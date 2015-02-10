@@ -17,18 +17,16 @@ static const NSString *TrustKitInfoDictionnaryKey = @"TSKCertificatePins";
 
 
 // Global storing the public key hashes and domains
-static NSMutableDictionary *certificatePins = NULL;
+static NSMutableDictionary *subjectPublicKeyInfoPins = NULL;
 
+
+#pragma mark Public Key Converter
 
 // The ASN1 data for a public key returned by iOS lacks the following ASN1 header
 unsigned char missingRsaAsn1Header[] = {
     0x30, 0x82, 0x01, 0x22, 0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86,
     0xf7, 0x0d, 0x01, 0x01, 0x01, 0x05, 0x00, 0x03, 0x82, 0x01, 0x0f, 0x00
 };
-
-
-
-#pragma mark Public Key Converter
 
 static const NSString *TrustKitPublicKeyTag = @"TSKPublicKeyTag"; // Used to add and find the public key in the Keychain
 
@@ -53,7 +51,7 @@ static NSData *getPublicKeyBits(SecKeyRef publicKey)
     
     
     // Get the key bytes from the Keychain atomically
-    @synchronized(certificatePins)
+    @synchronized(subjectPublicKeyInfoPins)
     {
         resultAdd = SecItemAdd((__bridge CFDictionaryRef) peerPublicKeyAdd, NULL);
         resultGet = SecItemCopyMatching((__bridge CFDictionaryRef)publicKeyGet, (void *)&publicKeyData);
@@ -87,7 +85,7 @@ static BOOL verifyCertificatePin(SecTrustRef serverTrust, NSString *serverName)
     }
     
     // Let's find at least one of the pins in the certificate chain
-    NSArray *serverPins = [certificatePins objectForKey:serverName];
+    NSArray *serverPins = [subjectPublicKeyInfoPins objectForKey:serverName];
 
     
     // For each pinned certificate, check if it is part of the server's cert trust chain
@@ -137,6 +135,7 @@ static BOOL verifyCertificatePin(SecTrustRef serverTrust, NSString *serverName)
 
 
 #pragma mark SSLHandshake Hook
+
 static OSStatus (*original_SSLHandshake)(SSLContextRef context);
 
 static OSStatus replaced_SSLHandshake(SSLContextRef context)
@@ -160,7 +159,7 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
         free(serverName);
         
         
-        if (certificatePins == NULL)
+        if (subjectPublicKeyInfoPins == NULL)
         {   // TODO: return an error
             NSLog(@"Error: pin not initialized?");
             return NO;
@@ -169,7 +168,7 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
         
         // Is this domain name pinned ?
         BOOL wasPinValidationSuccessful = NO;
-        if ([certificatePins objectForKey:serverNameStr])
+        if ([subjectPublicKeyInfoPins objectForKey:serverNameStr])
         {
             // Let's check the certificate chain with our SSL pins
             NSLog(@"Server IS pinned");
@@ -204,7 +203,7 @@ __attribute__((constructor)) static void initialize(int argc, const char **argv)
     // TrustKit just got injected in the App
     NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"];
     NSLog(@"TrustKit started in %@", appName);
-    certificatePins = [[NSMutableDictionary alloc]init];
+    subjectPublicKeyInfoPins = [[NSMutableDictionary alloc]init];
     
         // Retrieve the certificate hashes/pins from the App's Info.plist file
      NSDictionary *certificatePinsFromPlist = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)TrustKitInfoDictionnaryKey];
@@ -245,10 +244,10 @@ __attribute__((constructor)) static void initialize(int argc, const char **argv)
             [serverSslPinsData addObject:pinnedCertificateHashData];
         }
         
-        [certificatePins setObject:serverSslPinsData forKey:serverName];
+        [subjectPublicKeyInfoPins setObject:serverSslPinsData forKey:serverName];
     }];
     
-    NSLog(@"PINS %@", certificatePins);
+    NSLog(@"PINS %@", subjectPublicKeyInfoPins);
 
     
     
