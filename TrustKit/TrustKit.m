@@ -106,23 +106,23 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
         
         
         // Is this domain name pinned ?
-        BOOL isPinInCertificateChain = NO;
+        BOOL wasPinValidationSuccessful = NO;
         if ([certificatePins objectForKey:serverNameStr])
         {
             // Let's check the certificate chain with our SSL pins
             NSLog(@"Server IS pinned");
             SecTrustRef serverTrust;
             SSLCopyPeerTrust(context, &serverTrust);
-            isPinInCertificateChain = verifyCertificatePin(serverTrust, serverNameStr);
+            wasPinValidationSuccessful = verifyCertificatePin(serverTrust, serverNameStr);
         }
         else
         {
             // No SSL pinning and regular SSL validation was already done by SSLHandshake and was sucessful
             NSLog(@"Server not pinned");
-            isPinInCertificateChain = YES;
+            wasPinValidationSuccessful = YES;
         }
         
-        if (isPinInCertificateChain == NO)
+        if (wasPinValidationSuccessful == NO)
         {
             // The certificate chain did not contain the expected pins; force an error
             result = errSSLXCertChainInvalid;
