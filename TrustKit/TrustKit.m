@@ -11,6 +11,10 @@
 #include <dlfcn.h>
 #import "fishhook/fishhook.h"
 
+
+static const NSString *TrustKitInfoDictionnaryKey = @"TSKCertificatePins";
+
+
 static NSMutableDictionary *certificatePins = NULL;
 
 
@@ -135,13 +139,13 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
 
 __attribute__((constructor)) static void initialize(int argc, const char **argv)
 {
+    // TrustKit just got injected in the App
     NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"];
     NSLog(@"TrustKit started in %@", appName);
-    
     certificatePins = [[NSMutableDictionary alloc]init];
-    NSDictionary *certificatePinsFromPlist = @{ @"www.yahoo.com" : @[ @"thing 2",
-                                               @"lol"],
-                         @"www.datatheorem.com" : @[ @"d495962735cd1ca16b6e72ec5e18ae5a9d71f4bf1aec83e5a551d56a49893ca0"]};
+    
+        // Retrieve the certificate hashes/pins from the App's Info.plist file
+     NSDictionary *certificatePinsFromPlist = [[NSBundle mainBundle] objectForInfoDictionaryKey:TrustKitInfoDictionnaryKey];
     
     
     // Convert the certificates hashes/pins to NSData and store them in the certificatePins variable
@@ -151,6 +155,7 @@ __attribute__((constructor)) static void initialize(int argc, const char **argv)
         NSArray *serverSslPinsString = obj;
         NSMutableArray *serverSslPinsData = [[NSMutableArray alloc]init];
         
+        NSLog(@"Loading SSL pins for %@", serverName);
         for (NSString *pinnedCertificateHash in serverSslPinsString)
         {
             NSMutableData *pinnedCertificateHashData = [NSMutableData dataWithCapacity:CC_SHA256_DIGEST_LENGTH];
