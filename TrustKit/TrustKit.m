@@ -248,7 +248,6 @@ __attribute__((constructor)) static void initialize(int argc, const char **argv)
     }];
     
     NSLog(@"PINS %@", subjectPublicKeyInfoPins);
-
     
     
     // Hook SSLHandshake()
