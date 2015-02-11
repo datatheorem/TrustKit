@@ -13,7 +13,7 @@
 
 
 // Info.plist key we read the public key hashes from
-static const NSString *TrustKitInfoDictionnaryKey = @"TSKCertificatePins";
+static const NSString *TrustKitInfoDictionnaryKey = @"TSKPublicKeyPins";
 
 
 // Global storing the public key hashes and domains
