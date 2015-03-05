@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0710306C1AA88A510028092C /* TrustKitServerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0710306B1AA88A510028092C /* TrustKitServerTests.m */; };
 		8C84804D1A896EE30017C155 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C84804C1A896EE30017C155 /* TrustKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8C8480531A896EE30017C155 /* TrustKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C8480471A896EE30017C155 /* TrustKit.framework */; };
 		8C84805A1A896EE30017C155 /* TrustKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C8480591A896EE30017C155 /* TrustKitTests.m */; };
@@ -26,6 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0710306B1AA88A510028092C /* TrustKitServerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrustKitServerTests.m; sourceTree = "<group>"; };
 		8C8480471A896EE30017C155 /* TrustKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TrustKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C84804B1A896EE30017C155 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C84804C1A896EE30017C155 /* TrustKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrustKit.h; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				8C8480591A896EE30017C155 /* TrustKitTests.m */,
+				0710306B1AA88A510028092C /* TrustKitServerTests.m */,
 				8C8480571A896EE30017C155 /* Supporting Files */,
 			);
 			path = TrustKitTests;
@@ -236,6 +239,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0710306C1AA88A510028092C /* TrustKitServerTests.m in Sources */,
 				8C84805A1A896EE30017C155 /* TrustKitTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
