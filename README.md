@@ -25,7 +25,7 @@ Your App's Info.plist file should look like this:
 
 ![](http://datatheorem.github.io/TrustKit/images/dynamic3.png)
 
-Then, all SSL connections relying on Appple's SecureTransport (NSURLSession, NSURLConnection, UIWebView, etc.) will be checking the server's certificate chain using the public key pins specified in the Info.plist.
+Then, all SSL connections relying on Apple's SecureTransport (NSURLSession, NSURLConnection, UIWebView, etc.) will be checking the server's certificate chain using the public key pins specified in the Info.plist.
 
 
 
