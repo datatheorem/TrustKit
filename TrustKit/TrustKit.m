@@ -75,6 +75,7 @@ static BOOL verifyCertificatePin(SecTrustRef serverTrust, NSString *serverName)
     
     // First re-check the certificate chain using the default SSL validation in case it was disabled
     // This gives us revocation (only for EV certs I think?) and also ensures the certificate chain is sane
+    // And also gives us the exact path that successfully validated the chain
     SecTrustResultType trustResult;
     SecTrustEvaluate(serverTrust, &trustResult);
     if ((trustResult != kSecTrustResultUnspecified) && (trustResult != kSecTrustResultProceed))
