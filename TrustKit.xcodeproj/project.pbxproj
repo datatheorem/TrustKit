@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0710306C1AA88A510028092C /* TrustKitServerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0710306B1AA88A510028092C /* TrustKitServerTests.m */; };
+		075AA1091AC985FD00178223 /* TrustKitCertificateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA2868CAFECA46ADE0B6E3E /* TrustKitCertificateTests.m */; };
 		8C84804D1A896EE30017C155 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C84804C1A896EE30017C155 /* TrustKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8C8480531A896EE30017C155 /* TrustKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C8480471A896EE30017C155 /* TrustKit.framework */; };
 		8C84805A1A896EE30017C155 /* TrustKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C8480591A896EE30017C155 /* TrustKitTests.m */; };
@@ -28,6 +29,9 @@
 
 /* Begin PBXFileReference section */
 		0710306B1AA88A510028092C /* TrustKitServerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrustKitServerTests.m; sourceTree = "<group>"; };
+		2FA28052F8F01FDE594E4642 /* TrustKitTestCertificates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrustKitTestCertificates.h; sourceTree = "<group>"; };
+		2FA286123F801C437F35D240 /* TrustKit+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TrustKit+Private.h"; sourceTree = "<group>"; };
+		2FA2868CAFECA46ADE0B6E3E /* TrustKitCertificateTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrustKitCertificateTests.m; sourceTree = "<group>"; };
 		8C8480471A896EE30017C155 /* TrustKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TrustKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C84804B1A896EE30017C155 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C84804C1A896EE30017C155 /* TrustKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrustKit.h; sourceTree = "<group>"; };
@@ -82,6 +86,7 @@
 				8C84806B1A896F3C0017C155 /* fishhook */,
 				8C84804C1A896EE30017C155 /* TrustKit.h */,
 				8C84806C1A896F660017C155 /* TrustKit.m */,
+				2FA286123F801C437F35D240 /* TrustKit+Private.h */,
 				8C84804A1A896EE30017C155 /* Supporting Files */,
 			);
 			path = TrustKit;
@@ -100,6 +105,8 @@
 			children = (
 				8C8480591A896EE30017C155 /* TrustKitTests.m */,
 				0710306B1AA88A510028092C /* TrustKitServerTests.m */,
+				2FA2868CAFECA46ADE0B6E3E /* TrustKitCertificateTests.m */,
+				2FA28052F8F01FDE594E4642 /* TrustKitTestCertificates.h */,
 				8C8480571A896EE30017C155 /* Supporting Files */,
 			);
 			path = TrustKitTests;
@@ -241,6 +248,7 @@
 			files = (
 				0710306C1AA88A510028092C /* TrustKitServerTests.m in Sources */,
 				8C84805A1A896EE30017C155 /* TrustKitTests.m in Sources */,
+				075AA1091AC985FD00178223 /* TrustKitCertificateTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,6 +360,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -368,6 +377,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;
 		};
@@ -385,6 +395,7 @@
 				INFOPLIST_FILE = TrustKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -398,6 +409,7 @@
 				INFOPLIST_FILE = TrustKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
 			name = Release;
 		};

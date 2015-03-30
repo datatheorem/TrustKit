@@ -17,6 +17,7 @@ FOUNDATION_EXPORT const unsigned char TrustKitVersionString[];
 //Set up public keys of pinned certificates
 @interface TKSettings : NSObject
 
++ (NSDictionary *)publicKeyPins;
 + (BOOL)setPublicKeyPins:(NSDictionary *)publicKeyPins shouldOverwrite:(BOOL)overwritePins;
 
 @end
