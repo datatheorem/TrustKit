@@ -12,6 +12,8 @@
 #import "TrustKit+Private.h"
 #import "TrustKitTestCertificates.h"
 
+#define HEXDUMP_COLS 16
+
 @interface TrustKitServerTests : XCTestCase
 @end
 
@@ -22,23 +24,48 @@
 }
 @end
 
-@implementation TrustKitCertificateTests
+@implementation TrustKitCertificateTests {
+    SecCertificateRef _rootCertificate;
+    SecCertificateRef _chainCertificate;
+    SecCertificateRef _leafCertificate;
+    SecPolicyRef _policy;
+}
 
 - (void)setUp {
     [super setUp];
 
+    // These certificates were generated with a different ASN.1 header, since TrustKit includes
+    // a different one by default, let's change it (this functionality is private)
 
+    [TKSettings setDefaultRsaAsn1Header:[NSData dataWithBytes:rsa_asn1_header length:sizeof(rsa_asn1_header)]];
 
+    CFDataRef rootData = CFDataCreate(kCFAllocatorDefault, ca_cert_der, (CFIndex)ca_cert_der_len);
+    _rootCertificate = SecCertificateCreateWithData(kCFAllocatorDefault, rootData);
+    CFRelease(rootData);
+
+    CFDataRef chainData = CFDataCreate(kCFAllocatorDefault, ca_chain_cert_der, (CFIndex)ca_chain_cert_der_len);
+    _chainCertificate = SecCertificateCreateWithData(kCFAllocatorDefault, chainData);
+    CFRelease(chainData);
+
+    CFDataRef leafData = CFDataCreate(kCFAllocatorDefault, www_good_com_cert_der, (CFIndex)www_good_com_cert_der_len);
+    _leafCertificate = SecCertificateCreateWithData(kCFAllocatorDefault, leafData);
+    CFRelease(leafData);
+
+    _policy = SecPolicyCreateSSL(true, NULL);
 }
 
 - (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    [super tearDown];
 
+    CFRelease(_rootCertificate);
+    CFRelease(_chainCertificate);
+    CFRelease(_leafCertificate);
+    CFRelease(_policy);
+
+    [super tearDown];
 }
 
-- (void)testExample {
-
+- (void)testWwwGoodComCertificateAgainstGoodIntermediateCA
+{
     [TKSettings setPublicKeyPins:@{
             @"www.good.com" : @[
                     @"4d012d74c6e6c058185227cce0b0c5fb1804b5dd33ebd98f1a6929d35e1de996", //Server key
@@ -47,53 +74,47 @@
             ]
     } shouldOverwrite:YES];
 
-    SecPolicyRef policy = SecPolicyCreateSSL(true, NULL);
-
-    CFDataRef rootData = CFDataCreate(kCFAllocatorDefault, ca_cert_der, (CFIndex)ca_cert_der_len);
-    SecCertificateRef root = SecCertificateCreateWithData(kCFAllocatorDefault, rootData);
-    CFRelease(rootData);
-
-    CFDataRef chainData = CFDataCreate(kCFAllocatorDefault, ca_chain_cert_der, (CFIndex)ca_chain_cert_der_len);
-    SecCertificateRef chain = SecCertificateCreateWithData(kCFAllocatorDefault, chainData);
-    CFRelease(chainData);
-
-    CFDataRef leafData = CFDataCreate(kCFAllocatorDefault, www_good_com_cert_der, (CFIndex)www_good_com_cert_der_len);
-    SecCertificateRef leaf = SecCertificateCreateWithData(kCFAllocatorDefault, leafData);
-    CFRelease(leafData);
-
-    SecCertificateRef certArray[2] = { chain, leaf };
-    CFArrayRef certs = CFArrayCreate(NULL, (const void **)certArray, 2, NULL);
+    SecCertificateRef trustCertArray[2] = {_chainCertificate, _leafCertificate};
+    CFArrayRef certs = CFArrayCreate(NULL, (const void **) trustCertArray, 2, NULL);
     SecTrustRef trust;
 
-    if(SecTrustCreateWithCertificates(certs, policy, &trust) == errSecSuccess)
-    {
-        SecCertificateRef rootArray[1] = { root };
-        CFArrayRef rootCerts = CFArrayCreate(NULL, (const void **)rootArray, 1, NULL);
+    XCTAssert(SecTrustCreateWithCertificates(certs, _policy, &trust) == errSecSuccess, @"SecTrustCreateWithCertificates did not return errSecSuccess");
 
-        if(SecTrustSetAnchorCertificates(trust, rootCerts) == errSecSuccess)
-        {
-            NSLog(@"verifyCertificatePin returned: %d", verifyCertificatePin(trust, @"www.good.com"));
-        }
+    SecCertificateRef caRootArray[1] = {_rootCertificate};
+    CFArrayRef caRootCertificates = CFArrayCreate(NULL, (const void **) caRootArray, 1, NULL);
 
-        CFRelease(rootArray);
+    XCTAssert(SecTrustSetAnchorCertificates(trust, caRootCertificates) == errSecSuccess, @"SecTrustSetAnchorCertificates did not return errSecSuccess");
 
-    }
+    BOOL verificationPassed = verifyCertificatePin(trust, @"www.good.com");
 
-    CFRelease(root);
-    CFRelease(leaf);
-    CFRelease(chain);
+    CFRelease(caRootCertificates);
     CFRelease(certs);
     CFRelease(trust);
-    CFRelease(policy);
 
-
+    XCTAssert(verificationPassed == YES, @"Validation must past against valid public key pins");
 }
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+- (void)testWwwGoodComCertificateWithNoPins
+{
+    SecCertificateRef trustCertArray[2] = {_chainCertificate, _leafCertificate};
+    CFArrayRef certs = CFArrayCreate(NULL, (const void **) trustCertArray, 2, NULL);
+    SecTrustRef trust;
+
+    XCTAssert(SecTrustCreateWithCertificates(certs, _policy, &trust) == errSecSuccess, @"SecTrustCreateWithCertificates did not return errSecSuccess");
+
+    SecCertificateRef caRootArray[1] = {_rootCertificate};
+    CFArrayRef caRootCertificates = CFArrayCreate(NULL, (const void **) caRootArray, 1, NULL);
+
+    XCTAssert(SecTrustSetAnchorCertificates(trust, caRootCertificates) == errSecSuccess, @"SecTrustSetAnchorCertificates did not return errSecSuccess");
+
+    BOOL verificationPassed = verifyCertificatePin(trust, @"www.good.com");
+
+    CFRelease(caRootCertificates);
+    CFRelease(certs);
+    CFRelease(trust);
+
+    XCTAssert(verificationPassed == NO, @"Validation must NOT pass if no public key pins are set.");
 }
+
 
 @end

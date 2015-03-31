@@ -18,13 +18,14 @@ static const NSString *TrustKitInfoDictionnaryKey = @"TSKPublicKeyPins";
 
 
 // Global storing the public key hashes and domains
-static NSMutableDictionary *_subjectPublicKeyInfoPins = NULL;
-
+static NSMutableDictionary *_subjectPublicKeyInfoPins = nil;
 
 #pragma mark Public Key Converter
 
+static NSData *_defaultRsaAsn1Header = nil;
+
 // The ASN1 data for a public key returned by iOS lacks the following ASN1 header
-unsigned char missingRsaAsn1Header[] = {
+unsigned char defaultRsaAsn1HeaderBytes[] = {
     0x30, 0x82, 0x01, 0x22, 0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86,
     0xf7, 0x0d, 0x01, 0x01, 0x01, 0x05, 0x00, 0x03, 0x82, 0x01, 0x0f, 0x00
 };
@@ -32,7 +33,7 @@ unsigned char missingRsaAsn1Header[] = {
 static const NSString *TrustKitPublicKeyTag = @"TSKPublicKeyTag"; // Used to add and find the public key in the Keychain
 
 // The one and only way to get a key's data in a buffer on iOS is to put it in the Keychain and then ask for the data back...
-static NSData *getPublicKeyBits(SecKeyRef publicKey)
+NSData *getPublicKeyBits(SecKeyRef publicKey)
 {
     NSData *publicKeyData = nil;
     OSStatus resultAdd, resultGet, resultDel = noErr;
@@ -91,7 +92,7 @@ BOOL verifyCertificatePin(SecTrustRef serverTrust, NSString *serverName)
     
     // For each pinned certificate, check if it is part of the server's cert trust chain
     // We only need one of the pinned certificates to be in the server's trust chain
-    for (NSData *pinnedSubkectPublicKeyInfoHash in serverPins)
+    for (NSData *pinnedSubjectPublicKeyInfoHash in serverPins)
     {
         // Check each certificate in the server's certificate chain (the trust object)
         CFIndex certificateChainLen = SecTrustGetCertificateCount(serverTrust);
@@ -109,7 +110,7 @@ BOOL verifyCertificatePin(SecTrustRef serverTrust, NSString *serverName)
             NSData *publicKeyData = getPublicKeyBits(publicKey);
             
             // Add the missing ASN1 header for RSA public keys to re-create the subject public key info
-            NSMutableData *subjectPublicKeyInfoData = [NSMutableData dataWithBytes:missingRsaAsn1Header length:sizeof(missingRsaAsn1Header)];
+            NSMutableData *subjectPublicKeyInfoData = [NSMutableData dataWithData:[TKSettings defaultRsaAsn1Header]];
             [subjectPublicKeyInfoData appendData:publicKeyData];
             //NSLog(@"%@ SUBJECT KEY DATA %@", serverName, subjectPublicKeyInfoData);
             
@@ -118,10 +119,10 @@ BOOL verifyCertificatePin(SecTrustRef serverTrust, NSString *serverName)
             NSMutableData *subjectPublicKeyInfoHash = [NSMutableData dataWithLength:CC_SHA256_DIGEST_LENGTH];
             CC_SHA256(subjectPublicKeyInfoData.bytes, (unsigned int)subjectPublicKeyInfoData.length,  subjectPublicKeyInfoHash.mutableBytes);
             CFRelease(publicKey);
-            NSLog(@"PinE %@  PinF %@", pinnedSubkectPublicKeyInfoHash, subjectPublicKeyInfoHash);
+            NSLog(@"PinE %@  PinF %@", pinnedSubjectPublicKeyInfoHash, subjectPublicKeyInfoHash);
             
             // Compare the two hashes
-            if ([pinnedSubkectPublicKeyInfoHash isEqualToData:subjectPublicKeyInfoHash])
+            if ([pinnedSubjectPublicKeyInfoHash isEqualToData:subjectPublicKeyInfoHash])
             {
                 NSLog(@"OK: Found SSL Pin");
                 return YES;
@@ -199,6 +200,10 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
 //Set up public keys of pinned certificates
 @implementation TKSettings
 
++ (void)initialize
+{
+    _defaultRsaAsn1Header = [NSData dataWithBytes:defaultRsaAsn1HeaderBytes length:sizeof(defaultRsaAsn1HeaderBytes)];
+}
 + (void)_addCertificateHashesFromDictionary:(NSDictionary *)publicKeyPins
 {
     // Convert the certificates hashes/pins to NSData and store them in the certificatePins variable
@@ -236,7 +241,8 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
 
 }
 
-+ (NSDictionary *)publicKeyPins {
++ (NSDictionary *)publicKeyPins
+{
     return [NSDictionary dictionaryWithDictionary:_subjectPublicKeyInfoPins];
 }
 
@@ -247,6 +253,16 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
 
     [TKSettings _addCertificateHashesFromDictionary:publicKeyPins];
     return YES;
+}
+
++ (NSData *)defaultRsaAsn1Header
+{
+    return _defaultRsaAsn1Header;
+}
+
++ (void)setDefaultRsaAsn1Header:(NSData *)defaultRsaAsn1Header
+{
+    _defaultRsaAsn1Header = defaultRsaAsn1Header;
 }
 
 @end
