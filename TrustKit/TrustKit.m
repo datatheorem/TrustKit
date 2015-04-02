@@ -45,7 +45,7 @@ static pthread_mutex_t _keychainLock; // Used to lock access to our Keychain ite
 NSData *getPublicKeyBits(SecKeyRef publicKey)
 {
     NSData *publicKeyData = nil;
-    OSStatus resultAdd, resultGet, resultDel = noErr;
+    OSStatus resultAdd, resultDel = noErr;
     
     
     // Prepare the dictionnary to add the key
@@ -53,6 +53,8 @@ NSData *getPublicKeyBits(SecKeyRef publicKey)
     [peerPublicKeyAdd setObject:(__bridge id)kSecClassKey forKey:(__bridge id)kSecClass];
     [peerPublicKeyAdd setObject:TrustKitPublicKeyTag forKey:(__bridge id)kSecAttrApplicationTag];
     [peerPublicKeyAdd setObject:(__bridge id)(publicKey) forKey:(__bridge id)kSecValueRef];
+    // Request the key's data to be returned
+    [peerPublicKeyAdd setObject:(__bridge id)(kCFBooleanTrue) forKey:(__bridge id)kSecReturnData];
     
     // Prepare the dictionnary to retrieve the key
     NSMutableDictionary * publicKeyGet = [[NSMutableDictionary alloc] init];
@@ -64,13 +66,12 @@ NSData *getPublicKeyBits(SecKeyRef publicKey)
     // Get the key bytes from the Keychain atomically
     pthread_mutex_lock(&_keychainLock);
     {
-        resultAdd = SecItemAdd((__bridge CFDictionaryRef) peerPublicKeyAdd, NULL);
-        resultGet = SecItemCopyMatching((__bridge CFDictionaryRef)publicKeyGet, (void *)&publicKeyData);
+        resultAdd = SecItemAdd((__bridge CFDictionaryRef) peerPublicKeyAdd, (void *)&publicKeyData);
         resultDel = SecItemDelete((__bridge CFDictionaryRef)(publicKeyGet));
     }
     pthread_mutex_unlock(&_keychainLock);
     
-    //NSLog(@"RESULT %d", result);
+    // TODO: Check the result returned by SecItemXXX()
     
     return publicKeyData;
 }
