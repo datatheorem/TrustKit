@@ -89,7 +89,7 @@ BOOL verifyCertificatePin(SecTrustRef serverTrust, NSString *serverName)
     
     // Let's find at least one of the pins in the certificate chain
     NSArray *serverPins = [_subjectPublicKeyInfoPins objectForKey:serverName];
-
+    
     
     // For each pinned certificate, check if it is part of the server's cert trust chain
     // We only need one of the pinned certificates to be in the server's trust chain
@@ -101,7 +101,7 @@ BOOL verifyCertificatePin(SecTrustRef serverTrust, NSString *serverName)
             
             // Extract the certificate
             SecCertificateRef certificate = SecTrustGetCertificateAtIndex(serverTrust, i);
-    
+            
             // Extract the public key
             SecTrustRef tempTrust;
             SecPolicyRef policy = SecPolicyCreateBasicX509();
@@ -130,7 +130,7 @@ BOOL verifyCertificatePin(SecTrustRef serverTrust, NSString *serverName)
             }
         }
     }
- 
+    
     // If we get here, we didn't find any matching certificate in the chain
     NSLog(@"Error: SSL Pin not found");
     return NO;
@@ -212,11 +212,11 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
         NSString *serverName = key;
         NSArray *serverSslPinsString = obj;
         NSMutableArray *serverSslPinsData = [[NSMutableArray alloc] init];
-
+        
         NSLog(@"Loading SSL pins for %@", serverName);
         for (NSString *pinnedCertificateHash in serverSslPinsString) {
             NSMutableData *pinnedCertificateHashData = [NSMutableData dataWithCapacity:CC_SHA256_DIGEST_LENGTH];
-
+            
             // Convert the hex string to data
             if ([pinnedCertificateHash length] != CC_SHA256_DIGEST_LENGTH * 2) {
                 // The certificate hash doesn't have a valid size; store a null hash to make all connections fail
@@ -227,19 +227,19 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
                 // Convert the hash from NSString to NSData
                 char output[CC_SHA256_DIGEST_LENGTH];
                 const char *input = [pinnedCertificateHash UTF8String];
-
+                
                 for (int i = 0; i < CC_SHA256_DIGEST_LENGTH; i++) {
                     sscanf(input + i * 2, "%2hhx", output + i);
                 }
                 [pinnedCertificateHashData replaceBytesInRange:NSMakeRange(0, CC_SHA256_DIGEST_LENGTH) withBytes:output];
             }
-
+            
             [serverSslPinsData addObject:pinnedCertificateHashData];
         }
-
+        
         _subjectPublicKeyInfoPins[serverName] = serverSslPinsData;
     }];
-
+    
 }
 
 + (NSDictionary *)publicKeyPins
@@ -251,7 +251,7 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
 {
     if (overwritePins == YES)
         [_subjectPublicKeyInfoPins removeAllObjects];
-
+    
     [TKSettings _addCertificateHashesFromDictionary:publicKeyPins];
     return YES;
 }
@@ -278,7 +278,7 @@ __attribute__((constructor)) static void initialize(int argc, const char **argv)
     NSLog(@"TrustKit started in %@", appName);
     _subjectPublicKeyInfoPins = [[NSMutableDictionary alloc]init];
     
-        // Retrieve the certificate hashes/pins from the App's Info.plist file
+    // Retrieve the certificate hashes/pins from the App's Info.plist file
     NSDictionary *certificatePinsFromPlist = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)TrustKitInfoDictionnaryKey];
     
     [TKSettings _addCertificateHashesFromDictionary:certificatePinsFromPlist];
