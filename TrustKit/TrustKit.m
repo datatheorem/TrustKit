@@ -311,7 +311,16 @@ static void initializeTrustKit(NSDictionary *publicKeyPins)
 
 #pragma mark Framework Initialization When Statically Linked
 
+@implementation TrustKit
 
+
++ (void) initializeWithSslPins:(NSDictionary *)publicKeyPins
+{
+    NSLog(@"TrustKit started statically in App %@", CFBundleGetValueForInfoDictionaryKey(CFBundleGetMainBundle(), (__bridge CFStringRef)@"CFBundleIdentifier"));
+    initializeTrustKit(publicKeyPins);
+}
+
+@end
 
 
 #pragma mark Framework Initialization When Dynamically Linked
@@ -320,7 +329,7 @@ __attribute__((constructor)) static void initialize(int argc, const char **argv)
 {
     // TrustKit just got injected in the App
     CFBundleRef appBundle = CFBundleGetMainBundle();
-    NSLog(@"TrustKit started in App %@", CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)@"CFBundleIdentifier"));
+    NSLog(@"TrustKit started dynamically in App %@", CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)@"CFBundleIdentifier"));
     
     // Retrieve the SSL pins from the App's Info.plist file
     NSDictionary *publicKeyPinsFromInfoPlist = CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)TrustKitInfoDictionnaryKey);

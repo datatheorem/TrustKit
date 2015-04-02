@@ -14,6 +14,13 @@ FOUNDATION_EXPORT double TrustKitVersionNumber;
 //! Project version string for TrustKit.
 FOUNDATION_EXPORT const unsigned char TrustKitVersionString[];
 
+
+@interface TrustKit : NSObject
+
++ (void) initializeWithSslPins:(NSDictionary *)publicKeyPins;
+
+@end
+
 //Set up public keys of pinned certificates
 @interface TKSettings : NSObject
 
