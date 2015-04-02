@@ -279,13 +279,16 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
 __attribute__((constructor)) static void initialize(int argc, const char **argv)
 {
     // TrustKit just got injected in the App
-    NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleIdentifier"];
-    NSLog(@"TrustKit started in %@", appName);
+    CFBundleRef appBundle = CFBundleGetMainBundle();
+    NSLog(@"TrustKit started in App %@", CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)@"CFBundleIdentifier"));
+    
+    // Initialize the global var where we will store our SSL pins
     _subjectPublicKeyInfoPins = [[NSMutableDictionary alloc]init];
     
-    // Retrieve the certificate hashes/pins from the App's Info.plist file
-    NSDictionary *certificatePinsFromPlist = [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)TrustKitInfoDictionnaryKey];
+    // Retrieve the SSL pins from the App's Info.plist file
+    NSDictionary *certificatePinsFromPlist = CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)TrustKitInfoDictionnaryKey);
     
+    // Store the SSL pins
     [TKSettings _addPublicKeyHashesFromDictionary:certificatePinsFromPlist];
     
     NSLog(@"PINS %@", _subjectPublicKeyInfoPins);
