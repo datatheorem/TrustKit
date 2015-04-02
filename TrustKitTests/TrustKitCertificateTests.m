@@ -71,8 +71,7 @@
                     @"4d012d74c6e6c058185227cce0b0c5fb1804b5dd33ebd98f1a6929d35e1de996", //Server key
                     @"921288e9a7b89a2704bd7ef8301fc1678bb5e560961973c3e868e0ea221155e1", //Intermediate key
                     @"890324e289eb249cff9f05b5c02511d1872c877a2685b33e3ea304c0da1ffcad" //CA key
-            ]
-    } shouldOverwrite:YES];
+            ]}];
 
     SecCertificateRef trustCertArray[2] = {_chainCertificate, _leafCertificate};
     CFArrayRef certs = CFArrayCreate(NULL, (const void **) trustCertArray, 2, NULL);

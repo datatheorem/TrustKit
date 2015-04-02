@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 #import "TrustKit.h"
+#import "TrustKit+Private.h"
+
 
 #include <dlfcn.h>
 
@@ -32,8 +34,7 @@
     [TKSettings setPublicKeyPins:@{
             @"www.datatheorem.com" : @[
                     @"0000000000000000000000000000000000000000000000000000000000000000"
-            ]
-    } shouldOverwrite:YES];
+            ]}];
 
     XCTAssertNotNil([TKSettings publicKeyPins][@"www.datatheorem.com"], @"There was no pin found for www.datatheorem.com");
     XCTAssertEqual([TKSettings publicKeyPins][@"www.datatheorem.com"][0], @"0000000000000000000000000000000000000000000000000000000000000000", @"The hash key does not match the one that was setup");

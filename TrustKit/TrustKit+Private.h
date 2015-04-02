@@ -11,11 +11,14 @@
 #ifndef TrustKit_TrustKit_Private____FILEEXTENSION___
 #define TrustKit_TrustKit_Private____FILEEXTENSION___
 
+
 BOOL verifyCertificatePin(SecTrustRef serverTrust, NSString *serverName);
-NSData *getPublicKeyBits(SecKeyRef publicKey);
 
-@interface TKSettings (Private)
 
+@interface TKSettings : NSObject
+
++ (NSDictionary *)publicKeyPins;
++ (BOOL)setPublicKeyPins:(NSDictionary *)publicKeyPins;
 + (NSData *)defaultRsaAsn1Header;
 + (void)setDefaultRsaAsn1Header:(NSData *)defaultASN1Header;
 

@@ -257,11 +257,9 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
 }
 
 
-+ (BOOL)setPublicKeyPins:(NSDictionary *)publicKeyPins shouldOverwrite:(BOOL)overwritePins
++ (BOOL)setPublicKeyPins:(NSDictionary *)publicKeyPins
 {
-    if (overwritePins == YES)
-        [_subjectPublicKeyInfoPins removeAllObjects];
-    
+    [_subjectPublicKeyInfoPins removeAllObjects];
     [TKSettings _convertAndSetPublicKeyPinsFromDictionary:publicKeyPins];
     return YES;
 }
