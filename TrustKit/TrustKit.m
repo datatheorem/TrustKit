@@ -286,10 +286,10 @@ __attribute__((constructor)) static void initialize(int argc, const char **argv)
     _subjectPublicKeyInfoPins = [[NSMutableDictionary alloc]init];
     
     // Retrieve the SSL pins from the App's Info.plist file
-    NSDictionary *certificatePinsFromPlist = CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)TrustKitInfoDictionnaryKey);
+    NSDictionary *sslPinsFromPlist = CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)TrustKitInfoDictionnaryKey);
     
     // Store the SSL pins
-    [TKSettings _addPublicKeyHashesFromDictionary:certificatePinsFromPlist];
+    [TKSettings _addPublicKeyHashesFromDictionary:sslPinsFromPlist];
     
     NSLog(@"PINS %@", _subjectPublicKeyInfoPins);
     
