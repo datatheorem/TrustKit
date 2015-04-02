@@ -201,16 +201,19 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
 //Set up public keys of pinned certificates
 @implementation TKSettings
 
+
 + (void)initialize
 {
     _defaultRsaAsn1Header = [NSData dataWithBytes:defaultRsaAsn1HeaderBytes length:sizeof(defaultRsaAsn1HeaderBytes)];
 }
+
+
 + (void)_addCertificateHashesFromDictionary:(NSDictionary *)publicKeyPins
 {
     // Convert the certificates hashes/pins to NSData and store them in the certificatePins variable
-    [publicKeyPins enumerateKeysAndObjectsUsingBlock:^void(id key, id obj, BOOL *stop) {
-        NSString *serverName = key;
-        NSArray *serverSslPinsString = obj;
+    for (NSString *serverName in publicKeyPins)
+    {
+        NSArray *serverSslPinsString = publicKeyPins[serverName];
         NSMutableArray *serverSslPinsData = [[NSMutableArray alloc] init];
         
         NSLog(@"Loading SSL pins for %@", serverName);
@@ -238,14 +241,15 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
         }
         
         _subjectPublicKeyInfoPins[serverName] = serverSslPinsData;
-    }];
-    
+    }
 }
+
 
 + (NSDictionary *)publicKeyPins
 {
     return [NSDictionary dictionaryWithDictionary:_subjectPublicKeyInfoPins];
 }
+
 
 + (BOOL)setPublicKeyPins:(NSDictionary *)publicKeyPins shouldOverwrite:(BOOL)overwritePins
 {
