@@ -201,19 +201,11 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
     return result;
 }
 
-#pragma mark Configuration class TKSettings
 
-//Set up public keys of pinned certificates
-@implementation TKSettings
+#pragma mark Framework Initialization 
 
 
-+ (void)initialize
-{
-    _defaultRsaAsn1Header = [NSData dataWithBytes:defaultRsaAsn1HeaderBytes length:sizeof(defaultRsaAsn1HeaderBytes)];
-}
-
-
-+ (void)_convertAndSetPublicKeyPinsFromDictionary:(NSDictionary *)publicKeyPins
+static void convertAndSetPublicKeyPinsFromDictionary(NSDictionary *publicKeyPins)
 {
     // Convert public key hashes/pins from NSString to NSData and store them in the _subjectPublicKeyInfoPins global variable
     for (NSString *serverName in publicKeyPins)
@@ -251,34 +243,6 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
 }
 
 
-+ (NSDictionary *)publicKeyPins
-{
-    return [NSDictionary dictionaryWithDictionary:_subjectPublicKeyInfoPins];
-}
-
-
-+ (BOOL)setPublicKeyPins:(NSDictionary *)publicKeyPins
-{
-    [_subjectPublicKeyInfoPins removeAllObjects];
-    [TKSettings _convertAndSetPublicKeyPinsFromDictionary:publicKeyPins];
-    return YES;
-}
-
-+ (NSData *)defaultRsaAsn1Header
-{
-    return _defaultRsaAsn1Header;
-}
-
-+ (void)setDefaultRsaAsn1Header:(NSData *)defaultRsaAsn1Header
-{
-    _defaultRsaAsn1Header = defaultRsaAsn1Header;
-}
-
-@end
-
-
-#pragma mark Framework Initialization
-
 static void initializeTrustKit(NSDictionary *publicKeyPins)
 {
     if (isTrustKitInitialized == YES)
@@ -293,7 +257,7 @@ static void initializeTrustKit(NSDictionary *publicKeyPins)
         _subjectPublicKeyInfoPins = [[NSMutableDictionary alloc]init];
         
         // Store the SSL pins
-        [TKSettings _convertAndSetPublicKeyPinsFromDictionary:publicKeyPins];
+        convertAndSetPublicKeyPinsFromDictionary(publicKeyPins);
         
         // Hook SSLHandshake()
         char functionToHook[] = "SSLHandshake";
@@ -334,3 +298,43 @@ __attribute__((constructor)) static void initialize(int argc, const char **argv)
 
     initializeTrustKit(publicKeyPinsFromInfoPlist);
 }
+
+
+#pragma mark Private Configuration Class For Tests
+
+@implementation TKSettings
+
+
++ (void)initialize
+{
+    _defaultRsaAsn1Header = [NSData dataWithBytes:defaultRsaAsn1HeaderBytes length:sizeof(defaultRsaAsn1HeaderBytes)];
+}
+
+
++ (NSDictionary *)publicKeyPins
+{
+    return [NSDictionary dictionaryWithDictionary:_subjectPublicKeyInfoPins];
+}
+
+
++ (BOOL)setPublicKeyPins:(NSDictionary *)publicKeyPins
+{
+    [_subjectPublicKeyInfoPins removeAllObjects];
+    convertAndSetPublicKeyPinsFromDictionary(publicKeyPins);
+    return YES;
+}
+
++ (NSData *)defaultRsaAsn1Header
+{
+    return _defaultRsaAsn1Header;
+}
+
++ (void)setDefaultRsaAsn1Header:(NSData *)defaultRsaAsn1Header
+{
+    _defaultRsaAsn1Header = defaultRsaAsn1Header;
+}
+
+@end
+
+
+
