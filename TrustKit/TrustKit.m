@@ -276,6 +276,7 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
 
 #pragma mark Framework Initialization
 
+
 __attribute__((constructor)) static void initialize(int argc, const char **argv)
 {
     // TrustKit just got injected in the App
@@ -288,14 +289,16 @@ __attribute__((constructor)) static void initialize(int argc, const char **argv)
     // Retrieve the SSL pins from the App's Info.plist file
     NSDictionary *publicKeyPinsFromInfoPlist = CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)TrustKitInfoDictionnaryKey);
     
-    // Store the SSL pins
-    [TKSettings _convertAndSetPublicKeyPinsFromDictionary:publicKeyPinsFromInfoPlist];
+    if ([publicKeyPinsFromInfoPlist count] > 0)
+    {
+        // Store the SSL pins
+        [TKSettings _convertAndSetPublicKeyPinsFromDictionary:publicKeyPinsFromInfoPlist];
+        
+        // Hook SSLHandshake()
+        char functionToHook[] = "SSLHandshake";
+        original_SSLHandshake = dlsym(RTLD_DEFAULT, functionToHook);
+        rebind_symbols((struct rebinding[1]){{(char *)functionToHook, (void *)replaced_SSLHandshake}}, 1);
+    }
     
     NSLog(@"PINS %@", _subjectPublicKeyInfoPins);
-    
-    
-    // Hook SSLHandshake()
-    char functionToHook[] = "SSLHandshake";
-    original_SSLHandshake = dlsym(RTLD_DEFAULT, functionToHook);
-    rebind_symbols((struct rebinding[1]){{(char *)functionToHook, (void *)replaced_SSLHandshake}}, 1);
 }
