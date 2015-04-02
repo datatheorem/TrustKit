@@ -60,7 +60,7 @@ NSData *getPublicKeyBits(SecKeyRef publicKey)
     NSMutableDictionary * publicKeyGet = [[NSMutableDictionary alloc] init];
     [publicKeyGet setObject:(__bridge id)kSecClassKey forKey:(__bridge id)kSecClass];
     [publicKeyGet setObject:(TrustKitPublicKeyTag) forKey:(__bridge id)kSecAttrApplicationTag];
-    [publicKeyGet setObject:[NSNumber numberWithBool:YES] forKey:(__bridge id)kSecReturnData];
+    [publicKeyGet setObject:(__bridge id)(kCFBooleanTrue) forKey:(__bridge id)kSecReturnData];
     
     
     // Get the key bytes from the Keychain atomically
