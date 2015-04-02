@@ -208,7 +208,7 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
 }
 
 
-+ (void)_addPublicKeyPinsFromDictionary:(NSDictionary *)publicKeyPins
++ (void)_convertAndSetPublicKeyPinsFromDictionary:(NSDictionary *)publicKeyPins
 {
     // Convert public key hashes/pins from NSString to NSData and store them in the _subjectPublicKeyInfoPins global variable
     for (NSString *serverName in publicKeyPins)
@@ -257,7 +257,7 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
     if (overwritePins == YES)
         [_subjectPublicKeyInfoPins removeAllObjects];
     
-    [TKSettings _addPublicKeyPinsFromDictionary:publicKeyPins];
+    [TKSettings _convertAndSetPublicKeyPinsFromDictionary:publicKeyPins];
     return YES;
 }
 
@@ -289,7 +289,7 @@ __attribute__((constructor)) static void initialize(int argc, const char **argv)
     NSDictionary *publicKeyPinsFromInfoPlist = CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)TrustKitInfoDictionnaryKey);
     
     // Store the SSL pins
-    [TKSettings _addPublicKeyPinsFromDictionary:publicKeyPinsFromInfoPlist];
+    [TKSettings _convertAndSetPublicKeyPinsFromDictionary:publicKeyPinsFromInfoPlist];
     
     NSLog(@"PINS %@", _subjectPublicKeyInfoPins);
     
