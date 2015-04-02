@@ -17,8 +17,13 @@
 static const NSString *TrustKitInfoDictionnaryKey = @"TSKPublicKeyPins";
 
 
+#pragma mark TrustKit Global State
 // Global storing the public key hashes and domains
 static NSMutableDictionary *_subjectPublicKeyInfoPins = nil;
+
+// Global preventing multiple initializations (double function interposition, etc.)
+static BOOL isTrustKitInitialized = NO;
+
 
 #pragma mark Public Key Converter
 
@@ -276,6 +281,40 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
 
 #pragma mark Framework Initialization
 
+static void initializeTrustKit(NSDictionary *publicKeyPins)
+{
+    if (isTrustKitInitialized == YES)
+    {
+        // TrustKit should only be initialized once so we don't double interpose SecureTransport or get into anything unexpected
+        [NSException raise:@"TrustKit already initialized" format:@"TrustKit was already initialized with the following SSL pins: %@", _subjectPublicKeyInfoPins];
+    }
+    
+    if ([publicKeyPins count] > 0)
+    {
+        // Initialize the global variable where we will store our SSL pins
+        _subjectPublicKeyInfoPins = [[NSMutableDictionary alloc]init];
+        
+        // Store the SSL pins
+        [TKSettings _convertAndSetPublicKeyPinsFromDictionary:publicKeyPins];
+        
+        // Hook SSLHandshake()
+        char functionToHook[] = "SSLHandshake";
+        original_SSLHandshake = dlsym(RTLD_DEFAULT, functionToHook);
+        rebind_symbols((struct rebinding[1]){{(char *)functionToHook, (void *)replaced_SSLHandshake}}, 1);
+        
+        isTrustKitInitialized = YES;
+    }
+    
+    NSLog(@"PINS %@", _subjectPublicKeyInfoPins);
+}
+
+
+#pragma mark Framework Initialization When Statically Linked
+
+
+
+
+#pragma mark Framework Initialization When Dynamically Linked
 
 __attribute__((constructor)) static void initialize(int argc, const char **argv)
 {
@@ -283,22 +322,8 @@ __attribute__((constructor)) static void initialize(int argc, const char **argv)
     CFBundleRef appBundle = CFBundleGetMainBundle();
     NSLog(@"TrustKit started in App %@", CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)@"CFBundleIdentifier"));
     
-    // Initialize the global var where we will store our SSL pins
-    _subjectPublicKeyInfoPins = [[NSMutableDictionary alloc]init];
-    
     // Retrieve the SSL pins from the App's Info.plist file
     NSDictionary *publicKeyPinsFromInfoPlist = CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)TrustKitInfoDictionnaryKey);
-    
-    if ([publicKeyPinsFromInfoPlist count] > 0)
-    {
-        // Store the SSL pins
-        [TKSettings _convertAndSetPublicKeyPinsFromDictionary:publicKeyPinsFromInfoPlist];
-        
-        // Hook SSLHandshake()
-        char functionToHook[] = "SSLHandshake";
-        original_SSLHandshake = dlsym(RTLD_DEFAULT, functionToHook);
-        rebind_symbols((struct rebinding[1]){{(char *)functionToHook, (void *)replaced_SSLHandshake}}, 1);
-    }
-    
-    NSLog(@"PINS %@", _subjectPublicKeyInfoPins);
+
+    initializeTrustKit(publicKeyPinsFromInfoPlist);
 }
