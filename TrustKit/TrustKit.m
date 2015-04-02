@@ -210,7 +210,7 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
 
 + (void)_addPublicKeyHashesFromDictionary:(NSDictionary *)publicKeyPins
 {
-    // Convert the certificates hashes/pins to NSData and store them in the certificatePins variable
+    // Convert public key hashes/pins from NSString to NSData and store them in the _subjectPublicKeyInfoPins global variable
     for (NSString *serverName in publicKeyPins)
     {
         NSArray *serverSslPinsString = publicKeyPins[serverName];
@@ -222,7 +222,7 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
             
             // Convert the hex string to data
             if ([pinnedCertificateHash length] != CC_SHA256_DIGEST_LENGTH * 2) {
-                // The certificate hash doesn't have a valid size; store a null hash to make all connections fail
+                // The public key hash doesn't have a valid size; store a null hash to make all connections fail
                 NSLog(@"Bad hash for %@", serverName);
                 [pinnedCertificateHashData resetBytesInRange:NSMakeRange(0, CC_SHA256_DIGEST_LENGTH)];
             }
@@ -240,6 +240,7 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
             [serverSslPinsData addObject:pinnedCertificateHashData];
         }
         
+        // Save the public key hashes for this server
         _subjectPublicKeyInfoPins[serverName] = serverSslPinsData;
     }
 }
