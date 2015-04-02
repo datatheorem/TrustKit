@@ -10,6 +10,7 @@
 #import "TrustKit+Private.h"
 #import <CommonCrypto/CommonDigest.h>
 #include <dlfcn.h>
+#include <pthread.h>
 #import "fishhook/fishhook.h"
 
 
@@ -22,7 +23,7 @@ static const NSString *TrustKitInfoDictionnaryKey = @"TSKPublicKeyPins";
 static NSMutableDictionary *_subjectPublicKeyInfoPins = nil;
 
 // Global preventing multiple initializations (double function interposition, etc.)
-static BOOL isTrustKitInitialized = NO;
+static BOOL _isTrustKitInitialized = NO;
 
 
 #pragma mark Public Key Converter
@@ -36,6 +37,9 @@ unsigned char defaultRsaAsn1HeaderBytes[] = {
 };
 
 static const NSString *TrustKitPublicKeyTag = @"TSKPublicKeyTag"; // Used to add and find the public key in the Keychain
+
+static pthread_mutex_t _keychainLock; // Used to lock access to our Keychain item
+
 
 // The one and only way to get a key's data in a buffer on iOS is to put it in the Keychain and then ask for the data back...
 NSData *getPublicKeyBits(SecKeyRef publicKey)
@@ -58,12 +62,13 @@ NSData *getPublicKeyBits(SecKeyRef publicKey)
     
     
     // Get the key bytes from the Keychain atomically
-    @synchronized(_subjectPublicKeyInfoPins)
+    pthread_mutex_lock(&_keychainLock);
     {
         resultAdd = SecItemAdd((__bridge CFDictionaryRef) peerPublicKeyAdd, NULL);
         resultGet = SecItemCopyMatching((__bridge CFDictionaryRef)publicKeyGet, (void *)&publicKeyData);
         resultDel = SecItemDelete((__bridge CFDictionaryRef)(publicKeyGet));
     }
+    pthread_mutex_unlock(&_keychainLock);
     
     //NSLog(@"RESULT %d", result);
     
@@ -245,7 +250,7 @@ static void convertAndSetPublicKeyPinsFromDictionary(NSDictionary *publicKeyPins
 
 static void initializeTrustKit(NSDictionary *publicKeyPins)
 {
-    if (isTrustKitInitialized == YES)
+    if (_isTrustKitInitialized == YES)
     {
         // TrustKit should only be initialized once so we don't double interpose SecureTransport or get into anything unexpected
         [NSException raise:@"TrustKit already initialized" format:@"TrustKit was already initialized with the following SSL pins: %@", _subjectPublicKeyInfoPins];
@@ -256,6 +261,9 @@ static void initializeTrustKit(NSDictionary *publicKeyPins)
         // Initialize the global variable where we will store our SSL pins
         _subjectPublicKeyInfoPins = [[NSMutableDictionary alloc]init];
         
+        // Initialize our Keychain lock
+        pthread_mutex_init(&_keychainLock, NULL);
+        
         // Store the SSL pins
         convertAndSetPublicKeyPinsFromDictionary(publicKeyPins);
         
@@ -264,7 +272,7 @@ static void initializeTrustKit(NSDictionary *publicKeyPins)
         original_SSLHandshake = dlsym(RTLD_DEFAULT, functionToHook);
         rebind_symbols((struct rebinding[1]){{(char *)functionToHook, (void *)replaced_SSLHandshake}}, 1);
         
-        isTrustKitInitialized = YES;
+        _isTrustKitInitialized = YES;
     }
     
     NSLog(@"PINS %@", _subjectPublicKeyInfoPins);
