@@ -12,7 +12,7 @@
 #define TrustKit_TrustKit_Private____FILEEXTENSION___
 
 
-BOOL verifyCertificatePin(SecTrustRef serverTrust, NSString *serverName);
+BOOL verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverName);
 
 
 @interface TKSettings : NSObject

@@ -77,9 +77,9 @@ NSData *getPublicKeyBits(SecKeyRef publicKey)
 }
 
 
-#pragma mark Certificate Pin Validator
+#pragma mark SSL Pin Validator
 
-BOOL verifyCertificatePin(SecTrustRef serverTrust, NSString *serverName)
+BOOL verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverName)
 {
     if ((serverTrust == NULL) || (serverName == NULL))
     {
@@ -188,7 +188,7 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
             NSLog(@"Server IS pinned");
             SecTrustRef serverTrust;
             SSLCopyPeerTrust(context, &serverTrust);
-            wasPinValidationSuccessful = verifyCertificatePin(serverTrust, serverNameStr);
+            wasPinValidationSuccessful = verifyPublicKeyPin(serverTrust, serverNameStr);
         }
         else
         {

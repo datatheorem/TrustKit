@@ -84,7 +84,7 @@
 
     XCTAssert(SecTrustSetAnchorCertificates(trust, caRootCertificates) == errSecSuccess, @"SecTrustSetAnchorCertificates did not return errSecSuccess");
 
-    BOOL verificationPassed = verifyCertificatePin(trust, @"www.good.com");
+    BOOL verificationPassed = verifyPublicKeyPin(trust, @"www.good.com");
 
     CFRelease(caRootCertificates);
     CFRelease(certs);
@@ -106,7 +106,7 @@
 
     XCTAssert(SecTrustSetAnchorCertificates(trust, caRootCertificates) == errSecSuccess, @"SecTrustSetAnchorCertificates did not return errSecSuccess");
 
-    BOOL verificationPassed = verifyCertificatePin(trust, @"www.good.com");
+    BOOL verificationPassed = verifyPublicKeyPin(trust, @"www.good.com");
 
     CFRelease(caRootCertificates);
     CFRelease(certs);
