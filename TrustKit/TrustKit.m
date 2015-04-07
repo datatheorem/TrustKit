@@ -8,10 +8,10 @@
 
 #import "TrustKit.h"
 #import "TrustKit+Private.h"
-#import <CommonCrypto/CommonDigest.h>
 #include <dlfcn.h>
-#include <pthread.h>
+#import <CommonCrypto/CommonDigest.h>
 #import "fishhook/fishhook.h"
+#import "subjectPublicKeyHash.h"
 
 
 // Info.plist key we read the public key hashes from
@@ -25,56 +25,6 @@ static NSDictionary *_subjectPublicKeyInfoPins = nil;
 // Global preventing multiple initializations (double function interposition, etc.)
 static BOOL _isTrustKitInitialized = NO;
 
-
-#pragma mark Public Key Converter
-
-static NSData *_defaultRsaAsn1Header = nil;
-
-// The ASN1 data for a public key returned by iOS lacks the following ASN1 header
-unsigned char defaultRsaAsn1HeaderBytes[] = {
-    0x30, 0x82, 0x01, 0x22, 0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86,
-    0xf7, 0x0d, 0x01, 0x01, 0x01, 0x05, 0x00, 0x03, 0x82, 0x01, 0x0f, 0x00
-};
-
-static const NSString *TrustKitPublicKeyTag = @"TSKPublicKeyTag"; // Used to add and find the public key in the Keychain
-
-static pthread_mutex_t _keychainLock; // Used to lock access to our Keychain item
-
-
-// The one and only way to get a key's data in a buffer on iOS is to put it in the Keychain and then ask for the data back...
-NSData *getPublicKeyBits(SecKeyRef publicKey)
-{
-    NSData *publicKeyData = nil;
-    OSStatus resultAdd, resultDel = noErr;
-    
-    
-    // Prepare the dictionnary to add the key
-    NSMutableDictionary *peerPublicKeyAdd = [[NSMutableDictionary alloc] init];
-    [peerPublicKeyAdd setObject:(__bridge id)kSecClassKey forKey:(__bridge id)kSecClass];
-    [peerPublicKeyAdd setObject:TrustKitPublicKeyTag forKey:(__bridge id)kSecAttrApplicationTag];
-    [peerPublicKeyAdd setObject:(__bridge id)(publicKey) forKey:(__bridge id)kSecValueRef];
-    // Request the key's data to be returned
-    [peerPublicKeyAdd setObject:(__bridge id)(kCFBooleanTrue) forKey:(__bridge id)kSecReturnData];
-    
-    // Prepare the dictionnary to retrieve the key
-    NSMutableDictionary * publicKeyGet = [[NSMutableDictionary alloc] init];
-    [publicKeyGet setObject:(__bridge id)kSecClassKey forKey:(__bridge id)kSecClass];
-    [publicKeyGet setObject:(TrustKitPublicKeyTag) forKey:(__bridge id)kSecAttrApplicationTag];
-    [publicKeyGet setObject:(__bridge id)(kCFBooleanTrue) forKey:(__bridge id)kSecReturnData];
-    
-    
-    // Get the key bytes from the Keychain atomically
-    pthread_mutex_lock(&_keychainLock);
-    {
-        resultAdd = SecItemAdd((__bridge CFDictionaryRef) peerPublicKeyAdd, (void *)&publicKeyData);
-        resultDel = SecItemDelete((__bridge CFDictionaryRef)(publicKeyGet));
-    }
-    pthread_mutex_unlock(&_keychainLock);
-    
-    // TODO: Check the result returned by SecItemXXX()
-    
-    return publicKeyData;
-}
 
 
 #pragma mark SSL Pin Validator
@@ -107,32 +57,11 @@ BOOL verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverName, NSDiction
     CFIndex certificateChainLen = SecTrustGetCertificateCount(serverTrust);
     for(int i=0;i<certificateChainLen;i++)
     {
-        // Extract the certificate
+        // Extract and hash the certificate
         SecCertificateRef certificate = SecTrustGetCertificateAtIndex(serverTrust, i);
         
-        // Extract the public key
-        SecTrustRef tempTrust;
-        SecPolicyRef policy = SecPolicyCreateBasicX509();
-        SecTrustCreateWithCertificates(certificate, policy, &tempTrust);
-        SecTrustEvaluate(tempTrust, NULL);
-        SecKeyRef publicKey = SecTrustCopyPublicKey(tempTrust);
-        NSData *publicKeyData = getPublicKeyBits(publicKey);
-        
-        
-        // Generate a hash of the subject public key info
-        // TODO: error checking and better support for different ASN1 headers
-        NSMutableData *subjectPublicKeyInfoHash = [NSMutableData dataWithLength:CC_SHA256_DIGEST_LENGTH];
-        CC_SHA256_CTX shaCtx;
-        CC_SHA256_Init(&shaCtx);
-        
-        // Add the missing ASN1 header for RSA public keys to re-create the subject public key info
-        CC_SHA256_Update(&shaCtx, [[TKSettings defaultRsaAsn1Header] bytes], (unsigned int)[[TKSettings defaultRsaAsn1Header] length]);
-        
-        // Add the public key
-        CC_SHA256_Update(&shaCtx, [publicKeyData bytes], (unsigned int)[publicKeyData length]);
-        CC_SHA256_Final((unsigned char *)[subjectPublicKeyInfoHash bytes], &shaCtx);
-        CFRelease(publicKey);
-
+        NSData *subjectPublicKeyInfoHash = hashSubjectPublicKeyInfoFromCertificate(certificate);
+        // TODO: error checking
         
         // Is the generated hash in our set of pinned hashes ?
         NSLog(@"Testing SSL Pin %@", subjectPublicKeyInfoHash);
@@ -265,19 +194,7 @@ static void initializeTrustKit(NSDictionary *publicKeyPins)
     
     if ([publicKeyPins count] > 0)
     {
-        // Initialize our Keychain lock
-        pthread_mutex_init(&_keychainLock, NULL);
-        
-        // Cleanup the Keychain in case the App previously crashed
-        NSMutableDictionary * publicKeyGet = [[NSMutableDictionary alloc] init];
-        [publicKeyGet setObject:(__bridge id)kSecClassKey forKey:(__bridge id)kSecClass];
-        [publicKeyGet setObject:(TrustKitPublicKeyTag) forKey:(__bridge id)kSecAttrApplicationTag];
-        [publicKeyGet setObject:(__bridge id)(kCFBooleanTrue) forKey:(__bridge id)kSecReturnData];
-        pthread_mutex_lock(&_keychainLock);
-        {
-            SecItemDelete((__bridge CFDictionaryRef)(publicKeyGet));
-        }
-        pthread_mutex_unlock(&_keychainLock);
+        initializeKeychain();
         
         // Convert and store the SSL pins in our global variable
         _subjectPublicKeyInfoPins = [[NSDictionary alloc]initWithDictionary:convertPublicKeyPinsFromStringToData(publicKeyPins)];
@@ -308,7 +225,7 @@ static void initializeTrustKit(NSDictionary *publicKeyPins)
 + (void) resetSslPins
 {
     // This is only used for tests
-    pthread_mutex_destroy(&_keychainLock);
+    resetKeychain();
     _subjectPublicKeyInfoPins = nil;
     _isTrustKitInitialized = NO;
 }
@@ -329,30 +246,6 @@ __attribute__((constructor)) static void initialize(int argc, const char **argv)
 
     initializeTrustKit(publicKeyPinsFromInfoPlist);
 }
-
-
-#pragma mark Private Configuration Class For Tests
-
-@implementation TKSettings
-
-
-+ (void)initialize
-{
-    _defaultRsaAsn1Header = [NSData dataWithBytes:defaultRsaAsn1HeaderBytes length:sizeof(defaultRsaAsn1HeaderBytes)];
-}
-
-
-+ (NSData *)defaultRsaAsn1Header
-{
-    return _defaultRsaAsn1Header;
-}
-
-+ (void)setDefaultRsaAsn1Header:(NSData *)defaultRsaAsn1Header
-{
-    _defaultRsaAsn1Header = defaultRsaAsn1Header;
-}
-
-@end
 
 
 

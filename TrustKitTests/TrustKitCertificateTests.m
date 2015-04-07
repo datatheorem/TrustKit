@@ -37,7 +37,7 @@
     // These certificates were generated with a different ASN.1 header, since TrustKit includes
     // a different one by default, let's change it (this functionality is private)
     
-    [TKSettings setDefaultRsaAsn1Header:[NSData dataWithBytes:rsa_asn1_header length:sizeof(rsa_asn1_header)]];
+ //   [TKSettings setDefaultRsaAsn1Header:[NSData dataWithBytes:rsa_asn1_header length:sizeof(rsa_asn1_header)]];
     
     CFDataRef rootData = CFDataCreate(kCFAllocatorDefault, ca_cert_der, (CFIndex)ca_cert_der_len);
     _rootCertificate = SecCertificateCreateWithData(kCFAllocatorDefault, rootData);
