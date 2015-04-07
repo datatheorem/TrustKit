@@ -15,7 +15,13 @@
 
 
 // Info.plist key we read the public key hashes from
-static const NSString *TrustKitInfoDictionnaryKey = @"TSKPublicKeyPins";
+static const NSString *kTSKConfiguration = @"TSKConfiguration";
+
+// Keys for each domain within our dictionnary
+static const NSString *kTSKPublicKeyHashes = @"TSKPublicKeyHashes";
+static const NSString *kTSKIncludeSubdomains = @"TSKIncludeSubdomains";
+static const NSString *kTSKPublicKeyTypes = @"TSKPublicKeyTypes";
+static const NSString *kTSKReportUris = @"TSKReportUris";
 
 
 #pragma mark TrustKit Global State
@@ -30,7 +36,7 @@ static BOOL _isTrustKitInitialized = NO;
 #pragma mark SSL Pin Validator
 
 
-BOOL verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverName, NSDictionary *publicKeyPins)
+BOOL verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverName, NSDictionary *TrustKitConfiguration)
 {
     if ((serverTrust == NULL) || (serverName == NULL))
     {
@@ -50,7 +56,7 @@ BOOL verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverName, NSDiction
     }
     
     // Let's find at least one of the pins in the certificate chain
-    NSSet *serverPins = [publicKeyPins objectForKey:serverName];
+    NSSet *serverPins = TrustKitConfiguration[serverName][kTSKPublicKeyHashes];
     
 
     // Check each certificate in the server's certificate chain (the trust object)
@@ -113,7 +119,7 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
         
         // Is this domain name pinned ?
         BOOL wasPinValidationSuccessful = NO;
-        if ([_subjectPublicKeyInfoPins objectForKey:serverNameStr])
+        if (_subjectPublicKeyInfoPins[serverNameStr])
         {
             // Let's check the certificate chain with our SSL pins
             NSLog(@"Server IS pinned");
@@ -142,24 +148,69 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
 #pragma mark Framework Initialization 
 
 
-NSDictionary *convertPublicKeyPinsFromStringToData(NSDictionary *publicKeyPins)
+NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
 {
-    // Convert public key hashes/pins from an NSSArray of NSStrings (as provided by the user) to an NSSet of NSData (as needed by TrustKit)
-    NSMutableDictionary *convertedPins = [[NSMutableDictionary alloc]init];
+    // Convert settings supplied by the user to a configuration dictionnary that can be used by TrustKit
+    // This includes checking the sanity of the settings and converting public key hashes/pins from an
+    // NSSArray of NSStrings (as provided by the user) to an NSSet of NSData (as needed by TrustKit)
     
-    for (NSString *serverName in publicKeyPins)
+    NSMutableDictionary *finalConfiguration = [[NSMutableDictionary alloc]init];
+    
+    for (NSString *domainName in TrustKitArguments)
     {
-        NSArray *serverSslPinsString = publicKeyPins[serverName];
+        // Retrieve the configuration for this domain
+        NSDictionary *serverPinConfiguration = TrustKitArguments[domainName];
+        NSMutableDictionary *serverPinFinalConfiguration = [[NSMutableDictionary alloc]init];
+        
+        // Extract the includeSubdomains setting
+        NSNumber *shouldIncludeSubdomains = serverPinConfiguration[kTSKIncludeSubdomains];
+        if (shouldIncludeSubdomains == nil)
+        {
+            [NSException raise:@"TrustKit configuration invalid" format:@"TrustKit was initialized with an invalid value for %@", kTSKIncludeSubdomains];
+        }
+        serverPinFinalConfiguration[kTSKIncludeSubdomains] = shouldIncludeSubdomains;
+        
+        
+        // Extract the list of public key types
+        NSArray *publicKeyTypes = serverPinConfiguration[kTSKPublicKeyTypes];
+        if (publicKeyTypes == nil)
+        {
+            [NSException raise:@"TrustKit configuration invalid" format:@"TrustKit was initialized with an invalid value for %@", kTSKPublicKeyTypes];
+        }
+        serverPinFinalConfiguration[kTSKPublicKeyTypes] = publicKeyTypes;
+        
+        
+        // Extract and convert the report URIs if defined
+        NSArray *reportUriList = serverPinConfiguration[kTSKReportUris];
+        if (reportUriList != nil)
+        {
+            NSMutableArray *reportUriListFinal = [NSMutableArray array];
+            for (NSString *reportUriStr in reportUriList)
+            {
+                NSURL *reportUri = [NSURL URLWithString:reportUriStr];
+                if (reportUri == nil)
+                {
+                    [NSException raise:@"TrustKit configuration invalid" format:@"TrustKit was initialized with an invalid value for %@", kTSKReportUris];
+                }
+                [reportUriListFinal addObject:reportUri];
+            }
+
+            serverPinFinalConfiguration[kTSKReportUris] = [NSArray arrayWithArray:reportUriListFinal];
+        }
+        
+        
+        // Extract and convert the public key hashes
+        NSArray *serverSslPinsString = serverPinConfiguration[kTSKPublicKeyHashes];
         NSMutableArray *serverSslPinsData = [[NSMutableArray alloc] init];
         
-        NSLog(@"Loading SSL pins for %@", serverName);
+        NSLog(@"Loading SSL pins for %@", domainName);
         for (NSString *pinnedCertificateHash in serverSslPinsString) {
             NSMutableData *pinnedCertificateHashData = [NSMutableData dataWithCapacity:CC_SHA256_DIGEST_LENGTH];
             
             // Convert the hex string to data
             if ([pinnedCertificateHash length] != CC_SHA256_DIGEST_LENGTH * 2) {
                 // The public key hash doesn't have a valid size; store a null hash to make all connections fail
-                NSLog(@"Bad hash for %@", serverName);
+                NSLog(@"Bad hash for %@", domainName);
                 [pinnedCertificateHashData resetBytesInRange:NSMakeRange(0, CC_SHA256_DIGEST_LENGTH)];
             }
             else {
@@ -176,11 +227,14 @@ NSDictionary *convertPublicKeyPinsFromStringToData(NSDictionary *publicKeyPins)
             [serverSslPinsData addObject:pinnedCertificateHashData];
         }
         
-        // Save the public key hashes for this server as an NSSet
-        convertedPins[serverName] = [NSSet setWithArray:serverSslPinsData];
+        // Save the public key hashes for this server as an NSSet for quick lookup
+        serverPinFinalConfiguration[kTSKPublicKeyHashes] = [NSSet setWithArray:serverSslPinsData];
+        
+        // Store the whole configuration
+        finalConfiguration[domainName] = [NSDictionary dictionaryWithDictionary:serverPinFinalConfiguration];
     }
     
-    return convertedPins;
+    return finalConfiguration;
 }
 
 
@@ -197,7 +251,7 @@ static void initializeTrustKit(NSDictionary *publicKeyPins)
         initializeKeychain();
         
         // Convert and store the SSL pins in our global variable
-        _subjectPublicKeyInfoPins = [[NSDictionary alloc]initWithDictionary:convertPublicKeyPinsFromStringToData(publicKeyPins)];
+        _subjectPublicKeyInfoPins = [[NSDictionary alloc]initWithDictionary:parseTrustKitArguments(publicKeyPins)];
         
         // Hook SSLHandshake()
         char functionToHook[] = "SSLHandshake";
@@ -242,7 +296,7 @@ __attribute__((constructor)) static void initialize(int argc, const char **argv)
     NSLog(@"TrustKit started dynamically in App %@", CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)@"CFBundleIdentifier"));
     
     // Retrieve the SSL pins from the App's Info.plist file
-    NSDictionary *publicKeyPinsFromInfoPlist = CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)TrustKitInfoDictionnaryKey);
+    NSDictionary *publicKeyPinsFromInfoPlist = CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)kTSKConfiguration);
 
     initializeTrustKit(publicKeyPinsFromInfoPlist);
 }

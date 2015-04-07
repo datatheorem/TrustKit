@@ -66,7 +66,7 @@
 
 - (void)testWwwGoodComCertificateAgainstGoodIntermediateCA
 {
-    NSDictionary *publicKeyPins = convertPublicKeyPinsFromStringToData(
+    NSDictionary *publicKeyPins = parseTrustKitArguments(
                                                                        @{
                                                                          @"www.good.com" : @[
                                                                                  @"4d012d74c6e6c058185227cce0b0c5fb1804b5dd33ebd98f1a6929d35e1de996", //Server key

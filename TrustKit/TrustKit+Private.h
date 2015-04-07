@@ -10,8 +10,8 @@
 #define TrustKit_TrustKit_Private____FILEEXTENSION___
 
 
-BOOL verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverName, NSDictionary *publicKeyPins);
-NSDictionary *convertPublicKeyPinsFromStringToData(NSDictionary *publicKeyPins);
+BOOL verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverName, NSDictionary *TrustKitConfiguration);
+NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments);
 
 
 @interface TrustKit(Private)
