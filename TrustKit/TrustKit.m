@@ -20,7 +20,7 @@ static const NSString *TrustKitInfoDictionnaryKey = @"TSKPublicKeyPins";
 
 #pragma mark TrustKit Global State
 // Global storing the public key hashes and domains
-static NSMutableDictionary *_subjectPublicKeyInfoPins = nil;
+static NSDictionary *_subjectPublicKeyInfoPins = nil;
 
 // Global preventing multiple initializations (double function interposition, etc.)
 static BOOL _isTrustKitInitialized = NO;
@@ -211,9 +211,11 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
 #pragma mark Framework Initialization 
 
 
-static void convertAndSetPublicKeyPinsFromDictionary(NSDictionary *publicKeyPins)
+static NSDictionary *convertPublicKeyPinsFromStringToData(NSDictionary *publicKeyPins)
 {
-    // Convert public key hashes/pins from NSString to NSData and store them in the _subjectPublicKeyInfoPins global variable
+    // Convert public key hashes/pins from NSString as provided by the user to NSData, as needed by TrustKit
+    NSMutableDictionary *convertedPins = [[NSMutableDictionary alloc]init];
+    
     for (NSString *serverName in publicKeyPins)
     {
         NSArray *serverSslPinsString = publicKeyPins[serverName];
@@ -244,8 +246,10 @@ static void convertAndSetPublicKeyPinsFromDictionary(NSDictionary *publicKeyPins
         }
         
         // Save the public key hashes for this server
-        _subjectPublicKeyInfoPins[serverName] = serverSslPinsData;
+        convertedPins[serverName] = serverSslPinsData;
     }
+    
+    return convertedPins;
 }
 
 
@@ -259,14 +263,11 @@ static void initializeTrustKit(NSDictionary *publicKeyPins)
     
     if ([publicKeyPins count] > 0)
     {
-        // Initialize the global variable where we will store our SSL pins
-        _subjectPublicKeyInfoPins = [[NSMutableDictionary alloc]init];
-        
         // Initialize our Keychain lock
         pthread_mutex_init(&_keychainLock, NULL);
         
-        // Store the SSL pins
-        convertAndSetPublicKeyPinsFromDictionary(publicKeyPins);
+        // Convert and store the SSL pins in our global variable
+        _subjectPublicKeyInfoPins = [[NSDictionary alloc]initWithDictionary:convertPublicKeyPinsFromStringToData(publicKeyPins)];
         
         // Hook SSLHandshake()
         char functionToHook[] = "SSLHandshake";
@@ -274,9 +275,8 @@ static void initializeTrustKit(NSDictionary *publicKeyPins)
         rebind_symbols((struct rebinding[1]){{(char *)functionToHook, (void *)replaced_SSLHandshake}}, 1);
         
         _isTrustKitInitialized = YES;
+        NSLog(@"TrustKit initialized with pins %@", _subjectPublicKeyInfoPins);
     }
-    
-    NSLog(@"PINS %@", _subjectPublicKeyInfoPins);
 }
 
 
@@ -328,8 +328,7 @@ __attribute__((constructor)) static void initialize(int argc, const char **argv)
 
 + (BOOL)setPublicKeyPins:(NSDictionary *)publicKeyPins
 {
-    [_subjectPublicKeyInfoPins removeAllObjects];
-    convertAndSetPublicKeyPinsFromDictionary(publicKeyPins);
+    _subjectPublicKeyInfoPins = [[NSDictionary alloc]initWithDictionary:convertPublicKeyPinsFromStringToData(publicKeyPins)];
     return YES;
 }
 
