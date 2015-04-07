@@ -19,7 +19,7 @@ static const NSString *TrustKitInfoDictionnaryKey = @"TSKPublicKeyPins";
 
 
 #pragma mark TrustKit Global State
-// Global storing the public key hashes and domains
+// Global dictionnary storing the public key hashes and domains
 static NSDictionary *_subjectPublicKeyInfoPins = nil;
 
 // Global preventing multiple initializations (double function interposition, etc.)
@@ -79,6 +79,7 @@ NSData *getPublicKeyBits(SecKeyRef publicKey)
 
 #pragma mark SSL Pin Validator
 
+
 BOOL verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverName)
 {
     if ((serverTrust == NULL) || (serverName == NULL))
@@ -99,46 +100,41 @@ BOOL verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverName)
     }
     
     // Let's find at least one of the pins in the certificate chain
-    NSArray *serverPins = [_subjectPublicKeyInfoPins objectForKey:serverName];
+    NSSet *serverPins = [_subjectPublicKeyInfoPins objectForKey:serverName];
     
-    
-    // For each pinned certificate, check if it is part of the server's cert trust chain
-    // We only need one of the pinned certificates to be in the server's trust chain
-    for (NSData *pinnedSubjectPublicKeyInfoHash in serverPins)
+
+    // Check each certificate in the server's certificate chain (the trust object)
+    CFIndex certificateChainLen = SecTrustGetCertificateCount(serverTrust);
+    for(int i=0;i<certificateChainLen;i++)
     {
-        // Check each certificate in the server's certificate chain (the trust object)
-        CFIndex certificateChainLen = SecTrustGetCertificateCount(serverTrust);
-        for(int i=0;i<certificateChainLen;i++) {
-            
-            // Extract the certificate
-            SecCertificateRef certificate = SecTrustGetCertificateAtIndex(serverTrust, i);
-            
-            // Extract the public key
-            SecTrustRef tempTrust;
-            SecPolicyRef policy = SecPolicyCreateBasicX509();
-            SecTrustCreateWithCertificates(certificate, policy, &tempTrust);
-            SecTrustEvaluate(tempTrust, NULL);
-            SecKeyRef publicKey = SecTrustCopyPublicKey(tempTrust);
-            NSData *publicKeyData = getPublicKeyBits(publicKey);
-            
-            // Add the missing ASN1 header for RSA public keys to re-create the subject public key info
-            NSMutableData *subjectPublicKeyInfoData = [NSMutableData dataWithData:[TKSettings defaultRsaAsn1Header]];
-            [subjectPublicKeyInfoData appendData:publicKeyData];
-            //NSLog(@"%@ SUBJECT KEY DATA %@", serverName, subjectPublicKeyInfoData);
-            
-            
-            // Hash the public key
-            NSMutableData *subjectPublicKeyInfoHash = [NSMutableData dataWithLength:CC_SHA256_DIGEST_LENGTH];
-            CC_SHA256(subjectPublicKeyInfoData.bytes, (unsigned int)subjectPublicKeyInfoData.length,  subjectPublicKeyInfoHash.mutableBytes);
-            CFRelease(publicKey);
-            NSLog(@"PinE %@  PinF %@", pinnedSubjectPublicKeyInfoHash, subjectPublicKeyInfoHash);
-            
-            // Compare the two hashes
-            if ([pinnedSubjectPublicKeyInfoHash isEqualToData:subjectPublicKeyInfoHash])
-            {
-                NSLog(@"OK: Found SSL Pin");
-                return YES;
-            }
+        // Extract the certificate
+        SecCertificateRef certificate = SecTrustGetCertificateAtIndex(serverTrust, i);
+        
+        // Extract the public key
+        SecTrustRef tempTrust;
+        SecPolicyRef policy = SecPolicyCreateBasicX509();
+        SecTrustCreateWithCertificates(certificate, policy, &tempTrust);
+        SecTrustEvaluate(tempTrust, NULL);
+        SecKeyRef publicKey = SecTrustCopyPublicKey(tempTrust);
+        NSData *publicKeyData = getPublicKeyBits(publicKey);
+        
+        // Add the missing ASN1 header for RSA public keys to re-create the subject public key info
+        NSMutableData *subjectPublicKeyInfoData = [NSMutableData dataWithData:[TKSettings defaultRsaAsn1Header]];
+        [subjectPublicKeyInfoData appendData:publicKeyData];
+        //NSLog(@"%@ SUBJECT KEY DATA %@", serverName, subjectPublicKeyInfoData);
+        
+        
+        // Hash the public key
+        NSMutableData *subjectPublicKeyInfoHash = [NSMutableData dataWithLength:CC_SHA256_DIGEST_LENGTH];
+        CC_SHA256(subjectPublicKeyInfoData.bytes, (unsigned int)subjectPublicKeyInfoData.length,  subjectPublicKeyInfoHash.mutableBytes);
+        CFRelease(publicKey);
+        NSLog(@"Testing SSL Pin %@", subjectPublicKeyInfoHash);
+        
+        // Is the generated hash in our set of pinned hashes ?
+        if ([serverPins containsObject:subjectPublicKeyInfoHash])
+        {
+            NSLog(@"SSL Pin found");
+            return YES;
         }
     }
     
@@ -146,6 +142,7 @@ BOOL verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverName)
     NSLog(@"Error: SSL Pin not found");
     return NO;
 }
+
 
 
 #pragma mark SSLHandshake Hook
@@ -213,7 +210,7 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
 
 static NSDictionary *convertPublicKeyPinsFromStringToData(NSDictionary *publicKeyPins)
 {
-    // Convert public key hashes/pins from NSString as provided by the user to NSData, as needed by TrustKit
+    // Convert public key hashes/pins from an NSSArray of NSStrings (as provided by the user) to an NSSet of NSData (as needed by TrustKit)
     NSMutableDictionary *convertedPins = [[NSMutableDictionary alloc]init];
     
     for (NSString *serverName in publicKeyPins)
@@ -245,8 +242,8 @@ static NSDictionary *convertPublicKeyPinsFromStringToData(NSDictionary *publicKe
             [serverSslPinsData addObject:pinnedCertificateHashData];
         }
         
-        // Save the public key hashes for this server
-        convertedPins[serverName] = serverSslPinsData;
+        // Save the public key hashes for this server as an NSSet
+        convertedPins[serverName] = [NSSet setWithArray:serverSslPinsData];
     }
     
     return convertedPins;
