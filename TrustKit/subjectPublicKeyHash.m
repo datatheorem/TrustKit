@@ -75,7 +75,7 @@ NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate)
     CC_SHA256_Init(&shaCtx);
     
     // Add the missing ASN1 header for public keys to re-create the subject public key info
-    CC_SHA256_Update(&shaCtx, getAsn1HeaderBytesForPublicKeyType(0), getAsn1HeaderSizeForPublicKeyType(0));
+    CC_SHA256_Update(&shaCtx, getAsn1HeaderForPublicKeyAlgorithm(0), getAsn1HeaderSizeForPublicKeyAlgorithm(0));
     
     // Add the public key
     CC_SHA256_Update(&shaCtx, [publicKeyData bytes], (unsigned int)[publicKeyData length]);

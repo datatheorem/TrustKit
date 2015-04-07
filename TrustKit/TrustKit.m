@@ -20,8 +20,15 @@ static const NSString *kTSKConfiguration = @"TSKConfiguration";
 // Keys for each domain within our dictionnary
 static const NSString *kTSKPublicKeyHashes = @"TSKPublicKeyHashes";
 static const NSString *kTSKIncludeSubdomains = @"TSKIncludeSubdomains";
-static const NSString *kTSKPublicKeyTypes = @"TSKPublicKeyTypes";
+static const NSString *kTSKPublicKeyAlgorithms = @"TSKPublicKeyAlgorithms";
 static const NSString *kTSKReportUris = @"TSKReportUris";
+
+// Public key algorithms we support
+static const NSString *kTSKAlgorithmRsa2048 = @"TSKAlgorithmRsa2048";
+static const NSString *kTSKAlgorithmRsa4096 = @"TSKAlgorithmRsa4096";
+static const NSString *kTSKAlgorithmEcDsaSecp256r1 = @"TSKAlgorithmEcDsaSecp256r1";
+
+
 
 
 #pragma mark TrustKit Global State
@@ -172,12 +179,12 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
         
         
         // Extract the list of public key types
-        NSArray *publicKeyTypes = serverPinConfiguration[kTSKPublicKeyTypes];
-        if (publicKeyTypes == nil)
+        NSArray *publicKeyAlgs = serverPinConfiguration[kTSKPublicKeyAlgorithms];
+        if (publicKeyAlgs == nil)
         {
-            [NSException raise:@"TrustKit configuration invalid" format:@"TrustKit was initialized with an invalid value for %@", kTSKPublicKeyTypes];
+            [NSException raise:@"TrustKit configuration invalid" format:@"TrustKit was initialized with an invalid value for %@", kTSKPublicKeyAlgorithms];
         }
-        serverPinFinalConfiguration[kTSKPublicKeyTypes] = publicKeyTypes;
+        serverPinFinalConfiguration[kTSKPublicKeyAlgorithms] = publicKeyAlgs;
         
         
         // Extract and convert the report URIs if defined

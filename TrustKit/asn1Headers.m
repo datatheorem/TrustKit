@@ -21,19 +21,19 @@ unsigned char Rsa4096Asn1Header[] = {
 };
 
 
-unsigned char EcPrime256v1Asn1Header[] = {
+unsigned char ecDsaSecp256r1Asn1Header[] = {
     0x30, 0x59, 0x30, 0x13, 0x06, 0x07, 0x2a, 0x86, 0x48, 0xce, 0x3d, 0x02,
     0x01, 0x06, 0x08, 0x2a, 0x86, 0x48, 0xce, 0x3d, 0x03, 0x01, 0x07
 };
 
 
-const unsigned char *getAsn1HeaderBytesForPublicKeyType(int type)
+const unsigned char *getAsn1HeaderBytesForPublicKeyAlgorithm(TSKPublicKeyAlgorithm alg)
 {
     return Rsa2048Asn1Header;
 }
 
 
-unsigned int getAsn1HeaderSizeForPublicKeyType(int type)
+unsigned int getAsn1HeaderSizeForPublicKeyAlgorithm(TSKPublicKeyAlgorithm alg)
 {
     return sizeof(Rsa2048Asn1Header);
 }
