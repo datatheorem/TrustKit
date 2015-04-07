@@ -11,7 +11,6 @@
 		075AA1091AC985FD00178223 /* TrustKitCertificateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA2868CAFECA46ADE0B6E3E /* TrustKitCertificateTests.m */; };
 		8C84804D1A896EE30017C155 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C84804C1A896EE30017C155 /* TrustKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8C8480531A896EE30017C155 /* TrustKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C8480471A896EE30017C155 /* TrustKit.framework */; };
-		8C84805A1A896EE30017C155 /* TrustKitTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C8480591A896EE30017C155 /* TrustKitTests.m */; };
 		8C8480691A896F350017C155 /* fishhook.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C8480671A896F350017C155 /* fishhook.c */; };
 		8C84806A1A896F350017C155 /* fishhook.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C8480681A896F350017C155 /* fishhook.h */; };
 		8C84806D1A896F660017C155 /* TrustKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C84806C1A896F660017C155 /* TrustKit.m */; };
@@ -37,7 +36,6 @@
 		8C84804C1A896EE30017C155 /* TrustKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrustKit.h; sourceTree = "<group>"; };
 		8C8480521A896EE30017C155 /* TrustKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrustKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C8480581A896EE30017C155 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8C8480591A896EE30017C155 /* TrustKitTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrustKitTests.m; sourceTree = "<group>"; };
 		8C8480671A896F350017C155 /* fishhook.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fishhook.c; path = fishhook/fishhook.c; sourceTree = "<group>"; };
 		8C8480681A896F350017C155 /* fishhook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fishhook.h; path = fishhook/fishhook.h; sourceTree = "<group>"; };
 		8C84806C1A896F660017C155 /* TrustKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrustKit.m; sourceTree = "<group>"; };
@@ -103,7 +101,6 @@
 		8C8480561A896EE30017C155 /* TrustKitTests */ = {
 			isa = PBXGroup;
 			children = (
-				8C8480591A896EE30017C155 /* TrustKitTests.m */,
 				0710306B1AA88A510028092C /* TrustKitServerTests.m */,
 				2FA2868CAFECA46ADE0B6E3E /* TrustKitCertificateTests.m */,
 				2FA28052F8F01FDE594E4642 /* TrustKitTestCertificates.h */,
@@ -247,7 +244,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0710306C1AA88A510028092C /* TrustKitServerTests.m in Sources */,
-				8C84805A1A896EE30017C155 /* TrustKitTests.m in Sources */,
 				075AA1091AC985FD00178223 /* TrustKitCertificateTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
