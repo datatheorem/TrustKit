@@ -19,7 +19,7 @@ static const NSString *TrustKitInfoDictionnaryKey = @"TSKPublicKeyPins";
 
 
 #pragma mark TrustKit Global State
-// Global dictionnary storing the public key hashes and domains
+// Global dictionnary for storing the public key hashes and domains
 static NSDictionary *_subjectPublicKeyInfoPins = nil;
 
 // Global preventing multiple initializations (double function interposition, etc.)
@@ -118,19 +118,24 @@ BOOL verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverName)
         SecKeyRef publicKey = SecTrustCopyPublicKey(tempTrust);
         NSData *publicKeyData = getPublicKeyBits(publicKey);
         
-        // Add the missing ASN1 header for RSA public keys to re-create the subject public key info
-        NSMutableData *subjectPublicKeyInfoData = [NSMutableData dataWithData:[TKSettings defaultRsaAsn1Header]];
-        [subjectPublicKeyInfoData appendData:publicKeyData];
-        //NSLog(@"%@ SUBJECT KEY DATA %@", serverName, subjectPublicKeyInfoData);
         
-        
-        // Hash the public key
+        // Generate a hash of the subject public key info
+        // TODO: error checking and better support for different ASN1 headers
         NSMutableData *subjectPublicKeyInfoHash = [NSMutableData dataWithLength:CC_SHA256_DIGEST_LENGTH];
-        CC_SHA256(subjectPublicKeyInfoData.bytes, (unsigned int)subjectPublicKeyInfoData.length,  subjectPublicKeyInfoHash.mutableBytes);
+        CC_SHA256_CTX shaCtx;
+        CC_SHA256_Init(&shaCtx);
+        
+        // Add the missing ASN1 header for RSA public keys to re-create the subject public key info
+        CC_SHA256_Update(&shaCtx, [[TKSettings defaultRsaAsn1Header] bytes], (unsigned int)[[TKSettings defaultRsaAsn1Header] length]);
+        
+        // Add the public key
+        CC_SHA256_Update(&shaCtx, [publicKeyData bytes], (unsigned int)[publicKeyData length]);
+        CC_SHA256_Final((unsigned char *)[subjectPublicKeyInfoHash bytes], &shaCtx);
         CFRelease(publicKey);
-        NSLog(@"Testing SSL Pin %@", subjectPublicKeyInfoHash);
+
         
         // Is the generated hash in our set of pinned hashes ?
+        NSLog(@"Testing SSL Pin %@", subjectPublicKeyInfoHash);
         if ([serverPins containsObject:subjectPublicKeyInfoHash])
         {
             NSLog(@"SSL Pin found");
