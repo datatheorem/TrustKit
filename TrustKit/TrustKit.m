@@ -268,6 +268,17 @@ static void initializeTrustKit(NSDictionary *publicKeyPins)
         // Initialize our Keychain lock
         pthread_mutex_init(&_keychainLock, NULL);
         
+        // Cleanup the Keychain in case the App previously crashed
+        NSMutableDictionary * publicKeyGet = [[NSMutableDictionary alloc] init];
+        [publicKeyGet setObject:(__bridge id)kSecClassKey forKey:(__bridge id)kSecClass];
+        [publicKeyGet setObject:(TrustKitPublicKeyTag) forKey:(__bridge id)kSecAttrApplicationTag];
+        [publicKeyGet setObject:(__bridge id)(kCFBooleanTrue) forKey:(__bridge id)kSecReturnData];
+        pthread_mutex_lock(&_keychainLock);
+        {
+            SecItemDelete((__bridge CFDictionaryRef)(publicKeyGet));
+        }
+        pthread_mutex_unlock(&_keychainLock);
+        
         // Convert and store the SSL pins in our global variable
         _subjectPublicKeyInfoPins = [[NSDictionary alloc]initWithDictionary:convertPublicKeyPinsFromStringToData(publicKeyPins)];
         
