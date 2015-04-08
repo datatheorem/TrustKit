@@ -12,8 +12,6 @@
 #import <CommonCrypto/CommonDigest.h>
 #import "fishhook/fishhook.h"
 #import "subjectPublicKeyHash.h"
-#import "asn1Headers.h"
-
 
 
 // Info.plist key we read the public key hashes from

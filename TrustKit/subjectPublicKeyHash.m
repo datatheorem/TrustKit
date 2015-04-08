@@ -11,12 +11,34 @@
 #include <pthread.h>
 #import <CommonCrypto/CommonDigest.h>
 
-#pragma mark Global Cache for Subject Public Key Info Hashes
 
+#pragma mark Global Cache for SPKI Hashes
 
 // One dictionnary cache per TSKPublicKeyAlgorithm defined
 NSMutableDictionary *_subjectPublicKeyInfoHashesCache[3] = {nil, nil, nil};
 
+
+#pragma mark Missing ASN1 SPKI Headers
+
+// These are the ASN1 headers for the Subject Public Key Info section of a certificate
+static unsigned char Rsa2048Asn1Header[] = {
+    0x30, 0x82, 0x01, 0x22, 0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86,
+    0xf7, 0x0d, 0x01, 0x01, 0x01, 0x05, 0x00, 0x03, 0x82, 0x01, 0x0f, 0x00
+};
+
+static unsigned char Rsa4096Asn1Header[] = {
+    0x30, 0x82, 0x02, 0x22, 0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86,
+    0xf7, 0x0d, 0x01, 0x01, 0x01, 0x05, 0x00, 0x03, 0x82, 0x02, 0x0f, 0x00
+};
+
+static unsigned char ecDsaSecp256r1Asn1Header[] = {
+    0x30, 0x59, 0x30, 0x13, 0x06, 0x07, 0x2a, 0x86, 0x48, 0xce, 0x3d, 0x02,
+    0x01, 0x06, 0x08, 0x2a, 0x86, 0x48, 0xce, 0x3d, 0x03, 0x01, 0x07
+};
+
+// Careful with the order... must match how TSKPublicKeyAlgorithm is defined
+static unsigned char *asn1HeaderBytes[3] = { Rsa2048Asn1Header, Rsa4096Asn1Header, ecDsaSecp256r1Asn1Header };
+static unsigned int asn1HeaderSizes[3] = { sizeof(Rsa2048Asn1Header), sizeof(Rsa4096Asn1Header), sizeof(ecDsaSecp256r1Asn1Header) };
 
 #pragma mark Public Key Converter
 
@@ -93,9 +115,7 @@ NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate, T
     CC_SHA256_Init(&shaCtx);
     
     // Add the missing ASN1 header for public keys to re-create the subject public key info
-    CC_SHA256_Update(&shaCtx,
-                     getAsn1HeaderBytesForPublicKeyAlgorithm(publicKeyAlgorithm),
-                     getAsn1HeaderSizeForPublicKeyAlgorithm(publicKeyAlgorithm));
+    CC_SHA256_Update(&shaCtx, asn1HeaderBytes[publicKeyAlgorithm], asn1HeaderSizes[publicKeyAlgorithm]);
     
     // Add the public key
     CC_SHA256_Update(&shaCtx, [publicKeyData bytes], (unsigned int)[publicKeyData length]);

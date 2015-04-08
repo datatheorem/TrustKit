@@ -14,8 +14,6 @@
 		8C8480691A896F350017C155 /* fishhook.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C8480671A896F350017C155 /* fishhook.c */; };
 		8C84806A1A896F350017C155 /* fishhook.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C8480681A896F350017C155 /* fishhook.h */; };
 		8C84806D1A896F660017C155 /* TrustKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C84806C1A896F660017C155 /* TrustKit.m */; };
-		8CB068C81AD47909008C79C2 /* asn1Headers.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB068C61AD47909008C79C2 /* asn1Headers.m */; };
-		8CB068C91AD47909008C79C2 /* asn1Headers.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CB068C71AD47909008C79C2 /* asn1Headers.h */; };
 		8CB068CB1AD47DDD008C79C2 /* subjectPublicKeyHash.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB068CA1AD47DDD008C79C2 /* subjectPublicKeyHash.m */; };
 /* End PBXBuildFile section */
 
@@ -42,8 +40,6 @@
 		8C8480671A896F350017C155 /* fishhook.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fishhook.c; path = fishhook/fishhook.c; sourceTree = "<group>"; };
 		8C8480681A896F350017C155 /* fishhook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fishhook.h; path = fishhook/fishhook.h; sourceTree = "<group>"; };
 		8C84806C1A896F660017C155 /* TrustKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrustKit.m; sourceTree = "<group>"; };
-		8CB068C61AD47909008C79C2 /* asn1Headers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = asn1Headers.m; sourceTree = "<group>"; };
-		8CB068C71AD47909008C79C2 /* asn1Headers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = asn1Headers.h; sourceTree = "<group>"; };
 		8CB068CA1AD47DDD008C79C2 /* subjectPublicKeyHash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = subjectPublicKeyHash.m; sourceTree = "<group>"; };
 		8CB068CC1AD47E06008C79C2 /* subjectPublicKeyHash.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = subjectPublicKeyHash.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -93,8 +89,6 @@
 				8C84806C1A896F660017C155 /* TrustKit.m */,
 				2FA286123F801C437F35D240 /* TrustKit+Private.h */,
 				8C84804A1A896EE30017C155 /* Supporting Files */,
-				8CB068C61AD47909008C79C2 /* asn1Headers.m */,
-				8CB068C71AD47909008C79C2 /* asn1Headers.h */,
 				8CB068CA1AD47DDD008C79C2 /* subjectPublicKeyHash.m */,
 				8CB068CC1AD47E06008C79C2 /* subjectPublicKeyHash.h */,
 			);
@@ -144,7 +138,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CB068C91AD47909008C79C2 /* asn1Headers.h in Headers */,
 				8C84804D1A896EE30017C155 /* TrustKit.h in Headers */,
 				8C84806A1A896F350017C155 /* fishhook.h in Headers */,
 			);
@@ -246,7 +239,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CB068C81AD47909008C79C2 /* asn1Headers.m in Sources */,
 				8CB068CB1AD47DDD008C79C2 /* subjectPublicKeyHash.m in Sources */,
 				8C8480691A896F350017C155 /* fishhook.c in Sources */,
 				8C84806D1A896F660017C155 /* TrustKit.m in Sources */,
