@@ -11,6 +11,10 @@
 #include <pthread.h>
 #import <CommonCrypto/CommonDigest.h>
 
+#pragma mark Global Cache for Subject Public Key Info Hashes
+
+NSMutableDictionary *_subjectPublicKeyInfoCache[3];
+
 
 #pragma mark Public Key Converter
 
@@ -58,7 +62,20 @@ static NSData *getPublicKeyBits(SecKeyRef publicKey)
 
 NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate, TSKPublicKeyAlgorithm publicKeyAlgorithm)
 {
-    // Extract the public key
+    // Have we seen this certificate before? Look for the SPKI in the cache
+    NSData *certificateData = (__bridge NSData *)(SecCertificateCopyData(certificate));
+    int algorithm = publicKeyAlgorithm;
+    
+    NSData *cachedSubjectPublicKeyInfo = _subjectPublicKeyInfoCache[algorithm][certificateData];
+    if (cachedSubjectPublicKeyInfo)
+    {
+        NSLog(@"Subject Public Key Info hash was found in the cache");
+        return cachedSubjectPublicKeyInfo;
+    }
+    NSLog(@"Subject Public Key Info hash was found in the cache");
+    
+    // New certificate; we need to generate the hash
+    // First extract the public key
     SecTrustRef tempTrust;
     SecPolicyRef policy = SecPolicyCreateBasicX509();
     SecTrustCreateWithCertificates(certificate, policy, &tempTrust);
@@ -68,7 +85,7 @@ NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate, T
     
     
     // Generate a hash of the subject public key info
-    // TODO: error checking and better support for different ASN1 headers
+    // TODO: error checking
     NSMutableData *subjectPublicKeyInfoHash = [NSMutableData dataWithLength:CC_SHA256_DIGEST_LENGTH];
     CC_SHA256_CTX shaCtx;
     CC_SHA256_Init(&shaCtx);
@@ -83,6 +100,9 @@ NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate, T
     CC_SHA256_Final((unsigned char *)[subjectPublicKeyInfoHash bytes], &shaCtx);
     CFRelease(publicKey);
     
+    // Store the hash in our cache
+    _subjectPublicKeyInfoCache[algorithm][certificateData] = subjectPublicKeyInfoHash;
+    
     return subjectPublicKeyInfoHash;
 }
 
@@ -90,6 +110,11 @@ NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate, T
 
 void initializeKeychain(void)
 {
+    // Initialize our caches of SPKI hashes; we have one per type of public keys to make it convenient
+    _subjectPublicKeyInfoCache[TSKPublicKeyAlgorithmRsa2048] = [[NSMutableDictionary alloc]init];
+    _subjectPublicKeyInfoCache[TSKPublicKeyAlgorithmRsa4096] = [[NSMutableDictionary alloc]init];
+    _subjectPublicKeyInfoCache[TSKPublicKeyAlgorithmEcDsaSecp256r1] = [[NSMutableDictionary alloc]init];
+    
     // Initialize our Keychain lock
     pthread_mutex_init(&_keychainLock, NULL);
     
@@ -109,5 +134,12 @@ void resetKeychain(void)
 {
     // This is only used for tests
     pthread_mutex_destroy(&_keychainLock);
+    
+    // Discard SPKI cache
+    
+    // Initialize our caches of SPKI hashes
+    _subjectPublicKeyInfoCache[TSKPublicKeyAlgorithmRsa2048] = nil;
+    _subjectPublicKeyInfoCache[TSKPublicKeyAlgorithmRsa4096] = nil;
+    _subjectPublicKeyInfoCache[TSKPublicKeyAlgorithmEcDsaSecp256r1] = nil;
 }
 

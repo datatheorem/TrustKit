@@ -14,7 +14,7 @@
 
 typedef NS_ENUM(NSInteger, TSKPublicKeyAlgorithm)
 {
-    TSKPublicKeyAlgorithmRsa2048,
+    TSKPublicKeyAlgorithmRsa2048 = 0,
     TSKPublicKeyAlgorithmRsa4096,
     TSKPublicKeyAlgorithmEcDsaSecp256r1,
 };
