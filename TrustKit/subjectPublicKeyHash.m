@@ -10,7 +10,6 @@
 #import <Foundation/Foundation.h>
 #include <pthread.h>
 #import <CommonCrypto/CommonDigest.h>
-#import "asn1Headers.h"
 
 
 #pragma mark Public Key Converter
@@ -57,7 +56,7 @@ NSData *getPublicKeyBits(SecKeyRef publicKey)
 
 
 
-NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate)
+NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate, TSKPublicKeyAlgorithm publicKeyAlgorithm)
 {
     // Extract the public key
     SecTrustRef tempTrust;
@@ -75,7 +74,9 @@ NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate)
     CC_SHA256_Init(&shaCtx);
     
     // Add the missing ASN1 header for public keys to re-create the subject public key info
-    CC_SHA256_Update(&shaCtx, getAsn1HeaderForPublicKeyAlgorithm(0), getAsn1HeaderSizeForPublicKeyAlgorithm(0));
+    CC_SHA256_Update(&shaCtx,
+                     getAsn1HeaderBytesForPublicKeyAlgorithm(publicKeyAlgorithm),
+                     getAsn1HeaderSizeForPublicKeyAlgorithm(publicKeyAlgorithm));
     
     // Add the public key
     CC_SHA256_Update(&shaCtx, [publicKeyData bytes], (unsigned int)[publicKeyData length]);

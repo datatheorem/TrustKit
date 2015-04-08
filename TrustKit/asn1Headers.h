@@ -14,13 +14,13 @@
 
 typedef NS_ENUM(NSInteger, TSKPublicKeyAlgorithm)
 {
-    TSKAlgorithmRsa2048,
-    TSKAlgorithmRsa4096,
-    TSKAlgorithmEcDsaSecp256r1,
+    TSKPublicKeyAlgorithmRsa2048,
+    TSKPublicKeyAlgorithmRsa4096,
+    TSKPublicKeyAlgorithmEcDsaSecp256r1,
 };
 
 
-const unsigned char *getAsn1HeaderForPublicKeyAlgorithm(TSKPublicKeyAlgorithm alg);
+const unsigned char *getAsn1HeaderBytesForPublicKeyAlgorithm(TSKPublicKeyAlgorithm alg);
 unsigned int getAsn1HeaderSizeForPublicKeyAlgorithm(TSKPublicKeyAlgorithm alg);
 
 
