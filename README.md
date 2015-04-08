@@ -17,13 +17,13 @@ For Apps targeting iOS 8+, TrustKit can be dynamically linked, which allows enab
 ![](http://datatheorem.github.io/TrustKit/images/dynamic2.png)
 
 * Lastly, add the public key hashes TrustKit will use to check certificate chains. In the App's Info.plist file ("Info" tab in Xcode):
-    * Add a new Dictionnary key called TSKConfiguration.
+    * Add a new Dictionnary key called `TSKConfiguration`.
     * Within this dictionnary add a Dictionnary value and use the server's domain (such as www.google.com) as the entry's key.
     * Within dictionnary you can add a few specific keys in order to configure how TrustKit handles pinning with this domain:
         * `TSKPublicKeyHashes`: Each element of this Array should be the SHA 256 of a subject public key info that needs to be in the server's certificate chain.
-        * `TSKPublicKeyAlgorithms`: The algorithms TrustKit needs to support when generating public key hashes. Should be an array containing one or multiple entries from TSKAlgorithmRsa2048, TSKAlgorithmRsa4096, TSKAlgorithmEcDsaSecp256r1. Supporting multiple algorithms has a performance impact.
+        * `TSKPublicKeyAlgorithms`: The algorithms TrustKit needs to support when generating public key hashes. Should be an array containing one or multiple entries from `TSKAlgorithmRsa2048`, `TSKAlgorithmRsa4096`, `TSKAlgorithmEcDsaSecp256r1`. Supporting multiple algorithms has a performance impact.
         * `TSKEnforcePinning` (optional): If set to NO, a pinning failure will not cause the connection to fail; default value is YES.
-        * `TSKReportUris` (optional): No effet at the moment.
+        * `TSKReportUris` (optional): No effect at the moment.
         * `TSKIncludeSubdomains` (optional): No effect at the moment.
 
 Your App's Info.plist file should look like this: 
