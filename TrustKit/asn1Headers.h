@@ -1,5 +1,5 @@
 //
-//  subjectPublicKeyInfoAsn1Headers.h
+//  asn1Headers.h
 //  TrustKit
 //
 //  Created by Alban Diquet on 4/7/15.
@@ -7,8 +7,8 @@
 //
 
 
-#ifndef __TrustKit__subjectPublicKeyInfoAsn1Headers__
-#define __TrustKit__subjectPublicKeyInfoAsn1Headers__
+#ifndef __TrustKit__asn1Headers__
+#define __TrustKit__asn1Headers__
 
 #import <Foundation/Foundation.h>
 
@@ -24,4 +24,4 @@ const unsigned char *getAsn1HeaderBytesForPublicKeyAlgorithm(TSKPublicKeyAlgorit
 unsigned int getAsn1HeaderSizeForPublicKeyAlgorithm(TSKPublicKeyAlgorithm alg);
 
 
-#endif /* defined(__TrustKit__subjectPublicKeyInfoAsn1Headers__) */
+#endif /* defined(__TrustKit__asn1Headers__) */

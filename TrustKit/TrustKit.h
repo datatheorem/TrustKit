@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Data Theorem. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
 //! Project version number for TrustKit.
 FOUNDATION_EXPORT double TrustKitVersionNumber;

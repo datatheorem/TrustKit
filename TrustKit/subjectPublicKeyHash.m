@@ -20,7 +20,7 @@ static pthread_mutex_t _keychainLock; // Used to lock access to our Keychain ite
 
 
 // The one and only way to get a key's data in a buffer on iOS is to put it in the Keychain and then ask for the data back...
-NSData *getPublicKeyBits(SecKeyRef publicKey)
+static NSData *getPublicKeyBits(SecKeyRef publicKey)
 {
     NSData *publicKeyData = nil;
     OSStatus resultAdd, resultDel = noErr;
