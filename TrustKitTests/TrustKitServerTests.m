@@ -9,6 +9,7 @@
 #import <XCTest/XCTest.h>
 #import "TrustKit.h"
 #import "TrustKit+Private.h"
+#import "subjectPublicKeyHash.h"
 
 
 @interface TrustKitServerTests : XCTestCase
@@ -19,7 +20,7 @@
 
 - (void)setUp {
     [super setUp];
-    [TrustKit resetSslPins];
+    [TrustKit resetConfiguration];
     // Put setup code here. This method is called before the invocation of each test method in the class.
 }
 
@@ -34,13 +35,15 @@
 
 - (void)testConnectionValidatingAnyKey
 {
-    [TrustKit initializeWithSslPins:@{
-                                      @"www.datatheorem.com" : @[
-                                              @"d120dfddc453a3264968cb284b5ee817bd9531abcbc63fcded604d6ac36e891f", //Server key
-                                              @"2741caeb7dc87a45083200b10037145d697723ec2bd5721b1e4af4dfcc48c919", //Intermediate key
-                                              @"1d75d0831b9e0885394d32c7a1bfdb3dbc1c28e2b0e8391fb135981dbc5ba936" //CA key
-                                              ]
-                                      }];
+    NSDictionary *trustKitConfig = @{
+                                     @"www.datatheorem.com" : @{
+                                             kTSKIncludeSubdomains : [NSNumber numberWithBool:NO],
+                                             kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                                             kTSKPublicKeyHashes : @[@"d120dfddc453a3264968cb284b5ee817bd9531abcbc63fcded604d6ac36e891f", // Server key
+                                                                     @"2741caeb7dc87a45083200b10037145d697723ec2bd5721b1e4af4dfcc48c919", // Intermediate key
+                                                                     @"1d75d0831b9e0885394d32c7a1bfdb3dbc1c28e2b0e8391fb135981dbc5ba936" // CA key
+                                                                     ]}};
+    [TrustKit initializeWithConfiguration:trustKitConfig];
     
     NSError *error = nil;
     NSHTTPURLResponse *response;
@@ -56,7 +59,7 @@
 
 - (void)testConnectionValidatingServerPublicKey
 {
-    [TrustKit initializeWithSslPins:@{
+    [TrustKit initializeWithConfiguration:@{
                                       @"www.datatheorem.com" : @[
                                               @"d120dfddc453a3264968cb284b5ee817bd9531abcbc63fcded604d6ac36e891f", //Server key
                                               ]}];
@@ -76,7 +79,7 @@
 
 - (void)testConnectionValidatingIntermediatePublicKey
 {
-    [TrustKit initializeWithSslPins:@{
+    [TrustKit initializeWithConfiguration:@{
                                       @"www.datatheorem.com" : @[
                                               @"2741caeb7dc87a45083200b10037145d697723ec2bd5721b1e4af4dfcc48c919", //Intermediate key
                                               ]}];
@@ -95,7 +98,7 @@
 
 - (void)testConnectionValidatingCAPublicKey
 {
-    [TrustKit initializeWithSslPins:@{
+    [TrustKit initializeWithConfiguration:@{
                                       @"www.datatheorem.com" : @[
                                               @"1d75d0831b9e0885394d32c7a1bfdb3dbc1c28e2b0e8391fb135981dbc5ba936" //CA key
                                               ]}];
@@ -115,7 +118,7 @@
 
 - (void)testConnectionUsingFakeHashInvalidatingAllCertificates
 {
-    [TrustKit initializeWithSslPins:@{
+    [TrustKit initializeWithConfiguration:@{
                                       @"www.datatheorem.com" : @[
                                               @"0000000000000000000000000000000000000000000000000000000000000000", //Fake key
                                               ]}];
@@ -132,7 +135,7 @@
 
 - (void)testConnectionUsingValidAndFakeHash
 {
-    [TrustKit initializeWithSslPins:@{
+    [TrustKit initializeWithConfiguration:@{
                                       @"www.datatheorem.com" : @[
                                               @"0000000000000000000000000000000000000000000000000000000000000000", //Fake key
                                               @"1d75d0831b9e0885394d32c7a1bfdb3dbc1c28e2b0e8391fb135981dbc5ba936" //CA key

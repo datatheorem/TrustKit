@@ -13,7 +13,9 @@
 
 #pragma mark Global Cache for Subject Public Key Info Hashes
 
-NSMutableDictionary *_subjectPublicKeyInfoHashesCache[3];
+
+// One dictionnary cache per TSKPublicKeyAlgorithm defined
+NSMutableDictionary *_subjectPublicKeyInfoHashesCache[3] = {nil, nil, nil};
 
 
 #pragma mark Public Key Converter
@@ -108,7 +110,7 @@ NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate, T
 
 
 
-void initializeKeychain(void)
+void initializeSubjectPublicKeyInfoCache(void)
 {
     // Initialize our caches of SPKI hashes; we have one per type of public keys to make it convenient
     _subjectPublicKeyInfoHashesCache[TSKPublicKeyAlgorithmRsa2048] = [[NSMutableDictionary alloc]init];
@@ -130,14 +132,13 @@ void initializeKeychain(void)
     pthread_mutex_unlock(&_keychainLock);
 }
 
-void resetKeychain(void)
+void resetSubjectPublicKeyInfoCache(void)
 {
     // This is only used for tests
+    // Destroy keychain lock
     pthread_mutex_destroy(&_keychainLock);
     
     // Discard SPKI cache
-    
-    // Initialize our caches of SPKI hashes
     _subjectPublicKeyInfoHashesCache[TSKPublicKeyAlgorithmRsa2048] = nil;
     _subjectPublicKeyInfoHashesCache[TSKPublicKeyAlgorithmRsa4096] = nil;
     _subjectPublicKeyInfoHashesCache[TSKPublicKeyAlgorithmEcDsaSecp256r1] = nil;

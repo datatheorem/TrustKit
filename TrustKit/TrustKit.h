@@ -15,8 +15,20 @@ FOUNDATION_EXPORT double TrustKitVersionNumber;
 FOUNDATION_EXPORT const unsigned char TrustKitVersionString[];
 
 
+// Keys for each domain within the config dictionnary
+extern NSString * const kTSKPublicKeyHashes;
+extern NSString * const kTSKIncludeSubdomains;
+extern NSString * const kTSKPublicKeyAlgorithms;
+extern NSString * const kTSKReportUris;
+
+// Public key algorithms supported by TrustKit
+extern NSString * const kTSKAlgorithmRsa2048;
+extern NSString * const kTSKAlgorithmRsa4096;
+extern NSString * const kTSKAlgorithmEcDsaSecp256r1;
+
+
 @interface TrustKit : NSObject
 
-+ (void) initializeWithSslPins:(NSDictionary *)publicKeyPins;
++ (void) initializeWithConfiguration:(NSDictionary *)TrustKitConfig;
 
 @end

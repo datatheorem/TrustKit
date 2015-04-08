@@ -10,12 +10,11 @@
 #define TrustKit_subjectPublicKeyHash_h
 
 #import "asn1Headers.h"
-
 @import Security;
 
-//TODO: rename this function
-void initializeKeychain(void);
-void resetKeychain(void);
+
+void initializeSubjectPublicKeyInfoCache(void);
+void resetSubjectPublicKeyInfoCache(void);
 
 NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate, TSKPublicKeyAlgorithm publicKeyAlgorithm);
 

@@ -17,20 +17,18 @@
 
 
 // Info.plist key we read the public key hashes from
-static const NSString *kTSKConfiguration = @"TSKConfiguration";
+static NSString * const kTSKConfiguration = @"TSKConfiguration";
 
-// Keys for each domain within our dictionnary
-static const NSString *kTSKPublicKeyHashes = @"TSKPublicKeyHashes";
-static const NSString *kTSKIncludeSubdomains = @"TSKIncludeSubdomains";
-static const NSString *kTSKPublicKeyAlgorithms = @"TSKPublicKeyAlgorithms";
-static const NSString *kTSKReportUris = @"TSKReportUris";
+// Keys for each domain within the config dictionnary
+NSString * const kTSKPublicKeyHashes = @"TSKPublicKeyHashes";
+NSString * const kTSKIncludeSubdomains = @"TSKIncludeSubdomains";
+NSString * const kTSKPublicKeyAlgorithms = @"TSKPublicKeyAlgorithms";
+NSString * const kTSKReportUris = @"TSKReportUris";
 
-// Public key algorithms we support
-static const NSString *kTSKAlgorithmRsa2048 = @"TSKAlgorithmRsa2048";
-static const NSString *kTSKAlgorithmRsa4096 = @"TSKAlgorithmRsa4096";
-static const NSString *kTSKAlgorithmEcDsaSecp256r1 = @"TSKAlgorithmEcDsaSecp256r1";
-
-
+// Public key algorithms supported by TrustKit
+NSString * const kTSKAlgorithmRsa2048 = @"TSKAlgorithmRsa2048";
+NSString * const kTSKAlgorithmRsa4096 = @"TSKAlgorithmRsa4096";
+NSString * const kTSKAlgorithmEcDsaSecp256r1 = @"TSKAlgorithmEcDsaSecp256r1";
 
 
 #pragma mark TrustKit Global State
@@ -44,7 +42,7 @@ static BOOL _isTrustKitInitialized = NO;
 
 #pragma mark SSL Pin Validator
 
-
+// TODO: Move this function to a separate file
 BOOL verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverName, NSDictionary *TrustKitConfiguration)
 {
     if ((serverTrust == NULL) || (serverName == NULL))
@@ -77,9 +75,10 @@ BOOL verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverName, NSDiction
         
         
         // For each public key algorithm flagged as supported in the config, generate the subject public key info hash
-        for (id algorithm in TrustKitConfiguration[serverName][kTSKPublicKeyAlgorithms])
+        for (id savedAlgorithm in TrustKitConfiguration[serverName][kTSKPublicKeyAlgorithms])
         {
-            NSData *subjectPublicKeyInfoHash = hashSubjectPublicKeyInfoFromCertificate(certificate, (TSKPublicKeyAlgorithm)algorithm);
+            TSKPublicKeyAlgorithm algorithm = [savedAlgorithm integerValue];
+            NSData *subjectPublicKeyInfoHash = hashSubjectPublicKeyInfoFromCertificate(certificate, algorithm);
             // TODO: error checking
             
             // Is the generated hash in our set of pinned hashes ?
@@ -106,7 +105,7 @@ static OSStatus (*original_SSLHandshake)(SSLContextRef context);
 static OSStatus replaced_SSLHandshake(SSLContextRef context)
 {
     OSStatus result = original_SSLHandshake(context);
-    if (result == noErr)
+    if ((result == noErr) && (_isTrustKitInitialized))
     {
         // The handshake was sucessful, let's do our additional checks on the server certificate
         char *serverName = NULL;
@@ -201,11 +200,11 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
             }
             else if ([kTSKAlgorithmRsa4096 isEqualToString:algorithm])
             {
-                [publicKeyAlgs addObject:[NSNumber numberWithInt:TSKPublicKeyAlgorithmRsa2048]];
+                [publicKeyAlgs addObject:[NSNumber numberWithInt:TSKPublicKeyAlgorithmRsa4096]];
             }
             else if ([kTSKAlgorithmEcDsaSecp256r1 isEqualToString:algorithm])
             {
-                [publicKeyAlgs addObject:[NSNumber numberWithInt:TSKPublicKeyAlgorithmRsa2048]];
+                [publicKeyAlgs addObject:[NSNumber numberWithInt:TSKPublicKeyAlgorithmEcDsaSecp256r1]];
             }
             else
             {
@@ -273,7 +272,7 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
 }
 
 
-static void initializeTrustKit(NSDictionary *publicKeyPins)
+static void initializeTrustKit(NSDictionary *TrustKitConfig)
 {
     if (_isTrustKitInitialized == YES)
     {
@@ -281,12 +280,12 @@ static void initializeTrustKit(NSDictionary *publicKeyPins)
         [NSException raise:@"TrustKit already initialized" format:@"TrustKit was already initialized with the following SSL pins: %@", _trustKitGlobalConfiguration];
     }
     
-    if ([publicKeyPins count] > 0)
+    if ([TrustKitConfig count] > 0)
     {
-        initializeKeychain();
+        initializeSubjectPublicKeyInfoCache();
         
         // Convert and store the SSL pins in our global variable
-        _trustKitGlobalConfiguration = [[NSDictionary alloc]initWithDictionary:parseTrustKitArguments(publicKeyPins)];
+        _trustKitGlobalConfiguration = [[NSDictionary alloc]initWithDictionary:parseTrustKitArguments(TrustKitConfig)];
         
         // Hook SSLHandshake()
         char functionToHook[] = "SSLHandshake";
@@ -304,17 +303,17 @@ static void initializeTrustKit(NSDictionary *publicKeyPins)
 @implementation TrustKit
 
 
-+ (void) initializeWithSslPins:(NSDictionary *)publicKeyPins
++ (void) initializeWithConfiguration:(NSDictionary *)TrustKitConfig
 {
     NSLog(@"TrustKit started statically in App %@", CFBundleGetValueForInfoDictionaryKey(CFBundleGetMainBundle(), (__bridge CFStringRef)@"CFBundleIdentifier"));
-    initializeTrustKit(publicKeyPins);
+    initializeTrustKit(TrustKitConfig);
 }
 
 
-+ (void) resetSslPins
++ (void) resetConfiguration
 {
     // This is only used for tests
-    resetKeychain();
+    resetSubjectPublicKeyInfoCache();
     _trustKitGlobalConfiguration = nil;
     _isTrustKitInitialized = NO;
 }
@@ -330,10 +329,10 @@ __attribute__((constructor)) static void initialize(int argc, const char **argv)
     CFBundleRef appBundle = CFBundleGetMainBundle();
     NSLog(@"TrustKit started dynamically in App %@", CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)@"CFBundleIdentifier"));
     
-    // Retrieve the SSL pins from the App's Info.plist file
-    NSDictionary *publicKeyPinsFromInfoPlist = CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)kTSKConfiguration);
+    // Retrieve the configuration from the App's Info.plist file
+    NSDictionary *trustKitConfigFromInfoPlist = CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)kTSKConfiguration);
 
-    initializeTrustKit(publicKeyPinsFromInfoPlist);
+    initializeTrustKit(trustKitConfigFromInfoPlist);
 }
 
 
