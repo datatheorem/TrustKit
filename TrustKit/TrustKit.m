@@ -19,6 +19,7 @@ static NSString * const kTSKConfiguration = @"TSKConfiguration";
 
 // Keys for each domain within the config dictionnary
 NSString * const kTSKPublicKeyHashes = @"TSKPublicKeyHashes";
+NSString * const kTSKEnforcePinning = @"TSKEnforcePinning";
 NSString * const kTSKIncludeSubdomains = @"TSKIncludeSubdomains";
 NSString * const kTSKPublicKeyAlgorithms = @"TSKPublicKeyAlgorithms";
 NSString * const kTSKReportUris = @"TSKReportUris";
@@ -115,8 +116,6 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
         serverName = malloc(serverNameLen+1);
         SSLGetPeerDomainName(context, serverName, &serverNameLen);
         serverName[serverNameLen] = '\0';
-        NSLog(@"Result %d - %s", result, serverName);
-        
         NSString *serverNameStr = [NSString stringWithUTF8String:serverName];
         free(serverName);
         
@@ -174,13 +173,30 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
         NSMutableDictionary *domainFinalConfiguration = [[NSMutableDictionary alloc]init];
         
         
-        // Extract the includeSubdomains setting
+        // Extract the optional includeSubdomains setting
         NSNumber *shouldIncludeSubdomains = domainTrustKitArguments[kTSKIncludeSubdomains];
-        if (shouldIncludeSubdomains == nil)
+        if (shouldIncludeSubdomains)
         {
-            [NSException raise:@"TrustKit configuration invalid" format:@"TrustKit was initialized with an invalid value for %@", kTSKIncludeSubdomains];
+            domainFinalConfiguration[kTSKIncludeSubdomains] = shouldIncludeSubdomains;
         }
-        domainFinalConfiguration[kTSKIncludeSubdomains] = shouldIncludeSubdomains;
+        else
+        {
+            // Default setting is NO
+            domainFinalConfiguration[kTSKIncludeSubdomains] = [NSNumber numberWithBool:NO];
+        }
+        
+        
+        // Extract the optional enforcePinning setting
+        NSNumber *shouldEnforcePinning = domainTrustKitArguments[kTSKEnforcePinning];
+        if (shouldEnforcePinning)
+        {
+            domainFinalConfiguration[kTSKEnforcePinning] = shouldEnforcePinning;
+        }
+        else
+        {
+            // Default setting is YES
+            domainFinalConfiguration[kTSKEnforcePinning] = [NSNumber numberWithBool:YES];
+        }
         
         
         // Extract the list of public key algorithms to support and convert them from string to the TSKPublicKeyAlgorithm type

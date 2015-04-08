@@ -17,6 +17,7 @@ FOUNDATION_EXPORT const unsigned char TrustKitVersionString[];
 
 // Keys for each domain within the config dictionnary
 extern NSString * const kTSKPublicKeyHashes;
+extern NSString * const kTSKEnforcePinning;
 extern NSString * const kTSKIncludeSubdomains;
 extern NSString * const kTSKPublicKeyAlgorithms;
 extern NSString * const kTSKReportUris;
