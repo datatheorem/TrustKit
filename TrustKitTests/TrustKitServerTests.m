@@ -133,13 +133,14 @@
 
 
 // Tests a secure connection to https://www.datatheorem.com and forces validation to fail by providing a fake hash
-
+// TODO: Add the same test but with kTSKEnforcePinning set to NO
 - (void)testConnectionUsingFakeHashInvalidatingAllCertificates
 {
     NSDictionary *trustKitConfig =
     @{
       @"www.datatheorem.com" : @{
               kTSKIncludeSubdomains : [NSNumber numberWithBool:NO],
+              kTSKEnforcePinning : [NSNumber numberWithBool:YES],
               kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
               kTSKPublicKeyHashes : @[@"0000000000000000000000000000000000000000000000000000000000000000" //Fake key
                                       ]}};

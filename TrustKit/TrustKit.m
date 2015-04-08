@@ -120,36 +120,22 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
         free(serverName);
         
         
-        if (_trustKitGlobalConfiguration == NULL)
-        {   // TODO: return an error
-            NSLog(@"Error: pin not initialized?");
-            return NO;
-        }
-        
-        
         // Is this domain name pinned ?
-        BOOL wasPinValidationSuccessful = NO;
         if (_trustKitGlobalConfiguration[serverNameStr])
         {
             // Let's check the certificate chain with our SSL pins
-            NSLog(@"Server IS pinned");
+            NSLog(@"Server is pinned; verifying certificate chain...");
             SecTrustRef serverTrust;
             SSLCopyPeerTrust(context, &serverTrust);
-            wasPinValidationSuccessful = verifyPublicKeyPin(serverTrust, serverNameStr, _trustKitGlobalConfiguration);
-        }
-        else
-        {
-            // No SSL pinning and regular SSL validation was already done by SSLHandshake and was sucessful
-            NSLog(@"Server not pinned");
-            wasPinValidationSuccessful = YES;
-        }
-        
-        if (wasPinValidationSuccessful == NO)
-        {
-            if (_trustKitGlobalConfiguration[serverNameStr][kTSKEnforcePinning] != NO)
+            
+            if (verifyPublicKeyPin(serverTrust, serverNameStr, _trustKitGlobalConfiguration) == NO)
             {
-                // TrustKit was configured to enforce pinning and the certificate chain did not contain the expected pins; force an error
-                result = errSSLXCertChainInvalid;
+                // The server's SPKI hash was not found in the list of pins for this domain
+                if ([_trustKitGlobalConfiguration[serverNameStr][kTSKEnforcePinning] boolValue] == YES)
+                {
+                    // TrustKit was configured to enforce pinning; force an error
+                    result = errSSLXCertChainInvalid;
+                }
             }
         }
     }
@@ -254,7 +240,6 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
         NSArray *serverSslPinsString = domainTrustKitArguments[kTSKPublicKeyHashes];
         NSMutableArray *serverSslPinsData = [[NSMutableArray alloc] init];
         
-        NSLog(@"Loading SSL pins for %@", domainName);
         for (NSString *pinnedCertificateHash in serverSslPinsString) {
             NSMutableData *pinnedCertificateHashData = [NSMutableData dataWithCapacity:CC_SHA256_DIGEST_LENGTH];
             
