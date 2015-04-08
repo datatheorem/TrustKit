@@ -146,8 +146,11 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
         
         if (wasPinValidationSuccessful == NO)
         {
-            // The certificate chain did not contain the expected pins; force an error
-            result = errSSLXCertChainInvalid;
+            if (_trustKitGlobalConfiguration[serverNameStr][kTSKEnforcePinning] != NO)
+            {
+                // TrustKit was configured to enforce pinning and the certificate chain did not contain the expected pins; force an error
+                result = errSSLXCertChainInvalid;
+            }
         }
     }
     
