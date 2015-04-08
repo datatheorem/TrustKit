@@ -13,7 +13,7 @@
 
 #pragma mark Global Cache for Subject Public Key Info Hashes
 
-NSMutableDictionary *_subjectPublicKeyInfoCache[3];
+NSMutableDictionary *_subjectPublicKeyInfoHashesCache[3];
 
 
 #pragma mark Public Key Converter
@@ -66,13 +66,13 @@ NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate, T
     NSData *certificateData = (__bridge NSData *)(SecCertificateCopyData(certificate));
     int algorithm = publicKeyAlgorithm;
     
-    NSData *cachedSubjectPublicKeyInfo = _subjectPublicKeyInfoCache[algorithm][certificateData];
+    NSData *cachedSubjectPublicKeyInfo = _subjectPublicKeyInfoHashesCache[algorithm][certificateData];
     if (cachedSubjectPublicKeyInfo)
     {
         NSLog(@"Subject Public Key Info hash was found in the cache");
         return cachedSubjectPublicKeyInfo;
     }
-    NSLog(@"Subject Public Key Info hash was found in the cache");
+    NSLog(@"Generating Subject Public Key Info hash...");
     
     // New certificate; we need to generate the hash
     // First extract the public key
@@ -101,7 +101,7 @@ NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate, T
     CFRelease(publicKey);
     
     // Store the hash in our cache
-    _subjectPublicKeyInfoCache[algorithm][certificateData] = subjectPublicKeyInfoHash;
+    _subjectPublicKeyInfoHashesCache[algorithm][certificateData] = subjectPublicKeyInfoHash;
     
     return subjectPublicKeyInfoHash;
 }
@@ -111,9 +111,9 @@ NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate, T
 void initializeKeychain(void)
 {
     // Initialize our caches of SPKI hashes; we have one per type of public keys to make it convenient
-    _subjectPublicKeyInfoCache[TSKPublicKeyAlgorithmRsa2048] = [[NSMutableDictionary alloc]init];
-    _subjectPublicKeyInfoCache[TSKPublicKeyAlgorithmRsa4096] = [[NSMutableDictionary alloc]init];
-    _subjectPublicKeyInfoCache[TSKPublicKeyAlgorithmEcDsaSecp256r1] = [[NSMutableDictionary alloc]init];
+    _subjectPublicKeyInfoHashesCache[TSKPublicKeyAlgorithmRsa2048] = [[NSMutableDictionary alloc]init];
+    _subjectPublicKeyInfoHashesCache[TSKPublicKeyAlgorithmRsa4096] = [[NSMutableDictionary alloc]init];
+    _subjectPublicKeyInfoHashesCache[TSKPublicKeyAlgorithmEcDsaSecp256r1] = [[NSMutableDictionary alloc]init];
     
     // Initialize our Keychain lock
     pthread_mutex_init(&_keychainLock, NULL);
@@ -138,8 +138,8 @@ void resetKeychain(void)
     // Discard SPKI cache
     
     // Initialize our caches of SPKI hashes
-    _subjectPublicKeyInfoCache[TSKPublicKeyAlgorithmRsa2048] = nil;
-    _subjectPublicKeyInfoCache[TSKPublicKeyAlgorithmRsa4096] = nil;
-    _subjectPublicKeyInfoCache[TSKPublicKeyAlgorithmEcDsaSecp256r1] = nil;
+    _subjectPublicKeyInfoHashesCache[TSKPublicKeyAlgorithmRsa2048] = nil;
+    _subjectPublicKeyInfoHashesCache[TSKPublicKeyAlgorithmRsa4096] = nil;
+    _subjectPublicKeyInfoHashesCache[TSKPublicKeyAlgorithmEcDsaSecp256r1] = nil;
 }
 

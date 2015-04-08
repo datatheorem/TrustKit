@@ -213,7 +213,6 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
             }
         }
         domainFinalConfiguration[kTSKPublicKeyAlgorithms] = [NSArray arrayWithArray:publicKeyAlgs];
-        NSLog(@"public key algs %@", publicKeyAlgs);
         
         
         // Extract and convert the report URIs if defined
