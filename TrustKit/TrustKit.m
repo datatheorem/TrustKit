@@ -237,30 +237,22 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
         
         
         // Extract and convert the public key hashes
-        NSArray *serverSslPinsString = domainTrustKitArguments[kTSKPublicKeyHashes];
+        NSArray *serverSslPinsBase64 = domainTrustKitArguments[kTSKPublicKeyHashes];
+        
         NSMutableArray *serverSslPinsData = [[NSMutableArray alloc] init];
         
-        for (NSString *pinnedCertificateHash in serverSslPinsString) {
-            NSMutableData *pinnedCertificateHashData = [NSMutableData dataWithCapacity:CC_SHA256_DIGEST_LENGTH];
+        for (NSString *pinnedKeyHashBase64 in serverSslPinsBase64) {
+            NSData *pinnedKeyHash = [[NSData alloc] initWithBase64EncodedString:pinnedKeyHashBase64 options:0];
             
-            // Convert the hex string to data
-            if ([pinnedCertificateHash length] != CC_SHA256_DIGEST_LENGTH * 2) {
+            if ([pinnedKeyHash length] != CC_SHA256_DIGEST_LENGTH)
+            {
+                char zeroBuffer[CC_SHA256_DIGEST_LENGTH] = {0};
                 // The public key hash doesn't have a valid size; store a null hash to make all connections fail
                 NSLog(@"Bad hash for %@", domainName);
-                [pinnedCertificateHashData resetBytesInRange:NSMakeRange(0, CC_SHA256_DIGEST_LENGTH)];
+                pinnedKeyHash = [NSData dataWithBytes:zeroBuffer length:CC_SHA256_DIGEST_LENGTH];
             }
-            else {
-                // Convert the hash from NSString to NSData
-                char output[CC_SHA256_DIGEST_LENGTH];
-                const char *input = [pinnedCertificateHash UTF8String];
-                
-                for (int i = 0; i < CC_SHA256_DIGEST_LENGTH; i++) {
-                    sscanf(input + i * 2, "%2hhx", output + i);
-                }
-                [pinnedCertificateHashData replaceBytesInRange:NSMakeRange(0, CC_SHA256_DIGEST_LENGTH) withBytes:output];
-            }
-            
-            [serverSslPinsData addObject:pinnedCertificateHashData];
+
+            [serverSslPinsData addObject:pinnedKeyHash];
         }
         
         // Save the public key hashes for this server as an NSSet for quick lookup
