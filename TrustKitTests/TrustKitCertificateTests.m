@@ -67,9 +67,9 @@
       @"www.good.com" : @{
               kTSKIncludeSubdomains : [NSNumber numberWithBool:NO],
               kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-              kTSKPublicKeyHashes : @[@"4d012d74c6e6c058185227cce0b0c5fb1804b5dd33ebd98f1a6929d35e1de996", // Server key
-                                      @"921288e9a7b89a2704bd7ef8301fc1678bb5e560961973c3e868e0ea221155e1", // Intermediate key
-                                      @"890324e289eb249cff9f05b5c02511d1872c877a2685b33e3ea304c0da1ffcad" // CA key
+              kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=", // Server key
+                                      @"khKI6ae4micEvX74MB/BZ4u15WCWGXPD6Gjg6iIRVeE=", // Intermediate key
+                                      @"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=" // CA key
                                       ]}};
     NSDictionary *trustKitConfig = parseTrustKitArguments(trustKitArguments);
     
