@@ -2,6 +2,41 @@ TrustKit
 ========
 
 
+Generating SSL Pins
+-------------------
+
+In the context of TrustKit, an SSL pin is the base64-encoded SHA-256 of a certificate's public key info; this is the same as what is described in the HTTP Public Key Pinning specification (https://developer.mozilla.org/en-US/docs/Web/Security/Public_Key_Pinning).
+
+To generate such values, two bash scripts are available. The first script can be used to generate the pin from a PEM certificate:
+
+    $ ./get_pin_from_pem_certificate.sh ca.pem
+    -----------
+    Certificate
+    -----------
+    subject= /C=US/O=thawte, Inc./OU=Certification Services Division/OU=(c) 2006 thawte, Inc. - For authorized use only/CN=thawte Primary Root CA
+    issuer= /C=ZA/ST=Western Cape/L=Cape Town/O=Thawte Consulting cc/OU=Certification Services Division/CN=Thawte Premium Server CA/emailAddress=premium-server@thawte.com
+    SHA1 Fingerprint=1F:A4:90:D1:D4:95:79:42:CD:23:54:5F:6E:82:3D:00:00:79:6E:A2
+    ---------------------
+    Subject Key Info Pin
+    ---------------------
+    HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=
+
+
+The second script can be used to generate the pin of the highest certificate within the certificate chain returned by a given server:
+
+    $ ./get_pin_from_server.sh www.google.com
+    ----------------------------
+    Top Intermediate Certificate
+    ----------------------------
+    subject= /C=US/O=GeoTrust Inc./CN=GeoTrust Global CA
+    issuer= /C=US/O=Equifax/OU=Equifax Secure Certificate Authority
+    SHA1 Fingerprint=73:59:75:5C:6D:F9:A0:AB:C3:06:0B:CE:36:95:64:C8:EC:45:42:A3
+
+    ---------------------
+    Subject Key Info Pin
+    ---------------------
+    h6801m+z8v3zbgkRHpq6L29Esgfzhj89C1SyUCOQmqU=
+
 
 Deploying TrustKit Through Dynamic Linking
 ------------------------------------------
@@ -17,16 +52,16 @@ For Apps targeting iOS 8+, TrustKit can be dynamically linked, which allows enab
 ![](http://datatheorem.github.io/TrustKit/images/dynamic2.png)
 
 * Lastly, add the public key hashes TrustKit will use to check certificate chains. In the App's Info.plist file ("Info" tab in Xcode):
-    * Add a new Dictionnary key called `TSKConfiguration`.
-    * Within this dictionnary add a Dictionnary value and use the server's domain (such as www.google.com) as the entry's key.
-    * Within dictionnary you can add a few specific keys in order to configure how TrustKit handles pinning with this domain:
-        * `TSKPublicKeyHashes`: Each element of this Array should be the SHA 256 of a subject public key info that needs to be in the server's certificate chain.
+    * Add a new Dictionary key called `TSKConfiguration`.
+    * Within this dictionary add a Dictionnary value and use the server's domain (such as www.google.com) as the entry's key.
+    * Within dictionary you can add a few specific keys in order to configure how TrustKit handles pinning with this domain:
+        * `TSKPublicKeyHashes`: Each element of this Array should be the base64-encoded SHA 256 of a subject public key info that needs to be in the server's certificate chain.
         * `TSKPublicKeyAlgorithms`: The algorithms TrustKit needs to support when generating public key hashes. Should be an array containing one or multiple entries from `TSKAlgorithmRsa2048`, `TSKAlgorithmRsa4096`, `TSKAlgorithmEcDsaSecp256r1`. Supporting multiple algorithms has a performance impact.
         * `TSKEnforcePinning` (optional): If set to NO, a pinning failure will not cause the connection to fail; default value is YES.
         * `TSKReportUris` (optional): No effect at the moment.
         * `TSKIncludeSubdomains` (optional): No effect at the moment.
 
-Your App's Info.plist file should look like this: 
+Your App's Info.plist file should look like this:
 
 ![](http://datatheorem.github.io/TrustKit/images/dynamic3.png)
 
@@ -43,8 +78,8 @@ For Apps targeting iOS 7, TrustKit should be statically linked. To initialize th
     @{
       @"www.datatheorem.com" : @{
               kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-              kTSKPublicKeyHashes : @[@"2741caeb7dc87a45083200b10037145d697723ec2bd5721b1e4af4dfcc48c919",
-                                      @"1d75d0831b9e0885394d32c7a1bfdb3dbc1c28e2b0e8391fb135981dbc5ba936"
+              kTSKPublicKeyHashes : @[@"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=",
+                                      @"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8="
                                       ]}};
 
     [TrustKit initializeWithConfiguration:trustKitConfig];
