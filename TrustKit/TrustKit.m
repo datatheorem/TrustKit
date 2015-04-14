@@ -12,6 +12,7 @@
 #import <CommonCrypto/CommonDigest.h>
 #import "fishhook/fishhook.h"
 #import "subjectPublicKeyHash.h"
+#import "domain_registry.h"
 
 
 // Info.plist key we read the public key hashes from
@@ -157,6 +158,13 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
     
     for (NSString *domainName in TrustKitArguments)
     {
+        // Sanity check on the domain name
+        if (GetRegistryLength([domainName UTF8String]) == 0)
+        {
+            [NSException raise:@"TrustKit configuration invalid" format:@"TrustKit was initialized with an invalid domain %@", domainName];
+        }
+        
+        
         // Retrieve the supplied arguments for this domain
         NSDictionary *domainTrustKitArguments = TrustKitArguments[domainName];
         NSMutableDictionary *domainFinalConfiguration = [[NSMutableDictionary alloc]init];
@@ -192,7 +200,7 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
         NSArray *publicKeyAlgsStr = domainTrustKitArguments[kTSKPublicKeyAlgorithms];
         if (publicKeyAlgsStr == nil)
         {
-            [NSException raise:@"TrustKit configuration invalid" format:@"TrustKit was initialized with an invalid value for %@", kTSKPublicKeyAlgorithms];
+            [NSException raise:@"TrustKit configuration invalid" format:@"TrustKit was initialized with an invalid value for %@ for domain %@", kTSKPublicKeyAlgorithms, domainName];
         }
         NSMutableArray *publicKeyAlgs = [NSMutableArray array];
         for (NSString *algorithm in publicKeyAlgsStr)
@@ -211,7 +219,7 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
             }
             else
             {
-                [NSException raise:@"TrustKit configuration invalid" format:@"TrustKit was initialized with an invalid value for %@", kTSKPublicKeyAlgorithms];
+                [NSException raise:@"TrustKit configuration invalid" format:@"TrustKit was initialized with an invalid value for %@ for domain %@", kTSKPublicKeyAlgorithms, domainName];
             }
         }
         domainFinalConfiguration[kTSKPublicKeyAlgorithms] = [NSArray arrayWithArray:publicKeyAlgs];
@@ -227,7 +235,7 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
                 NSURL *reportUri = [NSURL URLWithString:reportUriStr];
                 if (reportUri == nil)
                 {
-                    [NSException raise:@"TrustKit configuration invalid" format:@"TrustKit was initialized with an invalid value for %@", kTSKReportUris];
+                    [NSException raise:@"TrustKit configuration invalid" format:@"TrustKit was initialized with an invalid value for %@ for domain %@", kTSKReportUris, domainName];
                 }
                 [reportUriListFinal addObject:reportUri];
             }
@@ -246,10 +254,8 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
             
             if ([pinnedKeyHash length] != CC_SHA256_DIGEST_LENGTH)
             {
-                char zeroBuffer[CC_SHA256_DIGEST_LENGTH] = {0};
-                // The public key hash doesn't have a valid size; store a null hash to make all connections fail
-                NSLog(@"Bad hash for %@", domainName);
-                pinnedKeyHash = [NSData dataWithBytes:zeroBuffer length:CC_SHA256_DIGEST_LENGTH];
+                // The public key hash doesn't have a valid size
+                [NSException raise:@"TrustKit configuration invalid" format:@"TrustKit was initialized with an invalid Pin %@ for domain %@", pinnedKeyHashBase64, domainName];
             }
 
             [serverSslPinsData addObject:pinnedKeyHash];
@@ -277,6 +283,7 @@ static void initializeTrustKit(NSDictionary *TrustKitConfig)
     if ([TrustKitConfig count] > 0)
     {
         initializeSubjectPublicKeyInfoCache();
+        InitializeDomainRegistry();
         
         // Convert and store the SSL pins in our global variable
         _trustKitGlobalConfiguration = [[NSDictionary alloc]initWithDictionary:parseTrustKitArguments(TrustKitConfig)];
