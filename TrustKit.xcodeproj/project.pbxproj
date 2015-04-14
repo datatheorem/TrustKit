@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		0710306C1AA88A510028092C /* TrustKitServerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0710306B1AA88A510028092C /* TrustKitServerTests.m */; };
 		075AA1091AC985FD00178223 /* TrustKitCertificateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA2868CAFECA46ADE0B6E3E /* TrustKitCertificateTests.m */; };
+		8C3492AE1ADCA1C3001849FD /* domain_registry.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C3492AD1ADCA1C3001849FD /* domain_registry.h */; };
+		8C3492B61ADCA2E0001849FD /* libassert_lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C3492B31ADCA2E0001849FD /* libassert_lib.a */; };
+		8C3492B71ADCA2E0001849FD /* libdomain_registry_lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C3492B41ADCA2E0001849FD /* libdomain_registry_lib.a */; };
+		8C3492B81ADCA2E0001849FD /* libinit_registry_tables_lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C3492B51ADCA2E0001849FD /* libinit_registry_tables_lib.a */; };
 		8C84804D1A896EE30017C155 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C84804C1A896EE30017C155 /* TrustKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8C8480531A896EE30017C155 /* TrustKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C8480471A896EE30017C155 /* TrustKit.framework */; };
 		8C8480691A896F350017C155 /* fishhook.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C8480671A896F350017C155 /* fishhook.c */; };
@@ -32,6 +36,10 @@
 		2FA28052F8F01FDE594E4642 /* TrustKitTestCertificates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrustKitTestCertificates.h; sourceTree = "<group>"; };
 		2FA286123F801C437F35D240 /* TrustKit+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TrustKit+Private.h"; sourceTree = "<group>"; };
 		2FA2868CAFECA46ADE0B6E3E /* TrustKitCertificateTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrustKitCertificateTests.m; sourceTree = "<group>"; };
+		8C3492AD1ADCA1C3001849FD /* domain_registry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = domain_registry.h; sourceTree = "<group>"; };
+		8C3492B31ADCA2E0001849FD /* libassert_lib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libassert_lib.a; sourceTree = "<group>"; };
+		8C3492B41ADCA2E0001849FD /* libdomain_registry_lib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdomain_registry_lib.a; sourceTree = "<group>"; };
+		8C3492B51ADCA2E0001849FD /* libinit_registry_tables_lib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libinit_registry_tables_lib.a; sourceTree = "<group>"; };
 		8C8480471A896EE30017C155 /* TrustKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TrustKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C84804B1A896EE30017C155 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C84804C1A896EE30017C155 /* TrustKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrustKit.h; sourceTree = "<group>"; };
@@ -49,6 +57,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C3492B71ADCA2E0001849FD /* libdomain_registry_lib.a in Frameworks */,
+				8C3492B61ADCA2E0001849FD /* libassert_lib.a in Frameworks */,
+				8C3492B81ADCA2E0001849FD /* libinit_registry_tables_lib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,6 +74,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C3492901ADCA059001849FD /* domain_registry */ = {
+			isa = PBXGroup;
+			children = (
+				8C3492B31ADCA2E0001849FD /* libassert_lib.a */,
+				8C3492B41ADCA2E0001849FD /* libdomain_registry_lib.a */,
+				8C3492B51ADCA2E0001849FD /* libinit_registry_tables_lib.a */,
+				8C3492AD1ADCA1C3001849FD /* domain_registry.h */,
+			);
+			name = domain_registry;
+			sourceTree = "<group>";
+		};
 		8C84803D1A896EE30017C155 = {
 			isa = PBXGroup;
 			children = (
@@ -84,6 +106,7 @@
 		8C8480491A896EE30017C155 /* TrustKit */ = {
 			isa = PBXGroup;
 			children = (
+				8C3492901ADCA059001849FD /* domain_registry */,
 				8C84806B1A896F3C0017C155 /* fishhook */,
 				8C84804C1A896EE30017C155 /* TrustKit.h */,
 				8C84806C1A896F660017C155 /* TrustKit.m */,
@@ -138,6 +161,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C3492AE1ADCA1C3001849FD /* domain_registry.h in Headers */,
 				8C84804D1A896EE30017C155 /* TrustKit.h in Headers */,
 				8C84806A1A896F350017C155 /* fishhook.h in Headers */,
 			);
@@ -193,6 +217,7 @@
 				TargetAttributes = {
 					8C8480461A896EE30017C155 = {
 						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = D94Z5227S5;
 					};
 					8C8480511A896EE30017C155 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -353,6 +378,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -360,7 +387,12 @@
 				INFOPLIST_FILE = TrustKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TrustKit",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
@@ -370,6 +402,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -377,7 +411,12 @@
 				INFOPLIST_FILE = TrustKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TrustKit",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SKIP_INSTALL = YES;
 				VALID_ARCHS = "arm64 armv7 armv7s";
 			};
