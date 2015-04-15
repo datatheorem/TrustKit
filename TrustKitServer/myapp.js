@@ -9,7 +9,6 @@ app.use(multer()); //for parsing multipart/form-data
 app.post('/', function (req, res) {
   console.log(req.body);
   res.send('got a POST request');
-//  res.json(req.body);
 })
 
 var server = app.listen(3000, function () {
