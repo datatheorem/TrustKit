@@ -142,7 +142,7 @@
               kTSKIncludeSubdomains : [NSNumber numberWithBool:NO],
               kTSKEnforcePinning : [NSNumber numberWithBool:YES],
               kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-              kTSKPublicKeyHashes : @[@"0000000000000000000000000000000000000000000000000000000000000000" //Fake key
+              kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" //Fake key
                                       ]}};
     
     [TrustKit initializeWithConfiguration:trustKitConfig];
