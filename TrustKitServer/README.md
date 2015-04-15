@@ -25,8 +25,9 @@ On the client side (open a new terminal), you can also use the following curl co
     $ curl -H "Content-Type: application/json" -X POST -d '{"username":"xyz","password":"abc"}' http://localhost:3000
 
 On your server terminal, you should see the following after the client is connected to it successfully:
+
     $ node myapp.js
     Example app listening at http://:::3000
     { username: 'xyz', password: 'abc' }
 
-Note that this server is setup to receive http requests rather than https.  So, in production system, you'd probably need to change the myapp.js to respond to https requests or using Nginx or other proxy to proxy requests to your nodejs app after they've terminated the SSL endpoint.  
+Note that this server is setup to receive http requests rather than https.  So, in production system, you'd probably need to change the myapp.js to respond to https requests or use proxies to proxy requests to your nodejs app after they've terminated the SSL endpoint.  
