@@ -1,5 +1,5 @@
 //
-//  TrustKitServerTests.m
+//  TrustKitPinValidationOnlineTests.m
 //  TrustKit
 //
 //  Created by Eric on 05/03/15.
@@ -12,11 +12,11 @@
 #import "subjectPublicKeyHash.h"
 
 
-@interface TrustKitServerTests : XCTestCase
+@interface TrustKitPinValidationOnlineTests : XCTestCase
 
 @end
 
-@implementation TrustKitServerTests
+@implementation TrustKitPinValidationOnlineTests
 
 - (void)setUp {
     [super setUp];
@@ -35,6 +35,7 @@
 
 - (void)testConnectionValidatingAnyKey
 {
+    
     NSDictionary *trustKitConfig =
     @{
       @"www.datatheorem.com" : @{

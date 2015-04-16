@@ -1,5 +1,5 @@
 //
-//  TrustKitCertificateTests.m
+//  TrustKitPinValidationOfflineTests.m
 //  TrustKit
 //
 //  Created by Eric on 30/03/15.
@@ -15,17 +15,17 @@
 
 #define HEXDUMP_COLS 16
 
-@interface TrustKitServerTests : XCTestCase
+@interface TrustKitPinValidationOnlineTests : XCTestCase
 @end
 
 
-@interface TrustKitCertificateTests : XCTestCase
+@interface TrustKitPinValidationOfflineTests : XCTestCase
 {
     
 }
 @end
 
-@implementation TrustKitCertificateTests {
+@implementation TrustKitPinValidationOfflineTests {
     SecCertificateRef _rootCertificate;
     SecCertificateRef _chainCertificate;
     SecCertificateRef _leafCertificate;
@@ -34,16 +34,16 @@
 
 - (void)setUp {
     [super setUp];
-    
-    CFDataRef rootData = CFDataCreate(kCFAllocatorDefault, ca_cert_der, (CFIndex)ca_cert_der_len);
+                    
+    CFDataRef rootData = (__bridge_retained CFDataRef)[NSData dataWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"ca.cert" ofType:@"der"]];
     _rootCertificate = SecCertificateCreateWithData(kCFAllocatorDefault, rootData);
     CFRelease(rootData);
     
-    CFDataRef chainData = CFDataCreate(kCFAllocatorDefault, ca_chain_cert_der, (CFIndex)ca_chain_cert_der_len);
+    CFDataRef chainData = (__bridge_retained CFDataRef)[NSData dataWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"ca-chain.cert" ofType:@"der"]];
     _chainCertificate = SecCertificateCreateWithData(kCFAllocatorDefault, chainData);
     CFRelease(chainData);
     
-    CFDataRef leafData = CFDataCreate(kCFAllocatorDefault, www_good_com_cert_der, (CFIndex)www_good_com_cert_der_len);
+    CFDataRef leafData = (__bridge_retained CFDataRef)[NSData dataWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"www.good.com.cert" ofType:@"der"]];
     _leafCertificate = SecCertificateCreateWithData(kCFAllocatorDefault, leafData);
     CFRelease(leafData);
     
