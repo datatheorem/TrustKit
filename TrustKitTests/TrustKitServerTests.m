@@ -38,7 +38,6 @@
     NSDictionary *trustKitConfig =
     @{
       @"www.datatheorem.com" : @{
-              kTSKIncludeSubdomains : [NSNumber numberWithBool:NO],
               kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
               kTSKPublicKeyHashes : @[@"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8=", // Server key
                                       @"J0HK633IekUIMgCxADcUXWl3I+wr1XIbHkr038xIyRk=", // Intermediate key
@@ -64,7 +63,6 @@
     NSDictionary *trustKitConfig =
     @{
       @"www.datatheorem.com" : @{
-              kTSKIncludeSubdomains : [NSNumber numberWithBool:NO],
               kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
               kTSKPublicKeyHashes : @[@"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8=", // Server key
                                       ]}};
@@ -89,7 +87,6 @@
     NSDictionary *trustKitConfig =
 @{
       @"www.datatheorem.com" : @{
-              kTSKIncludeSubdomains : [NSNumber numberWithBool:NO],
               kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
               kTSKPublicKeyHashes : @[@"J0HK633IekUIMgCxADcUXWl3I+wr1XIbHkr038xIyRk=", //Intermediate key
                                       ]}};
@@ -113,7 +110,6 @@
     NSDictionary *trustKitConfig =
   @{
     @"www.datatheorem.com" : @{
-            kTSKIncludeSubdomains : [NSNumber numberWithBool:NO],
             kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
             kTSKPublicKeyHashes : @[@"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=" //CA key
                                     ]}};
@@ -139,10 +135,9 @@
     NSDictionary *trustKitConfig =
     @{
       @"www.datatheorem.com" : @{
-              kTSKIncludeSubdomains : [NSNumber numberWithBool:NO],
               kTSKEnforcePinning : [NSNumber numberWithBool:YES],
               kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-              kTSKPublicKeyHashes : @[@"0000000000000000000000000000000000000000000000000000000000000000" //Fake key
+              kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" //Fake key
                                       ]}};
     
     [TrustKit initializeWithConfiguration:trustKitConfig];
@@ -162,10 +157,32 @@
     NSDictionary *trustKitConfig =
     @{
       @"www.datatheorem.com" : @{
-              kTSKIncludeSubdomains : [NSNumber numberWithBool:NO],
               kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
               kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", //Fake key
                                       @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=" //CA key
+                                      ]}};
+    
+    [TrustKit initializeWithConfiguration:trustKitConfig];
+    
+    NSError *error = nil;
+    NSHTTPURLResponse *response;
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.datatheorem.com"]];
+    [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    
+    XCTAssertNil(error, @"Connection had an error: %@", error);
+    XCTAssert(response.statusCode==200, @"Server did not respond with a 200 OK");
+}
+
+// Tests a secure connection to https://www.datatheorem.com pinning a valid key to datatheorem.com with includeSubdomains - must pass
+
+- (void)testConnectionUsingValidPinAndIncludeSubdomain
+{
+    NSDictionary *trustKitConfig =
+    @{
+      @"datatheorem.com" : @{
+              kTSKIncludeSubdomains : [NSNumber numberWithBool:YES],
+              kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+              kTSKPublicKeyHashes : @[@"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=" //CA key
                                       ]}};
     
     [TrustKit initializeWithConfiguration:trustKitConfig];

@@ -90,7 +90,7 @@
     CFRelease(certs);
     CFRelease(trust);
     
-    XCTAssert(verificationPassed == YES, @"Validation must past against valid public key pins");
+    XCTAssert(verificationPassed == YES, @"Validation must pass against valid public key pins");
 }
 
 - (void)testWwwGoodComCertificateWithNoPins
@@ -112,7 +112,7 @@
     CFRelease(certs);
     CFRelease(trust);
     
-    XCTAssert(verificationPassed == NO, @"Validation must NOT pass if no public key pins are set.");
+    XCTAssert(verificationPassed == YES, @"Validation must pass if no public key pins are set.");
 }
 
 

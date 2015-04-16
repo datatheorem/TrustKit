@@ -42,6 +42,30 @@ static BOOL _isTrustKitInitialized = NO;
 
 #pragma mark SSL Pin Validator
 
+static BOOL isSubdomain(NSString *domain, NSString *subdomain)
+{
+    size_t domainRegistryLength = GetRegistryLength([domain UTF8String]);
+    if (GetRegistryLength([subdomain UTF8String]) != domainRegistryLength)
+    {
+        // Different TLDs
+        return NO;
+    }
+    
+    // Retrieve the main domain without the TLD
+    NSString *domainLabel = [domain substringToIndex:([domain length] - domainRegistryLength - 1)];
+    
+    // Retrieve the subdomain's domain without the TLD
+    NSString *subdomainLabel = [subdomain substringToIndex:([subdomain length] - domainRegistryLength - 1)];
+    
+    if ([subdomainLabel rangeOfString:domainLabel].location != NSNotFound)
+    {
+        // This is a subdomain
+        return YES;
+    }
+    return NO;
+}
+
+
 // TODO: Move this function to a separate file
 BOOL verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverName, NSDictionary *TrustKitConfiguration)
 {
@@ -50,9 +74,46 @@ BOOL verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverName, NSDiction
         return NO;
     }
     
+    // First let's figure out if this domain is pinned
+    // Do we have this specific domain explicitely pinned ?
+    NSDictionary *serverPinningConfiguration = TrustKitConfiguration[serverName];
+    
+    
+    // No pins explicitly configured for this domain
+    if (serverPinningConfiguration == nil)
+    {
+        // Look for an includeSubdomain pin that applies
+        for (NSString *pinnedServerName in TrustKitConfiguration)
+        {
+            // Check each domain configured with the includeSubdomain flag
+            if (TrustKitConfiguration[pinnedServerName][kTSKIncludeSubdomains])
+            {
+                // Is the server a subdomain of this pinned server?
+                NSLog(@"Checking includeSubdomains configuration for %@", pinnedServerName);
+                if (isSubdomain(pinnedServerName, serverName))
+                {
+                    // Yes; let's use the parent domain's pins
+                    NSLog(@"Applying includeSubdomains configuration from %@ to %@", pinnedServerName, serverName);
+                    serverPinningConfiguration = TrustKitConfiguration[pinnedServerName];
+                    break;
+                }
+            }
+        }
+    }
+    
+    // If this domain isn't pinned the validation always succeeds
+    if (serverPinningConfiguration == nil)
+    {
+        NSLog(@"Domain %@ is not pinned", serverName);
+        return YES;
+    }
+    
+    // Domain is pinned
     // First re-check the certificate chain using the default SSL validation in case it was disabled
     // This gives us revocation (only for EV certs I think?) and also ensures the certificate chain is sane
     // And also gives us the exact path that successfully validated the chain
+    NSSet *serverPins = serverPinningConfiguration[kTSKPublicKeyHashes];
+    
     SecTrustResultType trustResult;
     SecTrustEvaluate(serverTrust, &trustResult);
     if ((trustResult != kSecTrustResultUnspecified) && (trustResult != kSecTrustResultProceed))
@@ -62,20 +123,16 @@ BOOL verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverName, NSDiction
         return NO;
     }
     
-    // Let's find at least one of the pins in the certificate chain
-    NSSet *serverPins = TrustKitConfiguration[serverName][kTSKPublicKeyHashes];
-    
-
     // Check each certificate in the server's certificate chain (the trust object)
     CFIndex certificateChainLen = SecTrustGetCertificateCount(serverTrust);
     for(int i=0;i<certificateChainLen;i++)
     {
-        // Extract and hash the certificate
+        // Extract the certificate
         SecCertificateRef certificate = SecTrustGetCertificateAtIndex(serverTrust, i);
         
         
         // For each public key algorithm flagged as supported in the config, generate the subject public key info hash
-        for (id savedAlgorithm in TrustKitConfiguration[serverName][kTSKPublicKeyAlgorithms])
+        for (id savedAlgorithm in serverPinningConfiguration[kTSKPublicKeyAlgorithms])
         {
             TSKPublicKeyAlgorithm algorithm = [savedAlgorithm integerValue];
             NSData *subjectPublicKeyInfoHash = hashSubjectPublicKeyInfoFromCertificate(certificate, algorithm);
@@ -91,9 +148,17 @@ BOOL verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverName, NSDiction
         }
     }
     
-    // If we get here, we didn't find any matching certificate in the chain
+
+    // If we get here, we didn't find any matching SPKI hash in the chain
     NSLog(@"Error: SSL Pin not found");
-    return NO;
+    if ([serverPinningConfiguration[kTSKEnforcePinning] boolValue] == YES)
+    {
+        // TrustKit was configured to enforce pinning; force an error
+        return NO;
+    }
+    
+    // TrustKit was configured to not enforce pinning for this domain; don't return an error
+    return YES;
 }
 
 
@@ -120,32 +185,21 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
         NSString *serverNameStr = [NSString stringWithUTF8String:serverName];
         free(serverName);
         
+        // Verify the server's certificate if it is pinned
+        SecTrustRef serverTrust;
+        SSLCopyPeerTrust(context, &serverTrust);
         
-        // Is this domain name pinned ?
-        if (_trustKitGlobalConfiguration[serverNameStr])
+        if (verifyPublicKeyPin(serverTrust, serverNameStr, _trustKitGlobalConfiguration) == NO)
         {
-            // Let's check the certificate chain with our SSL pins
-            NSLog(@"Server is pinned; verifying certificate chain...");
-            SecTrustRef serverTrust;
-            SSLCopyPeerTrust(context, &serverTrust);
-            
-            if (verifyPublicKeyPin(serverTrust, serverNameStr, _trustKitGlobalConfiguration) == NO)
-            {
-                // The server's SPKI hash was not found in the list of pins for this domain
-                if ([_trustKitGlobalConfiguration[serverNameStr][kTSKEnforcePinning] boolValue] == YES)
-                {
-                    // TrustKit was configured to enforce pinning; force an error
-                    result = errSSLXCertChainInvalid;
-                }
-            }
+            // Pinning validation failed
+            result = errSSLXCertChainInvalid;
         }
     }
-    
     return result;
 }
 
 
-#pragma mark Framework Initialization 
+#pragma mark Framework Initialization
 
 
 NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
@@ -153,6 +207,9 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
     // Convert settings supplied by the user to a configuration dictionnary that can be used by TrustKit
     // This includes checking the sanity of the settings and converting public key hashes/pins from an
     // NSSArray of NSStrings (as provided by the user) to an NSSet of NSData (as needed by TrustKit)
+    
+    // Initialize domain registry library
+    InitializeDomainRegistry();
     
     NSMutableDictionary *finalConfiguration = [[NSMutableDictionary alloc]init];
     
@@ -239,7 +296,7 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
                 }
                 [reportUriListFinal addObject:reportUri];
             }
-
+            
             domainFinalConfiguration[kTSKReportUris] = [NSArray arrayWithArray:reportUriListFinal];
         }
         
@@ -257,7 +314,7 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
                 // The public key hash doesn't have a valid size
                 [NSException raise:@"TrustKit configuration invalid" format:@"TrustKit was initialized with an invalid Pin %@ for domain %@", pinnedKeyHashBase64, domainName];
             }
-
+            
             [serverSslPinsData addObject:pinnedKeyHash];
         }
         
@@ -274,6 +331,11 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
 
 static void initializeTrustKit(NSDictionary *TrustKitConfig)
 {
+    if (TrustKitConfig == nil)
+    {
+        return;
+    }
+    
     if (_isTrustKitInitialized == YES)
     {
         // TrustKit should only be initialized once so we don't double interpose SecureTransport or get into anything unexpected
@@ -283,7 +345,6 @@ static void initializeTrustKit(NSDictionary *TrustKitConfig)
     if ([TrustKitConfig count] > 0)
     {
         initializeSubjectPublicKeyInfoCache();
-        InitializeDomainRegistry();
         
         // Convert and store the SSL pins in our global variable
         _trustKitGlobalConfiguration = [[NSDictionary alloc]initWithDictionary:parseTrustKitArguments(TrustKitConfig)];
@@ -292,7 +353,7 @@ static void initializeTrustKit(NSDictionary *TrustKitConfig)
         char functionToHook[] = "SSLHandshake";
         original_SSLHandshake = dlsym(RTLD_DEFAULT, functionToHook);
         rebind_symbols((struct rebinding[1]){{(char *)functionToHook, (void *)replaced_SSLHandshake}}, 1);
-
+        
         _isTrustKitInitialized = YES;
         NSLog(@"TrustKit initialized with configuration %@", _trustKitGlobalConfiguration);
     }
@@ -332,7 +393,7 @@ __attribute__((constructor)) static void initialize(int argc, const char **argv)
     
     // Retrieve the configuration from the App's Info.plist file
     NSDictionary *trustKitConfigFromInfoPlist = CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)kTSKConfiguration);
-
+    
     initializeTrustKit(trustKitConfigFromInfoPlist);
 }
 
