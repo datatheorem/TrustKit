@@ -67,6 +67,7 @@ static BOOL isSubdomain(NSString *domain, NSString *subdomain)
 
 
 // TODO: Move this function to a separate file
+// TODO: Change the return value to specify GoodPin, BadPin, ServerNotPinned
 BOOL verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverName, NSDictionary *TrustKitConfiguration)
 {
     if ((serverTrust == NULL) || (serverName == NULL))
