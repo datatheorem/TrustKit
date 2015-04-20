@@ -11,6 +11,8 @@
 		070868B61ADFFADF00E5AFDC /* ca-chain.cert.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868B01ADFF67200E5AFDC /* ca-chain.cert.der */; };
 		070868B71ADFFADF00E5AFDC /* intermediate.cert.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868B11ADFF67200E5AFDC /* intermediate.cert.der */; };
 		070868B81ADFFADF00E5AFDC /* www.good.com.cert.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868B21ADFF67200E5AFDC /* www.good.com.cert.der */; };
+		070868BB1AE1672D00E5AFDC /* self.cert.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868BA1AE1672D00E5AFDC /* self.cert.der */; };
+		070868BC1AE1673200E5AFDC /* ca-chain-plus-self.cert.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868B91AE1658200E5AFDC /* ca-chain-plus-self.cert.der */; };
 		0710306C1AA88A510028092C /* TrustKitPinValidationOnlineTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0710306B1AA88A510028092C /* TrustKitPinValidationOnlineTests.m */; };
 		075AA1091AC985FD00178223 /* TrustKitPinValidationOfflineTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA2868CAFECA46ADE0B6E3E /* TrustKitPinValidationOfflineTests.m */; };
 		8C3492AE1ADCA1C3001849FD /* domain_registry.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C3492AD1ADCA1C3001849FD /* domain_registry.h */; };
@@ -40,6 +42,8 @@
 		070868B11ADFF67200E5AFDC /* intermediate.cert.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = intermediate.cert.der; sourceTree = "<group>"; };
 		070868B21ADFF67200E5AFDC /* www.good.com.cert.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = www.good.com.cert.der; sourceTree = "<group>"; };
 		070868B41ADFF6B000E5AFDC /* ca.cert.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = ca.cert.der; sourceTree = "<group>"; };
+		070868B91AE1658200E5AFDC /* ca-chain-plus-self.cert.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ca-chain-plus-self.cert.der"; sourceTree = "<group>"; };
+		070868BA1AE1672D00E5AFDC /* self.cert.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = self.cert.der; sourceTree = "<group>"; };
 		0710306B1AA88A510028092C /* TrustKitPinValidationOnlineTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrustKitPinValidationOnlineTests.m; sourceTree = "<group>"; };
 		2FA28052F8F01FDE594E4642 /* TrustKitTestCertificates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrustKitTestCertificates.h; sourceTree = "<group>"; };
 		2FA286123F801C437F35D240 /* TrustKit+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TrustKit+Private.h"; sourceTree = "<group>"; };
@@ -85,6 +89,8 @@
 		070868B31ADFF68200E5AFDC /* Certificates */ = {
 			isa = PBXGroup;
 			children = (
+				070868BA1AE1672D00E5AFDC /* self.cert.der */,
+				070868B91AE1658200E5AFDC /* ca-chain-plus-self.cert.der */,
 				070868B41ADFF6B000E5AFDC /* ca.cert.der */,
 				070868B01ADFF67200E5AFDC /* ca-chain.cert.der */,
 				070868B11ADFF67200E5AFDC /* intermediate.cert.der */,
@@ -275,8 +281,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				070868B51ADFFADF00E5AFDC /* ca.cert.der in Resources */,
+				070868BB1AE1672D00E5AFDC /* self.cert.der in Resources */,
 				070868B61ADFFADF00E5AFDC /* ca-chain.cert.der in Resources */,
 				070868B71ADFFADF00E5AFDC /* intermediate.cert.der in Resources */,
+				070868BC1AE1673200E5AFDC /* ca-chain-plus-self.cert.der in Resources */,
 				070868B81ADFFADF00E5AFDC /* www.good.com.cert.der in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

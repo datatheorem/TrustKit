@@ -33,7 +33,7 @@
 
 // Tests a secure connection to https://www.datatheorem.com by pinning to any of the 3 public keys
 
-- (void)testConnectionValidatingAnyKey
+- (void)testConnectionValidatingAnyPublicKey
 {
     
     NSDictionary *trustKitConfig =
@@ -49,7 +49,7 @@
     
     NSError *error = nil;
     NSHTTPURLResponse *response;
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.datatheorem.com"]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.datatheorem.com"]];
     [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     XCTAssertNil(error, @"Connection had an error: %@", error);
     XCTAssert(response.statusCode==200, @"Server did not respond with a 200 OK");
@@ -72,7 +72,7 @@
 
     NSError *error = nil;
     NSHTTPURLResponse *response;
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.datatheorem.com"]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.datatheorem.com"]];
     [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
     XCTAssertNil(error, @"Connection had an error: %@", error);
@@ -96,7 +96,7 @@
 
     NSError *error = nil;
     NSHTTPURLResponse *response;
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.datatheorem.com"]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.datatheorem.com"]];
     [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
     XCTAssertNil(error, @"Connection had an error: %@", error);
@@ -120,7 +120,7 @@
     
     NSError *error = nil;
     NSHTTPURLResponse *response;
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.datatheorem.com"]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.datatheorem.com"]];
     [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
     XCTAssertNil(error, @"Connection had an error: %@", error);
@@ -130,13 +130,12 @@
 
 
 // Tests a secure connection to https://www.datatheorem.com and forces validation to fail by providing a fake hash
-// TODO: Add the same test but with kTSKEnforcePinning set to NO
 - (void)testConnectionUsingFakeHashInvalidatingAllCertificates
 {
     NSDictionary *trustKitConfig =
     @{
       @"www.datatheorem.com" : @{
-              kTSKEnforcePinning : [NSNumber numberWithBool:YES],
+              kTSKEnforcePinning : @YES,
               kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
               kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" //Fake key
                                       ]}};
@@ -149,6 +148,30 @@
     [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
     XCTAssert(error.code==-1202 && [error.domain isEqual:@"NSURLErrorDomain"], @"Invalid certificate error not fired");
+}
+
+// Tests a secure connection to https://www.datatheorem.com and validation should fail because of a fake hash,
+// however pinning is disabled from TrustKit config, so connection must then work
+
+- (void)testConnectionUsingFakeHashInvalidatingAllCertificatesButNotEnforcingPinning
+{
+    NSDictionary *trustKitConfig =
+            @{
+                    @"www.datatheorem.com" : @{
+                    kTSKEnforcePinning : @NO, // Pinning disabled!
+                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                    kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" //Fake key
+                    ]}};
+
+    [TrustKit initializeWithConfiguration:trustKitConfig];
+
+    NSError *error = nil;
+    NSHTTPURLResponse *response;
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.datatheorem.com"]];
+    [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+
+    XCTAssertNil(error, @"Connection had an error: %@", error);
+    XCTAssert(response.statusCode==200, @"Server did not respond with a 200 OK");
 }
 
 // Tests a secure connection to https://www.datatheorem.com combining both an invalid and a valid key - must pass
@@ -167,7 +190,7 @@
     
     NSError *error = nil;
     NSHTTPURLResponse *response;
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.datatheorem.com"]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.datatheorem.com"]];
     [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
     XCTAssertNil(error, @"Connection had an error: %@", error);
@@ -181,7 +204,7 @@
     NSDictionary *trustKitConfig =
     @{
       @"datatheorem.com" : @{
-              kTSKIncludeSubdomains : [NSNumber numberWithBool:YES],
+              kTSKIncludeSubdomains : @YES,
               kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
               kTSKPublicKeyHashes : @[@"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=" //CA key
                                       ]}};
@@ -190,7 +213,7 @@
     
     NSError *error = nil;
     NSHTTPURLResponse *response;
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.datatheorem.com"]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.datatheorem.com"]];
     [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
     XCTAssertNil(error, @"Connection had an error: %@", error);
@@ -203,7 +226,7 @@
 {
     NSError *error = nil;
     NSHTTPURLResponse *response;
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.datatheorem.com"]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.datatheorem.com"]];
     [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
     XCTAssertNil(error, @"Connection had an error: %@", error);
