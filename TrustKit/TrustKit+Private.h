@@ -14,7 +14,8 @@ typedef NS_ENUM(NSInteger, TSKPinValidationResult) {
     TSKPinValidationResultFailed,
     TSKPinValidationResultDomainNotPinned,
     TSKPinValidationResultInvalidParameters,
-    TSKPinValidationResultPinningDisabled
+    TSKPinValidationResultPinningNotEnforced,
+    TSKPinValidationResultInvalidCertificateChain,
 };
 
 TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverName, NSDictionary *TrustKitConfiguration);

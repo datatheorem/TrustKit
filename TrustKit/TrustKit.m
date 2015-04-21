@@ -67,7 +67,6 @@ static BOOL isSubdomain(NSString *domain, NSString *subdomain)
 
 
 // TODO: Move this function to a separate file
-// TODO: Change the return value to specify GoodPin, BadPin, ServerNotPinned
 TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverName, NSDictionary *TrustKitConfiguration)
 {
     if ((serverTrust == NULL) || (serverName == NULL))
@@ -121,7 +120,7 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
     {
         // Default SSL validation failed
         NSLog(@"Error: default SSL validation failed");
-        return TSKPinValidationResultFailed;
+        return TSKPinValidationResultInvalidCertificateChain;
     }
     
     // Check each certificate in the server's certificate chain (the trust object)
@@ -159,7 +158,7 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
     }
     
     // TrustKit was configured to not enforce pinning for this domain; don't return an error
-    return TSKPinValidationResultPinningDisabled;
+    return TSKPinValidationResultPinningNotEnforced;
 }
 
 
@@ -190,9 +189,14 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
         SecTrustRef serverTrust;
         SSLCopyPeerTrust(context, &serverTrust);
         
-        if (verifyPublicKeyPin(serverTrust, serverNameStr, _trustKitGlobalConfiguration) == NO)
+        TSKPinValidationResult validationResult = verifyPublicKeyPin(serverTrust, serverNameStr, _trustKitGlobalConfiguration);
+        
+        if (!
+            ((validationResult == TSKPinValidationResultSuccess)
+            || (validationResult == TSKPinValidationResultDomainNotPinned)
+            || (validationResult == TSKPinValidationResultPinningNotEnforced)))
         {
-            // Pinning validation failed
+            // Validation failed
             result = errSSLXCertChainInvalid;
         }
     }
