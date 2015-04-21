@@ -38,6 +38,9 @@ static NSDictionary *_trustKitGlobalConfiguration = nil;
 // Global preventing multiple initializations (double function interposition, etc.)
 static BOOL _isTrustKitInitialized = NO;
 
+// For tests
+static BOOL _wasTrustKitCalled = NO;
+
 
 
 #pragma mark SSL Pin Validator
@@ -165,7 +168,7 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
 
 #pragma mark SSLHandshake Hook
 
-static OSStatus (*original_SSLHandshake)(SSLContextRef context);
+static OSStatus (*original_SSLHandshake)(SSLContextRef context) = NULL;
 
 static OSStatus replaced_SSLHandshake(SSLContextRef context)
 {
@@ -173,9 +176,9 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
     if ((result == noErr) && (_isTrustKitInitialized))
     {
         // The handshake was sucessful, let's do our additional checks on the server certificate
+        _wasTrustKitCalled = YES;
         char *serverName = NULL;
         size_t serverNameLen = 0;
-        // TODO: error handling
         
         // Get the server's domain name
         SSLGetPeerDomainNameLength (context, &serverNameLen);
@@ -355,9 +358,12 @@ static void initializeTrustKit(NSDictionary *TrustKitConfig)
         _trustKitGlobalConfiguration = [[NSDictionary alloc]initWithDictionary:parseTrustKitArguments(TrustKitConfig)];
         
         // Hook SSLHandshake()
-        char functionToHook[] = "SSLHandshake";
-        original_SSLHandshake = dlsym(RTLD_DEFAULT, functionToHook);
-        rebind_symbols((struct rebinding[1]){{(char *)functionToHook, (void *)replaced_SSLHandshake}}, 1);
+        if (original_SSLHandshake == NULL)
+        {
+            char functionToHook[] = "SSLHandshake";
+            original_SSLHandshake = dlsym(RTLD_DEFAULT, functionToHook);
+            rebind_symbols((struct rebinding[1]){{(char *)functionToHook, (void *)replaced_SSLHandshake}}, 1);
+        }
         
         _isTrustKitInitialized = YES;
         NSLog(@"TrustKit initialized with configuration %@", _trustKitGlobalConfiguration);
@@ -376,6 +382,11 @@ static void initializeTrustKit(NSDictionary *TrustKitConfig)
     initializeTrustKit(TrustKitConfig);
 }
 
++ (BOOL) wasTrustKitCalled
+{
+    return _wasTrustKitCalled;
+}
+
 
 + (void) resetConfiguration
 {
@@ -383,6 +394,7 @@ static void initializeTrustKit(NSDictionary *TrustKitConfig)
     resetSubjectPublicKeyInfoCache();
     _trustKitGlobalConfiguration = nil;
     _isTrustKitInitialized = NO;
+    _wasTrustKitCalled = NO;
 }
 
 @end

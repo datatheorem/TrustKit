@@ -53,6 +53,7 @@
     [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     XCTAssertNil(error, @"Connection had an error: %@", error);
     XCTAssert(response.statusCode==200, @"Server did not respond with a 200 OK");
+    XCTAssert([TrustKit wasTrustKitCalled], @"TrustKit was not called");
 }
 
 
@@ -67,16 +68,19 @@
               kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
               kTSKPublicKeyHashes : @[@"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8=", // Server key
                                       ]}};
-
+    
     [TrustKit initializeWithConfiguration:trustKitConfig];
 
     NSError *error = nil;
     NSHTTPURLResponse *response;
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.datatheorem.com"]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.datatheorem.com."]];
     [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    
+    
     
     XCTAssertNil(error, @"Connection had an error: %@", error);
     XCTAssert(response.statusCode==200, @"Server did not respond with a 200 OK");
+    XCTAssert([TrustKit wasTrustKitCalled], @"TrustKit was not called");
 }
 
 
@@ -101,6 +105,7 @@
     
     XCTAssertNil(error, @"Connection had an error: %@", error);
     XCTAssert(response.statusCode==200, @"Server did not respond with a 200 OK");
+    XCTAssert([TrustKit wasTrustKitCalled], @"TrustKit was not called");
 }
 
 
@@ -125,6 +130,7 @@
     
     XCTAssertNil(error, @"Connection had an error: %@", error);
     XCTAssert(response.statusCode==200, @"Server did not respond with a 200 OK");
+    XCTAssert([TrustKit wasTrustKitCalled], @"TrustKit was not called");
 }
 
 
@@ -147,6 +153,7 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.datatheorem.com"]];
     [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
+    XCTAssert([TrustKit wasTrustKitCalled], @"TrustKit was not called");
     XCTAssert(error.code==-1202 && [error.domain isEqual:@"NSURLErrorDomain"], @"Invalid certificate error not fired");
 }
 
@@ -172,6 +179,7 @@
 
     XCTAssertNil(error, @"Connection had an error: %@", error);
     XCTAssert(response.statusCode==200, @"Server did not respond with a 200 OK");
+    XCTAssert([TrustKit wasTrustKitCalled], @"TrustKit was not called");
 }
 
 // Tests a secure connection to https://www.datatheorem.com combining both an invalid and a valid key - must pass
@@ -195,6 +203,7 @@
     
     XCTAssertNil(error, @"Connection had an error: %@", error);
     XCTAssert(response.statusCode==200, @"Server did not respond with a 200 OK");
+    XCTAssert([TrustKit wasTrustKitCalled], @"TrustKit was not called");
 }
 
 // Tests a secure connection to https://www.datatheorem.com pinning a valid key to datatheorem.com with includeSubdomains - must pass
@@ -218,6 +227,7 @@
     
     XCTAssertNil(error, @"Connection had an error: %@", error);
     XCTAssert(response.statusCode==200, @"Server did not respond with a 200 OK");
+    XCTAssert([TrustKit wasTrustKitCalled], @"TrustKit was not called");
 }
 
 // Don't pin anything (connection must work)
@@ -231,6 +241,7 @@
     
     XCTAssertNil(error, @"Connection had an error: %@", error);
     XCTAssert(response.statusCode==200, @"Server did not respond with a 200 OK");
+    XCTAssert(![TrustKit wasTrustKitCalled], @"TrustKit was called");
 }
 
 

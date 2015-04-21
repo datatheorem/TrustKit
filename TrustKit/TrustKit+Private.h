@@ -26,6 +26,7 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments);
 @interface TrustKit(Private)
 
 + (void) resetConfiguration;
++ (BOOL) wasTrustKitCalled;
 
 @end
 
