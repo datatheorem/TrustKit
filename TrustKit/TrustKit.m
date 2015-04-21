@@ -362,7 +362,11 @@ static void initializeTrustKit(NSDictionary *TrustKitConfig)
         {
             char functionToHook[] = "SSLHandshake";
             original_SSLHandshake = dlsym(RTLD_DEFAULT, functionToHook);
-            rebind_symbols((struct rebinding[1]){{(char *)functionToHook, (void *)replaced_SSLHandshake}}, 1);
+            int rebindResult = rebind_symbols((struct rebinding[1]){{(char *)functionToHook, (void *)replaced_SSLHandshake}}, 1);
+            if ((rebindResult < 0) || (original_SSLHandshake == NULL))
+            {
+                [NSException raise:@"TrustKit initialization error" format:@"Fishook returned an error: %d", rebindResult];
+            }
         }
         
         _isTrustKitInitialized = YES;
