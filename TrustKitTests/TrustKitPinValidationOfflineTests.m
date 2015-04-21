@@ -57,8 +57,9 @@
     _leafCertificate = SecCertificateCreateWithData(kCFAllocatorDefault, leafData);
     CFRelease(leafData);
     
-    _policy = SecPolicyCreateSSL(true, NULL);
-}
+    CFStringRef hostname = CFSTR("www.good.com");
+    _policy = SecPolicyCreateSSL(true, hostname);
+    }
 
 - (void)tearDown {
     
@@ -83,7 +84,7 @@
                                       ]}};
     NSDictionary *trustKitConfig = parseTrustKitArguments(trustKitArguments);
     
-    SecCertificateRef trustCertArray[2] = {_chainCertificate, _leafCertificate};
+    SecCertificateRef trustCertArray[2] = {_leafCertificate, _chainCertificate};
     CFArrayRef certs = CFArrayCreate(NULL, (const void **) trustCertArray, 2, NULL);
     SecTrustRef trust;
     
@@ -113,7 +114,7 @@
                                       ]}};
     NSDictionary *trustKitConfig = parseTrustKitArguments(trustKitArguments);
 
-    SecCertificateRef trustCertArray[2] = {_chainCertificate, _leafCertificate};
+    SecCertificateRef trustCertArray[2] = {_leafCertificate, _chainCertificate};
     CFArrayRef certs = CFArrayCreate(NULL, (const void **) trustCertArray, 2, NULL);
     SecTrustRef trust;
 
@@ -143,7 +144,7 @@
                                       ]}};
     NSDictionary *trustKitConfig = parseTrustKitArguments(trustKitArguments);
 
-    SecCertificateRef trustCertArray[2] = {_chainCertificate, _leafCertificate};
+    SecCertificateRef trustCertArray[2] = {_leafCertificate, _chainCertificate};
     CFArrayRef certs = CFArrayCreate(NULL, (const void **) trustCertArray, 2, NULL);
     SecTrustRef trust;
 
@@ -173,7 +174,7 @@
                                       ]}};
     NSDictionary *trustKitConfig = parseTrustKitArguments(trustKitArguments);
 
-    SecCertificateRef trustCertArray[2] = {_chainCertificate, _leafCertificate};
+    SecCertificateRef trustCertArray[2] = {_leafCertificate, _chainCertificate};
     CFArrayRef certs = CFArrayCreate(NULL, (const void **) trustCertArray, 2, NULL);
     SecTrustRef trust;
 
@@ -204,7 +205,7 @@
                                       ]}};
     NSDictionary *trustKitConfig = parseTrustKitArguments(trustKitArguments);
 
-    SecCertificateRef trustCertArray[2] = {_chainCertificate, _leafCertificate};
+    SecCertificateRef trustCertArray[2] = {_leafCertificate, _chainCertificate};
     CFArrayRef certs = CFArrayCreate(NULL, (const void **) trustCertArray, 2, NULL);
     SecTrustRef trust;
 
@@ -226,7 +227,7 @@
 
 - (void)testWwwGoodComCertificateWithNoPins
 {
-    SecCertificateRef trustCertArray[2] = {_chainCertificate, _leafCertificate};
+    SecCertificateRef trustCertArray[2] = {_leafCertificate, _chainCertificate};
     CFArrayRef certs = CFArrayCreate(NULL, (const void **) trustCertArray, 2, NULL);
     SecTrustRef trust;
 
@@ -246,8 +247,6 @@
     XCTAssert(verificationResult == TSKPinValidationResultDomainNotPinned, @"Validation must pass if no public key pins are set.");
 }
 
-
-// I don't understand this one
 - (void)testWwwGoodComCertificateAgainstCAWithSelfSignedCAAsWell
 {
     NSDictionary *trustKitArguments =
@@ -262,7 +261,7 @@
                                       ]}};
     NSDictionary *trustKitConfig = parseTrustKitArguments(trustKitArguments);
 
-    SecCertificateRef trustCertArray[2] = {_chainCertificate, _leafCertificate};
+    SecCertificateRef trustCertArray[2] = {_leafCertificate, _chainCertificate};
     CFArrayRef certs = CFArrayCreate(NULL, (const void **) trustCertArray, 2, NULL);
     SecTrustRef trust;
 

@@ -117,8 +117,13 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
     // And also gives us the exact path that successfully validated the chain
     NSSet *serverPins = serverPinningConfiguration[kTSKPublicKeyHashes];
     
-    SecTrustResultType trustResult;
-    SecTrustEvaluate(serverTrust, &trustResult);
+    SecTrustResultType trustResult = 0;
+    if (SecTrustEvaluate(serverTrust, &trustResult) != errSecSuccess)
+    {
+        NSLog(@"SecTrustEvaluate error");
+        return TSKPinValidationResultInvalidParameters;
+    }
+    
     if ((trustResult != kSecTrustResultUnspecified) && (trustResult != kSecTrustResultProceed))
     {
         // Default SSL validation failed
@@ -360,9 +365,10 @@ static void initializeTrustKit(NSDictionary *TrustKitConfig)
         // Hook SSLHandshake()
         if (original_SSLHandshake == NULL)
         {
+            int rebindResult = -1;
             char functionToHook[] = "SSLHandshake";
             original_SSLHandshake = dlsym(RTLD_DEFAULT, functionToHook);
-            int rebindResult = rebind_symbols((struct rebinding[1]){{(char *)functionToHook, (void *)replaced_SSLHandshake}}, 1);
+            rebindResult = rebind_symbols((struct rebinding[1]){{(char *)functionToHook, (void *)replaced_SSLHandshake}}, 1);
             if ((rebindResult < 0) || (original_SSLHandshake == NULL))
             {
                 [NSException raise:@"TrustKit initialization error" format:@"Fishook returned an error: %d", rebindResult];
