@@ -68,11 +68,11 @@ static BOOL isSubdomain(NSString *domain, NSString *subdomain)
 
 // TODO: Move this function to a separate file
 // TODO: Change the return value to specify GoodPin, BadPin, ServerNotPinned
-BOOL verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverName, NSDictionary *TrustKitConfiguration)
+TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverName, NSDictionary *TrustKitConfiguration)
 {
     if ((serverTrust == NULL) || (serverName == NULL))
     {
-        return NO;
+        return TSKPinValidationResultInvalidParameters;
     }
     
     // First let's figure out if this domain is pinned
@@ -106,7 +106,7 @@ BOOL verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverName, NSDiction
     if (serverPinningConfiguration == nil)
     {
         NSLog(@"Domain %@ is not pinned", serverName);
-        return YES;
+        return TSKPinValidationResultDomainNotPinned;
     }
     
     // Domain is pinned
@@ -121,7 +121,7 @@ BOOL verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverName, NSDiction
     {
         // Default SSL validation failed
         NSLog(@"Error: default SSL validation failed");
-        return NO;
+        return TSKPinValidationResultFailed;
     }
     
     // Check each certificate in the server's certificate chain (the trust object)
@@ -144,7 +144,7 @@ BOOL verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverName, NSDiction
             if ([serverPins containsObject:subjectPublicKeyInfoHash])
             {
                 NSLog(@"SSL Pin found");
-                return YES;
+                return TSKPinValidationResultSuccess;
             }
         }
     }
@@ -155,11 +155,11 @@ BOOL verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverName, NSDiction
     if ([serverPinningConfiguration[kTSKEnforcePinning] boolValue] == YES)
     {
         // TrustKit was configured to enforce pinning; force an error
-        return NO;
+        return TSKPinValidationResultFailed;
     }
     
     // TrustKit was configured to not enforce pinning for this domain; don't return an error
-    return YES;
+    return TSKPinValidationResultPinningDisabled;
 }
 
 

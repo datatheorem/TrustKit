@@ -94,13 +94,13 @@
     
     XCTAssert(SecTrustSetAnchorCertificates(trust, caRootCertificates) == errSecSuccess, @"SecTrustSetAnchorCertificates did not return errSecSuccess");
     
-    BOOL verificationPassed = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig);
-    
+    TSKPinValidationResult verificationResult = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig);
+
     CFRelease(caRootCertificates);
     CFRelease(certs);
     CFRelease(trust);
-    
-    XCTAssert(verificationPassed == YES, @"Validation must pass against valid public key pins");
+
+    XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against valid public key pins");
 }
 - (void)testWwwGoodComCertificateAgainstGoodIntermediateCAPublicKey
 {
@@ -112,25 +112,25 @@
               kTSKPublicKeyHashes : @[@"khKI6ae4micEvX74MB/BZ4u15WCWGXPD6Gjg6iIRVeE=" // Intermediate key only
                                       ]}};
     NSDictionary *trustKitConfig = parseTrustKitArguments(trustKitArguments);
-    
+
     SecCertificateRef trustCertArray[2] = {_chainCertificate, _leafCertificate};
     CFArrayRef certs = CFArrayCreate(NULL, (const void **) trustCertArray, 2, NULL);
     SecTrustRef trust;
-    
+
     XCTAssert(SecTrustCreateWithCertificates(certs, _policy, &trust) == errSecSuccess, @"SecTrustCreateWithCertificates did not return errSecSuccess");
-    
+
     SecCertificateRef caRootArray[1] = {_rootCertificate};
     CFArrayRef caRootCertificates = CFArrayCreate(NULL, (const void **) caRootArray, 1, NULL);
-    
+
     XCTAssert(SecTrustSetAnchorCertificates(trust, caRootCertificates) == errSecSuccess, @"SecTrustSetAnchorCertificates did not return errSecSuccess");
-    
-    BOOL verificationPassed = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig);
-    
+
+    TSKPinValidationResult verificationResult = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig);
+
     CFRelease(caRootCertificates);
     CFRelease(certs);
     CFRelease(trust);
-    
-    XCTAssert(verificationPassed == YES, @"Validation must pass against valid public key pins");
+
+    XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against valid public key pins");
 }
 - (void)testWwwGoodComCertificateAgainstGoodCAPublicKey
 {
@@ -142,25 +142,25 @@
               kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=" // CA key
                                       ]}};
     NSDictionary *trustKitConfig = parseTrustKitArguments(trustKitArguments);
-    
+
     SecCertificateRef trustCertArray[2] = {_chainCertificate, _leafCertificate};
     CFArrayRef certs = CFArrayCreate(NULL, (const void **) trustCertArray, 2, NULL);
     SecTrustRef trust;
-    
+
     XCTAssert(SecTrustCreateWithCertificates(certs, _policy, &trust) == errSecSuccess, @"SecTrustCreateWithCertificates did not return errSecSuccess");
-    
+
     SecCertificateRef caRootArray[1] = {_rootCertificate};
     CFArrayRef caRootCertificates = CFArrayCreate(NULL, (const void **) caRootArray, 1, NULL);
-    
+
     XCTAssert(SecTrustSetAnchorCertificates(trust, caRootCertificates) == errSecSuccess, @"SecTrustSetAnchorCertificates did not return errSecSuccess");
-    
-    BOOL verificationPassed = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig);
-    
+
+    TSKPinValidationResult verificationResult = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig);
+
     CFRelease(caRootCertificates);
     CFRelease(certs);
     CFRelease(trust);
-    
-    XCTAssert(verificationPassed == YES, @"Validation must pass against valid public key pins");
+
+    XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against valid public key pins");
 }
 - (void)testWwwGoodComCertificateAgainstGoodLeafPublicKey
 {
@@ -172,25 +172,25 @@
               kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=" // Server key only
                                       ]}};
     NSDictionary *trustKitConfig = parseTrustKitArguments(trustKitArguments);
-    
+
     SecCertificateRef trustCertArray[2] = {_chainCertificate, _leafCertificate};
     CFArrayRef certs = CFArrayCreate(NULL, (const void **) trustCertArray, 2, NULL);
     SecTrustRef trust;
-    
+
     XCTAssert(SecTrustCreateWithCertificates(certs, _policy, &trust) == errSecSuccess, @"SecTrustCreateWithCertificates did not return errSecSuccess");
-    
+
     SecCertificateRef caRootArray[1] = {_rootCertificate};
     CFArrayRef caRootCertificates = CFArrayCreate(NULL, (const void **) caRootArray, 1, NULL);
-    
+
     XCTAssert(SecTrustSetAnchorCertificates(trust, caRootCertificates) == errSecSuccess, @"SecTrustSetAnchorCertificates did not return errSecSuccess");
-    
-    BOOL verificationPassed = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig);
-    
+
+    TSKPinValidationResult verificationResult = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig);
+
     CFRelease(caRootCertificates);
     CFRelease(certs);
     CFRelease(trust);
-    
-    XCTAssert(verificationPassed == YES, @"Validation must pass against valid public key pins");
+
+    XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against valid public key pins");
 }
 
 - (void)testWwwGoodComCertificateAgainstBadKeyPinning
@@ -203,25 +203,25 @@
               kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                       ]}};
     NSDictionary *trustKitConfig = parseTrustKitArguments(trustKitArguments);
-    
+
     SecCertificateRef trustCertArray[2] = {_chainCertificate, _leafCertificate};
     CFArrayRef certs = CFArrayCreate(NULL, (const void **) trustCertArray, 2, NULL);
     SecTrustRef trust;
-    
+
     XCTAssert(SecTrustCreateWithCertificates(certs, _policy, &trust) == errSecSuccess, @"SecTrustCreateWithCertificates did not return errSecSuccess");
-    
+
     SecCertificateRef caRootArray[1] = {_rootCertificate};
     CFArrayRef caRootCertificates = CFArrayCreate(NULL, (const void **) caRootArray, 1, NULL);
-    
+
     XCTAssert(SecTrustSetAnchorCertificates(trust, caRootCertificates) == errSecSuccess, @"SecTrustSetAnchorCertificates did not return errSecSuccess");
-    
-    BOOL verificationPassed = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig);
-    
+
+    TSKPinValidationResult verificationResult = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig);
+
     CFRelease(caRootCertificates);
     CFRelease(certs);
     CFRelease(trust);
-    
-    XCTAssert(verificationPassed == NO, @"Validation must NOT pass against invalid public key pins");
+
+    XCTAssert(verificationResult == TSKPinValidationResultFailed, @"Validation must NOT pass against invalid public key pins");
 }
 
 - (void)testWwwGoodComCertificateWithNoPins
@@ -229,21 +229,21 @@
     SecCertificateRef trustCertArray[2] = {_chainCertificate, _leafCertificate};
     CFArrayRef certs = CFArrayCreate(NULL, (const void **) trustCertArray, 2, NULL);
     SecTrustRef trust;
-    
+
     XCTAssert(SecTrustCreateWithCertificates(certs, _policy, &trust) == errSecSuccess, @"SecTrustCreateWithCertificates did not return errSecSuccess");
-    
+
     SecCertificateRef caRootArray[1] = {_rootCertificate};
     CFArrayRef caRootCertificates = CFArrayCreate(NULL, (const void **) caRootArray, 1, NULL);
-    
+
     XCTAssert(SecTrustSetAnchorCertificates(trust, caRootCertificates) == errSecSuccess, @"SecTrustSetAnchorCertificates did not return errSecSuccess");
-    
-    BOOL verificationPassed = verifyPublicKeyPin(trust, @"www.good.com", nil);
-    
+
+    TSKPinValidationResult verificationResult = verifyPublicKeyPin(trust, @"www.good.com", nil);
+
     CFRelease(caRootCertificates);
     CFRelease(certs);
     CFRelease(trust);
-    
-    XCTAssert(verificationPassed == YES, @"Validation must pass if no public key pins are set.");
+
+    XCTAssert(verificationResult == TSKPinValidationResultDomainNotPinned, @"Validation must pass if no public key pins are set.");
 }
 
 
@@ -261,25 +261,25 @@
                                       //@"naw8JswG9YvBkitP4iGuyEgbFxssEMM/v4m7MglIzEw=" // Self-signed Key
                                       ]}};
     NSDictionary *trustKitConfig = parseTrustKitArguments(trustKitArguments);
-    
+
     SecCertificateRef trustCertArray[2] = {_chainCertificate, _leafCertificate};
     CFArrayRef certs = CFArrayCreate(NULL, (const void **) trustCertArray, 2, NULL);
     SecTrustRef trust;
-    
+
     XCTAssert(SecTrustCreateWithCertificates(certs, _policy, &trust) == errSecSuccess, @"SecTrustCreateWithCertificates did not return errSecSuccess");
-    
+
     SecCertificateRef caRootArray[2] = {_rootCertificate, _selfCertificate };
     CFArrayRef caRootCertificates = CFArrayCreate(NULL, (const void **) caRootArray, 2, NULL);
-    
+
     XCTAssert(SecTrustSetAnchorCertificates(trust, caRootCertificates) == errSecSuccess, @"SecTrustSetAnchorCertificates did not return errSecSuccess");
-    
-    BOOL verificationPassed = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig);
+
+    TSKPinValidationResult verificationResult = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig);
     
     CFRelease(caRootCertificates);
     CFRelease(certs);
     CFRelease(trust);
     
-    XCTAssert(verificationPassed == YES, @"Validation must pass against valid public key pins");
+    XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against valid public key pins");
 }
 
 @end
