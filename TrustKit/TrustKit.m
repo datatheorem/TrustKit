@@ -89,7 +89,7 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
         for (NSString *pinnedServerName in TrustKitConfiguration)
         {
             // Check each domain configured with the includeSubdomain flag
-            if (TrustKitConfiguration[pinnedServerName][kTSKIncludeSubdomains])
+            if ([TrustKitConfiguration[pinnedServerName][kTSKIncludeSubdomains] boolValue])
             {
                 // Is the server a subdomain of this pinned server?
                 NSLog(@"Checking includeSubdomains configuration for %@", pinnedServerName);

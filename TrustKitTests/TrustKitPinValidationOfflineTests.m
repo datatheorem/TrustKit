@@ -326,7 +326,7 @@
     
     CFRelease(trust);
     
-    XCTAssert(verificationResult == TSKPinValidationResultFailed, @"Validation must NOT pass because subdomains are not included");
+    XCTAssert(verificationResult == TSKPinValidationResultDomainNotPinned, @"Validation must NOT pass because includeSubdomain is not enabled so wwww.good.com is not actually pinned");
 }
 
 // Tricky case: pin a bad key for good.co.uk with includeSubdomains and ensure the validation for www.good.com succeeds.
