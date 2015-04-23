@@ -9,14 +9,24 @@
 #ifndef TrustKit_TrustKit_Private____FILEEXTENSION___
 #define TrustKit_TrustKit_Private____FILEEXTENSION___
 
+typedef NS_ENUM(NSInteger, TSKPinValidationResult) {
+    TSKPinValidationResultSuccess,
+    TSKPinValidationResultFailed,
+    TSKPinValidationResultDomainNotPinned,
+    TSKPinValidationResultInvalidParameters,
+    TSKPinValidationResultPinningNotEnforced,
+    TSKPinValidationResultInvalidCertificateChain,
+};
 
-BOOL verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverName, NSDictionary *TrustKitConfiguration);
+TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverName, NSDictionary *TrustKitConfiguration);
 NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments);
+
 
 
 @interface TrustKit(Private)
 
 + (void) resetConfiguration;
++ (BOOL) wasTrustKitCalled;
 
 @end
 
