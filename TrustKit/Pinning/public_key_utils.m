@@ -141,6 +141,7 @@ NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate, T
     pthread_mutex_unlock(&_spkiCacheLock);
     
     
+    CFRelease((__bridge CFTypeRef)(certificateData));
     return subjectPublicKeyInfoHash;
 }
 
