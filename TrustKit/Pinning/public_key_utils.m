@@ -93,6 +93,7 @@ NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate, T
     if (cachedSubjectPublicKeyInfo)
     {
         NSLog(@"Subject Public Key Info hash was found in the cache");
+        CFRelease((__bridge CFTypeRef)(certificateData));
         return cachedSubjectPublicKeyInfo;
     }
     NSLog(@"Generating Subject Public Key Info hash...");
