@@ -10,7 +10,7 @@
 #import "TrustKit+Private.h"
 #include <dlfcn.h>
 #import <CommonCrypto/CommonDigest.h>
-#import "fishhook/fishhook.h"
+#import "fishhook.h"
 #import "public_key_utils.h"
 #import "domain_registry.h"
 #import "ssl_pin_verifier.h"
