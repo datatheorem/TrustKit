@@ -9,6 +9,7 @@
 #ifndef TrustKit_TrustKit_Private____FILEEXTENSION___
 #define TrustKit_TrustKit_Private____FILEEXTENSION___
 
+NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments);
 
 @interface TrustKit(Private)
 

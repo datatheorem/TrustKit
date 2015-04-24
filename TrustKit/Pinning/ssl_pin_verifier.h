@@ -22,7 +22,6 @@ typedef NS_ENUM(NSInteger, TSKPinValidationResult) {
 };
 
 TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverName, NSDictionary *TrustKitConfiguration);
-NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments);
 
 
 #endif
