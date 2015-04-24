@@ -25,6 +25,7 @@
 		8CB1F9A41ADF2C2100104795 /* libassert_lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CB1F9A11ADF2C2100104795 /* libassert_lib.a */; };
 		8CB1F9A51ADF2C2100104795 /* libdomain_registry_lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CB1F9A21ADF2C2100104795 /* libdomain_registry_lib.a */; };
 		8CB1F9A61ADF2C2100104795 /* libinit_registry_tables_lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CB1F9A31ADF2C2100104795 /* libinit_registry_tables_lib.a */; };
+		8CE919121AEA01BB002B29AE /* TSKReporterDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE919111AEA01BB002B29AE /* TSKReporterDelegate.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		8CB1F9A11ADF2C2100104795 /* libassert_lib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libassert_lib.a; sourceTree = "<group>"; };
 		8CB1F9A21ADF2C2100104795 /* libdomain_registry_lib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdomain_registry_lib.a; sourceTree = "<group>"; };
 		8CB1F9A31ADF2C2100104795 /* libinit_registry_tables_lib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libinit_registry_tables_lib.a; sourceTree = "<group>"; };
+		8CE919111AEA01BB002B29AE /* TSKReporterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSKReporterDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +133,7 @@
 		8C8480491A896EE30017C155 /* TrustKit */ = {
 			isa = PBXGroup;
 			children = (
+				8CE919111AEA01BB002B29AE /* TSKReporterDelegate.h */,
 				8C3492901ADCA059001849FD /* domain_registry */,
 				8C84806B1A896F3C0017C155 /* fishhook */,
 				8C84804C1A896EE30017C155 /* TrustKit.h */,
@@ -190,6 +193,7 @@
 				8C3492AE1ADCA1C3001849FD /* domain_registry.h in Headers */,
 				8C84804D1A896EE30017C155 /* TrustKit.h in Headers */,
 				8C84806A1A896F350017C155 /* fishhook.h in Headers */,
+				8CE919121AEA01BB002B29AE /* TSKReporterDelegate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
