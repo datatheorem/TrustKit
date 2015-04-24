@@ -15,17 +15,17 @@
 		070868BC1AE1673200E5AFDC /* ca-chain-plus-self.cert.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868B91AE1658200E5AFDC /* ca-chain-plus-self.cert.der */; };
 		0710306C1AA88A510028092C /* TrustKitPinValidationOnlineTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0710306B1AA88A510028092C /* TrustKitPinValidationOnlineTests.m */; };
 		075AA1091AC985FD00178223 /* TrustKitPinValidationOfflineTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA2868CAFECA46ADE0B6E3E /* TrustKitPinValidationOfflineTests.m */; };
-		8C3492AE1ADCA1C3001849FD /* domain_registry.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C3492AD1ADCA1C3001849FD /* domain_registry.h */; };
 		8C84804D1A896EE30017C155 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C84804C1A896EE30017C155 /* TrustKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8C8480531A896EE30017C155 /* TrustKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C8480471A896EE30017C155 /* TrustKit.framework */; };
 		8C8480691A896F350017C155 /* fishhook.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C8480671A896F350017C155 /* fishhook.c */; };
 		8C84806A1A896F350017C155 /* fishhook.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C8480681A896F350017C155 /* fishhook.h */; };
 		8C84806D1A896F660017C155 /* TrustKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C84806C1A896F660017C155 /* TrustKit.m */; };
 		8CB068CB1AD47DDD008C79C2 /* subjectPublicKeyHash.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB068CA1AD47DDD008C79C2 /* subjectPublicKeyHash.m */; };
-		8CB1F9A41ADF2C2100104795 /* libassert_lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CB1F9A11ADF2C2100104795 /* libassert_lib.a */; };
-		8CB1F9A51ADF2C2100104795 /* libdomain_registry_lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CB1F9A21ADF2C2100104795 /* libdomain_registry_lib.a */; };
-		8CB1F9A61ADF2C2100104795 /* libinit_registry_tables_lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CB1F9A31ADF2C2100104795 /* libinit_registry_tables_lib.a */; };
 		8CE919121AEA01BB002B29AE /* TSKReporterDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE919111AEA01BB002B29AE /* TSKReporterDelegate.h */; };
+		8CE919171AEA0229002B29AE /* domain_registry.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE919131AEA0229002B29AE /* domain_registry.h */; };
+		8CE919181AEA0229002B29AE /* libassert_lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CE919141AEA0229002B29AE /* libassert_lib.a */; };
+		8CE919191AEA0229002B29AE /* libdomain_registry_lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CE919151AEA0229002B29AE /* libdomain_registry_lib.a */; };
+		8CE9191A1AEA0229002B29AE /* libinit_registry_tables_lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CE919161AEA0229002B29AE /* libinit_registry_tables_lib.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,7 +49,6 @@
 		2FA28052F8F01FDE594E4642 /* TrustKitTestCertificates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrustKitTestCertificates.h; sourceTree = "<group>"; };
 		2FA286123F801C437F35D240 /* TrustKit+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TrustKit+Private.h"; sourceTree = "<group>"; };
 		2FA2868CAFECA46ADE0B6E3E /* TrustKitPinValidationOfflineTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrustKitPinValidationOfflineTests.m; sourceTree = "<group>"; };
-		8C3492AD1ADCA1C3001849FD /* domain_registry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = domain_registry.h; sourceTree = "<group>"; };
 		8C8480471A896EE30017C155 /* TrustKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TrustKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C84804B1A896EE30017C155 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C84804C1A896EE30017C155 /* TrustKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrustKit.h; sourceTree = "<group>"; };
@@ -60,10 +59,11 @@
 		8C84806C1A896F660017C155 /* TrustKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrustKit.m; sourceTree = "<group>"; };
 		8CB068CA1AD47DDD008C79C2 /* subjectPublicKeyHash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = subjectPublicKeyHash.m; sourceTree = "<group>"; };
 		8CB068CC1AD47E06008C79C2 /* subjectPublicKeyHash.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = subjectPublicKeyHash.h; sourceTree = "<group>"; };
-		8CB1F9A11ADF2C2100104795 /* libassert_lib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libassert_lib.a; sourceTree = "<group>"; };
-		8CB1F9A21ADF2C2100104795 /* libdomain_registry_lib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libdomain_registry_lib.a; sourceTree = "<group>"; };
-		8CB1F9A31ADF2C2100104795 /* libinit_registry_tables_lib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libinit_registry_tables_lib.a; sourceTree = "<group>"; };
 		8CE919111AEA01BB002B29AE /* TSKReporterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSKReporterDelegate.h; sourceTree = "<group>"; };
+		8CE919131AEA0229002B29AE /* domain_registry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = domain_registry.h; path = domain_registry/domain_registry.h; sourceTree = "<group>"; };
+		8CE919141AEA0229002B29AE /* libassert_lib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libassert_lib.a; path = domain_registry/libassert_lib.a; sourceTree = "<group>"; };
+		8CE919151AEA0229002B29AE /* libdomain_registry_lib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libdomain_registry_lib.a; path = domain_registry/libdomain_registry_lib.a; sourceTree = "<group>"; };
+		8CE919161AEA0229002B29AE /* libinit_registry_tables_lib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libinit_registry_tables_lib.a; path = domain_registry/libinit_registry_tables_lib.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,9 +71,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CB1F9A51ADF2C2100104795 /* libdomain_registry_lib.a in Frameworks */,
-				8CB1F9A41ADF2C2100104795 /* libassert_lib.a in Frameworks */,
-				8CB1F9A61ADF2C2100104795 /* libinit_registry_tables_lib.a in Frameworks */,
+				8CE919191AEA0229002B29AE /* libdomain_registry_lib.a in Frameworks */,
+				8CE919181AEA0229002B29AE /* libassert_lib.a in Frameworks */,
+				8CE9191A1AEA0229002B29AE /* libinit_registry_tables_lib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -104,10 +104,10 @@
 		8C3492901ADCA059001849FD /* domain_registry */ = {
 			isa = PBXGroup;
 			children = (
-				8CB1F9A11ADF2C2100104795 /* libassert_lib.a */,
-				8CB1F9A21ADF2C2100104795 /* libdomain_registry_lib.a */,
-				8CB1F9A31ADF2C2100104795 /* libinit_registry_tables_lib.a */,
-				8C3492AD1ADCA1C3001849FD /* domain_registry.h */,
+				8CE919131AEA0229002B29AE /* domain_registry.h */,
+				8CE919141AEA0229002B29AE /* libassert_lib.a */,
+				8CE919151AEA0229002B29AE /* libdomain_registry_lib.a */,
+				8CE919161AEA0229002B29AE /* libinit_registry_tables_lib.a */,
 			);
 			name = domain_registry;
 			sourceTree = "<group>";
@@ -190,7 +190,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C3492AE1ADCA1C3001849FD /* domain_registry.h in Headers */,
+				8CE919171AEA0229002B29AE /* domain_registry.h in Headers */,
 				8C84804D1A896EE30017C155 /* TrustKit.h in Headers */,
 				8C84806A1A896F350017C155 /* fishhook.h in Headers */,
 				8CE919121AEA01BB002B29AE /* TSKReporterDelegate.h in Headers */,
@@ -426,6 +426,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/TrustKit",
+					"$(PROJECT_DIR)/TrustKit/domain_registry",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -450,6 +451,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/TrustKit",
+					"$(PROJECT_DIR)/TrustKit/domain_registry",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
