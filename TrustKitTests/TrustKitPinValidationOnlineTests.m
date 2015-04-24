@@ -9,7 +9,7 @@
 #import <XCTest/XCTest.h>
 #import "TrustKit.h"
 #import "TrustKit+Private.h"
-#import "subjectPublicKeyHash.h"
+#import "public_key_utils.h"
 
 
 @interface TrustKitPinValidationOnlineTests : XCTestCase

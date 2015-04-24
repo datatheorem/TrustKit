@@ -1,5 +1,5 @@
 //
-//  subjectPublicKeyHash.h
+//  public_key_utils.h
 //  TrustKit
 //
 //  Created by Alban Diquet on 4/7/15.

@@ -1,13 +1,12 @@
 //
-//  subjectPublicKeyHash.m
+//  public_key_utils.h
 //  TrustKit
 //
 //  Created by Alban Diquet on 4/7/15.
 //  Copyright (c) 2015 Data Theorem. All rights reserved.
 //
 
-#import "subjectPublicKeyHash.h"
-#import <Foundation/Foundation.h>
+#import "public_key_utils.h"
 #include <pthread.h>
 #import <CommonCrypto/CommonDigest.h>
 

@@ -20,12 +20,15 @@
 		8C8480691A896F350017C155 /* fishhook.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C8480671A896F350017C155 /* fishhook.c */; };
 		8C84806A1A896F350017C155 /* fishhook.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C8480681A896F350017C155 /* fishhook.h */; };
 		8C84806D1A896F660017C155 /* TrustKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C84806C1A896F660017C155 /* TrustKit.m */; };
-		8CB068CB1AD47DDD008C79C2 /* subjectPublicKeyHash.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB068CA1AD47DDD008C79C2 /* subjectPublicKeyHash.m */; };
-		8CE919121AEA01BB002B29AE /* TSKReporterDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE919111AEA01BB002B29AE /* TSKReporterDelegate.h */; };
 		8CE919171AEA0229002B29AE /* domain_registry.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE919131AEA0229002B29AE /* domain_registry.h */; };
 		8CE919181AEA0229002B29AE /* libassert_lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CE919141AEA0229002B29AE /* libassert_lib.a */; };
 		8CE919191AEA0229002B29AE /* libdomain_registry_lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CE919151AEA0229002B29AE /* libdomain_registry_lib.a */; };
 		8CE9191A1AEA0229002B29AE /* libinit_registry_tables_lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CE919161AEA0229002B29AE /* libinit_registry_tables_lib.a */; };
+		8CE9191E1AEA073C002B29AE /* public_key_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE9191C1AEA073C002B29AE /* public_key_utils.h */; };
+		8CE9191F1AEA073C002B29AE /* public_key_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9191D1AEA073C002B29AE /* public_key_utils.m */; };
+		8CE919221AEA077F002B29AE /* ssl_pin_verifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE919211AEA077F002B29AE /* ssl_pin_verifier.m */; };
+		8CE919251AEA07C5002B29AE /* ssl_pin_verifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE919241AEA07C5002B29AE /* ssl_pin_verifier.h */; };
+		8CE919271AEA0991002B29AE /* TSKReporterDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE919261AEA0991002B29AE /* TSKReporterDelegate.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,13 +59,15 @@
 		8C8480671A896F350017C155 /* fishhook.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = fishhook.c; path = fishhook/fishhook.c; sourceTree = "<group>"; };
 		8C8480681A896F350017C155 /* fishhook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = fishhook.h; path = fishhook/fishhook.h; sourceTree = "<group>"; };
 		8C84806C1A896F660017C155 /* TrustKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrustKit.m; sourceTree = "<group>"; };
-		8CB068CA1AD47DDD008C79C2 /* subjectPublicKeyHash.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = subjectPublicKeyHash.m; sourceTree = "<group>"; };
-		8CB068CC1AD47E06008C79C2 /* subjectPublicKeyHash.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = subjectPublicKeyHash.h; sourceTree = "<group>"; };
-		8CE919111AEA01BB002B29AE /* TSKReporterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSKReporterDelegate.h; sourceTree = "<group>"; };
 		8CE919131AEA0229002B29AE /* domain_registry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = domain_registry.h; path = domain_registry/domain_registry.h; sourceTree = "<group>"; };
 		8CE919141AEA0229002B29AE /* libassert_lib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libassert_lib.a; path = domain_registry/libassert_lib.a; sourceTree = "<group>"; };
 		8CE919151AEA0229002B29AE /* libdomain_registry_lib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libdomain_registry_lib.a; path = domain_registry/libdomain_registry_lib.a; sourceTree = "<group>"; };
 		8CE919161AEA0229002B29AE /* libinit_registry_tables_lib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libinit_registry_tables_lib.a; path = domain_registry/libinit_registry_tables_lib.a; sourceTree = "<group>"; };
+		8CE9191C1AEA073C002B29AE /* public_key_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = public_key_utils.h; path = Pinning/public_key_utils.h; sourceTree = "<group>"; };
+		8CE9191D1AEA073C002B29AE /* public_key_utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = public_key_utils.m; path = Pinning/public_key_utils.m; sourceTree = "<group>"; };
+		8CE919211AEA077F002B29AE /* ssl_pin_verifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ssl_pin_verifier.m; path = Pinning/ssl_pin_verifier.m; sourceTree = "<group>"; };
+		8CE919241AEA07C5002B29AE /* ssl_pin_verifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ssl_pin_verifier.h; path = Pinning/ssl_pin_verifier.h; sourceTree = "<group>"; };
+		8CE919261AEA0991002B29AE /* TSKReporterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKReporterDelegate.h; path = Reporting/TSKReporterDelegate.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,15 +137,14 @@
 		8C8480491A896EE30017C155 /* TrustKit */ = {
 			isa = PBXGroup;
 			children = (
-				8CE919111AEA01BB002B29AE /* TSKReporterDelegate.h */,
+				8CE919201AEA0745002B29AE /* Reporting */,
+				8CE9191B1AEA072A002B29AE /* Pinning */,
 				8C3492901ADCA059001849FD /* domain_registry */,
 				8C84806B1A896F3C0017C155 /* fishhook */,
 				8C84804C1A896EE30017C155 /* TrustKit.h */,
 				8C84806C1A896F660017C155 /* TrustKit.m */,
 				2FA286123F801C437F35D240 /* TrustKit+Private.h */,
 				8C84804A1A896EE30017C155 /* Supporting Files */,
-				8CB068CA1AD47DDD008C79C2 /* subjectPublicKeyHash.m */,
-				8CB068CC1AD47E06008C79C2 /* subjectPublicKeyHash.h */,
 			);
 			path = TrustKit;
 			sourceTree = "<group>";
@@ -181,6 +185,25 @@
 			name = fishhook;
 			sourceTree = "<group>";
 		};
+		8CE9191B1AEA072A002B29AE /* Pinning */ = {
+			isa = PBXGroup;
+			children = (
+				8CE9191C1AEA073C002B29AE /* public_key_utils.h */,
+				8CE9191D1AEA073C002B29AE /* public_key_utils.m */,
+				8CE919241AEA07C5002B29AE /* ssl_pin_verifier.h */,
+				8CE919211AEA077F002B29AE /* ssl_pin_verifier.m */,
+			);
+			name = Pinning;
+			sourceTree = "<group>";
+		};
+		8CE919201AEA0745002B29AE /* Reporting */ = {
+			isa = PBXGroup;
+			children = (
+				8CE919261AEA0991002B29AE /* TSKReporterDelegate.h */,
+			);
+			name = Reporting;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -189,9 +212,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CE919171AEA0229002B29AE /* domain_registry.h in Headers */,
+				8CE9191E1AEA073C002B29AE /* public_key_utils.h in Headers */,
 				8C84804D1A896EE30017C155 /* TrustKit.h in Headers */,
 				8C84806A1A896F350017C155 /* fishhook.h in Headers */,
-				8CE919121AEA01BB002B29AE /* TSKReporterDelegate.h in Headers */,
+				8CE919271AEA0991002B29AE /* TSKReporterDelegate.h in Headers */,
+				8CE919251AEA07C5002B29AE /* ssl_pin_verifier.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,7 +323,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CB068CB1AD47DDD008C79C2 /* subjectPublicKeyHash.m in Sources */,
+				8CE919221AEA077F002B29AE /* ssl_pin_verifier.m in Sources */,
+				8CE9191F1AEA073C002B29AE /* public_key_utils.m in Sources */,
 				8C8480691A896F350017C155 /* fishhook.c in Sources */,
 				8C84806D1A896F660017C155 /* TrustKit.m in Sources */,
 			);
