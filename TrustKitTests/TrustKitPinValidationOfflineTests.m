@@ -10,7 +10,6 @@
 
 #import "TrustKit.h"
 #import "TrustKit+Private.h"
-#import "TrustKitTestCertificates.h"
 #import "subjectPublicKeyHash.h"
 
 #define HEXDUMP_COLS 16

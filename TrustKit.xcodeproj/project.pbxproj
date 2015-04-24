@@ -46,7 +46,6 @@
 		070868B91AE1658200E5AFDC /* ca-chain-plus-self.cert.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ca-chain-plus-self.cert.der"; sourceTree = "<group>"; };
 		070868BA1AE1672D00E5AFDC /* self.cert.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = self.cert.der; sourceTree = "<group>"; };
 		0710306B1AA88A510028092C /* TrustKitPinValidationOnlineTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrustKitPinValidationOnlineTests.m; sourceTree = "<group>"; };
-		2FA28052F8F01FDE594E4642 /* TrustKitTestCertificates.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrustKitTestCertificates.h; sourceTree = "<group>"; };
 		2FA286123F801C437F35D240 /* TrustKit+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TrustKit+Private.h"; sourceTree = "<group>"; };
 		2FA2868CAFECA46ADE0B6E3E /* TrustKitPinValidationOfflineTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrustKitPinValidationOfflineTests.m; sourceTree = "<group>"; };
 		8C8480471A896EE30017C155 /* TrustKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TrustKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,7 +159,6 @@
 				070868B31ADFF68200E5AFDC /* Certificates */,
 				0710306B1AA88A510028092C /* TrustKitPinValidationOnlineTests.m */,
 				2FA2868CAFECA46ADE0B6E3E /* TrustKitPinValidationOfflineTests.m */,
-				2FA28052F8F01FDE594E4642 /* TrustKitTestCertificates.h */,
 				8C8480571A896EE30017C155 /* Supporting Files */,
 			);
 			path = TrustKitTests;
