@@ -49,7 +49,7 @@
     
     NSError *error = nil;
     NSHTTPURLResponse *response;
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.datatheorem.com"]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.datatheorem.com"]];
     [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     XCTAssertNil(error, @"Connection had an error: %@", error);
     XCTAssert(response.statusCode==200, @"Server did not respond with a 200 OK");
@@ -73,7 +73,7 @@
 
     NSError *error = nil;
     NSHTTPURLResponse *response;
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.datatheorem.com."]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.datatheorem.com"]];
     [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
     
@@ -93,14 +93,14 @@
 @{
       @"www.datatheorem.com" : @{
               kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-              kTSKPublicKeyHashes : @[@"J0HK633IekUIMgCxADcUXWl3I+wr1XIbHkr038xIyRk=", //Intermediate key
+              kTSKPublicKeyHashes : @[@"J0HK633IekUIMgCxADcUXWl3I+wr1XIbHkr038xIyRk=", // Intermediate key
                                       ]}};
     
     [TrustKit initializeWithConfiguration:trustKitConfig];
 
     NSError *error = nil;
     NSHTTPURLResponse *response;
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.datatheorem.com"]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.datatheorem.com"]];
     [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
     XCTAssertNil(error, @"Connection had an error: %@", error);
@@ -117,7 +117,7 @@
   @{
     @"www.datatheorem.com" : @{
             kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-            kTSKPublicKeyHashes : @[@"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=" //CA key
+            kTSKPublicKeyHashes : @[@"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=" // CA key
                                     ]}};
     
     [TrustKit initializeWithConfiguration:trustKitConfig];
@@ -125,7 +125,7 @@
     
     NSError *error = nil;
     NSHTTPURLResponse *response;
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.datatheorem.com"]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.datatheorem.com"]];
     [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
     XCTAssertNil(error, @"Connection had an error: %@", error);
@@ -198,7 +198,7 @@
     
     NSError *error = nil;
     NSHTTPURLResponse *response;
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.datatheorem.com"]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.datatheorem.com"]];
     [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
     XCTAssertNil(error, @"Connection had an error: %@", error);
@@ -222,7 +222,7 @@
     
     NSError *error = nil;
     NSHTTPURLResponse *response;
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.datatheorem.com"]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.datatheorem.com"]];
     [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
     XCTAssertNil(error, @"Connection had an error: %@", error);
@@ -236,7 +236,7 @@
 {
     NSError *error = nil;
     NSHTTPURLResponse *response;
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://www.datatheorem.com"]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.datatheorem.com"]];
     [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
     XCTAssertNil(error, @"Connection had an error: %@", error);
