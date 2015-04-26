@@ -38,7 +38,6 @@ static BOOL isSubdomain(NSString *domain, NSString *subdomain)
 }
 
 
-// TODO: Move this function to a separate file
 TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverName, NSDictionary *TrustKitConfiguration)
 {
     if ((serverTrust == NULL) || (serverName == NULL))
@@ -113,7 +112,6 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
         {
             TSKPublicKeyAlgorithm algorithm = [savedAlgorithm integerValue];
             NSData *subjectPublicKeyInfoHash = hashSubjectPublicKeyInfoFromCertificate(certificate, algorithm);
-            // TODO: error checking
             
             // Is the generated hash in our set of pinned hashes ?
             NSLog(@"Testing SSL Pin %@", subjectPublicKeyInfoHash);

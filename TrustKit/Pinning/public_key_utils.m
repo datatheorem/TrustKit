@@ -78,7 +78,12 @@ static NSData *getPublicKeyBits(SecKeyRef publicKey)
     }
     pthread_mutex_unlock(&_keychainLock);
     
-    // TODO: Check the result returned by SecItemXXX()
+    if ((resultAdd != errSecSuccess) || (resultDel != errSecSuccess))
+    {
+        // Something went wrong with the Keychain we won't know if we did get the right key data
+        NSLog(@"Keychain error");
+        publicKeyData = nil;
+    }
     
     return publicKeyData;
 }
@@ -119,7 +124,6 @@ NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate, T
     
     
     // Generate a hash of the subject public key info
-    // TODO: error checking
     NSMutableData *subjectPublicKeyInfoHash = [NSMutableData dataWithLength:CC_SHA256_DIGEST_LENGTH];
     CC_SHA256_CTX shaCtx;
     CC_SHA256_Init(&shaCtx);
