@@ -4,7 +4,7 @@ TrustKit
 TrustKit is an iOS / OS X framework for easily and efficiently deploying SSL pinning in any App:
 
 * TrustKit will pin any connection performed using Apple Frameworks (`NSURLConnection`, `NSURLSession`, `NSStream`, etc.) even including connections performed within `UIWebViews`.
-* TrustKit can be deployed in an App without having to modify the App's source code.
+* For Apps targeting iOS 8+, TrustKit can be deployed without having to modify the App's source code.
 * TrustKit follows the HTTP Public Key Pinning specification as closely as possible and provides HPKP functionality, such as pinning all subdomains of a given domain,  as well as reporting pin violations to a server.
 
 
@@ -35,7 +35,7 @@ Such keys include:
 * `kTSKPublicKeyAlgorithms`: The algorithms TrustKit needs to support when generating public key hashes. Should be an array containing one or multiple entries from `kTSKAlgorithmRsa2048`, `TSKAlgorithmRsa4096`, `TSKAlgorithmEcDsaSecp256r1`. Supporting multiple algorithms has a performance impact.
 * `kTSKIncludeSubdomains` (optional): Pin all the subdomains of the specific domain.
 * `kTSKReportUris` (optional): No effect at the moment.
-* `kTSKEnforcePinning` (optional): If set to NO, a pinning failure will not cause the connection to fail; default value is YES. This is meant to be used with TSKReportUris in order to report pin violations while still allowing connections to go through.
+* `kTSKEnforcePinning` (optional): If set to NO, a pinning failure will not cause the connection to fail; default value is YES. This is meant to be used with `kTSKReportUris` in order to report pin violations while still allowing connections to go through.
 
 Then, call the `initializeWithConfiguration:` method with the configuration dictionary:
 
@@ -72,7 +72,7 @@ For Apps targeting iOS 8+, TrustKit can be dynamically linked, which allows enab
         * `TSKPublicKeyAlgorithms`: The algorithms TrustKit needs to support when generating public key hashes. Should be an array containing one or multiple entries from `TSKAlgorithmRsa2048`, `TSKAlgorithmRsa4096`, `TSKAlgorithmEcDsaSecp256r1`. Supporting multiple algorithms has a performance impact.
         * `TSKIncludeSubdomains` (optional): Pin all the subdomains of the specific domain.
         * `TSKReportUris` (optional): No effect at the moment.
-        * `TSKEnforcePinning` (optional): If set to NO, a pinning failure will not cause the connection to fail; default value is YES. This is meant to be used with TSKReportUris in order to report pin violations while still allowing connections to go through.
+        * `TSKEnforcePinning` (optional): If set to NO, a pinning failure will not cause the connection to fail; default value is YES. This is meant to be used with `TSKReportUris` in order to report pin violations while still allowing connections to go through.
 
 Your App's Info.plist file should look like this:
 
