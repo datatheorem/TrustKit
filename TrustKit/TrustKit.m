@@ -300,7 +300,7 @@ static void initializeTrustKit(NSDictionary *TrustKitConfig)
 
 #pragma mark Framework Initialization When Dynamically Linked
 
-__attribute__((constructor)) static void initialize(int argc, const char **argv)
+__attribute__((constructor)) static void initializeAsDylib(int argc, const char **argv)
 {
     // TrustKit just got injected in the App
     CFBundleRef appBundle = CFBundleGetMainBundle();
