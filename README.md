@@ -5,7 +5,7 @@ TrustKit is an iOS / OS X framework for easily and efficiently deploying SSL pin
 
 * TrustKit will pin any connection performed using Apple Frameworks (`NSURLConnection`, `NSURLSession`, `NSStream`, etc.) even including connections performed within `UIWebViews`.
 * TrustKit can be deployed in an App without having to modify the App's source code.
-* TrustKit follows the HTTP Public Key Pinning specification as closely as possible and provides HPKP functionality such as pinning all subdomains of a given domain  as well as reporting pin violations to a server.
+* TrustKit follows the HTTP Public Key Pinning specification as closely as possible and provides HPKP functionality, such as pinning all subdomains of a given domain,  as well as reporting pin violations to a server.
 
 
 Generating SSL Pins
@@ -27,17 +27,17 @@ The second script can be used to generate the pin of the highest certificate wit
 Deploying TrustKit Through Static Linking
 -----------------------------------------
 
-For Apps targeting iOS 7+, TrustKit should be statically linked; this can be achieved by dragging and dropping the TrustKit project file into your App's Xcode project. Then, to initialize the framework, build a dictionnary containing the proper configuration keys for TrustKit.
+For Apps targeting iOS 7+, TrustKit should be statically linked; this can be achieved by dragging and dropping the TrustKit project file into your App's Xcode project. Then, to initialize the framework, build a dictionary containing the proper configuration keys for TrustKit.
 
 Such keys include:
 
-* `kTSKPublicKeyHashes`: Each element of this Array should be the base64-encoded SHA 256 of a subject public key info that needs to be in the server's certificate chain.
+* `kTSKPublicKeyHashes`: Each element of this array should be the base64-encoded SHA 256 of a subject public key info that needs to be in the server's certificate chain.
 * `kTSKPublicKeyAlgorithms`: The algorithms TrustKit needs to support when generating public key hashes. Should be an array containing one or multiple entries from `kTSKAlgorithmRsa2048`, `TSKAlgorithmRsa4096`, `TSKAlgorithmEcDsaSecp256r1`. Supporting multiple algorithms has a performance impact.
 * `kTSKIncludeSubdomains` (optional): Pin all the subdomains of the specific domain.
 * `kTSKReportUris` (optional): No effect at the moment.
 * `kTSKEnforcePinning` (optional): If set to NO, a pinning failure will not cause the connection to fail; default value is YES. This is meant to be used with TSKReportUris in order to report pin violations while still allowing connections to go through.
 
-Then, call the `initializeWithConfiguration:` method with the configuration dictionnary:
+Then, call the `initializeWithConfiguration:` method with the configuration dictionary:
 
     NSDictionary *trustKitConfig =
     @{
@@ -66,7 +66,7 @@ For Apps targeting iOS 8+, TrustKit can be dynamically linked, which allows enab
 
 * Lastly, add the public key hashes TrustKit will use to check certificate chains. In the App's Info.plist file ("Info" tab in Xcode):
     * Add a new Dictionary key called `TSKConfiguration`.
-    * Within this dictionary add a Dictionnary value and use the server's domain (such as www.google.com) as the entry's key.
+    * Within this dictionary add a Dictionary value and use the server's domain (such as www.google.com) as the entry's key.
     * Within dictionary you can add a few specific keys in order to configure how TrustKit handles pinning with this domain:
         * `TSKPublicKeyHashes`: Each element of this Array should be the base64-encoded SHA 256 of a subject public key info that needs to be in the server's certificate chain.
         * `TSKPublicKeyAlgorithms`: The algorithms TrustKit needs to support when generating public key hashes. Should be an array containing one or multiple entries from `TSKAlgorithmRsa2048`, `TSKAlgorithmRsa4096`, `TSKAlgorithmEcDsaSecp256r1`. Supporting multiple algorithms has a performance impact.
