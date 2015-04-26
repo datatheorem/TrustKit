@@ -9,6 +9,7 @@
 #import "public_key_utils.h"
 #include <pthread.h>
 #import <CommonCrypto/CommonDigest.h>
+#import "TrustKit+Private.h"
 
 
 #pragma mark Global Cache for SPKI Hashes
@@ -81,7 +82,7 @@ static NSData *getPublicKeyBits(SecKeyRef publicKey)
     if ((resultAdd != errSecSuccess) || (resultDel != errSecSuccess))
     {
         // Something went wrong with the Keychain we won't know if we did get the right key data
-        NSLog(@"Keychain error");
+        TSKLog(@"Keychain error");
         publicKeyData = nil;
     }
     
@@ -106,13 +107,13 @@ NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate, T
     
     if (cachedSubjectPublicKeyInfo)
     {
-        NSLog(@"Subject Public Key Info hash was found in the cache");
+        TSKLog(@"Subject Public Key Info hash was found in the cache");
         CFRelease((__bridge CFTypeRef)(certificateData));
         return cachedSubjectPublicKeyInfo;
     }
     
     // We didn't this certificate in the cache so we need to generate its SPKI hash
-    NSLog(@"Generating Subject Public Key Info hash...");
+    TSKLog(@"Generating Subject Public Key Info hash...");
     
     // First extract the public key
     SecTrustRef tempTrust;

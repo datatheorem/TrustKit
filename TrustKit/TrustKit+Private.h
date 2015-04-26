@@ -9,7 +9,10 @@
 #ifndef TrustKit_TrustKit_Private____FILEEXTENSION___
 #define TrustKit_TrustKit_Private____FILEEXTENSION___
 
+#import "TrustKit.h"
+
 NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments);
+void TSKLog(NSString *format, ...);
 
 @interface TrustKit(Private)
 

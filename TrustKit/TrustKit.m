@@ -43,6 +43,21 @@ static BOOL _isTrustKitInitialized = NO;
 static BOOL _wasTrustKitCalled = NO;
 
 
+#pragma mark Logging Function
+
+void TSKLog(NSString *format, ...)
+{
+    // Only log in debug builds
+#if DEBUG
+    NSString *newFormat = [[NSString alloc] initWithFormat:@"=== TrustKit: %@", format];
+    va_list args;
+    va_start(args, format);
+    NSLogv(newFormat, args);
+    va_end(args);
+#endif
+}
+
+
 
 #pragma mark SSLHandshake Hook
 
@@ -249,7 +264,7 @@ static void initializeTrustKit(NSDictionary *TrustKitConfig)
         }
         
         _isTrustKitInitialized = YES;
-        NSLog(@"TrustKit initialized with configuration %@", _trustKitGlobalConfiguration);
+        TSKLog(@"TrustKit initialized with configuration %@", _trustKitGlobalConfiguration);
     }
 }
 
@@ -261,7 +276,7 @@ static void initializeTrustKit(NSDictionary *TrustKitConfig)
 
 + (void) initializeWithConfiguration:(NSDictionary *)TrustKitConfig
 {
-    NSLog(@"TrustKit started statically in App %@", CFBundleGetValueForInfoDictionaryKey(CFBundleGetMainBundle(), (__bridge CFStringRef)@"CFBundleIdentifier"));
+    TSKLog(@"TrustKit started statically in App %@", CFBundleGetValueForInfoDictionaryKey(CFBundleGetMainBundle(), (__bridge CFStringRef)@"CFBundleIdentifier"));
     initializeTrustKit(TrustKitConfig);
 }
 
@@ -289,7 +304,7 @@ __attribute__((constructor)) static void initialize(int argc, const char **argv)
 {
     // TrustKit just got injected in the App
     CFBundleRef appBundle = CFBundleGetMainBundle();
-    NSLog(@"TrustKit started dynamically in App %@", CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)@"CFBundleIdentifier"));
+    TSKLog(@"TrustKit started dynamically in App %@", CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)@"CFBundleIdentifier"));
     
     // Retrieve the configuration from the App's Info.plist file
     NSDictionary *trustKitConfigFromInfoPlist = CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)kTSKConfiguration);
