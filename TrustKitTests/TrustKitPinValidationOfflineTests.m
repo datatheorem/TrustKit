@@ -72,8 +72,8 @@
     [super tearDown];
 }
 
-// Pin to any of CA, Intermediate CA and Leaf certificates public keys (all valid) and ensure it succeeds
 
+// Pin to any of CA, Intermediate CA and Leaf certificates public keys (all valid) and ensure it succeeds
 - (void)testWwwGoodComCertificateAgainstAnyPublicKey
 {
     NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
@@ -99,7 +99,6 @@
 
 
 // Pin only to the Intermediate CA certificate public key and ensure it succeeds
-
 - (void)testWwwGoodComCertificateAgainstGoodIntermediateCAPublicKey
 {
     NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
@@ -121,8 +120,8 @@
     XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against valid public key pins");
 }
 
-// Pin only to the CA certificate public key and ensure it succeeds
 
+// Pin only to the CA certificate public key and ensure it succeeds
 - (void)testWwwGoodComCertificateAgainstGoodCAPublicKey
 {
     NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
@@ -144,8 +143,8 @@
     XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against valid public key pins");
 }
 
-// Pin only to the leaf certificate public key and ensure it succeeds
 
+// Pin only to the leaf certificate public key and ensure it succeeds
 - (void)testWwwGoodComCertificateAgainstGoodLeafPublicKey
 {
     NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
@@ -190,8 +189,8 @@
     XCTAssert(verificationResult == TSKPinValidationResultFailed, @"Validation must NOT pass against invalid public key pins");
 }
 
-// Validation to domain names with no pins must never fail
 
+// Validation to domain names with no pins must never fail
 - (void)testWwwGoodComCertificateWithNoPins
 {
     SecCertificateRef trustCertArray[2] = {_leafCertificate, _chainCertificate};
@@ -207,8 +206,8 @@
     XCTAssert(verificationResult == TSKPinValidationResultDomainNotPinned, @"Validation must pass if no public key pins are set.");
 }
 
-// Pin a valid key for www.good.com and ensure it succeeds both with a trusted CA and a Self-Signed cert.
 
+// Pin a valid key for www.good.com and ensure it succeeds both with a trusted CA and a Self-Signed cert.
 - (void)testWwwGoodComCertificateAgainstCAWithSelfSignedCAAsWell
 {
     NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
@@ -233,8 +232,8 @@
     XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against valid public key pins");
 }
 
-// Pin a valid key for good.com with includeSubdomains and ensure the validation for www.good.com succeeds
 
+// Pin a valid key for good.com with includeSubdomains and ensure the validation for www.good.com succeeds
 - (void)testSubdomainWithGoodComCertificateAgainstGoodLeafPublicKey
 {
     NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"good.com" : @{
@@ -256,8 +255,8 @@
     XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against valid public key pins");
 }
 
-// Pin a bad key for good.com with includeSubdomains and ensure the validation for www.good.com fails
 
+// Pin a bad key for good.com with includeSubdomains and ensure the validation for www.good.com fails
 - (void)testSubdomainWithGoodComCertificateAgainstBadKeyPinning
 {
     NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"good.com" : @{
@@ -279,9 +278,9 @@
     XCTAssert(verificationResult == TSKPinValidationResultFailed, @"Validation must NOT pass against invalid public key pins");
 }
 
+
 // Pin a bad key for good.com with includeSubdomains and a good key for www.good.com and ensure the validation for www.good.com succeeds
 // (ie. the more specific pin should take precedence over the general good.com pin)
-
 - (void)testSubdomainWithGoodComCertificateAgainstGoodLeafPublicKeyAndBadKeyAsWell
 {
     NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"good.com" : @{
@@ -304,8 +303,8 @@
     XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against valid existing public key pins, regardless of an invalid key being present");
 }
 
-// Pin a valid key for good.com with includeSubdomains set to NO, and ensure the validation for www.good.com fails
 
+// Pin a valid key for good.com with includeSubdomains set to NO, and ensure the validation for www.good.com fails
 - (void)testSubdomainWithGoodComCertificateAgainstAnyPublicKeyNotIncludingSubdomains
 {
     NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"good.com" : @{
@@ -329,9 +328,9 @@
     XCTAssert(verificationResult == TSKPinValidationResultDomainNotPinned, @"Validation must NOT pass because includeSubdomain is not enabled so wwww.good.com is not actually pinned");
 }
 
+
 // Tricky case: pin a bad key for good.co.uk with includeSubdomains and ensure the validation for www.good.com succeeds.
 // Basically we want to make sure that TrustKit doesn’t confused with weird top-level domains (like .co.uk).
-
 - (void)testWwwGoodComCertificateAgainstDifferentTLDPublicKeyPinning
 {
     NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"good.co.uk" : @{
@@ -355,7 +354,6 @@
 
 
 // Helper methods for cleaner testing code
-
 - (SecTrustRef)_createTrustWithCertificates:(const void **)certArray arrayLength:(NSInteger)certArrayLength anchorCertificates:(const void **)anchorCertificates arrayLength:(NSInteger)anchorArrayLength
 {
     CFArrayRef certs = CFArrayCreate(NULL, (const void **)certArray, certArrayLength, NULL);

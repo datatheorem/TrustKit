@@ -17,6 +17,9 @@
 @end
 
 @implementation TrustKitPinValidationOnlineTests
+/*  WARNING: For the online tests, we need to use a different domain for every test otherwise the tests will be disrupted by SSL session resumption.
+    Specifically, connecting to the same host more than once will potentially allow the first session to be resumed, thereby skipping all SSL validation including TrustKit's. This is not a security issue but will make the tests report unexpected results.
+ */
 
 - (void)setUp {
     [super setUp];
@@ -31,86 +34,8 @@
 
 
 
-// Tests a secure connection to https://www.datatheorem.com by pinning to any of the 3 public keys
-
-- (void)testConnectionValidatingAnyPublicKey
-{
-    
-    NSDictionary *trustKitConfig =
-    @{
-      @"www.datatheorem.com" : @{
-              kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-              kTSKPublicKeyHashes : @[@"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8=", // Server key
-                                      @"J0HK633IekUIMgCxADcUXWl3I+wr1XIbHkr038xIyRk=", // Intermediate key
-                                      @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=" // CA key
-                                      ]}};
-
-    [TrustKit initializeWithConfiguration:trustKitConfig];
-    
-    NSError *error = nil;
-    NSHTTPURLResponse *response;
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.datatheorem.com"]];
-    [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    XCTAssertNil(error, @"Connection had an error: %@", error);
-    XCTAssert(response.statusCode==200, @"Server did not respond with a 200 OK");
-    XCTAssert([TrustKit wasTrustKitCalled], @"TrustKit was not called");
-}
-
-
-
-// Tests a secure connection to https://www.datatheorem.com by pinning only to the server's public key
-
-- (void)testConnectionValidatingServerPublicKey
-{
-    NSDictionary *trustKitConfig =
-    @{
-      @"www.datatheorem.com" : @{
-              kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-              kTSKPublicKeyHashes : @[@"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8=", // Server key
-                                      ]}};
-    
-    [TrustKit initializeWithConfiguration:trustKitConfig];
-
-    NSError *error = nil;
-    NSHTTPURLResponse *response;
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.datatheorem.com"]];
-    [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    
-    
-    
-    XCTAssertNil(error, @"Connection had an error: %@", error);
-    XCTAssert(response.statusCode==200, @"Server did not respond with a 200 OK");
-    XCTAssert([TrustKit wasTrustKitCalled], @"TrustKit was not called");
-}
-
-
-
-// Tests a secure connection to https://www.datatheorem.com by pinning only to the intermediate certificate public key
-
-- (void)testConnectionValidatingIntermediatePublicKey
-{
-    NSDictionary *trustKitConfig =
-@{
-      @"www.datatheorem.com" : @{
-              kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-              kTSKPublicKeyHashes : @[@"J0HK633IekUIMgCxADcUXWl3I+wr1XIbHkr038xIyRk=", // Intermediate key
-                                      ]}};
-    
-    [TrustKit initializeWithConfiguration:trustKitConfig];
-
-    NSError *error = nil;
-    NSHTTPURLResponse *response;
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.datatheorem.com"]];
-    [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    
-    XCTAssertNil(error, @"Connection had an error: %@", error);
-    XCTAssert(response.statusCode==200, @"Server did not respond with a 200 OK");
-    XCTAssert([TrustKit wasTrustKitCalled], @"TrustKit was not called");
-}
-
 
 // Tests a secure connection to https://www.datatheorem.com by pinning only to the CA public key
-
 - (void)testConnectionValidatingCAPublicKey
 {
     NSDictionary *trustKitConfig =
@@ -122,7 +47,6 @@
     
     [TrustKit initializeWithConfiguration:trustKitConfig];
     
-    
     NSError *error = nil;
     NSHTTPURLResponse *response;
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.datatheorem.com"]];
@@ -135,12 +59,12 @@
 
 
 
-// Tests a secure connection to https://www.datatheorem.com and forces validation to fail by providing a fake hash
+// Tests a secure connection to https://www.yahoo.com and forces validation to fail by providing a fake hash
 - (void)testConnectionUsingFakeHashInvalidatingAllCertificates
 {
     NSDictionary *trustKitConfig =
     @{
-      @"www.datatheorem.com" : @{
+      @"www.yahoo.com" : @{
               kTSKEnforcePinning : @YES,
               kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
               kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" //Fake key
@@ -150,21 +74,21 @@
     
     NSError *error = nil;
     NSHTTPURLResponse *response;
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.datatheorem.com"]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.yahoo.com"]];
     [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
-    XCTAssert([TrustKit wasTrustKitCalled], @"TrustKit was not called");
     XCTAssert(error.code==-1202 && [error.domain isEqual:@"NSURLErrorDomain"], @"Invalid certificate error not fired");
+    XCTAssert([TrustKit wasTrustKitCalled], @"TrustKit was not called");
 }
 
-// Tests a secure connection to https://www.datatheorem.com and validation should fail because of a fake hash,
-// however pinning is disabled from TrustKit config, so connection must then work
 
+// Tests a secure connection to https://www.google.com and validation should fail because of a fake hash,
+// however TrustKit is configured to not enforce pinning so the connection must work
 - (void)testConnectionUsingFakeHashInvalidatingAllCertificatesButNotEnforcingPinning
 {
     NSDictionary *trustKitConfig =
             @{
-                    @"www.datatheorem.com" : @{
+                    @"www.github.com" : @{
                     kTSKEnforcePinning : @NO, // Pinning disabled!
                     kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                     kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" //Fake key
@@ -174,7 +98,7 @@
 
     NSError *error = nil;
     NSHTTPURLResponse *response;
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.datatheorem.com"]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.github.com"]];
     [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
 
     XCTAssertNil(error, @"Connection had an error: %@", error);
@@ -182,61 +106,13 @@
     XCTAssert([TrustKit wasTrustKitCalled], @"TrustKit was not called");
 }
 
-// Tests a secure connection to https://www.datatheorem.com combining both an invalid and a valid key - must pass
-
-- (void)testConnectionUsingValidAndFakeHash
-{
-    NSDictionary *trustKitConfig =
-    @{
-      @"www.datatheorem.com" : @{
-              kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-              kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", //Fake key
-                                      @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=" //CA key
-                                      ]}};
-    
-    [TrustKit initializeWithConfiguration:trustKitConfig];
-    
-    NSError *error = nil;
-    NSHTTPURLResponse *response;
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.datatheorem.com"]];
-    [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    
-    XCTAssertNil(error, @"Connection had an error: %@", error);
-    XCTAssert(response.statusCode==200, @"Server did not respond with a 200 OK");
-    XCTAssert([TrustKit wasTrustKitCalled], @"TrustKit was not called");
-}
-
-// Tests a secure connection to https://www.datatheorem.com pinning a valid key to datatheorem.com with includeSubdomains - must pass
-
-- (void)testConnectionUsingValidPinAndIncludeSubdomain
-{
-    NSDictionary *trustKitConfig =
-    @{
-      @"datatheorem.com" : @{
-              kTSKIncludeSubdomains : @YES,
-              kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-              kTSKPublicKeyHashes : @[@"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=" //CA key
-                                      ]}};
-    
-    [TrustKit initializeWithConfiguration:trustKitConfig];
-    
-    NSError *error = nil;
-    NSHTTPURLResponse *response;
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.datatheorem.com"]];
-    [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    
-    XCTAssertNil(error, @"Connection had an error: %@", error);
-    XCTAssert(response.statusCode==200, @"Server did not respond with a 200 OK");
-    XCTAssert([TrustKit wasTrustKitCalled], @"TrustKit was not called");
-}
 
 // Don't pin anything (connection must work)
-
 - (void)testConnectionWithoutPinningAnything
 {
     NSError *error = nil;
     NSHTTPURLResponse *response;
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.datatheorem.com"]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.outlook.com"]];
     [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
     XCTAssertNil(error, @"Connection had an error: %@", error);
