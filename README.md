@@ -15,11 +15,12 @@ Before implementing SSL pinning within your App, you first need to figure out th
 
 In the context of TrustKit, an SSL pin is the base64-encoded SHA-256 of a certificate's public key info; this is the same as what is described in the HTTP Public Key Pinning specification (https://developer.mozilla.org/en-US/docs/Web/Security/Public_Key_Pinning).
 
-To generate such values, two bash scripts are available. The first script can be used to generate the pin from a PEM certificate:
+To generate such values, three bash scripts are available. The first two scripts can be used to generate the pin configuration from a PEM or DER certificate:
 
     $ ./get_pin_from_pem_certificate.sh ca.pem
+    $ ./get_pin_from_der_certificate.sh ca.der
 
-The second script can be used to generate the pin of the highest certificate within the certificate chain returned by a given server:
+The second script can be used to generate the pin configuration for the highest certificate within the certificate chain returned by a given server:
 
     $ ./get_pin_from_server.sh www.google.com
 
