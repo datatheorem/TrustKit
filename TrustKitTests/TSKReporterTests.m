@@ -3,7 +3,7 @@
 //  TrustKit
 //
 //  Created by Angela Chow on 4/29/15.
-//  Copyright (c) 2015 Data Theorem. All rights reserved.
+//  Copyright (c) 2015 Yahoo! Inc. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
@@ -27,12 +27,14 @@
 }
 
 - (void)testSimpleReporter {
-    // Just try to use pinValidationFailed API to see if we can post something
+    
+    //just try a simple valid case to see if we can post this to the server
     TSKSimpleReporter *reporter = [[TSKSimpleReporter alloc] init];
     
+    [reporter initWithAppBundleId:@"com.example.ABC" appVersion:@"1.0"];
     [reporter pinValidationFailed:@"example.com"
                    serverHostname:@"mail.example.com"
-                       serverPort:[NSNumber numberWithInt:123]
+                       serverPort:[NSNumber numberWithInt:443]
                      reportingURL:@"http://localhost:3000"
                 includeSubdomains:YES
                  certificateChain:[NSArray arrayWithObjects:

@@ -9,8 +9,10 @@
 #import "TSKSimpleReporter.h"
 @implementation TSKSimpleReporter
 
-// Global preventing multiple initializations (double function interposition, etc.)
-static BOOL isTSKSimpleReporterInitialized = NO;
+BOOL _isTSKSimpleReporterInitialized = NO;
+
+NSString * _appBundleId;
+NSString * _appVersion;
 
 
 
@@ -20,6 +22,21 @@ static BOOL isTSKSimpleReporterInitialized = NO;
 - (void)initWithAppBundleId:(NSString *) appBundleId
                  appVersion:(NSString *) appVersion
 {
+    if ([appBundleId length] == 0)
+    {
+        [NSException raise:@"TrustKit Simple Reporter configuration invalid"
+                    format:@"Reporter was given empty appBundleId"];
+    }
+    _appBundleId = appBundleId;
+    
+    if ([appVersion length] == 0)
+    {
+        [NSException raise:@"TrustKit Simple Reporter configuration invalid"
+                    format:@"Reporter was given empty appVersion"];
+    }
+    _appVersion = appVersion;
+    
+    _isTSKSimpleReporterInitialized = YES;
     
 }
 
@@ -35,6 +52,13 @@ static BOOL isTSKSimpleReporterInitialized = NO;
             certificateChain:(NSArray *) validatedCertificateChain
                 expectedPins:(NSArray *) knownPins
 {
+    
+    if (_isTSKSimpleReporterInitialized == NO)
+    {
+        [NSException raise:@"TrustKit Simple Reporter configuration invalid"
+                    format:@"Reporter was not initialized with appid and appversion yet"];
+        
+    }
     
     if ([pinnedDomainStr length] == 0)
     {
@@ -87,8 +111,8 @@ static BOOL isTSKSimpleReporterInitialized = NO;
     NSString *currentTimeStr = [dateFormatter stringFromDate: currentTime];
     
     NSDictionary *requestData = [[NSDictionary alloc] initWithObjectsAndKeys:
-                              //   appBundleIdStr, @"app-bundle-id",
-                              //   appVersionStr, @"app-version",
+                                 _appBundleId, @"app-bundle-id",
+                                 _appVersion, @"app-version",
                                  currentTimeStr, @"date-time",
                                  hostnameStr, @"hostname",
                                  port, @"port",
