@@ -1,0 +1,25 @@
+//
+//  TSKSimpleBackgroundReporter.h
+//  TrustKit
+//
+//  Created by Angela Chow on 5/14/15.
+//  Copyright (c) 2015 Yahoo! Inc. All rights reserved.
+//
+
+#ifndef TrustKit_TSKSimpleBackgroundReporter_h
+#define TrustKit_TSKSimpleBackgroundReporter_h
+
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import "TSKReporterDelegate.h"
+
+/*
+ * This is a very simple implementation of a reporter delegate using a background task in sending out the
+ * report each time it receives pinValidationFailed.  It does not implement pinValidationSucceeded
+ * as it does not care about successful validation.  It also does not try to optimize/throttle the reports sent.
+ */
+@interface TSKSimpleBackgroundReporter : NSObject <TSKReporterDelegate, NSURLSessionDelegate, NSURLSessionTaskDelegate>
+
+@end
+
+#endif

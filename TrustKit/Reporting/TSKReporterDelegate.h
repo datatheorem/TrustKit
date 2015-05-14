@@ -12,8 +12,8 @@
 /*
  * Initialize the reporter with the app's bundle id, and app version
  */
-- (void)initWithAppBundleId:(NSString *) appBundleId
-                 appVersion:(NSString *) appVersion;
+- (instancetype)initWithAppBundleId:(NSString *) appBundleId
+                         appVersion:(NSString *) appVersion;
 
 
 /*
