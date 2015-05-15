@@ -20,6 +20,8 @@
 		6B032D401AF1AEC200EAFA69 /* TSKReporterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B032D3F1AF1AEB600EAFA69 /* TSKReporterTests.m */; };
 		6B2B06AD1B05154A00FC749E /* TSKSimpleBackgroundReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B2B06AC1B05154A00FC749E /* TSKSimpleBackgroundReporter.h */; };
 		6B2B06AF1B05157400FC749E /* TSKSimpleBackgroundReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B2B06AE1B05157400FC749E /* TSKSimpleBackgroundReporter.m */; };
+		6B2B06B11B06B10D00FC749E /* TSKAppDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B2B06B01B06B10D00FC749E /* TSKAppDelegate.h */; };
+		6B2B06B31B06B12600FC749E /* TSKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B2B06B21B06B12600FC749E /* TSKAppDelegate.m */; };
 		8C84804D1A896EE30017C155 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C84804C1A896EE30017C155 /* TrustKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8C8480531A896EE30017C155 /* TrustKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C8480471A896EE30017C155 /* TrustKit.framework */; };
 		8C84806D1A896F660017C155 /* TrustKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C84806C1A896F660017C155 /* TrustKit.m */; };
@@ -61,6 +63,8 @@
 		6B032D3F1AF1AEB600EAFA69 /* TSKReporterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSKReporterTests.m; sourceTree = "<group>"; };
 		6B2B06AC1B05154A00FC749E /* TSKSimpleBackgroundReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKSimpleBackgroundReporter.h; path = Reporting/TSKSimpleBackgroundReporter.h; sourceTree = "<group>"; };
 		6B2B06AE1B05157400FC749E /* TSKSimpleBackgroundReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKSimpleBackgroundReporter.m; path = Reporting/TSKSimpleBackgroundReporter.m; sourceTree = "<group>"; };
+		6B2B06B01B06B10D00FC749E /* TSKAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKAppDelegate.h; path = Reporting/TSKAppDelegate.h; sourceTree = "<group>"; };
+		6B2B06B21B06B12600FC749E /* TSKAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKAppDelegate.m; path = Reporting/TSKAppDelegate.m; sourceTree = "<group>"; };
 		8C8480471A896EE30017C155 /* TrustKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TrustKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C84804B1A896EE30017C155 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C84804C1A896EE30017C155 /* TrustKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrustKit.h; sourceTree = "<group>"; };
@@ -214,6 +218,8 @@
 				6B032D391AF1794D00EAFA69 /* TSKSimpleReporter.m */,
 				6B2B06AC1B05154A00FC749E /* TSKSimpleBackgroundReporter.h */,
 				6B2B06AE1B05157400FC749E /* TSKSimpleBackgroundReporter.m */,
+				6B2B06B01B06B10D00FC749E /* TSKAppDelegate.h */,
+				6B2B06B21B06B12600FC749E /* TSKAppDelegate.m */,
 			);
 			name = Reporting;
 			sourceTree = "<group>";
@@ -242,6 +248,7 @@
 				8CE919271AEA0991002B29AE /* TSKReporterDelegate.h in Headers */,
 				8CE919251AEA07C5002B29AE /* ssl_pin_verifier.h in Headers */,
 				8CE919361AEA0F8B002B29AE /* fishhook.h in Headers */,
+				6B2B06B11B06B10D00FC749E /* TSKAppDelegate.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -354,6 +361,7 @@
 				8CE9191F1AEA073C002B29AE /* public_key_utils.m in Sources */,
 				8CE919351AEA0F8B002B29AE /* fishhook.c in Sources */,
 				8C84806D1A896F660017C155 /* TrustKit.m in Sources */,
+				6B2B06B31B06B12600FC749E /* TSKAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

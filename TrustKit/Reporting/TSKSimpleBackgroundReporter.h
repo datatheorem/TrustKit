@@ -6,9 +6,6 @@
 //  Copyright (c) 2015 Yahoo! Inc. All rights reserved.
 //
 
-#ifndef TrustKit_TSKSimpleBackgroundReporter_h
-#define TrustKit_TSKSimpleBackgroundReporter_h
-
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import "TSKReporterDelegate.h"
@@ -22,4 +19,3 @@
 
 @end
 
-#endif

@@ -7,6 +7,7 @@
 //
 
 #import "TSKSimpleBackgroundReporter.h"
+#import "TSKAppDelegate.h"
 
 @interface TSKSimpleBackgroundReporter()
 
@@ -168,27 +169,50 @@
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request setHTTPBody: postData];
     
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsDirectory = [paths objectAtIndex:0];
-    //make a file name to write the data to using the documents directory:
-    NSString *tmpFilePath = [NSString stringWithFormat:@"%@/TSKReport.tmp", documentsDirectory];
+    //make a file name to write the data to using the tmp directory:
+    NSURL *tmpDirURL = [NSURL fileURLWithPath:NSTemporaryDirectory() isDirectory:YES];
+    NSURL *fileURL = [[tmpDirURL URLByAppendingPathComponent:@"TSKReport"] URLByAppendingPathExtension:@"tmp"];
+    NSLog(@"fileURL: %@", [fileURL path]);
     
     //Write postdata to file as we can only use background upload task with file
-    if (!([postData writeToFile:tmpFilePath atomically:YES])) {
+    if (!([postData writeToFile:[fileURL path] atomically:YES])) {
         [NSException raise:@"TrustKit Simple Reporter runtime error"
                     format:@"Report cannot be saved to file"];
     }
     
     
-    NSURLSessionUploadTask *postDataTask =
-    [[self backgroundSession] uploadTaskWithRequest: request
-                                           fromFile: [NSURL URLWithString:[NSString stringWithFormat:@"file://%@", tmpFilePath]]];
-    
+    NSURLSessionUploadTask *postDataTask = [[self backgroundSession] uploadTaskWithRequest: request fromFile: fileURL];
     
     [postDataTask resume];
     
     
 }
+
+- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
+{
+    NSString * str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSLog(@"Received String %@",str);
+    
+}
+
+- (void)URLSession:(NSURLSession *)session
+              task:(NSURLSessionTask *)task
+   didSendBodyData:(int64_t)bytesSent
+    totalBytesSent:(int64_t)totalBytesSent
+totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
+{
+    
+    /*
+     Report progress on the task.
+     If you created more than one task, you might keep references to them and report on them individually.
+     */
+    NSLog(@"totalBytesSent:%lld", totalBytesSent);
+    NSLog(@"totalBytesSent:%lld", totalBytesExpectedToSend);
+
+}
+    
+
+
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
 {
@@ -203,6 +227,22 @@
     }
     
 }
+
+/*
+ If an application has received an -application:handleEventsForBackgroundURLSession:completionHandler: message, the session delegate will receive this message to indicate that all messages previously enqueued for this session have been delivered. At this time it is safe to invoke the previously stored completion handler, or to begin any internal updates that will result in invoking the completion handler.
+ */
+- (void)URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *)session
+{
+    TSKAppDelegate *appDelegate = (TSKAppDelegate *) [[UIApplication sharedApplication] delegate];
+    if (appDelegate.backgroundSessionCompletionHandler) {
+        void (^completionHandler)() = appDelegate.backgroundSessionCompletionHandler;
+        appDelegate.backgroundSessionCompletionHandler = nil;
+        completionHandler();
+    }
+    
+    NSLog(@"All tasks are finished");
+}
+
 
 
 @end

@@ -498,7 +498,7 @@
                                    @"pin-sha256=\"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g=\"",
                                    nil]];
     
-    [NSThread sleepForTimeInterval:5.0];
+    //[NSThread sleepForTimeInterval:5.0];
     XCTAssert(YES, @"Pass");
 }
 
