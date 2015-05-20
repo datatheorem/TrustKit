@@ -108,15 +108,19 @@ static NSData *getPublicKeyDataFromCertificate(SecCertificateRef certificate)
 
 #pragma mark Public Key Converter - OS X
 
-// The one and only way to get a key's data in a buffer on iOS is to put it in the Keychain and then ask for the data back...
 static NSData *getPublicKeyDataFromCertificate(SecCertificateRef certificate)
 {
     NSData *publicKeyData = nil;
     NSDictionary *certificateValues = nil;
     CFErrorRef *error = NULL;
     
-    // TODO: check error
+    // SecCertificateCopyValues() is OS X only
     certificateValues = (__bridge NSDictionary *)(SecCertificateCopyValues(certificate, NULL, error));
+    if (certificateValues == NULL)
+    {
+        TSKLog(@"SecCertificateCopyValues() error");
+        return nil;
+    }
     
     for (NSString* fieldName in certificateValues)
     {
