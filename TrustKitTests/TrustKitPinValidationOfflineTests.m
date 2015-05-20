@@ -7,8 +7,6 @@
 //
 
 #import <XCTest/XCTest.h>
-
-#import "TrustKit.h"
 #import "TrustKit+Private.h"
 #import "ssl_pin_verifier.h"
 #import "public_key_utils.h"

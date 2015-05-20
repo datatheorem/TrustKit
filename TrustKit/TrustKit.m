@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Data Theorem. All rights reserved.
 //
 
-#import "TrustKit.h"
+
 #import "TrustKit+Private.h"
 #include <dlfcn.h>
 #import <CommonCrypto/CommonDigest.h>

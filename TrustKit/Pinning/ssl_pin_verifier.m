@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Data Theorem. All rights reserved.
 //
 
-#import "TrustKit.h"
+
 #import "ssl_pin_verifier.h"
 #import "domain_registry.h"
 #import "public_key_utils.h"
