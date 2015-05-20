@@ -7,7 +7,6 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "TrustKit.h"
 #import "TrustKit+Private.h"
 #import "public_key_utils.h"
 
