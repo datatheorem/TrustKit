@@ -15,7 +15,10 @@
 #pragma mark Global Cache for SPKI Hashes
 
 // One dictionnary cache per TSKPublicKeyAlgorithm defined
+// We use these to cache SPKI hashes instead of having to compute them on every connection
 NSMutableDictionary *_subjectPublicKeyInfoHashesCache[3] = {nil, nil, nil};
+
+static pthread_mutex_t _spkiCacheLock; // Used to lock access to our SPKI caches
 
 
 #pragma mark Missing ASN1 SPKI Headers
@@ -41,21 +44,32 @@ static unsigned char *asn1HeaderBytes[3] = { Rsa2048Asn1Header, Rsa4096Asn1Heade
 static unsigned int asn1HeaderSizes[3] = { sizeof(Rsa2048Asn1Header), sizeof(Rsa4096Asn1Header), sizeof(ecDsaSecp256r1Asn1Header) };
 
 
-#pragma mark Public Key Converter
+
+#if TARGET_OS_IPHONE
+
+#pragma mark Public Key Converter - iOS
 
 static const NSString *TrustKitPublicKeyTag = @"TSKPublicKeyTag"; // Used to add and find the public key in the Keychain
 
 static pthread_mutex_t _keychainLock; // Used to lock access to our Keychain item
-static pthread_mutex_t _spkiCacheLock; // Used to lock access to our SPKI cache
 
 
 // The one and only way to get a key's data in a buffer on iOS is to put it in the Keychain and then ask for the data back...
-static NSData *getPublicKeyBits(SecKeyRef publicKey)
+static NSData *getPublicKeyDataFromCertificate(SecCertificateRef certificate)
 {
     NSData *publicKeyData = nil;
     OSStatus resultAdd, resultDel = noErr;
+    SecKeyRef publicKey;
+    SecTrustRef tempTrust;
+    SecPolicyRef policy = SecPolicyCreateBasicX509();
+    
+    // Get a public key reference from the certificate
+    SecTrustCreateWithCertificates(certificate, policy, &tempTrust);
+    SecTrustEvaluate(tempTrust, NULL);
+    publicKey = SecTrustCopyPublicKey(tempTrust);
     
     
+    // Extract the actual bytes from the key reference using the Keychain
     // Prepare the dictionnary to add the key
     NSMutableDictionary *peerPublicKeyAdd = [[NSMutableDictionary alloc] init];
     [peerPublicKeyAdd setObject:(__bridge id)kSecClassKey forKey:(__bridge id)kSecClass];
@@ -79,6 +93,7 @@ static NSData *getPublicKeyBits(SecKeyRef publicKey)
     }
     pthread_mutex_unlock(&_keychainLock);
     
+    CFRelease(publicKey);
     if ((resultAdd != errSecSuccess) || (resultDel != errSecSuccess))
     {
         // Something went wrong with the Keychain we won't know if we did get the right key data
@@ -89,7 +104,39 @@ static NSData *getPublicKeyBits(SecKeyRef publicKey)
     return publicKeyData;
 }
 
+#else
 
+#pragma mark Public Key Converter - OS X
+
+static NSData *getPublicKeyDataFromCertificate(SecCertificateRef certificate)
+{
+    NSData *publicKeyData = nil;
+    NSDictionary *certificateValues = nil;
+    CFErrorRef *error = NULL;
+    
+    // SecCertificateCopyValues() is OS X only
+    certificateValues = (__bridge NSDictionary *)(SecCertificateCopyValues(certificate, NULL, error));
+    if (certificateValues == NULL)
+    {
+        TSKLog(@"SecCertificateCopyValues() error");
+        return nil;
+    }
+    
+    for (NSString* fieldName in certificateValues)
+    {
+        NSDictionary *fieldDict = certificateValues[fieldName];
+        if ([fieldDict[(__bridge __strong id)(kSecPropertyKeyLabel)] isEqualToString:@"Public Key Data"])
+        {
+            publicKeyData = fieldDict[(__bridge __strong id)(kSecPropertyKeyValue)];
+        }
+    }
+    return publicKeyData;
+}
+
+#endif
+
+
+#pragma mark SPKI Hashing Function
 
 NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate, TSKPublicKeyAlgorithm publicKeyAlgorithm)
 {
@@ -115,13 +162,8 @@ NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate, T
     // We didn't this certificate in the cache so we need to generate its SPKI hash
     TSKLog(@"Generating Subject Public Key Info hash...");
     
-    // First extract the public key
-    SecTrustRef tempTrust;
-    SecPolicyRef policy = SecPolicyCreateBasicX509();
-    SecTrustCreateWithCertificates(certificate, policy, &tempTrust);
-    SecTrustEvaluate(tempTrust, NULL);
-    SecKeyRef publicKey = SecTrustCopyPublicKey(tempTrust);
-    NSData *publicKeyData = getPublicKeyBits(publicKey);
+    // First extract the public key bytes
+    NSData *publicKeyData = getPublicKeyDataFromCertificate(certificate);
     
     
     // Generate a hash of the subject public key info
@@ -135,9 +177,8 @@ NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate, T
     // Add the public key
     CC_SHA256_Update(&shaCtx, [publicKeyData bytes], (unsigned int)[publicKeyData length]);
     CC_SHA256_Final((unsigned char *)[subjectPublicKeyInfoHash bytes], &shaCtx);
-    CFRelease(publicKey);
     
-    
+
     // Store the hash in our cache
     pthread_mutex_lock(&_spkiCacheLock);
     {
@@ -160,9 +201,10 @@ void initializeSubjectPublicKeyInfoCache(void)
     _subjectPublicKeyInfoHashesCache[TSKPublicKeyAlgorithmEcDsaSecp256r1] = [[NSMutableDictionary alloc]init];
     
     // Initialize our locks
-    pthread_mutex_init(&_keychainLock, NULL);
     pthread_mutex_init(&_spkiCacheLock, NULL);
     
+#if TARGET_OS_IPHONE
+    pthread_mutex_init(&_keychainLock, NULL);
     // Cleanup the Keychain in case the App previously crashed
     NSMutableDictionary * publicKeyGet = [[NSMutableDictionary alloc] init];
     [publicKeyGet setObject:(__bridge id)kSecClassKey forKey:(__bridge id)kSecClass];
@@ -173,14 +215,18 @@ void initializeSubjectPublicKeyInfoCache(void)
         SecItemDelete((__bridge CFDictionaryRef)(publicKeyGet));
     }
     pthread_mutex_unlock(&_keychainLock);
+#endif
 }
 
 void resetSubjectPublicKeyInfoCache(void)
 {
     // This is only used for tests
     // Destroy our locks
-    pthread_mutex_destroy(&_keychainLock);
     pthread_mutex_destroy(&_spkiCacheLock);
+    
+#if TARGET_OS_IPHONE
+    pthread_mutex_destroy(&_keychainLock);
+#endif
     
     // Discard SPKI cache
     _subjectPublicKeyInfoHashesCache[TSKPublicKeyAlgorithmRsa2048] = nil;
