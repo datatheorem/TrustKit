@@ -230,9 +230,9 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
 }
 
 
-static void initializeTrustKit(NSDictionary *TrustKitConfig)
+static void initializeTrustKit(NSDictionary *trustKitConfig)
 {
-    if (TrustKitConfig == nil)
+    if (trustKitConfig == nil)
     {
         return;
     }
@@ -243,12 +243,12 @@ static void initializeTrustKit(NSDictionary *TrustKitConfig)
         [NSException raise:@"TrustKit already initialized" format:@"TrustKit was already initialized with the following SSL pins: %@", _trustKitGlobalConfiguration];
     }
     
-    if ([TrustKitConfig count] > 0)
+    if ([trustKitConfig count] > 0)
     {
         initializeSubjectPublicKeyInfoCache();
         
         // Convert and store the SSL pins in our global variable
-        _trustKitGlobalConfiguration = [[NSDictionary alloc]initWithDictionary:parseTrustKitArguments(TrustKitConfig)];
+        _trustKitGlobalConfiguration = [[NSDictionary alloc]initWithDictionary:parseTrustKitArguments(trustKitConfig)];
         
         // Hook SSLHandshake()
         if (original_SSLHandshake == NULL)
@@ -274,10 +274,10 @@ static void initializeTrustKit(NSDictionary *TrustKitConfig)
 
 #pragma mark Framework Initialization When Statically Linked
 
-+ (void) initializeWithConfiguration:(NSDictionary *)TrustKitConfig
++ (void) initializeWithConfiguration:(NSDictionary *)trustKitConfig
 {
     TSKLog(@"TrustKit started statically in App %@", CFBundleGetValueForInfoDictionaryKey(CFBundleGetMainBundle(), (__bridge CFStringRef)@"CFBundleIdentifier"));
-    initializeTrustKit(TrustKitConfig);
+    initializeTrustKit(trustKitConfig);
 }
 
 
