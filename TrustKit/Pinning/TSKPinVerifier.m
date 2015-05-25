@@ -10,8 +10,6 @@
 #import "ssl_pin_verifier.h"
 #import "TrustKit+Private.h"
 
-extern NSString * const kTSKPublicKeyHashes;
-
 
 @implementation TSKPinVerifier
 

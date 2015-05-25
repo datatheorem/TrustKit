@@ -15,19 +15,17 @@ FOUNDATION_EXPORT double TrustKitVersionNumber;
 FOUNDATION_EXPORT const unsigned char TrustKitVersionString[];
 
 
-// Keys for each domain within the config dictionnary
+#pragma mark TrustKit Configuration Keys
 extern NSString * const kTSKPublicKeyHashes;
 extern NSString * const kTSKEnforcePinning;
 extern NSString * const kTSKIncludeSubdomains;
 extern NSString * const kTSKPublicKeyAlgorithms;
 extern NSString * const kTSKReportUris;
 
-// Public key algorithms supported by TrustKit
+#pragma mark Supported Public Key Algorithm Keys
 extern NSString * const kTSKAlgorithmRsa2048;
 extern NSString * const kTSKAlgorithmRsa4096;
 extern NSString * const kTSKAlgorithmEcDsaSecp256r1;
-
-
 
 
 /**
@@ -88,7 +86,9 @@ extern NSString * const kTSKAlgorithmEcDsaSecp256r1;
 ///---------------------
 
 /**
- Initializes TrustKit's global state with the supplied SSL pinning configuration. This method should be called as early as possible in the App's lifecycle to ensure that the App's very first HTTPS connections are protected.
+ Initializes TrustKit's global state with the supplied SSL pinning configuration. 
+ 
+ This method should be called as early as possible in the App's lifecycle to ensure that the App's very first HTTPS connections are protected.
  
  @param trustKitConfig A dictionnary containing various keys for configuring the App's SSL pinning policy.
  
