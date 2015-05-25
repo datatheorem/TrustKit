@@ -269,10 +269,10 @@ static void initializeTrustKit(NSDictionary *TrustKitConfig)
 }
 
 
-#pragma mark Framework Initialization When Statically Linked
-
 @implementation TrustKit
 
+
+#pragma mark Framework Initialization When Statically Linked
 
 + (void) initializeWithConfiguration:(NSDictionary *)TrustKitConfig
 {
@@ -280,9 +280,17 @@ static void initializeTrustKit(NSDictionary *TrustKitConfig)
     initializeTrustKit(TrustKitConfig);
 }
 
+
+# pragma mark Private / Test Methods
 + (BOOL) wasTrustKitCalled
 {
     return _wasTrustKitCalled;
+}
+
+
++ (NSDictionary *) trustKitConfiguration
+{
+    return _trustKitGlobalConfiguration;
 }
 
 
