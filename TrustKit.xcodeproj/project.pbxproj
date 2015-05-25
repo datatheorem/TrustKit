@@ -13,8 +13,8 @@
 		070868B81ADFFADF00E5AFDC /* www.good.com.cert.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868B21ADFF67200E5AFDC /* www.good.com.cert.der */; };
 		070868BB1AE1672D00E5AFDC /* self.cert.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868BA1AE1672D00E5AFDC /* self.cert.der */; };
 		070868BC1AE1673200E5AFDC /* ca-chain-plus-self.cert.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868B91AE1658200E5AFDC /* ca-chain-plus-self.cert.der */; };
-		0710306C1AA88A510028092C /* TrustKitPinValidationOnlineTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0710306B1AA88A510028092C /* TrustKitPinValidationOnlineTests.m */; };
-		075AA1091AC985FD00178223 /* TrustKitPinValidationOfflineTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA2868CAFECA46ADE0B6E3E /* TrustKitPinValidationOfflineTests.m */; };
+		0710306C1AA88A510028092C /* TSKPinValidationOnlineTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0710306B1AA88A510028092C /* TSKPinValidationOnlineTests.m */; };
+		075AA1091AC985FD00178223 /* TSKPinValidationOfflineTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA2868CAFECA46ADE0B6E3E /* TSKPinValidationOfflineTests.m */; };
 		6B032D3A1AF1794D00EAFA69 /* TSKSimpleReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B032D391AF1794D00EAFA69 /* TSKSimpleReporter.m */; };
 		6B032D3E1AF1A4AC00EAFA69 /* TSKSimpleReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B032D3D1AF1A4AC00EAFA69 /* TSKSimpleReporter.h */; };
 		6B032D401AF1AEC200EAFA69 /* TSKReporterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B032D3F1AF1AEB600EAFA69 /* TSKReporterTests.m */; };
@@ -51,9 +51,9 @@
 		070868B41ADFF6B000E5AFDC /* ca.cert.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = ca.cert.der; sourceTree = "<group>"; };
 		070868B91AE1658200E5AFDC /* ca-chain-plus-self.cert.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ca-chain-plus-self.cert.der"; sourceTree = "<group>"; };
 		070868BA1AE1672D00E5AFDC /* self.cert.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = self.cert.der; sourceTree = "<group>"; };
-		0710306B1AA88A510028092C /* TrustKitPinValidationOnlineTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrustKitPinValidationOnlineTests.m; sourceTree = "<group>"; };
+		0710306B1AA88A510028092C /* TSKPinValidationOnlineTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKPinValidationOnlineTests.m; sourceTree = "<group>"; };
 		2FA286123F801C437F35D240 /* TrustKit+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TrustKit+Private.h"; sourceTree = "<group>"; };
-		2FA2868CAFECA46ADE0B6E3E /* TrustKitPinValidationOfflineTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrustKitPinValidationOfflineTests.m; sourceTree = "<group>"; };
+		2FA2868CAFECA46ADE0B6E3E /* TSKPinValidationOfflineTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKPinValidationOfflineTests.m; sourceTree = "<group>"; };
 		6B032D391AF1794D00EAFA69 /* TSKSimpleReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKSimpleReporter.m; path = Reporting/TSKSimpleReporter.m; sourceTree = "<group>"; };
 		6B032D3D1AF1A4AC00EAFA69 /* TSKSimpleReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKSimpleReporter.h; path = Reporting/TSKSimpleReporter.h; sourceTree = "<group>"; };
 		6B032D3F1AF1AEB600EAFA69 /* TSKReporterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSKReporterTests.m; sourceTree = "<group>"; };
@@ -166,8 +166,8 @@
 			isa = PBXGroup;
 			children = (
 				070868B31ADFF68200E5AFDC /* Certificates */,
-				0710306B1AA88A510028092C /* TrustKitPinValidationOnlineTests.m */,
-				2FA2868CAFECA46ADE0B6E3E /* TrustKitPinValidationOfflineTests.m */,
+				0710306B1AA88A510028092C /* TSKPinValidationOnlineTests.m */,
+				2FA2868CAFECA46ADE0B6E3E /* TSKPinValidationOfflineTests.m */,
 				8C8480571A896EE30017C155 /* Supporting Files */,
 				6B032D3F1AF1AEB600EAFA69 /* TSKReporterTests.m */,
 			);
@@ -353,8 +353,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0710306C1AA88A510028092C /* TrustKitPinValidationOnlineTests.m in Sources */,
-				075AA1091AC985FD00178223 /* TrustKitPinValidationOfflineTests.m in Sources */,
+				0710306C1AA88A510028092C /* TSKPinValidationOnlineTests.m in Sources */,
+				075AA1091AC985FD00178223 /* TSKPinValidationOfflineTests.m in Sources */,
 				6B032D401AF1AEC200EAFA69 /* TSKReporterTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
