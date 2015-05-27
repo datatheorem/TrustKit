@@ -18,6 +18,8 @@
 		6B032D3A1AF1794D00EAFA69 /* TSKSimpleReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B032D391AF1794D00EAFA69 /* TSKSimpleReporter.m */; };
 		6B032D3E1AF1A4AC00EAFA69 /* TSKSimpleReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B032D3D1AF1A4AC00EAFA69 /* TSKSimpleReporter.h */; };
 		6B032D401AF1AEC200EAFA69 /* TSKReporterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B032D3F1AF1AEB600EAFA69 /* TSKReporterTests.m */; };
+		8C15F9931B132F9200F06C0E /* TSKPinVerifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C15F9911B132F9200F06C0E /* TSKPinVerifier.h */; };
+		8C15F9941B132F9200F06C0E /* TSKPinVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F9921B132F9200F06C0E /* TSKPinVerifier.m */; };
 		6B2B06AD1B05154A00FC749E /* TSKSimpleBackgroundReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B2B06AC1B05154A00FC749E /* TSKSimpleBackgroundReporter.h */; };
 		6B2B06AF1B05157400FC749E /* TSKSimpleBackgroundReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B2B06AE1B05157400FC749E /* TSKSimpleBackgroundReporter.m */; };
 		8C84804D1A896EE30017C155 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C84804C1A896EE30017C155 /* TrustKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -59,6 +61,8 @@
 		6B032D391AF1794D00EAFA69 /* TSKSimpleReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKSimpleReporter.m; path = Reporting/TSKSimpleReporter.m; sourceTree = "<group>"; };
 		6B032D3D1AF1A4AC00EAFA69 /* TSKSimpleReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKSimpleReporter.h; path = Reporting/TSKSimpleReporter.h; sourceTree = "<group>"; };
 		6B032D3F1AF1AEB600EAFA69 /* TSKReporterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSKReporterTests.m; sourceTree = "<group>"; };
+		8C15F9911B132F9200F06C0E /* TSKPinVerifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKPinVerifier.h; path = Pinning/TSKPinVerifier.h; sourceTree = "<group>"; };
+		8C15F9921B132F9200F06C0E /* TSKPinVerifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKPinVerifier.m; path = Pinning/TSKPinVerifier.m; sourceTree = "<group>"; };
 		6B2B06AC1B05154A00FC749E /* TSKSimpleBackgroundReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKSimpleBackgroundReporter.h; path = Reporting/TSKSimpleBackgroundReporter.h; sourceTree = "<group>"; };
 		6B2B06AE1B05157400FC749E /* TSKSimpleBackgroundReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKSimpleBackgroundReporter.m; path = Reporting/TSKSimpleBackgroundReporter.m; sourceTree = "<group>"; };
 		8C8480471A896EE30017C155 /* TrustKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TrustKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };

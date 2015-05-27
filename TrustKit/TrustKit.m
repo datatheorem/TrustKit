@@ -278,7 +278,7 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
 + (void) initializeWithConfiguration:(NSDictionary *)trustKitConfig
 {
     TSKLog(@"TrustKit started statically in App %@", CFBundleGetValueForInfoDictionaryKey(CFBundleGetMainBundle(), (__bridge CFStringRef)@"CFBundleIdentifier"));
-    initializeTrustKit(TrustKitConfig);
+    initializeTrustKit(trustKitConfig);
     
     //just try a simple valid case to see if we can post this to the server
     TSKSimpleBackgroundReporter *reporter = [[TSKSimpleBackgroundReporter alloc] initWithAppBundleId:@"com.example.ABC" appVersion:@"1.0"];
