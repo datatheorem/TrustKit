@@ -10,16 +10,8 @@
 #define TrustKit_ssl_pin_verifier_h
 
 #import <Foundation/Foundation.h>
+#import "TSKPinVerifier.h"
 
-
-typedef NS_ENUM(NSInteger, TSKPinValidationResult) {
-    TSKPinValidationResultSuccess,
-    TSKPinValidationResultFailed,
-    TSKPinValidationResultDomainNotPinned,
-    TSKPinValidationResultInvalidParameters,
-    TSKPinValidationResultPinningNotEnforced,
-    TSKPinValidationResultInvalidCertificateChain,
-};
 
 TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverName, NSDictionary *TrustKitConfiguration);
 

@@ -1,5 +1,5 @@
 //
-//  TrustKitPinValidationOfflineTests.m
+//  TSKPinValidationOfflineTests.m
 //  TrustKit
 //
 //  Created by Eric on 30/03/15.
@@ -7,25 +7,20 @@
 //
 
 #import <XCTest/XCTest.h>
-
-#import "TrustKit.h"
 #import "TrustKit+Private.h"
 #import "ssl_pin_verifier.h"
 #import "public_key_utils.h"
 
 #define HEXDUMP_COLS 16
 
-@interface TrustKitPinValidationOnlineTests : XCTestCase
-@end
 
-
-@interface TrustKitPinValidationOfflineTests : XCTestCase
+@interface TSKPinValidationOfflineTests : XCTestCase
 {
     
 }
 @end
 
-@implementation TrustKitPinValidationOfflineTests {
+@implementation TSKPinValidationOfflineTests {
     SecCertificateRef _rootCertificate;
     SecCertificateRef _chainCertificate;
     SecCertificateRef _chainPlusSelfCertificate;
@@ -57,6 +52,7 @@
     _leafCertificate = SecCertificateCreateWithData(kCFAllocatorDefault, leafData);
     CFRelease(leafData);
     
+    // Enable hostname validation in the SSL policy
     CFStringRef hostname = CFSTR("www.good.com");
     _policy = SecPolicyCreateSSL(true, hostname);
 

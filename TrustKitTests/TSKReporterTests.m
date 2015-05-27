@@ -6,7 +6,6 @@
 //  Copyright (c) 2015 Yahoo! Inc. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 #import "TSKSimpleReporter.h"
 #import "TSKSimpleBackgroundReporter.h"

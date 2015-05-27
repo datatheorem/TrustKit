@@ -1,5 +1,5 @@
 //
-//  TrustKitPinValidationOnlineTests.m
+//  TSKPinValidationOnlineTests.m
 //  TrustKit
 //
 //  Created by Eric on 05/03/15.
@@ -7,16 +7,15 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "TrustKit.h"
 #import "TrustKit+Private.h"
 #import "public_key_utils.h"
 
 
-@interface TrustKitPinValidationOnlineTests : XCTestCase
+@interface TSKPinValidationOnlineTests : XCTestCase
 
 @end
 
-@implementation TrustKitPinValidationOnlineTests
+@implementation TSKPinValidationOnlineTests
 /*  WARNING: For the online tests, we need to use a different domain for every test otherwise the tests will be disrupted by SSL session resumption.
     Specifically, connecting to the same host more than once will potentially allow the first session to be resumed, thereby skipping all SSL validation including TrustKit's. This is not a security issue but will make the tests report unexpected results.
  */

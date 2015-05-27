@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Data Theorem. All rights reserved.
 //
 
-#import "TrustKit.h"
+
 #import "TrustKit+Private.h"
 #include <dlfcn.h>
 #import <CommonCrypto/CommonDigest.h>
@@ -231,9 +231,9 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
 }
 
 
-static void initializeTrustKit(NSDictionary *TrustKitConfig)
+static void initializeTrustKit(NSDictionary *trustKitConfig)
 {
-    if (TrustKitConfig == nil)
+    if (trustKitConfig == nil)
     {
         return;
     }
@@ -244,12 +244,12 @@ static void initializeTrustKit(NSDictionary *TrustKitConfig)
         [NSException raise:@"TrustKit already initialized" format:@"TrustKit was already initialized with the following SSL pins: %@", _trustKitGlobalConfiguration];
     }
     
-    if ([TrustKitConfig count] > 0)
+    if ([trustKitConfig count] > 0)
     {
         initializeSubjectPublicKeyInfoCache();
         
         // Convert and store the SSL pins in our global variable
-        _trustKitGlobalConfiguration = [[NSDictionary alloc]initWithDictionary:parseTrustKitArguments(TrustKitConfig)];
+        _trustKitGlobalConfiguration = [[NSDictionary alloc]initWithDictionary:parseTrustKitArguments(trustKitConfig)];
         
         // Hook SSLHandshake()
         if (original_SSLHandshake == NULL)
@@ -270,12 +270,12 @@ static void initializeTrustKit(NSDictionary *TrustKitConfig)
 }
 
 
-#pragma mark Framework Initialization When Statically Linked
-
 @implementation TrustKit
 
 
-+ (void) initializeWithConfiguration:(NSDictionary *)TrustKitConfig
+#pragma mark Framework Initialization When Statically Linked
+
++ (void) initializeWithConfiguration:(NSDictionary *)trustKitConfig
 {
     TSKLog(@"TrustKit started statically in App %@", CFBundleGetValueForInfoDictionaryKey(CFBundleGetMainBundle(), (__bridge CFStringRef)@"CFBundleIdentifier"));
     initializeTrustKit(TrustKitConfig);
@@ -347,9 +347,17 @@ static void initializeTrustKit(NSDictionary *TrustKitConfig)
     
 }
 
+
+# pragma mark Private / Test Methods
 + (BOOL) wasTrustKitCalled
 {
     return _wasTrustKitCalled;
+}
+
+
++ (NSDictionary *) trustKitConfiguration
+{
+    return _trustKitGlobalConfiguration;
 }
 
 

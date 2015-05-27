@@ -12,11 +12,14 @@
 #import "TrustKit.h"
 
 NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments);
+
 void TSKLog(NSString *format, ...);
+
 
 @interface TrustKit(Private)
 
 + (void) resetConfiguration;
++ (NSDictionary *) trustKitConfiguration;
 + (BOOL) wasTrustKitCalled;
 
 @end
