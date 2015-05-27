@@ -7,7 +7,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 #import "TSKReporterDelegate.h"
 
 /*
@@ -15,7 +14,7 @@
  * report each time it receives pinValidationFailed.  It does not implement pinValidationSucceeded
  * as it does not care about successful validation.  It also does not try to optimize/throttle the reports sent.
  */
-@interface TSKSimpleBackgroundReporter : UIViewController <TSKReporterDelegate, NSURLSessionTaskDelegate>
+@interface TSKSimpleBackgroundReporter : NSObject <TSKReporterDelegate, NSURLSessionTaskDelegate>
 
 @end
 

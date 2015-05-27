@@ -80,7 +80,9 @@
 #endif
     
         backgroundConfiguration.discretionary = YES;
+#if TARGET_OS_IPHONE
         backgroundConfiguration.sessionSendsLaunchEvents = NO;
+#endif
         session = [NSURLSession sessionWithConfiguration:backgroundConfiguration delegate:self delegateQueue:nil];
     });
     return session;
