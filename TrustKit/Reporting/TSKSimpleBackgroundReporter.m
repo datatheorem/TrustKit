@@ -61,7 +61,6 @@
 
 - (NSURLSession *)backgroundSession
 {
-    
     /*
      Using disptach_once here ensures that multiple background sessions with the same identifier are not created in this instance of the application. If you want to support multiple background sessions within a single process, you should create each session with its own identifier.
      */
@@ -70,22 +69,18 @@
     dispatch_once(&onceToken, ^{
         
         NSURLSessionConfiguration *backgroundConfiguration;
-        if ([[[UIDevice currentDevice] systemVersion] floatValue] >=8.0f)
-        {
-            // starting iOS 8, backgroundSessionConfigurationWithIdentifier is used instead of backgroundSessionConfiguration
-            backgroundConfiguration =
-            [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:
-             [NSString stringWithFormat:@"%@.%@", self.appBundleId, @"TSKSimpleBgdReporter" ]];
-        }
-        else
-        {
-            backgroundConfiguration =
-            [NSURLSessionConfiguration backgroundSessionConfiguration:
-             [NSString stringWithFormat:@"%@.%@", self.appBundleId, @"TSKSimpleBgdReporter" ]];
-        }
+
+        // The API for creating background sessions changed between iOS 7 and iOS 8 and OS X 10.9 and 10.10
+#if (TARGET_OS_IPHONE && __IPHONE_OS_VERSION_MIN_REQUIRED < 80000) || (!TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MIN_REQUIRED < 101000)
+        // iOS 7 or OS X 10.9
+        backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfiguration:[NSString stringWithFormat:@"%@.%@", self.appBundleId, @"TSKSimpleBgdReporter"]];
+#else
+        // iOS 8+ or OS X 10.10+
+        backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier: [NSString stringWithFormat:@"%@.%@", self.appBundleId, @"TSKSimpleBgdReporter" ]];
+#endif
+    
         backgroundConfiguration.discretionary = YES;
         backgroundConfiguration.sessionSendsLaunchEvents = NO;
-
         session = [NSURLSession sessionWithConfiguration:backgroundConfiguration delegate:self delegateQueue:nil];
     });
     return session;
