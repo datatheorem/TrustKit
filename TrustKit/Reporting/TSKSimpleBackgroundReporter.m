@@ -7,14 +7,14 @@
 //
 
 #import "TSKSimpleBackgroundReporter.h"
-#import "TSKAppDelegate.h"
+#import "TrustKit+Private.h"
 
 @interface TSKSimpleBackgroundReporter()
-
 
 @property (nonatomic, strong) NSString * appBundleId;
 @property (nonatomic, strong) NSString * appVersion;
 @property (nonatomic) BOOL isTSKSimpleReporterInitialized;
+@property (nonatomic) NSURLSession *session;
 
 @end
 
@@ -28,9 +28,15 @@
 - (instancetype)initWithAppBundleId:(NSString *) appBundleId
                          appVersion:(NSString *) appVersion
 {
+    if (_isTSKSimpleReporterInitialized == YES)
+    {
+        // Reporter should only be initialized once
+        [NSException raise:@"TrustKit Reporter already initialized" format:@"Reporter was already initialized with the following appBundleId: %@", appBundleId];
+    }
     
     self = [super init];
-    if (self) {
+    if (self)
+    {
         // Custom initialization
         if ([appBundleId length] == 0)
         {
@@ -45,6 +51,8 @@
                         format:@"Reporter was given empty appVersion"];
         }
         self.appVersion = appVersion;
+        self.session = [self backgroundSession];
+
         self.isTSKSimpleReporterInitialized = YES;
         
     }
@@ -55,8 +63,7 @@
 {
     
     /*
-     * Using disptach_once here ensures that multiple background sessions with the same identifier are not created in this
-     * instance of the application.
+     Using disptach_once here ensures that multiple background sessions with the same identifier are not created in this instance of the application. If you want to support multiple background sessions within a single process, you should create each session with its own identifier.
      */
     static NSURLSession *session = nil;
     static dispatch_once_t onceToken;
@@ -76,16 +83,18 @@
             [NSURLSessionConfiguration backgroundSessionConfiguration:
              [NSString stringWithFormat:@"%@.%@", self.appBundleId, @"TSKSimpleBgdReporter" ]];
         }
+        backgroundConfiguration.discretionary = YES;
+        backgroundConfiguration.sessionSendsLaunchEvents = NO;
+
         session = [NSURLSession sessionWithConfiguration:backgroundConfiguration delegate:self delegateQueue:nil];
     });
-    
     return session;
 }
 
 /*
- * Pin validation failed for a connection to a pinned domain
- * In this implementation for a simple background reporter, we're just going to send out the report upon each failure
- * in a background task
+  Pin validation failed for a connection to a pinned domain
+  In this implementation for a simple background reporter, we're just going to send out the report upon each failure
+  in a background task
  */
 - (void) pinValidationFailed:(NSString *) pinnedDomainStr
               serverHostname:(NSString *) hostnameStr
@@ -167,33 +176,23 @@
     NSData *postData = [NSJSONSerialization dataWithJSONObject:requestData options:0 error:&error];
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request setHTTPBody: postData];
     
     //make a file name to write the data to using the tmp directory:
     NSURL *tmpDirURL = [NSURL fileURLWithPath:NSTemporaryDirectory() isDirectory:YES];
-    NSURL *fileURL = [[tmpDirURL URLByAppendingPathComponent:@"TSKReport"] URLByAppendingPathExtension:@"tmp"];
-    NSLog(@"fileURL: %@", [fileURL path]);
+    NSURL *fileURL = [[tmpDirURL URLByAppendingPathComponent:@"TSKReport"] URLByAppendingPathExtension:currentTimeStr];
+    TSKLog(@"fileURL: %@", [fileURL path]);
     
-    //Write postdata to file as we can only use background upload task with file
+    //write postdata to file as we can only use background upload task with file
     if (!([postData writeToFile:[fileURL path] atomically:YES])) {
         [NSException raise:@"TrustKit Simple Reporter runtime error"
                     format:@"Report cannot be saved to file"];
     }
     
-    
-    NSURLSessionUploadTask *postDataTask = [[self backgroundSession] uploadTaskWithRequest: request fromFile: fileURL];
-    
-    [postDataTask resume];
-    
+    NSURLSessionUploadTask *uploadTask  = [self.session uploadTaskWithRequest: request fromFile: fileURL];
+    [uploadTask resume];
     
 }
 
-- (void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data
-{
-    NSString * str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSLog(@"Received String %@",str);
-    
-}
 
 - (void)URLSession:(NSURLSession *)session
               task:(NSURLSessionTask *)task
@@ -206,12 +205,11 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
      Report progress on the task.
      If you created more than one task, you might keep references to them and report on them individually.
      */
-    NSLog(@"totalBytesSent:%lld", totalBytesSent);
-    NSLog(@"totalBytesSent:%lld", totalBytesExpectedToSend);
-
-}
     
-
+    TSKLog(@"totalBytesSent:%lld", totalBytesSent);
+    TSKLog(@"totalBytesExpectedToSend:%lld", totalBytesExpectedToSend);
+    
+}
 
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
@@ -219,31 +217,15 @@ totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
     
     if (error == nil)
     {
-        NSLog(@"Task: %@ completed successfully", task);
+        TSKLog(@"Task: %@ completed successfully", task);
     }
     else
     {
-        NSLog(@"Task: %@ completed with error: %@", task, [error localizedDescription]);
+        TSKLog(@"Task: %@ completed with error: %@", task, [error localizedDescription]);
+        TSKLog(@"Task: error.code: %ld", (long)error.code);
+        
     }
-    
 }
-
-/*
- If an application has received an -application:handleEventsForBackgroundURLSession:completionHandler: message, the session delegate will receive this message to indicate that all messages previously enqueued for this session have been delivered. At this time it is safe to invoke the previously stored completion handler, or to begin any internal updates that will result in invoking the completion handler.
- */
-- (void)URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *)session
-{
-    TSKAppDelegate *appDelegate = (TSKAppDelegate *) [[UIApplication sharedApplication] delegate];
-    if (appDelegate.backgroundSessionCompletionHandler) {
-        void (^completionHandler)() = appDelegate.backgroundSessionCompletionHandler;
-        appDelegate.backgroundSessionCompletionHandler = nil;
-        completionHandler();
-    }
-    
-    NSLog(@"All tasks are finished");
-}
-
-
 
 @end
 
