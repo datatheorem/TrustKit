@@ -41,18 +41,19 @@
     // TODO: Convert knownPins and validatedCertificateChain
     
     // Create the dictionary
-    NSDictionary *requestData = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                 self.appBundleId, @"app-bundle-id",
-                                 self.appVersion, @"app-version",
-                                 currentTimeStr, @"date-time",
-                                 self.serverHostname, @"hostname",
-                                 [self.serverPort stringValue], @"port",
-                                 [NSNumber numberWithBool:self.includeSubdomains], @"include-subdomains",
-                                 self.notedHostname, @"noted-hostname",
-                                 self.validatedCertificateChain, @"validated-certificate-chain",
-                                 self.knownPins, @"known-pins",
-                                 nil];
+    NSDictionary *requestData = @ {
+        @"app-bundle-id" : self.appBundleId,
+        @"app-version" : self.appVersion,
+        @"date-time" : currentTimeStr,
+        @"hostname" : self.serverHostname,
+        @"port" : self.serverPort,
+        @"include-subdomains" : [NSNumber numberWithBool:self.includeSubdomains],
+        @"noted-hostname" : self.notedHostname,
+        @"validated-certificate-chain" : self.validatedCertificateChain,
+        @"known-pins" : self.knownPins
+    };
     
+    // TODO: Check error
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:requestData options:0 error:&error];
     return jsonData;
