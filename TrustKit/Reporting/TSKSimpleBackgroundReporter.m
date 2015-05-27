@@ -9,7 +9,12 @@
 #import "TSKSimpleBackgroundReporter.h"
 #import "TrustKit+Private.h"
 
-@interface TSKSimpleBackgroundReporter()
+
+// Session identifier for background uploads: <bundle id>.TSKSimpleReporter
+static NSString* backgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
+
+
+@interface TSKSimpleBackgroundReporter(Private)
 
 @property (nonatomic, strong) NSString * appBundleId;
 @property (nonatomic, strong) NSString * appVersion;
@@ -27,13 +32,7 @@
  */
 - (instancetype)initWithAppBundleId:(NSString *) appBundleId
                          appVersion:(NSString *) appVersion
-{
-    if (_isTSKSimpleReporterInitialized == YES)
-    {
-        // Reporter should only be initialized once
-        [NSException raise:@"TrustKit Reporter already initialized" format:@"Reporter was already initialized with the following appBundleId: %@", appBundleId];
-    }
-    
+{    
     self = [super init];
     if (self)
     {
@@ -73,10 +72,10 @@
         // The API for creating background sessions changed between iOS 7 and iOS 8 and OS X 10.9 and 10.10
 #if (TARGET_OS_IPHONE && __IPHONE_OS_VERSION_MIN_REQUIRED < 80000) || (!TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MIN_REQUIRED < 101000)
         // iOS 7 or OS X 10.9
-        backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfiguration:[NSString stringWithFormat:@"%@.%@", self.appBundleId, @"TSKSimpleBgdReporter"]];
+        backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfiguration:[NSString stringWithFormat:backgroundSessionIdentifierFormat, self.appBundleId]];
 #else
         // iOS 8+ or OS X 10.10+
-        backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier: [NSString stringWithFormat:@"%@.%@", self.appBundleId, @"TSKSimpleBgdReporter" ]];
+        backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier: [NSString stringWithFormat:backgroundSessionIdentifierFormat, self.appBundleId]];
 #endif
     
         backgroundConfiguration.discretionary = YES;
