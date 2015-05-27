@@ -8,7 +8,7 @@
 
 #import "TSKSimpleReporter.h"
 
-@interface TSKSimpleReporter(Private)
+@interface TSKSimpleReporter()
 @property (nonatomic, strong) NSString * appBundleId;
 @property (nonatomic, strong) NSString * appVersion;
 @property (nonatomic) BOOL isTSKSimpleReporterInitialized;

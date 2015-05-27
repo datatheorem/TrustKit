@@ -14,7 +14,7 @@
 static NSString* backgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
 
 
-@interface TSKSimpleBackgroundReporter(Private)
+@interface TSKSimpleBackgroundReporter()
 
 @property (nonatomic, strong) NSString * appBundleId;
 @property (nonatomic, strong) NSString * appVersion;
@@ -32,7 +32,7 @@ static NSString* backgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
  */
 - (instancetype)initWithAppBundleId:(NSString *) appBundleId
                          appVersion:(NSString *) appVersion
-{    
+{
     self = [super init];
     if (self)
     {
@@ -81,6 +81,7 @@ static NSString* backgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
         backgroundConfiguration.discretionary = YES;
 #if TARGET_OS_IPHONE
         backgroundConfiguration.sessionSendsLaunchEvents = NO;
+        backgroundConfiguration.sharedContainerIdentifier = [NSString stringWithFormat:backgroundSessionIdentifierFormat, self.appBundleId];
 #endif
         session = [NSURLSession sessionWithConfiguration:backgroundConfiguration delegate:self delegateQueue:nil];
     });
