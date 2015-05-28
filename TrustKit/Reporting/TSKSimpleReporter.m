@@ -119,14 +119,10 @@
                                                                        knownPins:knownPins];
     
     // POST it to the report uri
+    NSURLRequest *request = [report requestToUri:reportingURL];
+    
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:reportingURL];
-    [request setHTTPMethod:@"POST"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request setHTTPBody:[report json]];
-    
     NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request
                                                     completionHandler:^(NSData *data,
                                                                         NSURLResponse *response,

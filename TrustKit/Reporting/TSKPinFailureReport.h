@@ -20,10 +20,15 @@
 @property (readonly) NSArray *validatedCertificateChain;
 @property (readonly) NSArray *knownPins;
 
+
 // Init with default bundle ID and current time as the date-time
 - (instancetype) initWithAppVersion:(NSString *)appVersion notedHostname:(NSString *)notedHostname serverHostname:(NSString *)serverHostname port:(NSNumber *)serverPort includeSubdomains:(BOOL) includeSubdomains validatedCertificateChain:(NSArray *)validatedCertificateChain knownPins:(NSArray *)knownPins;
 
 // Return the report in JSON format for POSTing it
--(NSData *)json;
+- (NSData *)json;
+
+// Return a request ready to be sent with the report in JSON format in the response's body
+- (NSMutableURLRequest *)requestToUri:(NSURL *)reportUri;
+
 
 @end

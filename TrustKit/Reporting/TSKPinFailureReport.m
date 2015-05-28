@@ -35,7 +35,7 @@
 }
 
 
--(NSData *)json;
+- (NSData *)json;
 {
     // Convert the date to a string
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -63,5 +63,16 @@
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:requestData options:0 error:&error];
     return jsonData;
 }
+
+
+- (NSMutableURLRequest *)requestToUri:(NSURL *)reportUri
+{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:reportUri];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setHTTPBody:[self json]];
+    return request;
+}
+
 
 @end

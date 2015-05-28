@@ -158,25 +158,25 @@ static NSString* backgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
                                                        validatedCertificateChain:validatedCertificateChain
                                                                        knownPins:knownPins];
     
-    // Send the falure report
+    // Create the HTTP request
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:reportingURL];
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
-    //make a file name to write the data to using the tmp directory:
+    // Create a temporary file for storing the JSON data in ~/tmp
     NSURL *tmpDirURL = [NSURL fileURLWithPath:NSTemporaryDirectory() isDirectory:YES];
-    NSURL *fileURL = [[tmpDirURL URLByAppendingPathComponent:[[NSProcessInfo processInfo] globallyUniqueString]] URLByAppendingPathExtension:@"tsk-report"];
-    TSKLog(@"fileURL: %@", [fileURL path]);
+    NSURL *tmpFileURL = [[tmpDirURL URLByAppendingPathComponent:[[NSProcessInfo processInfo] globallyUniqueString]] URLByAppendingPathExtension:@"tsk-report"];
+    TSKLog(@"fileURL: %@", [tmpFileURL path]);
     
-    //write postdata to file as we can only use background upload task with file
-    if (!([[report json] writeToFile:[fileURL path] atomically:YES])) {
+    // Write the JSON report data to the temporary file
+    if (!([[report json] writeToFile:[tmpFileURL path] atomically:YES])) {
         [NSException raise:@"TrustKit Simple Reporter runtime error"
                     format:@"Report cannot be saved to file"];
     }
     
-    NSURLSessionUploadTask *uploadTask  = [self.session uploadTaskWithRequest: request fromFile: fileURL];
+    // Pass the URL and the temporary file to the background upload task and start uploading
+    NSURLSessionUploadTask *uploadTask = [self.session uploadTaskWithRequest:request fromFile:tmpFileURL];
     [uploadTask resume];
-    
 }
 
 
