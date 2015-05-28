@@ -110,10 +110,12 @@
     }
     
     // Create the pin validation failure report
-    TSKPinFailureReport *report = [[TSKPinFailureReport alloc]initWithAppVersion:self.appVersion
+    TSKPinFailureReport *report = [[TSKPinFailureReport alloc]initWithAppBundleId:self.appBundleId
+                                                                          appVersion:self.appVersion
                                                                    notedHostname:pinnedDomainStr
                                                                   serverHostname:hostnameStr
                                                                             port:port
+                                                                         dateTime:[NSDate date] // Use the current time
                                                                includeSubdomains:includeSubdomains
                                                        validatedCertificateChain:validatedCertificateChain
                                                                        knownPins:knownPins];

@@ -150,13 +150,15 @@ static NSString* backgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
         
     }
     // Create the pin validation failure report
-    TSKPinFailureReport *report = [[TSKPinFailureReport alloc]initWithAppVersion:self.appVersion
-                                                                   notedHostname:pinnedDomainStr
-                                                                  serverHostname:hostnameStr
-                                                                            port:port
-                                                               includeSubdomains:includeSubdomains
-                                                       validatedCertificateChain:validatedCertificateChain
-                                                                       knownPins:knownPins];
+    TSKPinFailureReport *report = [[TSKPinFailureReport alloc]initWithAppBundleId:self.appBundleId
+                                                                       appVersion:self.appVersion
+                                                                    notedHostname:pinnedDomainStr
+                                                                   serverHostname:hostnameStr
+                                                                             port:port
+                                                                         dateTime:[NSDate date] // Use the current time
+                                                                includeSubdomains:includeSubdomains
+                                                        validatedCertificateChain:validatedCertificateChain
+                                                                        knownPins:knownPins];
     
     // Create the HTTP request
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:reportingURL];

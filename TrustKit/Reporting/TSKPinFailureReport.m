@@ -11,22 +11,17 @@
 @implementation TSKPinFailureReport
 
 
-- (instancetype) initWithAppVersion:(NSString *)appVersion notedHostname:(NSString *)notedHostname serverHostname:(NSString *)serverHostname port:(NSNumber *)serverPort includeSubdomains:(BOOL) includeSubdomains validatedCertificateChain:(NSArray *)validatedCertificateChain knownPins:(NSArray *)knownPins;
+- (instancetype) initWithAppBundleId:(NSString *) appBundleId appVersion:(NSString *)appVersion notedHostname:(NSString *)notedHostname serverHostname:(NSString *)serverHostname port:(NSNumber *)serverPort dateTime:(NSDate *)dateTime includeSubdomains:(BOOL) includeSubdomains validatedCertificateChain:(NSArray *)validatedCertificateChain knownPins:(NSArray *)knownPins;
 {
     self = [super init];
     if (self)
     {
-        _appBundleId = [[NSBundle mainBundle] bundleIdentifier];
-        if (_appBundleId == nil)
-        {
-            // Happens in unit tests
-            _appBundleId = @"N/A";
-        }
+        _appBundleId = appBundleId;
         _appVersion = appVersion;
         _notedHostname = notedHostname;
         _serverHostname = serverHostname;
         _serverPort = serverPort;
-        _dateTime = [NSDate date];
+        _dateTime = dateTime;
         _includeSubdomains = includeSubdomains;
         _validatedCertificateChain = validatedCertificateChain;
         _knownPins = knownPins;
