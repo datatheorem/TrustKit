@@ -9,11 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @protocol TSKReporterDelegate <NSObject>
-/*
- * Initialize the reporter with the app's bundle id, and app version
- */
-- (instancetype)initWithAppBundleId:(NSString *) appBundleId
-                         appVersion:(NSString *) appVersion;
 
 
 /*
@@ -23,7 +18,7 @@
               serverHostname:(NSString *) hostnameStr
                   serverPort:(NSNumber *) port
                 reportingURL:(NSString *) reportingURLStr
-           includeSubdomains:(Boolean) includeSubdomains
+           includeSubdomains:(BOOL) includeSubdomains
             certificateChain:(NSArray *) validatedCertificateChain
                 expectedPins:(NSArray *) knownPins;
 

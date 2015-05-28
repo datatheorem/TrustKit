@@ -57,7 +57,7 @@
               serverHostname:(NSString *) hostnameStr
                   serverPort:(NSNumber *) port
                 reportingURL:(NSString *) reportingURLStr
-           includeSubdomains:(Boolean) includeSubdomains
+           includeSubdomains:(BOOL) includeSubdomains
             certificateChain:(NSArray *) validatedCertificateChain
                 expectedPins:(NSArray *) knownPins
 {

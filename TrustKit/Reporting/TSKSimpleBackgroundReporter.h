@@ -16,5 +16,11 @@
  */
 @interface TSKSimpleBackgroundReporter : NSObject <TSKReporterDelegate, NSURLSessionTaskDelegate>
 
+/*
+ * Initialize the reporter with the app's bundle id, and app version
+ */
+- (instancetype)initWithAppBundleId:(NSString *) appBundleId
+                         appVersion:(NSString *) appVersion;
+
 @end
 
