@@ -19,7 +19,6 @@ static NSString* backgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
 
 @property (nonatomic, strong) NSString * appBundleId;
 @property (nonatomic, strong) NSString * appVersion;
-@property (nonatomic) BOOL isTSKSimpleReporterInitialized;
 @property (nonatomic) NSURLSession *session;
 
 @end
@@ -51,10 +50,8 @@ static NSString* backgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
                         format:@"Reporter was given empty appVersion"];
         }
         self.appVersion = appVersion;
-        self.session = [self backgroundSession];
-
-        self.isTSKSimpleReporterInitialized = YES;
         
+        self.session = [self backgroundSession];
     }
     return self;
 }
@@ -102,14 +99,6 @@ static NSString* backgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
             certificateChain:(NSArray *) validatedCertificateChain
                 expectedPins:(NSArray *) knownPins
 {
-    
-    if (self.isTSKSimpleReporterInitialized == NO)
-    {
-        [NSException raise:@"TrustKit Simple Background Reporter configuration invalid"
-                    format:@"Reporter was not initialized with appid and appversion yet"];
-        
-    }
-    
     if ([pinnedDomainStr length] == 0)
     {
         [NSException raise:@"TrustKit Simple Background Reporter configuration invalid"

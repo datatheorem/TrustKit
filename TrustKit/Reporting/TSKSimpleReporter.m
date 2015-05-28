@@ -13,7 +13,6 @@
 @interface TSKSimpleReporter()
 @property (nonatomic, strong) NSString * appBundleId;
 @property (nonatomic, strong) NSString * appVersion;
-@property (nonatomic) BOOL isTSKSimpleReporterInitialized;
 @end
 
 
@@ -42,11 +41,8 @@
                         format:@"Reporter was given empty appVersion"];
         }
         self.appVersion = appVersion;
-        self.isTSKSimpleReporterInitialized = YES;
-        
     }
     return self;
-    
 }
 
 /*
@@ -61,14 +57,6 @@
             certificateChain:(NSArray *) validatedCertificateChain
                 expectedPins:(NSArray *) knownPins
 {
-    
-    if (self.isTSKSimpleReporterInitialized == NO)
-    {
-        [NSException raise:@"TrustKit Simple Reporter configuration invalid"
-                    format:@"Reporter was not initialized with appid and appversion yet"];
-        
-    }
-    
     if ([pinnedDomainStr length] == 0)
     {
         [NSException raise:@"TrustKit Simple Reporter configuration invalid"
