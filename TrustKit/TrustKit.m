@@ -59,7 +59,6 @@ void TSKLog(NSString *format, ...)
 }
 
 
-
 #pragma mark SSLHandshake Hook
 
 static OSStatus (*original_SSLHandshake)(SSLContextRef context) = NULL;
@@ -82,19 +81,34 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
         NSString *serverNameStr = [NSString stringWithUTF8String:serverName];
         free(serverName);
         
-        // Verify the server's certificate if it is pinned
         SecTrustRef serverTrust;
         SSLCopyPeerTrust(context, &serverTrust);
         
-        TSKPinValidationResult validationResult = verifyPublicKeyPin(serverTrust, serverNameStr, _trustKitGlobalConfiguration);
-        
-        if (!
-            ((validationResult == TSKPinValidationResultSuccess)
-            || (validationResult == TSKPinValidationResultDomainNotPinned)
-            || (validationResult == TSKPinValidationResultPinningNotEnforced)))
+        // Retrieve the pinning configuration for this specific domain, if there is one
+        NSDictionary *serverConfig = getPinningConfigurationForDomain(serverNameStr, _trustKitGlobalConfiguration);
+        if (serverConfig != nil)
         {
-            // Validation failed
-            result = errSSLXCertChainInvalid;
+            // This domain is pinned: look for one the configured public key pins in the server's evaluated certificate chain
+            TSKPinValidationResult validationResult = TSKPinValidationResultFailed;
+            validationResult = verifyPublicKeyPin(serverTrust, serverConfig[kTSKPublicKeyAlgorithms], serverConfig[kTSKPublicKeyHashes]);
+            
+            if (validationResult != TSKPinValidationResultSuccess)
+            {
+                // Pin validation failed: notify the reporter if a report URI was configured
+                for (NSURL *reportUri in serverConfig[kTSKReportUris])
+                {
+                    // TODO: Send report
+                }
+                
+                if (([serverConfig[kTSKEnforcePinning] boolValue] == YES)
+                     || (validationResult == TSKPinValidationResultFailedInvalidCertificateChain)
+                     || (validationResult == TSKPinValidationResultFailedInvalidParameters))
+                {
+                    // TrustKit was configured to enforce pinning or the certificate chain was not trusted: make the connection fail
+                    result = errSSLXCertChainInvalid;
+                }
+            }
+            
         }
     }
     return result;

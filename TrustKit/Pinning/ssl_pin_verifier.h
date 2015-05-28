@@ -13,7 +13,11 @@
 #import "TSKPinVerifier.h"
 
 
-TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverName, NSDictionary *TrustKitConfiguration);
+// Figure out if a specific domain is pinned and retrieve this domain's configuration; returns nil if no configuration was found
+NSDictionary *getPinningConfigurationForDomain(NSString *hostname, NSDictionary *trustKitConfiguration);
+
+// Validate that the server trust contains at least one of the know/expected pins
+TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSArray *supportedAlgorithms, NSSet *knownPins);
 
 
 #endif

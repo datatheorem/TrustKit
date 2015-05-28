@@ -13,7 +13,8 @@
 #import "TrustKit+Private.h"
 
 
-#pragma mark SSL Pin Validator
+
+#pragma mark Utility functions
 
 static BOOL isSubdomain(NSString *domain, NSString *subdomain)
 {
@@ -39,65 +40,65 @@ static BOOL isSubdomain(NSString *domain, NSString *subdomain)
 }
 
 
-TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverName, NSDictionary *TrustKitConfiguration)
+NSDictionary *getPinningConfigurationForDomain(NSString *hostname, NSDictionary *trustKitConfiguration)
 {
-    if ((serverTrust == NULL) || (serverName == NULL))
-    {
-        return TSKPinValidationResultInvalidParameters;
-    }
-    
-    // First let's figure out if this domain is pinned
     // Do we have this specific domain explicitely pinned ?
-    NSDictionary *serverPinningConfiguration = TrustKitConfiguration[serverName];
-    
+    NSDictionary *serverPinningConfiguration = trustKitConfiguration[hostname];
     
     // No pins explicitly configured for this domain
     if (serverPinningConfiguration == nil)
     {
         // Look for an includeSubdomain pin that applies
-        for (NSString *pinnedServerName in TrustKitConfiguration)
+        for (NSString *pinnedServerName in trustKitConfiguration)
         {
             // Check each domain configured with the includeSubdomain flag
-            if ([TrustKitConfiguration[pinnedServerName][kTSKIncludeSubdomains] boolValue])
+            if ([trustKitConfiguration[pinnedServerName][kTSKIncludeSubdomains] boolValue])
             {
                 // Is the server a subdomain of this pinned server?
                 TSKLog(@"Checking includeSubdomains configuration for %@", pinnedServerName);
-                if (isSubdomain(pinnedServerName, serverName))
+                if (isSubdomain(pinnedServerName, hostname))
                 {
                     // Yes; let's use the parent domain's pins
-                    TSKLog(@"Applying includeSubdomains configuration from %@ to %@", pinnedServerName, serverName);
-                    serverPinningConfiguration = TrustKitConfiguration[pinnedServerName];
+                    TSKLog(@"Applying includeSubdomains configuration from %@ to %@", pinnedServerName, hostname);
+                    serverPinningConfiguration = trustKitConfiguration[pinnedServerName];
                     break;
                 }
             }
         }
     }
     
-    // If this domain isn't pinned the validation always succeeds
     if (serverPinningConfiguration == nil)
     {
-        TSKLog(@"Domain %@ is not pinned", serverName);
-        return TSKPinValidationResultDomainNotPinned;
+        TSKLog(@"Domain %@ is not pinned", hostname);
+    }
+    return serverPinningConfiguration;
+}
+
+
+#pragma mark SSL Pin Verifier
+
+TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSArray *supportedAlgorithms, NSSet *knownPins)
+{
+    if ((serverTrust == NULL) || (supportedAlgorithms == nil) || (knownPins == nil))
+    {
+        return TSKPinValidationResultFailedInvalidParameters;
     }
     
-    // Domain is pinned
     // First re-check the certificate chain using the default SSL validation in case it was disabled
     // This gives us revocation (only for EV certs I think?) and also ensures the certificate chain is sane
     // And also gives us the exact path that successfully validated the chain
-    NSSet *serverPins = serverPinningConfiguration[kTSKPublicKeyHashes];
-    
     SecTrustResultType trustResult = 0;
     if (SecTrustEvaluate(serverTrust, &trustResult) != errSecSuccess)
     {
         TSKLog(@"SecTrustEvaluate error");
-        return TSKPinValidationResultInvalidParameters;
+        return TSKPinValidationResultFailedInvalidParameters;
     }
     
     if ((trustResult != kSecTrustResultUnspecified) && (trustResult != kSecTrustResultProceed))
     {
         // Default SSL validation failed
         TSKLog(@"Error: default SSL validation failed");
-        return TSKPinValidationResultInvalidCertificateChain;
+        return TSKPinValidationResultFailedInvalidCertificateChain;
     }
     
     // Check each certificate in the server's certificate chain (the trust object)
@@ -109,14 +110,14 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
         
         
         // For each public key algorithm flagged as supported in the config, generate the subject public key info hash
-        for (id savedAlgorithm in serverPinningConfiguration[kTSKPublicKeyAlgorithms])
+        for (id savedAlgorithm in supportedAlgorithms)
         {
             TSKPublicKeyAlgorithm algorithm = [savedAlgorithm integerValue];
             NSData *subjectPublicKeyInfoHash = hashSubjectPublicKeyInfoFromCertificate(certificate, algorithm);
             
             // Is the generated hash in our set of pinned hashes ?
             TSKLog(@"Testing SSL Pin %@", subjectPublicKeyInfoHash);
-            if ([serverPins containsObject:subjectPublicKeyInfoHash])
+            if ([knownPins containsObject:subjectPublicKeyInfoHash])
             {
                 TSKLog(@"SSL Pin found");
                 return TSKPinValidationResultSuccess;
@@ -124,15 +125,7 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
         }
     }
     
-    
     // If we get here, we didn't find any matching SPKI hash in the chain
     TSKLog(@"Error: SSL Pin not found");
-    if ([serverPinningConfiguration[kTSKEnforcePinning] boolValue] == YES)
-    {
-        // TrustKit was configured to enforce pinning; force an error
-        return TSKPinValidationResultFailed;
-    }
-    
-    // TrustKit was configured to not enforce pinning for this domain; don't return an error
-    return TSKPinValidationResultPinningNotEnforced;
+    return TSKPinValidationResultFailed;
 }
