@@ -10,15 +10,15 @@
 
 @interface TSKPinFailureReport : NSObject
 
-@property (readonly) NSString *appBundleId;
-@property (readonly) NSString *appVersion;
-@property (readonly) NSString *notedHostname;
-@property (readonly) NSString *serverHostname;
-@property (readonly) NSNumber *serverPort;
-@property (readonly) NSDate *dateTime;
-@property (readonly) BOOL includeSubdomains;
-@property (readonly) NSArray *validatedCertificateChain;
-@property (readonly) NSArray *knownPins;
+@property (readonly, nonatomic) NSString *appBundleId; // Not part of the HPKP spec
+@property (readonly, nonatomic) NSString *appVersion; // Not part of the HPKP spec
+@property (readonly, nonatomic) NSString *notedHostname;
+@property (readonly, nonatomic) NSString *serverHostname;
+@property (readonly, nonatomic) NSNumber *serverPort;
+@property (readonly, nonatomic) NSDate *dateTime;
+@property (readonly, nonatomic) BOOL includeSubdomains;
+@property (readonly, nonatomic) NSArray *validatedCertificateChain;
+@property (readonly, nonatomic) NSArray *knownPins;
 
 
 // Init with default bundle ID and current time as the date-time
