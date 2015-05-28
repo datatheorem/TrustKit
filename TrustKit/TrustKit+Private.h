@@ -19,7 +19,7 @@ void TSKLog(NSString *format, ...);
 @interface TrustKit(Private)
 
 + (void) resetConfiguration;
-+ (NSDictionary *) trustKitConfiguration;
++ (NSDictionary *) configuration;
 + (BOOL) wasTrustKitCalled;
 
 @end

@@ -15,7 +15,7 @@
 
 + (TSKPinValidationResult) verifyPinForTrust:(SecTrustRef)serverTrust andDomain:(NSString *)serverHostname
 {
-    return verifyPublicKeyPin(serverTrust, serverHostname, [TrustKit trustKitConfiguration]);
+    return verifyPublicKeyPin(serverTrust, serverHostname, [TrustKit configuration]);
 }
 
 @end
