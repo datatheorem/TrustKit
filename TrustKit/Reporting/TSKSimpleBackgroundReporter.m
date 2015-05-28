@@ -11,7 +11,7 @@
 #import "TSKPinFailureReport.h"
 
 
-// Session identifier for background uploads: <bundle id>.TSKSimpleReporter
+// Session identifier for background uploads and shared container: <bundle_id>.TSKSimpleReporter
 static NSString* backgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
 
 
@@ -27,11 +27,8 @@ static NSString* backgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
 @implementation TSKSimpleBackgroundReporter
 
 
-/*
- * Initialize the reporter with the app's bundle id and app version
- */
-- (instancetype)initWithAppBundleId:(NSString *) appBundleId
-                         appVersion:(NSString *) appVersion
+- (instancetype)initWithAppBundleId:(NSString *)appBundleId
+                         appVersion:(NSString *)appVersion
 {
     self = [super init];
     if (self)
@@ -60,8 +57,8 @@ static NSString* backgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
     /*
      Using disptach_once here ensures that multiple background sessions with the same identifier are not created in this instance of the application. If you want to support multiple background sessions within a single process, you should create each session with its own identifier.
      */
-    static NSURLSession *session = nil;
-    static dispatch_once_t onceToken;
+    __block NSURLSession *session = nil;
+    dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         
         NSURLSessionConfiguration *backgroundConfiguration;
@@ -74,12 +71,16 @@ static NSString* backgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
         // iOS 8+ or OS X 10.10+
         backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier: [NSString stringWithFormat:backgroundSessionIdentifierFormat, self.appBundleId]];
 #endif
-    
-        backgroundConfiguration.discretionary = YES;
+
 #if TARGET_OS_IPHONE
+        // iOS-only settings
+        // Do not wake up the App after completing the upload
         backgroundConfiguration.sessionSendsLaunchEvents = NO;
+        // Create a shared container just in case TrustKit is used in an App Extension
         backgroundConfiguration.sharedContainerIdentifier = [NSString stringWithFormat:backgroundSessionIdentifierFormat, self.appBundleId];
 #endif
+
+        backgroundConfiguration.discretionary = YES;
         session = [NSURLSession sessionWithConfiguration:backgroundConfiguration delegate:self delegateQueue:nil];
     });
     return session;
@@ -131,7 +132,7 @@ static NSString* backgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
     // Create a temporary file for storing the JSON data in ~/tmp
     NSURL *tmpDirURL = [NSURL fileURLWithPath:NSTemporaryDirectory() isDirectory:YES];
     NSURL *tmpFileURL = [[tmpDirURL URLByAppendingPathComponent:[[NSProcessInfo processInfo] globallyUniqueString]] URLByAppendingPathExtension:@"tsk-report"];
-    TSKLog(@"fileURL: %@", [tmpFileURL path]);
+    TSKLog(@"Report created at: %@", [tmpFileURL path]);
     
     // Write the JSON report data to the temporary file
     if (!([[report json] writeToFile:[tmpFileURL path] atomically:YES])) {
@@ -145,36 +146,15 @@ static NSString* backgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
 }
 
 
-- (void)URLSession:(NSURLSession *)session
-              task:(NSURLSessionTask *)task
-   didSendBodyData:(int64_t)bytesSent
-    totalBytesSent:(int64_t)totalBytesSent
-totalBytesExpectedToSend:(int64_t)totalBytesExpectedToSend
-{
-    
-    /*
-     Report progress on the task.
-     If you created more than one task, you might keep references to them and report on them individually.
-     */
-    
-    TSKLog(@"totalBytesSent:%lld", totalBytesSent);
-    TSKLog(@"totalBytesExpectedToSend:%lld", totalBytesExpectedToSend);
-    
-}
-
-
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
 {
-    
     if (error == nil)
     {
-        TSKLog(@"Task: %@ completed successfully", task);
+        TSKLog(@"Background upload - task %@ completed successfully", task);
     }
     else
     {
-        TSKLog(@"Task: %@ completed with error: %@", task, [error localizedDescription]);
-        TSKLog(@"Task: error.code: %ld", (long)error.code);
-        
+        TSKLog(@"Background upload - task %@ completed with error: %@ (code %ld)", task, [error localizedDescription], (long)error.code);
     }
 }
 

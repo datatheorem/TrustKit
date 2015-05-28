@@ -84,22 +84,17 @@
     NSURLRequest *request = [report requestToUri:reportURI];
     
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration
+                                                          delegate:self
+                                                     delegateQueue:nil];
     NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request
-                                                    completionHandler:^(NSData *data,
-                                                                        NSURLResponse *response,
-                                                                        NSError *error) {
-                                                        
-                                                        // You can add something here to handle error conditions.
+                                                    completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                                         // We don't do anything here as reports are meant to be sent
-                                                        // on a best-effort basis, so even if we got error, there's
-                                                        // nothing we would do anyway.
+                                                        // on a best-effort basis: even if we got an error, there's
+                                                        // nothing to do anyway.
                                                     }];
-    
     [postDataTask resume];
-
 }
 
 
 @end
-
