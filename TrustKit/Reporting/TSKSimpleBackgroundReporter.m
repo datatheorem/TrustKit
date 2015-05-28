@@ -11,7 +11,7 @@
 #import "TSKPinFailureReport.h"
 
 
-// Session identifier for background uploads and shared container: <bundle_id>.TSKSimpleReporter
+// Session identifier for background uploads: <bundle_id>.TSKSimpleReporter
 static NSString* backgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
 
 
@@ -76,8 +76,6 @@ static NSString* backgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
         // iOS-only settings
         // Do not wake up the App after completing the upload
         backgroundConfiguration.sessionSendsLaunchEvents = NO;
-        // Create a shared container just in case TrustKit is used in an App Extension
-        backgroundConfiguration.sharedContainerIdentifier = [NSString stringWithFormat:backgroundSessionIdentifierFormat, self.appBundleId];
 #endif
 
         backgroundConfiguration.discretionary = YES;

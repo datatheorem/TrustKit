@@ -22,7 +22,15 @@
 
 
 // Init with default bundle ID and current time as the date-time
-- (instancetype) initWithAppBundleId:(NSString *) appBundleId appVersion:(NSString *)appVersion notedHostname:(NSString *)notedHostname hostname:(NSString *)serverHostname port:(NSNumber *)serverPort dateTime:(NSDate *)dateTime includeSubdomains:(BOOL) includeSubdomains validatedCertificateChain:(NSArray *)validatedCertificateChain knownPins:(NSArray *)knownPins;
+- (instancetype) initWithAppBundleId:(NSString *) appBundleId
+                          appVersion:(NSString *)appVersion
+                       notedHostname:(NSString *)notedHostname
+                            hostname:(NSString *)serverHostname
+                                port:(NSNumber *)serverPort
+                            dateTime:(NSDate *)dateTime
+                   includeSubdomains:(BOOL) includeSubdomains
+           validatedCertificateChain:(NSArray *)validatedCertificateChain
+                           knownPins:(NSArray *)knownPins;
 
 // Return the report in JSON format for POSTing it
 - (NSData *)json;
