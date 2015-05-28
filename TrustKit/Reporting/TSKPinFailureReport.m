@@ -11,7 +11,7 @@
 @implementation TSKPinFailureReport
 
 
-- (instancetype) initWithAppBundleId:(NSString *) appBundleId appVersion:(NSString *)appVersion notedHostname:(NSString *)notedHostname serverHostname:(NSString *)serverHostname port:(NSNumber *)serverPort dateTime:(NSDate *)dateTime includeSubdomains:(BOOL) includeSubdomains validatedCertificateChain:(NSArray *)validatedCertificateChain knownPins:(NSArray *)knownPins;
+- (instancetype) initWithAppBundleId:(NSString *) appBundleId appVersion:(NSString *)appVersion notedHostname:(NSString *)notedHostname hostname:(NSString *)serverHostname port:(NSNumber *)serverPort dateTime:(NSDate *)dateTime includeSubdomains:(BOOL) includeSubdomains validatedCertificateChain:(NSArray *)validatedCertificateChain knownPins:(NSArray *)knownPins;
 {
     self = [super init];
     if (self)
@@ -19,8 +19,8 @@
         _appBundleId = appBundleId;
         _appVersion = appVersion;
         _notedHostname = notedHostname;
-        _serverHostname = serverHostname;
-        _serverPort = serverPort;
+        _hostname = serverHostname;
+        _port = serverPort;
         _dateTime = dateTime;
         _includeSubdomains = includeSubdomains;
         _validatedCertificateChain = validatedCertificateChain;
@@ -45,8 +45,8 @@
         @"app-bundle-id" : self.appBundleId,
         @"app-version" : self.appVersion,
         @"date-time" : currentTimeStr,
-        @"hostname" : self.serverHostname,
-        @"port" : self.serverPort,
+        @"hostname" : self.hostname,
+        @"port" : self.port,
         @"include-subdomains" : [NSNumber numberWithBool:self.includeSubdomains],
         @"noted-hostname" : self.notedHostname,
         @"validated-certificate-chain" : self.validatedCertificateChain,

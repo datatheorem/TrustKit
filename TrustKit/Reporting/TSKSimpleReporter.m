@@ -48,67 +48,40 @@
  * Pin validation failed for a connection to a pinned domain
  * In this implementation for a simple reporter, we're just going to send out the report upon each failure
  */
-- (void) pinValidationFailed:(NSString *) pinnedDomainStr
-              serverHostname:(NSString *) hostnameStr
-                  serverPort:(NSNumber *) port
-                reportingURL:(NSString *) reportingURLStr
-           includeSubdomains:(BOOL) includeSubdomains
-            certificateChain:(NSArray *) validatedCertificateChain
-                expectedPins:(NSArray *) knownPins
+- (void) pinValidationFailedForHostname:(NSString *) serverHostname
+                                   port:(NSNumber *) serverPort
+                          notedHostname:(NSString *) notedHostname
+                              reportURI:(NSURL *) reportURI
+                      includeSubdomains:(BOOL) includeSubdomains
+              validatedCertificateChain:(NSArray *) certificateChain
+                              knownPins:(NSArray *) knownPins
 {
-    if ([pinnedDomainStr length] == 0)
+    // Default port to 443 if not specified
+    if (serverPort == nil)
     {
-        [NSException raise:@"TrustKit Simple Reporter configuration invalid"
-                    format:@"Reporter was given empty pinnedDomainStr"];
-    }
-
-    if ([hostnameStr length] == 0)
-    {
-        [NSException raise:@"TrustKit Simple Reporter configuration invalid"
-                    format:@"Reporter was given empty serverHostname"];
+        serverPort = [NSNumber numberWithInt:443];
     }
     
-    //default port to 443 if not specified
-    if (port == nil)
-    {
-        port = [NSNumber numberWithInt:443];
-    }
-    
-    NSURL *reportingURL = [NSURL URLWithString:reportingURLStr];
-    if (reportingURL == nil)
+    if (reportURI == nil)
     {
         [NSException raise:@"TrustKit Simple Reporter configuration invalid"
                     format:@"Reporter was given an invalid value for reportingURL: %@ for domain %@",
-         reportingURLStr, pinnedDomainStr];
-    }
-    
-    if ([validatedCertificateChain count] == 0)
-    {
-        [NSException raise:@"TrustKit Simple Reporter configuration invalid"
-                    format:@"Reporter was given empty certificateChain"];
-        
-    }
-    
-    if ([knownPins count] == 0)
-    {
-        [NSException raise:@"TrustKit Simple Reporter configuration invalid"
-                    format:@"Reporter was given empty expectedPins"];
-
+         reportURI, notedHostname];
     }
     
     // Create the pin validation failure report
     TSKPinFailureReport *report = [[TSKPinFailureReport alloc]initWithAppBundleId:self.appBundleId
-                                                                          appVersion:self.appVersion
-                                                                   notedHostname:pinnedDomainStr
-                                                                  serverHostname:hostnameStr
-                                                                            port:port
+                                                                       appVersion:self.appVersion
+                                                                    notedHostname:notedHostname
+                                                                         hostname:serverHostname
+                                                                             port:serverPort
                                                                          dateTime:[NSDate date] // Use the current time
-                                                               includeSubdomains:includeSubdomains
-                                                       validatedCertificateChain:validatedCertificateChain
-                                                                       knownPins:knownPins];
+                                                                includeSubdomains:includeSubdomains
+                                                        validatedCertificateChain:certificateChain
+                                                                        knownPins:knownPins];
     
     // POST it to the report uri
-    NSURLRequest *request = [report requestToUri:reportingURL];
+    NSURLRequest *request = [report requestToUri:reportURI];
     
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];

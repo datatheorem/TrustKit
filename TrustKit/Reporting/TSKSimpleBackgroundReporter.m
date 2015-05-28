@@ -90,66 +90,41 @@ static NSString* backgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
   In this implementation for a simple background reporter, we're just going to send out the report upon each failure
   in a background task
  */
-- (void) pinValidationFailed:(NSString *) pinnedDomainStr
-              serverHostname:(NSString *) hostnameStr
-                  serverPort:(NSNumber *) port
-                reportingURL:(NSString *) reportingURLStr
-           includeSubdomains:(BOOL) includeSubdomains
-            certificateChain:(NSArray *) validatedCertificateChain
-                expectedPins:(NSArray *) knownPins
+
+- (void) pinValidationFailedForHostname:(NSString *) serverHostname
+                                   port:(NSNumber *) serverPort
+                          notedHostname:(NSString *) notedHostname
+                              reportURI:(NSURL *) reportURI
+                      includeSubdomains:(BOOL) includeSubdomains
+              validatedCertificateChain:(NSArray *) certificateChain
+                              knownPins:(NSArray *) knownPins
 {
-    if ([pinnedDomainStr length] == 0)
+    // Default port to 443 if not specified
+    if (serverPort == nil)
     {
-        [NSException raise:@"TrustKit Simple Background Reporter configuration invalid"
-                    format:@"Reporter was given empty pinnedDomainStr"];
+        serverPort = [NSNumber numberWithInt:443];
     }
     
-    if ([hostnameStr length] == 0)
-    {
-        [NSException raise:@"TrustKit Simple Background Reporter configuration invalid"
-                    format:@"Reporter was given empty serverHostname"];
-    }
-    
-    //default port to 443 if not specified
-    if (port == nil)
-    {
-        port = [NSNumber numberWithInt:443];
-    }
-    
-    NSURL *reportingURL = [NSURL URLWithString:reportingURLStr];
-    if (reportingURL == nil)
+    if (reportURI == nil)
     {
         [NSException raise:@"TrustKit Simple Background Reporter configuration invalid"
                     format:@"Reporter was given an invalid value for reportingURL: %@ for domain %@",
-         reportingURLStr, pinnedDomainStr];
+         reportURI, notedHostname];
     }
-    
-    if ([validatedCertificateChain count] == 0)
-    {
-        [NSException raise:@"TrustKit Simple Background Reporter configuration invalid"
-                    format:@"Reporter was given empty certificateChain"];
-        
-    }
-    
-    if ([knownPins count] == 0)
-    {
-        [NSException raise:@"TrustKit Simple Background Reporter configuration invalid"
-                    format:@"Reporter was given empty expectedPins"];
-        
-    }
+
     // Create the pin validation failure report
     TSKPinFailureReport *report = [[TSKPinFailureReport alloc]initWithAppBundleId:self.appBundleId
                                                                        appVersion:self.appVersion
-                                                                    notedHostname:pinnedDomainStr
-                                                                   serverHostname:hostnameStr
-                                                                             port:port
+                                                                    notedHostname:notedHostname
+                                                                         hostname:serverHostname
+                                                                             port:serverPort
                                                                          dateTime:[NSDate date] // Use the current time
                                                                 includeSubdomains:includeSubdomains
-                                                        validatedCertificateChain:validatedCertificateChain
+                                                        validatedCertificateChain:certificateChain
                                                                         knownPins:knownPins];
     
     // Create the HTTP request
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:reportingURL];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:reportURI];
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
