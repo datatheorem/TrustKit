@@ -8,6 +8,7 @@
 
 #import "TSKSimpleBackgroundReporter.h"
 #import "TrustKit+Private.h"
+#import "TSKPinFailureReport.h"
 
 
 // Session identifier for background uploads: <bundle id>.TSKSimpleReporter
@@ -148,39 +149,27 @@ static NSString* backgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
                     format:@"Reporter was given empty expectedPins"];
         
     }
+    // Create the pin validation failure report
+    TSKPinFailureReport *report = [[TSKPinFailureReport alloc]initWithAppVersion:self.appVersion
+                                                                   notedHostname:pinnedDomainStr
+                                                                  serverHostname:hostnameStr
+                                                                            port:port
+                                                               includeSubdomains:includeSubdomains
+                                                       validatedCertificateChain:validatedCertificateChain
+                                                                       knownPins:knownPins];
     
+    // Send the falure report
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:reportingURL];
-    
-    NSDate *currentTime = [NSDate date];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
-    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
-    NSString *currentTimeStr = [dateFormatter stringFromDate: currentTime];
-    
-    NSDictionary *requestData = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                 self.appBundleId, @"app-bundle-id",
-                                 self.appVersion, @"app-version",
-                                 currentTimeStr, @"date-time",
-                                 hostnameStr, @"hostname",
-                                 port, @"port",
-                                 [NSNumber numberWithBool:includeSubdomains], @"include-subdomains",
-                                 pinnedDomainStr, @"noted-hostname",
-                                 validatedCertificateChain, @"validated-certificate-chain",
-                                 knownPins, @"known-pins",
-                                 nil];
-    
-    NSError *error;
-    NSData *postData = [NSJSONSerialization dataWithJSONObject:requestData options:0 error:&error];
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     
     //make a file name to write the data to using the tmp directory:
     NSURL *tmpDirURL = [NSURL fileURLWithPath:NSTemporaryDirectory() isDirectory:YES];
-    NSURL *fileURL = [[tmpDirURL URLByAppendingPathComponent:@"TSKReport"] URLByAppendingPathExtension:currentTimeStr];
+    NSURL *fileURL = [[tmpDirURL URLByAppendingPathComponent:[[NSProcessInfo processInfo] globallyUniqueString]] URLByAppendingPathExtension:@"tsk-report"];
     TSKLog(@"fileURL: %@", [fileURL path]);
     
     //write postdata to file as we can only use background upload task with file
-    if (!([postData writeToFile:[fileURL path] atomically:YES])) {
+    if (!([[report json] writeToFile:[fileURL path] atomically:YES])) {
         [NSException raise:@"TrustKit Simple Reporter runtime error"
                     format:@"Report cannot be saved to file"];
     }

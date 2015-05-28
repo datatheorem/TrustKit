@@ -10,15 +10,15 @@
 
 @interface TSKPinFailureReport : NSObject
 
-@property NSString *appBundleId;
-@property NSString *appVersion;
-@property NSString *notedHostname;
-@property NSString *serverHostname;
-@property NSNumber *serverPort;
-@property NSDate *dateTime;
-@property BOOL includeSubdomains;
-@property NSArray *validatedCertificateChain;
-@property NSArray *knownPins;
+@property (readonly) NSString *appBundleId;
+@property (readonly) NSString *appVersion;
+@property (readonly) NSString *notedHostname;
+@property (readonly) NSString *serverHostname;
+@property (readonly) NSNumber *serverPort;
+@property (readonly) NSDate *dateTime;
+@property (readonly) BOOL includeSubdomains;
+@property (readonly) NSArray *validatedCertificateChain;
+@property (readonly) NSArray *knownPins;
 
 // Init with default bundle ID and current time as the date-time
 - (instancetype) initWithAppVersion:(NSString *)appVersion notedHostname:(NSString *)notedHostname serverHostname:(NSString *)serverHostname port:(NSNumber *)serverPort includeSubdomains:(BOOL) includeSubdomains validatedCertificateChain:(NSArray *)validatedCertificateChain knownPins:(NSArray *)knownPins;

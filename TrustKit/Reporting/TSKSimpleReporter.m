@@ -7,6 +7,8 @@
 //
 
 #import "TSKSimpleReporter.h"
+#import "TSKPinFailureReport.h"
+
 
 @interface TSKSimpleReporter()
 @property (nonatomic, strong) NSString * appBundleId;
@@ -107,34 +109,23 @@
 
     }
     
+    // Create the pin validation failure report
+    TSKPinFailureReport *report = [[TSKPinFailureReport alloc]initWithAppVersion:self.appVersion
+                                                                   notedHostname:pinnedDomainStr
+                                                                  serverHostname:hostnameStr
+                                                                            port:port
+                                                               includeSubdomains:includeSubdomains
+                                                       validatedCertificateChain:validatedCertificateChain
+                                                                       knownPins:knownPins];
+    
+    // POST it to the report uri
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:self delegateQueue:nil];
+    
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:reportingURL];
-    
-    NSDate *currentTime = [NSDate date];
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
-    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
-    NSString *currentTimeStr = [dateFormatter stringFromDate: currentTime];
-    
-    NSDictionary *requestData = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                 self.appBundleId, @"app-bundle-id",
-                                 self.appVersion, @"app-version",
-                                 currentTimeStr, @"date-time",
-                                 hostnameStr, @"hostname",
-                                 port, @"port",
-                                 [NSNumber numberWithBool:includeSubdomains], @"include-subdomains",
-                                 pinnedDomainStr, @"noted-hostname",
-                                 validatedCertificateChain, @"validated-certificate-chain",
-                                 knownPins, @"known-pins",
-                                 nil];
-    
-    NSError *error;
-    NSData *postData = [NSJSONSerialization dataWithJSONObject:requestData options:0 error:&error];
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [request setHTTPBody:postData];
-    
+    [request setHTTPBody:[report json]];
     
     NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request
                                                     completionHandler:^(NSData *data,
@@ -148,7 +139,6 @@
                                                     }];
     
     [postDataTask resume];
-    
 
 }
 

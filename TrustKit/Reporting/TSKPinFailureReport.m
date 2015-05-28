@@ -17,6 +17,11 @@
     if (self)
     {
         _appBundleId = [[NSBundle mainBundle] bundleIdentifier];
+        if (_appBundleId == nil)
+        {
+            // Happens in unit tests
+            _appBundleId = @"N/A";
+        }
         _appVersion = appVersion;
         _notedHostname = notedHostname;
         _serverHostname = serverHostname;
