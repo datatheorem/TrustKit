@@ -36,17 +36,16 @@ static NSString* backgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
     self = [super init];
     if (self)
     {
-        // Custom initialization
-        if ([appBundleId length] == 0)
+        if ((appBundleId == nil) || ([appBundleId length] == 0))
         {
-            [NSException raise:@"TrustKit Simple Background Reporter configuration invalid"
+            [NSException raise:@"TrustKit Simple Reporter configuration invalid"
                         format:@"Reporter was given empty appBundleId"];
         }
         self.appBundleId = appBundleId;
         
-        if ([appVersion length] == 0)
+        if ((appVersion == nil) || ([appVersion length] == 0))
         {
-            [NSException raise:@"TrustKit Simple Background Reporter configuration invalid"
+            [NSException raise:@"TrustKit Simple Reporter configuration invalid"
                         format:@"Reporter was given empty appVersion"];
         }
         self.appVersion = appVersion;
