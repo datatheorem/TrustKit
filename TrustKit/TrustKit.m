@@ -258,23 +258,26 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
         [NSException raise:@"TrustKit already initialized" format:@"TrustKit was already initialized with the following SSL pins: %@", _trustKitGlobalConfiguration];
     }
     
-    if ([trustKitConfig count] > 0)
-    {
-        initializeSubjectPublicKeyInfoCache();
-        
-        // Convert and store the SSL pins in our global variable
-        _trustKitGlobalConfiguration = [[NSDictionary alloc]initWithDictionary:parseTrustKitArguments(trustKitConfig)];
-        
-        // Hook SSLHandshake()
-        if (original_SSLHandshake == NULL)
+    static dispatch_once_t predicate;
+    dispatch_once(&predicate, ^{
+        if ([trustKitConfig count] > 0)
         {
-            int rebindResult = -1;
-            char functionToHook[] = "SSLHandshake";
-            original_SSLHandshake = dlsym(RTLD_DEFAULT, functionToHook);
-            rebindResult = rebind_symbols((struct rebinding[1]){{(char *)functionToHook, (void *)replaced_SSLHandshake}}, 1);
-            if ((rebindResult < 0) || (original_SSLHandshake == NULL))
+            initializeSubjectPublicKeyInfoCache();
+            
+            // Convert and store the SSL pins in our global variable
+            _trustKitGlobalConfiguration = [[NSDictionary alloc]initWithDictionary:parseTrustKitArguments(trustKitConfig)];
+            
+            // Hook SSLHandshake()
+            if (original_SSLHandshake == NULL)
             {
-                [NSException raise:@"TrustKit initialization error" format:@"Fishook returned an error: %d", rebindResult];
+                int rebindResult = -1;
+                char functionToHook[] = "SSLHandshake";
+                original_SSLHandshake = dlsym(RTLD_DEFAULT, functionToHook);
+                rebindResult = rebind_symbols((struct rebinding[1]){{(char *)functionToHook, (void *)replaced_SSLHandshake}}, 1);
+                if ((rebindResult < 0) || (original_SSLHandshake == NULL))
+                {
+                    [NSException raise:@"TrustKit initialization error" format:@"Fishook returned an error: %d", rebindResult];
+                }
             }
         }
         
@@ -291,7 +294,7 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
 
 + (void) initializeWithConfiguration:(NSDictionary *)trustKitConfig
 {
-    TSKLog(@"TrustKit started statically in App %@", CFBundleGetValueForInfoDictionaryKey(CFBundleGetMainBundle(), (__bridge CFStringRef)@"CFBundleIdentifier"));
+    TSKLog(@"TrustKit started statically in App %@", (NSString *)CFBundleGetIdentifier(CFBundleGetMainBundle()));
     initializeTrustKit(trustKitConfig);
 }
 
@@ -327,7 +330,7 @@ __attribute__((constructor)) static void initializeAsDylib(int argc, const char 
 {
     // TrustKit just got injected in the App
     CFBundleRef appBundle = CFBundleGetMainBundle();
-    TSKLog(@"TrustKit started dynamically in App %@", CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)@"CFBundleIdentifier"));
+    TSKLog(@"TrustKit started dynamically in App %@", (NSString *)CFBundleGetIdentifier(CFBundleGetMainBundle()));
     
     // Retrieve the configuration from the App's Info.plist file
     NSDictionary *trustKitConfigFromInfoPlist = CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)kTSKConfiguration);
