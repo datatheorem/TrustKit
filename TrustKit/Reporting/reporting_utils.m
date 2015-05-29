@@ -14,7 +14,7 @@ NSArray *convertTrustToPemArray(SecTrustRef serverTrust)
     // Convert the trust object into an array of PEM certificates
     NSMutableArray *certificateChain = [NSMutableArray array];
     CFIndex chainLen = SecTrustGetCertificateCount(serverTrust);
-    for (CFIndex i=0;i<=chainLen;i++)
+    for (CFIndex i=0;i<chainLen;i++)
     {
         NSData *certificateData = (__bridge NSData *)(SecCertificateCopyData(SecTrustGetCertificateAtIndex(serverTrust, i)));
         [certificateChain addObject:[NSString stringWithFormat:@"-----BEGIN CERTIFICATE-----\n%@\n-----END CERTIFICATE-----", [certificateData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]]];
