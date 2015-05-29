@@ -8,7 +8,7 @@
 
 #import "TSKSimpleReporter.h"
 #import "TSKPinFailureReport.h"
-
+#import "reporting_utils.h"
 
 @interface TSKSimpleReporter()
 @property (nonatomic, strong) NSString * appBundleId;
@@ -17,6 +17,7 @@
 
 
 @implementation TSKSimpleReporter
+
 
 /*
  * Initialize the reporter with the app's bundle id and app version
@@ -50,11 +51,11 @@
  */
 - (void) pinValidationFailedForHostname:(NSString *) serverHostname
                                    port:(NSNumber *) serverPort
+                                  trust:(SecTrustRef) serverTrust
                           notedHostname:(NSString *) notedHostname
-                              reportURI:(NSURL *) reportURI
+                              reportURIs:(NSArray *) reportURIs
                       includeSubdomains:(BOOL) includeSubdomains
-              validatedCertificateChain:(NSArray *) certificateChain
-                              knownPins:(NSArray *) knownPins
+                              knownPins:(NSArray *) knownPins;
 {
     // Default port to 443 if not specified
     if (serverPort == nil)
@@ -62,14 +63,16 @@
         serverPort = [NSNumber numberWithInt:443];
     }
     
-    if (reportURI == nil)
+    if (reportURIs == nil)
     {
         [NSException raise:@"TrustKit Simple Reporter configuration invalid"
-                    format:@"Reporter was given an invalid value for reportingURL: %@ for domain %@",
-         reportURI, notedHostname];
+                    format:@"Reporter was given an invalid value for reportURIs: %@ for domain %@",
+         reportURIs, notedHostname];
     }
     
     // Create the pin validation failure report
+    NSArray *certificateChain = convertTrustToPemArray(serverTrust);
+    NSArray *formattedPins = convertPinsToHpkpPins(knownPins);
     TSKPinFailureReport *report = [[TSKPinFailureReport alloc]initWithAppBundleId:self.appBundleId
                                                                        appVersion:self.appVersion
                                                                     notedHostname:notedHostname
@@ -78,22 +81,26 @@
                                                                          dateTime:[NSDate date] // Use the current time
                                                                 includeSubdomains:includeSubdomains
                                                         validatedCertificateChain:certificateChain
-                                                                        knownPins:knownPins];
+                                                                        knownPins:formattedPins];
     
-    // POST it to the report uri
-    NSURLRequest *request = [report requestToUri:reportURI];
-    
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    // Create the session for sending the report
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration
                                                           delegate:self
                                                      delegateQueue:nil];
-    NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request
-                                                    completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                        // We don't do anything here as reports are meant to be sent
-                                                        // on a best-effort basis: even if we got an error, there's
-                                                        // nothing to do anyway.
-                                                    }];
-    [postDataTask resume];
+    
+    // POST the report to all the configured report URIs
+    for (NSURL *reportUri in reportURIs)
+    {
+        NSURLRequest *request = [report requestToUri:reportUri];
+        NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request
+                                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                            // We don't do anything here as reports are meant to be sent
+                                                            // on a best-effort basis: even if we got an error, there's
+                                                            // nothing to do anyway.
+                                                        }];
+        [postDataTask resume];
+    }
 }
 
 

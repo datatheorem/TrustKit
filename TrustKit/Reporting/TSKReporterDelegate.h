@@ -16,10 +16,10 @@
  */
 - (void) pinValidationFailedForHostname:(NSString *) serverHostname
                                    port:(NSNumber *) serverPort
+                                  trust:(SecTrustRef) serverTrust
                           notedHostname:(NSString *) notedHostname
-                              reportURI:(NSURL *) reportURI
+                              reportURIs:(NSArray *) reportURIs
                       includeSubdomains:(BOOL) includeSubdomains
-              validatedCertificateChain:(NSArray *) certificateChain
                               knownPins:(NSArray *) knownPins;
 
 @optional

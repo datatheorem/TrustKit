@@ -9,7 +9,7 @@
 #import "TSKSimpleBackgroundReporter.h"
 #import "TrustKit+Private.h"
 #import "TSKPinFailureReport.h"
-
+#import "reporting_utils.h"
 
 // Session identifier for background uploads: <bundle_id>.TSKSimpleReporter
 static NSString* backgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
@@ -35,18 +35,21 @@ static NSString* backgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
     {
         if ((appBundleId == nil) || ([appBundleId length] == 0))
         {
-            [NSException raise:@"TrustKit Simple Reporter configuration invalid"
-                        format:@"Reporter was given empty appBundleId"];
+            self.appBundleId = @"N/A";
         }
-        self.appBundleId = appBundleId;
+        else
+        {
+            self.appBundleId = appBundleId;
+        }
         
         if ((appVersion == nil) || ([appVersion length] == 0))
         {
-            [NSException raise:@"TrustKit Simple Reporter configuration invalid"
-                        format:@"Reporter was given empty appVersion"];
+            self.appVersion = @"N/A";
         }
-        self.appVersion = appVersion;
-        
+        else
+        {
+            self.appVersion = appVersion;
+        }
         self.session = [self backgroundSession];
     }
     return self;
@@ -92,11 +95,11 @@ static NSString* backgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
 
 - (void) pinValidationFailedForHostname:(NSString *) serverHostname
                                    port:(NSNumber *) serverPort
+                                  trust:(SecTrustRef) serverTrust
                           notedHostname:(NSString *) notedHostname
-                              reportURI:(NSURL *) reportURI
+                             reportURIs:(NSArray *) reportURIs
                       includeSubdomains:(BOOL) includeSubdomains
-              validatedCertificateChain:(NSArray *) certificateChain
-                              knownPins:(NSArray *) knownPins
+                              knownPins:(NSArray *) knownPins;
 {
     // Default port to 443 if not specified
     if (serverPort == nil)
@@ -104,14 +107,16 @@ static NSString* backgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
         serverPort = [NSNumber numberWithInt:443];
     }
     
-    if (reportURI == nil)
+    if (reportURIs == nil)
     {
         [NSException raise:@"TrustKit Simple Background Reporter configuration invalid"
-                    format:@"Reporter was given an invalid value for reportingURL: %@ for domain %@",
-         reportURI, notedHostname];
+                    format:@"Reporter was given an invalid value for reportURIs: %@ for domain %@",
+         reportURIs, notedHostname];
     }
-
+    
     // Create the pin validation failure report
+    NSArray *certificateChain = convertTrustToPemArray(serverTrust);
+    NSArray *formattedPins = convertPinsToHpkpPins(knownPins);
     TSKPinFailureReport *report = [[TSKPinFailureReport alloc]initWithAppBundleId:self.appBundleId
                                                                        appVersion:self.appVersion
                                                                     notedHostname:notedHostname
@@ -120,12 +125,7 @@ static NSString* backgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
                                                                          dateTime:[NSDate date] // Use the current time
                                                                 includeSubdomains:includeSubdomains
                                                         validatedCertificateChain:certificateChain
-                                                                        knownPins:knownPins];
-    
-    // Create the HTTP request
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:reportURI];
-    [request setHTTPMethod:@"POST"];
-    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+                                                                        knownPins:formattedPins];
     
     // Create a temporary file for storing the JSON data in ~/tmp
     NSURL *tmpDirURL = [NSURL fileURLWithPath:NSTemporaryDirectory() isDirectory:YES];
@@ -138,9 +138,18 @@ static NSString* backgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
                     format:@"Report cannot be saved to file"];
     }
     
-    // Pass the URL and the temporary file to the background upload task and start uploading
-    NSURLSessionUploadTask *uploadTask = [self.session uploadTaskWithRequest:request fromFile:tmpFileURL];
-    [uploadTask resume];
+    
+    // Create the HTTP request for all the configured report URIs and send it
+    for (NSURL *reportUri in reportURIs)
+    {
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:reportUri];
+        [request setHTTPMethod:@"POST"];
+        [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        
+        // Pass the URL and the temporary file to the background upload task and start uploading
+        NSURLSessionUploadTask *uploadTask = [self.session uploadTaskWithRequest:request fromFile:tmpFileURL];
+        [uploadTask resume];
+    }
 }
 
 

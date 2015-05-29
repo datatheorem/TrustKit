@@ -101,16 +101,17 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
             if (validationResult != TSKPinValidationResultSuccess)
             {
                 // Pin validation failed: notify the reporter delegate if a report URI was configured
-                for (NSURL *reportUri in domainConfig[kTSKReportUris])
+                NSArray *reportUris = domainConfig[kTSKReportUris];
+                if ((reportUris != nil) && ([reportUris count] > 0))
                 {
                     dispatch_async(_pinFailureReporterQueue, ^(void)
                                    {
                                        [_pinFailureReporter pinValidationFailedForHostname:serverNameStr
                                                                                       port:nil
+                                                                                     trust:serverTrust
                                                                              notedHostname:domainConfigKey
-                                                                                 reportURI:reportUri
+                                                                                 reportURIs:reportUris
                                                                          includeSubdomains:[domainConfig[kTSKIncludeSubdomains] boolValue]
-                                                                 validatedCertificateChain:nil
                                                                                  knownPins:domainConfig[kTSKPublicKeyHashes]];
                                    });
                 }
