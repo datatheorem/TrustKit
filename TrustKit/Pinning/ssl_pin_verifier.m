@@ -40,14 +40,13 @@ static BOOL isSubdomain(NSString *domain, NSString *subdomain)
 }
 
 
-NSDictionary *getPinningConfigurationForDomain(NSString *hostname, NSDictionary *trustKitConfiguration)
+NSString *getPinningConfigurationKeyForDomain(NSString *hostname, NSDictionary *trustKitConfiguration)
 {
-    // Do we have this specific domain explicitely pinned ?
-    NSDictionary *serverPinningConfiguration = trustKitConfiguration[hostname];
+    NSString *configHostname = nil;
     
-    // No pins explicitly configured for this domain
-    if (serverPinningConfiguration == nil)
+    if (trustKitConfiguration[hostname] == nil)
     {
+        // No pins explicitly configured for this domain
         // Look for an includeSubdomain pin that applies
         for (NSString *pinnedServerName in trustKitConfiguration)
         {
@@ -58,20 +57,25 @@ NSDictionary *getPinningConfigurationForDomain(NSString *hostname, NSDictionary 
                 TSKLog(@"Checking includeSubdomains configuration for %@", pinnedServerName);
                 if (isSubdomain(pinnedServerName, hostname))
                 {
-                    // Yes; let's use the parent domain's pins
+                    // Yes; let's use the parent domain's pinning configuration
                     TSKLog(@"Applying includeSubdomains configuration from %@ to %@", pinnedServerName, hostname);
-                    serverPinningConfiguration = trustKitConfiguration[pinnedServerName];
+                    configHostname = pinnedServerName;
                     break;
                 }
             }
         }
     }
+    else
+    {
+        // This hostname has a pinnning configuration
+        configHostname = hostname;
+    }
     
-    if (serverPinningConfiguration == nil)
+    if (configHostname == nil)
     {
         TSKLog(@"Domain %@ is not pinned", hostname);
     }
-    return serverPinningConfiguration;
+    return configHostname;
 }
 
 

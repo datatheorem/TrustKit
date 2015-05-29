@@ -38,10 +38,8 @@
                                                                     kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                                     kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY="]}});
     
-    NSDictionary *serverConfig = getPinningConfigurationForDomain(@"www.good.com", trustKitConfig);
-    
-    XCTAssert(serverConfig != nil, @"Did not receive a configuration for a pinned domain");
-    XCTAssert(serverConfig == trustKitConfig[@"www.good.com"], @"Did not receive a configuration for a pinned domain");
+    NSString *serverConfigKey = getPinningConfigurationKeyForDomain(@"www.good.com", trustKitConfig);
+    XCTAssert([serverConfigKey isEqualToString:@"www.good.com"], @"Did not receive a configuration for a pinned domain");
 }
 
 
@@ -53,9 +51,8 @@
                                                                                             ]}});
     
     // Ensure www.datatheorem.com gets no configuration
-    NSDictionary *serverConfig = getPinningConfigurationForDomain(@"www.datatheorem.com", trustKitConfig);
-    
-    XCTAssert(serverConfig == nil, @"Received a configuration a non-pinned domain");
+    NSString *serverConfigKey = getPinningConfigurationKeyForDomain(@"www.datatheorem.com", trustKitConfig);
+    XCTAssert(serverConfigKey == nil, @"Received a configuration a non-pinned domain");
 }
 
 
@@ -68,10 +65,8 @@
                                                                                             ]}});
     
     // Ensure www.good.com gets the configuration set for good.com as includeSubdomains is enabled
-    NSDictionary *serverConfig = getPinningConfigurationForDomain(@"www.good.com", trustKitConfig);
-    
-    XCTAssert(serverConfig != nil, @"IncludeSubdomains did not work");
-    XCTAssert(serverConfig == trustKitConfig[@"good.com"], @"IncludeSubdomains did not work");
+    NSString *serverConfigKey = getPinningConfigurationKeyForDomain(@"www.good.com", trustKitConfig);
+    XCTAssert([serverConfigKey isEqualToString:@"good.com"], @"IncludeSubdomains did not work");
 }
 
 
@@ -84,9 +79,8 @@
                                                                                             ]}});
     
     // Ensure www.good.com does not get the configuration set for good.com
-    NSDictionary *serverConfig = getPinningConfigurationForDomain(@"www.good.com", trustKitConfig);
-    
-    XCTAssert(serverConfig == nil, @"IncludeSubdomains did not work");
+    NSString *serverConfigKey = getPinningConfigurationKeyForDomain(@"www.good.com", trustKitConfig);
+    XCTAssert(serverConfigKey == nil, @"IncludeSubdomains did not work");
 }
 
 - (void)testIncludeSubdomainsEnabledAndSpecificConfiguration
@@ -102,10 +96,8 @@
                                                                                             ]}});
     
     // Ensure the configuration specific to www.good.com takes precedence over the more general config for good.com
-    NSDictionary *serverConfig = getPinningConfigurationForDomain(@"www.good.com", trustKitConfig);
-    
-    XCTAssert(serverConfig != nil, @"IncludeSubdomains did not work");
-    XCTAssert(serverConfig == trustKitConfig[@"www.good.com"], @"IncludeSubdomains took precedence over a more specialized configuration");
+    NSString *serverConfigKey = getPinningConfigurationKeyForDomain(@"www.good.com", trustKitConfig);
+    XCTAssert([serverConfigKey isEqualToString:@"www.good.com"], @"IncludeSubdomains took precedence over a more specialized configuration");
 }
 
 @end

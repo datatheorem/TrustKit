@@ -40,6 +40,10 @@ static NSDictionary *_trustKitGlobalConfiguration = nil;
 // Global preventing multiple initializations (double function interposition, etc.)
 static BOOL _isTrustKitInitialized = NO;
 
+// Reporter delegate for sending pin violation reports
+static TSKSimpleBackgroundReporter *_pinFailureReporter = nil;
+static dispatch_queue_t _pinFailureReporterQueue = NULL;
+
 // For tests
 static BOOL _wasTrustKitCalled = NO;
 
@@ -85,22 +89,33 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
         SSLCopyPeerTrust(context, &serverTrust);
         
         // Retrieve the pinning configuration for this specific domain, if there is one
-        NSDictionary *serverConfig = getPinningConfigurationForDomain(serverNameStr, _trustKitGlobalConfiguration);
-        if (serverConfig != nil)
+        NSString *domainConfigKey = getPinningConfigurationKeyForDomain(serverNameStr, _trustKitGlobalConfiguration);
+        if (domainConfigKey != nil)
         {
             // This domain is pinned: look for one the configured public key pins in the server's evaluated certificate chain
             TSKPinValidationResult validationResult = TSKPinValidationResultFailed;
-            validationResult = verifyPublicKeyPin(serverTrust, serverConfig[kTSKPublicKeyAlgorithms], serverConfig[kTSKPublicKeyHashes]);
+            NSDictionary *domainConfig = _trustKitGlobalConfiguration[domainConfigKey];
+            
+            validationResult = verifyPublicKeyPin(serverTrust, domainConfig[kTSKPublicKeyAlgorithms], domainConfig[kTSKPublicKeyHashes]);
             
             if (validationResult != TSKPinValidationResultSuccess)
             {
-                // Pin validation failed: notify the reporter if a report URI was configured
-                for (NSURL *reportUri in serverConfig[kTSKReportUris])
+                // Pin validation failed: notify the reporter delegate if a report URI was configured
+                for (NSURL *reportUri in domainConfig[kTSKReportUris])
                 {
-                    // TODO: Send report
+                    dispatch_async(_pinFailureReporterQueue, ^(void)
+                                   {
+                                       [_pinFailureReporter pinValidationFailedForHostname:serverNameStr
+                                                                                      port:nil
+                                                                             notedHostname:domainConfigKey
+                                                                                 reportURI:reportUri
+                                                                         includeSubdomains:[domainConfig[kTSKIncludeSubdomains] boolValue]
+                                                                 validatedCertificateChain:nil
+                                                                                 knownPins:domainConfig[kTSKPublicKeyHashes]];
+                                   });
                 }
                 
-                if (([serverConfig[kTSKEnforcePinning] boolValue] == YES)
+                if (([domainConfig[kTSKEnforcePinning] boolValue] == YES)
                      || (validationResult == TSKPinValidationResultFailedInvalidCertificateChain)
                      || (validationResult == TSKPinValidationResultFailedInvalidParameters))
                 {
@@ -279,11 +294,20 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
                     [NSException raise:@"TrustKit initialization error" format:@"Fishook returned an error: %d", rebindResult];
                 }
             }
+            
+            // Create our reporter for sending pin violation failure
+            CFBundleRef appBundle = CFBundleGetMainBundle();
+            NSString *appBundleId = (NSString *)CFBundleGetIdentifier(appBundle);
+            NSString *appVersion =  CFBundleGetValueForInfoDictionaryKey(appBundle, kCFBundleVersionKey);
+            _pinFailureReporter = [[TSKSimpleBackgroundReporter alloc]initWithAppBundleId:appBundleId appVersion:appVersion];
+            
+            // Create a dispatch queue for sending pin violation failure
+            _pinFailureReporterQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+            
+            _isTrustKitInitialized = YES;
+            TSKLog(@"TrustKit initialized with configuration %@", _trustKitGlobalConfiguration);
         }
-        
-        _isTrustKitInitialized = YES;
-        TSKLog(@"TrustKit initialized with configuration %@", _trustKitGlobalConfiguration);
-    }
+    });
 }
 
 

@@ -16,13 +16,15 @@
 + (TSKPinValidationResult) verifyPinForTrust:(SecTrustRef)serverTrust andDomain:(NSString *)serverHostname
 {
     TSKPinValidationResult result = TSKPinValidationResultFailed;
+    NSDictionary *trustKitConfig = [TrustKit configuration];
     
     // Retrieve the pinning configuration for this specific domain, if there is one
-    NSDictionary *serverConfig = getPinningConfigurationForDomain(serverHostname, [TrustKit configuration]);
-    if (serverConfig != nil)
+    NSString *domainConfigKey = getPinningConfigurationKeyForDomain(serverHostname, trustKitConfig);
+    if (domainConfigKey != nil)
     {
         // This domain is pinned: look for one the configured public key pins in the server's evaluated certificate chain
-        result = verifyPublicKeyPin(serverTrust, serverConfig[kTSKPublicKeyAlgorithms], serverConfig[kTSKPublicKeyHashes]);
+        NSDictionary *domainConfig = trustKitConfig[domainConfigKey];
+        result = verifyPublicKeyPin(serverTrust, domainConfig[kTSKPublicKeyAlgorithms], domainConfig[kTSKPublicKeyHashes]);
     }
     else
     {
