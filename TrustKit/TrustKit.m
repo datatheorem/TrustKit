@@ -39,6 +39,7 @@ static NSDictionary *_trustKitGlobalConfiguration = nil;
 
 // Global preventing multiple initializations (double function interposition, etc.)
 static BOOL _isTrustKitInitialized = NO;
+static dispatch_once_t dispatchOnceTrustKitInit;
 
 // Reporter delegate for sending pin violation reports
 static TSKSimpleBackgroundReporter *_pinFailureReporter = nil;
@@ -274,8 +275,7 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
         [NSException raise:@"TrustKit already initialized" format:@"TrustKit was already initialized with the following SSL pins: %@", _trustKitGlobalConfiguration];
     }
     
-    static dispatch_once_t predicate;
-    dispatch_once(&predicate, ^{
+    dispatch_once(&dispatchOnceTrustKitInit, ^{
         if ([trustKitConfig count] > 0)
         {
             initializeSubjectPublicKeyInfoCache();
@@ -344,6 +344,9 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
     _trustKitGlobalConfiguration = nil;
     _isTrustKitInitialized = NO;
     _wasTrustKitCalled = NO;
+    _pinFailureReporter = nil;
+    _pinFailureReporterQueue = NULL;
+    dispatchOnceTrustKitInit = 0;
 }
 
 @end

@@ -20,7 +20,7 @@ static NSString* backgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
 @property (nonatomic, strong) NSString * appBundleId;
 @property (nonatomic, strong) NSString * appVersion;
 @property (nonatomic) NSURLSession *session;
-
+@property dispatch_once_t dispatchOnceSession;
 @end
 
 
@@ -61,8 +61,7 @@ static NSString* backgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
      Using disptach_once here ensures that multiple background sessions with the same identifier are not created in this instance of the application. If you want to support multiple background sessions within a single process, you should create each session with its own identifier.
      */
     __block NSURLSession *session = nil;
-    dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
+    dispatch_once(&_dispatchOnceSession, ^{
         
         NSURLSessionConfiguration *backgroundConfiguration;
 
