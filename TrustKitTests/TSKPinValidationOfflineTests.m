@@ -212,6 +212,29 @@
     XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against a good and an invalid public key pins");
 }
 
+// Pin the valid CA key with an invalid certificate chain and ensure validation fails
+- (void)testVerifyAgainstCaPublicKeyAndBadCertificateChain
+{
+    // The leaf certificate is self-signed
+    SecCertificateRef trustCertArray[2] = {_selfCertificate, _chainCertificate};
+    SecCertificateRef caRootArray[1] = {_rootCertificate};
+    
+    SecTrustRef trust = [self _createTrustWithCertificates:(const void **)trustCertArray arrayLength:sizeof(trustCertArray)/sizeof(trustCertArray[0])
+                                        anchorCertificates:(const void **)caRootArray arrayLength:sizeof(caRootArray)/sizeof(caRootArray[0])];
+    
+    // Create a configuration and parse it so we get the right format
+    NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
+                                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                                    kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=" // CA key
+                                                                                            ]}});
+    
+    TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
+    verificationResult = verifyPublicKeyPin(trust, trustKitConfig[@"www.good.com"][kTSKPublicKeyAlgorithms], trustKitConfig[@"www.good.com"][kTSKPublicKeyHashes]);
+    CFRelease(trust);
+    
+    XCTAssert(verificationResult == TSKPinValidationResultFailedInvalidCertificateChain, @"Validation must fail against an invalid certificate chain");
+}
+
 
 
 // Helper methods for cleaner testing code
