@@ -13,10 +13,8 @@
 typedef NS_ENUM(NSInteger, TSKPinValidationResult) {
     TSKPinValidationResultSuccess,
     TSKPinValidationResultFailed,
-    TSKPinValidationResultDomainNotPinned,
-    TSKPinValidationResultInvalidParameters,
-    TSKPinValidationResultPinningNotEnforced,
-    TSKPinValidationResultInvalidCertificateChain,
+    TSKPinValidationResultFailedInvalidCertificateChain, // The server's supplied certificate chain is not trusted
+    TSKPinValidationResultFailedInvalidParameters,
 };
 
 

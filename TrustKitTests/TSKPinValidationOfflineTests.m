@@ -70,24 +70,25 @@
 
 
 // Pin to any of CA, Intermediate CA and Leaf certificates public keys (all valid) and ensure it succeeds
-- (void)testWwwGoodComCertificateAgainstAnyPublicKey
+- (void)testVerifyAgainstAnyPublicKey
 {
-    NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
-                                                                    kTSKIncludeSubdomains : @NO,
-                                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                                                    kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=", // Server key
-                                                                                            @"khKI6ae4micEvX74MB/BZ4u15WCWGXPD6Gjg6iIRVeE=", // Intermediate key
-                                                                                            @"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=" // CA key
-                                                                                            ]}});
-
     SecCertificateRef trustCertArray[2] = {_leafCertificate, _chainCertificate};
     SecCertificateRef caRootArray[1] = {_rootCertificate};
     
     SecTrustRef trust = [self _createTrustWithCertificates:(const void **)trustCertArray arrayLength:sizeof(trustCertArray)/sizeof(trustCertArray[0])
                                         anchorCertificates:(const void **)caRootArray arrayLength:sizeof(caRootArray)/sizeof(caRootArray[0])];
     
-    TSKPinValidationResult verificationResult = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig);
+    // Create a configuration and parse it so we get the right format
+    NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
+                                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                                    kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=", // Server key
+                                                                                            @"khKI6ae4micEvX74MB/BZ4u15WCWGXPD6Gjg6iIRVeE=", // Intermediate key
+                                                                                            @"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=" // CA key
+                                                                                            ]}});
 
+    
+    TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
+    verificationResult = verifyPublicKeyPin(trust, trustKitConfig[@"www.good.com"][kTSKPublicKeyAlgorithms], trustKitConfig[@"www.good.com"][kTSKPublicKeyHashes]);
     CFRelease(trust);
 
     XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against valid public key pins");
@@ -95,22 +96,23 @@
 
 
 // Pin only to the Intermediate CA certificate public key and ensure it succeeds
-- (void)testWwwGoodComCertificateAgainstGoodIntermediateCAPublicKey
+- (void)testVerifyAgainstIntermediateCAPublicKey
 {
-    NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
-                                                                    kTSKIncludeSubdomains : @NO,
-                                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                                                    kTSKPublicKeyHashes : @[@"khKI6ae4micEvX74MB/BZ4u15WCWGXPD6Gjg6iIRVeE=" // Intermediate key only
-                                                                                            ]}});
-
     SecCertificateRef trustCertArray[2] = {_leafCertificate, _chainCertificate};
     SecCertificateRef caRootArray[1] = {_rootCertificate};
     
     SecTrustRef trust = [self _createTrustWithCertificates:(const void **)trustCertArray arrayLength:sizeof(trustCertArray)/sizeof(trustCertArray[0])
                                         anchorCertificates:(const void **)caRootArray arrayLength:sizeof(caRootArray)/sizeof(caRootArray[0])];
 
-    TSKPinValidationResult verificationResult = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig);
+    // Create a configuration and parse it so we get the right format
+    NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
+                                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                                    kTSKPublicKeyHashes : @[@"khKI6ae4micEvX74MB/BZ4u15WCWGXPD6Gjg6iIRVeE=" // Intermediate key only
+                                                                                            ]}});
+
     
+    TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
+    verificationResult = verifyPublicKeyPin(trust, trustKitConfig[@"www.good.com"][kTSKPublicKeyAlgorithms], trustKitConfig[@"www.good.com"][kTSKPublicKeyHashes]);
     CFRelease(trust);
     
     XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against valid public key pins");
@@ -118,22 +120,22 @@
 
 
 // Pin only to the CA certificate public key and ensure it succeeds
-- (void)testWwwGoodComCertificateAgainstGoodCAPublicKey
+- (void)testVerifyAgainstCAPublicKey
 {
-    NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
-                                                                    kTSKIncludeSubdomains : @NO,
-                                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                                                    kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=" // CA key
-                                                                                            ]}});
-
     SecCertificateRef trustCertArray[2] = {_leafCertificate, _chainCertificate};
     SecCertificateRef caRootArray[1] = {_rootCertificate};
     
     SecTrustRef trust = [self _createTrustWithCertificates:(const void **)trustCertArray arrayLength:sizeof(trustCertArray)/sizeof(trustCertArray[0])
                                         anchorCertificates:(const void **)caRootArray arrayLength:sizeof(caRootArray)/sizeof(caRootArray[0])];
-    
-    TSKPinValidationResult verificationResult = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig);
 
+    // Create a configuration and parse it so we get the right format
+    NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
+                                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                                    kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=" // CA key only
+                                                                                            ]}});
+    
+    TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
+    verificationResult = verifyPublicKeyPin(trust, trustKitConfig[@"www.good.com"][kTSKPublicKeyAlgorithms], trustKitConfig[@"www.good.com"][kTSKPublicKeyHashes]);
     CFRelease(trust);
 
     XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against valid public key pins");
@@ -141,212 +143,98 @@
 
 
 // Pin only to the leaf certificate public key and ensure it succeeds
-- (void)testWwwGoodComCertificateAgainstGoodLeafPublicKey
+- (void)testVerifyAgainstLeafPublicKey
 {
+    SecCertificateRef trustCertArray[2] = {_leafCertificate, _chainCertificate};
+    SecCertificateRef caRootArray[1] = {_rootCertificate};
+    
+    SecTrustRef trust = [self _createTrustWithCertificates:(const void **)trustCertArray arrayLength:sizeof(trustCertArray)/sizeof(trustCertArray[0])
+                                        anchorCertificates:(const void **)caRootArray arrayLength:sizeof(caRootArray)/sizeof(caRootArray[0])];
+    
+    // Create a configuration and parse it so we get the right format
     NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
-                                                                    kTSKIncludeSubdomains : @NO,
                                                                     kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                                                    kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=" // Server key only
+                                                                    kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=" // Leaf key only
                                                                                             ]}});
-
-    SecCertificateRef trustCertArray[2] = {_leafCertificate, _chainCertificate};
-    SecCertificateRef caRootArray[1] = {_rootCertificate};
     
-    SecTrustRef trust = [self _createTrustWithCertificates:(const void **)trustCertArray arrayLength:sizeof(trustCertArray)/sizeof(trustCertArray[0])
-                                        anchorCertificates:(const void **)caRootArray arrayLength:sizeof(caRootArray)/sizeof(caRootArray[0])];
-    
-    TSKPinValidationResult verificationResult = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig);
-
-    CFRelease(trust);
-
-    XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against valid public key pins");
-}
-
-// Pin a bad key for www.good.com and ensure it fails
-
-- (void)testWwwGoodComCertificateAgainstBadKeyPinning
-{
-    NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
-                                                                    kTSKIncludeSubdomains : @NO,
-                                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                                                    kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
-                                                                                            ]}});
-
-    SecCertificateRef trustCertArray[2] = {_leafCertificate, _chainCertificate};
-    SecCertificateRef caRootArray[1] = {_rootCertificate};
-    
-    SecTrustRef trust = [self _createTrustWithCertificates:(const void **)trustCertArray arrayLength:sizeof(trustCertArray)/sizeof(trustCertArray[0])
-                                        anchorCertificates:(const void **)caRootArray arrayLength:sizeof(caRootArray)/sizeof(caRootArray[0])];
-    
-    TSKPinValidationResult verificationResult = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig);
-
-    CFRelease(trust);
-
-    XCTAssert(verificationResult == TSKPinValidationResultFailed, @"Validation must NOT pass against invalid public key pins");
-}
-
-
-// Validation to domain names with no pins must never fail
-- (void)testWwwGoodComCertificateWithNoPins
-{
-    SecCertificateRef trustCertArray[2] = {_leafCertificate, _chainCertificate};
-    SecCertificateRef caRootArray[1] = {_rootCertificate};
-    
-    SecTrustRef trust = [self _createTrustWithCertificates:(const void **)trustCertArray arrayLength:sizeof(trustCertArray)/sizeof(trustCertArray[0])
-                                        anchorCertificates:(const void **)caRootArray arrayLength:sizeof(caRootArray)/sizeof(caRootArray[0])];
-    
-    TSKPinValidationResult verificationResult = verifyPublicKeyPin(trust, @"www.good.com", nil);
-
-    CFRelease(trust);
-
-    XCTAssert(verificationResult == TSKPinValidationResultDomainNotPinned, @"Validation must pass if no public key pins are set.");
-}
-
-
-// Pin a valid key for www.good.com and ensure it succeeds both with a trusted CA and a Self-Signed cert.
-- (void)testWwwGoodComCertificateAgainstCAWithSelfSignedCAAsWell
-{
-    NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
-                                                                    kTSKIncludeSubdomains : @NO,
-                                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                                                    kTSKPublicKeyHashes : @[//@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=", // Server key
-                                                                            //@"khKI6ae4micEvX74MB/BZ4u15WCWGXPD6Gjg6iIRVeE=", // Intermediate key
-                                                                            @"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0="//, // CA key
-                                                                            //@"naw8JswG9YvBkitP4iGuyEgbFxssEMM/v4m7MglIzEw=" // Self-signed Key
-                                                                            ]}});
-
-    SecCertificateRef trustCertArray[2] = {_leafCertificate, _chainCertificate};
-    SecCertificateRef caRootArray[2] = {_rootCertificate, _selfCertificate };
-    
-    SecTrustRef trust = [self _createTrustWithCertificates:(const void **)trustCertArray arrayLength:sizeof(trustCertArray)/sizeof(trustCertArray[0])
-                                        anchorCertificates:(const void **)caRootArray arrayLength:sizeof(caRootArray)/sizeof(caRootArray[0])];
-    
-    TSKPinValidationResult verificationResult = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig);
-    
+    TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
+    verificationResult = verifyPublicKeyPin(trust, trustKitConfig[@"www.good.com"][kTSKPublicKeyAlgorithms], trustKitConfig[@"www.good.com"][kTSKPublicKeyHashes]);
     CFRelease(trust);
     
     XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against valid public key pins");
 }
 
 
-// Pin a valid key for good.com with includeSubdomains and ensure the validation for www.good.com succeeds
-- (void)testSubdomainWithGoodComCertificateAgainstGoodLeafPublicKey
+// Pin a bad key and ensure validation fails
+- (void)testVerifyAgainstBadPublicKey
 {
-    NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"good.com" : @{
-                                                                    kTSKIncludeSubdomains : @YES,
-                                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                                                    kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=" // Server key
-                                                                                            ]}});
-    
     SecCertificateRef trustCertArray[2] = {_leafCertificate, _chainCertificate};
     SecCertificateRef caRootArray[1] = {_rootCertificate};
     
     SecTrustRef trust = [self _createTrustWithCertificates:(const void **)trustCertArray arrayLength:sizeof(trustCertArray)/sizeof(trustCertArray[0])
                                         anchorCertificates:(const void **)caRootArray arrayLength:sizeof(caRootArray)/sizeof(caRootArray[0])];
     
-    TSKPinValidationResult verificationResult = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig);
     
-    CFRelease(trust);
-    
-    XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against valid public key pins");
-}
-
-
-// Pin a bad key for good.com with includeSubdomains and ensure the validation for www.good.com fails
-- (void)testSubdomainWithGoodComCertificateAgainstBadKeyPinning
-{
-    NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"good.com" : @{
-                                                                    kTSKIncludeSubdomains : @YES,
+    // Create a configuration and parse it so we get the right format
+    NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
                                                                     kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                                                    kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
+                                                                    kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Bad key
                                                                                             ]}});
     
-    SecCertificateRef trustCertArray[2] = {_leafCertificate, _chainCertificate};
-    SecCertificateRef caRootArray[1] = {_rootCertificate};
-    
-    SecTrustRef trust = [self _createTrustWithCertificates:(const void **)trustCertArray arrayLength:sizeof(trustCertArray)/sizeof(trustCertArray[0])
-                                        anchorCertificates:(const void **)caRootArray arrayLength:sizeof(caRootArray)/sizeof(caRootArray[0])];
-    
-    TSKPinValidationResult verificationResult = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig);
-    
+    TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
+    verificationResult = verifyPublicKeyPin(trust, trustKitConfig[@"www.good.com"][kTSKPublicKeyAlgorithms], trustKitConfig[@"www.good.com"][kTSKPublicKeyHashes]);
     CFRelease(trust);
     
     XCTAssert(verificationResult == TSKPinValidationResultFailed, @"Validation must NOT pass against invalid public key pins");
 }
 
 
-// Pin a bad key for good.com with includeSubdomains and a good key for www.good.com and ensure the validation for www.good.com succeeds
-// (ie. the more specific pin should take precedence over the general good.com pin)
-- (void)testSubdomainWithGoodComCertificateAgainstGoodLeafPublicKeyAndBadKeyAsWell
+// Pin a bad key and a good key and ensure validation succeeds
+- (void)testVerifyAgainstLeafPublicKeyAndBadPublicKey
 {
-    NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"good.com" : @{
-                                                                    kTSKIncludeSubdomains : @YES,
-                                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                                                    kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=", // Server key
-                                                                                            @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
-                                                                                            ]}});
-    
     SecCertificateRef trustCertArray[2] = {_leafCertificate, _chainCertificate};
     SecCertificateRef caRootArray[1] = {_rootCertificate};
     
     SecTrustRef trust = [self _createTrustWithCertificates:(const void **)trustCertArray arrayLength:sizeof(trustCertArray)/sizeof(trustCertArray[0])
                                         anchorCertificates:(const void **)caRootArray arrayLength:sizeof(caRootArray)/sizeof(caRootArray[0])];
     
-    TSKPinValidationResult verificationResult = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig);
-    
-    CFRelease(trust);
-    
-    XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against valid existing public key pins, regardless of an invalid key being present");
-}
-
-
-// Pin a valid key for good.com with includeSubdomains set to NO, and ensure the validation for www.good.com fails
-- (void)testSubdomainWithGoodComCertificateAgainstAnyPublicKeyNotIncludingSubdomains
-{
-    NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"good.com" : @{
-                                                                    kTSKIncludeSubdomains : @NO,
+    // Create a configuration and parse it so we get the right format
+    NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
                                                                     kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                                                    kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=", // Server key
-                                                                                            @"khKI6ae4micEvX74MB/BZ4u15WCWGXPD6Gjg6iIRVeE=", // Intermediate key
-                                                                                            @"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=" // CA key
+                                                                    kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Bad key
+                                                                                            @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY="  // Leaf key
                                                                                             ]}});
     
-    SecCertificateRef trustCertArray[2] = {_leafCertificate, _chainCertificate};
+    TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
+    verificationResult = verifyPublicKeyPin(trust, trustKitConfig[@"www.good.com"][kTSKPublicKeyAlgorithms], trustKitConfig[@"www.good.com"][kTSKPublicKeyHashes]);
+    CFRelease(trust);
+    
+    XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against a good and an invalid public key pins");
+}
+
+// Pin the valid CA key with an invalid certificate chain and ensure validation fails
+- (void)testVerifyAgainstCaPublicKeyAndBadCertificateChain
+{
+    // The leaf certificate is self-signed
+    SecCertificateRef trustCertArray[2] = {_selfCertificate, _chainCertificate};
     SecCertificateRef caRootArray[1] = {_rootCertificate};
     
     SecTrustRef trust = [self _createTrustWithCertificates:(const void **)trustCertArray arrayLength:sizeof(trustCertArray)/sizeof(trustCertArray[0])
                                         anchorCertificates:(const void **)caRootArray arrayLength:sizeof(caRootArray)/sizeof(caRootArray[0])];
     
-    TSKPinValidationResult verificationResult = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig);
-    
-    CFRelease(trust);
-    
-    XCTAssert(verificationResult == TSKPinValidationResultDomainNotPinned, @"Validation must NOT pass because includeSubdomain is not enabled so wwww.good.com is not actually pinned");
-}
-
-
-// Tricky case: pin a bad key for good.co.uk with includeSubdomains and ensure the validation for www.good.com succeeds.
-// Basically we want to make sure that TrustKit doesn’t confused with weird top-level domains (like .co.uk).
-- (void)testWwwGoodComCertificateAgainstDifferentTLDPublicKeyPinning
-{
-    NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"good.co.uk" : @{
-                                                                    kTSKIncludeSubdomains : @YES,
+    // Create a configuration and parse it so we get the right format
+    NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
                                                                     kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                                                    kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
+                                                                    kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=" // CA key
                                                                                             ]}});
     
-    SecCertificateRef trustCertArray[2] = {_leafCertificate, _chainCertificate};
-    SecCertificateRef caRootArray[1] = {_rootCertificate};
-    
-    SecTrustRef trust = [self _createTrustWithCertificates:(const void **)trustCertArray arrayLength:sizeof(trustCertArray)/sizeof(trustCertArray[0])
-                                        anchorCertificates:(const void **)caRootArray arrayLength:sizeof(caRootArray)/sizeof(caRootArray[0])];
-    
-    TSKPinValidationResult verificationResult = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig);
-    
+    TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
+    verificationResult = verifyPublicKeyPin(trust, trustKitConfig[@"www.good.com"][kTSKPublicKeyAlgorithms], trustKitConfig[@"www.good.com"][kTSKPublicKeyHashes]);
     CFRelease(trust);
     
-    XCTAssert(verificationResult == TSKPinValidationResultDomainNotPinned, @"Validation must pass as www.good.com domain shouldn't be pinned, when config is for a different TLD (co.uk)");
+    XCTAssert(verificationResult == TSKPinValidationResultFailedInvalidCertificateChain, @"Validation must fail against an invalid certificate chain");
 }
+
 
 
 // Helper methods for cleaner testing code

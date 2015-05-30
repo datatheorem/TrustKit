@@ -9,23 +9,18 @@
 #import <Foundation/Foundation.h>
 
 @protocol TSKReporterDelegate <NSObject>
-/*
- * Initialize the reporter with the app's bundle id, and app version
- */
-- (void)initWithAppBundleId:(NSString *) appBundleId
-                 appVersion:(NSString *) appVersion;
 
 
 /*
- * Pin validation failed for a connection to a pinned domain
+ * Pin validation failed for a connection to a pinned domain. Each argument is described section 3. of RFC 7469.
  */
-- (void) pinValidationFailed:(NSString *) pinnedDomainStr
-              serverHostname:(NSString *) hostnameStr
-                  serverPort:(NSNumber *) port
-                reportingURL:(NSString *) reportingURLStr
-           includeSubdomains:(Boolean) includeSubdomains
-            certificateChain:(NSArray *) validatedCertificateChain
-                expectedPins:(NSArray *) knownPins;
+- (void) pinValidationFailedForHostname:(NSString *) serverHostname
+                                   port:(NSNumber *) serverPort
+                                  trust:(SecTrustRef) serverTrust
+                          notedHostname:(NSString *) notedHostname
+                              reportURIs:(NSArray *) reportURIs
+                      includeSubdomains:(BOOL) includeSubdomains
+                              knownPins:(NSArray *) knownPins;
 
 @optional
 
@@ -39,6 +34,7 @@
  * are no longer in the MITM state.  In order to know that connections are no longer MITM, 
  * the pinValidationSucceeded function will provide a way to know that connections are fine now.
  */
-- (void) pinValidationSucceeded:(NSString*) pinnedDomain;
-
+- (void) pinValidationSucceededForHostname:(NSString *) serverHostname
+                                      port:(NSNumber *) serverPort
+                             notedHostname:(NSString *) notedHostname;
 @end

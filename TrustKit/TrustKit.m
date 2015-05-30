@@ -14,6 +14,7 @@
 #import "public_key_utils.h"
 #import "domain_registry.h"
 #import "ssl_pin_verifier.h"
+#import "TSKSimpleBackgroundReporter.h"
 
 
 // Info.plist key we read the public key hashes from
@@ -38,6 +39,11 @@ static NSDictionary *_trustKitGlobalConfiguration = nil;
 
 // Global preventing multiple initializations (double function interposition, etc.)
 static BOOL _isTrustKitInitialized = NO;
+static dispatch_once_t dispatchOnceTrustKitInit;
+
+// Reporter delegate for sending pin violation reports
+static TSKSimpleBackgroundReporter *_pinFailureReporter = nil;
+static dispatch_queue_t _pinFailureReporterQueue = NULL;
 
 // For tests
 static BOOL _wasTrustKitCalled = NO;
@@ -56,7 +62,6 @@ void TSKLog(NSString *format, ...)
     va_end(args);
 #endif
 }
-
 
 
 #pragma mark SSLHandshake Hook
@@ -81,19 +86,46 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
         NSString *serverNameStr = [NSString stringWithUTF8String:serverName];
         free(serverName);
         
-        // Verify the server's certificate if it is pinned
         SecTrustRef serverTrust;
         SSLCopyPeerTrust(context, &serverTrust);
         
-        TSKPinValidationResult validationResult = verifyPublicKeyPin(serverTrust, serverNameStr, _trustKitGlobalConfiguration);
-        
-        if (!
-            ((validationResult == TSKPinValidationResultSuccess)
-            || (validationResult == TSKPinValidationResultDomainNotPinned)
-            || (validationResult == TSKPinValidationResultPinningNotEnforced)))
+        // Retrieve the pinning configuration for this specific domain, if there is one
+        NSString *domainConfigKey = getPinningConfigurationKeyForDomain(serverNameStr, _trustKitGlobalConfiguration);
+        if (domainConfigKey != nil)
         {
-            // Validation failed
-            result = errSSLXCertChainInvalid;
+            // This domain is pinned: look for one the configured public key pins in the server's evaluated certificate chain
+            TSKPinValidationResult validationResult = TSKPinValidationResultFailed;
+            NSDictionary *domainConfig = _trustKitGlobalConfiguration[domainConfigKey];
+            
+            validationResult = verifyPublicKeyPin(serverTrust, domainConfig[kTSKPublicKeyAlgorithms], domainConfig[kTSKPublicKeyHashes]);
+            
+            if (validationResult != TSKPinValidationResultSuccess)
+            {
+                // Pin validation failed: notify the reporter delegate if a report URI was configured
+                NSArray *reportUris = domainConfig[kTSKReportUris];
+                if ((reportUris != nil) && ([reportUris count] > 0))
+                {
+                    dispatch_async(_pinFailureReporterQueue, ^(void)
+                                   {
+                                       [_pinFailureReporter pinValidationFailedForHostname:serverNameStr
+                                                                                      port:nil
+                                                                                     trust:serverTrust
+                                                                             notedHostname:domainConfigKey
+                                                                                 reportURIs:reportUris
+                                                                         includeSubdomains:[domainConfig[kTSKIncludeSubdomains] boolValue]
+                                                                                 knownPins:domainConfig[kTSKPublicKeyHashes]];
+                                   });
+                }
+                
+                if (([domainConfig[kTSKEnforcePinning] boolValue] == YES)
+                     || (validationResult == TSKPinValidationResultFailedInvalidCertificateChain)
+                     || (validationResult == TSKPinValidationResultFailedInvalidParameters))
+                {
+                    // TrustKit was configured to enforce pinning or the certificate chain was not trusted: make the connection fail
+                    result = errSSLXCertChainInvalid;
+                }
+            }
+            
         }
     }
     return result;
@@ -243,29 +275,40 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
         [NSException raise:@"TrustKit already initialized" format:@"TrustKit was already initialized with the following SSL pins: %@", _trustKitGlobalConfiguration];
     }
     
-    if ([trustKitConfig count] > 0)
-    {
-        initializeSubjectPublicKeyInfoCache();
-        
-        // Convert and store the SSL pins in our global variable
-        _trustKitGlobalConfiguration = [[NSDictionary alloc]initWithDictionary:parseTrustKitArguments(trustKitConfig)];
-        
-        // Hook SSLHandshake()
-        if (original_SSLHandshake == NULL)
+    dispatch_once(&dispatchOnceTrustKitInit, ^{
+        if ([trustKitConfig count] > 0)
         {
-            int rebindResult = -1;
-            char functionToHook[] = "SSLHandshake";
-            original_SSLHandshake = dlsym(RTLD_DEFAULT, functionToHook);
-            rebindResult = rebind_symbols((struct rebinding[1]){{(char *)functionToHook, (void *)replaced_SSLHandshake}}, 1);
-            if ((rebindResult < 0) || (original_SSLHandshake == NULL))
+            initializeSubjectPublicKeyInfoCache();
+            
+            // Convert and store the SSL pins in our global variable
+            _trustKitGlobalConfiguration = [[NSDictionary alloc]initWithDictionary:parseTrustKitArguments(trustKitConfig)];
+            
+            // Hook SSLHandshake()
+            if (original_SSLHandshake == NULL)
             {
-                [NSException raise:@"TrustKit initialization error" format:@"Fishook returned an error: %d", rebindResult];
+                int rebindResult = -1;
+                char functionToHook[] = "SSLHandshake";
+                original_SSLHandshake = dlsym(RTLD_DEFAULT, functionToHook);
+                rebindResult = rebind_symbols((struct rebinding[1]){{(char *)functionToHook, (void *)replaced_SSLHandshake}}, 1);
+                if ((rebindResult < 0) || (original_SSLHandshake == NULL))
+                {
+                    [NSException raise:@"TrustKit initialization error" format:@"Fishook returned an error: %d", rebindResult];
+                }
             }
+            
+            // Create our reporter for sending pin violation failure
+            CFBundleRef appBundle = CFBundleGetMainBundle();
+            NSString *appBundleId = (NSString *)CFBundleGetIdentifier(appBundle);
+            NSString *appVersion =  CFBundleGetValueForInfoDictionaryKey(appBundle, kCFBundleVersionKey);
+            _pinFailureReporter = [[TSKSimpleBackgroundReporter alloc]initWithAppBundleId:appBundleId appVersion:appVersion];
+            
+            // Create a dispatch queue for sending pin violation failure
+            _pinFailureReporterQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+            
+            _isTrustKitInitialized = YES;
+            TSKLog(@"TrustKit initialized with configuration %@", _trustKitGlobalConfiguration);
         }
-        
-        _isTrustKitInitialized = YES;
-        TSKLog(@"TrustKit initialized with configuration %@", _trustKitGlobalConfiguration);
-    }
+    });
 }
 
 
@@ -276,7 +319,7 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
 
 + (void) initializeWithConfiguration:(NSDictionary *)trustKitConfig
 {
-    TSKLog(@"TrustKit started statically in App %@", CFBundleGetValueForInfoDictionaryKey(CFBundleGetMainBundle(), (__bridge CFStringRef)@"CFBundleIdentifier"));
+    TSKLog(@"TrustKit started statically in App %@", (NSString *)CFBundleGetIdentifier(CFBundleGetMainBundle()));
     initializeTrustKit(trustKitConfig);
 }
 
@@ -288,7 +331,7 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
 }
 
 
-+ (NSDictionary *) trustKitConfiguration
++ (NSDictionary *) configuration
 {
     return _trustKitGlobalConfiguration;
 }
@@ -301,6 +344,9 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
     _trustKitGlobalConfiguration = nil;
     _isTrustKitInitialized = NO;
     _wasTrustKitCalled = NO;
+    _pinFailureReporter = nil;
+    _pinFailureReporterQueue = NULL;
+    dispatchOnceTrustKitInit = 0;
 }
 
 @end
@@ -312,7 +358,7 @@ __attribute__((constructor)) static void initializeAsDylib(int argc, const char 
 {
     // TrustKit just got injected in the App
     CFBundleRef appBundle = CFBundleGetMainBundle();
-    TSKLog(@"TrustKit started dynamically in App %@", CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)@"CFBundleIdentifier"));
+    TSKLog(@"TrustKit started dynamically in App %@", (NSString *)CFBundleGetIdentifier(CFBundleGetMainBundle()));
     
     // Retrieve the configuration from the App's Info.plist file
     NSDictionary *trustKitConfigFromInfoPlist = CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)kTSKConfiguration);
