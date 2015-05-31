@@ -16,8 +16,11 @@ NSArray *convertTrustToPemArray(SecTrustRef serverTrust)
     CFIndex chainLen = SecTrustGetCertificateCount(serverTrust);
     for (CFIndex i=0;i<chainLen;i++)
     {
-        NSData *certificateData = (__bridge NSData *)(SecCertificateCopyData(SecTrustGetCertificateAtIndex(serverTrust, i)));
-        [certificateChain addObject:[NSString stringWithFormat:@"-----BEGIN CERTIFICATE-----\n%@\n-----END CERTIFICATE-----", [certificateData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]]];
+        CFDataRef certificateData = SecCertificateCopyData(SecTrustGetCertificateAtIndex(serverTrust, i));
+        [certificateChain addObject:[NSString
+                                     stringWithFormat:@"-----BEGIN CERTIFICATE-----\n%@\n-----END CERTIFICATE-----",
+                                     [(__bridge NSData *)(certificateData) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]]];
+        CFRelease(certificateData);
     }
     return certificateChain;
 }

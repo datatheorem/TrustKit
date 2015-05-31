@@ -112,25 +112,28 @@ static NSData *getPublicKeyDataFromCertificate(SecCertificateRef certificate)
 static NSData *getPublicKeyDataFromCertificate(SecCertificateRef certificate)
 {
     NSData *publicKeyData = nil;
-    NSDictionary *certificateValues = nil;
-    CFErrorRef *error = NULL;
+    CFErrorRef error = NULL;
     
     // SecCertificateCopyValues() is OS X only
-    certificateValues = (__bridge NSDictionary *)(SecCertificateCopyValues(certificate, NULL, error));
+    CFDictionaryRef certificateValues = SecCertificateCopyValues(certificate, NULL, &error);
     if (certificateValues == NULL)
     {
-        TSKLog(@"SecCertificateCopyValues() error");
+        CFStringRef errorDescription = CFErrorCopyDescription(error);
+        TSKLog(@"SecCertificateCopyValues() error: %@", errorDescription);
+        CFRelease(errorDescription);
+        CFRelease(error);
         return nil;
     }
     
-    for (NSString* fieldName in certificateValues)
+    for (NSString* fieldName in (__bridge NSDictionary *)certificateValues)
     {
-        NSDictionary *fieldDict = certificateValues[fieldName];
+        NSDictionary *fieldDict = CFDictionaryGetValue(certificateValues, (__bridge const void *)(fieldName));
         if ([fieldDict[(__bridge __strong id)(kSecPropertyKeyLabel)] isEqualToString:@"Public Key Data"])
         {
             publicKeyData = fieldDict[(__bridge __strong id)(kSecPropertyKeyValue)];
         }
     }
+    CFRelease(certificateValues);
     return publicKeyData;
 }
 
