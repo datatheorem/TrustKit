@@ -12,8 +12,12 @@
 
 + (SecCertificateRef)createCertificateFromDer:(NSString *)derCertiticatePath
 {
-    CFDataRef certData = (__bridge_retained CFDataRef)[NSData dataWithContentsOfFile:[[NSBundle bundleForClass:[self class]]
-                                                                                      pathForResource:derCertiticatePath ofType:@"der"]];
+    NSBundle *bundle = [NSBundle bundleForClass:[self class]];
+    CFDataRef certData = (__bridge_retained CFDataRef)[NSData dataWithContentsOfFile:[bundle pathForResource:derCertiticatePath ofType:@"der"]];
+    if (!certData)
+    {
+        [NSException raise:@"Test error" format:@"Could not open certificate at path %@", derCertiticatePath];
+    }
     SecCertificateRef certificate = SecCertificateCreateWithData(kCFAllocatorDefault, certData);
     CFRelease(certData);
     return certificate;
@@ -32,22 +36,21 @@
     
     if (SecTrustCreateWithCertificates(certificateChain, policy, &trust) != errSecSuccess)
     {
-        NSLog(@"SecTrustCreateWithCertificates did not return errSecSuccess");
-        CFRelease(certificateChain);
-        return NULL;
+        [NSException raise:@"Test error" format:@"SecTrustCreateWithCertificates did not return errSecSuccess"];
     }
-    CFArrayRef trustStore = CFArrayCreate(NULL, (const void **)anchorCertificates, anchorArrayLength, NULL);
     
-    if (SecTrustSetAnchorCertificates(trust, trustStore) != errSecSuccess)
+    if (anchorCertificates)
     {
-        NSLog(@"SecTrustSetAnchorCertificates did not return errSecSuccess");
-        CFRelease(certificateChain);
-        CFRelease(trustStore);
-        return NULL;
+        CFArrayRef trustStore = CFArrayCreate(NULL, (const void **)anchorCertificates, anchorArrayLength, NULL);
         
+        if (SecTrustSetAnchorCertificates(trust, trustStore) != errSecSuccess)
+        {
+            [NSException raise:@"Test error" format:@"SecTrustCreateWithCertificates did not return errSecSuccess"];
+        }
+        CFRelease(trustStore);
     }
+   
     CFRelease(certificateChain);
-    CFRelease(trustStore);
     return trust;
 }
 

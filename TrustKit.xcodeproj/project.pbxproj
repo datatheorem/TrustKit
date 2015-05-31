@@ -27,6 +27,11 @@
 		8C8480531A896EE30017C155 /* TrustKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C8480471A896EE30017C155 /* TrustKit.framework */; };
 		8C84806D1A896F660017C155 /* TrustKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C84806C1A896F660017C155 /* TrustKit.m */; };
 		8CC78B201B1B586F00523A25 /* TSKCertificateUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC78B1F1B1B586F00523A25 /* TSKCertificateUtils.m */; };
+		8CC78B251B1B616500523A25 /* TSKPublicKeyAlgorithmTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC78B241B1B616500523A25 /* TSKPublicKeyAlgorithmTests.m */; };
+		8CC78B261B1B696500523A25 /* ThawteSSLCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CC78B211B1B604A00523A25 /* ThawteSSLCA.der */; };
+		8CC78B271B1B696800523A25 /* www.datatheorem.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CC78B221B1B604A00523A25 /* www.datatheorem.com.der */; };
+		8CC78B281B1B696D00523A25 /* sni41871.cloudflaressl.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CC78B1D1B1B55EC00523A25 /* sni41871.cloudflaressl.com.der */; };
+		8CC78B291B1B697000523A25 /* COMODOECCDomainValidationSecureServerCA2.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CC78B1C1B1B55EC00523A25 /* COMODOECCDomainValidationSecureServerCA2.der */; };
 		8CCBD15B1B186D1100CB88AF /* reporting_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CCBD15A1B186D1100CB88AF /* reporting_utils.m */; };
 		8CE9191E1AEA073C002B29AE /* public_key_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE9191C1AEA073C002B29AE /* public_key_utils.h */; };
 		8CE9191F1AEA073C002B29AE /* public_key_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9191D1AEA073C002B29AE /* public_key_utils.m */; };
@@ -79,6 +84,9 @@
 		8CC78B1D1B1B55EC00523A25 /* sni41871.cloudflaressl.com.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = sni41871.cloudflaressl.com.der; sourceTree = "<group>"; };
 		8CC78B1E1B1B586F00523A25 /* TSKCertificateUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSKCertificateUtils.h; sourceTree = "<group>"; };
 		8CC78B1F1B1B586F00523A25 /* TSKCertificateUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKCertificateUtils.m; sourceTree = "<group>"; };
+		8CC78B211B1B604A00523A25 /* ThawteSSLCA.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = ThawteSSLCA.der; sourceTree = "<group>"; };
+		8CC78B221B1B604A00523A25 /* www.datatheorem.com.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = www.datatheorem.com.der; sourceTree = "<group>"; };
+		8CC78B241B1B616500523A25 /* TSKPublicKeyAlgorithmTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKPublicKeyAlgorithmTests.m; sourceTree = "<group>"; };
 		8CCBD15A1B186D1100CB88AF /* reporting_utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = reporting_utils.m; path = Reporting/reporting_utils.m; sourceTree = "<group>"; };
 		8CCBD15C1B186D2100CB88AF /* reporting_utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = reporting_utils.h; sourceTree = "<group>"; };
 		8CE9191C1AEA073C002B29AE /* public_key_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = public_key_utils.h; path = Pinning/public_key_utils.h; sourceTree = "<group>"; };
@@ -188,6 +196,7 @@
 				8C15F9A31B17564400F06C0E /* TSKPinConfigurationTests.m */,
 				8CC78B1E1B1B586F00523A25 /* TSKCertificateUtils.h */,
 				8CC78B1F1B1B586F00523A25 /* TSKCertificateUtils.m */,
+				8CC78B241B1B616500523A25 /* TSKPublicKeyAlgorithmTests.m */,
 			);
 			path = TrustKitTests;
 			sourceTree = "<group>";
@@ -221,6 +230,8 @@
 		8CC78B1A1B1B551400523A25 /* RSA 2048 */ = {
 			isa = PBXGroup;
 			children = (
+				8CC78B211B1B604A00523A25 /* ThawteSSLCA.der */,
+				8CC78B221B1B604A00523A25 /* www.datatheorem.com.der */,
 			);
 			name = "RSA 2048";
 			sourceTree = "<group>";
@@ -381,9 +392,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CC78B291B1B697000523A25 /* COMODOECCDomainValidationSecureServerCA2.der in Resources */,
+				8CC78B261B1B696500523A25 /* ThawteSSLCA.der in Resources */,
 				070868B51ADFFADF00E5AFDC /* GoodRootCA.der in Resources */,
 				070868BB1AE1672D00E5AFDC /* www.good.com.selfsigned.der in Resources */,
 				070868B71ADFFADF00E5AFDC /* GoodIntermediateCA.der in Resources */,
+				8CC78B271B1B696800523A25 /* www.datatheorem.com.der in Resources */,
+				8CC78B281B1B696D00523A25 /* sni41871.cloudflaressl.com.der in Resources */,
 				070868B81ADFFADF00E5AFDC /* www.good.com.der in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -414,6 +429,7 @@
 				0710306C1AA88A510028092C /* TSKPinValidationOnlineTests.m in Sources */,
 				8C15F9A41B17564400F06C0E /* TSKPinConfigurationTests.m in Sources */,
 				075AA1091AC985FD00178223 /* TSKPinValidationOfflineTests.m in Sources */,
+				8CC78B251B1B616500523A25 /* TSKPublicKeyAlgorithmTests.m in Sources */,
 				6B032D401AF1AEC200EAFA69 /* TSKReporterTests.m in Sources */,
 				8CC78B201B1B586F00523A25 /* TSKCertificateUtils.m in Sources */,
 			);

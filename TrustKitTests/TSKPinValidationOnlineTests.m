@@ -57,30 +57,6 @@
 }
 
 
-// Tests a secure connection to https://istlsfastyet.com which uses an ECDSA certificate
-- (void)testConnectionValidatingCAPublicKeyEcDsa
-{
-    NSDictionary *trustKitConfig =
-    @{
-      @"istlsfastyet.com" : @{
-              kTSKPublicKeyAlgorithms : @[kTSKAlgorithmEcDsaSecp256r1],
-              kTSKPublicKeyHashes : @[@"rFjc3wG7lTZe43zeYTvPq8k4xdDEutCmIhI5dn4oCeE=" // Leaf key
-                                      ]}};
-    
-    [TrustKit initializeWithConfiguration:trustKitConfig];
-    
-    NSError *error = nil;
-    NSHTTPURLResponse *response;
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://istlsfastyet.com"]];
-    [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    
-    XCTAssertNil(error, @"Connection had an error: %@", error);
-    XCTAssert(response.statusCode==200, @"Server did not respond with a 200 OK");
-    XCTAssert([TrustKit wasTrustKitCalled], @"TrustKit was not called");
-}
-
-
-
 // Tests a secure connection to https://www.yahoo.com and forces validation to fail by providing a fake hash
 - (void)testConnectionUsingFakeHashInvalidatingAllCertificates
 {
