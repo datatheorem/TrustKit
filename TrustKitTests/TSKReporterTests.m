@@ -9,74 +9,46 @@
 #import <XCTest/XCTest.h>
 #import "TSKSimpleReporter.h"
 #import "TSKSimpleBackgroundReporter.h"
+#import "TSKCertificateUtils.h"
+
 
 @interface TSKReporterTests : XCTestCase
 
 @end
 
 @implementation TSKReporterTests
-
-SecTrustRef _testTrust;
-SecCertificateRef _rootCertificate;
-SecCertificateRef _chainCertificate;
-SecCertificateRef _leafCertificate;
-SecPolicyRef _policy;
+{
+    SecTrustRef _testTrust;
+    SecCertificateRef _rootCertificate;
+    SecCertificateRef _intermediateCertificate;
+    SecCertificateRef _leafCertificate;
+}
 
 
 - (void)setUp {
     [super setUp];
     
-    CFDataRef rootData = (__bridge_retained CFDataRef)[NSData dataWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"ca.cert" ofType:@"der"]];
-    _rootCertificate = SecCertificateCreateWithData(kCFAllocatorDefault, rootData);
-    CFRelease(rootData);
-
-    CFDataRef chainData = (__bridge_retained CFDataRef)[NSData dataWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"ca-chain.cert" ofType:@"der"]];
-    _chainCertificate = SecCertificateCreateWithData(kCFAllocatorDefault, chainData);
-    CFRelease(chainData);
+    _rootCertificate = [TSKCertificateUtils createCertificateFromDer:@"GoodRootCA"];
+    _intermediateCertificate = [TSKCertificateUtils createCertificateFromDer:@"GoodIntermediateCA"];
+    _leafCertificate = [TSKCertificateUtils createCertificateFromDer:@"www.good.com"];
     
-    CFDataRef leafData = (__bridge_retained CFDataRef)[NSData dataWithContentsOfFile:[[NSBundle bundleForClass:[self class]] pathForResource:@"www.good.com.cert" ofType:@"der"]];
-    _leafCertificate = SecCertificateCreateWithData(kCFAllocatorDefault, leafData);
-    CFRelease(leafData);
+    SecCertificateRef certChainArray[2] = {_leafCertificate, _intermediateCertificate};
+    SecCertificateRef trustStoreArray[1] = {_rootCertificate};
     
-    CFStringRef hostname = CFSTR("www.good.com");
-    _policy = SecPolicyCreateSSL(true, hostname);
-    
-    
-    SecCertificateRef trustCertArray[2] = {_leafCertificate, _chainCertificate};
-    SecCertificateRef caRootArray[1] = {_rootCertificate};
-    
-    _testTrust = [self _createTrustWithCertificates:(const void **)trustCertArray arrayLength:sizeof(trustCertArray)/sizeof(trustCertArray[0])
-                                        anchorCertificates:(const void **)caRootArray arrayLength:sizeof(caRootArray)/sizeof(caRootArray[0])];
-    
+    _testTrust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
+                                                             arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
+                                                      anchorCertificates:(const void **)trustStoreArray
+                                                             arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
 }
 
 - (void)tearDown
 {
     CFRelease(_rootCertificate);
-    CFRelease(_chainCertificate);
+    CFRelease(_intermediateCertificate);
     CFRelease(_leafCertificate);
-    CFRelease(_policy);
     CFRelease(_testTrust);
     
     [super tearDown];
-}
-
-// Helper methods for cleaner testing code
-- (SecTrustRef)_createTrustWithCertificates:(const void **)certArray arrayLength:(NSInteger)certArrayLength anchorCertificates:(const void **)anchorCertificates arrayLength:(NSInteger)anchorArrayLength
-{
-    CFArrayRef certs = CFArrayCreate(NULL, (const void **)certArray, certArrayLength, NULL);
-    SecTrustRef trust;
-    
-    XCTAssert(SecTrustCreateWithCertificates(certs, _policy, &trust) == errSecSuccess, @"SecTrustCreateWithCertificates did not return errSecSuccess");
-    
-    CFArrayRef caRootCertificates = CFArrayCreate(NULL, (const void **)anchorCertificates, anchorArrayLength, NULL);
-    
-    XCTAssert(SecTrustSetAnchorCertificates(trust, caRootCertificates) == errSecSuccess, @"SecTrustSetAnchorCertificates did not return errSecSuccess");
-    
-    CFRelease(caRootCertificates);
-    CFRelease(certs);
-    
-    return trust;
 }
 
 - (void)testSimpleReporter {
