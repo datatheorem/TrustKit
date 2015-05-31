@@ -19,7 +19,7 @@ echo '--------------------------'
 # Generate the Subject Public Key Info hash
 pin=$(openssl x509  -pubkey -noout -inform DER -in $CERT | openssl rsa -outform DER -pubin -in /dev/stdin 2>/dev/null | openssl dgst -sha256 -binary | openssl enc -base64)
 
-echo "kTSKPublicKeyHashes: @[\"$pin\"]"
+echo "kTSKPublicKeyHashes: @[@\"$pin\"]"
 
 # Generate the public key algorithm
 publickey=$(openssl x509 -in $CERT -inform DER -text -noout | grep 'Public Key')

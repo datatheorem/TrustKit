@@ -16,7 +16,7 @@ echo 'TrustKit Pin Configuration'
 echo '--------------------------'
 # Generate the Subject Public Key Info hash
 pin=$(echo "$CACERT" | openssl x509  -pubkey -noout -in /dev/stdin | openssl rsa -outform DER -pubin -in /dev/stdin 2>/dev/null | openssl dgst -sha256 -binary | openssl enc -base64)
-echo "kTSKPublicKeyHashes: @[\"$pin\"]"
+echo "kTSKPublicKeyHashes: @[@\"$pin\"]"
 
 # Generate the public key algorithm
 publickey=$(echo "$CACERT" | openssl x509 -in /dev/stdin -text -noout | grep 'Public Key')
