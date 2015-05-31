@@ -97,7 +97,7 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
             TSKPinValidationResult validationResult = TSKPinValidationResultFailed;
             NSDictionary *domainConfig = _trustKitGlobalConfiguration[domainConfigKey];
             
-            validationResult = verifyPublicKeyPin(serverTrust, domainConfig[kTSKPublicKeyAlgorithms], domainConfig[kTSKPublicKeyHashes]);
+            validationResult = verifyPublicKeyPin(serverTrust, serverNameStr, domainConfig[kTSKPublicKeyAlgorithms], domainConfig[kTSKPublicKeyHashes]);
             
             if (validationResult != TSKPinValidationResultSuccess)
             {

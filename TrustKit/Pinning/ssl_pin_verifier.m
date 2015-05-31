@@ -81,7 +81,7 @@ NSString *getPinningConfigurationKeyForDomain(NSString *hostname, NSDictionary *
 
 #pragma mark SSL Pin Verifier
 
-TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSArray *supportedAlgorithms, NSSet *knownPins)
+TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverHostname, NSArray *supportedAlgorithms, NSSet *knownPins)
 {
     if ((serverTrust == NULL) || (supportedAlgorithms == nil) || (knownPins == nil))
     {
@@ -91,6 +91,12 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSArray *supp
     // First re-check the certificate chain using the default SSL validation in case it was disabled
     // This gives us revocation (only for EV certs I think?) and also ensures the certificate chain is sane
     // And also gives us the exact path that successfully validated the chain
+    
+    // Create and use a sane SSL policy to force hostname validation, even if the supplied trust has a bad
+    // policy configured (such as one from SecPolicyCreateBasicX509())
+    SecPolicyRef SslPolicy = SecPolicyCreateSSL(YES, (__bridge CFStringRef)(serverHostname));
+    SecTrustSetPolicies(serverTrust, SslPolicy);
+    
     SecTrustResultType trustResult = 0;
     if (SecTrustEvaluate(serverTrust, &trustResult) != errSecSuccess)
     {

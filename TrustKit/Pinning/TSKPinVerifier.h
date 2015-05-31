@@ -20,6 +20,6 @@ typedef NS_ENUM(NSInteger, TSKPinValidationResult) {
 
 @interface TSKPinVerifier : NSObject
 
-+ (TSKPinValidationResult) verifyPinForTrust:(SecTrustRef)serverTrust andDomain:(NSString *)serverHostname;
++ (TSKPinValidationResult) verifyPinForTrust:(SecTrustRef)serverTrust andHostname:(NSString *)serverHostname;
 
 @end

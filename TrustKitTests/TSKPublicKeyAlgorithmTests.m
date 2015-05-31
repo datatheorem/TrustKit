@@ -51,7 +51,7 @@
                                                                                             ]}});
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
-    verificationResult = verifyPublicKeyPin(trust, trustKitConfig[@"www.datatheorem.com"][kTSKPublicKeyAlgorithms], trustKitConfig[@"www.datatheorem.com"][kTSKPublicKeyHashes]);
+    verificationResult = verifyPublicKeyPin(trust, @"www.datatheorem.com", trustKitConfig[@"www.datatheorem.com"][kTSKPublicKeyAlgorithms], trustKitConfig[@"www.datatheorem.com"][kTSKPublicKeyHashes]);
     CFRelease(trust);
     
     XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against valid public key pins for RSA 2048");
@@ -79,7 +79,7 @@
                                                                                             ]}});
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
-    verificationResult = verifyPublicKeyPin(trust, trustKitConfig[@"www.good.com"][kTSKPublicKeyAlgorithms], trustKitConfig[@"www.good.com"][kTSKPublicKeyHashes]);
+    verificationResult = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig[@"www.good.com"][kTSKPublicKeyAlgorithms], trustKitConfig[@"www.good.com"][kTSKPublicKeyHashes]);
     CFRelease(trust);
     
     XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against valid public key pins for RSA 4096");
@@ -105,7 +105,7 @@
                                                                                             ]}});
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
-    verificationResult = verifyPublicKeyPin(trust, trustKitConfig[@"istlsfastyet.com"][kTSKPublicKeyAlgorithms], trustKitConfig[@"istlsfastyet.com"][kTSKPublicKeyHashes]);
+    verificationResult = verifyPublicKeyPin(trust, @"istlsfastyet.com", trustKitConfig[@"istlsfastyet.com"][kTSKPublicKeyAlgorithms], trustKitConfig[@"istlsfastyet.com"][kTSKPublicKeyHashes]);
     CFRelease(trust);
     
     XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against valid public key pins for ECDSA secp256r1");
