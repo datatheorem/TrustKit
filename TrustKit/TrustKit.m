@@ -114,6 +114,8 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
                                                                                  reportURIs:reportUris
                                                                          includeSubdomains:[domainConfig[kTSKIncludeSubdomains] boolValue]
                                                                                  knownPins:domainConfig[kTSKPublicKeyHashes]];
+                                       
+                                       CFRelease(serverTrust);
                                    });
                 }
                 
@@ -125,7 +127,6 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
                     result = errSSLXCertChainInvalid;
                 }
             }
-            
         }
     }
     return result;

@@ -36,8 +36,11 @@
     
     if (SecTrustCreateWithCertificates(certificateChain, policy, &trust) != errSecSuccess)
     {
+        CFRelease(certificateChain);
+        CFRelease(policy);
         [NSException raise:@"Test error" format:@"SecTrustCreateWithCertificates did not return errSecSuccess"];
     }
+    CFRelease(policy);
     
     if (anchorCertificates)
     {
@@ -45,11 +48,13 @@
         
         if (SecTrustSetAnchorCertificates(trust, trustStore) != errSecSuccess)
         {
+            CFRelease(certificateChain);
+            CFRelease(trust);
             [NSException raise:@"Test error" format:@"SecTrustCreateWithCertificates did not return errSecSuccess"];
         }
         CFRelease(trustStore);
     }
-   
+    
     CFRelease(certificateChain);
     return trust;
 }

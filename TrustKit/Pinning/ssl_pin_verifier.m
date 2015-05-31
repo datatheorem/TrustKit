@@ -96,6 +96,7 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
     // policy configured (such as one from SecPolicyCreateBasicX509())
     SecPolicyRef SslPolicy = SecPolicyCreateSSL(YES, (__bridge CFStringRef)(serverHostname));
     SecTrustSetPolicies(serverTrust, SslPolicy);
+    CFRelease(SslPolicy);
     
     SecTrustResultType trustResult = 0;
     if (SecTrustEvaluate(serverTrust, &trustResult) != errSecSuccess)

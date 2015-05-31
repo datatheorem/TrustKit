@@ -68,6 +68,8 @@ static NSData *getPublicKeyDataFromCertificate(SecCertificateRef certificate)
     SecTrustCreateWithCertificates(certificate, policy, &tempTrust);
     SecTrustEvaluate(tempTrust, NULL);
     publicKey = SecTrustCopyPublicKey(tempTrust);
+    CFRelease(policy);
+    CFRelease(tempTrust);
     
     
     // Extract the actual bytes from the key reference using the Keychain
