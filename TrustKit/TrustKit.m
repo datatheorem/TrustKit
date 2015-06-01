@@ -26,6 +26,7 @@ NSString * const kTSKEnforcePinning = @"TSKEnforcePinning";
 NSString * const kTSKIncludeSubdomains = @"TSKIncludeSubdomains";
 NSString * const kTSKPublicKeyAlgorithms = @"TSKPublicKeyAlgorithms";
 NSString * const kTSKReportUris = @"TSKReportUris";
+NSString * const kTSKDisableDefaultReportUri = @"TSKDisableDefaultReportUri";
 
 // Public key algorithms supported by TrustKit
 NSString * const kTSKAlgorithmRsa2048 = @"TSKAlgorithmRsa2048";
@@ -184,6 +185,19 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
         {
             // Default setting is YES
             domainFinalConfiguration[kTSKEnforcePinning] = [NSNumber numberWithBool:YES];
+        }
+        
+        
+        // Extract the optional disableDefaultReportUri setting
+        NSNumber *shouldDisableDefaultReportUri = domainTrustKitArguments[kTSKDisableDefaultReportUri];
+        if (shouldDisableDefaultReportUri)
+        {
+            domainFinalConfiguration[kTSKDisableDefaultReportUri] = shouldDisableDefaultReportUri;
+        }
+        else
+        {
+            // Default setting is NO
+            domainFinalConfiguration[kTSKDisableDefaultReportUri] = [NSNumber numberWithBool:NO];
         }
         
         

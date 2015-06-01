@@ -21,6 +21,7 @@ extern NSString * const kTSKEnforcePinning;
 extern NSString * const kTSKIncludeSubdomains;
 extern NSString * const kTSKPublicKeyAlgorithms;
 extern NSString * const kTSKReportUris;
+extern NSString * const kTSKDisableDefaultReportUri;
 
 #pragma mark Supported Public Key Algorithm Keys
 extern NSString * const kTSKAlgorithmRsa2048;
@@ -75,11 +76,11 @@ extern NSString * const kTSKAlgorithmEcDsaSecp256r1;
  
  #### `kTSKReportUris`
  An array of URLs to which pin validation failures should be reported. The format of the reports is similar to the one described in the HPKP specification.
- 
+
  
  ### Public Key Algorithms Keys
  
- Public key algorithms supported by TrustKit for generating SSL pins.
+ Public key algorithms supported by TrustKit for computing SSL pins.
  
  #### `kTSKAlgorithmRsa2048`
  
