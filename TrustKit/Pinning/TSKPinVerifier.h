@@ -42,7 +42,7 @@ typedef NS_ENUM(NSInteger, TSKPinValidationResult)
  This method should only be used to validate certificate chains for SSL connections that are not automatically handled by TrustKit:
  
  * Background upload/download URL sessions, because they are performed in a different process where TrustKit doesn't get loaded.
- * Connections that rely on a third-party library for SSL (such as OpenSSL) instead of Apple's SecureTransport. 
+ * Connections that rely on a third-party library for SSL (such as OpenSSL) instead of Apple's SecureTransport.
  */
 @interface TSKPinVerifier : NSObject
 
