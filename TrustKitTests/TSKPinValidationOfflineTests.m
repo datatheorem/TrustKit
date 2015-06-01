@@ -12,8 +12,6 @@
 #import "public_key_utils.h"
 #import "TSKCertificateUtils.h"
 
-#define HEXDUMP_COLS 16
-
 
 @interface TSKPinValidationOfflineTests : XCTestCase
 {
