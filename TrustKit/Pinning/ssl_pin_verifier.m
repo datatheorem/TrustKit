@@ -108,7 +108,10 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
     if ((trustResult != kSecTrustResultUnspecified) && (trustResult != kSecTrustResultProceed))
     {
         // Default SSL validation failed
-        TSKLog(@"Error: default SSL validation failed");
+        
+        CFDictionaryRef evaluationDetails = SecTrustCopyResult(serverTrust);
+        TSKLog(@"Error: default SSL validation failed: %@", evaluationDetails);
+        CFRelease(evaluationDetails);
         return TSKPinValidationResultFailedInvalidCertificateChain;
     }
     
