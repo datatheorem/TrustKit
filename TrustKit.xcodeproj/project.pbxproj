@@ -350,8 +350,9 @@
 		8C84803E1A896EE30017C155 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = TSK;
 				LastUpgradeCheck = 0610;
-				ORGANIZATIONNAME = "Data Theorem";
+				ORGANIZATIONNAME = TrustKit;
 				TargetAttributes = {
 					8C8480461A896EE30017C155 = {
 						CreatedOnToolsVersion = 6.1.1;
