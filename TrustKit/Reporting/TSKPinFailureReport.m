@@ -1,10 +1,13 @@
-//
-//  TSKPinFailureReport.m
-//  TrustKit
-//
-//  Created by Alban Diquet on 5/27/15.
-//  Copyright (c) 2015 Data Theorem. All rights reserved.
-//
+/*
+ 
+ TSKPinFailureReport.m
+ TrustKit
+ 
+ Copyright 2015 The TrustKit Project Authors
+ Licensed under the MIT license, see associated LICENSE file for terms.
+ See AUTHORS file for the list of project authors.
+ 
+ */
 
 #import "TSKPinFailureReport.h"
 

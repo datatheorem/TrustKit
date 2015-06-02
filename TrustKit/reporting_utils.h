@@ -1,10 +1,13 @@
-//
-//  reporting_utils.h
-//  TrustKit
-//
-//  Created by Alban Diquet on 5/29/15.
-//  Copyright (c) 2015 Data Theorem. All rights reserved.
-//
+/*
+ 
+ reporting_utils.h
+ TrustKit
+ 
+ Copyright 2015 The TrustKit Project Authors
+ Licensed under the MIT license, see associated LICENSE file for terms.
+ See AUTHORS file for the list of project authors.
+ 
+ */
 
 #ifndef TrustKit_reporting_utils_h
 #define TrustKit_reporting_utils_h

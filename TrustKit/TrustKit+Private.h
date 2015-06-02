@@ -1,10 +1,13 @@
-//
-//  TrustKit+Private.h
-//  TrustKit
-//
-//  Created by Eric on 30/03/15.
-//  Copyright (c) 2015 Data Theorem. All rights reserved.
-//
+/*
+ 
+ TrustKit+Private.h
+ TrustKit
+ 
+ Copyright 2015 The TrustKit Project Authors
+ Licensed under the MIT license, see associated LICENSE file for terms.
+ See AUTHORS file for the list of project authors.
+ 
+ */
 
 #ifndef TrustKit_TrustKit_Private____FILEEXTENSION___
 #define TrustKit_TrustKit_Private____FILEEXTENSION___
