@@ -1,10 +1,13 @@
-//
-//  TSKSimpleReporter.h
-//  TrustKit
-//
-//  Created by Angela Chow on 4/29/15.
-//  Copyright (c) 2015 Yahoo! Inc. All rights reserved.
-//
+/*
+ 
+ TSKSimpleReporter.h
+ TrustKit
+ 
+ Copyright 2015 The TrustKit Project Authors
+ Licensed under the MIT license, see associated LICENSE file for terms.
+ See AUTHORS file for the list of project authors.
+ 
+ */
 
 #import <Foundation/Foundation.h>
 #import "TSKReporterDelegate.h"
