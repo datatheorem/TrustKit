@@ -10,7 +10,6 @@
  */
 
 #import "ViewController.h"
-#import "TrustKit.h"
 
 @interface ViewController ()
 
@@ -25,20 +24,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.destinationWebView.delegate = self;
-    NSDictionary *trustKitConfig =
-    @{
-      @"www.datatheorem.com" : @{
-
-              kTSKEnforcePinning:@YES,
-              kTSKIncludeSubdomains:@YES,
-              kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-              kTSKPublicKeyHashes : @[@"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTX="
-                                      ], //wrong CA public key for datatheorem
-              kTSKReportUris: @[@"http://127.0.0.1:8080/log_csp_report"], //failure report to be sent here
-              }};
-    
-    [TrustKit initializeWithConfiguration:trustKitConfig];
-
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,6 +45,7 @@
     }
 }
 
+// show user an error dialog when webview cannot load
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
     NSLog(@"%s webview fail load error=%@", __FUNCTION__, error);
     UIAlertView *infoMessage;

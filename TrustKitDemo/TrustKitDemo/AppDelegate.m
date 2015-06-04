@@ -10,6 +10,7 @@
  */
 
 #import "AppDelegate.h"
+#import "TrustKit.h"
 
 @interface AppDelegate ()
 
@@ -20,6 +21,21 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    // Initialize TrustKit here so that from this point on, pin check is turned on 
+    NSDictionary *trustKitConfig =
+    @{
+      @"www.datatheorem.com" : @{
+              kTSKEnforcePinning:@YES,
+              kTSKIncludeSubdomains:@YES,
+              kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+              kTSKPublicKeyHashes : @[@"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTX="
+                                      ], //wrong CA public key for datatheorem to demonstrate the case of fail pinning
+              kTSKReportUris: @[@"http://127.0.0.1:8080/log_csp_report"] //failure report to be sent here
+              }};
+    
+    [TrustKit initializeWithConfiguration:trustKitConfig];
+
     return YES;
 }
 
