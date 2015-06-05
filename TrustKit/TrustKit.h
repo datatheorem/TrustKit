@@ -78,7 +78,7 @@ extern NSString * const kTSKAlgorithmEcDsaSecp256r1;
  If set to `NO`, a pinning failure will not cause the SSL connection to fail; default value is `YES`.
  
  #### `kTSKReportUris`
- An array of URLs to which pin validation failures should be reported. The format of the reports is similar to the one described in the HPKP specification.
+ An array of URLs to which pin validation failures should be reported. To minimize the performance impact of sending reports on each validation failure, the reports are uploaded using the background transfer service. For HTTPS report URLs, the HTTPS connections will ignore the SSL pinning policy and use the default certificate validation mechanisms, in order to maximize the chance of the reports reaching the server. The format of the reports is similar to the one described in the HPKP specification.
 
  
  ### Public Key Algorithms Keys
