@@ -3,4 +3,12 @@ pinning in any iOS or OS X App.
 
 
 This is the API documentation for TrustKit. For an overview of the framework and
-a more general guide to using it, see the [Getting Started]() guide.
+a more general guide to using it, see the [Getting
+Started](https://datatheorem.github.io/TrustKit/documentation) guide.
+
+TrustKit only exposes two classes:
+
+* TrustKit, for configuring the global SSL pinning policy within an App.
+* TSKPinVerifier, for manually validating a certificate chain against the
+configured pinning policy. This class only needs to be used for connections
+that are not automatically handled by TrustKit.

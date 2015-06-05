@@ -1,44 +1,41 @@
 TrustKit
 ========
 
-TrustKit is an iOS / OS X framework for easily and efficiently deploying SSL pinning in any App:
-
-* TrustKit will pin any connection performed using Apple Frameworks (`NSURLConnection`, `NSURLSession`, `NSStream`, etc.) even including connections performed within `UIWebViews`.
-* For Apps targeting iOS 8+, TrustKit can be deployed without having to modify the App's source code.
-* TrustKit follows the HTTP Public Key Pinning specification as closely as possible and provides HPKP functionality, such as pinning all subdomains of a given domain,  as well as reporting pin violations to a server.
+TrustKit is an open source framework that makes it easy to deploy SSL public key
+pinning in any iOS or OS X App.
 
 
-Generating SSL Pins
--------------------
+Features
+--------
 
-Before implementing SSL pinning within your App, you first need to figure out the list of server domains and public keys you would like to pin.
+* Easy to use: TrustKit can be deployed in minutes in any App. For iOS8+ and OS
+X Apps, TrustKit can be used without even modifying the App's source code.
+* API-independent pinning by directly hooking Apple's SecureTransport: TrustKit
+works on `NSURLSession`, `UIWebView`, `NSStream`, etc. all the way down to BSD
+sockets.
+* Subject Public Key Info pinning - the right way to do SSL pinning
+[as opposed to certificate pinning or pinning the public key bits](https://www.imperialviolet.org/2011/05/04/pinning.html).
+* Mechanism to report pinning failures, which allows Apps to send reports
+when an unexpected certificate chain is detected, similarly to the _report-uri_
+directive described in the [HTTP Public Key Pinning
+specification](https://tools.ietf.org/html/rfc7469).
 
-In the context of TrustKit, an SSL pin is the base64-encoded SHA-256 of a certificate's public key info; this is the same as what is described in the HTTP Public Key Pinning specification (https://developer.mozilla.org/en-US/docs/Web/Security/Public_Key_Pinning).
-
-To generate such values, three bash scripts are available. The first two scripts can be used to generate the pin configuration from a PEM or DER certificate:
-
-    $ ./get_pin_from_pem_certificate.sh ca.pem
-    $ ./get_pin_from_der_certificate.sh ca.der
-
-The second script can be used to generate the pin configuration for the highest certificate within the certificate chain returned by a given server:
-
-    $ ./get_pin_from_server.sh www.google.com
+TrustKit was initially released at [Black Hat 2015 USA](bh2015-pdf).
 
 
-Deploying TrustKit Through Static Linking
------------------------------------------
+Getting Started
+---------------
 
-For Apps targeting iOS 7+, TrustKit should be statically linked; this can be achieved by dragging and dropping the TrustKit project file into your App's Xcode project. Then, to initialize the framework, build a dictionary containing the proper configuration keys for TrustKit.
+* Have a look at the Black Hat USA 2015 [presentation](bh2015-pdf).
+* Read the [Getting Started](getting-started) guide.
+* Check out the [API documentation](api-doc).
 
-Such keys include:
 
-* `kTSKPublicKeyHashes`: Each element of this array should be the base64-encoded SHA 256 of a subject public key info that needs to be in the server's certificate chain.
-* `kTSKPublicKeyAlgorithms`: The algorithms TrustKit needs to support when generating public key hashes. Should be an array containing one or multiple entries from `kTSKAlgorithmRsa2048`, `TSKAlgorithmRsa4096`, `TSKAlgorithmEcDsaSecp256r1`. Supporting multiple algorithms has a performance impact.
-* `kTSKIncludeSubdomains` (optional): Pin all the subdomains of the specific domain.
-* `kTSKReportUris` (optional): No effect at the moment.
-* `kTSKEnforcePinning` (optional): If set to NO, a pinning failure will not cause the connection to fail; default value is YES. This is meant to be used with `kTSKReportUris` in order to report pin violations while still allowing connections to go through.
+Sample Usage
+------------
 
-Then, call the `initializeWithConfiguration:` method with the configuration dictionary:
+Enabling SSL pinning only requires initializing TrustKit with a pinning policy
+(domains, Subject Public Key Info hashes, and additional settings):
 
     NSDictionary *trustKitConfig =
     @{
@@ -47,44 +44,31 @@ Then, call the `initializeWithConfiguration:` method with the configuration dict
               kTSKPublicKeyHashes : @[@"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=",
                                       @"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8="
                                       ]}};
+              kTSKEnforcePinning : @YES,
+              kTSKReportUris : @[@"http://report.datatheorem.com/log_hpkp_report"],
 
     [TrustKit initializeWithConfiguration:trustKitConfig];
 
+Once TrustKit has been initialized, all TLS connections initiated by Apple
+frameworks within the App will verify the server' certificate chains against the
+supplied pinning policy. If report URIs have been configured, the App will also
+send reports to the specified URIs whenever a pin validation failure occurred.
+
+For more information, see the [Getting Started](getting-started) guide.
 
 
-Deploying TrustKit Through Dynamic Linking
-------------------------------------------
-
-For Apps targeting iOS 8+, TrustKit can be dynamically linked, which allows enabling public key pinning without having to modify the App's source code. To embed TrustKit in your App:
-
-* Drag and drop the TrustKit.xcodeproj file into your App's workspace in Xcode. Make sure TrustKit isn't already opened in Xcode:
-
-![](http://datatheorem.github.io/TrustKit/images/dynamic1.png)
-
-* In the App's "General" settings code, add TrustKit.framework in the list of "Embedded Binaries":
-
-![](http://datatheorem.github.io/TrustKit/images/dynamic2.png)
-
-* Lastly, add the public key hashes TrustKit will use to check certificate chains. In the App's Info.plist file ("Info" tab in Xcode):
-    * Add a new Dictionary key called `TSKConfiguration`.
-    * Within this dictionary add a Dictionary value and use the server's domain (such as www.google.com) as the entry's key.
-    * Within dictionary you can add a few specific keys in order to configure how TrustKit handles pinning with this domain:
-        * `TSKPublicKeyHashes`: Each element of this Array should be the base64-encoded SHA 256 of a subject public key info that needs to be in the server's certificate chain.
-        * `TSKPublicKeyAlgorithms`: The algorithms TrustKit needs to support when generating public key hashes. Should be an array containing one or multiple entries from `TSKAlgorithmRsa2048`, `TSKAlgorithmRsa4096`, `TSKAlgorithmEcDsaSecp256r1`. Supporting multiple algorithms has a performance impact.
-        * `TSKIncludeSubdomains` (optional): Pin all the subdomains of the specific domain.
-        * `TSKReportUris` (optional): No effect at the moment.
-        * `TSKEnforcePinning` (optional): If set to NO, a pinning failure will not cause the connection to fail; default value is YES. This is meant to be used with `TSKReportUris` in order to report pin violations while still allowing connections to go through.
-
-Your App's Info.plist file should look like this:
-
-![](http://datatheorem.github.io/TrustKit/images/dynamic3.png)
-
-Then, all SSL connections relying on Apple's SecureTransport (NSURLSession, NSURLConnection, UIWebView, etc.) will be checking the server's certificate chain using the public key pins specified in the Info.plist.
-
-
-
-
-Cordova
+Credits
 -------
 
-TBD.
+TrustKit is a joint-effort between the security teams at Data Theorem and Yahoo.
+See AUTHORS for details.
+
+
+License
+-------
+
+TrustKit is released under the MIT license. See LICENSE for details.
+
+[getting-started]: https://datatheorem.github.io/TrustKit/
+[bh2015-pdf]: /tbd
+[api-doc]: https://datatheorem.github.io/TrustKit/documentation
