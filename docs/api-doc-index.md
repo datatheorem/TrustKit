@@ -6,7 +6,8 @@ This is the API documentation for TrustKit. For an overview of the framework and
 a more general guide to using it, see the project's page at
 https://datatheorem.github.io/TrustKit .
 
-TrustKit only exposes two classes:
+TrustKit requires iOS 7+ or OS X 10.9+ as the minimum deployment target and
+provides two classes:
 
 * TrustKit, for configuring the global SSL pinning policy within an App.
 * TSKPinVerifier, for manually validating a certificate chain against the
