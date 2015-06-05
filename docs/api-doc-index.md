@@ -11,4 +11,4 @@ TrustKit only exposes two classes:
 * TrustKit, for configuring the global SSL pinning policy within an App.
 * TSKPinVerifier, for manually validating a certificate chain against the
 configured pinning policy. This class only needs to be used for connections
-that are not automatically handled by TrustKit.
+that are not automatically intercepted by TrustKit.

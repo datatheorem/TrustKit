@@ -5,30 +5,38 @@ TrustKit is an open source framework that makes it easy to deploy SSL public key
 pinning in any iOS or OS X App.
 
 
-Features
+Overview
 --------
+
+At a high level, TrustKit intercepts all outgoing SSL connections initiated by
+SecureTransport in order to perform additional validation against the server's
+certificate chain, based on an App-wide SSL pinning policy. This novel approach
+to SSL pinning gives us the following benefits:
 
 * Easy to use: TrustKit can be deployed in minutes in any App. For iOS8+ and OS
 X Apps, TrustKit can be used without even modifying the App's source code.
 * API-independent pinning by directly hooking Apple's SecureTransport: TrustKit
 works on `NSURLSession`, `UIWebView`, `NSStream`, etc. all the way down to BSD
 sockets.
-* Subject Public Key Info pinning - the right way to do SSL pinning
-[as opposed to certificate pinning or pinning the public key bits](https://www.imperialviolet.org/2011/05/04/pinning.html).
+
+Additionally, TrustKit provides the following features:
+
+* Subject Public Key Info pinning, [as opposed to certificate pinning or pinning
+the public key bits](https://www.imperialviolet.org/2011/05/04/pinning.html).
 * Mechanism to report pinning failures, which allows Apps to send reports
 when an unexpected certificate chain is detected, similarly to the _report-uri_
 directive described in the [HTTP Public Key Pinning
 specification](https://tools.ietf.org/html/rfc7469).
 
-TrustKit was initially released at [Black Hat 2015 USA](bh2015-pdf).
+TrustKit was initially released at [Black Hat 2015 USA][bh2015-pdf].
 
 
 Getting Started
 ---------------
 
-* Have a look at the Black Hat USA 2015 [presentation](bh2015-pdf).
-* Read the [Getting Started](getting-started) guide.
-* Check out the [API documentation](api-doc).
+* Have a look at the Black Hat USA 2015 [presentation][bh2015-pdf].
+* Read the [Getting Started][getting-started] guide.
+* Check out the [API documentation][api-doc].
 
 
 Sample Usage
@@ -49,12 +57,12 @@ Enabling SSL pinning only requires initializing TrustKit with a pinning policy
 
     [TrustKit initializeWithConfiguration:trustKitConfig];
 
-Once TrustKit has been initialized, all TLS connections initiated by Apple
+Once TrustKit has been initialized, all SSL connections initiated by Apple
 frameworks within the App will verify the server' certificate chains against the
 supplied pinning policy. If report URIs have been configured, the App will also
 send reports to the specified URIs whenever a pin validation failure occurred.
 
-For more information, see the [Getting Started](getting-started) guide.
+For more information, see the [Getting Started][getting-started] guide.
 
 
 Credits
@@ -70,5 +78,5 @@ License
 TrustKit is released under the MIT license. See LICENSE for details.
 
 [getting-started]: https://datatheorem.github.io/TrustKit/
-[bh2015-pdf]: /tbd
+[bh2015-pdf]: #tbd
 [api-doc]: https://datatheorem.github.io/TrustKit/documentation
