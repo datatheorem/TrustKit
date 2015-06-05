@@ -3,8 +3,8 @@ pinning in any iOS or OS X App.
 
 
 This is the API documentation for TrustKit. For an overview of the framework and
-a more general guide to using it, see the [Getting
-Started](https://datatheorem.github.io/TrustKit/documentation) guide.
+a more general guide to using it, see the [project's
+page](https://datatheorem.github.io/TrustKit).
 
 TrustKit only exposes two classes:
 
