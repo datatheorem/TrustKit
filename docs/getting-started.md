@@ -74,25 +74,31 @@ corresponding certificates' public key algorithms. For example:
                        };
 
 The list of all configuration keys is available in the
-[documentation][trustkit-doc].
+[documentation](https://datatheorem.github.io/TrustKit/documentation/Classes/TrustKit.html).
 
 
 ### Static Linking
 
-For Apps targeting iOS 7+, TrustKit must be statically linked:
+For Apps targeting iOS 7, TrustKit must be statically linked.
 
 1. Drag and drop the TrustKit Xcode project file in your project:
 
 ![](http://datatheorem.github.io/TrustKit/images/linking1.png)
 
-2. Within the "General" tab for your App's target, add TrustKit to the
-"Linked Framework and Binaries" section:
+2. Within the "General" tab for your App's target, add _libTrustKit_Static.a_ to
+the "Linked Framework and Binaries" section:
 
-![](http://datatheorem.github.io/TrustKit/images/linking_static2.png)
+![](http://datatheorem.github.io/TrustKit/images/linking2_static.png)
 
-3. Lastly, call the `initializeWithConfiguration:` method with your pinning policy:
+3. Within the "Build Settings", add TrustKit's folder to the "User Header Search
+Paths" setting and set "Always Search Header Paths" to "Yes":
 
-    #import <TrustKit/TrustKit.h>
+![](http://datatheorem.github.io/TrustKit/images/linking3_static.png)
+
+3. Lastly, call the `initializeWithConfiguration:` method with your pinning
+policy:
+
+    #import "TrustKit.h"
 
     [...]
 
@@ -116,7 +122,7 @@ USA 2015.
 ### Dynamic Linking
 
 For Apps targeting iOS 8+ or OS X, TrustKit can be dynamically linked, which
-allows deploying SSL pinning without having to modify the App's source code:
+allows deploying SSL pinning without having to modify the App's source code.
 
 1. Drag and drop the TrustKit Xcode project file in your project:
 
@@ -125,12 +131,12 @@ allows deploying SSL pinning without having to modify the App's source code:
 2. Within the "General" tab for your App's target, add TrustKit to the
 "Embedded Binaries" section:
 
-![](http://datatheorem.github.io/TrustKit/images/linking_dynamic2.png)
+![](http://datatheorem.github.io/TrustKit/images/linking2_dynamic.png)
 
 3. Lastly, specify your App's pinning policy by adding configuration keys to
 the App's _Info.plist_ file under a `TSKConfiguration` dictionary key:
 
-![](http://datatheorem.github.io/TrustKit/images/linking_dynamic3.png)
+![](http://datatheorem.github.io/TrustKit/images/linking3_dynamic.png)
 
 
 Manual Pin Validation
@@ -144,6 +150,3 @@ libraries (such as OpenSSL). For these connections, the pin validation must be
 triggered manually; see the documentation for the [TSKPinVerifier
 class](https://datatheorem.github.io/TrustKit/documentation/Classes/TSKPinVerifier.html)
 for more details.
-
-
-[trustkit-doc]: https://datatheorem.github.io/TrustKit/documentation/Classes/TrustKit.html
