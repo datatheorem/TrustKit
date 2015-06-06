@@ -28,12 +28,12 @@ static pthread_mutex_t _spkiCacheLock; // Used to lock access to our SPKI caches
 #pragma mark Missing ASN1 SPKI Headers
 
 // These are the ASN1 headers for the Subject Public Key Info section of a certificate
-static unsigned char Rsa2048Asn1Header[] = {
+static unsigned char rsa2048Asn1Header[] = {
     0x30, 0x82, 0x01, 0x22, 0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86,
     0xf7, 0x0d, 0x01, 0x01, 0x01, 0x05, 0x00, 0x03, 0x82, 0x01, 0x0f, 0x00
 };
 
-static unsigned char Rsa4096Asn1Header[] = {
+static unsigned char rsa4096Asn1Header[] = {
     0x30, 0x82, 0x02, 0x22, 0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86,
     0xf7, 0x0d, 0x01, 0x01, 0x01, 0x05, 0x00, 0x03, 0x82, 0x02, 0x0f, 0x00
 };
@@ -45,8 +45,8 @@ static unsigned char ecDsaSecp256r1Asn1Header[] = {
 };
 
 // Careful with the order... must match how TSKPublicKeyAlgorithm is defined
-static unsigned char *asn1HeaderBytes[3] = { Rsa2048Asn1Header, Rsa4096Asn1Header, ecDsaSecp256r1Asn1Header };
-static unsigned int asn1HeaderSizes[3] = { sizeof(Rsa2048Asn1Header), sizeof(Rsa4096Asn1Header), sizeof(ecDsaSecp256r1Asn1Header) };
+static unsigned char *asn1HeaderBytes[3] = { rsa2048Asn1Header, rsa4096Asn1Header, ecDsaSecp256r1Asn1Header };
+static unsigned int asn1HeaderSizes[3] = { sizeof(rsa2048Asn1Header), sizeof(rsa4096Asn1Header), sizeof(ecDsaSecp256r1Asn1Header) };
 
 
 
@@ -54,7 +54,7 @@ static unsigned int asn1HeaderSizes[3] = { sizeof(Rsa2048Asn1Header), sizeof(Rsa
 
 #pragma mark Public Key Converter - iOS
 
-static const NSString *TrustKitPublicKeyTag = @"TSKPublicKeyTag"; // Used to add and find the public key in the Keychain
+static const NSString *kTSKKeychainPublicKeyTag = @"TSKKeychainPublicKeyTag"; // Used to add and find the public key in the Keychain
 
 static pthread_mutex_t _keychainLock; // Used to lock access to our Keychain item
 
@@ -80,7 +80,7 @@ static NSData *getPublicKeyDataFromCertificate(SecCertificateRef certificate)
     // Prepare the dictionnary to add the key
     NSMutableDictionary *peerPublicKeyAdd = [[NSMutableDictionary alloc] init];
     [peerPublicKeyAdd setObject:(__bridge id)kSecClassKey forKey:(__bridge id)kSecClass];
-    [peerPublicKeyAdd setObject:TrustKitPublicKeyTag forKey:(__bridge id)kSecAttrApplicationTag];
+    [peerPublicKeyAdd setObject:kTSKKeychainPublicKeyTag forKey:(__bridge id)kSecAttrApplicationTag];
     [peerPublicKeyAdd setObject:(__bridge id)(publicKey) forKey:(__bridge id)kSecValueRef];
     // Request the key's data to be returned
     [peerPublicKeyAdd setObject:(__bridge id)(kCFBooleanTrue) forKey:(__bridge id)kSecReturnData];
@@ -88,7 +88,7 @@ static NSData *getPublicKeyDataFromCertificate(SecCertificateRef certificate)
     // Prepare the dictionnary to retrieve the key
     NSMutableDictionary * publicKeyGet = [[NSMutableDictionary alloc] init];
     [publicKeyGet setObject:(__bridge id)kSecClassKey forKey:(__bridge id)kSecClass];
-    [publicKeyGet setObject:(TrustKitPublicKeyTag) forKey:(__bridge id)kSecAttrApplicationTag];
+    [publicKeyGet setObject:(kTSKKeychainPublicKeyTag) forKey:(__bridge id)kSecAttrApplicationTag];
     [publicKeyGet setObject:(__bridge id)(kCFBooleanTrue) forKey:(__bridge id)kSecReturnData];
     
     
@@ -218,7 +218,7 @@ void initializeSubjectPublicKeyInfoCache(void)
     // Cleanup the Keychain in case the App previously crashed
     NSMutableDictionary * publicKeyGet = [[NSMutableDictionary alloc] init];
     [publicKeyGet setObject:(__bridge id)kSecClassKey forKey:(__bridge id)kSecClass];
-    [publicKeyGet setObject:(TrustKitPublicKeyTag) forKey:(__bridge id)kSecAttrApplicationTag];
+    [publicKeyGet setObject:(kTSKKeychainPublicKeyTag) forKey:(__bridge id)kSecAttrApplicationTag];
     [publicKeyGet setObject:(__bridge id)(kCFBooleanTrue) forKey:(__bridge id)kSecReturnData];
     pthread_mutex_lock(&_keychainLock);
     {

@@ -15,7 +15,7 @@
 #import "reporting_utils.h"
 
 // Session identifier for background uploads: <bundle_id>.TSKSimpleReporter
-static NSString* backgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
+static NSString* kTSKBackgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
 static dispatch_once_t dispatchOnceBackgroundSession;
 
 
@@ -74,7 +74,7 @@ static dispatch_once_t dispatchOnceBackgroundSession;
         backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfiguration:[NSString stringWithFormat:backgroundSessionIdentifierFormat, self.appBundleId]];
 #else
         // iOS 8+ or OS X 10.10+
-        backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier: [NSString stringWithFormat:backgroundSessionIdentifierFormat, self.appBundleId]];
+        backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier: [NSString stringWithFormat:kTSKBackgroundSessionIdentifierFormat, self.appBundleId]];
 #endif
 
 #if TARGET_OS_IPHONE
