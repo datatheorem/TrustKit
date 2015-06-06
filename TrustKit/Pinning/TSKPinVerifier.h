@@ -47,14 +47,14 @@ typedef NS_ENUM(NSInteger, TSKPinValidationResult)
 /**
  `TSKPinVerifier` is a class for manually verifying a server's identity against the global SSL pinning policy.
  
- In a few specific scenarios, TrustKit cannot intercept an outgoing SSL connection and automatically validate the server's identity against the pinning policy. For such connections, the pin validation needs to be manually triggered: the server's trust object, which contains its certificate chain, needs to be retrieved or built before being passed to `TSKPinVerifier` for validation.
+ In a few specific scenarios, TrustKit cannot intercept outgoing SSL connections and automatically validate the server's identity against the pinning policy. For these connections, the pin validation must be manually triggered: the server's trust object, which contains its certificate chain, needs to be retrieved or built before being passed to `TSKPinVerifier` for validation.
  
  The following scenarios require manual pin validation:
  
  * Connections initiated from an external process, where TrustKit does not get loaded:
  * `WKWebView` connections: the server's trust object can be retrieved within the `webView:didReceiveAuthenticationChallenge:completionHandler:` method.
- * `NSURLSession` connections using a background session: the server's trust object can be retrieved within the `application:handleEventsForBackgroundURLSession:completionHandler:` method.
- * Connections initiated using a third-party SSL library such as OpenSSL, instead of Apple's SecureTransport. A `SecTrustRef` object needs to be built using the server's certificate chain.
+ * `NSURLSession` connections using the background transfer service: the server's trust object can be retrieved within the `application:handleEventsForBackgroundURLSession:completionHandler:` method.
+ * Connections initiated using a third-party SSL library such as OpenSSL, instead of Apple's SecureTransport. The server's trust object needs to be built using its certificate chain.
  
  */
 @interface TSKPinVerifier : NSObject
