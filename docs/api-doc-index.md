@@ -1,7 +1,6 @@
 TrustKit is an open source framework that makes it easy to deploy SSL public key
 pinning in any iOS or OS X App.
 
-
 This is the API documentation for TrustKit. For an overview of the framework and
 a more general guide to using it, see the project's page at
 https://datatheorem.github.io/TrustKit .
