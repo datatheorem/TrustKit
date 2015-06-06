@@ -28,7 +28,7 @@ when an unexpected certificate chain is detected, similarly to the _report-uri_
 directive described in the [HTTP Public Key Pinning
 specification](https://tools.ietf.org/html/rfc7469).
 
-TrustKit was initially released at [Black Hat 2015 USA][bh2015-pdf].
+TrustKit will be initially released at [Black Hat 2015 USA][bh2015-pdf].
 
 
 Getting Started
