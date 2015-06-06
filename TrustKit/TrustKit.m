@@ -19,8 +19,11 @@
 #import "TSKSimpleBackgroundReporter.h"
 
 
+#pragma mark Configuration Constants
+
 // Info.plist key we read the public key hashes from
 static NSString * const kTSKConfiguration = @"TSKConfiguration";
+
 
 // Keys for each domain within the config dictionnary
 NSString * const kTSKPublicKeyHashes = @"TSKPublicKeyHashes";
@@ -30,7 +33,7 @@ NSString * const kTSKPublicKeyAlgorithms = @"TSKPublicKeyAlgorithms";
 NSString * const kTSKReportUris = @"TSKReportUris";
 NSString * const kTSKDisableDefaultReportUri = @"TSKDisableDefaultReportUri";
 
-// Public key algorithms supported by TrustKit
+#pragma mark Public key Algorithms Constants
 NSString * const kTSKAlgorithmRsa2048 = @"TSKAlgorithmRsa2048";
 NSString * const kTSKAlgorithmRsa4096 = @"TSKAlgorithmRsa4096";
 NSString * const kTSKAlgorithmEcDsaSecp256r1 = @"TSKAlgorithmEcDsaSecp256r1";
@@ -46,11 +49,15 @@ static dispatch_once_t dispatchOnceTrustKitInit;
 
 // Reporter delegate for sending pin violation reports
 static TSKSimpleBackgroundReporter *_pinFailureReporter = nil;
-static char _pinFailureReporterQueueLabel[] = "com.datatheorem.trustkit.reporterqueue";
+static char kTSKPinFailureReporterQueueLabel[] = "com.datatheorem.trustkit.reporterqueue";
 static dispatch_queue_t _pinFailureReporterQueue = NULL;
 
 // For tests
 static BOOL _wasTrustKitCalled = NO;
+
+
+// Default report URI - can be disabled with TSKDisableDefaultReportUri
+static NSString * const kTSKDefaultReportUri = @"https://trustkit-reports-server.appspot.com/log_report";
 
 
 #pragma mark Logging Function
@@ -106,7 +113,12 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
             if (validationResult != TSKPinValidationResultSuccess)
             {
                 // Pin validation failed: notify the reporter delegate if a report URI was configured
-                NSArray *reportUris = domainConfig[kTSKReportUris];
+                NSMutableArray *reportUris = [NSMutableArray arrayWithArray:domainConfig[kTSKReportUris]];
+                if (domainConfig[kTSKDisableDefaultReportUri] == NO)
+                {
+                    [reportUris addObject:[NSURL URLWithString:kTSKDefaultReportUri]];
+                }
+
                 if ((reportUris != nil) && ([reportUris count] > 0))
                 {
                     dispatch_async(_pinFailureReporterQueue, ^(void)
@@ -118,7 +130,6 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
                                                                                  reportURIs:reportUris
                                                                          includeSubdomains:[domainConfig[kTSKIncludeSubdomains] boolValue]
                                                                                  knownPins:domainConfig[kTSKPublicKeyHashes]];
-                                       
                                        CFRelease(serverTrust);
                                    });
                 }
@@ -323,7 +334,7 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
             // Create a dispatch queue for activating the reporter
             // We use a serial queue targetting the global default queue in order to ensure reports are sent one by one
             // even when a lot of pin failures are occuring, instead of spamming the global queue with events to process
-            _pinFailureReporterQueue = dispatch_queue_create(_pinFailureReporterQueueLabel, DISPATCH_QUEUE_SERIAL);
+            _pinFailureReporterQueue = dispatch_queue_create(kTSKPinFailureReporterQueueLabel, DISPATCH_QUEUE_SERIAL);
             dispatch_set_target_queue(_pinFailureReporterQueue, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0));
 
             // All done

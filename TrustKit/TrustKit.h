@@ -63,10 +63,10 @@ extern NSString * const kTSKAlgorithmEcDsaSecp256r1;
  ### Required Configuration Keys
  
  #### `kTSKPublicKeyHashes`
- This value should be an array of SSL pins; each pin is the base64-encoded SHA-256 hash of a certificate's subject public key info. TrustKit will verify that at least one of the specifed pins is found in the server's certificate chain.
+ An array of SSL pins; each pin is the base64-encoded SHA-256 hash of a certificate's Subject Public Key Info. TrustKit will verify that at least one of the specifed pins is found in the server's evaluated certificate chain.
  
  #### `kTSKPublicKeyAlgorithms`
- This value should be an array of `kTSKAlgorithm` constants that TrustKit needs to support when computing pins. To minimize the performance impact of Trustkit, only one algorithm should be enabled.
+ An array of `kTSKAlgorithm` constants to specify which public key algorithms need to be supported when computing SSL pins. To minimize the performance impact of Trustkit, only one algorithm should be enabled.
  
  
  ### Optional Configuration Keys
@@ -80,6 +80,9 @@ extern NSString * const kTSKAlgorithmEcDsaSecp256r1;
  #### `kTSKReportUris`
  An array of URLs to which pin validation failures should be reported. To minimize the performance impact of sending reports on each validation failure, the reports are uploaded using the background transfer service. For HTTPS report URLs, the HTTPS connections will ignore the SSL pinning policy and use the default certificate validation mechanisms, in order to maximize the chance of the reports reaching the server. The format of the reports is similar to the one described in the HPKP specification.
 
+ #### `kTSKDisableDefaultReportUri`
+ If set to `YES`, the default report URL for sending pin failure reports will be disabled. By default, pin failure reports are sent to a report server hosted by Data Theorem, for detecting potential CA compromises and man-in-the-middle attacks, as well as providing a free dashboard for developers. Only reports are sent, which contain the App's bundle ID and the server's hostname and certificate chain that failed validation. This behavior can be disabled by setting this key to `YES`.
+ 
  
  ### Public Key Algorithms Keys
  
