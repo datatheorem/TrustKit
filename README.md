@@ -45,15 +45,26 @@ Sample Usage
 Enabling SSL pinning only requires initializing TrustKit with a pinning policy
 (domains, Subject Public Key Info hashes, and additional settings):
 
-    NSDictionary *trustKitConfig =
-    @{
-      @"www.datatheorem.com" : @{
-              kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-              kTSKPublicKeyHashes : @[@"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=",
-                                      @"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8="
-                                      ]}};
-              kTSKEnforcePinning : @YES,
-              kTSKReportUris : @[@"http://report.datatheorem.com/log_hpkp_report"],
+    NSDictionary *trustKitConfig;
+    trustKitConfig = @{
+                       @"www.datatheorem.com" : @{
+                               kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                               kTSKPublicKeyHashes : @[
+                                       @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=",
+                                       @"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8="
+                                       ],
+                               kTSKEnforcePinning : @NO,
+                               kTSKReportUris : @[@"http://report.datatheorem.com/log_hpkp_report"],
+                               },
+                       @"yahoo.com" : @{
+                               kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                               kTSKPublicKeyHashes : @[
+                                       @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                                       @"rFjc3wG7lTZe43zeYTvPq8k4xdDEutCmIhI5dn4oCeE=",
+                                       ],
+                               kTSKIncludeSubdomains : @YES
+                               }
+                       };
 
     [TrustKit initializeWithConfiguration:trustKitConfig];
 

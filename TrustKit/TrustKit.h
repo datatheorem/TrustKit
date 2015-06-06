@@ -37,25 +37,28 @@ extern NSString * const kTSKAlgorithmEcDsaSecp256r1;
  
  Initializing TrustKit requires supplying a dictionary containing domain names as keys and dictionaries as values. Each domain dictionary should specify some configuration keys, which will specify the pinning policy for this domain. For example:
  
-     NSDictionary *trustKitConfig = @{
-         @"www.datatheorem.com" : @{
-             kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-             kTSKPublicKeyHashes : @[
-                 @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=",
-                 @"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8="
-                 ]
-             }
-        @"yahoo.com" : @{
-            kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-            kTSKPublicKeyHashes : @[
-                @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
-                @"rFjc3wG7lTZe43zeYTvPq8k4xdDEutCmIhI5dn4oCeE=",
-                ]
-            },
-            kTSKIncludeSubdomains : YES
-         };
- 
-     [TrustKit initializeWithConfiguration:trustKitConfig];
+     NSDictionary *trustKitConfig;
+     trustKitConfig = @{
+                        @"www.datatheorem.com" : @{
+                                kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                                kTSKPublicKeyHashes : @[
+                                        @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=",
+                                        @"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8="
+                                        ],
+                                kTSKEnforcePinning : @NO,
+                                kTSKReportUris : @[@"http://report.datatheorem.com/log_hpkp_report"],
+                                },
+                        @"yahoo.com" : @{
+                                kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                kTSKPublicKeyHashes : @[
+                                        @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                                        @"rFjc3wG7lTZe43zeYTvPq8k4xdDEutCmIhI5dn4oCeE=",
+                                        ],
+                                kTSKIncludeSubdomains : @YES
+                                }
+                        };
+
+      [TrustKit initializeWithConfiguration:trustKitConfig];
  
   When dynamically linked, TrustKit is automatically initialized by reading configuration keys from the App's _Info.plist_, and no initialization method needs to be called.
  
@@ -63,10 +66,10 @@ extern NSString * const kTSKAlgorithmEcDsaSecp256r1;
  ### Required Configuration Keys
  
  #### `kTSKPublicKeyHashes`
- An array of SSL pins; each pin is the base64-encoded SHA-256 hash of a certificate's Subject Public Key Info. TrustKit will verify that at least one of the specifed pins is found in the server's evaluated certificate chain.
+ An array of SSL pins; each pin is the base64-encoded SHA-256 hash of a certificate's Subject Public Key Info. TrustKit will verify that at least one of the specified pins is found in the server's evaluated certificate chain.
  
  #### `kTSKPublicKeyAlgorithms`
- An array of `kTSKAlgorithm` constants to specify which public key algorithms need to be supported when computing SSL pins. To minimize the performance impact of Trustkit, only one algorithm should be enabled.
+ An array of `kTSKAlgorithm` constants to specify the public key algorithms for the keys to be pinned. TrustKit requires this information in order to compute SSL pins when validating a server's certificate chain, because there are no APIs to directly extract the key's algorithm from an SSL certificate. To minimize the performance impact of Trustkit, only one algorithm should be enabled.
  
  
  ### Optional Configuration Keys
@@ -104,11 +107,11 @@ extern NSString * const kTSKAlgorithmEcDsaSecp256r1;
 /**
  Initializes the global SSL pinning policy with the supplied configuration.
  
- This method should be called as early as possible in the App's lifecycle to ensure that the App's very first HTTPS connections are protected.
+ This method should be called as early as possible in the App's lifecycle to ensure that the App's very first HTTPS connections are validated by TrustKit.
  
  @param trustKitConfig A dictionnary containing various keys for configuring the global SSL pinning policy.
+ @exception NSException Thrown when the supplied configuration is invalid or TrustKit has already been initialized.
  
- @warning TrustKit can only be initialized once and calling this method multiple times will raise an exception.
  */
 + (void) initializeWithConfiguration:(NSDictionary *)trustKitConfig;
 
