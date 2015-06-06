@@ -173,7 +173,7 @@
                                                                     kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Bad key
                                                                                             ]}});
     
-    TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
+    TSKPinValidationResult verificationResult = TSKPinValidationResultSuccess;
     verificationResult = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig[@"www.good.com"][kTSKPublicKeyAlgorithms], trustKitConfig[@"www.good.com"][kTSKPublicKeyHashes]);
     CFRelease(trust);
     
@@ -228,7 +228,7 @@
     verificationResult = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig[@"www.good.com"][kTSKPublicKeyAlgorithms], trustKitConfig[@"www.good.com"][kTSKPublicKeyHashes]);
     CFRelease(trust);
     
-    XCTAssert(verificationResult == TSKPinValidationResultFailedInvalidCertificateChain, @"Validation must fail against an invalid certificate chain");
+    XCTAssert(verificationResult == TSKPinValidationResultFailedCertificateChainNotTrusted, @"Validation must fail against an invalid certificate chain");
 }
 
 
@@ -253,7 +253,7 @@
     verificationResult = verifyPublicKeyPin(trust, @"www.bad.com", trustKitConfig[@"www.bad.com"][kTSKPublicKeyAlgorithms], trustKitConfig[@"www.bad.com"][kTSKPublicKeyHashes]);
     CFRelease(trust);
     
-    XCTAssert(verificationResult == TSKPinValidationResultFailedInvalidCertificateChain, @"Validation must fail against an invalid hostname");
+    XCTAssert(verificationResult == TSKPinValidationResultFailedCertificateChainNotTrusted, @"Validation must fail against an invalid hostname");
 }
 
 

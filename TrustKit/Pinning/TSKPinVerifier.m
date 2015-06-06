@@ -32,7 +32,7 @@
     else
     {
         // The domain is not pinned: nothing to validate
-        result = TSKPinValidationResultSuccess;
+        result = TSKPinValidationResultDomainNotPinned;
     }
     return result;
 }

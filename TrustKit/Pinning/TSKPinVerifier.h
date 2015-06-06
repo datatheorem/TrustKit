@@ -30,12 +30,17 @@ typedef NS_ENUM(NSInteger, TSKPinValidationResult)
     /**
      The server trust's evaluation failed: the server's certificate chain is not trusted.
      */
-    TSKPinValidationResultFailedInvalidCertificateChain,
+    TSKPinValidationResultFailedCertificateChainNotTrusted,
     
     /**
      The server trust could not be evaluated due to invalid parameters.
      */
-    TSKPinValidationResultFailedInvalidParameters,
+    TSKPinValidationResultErrorInvalidParameters,
+    
+    /**
+     The supplied hostname does not have a pinning policy configured; no validation was performed.
+     */
+    TSKPinValidationResultDomainNotPinned,
 };
 
 
@@ -67,7 +72,7 @@ typedef NS_ENUM(NSInteger, TSKPinValidationResult)
  
  @return The result of validation. See `TSKPinValidationResult` for possible values.
  
- @warning If no SSL pinning policy was configured for the supplied _serverHostname_, this method has no effect and will return `TSKPinValidationResultSuccess` without validating the supplied _serverTrust_ at all.
+ @warning If no SSL pinning policy was configured for the supplied _serverHostname_, this method has no effect and will return `TSKPinValidationResultDomainNotPinned` without validating the supplied _serverTrust_ at all.
  */
 + (TSKPinValidationResult) verifyPinForTrust:(SecTrustRef)serverTrust andHostname:(NSString *)serverHostname;
 

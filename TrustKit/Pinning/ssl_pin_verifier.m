@@ -87,7 +87,7 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
 {
     if ((serverTrust == NULL) || (supportedAlgorithms == nil) || (knownPins == nil))
     {
-        return TSKPinValidationResultFailedInvalidParameters;
+        return TSKPinValidationResultErrorInvalidParameters;
     }
     
     // First re-check the certificate chain using the default SSL validation in case it was disabled
@@ -104,7 +104,7 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
     if (SecTrustEvaluate(serverTrust, &trustResult) != errSecSuccess)
     {
         TSKLog(@"SecTrustEvaluate error");
-        return TSKPinValidationResultFailedInvalidParameters;
+        return TSKPinValidationResultErrorInvalidParameters;
     }
     
     if ((trustResult != kSecTrustResultUnspecified) && (trustResult != kSecTrustResultProceed))
@@ -114,7 +114,7 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
         CFDictionaryRef evaluationDetails = SecTrustCopyResult(serverTrust);
         TSKLog(@"Error: default SSL validation failed: %@", evaluationDetails);
         CFRelease(evaluationDetails);
-        return TSKPinValidationResultFailedInvalidCertificateChain;
+        return TSKPinValidationResultFailedCertificateChainNotTrusted;
     }
     
     // Check each certificate in the server's certificate chain (the trust object)

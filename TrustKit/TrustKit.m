@@ -124,8 +124,8 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
                 }
                 
                 if (([domainConfig[kTSKEnforcePinning] boolValue] == YES)
-                     || (validationResult == TSKPinValidationResultFailedInvalidCertificateChain)
-                     || (validationResult == TSKPinValidationResultFailedInvalidParameters))
+                     || (validationResult == TSKPinValidationResultFailedCertificateChainNotTrusted)
+                     || (validationResult == TSKPinValidationResultErrorInvalidParameters))
                 {
                     // TrustKit was configured to enforce pinning or the certificate chain was not trusted: make the connection fail
                     result = errSSLXCertChainInvalid;
