@@ -26,6 +26,7 @@
 		8C84804D1A896EE30017C155 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C84804C1A896EE30017C155 /* TrustKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8C8480531A896EE30017C155 /* TrustKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C8480471A896EE30017C155 /* TrustKit.framework */; };
 		8C84806D1A896F660017C155 /* TrustKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C84806C1A896F660017C155 /* TrustKit.m */; };
+		8C9492F61B2379A100F5DF38 /* reporting_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C9492F51B2379A100F5DF38 /* reporting_utils.h */; };
 		8CC78B201B1B586F00523A25 /* TSKCertificateUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC78B1F1B1B586F00523A25 /* TSKCertificateUtils.m */; };
 		8CC78B251B1B616500523A25 /* TSKPublicKeyAlgorithmTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC78B241B1B616500523A25 /* TSKPublicKeyAlgorithmTests.m */; };
 		8CC78B261B1B696500523A25 /* ThawteSSLCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CC78B211B1B604A00523A25 /* ThawteSSLCA.der */; };
@@ -80,6 +81,7 @@
 		8C8480521A896EE30017C155 /* TrustKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrustKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C8480581A896EE30017C155 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C84806C1A896F660017C155 /* TrustKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrustKit.m; sourceTree = "<group>"; };
+		8C9492F51B2379A100F5DF38 /* reporting_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = reporting_utils.h; path = Reporting/reporting_utils.h; sourceTree = "<group>"; };
 		8CC78B1C1B1B55EC00523A25 /* COMODOECCDomainValidationSecureServerCA2.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = COMODOECCDomainValidationSecureServerCA2.der; sourceTree = "<group>"; };
 		8CC78B1D1B1B55EC00523A25 /* sni41871.cloudflaressl.com.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = sni41871.cloudflaressl.com.der; sourceTree = "<group>"; };
 		8CC78B1E1B1B586F00523A25 /* TSKCertificateUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSKCertificateUtils.h; sourceTree = "<group>"; };
@@ -88,7 +90,6 @@
 		8CC78B221B1B604A00523A25 /* www.datatheorem.com.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = www.datatheorem.com.der; sourceTree = "<group>"; };
 		8CC78B241B1B616500523A25 /* TSKPublicKeyAlgorithmTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKPublicKeyAlgorithmTests.m; sourceTree = "<group>"; };
 		8CCBD15A1B186D1100CB88AF /* reporting_utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = reporting_utils.m; path = Reporting/reporting_utils.m; sourceTree = "<group>"; };
-		8CCBD15C1B186D2100CB88AF /* reporting_utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = reporting_utils.h; sourceTree = "<group>"; };
 		8CE9191C1AEA073C002B29AE /* public_key_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = public_key_utils.h; path = Pinning/public_key_utils.h; sourceTree = "<group>"; };
 		8CE9191D1AEA073C002B29AE /* public_key_utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = public_key_utils.m; path = Pinning/public_key_utils.m; sourceTree = "<group>"; };
 		8CE919211AEA077F002B29AE /* ssl_pin_verifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ssl_pin_verifier.m; path = Pinning/ssl_pin_verifier.m; sourceTree = "<group>"; };
@@ -270,8 +271,8 @@
 				6B2B06AE1B05157400FC749E /* TSKSimpleBackgroundReporter.m */,
 				8C15F99E1B16094D00F06C0E /* TSKPinFailureReport.h */,
 				8C15F99F1B16094D00F06C0E /* TSKPinFailureReport.m */,
+				8C9492F51B2379A100F5DF38 /* reporting_utils.h */,
 				8CCBD15A1B186D1100CB88AF /* reporting_utils.m */,
-				8CCBD15C1B186D2100CB88AF /* reporting_utils.h */,
 			);
 			name = Reporting;
 			sourceTree = "<group>";
@@ -297,6 +298,7 @@
 				6B2B06AD1B05154A00FC749E /* TSKSimpleBackgroundReporter.h in Headers */,
 				6B032D3E1AF1A4AC00EAFA69 /* TSKSimpleReporter.h in Headers */,
 				8C15F9931B132F9200F06C0E /* TSKPinVerifier.h in Headers */,
+				8C9492F61B2379A100F5DF38 /* reporting_utils.h in Headers */,
 				8C84804D1A896EE30017C155 /* TrustKit.h in Headers */,
 				8C15F9A01B16094D00F06C0E /* TSKPinFailureReport.h in Headers */,
 				8CE919271AEA0991002B29AE /* TSKReporterDelegate.h in Headers */,
