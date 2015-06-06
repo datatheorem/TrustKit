@@ -1,10 +1,14 @@
-//
-//  public_key_utils.h
-//  TrustKit
-//
-//  Created by Alban Diquet on 4/7/15.
-//  Copyright (c) 2015 Data Theorem. All rights reserved.
-//
+/*
+ 
+ public_key_utils.m
+ TrustKit
+ 
+ Copyright 2015 The TrustKit Project Authors
+ Licensed under the MIT license, see associated LICENSE file for terms.
+ See AUTHORS file for the list of project authors.
+ 
+ */
+
 
 #import "public_key_utils.h"
 #include <pthread.h>
