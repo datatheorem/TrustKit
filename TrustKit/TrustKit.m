@@ -46,6 +46,7 @@ static dispatch_once_t dispatchOnceTrustKitInit;
 
 // Reporter delegate for sending pin violation reports
 static TSKSimpleBackgroundReporter *_pinFailureReporter = nil;
+static char _pinFailureReporterQueueLabel[] = "com.datatheorem.trustkit.reporterqueue";
 static dispatch_queue_t _pinFailureReporterQueue = NULL;
 
 // For tests
@@ -313,15 +314,19 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
                 }
             }
             
-            // Create our reporter for sending pin violation failure
+            // Create our reporter for sending pin validation failures
             CFBundleRef appBundle = CFBundleGetMainBundle();
             NSString *appBundleId = (NSString *)CFBundleGetIdentifier(appBundle);
             NSString *appVersion =  CFBundleGetValueForInfoDictionaryKey(appBundle, kCFBundleVersionKey);
             _pinFailureReporter = [[TSKSimpleBackgroundReporter alloc]initWithAppBundleId:appBundleId appVersion:appVersion];
             
-            // Create a dispatch queue for sending pin violation failure
-            _pinFailureReporterQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-            
+            // Create a dispatch queue for activating the reporter
+            // We use a serial queue targetting the global default queue in order to ensure reports are sent one by one
+            // even when a lot of pin failures are occuring, instead of spamming the global queue with events to process
+            _pinFailureReporterQueue = dispatch_queue_create(_pinFailureReporterQueueLabel, DISPATCH_QUEUE_SERIAL);
+            dispatch_set_target_queue(_pinFailureReporterQueue, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0));
+
+            // All done
             _isTrustKitInitialized = YES;
             TSKLog(@"TrustKit initialized with configuration %@", _trustKitGlobalConfiguration);
         }
@@ -362,7 +367,7 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
     _isTrustKitInitialized = NO;
     _wasTrustKitCalled = NO;
     _pinFailureReporter = nil;
-    _pinFailureReporterQueue = NULL;
+    _pinFailureReporterQueue= NULL;
     dispatchOnceTrustKitInit = 0;
 }
 
