@@ -14,7 +14,8 @@
 		6B6B47651B1EECB4007757EE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6B6B47641B1EECB4007757EE /* Images.xcassets */; };
 		6B6B47681B1EECB4007757EE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6B6B47661B1EECB4007757EE /* LaunchScreen.xib */; };
 		6B6B47741B1EECB4007757EE /* TrustKitDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B6B47731B1EECB4007757EE /* TrustKitDemoTests.m */; };
-		6B6B47881B1F0C04007757EE /* TrustKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B6B47831B1F0BBD007757EE /* TrustKit.framework */; };
+		8C8717291B23D13C00267E1D /* TrustKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B6B47831B1F0BBD007757EE /* TrustKit.framework */; };
+		8C87172A1B23D13C00267E1D /* TrustKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6B6B47831B1F0BBD007757EE /* TrustKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,7 +47,35 @@
 			remoteGlobalIDString = 8C8480461A896EE30017C155;
 			remoteInfo = TrustKit;
 		};
+		8C8717271B23D12300267E1D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6B6B477D1B1F0BBD007757EE /* TrustKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8C8716961B23A91D00267E1D;
+			remoteInfo = TrustKit_Static;
+		};
+		8C87172B1B23D13D00267E1D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6B6B477D1B1F0BBD007757EE /* TrustKit.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 8C8480461A896EE30017C155;
+			remoteInfo = TrustKit;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8C87172D1B23D13D00267E1D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8C87172A1B23D13C00267E1D /* TrustKit.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		6B6B47541B1EECB4007757EE /* TrustKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrustKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -70,7 +99,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6B6B47881B1F0C04007757EE /* TrustKit.framework in Frameworks */,
+				8C8717291B23D13C00267E1D /* TrustKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -148,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				6B6B47831B1F0BBD007757EE /* TrustKit.framework */,
+				8C8717281B23D12300267E1D /* libTrustKit_Static.a */,
 				6B6B47851B1F0BBD007757EE /* TrustKitTests.xctest */,
 			);
 			name = Products;
@@ -163,11 +193,13 @@
 				6B6B47501B1EECB3007757EE /* Sources */,
 				6B6B47511B1EECB3007757EE /* Frameworks */,
 				6B6B47521B1EECB3007757EE /* Resources */,
+				8C87172D1B23D13D00267E1D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				6B6B47871B1F0BF3007757EE /* PBXTargetDependency */,
+				8C87172C1B23D13D00267E1D /* PBXTargetDependency */,
 			);
 			name = TrustKitDemo;
 			productName = TrustKitDemo;
@@ -250,6 +282,13 @@
 			remoteRef = 6B6B47841B1F0BBD007757EE /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		8C8717281B23D12300267E1D /* libTrustKit_Static.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libTrustKit_Static.a;
+			remoteRef = 8C8717271B23D12300267E1D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -303,6 +342,11 @@
 			isa = PBXTargetDependency;
 			name = TrustKit;
 			targetProxy = 6B6B47861B1F0BF3007757EE /* PBXContainerItemProxy */;
+		};
+		8C87172C1B23D13D00267E1D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = TrustKit;
+			targetProxy = 8C87172B1B23D13D00267E1D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
