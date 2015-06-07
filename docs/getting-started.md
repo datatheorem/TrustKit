@@ -1,5 +1,11 @@
-TrustKit - Getting Started
-==========================
+Getting Started
+===============
+
+Adding TrustKit to an App can be achieved through the following steps:
+
+1. Generating SSL pins for the App's server endpoints and choosing a pinning policy.
+2. Adding TrustKit as a dependency to the App's Xcode project.
+3. Initializing TrustKit with the pinning policy.
 
 
 Generating SSL Pins
@@ -12,7 +18,7 @@ connect to its servers, if the servers' keys were compromised.
 
 The following blog post provides some information on how to decide and what the
 trade-offs are:
-https://noncombatant.org/2015/05/01/about-http-public-key-pinning/.
+[https://noncombatant.org/2015/05/01/about-http-public-key-pinning/](https://noncombatant.org/2015/05/01/about-http-public-key-pinning/).
 
 In the context of TrustKit, an SSL pin is the base64-encoded SHA-256 of a
 certificate's Subject Public Key Info; this is the same as what is described in
@@ -83,34 +89,34 @@ For Apps targeting iOS 7, TrustKit must be statically linked.
 
 1. Drag and drop the TrustKit Xcode project file in your project:
 
-![](http://datatheorem.github.io/TrustKit/images/linking1.png)
+    ![](https://datatheorem.github.io/TrustKit/images/linking1.png)
 
 2. Within the "General" tab for your App's target, add _libTrustKit_Static.a_ to
 the "Linked Framework and Binaries" section:
 
-![](http://datatheorem.github.io/TrustKit/images/linking2_static.png)
+    ![](https://datatheorem.github.io/TrustKit/images/linking2_static.png)
 
 3. Within the "Build Settings", add TrustKit's folder to the "User Header Search
 Paths" setting and set "Always Search Header Paths" to "Yes":
 
-![](http://datatheorem.github.io/TrustKit/images/linking3_static.png)
+    ![](https://datatheorem.github.io/TrustKit/images/linking3_static.png)
 
 3. Lastly, call the `initializeWithConfiguration:` method with your pinning
 policy:
 
-    #import "TrustKit.h"
+        #import "TrustKit.h"
 
-    [...]
+        [...]
 
-    NSDictionary *trustKitConfig =
-    @{
-      @"www.datatheorem.com" : @{
-              kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-              kTSKPublicKeyHashes : @[@"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=",
-                                      @"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8="
-                                      ]}};
+        NSDictionary *trustKitConfig =
+        @{
+          @"www.datatheorem.com" : @{
+                  kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                  kTSKPublicKeyHashes : @[@"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=",
+                                          @"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8="
+                                          ]}};
 
-    [TrustKit initializeWithConfiguration:trustKitConfig];
+        [TrustKit initializeWithConfiguration:trustKitConfig];
 
 
 ### CocoaPods
@@ -126,17 +132,17 @@ allows deploying SSL pinning without having to modify the App's source code.
 
 1. Drag and drop the TrustKit Xcode project file in your project:
 
-![](http://datatheorem.github.io/TrustKit/images/linking1.png)
+    ![](https://datatheorem.github.io/TrustKit/images/linking1.png)
 
 2. Within the "General" tab for your App's target, add TrustKit to the
 "Embedded Binaries" section:
 
-![](http://datatheorem.github.io/TrustKit/images/linking2_dynamic.png)
+    ![](https://datatheorem.github.io/TrustKit/images/linking2_dynamic.png)
 
 3. Lastly, specify your App's pinning policy by adding configuration keys to
 the App's _Info.plist_ file under a `TSKConfiguration` dictionary key:
 
-![](http://datatheorem.github.io/TrustKit/images/linking3_dynamic.png)
+  ![](https://datatheorem.github.io/TrustKit/images/linking3_dynamic.png)
 
 
 Manual Pin Validation
@@ -146,7 +152,9 @@ In a few specific scenarios, TrustKit cannot intercept outgoing SSL connections
 and automatically validate the server's identity against the pinning policy.
 This includes for example connections initiated by external processes (such as
 the `NSURLSession`'s background transfer service) or through third-party SSL
-libraries (such as OpenSSL). For these connections, the pin validation must be
+libraries (such as OpenSSL).
+
+For these connections, the pin validation must be
 triggered manually; see the documentation for the [TSKPinVerifier
 class](https://datatheorem.github.io/TrustKit/documentation/Classes/TSKPinVerifier.html)
 for more details.

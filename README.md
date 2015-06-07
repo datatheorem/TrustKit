@@ -28,7 +28,7 @@ when an unexpected certificate chain is detected, similarly to the _report-uri_
 directive described in the [HTTP Public Key Pinning
 specification](https://tools.ietf.org/html/rfc7469).
 
-TrustKit will be initially released at [Black Hat 2015 USA][bh2015-pdf].
+TrustKit will be open-sourced at [Black Hat 2015 USA][bh2015-conf].
 
 
 Getting Started
@@ -88,6 +88,7 @@ License
 
 TrustKit is released under the MIT license. See LICENSE for details.
 
-[getting-started]: https://datatheorem.github.io/TrustKit/
+[getting-started]: https://datatheorem.github.io/TrustKit/getting-started/
 [bh2015-pdf]: #tbd
+[bh2015-conf]: https://www.blackhat.com/us-15/briefings.html#trustkit-code-injection-on-ios-8-for-the-greater-good
 [api-doc]: https://datatheorem.github.io/TrustKit/documentation
