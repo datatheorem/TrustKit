@@ -114,7 +114,7 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
             {
                 // Pin validation failed: notify the reporter delegate if a report URI was configured
                 NSMutableArray *reportUris = [NSMutableArray arrayWithArray:domainConfig[kTSKReportUris]];
-                if (domainConfig[kTSKDisableDefaultReportUri] == NO)
+                if ([domainConfig[kTSKDisableDefaultReportUri] boolValue] == NO)
                 {
                     [reportUris addObject:[NSURL URLWithString:kTSKDefaultReportUri]];
                 }
