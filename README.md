@@ -54,7 +54,7 @@ Enabling SSL pinning only requires initializing TrustKit with a pinning policy
                                        @"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8="
                                        ],
                                kTSKEnforcePinning : @NO,
-                               kTSKReportUris : @[@"http://report.datatheorem.com/log_hpkp_report"],
+                               kTSKReportUris : @[@"http://report.datatheorem.com/log_report"],
                                },
                        @"yahoo.com" : @{
                                kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
