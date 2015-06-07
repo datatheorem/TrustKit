@@ -79,7 +79,20 @@ corresponding certificates' public key algorithms. For example:
                                }
                        };
 
-The list of all configuration keys is available in the
+To avoid locking out too many users from your App when deploying SSL pinning
+for the first time, a more elaborate policy can be enabled using the following
+configuration keys:
+
+* Setting `kTSKEnforcePinning` to `NO`, so that SSL connections will succeed
+regardless of pin validation.
+* Adding a report URL using the `kTSKReportUris` setting to receive pin
+validation failure reports.
+
+This will allow the App to work regardless of pin validation failures, but the
+reports will give you an idea of how many users would be blocked, if pin
+validation was to be enforced.
+
+The list of all the configuration keys is available in the
 [documentation](https://datatheorem.github.io/TrustKit/documentation/Classes/TrustKit.html).
 
 
