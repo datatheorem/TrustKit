@@ -16,12 +16,12 @@ Public key pinning can be dangerous and requires more than just code-level
 changes in your App. If you make a mistake, you might cause your App to pin a
 set of keys that validates today but which stops validating a week or a year
 from now, if something changes. In that case, your App will no longer be able to
-connect to its servers and will stop working.
+connect to its servers and will most likely stop working, until it gets updated
+with a new set of pins.
 
-Unless you are very confident that you understand the Web PKI, and unless you
-are very confident that you can manage your site’s cryptographic identity very
-well, you should not use key pinning. Stick to regular, un-pinned SSL
-connections until you get more confident.
+Unless you are confident that you understand the Web PKI that you can manage
+the App servers' cryptographic identity very well, you should not use key
+pinning.
 
 
 Generating SSL Pins
