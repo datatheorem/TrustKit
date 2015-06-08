@@ -121,7 +121,8 @@ static NSData *getPublicKeyDataFromCertificate(SecCertificateRef certificate)
     CFErrorRef error = NULL;
     
     // SecCertificateCopyValues() is OS X only
-    CFDictionaryRef certificateValues = SecCertificateCopyValues(certificate, NULL, &error);
+    NSArray *oids = [NSArray arrayWithObject:(__bridge id)(kSecOIDX509V1SubjectPublicKey)];
+    CFDictionaryRef certificateValues = SecCertificateCopyValues(certificate, (__bridge CFArrayRef)(oids), &error);
     if (certificateValues == NULL)
     {
         CFStringRef errorDescription = CFErrorCopyDescription(error);
