@@ -3,21 +3,37 @@ Getting Started
 
 Adding TrustKit to an App can be achieved through the following steps:
 
-1. Generating SSL pins for the App's server endpoints and choosing a pinning policy.
+1. Generating SSL pins for the App's server endpoints and choosing a pinning
+policy.
 2. Adding TrustKit as a dependency to the App's Xcode project.
 3. Initializing TrustKit with the pinning policy.
+
+
+Warning
+-------
+
+Public key pinning can be dangerous and requires more than just code-level
+changes in your App. If you make a mistake, you might cause your App to pin a
+set of keys that validates today but which stops validating a week or a year
+from now, if something changes. In that case, your App will no longer be able to
+connect to its servers and will stop working.
+
+Unless you are very confident that you understand the Web PKI, and unless you
+are very confident that you can manage your site’s cryptographic identity very
+well, you should not use key pinning. Stick to regular, un-pinned SSL
+connections until you get more confident.
 
 
 Generating SSL Pins
 -------------------
 
 Before deploying SSL pinning within your App, you first need to investigate and
-choose which domains and public keys need to be pinned. This is *very* important
-as enabling the wrong pinning policy may prevent your App from being able to
-connect to its servers, if the servers' keys were compromised.
+choose which domains and public keys need to be pinned. This is **very
+important** as enabling the wrong pinning policy may prevent your App from being
+able to connect to its servers, when the servers' keys are rotated.
 
-The following blog post provides some information on how to decide and what the
-trade-offs are:
+The following blog post provides some information on which keys to pin and what
+the trade-offs are:
 [https://noncombatant.org/2015/05/01/about-http-public-key-pinning/](https://noncombatant.org/2015/05/01/about-http-public-key-pinning/).
 
 In the context of TrustKit, an SSL pin is the base64-encoded SHA-256 of a
@@ -134,8 +150,11 @@ policy:
 
 ### CocoaPods
 
-Support for CocoaPods will be added when TrustKit is open-sourced at Black Hat
-USA 2015.
+TrustKit will be made available through CocoaPods when it is open-sourced
+at Black Hat 2015 in August. Until then, TrustKit can still be added as a local
+pod by adding the following dependency to your project's Podfile:
+
+    pod 'TrustKit', :path => '/path/to/TrustKit'
 
 
 ### Dynamic Linking
