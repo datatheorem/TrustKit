@@ -7,17 +7,45 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		070868B51ADFFADF00E5AFDC /* ca.cert.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868B41ADFF6B000E5AFDC /* ca.cert.der */; };
-		070868B61ADFFADF00E5AFDC /* ca-chain.cert.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868B01ADFF67200E5AFDC /* ca-chain.cert.der */; };
-		070868B71ADFFADF00E5AFDC /* intermediate.cert.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868B11ADFF67200E5AFDC /* intermediate.cert.der */; };
-		070868B81ADFFADF00E5AFDC /* www.good.com.cert.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868B21ADFF67200E5AFDC /* www.good.com.cert.der */; };
-		070868BB1AE1672D00E5AFDC /* self.cert.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868BA1AE1672D00E5AFDC /* self.cert.der */; };
-		070868BC1AE1673200E5AFDC /* ca-chain-plus-self.cert.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868B91AE1658200E5AFDC /* ca-chain-plus-self.cert.der */; };
-		0710306C1AA88A510028092C /* TrustKitPinValidationOnlineTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0710306B1AA88A510028092C /* TrustKitPinValidationOnlineTests.m */; };
-		075AA1091AC985FD00178223 /* TrustKitPinValidationOfflineTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA2868CAFECA46ADE0B6E3E /* TrustKitPinValidationOfflineTests.m */; };
+		070868B51ADFFADF00E5AFDC /* GoodRootCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868B41ADFF6B000E5AFDC /* GoodRootCA.der */; };
+		070868B71ADFFADF00E5AFDC /* GoodIntermediateCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868B11ADFF67200E5AFDC /* GoodIntermediateCA.der */; };
+		070868B81ADFFADF00E5AFDC /* www.good.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868B21ADFF67200E5AFDC /* www.good.com.der */; };
+		070868BB1AE1672D00E5AFDC /* www.good.com.selfsigned.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868BA1AE1672D00E5AFDC /* www.good.com.selfsigned.der */; };
+		0710306C1AA88A510028092C /* TSKPinValidationOnlineTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0710306B1AA88A510028092C /* TSKPinValidationOnlineTests.m */; };
+		075AA1091AC985FD00178223 /* TSKPinValidationOfflineTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA2868CAFECA46ADE0B6E3E /* TSKPinValidationOfflineTests.m */; };
+		6B032D3A1AF1794D00EAFA69 /* TSKSimpleReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B032D391AF1794D00EAFA69 /* TSKSimpleReporter.m */; };
+		6B032D3E1AF1A4AC00EAFA69 /* TSKSimpleReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B032D3D1AF1A4AC00EAFA69 /* TSKSimpleReporter.h */; };
+		6B032D401AF1AEC200EAFA69 /* TSKReporterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B032D3F1AF1AEB600EAFA69 /* TSKReporterTests.m */; };
+		6B2B06AD1B05154A00FC749E /* TSKSimpleBackgroundReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B2B06AC1B05154A00FC749E /* TSKSimpleBackgroundReporter.h */; };
+		6B2B06AF1B05157400FC749E /* TSKSimpleBackgroundReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B2B06AE1B05157400FC749E /* TSKSimpleBackgroundReporter.m */; };
+		8C15F9931B132F9200F06C0E /* TSKPinVerifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C15F9911B132F9200F06C0E /* TSKPinVerifier.h */; };
+		8C15F9941B132F9200F06C0E /* TSKPinVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F9921B132F9200F06C0E /* TSKPinVerifier.m */; };
+		8C15F9A01B16094D00F06C0E /* TSKPinFailureReport.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C15F99E1B16094D00F06C0E /* TSKPinFailureReport.h */; };
+		8C15F9A11B16094E00F06C0E /* TSKPinFailureReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F99F1B16094D00F06C0E /* TSKPinFailureReport.m */; };
+		8C15F9A41B17564400F06C0E /* TSKPinConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F9A31B17564400F06C0E /* TSKPinConfigurationTests.m */; };
 		8C84804D1A896EE30017C155 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C84804C1A896EE30017C155 /* TrustKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8C8480531A896EE30017C155 /* TrustKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C8480471A896EE30017C155 /* TrustKit.framework */; };
 		8C84806D1A896F660017C155 /* TrustKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C84806C1A896F660017C155 /* TrustKit.m */; };
+		8C8716AD1B23A9D200267E1D /* fishhook.c in Sources */ = {isa = PBXBuildFile; fileRef = 8CE919311AEA0F8B002B29AE /* fishhook.c */; };
+		8C8716AE1B23A9DD00267E1D /* libassert_lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CE9192A1AEA0F7E002B29AE /* libassert_lib.a */; };
+		8C8716AF1B23A9DD00267E1D /* libdomain_registry_lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CE9192B1AEA0F7E002B29AE /* libdomain_registry_lib.a */; };
+		8C8716B01B23A9DD00267E1D /* libinit_registry_tables_lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CE9192C1AEA0F7E002B29AE /* libinit_registry_tables_lib.a */; };
+		8C8716B11B23A9F000267E1D /* TSKSimpleReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B032D391AF1794D00EAFA69 /* TSKSimpleReporter.m */; };
+		8C8716B21B23A9F400267E1D /* TSKSimpleBackgroundReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B2B06AE1B05157400FC749E /* TSKSimpleBackgroundReporter.m */; };
+		8C8716B31B23A9F700267E1D /* TSKPinFailureReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F99F1B16094D00F06C0E /* TSKPinFailureReport.m */; };
+		8C8716B41B23A9FA00267E1D /* reporting_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CCBD15A1B186D1100CB88AF /* reporting_utils.m */; };
+		8C8716B51B23AA0600267E1D /* public_key_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9191D1AEA073C002B29AE /* public_key_utils.m */; };
+		8C8716B61B23AA0800267E1D /* ssl_pin_verifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE919211AEA077F002B29AE /* ssl_pin_verifier.m */; };
+		8C8716B71B23AA0B00267E1D /* TSKPinVerifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F9921B132F9200F06C0E /* TSKPinVerifier.m */; };
+		8C8716B81B23AA0D00267E1D /* TrustKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C84806C1A896F660017C155 /* TrustKit.m */; };
+		8C9492F61B2379A100F5DF38 /* reporting_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C9492F51B2379A100F5DF38 /* reporting_utils.h */; };
+		8CC78B201B1B586F00523A25 /* TSKCertificateUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC78B1F1B1B586F00523A25 /* TSKCertificateUtils.m */; };
+		8CC78B251B1B616500523A25 /* TSKPublicKeyAlgorithmTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC78B241B1B616500523A25 /* TSKPublicKeyAlgorithmTests.m */; };
+		8CC78B261B1B696500523A25 /* ThawteSSLCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CC78B211B1B604A00523A25 /* ThawteSSLCA.der */; };
+		8CC78B271B1B696800523A25 /* www.datatheorem.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CC78B221B1B604A00523A25 /* www.datatheorem.com.der */; };
+		8CC78B281B1B696D00523A25 /* sni41871.cloudflaressl.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CC78B1D1B1B55EC00523A25 /* sni41871.cloudflaressl.com.der */; };
+		8CC78B291B1B697000523A25 /* COMODOECCDomainValidationSecureServerCA2.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CC78B1C1B1B55EC00523A25 /* COMODOECCDomainValidationSecureServerCA2.der */; };
+		8CCBD15B1B186D1100CB88AF /* reporting_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CCBD15A1B186D1100CB88AF /* reporting_utils.m */; };
 		8CE9191E1AEA073C002B29AE /* public_key_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE9191C1AEA073C002B29AE /* public_key_utils.h */; };
 		8CE9191F1AEA073C002B29AE /* public_key_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9191D1AEA073C002B29AE /* public_key_utils.m */; };
 		8CE919221AEA077F002B29AE /* ssl_pin_verifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE919211AEA077F002B29AE /* ssl_pin_verifier.m */; };
@@ -41,22 +69,52 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		8C8716941B23A91D00267E1D /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		070868B01ADFF67200E5AFDC /* ca-chain.cert.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ca-chain.cert.der"; sourceTree = "<group>"; };
-		070868B11ADFF67200E5AFDC /* intermediate.cert.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = intermediate.cert.der; sourceTree = "<group>"; };
-		070868B21ADFF67200E5AFDC /* www.good.com.cert.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = www.good.com.cert.der; sourceTree = "<group>"; };
-		070868B41ADFF6B000E5AFDC /* ca.cert.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = ca.cert.der; sourceTree = "<group>"; };
-		070868B91AE1658200E5AFDC /* ca-chain-plus-self.cert.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ca-chain-plus-self.cert.der"; sourceTree = "<group>"; };
-		070868BA1AE1672D00E5AFDC /* self.cert.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = self.cert.der; sourceTree = "<group>"; };
-		0710306B1AA88A510028092C /* TrustKitPinValidationOnlineTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrustKitPinValidationOnlineTests.m; sourceTree = "<group>"; };
+		070868B11ADFF67200E5AFDC /* GoodIntermediateCA.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = GoodIntermediateCA.der; sourceTree = "<group>"; };
+		070868B21ADFF67200E5AFDC /* www.good.com.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = www.good.com.der; sourceTree = "<group>"; };
+		070868B41ADFF6B000E5AFDC /* GoodRootCA.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = GoodRootCA.der; sourceTree = "<group>"; };
+		070868BA1AE1672D00E5AFDC /* www.good.com.selfsigned.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = www.good.com.selfsigned.der; sourceTree = "<group>"; };
+		0710306B1AA88A510028092C /* TSKPinValidationOnlineTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKPinValidationOnlineTests.m; sourceTree = "<group>"; };
 		2FA286123F801C437F35D240 /* TrustKit+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TrustKit+Private.h"; sourceTree = "<group>"; };
-		2FA2868CAFECA46ADE0B6E3E /* TrustKitPinValidationOfflineTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrustKitPinValidationOfflineTests.m; sourceTree = "<group>"; };
+		2FA2868CAFECA46ADE0B6E3E /* TSKPinValidationOfflineTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKPinValidationOfflineTests.m; sourceTree = "<group>"; };
+		6B032D391AF1794D00EAFA69 /* TSKSimpleReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKSimpleReporter.m; path = Reporting/TSKSimpleReporter.m; sourceTree = "<group>"; };
+		6B032D3D1AF1A4AC00EAFA69 /* TSKSimpleReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKSimpleReporter.h; path = Reporting/TSKSimpleReporter.h; sourceTree = "<group>"; };
+		6B032D3F1AF1AEB600EAFA69 /* TSKReporterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSKReporterTests.m; sourceTree = "<group>"; };
+		6B2B06AC1B05154A00FC749E /* TSKSimpleBackgroundReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKSimpleBackgroundReporter.h; path = Reporting/TSKSimpleBackgroundReporter.h; sourceTree = "<group>"; };
+		6B2B06AE1B05157400FC749E /* TSKSimpleBackgroundReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKSimpleBackgroundReporter.m; path = Reporting/TSKSimpleBackgroundReporter.m; sourceTree = "<group>"; };
+		8C15F9911B132F9200F06C0E /* TSKPinVerifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKPinVerifier.h; path = Pinning/TSKPinVerifier.h; sourceTree = "<group>"; };
+		8C15F9921B132F9200F06C0E /* TSKPinVerifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKPinVerifier.m; path = Pinning/TSKPinVerifier.m; sourceTree = "<group>"; };
+		8C15F99E1B16094D00F06C0E /* TSKPinFailureReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKPinFailureReport.h; path = Reporting/TSKPinFailureReport.h; sourceTree = "<group>"; };
+		8C15F99F1B16094D00F06C0E /* TSKPinFailureReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKPinFailureReport.m; path = Reporting/TSKPinFailureReport.m; sourceTree = "<group>"; };
+		8C15F9A31B17564400F06C0E /* TSKPinConfigurationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKPinConfigurationTests.m; sourceTree = "<group>"; };
 		8C8480471A896EE30017C155 /* TrustKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TrustKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C84804B1A896EE30017C155 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C84804C1A896EE30017C155 /* TrustKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrustKit.h; sourceTree = "<group>"; };
 		8C8480521A896EE30017C155 /* TrustKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrustKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C8480581A896EE30017C155 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C84806C1A896F660017C155 /* TrustKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrustKit.m; sourceTree = "<group>"; };
+		8C8716961B23A91D00267E1D /* libTrustKit_Static.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTrustKit_Static.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C9492F51B2379A100F5DF38 /* reporting_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = reporting_utils.h; path = Reporting/reporting_utils.h; sourceTree = "<group>"; };
+		8CC78B1C1B1B55EC00523A25 /* COMODOECCDomainValidationSecureServerCA2.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = COMODOECCDomainValidationSecureServerCA2.der; sourceTree = "<group>"; };
+		8CC78B1D1B1B55EC00523A25 /* sni41871.cloudflaressl.com.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = sni41871.cloudflaressl.com.der; sourceTree = "<group>"; };
+		8CC78B1E1B1B586F00523A25 /* TSKCertificateUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSKCertificateUtils.h; sourceTree = "<group>"; };
+		8CC78B1F1B1B586F00523A25 /* TSKCertificateUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKCertificateUtils.m; sourceTree = "<group>"; };
+		8CC78B211B1B604A00523A25 /* ThawteSSLCA.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = ThawteSSLCA.der; sourceTree = "<group>"; };
+		8CC78B221B1B604A00523A25 /* www.datatheorem.com.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = www.datatheorem.com.der; sourceTree = "<group>"; };
+		8CC78B241B1B616500523A25 /* TSKPublicKeyAlgorithmTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKPublicKeyAlgorithmTests.m; sourceTree = "<group>"; };
+		8CCBD15A1B186D1100CB88AF /* reporting_utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = reporting_utils.m; path = Reporting/reporting_utils.m; sourceTree = "<group>"; };
 		8CE9191C1AEA073C002B29AE /* public_key_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = public_key_utils.h; path = Pinning/public_key_utils.h; sourceTree = "<group>"; };
 		8CE9191D1AEA073C002B29AE /* public_key_utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = public_key_utils.m; path = Pinning/public_key_utils.m; sourceTree = "<group>"; };
 		8CE919211AEA077F002B29AE /* ssl_pin_verifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ssl_pin_verifier.m; path = Pinning/ssl_pin_verifier.m; sourceTree = "<group>"; };
@@ -89,18 +147,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8C8716931B23A91D00267E1D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C8716AF1B23A9DD00267E1D /* libdomain_registry_lib.a in Frameworks */,
+				8C8716AE1B23A9DD00267E1D /* libassert_lib.a in Frameworks */,
+				8C8716B01B23A9DD00267E1D /* libinit_registry_tables_lib.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		070868B31ADFF68200E5AFDC /* Certificates */ = {
 			isa = PBXGroup;
 			children = (
-				070868BA1AE1672D00E5AFDC /* self.cert.der */,
-				070868B91AE1658200E5AFDC /* ca-chain-plus-self.cert.der */,
-				070868B41ADFF6B000E5AFDC /* ca.cert.der */,
-				070868B01ADFF67200E5AFDC /* ca-chain.cert.der */,
-				070868B11ADFF67200E5AFDC /* intermediate.cert.der */,
-				070868B21ADFF67200E5AFDC /* www.good.com.cert.der */,
+				8CC78B1B1B1B552100523A25 /* RSA 4096 */,
+				8CC78B1A1B1B551400523A25 /* RSA 2048 */,
+				8CC78B191B1B54F700523A25 /* ECDSA  sec256r1 */,
 			);
 			name = Certificates;
 			sourceTree = "<group>";
@@ -130,6 +195,7 @@
 			children = (
 				8C8480471A896EE30017C155 /* TrustKit.framework */,
 				8C8480521A896EE30017C155 /* TrustKitTests.xctest */,
+				8C8716961B23A91D00267E1D /* libTrustKit_Static.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -160,9 +226,14 @@
 			isa = PBXGroup;
 			children = (
 				070868B31ADFF68200E5AFDC /* Certificates */,
-				0710306B1AA88A510028092C /* TrustKitPinValidationOnlineTests.m */,
-				2FA2868CAFECA46ADE0B6E3E /* TrustKitPinValidationOfflineTests.m */,
+				0710306B1AA88A510028092C /* TSKPinValidationOnlineTests.m */,
+				2FA2868CAFECA46ADE0B6E3E /* TSKPinValidationOfflineTests.m */,
 				8C8480571A896EE30017C155 /* Supporting Files */,
+				6B032D3F1AF1AEB600EAFA69 /* TSKReporterTests.m */,
+				8C15F9A31B17564400F06C0E /* TSKPinConfigurationTests.m */,
+				8CC78B1E1B1B586F00523A25 /* TSKCertificateUtils.h */,
+				8CC78B1F1B1B586F00523A25 /* TSKCertificateUtils.m */,
+				8CC78B241B1B616500523A25 /* TSKPublicKeyAlgorithmTests.m */,
 			);
 			path = TrustKitTests;
 			sourceTree = "<group>";
@@ -184,6 +255,35 @@
 			name = fishhook;
 			sourceTree = "<group>";
 		};
+		8CC78B191B1B54F700523A25 /* ECDSA  sec256r1 */ = {
+			isa = PBXGroup;
+			children = (
+				8CC78B1C1B1B55EC00523A25 /* COMODOECCDomainValidationSecureServerCA2.der */,
+				8CC78B1D1B1B55EC00523A25 /* sni41871.cloudflaressl.com.der */,
+			);
+			name = "ECDSA  sec256r1";
+			sourceTree = "<group>";
+		};
+		8CC78B1A1B1B551400523A25 /* RSA 2048 */ = {
+			isa = PBXGroup;
+			children = (
+				8CC78B211B1B604A00523A25 /* ThawteSSLCA.der */,
+				8CC78B221B1B604A00523A25 /* www.datatheorem.com.der */,
+			);
+			name = "RSA 2048";
+			sourceTree = "<group>";
+		};
+		8CC78B1B1B1B552100523A25 /* RSA 4096 */ = {
+			isa = PBXGroup;
+			children = (
+				070868BA1AE1672D00E5AFDC /* www.good.com.selfsigned.der */,
+				070868B41ADFF6B000E5AFDC /* GoodRootCA.der */,
+				070868B11ADFF67200E5AFDC /* GoodIntermediateCA.der */,
+				070868B21ADFF67200E5AFDC /* www.good.com.der */,
+			);
+			name = "RSA 4096";
+			sourceTree = "<group>";
+		};
 		8CE9191B1AEA072A002B29AE /* Pinning */ = {
 			isa = PBXGroup;
 			children = (
@@ -191,6 +291,8 @@
 				8CE9191D1AEA073C002B29AE /* public_key_utils.m */,
 				8CE919241AEA07C5002B29AE /* ssl_pin_verifier.h */,
 				8CE919211AEA077F002B29AE /* ssl_pin_verifier.m */,
+				8C15F9911B132F9200F06C0E /* TSKPinVerifier.h */,
+				8C15F9921B132F9200F06C0E /* TSKPinVerifier.m */,
 			);
 			name = Pinning;
 			sourceTree = "<group>";
@@ -199,6 +301,14 @@
 			isa = PBXGroup;
 			children = (
 				8CE919261AEA0991002B29AE /* TSKReporterDelegate.h */,
+				6B032D3D1AF1A4AC00EAFA69 /* TSKSimpleReporter.h */,
+				6B032D391AF1794D00EAFA69 /* TSKSimpleReporter.m */,
+				6B2B06AC1B05154A00FC749E /* TSKSimpleBackgroundReporter.h */,
+				6B2B06AE1B05157400FC749E /* TSKSimpleBackgroundReporter.m */,
+				8C15F99E1B16094D00F06C0E /* TSKPinFailureReport.h */,
+				8C15F99F1B16094D00F06C0E /* TSKPinFailureReport.m */,
+				8C9492F51B2379A100F5DF38 /* reporting_utils.h */,
+				8CCBD15A1B186D1100CB88AF /* reporting_utils.m */,
 			);
 			name = Reporting;
 			sourceTree = "<group>";
@@ -221,7 +331,12 @@
 			files = (
 				8CE9192D1AEA0F7E002B29AE /* domain_registry.h in Headers */,
 				8CE9191E1AEA073C002B29AE /* public_key_utils.h in Headers */,
+				6B2B06AD1B05154A00FC749E /* TSKSimpleBackgroundReporter.h in Headers */,
+				6B032D3E1AF1A4AC00EAFA69 /* TSKSimpleReporter.h in Headers */,
+				8C15F9931B132F9200F06C0E /* TSKPinVerifier.h in Headers */,
+				8C9492F61B2379A100F5DF38 /* reporting_utils.h in Headers */,
 				8C84804D1A896EE30017C155 /* TrustKit.h in Headers */,
+				8C15F9A01B16094D00F06C0E /* TSKPinFailureReport.h in Headers */,
 				8CE919271AEA0991002B29AE /* TSKReporterDelegate.h in Headers */,
 				8CE919251AEA07C5002B29AE /* ssl_pin_verifier.h in Headers */,
 				8CE919361AEA0F8B002B29AE /* fishhook.h in Headers */,
@@ -267,14 +382,32 @@
 			productReference = 8C8480521A896EE30017C155 /* TrustKitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		8C8716951B23A91D00267E1D /* TrustKit_Static */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8C8716AB1B23A91D00267E1D /* Build configuration list for PBXNativeTarget "TrustKit_Static" */;
+			buildPhases = (
+				8C8716921B23A91D00267E1D /* Sources */,
+				8C8716931B23A91D00267E1D /* Frameworks */,
+				8C8716941B23A91D00267E1D /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TrustKit_Static;
+			productName = TrustKit_Static;
+			productReference = 8C8716961B23A91D00267E1D /* libTrustKit_Static.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		8C84803E1A896EE30017C155 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = TSK;
 				LastUpgradeCheck = 0610;
-				ORGANIZATIONNAME = "Data Theorem";
+				ORGANIZATIONNAME = TrustKit;
 				TargetAttributes = {
 					8C8480461A896EE30017C155 = {
 						CreatedOnToolsVersion = 6.1.1;
@@ -282,6 +415,9 @@
 					};
 					8C8480511A896EE30017C155 = {
 						CreatedOnToolsVersion = 6.1.1;
+					};
+					8C8716951B23A91D00267E1D = {
+						CreatedOnToolsVersion = 6.3.2;
 					};
 				};
 			};
@@ -298,6 +434,7 @@
 			projectRoot = "";
 			targets = (
 				8C8480461A896EE30017C155 /* TrustKit */,
+				8C8716951B23A91D00267E1D /* TrustKit_Static */,
 				8C8480511A896EE30017C155 /* TrustKitTests */,
 			);
 		};
@@ -315,12 +452,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				070868B51ADFFADF00E5AFDC /* ca.cert.der in Resources */,
-				070868BB1AE1672D00E5AFDC /* self.cert.der in Resources */,
-				070868B61ADFFADF00E5AFDC /* ca-chain.cert.der in Resources */,
-				070868B71ADFFADF00E5AFDC /* intermediate.cert.der in Resources */,
-				070868BC1AE1673200E5AFDC /* ca-chain-plus-self.cert.der in Resources */,
-				070868B81ADFFADF00E5AFDC /* www.good.com.cert.der in Resources */,
+				8CC78B291B1B697000523A25 /* COMODOECCDomainValidationSecureServerCA2.der in Resources */,
+				8CC78B261B1B696500523A25 /* ThawteSSLCA.der in Resources */,
+				070868B51ADFFADF00E5AFDC /* GoodRootCA.der in Resources */,
+				070868BB1AE1672D00E5AFDC /* www.good.com.selfsigned.der in Resources */,
+				070868B71ADFFADF00E5AFDC /* GoodIntermediateCA.der in Resources */,
+				8CC78B271B1B696800523A25 /* www.datatheorem.com.der in Resources */,
+				8CC78B281B1B696D00523A25 /* sni41871.cloudflaressl.com.der in Resources */,
+				070868B81ADFFADF00E5AFDC /* www.good.com.der in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -332,9 +471,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CE919221AEA077F002B29AE /* ssl_pin_verifier.m in Sources */,
+				6B2B06AF1B05157400FC749E /* TSKSimpleBackgroundReporter.m in Sources */,
+				6B032D3A1AF1794D00EAFA69 /* TSKSimpleReporter.m in Sources */,
 				8CE9191F1AEA073C002B29AE /* public_key_utils.m in Sources */,
 				8CE919351AEA0F8B002B29AE /* fishhook.c in Sources */,
+				8C15F9A11B16094E00F06C0E /* TSKPinFailureReport.m in Sources */,
+				8C15F9941B132F9200F06C0E /* TSKPinVerifier.m in Sources */,
 				8C84806D1A896F660017C155 /* TrustKit.m in Sources */,
+				8CCBD15B1B186D1100CB88AF /* reporting_utils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,8 +486,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0710306C1AA88A510028092C /* TrustKitPinValidationOnlineTests.m in Sources */,
-				075AA1091AC985FD00178223 /* TrustKitPinValidationOfflineTests.m in Sources */,
+				0710306C1AA88A510028092C /* TSKPinValidationOnlineTests.m in Sources */,
+				8C15F9A41B17564400F06C0E /* TSKPinConfigurationTests.m in Sources */,
+				075AA1091AC985FD00178223 /* TSKPinValidationOfflineTests.m in Sources */,
+				8CC78B251B1B616500523A25 /* TSKPublicKeyAlgorithmTests.m in Sources */,
+				6B032D401AF1AEC200EAFA69 /* TSKReporterTests.m in Sources */,
+				8CC78B201B1B586F00523A25 /* TSKCertificateUtils.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C8716921B23A91D00267E1D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C8716B71B23AA0B00267E1D /* TSKPinVerifier.m in Sources */,
+				8C8716B51B23AA0600267E1D /* public_key_utils.m in Sources */,
+				8C8716AD1B23A9D200267E1D /* fishhook.c in Sources */,
+				8C8716B31B23A9F700267E1D /* TSKPinFailureReport.m in Sources */,
+				8C8716B41B23A9FA00267E1D /* reporting_utils.m in Sources */,
+				8C8716B81B23AA0D00267E1D /* TrustKit.m in Sources */,
+				8C8716B21B23A9F400267E1D /* TSKSimpleBackgroundReporter.m in Sources */,
+				8C8716B11B23A9F000267E1D /* TSKSimpleReporter.m in Sources */,
+				8C8716B61B23AA0800267E1D /* ssl_pin_verifier.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,6 +526,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -393,11 +558,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = iphoneos;
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -407,6 +573,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -432,11 +599,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				SDKROOT = iphoneos;
+				SDKROOT = macosx;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "arm64 armv7 armv7s x86_64";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -445,7 +613,7 @@
 		8C84805E1A896EE30017C155 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
+				APPLICATION_EXTENSION_API_ONLY = "$(inherited)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
@@ -462,8 +630,9 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SDKROOT = iphoneos;
+				SDKROOT = "$(inherited)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "$(inherited)";
 				VALID_ARCHS = "arm64 armv7 armv7s x86_64";
 			};
 			name = Debug;
@@ -471,7 +640,7 @@
 		8C84805F1A896EE30017C155 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
+				APPLICATION_EXTENSION_API_ONLY = "$(inherited)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEFINES_MODULE = YES;
@@ -488,8 +657,9 @@
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SDKROOT = iphoneos;
+				SDKROOT = "$(inherited)";
 				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "$(inherited)";
 				VALID_ARCHS = "arm64 armv7 armv7s x86_64";
 			};
 			name = Release;
@@ -498,17 +668,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(SDKROOT)",
 					"$(inherited)",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = TrustKitTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks @loader_path/../Frameworks @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
+				SDKROOT = "$(inherited)";
+				SUPPORTED_PLATFORMS = "$(inherited)";
 				VALID_ARCHS = "arm64 armv7 armv7s x86_64";
 			};
 			name = Debug;
@@ -517,14 +689,59 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(SDKROOT)",
 					"$(inherited)",
 				);
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = TrustKitTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks @loader_path/../Frameworks @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
+				SDKROOT = "$(inherited)";
+				SUPPORTED_PLATFORMS = "$(inherited)";
 				VALID_ARCHS = "arm64 armv7 armv7s x86_64";
+			};
+			name = Release;
+		};
+		8C8716A71B23A91D00267E1D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = "$(inherited)";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TrustKit/Dependencies/domain_registry",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = "$(inherited)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "$(inherited)";
+			};
+			name = Debug;
+		};
+		8C8716A81B23A91D00267E1D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = "$(inherited)";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TrustKit/Dependencies/domain_registry",
+				);
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = "$(inherited)";
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "$(inherited)";
 			};
 			name = Release;
 		};
@@ -554,6 +771,15 @@
 			buildConfigurations = (
 				8C8480611A896EE30017C155 /* Debug */,
 				8C8480621A896EE30017C155 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8C8716AB1B23A91D00267E1D /* Build configuration list for PBXNativeTarget "TrustKit_Static" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8C8716A71B23A91D00267E1D /* Debug */,
+				8C8716A81B23A91D00267E1D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

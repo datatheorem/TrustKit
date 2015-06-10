@@ -1,3 +1,0 @@
-[submodule "TrustKit/fishhook"]
-	path = TrustKit/Dependencies/fishhook
-	url = git@github.com:facebook/fishhook.git

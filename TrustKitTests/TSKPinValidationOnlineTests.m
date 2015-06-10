@@ -1,21 +1,24 @@
-//
-//  TrustKitPinValidationOnlineTests.m
-//  TrustKit
-//
-//  Created by Eric on 05/03/15.
-//  Copyright (c) 2015 Data Theorem. All rights reserved.
-//
+/*
+ 
+ TSKPinValidationOnlineTests.m
+ TrustKit
+ 
+ Copyright 2015 The TrustKit Project Authors
+ Licensed under the MIT license, see associated LICENSE file for terms.
+ See AUTHORS file for the list of project authors.
+ 
+ */
 
 #import <XCTest/XCTest.h>
 #import "TrustKit+Private.h"
 #import "public_key_utils.h"
 
 
-@interface TrustKitPinValidationOnlineTests : XCTestCase
+@interface TSKPinValidationOnlineTests : XCTestCase
 
 @end
 
-@implementation TrustKitPinValidationOnlineTests
+@implementation TSKPinValidationOnlineTests
 /*  WARNING: For the online tests, we need to use a different domain for every test otherwise the tests will be disrupted by SSL session resumption.
     Specifically, connecting to the same host more than once will potentially allow the first session to be resumed, thereby skipping all SSL validation including TrustKit's. This is not a security issue but will make the tests report unexpected results.
  */
@@ -38,11 +41,11 @@
 - (void)testConnectionValidatingCAPublicKey
 {
     NSDictionary *trustKitConfig =
-  @{
-    @"www.datatheorem.com" : @{
-            kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-            kTSKPublicKeyHashes : @[@"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=" // CA key
-                                    ]}};
+    @{
+      @"www.datatheorem.com" : @{
+              kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+              kTSKPublicKeyHashes : @[@"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=" // CA key
+                                      ]}};
     
     [TrustKit initializeWithConfiguration:trustKitConfig];
     
@@ -55,7 +58,6 @@
     XCTAssert(response.statusCode==200, @"Server did not respond with a 200 OK");
     XCTAssert([TrustKit wasTrustKitCalled], @"TrustKit was not called");
 }
-
 
 
 // Tests a secure connection to https://www.yahoo.com and forces validation to fail by providing a fake hash
