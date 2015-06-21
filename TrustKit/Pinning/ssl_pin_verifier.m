@@ -33,11 +33,15 @@ static BOOL isSubdomain(NSString *domain, NSString *subdomain)
     // Retrieve the subdomain's domain without the TLD
     NSString *subdomainLabel = [subdomain substringToIndex:([subdomain length] - domainRegistryLength - 1)];
     
-    if ([subdomainLabel rangeOfString:domainLabel].location != NSNotFound)
-    {
-        // This is a subdomain
-        return YES;
-    }
+    // Does the subdomain contain the domain
+    NSArray *subComponents = [subdomainLabel componentsSeparatedByString:@"."];
+    NSString *domainFromSubLabel = [subComponents lastObject];
+    if ([domainFromSubLabel isEqualToString:domainLabel])
+         {
+             // This is a subdomain
+             return YES;
+         }
+    
     return NO;
 }
 
