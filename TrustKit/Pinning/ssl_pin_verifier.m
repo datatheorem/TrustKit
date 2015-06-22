@@ -34,9 +34,8 @@ static BOOL isSubdomain(NSString *domain, NSString *subdomain)
     NSString *subdomainLabel = [subdomain substringToIndex:([subdomain length] - domainRegistryLength - 1)];
     
     // Does the subdomain contain the domain
-    NSArray *subComponents = [subdomainLabel componentsSeparatedByString:@"."];
-    NSString *domainFromSubLabel = [subComponents lastObject];
-    if ([domainFromSubLabel isEqualToString:domainLabel])
+    NSArray *subComponents = [subdomainLabel componentsSeparatedByString:domainLabel];
+    if ([[subComponents lastObject] isEqualToString:@""])
          {
              // This is a subdomain
              return YES;
