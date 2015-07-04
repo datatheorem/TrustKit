@@ -105,10 +105,10 @@ static dispatch_once_t dispatchOnceBackgroundSession;
                       includeSubdomains:(BOOL) includeSubdomains
                               knownPins:(NSArray *) knownPins;
 {
-    // Default port to 443 if not specified
+    // Default port to 0 if not specified
     if (serverPort == nil)
     {
-        serverPort = [NSNumber numberWithInt:443];
+        serverPort = [NSNumber numberWithInt:0];
     }
     
     if (reportURIs == nil)
