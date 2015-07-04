@@ -378,7 +378,7 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
 
             // All done
             _isTrustKitInitialized = YES;
-            TSKLog(@"TrustKit initialized with configuration %@", _trustKitGlobalConfiguration);
+            TSKLog(@"Successfully initialized with configuration %@", _trustKitGlobalConfiguration);
         }
     });
 }
@@ -387,11 +387,11 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
 @implementation TrustKit
 
 
-#pragma mark Framework Initialization When Statically Linked
+#pragma mark TrustKit Explicit Initialization
 
 + (void) initializeWithConfiguration:(NSDictionary *)trustKitConfig
 {
-    TSKLog(@"TrustKit started statically in App %@", (NSString *)CFBundleGetIdentifier(CFBundleGetMainBundle()));
+    TSKLog(@"Configuration passed via explicit call to initializeWithConfiguration:");
     initializeTrustKit(trustKitConfig);
 }
 
@@ -424,18 +424,20 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
 @end
 
 
-#pragma mark Framework Initialization When Dynamically Linked
+#pragma mark TrustKit Implicit Initialization via Library Constructor
 
-__attribute__((constructor)) static void initializeAsDylib(int argc, const char **argv)
+__attribute__((constructor)) static void initializeWithInfoPlist(int argc, const char **argv)
 {
-    // TrustKit just got injected in the App
+    // TrustKit just got started in the App
     CFBundleRef appBundle = CFBundleGetMainBundle();
-    TSKLog(@"TrustKit started dynamically in App %@", (NSString *)CFBundleGetIdentifier(CFBundleGetMainBundle()));
     
     // Retrieve the configuration from the App's Info.plist file
     NSDictionary *trustKitConfigFromInfoPlist = CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)kTSKConfiguration);
-    
-    initializeTrustKit(trustKitConfigFromInfoPlist);
+    if (trustKitConfigFromInfoPlist)
+    {
+        TSKLog(@"Configuration supplied via the App's Info.plist");
+        initializeTrustKit(trustKitConfigFromInfoPlist);
+    }
 }
 
 
