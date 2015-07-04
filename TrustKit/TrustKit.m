@@ -32,7 +32,7 @@ const NSString *kTSKIncludeSubdomains = @"TSKIncludeSubdomains";
 const NSString *kTSKPublicKeyAlgorithms = @"TSKPublicKeyAlgorithms";
 const NSString *kTSKReportUris = @"TSKReportUris";
 const NSString *kTSKDisableDefaultReportUri = @"TSKDisableDefaultReportUri";
-const NSString *kTSKWhitelistUserDefinedTrustAnchors = @"TSKWhitelistUserDefinedTrustAnchors";
+const NSString *kTSKIgnorePinningForUserDefinedTrustAnchors = @"TSKIgnorePinningForUserDefinedTrustAnchors";
 
 #pragma mark Public key Algorithms Constants
 const NSString *kTSKAlgorithmRsa2048 = @"TSKAlgorithmRsa2048";
@@ -113,8 +113,9 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
             if ((validationResult != TSKPinValidationResultSuccess)
                 
 #if !TARGET_OS_IPHONE
-                || // OS-X only: user defined trust anchors can be whitelisted (for corporate proxies, etc.)
-                ((validationResult == TSKPinValidationResultFailedUserDefinedTrustAnchor) && ([domainConfig[kTSKWhitelistUserDefinedTrustAnchors] boolValue]))
+                || // OS-X only: user-defined trust anchors can be whitelisted (for corporate proxies, etc.)
+                ((validationResult == TSKPinValidationResultFailedUserDefinedTrustAnchor)
+                 && ([domainConfig[kTSKIgnorePinningForUserDefinedTrustAnchors] boolValue] == NO))
 #endif
                 )
             {
@@ -198,22 +199,7 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
             // Default setting is NO
             domainFinalConfiguration[kTSKIncludeSubdomains] = [NSNumber numberWithBool:NO];
         }
-        
 
-#if !TARGET_OS_IPHONE
-        // OS X only: extract the optional whitelistUserDefinedTrustAnchors setting
-        NSNumber *shouldWhitelistUserDefinedTrustAnchors = domainTrustKitArguments[kTSKWhitelistUserDefinedTrustAnchors];
-        if (shouldWhitelistUserDefinedTrustAnchors)
-        {
-            domainFinalConfiguration[kTSKWhitelistUserDefinedTrustAnchors] = shouldWhitelistUserDefinedTrustAnchors;
-        }
-        else
-        {
-            // Default setting is NO
-            domainFinalConfiguration[kTSKWhitelistUserDefinedTrustAnchors] = [NSNumber numberWithBool:NO];
-        }
-#endif
-        
         
         // Extract the optional enforcePinning setting
         NSNumber *shouldEnforcePinning = domainTrustKitArguments[kTSKEnforcePinning];
@@ -226,6 +212,21 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
             // Default setting is YES
             domainFinalConfiguration[kTSKEnforcePinning] = [NSNumber numberWithBool:YES];
         }
+        
+        
+#if !TARGET_OS_IPHONE
+        // OS X only: extract the optional ignorePinningForUserDefinedTrustAnchors setting
+        NSNumber *shouldIgnorePinningForUserDefinedTrustAnchors = domainTrustKitArguments[kTSKIgnorePinningForUserDefinedTrustAnchors];
+        if (shouldIgnorePinningForUserDefinedTrustAnchors)
+        {
+            domainFinalConfiguration[kTSKIgnorePinningForUserDefinedTrustAnchors] = shouldIgnorePinningForUserDefinedTrustAnchors;
+        }
+        else
+        {
+            // Default setting is NO
+            domainFinalConfiguration[kTSKIgnorePinningForUserDefinedTrustAnchors] = [NSNumber numberWithBool:NO];
+        }
+#endif
         
         
         // Extract the optional disableDefaultReportUri setting

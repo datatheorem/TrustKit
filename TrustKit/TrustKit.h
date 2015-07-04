@@ -25,7 +25,7 @@ FOUNDATION_EXPORT const NSString *kTSKIncludeSubdomains;
 FOUNDATION_EXPORT const NSString *kTSKPublicKeyAlgorithms;
 FOUNDATION_EXPORT const NSString *kTSKReportUris;
 FOUNDATION_EXPORT const NSString *kTSKDisableDefaultReportUri;
-FOUNDATION_EXPORT const NSString *kTSKWhitelistUserDefinedTrustAnchors NS_AVAILABLE_MAC(10_9);
+FOUNDATION_EXPORT const NSString *kTSKIgnorePinningForUserDefinedTrustAnchors NS_AVAILABLE_MAC(10_9);
 
 
 #pragma mark Supported Public Key Algorithm Keys
@@ -80,13 +80,18 @@ FOUNDATION_EXPORT const NSString *kTSKAlgorithmEcDsaSecp256r1;
  If set to `YES`, also pin all the subdomains of the specified domain; default value is `NO`.
  
  #### `kTSKEnforcePinning`
- If set to `NO`, a pinning failure will not cause the SSL connection to fail; default value is `YES`.
+ If set to `NO`, a pinning failure will not cause the SSL connection to fail; default value is `YES`. When a pinning failure occurs, pin failure reports will still be sent to the configured report URIs.
  
  #### `kTSKReportUris`
  An array of URLs to which pin validation failures should be reported. To minimize the performance impact of sending reports on each validation failure, the reports are uploaded using the background transfer service. For HTTPS report URLs, the HTTPS connections will ignore the SSL pinning policy and use the default certificate validation mechanisms, in order to maximize the chance of the reports reaching the server. The format of the reports is similar to the one described in the HPKP specification.
 
  #### `kTSKDisableDefaultReportUri`
- If set to `YES`, the default report URL for sending pin failure reports will be disabled. By default, pin failure reports are sent to a report server hosted by Data Theorem, for detecting potential CA compromises and man-in-the-middle attacks, as well as providing a free dashboard for developers. Only reports are sent, which contain the App's bundle ID and the server's hostname and certificate chain that failed validation. This behavior can be disabled by setting this key to `YES`.
+ If set to `YES`, the default report URL for sending pin failure reports will be disabled; default value is `NO`. 
+ By default, pin failure reports are sent to a report server hosted by Data Theorem, for detecting potential CA compromises and man-in-the-middle attacks, as well as providing a free dashboard for developers. Only pin failure reports are sent, which contain the App's bundle ID and the server's hostname and certificate chain that failed validation.
+ 
+ #### `kTSKIgnorePinningForUserDefinedTrustAnchors` (OS X only)
+ If set to `YES`, pinning validation will be skipped if the server's certificate chain terminates at a user-defined trust anchor (such as a root CA that isn't part of OS X's default trust store) and no pin failure reports will be sent; default value is `NO`.
+ This is useful for allowing SSL connections through corporate proxies or firewalls. See https://www.chromium.org/Home/chromium-security/security-faq#TOC-How-does-key-pinning-interact-with-local-proxies-and-filters- for more information.
  
  
  ### Public Key Algorithms Keys
