@@ -41,6 +41,11 @@ typedef NS_ENUM(NSInteger, TSKPinValidationResult)
      The supplied hostname does not have a pinning policy configured; no validation was performed.
      */
     TSKPinValidationResultDomainNotPinned,
+    
+    /**
+     The server trust was succesfully evaluated but did not contain any of the configured pins. However, the certificate chain terminates at a user-defined trust anchor, rather than a trust anchor built-in to the OS X's trust store.
+     */
+    TSKPinValidationResultFailedUserDefinedTrustAnchor NS_AVAILABLE_MAC(10_9),
 };
 
 

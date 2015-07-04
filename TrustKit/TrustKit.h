@@ -25,6 +25,8 @@ FOUNDATION_EXPORT const NSString *kTSKIncludeSubdomains;
 FOUNDATION_EXPORT const NSString *kTSKPublicKeyAlgorithms;
 FOUNDATION_EXPORT const NSString *kTSKReportUris;
 FOUNDATION_EXPORT const NSString *kTSKDisableDefaultReportUri;
+FOUNDATION_EXPORT const NSString *kTSKWhitelistUserDefinedTrustAnchors NS_AVAILABLE_MAC(10_9);
+
 
 #pragma mark Supported Public Key Algorithm Keys
 FOUNDATION_EXPORT const NSString *kTSKAlgorithmRsa2048;
