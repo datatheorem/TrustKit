@@ -144,9 +144,9 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
     
 #if !TARGET_OS_IPHONE
     // OS X only: if user-defined anchors are whitelisted, allow the App to not enforce pin validation
-    // Retrieve the OS X host's list of user-defined CA certificates
-    NSMutableArray *customRootCerts;
+    NSMutableArray *customRootCerts = [NSMutableArray array];
     
+    // Retrieve the OS X host's list of user-defined CA certificates
     CFArrayRef userRootCerts;
     OSStatus status = SecTrustSettingsCopyCertificates(kSecTrustSettingsDomainUser, &userRootCerts);
     if (status == errSecSuccess)
@@ -155,7 +155,7 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
         CFRelease(userRootCerts);
     }
     CFArrayRef adminRootCerts;
-    status = SecTrustSettingsCopyCertificates(kSecTrustSettingsDomainUser, &adminRootCerts);
+    status = SecTrustSettingsCopyCertificates(kSecTrustSettingsDomainAdmin, &adminRootCerts);
     if (status == errSecSuccess)
     {
         [customRootCerts addObjectsFromArray:(__bridge NSArray *)(adminRootCerts)];

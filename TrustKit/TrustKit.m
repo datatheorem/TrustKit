@@ -108,10 +108,11 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
             // This domain is pinned: look for one the configured public key pins in the server's evaluated certificate chain
             TSKPinValidationResult validationResult = TSKPinValidationResultFailed;
             NSDictionary *domainConfig = _trustKitGlobalConfiguration[domainConfigKey];
-            
+
             validationResult = verifyPublicKeyPin(serverTrust, serverNameStr, domainConfig[kTSKPublicKeyAlgorithms], domainConfig[kTSKPublicKeyHashes]);
-            if ((validationResult != TSKPinValidationResultSuccess)
-                
+            if ((validationResult == TSKPinValidationResultFailed)
+                || (validationResult == TSKPinValidationResultFailedCertificateChainNotTrusted)
+                || (validationResult == TSKPinValidationResultErrorInvalidParameters)
 #if !TARGET_OS_IPHONE
                 || // OS-X only: user-defined trust anchors can be whitelisted (for corporate proxies, etc.)
                 ((validationResult == TSKPinValidationResultFailedUserDefinedTrustAnchor)
