@@ -267,8 +267,13 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
         }
         
         
-        // Extract and convert the public key hashes
+        // Extract and convert the subject public key info hashes
         NSArray *serverSslPinsBase64 = domainTrustKitArguments[kTSKPublicKeyHashes];
+        if ([serverSslPinsBase64 count] < 2)
+        {
+            [NSException raise:@"TrustKit configuration invalid"
+                        format:@"TrustKit was initialized with less than two pins (ie. no backup pins) for domain %@", domainName];
+        }
         
         NSMutableArray *serverSslPinsData = [[NSMutableArray alloc] init];
         
@@ -277,14 +282,14 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
             
             if ([pinnedKeyHash length] != CC_SHA256_DIGEST_LENGTH)
             {
-                // The public key hash doesn't have a valid size
+                // The subject public key info hash doesn't have a valid size
                 [NSException raise:@"TrustKit configuration invalid" format:@"TrustKit was initialized with an invalid Pin %@ for domain %@", pinnedKeyHashBase64, domainName];
             }
             
             [serverSslPinsData addObject:pinnedKeyHash];
         }
         
-        // Save the public key hashes for this server as an NSSet for quick lookup
+        // Save the hashes for this server as an NSSet for quick lookup
         domainFinalConfiguration[kTSKPublicKeyHashes] = [NSSet setWithArray:serverSslPinsData];
         
         // Store the whole configuration

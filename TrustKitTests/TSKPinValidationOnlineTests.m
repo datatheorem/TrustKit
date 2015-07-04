@@ -44,7 +44,8 @@
     @{
       @"www.datatheorem.com" : @{
               kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-              kTSKPublicKeyHashes : @[@"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=" // CA key
+              kTSKPublicKeyHashes : @[@"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=", // CA key
+                                      @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=" // CA key
                                       ]}};
     
     [TrustKit initializeWithConfiguration:trustKitConfig];
@@ -68,7 +69,8 @@
       @"www.yahoo.com" : @{
               kTSKEnforcePinning : @YES,
               kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-              kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" //Fake key
+              kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
+                                      @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                       ]}};
     
     [TrustKit initializeWithConfiguration:trustKitConfig];
@@ -92,7 +94,8 @@
                     @"www.github.com" : @{
                     kTSKEnforcePinning : @NO, // Pinning disabled!
                     kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                    kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" //Fake key
+                    kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
+                                            @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                     ]}};
 
     [TrustKit initializeWithConfiguration:trustKitConfig];

@@ -48,10 +48,12 @@
                                                              arrayLength:0];
     
     // Create a configuration and parse it so we get the right format
-    NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"www.datatheorem.com" : @{
-                                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                                                                    kTSKPublicKeyHashes : @[@"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8=", // Leaf key
-                                                                                            ]}});
+    NSDictionary *trustKitConfig;
+    trustKitConfig = parseTrustKitArguments(@{@"www.datatheorem.com" : @{
+                                                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                                                      kTSKPublicKeyHashes : @[@"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8=", // Leaf Key
+                                                                              @"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8=", // Leaf Key
+                                                                              ]}});
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust, @"www.datatheorem.com", trustKitConfig[@"www.datatheorem.com"][kTSKPublicKeyAlgorithms], trustKitConfig[@"www.datatheorem.com"][kTSKPublicKeyHashes]);
@@ -78,10 +80,12 @@
                                                              arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
     
     // Create a configuration and parse it so we get the right format
-    NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
-                                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                                                    kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=", // Server key
-                                                                                            ]}});
+    NSDictionary *trustKitConfig;
+    trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
+                                                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                      kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=", // Server Key
+                                                                              @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=", // Server Key
+                                                                              ]}});
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig[@"www.good.com"][kTSKPublicKeyAlgorithms], trustKitConfig[@"www.good.com"][kTSKPublicKeyHashes]);
@@ -107,10 +111,12 @@
                                                              arrayLength:0];
     
     // Create a configuration and parse it so we get the right format
-    NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"istlsfastyet.com" : @{
-                                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmEcDsaSecp256r1],
-                                                                    kTSKPublicKeyHashes : @[@"rFjc3wG7lTZe43zeYTvPq8k4xdDEutCmIhI5dn4oCeE=", // Server key
-                                                                                            ]}});
+    NSDictionary *trustKitConfig;
+    trustKitConfig = parseTrustKitArguments(@{@"istlsfastyet.com" : @{
+                                                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmEcDsaSecp256r1],
+                                                      kTSKPublicKeyHashes : @[@"rFjc3wG7lTZe43zeYTvPq8k4xdDEutCmIhI5dn4oCeE=", // Server Key
+                                                                              @"rFjc3wG7lTZe43zeYTvPq8k4xdDEutCmIhI5dn4oCeE=", // Server Key
+                                                                              ]}});
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust, @"istlsfastyet.com", trustKitConfig[@"istlsfastyet.com"][kTSKPublicKeyAlgorithms], trustKitConfig[@"istlsfastyet.com"][kTSKPublicKeyHashes]);

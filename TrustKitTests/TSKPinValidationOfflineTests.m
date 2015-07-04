@@ -51,6 +51,17 @@
 }
 
 
+// Pin to only one key and ensure it fails; TrustKit requires at least two pins (which should include a backup pin)
+- (void)testVerifyAgainstOnePublicKey
+{
+    XCTAssertThrows(parseTrustKitArguments(@{@"www.good.com" : @{
+                                                     kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                     kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY="
+                                                                             ]}}),
+                                           @"Configuration with one pin only must be rejected");
+}
+
+
 // Pin to any of CA, Intermediate CA and Leaf certificates public keys (all valid) and ensure it succeeds
 - (void)testVerifyAgainstAnyPublicKey
 {
@@ -63,12 +74,13 @@
                                                              arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
     
     // Create a configuration and parse it so we get the right format
-    NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
-                                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                                                    kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=", // Server key
-                                                                                            @"khKI6ae4micEvX74MB/BZ4u15WCWGXPD6Gjg6iIRVeE=", // Intermediate key
-                                                                                            @"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=" // CA key
-                                                                                            ]}});
+    NSDictionary *trustKitConfig;
+    trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
+                                                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                      kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=", // Server key
+                                                                              @"khKI6ae4micEvX74MB/BZ4u15WCWGXPD6Gjg6iIRVeE=", // Intermediate key
+                                                                              @"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=" // CA key
+                                                                              ]}});
 
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
@@ -91,10 +103,12 @@
                                                              arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
 
     // Create a configuration and parse it so we get the right format
-    NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
-                                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                                                    kTSKPublicKeyHashes : @[@"khKI6ae4micEvX74MB/BZ4u15WCWGXPD6Gjg6iIRVeE=" // Intermediate key only
-                                                                                            ]}});
+    NSDictionary *trustKitConfig;
+    trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
+                                                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                      kTSKPublicKeyHashes : @[@"khKI6ae4micEvX74MB/BZ4u15WCWGXPD6Gjg6iIRVeE=", // Intermediate Key
+                                                                              @"khKI6ae4micEvX74MB/BZ4u15WCWGXPD6Gjg6iIRVeE=" // Intermediate Key
+                                                                              ]}});
 
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
@@ -117,10 +131,12 @@
                                                              arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
     
     // Create a configuration and parse it so we get the right format
-    NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
-                                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                                                    kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=" // CA key only
-                                                                                            ]}});
+    NSDictionary *trustKitConfig;
+    trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
+                                                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                      kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA Key
+                                                                              @"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=" // CA Key
+                                                                              ]}});
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig[@"www.good.com"][kTSKPublicKeyAlgorithms], trustKitConfig[@"www.good.com"][kTSKPublicKeyHashes]);
@@ -142,10 +158,12 @@
                                                              arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
     
     // Create a configuration and parse it so we get the right format
-    NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
-                                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                                                    kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=" // Leaf key only
-                                                                                            ]}});
+    NSDictionary *trustKitConfig;
+    trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
+                                                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                      kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=", // Leaf Key
+                                                                              @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=" // Leaf Key
+                                                                              ]}});
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig[@"www.good.com"][kTSKPublicKeyAlgorithms], trustKitConfig[@"www.good.com"][kTSKPublicKeyHashes]);
@@ -168,10 +186,12 @@
     
     
     // Create a configuration and parse it so we get the right format
-    NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
-                                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                                                    kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Bad key
-                                                                                            ]}});
+    NSDictionary *trustKitConfig;
+    trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
+                                                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                      kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Bad Key
+                                                                              @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Bad key
+                                                                              ]}});
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultSuccess;
     verificationResult = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig[@"www.good.com"][kTSKPublicKeyAlgorithms], trustKitConfig[@"www.good.com"][kTSKPublicKeyHashes]);
@@ -193,11 +213,12 @@
                                                              arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
     
     // Create a configuration and parse it so we get the right format
-    NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
-                                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                                                    kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Bad key
-                                                                                            @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY="  // Leaf key
-                                                                                            ]}});
+    NSDictionary *trustKitConfig;
+    trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
+                                                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                      kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Bad key
+                                                                              @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY="  // Leaf key
+                                                                              ]}});
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig[@"www.good.com"][kTSKPublicKeyAlgorithms], trustKitConfig[@"www.good.com"][kTSKPublicKeyHashes]);
@@ -219,10 +240,12 @@
                                                              arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
     
     // Create a configuration and parse it so we get the right format
-    NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
-                                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                                                    kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=" // CA key
-                                                                                            ]}});
+    NSDictionary *trustKitConfig;
+    trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
+                                                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                      kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA key
+                                                                              @"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=" // CA key
+                                                                              ]}});
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig[@"www.good.com"][kTSKPublicKeyAlgorithms], trustKitConfig[@"www.good.com"][kTSKPublicKeyHashes]);
@@ -244,10 +267,12 @@
                                                              arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
     
     // Create a configuration and parse it so we get the right format
-    NSDictionary *trustKitConfig = parseTrustKitArguments(@{@"www.bad.com" : @{
-                                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                                                    kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=" // CA key
-                                                                                            ]}});
+    NSDictionary *trustKitConfig;
+    trustKitConfig = parseTrustKitArguments(@{@"www.bad.com" : @{
+                                                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                      kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA Key
+                                                                              @"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=" // CA Key
+                                                                              ]}});
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust, @"www.bad.com", trustKitConfig[@"www.bad.com"][kTSKPublicKeyAlgorithms], trustKitConfig[@"www.bad.com"][kTSKPublicKeyHashes]);
