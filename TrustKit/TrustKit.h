@@ -19,17 +19,17 @@ FOUNDATION_EXPORT const unsigned char TrustKitVersionString[];
 
 
 #pragma mark TrustKit Configuration Keys
-extern NSString * const kTSKPublicKeyHashes;
-extern NSString * const kTSKEnforcePinning;
-extern NSString * const kTSKIncludeSubdomains;
-extern NSString * const kTSKPublicKeyAlgorithms;
-extern NSString * const kTSKReportUris;
-extern NSString * const kTSKDisableDefaultReportUri;
+FOUNDATION_EXPORT const NSString *kTSKPublicKeyHashes;
+FOUNDATION_EXPORT const NSString *kTSKEnforcePinning;
+FOUNDATION_EXPORT const NSString *kTSKIncludeSubdomains;
+FOUNDATION_EXPORT const NSString *kTSKPublicKeyAlgorithms;
+FOUNDATION_EXPORT const NSString *kTSKReportUris;
+FOUNDATION_EXPORT const NSString *kTSKDisableDefaultReportUri;
 
 #pragma mark Supported Public Key Algorithm Keys
-extern NSString * const kTSKAlgorithmRsa2048;
-extern NSString * const kTSKAlgorithmRsa4096;
-extern NSString * const kTSKAlgorithmEcDsaSecp256r1;
+FOUNDATION_EXPORT const NSString *kTSKAlgorithmRsa2048;
+FOUNDATION_EXPORT const NSString *kTSKAlgorithmRsa4096;
+FOUNDATION_EXPORT const NSString *kTSKAlgorithmEcDsaSecp256r1;
 
 
 /**

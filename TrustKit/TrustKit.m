@@ -26,17 +26,17 @@ static NSString * const kTSKConfiguration = @"TSKConfiguration";
 
 
 // Keys for each domain within the config dictionnary
-NSString * const kTSKPublicKeyHashes = @"TSKPublicKeyHashes";
-NSString * const kTSKEnforcePinning = @"TSKEnforcePinning";
-NSString * const kTSKIncludeSubdomains = @"TSKIncludeSubdomains";
-NSString * const kTSKPublicKeyAlgorithms = @"TSKPublicKeyAlgorithms";
-NSString * const kTSKReportUris = @"TSKReportUris";
-NSString * const kTSKDisableDefaultReportUri = @"TSKDisableDefaultReportUri";
+const NSString *kTSKPublicKeyHashes = @"TSKPublicKeyHashes";
+const NSString *kTSKEnforcePinning = @"TSKEnforcePinning";
+const NSString *kTSKIncludeSubdomains = @"TSKIncludeSubdomains";
+const NSString *kTSKPublicKeyAlgorithms = @"TSKPublicKeyAlgorithms";
+const NSString *kTSKReportUris = @"TSKReportUris";
+const NSString *kTSKDisableDefaultReportUri = @"TSKDisableDefaultReportUri";
 
 #pragma mark Public key Algorithms Constants
-NSString * const kTSKAlgorithmRsa2048 = @"TSKAlgorithmRsa2048";
-NSString * const kTSKAlgorithmRsa4096 = @"TSKAlgorithmRsa4096";
-NSString * const kTSKAlgorithmEcDsaSecp256r1 = @"TSKAlgorithmEcDsaSecp256r1";
+const NSString *kTSKAlgorithmRsa2048 = @"TSKAlgorithmRsa2048";
+const NSString *kTSKAlgorithmRsa4096 = @"TSKAlgorithmRsa4096";
+const NSString *kTSKAlgorithmEcDsaSecp256r1 = @"TSKAlgorithmEcDsaSecp256r1";
 
 
 #pragma mark TrustKit Global State
