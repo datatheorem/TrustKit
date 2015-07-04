@@ -67,17 +67,21 @@ static dispatch_once_t dispatchOnceBackgroundSession;
     dispatch_once(&dispatchOnceBackgroundSession, ^{
         
         NSURLSessionConfiguration *backgroundConfiguration;
-
+        
         // The API for creating background sessions changed between iOS 7 and iOS 8 and OS X 10.9 and 10.10
-        if ([NSURLSessionConfiguration respondsToSelector:@selector(backgroundSessionConfigurationWithIdentifier:)])
-        {
-            // iOS 8+ or OS X 10.10+
-            backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier: [NSString stringWithFormat:kTSKBackgroundSessionIdentifierFormat, self.appBundleId]];
-        } else
+#if (TARGET_OS_IPHONE &&__IPHONE_OS_VERSION_MIN_REQUIRED < 80000) || (!TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MIN_REQUIRED < 1090)
+        if (![NSURLSessionConfiguration respondsToSelector:@selector(backgroundSessionConfigurationWithIdentifier:)])
         {
             // iOS 7 or OS X 10.9
             backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfiguration:[NSString stringWithFormat:kTSKBackgroundSessionIdentifierFormat, self.appBundleId]];
         }
+        else
+#endif
+        {
+            // iOS 8+ or OS X 10.10+
+            backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier: [NSString stringWithFormat:kTSKBackgroundSessionIdentifierFormat, self.appBundleId]];
+        }
+
 
 #if TARGET_OS_IPHONE
         // iOS-only settings
