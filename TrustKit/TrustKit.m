@@ -171,7 +171,8 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
         // Sanity check on the domain name
         if (GetRegistryLength([domainName UTF8String]) == 0)
         {
-            [NSException raise:@"TrustKit configuration invalid" format:@"TrustKit was initialized with an invalid domain %@", domainName];
+            [NSException raise:@"TrustKit configuration invalid"
+                        format:@"TrustKit was initialized with an invalid domain %@", domainName];
         }
         
         
@@ -223,7 +224,8 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
         NSArray *publicKeyAlgsStr = domainTrustKitArguments[kTSKPublicKeyAlgorithms];
         if (publicKeyAlgsStr == nil)
         {
-            [NSException raise:@"TrustKit configuration invalid" format:@"TrustKit was initialized with an invalid value for %@ for domain %@", kTSKPublicKeyAlgorithms, domainName];
+            [NSException raise:@"TrustKit configuration invalid"
+                        format:@"TrustKit was initialized with an invalid value for %@ for domain %@", kTSKPublicKeyAlgorithms, domainName];
         }
         NSMutableArray *publicKeyAlgs = [NSMutableArray array];
         for (NSString *algorithm in publicKeyAlgsStr)
@@ -242,7 +244,8 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
             }
             else
             {
-                [NSException raise:@"TrustKit configuration invalid" format:@"TrustKit was initialized with an invalid value for %@ for domain %@", kTSKPublicKeyAlgorithms, domainName];
+                [NSException raise:@"TrustKit configuration invalid"
+                            format:@"TrustKit was initialized with an invalid value for %@ for domain %@", kTSKPublicKeyAlgorithms, domainName];
             }
         }
         domainFinalConfiguration[kTSKPublicKeyAlgorithms] = [NSArray arrayWithArray:publicKeyAlgs];
@@ -258,7 +261,8 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
                 NSURL *reportUri = [NSURL URLWithString:reportUriStr];
                 if (reportUri == nil)
                 {
-                    [NSException raise:@"TrustKit configuration invalid" format:@"TrustKit was initialized with an invalid value for %@ for domain %@", kTSKReportUris, domainName];
+                    [NSException raise:@"TrustKit configuration invalid"
+                                format:@"TrustKit was initialized with an invalid value for %@ for domain %@", kTSKReportUris, domainName];
                 }
                 [reportUriListFinal addObject:reportUri];
             }
@@ -283,7 +287,8 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
             if ([pinnedKeyHash length] != CC_SHA256_DIGEST_LENGTH)
             {
                 // The subject public key info hash doesn't have a valid size
-                [NSException raise:@"TrustKit configuration invalid" format:@"TrustKit was initialized with an invalid Pin %@ for domain %@", pinnedKeyHashBase64, domainName];
+                [NSException raise:@"TrustKit configuration invalid"
+                            format:@"TrustKit was initialized with an invalid Pin %@ for domain %@", pinnedKeyHashBase64, domainName];
             }
             
             [serverSslPinsData addObject:pinnedKeyHash];
@@ -310,7 +315,8 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
     if (_isTrustKitInitialized == YES)
     {
         // TrustKit should only be initialized once so we don't double interpose SecureTransport or get into anything unexpected
-        [NSException raise:@"TrustKit already initialized" format:@"TrustKit was already initialized with the following SSL pins: %@", _trustKitGlobalConfiguration];
+        [NSException raise:@"TrustKit already initialized"
+                    format:@"TrustKit was already initialized with the following SSL pins: %@", _trustKitGlobalConfiguration];
     }
     
     dispatch_once(&dispatchOnceTrustKitInit, ^{
@@ -330,7 +336,8 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
                 rebindResult = rebind_symbols((struct rebinding[1]){{(char *)functionToHook, (void *)replaced_SSLHandshake}}, 1);
                 if ((rebindResult < 0) || (original_SSLHandshake == NULL))
                 {
-                    [NSException raise:@"TrustKit initialization error" format:@"Fishook returned an error: %d", rebindResult];
+                    [NSException raise:@"TrustKit initialization error"
+                                format:@"Fishook returned an error: %d", rebindResult];
                 }
             }
             
