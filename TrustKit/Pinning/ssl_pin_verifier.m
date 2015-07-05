@@ -92,7 +92,7 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
     {
         return TSKPinValidationResultErrorInvalidParameters;
     }
-    
+
     // First re-check the certificate chain using the default SSL validation in case it was disabled
     // This gives us revocation (only for EV certs I think?) and also ensures the certificate chain is sane
     // And also gives us the exact path that successfully validated the chain
@@ -119,9 +119,9 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
         return TSKPinValidationResultFailedCertificateChainNotTrusted;
     }
     
-    // Check each certificate in the server's certificate chain (the trust object)
+    // Check each certificate in the server's certificate chain (the trust object); start with the CA all the way down to the leaf
     CFIndex certificateChainLen = SecTrustGetCertificateCount(serverTrust);
-    for(int i=0;i<certificateChainLen;i++)
+    for(int i=(int)certificateChainLen-1;i>=0;i--)
     {
         // Extract the certificate
         SecCertificateRef certificate = SecTrustGetCertificateAtIndex(serverTrust, i);
