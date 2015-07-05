@@ -62,7 +62,7 @@ FOUNDATION_EXPORT const NSString *kTSKAlgorithmEcDsaSecp256r1;
 
       [TrustKit initializeWithConfiguration:trustKitConfig];
  
-  When dynamically linked, TrustKit is automatically initialized by reading configuration keys from the App's _Info.plist_, and no initialization method needs to be called.
+  It also possible to supply the pinning policy by adding these configuration keys to the App's _Info.plist_ under a `TSKConfiguration` dictionary key. When doing so, no initialization method needs to be called and TrustKit will automatically be initialized with the policy.
  
  
  ### Required Configuration Keys
@@ -91,7 +91,7 @@ FOUNDATION_EXPORT const NSString *kTSKAlgorithmEcDsaSecp256r1;
  
  #### `kTSKIgnorePinningForUserDefinedTrustAnchors` (OS X only)
  If set to `YES`, pinning validation will be skipped if the server's certificate chain terminates at a user-defined trust anchor (such as a root CA that isn't part of OS X's default trust store) and no pin failure reports will be sent; default value is `YES`.
- This is useful for allowing SSL connections through corporate proxies or firewalls. See https://www.chromium.org/Home/chromium-security/security-faq#TOC-How-does-key-pinning-interact-with-local-proxies-and-filters- for more information.
+ This is useful for allowing SSL connections through corporate proxies or firewalls. See "How does key pinning interact with local proxies and filters?" within the Chromium security FAQ at https://www.chromium.org/Home/chromium-security/security-faq for more information.
  
  
  ### Public Key Algorithms Keys
@@ -114,7 +114,7 @@ FOUNDATION_EXPORT const NSString *kTSKAlgorithmEcDsaSecp256r1;
 /**
  Initializes the global SSL pinning policy with the supplied configuration.
  
- This method should be called as early as possible in the App's lifecycle to ensure that the App's very first HTTPS connections are validated by TrustKit.
+ This method should be called as early as possible in the App's lifecycle to ensure that the App's very first SSL connections are validated by TrustKit.
  
  @param trustKitConfig A dictionnary containing various keys for configuring the global SSL pinning policy.
  @exception NSException Thrown when the supplied configuration is invalid or TrustKit has already been initialized.
