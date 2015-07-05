@@ -224,8 +224,8 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
         }
         else
         {
-            // Default setting is NO
-            domainFinalConfiguration[kTSKIgnorePinningForUserDefinedTrustAnchors] = [NSNumber numberWithBool:NO];
+            // Default setting is YES
+            domainFinalConfiguration[kTSKIgnorePinningForUserDefinedTrustAnchors] = [NSNumber numberWithBool:YES];
         }
 #endif
         
