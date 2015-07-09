@@ -97,17 +97,20 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
         serverName[serverNameLen] = '\0';
         NSString *serverNameStr = [NSString stringWithUTF8String:serverName];
         free(serverName);
-        
-        SecTrustRef serverTrust;
-        SSLCopyPeerTrust(context, &serverTrust);
-        
+
         // Retrieve the pinning configuration for this specific domain, if there is one
         NSString *domainConfigKey = getPinningConfigurationKeyForDomain(serverNameStr, _trustKitGlobalConfiguration);
         if (domainConfigKey != nil)
         {
-            // This domain is pinned: look for one the configured public key pins in the server's evaluated certificate chain
-            TSKPinValidationResult validationResult = TSKPinValidationResultFailed;
+            // This domain is pinned
             NSDictionary *domainConfig = _trustKitGlobalConfiguration[domainConfigKey];
+            
+            // Retrieve the server's trust object
+            SecTrustRef serverTrust;
+            SSLCopyPeerTrust(context, &serverTrust);
+            
+            // Re-evaluate the server's certificate chain and look for one the configured SPKI pins
+            TSKPinValidationResult validationResult = TSKPinValidationResultFailed;
 
             validationResult = verifyPublicKeyPin(serverTrust, serverNameStr, domainConfig[kTSKPublicKeyAlgorithms], domainConfig[kTSKPublicKeyHashes]);
             if ((validationResult == TSKPinValidationResultFailed)
@@ -147,8 +150,8 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
                 }
                 
                 if (([domainConfig[kTSKEnforcePinning] boolValue] == YES)
-                     || (validationResult == TSKPinValidationResultFailedCertificateChainNotTrusted)
-                     || (validationResult == TSKPinValidationResultErrorInvalidParameters))
+                    || (validationResult == TSKPinValidationResultFailedCertificateChainNotTrusted)
+                    || (validationResult == TSKPinValidationResultErrorInvalidParameters))
                 {
                     // TrustKit was configured to enforce pinning or the certificate chain was not trusted: make the connection fail
                     result = errSSLXCertChainInvalid;
