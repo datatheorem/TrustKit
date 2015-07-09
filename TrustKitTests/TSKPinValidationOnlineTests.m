@@ -91,7 +91,7 @@
 {
     NSDictionary *trustKitConfig =
             @{
-                    @"www.github.com" : @{
+                    @"www.google.com" : @{
                     kTSKEnforcePinning : @NO, // Pinning disabled!
                     kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                     kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
@@ -102,7 +102,7 @@
 
     NSError *error = nil;
     NSHTTPURLResponse *response;
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.github.com"]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.google.com"]];
     [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
 
     XCTAssertNil(error, @"Connection had an error: %@", error);
