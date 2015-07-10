@@ -193,7 +193,7 @@ the `NSURLSession`'s background transfer service) or through third-party SSL
 libraries (such as OpenSSL).
 
 For these connections, the pin validation must be
-triggered manually; see the documentation for the [TSKPinVerifier
-class](https://datatheorem.github.io/TrustKit/documentation/Classes/TSKPinVerifier.html)
+triggered manually; see the documentation for the [TSKPinningValidator
+class](https://datatheorem.github.io/TrustKit/documentation/Classes/TSKPinningValidator.html)
 for more details.
 

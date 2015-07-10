@@ -10,7 +10,7 @@
  */
 
 #import <Foundation/Foundation.h>
-#import "TSKPinVerifier.h"
+#import "TSKPinningValidator.h"
 
 
 @interface TSKPinFailureReport : NSObject

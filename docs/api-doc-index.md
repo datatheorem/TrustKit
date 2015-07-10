@@ -9,6 +9,6 @@ TrustKit requires iOS 7+ or OS X 10.9+ as the minimum deployment target and
 provides two classes:
 
 * TrustKit, for configuring the global SSL pinning policy within an App.
-* TSKPinVerifier, for manually validating a certificate chain against the
+* TSKPinningValidator, for manually validating a certificate chain against the
 configured pinning policy. This class only needs to be used for connections
 that are not automatically intercepted by TrustKit.

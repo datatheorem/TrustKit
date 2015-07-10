@@ -1,6 +1,6 @@
 /*
  
- TSKPinVerifier.h
+ TSKPinningValidator.h
  TrustKit
  
  Copyright 2015 The TrustKit Project Authors
@@ -12,7 +12,7 @@
 #import <Foundation/Foundation.h>
 
 /**
- Possible return values when verifying a server's identity against the global SSL pinning policy using `TSKPinVerifier`.
+ Possible return values when verifying a server's identity against the global SSL pinning policy using `TSKPinningValidator`.
  
  */
 typedef NS_ENUM(NSInteger, TSKPinValidationResult)
@@ -50,9 +50,9 @@ typedef NS_ENUM(NSInteger, TSKPinValidationResult)
 
 
 /**
- `TSKPinVerifier` is a class for manually verifying a server's identity against the global SSL pinning policy.
+ `TSKPinningValidator` is a class for manually verifying a server's identity against the global SSL pinning policy.
  
- In a few specific scenarios, TrustKit cannot intercept outgoing SSL connections and automatically validate the server's identity against the pinning policy. For these connections, the pin validation must be manually triggered: the server's trust object, which contains its certificate chain, needs to be retrieved or built before being passed to `TSKPinVerifier` for validation.
+ In a few specific scenarios, TrustKit cannot intercept outgoing SSL connections and automatically validate the server's identity against the pinning policy. For these connections, the pin validation must be manually triggered: the server's trust object, which contains its certificate chain, needs to be retrieved or built before being passed to `TSKPinningValidator` for validation.
  
  The following scenarios require manual pin validation:
  
@@ -62,14 +62,14 @@ typedef NS_ENUM(NSInteger, TSKPinValidationResult)
  2. Connections initiated using a third-party SSL library such as OpenSSL, instead of Apple's SecureTransport. The server's trust object needs to be built using the received certificate chain.
  
  */
-@interface TSKPinVerifier : NSObject
+@interface TSKPinningValidator : NSObject
 
-///--------------------------------
-/// @name Manual SSL Pin Validation
-///--------------------------------
+///------------------------------------
+/// @name Manual SSL Pinning Validation
+///------------------------------------
 
 /**
- Verify the validity of the supplied server trust against the global SSL pinning policy previously configured; if pin validation fails, pin failure reports will be sent according to the pinning policy.
+ Evaluate the supplied server trust against the global SSL pinning policy previously configured. If the validation fails, pin failure reports will be sent according to the pinning policy.
  
  @param serverTrust The trust object representing the server's certificate chain. The trust's validation policy is always overriden to ensure all the proper SSL policies (expiration, hostname validation, etc.) are enabled.
  
@@ -78,7 +78,9 @@ typedef NS_ENUM(NSInteger, TSKPinValidationResult)
  @return The result of the validation. See `TSKPinValidationResult` for possible values.
  
  @warning If no SSL pinning policy was configured for the supplied _serverHostname_, this method has no effect and will return `TSKPinValidationResultDomainNotPinned` without validating the supplied _serverTrust_ at all.
+ 
+ @exception NSException Thrown when TrustKit has not been initialized.
  */
-+ (TSKPinValidationResult) verifyPinForTrust:(SecTrustRef)serverTrust andHostname:(NSString *)serverHostname;
++ (TSKPinValidationResult) evaluateTrust:(SecTrustRef)serverTrust forHostname:(NSString *)serverHostname;
 
 @end

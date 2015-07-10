@@ -1,6 +1,6 @@
 /*
  
- TSKPinVerifier.m
+ TSKPinningValidator.m
  TrustKit
  
  Copyright 2015 The TrustKit Project Authors
@@ -9,15 +9,15 @@
  
  */
 
-#import "TSKPinVerifier.h"
+#import "TSKPinningValidator.h"
 #import "ssl_pin_verifier.h"
 #import "TrustKit+Private.h"
 
 
 
-@implementation TSKPinVerifier
+@implementation TSKPinningValidator
 
-+ (TSKPinValidationResult) verifyPinForTrust:(SecTrustRef)serverTrust andHostname:(NSString *)serverHostname
++ (TSKPinValidationResult) evaluateTrust:(SecTrustRef)serverTrust forHostname:(NSString *)serverHostname
 {
     if ([TrustKit wasTrustKitInitialized] == NO)
     {
