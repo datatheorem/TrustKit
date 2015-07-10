@@ -27,3 +27,7 @@ DerivedData
 
 # Appledoc
 html/
+
+# Facebook Infer
+infer-out/
+
