@@ -18,7 +18,13 @@
 
 + (TSKPinValidationResult) verifyPinForTrust:(SecTrustRef)serverTrust andHostname:(NSString *)serverHostname
 {
-    TSKPinValidationResult result = TSKPinValidationResultFailed;
+    if ([TrustKit wasTrustKitInitialized] == NO)
+    {
+        [NSException raise:@"TrustKit not initialized"
+                    format:@"TrustKit has not been initialized with a pinning configuration"];
+    }
+    
+    TSKPinValidationResult validationResult = TSKPinValidationResultFailed;
     NSDictionary *trustKitConfig = [TrustKit configuration];
     
     // Retrieve the pinning configuration for this specific domain, if there is one
@@ -27,14 +33,23 @@
     {
         // This domain is pinned: look for one the configured public key pins in the server's evaluated certificate chain
         NSDictionary *domainConfig = trustKitConfig[domainConfigKey];
-        result = verifyPublicKeyPin(serverTrust, serverHostname, domainConfig[kTSKPublicKeyAlgorithms], domainConfig[kTSKPublicKeyHashes]);
+        validationResult = verifyPublicKeyPin(serverTrust, serverHostname, domainConfig[kTSKPublicKeyAlgorithms], domainConfig[kTSKPublicKeyHashes]);
+        
+        
+        if (validationResult != TSKPinValidationResultSuccess)
+        {
+            // Pin validation failed: send a pin failure report
+            dispatch_async(pinFailureReporterQueue, ^(void) {
+                sendPinFailureReport(validationResult, serverTrust, serverHostname, domainConfigKey, domainConfig);
+            });
+        }
     }
     else
     {
         // The domain is not pinned: nothing to validate
-        result = TSKPinValidationResultDomainNotPinned;
+        validationResult = TSKPinValidationResultDomainNotPinned;
     }
-    return result;
+    return validationResult;
 }
 
 @end
