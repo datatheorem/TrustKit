@@ -43,7 +43,7 @@ typedef NS_ENUM(NSInteger, TSKPinValidationResult)
     TSKPinValidationResultDomainNotPinned,
     
     /**
-     The server trust was succesfully evaluated but did not contain any of the configured pins. However, the certificate chain terminates at a user-defined trust anchor, rather than a trust anchor built-in to the OS X's trust store.
+     The server trust was succesfully evaluated but did not contain any of the configured pins. However, the certificate chain terminates at a user-defined trust anchor (ie. a custom/private CA that was manually added to OS X's trust store).
      */
     TSKPinValidationResultFailedUserDefinedTrustAnchor NS_AVAILABLE_MAC(10_9),
 };
@@ -69,7 +69,7 @@ typedef NS_ENUM(NSInteger, TSKPinValidationResult)
 ///--------------------------------
 
 /**
- Verify the validity of the supplied server trust against the global SSL pinning policy previously configured.
+ Verify the validity of the supplied server trust against the global SSL pinning policy previously configured; if pin validation fails, pin failure reports will be sent according to the to the pinning policy.
  
  @param serverTrust The trust object representing the server's certificate chain. The trust's validation policy is always overriden to ensure all the proper SSL policies (expiration, hostname validation, etc.) are enabled.
  
