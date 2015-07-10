@@ -83,10 +83,29 @@ FOUNDATION_EXPORT const NSString *kTSKAlgorithmEcDsaSecp256r1;
  If set to `NO`, TrustKit will not block SSL connections that caused a pin or certificate validation error; default value is `YES`. When verifying a server's identity, TrustKit validates the server's certificate chain and also checks for the presence of one of the configured SSL pins. When a pinning failure occurs, pin failure reports will still be sent to the configured report URIs.
  
  #### `kTSKReportUris`
- An array of URLs to which pin validation failures should be reported. To minimize the performance impact of sending reports on each validation failure, the reports are uploaded using the background transfer service. For HTTPS report URLs, the HTTPS connections will ignore the SSL pinning policy and use the default certificate validation mechanisms, in order to maximize the chance of the reports reaching the server. The format of the reports is similar to the one described in the HPKP specification.
+ An array of URLs to which pin validation failures should be reported. To minimize the performance impact of sending reports on each validation failure, the reports are uploaded using the background transfer service. For HTTPS report URLs, the HTTPS connections will ignore the SSL pinning policy and use the default certificate validation mechanisms, in order to maximize the chance of the reports reaching the server. The format of the reports is similar to the one described in RFC 7469 for the HPKP specification:
+ 
+    {
+        "app-bundle-id":"com.example.ABC",
+        "app-version":"1.0",
+        "date-time": "2015-07-10T20:03:14Z",
+        "hostname": "mail.example.com",
+        "port": 0,
+        "include-subdomains": true,
+        "noted-hostname": "example.com",
+        "validated-certificate-chain": [
+            pem1, ... pemN
+        ],
+        "known-pins": [
+            "pin-sha256=\"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM=\"",
+            "pin-sha256=\"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g=\""
+        ],
+        "validation-result":1
+    }
+
 
  #### `kTSKDisableDefaultReportUri`
- If set to `YES`, the default report URL for sending pin failure reports will be disabled; default value is `NO`. 
+ If set to `YES`, the default report URL for sending pin failure reports will be disabled; default value is `NO`.
  By default, pin failure reports are sent to a report server hosted by Data Theorem, for detecting potential CA compromises and man-in-the-middle attacks, as well as providing a free dashboard for developers. Only pin failure reports are sent, which contain the App's bundle ID and the server's hostname and certificate chain that failed validation.
  
  #### `kTSKIgnorePinningForUserDefinedTrustAnchors` (OS X only)
