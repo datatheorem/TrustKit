@@ -83,15 +83,6 @@ void sendPinFailureReport_async(TSKPinValidationResult validationResult, SecTrus
 {
     dispatch_async(_pinFailureReporterQueue, ^(void) {
         
-#if !TARGET_OS_IPHONE
-        if ((validationResult == TSKPinValidationResultFailedUserDefinedTrustAnchor)
-            && ([notedHostnameConfig[kTSKIgnorePinningForUserDefinedTrustAnchors] boolValue] == NO))
-        {
-            // OS-X only: user-defined trust anchors can be whitelisted (for corporate proxies, etc.)
-            return;
-        }
-#endif
-        
         // Pin validation failed: retrieve the list of configured report URLs
         NSMutableArray *reportUris = [NSMutableArray arrayWithArray:notedHostnameConfig[kTSKReportUris]];
         
@@ -166,6 +157,16 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
             
             if (validationResult != TSKPinValidationResultSuccess)
             {
+#if !TARGET_OS_IPHONE
+                if ((validationResult == TSKPinValidationResultFailedUserDefinedTrustAnchor)
+                    && ([domainConfig[kTSKIgnorePinningForUserDefinedTrustAnchors] boolValue] == NO))
+                {
+                    // OS-X only: user-defined trust anchors can be whitelisted (for corporate proxies, etc.)
+                    CFRelease(serverTrust);
+                    return result;
+                }
+#endif
+                
                 // Pin validation failed: send a pin failure report
                 sendPinFailureReport_async(validationResult, serverTrust, serverNameStr, domainConfigKey, domainConfig, ^void (void)
                 {

@@ -46,6 +46,15 @@
         
         if (validationResult != TSKPinValidationResultSuccess)
         {
+#if !TARGET_OS_IPHONE
+            if ((validationResult == TSKPinValidationResultFailedUserDefinedTrustAnchor)
+                && ([domainConfig[kTSKIgnorePinningForUserDefinedTrustAnchors] boolValue] == NO))
+            {
+                // OS-X only: user-defined trust anchors can be whitelisted (for corporate proxies, etc.) so don't send reports
+                CFRelease(serverTrust);
+                return TSKPinValidationResultFailedUserDefinedTrustAnchor;
+            }
+#endif
             // Pin validation failed: send a pin failure report
             sendPinFailureReport_async(validationResult, serverTrust, serverHostname, domainConfigKey, domainConfig, ^void (void)
                                  {
