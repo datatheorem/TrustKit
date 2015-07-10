@@ -259,7 +259,7 @@
 - (void)testVerifyAgainstCaPublicKeyAndBadHostname
 {
     // The certificate chain is valid for www.good.com but we are connecting to www.bad.com
-    SecCertificateRef certChainArray[2] = {_selfSignedCertificate, _intermediateCertificate};
+    SecCertificateRef certChainArray[2] = {_leafCertificate, _intermediateCertificate};
     SecCertificateRef trustStoreArray[1] = {_rootCertificate};
     SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
                                                              arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
