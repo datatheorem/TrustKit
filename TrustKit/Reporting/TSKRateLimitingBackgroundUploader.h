@@ -14,8 +14,10 @@
 
 /*
  * Reporter which prevents identical pin failure reports from being sent more than once per day.
+ * This is best-effort as the reporter doesn't persist state across App restarts, so if the App
+ * get killed, it will start sending reports again.
  * Reports are uploaded using the background transfer service.
- * Also, it only acts on pin failures and does not anything for successful pin validation.
+ * Also, it only acts on pin failures and does not do anything for successful pin validation.
  */
 @interface TSKRateLimitingBackgroundUploader : TSKSimpleBackgroundReporter
 

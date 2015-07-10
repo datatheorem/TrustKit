@@ -25,6 +25,7 @@
 		8C15F9A41B17564400F06C0E /* TSKPinConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F9A31B17564400F06C0E /* TSKPinConfigurationTests.m */; };
 		8C2311A31B4F65910057C459 /* TSKRateLimitingBackgroundUploader.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C2311A11B4F65910057C459 /* TSKRateLimitingBackgroundUploader.h */; };
 		8C2311A41B4F65910057C459 /* TSKRateLimitingBackgroundUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2311A21B4F65910057C459 /* TSKRateLimitingBackgroundUploader.m */; };
+		8C2311A51B5039490057C459 /* TSKRateLimitingBackgroundUploader.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2311A21B4F65910057C459 /* TSKRateLimitingBackgroundUploader.m */; };
 		8C84804D1A896EE30017C155 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C84804C1A896EE30017C155 /* TrustKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8C8480531A896EE30017C155 /* TrustKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C8480471A896EE30017C155 /* TrustKit.framework */; };
 		8C84806D1A896F660017C155 /* TrustKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C84806C1A896F660017C155 /* TrustKit.m */; };
@@ -512,6 +513,7 @@
 				8C8716AD1B23A9D200267E1D /* fishhook.c in Sources */,
 				8C8716B31B23A9F700267E1D /* TSKPinFailureReport.m in Sources */,
 				8C8716B41B23A9FA00267E1D /* reporting_utils.m in Sources */,
+				8C2311A51B5039490057C459 /* TSKRateLimitingBackgroundUploader.m in Sources */,
 				8C8716B81B23AA0D00267E1D /* TrustKit.m in Sources */,
 				8C8716B21B23A9F400267E1D /* TSKSimpleBackgroundReporter.m in Sources */,
 				8C8716B11B23A9F000267E1D /* TSKSimpleReporter.m in Sources */,

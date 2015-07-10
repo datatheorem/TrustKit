@@ -31,7 +31,9 @@ static NSDate *_lastReportsCacheResetDate = nil;
 - (instancetype)initWithAppBundleId:(NSString *)appBundleId
                          appVersion:(NSString *)appVersion
 {
+    // Initialize the background the session in the super class' constructor
     self = [super init];
+    
     if (self)
     {
         // Initialize all the internal state for rate-limiting report uploads
