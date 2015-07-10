@@ -63,7 +63,7 @@
                                         port:[NSNumber numberWithInt:443]
                                        trust:_testTrust
                                notedHostname:@"example.com"
-                                   reportURIs:@[[NSURL URLWithString:@"http://127.0.0.1:8080/log_csp_report"]]
+                                   reportURIs:@[[NSURL URLWithString:@"http://127.0.0.1:8080/log_report"]]
                            includeSubdomains:YES
                                    knownPins:@[
                                                [[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM=" options:0],
@@ -85,7 +85,7 @@
                                         port:[NSNumber numberWithInt:443]
                                        trust:_testTrust
                                notedHostname:@"example.com"
-                                  reportURIs:@[[NSURL URLWithString:@"http://127.0.0.1:8080/log_csp_report"]]
+                                  reportURIs:@[[NSURL URLWithString:@"http://127.0.0.1:8080/log_report"]]
                            includeSubdomains:YES
                                    knownPins:@[
                                                [[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM=" options:0],
@@ -105,7 +105,7 @@
                                         port:[NSNumber numberWithInt:443]
                                        trust:_testTrust
                                notedHostname:@"example.com"
-                                  reportURIs:@[[NSURL URLWithString:@"http://127.0.0.1:8080/log_csp_report"]]
+                                  reportURIs:@[[NSURL URLWithString:@"http://127.0.0.1:8080/log_report"]]
                            includeSubdomains:YES
                                    knownPins:@[
                                                [[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM=" options:0],
@@ -118,7 +118,7 @@
                                         port:[NSNumber numberWithInt:443]
                                        trust:_testTrust
                                notedHostname:@"example.com"
-                                  reportURIs:@[[NSURL URLWithString:@"http://127.0.0.1:8080/log_csp_report"]]
+                                  reportURIs:@[[NSURL URLWithString:@"http://127.0.0.1:8080/log_report"]]
                            includeSubdomains:YES
                                    knownPins:@[
                                                [[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM=" options:0],
