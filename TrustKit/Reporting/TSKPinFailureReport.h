@@ -10,6 +10,8 @@
  */
 
 #import <Foundation/Foundation.h>
+#import "TSKPinVerifier.h"
+
 
 @interface TSKPinFailureReport : NSObject
 
@@ -22,6 +24,7 @@
 @property (readonly, nonatomic) BOOL includeSubdomains;
 @property (readonly, nonatomic) NSArray *validatedCertificateChain;
 @property (readonly, nonatomic) NSArray *knownPins;
+@property (readonly, nonatomic) TSKPinValidationResult validationResult;
 
 
 // Init with default bundle ID and current time as the date-time
@@ -33,7 +36,8 @@
                             dateTime:(NSDate *)dateTime
                    includeSubdomains:(BOOL) includeSubdomains
            validatedCertificateChain:(NSArray *)validatedCertificateChain
-                           knownPins:(NSArray *)knownPins;
+                           knownPins:(NSArray *)knownPins
+                    validationResult:(TSKPinValidationResult) validationResult;
 
 // Return the report in JSON format for POSTing it
 - (NSData *)json;

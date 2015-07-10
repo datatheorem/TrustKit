@@ -106,7 +106,8 @@ static dispatch_once_t dispatchOnceBackgroundSession;
                           notedHostname:(NSString *) notedHostname
                              reportURIs:(NSArray *) reportURIs
                       includeSubdomains:(BOOL) includeSubdomains
-                              knownPins:(NSArray *) knownPins;
+                              knownPins:(NSArray *) knownPins
+                       validationResult:(TSKPinValidationResult) validationResult;
 {
     // Default port to 0 if not specified
     if (serverPort == nil)
@@ -132,7 +133,8 @@ static dispatch_once_t dispatchOnceBackgroundSession;
                                                                          dateTime:[NSDate date] // Use the current time
                                                                 includeSubdomains:includeSubdomains
                                                         validatedCertificateChain:certificateChain
-                                                                        knownPins:formattedPins];
+                                                                        knownPins:formattedPins
+                                                                 validationResult:validationResult];
     
     // Create a temporary file for storing the JSON data in ~/tmp
     NSURL *tmpDirURL = [NSURL fileURLWithPath:NSTemporaryDirectory() isDirectory:YES];

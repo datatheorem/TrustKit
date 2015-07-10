@@ -65,9 +65,11 @@
                                notedHostname:@"example.com"
                                    reportURIs:@[[NSURL URLWithString:@"http://127.0.0.1:8080/log_csp_report"]]
                            includeSubdomains:YES
-                                   knownPins:@[[[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM=" options:0],
+                                   knownPins:@[
+                                               [[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM=" options:0],
                                                [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g=" options:0],
-                                               ]];
+                                               ]
+                            validationResult:TSKPinValidationResultFailed];
 
     
     [NSThread sleepForTimeInterval:5.0];
@@ -85,9 +87,11 @@
                                notedHostname:@"example.com"
                                   reportURIs:@[[NSURL URLWithString:@"http://127.0.0.1:8080/log_csp_report"]]
                            includeSubdomains:YES
-                                   knownPins:@[[[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM=" options:0],
+                                   knownPins:@[
+                                               [[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM=" options:0],
                                                [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g=" options:0],
-                                               ]];
+                                               ]
+                            validationResult:TSKPinValidationResultFailed];
     
     [NSThread sleepForTimeInterval:5.0];
     XCTAssert(YES, @"Pass");
@@ -103,9 +107,11 @@
                                notedHostname:@"example.com"
                                   reportURIs:@[[NSURL URLWithString:@"http://127.0.0.1:8080/log_csp_report"]]
                            includeSubdomains:YES
-                                   knownPins:@[[[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM=" options:0],
+                                   knownPins:@[
+                                               [[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM=" options:0],
                                                [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g=" options:0],
-                                               ]];
+                                               ]
+                            validationResult:TSKPinValidationResultFailed];
     
     // The second report should be rate-limited
     [reporter pinValidationFailedForHostname:@"mail.example.com"
@@ -114,9 +120,11 @@
                                notedHostname:@"example.com"
                                   reportURIs:@[[NSURL URLWithString:@"http://127.0.0.1:8080/log_csp_report"]]
                            includeSubdomains:YES
-                                   knownPins:@[[[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM=" options:0],
+                                   knownPins:@[
+                                               [[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM=" options:0],
                                                [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g=" options:0],
-                                               ]];
+                                               ]
+                            validationResult:TSKPinValidationResultFailed];
     
     
     [NSThread sleepForTimeInterval:5.0];

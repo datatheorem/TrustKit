@@ -112,12 +112,13 @@ void sendPinFailureReport_async(TSKPinValidationResult validationResult, SecTrus
                                                   notedHostname:notedHostname
                                                      reportURIs:reportUris
                                               includeSubdomains:[notedHostnameConfig[kTSKIncludeSubdomains] boolValue]
-                                                      knownPins:notedHostnameConfig[kTSKPublicKeyHashes]];
+                                                      knownPins:notedHostnameConfig[kTSKPublicKeyHashes]
+                                               validationResult:validationResult];
         }
         
         if (onCompletion)
         {
-            // We usually use this to CFRelease the serverTrust
+            // We usually use this to CFRelease() the serverTrust
             onCompletion();
         }
     });

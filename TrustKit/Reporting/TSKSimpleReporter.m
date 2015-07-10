@@ -58,7 +58,8 @@
                           notedHostname:(NSString *) notedHostname
                               reportURIs:(NSArray *) reportURIs
                       includeSubdomains:(BOOL) includeSubdomains
-                              knownPins:(NSArray *) knownPins;
+                              knownPins:(NSArray *) knownPins
+                       validationResult:(TSKPinValidationResult) validationResult;
 {
     // Default port to 0 if not specified
     if (serverPort == nil)
@@ -84,7 +85,8 @@
                                                                          dateTime:[NSDate date] // Use the current time
                                                                 includeSubdomains:includeSubdomains
                                                         validatedCertificateChain:certificateChain
-                                                                        knownPins:formattedPins];
+                                                                        knownPins:formattedPins
+                                                                 validationResult:validationResult];
     
     // Create the session for sending the report
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];

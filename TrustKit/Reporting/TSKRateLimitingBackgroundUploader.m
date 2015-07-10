@@ -56,7 +56,8 @@ static NSDate *_lastReportsCacheResetDate = nil;
                           notedHostname:(NSString *) notedHostname
                              reportURIs:(NSArray *) reportURIs
                       includeSubdomains:(BOOL) includeSubdomains
-                              knownPins:(NSArray *) knownPins;
+                              knownPins:(NSArray *) knownPins
+                       validationResult:(TSKPinValidationResult) validationResult;
 {
     // Check if we need to clear the reports cache for rate-limiting
     NSDate *currentDate = [NSDate date];
@@ -75,7 +76,7 @@ static NSDate *_lastReportsCacheResetDate = nil;
     
     // Create an array containg the gist of the pin failure report
     NSArray *certificateChain = convertTrustToPemArray(serverTrust);
-    NSArray *pinFailureInfo = @[notedHostname, serverHostname, serverPort, certificateChain, knownPins];
+    NSArray *pinFailureInfo = @[notedHostname, serverHostname, serverPort, certificateChain, knownPins, [NSNumber numberWithInt:validationResult]];
     
     // Check if the exact same report has already been sent recently
     BOOL shouldRateLimitReport = NO;
@@ -96,7 +97,14 @@ static NSDate *_lastReportsCacheResetDate = nil;
         pthread_mutex_unlock(&_reportsCacheLock);
         
         // Send the pin failure report
-        [super pinValidationFailedForHostname:serverHostname port:serverPort trust:serverTrust notedHostname:notedHostname reportURIs:reportURIs includeSubdomains:includeSubdomains knownPins:knownPins];
+        [super pinValidationFailedForHostname:serverHostname
+                                         port:serverPort
+                                        trust:serverTrust
+                                notedHostname:notedHostname
+                                   reportURIs:reportURIs
+                            includeSubdomains:includeSubdomains
+                                    knownPins:knownPins
+                             validationResult:validationResult];
     }
     else
     {
