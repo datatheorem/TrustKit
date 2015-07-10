@@ -16,6 +16,7 @@
 
 // Session identifier for background uploads: <bundle_id>.TSKSimpleReporter
 static NSString* kTSKBackgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
+static NSURLSession *_backgroundSession = nil;
 static dispatch_once_t dispatchOnceBackgroundSession;
 
 
@@ -23,7 +24,6 @@ static dispatch_once_t dispatchOnceBackgroundSession;
 
 @property (nonatomic, strong) NSString * appBundleId;
 @property (nonatomic, strong) NSString * appVersion;
-@property (nonatomic) NSURLSession *session;
 @end
 
 
@@ -53,62 +53,62 @@ static dispatch_once_t dispatchOnceBackgroundSession;
         {
             self.appVersion = appVersion;
         }
-        self.session = [self backgroundSession];
+        
+        /*
+         Using dispatch_once here ensures that multiple background sessions with the same identifier are not created 
+         in this instance of the application. If you want to support multiple background sessions within a single process, 
+         you should create each session with its own identifier.
+         */
+        dispatch_once(&dispatchOnceBackgroundSession, ^{
+            NSURLSessionConfiguration *backgroundConfiguration = nil;
+            
+            // The API for creating background sessions changed between iOS 7 and iOS 8 and OS X 10.9 and 10.10
+            //#if (TARGET_OS_IPHONE &&__IPHONE_OS_VERSION_MIN_REQUIRED < 80000) || (!TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MIN_REQUIRED < 1090)
+            if (![NSURLSessionConfiguration respondsToSelector:@selector(backgroundSessionConfigurationWithIdentifier:)])
+            {
+                // iOS 7 or OS X 10.9
+                backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfiguration:[NSString stringWithFormat:kTSKBackgroundSessionIdentifierFormat, self.appBundleId]];
+            }
+            else
+                //#endif
+            {
+                // iOS 8+ or OS X 10.10+
+                backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier: [NSString stringWithFormat:kTSKBackgroundSessionIdentifierFormat, self.appBundleId]];
+            }
+            
+            
+#if TARGET_OS_IPHONE
+            // iOS-only settings
+            // Do not wake up the App after completing the upload
+            backgroundConfiguration.sessionSendsLaunchEvents = NO;
+#endif
+            
+            backgroundConfiguration.discretionary = YES;
+            _backgroundSession = [NSURLSession sessionWithConfiguration:backgroundConfiguration delegate:self delegateQueue:nil];
+        });
     }
     return self;
 }
 
-- (NSURLSession *)backgroundSession
-{
-    /*
-     Using disptach_once here ensures that multiple background sessions with the same identifier are not created in this instance of the application. If you want to support multiple background sessions within a single process, you should create each session with its own identifier.
-     */
-    __block NSURLSession *session = nil;
-    dispatch_once(&dispatchOnceBackgroundSession, ^{
-        
-        NSURLSessionConfiguration *backgroundConfiguration;
-
-        // The API for creating background sessions changed between iOS 7 and iOS 8 and OS X 10.9 and 10.10
-        if ([NSURLSessionConfiguration respondsToSelector:@selector(backgroundSessionConfigurationWithIdentifier:)])
-        {
-            // iOS 8+ or OS X 10.10+
-            backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier: [NSString stringWithFormat:kTSKBackgroundSessionIdentifierFormat, self.appBundleId]];
-        } else
-        {
-            // iOS 7 or OS X 10.9
-            backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfiguration:[NSString stringWithFormat:kTSKBackgroundSessionIdentifierFormat, self.appBundleId]];
-        }
-
-#if TARGET_OS_IPHONE
-        // iOS-only settings
-        // Do not wake up the App after completing the upload
-        backgroundConfiguration.sessionSendsLaunchEvents = NO;
-#endif
-
-        backgroundConfiguration.discretionary = YES;
-        session = [NSURLSession sessionWithConfiguration:backgroundConfiguration delegate:self delegateQueue:nil];
-    });
-    return session;
-}
 
 /*
   Pin validation failed for a connection to a pinned domain
   In this implementation for a simple background reporter, we're just going to send out the report upon each failure
   in a background task
  */
-
 - (void) pinValidationFailedForHostname:(NSString *) serverHostname
                                    port:(NSNumber *) serverPort
                                   trust:(SecTrustRef) serverTrust
                           notedHostname:(NSString *) notedHostname
                              reportURIs:(NSArray *) reportURIs
                       includeSubdomains:(BOOL) includeSubdomains
-                              knownPins:(NSArray *) knownPins;
+                              knownPins:(NSArray *) knownPins
+                       validationResult:(TSKPinValidationResult) validationResult;
 {
-    // Default port to 443 if not specified
+    // Default port to 0 if not specified
     if (serverPort == nil)
     {
-        serverPort = [NSNumber numberWithInt:443];
+        serverPort = [NSNumber numberWithInt:0];
     }
     
     if (reportURIs == nil)
@@ -129,7 +129,8 @@ static dispatch_once_t dispatchOnceBackgroundSession;
                                                                          dateTime:[NSDate date] // Use the current time
                                                                 includeSubdomains:includeSubdomains
                                                         validatedCertificateChain:certificateChain
-                                                                        knownPins:formattedPins];
+                                                                        knownPins:formattedPins
+                                                                 validationResult:validationResult];
     
     // Create a temporary file for storing the JSON data in ~/tmp
     NSURL *tmpDirURL = [NSURL fileURLWithPath:NSTemporaryDirectory() isDirectory:YES];
@@ -151,7 +152,8 @@ static dispatch_once_t dispatchOnceBackgroundSession;
         [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
         
         // Pass the URL and the temporary file to the background upload task and start uploading
-        NSURLSessionUploadTask *uploadTask = [self.session uploadTaskWithRequest:request fromFile:tmpFileURL];
+        NSURLSessionUploadTask *uploadTask = [_backgroundSession uploadTaskWithRequest:request
+                                                                              fromFile:tmpFileURL];
         [uploadTask resume];
     }
 }

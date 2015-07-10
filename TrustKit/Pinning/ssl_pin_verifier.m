@@ -92,7 +92,7 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
     {
         return TSKPinValidationResultErrorInvalidParameters;
     }
-    
+
     // First re-check the certificate chain using the default SSL validation in case it was disabled
     // This gives us revocation (only for EV certs I think?) and also ensures the certificate chain is sane
     // And also gives us the exact path that successfully validated the chain
@@ -113,20 +113,18 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
     if ((trustResult != kSecTrustResultUnspecified) && (trustResult != kSecTrustResultProceed))
     {
         // Default SSL validation failed
-        
         CFDictionaryRef evaluationDetails = SecTrustCopyResult(serverTrust);
         TSKLog(@"Error: default SSL validation failed: %@", evaluationDetails);
         CFRelease(evaluationDetails);
         return TSKPinValidationResultFailedCertificateChainNotTrusted;
     }
     
-    // Check each certificate in the server's certificate chain (the trust object)
+    // Check each certificate in the server's certificate chain (the trust object); start with the CA all the way down to the leaf
     CFIndex certificateChainLen = SecTrustGetCertificateCount(serverTrust);
-    for(int i=0;i<certificateChainLen;i++)
+    for(int i=(int)certificateChainLen-1;i>=0;i--)
     {
         // Extract the certificate
         SecCertificateRef certificate = SecTrustGetCertificateAtIndex(serverTrust, i);
-        
         
         // For each public key algorithm flagged as supported in the config, generate the subject public key info hash
         for (id savedAlgorithm in supportedAlgorithms)
@@ -143,6 +141,45 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
             }
         }
     }
+    
+#if !TARGET_OS_IPHONE
+    // OS X only: if user-defined anchors are whitelisted, allow the App to not enforce pin validation
+    NSMutableArray *customRootCerts = [NSMutableArray array];
+    
+    // Retrieve the OS X host's list of user-defined CA certificates
+    CFArrayRef userRootCerts;
+    OSStatus status = SecTrustSettingsCopyCertificates(kSecTrustSettingsDomainUser, &userRootCerts);
+    if (status == errSecSuccess)
+    {
+        [customRootCerts addObjectsFromArray:(__bridge NSArray *)(userRootCerts)];
+        CFRelease(userRootCerts);
+    }
+    CFArrayRef adminRootCerts;
+    status = SecTrustSettingsCopyCertificates(kSecTrustSettingsDomainAdmin, &adminRootCerts);
+    if (status == errSecSuccess)
+    {
+        [customRootCerts addObjectsFromArray:(__bridge NSArray *)(adminRootCerts)];
+        CFRelease(adminRootCerts);
+    }
+    
+    // Is any certificate in the chain a custom anchor that was manually added to the OS' trust store ?
+    // If we get there, we shouldn't have to check the custom certificates' trust setting (trusted / not trusted)
+    // as the chain validation was successful right before
+    if ([customRootCerts count] > 0)
+    {
+        for(int i=0;i<certificateChainLen;i++)
+        {
+            SecCertificateRef certificate = SecTrustGetCertificateAtIndex(serverTrust, i);
+            
+            // Is the certificate chain's anchor a user-defined anchor ?
+            if ([customRootCerts containsObject:(__bridge id)(certificate)])
+            {
+                TSKLog(@"Detected user-defined trust anchor in the certificate chain");
+                return TSKPinValidationResultFailedUserDefinedTrustAnchor;
+            }
+        }
+    }
+#endif
     
     // If we get here, we didn't find any matching SPKI hash in the chain
     TSKLog(@"Error: SSL Pin not found");

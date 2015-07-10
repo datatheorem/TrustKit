@@ -10,12 +10,16 @@
 */
 
 #import <Foundation/Foundation.h>
+#import "TSKPinningValidator.h"
+
 
 @protocol TSKReporterDelegate <NSObject>
 
 
 /*
- * Pin validation failed for a connection to a pinned domain. Each argument is described section 3. of RFC 7469.
+ * Pin validation failed for a connection to a pinned domain. 
+ * Each argument is described section 3. of RFC 7469 and we added the pin validation result
+ * to help troubleshoot pin failures.
  */
 - (void) pinValidationFailedForHostname:(NSString *) serverHostname
                                    port:(NSNumber *) serverPort
@@ -23,7 +27,8 @@
                           notedHostname:(NSString *) notedHostname
                               reportURIs:(NSArray *) reportURIs
                       includeSubdomains:(BOOL) includeSubdomains
-                              knownPins:(NSArray *) knownPins;
+                              knownPins:(NSArray *) knownPins
+                       validationResult:(TSKPinValidationResult) validationResult;
 
 @optional
 

@@ -2,15 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>TSKPublicKeyPins</key>
-	<dict>
-		<key>www.datatheorem.com</key>
-		<array>
-			<string>d120dfddc453a3264968cb284b5ee817bd9531abcbc63fcded604d6ac36e891f</string>
-			<string>2741caeb7dc87a45083200b10037145d697723ec2bd5721b1e4af4dfcc48c919</string>
-			<string>1d75d0831b9e0885394d32c7a1bfdb3dbc1c28e2b0e8391fb135981dbc5ba936</string>
-		</array>
-	</dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>

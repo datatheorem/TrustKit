@@ -23,6 +23,7 @@
                    includeSubdomains:(BOOL) includeSubdomains
            validatedCertificateChain:(NSArray *)validatedCertificateChain
                            knownPins:(NSArray *)knownPins
+                    validationResult:(TSKPinValidationResult) validationResult
 {
     self = [super init];
     if (self)
@@ -36,6 +37,7 @@
         _includeSubdomains = includeSubdomains;
         _validatedCertificateChain = validatedCertificateChain;
         _knownPins = knownPins;
+        _validationResult = validationResult;
     }
     return self;
 }
@@ -49,8 +51,6 @@
     [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
     NSString *currentTimeStr = [dateFormatter stringFromDate: self.dateTime];
     
-    // TODO: Convert knownPins and validatedCertificateChain
-    
     // Create the dictionary
     NSDictionary *requestData = @ {
         @"app-bundle-id" : self.appBundleId,
@@ -61,10 +61,10 @@
         @"include-subdomains" : [NSNumber numberWithBool:self.includeSubdomains],
         @"noted-hostname" : self.notedHostname,
         @"validated-certificate-chain" : self.validatedCertificateChain,
-        @"known-pins" : self.knownPins
+        @"known-pins" : self.knownPins,
+        @"validation-result": [NSNumber numberWithInt:self.validationResult]
     };
     
-    // TODO: Check error
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:requestData options:0 error:&error];
     return jsonData;

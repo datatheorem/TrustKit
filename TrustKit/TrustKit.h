@@ -19,17 +19,19 @@ FOUNDATION_EXPORT const unsigned char TrustKitVersionString[];
 
 
 #pragma mark TrustKit Configuration Keys
-extern NSString * const kTSKPublicKeyHashes;
-extern NSString * const kTSKEnforcePinning;
-extern NSString * const kTSKIncludeSubdomains;
-extern NSString * const kTSKPublicKeyAlgorithms;
-extern NSString * const kTSKReportUris;
-extern NSString * const kTSKDisableDefaultReportUri;
+FOUNDATION_EXPORT const NSString *kTSKPublicKeyHashes;
+FOUNDATION_EXPORT const NSString *kTSKEnforcePinning;
+FOUNDATION_EXPORT const NSString *kTSKIncludeSubdomains;
+FOUNDATION_EXPORT const NSString *kTSKPublicKeyAlgorithms;
+FOUNDATION_EXPORT const NSString *kTSKReportUris;
+FOUNDATION_EXPORT const NSString *kTSKDisableDefaultReportUri;
+FOUNDATION_EXPORT const NSString *kTSKIgnorePinningForUserDefinedTrustAnchors NS_AVAILABLE_MAC(10_9);
+
 
 #pragma mark Supported Public Key Algorithm Keys
-extern NSString * const kTSKAlgorithmRsa2048;
-extern NSString * const kTSKAlgorithmRsa4096;
-extern NSString * const kTSKAlgorithmEcDsaSecp256r1;
+FOUNDATION_EXPORT const NSString *kTSKAlgorithmRsa2048;
+FOUNDATION_EXPORT const NSString *kTSKAlgorithmRsa4096;
+FOUNDATION_EXPORT const NSString *kTSKAlgorithmEcDsaSecp256r1;
 
 
 /**
@@ -60,7 +62,7 @@ extern NSString * const kTSKAlgorithmEcDsaSecp256r1;
 
       [TrustKit initializeWithConfiguration:trustKitConfig];
  
-  When dynamically linked, TrustKit is automatically initialized by reading configuration keys from the App's _Info.plist_, and no initialization method needs to be called.
+  It is also possible to supply the pinning policy by adding these configuration keys to the App's _Info.plist_ under a `TSKConfiguration` dictionary key. When doing so, no method needs to be called and TrustKit will automatically be initialized with the policy.
  
  
  ### Required Configuration Keys
@@ -78,13 +80,37 @@ extern NSString * const kTSKAlgorithmEcDsaSecp256r1;
  If set to `YES`, also pin all the subdomains of the specified domain; default value is `NO`.
  
  #### `kTSKEnforcePinning`
- If set to `NO`, a pinning failure will not cause the SSL connection to fail; default value is `YES`.
+ If set to `NO`, TrustKit will not block SSL connections that caused a pin or certificate validation error; default value is `YES`. When verifying a server's identity, TrustKit validates the server's certificate chain and also checks for the presence of one of the configured SSL pins. When a pinning failure occurs, pin failure reports will still be sent to the configured report URIs.
  
  #### `kTSKReportUris`
- An array of URLs to which pin validation failures should be reported. To minimize the performance impact of sending reports on each validation failure, the reports are uploaded using the background transfer service. For HTTPS report URLs, the HTTPS connections will ignore the SSL pinning policy and use the default certificate validation mechanisms, in order to maximize the chance of the reports reaching the server. The format of the reports is similar to the one described in the HPKP specification.
+ An array of URLs to which pin validation failures should be reported. To minimize the performance impact of sending reports on each validation failure, the reports are uploaded using the background transfer service. For HTTPS report URLs, the HTTPS connections will ignore the SSL pinning policy and use the default certificate validation mechanisms, in order to maximize the chance of the reports reaching the server. The format of the reports is similar to the one described in RFC 7469 for the HPKP specification:
+ 
+    {
+        "app-bundle-id":"com.example.ABC",
+        "app-version":"1.0",
+        "date-time": "2015-07-10T20:03:14Z",
+        "hostname": "mail.example.com",
+        "port": 0,
+        "include-subdomains": true,
+        "noted-hostname": "example.com",
+        "validated-certificate-chain": [
+            pem1, ... pemN
+        ],
+        "known-pins": [
+            "pin-sha256=\"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM=\"",
+            "pin-sha256=\"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g=\""
+        ],
+        "validation-result":1
+    }
+
 
  #### `kTSKDisableDefaultReportUri`
- If set to `YES`, the default report URL for sending pin failure reports will be disabled. By default, pin failure reports are sent to a report server hosted by Data Theorem, for detecting potential CA compromises and man-in-the-middle attacks, as well as providing a free dashboard for developers. Only reports are sent, which contain the App's bundle ID and the server's hostname and certificate chain that failed validation. This behavior can be disabled by setting this key to `YES`.
+ If set to `YES`, the default report URL for sending pin failure reports will be disabled; default value is `NO`.
+ By default, pin failure reports are sent to a report server hosted by Data Theorem, for detecting potential CA compromises and man-in-the-middle attacks, as well as providing a free dashboard for developers. Only pin failure reports are sent, which contain the App's bundle ID and the server's hostname and certificate chain that failed validation.
+ 
+ #### `kTSKIgnorePinningForUserDefinedTrustAnchors` (OS X only)
+ If set to `YES`, pinning validation will be skipped if the server's certificate chain terminates at a user-defined trust anchor (such as a root CA that isn't part of OS X's default trust store) and no pin failure reports will be sent; default value is `YES`.
+ This is useful for allowing SSL connections through corporate proxies or firewalls. See "How does key pinning interact with local proxies and filters?" within the Chromium security FAQ at https://www.chromium.org/Home/chromium-security/security-faq for more information.
  
  
  ### Public Key Algorithms Keys
@@ -107,7 +133,7 @@ extern NSString * const kTSKAlgorithmEcDsaSecp256r1;
 /**
  Initializes the global SSL pinning policy with the supplied configuration.
  
- This method should be called as early as possible in the App's lifecycle to ensure that the App's very first HTTPS connections are validated by TrustKit.
+ This method should be called as early as possible in the App's lifecycle to ensure that the App's very first SSL connections are validated by TrustKit.
  
  @param trustKitConfig A dictionnary containing various keys for configuring the global SSL pinning policy.
  @exception NSException Thrown when the supplied configuration is invalid or TrustKit has already been initialized.

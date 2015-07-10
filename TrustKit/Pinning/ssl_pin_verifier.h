@@ -14,7 +14,7 @@
 #define TrustKit_ssl_pin_verifier_h
 
 #import <Foundation/Foundation.h>
-#import "TSKPinVerifier.h"
+#import "TSKPinningValidator.h"
 
 
 // Figure out if a specific domain is pinned and retrieve this domain's configuration key; returns nil if no configuration was found

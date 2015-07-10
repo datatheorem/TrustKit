@@ -15,8 +15,7 @@
 #import "fishhook.h"
 #import "public_key_utils.h"
 #import "domain_registry.h"
-#import "ssl_pin_verifier.h"
-#import "TSKSimpleBackgroundReporter.h"
+#import "TSKRateLimitingBackgroundReporter.h"
 
 
 #pragma mark Configuration Constants
@@ -26,17 +25,18 @@ static NSString * const kTSKConfiguration = @"TSKConfiguration";
 
 
 // Keys for each domain within the config dictionnary
-NSString * const kTSKPublicKeyHashes = @"TSKPublicKeyHashes";
-NSString * const kTSKEnforcePinning = @"TSKEnforcePinning";
-NSString * const kTSKIncludeSubdomains = @"TSKIncludeSubdomains";
-NSString * const kTSKPublicKeyAlgorithms = @"TSKPublicKeyAlgorithms";
-NSString * const kTSKReportUris = @"TSKReportUris";
-NSString * const kTSKDisableDefaultReportUri = @"TSKDisableDefaultReportUri";
+const NSString *kTSKPublicKeyHashes = @"TSKPublicKeyHashes";
+const NSString *kTSKEnforcePinning = @"TSKEnforcePinning";
+const NSString *kTSKIncludeSubdomains = @"TSKIncludeSubdomains";
+const NSString *kTSKPublicKeyAlgorithms = @"TSKPublicKeyAlgorithms";
+const NSString *kTSKReportUris = @"TSKReportUris";
+const NSString *kTSKDisableDefaultReportUri = @"TSKDisableDefaultReportUri";
+const NSString *kTSKIgnorePinningForUserDefinedTrustAnchors = @"TSKIgnorePinningForUserDefinedTrustAnchors";
 
 #pragma mark Public key Algorithms Constants
-NSString * const kTSKAlgorithmRsa2048 = @"TSKAlgorithmRsa2048";
-NSString * const kTSKAlgorithmRsa4096 = @"TSKAlgorithmRsa4096";
-NSString * const kTSKAlgorithmEcDsaSecp256r1 = @"TSKAlgorithmEcDsaSecp256r1";
+const NSString *kTSKAlgorithmRsa2048 = @"TSKAlgorithmRsa2048";
+const NSString *kTSKAlgorithmRsa4096 = @"TSKAlgorithmRsa4096";
+const NSString *kTSKAlgorithmEcDsaSecp256r1 = @"TSKAlgorithmEcDsaSecp256r1";
 
 
 #pragma mark TrustKit Global State
@@ -48,7 +48,7 @@ static BOOL _isTrustKitInitialized = NO;
 static dispatch_once_t dispatchOnceTrustKitInit;
 
 // Reporter delegate for sending pin violation reports
-static TSKSimpleBackgroundReporter *_pinFailureReporter = nil;
+static TSKRateLimitingBackgroundReporter *_pinFailureReporter = nil;
 static char kTSKPinFailureReporterQueueLabel[] = "com.datatheorem.trustkit.reporterqueue";
 static dispatch_queue_t _pinFailureReporterQueue = NULL;
 
@@ -75,7 +75,49 @@ void TSKLog(NSString *format, ...)
 }
 
 
+#pragma mark Helper Function to Send Reports
+
+
+// Send a report if needed and release the serverTrust
+void sendPinFailureReport_async(TSKPinValidationResult validationResult, SecTrustRef serverTrust, NSString *serverHostname, NSString *notedHostname, NSDictionary *notedHostnameConfig, void (^onCompletion)(void))
+{
+    dispatch_async(_pinFailureReporterQueue, ^(void) {
+        
+        // Pin validation failed: retrieve the list of configured report URLs
+        NSMutableArray *reportUris = [NSMutableArray arrayWithArray:notedHostnameConfig[kTSKReportUris]];
+        
+#if !DEBUG
+        // For release builds, also enable the default reporting URL
+        if ([domainConfig[kTSKDisableDefaultReportUri] boolValue] == NO)
+        {
+            [reportUris addObject:[NSURL URLWithString:kTSKDefaultReportUri]];
+        }
+#endif
+        
+        // If some report URLs have been defined, send the pin failure report
+        if ((reportUris != nil) && ([reportUris count] > 0))
+        {
+            [_pinFailureReporter pinValidationFailedForHostname:serverHostname
+                                                           port:nil
+                                                          trust:serverTrust
+                                                  notedHostname:notedHostname
+                                                     reportURIs:reportUris
+                                              includeSubdomains:[notedHostnameConfig[kTSKIncludeSubdomains] boolValue]
+                                                      knownPins:notedHostnameConfig[kTSKPublicKeyHashes]
+                                               validationResult:validationResult];
+        }
+        
+        if (onCompletion)
+        {
+            // We usually use this to CFRelease() the serverTrust
+            onCompletion();
+        }
+    });
+}
+
+
 #pragma mark SSLHandshake Hook
+
 
 static OSStatus (*original_SSLHandshake)(SSLContextRef context) = NULL;
 
@@ -97,53 +139,51 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
         NSString *serverNameStr = [NSString stringWithUTF8String:serverName];
         free(serverName);
         
-        SecTrustRef serverTrust;
-        SSLCopyPeerTrust(context, &serverTrust);
-        
         // Retrieve the pinning configuration for this specific domain, if there is one
         NSString *domainConfigKey = getPinningConfigurationKeyForDomain(serverNameStr, _trustKitGlobalConfiguration);
         if (domainConfigKey != nil)
         {
-            // This domain is pinned: look for one the configured public key pins in the server's evaluated certificate chain
-            TSKPinValidationResult validationResult = TSKPinValidationResultFailed;
+            // This domain is pinned
             NSDictionary *domainConfig = _trustKitGlobalConfiguration[domainConfigKey];
             
+            // Retrieve the server's trust object
+            SecTrustRef serverTrust;
+            SSLCopyPeerTrust(context, &serverTrust);
+            
+            // Re-evaluate the server's certificate chain and look for one the configured SPKI pins
+            TSKPinValidationResult validationResult = TSKPinValidationResultFailed;
             validationResult = verifyPublicKeyPin(serverTrust, serverNameStr, domainConfig[kTSKPublicKeyAlgorithms], domainConfig[kTSKPublicKeyHashes]);
             
-            if (validationResult != TSKPinValidationResultSuccess)
+            if (validationResult == TSKPinValidationResultSuccess)
             {
-                // Pin validation failed: notify the reporter delegate if a report URI was configured
-                NSMutableArray *reportUris = [NSMutableArray arrayWithArray:domainConfig[kTSKReportUris]];
-                
-#if !DEBUG
-                // For prod also enable the default URL
-                if ([domainConfig[kTSKDisableDefaultReportUri] boolValue] == NO)
+                // Pin validation was successful
+                CFRelease(serverTrust);
+            }
+            else
+            {
+                // Pin validation failed
+#if !TARGET_OS_IPHONE
+                if ((validationResult == TSKPinValidationResultFailedUserDefinedTrustAnchor)
+                    && ([domainConfig[kTSKIgnorePinningForUserDefinedTrustAnchors] boolValue] == NO))
                 {
-                    [reportUris addObject:[NSURL URLWithString:kTSKDefaultReportUri]];
+                    // OS-X only: user-defined trust anchors can be whitelisted (for corporate proxies, etc.)
+                    CFRelease(serverTrust);
                 }
+                else
 #endif
-
-                if ((reportUris != nil) && ([reportUris count] > 0))
                 {
-                    dispatch_async(_pinFailureReporterQueue, ^(void)
-                                   {
-                                       [_pinFailureReporter pinValidationFailedForHostname:serverNameStr
-                                                                                      port:nil
-                                                                                     trust:serverTrust
-                                                                             notedHostname:domainConfigKey
-                                                                                 reportURIs:reportUris
-                                                                         includeSubdomains:[domainConfig[kTSKIncludeSubdomains] boolValue]
-                                                                                 knownPins:domainConfig[kTSKPublicKeyHashes]];
-                                       CFRelease(serverTrust);
-                                   });
-                }
-                
-                if (([domainConfig[kTSKEnforcePinning] boolValue] == YES)
-                     || (validationResult == TSKPinValidationResultFailedCertificateChainNotTrusted)
-                     || (validationResult == TSKPinValidationResultErrorInvalidParameters))
-                {
-                    // TrustKit was configured to enforce pinning or the certificate chain was not trusted: make the connection fail
-                    result = errSSLXCertChainInvalid;
+                    // Send a pin failure report
+                    sendPinFailureReport_async(validationResult, serverTrust, serverNameStr, domainConfigKey, domainConfig, ^void (void)
+                                               {
+                                                   // Release the trust once the report has been sent
+                                                   CFRelease(serverTrust);
+                                               });
+                    
+                    // If TrustKit was configured to enforce pinning, make the connection fail
+                    if ([domainConfig[kTSKEnforcePinning] boolValue] == YES)
+                    {
+                        result = errSSLXCertChainInvalid;
+                    }
                 }
             }
         }
@@ -152,7 +192,7 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
 }
 
 
-#pragma mark Framework Initialization
+#pragma mark TrustKit Initialization Helper Functions
 
 
 NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
@@ -171,7 +211,8 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
         // Sanity check on the domain name
         if (GetRegistryLength([domainName UTF8String]) == 0)
         {
-            [NSException raise:@"TrustKit configuration invalid" format:@"TrustKit was initialized with an invalid domain %@", domainName];
+            [NSException raise:@"TrustKit configuration invalid"
+                        format:@"TrustKit was initialized with an invalid domain %@", domainName];
         }
         
         
@@ -191,7 +232,7 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
             // Default setting is NO
             domainFinalConfiguration[kTSKIncludeSubdomains] = [NSNumber numberWithBool:NO];
         }
-        
+
         
         // Extract the optional enforcePinning setting
         NSNumber *shouldEnforcePinning = domainTrustKitArguments[kTSKEnforcePinning];
@@ -204,6 +245,21 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
             // Default setting is YES
             domainFinalConfiguration[kTSKEnforcePinning] = [NSNumber numberWithBool:YES];
         }
+        
+        
+#if !TARGET_OS_IPHONE
+        // OS X only: extract the optional ignorePinningForUserDefinedTrustAnchors setting
+        NSNumber *shouldIgnorePinningForUserDefinedTrustAnchors = domainTrustKitArguments[kTSKIgnorePinningForUserDefinedTrustAnchors];
+        if (shouldIgnorePinningForUserDefinedTrustAnchors)
+        {
+            domainFinalConfiguration[kTSKIgnorePinningForUserDefinedTrustAnchors] = shouldIgnorePinningForUserDefinedTrustAnchors;
+        }
+        else
+        {
+            // Default setting is YES
+            domainFinalConfiguration[kTSKIgnorePinningForUserDefinedTrustAnchors] = [NSNumber numberWithBool:YES];
+        }
+#endif
         
         
         // Extract the optional disableDefaultReportUri setting
@@ -223,7 +279,8 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
         NSArray *publicKeyAlgsStr = domainTrustKitArguments[kTSKPublicKeyAlgorithms];
         if (publicKeyAlgsStr == nil)
         {
-            [NSException raise:@"TrustKit configuration invalid" format:@"TrustKit was initialized with an invalid value for %@ for domain %@", kTSKPublicKeyAlgorithms, domainName];
+            [NSException raise:@"TrustKit configuration invalid"
+                        format:@"TrustKit was initialized with an invalid value for %@ for domain %@", kTSKPublicKeyAlgorithms, domainName];
         }
         NSMutableArray *publicKeyAlgs = [NSMutableArray array];
         for (NSString *algorithm in publicKeyAlgsStr)
@@ -242,7 +299,8 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
             }
             else
             {
-                [NSException raise:@"TrustKit configuration invalid" format:@"TrustKit was initialized with an invalid value for %@ for domain %@", kTSKPublicKeyAlgorithms, domainName];
+                [NSException raise:@"TrustKit configuration invalid"
+                            format:@"TrustKit was initialized with an invalid value for %@ for domain %@", kTSKPublicKeyAlgorithms, domainName];
             }
         }
         domainFinalConfiguration[kTSKPublicKeyAlgorithms] = [NSArray arrayWithArray:publicKeyAlgs];
@@ -258,7 +316,8 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
                 NSURL *reportUri = [NSURL URLWithString:reportUriStr];
                 if (reportUri == nil)
                 {
-                    [NSException raise:@"TrustKit configuration invalid" format:@"TrustKit was initialized with an invalid value for %@ for domain %@", kTSKReportUris, domainName];
+                    [NSException raise:@"TrustKit configuration invalid"
+                                format:@"TrustKit was initialized with an invalid value for %@ for domain %@", kTSKReportUris, domainName];
                 }
                 [reportUriListFinal addObject:reportUri];
             }
@@ -267,8 +326,13 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
         }
         
         
-        // Extract and convert the public key hashes
+        // Extract and convert the subject public key info hashes
         NSArray *serverSslPinsBase64 = domainTrustKitArguments[kTSKPublicKeyHashes];
+        if ([serverSslPinsBase64 count] < 2)
+        {
+            [NSException raise:@"TrustKit configuration invalid"
+                        format:@"TrustKit was initialized with less than two pins (ie. no backup pins) for domain %@", domainName];
+        }
         
         NSMutableArray *serverSslPinsData = [[NSMutableArray alloc] init];
         
@@ -277,14 +341,15 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
             
             if ([pinnedKeyHash length] != CC_SHA256_DIGEST_LENGTH)
             {
-                // The public key hash doesn't have a valid size
-                [NSException raise:@"TrustKit configuration invalid" format:@"TrustKit was initialized with an invalid Pin %@ for domain %@", pinnedKeyHashBase64, domainName];
+                // The subject public key info hash doesn't have a valid size
+                [NSException raise:@"TrustKit configuration invalid"
+                            format:@"TrustKit was initialized with an invalid Pin %@ for domain %@", pinnedKeyHashBase64, domainName];
             }
             
             [serverSslPinsData addObject:pinnedKeyHash];
         }
         
-        // Save the public key hashes for this server as an NSSet for quick lookup
+        // Save the hashes for this server as an NSSet for quick lookup
         domainFinalConfiguration[kTSKPublicKeyHashes] = [NSSet setWithArray:serverSslPinsData];
         
         // Store the whole configuration
@@ -305,7 +370,8 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
     if (_isTrustKitInitialized == YES)
     {
         // TrustKit should only be initialized once so we don't double interpose SecureTransport or get into anything unexpected
-        [NSException raise:@"TrustKit already initialized" format:@"TrustKit was already initialized with the following SSL pins: %@", _trustKitGlobalConfiguration];
+        [NSException raise:@"TrustKit already initialized"
+                    format:@"TrustKit was already initialized with the following SSL pins: %@", _trustKitGlobalConfiguration];
     }
     
     dispatch_once(&dispatchOnceTrustKitInit, ^{
@@ -325,7 +391,8 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
                 rebindResult = rebind_symbols((struct rebinding[1]){{(char *)functionToHook, (void *)replaced_SSLHandshake}}, 1);
                 if ((rebindResult < 0) || (original_SSLHandshake == NULL))
                 {
-                    [NSException raise:@"TrustKit initialization error" format:@"Fishook returned an error: %d", rebindResult];
+                    [NSException raise:@"TrustKit initialization error"
+                                format:@"Fishook returned an error: %d", rebindResult];
                 }
             }
             
@@ -333,7 +400,7 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
             CFBundleRef appBundle = CFBundleGetMainBundle();
             NSString *appBundleId = (NSString *)CFBundleGetIdentifier(appBundle);
             NSString *appVersion =  CFBundleGetValueForInfoDictionaryKey(appBundle, kCFBundleVersionKey);
-            _pinFailureReporter = [[TSKSimpleBackgroundReporter alloc]initWithAppBundleId:appBundleId appVersion:appVersion];
+            _pinFailureReporter = [[TSKRateLimitingBackgroundReporter alloc]initWithAppBundleId:appBundleId appVersion:appVersion];
             
             // Create a dispatch queue for activating the reporter
             // We use a serial queue targetting the global default queue in order to ensure reports are sent one by one
@@ -343,7 +410,7 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
 
             // All done
             _isTrustKitInitialized = YES;
-            TSKLog(@"TrustKit initialized with configuration %@", _trustKitGlobalConfiguration);
+            TSKLog(@"Successfully initialized with configuration %@", _trustKitGlobalConfiguration);
         }
     });
 }
@@ -352,11 +419,11 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
 @implementation TrustKit
 
 
-#pragma mark Framework Initialization When Statically Linked
+#pragma mark TrustKit Explicit Initialization
 
 + (void) initializeWithConfiguration:(NSDictionary *)trustKitConfig
 {
-    TSKLog(@"TrustKit started statically in App %@", (NSString *)CFBundleGetIdentifier(CFBundleGetMainBundle()));
+    TSKLog(@"Configuration passed via explicit call to initializeWithConfiguration:");
     initializeTrustKit(trustKitConfig);
 }
 
@@ -371,6 +438,12 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
 + (NSDictionary *) configuration
 {
     return _trustKitGlobalConfiguration;
+}
+
+
++ (BOOL) wasTrustKitInitialized
+{
+    return _isTrustKitInitialized;
 }
 
 
@@ -389,18 +462,20 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
 @end
 
 
-#pragma mark Framework Initialization When Dynamically Linked
+#pragma mark TrustKit Implicit Initialization via Library Constructor
 
-__attribute__((constructor)) static void initializeAsDylib(int argc, const char **argv)
+__attribute__((constructor)) static void initializeWithInfoPlist(int argc, const char **argv)
 {
-    // TrustKit just got injected in the App
+    // TrustKit just got started in the App
     CFBundleRef appBundle = CFBundleGetMainBundle();
-    TSKLog(@"TrustKit started dynamically in App %@", (NSString *)CFBundleGetIdentifier(CFBundleGetMainBundle()));
     
     // Retrieve the configuration from the App's Info.plist file
     NSDictionary *trustKitConfigFromInfoPlist = CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)kTSKConfiguration);
-    
-    initializeTrustKit(trustKitConfigFromInfoPlist);
+    if (trustKitConfigFromInfoPlist)
+    {
+        TSKLog(@"Configuration supplied via the App's Info.plist");
+        initializeTrustKit(trustKitConfigFromInfoPlist);
+    }
 }
 
 

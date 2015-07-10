@@ -29,9 +29,12 @@
               kTSKEnforcePinning:@YES,
               kTSKIncludeSubdomains:@YES,
               kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-              kTSKPublicKeyHashes : @[@"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTX="
-                                      ], //wrong CA public key for datatheorem to demonstrate the case of fail pinning
-              kTSKReportUris: @[@"http://127.0.0.1:8080/log_csp_report"] //failure report to be sent here
+              kTSKPublicKeyHashes : @[
+                      // Bad SSL pins for datatheorem.com to demonstrate pinning failures in the webview
+                      @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTX=",
+                      @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+                                      ],
+              kTSKReportUris: @[@"https://trustkit-reports-server.appspot.com/log_report"]
               }};
     
     [TrustKit initializeWithConfiguration:trustKitConfig];
