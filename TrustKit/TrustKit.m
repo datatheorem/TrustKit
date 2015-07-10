@@ -154,37 +154,37 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
             TSKPinValidationResult validationResult = TSKPinValidationResultFailed;
             validationResult = verifyPublicKeyPin(serverTrust, serverNameStr, domainConfig[kTSKPublicKeyAlgorithms], domainConfig[kTSKPublicKeyHashes]);
             
-            
-            if (validationResult != TSKPinValidationResultSuccess)
+            if (validationResult == TSKPinValidationResultSuccess)
             {
+                // Pin validation was successful
+                CFRelease(serverTrust);
+            }
+            else
+            {
+                // Pin validation failed
 #if !TARGET_OS_IPHONE
                 if ((validationResult == TSKPinValidationResultFailedUserDefinedTrustAnchor)
                     && ([domainConfig[kTSKIgnorePinningForUserDefinedTrustAnchors] boolValue] == NO))
                 {
                     // OS-X only: user-defined trust anchors can be whitelisted (for corporate proxies, etc.)
                     CFRelease(serverTrust);
-                    return result;
                 }
+                else
 #endif
-                
-                // Pin validation failed: send a pin failure report
-                sendPinFailureReport_async(validationResult, serverTrust, serverNameStr, domainConfigKey, domainConfig, ^void (void)
                 {
-                    // Release the trust once the report has been sent
-                    CFRelease(serverTrust);
-                });
-                
-                
-                // If TrustKit was configured to enforce pinning, make the connection fail
-                if ([domainConfig[kTSKEnforcePinning] boolValue] == YES)
-                {
-                    result = errSSLXCertChainInvalid;
+                    // Send a pin failure report
+                    sendPinFailureReport_async(validationResult, serverTrust, serverNameStr, domainConfigKey, domainConfig, ^void (void)
+                                               {
+                                                   // Release the trust once the report has been sent
+                                                   CFRelease(serverTrust);
+                                               });
+                    
+                    // If TrustKit was configured to enforce pinning, make the connection fail
+                    if ([domainConfig[kTSKEnforcePinning] boolValue] == YES)
+                    {
+                        result = errSSLXCertChainInvalid;
+                    }
                 }
-            }
-            else
-            {
-                // Pin validation was successful
-                CFRelease(serverTrust);
             }
         }
     }

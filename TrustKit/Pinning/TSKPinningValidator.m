@@ -25,7 +25,7 @@
                     format:@"TrustKit has not been initialized with a pinning configuration"];
     }
     
-    if (serverTrust == NULL)
+    if ((serverTrust == NULL) || (serverHostname == nil))
     {
         return TSKPinValidationResultErrorInvalidParameters;
     }
@@ -35,43 +35,44 @@
     
     // Retrieve the pinning configuration for this specific domain, if there is one
     NSString *domainConfigKey = getPinningConfigurationKeyForDomain(serverHostname, trustKitConfig);
-    if (domainConfigKey != nil)
+    if (domainConfigKey == nil)
     {
-        CFRetain(serverTrust);
-        
+        // The domain is not pinned: nothing to validate
+        validationResult = TSKPinValidationResultDomainNotPinned;
+    }
+    else
+    {
         // This domain is pinned: look for one the configured public key pins in the server's evaluated certificate chain
+        CFRetain(serverTrust);
         NSDictionary *domainConfig = trustKitConfig[domainConfigKey];
+        
         validationResult = verifyPublicKeyPin(serverTrust, serverHostname, domainConfig[kTSKPublicKeyAlgorithms], domainConfig[kTSKPublicKeyHashes]);
-        
-        
-        if (validationResult != TSKPinValidationResultSuccess)
+        if (validationResult == TSKPinValidationResultSuccess)
         {
+            // Pin validation was successful
+            CFRelease(serverTrust);
+        }
+        else
+        {
+            // Pin validation failed
 #if !TARGET_OS_IPHONE
             if ((validationResult == TSKPinValidationResultFailedUserDefinedTrustAnchor)
                 && ([domainConfig[kTSKIgnorePinningForUserDefinedTrustAnchors] boolValue] == NO))
             {
                 // OS-X only: user-defined trust anchors can be whitelisted (for corporate proxies, etc.) so don't send reports
                 CFRelease(serverTrust);
-                return TSKPinValidationResultFailedUserDefinedTrustAnchor;
             }
+            else
 #endif
-            // Pin validation failed: send a pin failure report
+            {
+            // Send a pin failure report
             sendPinFailureReport_async(validationResult, serverTrust, serverHostname, domainConfigKey, domainConfig, ^void (void)
                                  {
                                      // Release the trust once the report has been sent
                                      CFRelease(serverTrust);
                                  });
+            }
         }
-        else
-        {
-            // Pin validation was successful
-            CFRelease(serverTrust);
-        }
-    }
-    else
-    {
-        // The domain is not pinned: nothing to validate
-        validationResult = TSKPinValidationResultDomainNotPinned;
     }
     return validationResult;
 }
