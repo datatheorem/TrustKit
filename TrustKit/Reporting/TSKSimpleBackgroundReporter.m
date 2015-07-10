@@ -16,6 +16,7 @@
 
 // Session identifier for background uploads: <bundle_id>.TSKSimpleReporter
 static NSString* kTSKBackgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
+static NSURLSessionConfiguration *_backgroundSessionConfiguration = nil;
 static dispatch_once_t dispatchOnceBackgroundSession;
 
 
@@ -61,12 +62,11 @@ static dispatch_once_t dispatchOnceBackgroundSession;
 - (NSURLSession *)backgroundSession
 {
     /*
-     Using disptach_once here ensures that multiple background sessions with the same identifier are not created in this instance of the application. If you want to support multiple background sessions within a single process, you should create each session with its own identifier.
+     Using dispatch_once here ensures that multiple background sessions with the same identifier are not created in this instance of the application. If you want to support multiple background sessions within a single process, you should create each session with its own identifier.
      */
-    __block NSURLSession *session = nil;
-    dispatch_once(&dispatchOnceBackgroundSession, ^{
-        
-        NSURLSessionConfiguration *backgroundConfiguration;
+    dispatch_once(&dispatchOnceBackgroundSession, ^
+    {
+        NSURLSessionConfiguration *backgroundConfiguration = nil;
         
         // The API for creating background sessions changed between iOS 7 and iOS 8 and OS X 10.9 and 10.10
 //#if (TARGET_OS_IPHONE &&__IPHONE_OS_VERSION_MIN_REQUIRED < 80000) || (!TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MIN_REQUIRED < 1090)
@@ -90,9 +90,9 @@ static dispatch_once_t dispatchOnceBackgroundSession;
 #endif
 
         backgroundConfiguration.discretionary = YES;
-        session = [NSURLSession sessionWithConfiguration:backgroundConfiguration delegate:self delegateQueue:nil];
+        _backgroundSessionConfiguration = backgroundConfiguration;
     });
-    return session;
+    return [NSURLSession sessionWithConfiguration:_backgroundSessionConfiguration delegate:self delegateQueue:nil];;
 }
 
 /*
@@ -100,7 +100,6 @@ static dispatch_once_t dispatchOnceBackgroundSession;
   In this implementation for a simple background reporter, we're just going to send out the report upon each failure
   in a background task
  */
-
 - (void) pinValidationFailedForHostname:(NSString *) serverHostname
                                    port:(NSNumber *) serverPort
                                   trust:(SecTrustRef) serverTrust
