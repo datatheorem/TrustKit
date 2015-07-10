@@ -12,6 +12,7 @@
 #import "TSKRateLimitingBackgroundUploader.h"
 #import "reporting_utils.h"
 #include <pthread.h>
+#import "TrustKit+Private.h"
 
 
 
@@ -32,7 +33,7 @@ static NSDate *_lastReportsCacheResetDate = nil;
                          appVersion:(NSString *)appVersion
 {
     // Initialize the background the session in the super class' constructor
-    self = [super init];
+    self = [super initWithAppBundleId:appBundleId appVersion:appVersion];
     
     if (self)
     {
@@ -96,6 +97,10 @@ static NSDate *_lastReportsCacheResetDate = nil;
         
         // Send the pin failure report
         [super pinValidationFailedForHostname:serverHostname port:serverPort trust:serverTrust notedHostname:notedHostname reportURIs:reportURIs includeSubdomains:includeSubdomains knownPins:knownPins];
+    }
+    else
+    {
+        TSKLog(@"Pin failure report for %@ was not sent due to rate-limiting", serverHostname);
     }
 }
 

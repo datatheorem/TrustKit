@@ -11,7 +11,7 @@
 
 #import <XCTest/XCTest.h>
 #import "TSKSimpleReporter.h"
-#import "TSKSimpleBackgroundReporter.h"
+#import "TSKRateLimitingBackgroundUploader.h"
 #import "TSKCertificateUtils.h"
 
 
@@ -39,9 +39,9 @@
     SecCertificateRef trustStoreArray[1] = {_rootCertificate};
     
     _testTrust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
-                                                             arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
-                                                      anchorCertificates:(const void **)trustStoreArray
-                                                             arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
+                                                      arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
+                                               anchorCertificates:(const void **)trustStoreArray
+                                                      arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
 }
 
 - (void)tearDown
@@ -54,9 +54,9 @@
     [super tearDown];
 }
 
-- (void)testSimpleReporter {
-    
-    //just try a simple valid case to see if we can post this to the server
+- (void)testSimpleReporter
+{
+    // Just try a simple valid case to see if we can post this to the server
     TSKSimpleReporter *reporter = [[TSKSimpleReporter alloc] initWithAppBundleId:@"com.example.ABC" appVersion:@"1.0"];
     
     [reporter pinValidationFailedForHostname:@"mail.example.com"
@@ -74,20 +74,50 @@
     XCTAssert(YES, @"Pass");
 }
 
-- (void)testSimpleBackgroundReporter {
-    
-    //just try a simple valid case to see if we can post this to the server
+- (void)testSimpleBackgroundReporter
+{
+    // Just try a simple valid case to see if we can post this to the server
     TSKSimpleBackgroundReporter *reporter = [[TSKSimpleBackgroundReporter alloc] initWithAppBundleId:@"com.example.ABC" appVersion:@"1.0"];
     
     [reporter pinValidationFailedForHostname:@"mail.example.com"
                                         port:[NSNumber numberWithInt:443]
                                        trust:_testTrust
                                notedHostname:@"example.com"
-                                   reportURIs:@[[NSURL URLWithString:@"http://127.0.0.1:8080/log_csp_report"]]
+                                  reportURIs:@[[NSURL URLWithString:@"http://127.0.0.1:8080/log_csp_report"]]
                            includeSubdomains:YES
                                    knownPins:@[[[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM=" options:0],
                                                [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g=" options:0],
                                                ]];
+    
+    [NSThread sleepForTimeInterval:5.0];
+    XCTAssert(YES, @"Pass");
+}
+
+- (void)testRateLimitingBackgroundReporter
+{
+    TSKRateLimitingBackgroundUploader *reporter = [[TSKRateLimitingBackgroundUploader alloc] initWithAppBundleId:@"com.example.ABC" appVersion:@"1.0"];
+    
+    [reporter pinValidationFailedForHostname:@"mail.example.com"
+                                        port:[NSNumber numberWithInt:443]
+                                       trust:_testTrust
+                               notedHostname:@"example.com"
+                                  reportURIs:@[[NSURL URLWithString:@"http://127.0.0.1:8080/log_csp_report"]]
+                           includeSubdomains:YES
+                                   knownPins:@[[[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM=" options:0],
+                                               [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g=" options:0],
+                                               ]];
+    
+    // The second report should be rate-limited
+    [reporter pinValidationFailedForHostname:@"mail.example.com"
+                                        port:[NSNumber numberWithInt:443]
+                                       trust:_testTrust
+                               notedHostname:@"example.com"
+                                  reportURIs:@[[NSURL URLWithString:@"http://127.0.0.1:8080/log_csp_report"]]
+                           includeSubdomains:YES
+                                   knownPins:@[[[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM=" options:0],
+                                               [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g=" options:0],
+                                               ]];
+    
     
     [NSThread sleepForTimeInterval:5.0];
     XCTAssert(YES, @"Pass");
