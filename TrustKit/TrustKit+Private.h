@@ -19,8 +19,7 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments);
 
 void TSKLog(NSString *format, ...);
 
-void sendPinFailureReport(TSKPinValidationResult validationResult, SecTrustRef serverTrust, NSString *serverHostname, NSString *notedHostname, NSDictionary *notedHostnameConfig);
-dispatch_queue_t pinFailureReporterQueue;
+void sendPinFailureReport_async(TSKPinValidationResult validationResult, SecTrustRef serverTrust, NSString *serverHostname, NSString *notedHostname, NSDictionary *notedHostnameConfig, void (^onCompletion)(void));
 
 
 @interface TrustKit(Private)

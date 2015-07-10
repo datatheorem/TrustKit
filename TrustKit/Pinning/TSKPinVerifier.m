@@ -14,6 +14,7 @@
 #import "TrustKit+Private.h"
 
 
+
 @implementation TSKPinVerifier
 
 + (TSKPinValidationResult) verifyPinForTrust:(SecTrustRef)serverTrust andHostname:(NSString *)serverHostname
@@ -24,6 +25,11 @@
                     format:@"TrustKit has not been initialized with a pinning configuration"];
     }
     
+    if (serverTrust == NULL)
+    {
+        return TSKPinValidationResultErrorInvalidParameters;
+    }
+    
     TSKPinValidationResult validationResult = TSKPinValidationResultFailed;
     NSDictionary *trustKitConfig = [TrustKit configuration];
     
@@ -31,6 +37,8 @@
     NSString *domainConfigKey = getPinningConfigurationKeyForDomain(serverHostname, trustKitConfig);
     if (domainConfigKey != nil)
     {
+        CFRetain(serverTrust);
+        
         // This domain is pinned: look for one the configured public key pins in the server's evaluated certificate chain
         NSDictionary *domainConfig = trustKitConfig[domainConfigKey];
         validationResult = verifyPublicKeyPin(serverTrust, serverHostname, domainConfig[kTSKPublicKeyAlgorithms], domainConfig[kTSKPublicKeyHashes]);
@@ -39,9 +47,16 @@
         if (validationResult != TSKPinValidationResultSuccess)
         {
             // Pin validation failed: send a pin failure report
-            dispatch_async(pinFailureReporterQueue, ^(void) {
-                sendPinFailureReport(validationResult, serverTrust, serverHostname, domainConfigKey, domainConfig);
-            });
+            sendPinFailureReport_async(validationResult, serverTrust, serverHostname, domainConfigKey, domainConfig, ^void (void)
+                                 {
+                                     // Release the trust once the report has been sent
+                                     CFRelease(serverTrust);
+                                 });
+        }
+        else
+        {
+            // Pin validation was successful
+            CFRelease(serverTrust);
         }
     }
     else
