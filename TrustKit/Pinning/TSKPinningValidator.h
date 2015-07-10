@@ -69,7 +69,7 @@ typedef NS_ENUM(NSInteger, TSKPinValidationResult)
 ///------------------------------------
 
 /**
- Evaluate the supplied server trust against the global SSL pinning policy previously configured. If the validation fails, pin failure reports will be sent according to the pinning policy.
+ Evaluate the supplied server trust against the global SSL pinning policy previously configured. If the validation fails, pin failure reports will be sent accordingly.
  
  @param serverTrust The trust object representing the server's certificate chain. The trust's evaluation policy is always overridden using `SecTrustSetPolicies()` to ensure all the proper SSL checks (expiration, hostname validation, etc.) are enabled.
  
