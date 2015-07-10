@@ -11,7 +11,7 @@
 
 #import <XCTest/XCTest.h>
 #import "TSKSimpleReporter.h"
-#import "TSKRateLimitingBackgroundUploader.h"
+#import "TSKRateLimitingBackgroundReporter.h"
 #import "TSKCertificateUtils.h"
 
 
@@ -99,7 +99,7 @@
 
 - (void)testRateLimitingBackgroundReporter
 {
-    TSKRateLimitingBackgroundUploader *reporter = [[TSKRateLimitingBackgroundUploader alloc] initWithAppBundleId:@"com.example.ABC" appVersion:@"1.0"];
+    TSKRateLimitingBackgroundReporter *reporter = [[TSKRateLimitingBackgroundReporter alloc] initWithAppBundleId:@"com.example.ABC" appVersion:@"1.0"];
     
     [reporter pinValidationFailedForHostname:@"mail.example.com"
                                         port:[NSNumber numberWithInt:443]

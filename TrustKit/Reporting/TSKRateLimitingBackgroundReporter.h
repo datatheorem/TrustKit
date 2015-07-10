@@ -1,6 +1,6 @@
 /*
  
- TSKRateLimitingBackgroundUploader.h
+ TSKRateLimitingBackgroundReporter.h
  TrustKit
  
  Copyright 2015 The TrustKit Project Authors
@@ -19,7 +19,7 @@
  * Reports are uploaded using the background transfer service.
  * Also, it only acts on pin failures and does not do anything for successful pin validation.
  */
-@interface TSKRateLimitingBackgroundUploader : TSKSimpleBackgroundReporter
+@interface TSKRateLimitingBackgroundReporter : TSKSimpleBackgroundReporter
 
 - (instancetype)initWithAppBundleId:(NSString *)appBundleId
                          appVersion:(NSString *)appVersion;

@@ -1,6 +1,6 @@
 /*
  
- TSKRateLimitingBackgroundUploader.m
+ TSKRateLimitingBackgroundReporter.m
  TrustKit
  
  Copyright 2015 The TrustKit Project Authors
@@ -9,7 +9,7 @@
  
  */
 
-#import "TSKRateLimitingBackgroundUploader.h"
+#import "TSKRateLimitingBackgroundReporter.h"
 #import "reporting_utils.h"
 #include <pthread.h>
 #import "TrustKit+Private.h"
@@ -26,7 +26,7 @@ static NSDate *_lastReportsCacheResetDate = nil;
 
 
 
-@implementation TSKRateLimitingBackgroundUploader
+@implementation TSKRateLimitingBackgroundReporter
 
 
 - (instancetype)initWithAppBundleId:(NSString *)appBundleId

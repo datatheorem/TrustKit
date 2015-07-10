@@ -15,7 +15,7 @@
 #import "fishhook.h"
 #import "public_key_utils.h"
 #import "domain_registry.h"
-#import "TSKRateLimitingBackgroundUploader.h"
+#import "TSKRateLimitingBackgroundReporter.h"
 
 
 #pragma mark Configuration Constants
@@ -48,7 +48,7 @@ static BOOL _isTrustKitInitialized = NO;
 static dispatch_once_t dispatchOnceTrustKitInit;
 
 // Reporter delegate for sending pin violation reports
-static TSKRateLimitingBackgroundUploader *_pinFailureReporter = nil;
+static TSKRateLimitingBackgroundReporter *_pinFailureReporter = nil;
 static char kTSKPinFailureReporterQueueLabel[] = "com.datatheorem.trustkit.reporterqueue";
 static dispatch_queue_t _pinFailureReporterQueue = NULL;
 
@@ -400,7 +400,7 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
             CFBundleRef appBundle = CFBundleGetMainBundle();
             NSString *appBundleId = (NSString *)CFBundleGetIdentifier(appBundle);
             NSString *appVersion =  CFBundleGetValueForInfoDictionaryKey(appBundle, kCFBundleVersionKey);
-            _pinFailureReporter = [[TSKRateLimitingBackgroundUploader alloc]initWithAppBundleId:appBundleId appVersion:appVersion];
+            _pinFailureReporter = [[TSKRateLimitingBackgroundReporter alloc]initWithAppBundleId:appBundleId appVersion:appVersion];
             
             // Create a dispatch queue for activating the reporter
             // We use a serial queue targetting the global default queue in order to ensure reports are sent one by one
