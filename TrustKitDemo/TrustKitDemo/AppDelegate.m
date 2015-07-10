@@ -34,7 +34,7 @@
                       @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTX=",
                       @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
                                       ],
-              kTSKReportUris: @[@"http://127.0.0.1:8080/log_report"]
+              kTSKReportUris: @[@"https://trustkit-reports-server.appspot.com/log_report"]
               }};
     
     [TrustKit initializeWithConfiguration:trustKitConfig];

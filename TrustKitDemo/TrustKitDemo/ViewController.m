@@ -24,6 +24,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.destinationWebView.delegate = self;
+    self.connectionTextfield.text = @"https://www.datatheorem.com/";
 }
 
 - (void)didReceiveMemoryWarning {
