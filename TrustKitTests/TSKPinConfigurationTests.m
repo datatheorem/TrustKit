@@ -35,6 +35,18 @@
 }
 
 
+// Pin to only one key and ensure it fails; TrustKit requires at least two pins (which should include a backup pin)
+- (void)testPinOnePublicKey
+{
+    XCTAssertThrows(parseTrustKitArguments(@{@"www.good.com" : @{
+                                                     kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                     kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY="
+                                                                             ]}}),
+                    @"Configuration with one pin only must be rejected");
+}
+
+
+
 - (void)testGetConfigurationPinningEnabled
 {
     NSDictionary *trustKitConfig;

@@ -51,17 +51,6 @@
 }
 
 
-// Pin to only one key and ensure it fails; TrustKit requires at least two pins (which should include a backup pin)
-- (void)testVerifyAgainstOnePublicKey
-{
-    XCTAssertThrows(parseTrustKitArguments(@{@"www.good.com" : @{
-                                                     kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                                     kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY="
-                                                                             ]}}),
-                                           @"Configuration with one pin only must be rejected");
-}
-
-
 // Pin to any of CA, Intermediate CA and Leaf certificates public keys (all valid) and ensure it succeeds
 - (void)testVerifyAgainstAnyPublicKey
 {
