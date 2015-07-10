@@ -62,7 +62,7 @@ FOUNDATION_EXPORT const NSString *kTSKAlgorithmEcDsaSecp256r1;
 
       [TrustKit initializeWithConfiguration:trustKitConfig];
  
-  It also possible to supply the pinning policy by adding these configuration keys to the App's _Info.plist_ under a `TSKConfiguration` dictionary key. When doing so, no initialization method needs to be called and TrustKit will automatically be initialized with the policy.
+  It is also possible to supply the pinning policy by adding these configuration keys to the App's _Info.plist_ under a `TSKConfiguration` dictionary key. When doing so, no method needs to be called and TrustKit will automatically be initialized with the policy.
  
  
  ### Required Configuration Keys
