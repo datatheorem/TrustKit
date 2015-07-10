@@ -59,6 +59,12 @@ static NSDate *_lastReportsCacheResetDate = nil;
                               knownPins:(NSArray *) knownPins
                        validationResult:(TSKPinValidationResult) validationResult;
 {
+    // Default port to 0 if not specified
+    if (serverPort == nil)
+    {
+        serverPort = [NSNumber numberWithInt:0];
+    }
+    
     // Check if we need to clear the reports cache for rate-limiting
     NSDate *currentDate = [NSDate date];
     NSTimeInterval secondsSinceCacheReset = [currentDate timeIntervalSinceDate:_lastReportsCacheResetDate];
