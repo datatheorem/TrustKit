@@ -15,7 +15,6 @@
 #import "fishhook.h"
 #import "public_key_utils.h"
 #import "domain_registry.h"
-#import "ssl_pin_verifier.h"
 #import "TSKSimpleBackgroundReporter.h"
 
 
@@ -51,7 +50,7 @@ static dispatch_once_t dispatchOnceTrustKitInit;
 // Reporter delegate for sending pin violation reports
 static TSKSimpleBackgroundReporter *_pinFailureReporter = nil;
 static char kTSKPinFailureReporterQueueLabel[] = "com.datatheorem.trustkit.reporterqueue";
-static dispatch_queue_t _pinFailureReporterQueue = NULL;
+dispatch_queue_t pinFailureReporterQueue = NULL; // Also used in TSKPinVerifier.m
 
 // For tests
 static BOOL _wasTrustKitCalled = NO;
@@ -76,7 +75,47 @@ void TSKLog(NSString *format, ...)
 }
 
 
+#pragma mark Helper Function to Send Reports
+
+void sendPinFailureReport(TSKPinValidationResult validationResult, SecTrustRef serverTrust, NSString *serverHostname, NSString *notedHostname, NSDictionary *notedHostnameConfig)
+{
+    
+#if !TARGET_OS_IPHONE
+    if ((validationResult == TSKPinValidationResultFailedUserDefinedTrustAnchor)
+        && ([notedHostnameConfig[kTSKIgnorePinningForUserDefinedTrustAnchors] boolValue] == NO))
+    {
+        // OS-X only: user-defined trust anchors can be whitelisted (for corporate proxies, etc.)
+        return;
+    }
+#endif
+    
+    // Pin validation failed: retrieve the list of configured report URLs
+    NSMutableArray *reportUris = [NSMutableArray arrayWithArray:notedHostnameConfig[kTSKReportUris]];
+    
+#if !DEBUG
+    // For release builds, also enable the default reporting URL
+    if ([domainConfig[kTSKDisableDefaultReportUri] boolValue] == NO)
+    {
+        [reportUris addObject:[NSURL URLWithString:kTSKDefaultReportUri]];
+    }
+#endif
+    
+    // If some report URLs have been defined, send the pin failure report
+    if ((reportUris != nil) && ([reportUris count] > 0))
+    {
+        [_pinFailureReporter pinValidationFailedForHostname:serverHostname
+                                                       port:nil
+                                                      trust:serverTrust
+                                              notedHostname:notedHostname
+                                                 reportURIs:reportUris
+                                          includeSubdomains:[notedHostnameConfig[kTSKIncludeSubdomains] boolValue]
+                                                  knownPins:notedHostnameConfig[kTSKPublicKeyHashes]];
+    }
+}
+
+
 #pragma mark SSLHandshake Hook
+
 
 static OSStatus (*original_SSLHandshake)(SSLContextRef context) = NULL;
 
@@ -97,7 +136,7 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
         serverName[serverNameLen] = '\0';
         NSString *serverNameStr = [NSString stringWithUTF8String:serverName];
         free(serverName);
-
+        
         // Retrieve the pinning configuration for this specific domain, if there is one
         NSString *domainConfigKey = getPinningConfigurationKeyForDomain(serverNameStr, _trustKitGlobalConfiguration);
         if (domainConfigKey != nil)
@@ -111,51 +150,29 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
             
             // Re-evaluate the server's certificate chain and look for one the configured SPKI pins
             TSKPinValidationResult validationResult = TSKPinValidationResultFailed;
-
             validationResult = verifyPublicKeyPin(serverTrust, serverNameStr, domainConfig[kTSKPublicKeyAlgorithms], domainConfig[kTSKPublicKeyHashes]);
-            if ((validationResult == TSKPinValidationResultFailed)
-                || (validationResult == TSKPinValidationResultFailedCertificateChainNotTrusted)
-                || (validationResult == TSKPinValidationResultErrorInvalidParameters)
-#if !TARGET_OS_IPHONE
-                || // OS-X only: user-defined trust anchors can be whitelisted (for corporate proxies, etc.)
-                ((validationResult == TSKPinValidationResultFailedUserDefinedTrustAnchor)
-                 && ([domainConfig[kTSKIgnorePinningForUserDefinedTrustAnchors] boolValue] == NO))
-#endif
-                )
+            
+            
+            if (validationResult != TSKPinValidationResultSuccess)
             {
-                // Pin validation failed: notify the reporter delegate if a report URI was configured
-                NSMutableArray *reportUris = [NSMutableArray arrayWithArray:domainConfig[kTSKReportUris]];
+                // Pin validation failed: send a pin failure report
+                dispatch_async(pinFailureReporterQueue, ^(void)
+                               {
+                                   sendPinFailureReport(validationResult, serverTrust, serverNameStr, domainConfigKey, domainConfig);
+                                   CFRelease(serverTrust);
+                               });
                 
-#if !DEBUG
-                // For release builds, also enable the default reporting URL
-                if ([domainConfig[kTSKDisableDefaultReportUri] boolValue] == NO)
-                {
-                    [reportUris addObject:[NSURL URLWithString:kTSKDefaultReportUri]];
-                }
-#endif
-
-                if ((reportUris != nil) && ([reportUris count] > 0))
-                {
-                    dispatch_async(_pinFailureReporterQueue, ^(void)
-                                   {
-                                       [_pinFailureReporter pinValidationFailedForHostname:serverNameStr
-                                                                                      port:nil
-                                                                                     trust:serverTrust
-                                                                             notedHostname:domainConfigKey
-                                                                                 reportURIs:reportUris
-                                                                         includeSubdomains:[domainConfig[kTSKIncludeSubdomains] boolValue]
-                                                                                 knownPins:domainConfig[kTSKPublicKeyHashes]];
-                                       CFRelease(serverTrust);
-                                   });
-                }
                 
-                if (([domainConfig[kTSKEnforcePinning] boolValue] == YES)
-                    || (validationResult == TSKPinValidationResultFailedCertificateChainNotTrusted)
-                    || (validationResult == TSKPinValidationResultErrorInvalidParameters))
+                // If TrustKit was configured to enforce pinning, make the connection fail
+                if ([domainConfig[kTSKEnforcePinning] boolValue] == YES)
                 {
-                    // TrustKit was configured to enforce pinning or the certificate chain was not trusted: make the connection fail
                     result = errSSLXCertChainInvalid;
                 }
+            }
+            else
+            {
+                // Pin validation was successful
+                CFRelease(serverTrust);
             }
         }
     }
@@ -163,7 +180,7 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
 }
 
 
-#pragma mark Framework Initialization
+#pragma mark TrustKit Initialization Helper Functions
 
 
 NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
@@ -376,8 +393,8 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
             // Create a dispatch queue for activating the reporter
             // We use a serial queue targetting the global default queue in order to ensure reports are sent one by one
             // even when a lot of pin failures are occuring, instead of spamming the global queue with events to process
-            _pinFailureReporterQueue = dispatch_queue_create(kTSKPinFailureReporterQueueLabel, DISPATCH_QUEUE_SERIAL);
-            dispatch_set_target_queue(_pinFailureReporterQueue, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0));
+            pinFailureReporterQueue = dispatch_queue_create(kTSKPinFailureReporterQueueLabel, DISPATCH_QUEUE_SERIAL);
+            dispatch_set_target_queue(pinFailureReporterQueue, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0));
 
             // All done
             _isTrustKitInitialized = YES;
@@ -412,6 +429,12 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
 }
 
 
++ (BOOL) wasTrustKitInitialized
+{
+    return _isTrustKitInitialized;
+}
+
+
 + (void) resetConfiguration
 {
     // This is only used for tests
@@ -420,7 +443,7 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
     _isTrustKitInitialized = NO;
     _wasTrustKitCalled = NO;
     _pinFailureReporter = nil;
-    _pinFailureReporterQueue= NULL;
+    pinFailureReporterQueue= NULL;
     dispatchOnceTrustKitInit = 0;
 }
 

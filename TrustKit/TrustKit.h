@@ -80,7 +80,7 @@ FOUNDATION_EXPORT const NSString *kTSKAlgorithmEcDsaSecp256r1;
  If set to `YES`, also pin all the subdomains of the specified domain; default value is `NO`.
  
  #### `kTSKEnforcePinning`
- If set to `NO`, a pinning failure will not cause the SSL connection to fail; default value is `YES`. When a pinning failure occurs, pin failure reports will still be sent to the configured report URIs.
+ If set to `NO`, TrustKit will not block SSL connections that caused a pin or certificate validation error; default value is `YES`. When verifying a server's identity, TrustKit validates the server's certificate chain and also checks for the presence of one of the configured SSL pins. When a pinning failure occurs, pin failure reports will still be sent to the configured report URIs.
  
  #### `kTSKReportUris`
  An array of URLs to which pin validation failures should be reported. To minimize the performance impact of sending reports on each validation failure, the reports are uploaded using the background transfer service. For HTTPS report URLs, the HTTPS connections will ignore the SSL pinning policy and use the default certificate validation mechanisms, in order to maximize the chance of the reports reaching the server. The format of the reports is similar to the one described in the HPKP specification.

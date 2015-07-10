@@ -13,10 +13,14 @@
 #define TrustKit_TrustKit_Private____FILEEXTENSION___
 
 #import "TrustKit.h"
+#import "ssl_pin_verifier.h"
 
 NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments);
 
 void TSKLog(NSString *format, ...);
+
+void sendPinFailureReport(TSKPinValidationResult validationResult, SecTrustRef serverTrust, NSString *serverHostname, NSString *notedHostname, NSDictionary *notedHostnameConfig);
+dispatch_queue_t pinFailureReporterQueue;
 
 
 @interface TrustKit(Private)
@@ -24,6 +28,7 @@ void TSKLog(NSString *format, ...);
 + (void) resetConfiguration;
 + (NSDictionary *) configuration;
 + (BOOL) wasTrustKitCalled;
++ (BOOL) wasTrustKitInitialized;
 
 @end
 
