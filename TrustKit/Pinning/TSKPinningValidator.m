@@ -60,6 +60,7 @@
                 && ([domainConfig[kTSKIgnorePinningForUserDefinedTrustAnchors] boolValue] == YES))
             {
                 // OS-X only: user-defined trust anchors can be whitelisted (for corporate proxies, etc.) so don't send reports
+                TSKLog(@"Ignoring pinning result for user-defined trust anchor");
                 CFRelease(serverTrust);
             }
             else
