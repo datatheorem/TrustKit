@@ -164,7 +164,7 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
                 // Pin validation failed
 #if !TARGET_OS_IPHONE
                 if ((validationResult == TSKPinValidationResultFailedUserDefinedTrustAnchor)
-                    && ([domainConfig[kTSKIgnorePinningForUserDefinedTrustAnchors] boolValue] == NO))
+                    && ([domainConfig[kTSKIgnorePinningForUserDefinedTrustAnchors] boolValue] == YES))
                 {
                     // OS-X only: user-defined trust anchors can be whitelisted (for corporate proxies, etc.)
                     CFRelease(serverTrust);
