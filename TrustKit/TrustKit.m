@@ -167,6 +167,7 @@ static OSStatus replaced_SSLHandshake(SSLContextRef context)
                     && ([domainConfig[kTSKIgnorePinningForUserDefinedTrustAnchors] boolValue] == YES))
                 {
                     // OS-X only: user-defined trust anchors can be whitelisted (for corporate proxies, etc.)
+                    TSKLog(@"Ignoring pinning result for user-defined trust anchor");
                     CFRelease(serverTrust);
                 }
                 else
