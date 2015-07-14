@@ -88,7 +88,7 @@ void sendPinFailureReport_async(TSKPinValidationResult validationResult, SecTrus
         
 #if !DEBUG
         // For release builds, also enable the default reporting URL
-        if ([domainConfig[kTSKDisableDefaultReportUri] boolValue] == NO)
+        if ([notedHostnameConfig[kTSKDisableDefaultReportUri] boolValue] == NO)
         {
             [reportUris addObject:[NSURL URLWithString:kTSKDefaultReportUri]];
         }
