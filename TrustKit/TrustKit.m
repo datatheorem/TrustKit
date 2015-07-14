@@ -209,7 +209,7 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
     
     for (NSString *domainName in TrustKitArguments)
     {
-        // Sanity check on the domain name
+        // Sanity checks on the domain name
         if (GetRegistryLength([domainName UTF8String]) == 0)
         {
             [NSException raise:@"TrustKit configuration invalid"
@@ -226,6 +226,17 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
         NSNumber *shouldIncludeSubdomains = domainTrustKitArguments[kTSKIncludeSubdomains];
         if (shouldIncludeSubdomains)
         {
+            if ([shouldIncludeSubdomains boolValue] == YES)
+            {
+                // Prevent pinning on *.com
+                // Ran into this issue with *.appspot.com which is part of the public suffix list
+                if (GetRegistryLength([domainName UTF8String]) == [domainName length])
+                {
+                    [NSException raise:@"TrustKit configuration invalid"
+                                format:@"TrustKit was initialized with includeSubdomains for a domain suffix %@", domainName];
+                }
+            }
+            
             domainFinalConfiguration[kTSKIncludeSubdomains] = shouldIncludeSubdomains;
         }
         else

@@ -28,6 +28,7 @@ static BOOL isSubdomain(NSString *domain, NSString *subdomain)
     }
     
     // Retrieve the main domain without the TLD
+    // When initializing TrustKit, we check that [domain length] > domainRegistryLength
     NSString *domainLabel = [domain substringToIndex:([domain length] - domainRegistryLength - 1)];
     
     // Retrieve the subdomain's domain without the TLD

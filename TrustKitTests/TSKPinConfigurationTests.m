@@ -138,6 +138,18 @@
 }
 
 
+- (void)testIncludeSubdomainsEnabledForSuffix
+{
+    XCTAssertThrows(parseTrustKitArguments(@{@"com" : @{
+                                                     kTSKIncludeSubdomains : @YES,
+                                                     kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                     kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                                                                             @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY="
+                                                                             ]}}),
+                    @"Configuration that pins *.com must be rejected");
+}
+
+
 - (void)testIncludeSubdomainsDisabled
 {
     NSDictionary *trustKitConfig;
