@@ -10,4 +10,4 @@ env:
 #    - TEST_SDK=iphonesimulator7.0 BUILD_CONFIG=Debug
     - TEST_SDK=iphonesimulator7.0 BUILD_CONFIG=Release BUILD_DEST="platform=iOS Simulator,name=iPhone 6"
 script:
-  - xctool -project TrustKit.xcodeproj -scheme TrustKit -destination $BUILD_DEST -configuration $BUILD_CONFIG build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk $TEST_SDK test
+  - xctool -project TrustKit.xcodeproj -scheme TrustKit -destination "platform=iOS Simulator,name=iPhone 6" -configuration $BUILD_CONFIG build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk $TEST_SDK test
