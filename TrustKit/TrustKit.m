@@ -412,8 +412,13 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
             CFBundleRef appBundle = CFBundleGetMainBundle();
             NSString *appBundleId = (__bridge NSString *)CFBundleGetIdentifier(appBundle);
             NSString *appVersion =  (__bridge NSString *)CFBundleGetValueForInfoDictionaryKey(appBundle, kCFBundleVersionKey);
-            _pinFailureReporter = [[TSKRateLimitingBackgroundReporter alloc]initWithAppBundleId:appBundleId appVersion:appVersion];
             
+            if (appBundleId != nil)
+            {
+                // The bundle ID we get is nil if we're running tests on Travis; don't create the reporter when running unit tests
+                _pinFailureReporter = [[TSKRateLimitingBackgroundReporter alloc]initWithAppBundleId:appBundleId appVersion:appVersion];
+            
+            }
             // Create a dispatch queue for activating the reporter
             // We use a serial queue targetting the global default queue in order to ensure reports are sent one by one
             // even when a lot of pin failures are occuring, instead of spamming the global queue with events to process
