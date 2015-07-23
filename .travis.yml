@@ -1,13 +1,9 @@
 language: objective-c
 env:
   matrix: 
-    - TEST_SDK=macosx10.9 BUILD_CONFIG=Debug
-    - TEST_SDK=macosx10.9 BUILD_CONFIG=Release
-    - TEST_SDK=macosx10.10 BUILD_CONFIG=Debug
-    - TEST_SDK=macosx10.10 BUILD_CONFIG=Release
-    - TEST_SDK=iphonesimulator8.1 BUILD_CONFIG=Debug
-    - TEST_SDK=iphonesimulator8.1 BUILD_CONFIG=Release
-    - TEST_SDK=iphonesimulator7.0 BUILD_CONFIG=Debug
-    - TEST_SDK=iphonesimulator7.0 BUILD_CONFIG=Release
+    - TEST_SDK=macosx10.9
+    - TEST_SDK=macosx10.10
+    - TEST_SDK=iphonesimulator8.1
+    - TEST_SDK=iphonesimulator7.0
 script:
-  - xcodebuild build test -project TrustKit.xcodeproj -scheme TrustKit -configuration $BUILD_CONFIG CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk $TEST_SDK
+  - xcodebuild build test -project TrustKit.xcodeproj -scheme TrustKit -configuration Release CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk $TEST_SDK
