@@ -1,6 +1,6 @@
 /*
  
- TSKSimpleBackgroundReporter.m
+ TSKBackgroundReporter.m
  TrustKit
  
  Copyright 2015 The TrustKit Project Authors
@@ -9,10 +9,11 @@
  
  */
 
-#import "TSKSimpleBackgroundReporter.h"
+#import "TSKBackgroundReporter.h"
 #import "TrustKit+Private.h"
 #import "TSKPinFailureReport.h"
 #import "reporting_utils.h"
+#import "TSKReportsRateLimiter.h"
 
 // Session identifier for background uploads: <bundle_id>.TSKSimpleReporter
 static NSString* kTSKBackgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
@@ -20,21 +21,25 @@ static NSURLSession *_backgroundSession = nil;
 static dispatch_once_t dispatchOnceBackgroundSession;
 
 
-@interface TSKSimpleBackgroundReporter()
+@interface TSKBackgroundReporter()
 
 @property (nonatomic, strong) NSString * appBundleId;
 @property (nonatomic, strong) NSString * appVersion;
+@property BOOL shouldRateLimitReports;
+
 @end
 
 
-@implementation TSKSimpleBackgroundReporter
+@implementation TSKBackgroundReporter
 
 
-- (instancetype)init
+- (instancetype)initAndRateLimitReports:(BOOL)shouldRateLimitReports
 {
     self = [super init];
     if (self)
     {
+        self.shouldRateLimitReports = shouldRateLimitReports;
+        
         // Retrieve the App's information
         CFBundleRef appBundle = CFBundleGetMainBundle();
         self.appBundleId = (__bridge NSString *)CFBundleGetIdentifier(appBundle);
@@ -142,6 +147,15 @@ static dispatch_once_t dispatchOnceBackgroundSession;
                                                         validatedCertificateChain:certificateChain
                                                                         knownPins:formattedPins
                                                                  validationResult:validationResult];
+    
+    
+    // Should we rate-limit this report?
+    if (self.shouldRateLimitReports && [TSKReportsRateLimiter shouldRateLimitReport:report])
+    {
+        // We recently sent the exact same report; do not send this report
+        TSKLog(@"Pin failure report for %@ was not sent due to rate-limiting", serverHostname);
+        return;
+    }
     
     // Create a temporary file for storing the JSON data in ~/tmp
     NSURL *tmpDirURL = [NSURL fileURLWithPath:NSTemporaryDirectory() isDirectory:YES];

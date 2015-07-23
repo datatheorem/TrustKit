@@ -1,6 +1,6 @@
 /*
  
- TSKSimpleReporter.h
+ TSKBackgroundReporter.h
  TrustKit
  
  Copyright 2015 The TrustKit Project Authors
@@ -14,24 +14,22 @@
 
 
 /**
- `TSKSimpleReporter` is a class for uploading pin failure reports.
- 
- While TSKSimpleBackgroundReporter is a better implementation in most scenarios as it has a smaller performance impact on the App, the background transfer service cannot be used when running the test suite. Therefore, and only when we run the tests, we fall back to using TSKSimpleReporter.
+ `TSKSimpleBackgroundReporter` is a class for uploading pin failure reports using the background transfer service.
  
  */
-@interface TSKSimpleReporter : NSObject <TSKReporterDelegate, NSURLSessionDelegate>
+@interface TSKBackgroundReporter : NSObject <TSKReporterDelegate, NSURLSessionTaskDelegate>
 
 ///---------------------
 /// @name Initialization
 ///---------------------
 
 /**
- Initializes a simple reporter.
+ Initializes a background reporter.
  
  @param shouldRateLimitReports Prevent identical pin failure reports from being sent more than once per day.
+ @exception NSException Thrown when the App does not have a bundle ID, meaning we're running in unit tests where the background transfer service can't be used.
  
  */
 - (instancetype)initAndRateLimitReports:(BOOL)shouldRateLimitReports;
-
 @end
 

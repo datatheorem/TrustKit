@@ -24,6 +24,7 @@ static NSDate *_lastReportsCacheResetDate = nil;
 
 
 
+
 @implementation TSKReportsRateLimiter
 
 + (BOOL) shouldRateLimitReport:(TSKPinFailureReport *)report
@@ -78,6 +79,15 @@ static NSDate *_lastReportsCacheResetDate = nil;
     return shouldRateLimitReport;
 }
 
+
++ (void) setLastReportsCacheResetDate:(NSDate *)date
+{
+    pthread_mutex_lock(&_reportsCacheLock);
+    {
+        _lastReportsCacheResetDate = date;
+    }
+    pthread_mutex_unlock(&_reportsCacheLock);
+}
 
 @end
 

@@ -15,7 +15,7 @@
 #import "fishhook.h"
 #import "public_key_utils.h"
 #import "domain_registry.h"
-#import "TSKRateLimitingBackgroundReporter.h"
+#import "TSKBackgroundReporter.h"
 #import "TSKSimpleReporter.h"
 
 
@@ -413,13 +413,14 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
             @try
             {
                 // Create a reporter that uses the background transfer service to send pin failure reports
-                _pinFailureReporter = [[TSKRateLimitingBackgroundReporter alloc]init];
+                _pinFailureReporter = [[TSKBackgroundReporter alloc]initAndRateLimitReports:YES];
             
             }
             @catch (NSException *e)
             {
                 // The bundle ID we get is nil if we're running tests on Travis so we have to use the simple reporter for unit tests
-                _pinFailureReporter = [[TSKSimpleReporter alloc]init];
+                TSKLog(@"Null bundle ID: we are running the test suite; falling back to TSKSimpleReporter");
+                _pinFailureReporter = [[TSKSimpleReporter alloc]initAndRateLimitReports:YES];
             }
             
             // Create a dispatch queue for activating the reporter
