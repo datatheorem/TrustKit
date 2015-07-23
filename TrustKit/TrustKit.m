@@ -48,7 +48,7 @@ static BOOL _isTrustKitInitialized = NO;
 static dispatch_once_t dispatchOnceTrustKitInit;
 
 // Reporter delegate for sending pin violation reports
-static TSKRateLimitingBackgroundReporter *_pinFailureReporter = nil;
+static id _pinFailureReporter = nil;
 static char kTSKPinFailureReporterQueueLabel[] = "com.datatheorem.trustkit.reporterqueue";
 static dispatch_queue_t _pinFailureReporterQueue = NULL;
 
@@ -413,12 +413,22 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
             NSString *appBundleId = (__bridge NSString *)CFBundleGetIdentifier(appBundle);
             NSString *appVersion =  (__bridge NSString *)CFBundleGetValueForInfoDictionaryKey(appBundle, kCFBundleVersionKey);
             
-            if (appBundleId != nil)
+
+            @try
             {
-                // The bundle ID we get is nil if we're running tests on Travis; don't create the reporter when running unit tests
+                // Create a reporter that uses the background transfer service to send pin failure reports
                 _pinFailureReporter = [[TSKRateLimitingBackgroundReporter alloc]initWithAppBundleId:appBundleId appVersion:appVersion];
             
             }
+            @catch (NSException *e)
+            {
+                NSLog(@"An exception occurred: %@", e.name);
+                NSLog(@"Here are some details: %@", e.reason);
+                if ([[e reason] isEqualToString:@"Application must have a bundle identifier to use a background NSURLSession"])
+                // The bundle ID we get is nil if we're running tests on Travis so we have to use the simple reporter for unit tests
+                _pinFailureReporter = [[TSKSimpleBackgroundReporter alloc]initWithAppBundleId:appBundleId appVersion:appVersion];
+            }
+            
             // Create a dispatch queue for activating the reporter
             // We use a serial queue targetting the global default queue in order to ensure reports are sent one by one
             // even when a lot of pin failures are occuring, instead of spamming the global queue with events to process
