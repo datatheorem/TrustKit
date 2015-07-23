@@ -16,6 +16,7 @@
 #import "public_key_utils.h"
 #import "domain_registry.h"
 #import "TSKRateLimitingBackgroundReporter.h"
+#import "TSKSimpleReporter.h"
 
 
 #pragma mark Configuration Constants
@@ -426,7 +427,7 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
                 NSLog(@"Here are some details: %@", e.reason);
                 if ([[e reason] isEqualToString:@"Application must have a bundle identifier to use a background NSURLSession"])
                 // The bundle ID we get is nil if we're running tests on Travis so we have to use the simple reporter for unit tests
-                _pinFailureReporter = [[TSKSimpleBackgroundReporter alloc]initWithAppBundleId:appBundleId appVersion:appVersion];
+                _pinFailureReporter = [[TSKSimpleReporter alloc]initWithAppBundleId:appBundleId appVersion:appVersion];
             }
             
             // Create a dispatch queue for activating the reporter
