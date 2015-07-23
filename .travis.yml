@@ -2,4 +2,5 @@ language: objective-c
 xcode_project: TrustKit.xcodeproj
 xcode_scheme: TrustKit
 script:
-  - xctool -project TrustKit.xcodeproj -scheme TrustKit build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO test
+  - xctool -project TrustKit.xcodeproj -scheme TrustKit build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk macosx10.10 test
+  - xctool -project TrustKit.xcodeproj -scheme TrustKit build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk macosx10.9 test
