@@ -1,6 +1,8 @@
 language: objective-c
-xcode_project: TrustKit.xcodeproj
-xcode_scheme: TrustKit
+env:
+  matrix: 
+    - TEST_SDK=macsox10.9
+    - TEST_SDK=macosx10.10 
+    - TEST_SDK=iphonesimulator8.4
 script:
-  - xctool -project TrustKit.xcodeproj -scheme TrustKit build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk macosx10.10 test
-  - xctool -project TrustKit.xcodeproj -scheme TrustKit build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk macosx10.9 test
+  - xctool -project TrustKit.xcodeproj -scheme TrustKit build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk $TEST_SDK test
