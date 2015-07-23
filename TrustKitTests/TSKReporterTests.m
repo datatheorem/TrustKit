@@ -100,7 +100,7 @@
     
     // Ensure the same report will not be sent twice in a row
     XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == NO, @"Wrongly rate-limited a new report");
-    XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == YES, @"Did not rate-limite an identical report");
+    XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == NO, @"Did not rate-limit an identical report");
     
     // Set the last time the cache was reset to more than 24 hours ago and ensure the report is sent again
     [TSKReportsRateLimiter setLastReportsCacheResetDate:[[NSDate date] dateByAddingTimeInterval:-3700*24]];
@@ -119,7 +119,7 @@
                                                     knownPins:formattedPins
                                              validationResult:TSKPinValidationResultFailed];
     XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == NO, @"Wrongly rate-limited a new report");
-    XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == YES, @"Did not rate-limite an identical report");
+    XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == YES, @"Did not rate-limit an identical report");
     
     
     // Ensure the same report with a different hostname will be sent
@@ -134,7 +134,7 @@
                                                     knownPins:formattedPins
                                              validationResult:TSKPinValidationResultFailedCertificateChainNotTrusted];
     XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == NO, @"Wrongly rate-limited a new report");
-    XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == YES, @"Did not rate-limite an identical report");
+    XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == YES, @"Did not rate-limit an identical report");
     
     
     // Ensure the same report with a different certificate chain will be sent
@@ -149,7 +149,7 @@
                                                     knownPins:formattedPins
                                              validationResult:TSKPinValidationResultFailedCertificateChainNotTrusted];
     XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == NO, @"Wrongly rate-limited a new report");
-    XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == YES, @"Did not rate-limite an identical report");
+    XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == YES, @"Did not rate-limit an identical report");
 }
 
 @end
