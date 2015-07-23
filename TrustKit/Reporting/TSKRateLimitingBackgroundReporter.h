@@ -21,8 +21,7 @@
  */
 @interface TSKRateLimitingBackgroundReporter : TSKSimpleBackgroundReporter
 
-- (instancetype)initWithAppBundleId:(NSString *)appBundleId
-                         appVersion:(NSString *)appVersion;
+- (instancetype)init;
 
 @end
 

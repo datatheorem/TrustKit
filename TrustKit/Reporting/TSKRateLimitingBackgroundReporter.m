@@ -29,11 +29,10 @@ static NSDate *_lastReportsCacheResetDate = nil;
 @implementation TSKRateLimitingBackgroundReporter
 
 
-- (instancetype)initWithAppBundleId:(NSString *)appBundleId
-                         appVersion:(NSString *)appVersion
+- (instancetype)init
 {
     // Initialize the background the session in the super class' constructor
-    self = [super initWithAppBundleId:appBundleId appVersion:appVersion];
+    self = [super init];
     
     if (self)
     {

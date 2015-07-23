@@ -57,7 +57,7 @@
 - (void)testSimpleReporter
 {
     // Just try a simple valid case to see if we can post this to the server
-    TSKSimpleReporter *reporter = [[TSKSimpleReporter alloc] initWithAppBundleId:@"com.example.ABC" appVersion:@"1.0"];
+    TSKSimpleReporter *reporter = [[TSKSimpleReporter alloc] init];
     
     [reporter pinValidationFailedForHostname:@"mail.example.com"
                                         port:[NSNumber numberWithInt:443]
@@ -79,7 +79,7 @@
 - (void)testSimpleBackgroundReporter
 {
     // Just try a simple valid case to see if we can post this to the server
-    TSKSimpleBackgroundReporter *reporter = [[TSKSimpleBackgroundReporter alloc] initWithAppBundleId:@"com.example.ABC" appVersion:@"1.0"];
+    TSKSimpleBackgroundReporter *reporter = [[TSKSimpleBackgroundReporter alloc] init];
     
     [reporter pinValidationFailedForHostname:@"mail.example.com"
                                         port:[NSNumber numberWithInt:443]
@@ -99,7 +99,7 @@
 
 - (void)testRateLimitingBackgroundReporter
 {
-    TSKRateLimitingBackgroundReporter *reporter = [[TSKRateLimitingBackgroundReporter alloc] initWithAppBundleId:@"com.example.ABC" appVersion:@"1.0"];
+    TSKRateLimitingBackgroundReporter *reporter = [[TSKRateLimitingBackgroundReporter alloc] init];
     
     [reporter pinValidationFailedForHostname:@"mail.example.com"
                                         port:[NSNumber numberWithInt:443]

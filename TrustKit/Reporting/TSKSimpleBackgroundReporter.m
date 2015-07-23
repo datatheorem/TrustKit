@@ -30,28 +30,27 @@ static dispatch_once_t dispatchOnceBackgroundSession;
 @implementation TSKSimpleBackgroundReporter
 
 
-- (instancetype)initWithAppBundleId:(NSString *)appBundleId
-                         appVersion:(NSString *)appVersion
+- (instancetype)init
 {
     self = [super init];
     if (self)
     {
-        if ((appBundleId == nil) || ([appBundleId length] == 0))
-        {
-            self.appBundleId = @"N/A";
-        }
-        else
-        {
-            self.appBundleId = appBundleId;
-        }
+        // Retrieve the App's information
+        CFBundleRef appBundle = CFBundleGetMainBundle();
+        self.appBundleId = (__bridge NSString *)CFBundleGetIdentifier(appBundle);
+        self.appVersion =  (__bridge NSString *)CFBundleGetValueForInfoDictionaryKey(appBundle, kCFBundleVersionKey);
         
-        if ((appVersion == nil) || ([appVersion length] == 0))
+        if (self.appBundleId == nil)
+        {
+            // The bundle ID we get is nil if we're running tests on Travis. If the bundle ID is nil, background sessions can't be used
+            // backgroundSessionConfigurationWithIdentifier: will throw an exception within dispatch_once() which can't be handled
+            // Throw an exception here instead
+            [NSException raise:@"Null Bundle ID" format:@"Application must have a bundle identifier to use a background NSURLSession"];
+        }
+
+        if (self.appVersion == nil)
         {
             self.appVersion = @"N/A";
-        }
-        else
-        {
-            self.appVersion = appVersion;
         }
         
         /*

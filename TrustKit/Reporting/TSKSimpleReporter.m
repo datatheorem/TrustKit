@@ -25,25 +25,26 @@
 /*
  * Initialize the reporter with the app's bundle id and app version
  */
-- (instancetype)initWithAppBundleId:(NSString *) appBundleId
-                         appVersion:(NSString *) appVersion
+- (instancetype)init
 {
     self = [super init];
     if (self)
     {
-        if ((appBundleId == nil) || ([appBundleId length] == 0))
-        {
-            [NSException raise:@"TrustKit Simple Reporter configuration invalid"
-                        format:@"Reporter was given empty appBundleId"];
-        }
-        self.appBundleId = appBundleId;
+        // Retrieve the App's information
+        CFBundleRef appBundle = CFBundleGetMainBundle();
+        self.appBundleId = (__bridge NSString *)CFBundleGetIdentifier(appBundle);
+        self.appVersion =  (__bridge NSString *)CFBundleGetValueForInfoDictionaryKey(appBundle, kCFBundleVersionKey);
         
-        if ((appVersion == nil) || ([appVersion length] == 0))
+        if (self.appBundleId == nil)
         {
-            [NSException raise:@"TrustKit Simple Reporter configuration invalid"
-                        format:@"Reporter was given empty appVersion"];
+            // Should only happen when running tests
+            self.appBundleId = @"N/A";
         }
-        self.appVersion = appVersion;
+        
+        if (self.appVersion == nil)
+        {
+            self.appVersion = @"N/A";
+        }
     }
     return self;
 }

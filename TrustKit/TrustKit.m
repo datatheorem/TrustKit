@@ -410,24 +410,16 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
             }
             
             // Create our reporter for sending pin validation failures
-            CFBundleRef appBundle = CFBundleGetMainBundle();
-            NSString *appBundleId = (__bridge NSString *)CFBundleGetIdentifier(appBundle);
-            NSString *appVersion =  (__bridge NSString *)CFBundleGetValueForInfoDictionaryKey(appBundle, kCFBundleVersionKey);
-            
-
             @try
             {
                 // Create a reporter that uses the background transfer service to send pin failure reports
-                _pinFailureReporter = [[TSKRateLimitingBackgroundReporter alloc]initWithAppBundleId:appBundleId appVersion:appVersion];
+                _pinFailureReporter = [[TSKRateLimitingBackgroundReporter alloc]init];
             
             }
             @catch (NSException *e)
             {
-                NSLog(@"An exception occurred: %@", e.name);
-                NSLog(@"Here are some details: %@", e.reason);
-                if ([[e reason] isEqualToString:@"Application must have a bundle identifier to use a background NSURLSession"])
                 // The bundle ID we get is nil if we're running tests on Travis so we have to use the simple reporter for unit tests
-                _pinFailureReporter = [[TSKSimpleReporter alloc]initWithAppBundleId:appBundleId appVersion:appVersion];
+                _pinFailureReporter = [[TSKSimpleReporter alloc]init];
             }
             
             // Create a dispatch queue for activating the reporter
