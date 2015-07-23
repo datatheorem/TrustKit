@@ -63,27 +63,39 @@ static dispatch_once_t dispatchOnceBackgroundSession;
             NSURLSessionConfiguration *backgroundConfiguration = nil;
             
             // The API for creating background sessions changed between iOS 7 and iOS 8 and OS X 10.9 and 10.10
-            //#if (TARGET_OS_IPHONE &&__IPHONE_OS_VERSION_MIN_REQUIRED < 80000) || (!TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MIN_REQUIRED < 1090)
+#if (TARGET_OS_IPHONE &&__IPHONE_OS_VERSION_MAX_ALLOWED < 80000) || (!TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MAX_ALLOWED < 1100)
+            // iOS 7 or OS X 10.9 as the max SDK: awlays use the deprecated/iOS 7 API
+            backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfiguration:[NSString stringWithFormat:kTSKBackgroundSessionIdentifierFormat, self.appBundleId]];
+#else
+            // iOS 8+ or OS X 10.10+ as the max SDK
+#if (TARGET_OS_IPHONE &&__IPHONE_OS_VERSION_MIN_REQUIRED < 80000) || (!TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MIN_REQUIRED < 1100)
+            // iOS 7 or OS X 10.9 as the min SDK
+            // Try to use the new API if available at runtime
             if (![NSURLSessionConfiguration respondsToSelector:@selector(backgroundSessionConfigurationWithIdentifier:)])
             {
-                // iOS 7 or OS X 10.9
+                // Device runs on iOS 7 or OS X 10.9
                 backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfiguration:[NSString stringWithFormat:kTSKBackgroundSessionIdentifierFormat, self.appBundleId]];
             }
             else
-                //#endif
+#endif
             {
-                // iOS 8+ or OS X 10.10+
+                // Device runs on iOS 8+ or OS X 10.10+ or min SDK is iOS 8+ or OS X 10.10+
                 backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier: [NSString stringWithFormat:kTSKBackgroundSessionIdentifierFormat, self.appBundleId]];
             }
+#endif
             
+
             
 #if TARGET_OS_IPHONE
             // iOS-only settings
             // Do not wake up the App after completing the upload
             backgroundConfiguration.sessionSendsLaunchEvents = NO;
 #endif
-            
+
+#if (TARGET_OS_IPHONE) || ((!TARGET_OS_IPHONE) && (__MAC_OS_X_VERSION_MIN_REQUIRED >= 1100))
+            // On OS X discretionary is only available on 10.10
             backgroundConfiguration.discretionary = YES;
+#endif
             _backgroundSession = [NSURLSession sessionWithConfiguration:backgroundConfiguration delegate:self delegateQueue:nil];
         });
     }

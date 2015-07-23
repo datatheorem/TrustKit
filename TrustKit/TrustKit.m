@@ -410,8 +410,8 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
             
             // Create our reporter for sending pin validation failures
             CFBundleRef appBundle = CFBundleGetMainBundle();
-            NSString *appBundleId = (NSString *)CFBundleGetIdentifier(appBundle);
-            NSString *appVersion =  CFBundleGetValueForInfoDictionaryKey(appBundle, kCFBundleVersionKey);
+            NSString *appBundleId = (__bridge NSString *)CFBundleGetIdentifier(appBundle);
+            NSString *appVersion =  (__bridge NSString *)CFBundleGetValueForInfoDictionaryKey(appBundle, kCFBundleVersionKey);
             _pinFailureReporter = [[TSKRateLimitingBackgroundReporter alloc]initWithAppBundleId:appBundleId appVersion:appVersion];
             
             // Create a dispatch queue for activating the reporter
@@ -482,7 +482,7 @@ __attribute__((constructor)) static void initializeWithInfoPlist(int argc, const
     CFBundleRef appBundle = CFBundleGetMainBundle();
     
     // Retrieve the configuration from the App's Info.plist file
-    NSDictionary *trustKitConfigFromInfoPlist = CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)kTSKConfiguration);
+    NSDictionary *trustKitConfigFromInfoPlist = (__bridge NSDictionary *)CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)kTSKConfiguration);
     if (trustKitConfigFromInfoPlist)
     {
         TSKLog(@"Configuration supplied via the App's Info.plist");
