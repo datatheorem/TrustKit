@@ -1,8 +1,8 @@
 language: objective-c
 env:
   matrix: 
-    - TEST_SDK=macosx10.9
-    - TEST_SDK=macosx10.10
+#    - TEST_SDK=macosx10.9
+#    - TEST_SDK=macosx10.10
     - TEST_SDK=iphonesimulator8.1
 #    - TEST_SDK=iphonesimulator7.0
 script:
