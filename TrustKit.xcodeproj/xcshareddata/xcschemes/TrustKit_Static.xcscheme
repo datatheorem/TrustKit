@@ -46,9 +46,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8C87169F1B23A91D00267E1D"
-               BuildableName = "TrustKit_StaticTests.xctest"
-               BlueprintName = "TrustKit_StaticTests"
+               BlueprintIdentifier = "8C8480511A896EE30017C155"
+               BuildableName = "TrustKitTests.xctest"
+               BlueprintName = "TrustKitTests"
                ReferencedContainer = "container:TrustKit.xcodeproj">
             </BuildableReference>
          </TestableReference>
