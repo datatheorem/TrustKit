@@ -24,7 +24,7 @@
 @property (readonly, nonatomic) BOOL includeSubdomains;
 @property (readonly, nonatomic) NSArray *validatedCertificateChain;
 @property (readonly, nonatomic) NSArray *knownPins;
-@property (readonly, nonatomic) TSKPinValidationResult validationResult;
+@property (readonly, nonatomic) TSKPinValidationResult validationResult; // Not part of the HPKP spec
 
 
 // Init with default bundle ID and current time as the date-time

@@ -11,9 +11,11 @@
 
 #import <XCTest/XCTest.h>
 #import "TSKSimpleReporter.h"
-#import "TSKRateLimitingBackgroundReporter.h"
+#import "TSKBackgroundReporter.h"
+#import "TSKPinFailureReport.h"
 #import "TSKCertificateUtils.h"
-
+#import "reporting_utils.h"
+#import "TSKReportsRateLimiter.h"
 
 @interface TSKReporterTests : XCTestCase
 
@@ -57,7 +59,7 @@
 - (void)testSimpleReporter
 {
     // Just try a simple valid case to see if we can post this to the server
-    TSKSimpleReporter *reporter = [[TSKSimpleReporter alloc] initWithAppBundleId:@"com.example.ABC" appVersion:@"1.0"];
+    TSKSimpleReporter *reporter = [[TSKSimpleReporter alloc] initAndRateLimitReports:NO];
     
     [reporter pinValidationFailedForHostname:@"mail.example.com"
                                         port:[NSNumber numberWithInt:443]
@@ -76,59 +78,78 @@
     XCTAssert(YES, @"Pass");
 }
 
-- (void)testSimpleBackgroundReporter
-{
-    // Just try a simple valid case to see if we can post this to the server
-    TSKSimpleBackgroundReporter *reporter = [[TSKSimpleBackgroundReporter alloc] initWithAppBundleId:@"com.example.ABC" appVersion:@"1.0"];
-    
-    [reporter pinValidationFailedForHostname:@"mail.example.com"
-                                        port:[NSNumber numberWithInt:443]
-                                       trust:_testTrust
-                               notedHostname:@"example.com"
-                                  reportURIs:@[[NSURL URLWithString:@"http://127.0.0.1:8080/log_report"]]
-                           includeSubdomains:YES
-                                   knownPins:@[
-                                               [[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM=" options:0],
-                                               [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g=" options:0],
-                                               ]
-                            validationResult:TSKPinValidationResultFailed];
-    
-    [NSThread sleepForTimeInterval:5.0];
-    XCTAssert(YES, @"Pass");
-}
 
-- (void)testRateLimitingBackgroundReporter
+- (void)testReportsRateLimiter
 {
-    TSKRateLimitingBackgroundReporter *reporter = [[TSKRateLimitingBackgroundReporter alloc] initWithAppBundleId:@"com.example.ABC" appVersion:@"1.0"];
+    // Create the pin validation failure report
+    NSArray *certificateChain = convertTrustToPemArray(_testTrust);
+    NSArray *formattedPins = convertPinsToHpkpPins(@[[[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM=" options:0],
+                                                     [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g=" options:0],]);
     
-    [reporter pinValidationFailedForHostname:@"mail.example.com"
-                                        port:[NSNumber numberWithInt:443]
-                                       trust:_testTrust
-                               notedHostname:@"example.com"
-                                  reportURIs:@[[NSURL URLWithString:@"http://127.0.0.1:8080/log_report"]]
-                           includeSubdomains:YES
-                                   knownPins:@[
-                                               [[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM=" options:0],
-                                               [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g=" options:0],
-                                               ]
-                            validationResult:TSKPinValidationResultFailed];
+
+    TSKPinFailureReport *report = [[TSKPinFailureReport alloc] initWithAppBundleId:@"test"
+                                                                        appVersion:@"1.2.3"
+                                                                     notedHostname:@"example.com"
+                                                                          hostname:@"mail.example.com"
+                                                                              port:[NSNumber numberWithInt:443]
+                                                                          dateTime:[NSDate date]
+                                                                 includeSubdomains:NO
+                                                         validatedCertificateChain:certificateChain
+                                                                         knownPins:formattedPins
+                                                                  validationResult:TSKPinValidationResultFailedCertificateChainNotTrusted];
     
-    // The second report should be rate-limited
-    [reporter pinValidationFailedForHostname:@"mail.example.com"
-                                        port:[NSNumber numberWithInt:443]
-                                       trust:_testTrust
-                               notedHostname:@"example.com"
-                                  reportURIs:@[[NSURL URLWithString:@"http://127.0.0.1:8080/log_report"]]
-                           includeSubdomains:YES
-                                   knownPins:@[
-                                               [[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM=" options:0],
-                                               [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g=" options:0],
-                                               ]
-                            validationResult:TSKPinValidationResultFailed];
+    // Ensure the same report will not be sent twice in a row
+    XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == NO, @"Wrongly rate-limited a new report");
+    XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == YES, @"Did not rate-limit an identical report");
+    
+    // Set the last time the cache was reset to more than 24 hours ago and ensure the report is sent again
+    [TSKReportsRateLimiter setLastReportsCacheResetDate:[[NSDate date] dateByAddingTimeInterval:-3700*24]];
+    XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == NO, @"Reports cache was not properly reset after 24 hours");
+
+    
+    // Ensure the same report with a different validation result will be sent
+    report = [[TSKPinFailureReport alloc] initWithAppBundleId:@"test"
+                                                   appVersion:@"1.2.3"
+                                                notedHostname:@"example.com"
+                                                     hostname:@"mail.example.com"
+                                                         port:[NSNumber numberWithInt:443]
+                                                     dateTime:[NSDate date]
+                                            includeSubdomains:NO
+                                    validatedCertificateChain:certificateChain
+                                                    knownPins:formattedPins
+                                             validationResult:TSKPinValidationResultFailed];
+    XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == NO, @"Wrongly rate-limited a new report");
+    XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == YES, @"Did not rate-limit an identical report");
     
     
-    [NSThread sleepForTimeInterval:5.0];
-    XCTAssert(YES, @"Pass");
+    // Ensure the same report with a different hostname will be sent
+    report = [[TSKPinFailureReport alloc] initWithAppBundleId:@"test"
+                                                   appVersion:@"1.2.3"
+                                                notedHostname:@"example.com"
+                                                     hostname:@"other.example.com"
+                                                         port:[NSNumber numberWithInt:443]
+                                                     dateTime:[NSDate date]
+                                            includeSubdomains:NO
+                                    validatedCertificateChain:certificateChain
+                                                    knownPins:formattedPins
+                                             validationResult:TSKPinValidationResultFailedCertificateChainNotTrusted];
+    XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == NO, @"Wrongly rate-limited a new report");
+    XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == YES, @"Did not rate-limit an identical report");
+    
+    
+    // Ensure the same report with a different certificate chain will be sent
+    report = [[TSKPinFailureReport alloc] initWithAppBundleId:@"test"
+                                                   appVersion:@"1.2.3"
+                                                notedHostname:@"example.com"
+                                                     hostname:@"mail.example.com"
+                                                         port:[NSNumber numberWithInt:443]
+                                                     dateTime:[NSDate date]
+                                            includeSubdomains:NO
+                                    validatedCertificateChain:[certificateChain subarrayWithRange:NSMakeRange(1, 2)]
+                                                    knownPins:formattedPins
+                                             validationResult:TSKPinValidationResultFailedCertificateChainNotTrusted];
+    XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == NO, @"Wrongly rate-limited a new report");
+    XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == YES, @"Did not rate-limit an identical report");
 }
 
 @end

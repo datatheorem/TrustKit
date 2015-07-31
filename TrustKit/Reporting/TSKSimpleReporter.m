@@ -10,48 +10,49 @@
  */
 
 #import "TSKSimpleReporter.h"
+#import "TrustKit+Private.h"
 #import "TSKPinFailureReport.h"
 #import "reporting_utils.h"
+#import "TSKReportsRateLimiter.h"
+
 
 @interface TSKSimpleReporter()
 @property (nonatomic, strong) NSString * appBundleId;
 @property (nonatomic, strong) NSString * appVersion;
+@property BOOL shouldRateLimitReports;
 @end
 
 
 @implementation TSKSimpleReporter
 
 
-/*
- * Initialize the reporter with the app's bundle id and app version
- */
-- (instancetype)initWithAppBundleId:(NSString *) appBundleId
-                         appVersion:(NSString *) appVersion
+- (instancetype)initAndRateLimitReports:(BOOL)shouldRateLimitReports
 {
     self = [super init];
     if (self)
     {
-        if ((appBundleId == nil) || ([appBundleId length] == 0))
-        {
-            [NSException raise:@"TrustKit Simple Reporter configuration invalid"
-                        format:@"Reporter was given empty appBundleId"];
-        }
-        self.appBundleId = appBundleId;
+        self.shouldRateLimitReports = shouldRateLimitReports;
         
-        if ((appVersion == nil) || ([appVersion length] == 0))
+        // Retrieve the App's information
+        CFBundleRef appBundle = CFBundleGetMainBundle();
+        self.appBundleId = (__bridge NSString *)CFBundleGetIdentifier(appBundle);
+        self.appVersion =  (__bridge NSString *)CFBundleGetValueForInfoDictionaryKey(appBundle, kCFBundleVersionKey);
+        
+        if (self.appBundleId == nil)
         {
-            [NSException raise:@"TrustKit Simple Reporter configuration invalid"
-                        format:@"Reporter was given empty appVersion"];
+            // Should only happen when running tests
+            self.appBundleId = @"N/A";
         }
-        self.appVersion = appVersion;
+        
+        if (self.appVersion == nil)
+        {
+            self.appVersion = @"N/A";
+        }
     }
     return self;
 }
 
-/*
- * Pin validation failed for a connection to a pinned domain
- * In this implementation for a simple reporter, we're just going to send out the report upon each failure
- */
+
 - (void) pinValidationFailedForHostname:(NSString *) serverHostname
                                    port:(NSNumber *) serverPort
                                   trust:(SecTrustRef) serverTrust
@@ -61,6 +62,8 @@
                               knownPins:(NSArray *) knownPins
                        validationResult:(TSKPinValidationResult) validationResult;
 {
+    // Pin validation failed for a connection to a pinned domain
+    
     // Default port to 0 if not specified
     if (serverPort == nil)
     {
@@ -87,6 +90,15 @@
                                                         validatedCertificateChain:certificateChain
                                                                         knownPins:formattedPins
                                                                  validationResult:validationResult];
+    
+    
+    // Should we rate-limit this report?
+    if (self.shouldRateLimitReports && [TSKReportsRateLimiter shouldRateLimitReport:report])
+    {
+        // We recently sent the exact same report; do not send this report
+        TSKLog(@"Pin failure report for %@ was not sent due to rate-limiting", serverHostname);
+        return;
+    }
     
     // Create the session for sending the report
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];

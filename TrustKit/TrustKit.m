@@ -15,7 +15,8 @@
 #import "fishhook.h"
 #import "public_key_utils.h"
 #import "domain_registry.h"
-#import "TSKRateLimitingBackgroundReporter.h"
+#import "TSKBackgroundReporter.h"
+#import "TSKSimpleReporter.h"
 
 
 #pragma mark Configuration Constants
@@ -48,7 +49,7 @@ static BOOL _isTrustKitInitialized = NO;
 static dispatch_once_t dispatchOnceTrustKitInit;
 
 // Reporter delegate for sending pin violation reports
-static TSKRateLimitingBackgroundReporter *_pinFailureReporter = nil;
+static id _pinFailureReporter = nil;
 static char kTSKPinFailureReporterQueueLabel[] = "com.datatheorem.trustkit.reporterqueue";
 static dispatch_queue_t _pinFailureReporterQueue = NULL;
 
@@ -409,10 +410,18 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
             }
             
             // Create our reporter for sending pin validation failures
-            CFBundleRef appBundle = CFBundleGetMainBundle();
-            NSString *appBundleId = (NSString *)CFBundleGetIdentifier(appBundle);
-            NSString *appVersion =  CFBundleGetValueForInfoDictionaryKey(appBundle, kCFBundleVersionKey);
-            _pinFailureReporter = [[TSKRateLimitingBackgroundReporter alloc]initWithAppBundleId:appBundleId appVersion:appVersion];
+            @try
+            {
+                // Create a reporter that uses the background transfer service to send pin failure reports
+                _pinFailureReporter = [[TSKBackgroundReporter alloc]initAndRateLimitReports:YES];
+            
+            }
+            @catch (NSException *e)
+            {
+                // The bundle ID we get is nil if we're running tests on Travis so we have to use the simple reporter for unit tests
+                TSKLog(@"Null bundle ID: we are running the test suite; falling back to TSKSimpleReporter");
+                _pinFailureReporter = [[TSKSimpleReporter alloc]initAndRateLimitReports:YES];
+            }
             
             // Create a dispatch queue for activating the reporter
             // We use a serial queue targetting the global default queue in order to ensure reports are sent one by one
@@ -482,7 +491,7 @@ __attribute__((constructor)) static void initializeWithInfoPlist(int argc, const
     CFBundleRef appBundle = CFBundleGetMainBundle();
     
     // Retrieve the configuration from the App's Info.plist file
-    NSDictionary *trustKitConfigFromInfoPlist = CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)kTSKConfiguration);
+    NSDictionary *trustKitConfigFromInfoPlist = (__bridge NSDictionary *)CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)kTSKConfiguration);
     if (trustKitConfigFromInfoPlist)
     {
         TSKLog(@"Configuration supplied via the App's Info.plist");

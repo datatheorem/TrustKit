@@ -16,16 +16,13 @@
 		6B032D3A1AF1794D00EAFA69 /* TSKSimpleReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B032D391AF1794D00EAFA69 /* TSKSimpleReporter.m */; };
 		6B032D3E1AF1A4AC00EAFA69 /* TSKSimpleReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B032D3D1AF1A4AC00EAFA69 /* TSKSimpleReporter.h */; };
 		6B032D401AF1AEC200EAFA69 /* TSKReporterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B032D3F1AF1AEB600EAFA69 /* TSKReporterTests.m */; };
-		6B2B06AD1B05154A00FC749E /* TSKSimpleBackgroundReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B2B06AC1B05154A00FC749E /* TSKSimpleBackgroundReporter.h */; };
-		6B2B06AF1B05157400FC749E /* TSKSimpleBackgroundReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B2B06AE1B05157400FC749E /* TSKSimpleBackgroundReporter.m */; };
+		6B2B06AD1B05154A00FC749E /* TSKBackgroundReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B2B06AC1B05154A00FC749E /* TSKBackgroundReporter.h */; };
+		6B2B06AF1B05157400FC749E /* TSKBackgroundReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B2B06AE1B05157400FC749E /* TSKBackgroundReporter.m */; };
 		8C15F9931B132F9200F06C0E /* TSKPinningValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C15F9911B132F9200F06C0E /* TSKPinningValidator.h */; };
 		8C15F9941B132F9200F06C0E /* TSKPinningValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F9921B132F9200F06C0E /* TSKPinningValidator.m */; };
 		8C15F9A01B16094D00F06C0E /* TSKPinFailureReport.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C15F99E1B16094D00F06C0E /* TSKPinFailureReport.h */; };
 		8C15F9A11B16094E00F06C0E /* TSKPinFailureReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F99F1B16094D00F06C0E /* TSKPinFailureReport.m */; };
 		8C15F9A41B17564400F06C0E /* TSKPinConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F9A31B17564400F06C0E /* TSKPinConfigurationTests.m */; };
-		8C2311A31B4F65910057C459 /* TSKRateLimitingBackgroundReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C2311A11B4F65910057C459 /* TSKRateLimitingBackgroundReporter.h */; };
-		8C2311A41B4F65910057C459 /* TSKRateLimitingBackgroundReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2311A21B4F65910057C459 /* TSKRateLimitingBackgroundReporter.m */; };
-		8C2311A51B5039490057C459 /* TSKRateLimitingBackgroundReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2311A21B4F65910057C459 /* TSKRateLimitingBackgroundReporter.m */; };
 		8C84804D1A896EE30017C155 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C84804C1A896EE30017C155 /* TrustKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8C8480531A896EE30017C155 /* TrustKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C8480471A896EE30017C155 /* TrustKit.framework */; };
 		8C84806D1A896F660017C155 /* TrustKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C84806C1A896F660017C155 /* TrustKit.m */; };
@@ -34,7 +31,7 @@
 		8C8716AF1B23A9DD00267E1D /* libdomain_registry_lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CE9192B1AEA0F7E002B29AE /* libdomain_registry_lib.a */; };
 		8C8716B01B23A9DD00267E1D /* libinit_registry_tables_lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CE9192C1AEA0F7E002B29AE /* libinit_registry_tables_lib.a */; };
 		8C8716B11B23A9F000267E1D /* TSKSimpleReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B032D391AF1794D00EAFA69 /* TSKSimpleReporter.m */; };
-		8C8716B21B23A9F400267E1D /* TSKSimpleBackgroundReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B2B06AE1B05157400FC749E /* TSKSimpleBackgroundReporter.m */; };
+		8C8716B21B23A9F400267E1D /* TSKBackgroundReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B2B06AE1B05157400FC749E /* TSKBackgroundReporter.m */; };
 		8C8716B31B23A9F700267E1D /* TSKPinFailureReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F99F1B16094D00F06C0E /* TSKPinFailureReport.m */; };
 		8C8716B41B23A9FA00267E1D /* reporting_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CCBD15A1B186D1100CB88AF /* reporting_utils.m */; };
 		8C8716B51B23AA0600267E1D /* public_key_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9191D1AEA073C002B29AE /* public_key_utils.m */; };
@@ -42,6 +39,8 @@
 		8C8716B71B23AA0B00267E1D /* TSKPinningValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F9921B132F9200F06C0E /* TSKPinningValidator.m */; };
 		8C8716B81B23AA0D00267E1D /* TrustKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C84806C1A896F660017C155 /* TrustKit.m */; };
 		8C9492F61B2379A100F5DF38 /* reporting_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C9492F51B2379A100F5DF38 /* reporting_utils.h */; };
+		8C9EBE021B619BBE00CA7EE0 /* TSKReportsRateLimiter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C9EBE001B619BBE00CA7EE0 /* TSKReportsRateLimiter.h */; };
+		8C9EBE031B619BBE00CA7EE0 /* TSKReportsRateLimiter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBE011B619BBE00CA7EE0 /* TSKReportsRateLimiter.m */; };
 		8CC78B201B1B586F00523A25 /* TSKCertificateUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC78B1F1B1B586F00523A25 /* TSKCertificateUtils.m */; };
 		8CC78B251B1B616500523A25 /* TSKPublicKeyAlgorithmTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC78B241B1B616500523A25 /* TSKPublicKeyAlgorithmTests.m */; };
 		8CC78B261B1B696500523A25 /* ThawteSSLCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CC78B211B1B604A00523A25 /* ThawteSSLCA.der */; };
@@ -95,15 +94,13 @@
 		6B032D391AF1794D00EAFA69 /* TSKSimpleReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKSimpleReporter.m; path = Reporting/TSKSimpleReporter.m; sourceTree = "<group>"; };
 		6B032D3D1AF1A4AC00EAFA69 /* TSKSimpleReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKSimpleReporter.h; path = Reporting/TSKSimpleReporter.h; sourceTree = "<group>"; };
 		6B032D3F1AF1AEB600EAFA69 /* TSKReporterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSKReporterTests.m; sourceTree = "<group>"; };
-		6B2B06AC1B05154A00FC749E /* TSKSimpleBackgroundReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKSimpleBackgroundReporter.h; path = Reporting/TSKSimpleBackgroundReporter.h; sourceTree = "<group>"; };
-		6B2B06AE1B05157400FC749E /* TSKSimpleBackgroundReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKSimpleBackgroundReporter.m; path = Reporting/TSKSimpleBackgroundReporter.m; sourceTree = "<group>"; };
+		6B2B06AC1B05154A00FC749E /* TSKBackgroundReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKBackgroundReporter.h; path = Reporting/TSKBackgroundReporter.h; sourceTree = "<group>"; };
+		6B2B06AE1B05157400FC749E /* TSKBackgroundReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKBackgroundReporter.m; path = Reporting/TSKBackgroundReporter.m; sourceTree = "<group>"; };
 		8C15F9911B132F9200F06C0E /* TSKPinningValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKPinningValidator.h; path = Pinning/TSKPinningValidator.h; sourceTree = "<group>"; };
 		8C15F9921B132F9200F06C0E /* TSKPinningValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKPinningValidator.m; path = Pinning/TSKPinningValidator.m; sourceTree = "<group>"; };
 		8C15F99E1B16094D00F06C0E /* TSKPinFailureReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKPinFailureReport.h; path = Reporting/TSKPinFailureReport.h; sourceTree = "<group>"; };
 		8C15F99F1B16094D00F06C0E /* TSKPinFailureReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKPinFailureReport.m; path = Reporting/TSKPinFailureReport.m; sourceTree = "<group>"; };
 		8C15F9A31B17564400F06C0E /* TSKPinConfigurationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKPinConfigurationTests.m; sourceTree = "<group>"; };
-		8C2311A11B4F65910057C459 /* TSKRateLimitingBackgroundReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKRateLimitingBackgroundReporter.h; path = Reporting/TSKRateLimitingBackgroundReporter.h; sourceTree = "<group>"; };
-		8C2311A21B4F65910057C459 /* TSKRateLimitingBackgroundReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKRateLimitingBackgroundReporter.m; path = Reporting/TSKRateLimitingBackgroundReporter.m; sourceTree = "<group>"; };
 		8C8480471A896EE30017C155 /* TrustKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TrustKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C84804B1A896EE30017C155 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C84804C1A896EE30017C155 /* TrustKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrustKit.h; sourceTree = "<group>"; };
@@ -112,6 +109,8 @@
 		8C84806C1A896F660017C155 /* TrustKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrustKit.m; sourceTree = "<group>"; };
 		8C8716961B23A91D00267E1D /* libTrustKit_Static.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTrustKit_Static.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C9492F51B2379A100F5DF38 /* reporting_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = reporting_utils.h; path = Reporting/reporting_utils.h; sourceTree = "<group>"; };
+		8C9EBE001B619BBE00CA7EE0 /* TSKReportsRateLimiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKReportsRateLimiter.h; path = Reporting/TSKReportsRateLimiter.h; sourceTree = "<group>"; };
+		8C9EBE011B619BBE00CA7EE0 /* TSKReportsRateLimiter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKReportsRateLimiter.m; path = Reporting/TSKReportsRateLimiter.m; sourceTree = "<group>"; };
 		8CC78B1C1B1B55EC00523A25 /* COMODOECCDomainValidationSecureServerCA2.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = COMODOECCDomainValidationSecureServerCA2.der; sourceTree = "<group>"; };
 		8CC78B1D1B1B55EC00523A25 /* sni41871.cloudflaressl.com.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = sni41871.cloudflaressl.com.der; sourceTree = "<group>"; };
 		8CC78B1E1B1B586F00523A25 /* TSKCertificateUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSKCertificateUtils.h; sourceTree = "<group>"; };
@@ -305,13 +304,13 @@
 		8CE919201AEA0745002B29AE /* Reporting */ = {
 			isa = PBXGroup;
 			children = (
+				8C9EBE001B619BBE00CA7EE0 /* TSKReportsRateLimiter.h */,
+				8C9EBE011B619BBE00CA7EE0 /* TSKReportsRateLimiter.m */,
 				8CE919261AEA0991002B29AE /* TSKReporterDelegate.h */,
 				6B032D3D1AF1A4AC00EAFA69 /* TSKSimpleReporter.h */,
 				6B032D391AF1794D00EAFA69 /* TSKSimpleReporter.m */,
-				6B2B06AC1B05154A00FC749E /* TSKSimpleBackgroundReporter.h */,
-				6B2B06AE1B05157400FC749E /* TSKSimpleBackgroundReporter.m */,
-				8C2311A11B4F65910057C459 /* TSKRateLimitingBackgroundReporter.h */,
-				8C2311A21B4F65910057C459 /* TSKRateLimitingBackgroundReporter.m */,
+				6B2B06AC1B05154A00FC749E /* TSKBackgroundReporter.h */,
+				6B2B06AE1B05157400FC749E /* TSKBackgroundReporter.m */,
 				8C15F99E1B16094D00F06C0E /* TSKPinFailureReport.h */,
 				8C15F99F1B16094D00F06C0E /* TSKPinFailureReport.m */,
 				8C9492F51B2379A100F5DF38 /* reporting_utils.h */,
@@ -338,13 +337,13 @@
 			files = (
 				8CE9192D1AEA0F7E002B29AE /* domain_registry.h in Headers */,
 				8CE9191E1AEA073C002B29AE /* public_key_utils.h in Headers */,
-				6B2B06AD1B05154A00FC749E /* TSKSimpleBackgroundReporter.h in Headers */,
+				6B2B06AD1B05154A00FC749E /* TSKBackgroundReporter.h in Headers */,
+				8C9EBE021B619BBE00CA7EE0 /* TSKReportsRateLimiter.h in Headers */,
 				6B032D3E1AF1A4AC00EAFA69 /* TSKSimpleReporter.h in Headers */,
 				8C15F9931B132F9200F06C0E /* TSKPinningValidator.h in Headers */,
 				8C9492F61B2379A100F5DF38 /* reporting_utils.h in Headers */,
 				8C84804D1A896EE30017C155 /* TrustKit.h in Headers */,
 				8C15F9A01B16094D00F06C0E /* TSKPinFailureReport.h in Headers */,
-				8C2311A31B4F65910057C459 /* TSKRateLimitingBackgroundReporter.h in Headers */,
 				8CE919271AEA0991002B29AE /* TSKReporterDelegate.h in Headers */,
 				8CE919251AEA07C5002B29AE /* ssl_pin_verifier.h in Headers */,
 				8CE919361AEA0F8B002B29AE /* fishhook.h in Headers */,
@@ -479,11 +478,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CE919221AEA077F002B29AE /* ssl_pin_verifier.m in Sources */,
-				6B2B06AF1B05157400FC749E /* TSKSimpleBackgroundReporter.m in Sources */,
+				8C9EBE031B619BBE00CA7EE0 /* TSKReportsRateLimiter.m in Sources */,
+				6B2B06AF1B05157400FC749E /* TSKBackgroundReporter.m in Sources */,
 				6B032D3A1AF1794D00EAFA69 /* TSKSimpleReporter.m in Sources */,
 				8CE9191F1AEA073C002B29AE /* public_key_utils.m in Sources */,
 				8CE919351AEA0F8B002B29AE /* fishhook.c in Sources */,
-				8C2311A41B4F65910057C459 /* TSKRateLimitingBackgroundReporter.m in Sources */,
 				8C15F9A11B16094E00F06C0E /* TSKPinFailureReport.m in Sources */,
 				8C15F9941B132F9200F06C0E /* TSKPinningValidator.m in Sources */,
 				8C84806D1A896F660017C155 /* TrustKit.m in Sources */,
@@ -513,9 +512,8 @@
 				8C8716AD1B23A9D200267E1D /* fishhook.c in Sources */,
 				8C8716B31B23A9F700267E1D /* TSKPinFailureReport.m in Sources */,
 				8C8716B41B23A9FA00267E1D /* reporting_utils.m in Sources */,
-				8C2311A51B5039490057C459 /* TSKRateLimitingBackgroundReporter.m in Sources */,
 				8C8716B81B23AA0D00267E1D /* TrustKit.m in Sources */,
-				8C8716B21B23A9F400267E1D /* TSKSimpleBackgroundReporter.m in Sources */,
+				8C8716B21B23A9F400267E1D /* TSKBackgroundReporter.m in Sources */,
 				8C8716B11B23A9F000267E1D /* TSKSimpleReporter.m in Sources */,
 				8C8716B61B23AA0800267E1D /* ssl_pin_verifier.m in Sources */,
 			);
