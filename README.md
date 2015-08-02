@@ -45,7 +45,13 @@ Sample Usage
 ------------
 
 Enabling SSL pinning only requires initializing TrustKit with a pinning policy
-(domains, Subject Public Key Info hashes, and additional settings):
+(domains, Subject Public Key Info hashes, and additional settings).
+
+The policy can be configured within the App's Info.plist:
+
+![Info.plist policy](https://datatheorem.github.io/TrustKit/images/linking3_dynamic.png)
+
+Alternatively, the pinning policy can be set programmatically:
 
     NSDictionary *trustKitConfig;
     trustKitConfig = @{
