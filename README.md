@@ -30,7 +30,7 @@ when an unexpected certificate chain is detected, similarly to the _report-uri_
 directive described in the [HTTP Public Key Pinning
 specification](https://tools.ietf.org/html/rfc7469).
 
-TrustKit will be open-sourced at [Black Hat 2015 USA][bh2015-conf].
+TrustKit was open-sourced at [Black Hat 2015 USA][bh2015-conf].
 
 
 Getting Started
@@ -44,8 +44,16 @@ Getting Started
 Sample Usage
 ------------
 
-Enabling SSL pinning only requires initializing TrustKit with a pinning policy
-(domains, Subject Public Key Info hashes, and additional settings).
+TrustKit can be deployed using CocoaPods, by adding the following line to your Podfile:
+
+    pod 'TrustKit'
+
+Then run:
+
+    $ pod install
+
+Then, enabling SSL pinning globally in the App only requires initializing TrustKit 
+with a pinning policy (domains, Subject Public Key Info hashes, and additional settings).
 
 The policy can be configured within the App's Info.plist:
 
