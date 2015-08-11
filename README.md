@@ -1,7 +1,7 @@
 TrustKit
 ========
 
-[![Build Status](https://magnum.travis-ci.com/datatheorem/TrustKit.svg?token=rfjoe3qyr4ULeon1s9xq&branch=dev)](https://magnum.travis-ci.com/datatheorem/TrustKit)
+[![Build Status](https://travis-ci.org/datatheorem/TrustKit.svg)](https://travis-ci.org/datatheorem/TrustKit)
 
 TrustKit is an open source framework that makes it easy to deploy SSL public key
 pinning in any iOS or OS X App.
