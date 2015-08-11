@@ -69,11 +69,38 @@ connections, in order to perform additional validation against the server's
 certificate chain based on the configured SSL pinning policy.
 
 
-### Choosing a Pinning Policy
+### Adding TrustKit as a Dependency - CocoaPods
+
+The easiest way to deploy TrustKit in an App is via CocoaPods. To do so, add the 
+following line to your Podfile:
+
+    pod 'TrustKit'
+
+Then run:
+
+    $ pod install
+
+If CocoaPods cannot be used, TrustKit can be added to an Xcode project manually;
+instructions on how to do so are available at the end of this guide.
+
+
+### Configuring a Pinning Policy
+
+There are two ways to supply a pinning policy to TrustKit:
+
+* By adding configuration keys to the App's _Info.plist_ file under a 
+`TSKConfiguration` dictionary key:
+
+    ![](https://datatheorem.github.io/TrustKit/images/linking3_dynamic.png)
+
+* Programmatically, by calling the `initializeWithConfiguration:` method with your 
+pinning policy.
 
 A pinning policy is a dictionary of domain names and pinning configuration keys.
 At a minimum, the configuration should specify a list of SSL pins and the
 corresponding certificates' public key algorithms. For example:
+
+    #import "TrustKit.h"
 
     NSDictionary *trustKitConfig;
     trustKitConfig = @{
@@ -109,10 +136,14 @@ validation was to be enforced.
 The list of all the configuration keys is available in the
 [documentation](https://datatheorem.github.io/TrustKit/documentation/Classes/TrustKit.html).
 
+After supplying the pinning policy, all of the App's SSL connections will enforce
+the policy.
 
-### Adding TrustKit as a Dependency
 
-For Apps targeting iOS 7, TrustKit must be statically linked.
+### Adding TrustKit as a Dependency - Static Linking
+
+If CocoaPods can't be used and for Apps targeting iOS 7, TrustKit can be statically 
+linked.
 
 1. Drag and drop the TrustKit Xcode project file in your project:
 
@@ -131,45 +162,10 @@ Paths" setting and set "Always Search Header Paths" to "Yes":
 4. Lastly, initialize TrustKit with your pinning policy. 
 
 
-### Initializing TrustKit With a Pinning Policy
+### Adding TrustKit as a Dependency - Dynamic Linking
 
-There are two ways to supply a pinning policy to TrustKit:
-
-* By adding configuration keys to the App's _Info.plist_ file under a 
-`TSKConfiguration` dictionary key:
-
-  ![](https://datatheorem.github.io/TrustKit/images/linking3_dynamic.png)
-
-* Programmatically by calling the `initializeWithConfiguration:` method with your 
-pinning policy:
-
-        #import "TrustKit.h"
-
-        [...]
-
-        NSDictionary *trustKitConfig =
-        @{
-          @"www.datatheorem.com" : @{
-                  kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                  kTSKPublicKeyHashes : @[@"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=",
-                                          @"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8="
-                                          ]}};
-
-        [TrustKit initializeWithConfiguration:trustKitConfig];
-
-
-### CocoaPods
-
-TrustKit will be made available through CocoaPods when it is open-sourced
-at Black Hat 2015 in August. Until then, TrustKit can still be added as a local
-pod by adding the following dependency to your project's Podfile:
-
-    pod 'TrustKit', :path => '/path/to/TrustKit'
-
-
-### Dynamic Linking
-
-For Apps targeting iOS 8+ or OS X, TrustKit can be dynamically linked.
+If CocoaPods can't be used and for Apps targeting iOS 8+ or OS X, TrustKit can be 
+dynamically linked.
 
 1. Drag and drop the TrustKit Xcode project file in your project:
 
@@ -189,7 +185,7 @@ Manual Pin Validation
 In a few specific scenarios, TrustKit cannot intercept outgoing SSL connections
 and automatically validate the server's identity against the pinning policy.
 This includes for example connections initiated by external processes (such as
-the `NSURLSession`'s background transfer service) or through third-party SSL
+`NSURLSession`'s background transfer service) or through third-party SSL
 libraries (such as OpenSSL).
 
 For these connections, the pin validation must be
