@@ -159,7 +159,10 @@ Paths" setting and set "Always Search Header Paths" to "Yes":
 
     ![](https://datatheorem.github.io/TrustKit/images/linking3_static.png)
 
-4. Lastly, initialize TrustKit with your pinning policy. 
+4. Add `-ObjC` to the to the "Other Linker Flags" parameter within the App's Build 
+Settings.
+
+5. Lastly, initialize TrustKit with your pinning policy.
 
 
 ### Adding TrustKit as a Dependency - Dynamic Linking
