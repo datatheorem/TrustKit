@@ -639,6 +639,7 @@
 					"$(PROJECT_DIR)/TrustKit",
 					"$(PROJECT_DIR)/TrustKit/Dependencies/domain_registry",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SDKROOT = "$(inherited)";
@@ -734,6 +735,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/TrustKit/Dependencies/domain_registry",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = "$(inherited)";
