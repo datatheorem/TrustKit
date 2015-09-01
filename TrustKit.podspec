@@ -10,7 +10,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '7.0'
   s.osx.deployment_target = '10.9'
   s.source_files = 'TrustKit', 'TrustKit/**/*.{h,m}', 'TrustKit/Dependencies/fishhook/*.{h,c}'
-  s.public_header_files = 'TrustKit/TrustKit.h', 'TrustKit/Pinning/TSKPinVerifier.h'
+  s.public_header_files = 'TrustKit/TrustKit.h', 'TrustKit/Pinning/TSKPinningValidator.h'
   s.frameworks = 'Foundation', 'Security'
   s.vendored_libraries = 'TrustKit/Dependencies/domain_registry/*.a'
   s.requires_arc = true
