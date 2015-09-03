@@ -35,7 +35,8 @@
 }
 
 
-
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
 // Tests a secure connection to https://www.datatheorem.com by pinning only to the CA public key
 - (void)testConnectionValidatingCAPublicKey
@@ -53,6 +54,7 @@
     NSError *error = nil;
     NSHTTPURLResponse *response;
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.datatheorem.com"]];
+    
     [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     
     XCTAssertNil(error, @"Connection had an error: %@", error);
@@ -124,5 +126,6 @@
     XCTAssert(![TrustKit wasTrustKitCalled], @"TrustKit was called");
 }
 
+#pragma clang diagnostic pop
 
 @end
