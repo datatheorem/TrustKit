@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "E302059AEA03412BDA59789695F25F6B3B3F4EE6",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "E302059AEA03412BDA59789695F25F6B3B3F4EE6" : 0,
+    "2B8D60F823B54095FDE698DB84D10E9A0B2DB18B" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "FEA687C9-BCA7-46D9-BC27-A17B542FAC0A",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "E302059AEA03412BDA59789695F25F6B3B3F4EE6" : "TrustKit",
+    "2B8D60F823B54095FDE698DB84D10E9A0B2DB18B" : "github\/PLPatchMaster"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "TrustKit",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "TrustKit.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/plausiblelabs\/PLPatchMaster.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2B8D60F823B54095FDE698DB84D10E9A0B2DB18B"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:datatheorem\/TrustKit.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "E302059AEA03412BDA59789695F25F6B3B3F4EE6"
+    }
+  ]
+}
