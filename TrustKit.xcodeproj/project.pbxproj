@@ -650,7 +650,7 @@
 				SDKROOT = "$(inherited)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "$(inherited)";
-				VALID_ARCHS = "arm64 armv7 armv7s x86_64";
+				VALID_ARCHS = "$(inherited)";
 			};
 			name = Debug;
 		};
@@ -680,7 +680,7 @@
 				SDKROOT = "$(inherited)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "$(inherited)";
-				VALID_ARCHS = "arm64 armv7 armv7s x86_64";
+				VALID_ARCHS = "$(inherited)";
 			};
 			name = Release;
 		};
@@ -705,7 +705,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = "$(inherited)";
 				SUPPORTED_PLATFORMS = "$(inherited)";
-				VALID_ARCHS = "arm64 armv7 armv7s x86_64";
+				VALID_ARCHS = "$(inherited)";
 			};
 			name = Debug;
 		};
@@ -726,7 +726,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = "$(inherited)";
 				SUPPORTED_PLATFORMS = "$(inherited)";
-				VALID_ARCHS = "arm64 armv7 armv7s x86_64";
+				VALID_ARCHS = "$(inherited)";
 			};
 			name = Release;
 		};
@@ -753,6 +753,7 @@
 				SDKROOT = "$(inherited)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "$(inherited)";
+				VALID_ARCHS = "$(inherited)";
 			};
 			name = Debug;
 		};
@@ -775,6 +776,7 @@
 				SDKROOT = "$(inherited)";
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "$(inherited)";
+				VALID_ARCHS = "$(inherited)";
 			};
 			name = Release;
 		};
