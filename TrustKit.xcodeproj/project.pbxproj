@@ -852,10 +852,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SDKROOT = "$(inherited)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "$(inherited)";
-				VALID_ARCHS = "$(inherited)";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				VALID_ARCHS = "armv7 arm64";
 			};
 			name = Debug;
 		};
@@ -882,10 +882,10 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SDKROOT = "$(inherited)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "$(inherited)";
-				VALID_ARCHS = "$(inherited)";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				VALID_ARCHS = "armv7 arm64";
 			};
 			name = Release;
 		};
@@ -957,10 +957,10 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = "$(inherited)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "$(inherited)";
-				VALID_ARCHS = "$(inherited)";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				VALID_ARCHS = "armv7 arm64";
 			};
 			name = Debug;
 		};
@@ -980,16 +980,18 @@
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = "$(inherited)";
+				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "$(inherited)";
-				VALID_ARCHS = "$(inherited)";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
+				VALID_ARCHS = "armv7 arm64";
 			};
 			name = Release;
 		};
 		8CA6CC0E1BAE2ADD00BDA419 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
@@ -1012,6 +1014,7 @@
 		8CA6CC0F1BAE2ADD00BDA419 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -1035,6 +1038,7 @@
 		8CA6CC101BAE2ADD00BDA419 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -1049,6 +1053,7 @@
 		8CA6CC111BAE2ADD00BDA419 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
