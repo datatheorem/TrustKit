@@ -7,6 +7,32 @@ TrustKit is an open source framework that makes it easy to deploy SSL public key
 pinning in any iOS or OS X App.
 
 
+iOS 9 FAQ
+---------
+
+### Does TrustKit work on iOS 9?
+
+* Explicit pinning validation using the `TSKPinningValidator` class in your
+authentication handlers will work fine.
+* Implicit pinning validation, where TrustKit automatically "hooks" and 
+validates the App's 'outgoing SSL connections does not work with the current
+version (1.1.3) on iOS 9. This means that the App will still work fine but the 
+pinning validation will not be performed automatically.
+
+
+### What should I do?
+
+For pinning to work right now on iOS 9 devices, you can use the 
+`TSKPinningValidator` class to manually check the server's certificate chain 
+against your App's pinning policy.
+
+Apple has made changes in how function calls happen within and across Apple 
+frameworks, which break the technique we used in TrustKit to intercept outgoing
+SSL connections. The next release of TrustKit (1.2.0) will address this as much 
+as technically possible, and a blog post with technical details on what has changed 
+will be available shortly.
+
+
 Overview
 --------
 
