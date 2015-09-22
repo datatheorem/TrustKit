@@ -16,8 +16,9 @@ iOS 9 FAQ
 authentication handlers will work fine.
 * Implicit pinning validation, where TrustKit automatically "hooks" and 
 validates the App's 'outgoing SSL connections does not work with the current
-version (1.1.3) on iOS 9. This means that the App will still work fine but the 
-pinning validation will not be performed automatically.
+version (1.1.3) on iOS 9, on some devices (including the iPhone 6). This 
+means that the App will still work fine but the pinning validation will not 
+be performed automatically.
 
 
 ### What should I do?
