@@ -42,33 +42,47 @@ FOUNDATION_EXPORT const NSString *kTSKAlgorithmEcDsaSecp256r1;
  
  Initializing TrustKit requires supplying a dictionary containing domain names as keys and dictionaries as values. Each domain dictionary should specify some configuration keys, which will specify the pinning policy for this domain. For example:
  
-     NSDictionary *trustKitConfig;
-     trustKitConfig = @{
-                        @"www.datatheorem.com" : @{
-                                kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                                kTSKPublicKeyHashes : @[
-                                        @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=",
-                                        @"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8="
-                                        ],
-                                kTSKEnforcePinning : @NO,
-                                kTSKReportUris : @[@"http://report.datatheorem.com/log_hpkp_report"],
-                                },
-                        @"yahoo.com" : @{
-                                kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                kTSKPublicKeyHashes : @[
-                                        @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
-                                        @"rFjc3wG7lTZe43zeYTvPq8k4xdDEutCmIhI5dn4oCeE=",
-                                        ],
-                                kTSKIncludeSubdomains : @YES
-                                }
-                        };
+    NSDictionary *trustKitConfig;
+    trustKitConfig = @{
+                       kTSKPinnedDomains : @{
+                               @"www.datatheorem.com" : @{
+                                       kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                                       kTSKPublicKeyHashes : @[
+                                               @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=",
+                                               @"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8="
+                                               ],
+                                       kTSKEnforcePinning : @NO,
+                                       kTSKReportUris : @[@"http://report.datatheorem.com/log_hpkp_report"],
+                                       },
+                               @"yahoo.com" : @{
+                                       kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                       kTSKPublicKeyHashes : @[
+                                               @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                                               @"rFjc3wG7lTZe43zeYTvPq8k4xdDEutCmIhI5dn4oCeE=",
+                                               ],
+                                       kTSKIncludeSubdomains : @YES
+                                       }
+                               }};
 
       [TrustKit initializeWithConfiguration:trustKitConfig];
  
   It is also possible to supply the pinning policy by adding these configuration keys to the App's _Info.plist_ under a `TSKConfiguration` dictionary key. When doing so, no method needs to be called and TrustKit will automatically be initialized with the policy.
  
  
- ### Required Configuration Keys
+ ### Global Configuration Keys
+ 
+ #### `kTSKPinnedDomains` (required)
+ TBD
+ 
+ #### `kTSKSwizzleNetworkDelegates` (optional)
+ TBD
+
+ #### `kTSKIgnorePinningForUserDefinedTrustAnchors` (optional - OS X only)
+ If set to `YES`, pinning validation will be skipped if the server's certificate chain terminates at a user-defined trust anchor (such as a root CA that isn't part of OS X's default trust store) and no pin failure reports will be sent; default value is `YES`.
+ This is useful for allowing SSL connections through corporate proxies or firewalls. See "How does key pinning interact with local proxies and filters?" within the Chromium security FAQ at https://www.chromium.org/Home/chromium-security/security-faq for more information.
+
+ 
+ ### Required Domain-specific Keys
  
  #### `kTSKPublicKeyHashes`
  An array of SSL pins; each pin is the base64-encoded SHA-256 hash of a certificate's Subject Public Key Info. TrustKit will verify that at least one of the specified pins is found in the server's evaluated certificate chain.
@@ -77,7 +91,7 @@ FOUNDATION_EXPORT const NSString *kTSKAlgorithmEcDsaSecp256r1;
  An array of `kTSKAlgorithm` constants to specify the public key algorithms for the keys to be pinned. TrustKit requires this information in order to compute SSL pins when validating a server's certificate chain, because there are no APIs to directly extract the key's algorithm from an SSL certificate. To minimize the performance impact of Trustkit, only one algorithm should be enabled.
  
  
- ### Optional Configuration Keys
+ ### Optional Domain-specific Keys
  
  #### `kTSKIncludeSubdomains`
  If set to `YES`, also pin all the subdomains of the specified domain; default value is `NO`.
@@ -110,10 +124,6 @@ FOUNDATION_EXPORT const NSString *kTSKAlgorithmEcDsaSecp256r1;
  #### `kTSKDisableDefaultReportUri`
  If set to `YES`, the default report URL for sending pin failure reports will be disabled; default value is `NO`.
  By default, pin failure reports are sent to a report server hosted by Data Theorem, for detecting potential CA compromises and man-in-the-middle attacks, as well as providing a free dashboard for developers. Only pin failure reports are sent, which contain the App's bundle ID and the server's hostname and certificate chain that failed validation.
- 
- #### `kTSKIgnorePinningForUserDefinedTrustAnchors` (OS X only)
- If set to `YES`, pinning validation will be skipped if the server's certificate chain terminates at a user-defined trust anchor (such as a root CA that isn't part of OS X's default trust store) and no pin failure reports will be sent; default value is `YES`.
- This is useful for allowing SSL connections through corporate proxies or firewalls. See "How does key pinning interact with local proxies and filters?" within the Chromium security FAQ at https://www.chromium.org/Home/chromium-security/security-faq for more information.
  
  
  ### Public Key Algorithms Keys
