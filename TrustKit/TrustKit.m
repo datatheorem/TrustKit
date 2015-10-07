@@ -214,6 +214,8 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
     
     
     // Retrieve global settings
+    
+    // Should we auto-swizzle network delegates
     NSNumber *shouldSwizzleNetworkDelegates = TrustKitArguments[kTSKSwizzleNetworkDelegates];
     if (shouldSwizzleNetworkDelegates)
     {
@@ -226,6 +228,22 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
     }
     
     
+#if !TARGET_OS_IPHONE
+    // OS X only: extract the optional ignorePinningForUserDefinedTrustAnchors setting
+    NSNumber *shouldIgnorePinningForUserDefinedTrustAnchors = domainTrustKitArguments[kTSKIgnorePinningForUserDefinedTrustAnchors];
+    if (shouldIgnorePinningForUserDefinedTrustAnchors)
+    {
+        domainFinalConfiguration[kTSKIgnorePinningForUserDefinedTrustAnchors] = shouldIgnorePinningForUserDefinedTrustAnchors;
+    }
+    else
+    {
+        // Default setting is YES
+        domainFinalConfiguration[kTSKIgnorePinningForUserDefinedTrustAnchors] = [NSNumber numberWithBool:YES];
+    }
+#endif
+    
+    
+    // Retrieve the pinning policy for each domains
     if ((TrustKitArguments[kTSKPinnedDomains] == nil) || ([TrustKitArguments[kTSKPinnedDomains] count] < 1))
     {
         [NSException raise:@"TrustKit configuration invalid"
@@ -233,7 +251,6 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
     }
     
     
-    // Retrieve the pinning policy for each domains
     for (NSString *domainName in TrustKitArguments[kTSKPinnedDomains])
     {
         // Sanity checks on the domain name
@@ -284,21 +301,6 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
             // Default setting is YES
             domainFinalConfiguration[kTSKEnforcePinning] = [NSNumber numberWithBool:YES];
         }
-        
-        
-#if !TARGET_OS_IPHONE
-        // OS X only: extract the optional ignorePinningForUserDefinedTrustAnchors setting
-        NSNumber *shouldIgnorePinningForUserDefinedTrustAnchors = domainTrustKitArguments[kTSKIgnorePinningForUserDefinedTrustAnchors];
-        if (shouldIgnorePinningForUserDefinedTrustAnchors)
-        {
-            domainFinalConfiguration[kTSKIgnorePinningForUserDefinedTrustAnchors] = shouldIgnorePinningForUserDefinedTrustAnchors;
-        }
-        else
-        {
-            // Default setting is YES
-            domainFinalConfiguration[kTSKIgnorePinningForUserDefinedTrustAnchors] = [NSNumber numberWithBool:YES];
-        }
-#endif
         
         
         // Extract the optional disableDefaultReportUri setting
