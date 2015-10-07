@@ -49,15 +49,16 @@ static BOOL isSubdomain(NSString *domain, NSString *subdomain)
 NSString *getPinningConfigurationKeyForDomain(NSString *hostname, NSDictionary *trustKitConfiguration)
 {
     NSString *configHostname = nil;
+    NSDictionary *domainsPinningPolicy = trustKitConfiguration[kTSKPinnedDomains];
     
-    if (trustKitConfiguration[hostname] == nil)
+    if (domainsPinningPolicy[hostname] == nil)
     {
         // No pins explicitly configured for this domain
         // Look for an includeSubdomain pin that applies
-        for (NSString *pinnedServerName in trustKitConfiguration)
+        for (NSString *pinnedServerName in domainsPinningPolicy)
         {
             // Check each domain configured with the includeSubdomain flag
-            if ([trustKitConfiguration[pinnedServerName][kTSKIncludeSubdomains] boolValue])
+            if ([domainsPinningPolicy[pinnedServerName][kTSKIncludeSubdomains] boolValue])
             {
                 // Is the server a subdomain of this pinned server?
                 TSKLog(@"Checking includeSubdomains configuration for %@", pinnedServerName);

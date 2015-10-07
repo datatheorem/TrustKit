@@ -64,18 +64,22 @@
     
     // Create a configuration and parse it so we get the right format
     NSDictionary *trustKitConfig;
-    trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
-                                                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                                      kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=", // Server key
-                                                                              @"khKI6ae4micEvX74MB/BZ4u15WCWGXPD6Gjg6iIRVeE=", // Intermediate key
-                                                                              @"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=" // CA key
-                                                                              ]}});
-
+    trustKitConfig = parseTrustKitArguments(@{kTSKPinnedDomains :
+                                                  @{@"www.good.com" : @{
+                                                            kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                            kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=", // Server key
+                                                                                    @"khKI6ae4micEvX74MB/BZ4u15WCWGXPD6Gjg6iIRVeE=", // Intermediate key
+                                                                                    @"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=" // CA key
+                                                                                    ]}}});
+    
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
-    verificationResult = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig[@"www.good.com"][kTSKPublicKeyAlgorithms], trustKitConfig[@"www.good.com"][kTSKPublicKeyHashes]);
+    verificationResult = verifyPublicKeyPin(trust,
+                                            @"www.good.com",
+                                            trustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
+                                            trustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes]);
     CFRelease(trust);
-
+    
     XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against valid public key pins");
 }
 
@@ -90,18 +94,22 @@
                                                              arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
                                                       anchorCertificates:(const void **)trustStoreArray
                                                              arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
-
+    
     // Create a configuration and parse it so we get the right format
     NSDictionary *trustKitConfig;
-    trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
-                                                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                                      kTSKPublicKeyHashes : @[@"khKI6ae4micEvX74MB/BZ4u15WCWGXPD6Gjg6iIRVeE=", // Intermediate Key
-                                                                              @"khKI6ae4micEvX74MB/BZ4u15WCWGXPD6Gjg6iIRVeE=" // Intermediate Key
-                                                                              ]}});
-
+    trustKitConfig = parseTrustKitArguments(@{kTSKPinnedDomains :
+                                                  @{@"www.good.com" : @{
+                                                            kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                            kTSKPublicKeyHashes : @[@"khKI6ae4micEvX74MB/BZ4u15WCWGXPD6Gjg6iIRVeE=", // Intermediate Key
+                                                                                    @"khKI6ae4micEvX74MB/BZ4u15WCWGXPD6Gjg6iIRVeE=" // Intermediate Key
+                                                                                    ]}}});
+    
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
-    verificationResult = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig[@"www.good.com"][kTSKPublicKeyAlgorithms], trustKitConfig[@"www.good.com"][kTSKPublicKeyHashes]);
+    verificationResult = verifyPublicKeyPin(trust,
+                                            @"www.good.com",
+                                            trustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
+                                            trustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes]);
     CFRelease(trust);
     
     XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against valid public key pins");
@@ -121,16 +129,20 @@
     
     // Create a configuration and parse it so we get the right format
     NSDictionary *trustKitConfig;
-    trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
-                                                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                                      kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA Key
-                                                                              @"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=" // CA Key
-                                                                              ]}});
+    trustKitConfig = parseTrustKitArguments(@{kTSKPinnedDomains :
+                                                  @{@"www.good.com" : @{
+                                                            kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                            kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA Key
+                                                                                    @"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=" // CA Key
+                                                                                    ]}}});
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
-    verificationResult = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig[@"www.good.com"][kTSKPublicKeyAlgorithms], trustKitConfig[@"www.good.com"][kTSKPublicKeyHashes]);
+    verificationResult = verifyPublicKeyPin(trust,
+                                            @"www.good.com",
+                                            trustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
+                                            trustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes]);
     CFRelease(trust);
-
+    
     XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against valid public key pins");
 }
 
@@ -148,14 +160,18 @@
     
     // Create a configuration and parse it so we get the right format
     NSDictionary *trustKitConfig;
-    trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
-                                                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                                      kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=", // Leaf Key
-                                                                              @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=" // Leaf Key
-                                                                              ]}});
+    trustKitConfig = parseTrustKitArguments(@{kTSKPinnedDomains :
+                                                  @{@"www.good.com" : @{
+                                                            kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                            kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=", // Leaf Key
+                                                                                    @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=" // Leaf Key
+                                                                                    ]}}});
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
-    verificationResult = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig[@"www.good.com"][kTSKPublicKeyAlgorithms], trustKitConfig[@"www.good.com"][kTSKPublicKeyHashes]);
+    verificationResult = verifyPublicKeyPin(trust,
+                                            @"www.good.com",
+                                            trustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
+                                            trustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes]);
     CFRelease(trust);
     
     XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against valid public key pins");
@@ -176,14 +192,18 @@
     
     // Create a configuration and parse it so we get the right format
     NSDictionary *trustKitConfig;
-    trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
-                                                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                                      kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Bad Key
-                                                                              @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Bad key
-                                                                              ]}});
+    trustKitConfig = parseTrustKitArguments(@{kTSKPinnedDomains :
+                                                  @{@"www.good.com" : @{
+                                                            kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                            kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Bad Key
+                                                                                    @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Bad key
+                                                                                    ]}}});
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultSuccess;
-    verificationResult = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig[@"www.good.com"][kTSKPublicKeyAlgorithms], trustKitConfig[@"www.good.com"][kTSKPublicKeyHashes]);
+    verificationResult = verifyPublicKeyPin(trust,
+                                            @"www.good.com",
+                                            trustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
+                                            trustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes]);
     CFRelease(trust);
     
     XCTAssert(verificationResult == TSKPinValidationResultFailed, @"Validation must NOT pass against invalid public key pins");
@@ -203,14 +223,18 @@
     
     // Create a configuration and parse it so we get the right format
     NSDictionary *trustKitConfig;
-    trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
-                                                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                                      kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Bad key
-                                                                              @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY="  // Leaf key
-                                                                              ]}});
+    trustKitConfig = parseTrustKitArguments(@{kTSKPinnedDomains :
+                                                  @{@"www.good.com" : @{
+                                                            kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                            kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Bad key
+                                                                                    @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY="  // Leaf key
+                                                                                    ]}}});
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
-    verificationResult = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig[@"www.good.com"][kTSKPublicKeyAlgorithms], trustKitConfig[@"www.good.com"][kTSKPublicKeyHashes]);
+    verificationResult = verifyPublicKeyPin(trust,
+                                            @"www.good.com",
+                                            trustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
+                                            trustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes]);
     CFRelease(trust);
     
     XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against a good and an invalid public key pins");
@@ -230,14 +254,18 @@
     
     // Create a configuration and parse it so we get the right format
     NSDictionary *trustKitConfig;
-    trustKitConfig = parseTrustKitArguments(@{@"www.good.com" : @{
-                                                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                                      kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA key
-                                                                              @"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=" // CA key
-                                                                              ]}});
+    trustKitConfig = parseTrustKitArguments(@{kTSKPinnedDomains :
+                                                  @{@"www.good.com" : @{
+                                                            kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                            kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA key
+                                                                                    @"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=" // CA key
+                                                                                    ]}}});
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
-    verificationResult = verifyPublicKeyPin(trust, @"www.good.com", trustKitConfig[@"www.good.com"][kTSKPublicKeyAlgorithms], trustKitConfig[@"www.good.com"][kTSKPublicKeyHashes]);
+    verificationResult = verifyPublicKeyPin(trust,
+                                            @"www.good.com",
+                                            trustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
+                                            trustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes]);
     CFRelease(trust);
     
     XCTAssert(verificationResult == TSKPinValidationResultFailedCertificateChainNotTrusted, @"Validation must fail against an invalid certificate chain");
@@ -257,14 +285,18 @@
     
     // Create a configuration and parse it so we get the right format
     NSDictionary *trustKitConfig;
-    trustKitConfig = parseTrustKitArguments(@{@"www.bad.com" : @{
-                                                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                                      kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA Key
-                                                                              @"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=" // CA Key
-                                                                              ]}});
+    trustKitConfig = parseTrustKitArguments(@{kTSKPinnedDomains :
+                                                  @{@"www.bad.com" : @{
+                                                            kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                            kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA Key
+                                                                                    @"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=" // CA Key
+                                                                                    ]}}});
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
-    verificationResult = verifyPublicKeyPin(trust, @"www.bad.com", trustKitConfig[@"www.bad.com"][kTSKPublicKeyAlgorithms], trustKitConfig[@"www.bad.com"][kTSKPublicKeyHashes]);
+    verificationResult = verifyPublicKeyPin(trust,
+                                            @"www.bad.com",
+                                            trustKitConfig[kTSKPinnedDomains][@"www.bad.com"][kTSKPublicKeyAlgorithms],
+                                            trustKitConfig[kTSKPinnedDomains][@"www.bad.com"][kTSKPublicKeyHashes]);
     CFRelease(trust);
     
     XCTAssert(verificationResult == TSKPinValidationResultFailedCertificateChainNotTrusted, @"Validation must fail against an invalid hostname");

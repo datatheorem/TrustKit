@@ -22,10 +22,13 @@
 #pragma mark Configuration Constants
 
 // Info.plist key we read the public key hashes from
-static NSString * const kTSKConfiguration = @"TSKConfiguration";
+static const NSString *kTSKConfiguration = @"TSKConfiguration";
 
+// General keys
+const NSString *kTSKSwizzleNetworkDelegates = @"TSKSwizzleNetworkDelegates";
+const NSString *kTSKPinnedDomains = @"TSKPinnedDomains";
 
-// Keys for each domain within the config dictionnary
+// Keys for each domain within the TSKPinnedDomains entry
 const NSString *kTSKPublicKeyHashes = @"TSKPublicKeyHashes";
 const NSString *kTSKEnforcePinning = @"TSKEnforcePinning";
 const NSString *kTSKIncludeSubdomains = @"TSKIncludeSubdomains";
@@ -207,8 +210,31 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
     InitializeDomainRegistry();
     
     NSMutableDictionary *finalConfiguration = [[NSMutableDictionary alloc]init];
+    finalConfiguration[kTSKPinnedDomains] = [[NSMutableDictionary alloc]init];
     
-    for (NSString *domainName in TrustKitArguments)
+    
+    // Retrieve global settings
+    NSNumber *shouldSwizzleNetworkDelegates = TrustKitArguments[kTSKSwizzleNetworkDelegates];
+    if (shouldSwizzleNetworkDelegates)
+    {
+        finalConfiguration[kTSKSwizzleNetworkDelegates] = shouldSwizzleNetworkDelegates;
+    }
+    else
+    {
+        // Default setting is YES
+        finalConfiguration[kTSKSwizzleNetworkDelegates] = [NSNumber numberWithBool:YES];
+    }
+    
+    
+    if ((TrustKitArguments[kTSKPinnedDomains] == nil) || ([TrustKitArguments[kTSKPinnedDomains] count] < 1))
+    {
+        [NSException raise:@"TrustKit configuration invalid"
+                    format:@"TrustKit was initialized with zero pinned domains; ensure your domain pinning policies are under the TSKPinnedDomains key."];
+    }
+    
+    
+    // Retrieve the pinning policy for each domains
+    for (NSString *domainName in TrustKitArguments[kTSKPinnedDomains])
     {
         // Sanity checks on the domain name
         if (GetRegistryLength([domainName UTF8String]) == 0)
@@ -219,12 +245,12 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
         
         
         // Retrieve the supplied arguments for this domain
-        NSDictionary *domainTrustKitArguments = TrustKitArguments[domainName];
+        NSDictionary *domainPinningPolicy = TrustKitArguments[kTSKPinnedDomains][domainName];
         NSMutableDictionary *domainFinalConfiguration = [[NSMutableDictionary alloc]init];
         
         
         // Extract the optional includeSubdomains setting
-        NSNumber *shouldIncludeSubdomains = domainTrustKitArguments[kTSKIncludeSubdomains];
+        NSNumber *shouldIncludeSubdomains = domainPinningPolicy[kTSKIncludeSubdomains];
         if (shouldIncludeSubdomains)
         {
             if ([shouldIncludeSubdomains boolValue] == YES)
@@ -248,7 +274,7 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
 
         
         // Extract the optional enforcePinning setting
-        NSNumber *shouldEnforcePinning = domainTrustKitArguments[kTSKEnforcePinning];
+        NSNumber *shouldEnforcePinning = domainPinningPolicy[kTSKEnforcePinning];
         if (shouldEnforcePinning)
         {
             domainFinalConfiguration[kTSKEnforcePinning] = shouldEnforcePinning;
@@ -276,7 +302,7 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
         
         
         // Extract the optional disableDefaultReportUri setting
-        NSNumber *shouldDisableDefaultReportUri = domainTrustKitArguments[kTSKDisableDefaultReportUri];
+        NSNumber *shouldDisableDefaultReportUri = domainPinningPolicy[kTSKDisableDefaultReportUri];
         if (shouldDisableDefaultReportUri)
         {
             domainFinalConfiguration[kTSKDisableDefaultReportUri] = shouldDisableDefaultReportUri;
@@ -289,7 +315,7 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
         
         
         // Extract the list of public key algorithms to support and convert them from string to the TSKPublicKeyAlgorithm type
-        NSArray *publicKeyAlgsStr = domainTrustKitArguments[kTSKPublicKeyAlgorithms];
+        NSArray *publicKeyAlgsStr = domainPinningPolicy[kTSKPublicKeyAlgorithms];
         if (publicKeyAlgsStr == nil)
         {
             [NSException raise:@"TrustKit configuration invalid"
@@ -320,7 +346,7 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
         
         
         // Extract and convert the report URIs if defined
-        NSArray *reportUriList = domainTrustKitArguments[kTSKReportUris];
+        NSArray *reportUriList = domainPinningPolicy[kTSKReportUris];
         if (reportUriList != nil)
         {
             NSMutableArray *reportUriListFinal = [NSMutableArray array];
@@ -340,7 +366,7 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
         
         
         // Extract and convert the subject public key info hashes
-        NSArray *serverSslPinsBase64 = domainTrustKitArguments[kTSKPublicKeyHashes];
+        NSArray *serverSslPinsBase64 = domainPinningPolicy[kTSKPublicKeyHashes];
         if ([serverSslPinsBase64 count] < 2)
         {
             [NSException raise:@"TrustKit configuration invalid"
@@ -366,7 +392,7 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
         domainFinalConfiguration[kTSKPublicKeyHashes] = [NSSet setWithArray:serverSslPinsData];
         
         // Store the whole configuration
-        finalConfiguration[domainName] = [NSDictionary dictionaryWithDictionary:domainFinalConfiguration];
+        finalConfiguration[kTSKPinnedDomains][domainName] = [NSDictionary dictionaryWithDictionary:domainFinalConfiguration];
     }
     
     return finalConfiguration;

@@ -20,7 +20,7 @@
 
 @implementation TSKPinValidationOnlineTests
 /*  WARNING: For the online tests, we need to use a different domain for every test otherwise the tests will be disrupted by SSL session resumption.
-    Specifically, connecting to the same host more than once will potentially allow the first session to be resumed, thereby skipping all SSL validation including TrustKit's. This is not a security issue but will make the tests report unexpected results.
+ Specifically, connecting to the same host more than once will potentially allow the first session to be resumed, thereby skipping all SSL validation including TrustKit's. This is not a security issue but will make the tests report unexpected results.
  */
 
 - (void)setUp {
@@ -43,11 +43,13 @@
 {
     NSDictionary *trustKitConfig =
     @{
-      @"www.datatheorem.com" : @{
-              kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-              kTSKPublicKeyHashes : @[@"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=", // CA key
-                                      @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=" // CA key
-                                      ]}};
+      kTSKPinnedDomains :
+          @{
+              @"www.datatheorem.com" : @{
+                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                      kTSKPublicKeyHashes : @[@"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=", // CA key
+                                              @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=" // CA key
+                                              ]}}};
     
     [TrustKit initializeWithConfiguration:trustKitConfig];
     
@@ -68,12 +70,14 @@
 {
     NSDictionary *trustKitConfig =
     @{
-      @"www.yahoo.com" : @{
-              kTSKEnforcePinning : @YES,
-              kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-              kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
-                                      @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
-                                      ]}};
+      kTSKPinnedDomains :
+          @{
+              @"www.yahoo.com" : @{
+                      kTSKEnforcePinning : @YES,
+                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                      kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
+                                              @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
+                                              ]}}};
     
     [TrustKit initializeWithConfiguration:trustKitConfig];
     
@@ -92,21 +96,23 @@
 - (void)testConnectionUsingFakeHashInvalidatingAllCertificatesButNotEnforcingPinning
 {
     NSDictionary *trustKitConfig =
-            @{
-                    @"www.google.com" : @{
-                    kTSKEnforcePinning : @NO, // Pinning disabled!
-                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                    kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
-                                            @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
-                    ]}};
-
+    @{
+      kTSKPinnedDomains :
+          @{
+              @"www.google.com" : @{
+                      kTSKEnforcePinning : @NO, // Pinning disabled!
+                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                      kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
+                                              @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
+                                              ]}}};
+    
     [TrustKit initializeWithConfiguration:trustKitConfig];
-
+    
     NSError *error = nil;
     NSHTTPURLResponse *response;
     NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://www.google.com"]];
     [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-
+    
     XCTAssertNil(error, @"Connection had an error: %@", error);
     XCTAssert(response.statusCode==200, @"Server did not respond with a 200 OK");
     XCTAssert([TrustKit wasTrustKitCalled], @"TrustKit was not called");

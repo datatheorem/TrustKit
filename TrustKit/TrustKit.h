@@ -19,6 +19,9 @@ FOUNDATION_EXPORT const unsigned char TrustKitVersionString[];
 
 
 #pragma mark TrustKit Configuration Keys
+
+FOUNDATION_EXPORT const NSString *kTSKSwizzleNetworkDelegates;
+FOUNDATION_EXPORT const NSString *kTSKPinnedDomains;
 FOUNDATION_EXPORT const NSString *kTSKPublicKeyHashes;
 FOUNDATION_EXPORT const NSString *kTSKEnforcePinning;
 FOUNDATION_EXPORT const NSString *kTSKIncludeSubdomains;
