@@ -195,4 +195,29 @@
     XCTAssert([serverConfigKey isEqualToString:@"www.good.com"], @"IncludeSubdomains took precedence over a more specialized configuration");
 }
 
+
+- (void)testNoPinnedDomains
+{
+    XCTAssertThrows(parseTrustKitArguments(@{kTSKSwizzleNetworkDelegates : @YES}),
+                    @"Configuration with no pinned domains must be rejected");
+}
+
+
+- (void)testGlobalSettings
+{
+    NSDictionary *trustKitConfig;
+    trustKitConfig = parseTrustKitArguments(@{kTSKSwizzleNetworkDelegates: @NO,
+                                              kTSKPinnedDomains :
+                                                  @{@"good.com" : @{
+                                                            kTSKIncludeSubdomains : @YES,
+                                                            kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                            kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                                                                                    @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY="
+                                                                                    ]}}});
+    
+    // Ensure the kTSKSwizzleNetworkDelegates setting was saved
+    NSDictionary *savedTrustKitConfig = [TrustKit configuration];
+    XCTAssert([savedTrustKitConfig[kTSKSwizzleNetworkDelegates] boolValue] ==  NO, @"kTSKSwizzleNetworkDelegates was not saved in the configuration");
+}
+
 @end
