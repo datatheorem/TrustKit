@@ -12,7 +12,9 @@
 #import "RSSwizzle.h"
 
 
-static const void *swizzleOnceKey = &swizzleOnceKey;
+
+typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NSError *connectionError);
+
 
 
 @interface TSKNSURLConnectionDelegateProxy(Private)
@@ -53,7 +55,35 @@ static const void *swizzleOnceKey = &swizzleOnceKey;
                                             }), RSSwizzleModeAlways, NULL);
     
     
-    // TODO: Add warning for constructors that do not have a delegate (ie. we can't protect these connections)
+    // Not hooking + connectionWithRequest:delegate: as it ends up calling initWithRequest:delegate:
+    
+    // Log a warning for methods that do not have a delegate (ie. we can't protect these connections)
+    // + sendAsynchronousRequest:queue:completionHandler:
+    
+    RSSwizzleClassMethod(NSClassFromString(@"NSURLConnection"),
+                         @selector(sendAsynchronousRequest:queue:completionHandler:),
+                         RSSWReturnType(void),
+                         RSSWArguments(NSURLRequest *request, NSOperationQueue *queue, AsyncCompletionHandler handler),
+                         RSSWReplacement(
+                                         {
+                                             // Just display a warning
+                                             TSKLog(@"Warning: + sendAsynchronousRequest:queue:completionHandler: was called. This method does not expose a delegate argument for handling authentication challenges; TrustKit cannot enforce SSL pinning for these connections");
+                                             RSSWCallOriginal(request, queue, handler);
+                                         }));
+     
+    
+    // + sendSynchronousRequest:returningResponse:error:
+    RSSwizzleClassMethod(NSClassFromString(@"NSURLConnection"),
+                         @selector(sendSynchronousRequest:returningResponse:error:),
+                         RSSWReturnType(NSData *),
+                         RSSWArguments(NSURLRequest *request, NSURLResponse * _Nullable *response, NSError * _Nullable *error),
+                         RSSWReplacement(
+                                         {
+                                             // Just display a warning
+                                             TSKLog(@"Warning: + sendSynchronousRequest:returningResponse:error: was called. This method does not expose a delegate argument for handling authentication challenges; TrustKit cannot enforce SSL pinning for these connections");
+                                             NSData *data = RSSWCallOriginal(request, response, error);
+                                             return data;
+                                         }));
 }
 
 

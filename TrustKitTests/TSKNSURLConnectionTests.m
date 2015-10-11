@@ -46,7 +46,6 @@
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
     NSLog(@"%@ - received %lu bytes", NSStringFromClass([self class]), (unsigned long)[data length]);
-    [testExpectation fulfill];
 }
 
 - (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse
@@ -63,7 +62,6 @@
 - (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse
 {
     NSLog(@"%@ - redirect: %@", NSStringFromClass([self class]), [[request URL] host]);
-    [testExpectation fulfill];
     return request;
 }
 
@@ -86,13 +84,13 @@
     [super tearDown];
 }
 
-- (void)testExample {
+- (void)testNSURLConnection {
     
     NSDictionary *trustKitConfig =
     @{
       kTSKPinnedDomains :
           @{
-              @"www.datatheorem.com" : @{
+              @"www.yahoo.com" : @{
                       kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                       kTSKPublicKeyHashes : @[@"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=", // CA key
                                               @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=" // CA key
@@ -101,19 +99,34 @@
     [TrustKit initializeWithConfiguration:trustKitConfig];
     
     
-    XCTestExpectation *expectation = [self expectationWithDescription:@"High Expectations"];
     
     // NSURLConnection is deprecated
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated-declarations"
     
-    TestNSURLConnectionDelegate* deleg2 = [[TestNSURLConnectionDelegate alloc] initWithExpectation:expectation];
-    NSURLConnection *conn2 = [[NSURLConnection alloc]
-                              initWithRequest:[NSURLRequest requestWithURL:
-                                               [NSURL URLWithString:@"https://www.reddit.com/normal"]]
-                              delegate:deleg2];
-    [conn2 start];
+    XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLConnectionDelegate"];
+    TestNSURLConnectionDelegate* delegate = [[TestNSURLConnectionDelegate alloc] initWithExpectation:expectation];
+    NSURLConnection *connection = [[NSURLConnection alloc]
+                                   initWithRequest:[NSURLRequest requestWithURL:
+                                                    [NSURL URLWithString:@"https://www.reddit.com/normal"]]
+                                   delegate:delegate];
+    [connection start];
+    
+    
+    // Run other methods that we swizzle to display a warning, to ensure they don't crash
+    XCTestExpectation *expectation2 = [self expectationWithDescription:@"Asynchronous request"];
+    [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:
+                                              [NSURL URLWithString:@"https://www.datatheorem.com/test"]]
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               [expectation2 fulfill];
+                           }];
+    
+    [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:
+                                             [NSURL URLWithString:@"https://www.datatheorem.com/test"]]
+                          returningResponse:nil error:nil];
 #pragma GCC diagnostic pop
+    
     
     [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error) {
         if (error) {
@@ -121,7 +134,6 @@
         }
     }];
 }
-
 
 
 
