@@ -17,6 +17,7 @@
 #import "domain_registry.h"
 #import "TSKBackgroundReporter.h"
 #import "TSKSimpleReporter.h"
+#import "TSKNSURLConnectionDelegateProxy.h"
 
 
 #pragma mark Configuration Constants
@@ -119,82 +120,6 @@ void sendPinFailureReport_async(TSKPinValidationResult validationResult, SecTrus
     });
 }
 
-
-#pragma mark SSLHandshake Hook
-
-
-static OSStatus (*original_SSLHandshake)(SSLContextRef context) = NULL;
-
-static OSStatus replaced_SSLHandshake(SSLContextRef context)
-{
-    OSStatus result = original_SSLHandshake(context);
-    if ((result == noErr) && (_isTrustKitInitialized))
-    {
-        // The handshake was sucessful, let's do our additional checks on the server certificate
-        _wasTrustKitCalled = YES;
-        char *serverName = NULL;
-        size_t serverNameLen = 0;
-        
-        // Get the server's domain name
-        SSLGetPeerDomainNameLength (context, &serverNameLen);
-        serverName = malloc(serverNameLen+1);
-        SSLGetPeerDomainName(context, serverName, &serverNameLen);
-        serverName[serverNameLen] = '\0';
-        NSString *serverNameStr = [NSString stringWithUTF8String:serverName];
-        free(serverName);
-        
-        // Retrieve the pinning configuration for this specific domain, if there is one
-        NSString *domainConfigKey = getPinningConfigurationKeyForDomain(serverNameStr, _trustKitGlobalConfiguration);
-        if (domainConfigKey != nil)
-        {
-            // This domain is pinned
-            NSDictionary *domainConfig = _trustKitGlobalConfiguration[domainConfigKey];
-            
-            // Retrieve the server's trust object
-            SecTrustRef serverTrust;
-            SSLCopyPeerTrust(context, &serverTrust);
-            
-            // Re-evaluate the server's certificate chain and look for one the configured SPKI pins
-            TSKPinValidationResult validationResult = TSKPinValidationResultFailed;
-            validationResult = verifyPublicKeyPin(serverTrust, serverNameStr, domainConfig[kTSKPublicKeyAlgorithms], domainConfig[kTSKPublicKeyHashes]);
-            
-            if (validationResult == TSKPinValidationResultSuccess)
-            {
-                // Pin validation was successful
-                CFRelease(serverTrust);
-            }
-            else
-            {
-                // Pin validation failed
-#if !TARGET_OS_IPHONE
-                if ((validationResult == TSKPinValidationResultFailedUserDefinedTrustAnchor)
-                    && ([domainConfig[kTSKIgnorePinningForUserDefinedTrustAnchors] boolValue] == YES))
-                {
-                    // OS-X only: user-defined trust anchors can be whitelisted (for corporate proxies, etc.)
-                    TSKLog(@"Ignoring pinning result for user-defined trust anchor");
-                    CFRelease(serverTrust);
-                }
-                else
-#endif
-                {
-                    // Send a pin failure report
-                    sendPinFailureReport_async(validationResult, serverTrust, serverNameStr, domainConfigKey, domainConfig, ^void (void)
-                                               {
-                                                   // Release the trust once the report has been sent
-                                                   CFRelease(serverTrust);
-                                               });
-                    
-                    // If TrustKit was configured to enforce pinning, make the connection fail
-                    if ([domainConfig[kTSKEnforcePinning] boolValue] == YES)
-                    {
-                        result = errSSLXCertChainInvalid;
-                    }
-                }
-            }
-        }
-    }
-    return result;
-}
 
 
 #pragma mark TrustKit Initialization Helper Functions
@@ -423,19 +348,14 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
             // Convert and store the SSL pins in our global variable
             _trustKitGlobalConfiguration = [[NSDictionary alloc]initWithDictionary:parseTrustKitArguments(trustKitConfig)];
             
-            // Hook SSLHandshake()
-            if (original_SSLHandshake == NULL)
+            // Hook network APIs if needed
+            if ([_trustKitGlobalConfiguration[kTSKSwizzleNetworkDelegates] boolValue] == YES)
             {
-                int rebindResult = -1;
-                char functionToHook[] = "SSLHandshake";
-                original_SSLHandshake = dlsym(RTLD_DEFAULT, functionToHook);
-                rebindResult = rebind_symbols((struct rebinding[1]){{(char *)functionToHook, (void *)replaced_SSLHandshake}}, 1);
-                if ((rebindResult < 0) || (original_SSLHandshake == NULL))
-                {
-                    [NSException raise:@"TrustKit initialization error"
-                                format:@"Fishook returned an error: %d", rebindResult];
-                }
+                // NSURLConnection
+                [TSKNSURLConnectionDelegateProxy swizzleNSURLConnectionConstructor];
             }
+
+                
             
             // Create our reporter for sending pin validation failures
             @try
