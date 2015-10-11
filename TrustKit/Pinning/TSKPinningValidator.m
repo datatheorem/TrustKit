@@ -39,7 +39,6 @@
     if (domainConfigKey == nil)
     {
         // The domain is not pinned: nothing to validate
-        TSKLog(@"Domain not pinned - %@", serverHostname);
         validationResult = TSKPinValidationResultDomainNotPinned;
     }
     else
