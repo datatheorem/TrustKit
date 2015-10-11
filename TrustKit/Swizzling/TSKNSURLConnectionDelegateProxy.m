@@ -15,11 +15,17 @@
 static const void *swizzleOnceKey = &swizzleOnceKey;
 
 
+@interface TSKNSURLConnectionDelegateProxy(Private)
+-(BOOL)forwardToOriginalDelegateAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge forConnection:(NSURLConnection *)connection;
+@end
+
+
 @implementation TSKNSURLConnectionDelegateProxy
 
 + (void)swizzleNSURLConnectionConstructors
 {
     // - initWithRequest:delegate:
+    // We can use RSSwizzleModeAlways, NULL as the swizzling parameters because this should only be called from within a dispatch_once()
     RSSwizzleInstanceMethod(NSClassFromString(@"NSURLConnection"),
                             @selector(initWithRequest:delegate:),
                             RSSWReturnType(NSURLConnection*),
@@ -30,7 +36,7 @@ static const void *swizzleOnceKey = &swizzleOnceKey;
                                                 TSKNSURLConnectionDelegateProxy *swizzledDelegate = [[TSKNSURLConnectionDelegateProxy alloc]initWithDelegate:delegate];
                                                 NSURLConnection *connection = RSSWCallOriginal(request, swizzledDelegate);
                                                 return connection;
-                                            }), RSSwizzleModeOncePerClass, swizzleOnceKey);
+                                            }), RSSwizzleModeAlways, NULL);
     
     
     // - initWithRequest:delegate:startImmediately:
@@ -44,7 +50,7 @@ static const void *swizzleOnceKey = &swizzleOnceKey;
                                                 TSKNSURLConnectionDelegateProxy *swizzledDelegate = [[TSKNSURLConnectionDelegateProxy alloc]initWithDelegate:delegate];
                                                 NSURLConnection *connection = RSSWCallOriginal(request, swizzledDelegate, startImmediately);
                                                 return connection;
-                                            }), RSSwizzleModeOncePerClass, swizzleOnceKey);
+                                            }), RSSwizzleModeAlways, NULL);
     
     
     // TODO: Add warning for constructors that do not have a delegate (ie. we can't protect these connections)
