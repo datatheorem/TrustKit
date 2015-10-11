@@ -170,7 +170,7 @@ static const void *swizzleOnceKey = &swizzleOnceKey;
         if ([self forwardToOriginalDelegateAuthenticationChallenge:challenge forConnection:connection] == NO)
         {
             // The original delegate could not handle the challenge; use the default handler
-            [challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
+            [challenge.sender performDefaultHandlingForAuthenticationChallenge:challenge];
         }
     }
 }
