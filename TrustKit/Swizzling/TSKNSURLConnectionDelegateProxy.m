@@ -17,7 +17,7 @@ static const void *swizzleOnceKey = &swizzleOnceKey;
 
 @implementation TSKNSURLConnectionDelegateProxy
 
-+ (void)swizzleNSURLConnectionConstructor
++ (void)swizzleNSURLConnectionConstructors
 {
     // - initWithRequest:delegate:
     RSSwizzleInstanceMethod(NSClassFromString(@"NSURLConnection"),
@@ -119,7 +119,7 @@ static const void *swizzleOnceKey = &swizzleOnceKey;
     BOOL wasChallengeHandled = NO;
     TSKPinValidationResult result = TSKPinValidationResultFailed;
     
-    // For pinning we only care about server authentication
+    // For SSL pinning we only care about server authentication
     if([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust])
     {
         SecTrustRef serverTrust = challenge.protectionSpace.serverTrust;

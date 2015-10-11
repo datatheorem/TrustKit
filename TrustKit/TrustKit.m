@@ -352,7 +352,7 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
             if ([_trustKitGlobalConfiguration[kTSKSwizzleNetworkDelegates] boolValue] == YES)
             {
                 // NSURLConnection
-                [TSKNSURLConnectionDelegateProxy swizzleNSURLConnectionConstructor];
+                [TSKNSURLConnectionDelegateProxy swizzleNSURLConnectionConstructors];
             }
 
                 

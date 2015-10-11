@@ -15,7 +15,7 @@
 }
 
 // Initalize our hooks
-+ (void)swizzleNSURLConnectionConstructor;
++ (void)swizzleNSURLConnectionConstructors;
 
 - (TSKNSURLConnectionDelegateProxy *)initWithDelegate:(id)delegate;
 
