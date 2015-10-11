@@ -73,13 +73,18 @@ static const void *swizzleOnceKey = &swizzleOnceKey;
 {
     if (aSelector == @selector(connection:willSendRequestForAuthenticationChallenge:))
     {
-        // The swizzled delegate should always receive authentication challenges
+        // The delegate proxy should always receive authentication challenges
         return YES;
+    }
+    if (aSelector == @selector(connection:didReceiveAuthenticationChallenge:))
+    {
+        return NO;
     }
     else
     {
-        // The swizzled delegate should mirror the original delegate's methods so that it doesn't change the app flow
+        // The delegate proxy should mirror the original delegate's methods so that it doesn't change the app flow
         return [originalDelegate respondsToSelector:aSelector];
+    //    return NO;
     }
 }
 
@@ -149,6 +154,7 @@ static const void *swizzleOnceKey = &swizzleOnceKey;
             {
                 // The original delegate does not have authentication handlers for this challenge
                 // We need to do the default validation ourselves to avoid disabling SSL validation for all non pinned domains
+                TSKLog(@"Performing default certificate validation for %@", serverHostname);
                 SecTrustResultType trustResult = 0;
                 SecTrustEvaluate(serverTrust, &trustResult);
                 if ((trustResult != kSecTrustResultUnspecified) && (trustResult != kSecTrustResultProceed))

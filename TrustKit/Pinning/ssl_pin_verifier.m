@@ -92,6 +92,7 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
 {
     if ((serverTrust == NULL) || (supportedAlgorithms == nil) || (knownPins == nil))
     {
+        TSKLog(@"Invalid pinning parameters for %@", serverHostname);
         return TSKPinValidationResultErrorInvalidParameters;
     }
 
@@ -108,7 +109,7 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
     SecTrustResultType trustResult = 0;
     if (SecTrustEvaluate(serverTrust, &trustResult) != errSecSuccess)
     {
-        TSKLog(@"SecTrustEvaluate error");
+        TSKLog(@"SecTrustEvaluate error for %@", serverHostname);
         return TSKPinValidationResultErrorInvalidParameters;
     }
     
@@ -116,7 +117,7 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
     {
         // Default SSL validation failed
         CFDictionaryRef evaluationDetails = SecTrustCopyResult(serverTrust);
-        TSKLog(@"Error: default SSL validation failed: %@", evaluationDetails);
+        TSKLog(@"Error: default SSL validation failed for %@: %@", serverHostname, evaluationDetails);
         CFRelease(evaluationDetails);
         return TSKPinValidationResultFailedCertificateChainNotTrusted;
     }
@@ -138,7 +139,7 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
             TSKLog(@"Testing SSL Pin %@", subjectPublicKeyInfoHash);
             if ([knownPins containsObject:subjectPublicKeyInfoHash])
             {
-                TSKLog(@"SSL Pin found");
+                TSKLog(@"SSL Pin found for %@", serverHostname);
                 return TSKPinValidationResultSuccess;
             }
         }
@@ -184,6 +185,6 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
 #endif
     
     // If we get here, we didn't find any matching SPKI hash in the chain
-    TSKLog(@"Error: SSL Pin not found");
+    TSKLog(@"Error: SSL Pin not found for %@", serverHostname);
     return TSKPinValidationResultFailed;
 }
