@@ -67,7 +67,7 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
                          RSSWReplacement(
                                          {
                                              // Just display a warning
-                                             TSKLog(@"WARNING: +sendAsynchronousRequest:queue:completionHandler: was called. This method does not expose a delegate argument for handling authentication challenges; TrustKit cannot enforce SSL pinning for these connections");
+                                             TSKLog(@"WARNING: +sendAsynchronousRequest:queue:completionHandler: was called to connect to %@. This method does not expose a delegate argument for handling authentication challenges; TrustKit cannot enforce SSL pinning for these connections", [[request URL]host]);
                                              RSSWCallOriginal(request, queue, handler);
                                          }));
      
@@ -80,7 +80,7 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
                          RSSWReplacement(
                                          {
                                              // Just display a warning
-                                             TSKLog(@"WARNING: +sendSynchronousRequest:returningResponse:error: was called. This method does not expose a delegate argument for handling authentication challenges; TrustKit cannot enforce SSL pinning for these connections");
+                                             TSKLog(@"WARNING: +sendSynchronousRequest:returningResponse:error: was called to connect to %@. This method does not expose a delegate argument for handling authentication challenges; TrustKit cannot enforce SSL pinning for these connections", [[request URL]host]);
                                              NSData *data = RSSWCallOriginal(request, response, error);
                                              return data;
                                          }));
