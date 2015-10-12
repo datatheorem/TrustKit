@@ -222,7 +222,6 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
     XCTAssert(([TSKNSURLSessionDelegateProxy getLastTrustDecision] == TSKTrustDecisionShouldAllowConnection), @"TrustKit blocked a connection although pinning was not enforced");
     XCTAssertNil(delegate.lastError, @"TrustKit triggered an error");
     XCTAssertNotNil(delegate.lastResponse, @"TrustKit did not return a response although pinning was not enforced");
-    XCTAssert([(NSHTTPURLResponse *)delegate.lastResponse statusCode] == 200, @"TrustKit did not return a response although pinning was not enforced");
 }
 
 
