@@ -8,12 +8,21 @@
 
 #import <XCTest/XCTest.h>
 #import "TrustKit+Private.h"
+#import "TSKNSURLConnectionDelegateProxy.h"
+
+@interface TSKNSURLConnectionDelegateProxy(Private)
++(TSKPinValidationResult)getLastTrustKitValidationResult;
+@end
 
 
 @interface TestNSURLConnectionDelegate : NSObject <NSURLConnectionDataDelegate>
 {
     XCTestExpectation *testExpectation;
 }
+
+@property NSError *lastError;
+@property NSURLResponse *lastResponse;
+
 - (instancetype)initWithExpectation:(XCTestExpectation *)expectation;
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection;
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;
@@ -39,13 +48,12 @@
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    NSLog(@"%@ - failed: %@", NSStringFromClass([self class]), error);
+    _lastError = error;
     [testExpectation fulfill];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    NSLog(@"%@ - received %lu bytes", NSStringFromClass([self class]), (unsigned long)[data length]);
 }
 
 - (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse
@@ -55,13 +63,12 @@
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
-    NSLog(@"%@ - success: %@", NSStringFromClass([self class]), [[response URL] host]);
+    _lastResponse = response;
     [testExpectation fulfill];
 }
 
 - (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse
 {
-    NSLog(@"%@ - redirect: %@", NSStringFromClass([self class]), [[request URL] host]);
     return request;
 }
 
@@ -76,21 +83,146 @@
 
 - (void)setUp {
     [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+    [TrustKit resetConfiguration];
 }
 
 - (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
     [super tearDown];
 }
 
-- (void)testNSURLConnection {
+// NSURLConnection is deprecated - disable Xcode warnings
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+
+
+// Disable auto-swizzling and ensure TrustKit does not get called
+/*
+- (void)testSwizzleNetworkDelegatesDiabled
+{
+    NSDictionary *trustKitConfig =
+    @{
+      kTSKSwizzleNetworkDelegates: @NO,
+      kTSKPinnedDomains :
+          @{
+              @"www.reddit.com" : @{
+                      kTSKEnforcePinning : @YES,
+                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                      kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
+                                              @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
+                                              ]}}};
     
+    [TrustKit initializeWithConfiguration:trustKitConfig];
+    
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLConnectionDelegate"];
+    TestNSURLConnectionDelegate* delegate = [[TestNSURLConnectionDelegate alloc] initWithExpectation:expectation];
+    NSURLConnection *connection = [[NSURLConnection alloc]
+                                   initWithRequest:[NSURLRequest requestWithURL:
+                                                    [NSURL URLWithString:@"https://www.yahoo.com/"]]
+                                   delegate:delegate];
+    [connection start];
+    
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error) {
+        if (error) {
+            NSLog(@"Timeout Error: %@", error);
+        }
+    }];
+    
+    // The initial value for getLastTrustKitValidationResult is -1 when no pinning validation has been done yet
+    XCTAssert(([TSKNSURLConnectionDelegateProxy getLastTrustKitValidationResult] < 0), @"TrustKit was called although swizzling was disabled");
+}
+*/
+
+
+// Tests a secure connection to https://www.yahoo.com and forces validation to fail by providing a fake hash
+- (void)testPinningValidationFailed
+{
     NSDictionary *trustKitConfig =
     @{
       kTSKPinnedDomains :
           @{
               @"www.yahoo.com" : @{
+                      kTSKEnforcePinning : @YES,
+                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                      kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
+                                              @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
+                                              ]}}};
+    
+    [TrustKit initializeWithConfiguration:trustKitConfig];
+
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLConnectionDelegate"];
+    TestNSURLConnectionDelegate* delegate = [[TestNSURLConnectionDelegate alloc] initWithExpectation:expectation];
+    // Use -initWithRequest:delegate:
+    NSURLConnection *connection = [[NSURLConnection alloc]
+                                   initWithRequest:[NSURLRequest requestWithURL:
+                                                    [NSURL URLWithString:@"https://www.yahoo.com/"]]
+                                   delegate:delegate];
+    [connection start];
+    
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error)
+    {
+        if (error)
+        {
+            NSLog(@"Timeout Error: %@", error);
+        }
+    }];
+    
+    XCTAssert(([TSKNSURLConnectionDelegateProxy getLastTrustKitValidationResult] == TSKPinValidationResultFailed), @"TrustKit accepted an invalid certificate");
+    XCTAssertNotNil(delegate.lastError, @"TrustKit did not trigger an error");
+    XCTAssertNil(delegate.lastResponse, @"TrustKit returned a response although pin validation failed");
+}
+
+
+// Tests a secure connection to https://www.yahoo.com and forces validation to fail by providing a fake hash, but do not enforce pinning
+- (void)testPinningValidationFailedDoNotEnforcePinning
+{
+    NSDictionary *trustKitConfig =
+    @{
+      kTSKPinnedDomains :
+          @{
+              @"www.yahoo.com" : @{
+                      kTSKEnforcePinning : @NO,
+                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                      kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
+                                              @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
+                                              ]}}};
+    
+    [TrustKit initializeWithConfiguration:trustKitConfig];
+    
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLConnectionDelegate"];
+    TestNSURLConnectionDelegate* delegate = [[TestNSURLConnectionDelegate alloc] initWithExpectation:expectation];
+    // Use +connectionWithRequest:delegate:
+    NSURLConnection *connection = [NSURLConnection
+                                   connectionWithRequest:[NSURLRequest requestWithURL:
+                                                    [NSURL URLWithString:@"https://www.yahoo.com/"]]
+                                   delegate:delegate];
+    [connection start];
+    
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error)
+     {
+         if (error)
+         {
+             NSLog(@"Timeout Error: %@", error);
+         }
+     }];
+    
+    XCTAssert(([TSKNSURLConnectionDelegateProxy getLastTrustKitValidationResult] == TSKPinValidationResultFailed), @"TrustKit accepted an invalid certificate");
+    XCTAssertNotNil(delegate.lastError, @"TrustKit did not trigger an error");
+    XCTAssertNotNil(delegate.lastResponse, @"TrustKit did not return a response although pinning was not enforced");
+    XCTAssert([(NSHTTPURLResponse *)delegate.lastResponse statusCode] == 200, @"TrustKit did not return a response although pinning was not enforced");
+}
+
+
+// Tests a secure connection to https://www.datatheorem.com by pinning only to the CA public key
+- (void)testPinningValidationSucceeded
+{
+    NSDictionary *trustKitConfig =
+    @{
+      kTSKPinnedDomains :
+          @{
+              @"www.datatheorem.com" : @{
                       kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                       kTSKPublicKeyHashes : @[@"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=", // CA key
                                               @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=" // CA key
@@ -99,35 +231,63 @@
     [TrustKit initializeWithConfiguration:trustKitConfig];
     
     
-    
-    // NSURLConnection is deprecated
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
-    
     XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLConnectionDelegate"];
     TestNSURLConnectionDelegate* delegate = [[TestNSURLConnectionDelegate alloc] initWithExpectation:expectation];
+    // Use -initWithRequest:delegate:startstartImmediately:
     NSURLConnection *connection = [[NSURLConnection alloc]
                                    initWithRequest:[NSURLRequest requestWithURL:
-                                                    [NSURL URLWithString:@"https://www.reddit.com/normal"]]
-                                   delegate:delegate];
+                                                    [NSURL URLWithString:@"https://www.datatheorem.com/"]]
+                                   delegate:delegate
+                                   startImmediately:YES];
     [connection start];
     
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error)
+     {
+         if (error)
+         {
+             NSLog(@"Timeout Error: %@", error);
+         }
+     }];
     
-    // Run other methods that we swizzle to display a warning, to ensure they don't crash
-    XCTestExpectation *expectation2 = [self expectationWithDescription:@"Asynchronous request"];
+    NSLog(@"lol %ld",(long)[TSKNSURLConnectionDelegateProxy getLastTrustKitValidationResult]);
+    
+    XCTAssert(([TSKNSURLConnectionDelegateProxy getLastTrustKitValidationResult] == TSKPinValidationResultSuccess), @"TrustKit rejected a valid certificate");
+    XCTAssertNil(delegate.lastError, @"TrustKit triggered an error");
+    XCTAssertNotNil(delegate.lastResponse, @"TrustKit prevented a response from being returned");
+    XCTAssert([(NSHTTPURLResponse *)delegate.lastResponse statusCode] == 200, @"TrustKit prevented a response from being returned");
+
+}
+
+
+- (void)testNoDelegateWarnings
+{
+    NSDictionary *trustKitConfig =
+    @{
+      kTSKPinnedDomains :
+          @{
+              @"www.yahoo.com" : @{
+                      kTSKEnforcePinning : @YES,
+                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                      kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
+                                              @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
+                                              ]}}};
+    
+    [TrustKit initializeWithConfiguration:trustKitConfig];
+
+    // Run other NSURLConnection methods that we swizzle to display a warning, to ensure they don't crash
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Asynchronous request"];
     [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:
                                               [NSURL URLWithString:@"https://www.datatheorem.com/test"]]
                                        queue:[NSOperationQueue mainQueue]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
-                               [expectation2 fulfill];
+                               [expectation fulfill];
                            }];
     
     [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:
                                              [NSURL URLWithString:@"https://www.datatheorem.com/test"]]
                           returningResponse:nil error:nil];
-#pragma GCC diagnostic pop
-    
-    
+
+
     [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error) {
         if (error) {
             NSLog(@"Timeout Error: %@", error);
@@ -135,6 +295,5 @@
     }];
 }
 
-
-
+#pragma GCC diagnostic pop
 @end

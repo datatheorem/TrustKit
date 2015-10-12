@@ -12,6 +12,9 @@
 #import "RSSwizzle.h"
 
 
+// Useful for the tests
+static TSKPinValidationResult lastTrustKitValidationResult = -1;
+
 
 typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NSError *connectionError);
 
@@ -24,10 +27,20 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
 
 @implementation TSKNSURLConnectionDelegateProxy
 
+
++(TSKPinValidationResult)getLastTrustKitValidationResult
+{
+    return lastTrustKitValidationResult;
+}
+
+
 + (void)swizzleNSURLConnectionConstructors
 {
+    static const void *swizzleOncekey = &swizzleOncekey;
+    
     // - initWithRequest:delegate:
     // We can use RSSwizzleModeAlways, NULL as the swizzling parameters because this should only be called from within a dispatch_once()
+    
     RSSwizzleInstanceMethod(NSClassFromString(@"NSURLConnection"),
                             @selector(initWithRequest:delegate:),
                             RSSWReturnType(NSURLConnection*),
@@ -38,7 +51,8 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
                                                 TSKNSURLConnectionDelegateProxy *swizzledDelegate = [[TSKNSURLConnectionDelegateProxy alloc]initWithDelegate:delegate];
                                                 NSURLConnection *connection = RSSWCallOriginal(request, swizzledDelegate);
                                                 return connection;
-                                            }), RSSwizzleModeAlways, NULL);
+                                            }), RSSwizzleModeOncePerClass, swizzleOncekey);
+    
     
     
     // - initWithRequest:delegate:startImmediately:
@@ -52,7 +66,7 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
                                                 TSKNSURLConnectionDelegateProxy *swizzledDelegate = [[TSKNSURLConnectionDelegateProxy alloc]initWithDelegate:delegate];
                                                 NSURLConnection *connection = RSSWCallOriginal(request, swizzledDelegate, startImmediately);
                                                 return connection;
-                                            }), RSSwizzleModeAlways, NULL);
+                                            }), RSSwizzleModeOncePerClass, swizzleOncekey);
     
     
     // Not hooking + connectionWithRequest:delegate: as it ends up calling initWithRequest:delegate:
@@ -95,6 +109,7 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
         originalDelegate = delegate;
     }
     TSKLog(@"Proxy-ing NSURLConnectionDelegate: %@", NSStringFromClass([delegate class]));
+    lastTrustKitValidationResult = -1;
     return self;
 }
 
@@ -168,6 +183,7 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
     
         // Check the trust object against the pinning policy
         result = [TSKPinningValidator evaluateTrust:serverTrust forHostname:serverHostname];
+        lastTrustKitValidationResult = result;
         if (result == TSKPinValidationResultSuccess)
         {
             // Success - don't do anything and forward the challenge to the original delegate
@@ -216,7 +232,6 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
         }
     }
 }
-
 
 
 @end

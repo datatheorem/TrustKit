@@ -26,7 +26,6 @@ void sendPinFailureReport_async(TSKPinValidationResult validationResult, SecTrus
 
 + (void) resetConfiguration;
 + (NSDictionary *) configuration;
-+ (BOOL) wasTrustKitCalled;
 + (BOOL) wasTrustKitInitialized;
 
 @end

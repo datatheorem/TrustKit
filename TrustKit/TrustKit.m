@@ -57,9 +57,6 @@ static id _pinFailureReporter = nil;
 static char kTSKPinFailureReporterQueueLabel[] = "com.datatheorem.trustkit.reporterqueue";
 static dispatch_queue_t _pinFailureReporterQueue = NULL;
 
-// For tests
-static BOOL _wasTrustKitCalled = NO;
-
 
 // Default report URI - can be disabled with TSKDisableDefaultReportUri
 static NSString * const kTSKDefaultReportUri = @"https://trustkit-reports-server.appspot.com/log_report";
@@ -354,8 +351,6 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
                 // NSURLConnection
                 [TSKNSURLConnectionDelegateProxy swizzleNSURLConnectionConstructors];
             }
-
-                
             
             // Create our reporter for sending pin validation failures
             @try
@@ -398,11 +393,6 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
 
 
 # pragma mark Private / Test Methods
-+ (BOOL) wasTrustKitCalled
-{
-    return _wasTrustKitCalled;
-}
-
 
 + (NSDictionary *) configuration
 {
@@ -422,7 +412,6 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
     resetSubjectPublicKeyInfoCache();
     _trustKitGlobalConfiguration = nil;
     _isTrustKitInitialized = NO;
-    _wasTrustKitCalled = NO;
     _pinFailureReporter = nil;
     _pinFailureReporterQueue= NULL;
     dispatchOnceTrustKitInit = 0;
