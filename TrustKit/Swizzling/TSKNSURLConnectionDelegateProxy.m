@@ -27,7 +27,7 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
 @implementation TSKNSURLConnectionDelegateProxy
 
 
-+(TSKTrustDecision)getLastTrustKitTrustDecision
++(TSKTrustDecision)getLastTrustDecision
 {
     return lastTrustDecision;
 }
