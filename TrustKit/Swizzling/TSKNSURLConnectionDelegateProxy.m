@@ -122,7 +122,6 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
     {
         // The delegate proxy should mirror the original delegate's methods so that it doesn't change the app flow
         return [originalDelegate respondsToSelector:aSelector];
-    //    return NO;
     }
 }
 

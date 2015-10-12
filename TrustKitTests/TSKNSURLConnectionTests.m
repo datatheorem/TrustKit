@@ -10,6 +10,7 @@
 #import "TrustKit+Private.h"
 #import "TSKNSURLConnectionDelegateProxy.h"
 
+
 @interface TSKNSURLConnectionDelegateProxy(Private)
 +(TSKPinValidationResult)getLastTrustDecision;
 @end
