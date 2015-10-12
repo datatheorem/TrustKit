@@ -208,7 +208,7 @@
 
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLConnectionDelegate"];
-    TestNSURLConnectionDelegateNoAuthHandler* delegate = [[TestNSURLConnectionDelegateNoAuthHandler alloc] initWithExpectation:expectation];
+    TestNSURLConnectionDelegateNoAuthHandler *delegate = [[TestNSURLConnectionDelegateNoAuthHandler alloc] initWithExpectation:expectation];
     // Use -initWithRequest:delegate:
     NSURLConnection *connection = [[NSURLConnection alloc]
                                    initWithRequest:[NSURLRequest requestWithURL:
@@ -248,7 +248,7 @@
     
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLConnectionDelegate"];
-    TestNSURLConnectionDelegateNoAuthHandler* delegate = [[TestNSURLConnectionDelegateNoAuthHandler alloc] initWithExpectation:expectation];
+    TestNSURLConnectionDelegateNoAuthHandler *delegate = [[TestNSURLConnectionDelegateNoAuthHandler alloc] initWithExpectation:expectation];
     // Use +connectionWithRequest:delegate:
     NSURLConnection *connection = [NSURLConnection
                                    connectionWithRequest:[NSURLRequest requestWithURL:
@@ -288,7 +288,7 @@
     
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLConnectionDelegate"];
-    TestNSURLConnectionDelegateNoAuthHandler* delegate = [[TestNSURLConnectionDelegateNoAuthHandler alloc] initWithExpectation:expectation];
+    TestNSURLConnectionDelegateNoAuthHandler *delegate = [[TestNSURLConnectionDelegateNoAuthHandler alloc] initWithExpectation:expectation];
     // Use -initWithRequest:delegate:startstartImmediately:
     NSURLConnection *connection = [[NSURLConnection alloc]
                                    initWithRequest:[NSURLRequest requestWithURL:
@@ -366,7 +366,7 @@
     
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLConnectionDelegateDidReceiveAuth"];
-    TestNSURLConnectionDelegateDidReceiveAuth* delegate = [[TestNSURLConnectionDelegateDidReceiveAuth alloc] initWithExpectation:expectation];
+    TestNSURLConnectionDelegateDidReceiveAuth *delegate = [[TestNSURLConnectionDelegateDidReceiveAuth alloc] initWithExpectation:expectation];
     NSURLConnection *connection = [[NSURLConnection alloc]
                                    initWithRequest:[NSURLRequest requestWithURL:
                                                     [NSURL URLWithString:@"https://www.apple.com/"]]
@@ -402,7 +402,7 @@
 
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLConnectionDelegateDidReceiveAuth"];
-    TestNSURLConnectionDelegateWillSendRequestForAuth* delegate = [[TestNSURLConnectionDelegateWillSendRequestForAuth alloc] initWithExpectation:expectation];
+    TestNSURLConnectionDelegateWillSendRequestForAuth *delegate = [[TestNSURLConnectionDelegateWillSendRequestForAuth alloc] initWithExpectation:expectation];
     NSURLConnection *connection = [[NSURLConnection alloc]
                                    initWithRequest:[NSURLRequest requestWithURL:
                                                     [NSURL URLWithString:@"https://www.fastmail.fm/"]]
