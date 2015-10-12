@@ -19,7 +19,6 @@ static TSKTrustDecision lastTrustDecision = -1;
 typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NSError *connectionError);
 
 
-
 @interface TSKNSURLConnectionDelegateProxy(Private)
 -(BOOL)forwardToOriginalDelegateAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge forConnection:(NSURLConnection *)connection;
 @end
@@ -39,8 +38,6 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
     static const void *swizzleOncekey = &swizzleOncekey;
     
     // - initWithRequest:delegate:
-    // We can use RSSwizzleModeAlways, NULL as the swizzling parameters because this should only be called from within a dispatch_once()
-    
     RSSwizzleInstanceMethod(NSClassFromString(@"NSURLConnection"),
                             @selector(initWithRequest:delegate:),
                             RSSWReturnType(NSURLConnection*),
