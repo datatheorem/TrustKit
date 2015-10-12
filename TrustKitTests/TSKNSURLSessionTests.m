@@ -11,12 +11,14 @@
 #import "TSKNSURLSessionDelegateProxy.h"
 
 
+#pragma mark Private test methods
 @interface TSKNSURLSessionDelegateProxy(Private)
 +(TSKPinValidationResult)getLastTrustDecision;
 @end
 
 
-@interface TestNSURLSessionTaskDelegate : NSObject <NSURLSessionTaskDelegate, NSURLSessionDataDelegate>
+#pragma mark Test NSURLSession delegate with no auth handler
+@interface TestNSURLSessionDelegate : NSObject <NSURLSessionTaskDelegate, NSURLSessionDataDelegate>
 {
     XCTestExpectation *testExpectation;
 }
@@ -38,7 +40,7 @@ didReceiveResponse:(NSURLResponse * _Nonnull)response
 @end
 
 
-@implementation TestNSURLSessionTaskDelegate
+@implementation TestNSURLSessionDelegate
 
 - (instancetype)initWithExpectation:(XCTestExpectation *)expectation
 {
@@ -70,6 +72,63 @@ didReceiveResponse:(NSURLResponse * _Nonnull)response
 @end
 
 
+#pragma mark Test NSURLSession delegate with URLSession:task:didReceiveChallenge:completionHandler:
+@interface TestNSURLSessionDelegateTaskDidReceiveChallenge : TestNSURLSessionDelegate
+
+@property BOOL wasAuthHandlerCalled; // Used to validate that the delegate's auth handler was called
+
+- (void)URLSession:(NSURLSession * _Nonnull)session
+              task:(NSURLSessionTask * _Nonnull)task
+didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
+ completionHandler:(void (^ _Nonnull)(NSURLSessionAuthChallengeDisposition disposition,
+                                      NSURLCredential * _Nullable credential))completionHandler;
+
+@end
+
+
+@implementation TestNSURLSessionDelegateTaskDidReceiveChallenge
+
+- (void)URLSession:(NSURLSession * _Nonnull)session
+              task:(NSURLSessionTask * _Nonnull)task
+didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
+ completionHandler:(void (^ _Nonnull)(NSURLSessionAuthChallengeDisposition disposition,
+                                      NSURLCredential * _Nullable credential))completionHandler
+{
+    _wasAuthHandlerCalled = YES;
+    [testExpectation fulfill];
+}
+
+@end
+
+
+#pragma mark Test NSURLSession delegate with -URLSession:didReceiveChallenge:completionHandler:
+@interface TestNSURLSessionDelegateSessionDidReceiveChallenge : TestNSURLSessionDelegate
+
+@property BOOL wasAuthHandlerCalled; // Used to validate that the delegate's auth handler was called
+
+- (void)URLSession:(NSURLSession * _Nonnull)session
+didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
+ completionHandler:(void (^ _Nonnull)(NSURLSessionAuthChallengeDisposition disposition,
+                                      NSURLCredential * _Nullable credential))completionHandler;
+
+@end
+
+
+@implementation TestNSURLSessionDelegateSessionDidReceiveChallenge
+
+- (void)URLSession:(NSURLSession * _Nonnull)session
+didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
+ completionHandler:(void (^ _Nonnull)(NSURLSessionAuthChallengeDisposition disposition,
+                                      NSURLCredential * _Nullable credential))completionHandler
+{
+    _wasAuthHandlerCalled = YES;
+    [testExpectation fulfill];
+}
+
+@end
+
+
+#pragma mark Test suite
 @interface TSKNSURLSessionTests : XCTestCase
 
 @end
@@ -102,7 +161,7 @@ didReceiveResponse:(NSURLResponse * _Nonnull)response
     
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLSessionTaskDelegate"];
-    TestNSURLSessionTaskDelegate* delegate = [[TestNSURLSessionTaskDelegate alloc] initWithExpectation:expectation];
+    TestNSURLSessionDelegate* delegate = [[TestNSURLSessionDelegate alloc] initWithExpectation:expectation];
     
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]
                                                           delegate:delegate
@@ -143,7 +202,7 @@ didReceiveResponse:(NSURLResponse * _Nonnull)response
     
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLSessionTaskDelegate"];
-    TestNSURLSessionTaskDelegate* delegate = [[TestNSURLSessionTaskDelegate alloc] initWithExpectation:expectation];
+    TestNSURLSessionDelegate* delegate = [[TestNSURLSessionDelegate alloc] initWithExpectation:expectation];
     
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]
                                                           delegate:delegate
@@ -167,7 +226,6 @@ didReceiveResponse:(NSURLResponse * _Nonnull)response
 }
 
 
-
 - (void)testPinningValidationSucceeded
 {
     NSDictionary *trustKitConfig =
@@ -184,7 +242,7 @@ didReceiveResponse:(NSURLResponse * _Nonnull)response
     
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLSession"];
-    TestNSURLSessionTaskDelegate *delegate = [[TestNSURLSessionTaskDelegate alloc] initWithExpectation:expectation];
+    TestNSURLSessionDelegate *delegate = [[TestNSURLSessionDelegate alloc] initWithExpectation:expectation];
     
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]
                                                           delegate:delegate
@@ -241,5 +299,78 @@ didReceiveResponse:(NSURLResponse * _Nonnull)response
     [task3 resume];
 }
 
+
+// Ensure that if the original delegate has an auth handler, it also gets called when pinning validation succeed
+// so that we don't disrupt the App's usual flow because of TrustKit's swizzling
+- (void)testTaskDidReceiveChallengeGetsCalled
+{
+    NSDictionary *trustKitConfig =
+    @{
+      kTSKPinnedDomains :
+          @{
+              @"www.datatheorem.com" : @{
+                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                      kTSKPublicKeyHashes : @[@"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=", // CA key
+                                              @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=" // CA key
+                                              ]}}};
+    
+    [TrustKit initializeWithConfiguration:trustKitConfig];
+    
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLSession"];
+    TestNSURLSessionDelegateTaskDidReceiveChallenge *delegate = [[TestNSURLSessionDelegateTaskDidReceiveChallenge alloc] initWithExpectation:expectation];
+    
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]
+                                                          delegate:delegate
+                                                     delegateQueue:nil];
+    
+    NSURLSessionDataTask *task = [session dataTaskWithURL:[NSURL URLWithString:@"https://www.datatheorem.com/"]];
+    [task resume];
+    
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error) {
+        if (error) {
+            NSLog(@"Timeout Error: %@", error);
+        }
+    }];
+    
+    XCTAssert(delegate.wasAuthHandlerCalled, @"TrustKit prevented the original delegate's auth handler from being called");
+}
+
+
+// Ensure that if the original delegate has an auth handler, it also gets called when pinning validation succeed
+// so that we don't disrupt the App's usual flow because of TrustKit's swizzling
+- (void)testSessionDidReceiveChallengeGetsCalled
+{
+    NSDictionary *trustKitConfig =
+    @{
+      kTSKPinnedDomains :
+          @{
+              @"www.datatheorem.com" : @{
+                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                      kTSKPublicKeyHashes : @[@"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=", // CA key
+                                              @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=" // CA key
+                                              ]}}};
+    
+    [TrustKit initializeWithConfiguration:trustKitConfig];
+    
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLSession"];
+    TestNSURLSessionDelegateSessionDidReceiveChallenge *delegate = [[TestNSURLSessionDelegateSessionDidReceiveChallenge alloc] initWithExpectation:expectation];
+    
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]
+                                                          delegate:delegate
+                                                     delegateQueue:nil];
+    
+    NSURLSessionDataTask *task = [session dataTaskWithURL:[NSURL URLWithString:@"https://www.datatheorem.com/"]];
+    [task resume];
+    
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error) {
+        if (error) {
+            NSLog(@"Timeout Error: %@", error);
+        }
+    }];
+    
+    XCTAssert(delegate.wasAuthHandlerCalled, @"TrustKit prevented the original delegate's auth handler from being called");
+}
 
 @end
