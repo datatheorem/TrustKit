@@ -111,12 +111,16 @@
     // Create a valid server trust
     SecCertificateRef leafCertificate = [TSKCertificateUtils createCertificateFromDer:@"sni41871.cloudflaressl.com"];
     SecCertificateRef intermediateCertificate = [TSKCertificateUtils createCertificateFromDer:@"COMODOECCDomainValidationSecureServerCA2"];
-    SecCertificateRef certChainArray[2] = {leafCertificate, intermediateCertificate};
+    SecCertificateRef intermediateCertificate2 = [TSKCertificateUtils createCertificateFromDer:@"COMODOECCCertificationAuthority"];
+    SecCertificateRef certChainArray[3] = {leafCertificate, intermediateCertificate, intermediateCertificate2};
+    
+    SecCertificateRef rootCertificate = [TSKCertificateUtils createCertificateFromDer:@"AddTrustExternalRootCA"];
+    SecCertificateRef trustStoreArray[1] = {rootCertificate};
     
     SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
                                                              arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
-                                                      anchorCertificates:NULL
-                                                             arrayLength:0];
+                                                      anchorCertificates:(const void **)trustStoreArray
+                                                             arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
     
     // Create a configuration and parse it so we get the right format
     NSDictionary *trustKitConfig;
@@ -126,7 +130,7 @@
                                                             kTSKPublicKeyHashes : @[@"rFjc3wG7lTZe43zeYTvPq8k4xdDEutCmIhI5dn4oCeE=", // Server Key
                                                                                     @"rFjc3wG7lTZe43zeYTvPq8k4xdDEutCmIhI5dn4oCeE=", // Server Key
                                                                                     ]}}});
-    
+        
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust,
                                             @"istlsfastyet.com",
