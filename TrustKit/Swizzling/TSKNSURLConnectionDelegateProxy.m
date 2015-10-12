@@ -13,7 +13,7 @@
 
 
 // Useful for the tests
-static TSKPinValidationResult lastTrustKitValidationResult = -1;
+static TSKTrustDecision lastTrustDecision = -1;
 
 
 typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NSError *connectionError);
@@ -28,9 +28,9 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
 @implementation TSKNSURLConnectionDelegateProxy
 
 
-+(TSKPinValidationResult)getLastTrustKitValidationResult
++(TSKTrustDecision)getLastTrustKitTrustDecision
 {
-    return lastTrustKitValidationResult;
+    return lastTrustDecision;
 }
 
 
@@ -109,7 +109,7 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
         originalDelegate = delegate;
     }
     TSKLog(@"Proxy-ing NSURLConnectionDelegate: %@", NSStringFromClass([delegate class]));
-    lastTrustKitValidationResult = -1;
+    lastTrustDecision = -1;
     return self;
 }
 
@@ -173,23 +173,23 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
 - (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
 {
     BOOL wasChallengeHandled = NO;
-    TSKPinValidationResult result = TSKPinValidationResultFailed;
     
     // For SSL pinning we only care about server authentication
     if([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust])
     {
+        TSKTrustDecision trustDecision = TSKTrustDecisionShouldBlockConnection;
         SecTrustRef serverTrust = challenge.protectionSpace.serverTrust;
         NSString *serverHostname = challenge.protectionSpace.host;
     
         // Check the trust object against the pinning policy
-        result = [TSKPinningValidator evaluateTrust:serverTrust forHostname:serverHostname];
-        lastTrustKitValidationResult = result;
-        if (result == TSKPinValidationResultSuccess)
+        trustDecision = [TSKPinningValidator evaluateTrust:serverTrust forHostname:serverHostname];
+        lastTrustDecision = trustDecision;
+        if (trustDecision == TSKTrustDecisionShouldAllowConnection)
         {
             // Success - don't do anything and forward the challenge to the original delegate
             wasChallengeHandled = NO;
         }
-        else if (result == TSKPinValidationResultDomainNotPinned)
+        else if (trustDecision == TSKTrustDecisionDomainNotPinned)
         {
             if ([self forwardToOriginalDelegateAuthenticationChallenge:challenge forConnection:connection])
             {

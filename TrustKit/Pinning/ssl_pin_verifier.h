@@ -17,6 +17,38 @@
 #import "TSKPinningValidator.h"
 
 
+/**
+ Possible return values when verifying a server's identity. 
+ */
+typedef NS_ENUM(NSInteger, TSKPinValidationResult)
+{
+    /**
+     The server trust was succesfully evaluated and contained at least one of the configured pins.
+     */
+    TSKPinValidationResultSuccess,
+    
+    /**
+     The server trust was succesfully evaluated but did not contain any of the configured pins.
+     */
+    TSKPinValidationResultFailed,
+    
+    /**
+     The server trust's evaluation failed: the server's certificate chain is not trusted.
+     */
+    TSKPinValidationResultFailedCertificateChainNotTrusted,
+    
+    /**
+     The server trust could not be evaluated due to invalid parameters.
+     */
+    TSKPinValidationResultErrorInvalidParameters,
+
+    /**
+     The server trust was succesfully evaluated but did not contain any of the configured pins. However, the certificate chain terminates at a user-defined trust anchor (ie. a custom/private CA that was manually added to OS X's trust store). Only available on OS X.
+     */
+    TSKPinValidationResultFailedUserDefinedTrustAnchor NS_AVAILABLE_MAC(10_9),
+};
+
+
 // Figure out if a specific domain is pinned and retrieve this domain's configuration key; returns nil if no configuration was found
 NSString *getPinningConfigurationKeyForDomain(NSString *hostname, NSDictionary *trustKitConfiguration);
 

@@ -10,7 +10,7 @@
 */
 
 #import <Foundation/Foundation.h>
-#import "TSKPinningValidator.h"
+#import "ssl_pin_verifier.h"
 
 
 @protocol TSKReporterDelegate <NSObject>

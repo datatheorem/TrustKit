@@ -11,41 +11,17 @@
 
 #import <Foundation/Foundation.h>
 
+
+
 /**
  Possible return values when verifying a server's identity against the global SSL pinning policy using `TSKPinningValidator`.
  
  */
-typedef NS_ENUM(NSInteger, TSKPinValidationResult)
+typedef NS_ENUM(NSInteger, TSKTrustDecision)
 {
-/**
- The server trust was succesfully evaluated and contained at least one of the configured pins.
-*/
-    TSKPinValidationResultSuccess,
-    
-/**
- The server trust was succesfully evaluated but did not contain any of the configured pins.
-*/
-    TSKPinValidationResultFailed,
-    
-/**
- The server trust's evaluation failed: the server's certificate chain is not trusted.
-*/
-    TSKPinValidationResultFailedCertificateChainNotTrusted,
-    
-/**
- The server trust could not be evaluated due to invalid parameters.
-*/
-    TSKPinValidationResultErrorInvalidParameters,
-    
-/**
- The supplied hostname does not have a pinning policy configured; no validation was performed.
-*/
-    TSKPinValidationResultDomainNotPinned,
-    
-/**
- The server trust was succesfully evaluated but did not contain any of the configured pins. However, the certificate chain terminates at a user-defined trust anchor (ie. a custom/private CA that was manually added to OS X's trust store). Only available on OS X.
-*/
-    TSKPinValidationResultFailedUserDefinedTrustAnchor NS_AVAILABLE_MAC(10_9),
+    TSKTrustDecisionShouldAllowConnection,
+    TSKTrustDecisionShouldBlockConnection,
+    TSKTrustDecisionDomainNotPinned,
 };
 
 
@@ -81,6 +57,6 @@ typedef NS_ENUM(NSInteger, TSKPinValidationResult)
  
  @exception NSException Thrown when TrustKit has not been initialized with a pinning policy.
  */
-+ (TSKPinValidationResult) evaluateTrust:(SecTrustRef)serverTrust forHostname:(NSString *)serverHostname;
++ (TSKTrustDecision) evaluateTrust:(SecTrustRef)serverTrust forHostname:(NSString *)serverHostname;
 
 @end

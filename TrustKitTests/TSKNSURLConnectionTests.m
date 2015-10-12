@@ -11,7 +11,7 @@
 #import "TSKNSURLConnectionDelegateProxy.h"
 
 @interface TSKNSURLConnectionDelegateProxy(Private)
-+(TSKPinValidationResult)getLastTrustKitValidationResult;
++(TSKPinValidationResult)getLastTrustKitTrustDecision;
 @end
 
 
@@ -168,7 +168,7 @@
         }
     }];
     
-    XCTAssert(([TSKNSURLConnectionDelegateProxy getLastTrustKitValidationResult] == TSKPinValidationResultFailed), @"TrustKit accepted an invalid certificate");
+    XCTAssert(([TSKNSURLConnectionDelegateProxy getLastTrustKitTrustDecision] == TSKTrustDecisionShouldBlockConnection), @"TrustKit accepted an invalid certificate");
     XCTAssertNotNil(delegate.lastError, @"TrustKit did not trigger an error");
     XCTAssertNil(delegate.lastResponse, @"TrustKit returned a response although pin validation failed");
 }
@@ -208,7 +208,7 @@
          }
      }];
     
-    XCTAssert(([TSKNSURLConnectionDelegateProxy getLastTrustKitValidationResult] == TSKPinValidationResultFailed), @"TrustKit accepted an invalid certificate");
+    XCTAssert(([TSKNSURLConnectionDelegateProxy getLastTrustKitTrustDecision] == TSKTrustDecisionShouldAllowConnection), @"TrustKit blocked a connection although pinning was not enforced");
     XCTAssertNotNil(delegate.lastError, @"TrustKit did not trigger an error");
     XCTAssertNotNil(delegate.lastResponse, @"TrustKit did not return a response although pinning was not enforced");
     XCTAssert([(NSHTTPURLResponse *)delegate.lastResponse statusCode] == 200, @"TrustKit did not return a response although pinning was not enforced");
@@ -249,9 +249,9 @@
          }
      }];
     
-    NSLog(@"lol %ld",(long)[TSKNSURLConnectionDelegateProxy getLastTrustKitValidationResult]);
+    NSLog(@"lol %ld",(long)[TSKNSURLConnectionDelegateProxy getLastTrustKitTrustDecision]);
     
-    XCTAssert(([TSKNSURLConnectionDelegateProxy getLastTrustKitValidationResult] == TSKPinValidationResultSuccess), @"TrustKit rejected a valid certificate");
+    XCTAssert(([TSKNSURLConnectionDelegateProxy getLastTrustKitTrustDecision] == TSKTrustDecisionShouldAllowConnection), @"TrustKit rejected a valid certificate");
     XCTAssertNil(delegate.lastError, @"TrustKit triggered an error");
     XCTAssertNotNil(delegate.lastResponse, @"TrustKit prevented a response from being returned");
     XCTAssert([(NSHTTPURLResponse *)delegate.lastResponse statusCode] == 200, @"TrustKit prevented a response from being returned");
