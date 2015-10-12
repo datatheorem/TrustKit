@@ -98,7 +98,7 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
 }
 
 
-- (TSKNSURLConnectionDelegateProxy *)initWithDelegate:(id)delegate
+- (instancetype)initWithDelegate:(id)delegate
 {
     self = [super init];
     if (self)

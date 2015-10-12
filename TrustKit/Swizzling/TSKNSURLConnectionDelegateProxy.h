@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 
-@interface TSKNSURLConnectionDelegateProxy : NSObject <NSURLConnectionDelegate>
+@interface TSKNSURLConnectionDelegateProxy : NSObject
 {
     id<NSURLConnectionDelegate> originalDelegate; // The NSURLConnectionDelegate we're going to proxy
 }
@@ -17,7 +17,7 @@
 // Initalize our hooks
 + (void)swizzleNSURLConnectionConstructors;
 
-- (TSKNSURLConnectionDelegateProxy *)initWithDelegate:(id)delegate;
+- (instancetype)initWithDelegate:(id)delegate;
 
 // Mirror the original delegate's list of implemented methods
 - (BOOL)respondsToSelector:(SEL)aSelector ;
