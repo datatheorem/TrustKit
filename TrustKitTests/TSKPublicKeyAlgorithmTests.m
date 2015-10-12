@@ -130,7 +130,7 @@
                                                             kTSKPublicKeyHashes : @[@"rFjc3wG7lTZe43zeYTvPq8k4xdDEutCmIhI5dn4oCeE=", // Server Key
                                                                                     @"rFjc3wG7lTZe43zeYTvPq8k4xdDEutCmIhI5dn4oCeE=", // Server Key
                                                                                     ]}}});
-        
+    
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust,
                                             @"istlsfastyet.com",

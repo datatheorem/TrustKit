@@ -11,12 +11,14 @@
 #import "TSKNSURLConnectionDelegateProxy.h"
 
 
+#pragma mark Private test methods
 @interface TSKNSURLConnectionDelegateProxy(Private)
 +(TSKPinValidationResult)getLastTrustDecision;
 @end
 
 
-@interface TestNSURLConnectionDelegate : NSObject <NSURLConnectionDataDelegate>
+#pragma mark Test NSURLConnection delegate with no auth handler
+@interface TestNSURLConnectionDelegateNoAuthHandler : NSObject <NSURLConnectionDataDelegate>
 {
     XCTestExpectation *testExpectation;
 }
@@ -32,7 +34,7 @@
 @end
 
 
-@implementation TestNSURLConnectionDelegate {
+@implementation TestNSURLConnectionDelegateNoAuthHandler {
 }
 
 - (instancetype)initWithExpectation:(XCTestExpectation *)expectation
@@ -75,6 +77,58 @@
 
 @end
 
+
+#pragma mark Test NSURLConnection delegate with connection:didReceiveAuthenticationChallenge:
+@interface TestNSURLConnectionDelegateDidReceiveAuth : TestNSURLConnectionDelegateNoAuthHandler
+
+@property BOOL wasAuthHandlerCalled; // Used to validate that the delegate's auth handler was called
+
+- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
+- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace;
+@end
+
+
+@implementation TestNSURLConnectionDelegateDidReceiveAuth
+- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
+{
+    _wasAuthHandlerCalled = YES;
+    [testExpectation fulfill];
+}
+
+- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace
+{
+    return YES;
+}
+@end
+
+
+
+#pragma mark Test NSURLConnection delegate with connection:willSendRequestForAuthenticationChallenge:
+@interface TestNSURLConnectionDelegateWillSendRequestForAuth : TestNSURLConnectionDelegateNoAuthHandler
+
+@property BOOL wasAuthHandlerCalled; // Used to validate that the delegate's auth handler was called
+
+- (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
+@end
+
+
+@implementation TestNSURLConnectionDelegateWillSendRequestForAuth
+- (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
+{
+    _wasAuthHandlerCalled = YES;
+    [testExpectation fulfill];
+}
+
+@end
+
+
+#pragma mark Test suite
+
+// WARNING: For NSURLConnection tests, whenever we connect to a real endpoint as a test, the TLS Session Cache
+// will automatically cache the session, causing subsequent connections to the same host to resume the session.
+// When that happens, authentication handlers don't get called which would cause our tests to fail.
+// As a hacky workaround, every test that connects to an endpoint uses a different domain.
+// https://developer.apple.com/library/mac/qa/qa1727/_index.html
 
 @interface TSKNSURLConnectionTests : XCTestCase
 
@@ -154,7 +208,7 @@
 
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLConnectionDelegate"];
-    TestNSURLConnectionDelegate* delegate = [[TestNSURLConnectionDelegate alloc] initWithExpectation:expectation];
+    TestNSURLConnectionDelegateNoAuthHandler* delegate = [[TestNSURLConnectionDelegateNoAuthHandler alloc] initWithExpectation:expectation];
     // Use -initWithRequest:delegate:
     NSURLConnection *connection = [[NSURLConnection alloc]
                                    initWithRequest:[NSURLRequest requestWithURL:
@@ -194,7 +248,7 @@
     
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLConnectionDelegate"];
-    TestNSURLConnectionDelegate* delegate = [[TestNSURLConnectionDelegate alloc] initWithExpectation:expectation];
+    TestNSURLConnectionDelegateNoAuthHandler* delegate = [[TestNSURLConnectionDelegateNoAuthHandler alloc] initWithExpectation:expectation];
     // Use +connectionWithRequest:delegate:
     NSURLConnection *connection = [NSURLConnection
                                    connectionWithRequest:[NSURLRequest requestWithURL:
@@ -234,11 +288,11 @@
     
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLConnectionDelegate"];
-    TestNSURLConnectionDelegate* delegate = [[TestNSURLConnectionDelegate alloc] initWithExpectation:expectation];
+    TestNSURLConnectionDelegateNoAuthHandler* delegate = [[TestNSURLConnectionDelegateNoAuthHandler alloc] initWithExpectation:expectation];
     // Use -initWithRequest:delegate:startstartImmediately:
     NSURLConnection *connection = [[NSURLConnection alloc]
                                    initWithRequest:[NSURLRequest requestWithURL:
-                                                    [NSURL URLWithString:@"https://www.datatheorem.com/"]]
+                                                    [NSURL URLWithString:@"https://www.datatheorem.com:443/"]]
                                    delegate:delegate
                                    startImmediately:YES];
     [connection start];
@@ -255,7 +309,6 @@
     XCTAssertNil(delegate.lastError, @"TrustKit triggered an error");
     XCTAssertNotNil(delegate.lastResponse, @"TrustKit prevented a response from being returned");
     XCTAssert([(NSHTTPURLResponse *)delegate.lastResponse statusCode] == 200, @"TrustKit prevented a response from being returned");
-
 }
 
 
@@ -294,6 +347,78 @@
         }
     }];
 }
+
+// Ensure that if the original delegate has an auth handler, it also gets called when pinning validation succeed
+// so that we don't disrupt the App's usual flow because of TrustKit's swizzling
+- (void)testDidReceiveAuthHandlerGetsCalled
+{
+    NSDictionary *trustKitConfig =
+    @{
+      kTSKPinnedDomains :
+          @{
+              @"www.apple.com" : @{
+                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                      kTSKPublicKeyHashes : @[@"gMxWOrX4PMQesK9qFNbYBxjBfjUvlkn/vN1n+L9lE5E=", // CA key
+                                              @"gMxWOrX4PMQesK9qFNbYBxjBfjUvlkn/vN1n+L9lE5E=" // CA key
+                                              ]}}};
+    
+    [TrustKit initializeWithConfiguration:trustKitConfig];
+    
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLConnectionDelegateDidReceiveAuth"];
+    TestNSURLConnectionDelegateDidReceiveAuth* delegate = [[TestNSURLConnectionDelegateDidReceiveAuth alloc] initWithExpectation:expectation];
+    NSURLConnection *connection = [[NSURLConnection alloc]
+                                   initWithRequest:[NSURLRequest requestWithURL:
+                                                    [NSURL URLWithString:@"https://www.apple.com/"]]
+                                   delegate:delegate];
+    [connection start];
+    
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error)
+     {
+         if (error)
+         {
+             NSLog(@"Timeout Error: %@", error);
+         }
+     }];
+    XCTAssert(delegate.wasAuthHandlerCalled, @"TrustKit prevented the original delegate's auth handler from being called.");
+}
+
+
+// Ensure that if the original delegate has an auth handler, it also gets called when pinning validation succeed
+// so that we don't disrupt the App's usual flow because of TrustKit's swizzling
+- (void)testWillSendRequestForAuthHandlerGetsCalled
+{
+    NSDictionary *trustKitConfig =
+    @{
+      kTSKPinnedDomains :
+          @{
+              @"www.fastmail.fm" : @{
+                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                      kTSKPublicKeyHashes : @[@"k2v657xBsOVe1PQRwOsHsw3bsGT2VzIqz5K+59sNQws=", // CA key
+                                              @"k2v657xBsOVe1PQRwOsHsw3bsGT2VzIqz5K+59sNQws=" // CA key
+                                              ]}}};
+    
+    [TrustKit initializeWithConfiguration:trustKitConfig];
+
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLConnectionDelegateDidReceiveAuth"];
+    TestNSURLConnectionDelegateWillSendRequestForAuth* delegate = [[TestNSURLConnectionDelegateWillSendRequestForAuth alloc] initWithExpectation:expectation];
+    NSURLConnection *connection = [[NSURLConnection alloc]
+                                   initWithRequest:[NSURLRequest requestWithURL:
+                                                    [NSURL URLWithString:@"https://www.fastmail.fm/"]]
+                                   delegate:delegate];
+    [connection start];
+    
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error)
+     {
+         if (error)
+         {
+             NSLog(@"Timeout Error: %@", error);
+         }
+     }];
+    XCTAssert(delegate.wasAuthHandlerCalled, @"TrustKit prevented the original delegate's auth handler from being called.");
+}
+
 
 #pragma GCC diagnostic pop
 @end

@@ -216,8 +216,7 @@
                                                                                     ]}}});
     
     // Ensure the kTSKSwizzleNetworkDelegates setting was saved
-    NSDictionary *savedTrustKitConfig = [TrustKit configuration];
-    XCTAssert([savedTrustKitConfig[kTSKSwizzleNetworkDelegates] boolValue] ==  NO, @"kTSKSwizzleNetworkDelegates was not saved in the configuration");
+    XCTAssert([trustKitConfig[kTSKSwizzleNetworkDelegates] boolValue] ==  NO, @"kTSKSwizzleNetworkDelegates was not saved in the configuration");
 }
 
 @end
