@@ -114,8 +114,9 @@
     SecCertificateRef intermediateCertificate2 = [TSKCertificateUtils createCertificateFromDer:@"COMODOECCCertificationAuthority"];
     SecCertificateRef certChainArray[3] = {leafCertificate, intermediateCertificate, intermediateCertificate2};
     
-    SecCertificateRef rootCertificate = [TSKCertificateUtils createCertificateFromDer:@"AddTrustExternalRootCA"];
-    SecCertificateRef trustStoreArray[1] = {rootCertificate};
+    // If we put the real root CA, the test fails on OS X; using the last intermediate cert instead
+    //SecCertificateRef rootCertificate = [TSKCertificateUtils createCertificateFromDer:@"AddTrustExternalRootCA"];
+    SecCertificateRef trustStoreArray[1] = {intermediateCertificate2};
     
     SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
                                                              arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
