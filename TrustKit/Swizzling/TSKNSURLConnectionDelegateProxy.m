@@ -41,7 +41,7 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
     RSSwizzleInstanceMethod(NSClassFromString(@"NSURLConnection"),
                             @selector(initWithRequest:delegate:),
                             RSSWReturnType(NSURLConnection*),
-                            RSSWArguments(NSURLRequest *request, id delegate),
+                            RSSWArguments(NSURLRequest *request, id<NSURLConnectionDelegate> delegate),
                             RSSWReplacement(
                                             {
                                                 // Replace the delegate with our own so we can intercept and handle authentication challenges
@@ -56,7 +56,7 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
     RSSwizzleInstanceMethod(NSClassFromString(@"NSURLConnection"),
                             @selector(initWithRequest:delegate:startImmediately:),
                             RSSWReturnType(NSURLConnection*),
-                            RSSWArguments(NSURLRequest *request, id delegate, BOOL startImmediately),
+                            RSSWArguments(NSURLRequest *request, id<NSURLConnectionDelegate> delegate, BOOL startImmediately),
                             RSSWReplacement(
                                             {
                                                 // Replace the delegate with our own so we can intercept and handle authentication challenges
@@ -117,10 +117,6 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
     {
         // The delegate proxy should always receive authentication challenges
         return YES;
-    }
-    if (aSelector == @selector(connection:didReceiveAuthenticationChallenge:))
-    {
-        return NO;
     }
     else
     {
