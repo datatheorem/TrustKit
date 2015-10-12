@@ -96,6 +96,7 @@
 
 
 // Disable auto-swizzling and ensure TrustKit does not get called
+// Disabling this test for now as there are no ways to reset the swizzling
 /*
 - (void)testSwizzleNetworkDelegatesDiabled
 {
@@ -209,7 +210,7 @@
      }];
     
     XCTAssert(([TSKNSURLConnectionDelegateProxy getLastTrustKitTrustDecision] == TSKTrustDecisionShouldAllowConnection), @"TrustKit blocked a connection although pinning was not enforced");
-    XCTAssertNotNil(delegate.lastError, @"TrustKit did not trigger an error");
+    XCTAssertNil(delegate.lastError, @"TrustKit triggered an error");
     XCTAssertNotNil(delegate.lastResponse, @"TrustKit did not return a response although pinning was not enforced");
     XCTAssert([(NSHTTPURLResponse *)delegate.lastResponse statusCode] == 200, @"TrustKit did not return a response although pinning was not enforced");
 }
