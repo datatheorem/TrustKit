@@ -15,6 +15,10 @@
 #import "reporting_utils.h"
 #import "TSKReportsRateLimiter.h"
 
+#if TARGET_OS_IPHONE
+@import UIKit; // For accessing the IDFV
+#endif
+
 // Session identifier for background uploads: <bundle_id>.TSKSimpleReporter
 static NSString* kTSKBackgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
 static NSURLSession *_backgroundSession = nil;
@@ -25,12 +29,14 @@ static dispatch_once_t dispatchOnceBackgroundSession;
 
 @property (nonatomic, strong) NSString * appBundleId;
 @property (nonatomic, strong) NSString * appVersion;
+@property (nonatomic, strong) NSString * appIdentifier;
 @property BOOL shouldRateLimitReports;
 
 @end
 
 
 @implementation TSKBackgroundReporter
+
 
 
 - (instancetype)initAndRateLimitReports:(BOOL)shouldRateLimitReports
@@ -41,6 +47,14 @@ static dispatch_once_t dispatchOnceBackgroundSession;
         self.shouldRateLimitReports = shouldRateLimitReports;
         
         // Retrieve the App's information
+#if TARGET_OS_IPHONE
+        // On iOS use the IDFV
+        self.appIdentifier = [[[UIDevice currentDevice] identifierForVendor]UUIDString];
+#else
+        // On OS X, don't use anything for now
+        self.appIdentifier = @"OS-X";
+#endif
+    
         CFBundleRef appBundle = CFBundleGetMainBundle();
         self.appBundleId = (__bridge NSString *)CFBundleGetIdentifier(appBundle);
         self.appVersion =  (__bridge NSString *)CFBundleGetValueForInfoDictionaryKey(appBundle, kCFBundleVersionKey);
@@ -146,7 +160,8 @@ static dispatch_once_t dispatchOnceBackgroundSession;
                                                                 includeSubdomains:includeSubdomains
                                                         validatedCertificateChain:certificateChain
                                                                         knownPins:formattedPins
-                                                                 validationResult:validationResult];
+                                                                 validationResult:validationResult
+                                                                    appIdentifier:self.appIdentifier];
     
     
     // Should we rate-limit this report?

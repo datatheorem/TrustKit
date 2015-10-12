@@ -15,10 +15,14 @@
 #import "reporting_utils.h"
 #import "TSKReportsRateLimiter.h"
 
+#if TARGET_OS_IPHONE
+@import UIKit; // For accessing the IDFV
+#endif
 
 @interface TSKSimpleReporter()
 @property (nonatomic, strong) NSString * appBundleId;
 @property (nonatomic, strong) NSString * appVersion;
+@property (nonatomic, strong) NSString * appIdentifier;
 @property BOOL shouldRateLimitReports;
 @end
 
@@ -34,6 +38,14 @@
         self.shouldRateLimitReports = shouldRateLimitReports;
         
         // Retrieve the App's information
+#if TARGET_OS_IPHONE
+        // On iOS use the IDFV
+        self.appIdentifier = [[[UIDevice currentDevice] identifierForVendor]UUIDString];
+#else
+        // On OS X, don't use anything for now
+        self.appIdentifier = @"OS-X";
+#endif
+        
         CFBundleRef appBundle = CFBundleGetMainBundle();
         self.appBundleId = (__bridge NSString *)CFBundleGetIdentifier(appBundle);
         self.appVersion =  (__bridge NSString *)CFBundleGetValueForInfoDictionaryKey(appBundle, kCFBundleVersionKey);
@@ -89,7 +101,8 @@
                                                                 includeSubdomains:includeSubdomains
                                                         validatedCertificateChain:certificateChain
                                                                         knownPins:formattedPins
-                                                                 validationResult:validationResult];
+                                                                 validationResult:validationResult
+                                                                    appIdentifier:self.appIdentifier];
     
     
     // Should we rate-limit this report?
