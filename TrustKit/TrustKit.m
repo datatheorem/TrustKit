@@ -18,6 +18,7 @@
 #import "TSKBackgroundReporter.h"
 #import "TSKSimpleReporter.h"
 #import "TSKNSURLConnectionDelegateProxy.h"
+#import "TSKNSURLSessionDelegateProxy.h"
 
 
 #pragma mark Configuration Constants
@@ -350,6 +351,9 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
             {
                 // NSURLConnection
                 [TSKNSURLConnectionDelegateProxy swizzleNSURLConnectionConstructors];
+                
+                // NSURLSession
+                [TSKNSURLSessionDelegateProxy swizzleNSURLSessionConstructors];
             }
             
             // Create our reporter for sending pin validation failures

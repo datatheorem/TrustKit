@@ -251,8 +251,6 @@
          }
      }];
     
-    NSLog(@"lol %ld",(long)[TSKNSURLConnectionDelegateProxy getLastTrustDecision]);
-    
     XCTAssert(([TSKNSURLConnectionDelegateProxy getLastTrustDecision] == TSKTrustDecisionShouldAllowConnection), @"TrustKit rejected a valid certificate");
     XCTAssertNil(delegate.lastError, @"TrustKit triggered an error");
     XCTAssertNotNil(delegate.lastResponse, @"TrustKit prevented a response from being returned");

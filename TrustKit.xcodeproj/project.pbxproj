@@ -100,6 +100,13 @@
 		8CD5F7431BCB06F4005801D8 /* RSSwizzle.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CD5F7401BCB06F4005801D8 /* RSSwizzle.h */; settings = {ASSET_TAGS = (); }; };
 		8CD5F7441BCB06F4005801D8 /* RSSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD5F7411BCB06F4005801D8 /* RSSwizzle.m */; settings = {ASSET_TAGS = (); }; };
 		8CD5F7451BCB06F4005801D8 /* RSSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD5F7411BCB06F4005801D8 /* RSSwizzle.m */; settings = {ASSET_TAGS = (); }; };
+		8CD5F7491BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CD5F7471BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.h */; settings = {ASSET_TAGS = (); }; };
+		8CD5F74A1BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CD5F7471BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.h */; settings = {ASSET_TAGS = (); }; };
+		8CD5F74B1BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD5F7481BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.m */; settings = {ASSET_TAGS = (); }; };
+		8CD5F74C1BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD5F7481BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.m */; settings = {ASSET_TAGS = (); }; };
+		8CD5F74D1BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD5F7481BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.m */; settings = {ASSET_TAGS = (); }; };
+		8CD5F7571BCB7219005801D8 /* TSKNSURLSessionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD5F7561BCB7219005801D8 /* TSKNSURLSessionTests.m */; settings = {ASSET_TAGS = (); }; };
+		8CD5F7581BCB7219005801D8 /* TSKNSURLSessionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD5F7561BCB7219005801D8 /* TSKNSURLSessionTests.m */; settings = {ASSET_TAGS = (); }; };
 		8CE9191E1AEA073C002B29AE /* public_key_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE9191C1AEA073C002B29AE /* public_key_utils.h */; };
 		8CE9191F1AEA073C002B29AE /* public_key_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9191D1AEA073C002B29AE /* public_key_utils.m */; };
 		8CE919221AEA077F002B29AE /* ssl_pin_verifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE919211AEA077F002B29AE /* ssl_pin_verifier.m */; };
@@ -188,6 +195,9 @@
 		8CD5F7371BCB02A7005801D8 /* TSKNSURLConnectionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKNSURLConnectionTests.m; sourceTree = "<group>"; };
 		8CD5F7401BCB06F4005801D8 /* RSSwizzle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RSSwizzle.h; path = Dependencies/RSSwizzle/RSSwizzle.h; sourceTree = "<group>"; };
 		8CD5F7411BCB06F4005801D8 /* RSSwizzle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RSSwizzle.m; path = Dependencies/RSSwizzle/RSSwizzle.m; sourceTree = "<group>"; };
+		8CD5F7471BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKNSURLSessionDelegateProxy.h; path = Swizzling/TSKNSURLSessionDelegateProxy.h; sourceTree = "<group>"; };
+		8CD5F7481BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKNSURLSessionDelegateProxy.m; path = Swizzling/TSKNSURLSessionDelegateProxy.m; sourceTree = "<group>"; };
+		8CD5F7561BCB7219005801D8 /* TSKNSURLSessionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKNSURLSessionTests.m; sourceTree = "<group>"; };
 		8CE9191C1AEA073C002B29AE /* public_key_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = public_key_utils.h; path = Pinning/public_key_utils.h; sourceTree = "<group>"; };
 		8CE9191D1AEA073C002B29AE /* public_key_utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = public_key_utils.m; path = Pinning/public_key_utils.m; sourceTree = "<group>"; };
 		8CE919211AEA077F002B29AE /* ssl_pin_verifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ssl_pin_verifier.m; path = Pinning/ssl_pin_verifier.m; sourceTree = "<group>"; };
@@ -315,6 +325,7 @@
 				070868B31ADFF68200E5AFDC /* Certificates */,
 				0710306B1AA88A510028092C /* TSKPinValidationOnlineTests.m */,
 				8CD5F7371BCB02A7005801D8 /* TSKNSURLConnectionTests.m */,
+				8CD5F7561BCB7219005801D8 /* TSKNSURLSessionTests.m */,
 				2FA2868CAFECA46ADE0B6E3E /* TSKPinValidationOfflineTests.m */,
 				8C8480571A896EE30017C155 /* Supporting Files */,
 				6B032D3F1AF1AEB600EAFA69 /* TSKReporterTests.m */,
@@ -368,6 +379,8 @@
 			children = (
 				8CD5F72F1BC5ED4A005801D8 /* TSKNSURLConnectionDelegateProxy.h */,
 				8CD5F7301BC5ED4A005801D8 /* TSKNSURLConnectionDelegateProxy.m */,
+				8CD5F7471BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.h */,
+				8CD5F7481BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.m */,
 			);
 			name = Swizzling;
 			sourceTree = "<group>";
@@ -459,6 +472,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CE9192D1AEA0F7E002B29AE /* domain_registry.h in Headers */,
+				8CD5F7491BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.h in Headers */,
 				8CE9191E1AEA073C002B29AE /* public_key_utils.h in Headers */,
 				6B2B06AD1B05154A00FC749E /* TSKBackgroundReporter.h in Headers */,
 				8CD5F7311BC5ED4A005801D8 /* TSKNSURLConnectionDelegateProxy.h in Headers */,
@@ -480,6 +494,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CA6CC171BAE2B6600BDA419 /* TSKSimpleReporter.h in Headers */,
+				8CD5F74A1BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.h in Headers */,
 				8CA6CC1B1BAE2B6600BDA419 /* TSKPinFailureReport.h in Headers */,
 				8CA6CC141BAE2B6600BDA419 /* TSKReportsRateLimiter.h in Headers */,
 				8CD5F7321BC5ED4A005801D8 /* TSKNSURLConnectionDelegateProxy.h in Headers */,
@@ -692,6 +707,7 @@
 				8CE919221AEA077F002B29AE /* ssl_pin_verifier.m in Sources */,
 				8C9EBE031B619BBE00CA7EE0 /* TSKReportsRateLimiter.m in Sources */,
 				6B2B06AF1B05157400FC749E /* TSKBackgroundReporter.m in Sources */,
+				8CD5F74B1BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.m in Sources */,
 				6B032D3A1AF1794D00EAFA69 /* TSKSimpleReporter.m in Sources */,
 				8CE9191F1AEA073C002B29AE /* public_key_utils.m in Sources */,
 				8CE919351AEA0F8B002B29AE /* fishhook.c in Sources */,
@@ -714,6 +730,7 @@
 				075AA1091AC985FD00178223 /* TSKPinValidationOfflineTests.m in Sources */,
 				8CC78B251B1B616500523A25 /* TSKPublicKeyAlgorithmTests.m in Sources */,
 				6B032D401AF1AEC200EAFA69 /* TSKReporterTests.m in Sources */,
+				8CD5F7571BCB7219005801D8 /* TSKNSURLSessionTests.m in Sources */,
 				8CC78B201B1B586F00523A25 /* TSKCertificateUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -730,6 +747,7 @@
 				8C8716B81B23AA0D00267E1D /* TrustKit.m in Sources */,
 				8C8716B21B23A9F400267E1D /* TSKBackgroundReporter.m in Sources */,
 				0E64A7601B867BA000CA164A /* TSKReportsRateLimiter.m in Sources */,
+				8CD5F74C1BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.m in Sources */,
 				8CD5F7341BC5ED4A005801D8 /* TSKNSURLConnectionDelegateProxy.m in Sources */,
 				8C8716B11B23A9F000267E1D /* TSKSimpleReporter.m in Sources */,
 				8C8716B61B23AA0800267E1D /* ssl_pin_verifier.m in Sources */,
@@ -743,6 +761,7 @@
 				8CA6CC201BAE2B6A00BDA419 /* public_key_utils.m in Sources */,
 				8CA6CC1A1BAE2B6600BDA419 /* TSKBackgroundReporter.m in Sources */,
 				8CA6CC1C1BAE2B6600BDA419 /* TSKPinFailureReport.m in Sources */,
+				8CD5F74D1BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.m in Sources */,
 				8CA6CC241BAE2B6A00BDA419 /* TSKPinningValidator.m in Sources */,
 				8CA6CC1E1BAE2B6600BDA419 /* reporting_utils.m in Sources */,
 				8CA6CC261BAE2B6A00BDA419 /* TrustKit.m in Sources */,
@@ -765,6 +784,7 @@
 				8CA6CC391BAE2C7200BDA419 /* TSKPinValidationOfflineTests.m in Sources */,
 				8CA6CC3C1BAE2C8100BDA419 /* TSKPublicKeyAlgorithmTests.m in Sources */,
 				8CA6CC3B1BAE2C7E00BDA419 /* TSKPinConfigurationTests.m in Sources */,
+				8CD5F7581BCB7219005801D8 /* TSKNSURLSessionTests.m in Sources */,
 				8CA6CC3D1BAE2C8500BDA419 /* TSKCertificateUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
