@@ -26,8 +26,6 @@ static TSKTrustDecision lastTrustDecision = -1;
 
 + (void)swizzleNSURLSessionConstructors
 {
-    static const void *swizzleOncekey = &swizzleOncekey;
-    
     // Figure out NSURLSession's "real" class
     NSString *NSURLSessionClass;
     if (NSClassFromString(@"NSURLSession") != nil)
@@ -53,13 +51,32 @@ static TSKTrustDecision lastTrustDecision = -1;
                          RSSWArguments(NSURLSessionConfiguration * _Nonnull configuration, id _Nullable delegate, NSOperationQueue * _Nullable queue),
                          RSSWReplacement(
                                          {
-                                             // Replace the delegate with our own so we can intercept and handle authentication challenges
-                                             TSKNSURLSessionDelegateProxy *swizzledDelegate = [[TSKNSURLSessionDelegateProxy alloc]initWithDelegate:delegate];
-                                             NSURLSession *session = RSSWCallOriginal(configuration, swizzledDelegate, queue);
+                                             NSURLSession *session;
+                                             
+                                             if (delegate == nil)
+                                             {
+                                                 // Just display a warning
+                                                 TSKLog(@"WARNING: +sessionWithConfiguration:delegate:delegateQueue: was called with a nil delegate; TrustKit cannot enforce SSL pinning for any connection initiated by this session");
+                                                 session = RSSWCallOriginal(configuration, delegate, queue);
+                                             }
+                                             
+                                             // Do not swizzle TrustKit objects (such as the reporter)
+                                             else if ([NSStringFromClass([delegate class]) hasPrefix:@"TSK"])
+                                             {
+                                                 session = RSSWCallOriginal(configuration, delegate, queue);
+                                             }
+                                             else
+                                             {
+                                                 // Replace the delegate with our own so we can intercept and handle authentication challenges
+                                                 TSKNSURLSessionDelegateProxy *swizzledDelegate = [[TSKNSURLSessionDelegateProxy alloc]initWithDelegate:delegate];
+                                                 session = RSSWCallOriginal(configuration, swizzledDelegate, queue);
+                                             }
+                                             
                                              return session;
                                          }));
-    
-    // TODO: Add warnings for methods we can't swizzle
+    // Not hooking the following methods as they end up calling +sessionWithConfiguration:delegate:delegateQueue:
+    // +sessionWithConfiguration:
+    // +sharedSession
 }
 
 
@@ -228,7 +245,8 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
     // Forward all challenges (including client auth challenges) to the original delegate
     if (wasChallengeHandled == NO)
     {
-        // If we're here it means the delegate implement the handler method so we can call it directly
+        // If we're in this delegate method (and not URLSession:didReceiveChallenge:completionHandler:)
+        // it means the delegate definitely implements the handler method so we can call it directly
         [originalDelegate URLSession:session task:task didReceiveChallenge:challenge completionHandler:completionHandler];
     }
 }
