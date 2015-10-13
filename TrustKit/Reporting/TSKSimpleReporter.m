@@ -19,11 +19,15 @@
 @import UIKit; // For accessing the IDFV
 #endif
 
+
+
+
 @interface TSKSimpleReporter()
 @property (nonatomic, strong) NSString * appBundleId;
 @property (nonatomic, strong) NSString * appVersion;
 @property (nonatomic, strong) NSString * appIdentifier;
 @property BOOL shouldRateLimitReports;
+@property(nonatomic, strong) NSURLSession *session;
 @end
 
 
@@ -60,6 +64,10 @@
         {
             self.appVersion = @"N/A";
         }
+    
+        
+        // Create the session for sending the reports
+        self.session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]];
     }
     return self;
 }
@@ -112,19 +120,14 @@
         TSKLog(@"Pin failure report for %@ was not sent due to rate-limiting", serverHostname);
         return;
     }
-    
-    // Create the session for sending the report
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration
-                                                          delegate:self
-                                                     delegateQueue:nil];
+
     
     // POST the report to all the configured report URIs
     for (NSURL *reportUri in reportURIs)
     {
         NSURLRequest *request = [report requestToUri:reportUri];
-        NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request
-                                                        completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSURLSessionDataTask *postDataTask = [self.session dataTaskWithRequest:request
+                                                             completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
                                                             // We don't do anything here as reports are meant to be sent
                                                             // on a best-effort basis: even if we got an error, there's
                                                             // nothing to do anyway.
