@@ -17,7 +17,9 @@
               task:(NSURLSessionTask * _Nonnull)task
 didCompleteWithError:(NSError * _Nullable)error;
 
-
+- (void)URLSession:(NSURLSession * _Nonnull)session
+          dataTask:(NSURLSessionDataTask * _Nonnull)dataTask
+    didReceiveData:(NSData * _Nonnull)data;
 
 @end
 

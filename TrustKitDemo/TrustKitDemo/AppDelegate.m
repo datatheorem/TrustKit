@@ -46,18 +46,18 @@
                       kTSKReportUris: @[@"https://trustkit-reports-server.appspot.com/log_report"]
                       },
               
+              
+              // Pin valid SPKI hashes to *.datatheorem.com to demonstrate success
+              @"www.datatheorem.com" : @{
+                      kTSKEnforcePinning:@YES,
+                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                       
-                      // Pin valid SPKI hashes to *.datatheorem.com to demonstrate success
-                      @"www.datatheorem.com" : @{
-                              kTSKEnforcePinning:@YES,
-                              kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                              
-                              // Valid SPKI hashes to demonstrate success
-                              kTSKPublicKeyHashes : @[
-                                      @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=", // CA key
-                                      @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=" // CA key
-                                      ]
-                              }}};
+                      // Valid SPKI hashes to demonstrate success
+                      kTSKPublicKeyHashes : @[
+                              @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=", // CA key
+                              @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=" // CA key
+                              ]
+                      }}};
     
     [TrustKit initializeWithConfiguration:trustKitConfig];
 

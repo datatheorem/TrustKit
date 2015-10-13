@@ -69,9 +69,10 @@ didCompleteWithError:(NSError * _Nullable)error
     }
 }
 
-- (void)URLSession:(NSURLSession *)session
-          dataTask:(NSURLSessionDataTask *)dataTask
-    didReceiveData:(NSData *)data
+
+- (void)URLSession:(NSURLSession * _Nonnull)session
+          dataTask:(NSURLSessionDataTask * _Nonnull)dataTask
+    didReceiveData:(NSData * _Nonnull)data
 {
     // Display the content in the webview
     NSLog(@"Loading content");
