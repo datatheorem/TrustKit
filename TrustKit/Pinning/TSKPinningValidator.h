@@ -42,9 +42,11 @@ typedef NS_ENUM(NSInteger, TSKTrustDecision)
 /**
  `TSKPinningValidator` is a class for manually verifying a server's identity against the global SSL pinning policy.
  
- In specific scenarios, TrustKit cannot intercept outgoing SSL connections and automatically validate the server's identity against the pinning policy. For these connections, the pin validation must be manually triggered: the server's trust object, which contains its certificate chain, needs to be retrieved or built before being passed to `TSKPinningValidator` for validation.
+ In specific scenarios, TrustKit cannot intercept outgoing SSL connections and automatically validate the server's identity against the pinning policy. For these connections, the pin validation must be manually triggered: the server's trust object, which contains its certificate chain, needs to be retrieved or built before being passed to `TSKPinningValidator` for validation. 
  
- The following scenarios require manual pin validation:
+ `TSKPinningValidator` returns a `TSKTrustDecision` which describes whether the SSL connection should be allowed or blocked, based on the global pinning policy.
+ 
+ The following connections require manual pin validation:
  
  1. All connections within an App that disables TrustKit's network delegate swizzling by setting the `kTSKSwizzleNetworkDelegates` configuration key to `NO`.
  2. Connections that do not rely on the `NSURLConnection` or `NSURLSession` APIs:
@@ -74,7 +76,7 @@ typedef NS_ENUM(NSInteger, TSKTrustDecision)
         else if (trustDecision == TSKTrustDecisionDomainNotPinned)
         {
             // Domain was not pinned; we need to do the default validation ourselves to avoid disabling
-            // SSL validation for all non pinned domains
+            // SSL validation for all non-pinned domains
             SecTrustResultType trustResult = 0;
             SecTrustEvaluate(serverTrust, &trustResult);
             if ((trustResult != kSecTrustResultUnspecified) && (trustResult != kSecTrustResultProceed))
