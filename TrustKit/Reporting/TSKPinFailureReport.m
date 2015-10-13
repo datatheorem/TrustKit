@@ -65,7 +65,7 @@
         @"validated-certificate-chain" : self.validatedCertificateChain,
         @"known-pins" : self.knownPins,
         @"validation-result": [NSNumber numberWithInt:self.validationResult],
-        @"app-idfv": self.appIdentifier
+        @"app-identifier": self.appIdentifier
     };
     
     NSError *error;
