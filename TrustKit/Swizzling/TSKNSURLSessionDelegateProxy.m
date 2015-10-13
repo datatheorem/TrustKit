@@ -103,15 +103,23 @@ static TSKTrustDecision lastTrustDecision = -1;
     }
     else if (aSelector == @selector(URLSession:didReceiveChallenge:completionHandler:))
     {
-        if ([originalDelegate respondsToSelector:@selector(URLSession:task:didReceiveChallenge:completionHandler:)] == NO)
+        if ([originalDelegate respondsToSelector:@selector(URLSession:didReceiveChallenge:completionHandler:)] == YES)
         {
-            // If the task-level handler is not implemented in the delegate, we need to implement the session-level handler
-            // regardless of what the delegate implements, to ensure we get to handle auth challenges
             return YES;
         }
         else
         {
-            return [originalDelegate respondsToSelector:@selector(URLSession:didReceiveChallenge:completionHandler:)];
+            if ([originalDelegate respondsToSelector:@selector(URLSession:task:didReceiveChallenge:completionHandler:)] == NO)
+            {
+                // If the task-level handler is not implemented in the delegate, we need to implement the session-level handler
+                // regardless of what the delegate implements, to ensure we get to handle auth challenges so we can do pinning validation
+                return YES;
+            }
+            else
+            {
+                // Let the task-level handler handle auth challenges
+                return NO;
+            }
         }
     }
     else
