@@ -346,17 +346,8 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
             // Convert and store the SSL pins in our global variable
             _trustKitGlobalConfiguration = [[NSDictionary alloc]initWithDictionary:parseTrustKitArguments(trustKitConfig)];
             
-            // Hook network APIs if needed
-            if ([_trustKitGlobalConfiguration[kTSKSwizzleNetworkDelegates] boolValue] == YES)
-            {
-                // NSURLConnection
-                [TSKNSURLConnectionDelegateProxy swizzleNSURLConnectionConstructors];
-                
-                // NSURLSession
-                [TSKNSURLSessionDelegateProxy swizzleNSURLSessionConstructors];
-            }
             
-            // Create our reporter for sending pin validation failures
+            // Create our reporter for sending pin validation failures; do this before hooking NSURLSession so we don't hook ourselves
             @try
             {
                 // Create a reporter that uses the background transfer service to send pin failure reports
@@ -376,6 +367,18 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
             _pinFailureReporterQueue = dispatch_queue_create(kTSKPinFailureReporterQueueLabel, DISPATCH_QUEUE_SERIAL);
             dispatch_set_target_queue(_pinFailureReporterQueue, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0));
 
+            
+            // Hook network APIs if needed
+            if ([_trustKitGlobalConfiguration[kTSKSwizzleNetworkDelegates] boolValue] == YES)
+            {
+                // NSURLConnection
+                [TSKNSURLConnectionDelegateProxy swizzleNSURLConnectionConstructors];
+                
+                // NSURLSession
+                [TSKNSURLSessionDelegateProxy swizzleNSURLSessionConstructors];
+            }
+            
+            
             // All done
             _isTrustKitInitialized = YES;
             TSKLog(@"Successfully initialized with configuration %@", _trustKitGlobalConfiguration);
