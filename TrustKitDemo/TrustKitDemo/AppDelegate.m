@@ -22,20 +22,42 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    // Initialize TrustKit here so that from this point on, pin check is turned on 
+    // Initialize TrustKit
     NSDictionary *trustKitConfig =
     @{
-      @"www.datatheorem.com" : @{
-              kTSKEnforcePinning:@YES,
-              kTSKIncludeSubdomains:@YES,
-              kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-              kTSKPublicKeyHashes : @[
-                      // Bad SSL pins for datatheorem.com to demonstrate pinning failures in the webview
-                      @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTX=",
-                      @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
-                                      ],
-              kTSKReportUris: @[@"https://trustkit-reports-server.appspot.com/log_report"]
-              }};
+      // Auto-swizzle NSURLSession delegates to add pinning validation
+      kTSKSwizzleNetworkDelegates: @YES,
+      
+      kTSKPinnedDomains: @{
+              
+              // Pin invalid SPKI hashes to *.yahoo.com to demonstrate pinning failures
+              @"yahoo.com" : @{
+                      kTSKEnforcePinning:@YES,
+                      kTSKIncludeSubdomains:@YES,
+                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                      
+                      // Wrong SPKI hashes to demonstrate pinning failure
+                      kTSKPublicKeyHashes : @[
+                              @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+                              @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+                              ],
+                      
+                      // Send reports for pinning failures
+                      kTSKReportUris: @[@"https://trustkit-reports-server.appspot.com/log_report"]
+                      },
+              
+                      
+                      // Pin valid SPKI hashes to *.datatheorem.com to demonstrate success
+                      @"www.datatheorem.com" : @{
+                              kTSKEnforcePinning:@YES,
+                              kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                              
+                              // Valid SPKI hashes to demonstrate success
+                              kTSKPublicKeyHashes : @[
+                                      @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=", // CA key
+                                      @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=" // CA key
+                                      ]
+                              }}};
     
     [TrustKit initializeWithConfiguration:trustKitConfig];
 
