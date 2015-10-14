@@ -39,8 +39,23 @@ FOUNDATION_EXPORT const NSString *kTSKAlgorithmEcDsaSecp256r1;
 
 /**
  `TrustKit` is a class for programmatically configuring the global SSL pinning policy within an App.
+
+  The policy can be set either by adding it to the App's _Info.plist_ under the `TSKConfiguration` key, or by programmatically supplying it using the `TrustKit` class described here. Throughout the App's lifecycle, TrustKit can only be initialized once so only one of the two techniques should be used.
  
- A TrustKit SSL pinning policy is a dictionary which contains some global, App-wide settings as well as domain-specific configuration keys. The policy can be set either by adding it to the App's Info.plist under the _TSKConfiguration_ key, or by programmatically supplying it using the `TrustKit` class described here. Throughout the App's lifecycle, TrustKit can only be initialized once so only one of the two techniques should be used.
+ A TrustKit SSL pinning policy is a dictionary which contains some global, App-wide settings as well as domain-specific configuration keys. The following table shows the keys and their types, and uses indentation to indicate structure:
+ 
+ | Key                                          | Type       |
+ |----------------------------------------------|------------|
+ | `TSKSwizzleNetworkDelegates`                 | Boolean    |
+ | `TSKIgnorePinningForUserDefinedTrustAnchors` | Boolean    |
+ | `TSKPinnedDomains`                           | Dictionary |
+ | ── `<domain-name-to-pin-as-string>`          | Dictionary |
+ | ──── `TSKPublicKeyHashes`                    | Array      |
+ | ──── `TSKPublicKeyAlgorithms`                | Array      |
+ | ──── `TSKIncludeSubdomains`                  | Boolean    |
+ | ──── `TSKEnforcePinning`                     | Boolean    |
+ | ──── `TSKReportUris`                         | Array      |
+ | ──── `kTSKDisableDefaultReportUri`           | Boolean    |
  
  When setting the pinning policy programmatically, it has to be supplied to the `initializeWithConfiguration:` method as a dictionnary. For example:
  
