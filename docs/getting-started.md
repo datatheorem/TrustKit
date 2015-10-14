@@ -64,9 +64,15 @@ a pinning policy to TrustKit:
 * By storing the pinning policy in the App's _Info.plist_; this approach allows 
 deploying TrustKit without having to modify the App's source code.
 
-After initialization, TrustKit will intercept the App's outgoing SSL
-connections, in order to perform additional validation against the server's
-certificate chain based on the configured SSL pinning policy.
+After initialization, TrustKit will by default perform method swizzling on the 
+App's `NSURLSession` and `NSURLConnection` delegates in order to perform additional 
+validation against the server's certificate chain, based on the configured SSL pinning 
+policy. 
+
+If the developer wants a tighter control on the App's networking behavior or does
+not want auto-swizzling, it can be disabled by setting `kTSKSwizzleNetworkDelegates` to `NO`.
+Manual pinning validation can then be implemented in the App's authentication handlers' using the 
+[TSKPinningValidator class](https://datatheorem.github.io/TrustKit/documentation/Classes/TSKPinningValidator.html).
 
 
 ### Adding TrustKit as a Dependency - CocoaPods
@@ -102,42 +108,61 @@ corresponding certificates' public key algorithms. For example:
 
     #import "TrustKit.h"
 
-    NSDictionary *trustKitConfig;
-    trustKitConfig = @{
-                       @"www.datatheorem.com" : @{
-                               kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                               kTSKPublicKeyHashes : @[
-                                       @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=",
-                                       @"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8="
-                                       ]
-                               },
-                       @"yahoo.com" : @{
-                               kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                               kTSKPublicKeyHashes : @[
-                                       @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
-                                       @"rFjc3wG7lTZe43zeYTvPq8k4xdDEutCmIhI5dn4oCeE=",
-                                       ]
-                               }
-                       };
+    NSDictionary *trustKitConfig =
+    @{
+      // Auto-swizzle NSURLSession and NSURLConnection delegates to add pinning validation
+      kTSKSwizzleNetworkDelegates: @YES,
+      
+      // The list of domains we want to pin and their configuration
+      kTSKPinnedDomains: @{
+              
+              @"yahoo.com" : @{
+                      // Pin all subdomains of yahoo.com
+                      kTSKIncludeSubdomains:@YES,
+                      
+                      // Do not block connections if pinning validation failed so the App doesn't break
+                      kTSKEnforcePinning:@YES,
+                    
+                      // Send reports for pin validation failures so we can track them
+                      kTSKReportUris: @[@"https://trustkit-reports-server.appspot.com/log_report"],
+                      
+                      // The pinned public keys' algorithms
+                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                      
+                      // The pinned public keys' Subject Public Key Info hashes
+                      kTSKPublicKeyHashes : @[
+                              @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                              @"rFjc3wG7lTZe43zeYTvPq8k4xdDEutCmIhI5dn4oCeE=",
+                              ],
+                      },
+              
+              @"www.datatheorem.com" : @{
+                      // Block connections if pinning validation failed
+                      kTSKEnforcePinning:@YES,
+                      
+                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                      
+                      kTSKPublicKeyHashes : @[
+                              @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=",
+                              @"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8="
+                              ]
+                      }}};
 
 To avoid locking out too many users from your App when deploying SSL pinning
-for the first time, a more elaborate policy can be enabled using the following
-configuration keys:
+for the first time, it is advisable to set `kTSKEnforcePinning` to `NO`, so that SSL 
+connections will succeed regardless of pin validation. 
 
-* Setting `kTSKEnforcePinning` to `NO`, so that SSL connections will succeed
-regardless of pin validation.
-* Adding a report URL using the `kTSKReportUris` setting to receive pin
-validation failure reports.
+Also, adding a report URL using the `kTSKReportUris` setting to receive pin validation failure 
+reports will help track these failures. You can use your own report server or Data Theorem 
+(info@datatheorem.com) provides a dashboard to display these reports for free.
 
-This will allow the App to work regardless of pin validation failures, but the
-reports will give you an idea of how many users would be blocked, if pin
-validation was to be enforced.
+This will give you an idea of how many users would be blocked, if pin validation was to be enforced.
 
 The list of all the configuration keys is available in the
 [documentation](https://datatheorem.github.io/TrustKit/documentation/Classes/TrustKit.html).
 
-After supplying the pinning policy, all of the App's SSL connections will enforce
-the policy.
+After supplying the pinning policy, and if `kTSKSwizzleNetworkDelegates` is set to `YES`, all of 
+the App's `NSURLConnection` and `NSURLSession` delegates will automatically enforce the policy.
 
 
 ### Adding TrustKit as a Dependency - Static Linking
@@ -185,14 +210,17 @@ dynamically linked.
 Manual Pin Validation
 ---------------------
 
-In a few specific scenarios, TrustKit cannot intercept outgoing SSL connections
-and automatically validate the server's identity against the pinning policy.
-This includes for example connections initiated by external processes (such as
-`NSURLSession`'s background transfer service) or through third-party SSL
-libraries (such as OpenSSL).
-
-For these connections, the pin validation must be
-triggered manually; see the documentation for the [TSKPinningValidator
-class](https://datatheorem.github.io/TrustKit/documentation/Classes/TSKPinningValidator.html)
-for more details.
+In specific scenarios, TrustKit cannot intercept outgoing SSL connections and automatically validate the server's identity against the pinning policy. For these connections, the pin validation must be manually triggered: the server's trust object, which contains its certificate chain, needs to be retrieved or built before being passed to the [TSKPinningValidator class](https://datatheorem.github.io/TrustKit/documentation/Classes/TSKPinningValidator.html) for validation. 
+ 
+ `TSKPinningValidator` returns a `TSKTrustDecision` which describes whether the SSL connection should be allowed or blocked, based on the global pinning policy.
+ 
+ The following connections require manual pin validation:
+ 
+ 1. All connections within an App that disables TrustKit's network delegate swizzling by setting the `kTSKSwizzleNetworkDelegates` configuration key to `NO`.
+ 2. Connections that do not rely on the `NSURLConnection` or `NSURLSession` APIs:
+     * Connections leveraging lower-level APIs (such as `NSStream`). Instructions on how to retrieve the server's trust object are available at https://developer.apple.com/library/mac/documentation/NetworkingInternet/Conceptual/NetworkingTopics/Articles/OverridingSSLChainValidationCorrectly.html.
+     * Connections initiated using a third-party SSL library such as OpenSSL. The server's trust object needs to be built using the received certificate chain.
+ 3. Connections happening within an external process:
+     * `WKWebView` connections: the server's trust object can be retrieved and validated within the `webView:didReceiveAuthenticationChallenge:completionHandler:` method.
+     * `NSURLSession` connections using the background transfer service: the server's trust object can be retrieved and validated within the `application:handleEventsForBackgroundURLSession:completionHandler:` method.
 

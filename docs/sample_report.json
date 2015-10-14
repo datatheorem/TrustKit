@@ -14,5 +14,6 @@
     "pin-sha256=\"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=\""
   ],
   "app-bundle-id": "com.datatheorem.testtrustkit2",
+  "app-identifier": "599F9C00-92DC-4B5C-9464-7971F01F8370",
   "port": 443
 }
