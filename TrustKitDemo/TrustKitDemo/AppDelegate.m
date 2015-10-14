@@ -47,7 +47,7 @@
                       },
               
               
-              // Pin valid SPKI hashes to *.datatheorem.com to demonstrate success
+              // Pin valid SPKI hashes to www.datatheorem.com to demonstrate success
               @"www.datatheorem.com" : @{
                       kTSKEnforcePinning:@YES,
                       kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
