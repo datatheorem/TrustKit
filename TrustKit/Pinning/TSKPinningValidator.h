@@ -42,7 +42,7 @@ typedef NS_ENUM(NSInteger, TSKTrustDecision)
 /**
  `TSKPinningValidator` is a class for manually verifying a server's identity against the global SSL pinning policy.
  
- In specific scenarios, TrustKit cannot intercept outgoing SSL connections and automatically validate the server's identity against the pinning policy. For these connections, the pin validation must be manually triggered: the server's trust object, which contains its certificate chain, needs to be retrieved or built before being passed to `TSKPinningValidator` for validation. 
+ In specific scenarios, TrustKit cannot intercept outgoing SSL connections and automatically validate the server's identity against the pinning policy. For these connections, the pin validation must be manually triggered: the server's `SecTrustRef` object, which contains its certificate chain, needs to be retrieved or built before being passed to `TSKPinningValidator` for validation.
  
  `TSKPinningValidator` returns a `TSKTrustDecision` which describes whether the SSL connection should be allowed or blocked, based on the global pinning policy.
  
@@ -51,10 +51,10 @@ typedef NS_ENUM(NSInteger, TSKTrustDecision)
  1. All connections within an App that disables TrustKit's network delegate swizzling by setting the `kTSKSwizzleNetworkDelegates` configuration key to `NO`.
  2. Connections that do not rely on the `NSURLConnection` or `NSURLSession` APIs:
      * Connections leveraging lower-level APIs (such as `NSStream`). Instructions on how to retrieve the server's trust object are available at https://developer.apple.com/library/mac/documentation/NetworkingInternet/Conceptual/NetworkingTopics/Articles/OverridingSSLChainValidationCorrectly.html.
-     * Connections initiated using a third-party SSL library such as OpenSSL. The server's trust object needs to be built using the received certificate chain.
+     * Connections initiated using a third-party SSL library such as OpenSSL. The server's `SecTrustRef` object needs to be built using the received certificate chain.
  3. Connections happening within an external process:
-     * `WKWebView` connections: the server's trust object can be retrieved and validated within the `webView:didReceiveAuthenticationChallenge:completionHandler:` method.
-     * `NSURLSession` connections using the background transfer service: the server's trust object can be retrieved and validated within the `application:handleEventsForBackgroundURLSession:completionHandler:` method.
+     * `WKWebView` connections: the server's `SecTrustRef` object can be retrieved and validated within the `webView:didReceiveAuthenticationChallenge:completionHandler:` method.
+     * `NSURLSession` connections using the background transfer service: the server's `SecTrustRef` object can be retrieved and validated within the `application:handleEventsForBackgroundURLSession:completionHandler:` method.
  
  For example, `TSKPinningValidator` should be used as follow when verifying the server's identity within an `NSURLSession` or `WKWebView` authentication handler:
  
