@@ -99,7 +99,7 @@ FOUNDATION_EXPORT const NSString *kTSKAlgorithmEcDsaSecp256r1;
  #### `kTSKSwizzleNetworkDelegates`
  If set to `YES`, TrustKit will perform method swizzling on the App's `NSURLConnection` and `NSURLSession` delegates in order to automatically add SSL pinning validation to the App's connections; default value is `YES`.
  
- Swizzling might clash with anti-tampering mechanisms, as well as analytics SDKs that also perform swizzling of the App's network delegates. In such scenarios or if the developer wants a tigher control on the App's networking behavior, `kTSKSwizzleNetworkDelegates` should be set to `NO`; the developer should then manually add pinning validation to the App's authentication handlers. 
+ Swizzling allows enabling pinning within an App without having to find and modify each and every instance of `NSURLConnection` or `NSURLSession` delegates. However, it might clash with anti-tampering mechanisms, as well as analytics SDKs that also perform swizzling of the App's network delegates. In such scenarios or if the developer wants a tigher control on the App's networking behavior, `kTSKSwizzleNetworkDelegates` should be set to `NO`; the developer should then manually add pinning validation to the App's authentication handlers. 
  
  See the `TSKPinningValidator` class for instructions on how to do so.
  
