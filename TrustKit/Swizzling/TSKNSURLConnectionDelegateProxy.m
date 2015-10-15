@@ -72,9 +72,19 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
                             RSSWArguments(NSURLRequest *request, id<NSURLConnectionDelegate> delegate, BOOL startImmediately),
                             RSSWReplacement(
                                             {
-                                                // Replace the delegate with our own so we can intercept and handle authentication challenges
-                                                TSKNSURLConnectionDelegateProxy *swizzledDelegate = [[TSKNSURLConnectionDelegateProxy alloc]initWithDelegate:delegate];
-                                                NSURLConnection *connection = RSSWCallOriginal(request, swizzledDelegate, startImmediately);
+                                                NSURLConnection *connection;
+                                                
+                                                if ([NSStringFromClass([delegate class]) hasPrefix:@"TSK"])
+                                                {
+                                                    // Don't proxy ourselves
+                                                    connection = RSSWCallOriginal(request, delegate, startImmediately);
+                                                }
+                                                else
+                                                {
+                                                    // Replace the delegate with our own so we can intercept and handle authentication challenges
+                                                    TSKNSURLConnectionDelegateProxy *swizzledDelegate = [[TSKNSURLConnectionDelegateProxy alloc]initWithDelegate:delegate];
+                                                    connection = RSSWCallOriginal(request, swizzledDelegate, startImmediately);
+                                                }
                                                 return connection;
                                             }), RSSwizzleModeAlways, NULL);
     

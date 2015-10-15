@@ -195,7 +195,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
     @{
       kTSKPinnedDomains :
           @{
-              @"www.yahoo.com" : @{
+              @"www.datatheorem.com" : @{
                       kTSKEnforcePinning : @NO,
                       kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                       kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
@@ -212,7 +212,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
                                                           delegate:delegate
                                                      delegateQueue:nil];
     
-    NSURLSessionDataTask *task = [session dataTaskWithURL:[NSURL URLWithString:@"https://www.yahoo.com/"]];
+    NSURLSessionDataTask *task = [session dataTaskWithURL:[NSURL URLWithString:@"https://www.datatheorem.com/"]];
     [task resume];
     
     [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error)
