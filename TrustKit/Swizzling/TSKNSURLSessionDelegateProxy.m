@@ -12,7 +12,7 @@
 
 
 // Useful for the tests
-static TSKTrustDecision lastTrustDecision = -1;
+static TSKTrustDecision _lastTrustDecision = -1;
 
 
 @implementation TSKNSURLSessionDelegateProxy
@@ -21,12 +21,12 @@ static TSKTrustDecision lastTrustDecision = -1;
 // Private methods used for tests
 +(void)resetLastTrustDecision
 {
-    lastTrustDecision = -1;;
+    _lastTrustDecision = -1;;
 }
 
 +(TSKTrustDecision)getLastTrustDecision
 {
-    return lastTrustDecision;
+    return _lastTrustDecision;
 }
 
 
@@ -95,7 +95,7 @@ static TSKTrustDecision lastTrustDecision = -1;
         originalDelegate = delegate;
     }
     TSKLog(@"Proxy-ing NSURLSessionDelegate: %@", NSStringFromClass([delegate class]));
-    lastTrustDecision = -1;
+    _lastTrustDecision = -1;
     return self;
 }
 
@@ -176,7 +176,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
         
         // Check the trust object against the pinning policy
         trustDecision = [TSKPinningValidator evaluateTrust:serverTrust forHostname:serverHostname];
-        lastTrustDecision = trustDecision;
+        _lastTrustDecision = trustDecision;
         if (trustDecision == TSKTrustDecisionShouldAllowConnection)
         {
             // Success - don't do anything and forward the challenge to the original delegate
@@ -242,7 +242,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
         // Check the trust object against the pinning policy
         trustDecision = [TSKPinningValidator evaluateTrust:challenge.protectionSpace.serverTrust
                                                forHostname:challenge.protectionSpace.host];
-        lastTrustDecision = trustDecision;
+        _lastTrustDecision = trustDecision;
         if ((trustDecision == TSKTrustDecisionShouldAllowConnection) || (trustDecision == TSKTrustDecisionDomainNotPinned))
         {
             // Don't do anything and forward the challenge to the original delegate

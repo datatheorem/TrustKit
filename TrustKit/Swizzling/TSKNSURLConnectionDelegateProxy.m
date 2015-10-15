@@ -13,7 +13,7 @@
 
 
 // Useful for the tests
-static TSKTrustDecision lastTrustDecision = -1;
+static TSKTrustDecision _lastTrustDecision = -1;
 
 
 typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NSError *connectionError);
@@ -29,12 +29,12 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
 // Private methods used for tests
 +(void)resetLastTrustDecision
 {
-    lastTrustDecision = -1;;
+    _lastTrustDecision = -1;;
 }
 
 +(TSKTrustDecision)getLastTrustDecision
 {
-    return lastTrustDecision;
+    return _lastTrustDecision;
 }
 
 
@@ -129,7 +129,7 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
         originalDelegate = delegate;
     }
     TSKLog(@"Proxy-ing NSURLConnectionDelegate: %@", NSStringFromClass([delegate class]));
-    lastTrustDecision = -1;
+    _lastTrustDecision = -1;
     return self;
 }
 
@@ -198,7 +198,7 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
     
         // Check the trust object against the pinning policy
         trustDecision = [TSKPinningValidator evaluateTrust:serverTrust forHostname:serverHostname];
-        lastTrustDecision = trustDecision;
+        _lastTrustDecision = trustDecision;
         if (trustDecision == TSKTrustDecisionShouldAllowConnection)
         {
             // Success - don't do anything and forward the challenge to the original delegate
