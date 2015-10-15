@@ -32,8 +32,11 @@
 - (instancetype)initWithExpectation:(XCTestExpectation *)expectation;
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection;
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;
-- (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse;
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response;
+-(NSURLRequest *)download:(NSURLConnection *)connection
+          willSendRequest:(NSURLRequest *)request
+         redirectResponse:(NSURLResponse *)redirectResponse;
+
 @end
 
 
@@ -63,10 +66,6 @@
 {
 }
 
-- (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse
-{
-    return cachedResponse;
-}
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
@@ -77,6 +76,17 @@
 - (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse
 {
     return request;
+}
+
+-(NSURLRequest *)download:(NSURLConnection *)connection
+          willSendRequest:(NSURLRequest *)request
+         redirectResponse:(NSURLResponse *)redirectResponse
+{
+    NSLog(@"Received redirection");
+    [testExpectation fulfill];
+    
+    // Do not follow redirections as they cause two pinning validations, thereby changing the lastTrustDecision
+    return nil;
 }
 
 @end
@@ -159,7 +169,7 @@
 
 
 // Disable auto-swizzling and ensure TrustKit does not get called
-// Disabling this test for now as there are no ways to reset the swizzling
+// Disabling this test for now as there are no ways to reset the swizzling across different tests
 /*
 - (void)testSwizzleNetworkDelegatesDiabled
 {

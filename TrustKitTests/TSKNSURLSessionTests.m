@@ -40,6 +40,8 @@ didCompleteWithError:(NSError * _Nullable)error;
 didReceiveResponse:(NSURLResponse * _Nonnull)response
  completionHandler:(void (^ _Nonnull)(NSURLSessionResponseDisposition disposition))completionHandler;
 
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task willPerformHTTPRedirection:(NSHTTPURLResponse *)response newRequest:(NSURLRequest *)request completionHandler:(void (^)(NSURLRequest *))completionHandler;
+
 @end
 
 
@@ -71,6 +73,16 @@ didReceiveResponse:(NSURLResponse * _Nonnull)response
 {
     _lastResponse = response;
     [testExpectation fulfill];
+}
+
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task willPerformHTTPRedirection:(NSHTTPURLResponse *)response newRequest:(NSURLRequest *)request completionHandler:(void (^)(NSURLRequest *))completionHandler
+{
+    
+    NSLog(@"Received redirection");
+    [testExpectation fulfill];
+    
+    // Do not follow redirections as they cause two pinning validations, thereby changing the lastTrustDecision
+    completionHandler(nil);
 }
 
 @end
