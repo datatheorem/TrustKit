@@ -17,7 +17,7 @@
 
 @implementation TSKPinningValidator
 
-+ (TSKTrustDecision) evaluateTrust:(SecTrustRef)serverTrust forHostname:(NSString *)serverHostname
++ (TSKTrustDecision) evaluateTrust:(SecTrustRef _Nonnull)serverTrust forHostname:(NSString * _Nonnull)serverHostname
 {
     if ([TrustKit wasTrustKitInitialized] == NO)
     {

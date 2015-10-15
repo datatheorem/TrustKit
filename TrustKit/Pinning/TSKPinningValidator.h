@@ -121,6 +121,6 @@ typedef NS_ENUM(NSInteger, TSKTrustDecision)
  
  @exception NSException Thrown when TrustKit has not been initialized with a pinning policy.
  */
-+ (TSKTrustDecision) evaluateTrust:(SecTrustRef)serverTrust forHostname:(NSString *)serverHostname;
++ (TSKTrustDecision) evaluateTrust:(SecTrustRef _Nonnull)serverTrust forHostname:(NSString * _Nonnull)serverHostname;
 
 @end
