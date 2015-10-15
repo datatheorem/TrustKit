@@ -50,13 +50,13 @@ FOUNDATION_EXPORT const NSString *kTSKAlgorithmEcDsaSecp256r1;
  | `TSKSwizzleNetworkDelegates`                 | Boolean    |
  | `TSKIgnorePinningForUserDefinedTrustAnchors` | Boolean    |
  | `TSKPinnedDomains`                           | Dictionary |
- | ── `<domain-name-to-pin-as-string>`          | Dictionary |
- | ──── `TSKPublicKeyHashes`                    | Array      |
- | ──── `TSKPublicKeyAlgorithms`                | Array      |
- | ──── `TSKIncludeSubdomains`                  | Boolean    |
- | ──── `TSKEnforcePinning`                     | Boolean    |
- | ──── `TSKReportUris`                         | Array      |
- | ──── `kTSKDisableDefaultReportUri`           | Boolean    |
+ | __ `<domain-name-to-pin-as-string>`          | Dictionary |
+ | ____ `TSKPublicKeyHashes`                    | Array      |
+ | ____ `TSKPublicKeyAlgorithms`                | Array      |
+ | ____ `TSKIncludeSubdomains`                  | Boolean    |
+ | ____ `TSKEnforcePinning`                     | Boolean    |
+ | ____ `TSKReportUris`                         | Array      |
+ | ____ `kTSKDisableDefaultReportUri`           | Boolean    |
  
  When setting the pinning policy programmatically, it has to be supplied to the `initializeWithConfiguration:` method as a dictionnary. For example:
  
@@ -82,7 +82,21 @@ FOUNDATION_EXPORT const NSString *kTSKAlgorithmEcDsaSecp256r1;
                                        }
                                }};
 
-      [TrustKit initializeWithConfiguration:trustKitConfig];
+    [TrustKit initializeWithConfiguration:trustKitConfig];
+ 
+ Similarly, TrustKit can be initialized in Swift:
+ 
+     let trustKitConfig = [
+         kTSKPinnedDomains: [
+             "yahoo.com": [
+                 kTSKPublicKeyAlgorithms: [kTSKAlgorithmRsa2048],
+                 kTSKPublicKeyHashes: [
+                     "JbQbUG5JMJUoI6brnx0x3vZF6jilxsapbXGVfjhN8Fg=",
+                     "WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18="
+                   ],]]]
+        
+     TrustKit.initializeWithConfiguration(config)
+ 
  
   The various configuration keys that can be specified in the policy are described below.
  

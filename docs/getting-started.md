@@ -106,7 +106,7 @@ A pinning policy is a dictionary of domain names and pinning configuration keys.
 At a minimum, the configuration should specify a list of SSL pins and the
 corresponding certificates' public key algorithms. For example:
 
-    #import "TrustKit.h"
+    #import <TrustKit/TrustKit.h>
 
     NSDictionary *trustKitConfig =
     @{
