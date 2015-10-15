@@ -17,7 +17,7 @@
 
 @property (readonly, nonatomic) NSString *appBundleId; // Not part of the HPKP spec
 @property (readonly, nonatomic) NSString *appVersion; // Not part of the HPKP spec
-@property (readonly, nonatomic) NSString *appIdentifier; // Not part of the HPKP spec
+@property (readonly, nonatomic) NSString *appVendorId; // Not part of the HPKP spec
 @property (readonly, nonatomic) NSString *notedHostname;
 @property (readonly, nonatomic) NSString *hostname;
 @property (readonly, nonatomic) NSNumber *port;
@@ -39,7 +39,7 @@
            validatedCertificateChain:(NSArray *)validatedCertificateChain
                            knownPins:(NSArray *)knownPins
                     validationResult:(TSKPinValidationResult) validationResult
-                       appIdentifier:(NSString *)appIdentifier;
+                       appVendorId:(NSString *)appVendorId;
 
 // Return the report in JSON format for POSTing it
 - (NSData *)json;

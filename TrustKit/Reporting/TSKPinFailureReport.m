@@ -24,7 +24,7 @@
            validatedCertificateChain:(NSArray *)validatedCertificateChain
                            knownPins:(NSArray *)knownPins
                     validationResult:(TSKPinValidationResult) validationResult
-                       appIdentifier:(NSString *)appIdentifier
+                       appVendorId:(NSString *)appVendorId
 {
     self = [super init];
     if (self)
@@ -39,7 +39,7 @@
         _validatedCertificateChain = validatedCertificateChain;
         _knownPins = knownPins;
         _validationResult = validationResult;
-        _appIdentifier = appIdentifier;
+        _appVendorId = appVendorId;
     }
     return self;
 }
@@ -65,7 +65,7 @@
         @"validated-certificate-chain" : self.validatedCertificateChain,
         @"known-pins" : self.knownPins,
         @"validation-result": [NSNumber numberWithInt:self.validationResult],
-        @"app-identifier": self.appIdentifier
+        @"app-vendor-id": self.appVendorId
     };
     
     NSError *error;

@@ -25,7 +25,7 @@
 @interface TSKSimpleReporter()
 @property (nonatomic, strong) NSString * appBundleId;
 @property (nonatomic, strong) NSString * appVersion;
-@property (nonatomic, strong) NSString * appIdentifier;
+@property (nonatomic, strong) NSString * appVendorId;
 @property BOOL shouldRateLimitReports;
 @property(nonatomic, strong) NSURLSession *session;
 @end
@@ -44,7 +44,7 @@
         // Retrieve the App's information
 #if TARGET_OS_IPHONE
         // On iOS use the IDFV
-        self.appIdentifier = [[[UIDevice currentDevice] identifierForVendor]UUIDString];
+        self.appVendorId = [[[UIDevice currentDevice] identifierForVendor]UUIDString];
 #else
         // On OS X, don't use anything for now
         self.appIdentifier = @"OS-X";
@@ -110,7 +110,7 @@
                                                         validatedCertificateChain:certificateChain
                                                                         knownPins:formattedPins
                                                                  validationResult:validationResult
-                                                                    appIdentifier:self.appIdentifier];
+                                                                    appVendorId:self.appVendorId];
     
     
     // Should we rate-limit this report?

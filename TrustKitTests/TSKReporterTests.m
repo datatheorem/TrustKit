@@ -97,7 +97,7 @@
                                                          validatedCertificateChain:certificateChain
                                                                          knownPins:formattedPins
                                                                   validationResult:TSKPinValidationResultFailedCertificateChainNotTrusted
-                                                                      appIdentifier:@"test"];
+                                                                      appVendorId:@"test"];
     
     // Ensure the same report will not be sent twice in a row
     XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == NO, @"Wrongly rate-limited a new report");
@@ -119,7 +119,7 @@
                                     validatedCertificateChain:certificateChain
                                                     knownPins:formattedPins
                                              validationResult:TSKPinValidationResultFailed
-                                                appIdentifier:@"test"];
+                                                appVendorId:@"test"];
     XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == NO, @"Wrongly rate-limited a new report");
     XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == YES, @"Did not rate-limit an identical report");
     
@@ -135,7 +135,7 @@
                                     validatedCertificateChain:certificateChain
                                                     knownPins:formattedPins
                                              validationResult:TSKPinValidationResultFailedCertificateChainNotTrusted
-                                                appIdentifier:@"test"];
+                                                appVendorId:@"test"];
     XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == NO, @"Wrongly rate-limited a new report");
     XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == YES, @"Did not rate-limit an identical report");
     
@@ -151,7 +151,7 @@
                                     validatedCertificateChain:[certificateChain subarrayWithRange:NSMakeRange(1, 2)]
                                                     knownPins:formattedPins
                                              validationResult:TSKPinValidationResultFailedCertificateChainNotTrusted
-                                                appIdentifier:@"test"];
+                                                appVendorId:@"test"];
     XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == NO, @"Wrongly rate-limited a new report");
     XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == YES, @"Did not rate-limit an identical report");
 }

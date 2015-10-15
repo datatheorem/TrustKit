@@ -156,7 +156,7 @@ FOUNDATION_EXPORT const NSString * _Nonnull kTSKAlgorithmEcDsaSecp256r1;
     {
         "app-bundle-id":"com.example.ABC",
         "app-version":"1.0",
-        "app-identifier":"599F9C00-92DC-4B5C-9464-7971F01F8370",
+        "app-vendor-id":"599F9C00-92DC-4B5C-9464-7971F01F8370",
         "date-time": "2015-07-10T20:03:14Z",
         "hostname": "mail.example.com",
         "port": 0,
