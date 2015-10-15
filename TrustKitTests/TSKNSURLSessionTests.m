@@ -59,6 +59,7 @@ didReceiveResponse:(NSURLResponse * _Nonnull)response
               task:(NSURLSessionTask * _Nonnull)task
 didCompleteWithError:(NSError * _Nullable)error
 {
+    NSLog(@"Received error, %@", error);
     _lastError = error;
     [testExpectation fulfill];
 }
@@ -188,47 +189,6 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
 }
 
 
-// Tests a secure connection to https://www.yahoo.com and forces validation to fail by providing a fake hash, but do not enforce pinning
-- (void)testPinningValidationFailedDoNotEnforcePinning
-{
-    NSDictionary *trustKitConfig =
-    @{
-      kTSKPinnedDomains :
-          @{
-              @"www.datatheorem.com" : @{
-                      kTSKEnforcePinning : @NO,
-                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                      kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
-                                              @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
-                                              ]}}};
-    
-    [TrustKit initializeWithConfiguration:trustKitConfig];
-    
-    
-    XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLSessionTaskDelegate"];
-    TestNSURLSessionDelegate* delegate = [[TestNSURLSessionDelegate alloc] initWithExpectation:expectation];
-    
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]
-                                                          delegate:delegate
-                                                     delegateQueue:nil];
-    
-    NSURLSessionDataTask *task = [session dataTaskWithURL:[NSURL URLWithString:@"https://www.datatheorem.com/"]];
-    [task resume];
-    
-    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error)
-     {
-         if (error)
-         {
-             NSLog(@"Timeout Error: %@", error);
-         }
-     }];
-    
-    XCTAssert(([TSKNSURLSessionDelegateProxy getLastTrustDecision] == TSKTrustDecisionShouldAllowConnection), @"TrustKit blocked a connection although pinning was not enforced");
-    XCTAssertNil(delegate.lastError, @"TrustKit triggered an error");
-    XCTAssertNotNil(delegate.lastResponse, @"TrustKit did not return a response although pinning was not enforced");
-}
-
-
 - (void)testPinningValidationSucceeded
 {
     NSDictionary *trustKitConfig =
@@ -273,7 +233,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
     @{
       kTSKPinnedDomains :
           @{
-              @"www.yahoo.com" : @{
+              @"www.google.com" : @{
                       kTSKEnforcePinning : @YES,
                       kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                       kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
@@ -288,12 +248,12 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]
                                                           delegate:nil
                                                      delegateQueue:nil];
-    NSURLSessionDataTask *task = [session dataTaskWithURL:[NSURL URLWithString:@"https://www.yahoo.com/"]];
+    NSURLSessionDataTask *task = [session dataTaskWithURL:[NSURL URLWithString:@"https://www.google.com/"]];
     [task resume];
     
     // Start a session with +sessionWithConfiguration:
     NSURLSession *session2 = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]];
-    NSURLSessionDataTask *task2 = [session2 dataTaskWithURL:[NSURL URLWithString:@"https://www.yahoo.com/"]];
+    NSURLSessionDataTask *task2 = [session2 dataTaskWithURL:[NSURL URLWithString:@"https://www.google.com/"]];
     [task2 resume];
 
     // Start a session with +sharedSession
@@ -311,10 +271,10 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
     @{
       kTSKPinnedDomains :
           @{
-              @"www.datatheorem.com" : @{
+              @"www.apple.com" : @{
                       kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                      kTSKPublicKeyHashes : @[@"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=", // CA key
-                                              @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=" // CA key
+                      kTSKPublicKeyHashes : @[@"gMxWOrX4PMQesK9qFNbYBxjBfjUvlkn/vN1n+L9lE5E=", // CA key
+                                              @"gMxWOrX4PMQesK9qFNbYBxjBfjUvlkn/vN1n+L9lE5E=" // CA key
                                               ]}}};
     
     [TrustKit initializeWithConfiguration:trustKitConfig];
@@ -327,7 +287,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
                                                           delegate:delegate
                                                      delegateQueue:nil];
     
-    NSURLSessionDataTask *task = [session dataTaskWithURL:[NSURL URLWithString:@"https://www.google.com/"]];
+    NSURLSessionDataTask *task = [session dataTaskWithURL:[NSURL URLWithString:@"https://www.apple.com/"]];
     [task resume];
     
     [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error) {
@@ -348,10 +308,10 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
     @{
       kTSKPinnedDomains :
           @{
-              @"www.datatheorem.com" : @{
+              @"www.fastmail.fm" : @{
                       kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                      kTSKPublicKeyHashes : @[@"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=", // CA key
-                                              @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=" // CA key
+                      kTSKPublicKeyHashes : @[@"k2v657xBsOVe1PQRwOsHsw3bsGT2VzIqz5K+59sNQws=", // CA key
+                                              @"k2v657xBsOVe1PQRwOsHsw3bsGT2VzIqz5K+59sNQws=" // CA key
                                               ]}}};
     
     [TrustKit initializeWithConfiguration:trustKitConfig];
@@ -364,7 +324,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
                                                           delegate:delegate
                                                      delegateQueue:nil];
     
-    NSURLSessionDataTask *task = [session dataTaskWithURL:[NSURL URLWithString:@"https://www.google.com/"]];
+    NSURLSessionDataTask *task = [session dataTaskWithURL:[NSURL URLWithString:@"https://www.fastmail.fm/"]];
     [task resume];
     
     [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error) {

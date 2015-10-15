@@ -410,4 +410,31 @@
 }
 
 
+- (void)testDomainNotPinned
+{
+    // The certificate chain is valid for www.good.com but we are connecting to www.bad.com
+    SecCertificateRef certChainArray[2] = {_leafCertificate, _intermediateCertificate};
+    SecCertificateRef trustStoreArray[1] = {_rootCertificate};
+    SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
+                                                             arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
+                                                      anchorCertificates:(const void **)trustStoreArray
+                                                             arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
+    
+    
+    // Create a configuration
+    NSDictionary *trustKitConfig = @{kTSKPinnedDomains :
+                                         @{@"www.good.com" : @{
+                                                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                   kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA Key
+                                                                           @"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=" // CA Key
+                                                                           ]}}};
+  
+    // Then test TSKPinningValidator
+    [TrustKit initializeWithConfiguration:trustKitConfig];
+    XCTAssert([TSKPinningValidator evaluateTrust:trust forHostname:@"www.bad.com"] == TSKTrustDecisionDomainNotPinned);
+    CFRelease(trust);
+}
+
+
+
 @end

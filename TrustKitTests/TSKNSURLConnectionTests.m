@@ -54,6 +54,7 @@
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
+    NSLog(@"Received error, %@", error);
     _lastError = error;
     [testExpectation fulfill];
 }
@@ -132,6 +133,9 @@
 // When that happens, authentication handlers don't get called which would cause our tests to fail.
 // As a hacky workaround, every test that connects to an endpoint uses a different domain.
 // https://developer.apple.com/library/mac/qa/qa1727/_index.html
+
+// WARNING 2: If the domain sends a redirection, two pinning validation will occur, thereby setting the
+// lastTrustDecision to an unexpected value
 
 @interface TSKNSURLConnectionTests : XCTestCase
 
@@ -234,57 +238,17 @@
 }
 
 
-// Tests a secure connection to https://www.yahoo.com and forces validation to fail by providing a fake hash, but do not enforce pinning
-- (void)testPinningValidationFailedDoNotEnforcePinning
-{
-    NSDictionary *trustKitConfig =
-    @{
-      kTSKPinnedDomains :
-          @{
-              @"www.yahoo.com" : @{
-                      kTSKEnforcePinning : @NO,
-                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                      kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
-                                              @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
-                                              ]}}};
-    
-    [TrustKit initializeWithConfiguration:trustKitConfig];
-    
-    
-    XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLConnectionDelegate"];
-    TestNSURLConnectionDelegateNoAuthHandler *delegate = [[TestNSURLConnectionDelegateNoAuthHandler alloc] initWithExpectation:expectation];
-    // Use +connectionWithRequest:delegate:
-    NSURLConnection *connection = [NSURLConnection
-                                   connectionWithRequest:[NSURLRequest requestWithURL:
-                                                    [NSURL URLWithString:@"https://www.yahoo.com/"]]
-                                   delegate:delegate];
-    [connection start];
-    
-    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error)
-     {
-         if (error)
-         {
-             NSLog(@"Timeout Error: %@", error);
-         }
-     }];
-    
-    XCTAssert(([TSKNSURLConnectionDelegateProxy getLastTrustDecision] == TSKTrustDecisionShouldAllowConnection), @"TrustKit blocked a connection although pinning was not enforced");
-    XCTAssertNil(delegate.lastError, @"TrustKit triggered an error");
-    XCTAssertNotNil(delegate.lastResponse, @"TrustKit did not return a response although pinning was not enforced");
-}
-
-
-// Tests a secure connection to https://www.datatheorem.com by pinning only to the CA public key
+// Tests a secure connection to https://www.cloudflare.com by pinning only to the CA public key
 - (void)testPinningValidationSucceeded
 {
     NSDictionary *trustKitConfig =
     @{
       kTSKPinnedDomains :
           @{
-              @"www.datatheorem.com" : @{
+              @"www.cloudflare.com" : @{
                       kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                      kTSKPublicKeyHashes : @[@"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=", // CA key
-                                              @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=" // CA key
+                      kTSKPublicKeyHashes : @[@"AG1751Vd2CAmRCxPGieoDomhmJy4ezREjtIZTBgZbV4=", // CA key
+                                              @"AG1751Vd2CAmRCxPGieoDomhmJy4ezREjtIZTBgZbV4=" // CA key
                                               ]}}};
     
     [TrustKit initializeWithConfiguration:trustKitConfig];
@@ -295,7 +259,7 @@
     // Use -initWithRequest:delegate:startstartImmediately:
     NSURLConnection *connection = [[NSURLConnection alloc]
                                    initWithRequest:[NSURLRequest requestWithURL:
-                                                    [NSURL URLWithString:@"https://www.datatheorem.com/"]]
+                                                    [NSURL URLWithString:@"https://www.cloudflare.com/"]]
                                    delegate:delegate
                                    startImmediately:YES];
     [connection start];
