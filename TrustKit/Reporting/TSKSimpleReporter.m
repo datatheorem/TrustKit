@@ -77,7 +77,7 @@
                                    port:(NSNumber *) serverPort
                                   trust:(SecTrustRef) serverTrust
                           notedHostname:(NSString *) notedHostname
-                              reportURIs:(NSArray *) reportURIs
+                             reportURIs:(NSArray *) reportURIs
                       includeSubdomains:(BOOL) includeSubdomains
                               knownPins:(NSArray *) knownPins
                        validationResult:(TSKPinValidationResult) validationResult;
