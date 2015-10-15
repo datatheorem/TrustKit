@@ -288,17 +288,17 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]
                                                           delegate:nil
                                                      delegateQueue:nil];
-    NSURLSessionDataTask *task = [session dataTaskWithURL:[NSURL URLWithString:@"https://www.datatheorem.com/"]];
+    NSURLSessionDataTask *task = [session dataTaskWithURL:[NSURL URLWithString:@"https://www.yahoo.com/"]];
     [task resume];
     
     // Start a session with +sessionWithConfiguration:
     NSURLSession *session2 = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]];
-    NSURLSessionDataTask *task2 = [session2 dataTaskWithURL:[NSURL URLWithString:@"https://www.datatheorem.com/"]];
+    NSURLSessionDataTask *task2 = [session2 dataTaskWithURL:[NSURL URLWithString:@"https://www.yahoo.com/"]];
     [task2 resume];
 
     // Start a session with +sharedSession
     NSURLSession *session3 = [NSURLSession sharedSession];
-    NSURLSessionDataTask *task3 = [session3 dataTaskWithURL:[NSURL URLWithString:@"https://www.datatheorem.com/"]];
+    NSURLSessionDataTask *task3 = [session3 dataTaskWithURL:[NSURL URLWithString:@"https://www.yahoo.com/"]];
     [task3 resume];
 }
 
@@ -327,7 +327,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
                                                           delegate:delegate
                                                      delegateQueue:nil];
     
-    NSURLSessionDataTask *task = [session dataTaskWithURL:[NSURL URLWithString:@"https://www.datatheorem.com/"]];
+    NSURLSessionDataTask *task = [session dataTaskWithURL:[NSURL URLWithString:@"https://www.google.com/"]];
     [task resume];
     
     [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error) {
@@ -364,7 +364,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
                                                           delegate:delegate
                                                      delegateQueue:nil];
     
-    NSURLSessionDataTask *task = [session dataTaskWithURL:[NSURL URLWithString:@"https://www.datatheorem.com/"]];
+    NSURLSessionDataTask *task = [session dataTaskWithURL:[NSURL URLWithString:@"https://www.google.com/"]];
     [task resume];
     
     [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error) {
