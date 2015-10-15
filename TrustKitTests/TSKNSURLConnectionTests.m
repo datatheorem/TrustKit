@@ -13,7 +13,10 @@
 
 #pragma mark Private test methods
 @interface TSKNSURLConnectionDelegateProxy(Private)
+
 +(TSKPinValidationResult)getLastTrustDecision;
++(void)resetLastTrustDecision;
+
 @end
 
 
@@ -139,6 +142,7 @@
 - (void)setUp {
     [super setUp];
     [TrustKit resetConfiguration];
+    [TSKNSURLConnectionDelegateProxy resetLastTrustDecision];
 }
 
 - (void)tearDown {

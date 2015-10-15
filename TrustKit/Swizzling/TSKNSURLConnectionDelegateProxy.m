@@ -26,6 +26,11 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
 
 @implementation TSKNSURLConnectionDelegateProxy
 
+// Private methods used for tests
++(void)resetLastTrustDecision
+{
+    lastTrustDecision = -1;;
+}
 
 +(TSKTrustDecision)getLastTrustDecision
 {

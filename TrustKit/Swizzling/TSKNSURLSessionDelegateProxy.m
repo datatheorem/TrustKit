@@ -18,6 +18,12 @@ static TSKTrustDecision lastTrustDecision = -1;
 @implementation TSKNSURLSessionDelegateProxy
 
 
+// Private methods used for tests
++(void)resetLastTrustDecision
+{
+    lastTrustDecision = -1;;
+}
+
 +(TSKTrustDecision)getLastTrustDecision
 {
     return lastTrustDecision;
