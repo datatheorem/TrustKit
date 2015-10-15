@@ -12,7 +12,7 @@
 #ifndef TrustKit_TrustKit_Private____FILEEXTENSION___
 #define TrustKit_TrustKit_Private____FILEEXTENSION___
 
-#import "TrustKit.h"
+#import <TrustKit/TrustKit.h>
 #import "ssl_pin_verifier.h"
 
 NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments);

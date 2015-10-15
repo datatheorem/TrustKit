@@ -18,7 +18,7 @@
 		6B032D401AF1AEC200EAFA69 /* TSKReporterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B032D3F1AF1AEB600EAFA69 /* TSKReporterTests.m */; };
 		6B2B06AD1B05154A00FC749E /* TSKBackgroundReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B2B06AC1B05154A00FC749E /* TSKBackgroundReporter.h */; };
 		6B2B06AF1B05157400FC749E /* TSKBackgroundReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B2B06AE1B05157400FC749E /* TSKBackgroundReporter.m */; };
-		8C15F9931B132F9200F06C0E /* TSKPinningValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C15F9911B132F9200F06C0E /* TSKPinningValidator.h */; };
+		8C15F9931B132F9200F06C0E /* TSKPinningValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C15F9911B132F9200F06C0E /* TSKPinningValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8C15F9941B132F9200F06C0E /* TSKPinningValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F9921B132F9200F06C0E /* TSKPinningValidator.m */; };
 		8C15F9A01B16094D00F06C0E /* TSKPinFailureReport.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C15F99E1B16094D00F06C0E /* TSKPinFailureReport.h */; };
 		8C15F9A11B16094E00F06C0E /* TSKPinFailureReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F99F1B16094D00F06C0E /* TSKPinFailureReport.m */; };
@@ -476,6 +476,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CE9192D1AEA0F7E002B29AE /* domain_registry.h in Headers */,
+				8C15F9931B132F9200F06C0E /* TSKPinningValidator.h in Headers */,
 				8CD5F7491BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.h in Headers */,
 				8CE9191E1AEA073C002B29AE /* public_key_utils.h in Headers */,
 				6B2B06AD1B05154A00FC749E /* TSKBackgroundReporter.h in Headers */,
@@ -483,7 +484,6 @@
 				8C9EBE021B619BBE00CA7EE0 /* TSKReportsRateLimiter.h in Headers */,
 				6B032D3E1AF1A4AC00EAFA69 /* TSKSimpleReporter.h in Headers */,
 				8CD5F7421BCB06F4005801D8 /* RSSwizzle.h in Headers */,
-				8C15F9931B132F9200F06C0E /* TSKPinningValidator.h in Headers */,
 				8C9492F61B2379A100F5DF38 /* reporting_utils.h in Headers */,
 				8C84804D1A896EE30017C155 /* TrustKit.h in Headers */,
 				8C15F9A01B16094D00F06C0E /* TSKPinFailureReport.h in Headers */,

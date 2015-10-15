@@ -10,6 +10,7 @@
  */
 
 #import <Foundation/Foundation.h>
+#import <TrustKit/TSKPinningValidator.h>
 
 //! Project version number for TrustKit.
 FOUNDATION_EXPORT double TrustKitVersionNumber;

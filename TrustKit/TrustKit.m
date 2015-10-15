@@ -10,9 +10,7 @@
  */
 
 #import "TrustKit+Private.h"
-#include <dlfcn.h>
 #import <CommonCrypto/CommonDigest.h>
-#import "fishhook.h"
 #import "public_key_utils.h"
 #import "domain_registry.h"
 #import "TSKBackgroundReporter.h"
