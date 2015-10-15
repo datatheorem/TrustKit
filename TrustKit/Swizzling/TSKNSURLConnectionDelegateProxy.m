@@ -40,8 +40,6 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
 
 + (void)swizzleNSURLConnectionConstructors
 {
-    static const void *swizzleOncekey = &swizzleOncekey;
-    
     // - initWithRequest:delegate:
     RSSwizzleInstanceMethod(NSClassFromString(@"NSURLConnection"),
                             @selector(initWithRequest:delegate:),
@@ -49,11 +47,21 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
                             RSSWArguments(NSURLRequest *request, id<NSURLConnectionDelegate> delegate),
                             RSSWReplacement(
                                             {
-                                                // Replace the delegate with our own so we can intercept and handle authentication challenges
-                                                TSKNSURLConnectionDelegateProxy *swizzledDelegate = [[TSKNSURLConnectionDelegateProxy alloc]initWithDelegate:delegate];
-                                                NSURLConnection *connection = RSSWCallOriginal(request, swizzledDelegate);
+                                                NSURLConnection *connection;
+                                                
+                                                if ([NSStringFromClass([delegate class]) hasPrefix:@"TSK"])
+                                                {
+                                                    // Don't proxy ourselves
+                                                    connection = RSSWCallOriginal(request, delegate);
+                                                }
+                                                else
+                                                {
+                                                    // Replace the delegate with our own so we can intercept and handle authentication challenges
+                                                    TSKNSURLConnectionDelegateProxy *swizzledDelegate = [[TSKNSURLConnectionDelegateProxy alloc]initWithDelegate:delegate];
+                                                     connection = RSSWCallOriginal(request, swizzledDelegate);
+                                                }
                                                 return connection;
-                                            }), RSSwizzleModeOncePerClass, swizzleOncekey);
+                                            }), RSSwizzleModeAlways, NULL);
     
     
     
@@ -68,7 +76,7 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
                                                 TSKNSURLConnectionDelegateProxy *swizzledDelegate = [[TSKNSURLConnectionDelegateProxy alloc]initWithDelegate:delegate];
                                                 NSURLConnection *connection = RSSWCallOriginal(request, swizzledDelegate, startImmediately);
                                                 return connection;
-                                            }), RSSwizzleModeOncePerClass, swizzleOncekey);
+                                            }), RSSwizzleModeAlways, NULL);
     
     
     // Not hooking + connectionWithRequest:delegate: as it ends up calling initWithRequest:delegate:

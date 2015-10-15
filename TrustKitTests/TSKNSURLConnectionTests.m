@@ -295,7 +295,7 @@
     // Use -initWithRequest:delegate:startstartImmediately:
     NSURLConnection *connection = [[NSURLConnection alloc]
                                    initWithRequest:[NSURLRequest requestWithURL:
-                                                    [NSURL URLWithString:@"https://www.datatheorem.com:443/"]]
+                                                    [NSURL URLWithString:@"https://www.datatheorem.com/"]]
                                    delegate:delegate
                                    startImmediately:YES];
     [connection start];
@@ -321,7 +321,7 @@
     @{
       kTSKPinnedDomains :
           @{
-              @"www.yahoo.com" : @{
+              @"www.google.com" : @{
                       kTSKEnforcePinning : @YES,
                       kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                       kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
@@ -333,14 +333,14 @@
     // Run other NSURLConnection methods that we swizzle to display a warning, to ensure they don't crash
     XCTestExpectation *expectation = [self expectationWithDescription:@"Asynchronous request"];
     [NSURLConnection sendAsynchronousRequest:[NSURLRequest requestWithURL:
-                                              [NSURL URLWithString:@"https://www.datatheorem.com/test"]]
+                                              [NSURL URLWithString:@"https://www.google.com/test"]]
                                        queue:[NSOperationQueue mainQueue]
                            completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
                                [expectation fulfill];
                            }];
     
     [NSURLConnection sendSynchronousRequest:[NSURLRequest requestWithURL:
-                                             [NSURL URLWithString:@"https://www.datatheorem.com/test"]]
+                                             [NSURL URLWithString:@"https://www.google.com/test"]]
                           returningResponse:nil error:nil];
 
 
