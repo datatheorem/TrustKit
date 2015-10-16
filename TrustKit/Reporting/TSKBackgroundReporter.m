@@ -203,7 +203,7 @@ static dispatch_once_t dispatchOnceBackgroundSession;
 {
     if (error == nil)
     {
-        TSKLog(@"Background upload - task %@ completed successfully", task);
+        TSKLog(@"Background upload - task %@ completed successfully; pinning failure report sent", task);
     }
     else
     {
