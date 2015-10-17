@@ -47,7 +47,7 @@
         self.appVendorId = [[[UIDevice currentDevice] identifierForVendor]UUIDString];
 #else
         // On OS X, don't use anything for now
-        self.appIdentifier = @"OS-X";
+        self.appVendorId = @"OS-X";
 #endif
         
         CFBundleRef appBundle = CFBundleGetMainBundle();
