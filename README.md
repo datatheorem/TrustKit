@@ -3,18 +3,18 @@ TrustKit
 
 [![Build Status](https://travis-ci.org/datatheorem/TrustKit.svg)](https://travis-ci.org/datatheorem/TrustKit) [![Version Status](https://img.shields.io/cocoapods/v/TrustKit.svg?style=flat)](https://cocoapods.org/pods/TrustKit) [![Platform](http://img.shields.io/cocoapods/p/TrustKit.svg?style=flat)](https://cocoapods.org/pods/TrustKit) [![License MIT](https://img.shields.io/github/license/datatheorem/trustkit.svg?style=flat)](https://en.wikipedia.org/wiki/MIT_License)
 
-TrustKit is an open source framework that makes it easy to deploy SSL public key
+**TrustKit** is an open source framework that makes it easy to deploy SSL public key
 pinning in any iOS or OS X App.
 
 
 iOS 9 FAQ
 ---------
 
-### Does TrustKit work on iOS 9?
+### Does **TrustKit** work on iOS 9?
 
 * Explicit pinning validation using the `TSKPinningValidator` class in your
 authentication handlers will work fine.
-* Implicit pinning validation, where TrustKit automatically "hooks" and 
+* Implicit pinning validation, where **TrustKit** automatically "hooks" and 
 validates the App's 'outgoing SSL connections does not work with the current
 version (1.1.3) on iOS 9, on some devices (including the iPhone 6). This 
 means that the App will still work fine but the pinning validation will not 
@@ -28,8 +28,8 @@ For pinning to work right now on iOS 9 devices, you can use the
 against your App's pinning policy.
 
 Apple has made changes in how function calls happen within and across Apple 
-frameworks, which break the technique we used in TrustKit to intercept outgoing
-SSL connections. The next release of TrustKit (1.2.0) will address this as much 
+frameworks, which break the technique we used in **TrustKit** to intercept outgoing
+SSL connections. The next release of **TrustKit** (1.2.0) will address this as much 
 as technically possible, and a blog post with technical details on what has changed 
 will be available shortly.
 
@@ -37,18 +37,18 @@ will be available shortly.
 Overview
 --------
 
-At a high level, TrustKit intercepts all outgoing SSL connections initiated by
+At a high level, **TrustKit** intercepts all outgoing SSL connections initiated by
 SecureTransport in order to perform additional validation against the server's
 certificate chain, based on an App-wide SSL pinning policy. This novel approach
 to SSL pinning gives us the following benefits:
 
-* Easy to use: TrustKit can be deployed in minutes in any App. For iOS8+ and OS
-X Apps, TrustKit can be used without even modifying the App's source code.
-* API-independent pinning by directly hooking Apple's SecureTransport: TrustKit
+* Easy to use: **TrustKit** can be deployed in minutes in any App. For iOS8+ and OS
+X Apps, **TrustKit** can be used without even modifying the App's source code.
+* API-independent pinning by directly hooking Apple's SecureTransport: **TrustKit**
 works on `NSURLSession`, `UIWebView`, `NSStream`, etc. all the way down to BSD
 sockets.
 
-Additionally, TrustKit provides the following features:
+Additionally, **TrustKit** provides the following features:
 
 * Subject Public Key Info pinning, [as opposed to certificate pinning or pinning
 the public key bits](https://www.imperialviolet.org/2011/05/04/pinning.html).
@@ -57,7 +57,7 @@ when an unexpected certificate chain is detected, similarly to the _report-uri_
 directive described in the [HTTP Public Key Pinning
 specification](https://tools.ietf.org/html/rfc7469).
 
-TrustKit was open-sourced at [Black Hat 2015 USA][bh2015-conf].
+**TrustKit** was open-sourced at [Black Hat 2015 USA][bh2015-conf].
 
 
 Getting Started
@@ -71,7 +71,7 @@ Getting Started
 Sample Usage
 ------------
 
-TrustKit can be deployed using CocoaPods, by adding the following line to your Podfile:
+**TrustKit** can be deployed using CocoaPods, by adding the following line to your Podfile:
 
 ```ruby
 pod 'TrustKit'
@@ -83,10 +83,10 @@ Then run:
 $ pod install
 ```
 
-Then, enabling SSL pinning globally in the App only requires initializing TrustKit 
+Then, enabling SSL pinning globally in the App only requires initializing **TrustKit** 
 with a pinning policy (domains, Subject Public Key Info hashes, and additional settings).
 
-The policy can be configured within the App's Info.plist:
+The policy can be configured within the App's `Info.plist`:
 
 ![Info.plist policy](https://datatheorem.github.io/TrustKit/images/linking3_dynamic.png)
 
@@ -117,7 +117,7 @@ trustKitConfig = @{
 [TrustKit initializeWithConfiguration:trustKitConfig];
 ```
 
-Once TrustKit has been initialized, all SSL connections initiated by Apple
+Once **TrustKit** has been initialized, all SSL connections initiated by Apple
 frameworks within the App will verify the server' certificate chains against the
 supplied pinning policy. If report URIs have been configured, the App will also
 send reports to the specified URIs whenever a pin validation failure occurred.
@@ -128,14 +128,14 @@ For more information, see the [Getting Started][getting-started] guide.
 Credits
 -------
 
-TrustKit is a joint-effort between the security teams at Data Theorem and Yahoo.
-See AUTHORS for details.
+**TrustKit** is a joint-effort between the security teams at Data Theorem and Yahoo.
+See `AUTHORS` for details.
 
 
 License
 -------
 
-TrustKit is released under the MIT license. See LICENSE for details.
+**TrustKit** is released under the MIT license. See `LICENSE` for details.
 
 [getting-started]: https://datatheorem.github.io/TrustKit/getting-started/
 [bh2015-pdf]: https://datatheorem.github.io/TrustKit/files/TrustKit-BH2015.pdf
