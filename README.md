@@ -73,11 +73,15 @@ Sample Usage
 
 TrustKit can be deployed using CocoaPods, by adding the following line to your Podfile:
 
-    pod 'TrustKit'
+```ruby
+pod 'TrustKit'
+```
 
 Then run:
 
-    $ pod install
+```sh
+$ pod install
+```
 
 Then, enabling SSL pinning globally in the App only requires initializing TrustKit 
 with a pinning policy (domains, Subject Public Key Info hashes, and additional settings).
@@ -88,28 +92,30 @@ The policy can be configured within the App's Info.plist:
 
 Alternatively, the pinning policy can be set programmatically:
 
-    NSDictionary *trustKitConfig;
-    trustKitConfig = @{
-                       @"www.datatheorem.com" : @{
-                               kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                               kTSKPublicKeyHashes : @[
-                                       @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=",
-                                       @"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8="
-                                       ],
-                               kTSKEnforcePinning : @NO,
-                               kTSKReportUris : @[@"http://report.datatheorem.com/log_report"],
-                               },
-                       @"yahoo.com" : @{
-                               kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                               kTSKPublicKeyHashes : @[
-                                       @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
-                                       @"rFjc3wG7lTZe43zeYTvPq8k4xdDEutCmIhI5dn4oCeE=",
-                                       ],
-                               kTSKIncludeSubdomains : @YES
-                               }
-                       };
+```objc
+NSDictionary *trustKitConfig;
+trustKitConfig = @{
+                   @"www.datatheorem.com" : @{
+                           kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                           kTSKPublicKeyHashes : @[
+                                   @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=",
+                                   @"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8="
+                                   ],
+                           kTSKEnforcePinning : @NO,
+                           kTSKReportUris : @[@"http://report.datatheorem.com/log_report"],
+                           },
+                   @"yahoo.com" : @{
+                           kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                           kTSKPublicKeyHashes : @[
+                                   @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                                   @"rFjc3wG7lTZe43zeYTvPq8k4xdDEutCmIhI5dn4oCeE=",
+                                   ],
+                           kTSKIncludeSubdomains : @YES
+                           }
+                   };
 
-    [TrustKit initializeWithConfiguration:trustKitConfig];
+[TrustKit initializeWithConfiguration:trustKitConfig];
+```
 
 Once TrustKit has been initialized, all SSL connections initiated by Apple
 frameworks within the App will verify the server' certificate chains against the
