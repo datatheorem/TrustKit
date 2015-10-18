@@ -40,6 +40,8 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
 
 + (void)swizzleNSURLConnectionConstructors
 {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshadow"
     // - initWithRequest:delegate:
     RSSwizzleInstanceMethod(NSClassFromString(@"NSURLConnection"),
                             @selector(initWithRequest:delegate:),
@@ -118,6 +120,7 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
                                              NSData *data = RSSWCallOriginal(request, response, error);
                                              return data;
                                          }));
+#pragma clang diagnostic pop
 }
 
 

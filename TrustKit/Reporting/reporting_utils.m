@@ -11,6 +11,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "reporting_utils.h"
+
 
 NSArray *convertTrustToPemArray(SecTrustRef serverTrust)
 {
