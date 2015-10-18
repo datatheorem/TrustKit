@@ -169,6 +169,7 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
     {
         [NSException raise:@"TrustKit configuration invalid"
                     format:@"TrustKit was initialized with zero pinned domains; ensure your domain pinning policies are under the TSKPinnedDomains key."];
+                    format:@"TrustKit was initialized with no pinned domains. The configuration format has changed: ensure your domain pinning policies are under the TSKPinnedDomains key within TSKConfiguration."];
     }
     
     
