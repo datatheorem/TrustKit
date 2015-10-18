@@ -58,6 +58,7 @@
         {
             // Should only happen when running tests
             self.appBundleId = @"N/A";
+            self.appVendorId = @"unit-tests";
         }
         
         if (self.appVersion == nil)
