@@ -49,8 +49,11 @@ static TSKTrustDecision _lastTrustDecision = -1;
         TSKLog(@"ERROR: Could not find NSURLSession's class");
         return;
     }
-    
+
+
     // + sessionWithConfiguration:delegate:delegateQueue:
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshadow"
     RSSwizzleClassMethod(NSClassFromString(NSURLSessionClass),
                          @selector(sessionWithConfiguration:delegate:delegateQueue:),
                          RSSWReturnType(NSURLSession *),
@@ -58,14 +61,14 @@ static TSKTrustDecision _lastTrustDecision = -1;
                          RSSWReplacement(
                                          {
                                              NSURLSession *session;
-                                             
+
                                              if (delegate == nil)
                                              {
                                                  // Just display a warning
                                                  //TSKLog(@"WARNING: +sessionWithConfiguration:delegate:delegateQueue: was called with a nil delegate; TrustKit cannot enforce SSL pinning for any connection initiated by this session");
                                                  session = RSSWCallOriginal(configuration, delegate, queue);
                                              }
-                                             
+
                                              // Do not swizzle TrustKit objects (such as the reporter)
                                              else if ([NSStringFromClass([delegate class]) hasPrefix:@"TSK"])
                                              {
@@ -77,12 +80,14 @@ static TSKTrustDecision _lastTrustDecision = -1;
                                                  TSKNSURLSessionDelegateProxy *swizzledDelegate = [[TSKNSURLSessionDelegateProxy alloc]initWithDelegate:delegate];
                                                  session = RSSWCallOriginal(configuration, swizzledDelegate, queue);
                                              }
-                                             
+
                                              return session;
                                          }));
     // Not hooking the following methods as they end up calling +sessionWithConfiguration:delegate:delegateQueue:
     // +sessionWithConfiguration:
     // +sharedSession
+
+#pragma clang diagnostic pop
 }
 
 
