@@ -82,7 +82,10 @@ didReceiveResponse:(NSURLResponse * _Nonnull)response
     [testExpectation fulfill];
     
     // Do not follow redirections as they cause two pinning validations, thereby changing the lastTrustDecision
-    completionHandler(nil);
+    if (completionHandler)
+    {
+        completionHandler(nil);
+    }
 }
 
 @end

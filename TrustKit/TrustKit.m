@@ -138,28 +138,28 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
     
     // Should we auto-swizzle network delegates
     NSNumber *shouldSwizzleNetworkDelegates = TrustKitArguments[kTSKSwizzleNetworkDelegates];
-    if (shouldSwizzleNetworkDelegates)
-    {
-        finalConfiguration[kTSKSwizzleNetworkDelegates] = shouldSwizzleNetworkDelegates;
-    }
-    else
+    if (shouldSwizzleNetworkDelegates == nil)
     {
         // Default setting is YES
         finalConfiguration[kTSKSwizzleNetworkDelegates] = [NSNumber numberWithBool:YES];
+    }
+    else
+    {
+        finalConfiguration[kTSKSwizzleNetworkDelegates] = shouldSwizzleNetworkDelegates;
     }
     
     
 #if !TARGET_OS_IPHONE
     // OS X only: extract the optional ignorePinningForUserDefinedTrustAnchors setting
     NSNumber *shouldIgnorePinningForUserDefinedTrustAnchors = TrustKitArguments[kTSKIgnorePinningForUserDefinedTrustAnchors];
-    if (shouldIgnorePinningForUserDefinedTrustAnchors)
-    {
-        finalConfiguration[kTSKIgnorePinningForUserDefinedTrustAnchors] = shouldIgnorePinningForUserDefinedTrustAnchors;
-    }
-    else
+    if (shouldIgnorePinningForUserDefinedTrustAnchors == nil)
     {
         // Default setting is YES
         finalConfiguration[kTSKIgnorePinningForUserDefinedTrustAnchors] = [NSNumber numberWithBool:YES];
+    }
+    else
+    {
+        finalConfiguration[kTSKIgnorePinningForUserDefinedTrustAnchors] = shouldIgnorePinningForUserDefinedTrustAnchors;
     }
 #endif
     
@@ -168,7 +168,6 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
     if ((TrustKitArguments[kTSKPinnedDomains] == nil) || ([TrustKitArguments[kTSKPinnedDomains] count] < 1))
     {
         [NSException raise:@"TrustKit configuration invalid"
-                    format:@"TrustKit was initialized with zero pinned domains; ensure your domain pinning policies are under the TSKPinnedDomains key."];
                     format:@"TrustKit was initialized with no pinned domains. The configuration format has changed: ensure your domain pinning policies are under the TSKPinnedDomains key within TSKConfiguration."];
     }
     
@@ -190,7 +189,12 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
         
         // Extract the optional includeSubdomains setting
         NSNumber *shouldIncludeSubdomains = domainPinningPolicy[kTSKIncludeSubdomains];
-        if (shouldIncludeSubdomains)
+        if (shouldIncludeSubdomains == nil)
+        {
+            // Default setting is NO
+            domainFinalConfiguration[kTSKIncludeSubdomains] = [NSNumber numberWithBool:NO];
+        }
+        else
         {
             if ([shouldIncludeSubdomains boolValue] == YES)
             {
@@ -205,13 +209,8 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
             
             domainFinalConfiguration[kTSKIncludeSubdomains] = shouldIncludeSubdomains;
         }
-        else
-        {
-            // Default setting is NO
-            domainFinalConfiguration[kTSKIncludeSubdomains] = [NSNumber numberWithBool:NO];
-        }
-
         
+
         // Extract the optional enforcePinning setting
         NSNumber *shouldEnforcePinning = domainPinningPolicy[kTSKEnforcePinning];
         if (shouldEnforcePinning)
