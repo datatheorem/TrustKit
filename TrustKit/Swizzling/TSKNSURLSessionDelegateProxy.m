@@ -12,13 +12,14 @@
 
 
 // Useful for the tests
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wassign-enum"
 static TSKTrustDecision _lastTrustDecision = -1;
-
 
 @implementation TSKNSURLSessionDelegateProxy
 
 
-// Private methods used for tests
+#pragma mark Private methods used for tests
 +(void)resetLastTrustDecision
 {
     _lastTrustDecision = -1;;
@@ -28,7 +29,11 @@ static TSKTrustDecision _lastTrustDecision = -1;
 {
     return _lastTrustDecision;
 }
+#pragma clang diagnostic pop
 
+
+
+#pragma mark Public methods
 
 + (void)swizzleNSURLSessionConstructors
 {
@@ -100,10 +105,11 @@ static TSKTrustDecision _lastTrustDecision = -1;
         originalDelegate = delegate;
     }
     TSKLog(@"Proxy-ing NSURLSessionDelegate: %@", NSStringFromClass([delegate class]));
-    _lastTrustDecision = -1;
     return self;
 }
 
+
+#pragma mark Delegate methods
 
 - (BOOL)respondsToSelector:(SEL)aSelector
 {

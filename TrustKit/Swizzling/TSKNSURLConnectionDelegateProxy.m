@@ -13,8 +13,9 @@
 
 
 // Useful for the tests
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wassign-enum"
 static TSKTrustDecision _lastTrustDecision = -1;
-
 
 typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NSError *connectionError);
 
@@ -26,7 +27,8 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
 
 @implementation TSKNSURLConnectionDelegateProxy
 
-// Private methods used for tests
+
+#pragma mark Private methods used for tests
 +(void)resetLastTrustDecision
 {
     _lastTrustDecision = -1;;
@@ -36,7 +38,10 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
 {
     return _lastTrustDecision;
 }
+#pragma clang diagnostic pop
 
+
+#pragma mark Public methods
 
 + (void)swizzleNSURLConnectionConstructors
 {
@@ -132,10 +137,11 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
         originalDelegate = delegate;
     }
     TSKLog(@"Proxy-ing NSURLConnectionDelegate: %@", NSStringFromClass([delegate class]));
-    _lastTrustDecision = -1;
     return self;
 }
 
+
+#pragma mark Delegate methods
 
 - (BOOL)respondsToSelector:(SEL)aSelector
 {
