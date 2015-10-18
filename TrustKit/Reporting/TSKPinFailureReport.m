@@ -69,7 +69,7 @@
     };
     
     NSError *error;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:requestData options:0 error:&error];
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:requestData options:(NSJSONWritingOptions)0 error:&error];
     return jsonData;
 }
 

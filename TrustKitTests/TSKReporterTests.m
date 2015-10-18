@@ -68,8 +68,8 @@
                                    reportURIs:@[[NSURL URLWithString:@"http://127.0.0.1:8080/log_report"]]
                            includeSubdomains:YES
                                    knownPins:@[
-                                               [[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM=" options:0],
-                                               [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g=" options:0],
+                                               [[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM=" options:(NSDataBase64DecodingOptions)0],
+                                               [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g=" options:(NSDataBase64DecodingOptions)0],
                                                ]
                             validationResult:TSKPinValidationResultFailed];
 
@@ -83,8 +83,8 @@
 {
     // Create the pin validation failure report
     NSArray *certificateChain = convertTrustToPemArray(_testTrust);
-    NSArray *formattedPins = convertPinsToHpkpPins(@[[[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM=" options:0],
-                                                     [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g=" options:0],]);
+    NSArray *formattedPins = convertPinsToHpkpPins(@[[[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM=" options:(NSDataBase64DecodingOptions)0],
+                                                     [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g=" options:(NSDataBase64DecodingOptions)0],]);
     
 
     TSKPinFailureReport *report = [[TSKPinFailureReport alloc] initWithAppBundleId:@"test"

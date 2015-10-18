@@ -12,10 +12,6 @@
 #import "RSSwizzle.h"
 
 
-// Useful for the tests
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wassign-enum"
-static TSKTrustDecision _lastTrustDecision = -1;
 
 typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NSError *connectionError);
 
@@ -29,16 +25,18 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
 
 
 #pragma mark Private methods used for tests
+
+static TSKTrustDecision _lastTrustDecision = (TSKTrustDecision)-1;
+
 +(void)resetLastTrustDecision
 {
-    _lastTrustDecision = -1;;
+    _lastTrustDecision = (TSKTrustDecision)-1;
 }
 
 +(TSKTrustDecision)getLastTrustDecision
 {
     return _lastTrustDecision;
 }
-#pragma clang diagnostic pop
 
 
 #pragma mark Public methods

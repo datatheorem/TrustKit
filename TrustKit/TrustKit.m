@@ -299,7 +299,7 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
         NSMutableArray *serverSslPinsData = [[NSMutableArray alloc] init];
         
         for (NSString *pinnedKeyHashBase64 in serverSslPinsBase64) {
-            NSData *pinnedKeyHash = [[NSData alloc] initWithBase64EncodedString:pinnedKeyHashBase64 options:0];
+            NSData *pinnedKeyHash = [[NSData alloc] initWithBase64EncodedString:pinnedKeyHashBase64 options:(NSDataBase64DecodingOptions)0];
             
             if ([pinnedKeyHash length] != CC_SHA256_DIGEST_LENGTH)
             {
