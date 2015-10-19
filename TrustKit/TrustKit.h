@@ -62,6 +62,7 @@ FOUNDATION_EXPORT const NSString * _Nonnull kTSKAlgorithmEcDsaSecp256r1;
  
     NSDictionary *trustKitConfig;
     trustKitConfig = @{
+                       kTSKSwizzleNetworkDelegates: @YES,
                        kTSKPinnedDomains : @{
                                @"www.datatheorem.com" : @{
                                        kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
@@ -70,7 +71,7 @@ FOUNDATION_EXPORT const NSString * _Nonnull kTSKAlgorithmEcDsaSecp256r1;
                                                @"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8="
                                                ],
                                        kTSKEnforcePinning : @NO,
-                                       kTSKReportUris : @[@"http://report.datatheorem.com/log_hpkp_report"],
+                                       kTSKReportUris : @[@"http://report.datatheorem.com/log_report"],
                                        },
                                @"yahoo.com" : @{
                                        kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
