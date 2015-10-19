@@ -52,28 +52,28 @@ The policy can be configured within the App's `Info.plist`:
 Alternatively, the pinning policy can be set programmatically:
 
 ```objc
-NSDictionary *trustKitConfig;
-trustKitConfig = @{
-                   kTSKSwizzleNetworkDelegates: @YES,
-                   kTSKPinnedDomains : @{
-                           @"www.datatheorem.com" : @{
-                                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                                   kTSKPublicKeyHashes : @[
-                                           @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=",
-                                           @"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8="
-                                           ],
-                                   kTSKEnforcePinning : @NO,
-                                   kTSKReportUris : @[@"http://report.datatheorem.com/log_report"],
-                                   },
-                           @"yahoo.com" : @{
-                                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                   kTSKPublicKeyHashes : @[
-                                           @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
-                                           @"rFjc3wG7lTZe43zeYTvPq8k4xdDEutCmIhI5dn4oCeE=",
-                                           ],
-                                   kTSKIncludeSubdomains : @YES
-                                   }
-                           }};
+NSDictionary *trustKitConfig =
+@{
+  kTSKSwizzleNetworkDelegates: @YES,
+  kTSKPinnedDomains : @{
+          @"www.datatheorem.com" : @{
+                  kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                  kTSKPublicKeyHashes : @[
+                          @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=",
+                          @"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8="
+                          ],
+                  kTSKEnforcePinning : @NO,
+                  kTSKReportUris : @[@"http://report.datatheorem.com/log_report"],
+                  },
+          @"yahoo.com" : @{
+                  kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                  kTSKPublicKeyHashes : @[
+                          @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                          @"rFjc3wG7lTZe43zeYTvPq8k4xdDEutCmIhI5dn4oCeE=",
+                          ],
+                  kTSKIncludeSubdomains : @YES
+                  }
+          }};
 
 [TrustKit initializeWithConfiguration:trustKitConfig];
 ```
@@ -95,7 +95,7 @@ TrustKit.initializeWithConfiguration(config)
 
 Once **TrustKit** has been initialized, it will by default swizzle the App's _NSURLSession_ and _NSURLConnection_ delegates to verify the server's certificate against the configured pinning policy, whenever an HTTPS connection is initiated. If report URIs have been configured, the App will also send reports to the specified URIs whenever a pin validation failure occurred.
 
-The swizzling behavior can be disabled via the `kTSKSwizzleNetworkDelegates` setting, and a server's certificate chain can easily be checked against the App's SSL pinning policy using the `TSKPinningValidator` class (for example to implement an authentication handler).
+The swizzling behavior can be disabled via the `kTSKSwizzleNetworkDelegates` setting, and a server's certificate chain can easily be checked against the App's SSL pinning policy using the `TSKPinningValidator` class, for example to implement an authentication handler.
 
 For more information, see the [Getting Started][getting-started] guide.
 

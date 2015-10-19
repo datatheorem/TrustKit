@@ -60,28 +60,28 @@ FOUNDATION_EXPORT const NSString * _Nonnull kTSKAlgorithmEcDsaSecp256r1;
  
  When setting the pinning policy programmatically, it has to be supplied to the `initializeWithConfiguration:` method as a dictionnary. For example:
  
-    NSDictionary *trustKitConfig;
-    trustKitConfig = @{
-                       kTSKSwizzleNetworkDelegates: @YES,
-                       kTSKPinnedDomains : @{
-                               @"www.datatheorem.com" : @{
-                                       kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                                       kTSKPublicKeyHashes : @[
-                                               @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=",
-                                               @"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8="
-                                               ],
-                                       kTSKEnforcePinning : @NO,
-                                       kTSKReportUris : @[@"http://report.datatheorem.com/log_report"],
-                                       },
-                               @"yahoo.com" : @{
-                                       kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                       kTSKPublicKeyHashes : @[
-                                               @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
-                                               @"rFjc3wG7lTZe43zeYTvPq8k4xdDEutCmIhI5dn4oCeE=",
-                                               ],
-                                       kTSKIncludeSubdomains : @YES
-                                       }
-                               }};
+    NSDictionary *trustKitConfig =
+    @{
+      kTSKSwizzleNetworkDelegates: @YES,
+      kTSKPinnedDomains : @{
+              @"www.datatheorem.com" : @{
+                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                      kTSKPublicKeyHashes : @[
+                              @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=",
+                              @"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8="
+                              ],
+                      kTSKEnforcePinning : @NO,
+                      kTSKReportUris : @[@"http://report.datatheorem.com/log_report"],
+                      },
+              @"yahoo.com" : @{
+                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                      kTSKPublicKeyHashes : @[
+                              @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                              @"rFjc3wG7lTZe43zeYTvPq8k4xdDEutCmIhI5dn4oCeE=",
+                              ],
+                      kTSKIncludeSubdomains : @YES
+                      }
+              }};
 
     [TrustKit initializeWithConfiguration:trustKitConfig];
  
