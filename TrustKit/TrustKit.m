@@ -58,7 +58,7 @@ static dispatch_queue_t _pinFailureReporterQueue = NULL;
 
 
 // Default report URI - can be disabled with TSKDisableDefaultReportUri
-static NSString * const kTSKDefaultReportUri = @"https://trustkit-reports-server.appspot.com/log_report";
+static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.com/trustkit/report";
 
 
 #pragma mark Logging Function
