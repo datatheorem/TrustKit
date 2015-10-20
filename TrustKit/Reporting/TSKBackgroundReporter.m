@@ -59,63 +59,72 @@ static dispatch_once_t dispatchOnceBackgroundSession;
         self.appBundleId = (__bridge NSString *)CFBundleGetIdentifier(appBundle);
         self.appVersion =  (__bridge NSString *)CFBundleGetValueForInfoDictionaryKey(appBundle, kCFBundleVersionKey);
         
-        if (self.appBundleId == nil)
-        {
-            // The bundle ID we get is nil if we're running tests on Travis. If the bundle ID is nil, background sessions can't be used
-            // backgroundSessionConfigurationWithIdentifier: will throw an exception within dispatch_once() which can't be handled
-            // Throw an exception here instead
-            [NSException raise:@"Null Bundle ID" format:@"Application must have a bundle identifier to use a background NSURLSession"];
-        }
-
         if (self.appVersion == nil)
         {
             self.appVersion = @"N/A";
         }
         
-        /*
-         Using dispatch_once here ensures that multiple background sessions with the same identifier are not created 
-         in this instance of the application. If you want to support multiple background sessions within a single process, 
-         you should create each session with its own identifier.
-         */
-        dispatch_once(&dispatchOnceBackgroundSession, ^{
-            NSURLSessionConfiguration *backgroundConfiguration = nil;
+        if (self.appBundleId == nil)
+        {
+            // The bundle ID we get is nil if we're running tests on Travis. If the bundle ID is nil, background sessions can't be used
+            // backgroundSessionConfigurationWithIdentifier: will throw an exception within dispatch_once() which can't be handled
+            // Use a regular session instead
+            TSKLog(@"Null bundle ID: we are running the test suite; falling back to a normal session.");
+            self.appBundleId = @"N/A";
+            self.appVendorId = @"unit-tests";
             
-            // The API for creating background sessions changed between iOS 7 and iOS 8 and OS X 10.9 and 10.10
+            dispatch_once(&dispatchOnceBackgroundSession, ^{
+                _backgroundSession = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]];
+            });
+        }
+        else
+        {
+            // We're not running unit tests - use a background session
+            /*
+             Using dispatch_once here ensures that multiple background sessions with the same identifier are not created
+             in this instance of the application. If you want to support multiple background sessions within a single process,
+             you should create each session with its own identifier.
+             */
+            dispatch_once(&dispatchOnceBackgroundSession, ^{
+                NSURLSessionConfiguration *backgroundConfiguration = nil;
+                
+                // The API for creating background sessions changed between iOS 7 and iOS 8 and OS X 10.9 and 10.10
 #if (TARGET_OS_IPHONE &&__IPHONE_OS_VERSION_MAX_ALLOWED < 80000) || (!TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MAX_ALLOWED < 1100)
-            // iOS 7 or OS X 10.9 as the max SDK: awlays use the deprecated/iOS 7 API
-            backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfiguration:[NSString stringWithFormat:kTSKBackgroundSessionIdentifierFormat, self.appBundleId]];
-#else
-            // iOS 8+ or OS X 10.10+ as the max SDK
-#if (TARGET_OS_IPHONE &&__IPHONE_OS_VERSION_MIN_REQUIRED < 80000) || (!TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MIN_REQUIRED < 1100)
-            // iOS 7 or OS X 10.9 as the min SDK
-            // Try to use the new API if available at runtime
-            if (![NSURLSessionConfiguration respondsToSelector:@selector(backgroundSessionConfigurationWithIdentifier:)])
-            {
-                // Device runs on iOS 7 or OS X 10.9
+                // iOS 7 or OS X 10.9 as the max SDK: awlays use the deprecated/iOS 7 API
                 backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfiguration:[NSString stringWithFormat:kTSKBackgroundSessionIdentifierFormat, self.appBundleId]];
-            }
-            else
+#else
+                // iOS 8+ or OS X 10.10+ as the max SDK
+#if (TARGET_OS_IPHONE &&__IPHONE_OS_VERSION_MIN_REQUIRED < 80000) || (!TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MIN_REQUIRED < 1100)
+                // iOS 7 or OS X 10.9 as the min SDK
+                // Try to use the new API if available at runtime
+                if (![NSURLSessionConfiguration respondsToSelector:@selector(backgroundSessionConfigurationWithIdentifier:)])
+                {
+                    // Device runs on iOS 7 or OS X 10.9
+                    backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfiguration:[NSString stringWithFormat:kTSKBackgroundSessionIdentifierFormat, self.appBundleId]];
+                }
+                else
 #endif
-            {
-                // Device runs on iOS 8+ or OS X 10.10+ or min SDK is iOS 8+ or OS X 10.10+
-                backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier: [NSString stringWithFormat:kTSKBackgroundSessionIdentifierFormat, self.appBundleId]];
-            }
+                {
+                    // Device runs on iOS 8+ or OS X 10.10+ or min SDK is iOS 8+ or OS X 10.10+
+                    backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier: [NSString stringWithFormat:kTSKBackgroundSessionIdentifierFormat, self.appBundleId]];
+                }
 #endif
-            
-
-            
+                
+                
+                
 #if TARGET_OS_IPHONE
-            // iOS-only settings
-            // Do not wake up the App after completing the upload
-            backgroundConfiguration.sessionSendsLaunchEvents = NO;
+                // iOS-only settings
+                // Do not wake up the App after completing the upload
+                backgroundConfiguration.sessionSendsLaunchEvents = NO;
 #endif
-
+                
 #if (TARGET_OS_IPHONE) || ((!TARGET_OS_IPHONE) && (__MAC_OS_X_VERSION_MIN_REQUIRED >= 1100))
-            // On OS X discretionary is only available on 10.10
-            backgroundConfiguration.discretionary = YES;
+                // On OS X discretionary is only available on 10.10
+                backgroundConfiguration.discretionary = YES;
 #endif
-            _backgroundSession = [NSURLSession sessionWithConfiguration:backgroundConfiguration delegate:self delegateQueue:nil];
-        });
+                _backgroundSession = [NSURLSession sessionWithConfiguration:backgroundConfiguration delegate:self delegateQueue:nil];
+            });
+        }
     }
     return self;
 }

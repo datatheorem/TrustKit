@@ -10,7 +10,6 @@
  */
 
 #import <XCTest/XCTest.h>
-#import "TSKSimpleReporter.h"
 #import "TSKBackgroundReporter.h"
 #import "TSKPinFailureReport.h"
 #import "TSKCertificateUtils.h"
@@ -56,10 +55,10 @@
     [super tearDown];
 }
 
-- (void)testSimpleReporter
+- (void)testReporter
 {
     // Just try a simple valid case to see if we can post this to the server
-    TSKSimpleReporter *reporter = [[TSKSimpleReporter alloc] initAndRateLimitReports:NO];
+    TSKBackgroundReporter *reporter = [[TSKBackgroundReporter alloc] initAndRateLimitReports:NO];
     
     [reporter pinValidationFailedForHostname:@"mail.example.com"
                                         port:[NSNumber numberWithInt:443]

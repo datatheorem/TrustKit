@@ -13,8 +13,6 @@
 		070868BB1AE1672D00E5AFDC /* www.good.com.selfsigned.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868BA1AE1672D00E5AFDC /* www.good.com.selfsigned.der */; };
 		075AA1091AC985FD00178223 /* TSKPinningValidatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA2868CAFECA46ADE0B6E3E /* TSKPinningValidatorTests.m */; };
 		0E64A7601B867BA000CA164A /* TSKReportsRateLimiter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBE011B619BBE00CA7EE0 /* TSKReportsRateLimiter.m */; };
-		6B032D3A1AF1794D00EAFA69 /* TSKSimpleReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B032D391AF1794D00EAFA69 /* TSKSimpleReporter.m */; };
-		6B032D3E1AF1A4AC00EAFA69 /* TSKSimpleReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B032D3D1AF1A4AC00EAFA69 /* TSKSimpleReporter.h */; };
 		6B032D401AF1AEC200EAFA69 /* TSKReporterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B032D3F1AF1AEB600EAFA69 /* TSKReporterTests.m */; };
 		6B2B06AD1B05154A00FC749E /* TSKBackgroundReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B2B06AC1B05154A00FC749E /* TSKBackgroundReporter.h */; };
 		6B2B06AF1B05157400FC749E /* TSKBackgroundReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B2B06AE1B05157400FC749E /* TSKBackgroundReporter.m */; };
@@ -26,7 +24,6 @@
 		8C84804D1A896EE30017C155 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C84804C1A896EE30017C155 /* TrustKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8C8480531A896EE30017C155 /* TrustKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C8480471A896EE30017C155 /* TrustKit.framework */; };
 		8C84806D1A896F660017C155 /* TrustKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C84806C1A896F660017C155 /* TrustKit.m */; };
-		8C8716B11B23A9F000267E1D /* TSKSimpleReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B032D391AF1794D00EAFA69 /* TSKSimpleReporter.m */; };
 		8C8716B21B23A9F400267E1D /* TSKBackgroundReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B2B06AE1B05157400FC749E /* TSKBackgroundReporter.m */; };
 		8C8716B31B23A9F700267E1D /* TSKPinFailureReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F99F1B16094D00F06C0E /* TSKPinFailureReport.m */; };
 		8C8716B41B23A9FA00267E1D /* reporting_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CCBD15A1B186D1100CB88AF /* reporting_utils.m */; };
@@ -41,8 +38,6 @@
 		8CA6CC141BAE2B6600BDA419 /* TSKReportsRateLimiter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C9EBE001B619BBE00CA7EE0 /* TSKReportsRateLimiter.h */; settings = {ASSET_TAGS = (); }; };
 		8CA6CC151BAE2B6600BDA419 /* TSKReportsRateLimiter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBE011B619BBE00CA7EE0 /* TSKReportsRateLimiter.m */; settings = {ASSET_TAGS = (); }; };
 		8CA6CC161BAE2B6600BDA419 /* TSKReporterDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE919261AEA0991002B29AE /* TSKReporterDelegate.h */; settings = {ASSET_TAGS = (); }; };
-		8CA6CC171BAE2B6600BDA419 /* TSKSimpleReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B032D3D1AF1A4AC00EAFA69 /* TSKSimpleReporter.h */; settings = {ASSET_TAGS = (); }; };
-		8CA6CC181BAE2B6600BDA419 /* TSKSimpleReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B032D391AF1794D00EAFA69 /* TSKSimpleReporter.m */; settings = {ASSET_TAGS = (); }; };
 		8CA6CC191BAE2B6600BDA419 /* TSKBackgroundReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B2B06AC1B05154A00FC749E /* TSKBackgroundReporter.h */; settings = {ASSET_TAGS = (); }; };
 		8CA6CC1A1BAE2B6600BDA419 /* TSKBackgroundReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B2B06AE1B05157400FC749E /* TSKBackgroundReporter.m */; settings = {ASSET_TAGS = (); }; };
 		8CA6CC1B1BAE2B6600BDA419 /* TSKPinFailureReport.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C15F99E1B16094D00F06C0E /* TSKPinFailureReport.h */; settings = {ASSET_TAGS = (); }; };
@@ -151,8 +146,6 @@
 		070868BA1AE1672D00E5AFDC /* www.good.com.selfsigned.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = www.good.com.selfsigned.der; sourceTree = "<group>"; };
 		2FA286123F801C437F35D240 /* TrustKit+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TrustKit+Private.h"; sourceTree = "<group>"; };
 		2FA2868CAFECA46ADE0B6E3E /* TSKPinningValidatorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKPinningValidatorTests.m; sourceTree = "<group>"; };
-		6B032D391AF1794D00EAFA69 /* TSKSimpleReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKSimpleReporter.m; path = Reporting/TSKSimpleReporter.m; sourceTree = "<group>"; };
-		6B032D3D1AF1A4AC00EAFA69 /* TSKSimpleReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKSimpleReporter.h; path = Reporting/TSKSimpleReporter.h; sourceTree = "<group>"; };
 		6B032D3F1AF1AEB600EAFA69 /* TSKReporterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSKReporterTests.m; sourceTree = "<group>"; };
 		6B2B06AC1B05154A00FC749E /* TSKBackgroundReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKBackgroundReporter.h; path = Reporting/TSKBackgroundReporter.h; sourceTree = "<group>"; };
 		6B2B06AE1B05157400FC749E /* TSKBackgroundReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKBackgroundReporter.m; path = Reporting/TSKBackgroundReporter.m; sourceTree = "<group>"; };
@@ -431,8 +424,6 @@
 				8C9EBE001B619BBE00CA7EE0 /* TSKReportsRateLimiter.h */,
 				8C9EBE011B619BBE00CA7EE0 /* TSKReportsRateLimiter.m */,
 				8CE919261AEA0991002B29AE /* TSKReporterDelegate.h */,
-				6B032D3D1AF1A4AC00EAFA69 /* TSKSimpleReporter.h */,
-				6B032D391AF1794D00EAFA69 /* TSKSimpleReporter.m */,
 				6B2B06AC1B05154A00FC749E /* TSKBackgroundReporter.h */,
 				6B2B06AE1B05157400FC749E /* TSKBackgroundReporter.m */,
 				8C15F99E1B16094D00F06C0E /* TSKPinFailureReport.h */,
@@ -466,7 +457,6 @@
 				6B2B06AD1B05154A00FC749E /* TSKBackgroundReporter.h in Headers */,
 				8CD5F7311BC5ED4A005801D8 /* TSKNSURLConnectionDelegateProxy.h in Headers */,
 				8C9EBE021B619BBE00CA7EE0 /* TSKReportsRateLimiter.h in Headers */,
-				6B032D3E1AF1A4AC00EAFA69 /* TSKSimpleReporter.h in Headers */,
 				8CD5F7421BCB06F4005801D8 /* RSSwizzle.h in Headers */,
 				8C9492F61B2379A100F5DF38 /* reporting_utils.h in Headers */,
 				8C84804D1A896EE30017C155 /* TrustKit.h in Headers */,
@@ -480,7 +470,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CA6CC171BAE2B6600BDA419 /* TSKSimpleReporter.h in Headers */,
 				8CD5F74A1BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.h in Headers */,
 				8CA6CC1B1BAE2B6600BDA419 /* TSKPinFailureReport.h in Headers */,
 				8CA6CC141BAE2B6600BDA419 /* TSKReportsRateLimiter.h in Headers */,
@@ -698,7 +687,6 @@
 				8C9EBE031B619BBE00CA7EE0 /* TSKReportsRateLimiter.m in Sources */,
 				6B2B06AF1B05157400FC749E /* TSKBackgroundReporter.m in Sources */,
 				8CD5F74B1BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.m in Sources */,
-				6B032D3A1AF1794D00EAFA69 /* TSKSimpleReporter.m in Sources */,
 				8CE9191F1AEA073C002B29AE /* public_key_utils.m in Sources */,
 				8C15F9A11B16094E00F06C0E /* TSKPinFailureReport.m in Sources */,
 				8C15F9941B132F9200F06C0E /* TSKPinningValidator.m in Sources */,
@@ -736,7 +724,6 @@
 				0E64A7601B867BA000CA164A /* TSKReportsRateLimiter.m in Sources */,
 				8CD5F74C1BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.m in Sources */,
 				8CD5F7341BC5ED4A005801D8 /* TSKNSURLConnectionDelegateProxy.m in Sources */,
-				8C8716B11B23A9F000267E1D /* TSKSimpleReporter.m in Sources */,
 				8C8716B61B23AA0800267E1D /* ssl_pin_verifier.m in Sources */,
 				8CD0D4171BD42A7D004478C0 /* RSSwizzle.m in Sources */,
 			);
@@ -755,7 +742,6 @@
 				8CA6CC261BAE2B6A00BDA419 /* TrustKit.m in Sources */,
 				8CA6CC151BAE2B6600BDA419 /* TSKReportsRateLimiter.m in Sources */,
 				8CD5F7351BC5ED4A005801D8 /* TSKNSURLConnectionDelegateProxy.m in Sources */,
-				8CA6CC181BAE2B6600BDA419 /* TSKSimpleReporter.m in Sources */,
 				8CA6CC221BAE2B6A00BDA419 /* ssl_pin_verifier.m in Sources */,
 				8CD5F7451BCB06F4005801D8 /* RSSwizzle.m in Sources */,
 			);

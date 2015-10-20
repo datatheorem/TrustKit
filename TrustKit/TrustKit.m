@@ -14,7 +14,6 @@
 #import "public_key_utils.h"
 #import "domain_registry.h"
 #import "TSKBackgroundReporter.h"
-#import "TSKSimpleReporter.h"
 #import "TSKNSURLConnectionDelegateProxy.h"
 #import "TSKNSURLSessionDelegateProxy.h"
 
@@ -87,13 +86,11 @@ void sendPinFailureReport_async(TSKPinValidationResult validationResult, SecTrus
         // Pin validation failed: retrieve the list of configured report URLs
         NSMutableArray *reportUris = [NSMutableArray arrayWithArray:notedHostnameConfig[kTSKReportUris]];
         
-#if !DEBUG
-        // For release builds, also enable the default reporting URL
+        // Also enable the default reporting URL
         if ([notedHostnameConfig[kTSKDisableDefaultReportUri] boolValue] == NO)
         {
             [reportUris addObject:[NSURL URLWithString:kTSKDefaultReportUri]];
         }
-#endif
         
         // If some report URLs have been defined, send the pin failure report
         if ((reportUris != nil) && ([reportUris count] > 0))
@@ -344,20 +341,11 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
             // Convert and store the SSL pins in our global variable
             _trustKitGlobalConfiguration = [[NSDictionary alloc]initWithDictionary:parseTrustKitArguments(trustKitConfig)];
             
-            
+        
             // Create our reporter for sending pin validation failures; do this before hooking NSURLSession so we don't hook ourselves
-            @try
-            {
-                // Create a reporter that uses the background transfer service to send pin failure reports
-                _pinFailureReporter = [[TSKBackgroundReporter alloc]initAndRateLimitReports:YES];
-            
-            }
-            @catch (NSException *e)
-            {
-                // The bundle ID we get is nil if we're running tests on Travis so we have to use the simple reporter for unit tests
-                TSKLog(@"Null bundle ID: we are running the test suite; falling back to TSKSimpleReporter");
-                _pinFailureReporter = [[TSKSimpleReporter alloc]initAndRateLimitReports:YES];
-            }
+            // Create a reporter that uses the background transfer service to send pin failure reports
+            _pinFailureReporter = [[TSKBackgroundReporter alloc]initAndRateLimitReports:YES];
+    
             
             // Create a dispatch queue for activating the reporter
             // We use a serial queue targetting the global default queue in order to ensure reports are sent one by one
