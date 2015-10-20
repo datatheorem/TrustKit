@@ -81,7 +81,7 @@
                              reportURIs:(NSArray *) reportURIs
                       includeSubdomains:(BOOL) includeSubdomains
                               knownPins:(NSArray *) knownPins
-                       validationResult:(TSKPinValidationResult) validationResult;
+                       validationResult:(TSKPinValidationResult) validationResult
 {
     // Pin validation failed for a connection to a pinned domain
     

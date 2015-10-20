@@ -133,7 +133,7 @@ static dispatch_once_t dispatchOnceBackgroundSession;
                              reportURIs:(NSArray *) reportURIs
                       includeSubdomains:(BOOL) includeSubdomains
                               knownPins:(NSArray *) knownPins
-                       validationResult:(TSKPinValidationResult) validationResult;
+                       validationResult:(TSKPinValidationResult) validationResult
 {
     // Default port to 0 if not specified
     if (serverPort == nil)

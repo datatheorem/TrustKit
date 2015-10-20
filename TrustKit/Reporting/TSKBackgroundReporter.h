@@ -31,5 +31,17 @@
  
  */
 - (instancetype)initAndRateLimitReports:(BOOL)shouldRateLimitReports;
+
+- (void) pinValidationFailedForHostname:(NSString *) serverHostname
+                                   port:(NSNumber *) serverPort
+                                  trust:(SecTrustRef) serverTrust
+                          notedHostname:(NSString *) notedHostname
+                             reportURIs:(NSArray *) reportURIs
+                      includeSubdomains:(BOOL) includeSubdomains
+                              knownPins:(NSArray *) knownPins
+                       validationResult:(TSKPinValidationResult) validationResult;
+
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error;
+
 @end
 
