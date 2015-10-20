@@ -411,6 +411,12 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
     dispatchOnceTrustKitInit = 0;
 }
 
+
++ (NSString *) getDefaultReportUri
+{
+    return kTSKDefaultReportUri;
+}
+
 @end
 
 

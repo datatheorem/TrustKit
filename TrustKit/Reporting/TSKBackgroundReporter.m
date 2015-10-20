@@ -38,6 +38,7 @@ static dispatch_once_t dispatchOnceBackgroundSession;
 @implementation TSKBackgroundReporter
 
 
+#pragma mark Public methods
 
 - (instancetype)initAndRateLimitReports:(BOOL)shouldRateLimitReports
 {
@@ -130,11 +131,6 @@ static dispatch_once_t dispatchOnceBackgroundSession;
 }
 
 
-/*
-  Pin validation failed for a connection to a pinned domain
-  In this implementation for a simple background reporter, we're just going to send out the report upon each failure
-  in a background task
- */
 - (void) pinValidationFailedForHostname:(NSString *) serverHostname
                                    port:(NSNumber *) serverPort
                                   trust:(SecTrustRef) serverTrust
@@ -143,6 +139,40 @@ static dispatch_once_t dispatchOnceBackgroundSession;
                       includeSubdomains:(BOOL) includeSubdomains
                               knownPins:(NSArray *) knownPins
                        validationResult:(TSKPinValidationResult) validationResult
+{
+    return [self pinValidationFailedForHostname:serverHostname
+                                           port:serverPort
+                                          trust:serverTrust
+                                  notedHostname:notedHostname
+                                     reportURIs:reportURIs
+                              includeSubdomains:includeSubdomains
+                                      knownPins:knownPins
+                               validationResult:validationResult
+                              completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+            {
+                if (error == nil)
+                {
+                    TSKLog(@"Background upload - task completed successfully: %@; pinning failure report sent", response);
+                }
+                else
+                {
+                    TSKLog(@"Background upload - task completed with error: %@ (code %ld)", [error localizedDescription], (long)error.code);
+                }
+            }];
+}
+
+#pragma mark Private method
+- (void) pinValidationFailedForHostname:(NSString *) serverHostname
+                                   port:(NSNumber *) serverPort
+                                  trust:(SecTrustRef) serverTrust
+                          notedHostname:(NSString *) notedHostname
+                             reportURIs:(NSArray *) reportURIs
+                      includeSubdomains:(BOOL) includeSubdomains
+                              knownPins:(NSArray *) knownPins
+                       validationResult:(TSKPinValidationResult) validationResult
+                      completionHandler:(void (^ _Nonnull)(NSData * _Nullable data,
+                                                           NSURLResponse * _Nullable response,
+                                                           NSError * _Nullable error))completionHandler
 {
     // Default port to 0 if not specified
     if (serverPort == nil)
@@ -203,17 +233,7 @@ static dispatch_once_t dispatchOnceBackgroundSession;
         // Pass the URL and the temporary file to the background upload task and start uploading
         NSURLSessionUploadTask *uploadTask = [_backgroundSession uploadTaskWithRequest:request
                                                                               fromFile:tmpFileURL
-                                                                     completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
-        {
-            if (error == nil)
-            {
-                TSKLog(@"Background upload - task completed successfully: %@; pinning failure report sent", response);
-            }
-            else
-            {
-                TSKLog(@"Background upload - task completed with error: %@ (code %ld)", [error localizedDescription], (long)error.code);
-            }
-        }];
+                                                                     completionHandler:completionHandler];
         
         [uploadTask resume];
     }
