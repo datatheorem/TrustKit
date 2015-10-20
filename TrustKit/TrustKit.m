@@ -57,6 +57,7 @@ static dispatch_queue_t _pinFailureReporterQueue = NULL;
 
 
 // Default report URI - can be disabled with TSKDisableDefaultReportUri
+// Email info@datatheorem.com if you need a free dashboard to see your App's reports
 static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.com/trustkit/report";
 
 

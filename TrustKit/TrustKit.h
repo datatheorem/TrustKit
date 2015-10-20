@@ -177,7 +177,7 @@ FOUNDATION_EXPORT const NSString * _Nonnull kTSKAlgorithmEcDsaSecp256r1;
  #### `kTSKDisableDefaultReportUri`
  If set to `YES`, the default report URL for sending pin failure reports will be disabled; default value is `NO`.
  
- By default, pin failure reports are sent to a report server hosted by Data Theorem, for detecting potential CA compromises and man-in-the-middle attacks, as well as providing a free dashboard for developers. Only pin failure reports are sent, which contain the App's bundle ID, the IDFV, and the server's hostname and certificate chain that failed validation.
+ By default, pin failure reports are sent to a report server hosted by Data Theorem, for detecting potential CA compromises and man-in-the-middle attacks, as well as providing a free dashboard for developers; email info@datatheorem.com if you'd like a dashboard for your App. Only pin failure reports are sent, which contain the App's bundle ID, the IDFV, and the server's hostname and certificate chain that failed validation.
  
  
  ### Public Key Algorithms Keys
