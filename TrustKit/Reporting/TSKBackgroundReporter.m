@@ -122,7 +122,7 @@ static dispatch_once_t dispatchOnceBackgroundSession;
                 // On OS X discretionary is only available on 10.10
                 backgroundConfiguration.discretionary = YES;
 #endif
-                _backgroundSession = [NSURLSession sessionWithConfiguration:backgroundConfiguration delegate:self delegateQueue:nil];
+                _backgroundSession = [NSURLSession sessionWithConfiguration:backgroundConfiguration];
             });
         }
     }
@@ -202,21 +202,20 @@ static dispatch_once_t dispatchOnceBackgroundSession;
         
         // Pass the URL and the temporary file to the background upload task and start uploading
         NSURLSessionUploadTask *uploadTask = [_backgroundSession uploadTaskWithRequest:request
-                                                                              fromFile:tmpFileURL];
+                                                                              fromFile:tmpFileURL
+                                                                     completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+        {
+            if (error == nil)
+            {
+                TSKLog(@"Background upload - task completed successfully: %@; pinning failure report sent", response);
+            }
+            else
+            {
+                TSKLog(@"Background upload - task completed with error: %@ (code %ld)", [error localizedDescription], (long)error.code);
+            }
+        }];
+        
         [uploadTask resume];
-    }
-}
-
-
-- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
-{
-    if (error == nil)
-    {
-        TSKLog(@"Background upload - task %@ completed successfully; pinning failure report sent", task);
-    }
-    else
-    {
-        TSKLog(@"Background upload - task %@ completed with error: %@ (code %ld)", task, [error localizedDescription], (long)error.code);
     }
 }
 
