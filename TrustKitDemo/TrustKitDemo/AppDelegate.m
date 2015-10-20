@@ -10,7 +10,7 @@
  */
 
 #import "AppDelegate.h"
-#import "TrustKit.h"
+#import <TrustKit/TrustKit.h>
 
 @interface AppDelegate ()
 
