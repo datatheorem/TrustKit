@@ -80,6 +80,9 @@
 		8CC78B291B1B697000523A25 /* COMODOECCDomainValidationSecureServerCA2.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CC78B1C1B1B55EC00523A25 /* COMODOECCDomainValidationSecureServerCA2.der */; };
 		8CCBD15B1B186D1100CB88AF /* reporting_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CCBD15A1B186D1100CB88AF /* reporting_utils.m */; };
 		8CD0D4171BD42A7D004478C0 /* RSSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD5F7411BCB06F4005801D8 /* RSSwizzle.m */; settings = {ASSET_TAGS = (); COMPILER_FLAGS = "-Wno-sign-conversion -Wno-sign-compare"; }; };
+		8CD0D4271BD7159E004478C0 /* libassert_lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CA6CC321BAE2C1100BDA419 /* libassert_lib.a */; };
+		8CD0D4281BD7159E004478C0 /* libdomain_registry_lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CA6CC331BAE2C1100BDA419 /* libdomain_registry_lib.a */; };
+		8CD0D4291BD7159E004478C0 /* libinit_registry_tables_lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CA6CC341BAE2C1100BDA419 /* libinit_registry_tables_lib.a */; };
 		8CD5F7311BC5ED4A005801D8 /* TSKNSURLConnectionDelegateProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CD5F72F1BC5ED4A005801D8 /* TSKNSURLConnectionDelegateProxy.h */; settings = {ASSET_TAGS = (); }; };
 		8CD5F7321BC5ED4A005801D8 /* TSKNSURLConnectionDelegateProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CD5F72F1BC5ED4A005801D8 /* TSKNSURLConnectionDelegateProxy.h */; settings = {ASSET_TAGS = (); }; };
 		8CD5F7331BC5ED4A005801D8 /* TSKNSURLConnectionDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD5F7301BC5ED4A005801D8 /* TSKNSURLConnectionDelegateProxy.m */; settings = {ASSET_TAGS = (); }; };
@@ -221,6 +224,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CD0D4271BD7159E004478C0 /* libassert_lib.a in Frameworks */,
+				8CD0D4281BD7159E004478C0 /* libdomain_registry_lib.a in Frameworks */,
+				8CD0D4291BD7159E004478C0 /* libinit_registry_tables_lib.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1018,7 +1024,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/TrustKit/Dependencies/domain_registry",
+					"$(PROJECT_DIR)/TrustKit",
+					"$(PROJECT_DIR)/TrustKit/Dependencies/domain_registry/ios",
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
@@ -1042,7 +1049,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/TrustKit/Dependencies/domain_registry",
+					"$(PROJECT_DIR)/TrustKit",
+					"$(PROJECT_DIR)/TrustKit/Dependencies/domain_registry/ios",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
