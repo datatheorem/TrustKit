@@ -15,7 +15,8 @@
 
 @property (weak, nonatomic) IBOutlet UITextField *connectionTextfield;
 @property (weak, nonatomic) IBOutlet UIWebView *destinationWebView;
-
+@property NSURL *baseUrl;
+@property NSURLSession *session;
 
 @end
 
@@ -24,7 +25,28 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.destinationWebView.delegate = self;
-    self.connectionTextfield.text = @"https://www.datatheorem.com/";
+    
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]
+                                                          delegate:self
+                                                     delegateQueue:nil];
+    self.session = session;
+    
+    // First demonstrate pinning failure
+    [self loadUrlWithPinningFailure];
+}
+
+
+- (void)loadUrlWithPinningFailure {
+    // Load a URL with a bad pinning configuration to demonstrate a pinning failure with a report being sent
+    NSURLSessionDataTask *task = [self.session dataTaskWithURL:[NSURL URLWithString:@"https://www.yahoo.com/"]];
+    [task resume];
+}
+
+- (void)loadUrlWithPinningSuccess {
+    // Load a URL with a good pinning configuration
+    self.baseUrl = [NSURL URLWithString:@"https://www.datatheorem.com/"];
+    NSURLSessionDataTask *task = [self.session dataTaskWithURL:self.baseUrl];
+    [task resume];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -32,29 +54,30 @@
     // Dispose of any resources that can be recreated.
 }
 
-// connect to a website
-- (IBAction)connectButton:(UIButton *)sender {
-    if (self.connectionTextfield.hasText) {
-        NSLog(@"connection field: %@", self.connectionTextfield.text);
-        NSString *urlString = self.connectionTextfield.text;
-        NSURL *url = [NSURL URLWithString:urlString];
-        NSURLRequest *urlRequest = [NSURLRequest requestWithURL:url];
-        [self.destinationWebView loadRequest:urlRequest];
-    } else {
-        NSLog(@"connection field is empty");
+
+- (void)URLSession:(NSURLSession * _Nonnull)session
+              task:(NSURLSessionTask * _Nonnull)task
+didCompleteWithError:(NSError * _Nullable)error
+{
+    if (error)
+    {
+        // An error will only be triggered when loading
+        NSLog(@"Received error %@", error);
     
+        // Now try a valid connection
+        [self loadUrlWithPinningSuccess];
     }
 }
 
-// show user an error dialog when webview cannot load
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
-    NSLog(@"%s webview fail load error=%@", __FUNCTION__, error);
-    UIAlertView *infoMessage;
-    infoMessage = [[UIAlertView alloc]
-                   initWithTitle:@"webview load failed" message:[error localizedDescription]
-                   delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:nil];
-    infoMessage.alertViewStyle = UIAlertViewStyleDefault;
-    [infoMessage show];
+
+- (void)URLSession:(NSURLSession * _Nonnull)session
+          dataTask:(NSURLSessionDataTask * _Nonnull)dataTask
+    didReceiveData:(NSData * _Nonnull)data
+{
+    // Display the content in the webview
+    NSLog(@"Loading content");
+    [self.destinationWebView loadHTMLString:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]
+                                    baseURL:self.baseUrl];
 }
 
 

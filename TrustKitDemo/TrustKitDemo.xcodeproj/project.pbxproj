@@ -61,6 +61,20 @@
 			remoteGlobalIDString = 8C8480461A896EE30017C155;
 			remoteInfo = TrustKit;
 		};
+		8CD5F7911BCC801B005801D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6B6B477D1B1F0BBD007757EE /* TrustKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8CA6CBFD1BAE2ADD00BDA419;
+			remoteInfo = "TrustKit OS X";
+		};
+		8CD5F7931BCC801B005801D8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6B6B477D1B1F0BBD007757EE /* TrustKit.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 8CA6CC061BAE2ADD00BDA419;
+			remoteInfo = "TrustKit OS XTests";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -179,6 +193,8 @@
 				6B6B47831B1F0BBD007757EE /* TrustKit.framework */,
 				8C8717281B23D12300267E1D /* libTrustKit_Static.a */,
 				6B6B47851B1F0BBD007757EE /* TrustKitTests.xctest */,
+				8CD5F7921BCC801B005801D8 /* TrustKit.framework */,
+				8CD5F7941BCC801B005801D8 /* TrustKit OS XTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -230,11 +246,12 @@
 		6B6B474C1B1EECB3007757EE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Data Theorem";
 				TargetAttributes = {
 					6B6B47531B1EECB3007757EE = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = D94Z5227S5;
 					};
 					6B6B476C1B1EECB4007757EE = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -287,6 +304,20 @@
 			fileType = archive.ar;
 			path = libTrustKit_Static.a;
 			remoteRef = 8C8717271B23D12300267E1D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8CD5F7921BCC801B005801D8 /* TrustKit.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = TrustKit.framework;
+			remoteRef = 8CD5F7911BCC801B005801D8 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8CD5F7941BCC801B005801D8 /* TrustKit OS XTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "TrustKit OS XTests.xctest";
+			remoteRef = 8CD5F7931BCC801B005801D8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -391,6 +422,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -464,9 +496,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = TrustKitDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -474,9 +511,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = TrustKitDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -494,6 +536,7 @@
 				);
 				INFOPLIST_FILE = TrustKitDemoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TrustKitDemo.app/TrustKitDemo";
 			};
@@ -509,6 +552,7 @@
 				);
 				INFOPLIST_FILE = TrustKitDemoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TrustKitDemo.app/TrustKitDemo";
 			};

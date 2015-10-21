@@ -1,10 +1,10 @@
 language: objective-c
+osx_image: xcode7
 env:
   matrix: 
-    - TEST_SDK=macosx10.9
-    - TEST_SDK=macosx10.10
-    - TEST_SDK=iphonesimulator8.1
-    - TEST_SDK=iphonesimulator7.0
+    - TEST_SDK=macosx10.11 TEST_SCHEME="TrustKit OS X"
+    - TEST_SDK=iphonesimulator9.0 TEST_SCHEME=TrustKit
+    - TEST_SDK=iphonesimulator9.0 TEST_SCHEME=TrustKit_Static
 script:
-  - xcodebuild clean -project TrustKit.xcodeproj -scheme TrustKit -configuration Release CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk $TEST_SDK
-  - xcodebuild build test -project TrustKit.xcodeproj -scheme TrustKit -configuration Release CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk $TEST_SDK
+  - xcodebuild clean -project TrustKit.xcodeproj -scheme "$TEST_SCHEME" -configuration Release CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk $TEST_SDK
+  - xcodebuild build test -project TrustKit.xcodeproj -scheme "$TEST_SCHEME" -configuration Release CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO -sdk $TEST_SDK

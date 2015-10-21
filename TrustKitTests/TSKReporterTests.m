@@ -10,12 +10,15 @@
  */
 
 #import <XCTest/XCTest.h>
-#import "TSKSimpleReporter.h"
 #import "TSKBackgroundReporter.h"
 #import "TSKPinFailureReport.h"
 #import "TSKCertificateUtils.h"
 #import "reporting_utils.h"
 #import "TSKReportsRateLimiter.h"
+#import "TrustKit+Private.h"
+
+
+#pragma mark Test suite
 
 @interface TSKReporterTests : XCTestCase
 
@@ -56,26 +59,24 @@
     [super tearDown];
 }
 
-- (void)testSimpleReporter
+
+- (void)testReporter
 {
-    // Just try a simple valid case to see if we can post this to the server
-    TSKSimpleReporter *reporter = [[TSKSimpleReporter alloc] initAndRateLimitReports:NO];
-    
+    // Just try a simple valid case to see if we can post this to the default report URL
+    TSKBackgroundReporter *reporter = [[TSKBackgroundReporter alloc] initAndRateLimitReports:NO];
     [reporter pinValidationFailedForHostname:@"mail.example.com"
                                         port:[NSNumber numberWithInt:443]
                                        trust:_testTrust
                                notedHostname:@"example.com"
-                                   reportURIs:@[[NSURL URLWithString:@"http://127.0.0.1:8080/log_report"]]
+                                   reportURIs:@[[NSURL URLWithString:[TrustKit getDefaultReportUri]]]
                            includeSubdomains:YES
                                    knownPins:@[
-                                               [[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM=" options:0],
-                                               [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g=" options:0],
+                                               [[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM=" options:(NSDataBase64DecodingOptions)0],
+                                               [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g=" options:(NSDataBase64DecodingOptions)0],
                                                ]
                             validationResult:TSKPinValidationResultFailed];
-
     
-    [NSThread sleepForTimeInterval:5.0];
-    XCTAssert(YES, @"Pass");
+    [NSThread sleepForTimeInterval:2.0];
 }
 
 
@@ -83,8 +84,8 @@
 {
     // Create the pin validation failure report
     NSArray *certificateChain = convertTrustToPemArray(_testTrust);
-    NSArray *formattedPins = convertPinsToHpkpPins(@[[[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM=" options:0],
-                                                     [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g=" options:0],]);
+    NSArray *formattedPins = convertPinsToHpkpPins(@[[[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM=" options:(NSDataBase64DecodingOptions)0],
+                                                     [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g=" options:(NSDataBase64DecodingOptions)0],]);
     
 
     TSKPinFailureReport *report = [[TSKPinFailureReport alloc] initWithAppBundleId:@"test"
@@ -96,7 +97,8 @@
                                                                  includeSubdomains:NO
                                                          validatedCertificateChain:certificateChain
                                                                          knownPins:formattedPins
-                                                                  validationResult:TSKPinValidationResultFailedCertificateChainNotTrusted];
+                                                                  validationResult:TSKPinValidationResultFailedCertificateChainNotTrusted
+                                                                      appVendorId:@"test"];
     
     // Ensure the same report will not be sent twice in a row
     XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == NO, @"Wrongly rate-limited a new report");
@@ -117,7 +119,8 @@
                                             includeSubdomains:NO
                                     validatedCertificateChain:certificateChain
                                                     knownPins:formattedPins
-                                             validationResult:TSKPinValidationResultFailed];
+                                             validationResult:TSKPinValidationResultFailed
+                                                appVendorId:@"test"];
     XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == NO, @"Wrongly rate-limited a new report");
     XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == YES, @"Did not rate-limit an identical report");
     
@@ -132,7 +135,8 @@
                                             includeSubdomains:NO
                                     validatedCertificateChain:certificateChain
                                                     knownPins:formattedPins
-                                             validationResult:TSKPinValidationResultFailedCertificateChainNotTrusted];
+                                             validationResult:TSKPinValidationResultFailedCertificateChainNotTrusted
+                                                appVendorId:@"test"];
     XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == NO, @"Wrongly rate-limited a new report");
     XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == YES, @"Did not rate-limit an identical report");
     
@@ -147,7 +151,8 @@
                                             includeSubdomains:NO
                                     validatedCertificateChain:[certificateChain subarrayWithRange:NSMakeRange(1, 2)]
                                                     knownPins:formattedPins
-                                             validationResult:TSKPinValidationResultFailedCertificateChainNotTrusted];
+                                             validationResult:TSKPinValidationResultFailedCertificateChainNotTrusted
+                                                appVendorId:@"test"];
     XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == NO, @"Wrongly rate-limited a new report");
     XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == YES, @"Did not rate-limit an identical report");
 }

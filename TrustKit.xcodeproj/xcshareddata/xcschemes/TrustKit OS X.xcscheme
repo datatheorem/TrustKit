@@ -14,23 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8C8716951B23A91D00267E1D"
-               BuildableName = "libTrustKit_Static.a"
-               BlueprintName = "TrustKit_Static"
-               ReferencedContainer = "container:TrustKit.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8C87169F1B23A91D00267E1D"
-               BuildableName = "TrustKit_StaticTests.xctest"
-               BlueprintName = "TrustKit_StaticTests"
+               BlueprintIdentifier = "8CA6CBFC1BAE2ADD00BDA419"
+               BuildableName = "TrustKit.framework"
+               BlueprintName = "TrustKit OS X"
                ReferencedContainer = "container:TrustKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -46,9 +32,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "8C8480511A896EE30017C155"
-               BuildableName = "TrustKitTests.xctest"
-               BlueprintName = "TrustKitTests"
+               BlueprintIdentifier = "8CA6CC051BAE2ADD00BDA419"
+               BuildableName = "TrustKit OS XTests.xctest"
+               BlueprintName = "TrustKit OS XTests"
                ReferencedContainer = "container:TrustKit.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -56,9 +42,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8C8716951B23A91D00267E1D"
-            BuildableName = "libTrustKit_Static.a"
-            BlueprintName = "TrustKit_Static"
+            BlueprintIdentifier = "8CA6CBFC1BAE2ADD00BDA419"
+            BuildableName = "TrustKit.framework"
+            BlueprintName = "TrustKit OS X"
             ReferencedContainer = "container:TrustKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -78,9 +64,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8C8716951B23A91D00267E1D"
-            BuildableName = "libTrustKit_Static.a"
-            BlueprintName = "TrustKit_Static"
+            BlueprintIdentifier = "8CA6CBFC1BAE2ADD00BDA419"
+            BuildableName = "TrustKit.framework"
+            BlueprintName = "TrustKit OS X"
             ReferencedContainer = "container:TrustKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -96,9 +82,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "8C8716951B23A91D00267E1D"
-            BuildableName = "libTrustKit_Static.a"
-            BlueprintName = "TrustKit_Static"
+            BlueprintIdentifier = "8CA6CBFC1BAE2ADD00BDA419"
+            BuildableName = "TrustKit.framework"
+            BlueprintName = "TrustKit OS X"
             ReferencedContainer = "container:TrustKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

@@ -12,22 +12,27 @@
 #ifndef TrustKit_TrustKit_Private____FILEEXTENSION___
 #define TrustKit_TrustKit_Private____FILEEXTENSION___
 
-#import "TrustKit.h"
+#import <TrustKit/TrustKit.h>
 #import "ssl_pin_verifier.h"
 
-NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments);
+
+#pragma mark Utility functions
 
 void TSKLog(NSString *format, ...);
 
 void sendPinFailureReport_async(TSKPinValidationResult validationResult, SecTrustRef serverTrust, NSString *serverHostname, NSString *notedHostname, NSDictionary *notedHostnameConfig, void (^onCompletion)(void));
 
 
+#pragma mark Methods for the unit tests
+
+NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments);
+
 @interface TrustKit(Private)
 
 + (void) resetConfiguration;
 + (NSDictionary *) configuration;
-+ (BOOL) wasTrustKitCalled;
 + (BOOL) wasTrustKitInitialized;
++ (NSString *) getDefaultReportUri;
 
 @end
 

@@ -11,55 +11,93 @@
 
 #import <Foundation/Foundation.h>
 
+
+
 /**
  Possible return values when verifying a server's identity against the global SSL pinning policy using `TSKPinningValidator`.
  
  */
-typedef NS_ENUM(NSInteger, TSKPinValidationResult)
+typedef NS_ENUM(NSInteger, TSKTrustDecision)
 {
 /**
- The server trust was succesfully evaluated and contained at least one of the configured pins.
-*/
-    TSKPinValidationResultSuccess,
+ Based on the server's certificate chain and the global pinning policy for this domain, the SSL connection should be allowed.
+ This return value does not necessarily mean that the pinning validation succeded (for example if `kTSKEnforcePinning` was set to `NO` for this domain). If a pinning validation failure occured and if a report URI was configured, a pin failure report was sent.
+ */
+    TSKTrustDecisionShouldAllowConnection,
     
 /**
- The server trust was succesfully evaluated but did not contain any of the configured pins.
-*/
-    TSKPinValidationResultFailed,
+ Based on the server's certificate chain and the global pinning policy for this domain, the SSL connection should be blocked.
+ A pinning validation failure occured and if a report URI was configured, a pin failure report was sent.
+ */
+    TSKTrustDecisionShouldBlockConnection,
     
 /**
- The server trust's evaluation failed: the server's certificate chain is not trusted.
-*/
-    TSKPinValidationResultFailedCertificateChainNotTrusted,
-    
-/**
- The server trust could not be evaluated due to invalid parameters.
-*/
-    TSKPinValidationResultErrorInvalidParameters,
-    
-/**
- The supplied hostname does not have a pinning policy configured; no validation was performed.
-*/
-    TSKPinValidationResultDomainNotPinned,
-    
-/**
- The server trust was succesfully evaluated but did not contain any of the configured pins. However, the certificate chain terminates at a user-defined trust anchor (ie. a custom/private CA that was manually added to OS X's trust store). Only available on OS X.
-*/
-    TSKPinValidationResultFailedUserDefinedTrustAnchor NS_AVAILABLE_MAC(10_9),
+ No pinning policy was configured for this domain and TrustKit did not validate the server's identity.
+ Because this will happen in an authentication handler, it means that the server's _serverTrust_ object __needs__ to be verified against the device's trust store using `SecTrustEvaluate()`. Failing to do so will __disable SSL certificate validation__.
+ */
+    TSKTrustDecisionDomainNotPinned,
 };
 
 
 /**
  `TSKPinningValidator` is a class for manually verifying a server's identity against the global SSL pinning policy.
  
- In a few specific scenarios, TrustKit cannot intercept outgoing SSL connections and automatically validate the server's identity against the pinning policy. For these connections, the pin validation must be manually triggered: the server's trust object, which contains its certificate chain, needs to be retrieved or built before being passed to `TSKPinningValidator` for validation.
+ In specific scenarios, TrustKit cannot intercept outgoing SSL connections and automatically validate the server's identity against the pinning policy. For these connections, the pin validation must be manually triggered: the server's `SecTrustRef` object, which contains its certificate chain, needs to be retrieved or built before being passed to `TSKPinningValidator` for validation.
  
- The following scenarios require manual pin validation:
+ `TSKPinningValidator` returns a `TSKTrustDecision` which describes whether the SSL connection should be allowed or blocked, based on the global pinning policy.
  
- 1. Connections initiated from an external process, where TrustKit does not get loaded:
-     * `WKWebView` connections: the server's trust object can be retrieved within the `webView:didReceiveAuthenticationChallenge:completionHandler:` method.
-     * `NSURLSession` connections using the background transfer service: the server's trust object can be retrieved within the `application:handleEventsForBackgroundURLSession:completionHandler:` method.
- 2. Connections initiated using a third-party SSL library such as OpenSSL, instead of Apple's SecureTransport. The server's trust object needs to be built using the received certificate chain.
+ The following connections require manual pin validation:
+ 
+ 1. All connections within an App that disables TrustKit's network delegate swizzling by setting the `kTSKSwizzleNetworkDelegates` configuration key to `NO`.
+ 2. Connections that do not rely on the `NSURLConnection` or `NSURLSession` APIs:
+     * Connections leveraging lower-level APIs (such as `NSStream`). Instructions on how to retrieve the server's trust object are available at https://developer.apple.com/library/mac/documentation/NetworkingInternet/Conceptual/NetworkingTopics/Articles/OverridingSSLChainValidationCorrectly.html.
+     * Connections initiated using a third-party SSL library such as OpenSSL. The server's `SecTrustRef` object needs to be built using the received certificate chain.
+ 3. Connections happening within an external process:
+     * `WKWebView` connections: the server's `SecTrustRef` object can be retrieved and validated within the `webView:didReceiveAuthenticationChallenge:completionHandler:` method.
+     * `NSURLSession` connections using the background transfer service: the server's `SecTrustRef` object can be retrieved and validated within the `application:handleEventsForBackgroundURLSession:completionHandler:` method.
+ 
+ For example, `TSKPinningValidator` should be used as follow when verifying the server's identity within an `NSURLSession` or `WKWebView` authentication handler:
+ 
+    if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust])
+    {
+        // Check the trust object against the pinning policy
+        SecTrustRef serverTrust = challenge.protectionSpace.serverTrust;
+        NSString *serverHostname = challenge.protectionSpace.host;
+        
+        TSKTrustDecision trustDecision = [TSKPinningValidator evaluateTrust:serverTrust 
+                                                                forHostname:serverHostname];
+        
+        if (trustDecision == TSKTrustDecisionShouldAllowConnection)
+        {
+            // Success
+            completionHandler(NSURLSessionAuthChallengeUseCredential, 
+                              [NSURLCredential credentialForTrust:serverTrust]);
+        }
+        else if (trustDecision == TSKTrustDecisionDomainNotPinned)
+        {
+            // Domain was not pinned; we need to do the default validation ourselves to avoid disabling
+            // SSL validation for all non-pinned domains
+            SecTrustResultType trustResult = 0;
+            SecTrustEvaluate(serverTrust, &trustResult);
+            if ((trustResult != kSecTrustResultUnspecified) && (trustResult != kSecTrustResultProceed))
+            {
+                // Default SSL validation failed - block the connection
+                completionHandler(NSURLSessionAuthChallengeCancelAuthenticationChallenge, NULL);
+            }
+            else
+            {
+                // Default SSL validation succeeded
+                completionHandler(NSURLSessionAuthChallengeUseCredential, 
+                                  [NSURLCredential credentialForTrust:serverTrust]);
+            }
+        }
+        else
+        {
+            // Pinning validation failed - block the connection
+            completionHandler(NSURLSessionAuthChallengeCancelAuthenticationChallenge, NULL);
+        }
+    }
+ 
  
  */
 @interface TSKPinningValidator : NSObject
@@ -75,12 +113,14 @@ typedef NS_ENUM(NSInteger, TSKPinValidationResult)
  
  @param serverHostname The hostname of the server whose identity is being validated.
  
- @return The result of the validation. See `TSKPinValidationResult` for possible values.
+ @return A `TSKTrustDecision` which describes whether the SSL connection should be allowed or blocked, based on the global pinning policy.
  
- @warning If no SSL pinning policy was configured for the supplied _serverHostname_, this method has no effect and will return `TSKPinValidationResultDomainNotPinned` without validating the supplied _serverTrust_ at all.
+ @warning If no SSL pinning policy was configured for the supplied _serverHostname_, this method has no effect and will return `TSKTrustDecisionDomainNotPinned` without validating the supplied _serverTrust_ at all.
+ 
+ Because this will happen in an authentication handler, it means that the server's _serverTrust_ object __needs__ to be verified against the device's trust store using `SecTrustEvaluate()`. Failing to do so will __disable SSL certificate validation__.
  
  @exception NSException Thrown when TrustKit has not been initialized with a pinning policy.
  */
-+ (TSKPinValidationResult) evaluateTrust:(SecTrustRef)serverTrust forHostname:(NSString *)serverHostname;
++ (TSKTrustDecision) evaluateTrust:(SecTrustRef _Nonnull)serverTrust forHostname:(NSString * _Nonnull)serverHostname;
 
 @end

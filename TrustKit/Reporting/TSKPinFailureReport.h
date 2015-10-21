@@ -10,13 +10,14 @@
  */
 
 #import <Foundation/Foundation.h>
-#import "TSKPinningValidator.h"
+#import "ssl_pin_verifier.h"
 
 
 @interface TSKPinFailureReport : NSObject
 
 @property (readonly, nonatomic) NSString *appBundleId; // Not part of the HPKP spec
 @property (readonly, nonatomic) NSString *appVersion; // Not part of the HPKP spec
+@property (readonly, nonatomic) NSString *appVendorId; // Not part of the HPKP spec
 @property (readonly, nonatomic) NSString *notedHostname;
 @property (readonly, nonatomic) NSString *hostname;
 @property (readonly, nonatomic) NSNumber *port;
@@ -37,7 +38,8 @@
                    includeSubdomains:(BOOL) includeSubdomains
            validatedCertificateChain:(NSArray *)validatedCertificateChain
                            knownPins:(NSArray *)knownPins
-                    validationResult:(TSKPinValidationResult) validationResult;
+                    validationResult:(TSKPinValidationResult) validationResult
+                       appVendorId:(NSString *)appVendorId;
 
 // Return the report in JSON format for POSTing it
 - (NSData *)json;

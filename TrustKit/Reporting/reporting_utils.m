@@ -11,6 +11,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import "reporting_utils.h"
+
 
 NSArray *convertTrustToPemArray(SecTrustRef serverTrust)
 {
@@ -35,7 +37,7 @@ NSArray *convertPinsToHpkpPins(NSArray *knownPins)
     NSMutableArray *formattedPins = [NSMutableArray array];
     for (NSData *pin in knownPins)
     {
-        [formattedPins addObject:[NSString stringWithFormat:@"pin-sha256=\"%@\"", [pin base64EncodedStringWithOptions:0]]];
+        [formattedPins addObject:[NSString stringWithFormat:@"pin-sha256=\"%@\"", [pin base64EncodedStringWithOptions:(NSDataBase64EncodingOptions)0]]];
     }
     return formattedPins;
 }

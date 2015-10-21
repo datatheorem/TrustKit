@@ -24,6 +24,7 @@
            validatedCertificateChain:(NSArray *)validatedCertificateChain
                            knownPins:(NSArray *)knownPins
                     validationResult:(TSKPinValidationResult) validationResult
+                       appVendorId:(NSString *)appVendorId
 {
     self = [super init];
     if (self)
@@ -38,6 +39,7 @@
         _validatedCertificateChain = validatedCertificateChain;
         _knownPins = knownPins;
         _validationResult = validationResult;
+        _appVendorId = appVendorId;
     }
     return self;
 }
@@ -62,11 +64,12 @@
         @"noted-hostname" : self.notedHostname,
         @"validated-certificate-chain" : self.validatedCertificateChain,
         @"known-pins" : self.knownPins,
-        @"validation-result": [NSNumber numberWithInt:self.validationResult]
+        @"validation-result": [NSNumber numberWithInt:self.validationResult],
+        @"app-vendor-id": self.appVendorId
     };
     
     NSError *error;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:requestData options:0 error:&error];
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:requestData options:(NSJSONWritingOptions)0 error:&error];
     return jsonData;
 }
 

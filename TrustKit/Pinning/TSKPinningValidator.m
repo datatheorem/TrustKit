@@ -9,15 +9,12 @@
  
  */
 
-#import "TSKPinningValidator.h"
-#import "ssl_pin_verifier.h"
 #import "TrustKit+Private.h"
-
 
 
 @implementation TSKPinningValidator
 
-+ (TSKPinValidationResult) evaluateTrust:(SecTrustRef)serverTrust forHostname:(NSString *)serverHostname
++ (TSKTrustDecision) evaluateTrust:(SecTrustRef _Nonnull)serverTrust forHostname:(NSString * _Nonnull)serverHostname
 {
     if ([TrustKit wasTrustKitInitialized] == NO)
     {
@@ -27,10 +24,11 @@
     
     if ((serverTrust == NULL) || (serverHostname == nil))
     {
-        return TSKPinValidationResultErrorInvalidParameters;
+        TSKLog(@"Pin validation error - invalid parameters for %@", serverHostname);
+        return TSKTrustDecisionShouldBlockConnection;
     }
     
-    TSKPinValidationResult validationResult = TSKPinValidationResultFailed;
+    TSKTrustDecision finalTrustDecision = TSKTrustDecisionShouldBlockConnection;
     NSDictionary *trustKitConfig = [TrustKit configuration];
     
     // Retrieve the pinning configuration for this specific domain, if there is one
@@ -38,44 +36,59 @@
     if (domainConfigKey == nil)
     {
         // The domain is not pinned: nothing to validate
-        validationResult = TSKPinValidationResultDomainNotPinned;
+        finalTrustDecision = TSKTrustDecisionDomainNotPinned;
     }
     else
     {
         // This domain is pinned: look for one the configured public key pins in the server's evaluated certificate chain
         CFRetain(serverTrust);
-        NSDictionary *domainConfig = trustKitConfig[domainConfigKey];
+        NSDictionary *domainConfig = trustKitConfig[kTSKPinnedDomains][domainConfigKey];
         
-        validationResult = verifyPublicKeyPin(serverTrust, serverHostname, domainConfig[kTSKPublicKeyAlgorithms], domainConfig[kTSKPublicKeyHashes]);
+        TSKPinValidationResult validationResult = verifyPublicKeyPin(serverTrust, serverHostname, domainConfig[kTSKPublicKeyAlgorithms], domainConfig[kTSKPublicKeyHashes]);
         if (validationResult == TSKPinValidationResultSuccess)
         {
             // Pin validation was successful
+            TSKLog(@"Pin validation succeeded for %@", serverHostname);
+            finalTrustDecision = TSKTrustDecisionShouldAllowConnection;
             CFRelease(serverTrust);
         }
         else
         {
             // Pin validation failed
+            TSKLog(@"Pin validation failed for %@", serverHostname);
 #if !TARGET_OS_IPHONE
             if ((validationResult == TSKPinValidationResultFailedUserDefinedTrustAnchor)
-                && ([domainConfig[kTSKIgnorePinningForUserDefinedTrustAnchors] boolValue] == YES))
+                && ([trustKitConfig[kTSKIgnorePinningForUserDefinedTrustAnchors] boolValue] == YES))
             {
                 // OS-X only: user-defined trust anchors can be whitelisted (for corporate proxies, etc.) so don't send reports
-                TSKLog(@"Ignoring pinning result for user-defined trust anchor");
+                TSKLog(@"Ignoring pinning failure due to user-defined trust anchor for %@", serverHostname);
+                finalTrustDecision = TSKTrustDecisionShouldAllowConnection;
                 CFRelease(serverTrust);
             }
             else
 #endif
             {
-            // Send a pin failure report
-            sendPinFailureReport_async(validationResult, serverTrust, serverHostname, domainConfigKey, domainConfig, ^void (void)
-                                 {
-                                     // Release the trust once the report has been sent
-                                     CFRelease(serverTrust);
-                                 });
+                // Send a pin failure report
+                sendPinFailureReport_async(validationResult, serverTrust, serverHostname, domainConfigKey, domainConfig, ^void (void)
+                                           {
+                                               // Release the trust once the report has been sent
+                                               CFRelease(serverTrust);
+                                           });
+                
+                // Is pinning enforced?
+                if ([domainConfig[kTSKEnforcePinning] boolValue] == YES)
+                {
+                    // Yes - Block the connection
+                    finalTrustDecision = TSKTrustDecisionShouldBlockConnection;
+                }
+                else
+                {
+                    finalTrustDecision = TSKTrustDecisionShouldAllowConnection;
+                }
             }
         }
     }
-    return validationResult;
+    return finalTrustDecision;
 }
 
 @end

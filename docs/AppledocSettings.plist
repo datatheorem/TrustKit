@@ -17,6 +17,7 @@
 		<string>Reporting</string>
 		<string>public_key_utils.h</string>
 		<string>docs</string>
+		<string>ssl_pin_verifier.h</string>
 	</array>
 	<key>--index-desc</key>
 	<string>docs/api-doc-index.md</string>
