@@ -21,7 +21,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
     // Initialize TrustKit
     NSDictionary *trustKitConfig =
     @{
@@ -60,6 +59,8 @@
                       }}};
     
     [TrustKit initializeWithConfiguration:trustKitConfig];
+    
+    [TSKPinningValidator evaluateTrust:NULL forHostname:NULL];
 
     return YES;
 }

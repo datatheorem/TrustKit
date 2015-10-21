@@ -48,9 +48,9 @@
 		8CA6CC201BAE2B6A00BDA419 /* public_key_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9191D1AEA073C002B29AE /* public_key_utils.m */; settings = {ASSET_TAGS = (); }; };
 		8CA6CC211BAE2B6A00BDA419 /* ssl_pin_verifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE919241AEA07C5002B29AE /* ssl_pin_verifier.h */; settings = {ASSET_TAGS = (); }; };
 		8CA6CC221BAE2B6A00BDA419 /* ssl_pin_verifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE919211AEA077F002B29AE /* ssl_pin_verifier.m */; settings = {ASSET_TAGS = (); }; };
-		8CA6CC231BAE2B6A00BDA419 /* TSKPinningValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C15F9911B132F9200F06C0E /* TSKPinningValidator.h */; settings = {ASSET_TAGS = (); }; };
+		8CA6CC231BAE2B6A00BDA419 /* TSKPinningValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C15F9911B132F9200F06C0E /* TSKPinningValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8CA6CC241BAE2B6A00BDA419 /* TSKPinningValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F9921B132F9200F06C0E /* TSKPinningValidator.m */; settings = {ASSET_TAGS = (); }; };
-		8CA6CC251BAE2B6A00BDA419 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C84804C1A896EE30017C155 /* TrustKit.h */; settings = {ASSET_TAGS = (); }; };
+		8CA6CC251BAE2B6A00BDA419 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C84804C1A896EE30017C155 /* TrustKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8CA6CC261BAE2B6A00BDA419 /* TrustKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C84806C1A896F660017C155 /* TrustKit.m */; settings = {ASSET_TAGS = (); }; };
 		8CA6CC271BAE2B7000BDA419 /* domain_registry.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE919291AEA0F7E002B29AE /* domain_registry.h */; settings = {ASSET_TAGS = (); }; };
 		8CA6CC2F1BAE2C0700BDA419 /* libassert_lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CA6CC2C1BAE2C0700BDA419 /* libassert_lib.a */; settings = {ASSET_TAGS = (); }; };
@@ -476,17 +476,17 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CA6CC251BAE2B6A00BDA419 /* TrustKit.h in Headers */,
+				8CA6CC231BAE2B6A00BDA419 /* TSKPinningValidator.h in Headers */,
 				8CD5F74A1BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.h in Headers */,
 				8CA6CC1B1BAE2B6600BDA419 /* TSKPinFailureReport.h in Headers */,
 				8CA6CC141BAE2B6600BDA419 /* TSKReportsRateLimiter.h in Headers */,
 				8CD5F7321BC5ED4A005801D8 /* TSKNSURLConnectionDelegateProxy.h in Headers */,
 				8CA6CC211BAE2B6A00BDA419 /* ssl_pin_verifier.h in Headers */,
-				8CA6CC251BAE2B6A00BDA419 /* TrustKit.h in Headers */,
 				8CD5F7431BCB06F4005801D8 /* RSSwizzle.h in Headers */,
 				8CA6CC191BAE2B6600BDA419 /* TSKBackgroundReporter.h in Headers */,
 				8CA6CC271BAE2B7000BDA419 /* domain_registry.h in Headers */,
 				8CA6CC161BAE2B6600BDA419 /* TSKReporterDelegate.h in Headers */,
-				8CA6CC231BAE2B6A00BDA419 /* TSKPinningValidator.h in Headers */,
 				8CA6CC1D1BAE2B6600BDA419 /* reporting_utils.h in Headers */,
 				8CA6CC1F1BAE2B6A00BDA419 /* public_key_utils.h in Headers */,
 			);
