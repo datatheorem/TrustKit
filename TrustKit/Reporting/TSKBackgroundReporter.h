@@ -17,7 +17,7 @@
  `TSKSimpleBackgroundReporter` is a class for uploading pin failure reports using the background transfer service.
  
  */
-@interface TSKBackgroundReporter : NSObject <TSKReporterDelegate>
+@interface TSKBackgroundReporter : NSObject <TSKReporterDelegate, NSURLSessionTaskDelegate>
 
 ///---------------------
 /// @name Initialization
@@ -40,6 +40,8 @@
                       includeSubdomains:(BOOL) includeSubdomains
                               knownPins:(NSArray *) knownPins
                        validationResult:(TSKPinValidationResult) validationResult;
+
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error;
 
 @end
 

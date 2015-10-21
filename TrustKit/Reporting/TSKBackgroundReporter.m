@@ -19,6 +19,8 @@
 @import UIKit; // For accessing the IDFV
 #endif
 
+
+
 // Session identifier for background uploads: <bundle_id>.TSKSimpleReporter
 static NSString* kTSKBackgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
 static NSURLSession *_backgroundSession = nil;
@@ -32,11 +34,11 @@ static dispatch_once_t dispatchOnceBackgroundSession;
 @property (nonatomic, strong) NSString * appVendorId;
 @property BOOL shouldRateLimitReports;
 
+
 @end
 
 
 @implementation TSKBackgroundReporter
-
 
 #pragma mark Public methods
 
@@ -75,7 +77,9 @@ static dispatch_once_t dispatchOnceBackgroundSession;
             self.appVendorId = @"unit-tests";
             
             dispatch_once(&dispatchOnceBackgroundSession, ^{
-                _backgroundSession = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]];
+                _backgroundSession = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]
+                                                                   delegate:self
+                                                              delegateQueue:nil];
             });
         }
         else
@@ -123,7 +127,10 @@ static dispatch_once_t dispatchOnceBackgroundSession;
                 // On OS X discretionary is only available on 10.10
                 backgroundConfiguration.discretionary = YES;
 #endif
-                _backgroundSession = [NSURLSession sessionWithConfiguration:backgroundConfiguration];
+                // We have to use a delegate as background sessions can't use completion handlers
+                _backgroundSession = [NSURLSession sessionWithConfiguration:backgroundConfiguration
+                                                                   delegate:self
+                                                              delegateQueue:nil];
             });
         }
     }
@@ -139,40 +146,6 @@ static dispatch_once_t dispatchOnceBackgroundSession;
                       includeSubdomains:(BOOL) includeSubdomains
                               knownPins:(NSArray *) knownPins
                        validationResult:(TSKPinValidationResult) validationResult
-{
-    return [self pinValidationFailedForHostname:serverHostname
-                                           port:serverPort
-                                          trust:serverTrust
-                                  notedHostname:notedHostname
-                                     reportURIs:reportURIs
-                              includeSubdomains:includeSubdomains
-                                      knownPins:knownPins
-                               validationResult:validationResult
-                              completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
-            {
-                if (error == nil)
-                {
-                    TSKLog(@"Background upload - task completed successfully: %@; pinning failure report sent", response);
-                }
-                else
-                {
-                    TSKLog(@"Background upload - task completed with error: %@ (code %ld)", [error localizedDescription], (long)error.code);
-                }
-            }];
-}
-
-#pragma mark Private method
-- (void) pinValidationFailedForHostname:(NSString *) serverHostname
-                                   port:(NSNumber *) serverPort
-                                  trust:(SecTrustRef) serverTrust
-                          notedHostname:(NSString *) notedHostname
-                             reportURIs:(NSArray *) reportURIs
-                      includeSubdomains:(BOOL) includeSubdomains
-                              knownPins:(NSArray *) knownPins
-                       validationResult:(TSKPinValidationResult) validationResult
-                      completionHandler:(void (^ _Nonnull)(NSData * _Nullable data,
-                                                           NSURLResponse * _Nullable response,
-                                                           NSError * _Nullable error))completionHandler
 {
     // Default port to 0 if not specified
     if (serverPort == nil)
@@ -232,12 +205,26 @@ static dispatch_once_t dispatchOnceBackgroundSession;
         
         // Pass the URL and the temporary file to the background upload task and start uploading
         NSURLSessionUploadTask *uploadTask = [_backgroundSession uploadTaskWithRequest:request
-                                                                              fromFile:tmpFileURL
-                                                                     completionHandler:completionHandler];
+                                                                              fromFile:tmpFileURL];
         
         [uploadTask resume];
     }
 }
+
+
+
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
+{
+    if (error == nil)
+    {
+        TSKLog(@"Background upload - task completed successfully: pinning failure report sent");
+    }
+    else
+    {
+        TSKLog(@"Background upload - task completed with error: %@ (code %ld)", [error localizedDescription], (long)error.code);
+    }
+}
+
 
 @end
 
