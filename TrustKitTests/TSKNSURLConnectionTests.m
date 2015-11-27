@@ -90,7 +90,6 @@
         finalRequest = nil;
         NSLog(@"Received redirection %@", redirectResponse);
         _lastResponse = redirectResponse;
-        [testExpectation fulfill];
     }
     return finalRequest;
 }
