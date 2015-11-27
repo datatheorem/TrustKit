@@ -21,8 +21,8 @@
 
 
 
-// Session identifier for background uploads: <bundle_id>.TSKSimpleReporter
-static NSString *kTSKBackgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
+// Session identifier for background uploads: <bundle_id>.TSKBackgroundReporter
+static NSString *kTSKBackgroundSessionIdentifierFormat = @"%@.TSKBackgroundReporter";
 static NSURLSession *_backgroundSession = nil;
 static dispatch_once_t dispatchOnceBackgroundSession;
 

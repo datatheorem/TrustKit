@@ -51,7 +51,7 @@ static BOOL _isTrustKitInitialized = NO;
 static dispatch_once_t dispatchOnceTrustKitInit;
 
 // Reporter delegate for sending pin violation reports
-static id _pinFailureReporter = nil;
+static TSKBackgroundReporter *_pinFailureReporter = nil;
 static char kTSKPinFailureReporterQueueLabel[] = "com.datatheorem.trustkit.reporterqueue";
 static dispatch_queue_t _pinFailureReporterQueue = NULL;
 
@@ -406,8 +406,6 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
     resetSubjectPublicKeyInfoCache();
     _trustKitGlobalConfiguration = nil;
     _isTrustKitInitialized = NO;
-    _pinFailureReporter = nil;
-    _pinFailureReporterQueue= NULL;
     dispatchOnceTrustKitInit = 0;
 }
 
