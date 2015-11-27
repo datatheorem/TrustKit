@@ -22,16 +22,16 @@
 
 
 // Session identifier for background uploads: <bundle_id>.TSKSimpleReporter
-static NSString* kTSKBackgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
+static NSString *kTSKBackgroundSessionIdentifierFormat = @"%@.TSKSimpleReporter";
 static NSURLSession *_backgroundSession = nil;
 static dispatch_once_t dispatchOnceBackgroundSession;
 
 
 @interface TSKBackgroundReporter()
 
-@property (nonatomic, strong) NSString * appBundleId;
-@property (nonatomic, strong) NSString * appVersion;
-@property (nonatomic, strong) NSString * appVendorId;
+@property (nonatomic, strong) NSString *appBundleId;
+@property (nonatomic, strong) NSString *appVersion;
+@property (nonatomic, strong) NSString *appVendorId;
 @property BOOL shouldRateLimitReports;
 
 
@@ -47,34 +47,34 @@ static dispatch_once_t dispatchOnceBackgroundSession;
     self = [super init];
     if (self)
     {
-        self.shouldRateLimitReports = shouldRateLimitReports;
+        _shouldRateLimitReports = shouldRateLimitReports;
         
         // Retrieve the App's information
 #if TARGET_OS_IPHONE
         // On iOS use the IDFV
-        self.appVendorId = [[[UIDevice currentDevice] identifierForVendor]UUIDString];
+        _appVendorId = [[[UIDevice currentDevice] identifierForVendor]UUIDString];
 #else
         // On OS X, don't use anything for now
-        self.appVendorId = @"OS-X";
+        _appVendorId = @"OS-X";
 #endif
     
         CFBundleRef appBundle = CFBundleGetMainBundle();
-        self.appBundleId = (__bridge NSString *)CFBundleGetIdentifier(appBundle);
-        self.appVersion =  (__bridge NSString *)CFBundleGetValueForInfoDictionaryKey(appBundle, kCFBundleVersionKey);
+        _appBundleId = (__bridge NSString *)CFBundleGetIdentifier(appBundle);
+        _appVersion =  (__bridge NSString *)CFBundleGetValueForInfoDictionaryKey(appBundle, kCFBundleVersionKey);
         
-        if (self.appVersion == nil)
+        if (_appVersion == nil)
         {
-            self.appVersion = @"N/A";
+            _appVersion = @"N/A";
         }
         
-        if (self.appBundleId == nil)
+        if (_appBundleId == nil)
         {
             // The bundle ID we get is nil if we're running tests on Travis. If the bundle ID is nil, background sessions can't be used
             // backgroundSessionConfigurationWithIdentifier: will throw an exception within dispatch_once() which can't be handled
             // Use a regular session instead
             TSKLog(@"Null bundle ID: we are running the test suite; falling back to a normal session.");
-            self.appBundleId = @"N/A";
-            self.appVendorId = @"unit-tests";
+            _appBundleId = @"N/A";
+            _appVendorId = @"unit-tests";
             
             dispatch_once(&dispatchOnceBackgroundSession, ^{
                 _backgroundSession = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]
@@ -96,7 +96,7 @@ static dispatch_once_t dispatchOnceBackgroundSession;
                 // The API for creating background sessions changed between iOS 7 and iOS 8 and OS X 10.9 and 10.10
 #if (TARGET_OS_IPHONE &&__IPHONE_OS_VERSION_MAX_ALLOWED < 80000) || (!TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MAX_ALLOWED < 1100)
                 // iOS 7 or OS X 10.9 as the max SDK: awlays use the deprecated/iOS 7 API
-                backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfiguration:[NSString stringWithFormat:kTSKBackgroundSessionIdentifierFormat, self.appBundleId]];
+                backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfiguration:[NSString stringWithFormat:kTSKBackgroundSessionIdentifierFormat, _appBundleId]];
 #else
                 // iOS 8+ or OS X 10.10+ as the max SDK
 #if (TARGET_OS_IPHONE &&__IPHONE_OS_VERSION_MIN_REQUIRED < 80000) || (!TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MIN_REQUIRED < 1100)
@@ -105,13 +105,13 @@ static dispatch_once_t dispatchOnceBackgroundSession;
                 if (![NSURLSessionConfiguration respondsToSelector:@selector(backgroundSessionConfigurationWithIdentifier:)])
                 {
                     // Device runs on iOS 7 or OS X 10.9
-                    backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfiguration:[NSString stringWithFormat:kTSKBackgroundSessionIdentifierFormat, self.appBundleId]];
+                    backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfiguration:[NSString stringWithFormat:kTSKBackgroundSessionIdentifierFormat, _appBundleId]];
                 }
                 else
 #endif
                 {
                     // Device runs on iOS 8+ or OS X 10.10+ or min SDK is iOS 8+ or OS X 10.10+
-                    backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier: [NSString stringWithFormat:kTSKBackgroundSessionIdentifierFormat, self.appBundleId]];
+                    backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier: [NSString stringWithFormat:kTSKBackgroundSessionIdentifierFormat, _appBundleId]];
                 }
 #endif
                 
@@ -155,7 +155,7 @@ static dispatch_once_t dispatchOnceBackgroundSession;
     
     if (reportURIs == nil)
     {
-        [NSException raise:@"TrustKit Simple Background Reporter configuration invalid"
+        [NSException raise:@"TSKBackgroundReporter configuration invalid"
                     format:@"Reporter was given an invalid value for reportURIs: %@ for domain %@",
          reportURIs, notedHostname];
     }
@@ -163,8 +163,8 @@ static dispatch_once_t dispatchOnceBackgroundSession;
     // Create the pin validation failure report
     NSArray *certificateChain = convertTrustToPemArray(serverTrust);
     NSArray *formattedPins = convertPinsToHpkpPins(knownPins);
-    TSKPinFailureReport *report = [[TSKPinFailureReport alloc]initWithAppBundleId:self.appBundleId
-                                                                       appVersion:self.appVersion
+    TSKPinFailureReport *report = [[TSKPinFailureReport alloc]initWithAppBundleId:_appBundleId
+                                                                       appVersion:_appVersion
                                                                     notedHostname:notedHostname
                                                                          hostname:serverHostname
                                                                              port:serverPort
@@ -173,11 +173,11 @@ static dispatch_once_t dispatchOnceBackgroundSession;
                                                         validatedCertificateChain:certificateChain
                                                                         knownPins:formattedPins
                                                                  validationResult:validationResult
-                                                                    appVendorId:self.appVendorId];
+                                                                    appVendorId:_appVendorId];
     
     
     // Should we rate-limit this report?
-    if (self.shouldRateLimitReports && [TSKReportsRateLimiter shouldRateLimitReport:report])
+    if (_shouldRateLimitReports && [TSKReportsRateLimiter shouldRateLimitReport:report])
     {
         // We recently sent the exact same report; do not send this report
         TSKLog(@"Pin failure report for %@ was not sent due to rate-limiting", serverHostname);
