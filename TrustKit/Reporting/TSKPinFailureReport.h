@@ -29,7 +29,7 @@
 
 
 // Init with default bundle ID and current time as the date-time
-- (instancetype) initWithAppBundleId:(NSString *) appBundleId
+- (instancetype) initWithAppBundleId:(NSString *)appBundleId
                           appVersion:(NSString *)appVersion
                        notedHostname:(NSString *)notedHostname
                             hostname:(NSString *)serverHostname

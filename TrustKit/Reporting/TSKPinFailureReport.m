@@ -14,7 +14,7 @@
 @implementation TSKPinFailureReport
 
 
-- (instancetype) initWithAppBundleId:(NSString *) appBundleId
+- (instancetype) initWithAppBundleId:(NSString *)appBundleId
                           appVersion:(NSString *)appVersion
                        notedHostname:(NSString *)notedHostname
                             hostname:(NSString *)serverHostname
