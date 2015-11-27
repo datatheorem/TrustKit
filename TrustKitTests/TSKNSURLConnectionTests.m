@@ -89,7 +89,6 @@
         // Do not follow redirections as they cause two pinning validations, thereby changing the lastTrustDecision
         finalRequest = nil;
         NSLog(@"Received redirection %@", redirectResponse);
-        _lastResponse = redirectResponse;
     }
     return finalRequest;
 }
@@ -162,6 +161,7 @@
     [super setUp];
     [TrustKit resetConfiguration];
     [TSKNSURLConnectionDelegateProxy resetLastTrustDecision];
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
 }
 
 - (void)tearDown {

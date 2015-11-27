@@ -158,6 +158,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
     [super setUp];
     [TrustKit resetConfiguration];
     [TSKNSURLSessionDelegateProxy resetLastTrustDecision];
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
 }
 
 - (void)tearDown {
