@@ -212,8 +212,8 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
           @{
               @"www.datatheorem.com" : @{
                       kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                      kTSKPublicKeyHashes : @[@"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=", // CA key
-                                              @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=" // CA key
+                      kTSKPublicKeyHashes : @[@"lCppFqbkrlJ3EcVFAkeip0+44VaoJUymbnOaEUk7tEU=", // CA key
+                                              @"lCppFqbkrlJ3EcVFAkeip0+44VaoJUymbnOaEUk7tEU=" // CA key
                                               ]}}};
     
     [TrustKit initializeWithConfiguration:trustKitConfig];

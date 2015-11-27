@@ -38,9 +38,10 @@
 - (void)testVerifyRsa2048
 {
     // Create a valid server trust
-    SecCertificateRef leafCertificate = [TSKCertificateUtils createCertificateFromDer:@"www.datatheorem.com"];
-    SecCertificateRef intermediateCertificate = [TSKCertificateUtils createCertificateFromDer:@"ThawteSSLCA"];
-    SecCertificateRef certChainArray[2] = {leafCertificate, intermediateCertificate};
+    SecCertificateRef leafCertificate = [TSKCertificateUtils createCertificateFromDer:@"datatheorem.com"];
+    SecCertificateRef intermediateCertificate = [TSKCertificateUtils createCertificateFromDer:@"COMODORSADomainValidationSecureServerCA"];
+    SecCertificateRef intermediateCertificate2 = [TSKCertificateUtils createCertificateFromDer:@"COMODORSACertificationAuthority"];
+    SecCertificateRef certChainArray[3] = {leafCertificate, intermediateCertificate, intermediateCertificate2};
     
     SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
                                                              arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
@@ -52,8 +53,8 @@
     trustKitConfig = parseTrustKitArguments(@{kTSKPinnedDomains :
                                                   @{@"www.datatheorem.com" : @{
                                                             kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                                                            kTSKPublicKeyHashes : @[@"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8=", // Leaf Key
-                                                                                    @"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8=", // Leaf Key
+                                                            kTSKPublicKeyHashes : @[@"NnUTm1c2kQBu1jepUWgce1VExzxgb9hfBfW3T9J2jeI=", // Leaf Key
+                                                                                    @"NnUTm1c2kQBu1jepUWgce1VExzxgb9hfBfW3T9J2jeI=", // Leaf Key
                                                                                     ]}}});
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;

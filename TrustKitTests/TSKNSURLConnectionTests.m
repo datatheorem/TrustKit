@@ -33,9 +33,9 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection;
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response;
--(NSURLRequest *)download:(NSURLConnection *)connection
-          willSendRequest:(NSURLRequest *)request
-         redirectResponse:(NSURLResponse *)redirectResponse;
+- (NSURLRequest *)connection:(NSURLConnection *)connection
+             willSendRequest:(NSURLRequest *)request
+            redirectResponse:(NSURLResponse *)redirectResponse;
 
 @end
 
@@ -73,20 +73,26 @@
     [testExpectation fulfill];
 }
 
-- (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse
-{
-    return request;
-}
 
--(NSURLRequest *)download:(NSURLConnection *)connection
-          willSendRequest:(NSURLRequest *)request
-         redirectResponse:(NSURLResponse *)redirectResponse
+- (NSURLRequest *)connection:(NSURLConnection *)connection
+             willSendRequest:(NSURLRequest *)request
+            redirectResponse:(NSURLResponse *)redirectResponse
 {
-    NSLog(@"Received redirection");
-    [testExpectation fulfill];
-    
-    // Do not follow redirections as they cause two pinning validations, thereby changing the lastTrustDecision
-    return nil;
+    NSURLRequest *finalRequest;
+    if (redirectResponse == nil)
+    {
+        // URL canonicalization - not an actual redirection
+        finalRequest = request;
+    }
+    else
+    {
+        // Do not follow redirections as they cause two pinning validations, thereby changing the lastTrustDecision
+        finalRequest = nil;
+        NSLog(@"Received redirection %@", redirectResponse);
+        _lastResponse = redirectResponse;
+        [testExpectation fulfill];
+    }
+    return finalRequest;
 }
 
 @end
@@ -248,17 +254,17 @@
 }
 
 
-// Tests a secure connection to https://www.cloudflare.com by pinning only to the CA public key
+// Tests a secure connection to https://www.twitter.com by pinning only to the CA public key
 - (void)testPinningValidationSucceeded
 {
     NSDictionary *trustKitConfig =
     @{
       kTSKPinnedDomains :
           @{
-              @"www.cloudflare.com" : @{
+              @"www.twitter.com" : @{
                       kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                      kTSKPublicKeyHashes : @[@"AG1751Vd2CAmRCxPGieoDomhmJy4ezREjtIZTBgZbV4=", // CA key
-                                              @"AG1751Vd2CAmRCxPGieoDomhmJy4ezREjtIZTBgZbV4=" // CA key
+                      kTSKPublicKeyHashes : @[@"JbQbUG5JMJUoI6brnx0x3vZF6jilxsapbXGVfjhN8Fg=", // CA key
+                                              @"JbQbUG5JMJUoI6brnx0x3vZF6jilxsapbXGVfjhN8Fg=" // CA key
                                               ]}}};
     
     [TrustKit initializeWithConfiguration:trustKitConfig];
@@ -269,7 +275,7 @@
     // Use -initWithRequest:delegate:startstartImmediately:
     NSURLConnection *connection = [[NSURLConnection alloc]
                                    initWithRequest:[NSURLRequest requestWithURL:
-                                                    [NSURL URLWithString:@"https://www.cloudflare.com/"]]
+                                                    [NSURL URLWithString:@"https://www.twitter.com/"]]
                                    delegate:delegate
                                    startImmediately:YES];
     [connection start];
@@ -285,7 +291,7 @@
     XCTAssert(([TSKNSURLConnectionDelegateProxy getLastTrustDecision] == TSKTrustDecisionShouldAllowConnection), @"TrustKit rejected a valid certificate");
     XCTAssertNil(delegate.lastError, @"TrustKit triggered an error");
     XCTAssertNotNil(delegate.lastResponse, @"TrustKit prevented a response from being returned");
-    XCTAssert([(NSHTTPURLResponse *)delegate.lastResponse statusCode] == 200, @"TrustKit prevented a response from being returned");
+    XCTAssert([(NSHTTPURLResponse *)delegate.lastResponse statusCode] == 301, @"TrustKit prevented a response from being returned");
 }
 
 
