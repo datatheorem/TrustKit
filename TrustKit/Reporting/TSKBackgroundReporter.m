@@ -187,13 +187,19 @@ static dispatch_once_t dispatchOnceBackgroundSession;
     // Create a temporary file for storing the JSON data in ~/tmp
     NSURL *tmpDirURL = [NSURL fileURLWithPath:NSTemporaryDirectory() isDirectory:YES];
     NSURL *tmpFileURL = [[tmpDirURL URLByAppendingPathComponent:[[NSProcessInfo processInfo] globallyUniqueString]] URLByAppendingPathExtension:@"tsk-report"];
-    TSKLog(@"Report created at: %@", [tmpFileURL path]);
     
     // Write the JSON report data to the temporary file
-    if (!([[report json] writeToFile:[tmpFileURL path] atomically:YES])) {
-        [NSException raise:@"TrustKit Simple Reporter runtime error"
+    if (!([[report json] writeToFile:[tmpFileURL path] atomically:YES]))
+    {
+#if DEBUG
+        // Only raise this exception for debug as not being able to save the report would crash a prod App
+        // https://github.com/datatheorem/TrustKit/issues/32
+        // This might happen when the device's storage is full?
+        [NSException raise:@"TSKBackgroundReporter runtime error"
                     format:@"Report cannot be saved to file"];
+#endif
     }
+    TSKLog(@"Report created at: %@", [tmpFileURL path]);
     
     
     // Create the HTTP request for all the configured report URIs and send it
