@@ -53,15 +53,12 @@
                       
                       // Valid SPKI hashes to demonstrate success
                       kTSKPublicKeyHashes : @[
-                              @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=", // CA key
-                              @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=" // CA key
+                              @"lCppFqbkrlJ3EcVFAkeip0+44VaoJUymbnOaEUk7tEU=", // CA key
+                              @"lCppFqbkrlJ3EcVFAkeip0+44VaoJUymbnOaEUk7tEU=" // CA key
                               ]
                       }}};
     
     [TrustKit initializeWithConfiguration:trustKitConfig];
-    
-    [TSKPinningValidator evaluateTrust:NULL forHostname:NULL];
-
     return YES;
 }
 
