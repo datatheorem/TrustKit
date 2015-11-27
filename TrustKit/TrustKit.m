@@ -334,26 +334,28 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
                     format:@"TrustKit was already initialized with the following SSL pins: %@", _trustKitGlobalConfiguration];
     }
     
-    dispatch_once(&dispatchOnceTrustKitInit, ^{
-        if ([trustKitConfig count] > 0)
-        {
-            initializeSubjectPublicKeyInfoCache();
-            
-            // Convert and store the SSL pins in our global variable
-            _trustKitGlobalConfiguration = [[NSDictionary alloc]initWithDictionary:parseTrustKitArguments(trustKitConfig)];
-            
+    if ([trustKitConfig count] > 0)
+    {
+        initializeSubjectPublicKeyInfoCache();
         
+        // Convert and store the SSL pins in our global variable
+        _trustKitGlobalConfiguration = [[NSDictionary alloc]initWithDictionary:parseTrustKitArguments(trustKitConfig)];
+        
+        
+        // We use dispatch_once() here only so that unit tests don't reset the reporter
+        // or the swizzling logic when calling [TrustKit resetConfiguration]
+        dispatch_once(&dispatchOnceTrustKitInit, ^{
+            
             // Create our reporter for sending pin validation failures; do this before hooking NSURLSession so we don't hook ourselves
-            // Create a reporter that uses the background transfer service to send pin failure reports
             _pinFailureReporter = [[TSKBackgroundReporter alloc]initAndRateLimitReports:YES];
-    
+            
             
             // Create a dispatch queue for activating the reporter
             // We use a serial queue targetting the global default queue in order to ensure reports are sent one by one
             // even when a lot of pin failures are occuring, instead of spamming the global queue with events to process
             _pinFailureReporterQueue = dispatch_queue_create(kTSKPinFailureReporterQueueLabel, DISPATCH_QUEUE_SERIAL);
             dispatch_set_target_queue(_pinFailureReporterQueue, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0));
-
+            
             
             // Hook network APIs if needed
             if ([_trustKitGlobalConfiguration[kTSKSwizzleNetworkDelegates] boolValue] == YES)
@@ -364,13 +366,12 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
                 // NSURLSession
                 [TSKNSURLSessionDelegateProxy swizzleNSURLSessionConstructors];
             }
-            
-            
-            // All done
-            _isTrustKitInitialized = YES;
-            TSKLog(@"Successfully initialized with configuration %@", _trustKitGlobalConfiguration);
-        }
-    });
+        });
+        
+        // All done
+        _isTrustKitInitialized = YES;
+        TSKLog(@"Successfully initialized with configuration %@", _trustKitGlobalConfiguration);
+    }
 }
 
 
@@ -406,7 +407,6 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
     resetSubjectPublicKeyInfoCache();
     _trustKitGlobalConfiguration = nil;
     _isTrustKitInitialized = NO;
-    dispatchOnceTrustKitInit = 0;
 }
 
 
