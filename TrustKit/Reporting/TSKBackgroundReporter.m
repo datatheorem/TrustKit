@@ -199,7 +199,7 @@ static dispatch_once_t dispatchOnceBackgroundSession;
                     format:@"Report cannot be saved to file"];
 #endif
     }
-    TSKLog(@"Report created at: %@", [tmpFileURL path]);
+    TSKLog(@"Report for %@ created at: %@", serverHostname, [tmpFileURL path]);
     
     
     // Create the HTTP request for all the configured report URIs and send it
