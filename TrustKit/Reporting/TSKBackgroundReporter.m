@@ -34,6 +34,7 @@ static dispatch_once_t dispatchOnceBackgroundSession;
 @property (nonatomic, strong) NSString *appBundleId;
 @property (nonatomic, strong) NSString *appVersion;
 @property (nonatomic, strong) NSString *appVendorId;
+@property (nonatomic, strong) NSString *appPlatform;
 @property BOOL shouldRateLimitReports;
 
 
@@ -52,6 +53,12 @@ static dispatch_once_t dispatchOnceBackgroundSession;
         _shouldRateLimitReports = shouldRateLimitReports;
         
         // Retrieve the App's information
+#if TARGET_OS_IPHONE
+        _appPlatform = @"IOS";
+#else
+        _appPlatform = @"OSX";
+#endif
+        
         CFBundleRef appBundle = CFBundleGetMainBundle();
         _appBundleId = (__bridge NSString *)CFBundleGetIdentifier(appBundle);
         _appVersion =  (__bridge NSString *)CFBundleGetValueForInfoDictionaryKey(appBundle, kCFBundleVersionKey);
@@ -168,6 +175,7 @@ static dispatch_once_t dispatchOnceBackgroundSession;
     NSArray *formattedPins = convertPinsToHpkpPins(knownPins);
     TSKPinFailureReport *report = [[TSKPinFailureReport alloc]initWithAppBundleId:_appBundleId
                                                                        appVersion:_appVersion
+                                                                      appPlatform:_appPlatform
                                                                     notedHostname:notedHostname
                                                                          hostname:serverHostname
                                                                              port:serverPort

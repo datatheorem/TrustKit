@@ -16,6 +16,7 @@
 
 - (instancetype) initWithAppBundleId:(NSString *)appBundleId
                           appVersion:(NSString *)appVersion
+                         appPlatform:(NSString *)appPlatform
                        notedHostname:(NSString *)notedHostname
                             hostname:(NSString *)serverHostname
                                 port:(NSNumber *)serverPort
@@ -31,6 +32,7 @@
     {
         _appBundleId = appBundleId;
         _appVersion = appVersion;
+        _appPlatform = appPlatform;
         _notedHostname = notedHostname;
         _hostname = serverHostname;
         _port = serverPort;
@@ -57,6 +59,7 @@
     NSDictionary *requestData = @ {
         @"app-bundle-id" : self.appBundleId,
         @"app-version" : self.appVersion,
+        @"app-platform" : self.appPlatform,
         @"date-time" : currentTimeStr,
         @"hostname" : self.hostname,
         @"port" : self.port,

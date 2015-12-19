@@ -93,6 +93,7 @@
 
     TSKPinFailureReport *report = [[TSKPinFailureReport alloc] initWithAppBundleId:@"test"
                                                                         appVersion:@"1.2.3"
+                                                                        appPlatform:@"IOS"
                                                                      notedHostname:@"example.com"
                                                                           hostname:@"mail.example.com"
                                                                               port:[NSNumber numberWithInt:443]
@@ -115,6 +116,7 @@
     // Ensure the same report with a different validation result will be sent
     report = [[TSKPinFailureReport alloc] initWithAppBundleId:@"test"
                                                    appVersion:@"1.2.3"
+                                                  appPlatform:@"IOS"
                                                 notedHostname:@"example.com"
                                                      hostname:@"mail.example.com"
                                                          port:[NSNumber numberWithInt:443]
@@ -131,6 +133,7 @@
     // Ensure the same report with a different hostname will be sent
     report = [[TSKPinFailureReport alloc] initWithAppBundleId:@"test"
                                                    appVersion:@"1.2.3"
+                                                  appPlatform:@"IOS"
                                                 notedHostname:@"example.com"
                                                      hostname:@"other.example.com"
                                                          port:[NSNumber numberWithInt:443]
@@ -147,6 +150,7 @@
     // Ensure the same report with a different certificate chain will be sent
     report = [[TSKPinFailureReport alloc] initWithAppBundleId:@"test"
                                                    appVersion:@"1.2.3"
+                                                  appPlatform:@"IOS"
                                                 notedHostname:@"example.com"
                                                      hostname:@"mail.example.com"
                                                          port:[NSNumber numberWithInt:443]

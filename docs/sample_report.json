@@ -16,5 +16,6 @@
   "validation-result": 1,
   "app-bundle-id": "com.datatheorem.testtrustkit2",
   "app-vendor-id": "599F9C00-92DC-4B5C-9464-7971F01F8370",
+  "app-platform": "IOS",
   "port": 443
 }
