@@ -17,6 +17,8 @@
 
 #if TARGET_OS_IPHONE
 @import UIKit; // For accessing the IDFV
+#else
+#import "osx_vendor_id.h"  // Home-made IDFV for OS X
 #endif
 
 
@@ -50,14 +52,6 @@ static dispatch_once_t dispatchOnceBackgroundSession;
         _shouldRateLimitReports = shouldRateLimitReports;
         
         // Retrieve the App's information
-#if TARGET_OS_IPHONE
-        // On iOS use the IDFV
-        _appVendorId = [[[UIDevice currentDevice] identifierForVendor]UUIDString];
-#else
-        // On OS X, don't use anything for now
-        _appVendorId = @"OS-X";
-#endif
-    
         CFBundleRef appBundle = CFBundleGetMainBundle();
         _appBundleId = (__bridge NSString *)CFBundleGetIdentifier(appBundle);
         _appVersion =  (__bridge NSString *)CFBundleGetValueForInfoDictionaryKey(appBundle, kCFBundleVersionKey);
@@ -84,6 +78,15 @@ static dispatch_once_t dispatchOnceBackgroundSession;
         }
         else
         {
+            // Get the vendor identifier
+#if TARGET_OS_IPHONE
+            // On iOS use the IDFV
+            _appVendorId = [[[UIDevice currentDevice] identifierForVendor]UUIDString];
+#else
+            // On OS X we use a hash of the mac address and bundle ID
+            _appVendorId = osx_identifier_for_vendor(_appBundleId);
+#endif
+            
             // We're not running unit tests - use a background session
             /*
              Using dispatch_once here ensures that multiple background sessions with the same identifier are not created

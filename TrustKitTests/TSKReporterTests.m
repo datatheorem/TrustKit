@@ -17,6 +17,9 @@
 #import "TSKReportsRateLimiter.h"
 #import "TrustKit+Private.h"
 
+#if !TARGET_OS_IPHONE
+#import "osx_vendor_id.h"
+#endif
 
 #pragma mark Test suite
 
@@ -156,5 +159,15 @@
     XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == NO, @"Wrongly rate-limited a new report");
     XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == YES, @"Did not rate-limit an identical report");
 }
+
+
+
+#if !TARGET_OS_IPHONE
+- (void)testOSXIdentifierForVendor
+{
+    NSString *idfv = osx_identifier_for_vendor(@"com.fake.bundle.id");
+    XCTAssertNotNil(idfv);
+}
+#endif
 
 @end

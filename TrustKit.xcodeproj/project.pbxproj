@@ -16,6 +16,7 @@
 		6B032D401AF1AEC200EAFA69 /* TSKReporterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B032D3F1AF1AEB600EAFA69 /* TSKReporterTests.m */; };
 		6B2B06AD1B05154A00FC749E /* TSKBackgroundReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B2B06AC1B05154A00FC749E /* TSKBackgroundReporter.h */; };
 		6B2B06AF1B05157400FC749E /* TSKBackgroundReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B2B06AE1B05157400FC749E /* TSKBackgroundReporter.m */; };
+		8C0237161C25736400855D43 /* osx_vendor_id.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C0237151C25736400855D43 /* osx_vendor_id.m */; };
 		8C15F9931B132F9200F06C0E /* TSKPinningValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C15F9911B132F9200F06C0E /* TSKPinningValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8C15F9941B132F9200F06C0E /* TSKPinningValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F9921B132F9200F06C0E /* TSKPinningValidator.m */; };
 		8C15F9A01B16094D00F06C0E /* TSKPinFailureReport.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C15F99E1B16094D00F06C0E /* TSKPinFailureReport.h */; };
@@ -154,6 +155,8 @@
 		6B032D3F1AF1AEB600EAFA69 /* TSKReporterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSKReporterTests.m; sourceTree = "<group>"; };
 		6B2B06AC1B05154A00FC749E /* TSKBackgroundReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKBackgroundReporter.h; path = Reporting/TSKBackgroundReporter.h; sourceTree = "<group>"; };
 		6B2B06AE1B05157400FC749E /* TSKBackgroundReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKBackgroundReporter.m; path = Reporting/TSKBackgroundReporter.m; sourceTree = "<group>"; };
+		8C0237151C25736400855D43 /* osx_vendor_id.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = osx_vendor_id.m; path = Reporting/osx_vendor_id.m; sourceTree = "<group>"; };
+		8C0237171C25739D00855D43 /* osx_vendor_id.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = osx_vendor_id.h; path = Reporting/osx_vendor_id.h; sourceTree = "<group>"; };
 		8C15F9911B132F9200F06C0E /* TSKPinningValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKPinningValidator.h; path = Pinning/TSKPinningValidator.h; sourceTree = "<group>"; };
 		8C15F9921B132F9200F06C0E /* TSKPinningValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKPinningValidator.m; path = Pinning/TSKPinningValidator.m; sourceTree = "<group>"; };
 		8C15F99E1B16094D00F06C0E /* TSKPinFailureReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKPinFailureReport.h; path = Reporting/TSKPinFailureReport.h; sourceTree = "<group>"; };
@@ -440,6 +443,8 @@
 				8C15F99F1B16094D00F06C0E /* TSKPinFailureReport.m */,
 				8C9492F51B2379A100F5DF38 /* reporting_utils.h */,
 				8CCBD15A1B186D1100CB88AF /* reporting_utils.m */,
+				8C0237151C25736400855D43 /* osx_vendor_id.m */,
+				8C0237171C25739D00855D43 /* osx_vendor_id.h */,
 			);
 			name = Reporting;
 			sourceTree = "<group>";
@@ -750,6 +755,7 @@
 				8CA6CC1C1BAE2B6600BDA419 /* TSKPinFailureReport.m in Sources */,
 				8CD5F74D1BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.m in Sources */,
 				8CA6CC241BAE2B6A00BDA419 /* TSKPinningValidator.m in Sources */,
+				8C0237161C25736400855D43 /* osx_vendor_id.m in Sources */,
 				8CA6CC1E1BAE2B6600BDA419 /* reporting_utils.m in Sources */,
 				8CA6CC261BAE2B6A00BDA419 /* TrustKit.m in Sources */,
 				8CA6CC151BAE2B6600BDA419 /* TSKReportsRateLimiter.m in Sources */,
