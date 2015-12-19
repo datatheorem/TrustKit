@@ -179,6 +179,11 @@ NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate, T
     
     // First extract the public key bytes
     NSData *publicKeyData = getPublicKeyDataFromCertificate(certificate);
+    if (publicKeyData == nil)
+    {
+        TSKLog(@"Error - could not extract the public key bytes");
+        return nil;
+    }
     
     
     // Generate a hash of the subject public key info

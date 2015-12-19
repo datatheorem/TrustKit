@@ -134,6 +134,11 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
         {
             TSKPublicKeyAlgorithm algorithm = [savedAlgorithm integerValue];
             NSData *subjectPublicKeyInfoHash = hashSubjectPublicKeyInfoFromCertificate(certificate, algorithm);
+            if (subjectPublicKeyInfoHash == nil)
+            {
+                TSKLog(@"Error - could not generate the SPKI hash for %@", serverHostname);
+                return TSKPinValidationResultErrorCouldNotGenerateSpkiHash;
+            }
             
             // Is the generated hash in our set of pinned hashes ?
             TSKLog(@"Testing SSL Pin %@", subjectPublicKeyInfoHash);

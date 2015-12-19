@@ -46,6 +46,11 @@ typedef NS_ENUM(NSInteger, TSKPinValidationResult)
      The server trust was succesfully evaluated but did not contain any of the configured pins. However, the certificate chain terminates at a user-defined trust anchor (ie. a custom/private CA that was manually added to OS X's trust store). Only available on OS X.
      */
     TSKPinValidationResultFailedUserDefinedTrustAnchor NS_AVAILABLE_MAC(10_9),
+    
+    /**
+     The server trust could not be evaluated due to an error when trying to generate the certificate's subject public key info hash. On iOS, this could be caused by a Keychain failure when trying to extract the certificate's public key bytes.
+     */
+    TSKPinValidationResultErrorCouldNotGenerateSpkiHash,
 };
 
 
