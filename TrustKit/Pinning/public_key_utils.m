@@ -82,10 +82,14 @@ static NSData *getPublicKeyDataFromCertificate(SecCertificateRef certificate)
     [peerPublicKeyAdd setObject:(__bridge id)kSecClassKey forKey:(__bridge id)kSecClass];
     [peerPublicKeyAdd setObject:kTSKKeychainPublicKeyTag forKey:(__bridge id)kSecAttrApplicationTag];
     [peerPublicKeyAdd setObject:(__bridge id)(publicKey) forKey:(__bridge id)kSecValueRef];
+    
+    // Avoid issues with background fetching while the device is locked
+    [peerPublicKeyAdd setObject:(__bridge id)kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly forKey:(__bridge id)kSecAttrAccessible];
+    
     // Request the key's data to be returned
     [peerPublicKeyAdd setObject:(__bridge id)(kCFBooleanTrue) forKey:(__bridge id)kSecReturnData];
     
-    // Prepare the dictionnary to retrieve the key
+    // Prepare the dictionnary to retrieve and delete the key
     NSMutableDictionary * publicKeyGet = [[NSMutableDictionary alloc] init];
     [publicKeyGet setObject:(__bridge id)kSecClassKey forKey:(__bridge id)kSecClass];
     [publicKeyGet setObject:(kTSKKeychainPublicKeyTag) forKey:(__bridge id)kSecAttrApplicationTag];
