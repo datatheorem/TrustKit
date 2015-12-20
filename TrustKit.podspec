@@ -10,6 +10,7 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = '7.0'
   s.osx.deployment_target = '10.9'
   s.source_files = 'TrustKit', 'TrustKit/**/*.{h,m}'
+  s.ios.exclude_files = 'TrustKit/Reporting/osx_vendor_id.{h,m}'
   s.public_header_files = 'TrustKit/TrustKit.h', 'TrustKit/Pinning/TSKPinningValidator.h'
   s.frameworks = 'Foundation', 'Security'
   s.ios.vendored_libraries = 'TrustKit/Dependencies/domain_registry/ios/*.a'
