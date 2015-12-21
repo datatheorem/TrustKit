@@ -100,6 +100,7 @@ typedef NS_ENUM(NSInteger, TSKTrustDecision)
  
  
  */
+NS_ASSUME_NONNULL_BEGIN
 @interface TSKPinningValidator : NSObject
 
 ///------------------------------------
@@ -121,6 +122,7 @@ typedef NS_ENUM(NSInteger, TSKTrustDecision)
  
  @exception NSException Thrown when TrustKit has not been initialized with a pinning policy.
  */
-+ (TSKTrustDecision) evaluateTrust:(SecTrustRef _Nonnull)serverTrust forHostname:(NSString * _Nonnull)serverHostname;
++ (TSKTrustDecision) evaluateTrust:(SecTrustRef)serverTrust forHostname:(NSString *)serverHostname;
 
 @end
+NS_ASSUME_NONNULL_END
