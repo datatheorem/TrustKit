@@ -12,6 +12,7 @@
 #import <Foundation/Foundation.h>
 #import <TrustKit/TSKPinningValidator.h>
 
+NS_ASSUME_NONNULL_BEGIN
 //! Project version number for TrustKit.
 FOUNDATION_EXPORT double TrustKitVersionNumber;
 
@@ -21,21 +22,21 @@ FOUNDATION_EXPORT const unsigned char TrustKitVersionString[];
 
 #pragma mark TrustKit Configuration Keys
 
-FOUNDATION_EXPORT const NSString * _Nonnull kTSKSwizzleNetworkDelegates;
-FOUNDATION_EXPORT const NSString * _Nonnull kTSKPinnedDomains;
-FOUNDATION_EXPORT const NSString * _Nonnull kTSKPublicKeyHashes;
-FOUNDATION_EXPORT const NSString * _Nonnull kTSKEnforcePinning;
-FOUNDATION_EXPORT const NSString * _Nonnull kTSKIncludeSubdomains;
-FOUNDATION_EXPORT const NSString * _Nonnull kTSKPublicKeyAlgorithms;
-FOUNDATION_EXPORT const NSString * _Nonnull kTSKReportUris;
-FOUNDATION_EXPORT const NSString * _Nonnull kTSKDisableDefaultReportUri;
-FOUNDATION_EXPORT const NSString * _Nonnull kTSKIgnorePinningForUserDefinedTrustAnchors NS_AVAILABLE_MAC(10_9);
+FOUNDATION_EXPORT const NSString * kTSKSwizzleNetworkDelegates;
+FOUNDATION_EXPORT const NSString * kTSKPinnedDomains;
+FOUNDATION_EXPORT const NSString * kTSKPublicKeyHashes;
+FOUNDATION_EXPORT const NSString * kTSKEnforcePinning;
+FOUNDATION_EXPORT const NSString * kTSKIncludeSubdomains;
+FOUNDATION_EXPORT const NSString * kTSKPublicKeyAlgorithms;
+FOUNDATION_EXPORT const NSString * kTSKReportUris;
+FOUNDATION_EXPORT const NSString * kTSKDisableDefaultReportUri;
+FOUNDATION_EXPORT const NSString * kTSKIgnorePinningForUserDefinedTrustAnchors NS_AVAILABLE_MAC(10_9);
 
 
 #pragma mark Supported Public Key Algorithm Keys
-FOUNDATION_EXPORT const NSString * _Nonnull kTSKAlgorithmRsa2048;
-FOUNDATION_EXPORT const NSString * _Nonnull kTSKAlgorithmRsa4096;
-FOUNDATION_EXPORT const NSString * _Nonnull kTSKAlgorithmEcDsaSecp256r1;
+FOUNDATION_EXPORT const NSString * kTSKAlgorithmRsa2048;
+FOUNDATION_EXPORT const NSString * kTSKAlgorithmRsa4096;
+FOUNDATION_EXPORT const NSString * kTSKAlgorithmEcDsaSecp256r1;
 
 
 /**
@@ -206,7 +207,7 @@ FOUNDATION_EXPORT const NSString * _Nonnull kTSKAlgorithmEcDsaSecp256r1;
  @exception NSException Thrown when the supplied configuration is invalid or TrustKit has already been initialized.
  
  */
-+ (void) initializeWithConfiguration:(nonnull NSDictionary *)trustKitConfig;
++ (void) initializeWithConfiguration:(NSDictionary *)trustKitConfig;
 
 @end
-
+NS_ASSUME_NONNULL_END
