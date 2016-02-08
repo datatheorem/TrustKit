@@ -25,6 +25,7 @@ Getting Started
 * Read the [Getting Started][getting-started] guide.
 * Check out the [API documentation][api-doc].
 * Have a look at the [Black Hat USA 2015 presentation][bh2015-pdf] and the [significant changes][ios9-post] that subsequently happened with iOS 9.
+* TrustKit was featured on [PayPal's engineering blog][paypal-post].
 
 
 Sample Usage
@@ -116,3 +117,4 @@ License
 [bh2015-conf]: https://www.blackhat.com/us-15/briefings.html#trustkit-code-injection-on-ios-8-for-the-greater-good
 [api-doc]: https://datatheorem.github.io/TrustKit/documentation
 [ios9-post]: https://datatheorem.github.io/ios/2015/10/17/trustkit-ios-9-shared-cache/
+[paypal-post]: https://www.paypal-engineering.com/2015/10/14/key-pinning-in-mobile-applications/
