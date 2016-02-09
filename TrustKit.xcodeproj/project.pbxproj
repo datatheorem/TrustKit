@@ -22,6 +22,10 @@
 		8C15F9A01B16094D00F06C0E /* TSKPinFailureReport.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C15F99E1B16094D00F06C0E /* TSKPinFailureReport.h */; };
 		8C15F9A11B16094E00F06C0E /* TSKPinFailureReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F99F1B16094D00F06C0E /* TSKPinFailureReport.m */; };
 		8C15F9A41B17564400F06C0E /* TSKPinConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F9A31B17564400F06C0E /* TSKPinConfigurationTests.m */; };
+		8C7D06811C69551900D3B3D2 /* www.cloudflare.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 8C7D06801C69551400D3B3D2 /* www.cloudflare.com.der */; };
+		8C7D06821C69551900D3B3D2 /* www.cloudflare.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 8C7D06801C69551400D3B3D2 /* www.cloudflare.com.der */; };
+		8C7D06871C6957FE00D3B3D2 /* COMODOECCExtendedValidationSecureServerCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8C7D06861C6957FE00D3B3D2 /* COMODOECCExtendedValidationSecureServerCA.der */; };
+		8C7D06881C6957FE00D3B3D2 /* COMODOECCExtendedValidationSecureServerCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8C7D06861C6957FE00D3B3D2 /* COMODOECCExtendedValidationSecureServerCA.der */; };
 		8C84804D1A896EE30017C155 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C84804C1A896EE30017C155 /* TrustKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8C8480531A896EE30017C155 /* TrustKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C8480471A896EE30017C155 /* TrustKit.framework */; };
 		8C84806D1A896F660017C155 /* TrustKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C84806C1A896F660017C155 /* TrustKit.m */; };
@@ -69,12 +73,8 @@
 		8CA6CC3F1BAE2E8300BDA419 /* GoodRootCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868B41ADFF6B000E5AFDC /* GoodRootCA.der */; };
 		8CA6CC401BAE2E8300BDA419 /* GoodIntermediateCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868B11ADFF67200E5AFDC /* GoodIntermediateCA.der */; };
 		8CA6CC411BAE2E8300BDA419 /* www.good.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868B21ADFF67200E5AFDC /* www.good.com.der */; };
-		8CA6CC441BAE2E8800BDA419 /* COMODOECCDomainValidationSecureServerCA2.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CC78B1C1B1B55EC00523A25 /* COMODOECCDomainValidationSecureServerCA2.der */; };
-		8CA6CC451BAE2E8800BDA419 /* sni41871.cloudflaressl.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CC78B1D1B1B55EC00523A25 /* sni41871.cloudflaressl.com.der */; };
 		8CC78B201B1B586F00523A25 /* TSKCertificateUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC78B1F1B1B586F00523A25 /* TSKCertificateUtils.m */; };
 		8CC78B251B1B616500523A25 /* TSKPublicKeyAlgorithmTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC78B241B1B616500523A25 /* TSKPublicKeyAlgorithmTests.m */; };
-		8CC78B281B1B696D00523A25 /* sni41871.cloudflaressl.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CC78B1D1B1B55EC00523A25 /* sni41871.cloudflaressl.com.der */; };
-		8CC78B291B1B697000523A25 /* COMODOECCDomainValidationSecureServerCA2.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CC78B1C1B1B55EC00523A25 /* COMODOECCDomainValidationSecureServerCA2.der */; };
 		8CCBD15B1B186D1100CB88AF /* reporting_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CCBD15A1B186D1100CB88AF /* reporting_utils.m */; };
 		8CD0D4171BD42A7D004478C0 /* RSSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD5F7411BCB06F4005801D8 /* RSSwizzle.m */; settings = {COMPILER_FLAGS = "-Wno-sign-conversion -Wno-sign-compare"; }; };
 		8CD0D4271BD7159E004478C0 /* libassert_lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CA6CC321BAE2C1100BDA419 /* libassert_lib.a */; };
@@ -106,8 +106,6 @@
 		8CD5F7581BCB7219005801D8 /* TSKNSURLSessionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD5F7561BCB7219005801D8 /* TSKNSURLSessionTests.m */; };
 		8CD5F7831BCC40AF005801D8 /* COMODOECCCertificationAuthority.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CD5F7821BCC40AF005801D8 /* COMODOECCCertificationAuthority.der */; };
 		8CD5F7841BCC40AF005801D8 /* COMODOECCCertificationAuthority.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CD5F7821BCC40AF005801D8 /* COMODOECCCertificationAuthority.der */; };
-		8CD5F7861BCC4650005801D8 /* AddTrustExternalRootCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CD5F7851BCC4650005801D8 /* AddTrustExternalRootCA.der */; };
-		8CD5F7871BCC4650005801D8 /* AddTrustExternalRootCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CD5F7851BCC4650005801D8 /* AddTrustExternalRootCA.der */; };
 		8CE9191E1AEA073C002B29AE /* public_key_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE9191C1AEA073C002B29AE /* public_key_utils.h */; };
 		8CE9191F1AEA073C002B29AE /* public_key_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9191D1AEA073C002B29AE /* public_key_utils.m */; };
 		8CE919221AEA077F002B29AE /* ssl_pin_verifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE919211AEA077F002B29AE /* ssl_pin_verifier.m */; };
@@ -162,6 +160,8 @@
 		8C15F99E1B16094D00F06C0E /* TSKPinFailureReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKPinFailureReport.h; path = Reporting/TSKPinFailureReport.h; sourceTree = "<group>"; };
 		8C15F99F1B16094D00F06C0E /* TSKPinFailureReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKPinFailureReport.m; path = Reporting/TSKPinFailureReport.m; sourceTree = "<group>"; };
 		8C15F9A31B17564400F06C0E /* TSKPinConfigurationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKPinConfigurationTests.m; sourceTree = "<group>"; };
+		8C7D06801C69551400D3B3D2 /* www.cloudflare.com.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = www.cloudflare.com.der; sourceTree = "<group>"; };
+		8C7D06861C6957FE00D3B3D2 /* COMODOECCExtendedValidationSecureServerCA.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = COMODOECCExtendedValidationSecureServerCA.der; sourceTree = "<group>"; };
 		8C8480471A896EE30017C155 /* TrustKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TrustKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C84804B1A896EE30017C155 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C84804C1A896EE30017C155 /* TrustKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrustKit.h; sourceTree = "<group>"; };
@@ -180,8 +180,6 @@
 		8CA6CC321BAE2C1100BDA419 /* libassert_lib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libassert_lib.a; path = Dependencies/domain_registry/ios/libassert_lib.a; sourceTree = "<group>"; };
 		8CA6CC331BAE2C1100BDA419 /* libdomain_registry_lib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libdomain_registry_lib.a; path = Dependencies/domain_registry/ios/libdomain_registry_lib.a; sourceTree = "<group>"; };
 		8CA6CC341BAE2C1100BDA419 /* libinit_registry_tables_lib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libinit_registry_tables_lib.a; path = Dependencies/domain_registry/ios/libinit_registry_tables_lib.a; sourceTree = "<group>"; };
-		8CC78B1C1B1B55EC00523A25 /* COMODOECCDomainValidationSecureServerCA2.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = COMODOECCDomainValidationSecureServerCA2.der; sourceTree = "<group>"; };
-		8CC78B1D1B1B55EC00523A25 /* sni41871.cloudflaressl.com.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = sni41871.cloudflaressl.com.der; sourceTree = "<group>"; };
 		8CC78B1E1B1B586F00523A25 /* TSKCertificateUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSKCertificateUtils.h; sourceTree = "<group>"; };
 		8CC78B1F1B1B586F00523A25 /* TSKCertificateUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKCertificateUtils.m; sourceTree = "<group>"; };
 		8CC78B241B1B616500523A25 /* TSKPublicKeyAlgorithmTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKPublicKeyAlgorithmTests.m; sourceTree = "<group>"; };
@@ -198,7 +196,6 @@
 		8CD5F7481BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKNSURLSessionDelegateProxy.m; path = Swizzling/TSKNSURLSessionDelegateProxy.m; sourceTree = "<group>"; };
 		8CD5F7561BCB7219005801D8 /* TSKNSURLSessionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKNSURLSessionTests.m; sourceTree = "<group>"; };
 		8CD5F7821BCC40AF005801D8 /* COMODOECCCertificationAuthority.der */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COMODOECCCertificationAuthority.der; sourceTree = "<group>"; };
-		8CD5F7851BCC4650005801D8 /* AddTrustExternalRootCA.der */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AddTrustExternalRootCA.der; sourceTree = "<group>"; };
 		8CE9191C1AEA073C002B29AE /* public_key_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = public_key_utils.h; path = Pinning/public_key_utils.h; sourceTree = "<group>"; };
 		8CE9191D1AEA073C002B29AE /* public_key_utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = public_key_utils.m; path = Pinning/public_key_utils.m; sourceTree = "<group>"; };
 		8CE919211AEA077F002B29AE /* ssl_pin_verifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ssl_pin_verifier.m; path = Pinning/ssl_pin_verifier.m; sourceTree = "<group>"; };
@@ -380,10 +377,9 @@
 		8CC78B191B1B54F700523A25 /* ECDSA  sec256r1 */ = {
 			isa = PBXGroup;
 			children = (
-				8CC78B1C1B1B55EC00523A25 /* COMODOECCDomainValidationSecureServerCA2.der */,
-				8CD5F7851BCC4650005801D8 /* AddTrustExternalRootCA.der */,
+				8C7D06801C69551400D3B3D2 /* www.cloudflare.com.der */,
+				8C7D06861C6957FE00D3B3D2 /* COMODOECCExtendedValidationSecureServerCA.der */,
 				8CD5F7821BCC40AF005801D8 /* COMODOECCCertificationAuthority.der */,
-				8CC78B1D1B1B55EC00523A25 /* sni41871.cloudflaressl.com.der */,
 			);
 			name = "ECDSA  sec256r1";
 			sourceTree = "<group>";
@@ -655,15 +651,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CD2D5FB1C08F8A500C4F2B5 /* datatheorem.com.der in Resources */,
-				8CC78B291B1B697000523A25 /* COMODOECCDomainValidationSecureServerCA2.der in Resources */,
-				8CD5F7861BCC4650005801D8 /* AddTrustExternalRootCA.der in Resources */,
 				8CD2D5F81C08F89D00C4F2B5 /* COMODORSADomainValidationSecureServerCA.der in Resources */,
 				070868B51ADFFADF00E5AFDC /* GoodRootCA.der in Resources */,
 				8CD2D5F51C08F89100C4F2B5 /* COMODORSACertificationAuthority.der in Resources */,
+				8C7D06871C6957FE00D3B3D2 /* COMODOECCExtendedValidationSecureServerCA.der in Resources */,
 				070868BB1AE1672D00E5AFDC /* www.good.com.selfsigned.der in Resources */,
 				070868B71ADFFADF00E5AFDC /* GoodIntermediateCA.der in Resources */,
 				8CD5F7831BCC40AF005801D8 /* COMODOECCCertificationAuthority.der in Resources */,
-				8CC78B281B1B696D00523A25 /* sni41871.cloudflaressl.com.der in Resources */,
+				8C7D06811C69551900D3B3D2 /* www.cloudflare.com.der in Resources */,
 				070868B81ADFFADF00E5AFDC /* www.good.com.der in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -680,15 +675,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CD2D5FC1C08F8A500C4F2B5 /* datatheorem.com.der in Resources */,
-				8CD5F7871BCC4650005801D8 /* AddTrustExternalRootCA.der in Resources */,
 				8CA6CC3F1BAE2E8300BDA419 /* GoodRootCA.der in Resources */,
 				8CD2D5F91C08F89D00C4F2B5 /* COMODORSADomainValidationSecureServerCA.der in Resources */,
 				8CA6CC401BAE2E8300BDA419 /* GoodIntermediateCA.der in Resources */,
+				8C7D06881C6957FE00D3B3D2 /* COMODOECCExtendedValidationSecureServerCA.der in Resources */,
 				8CD2D5F61C08F89200C4F2B5 /* COMODORSACertificationAuthority.der in Resources */,
 				8CA6CC411BAE2E8300BDA419 /* www.good.com.der in Resources */,
-				8CA6CC451BAE2E8800BDA419 /* sni41871.cloudflaressl.com.der in Resources */,
 				8CD5F7841BCC40AF005801D8 /* COMODOECCCertificationAuthority.der in Resources */,
-				8CA6CC441BAE2E8800BDA419 /* COMODOECCDomainValidationSecureServerCA2.der in Resources */,
+				8C7D06821C69551900D3B3D2 /* www.cloudflare.com.der in Resources */,
 				8CA6CC3E1BAE2E8300BDA419 /* www.good.com.selfsigned.der in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
