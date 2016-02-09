@@ -184,37 +184,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
         // Check the trust object against the pinning policy
         trustDecision = [TSKPinningValidator evaluateTrust:serverTrust forHostname:serverHostname];
         _lastTrustDecision = trustDecision;
-        if (trustDecision == TSKTrustDecisionShouldAllowConnection)
-        {
-            // Success - don't do anything and forward the challenge to the original delegate
-            wasChallengeHandled = NO;
-        }
-        else if (trustDecision == TSKTrustDecisionDomainNotPinned)
-        {
-            if ([self forwardToOriginalDelegateAuthenticationChallenge:challenge completionHandler:completionHandler forSession:session])
-            {
-                // The original delegate handled the challenge and performed SSL validation itself
-                wasChallengeHandled = YES;
-            }
-            else
-            {
-                // The original delegate does not have authentication handlers for this challenge
-                // We need to do the default validation ourselves to avoid disabling SSL validation for all non pinned domains
-                TSKLog(@"Performing default certificate validation for %@", serverHostname);
-                SecTrustResultType trustResult = 0;
-                SecTrustEvaluate(serverTrust, &trustResult);
-                if ((trustResult != kSecTrustResultUnspecified) && (trustResult != kSecTrustResultProceed))
-                {
-                    // Default SSL validation failed - block the connection
-                    CFDictionaryRef evaluationDetails = SecTrustCopyResult(serverTrust);
-                    TSKLog(@"Error: default SSL validation failed: %@", evaluationDetails);
-                    CFRelease(evaluationDetails);
-                    wasChallengeHandled = YES;
-                    completionHandler(NSURLSessionAuthChallengeCancelAuthenticationChallenge, NULL);
-                }
-            }
-        }
-        else
+        if (trustDecision == TSKTrustDecisionShouldBlockConnection)
         {
             // Pinning validation failed - block the connection
             wasChallengeHandled = YES;
@@ -225,6 +195,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
     // Forward all challenges (including client auth challenges) to the original delegate
     if (wasChallengeHandled == NO)
     {
+        // We will also get here if the pinning validation succeeded or the domain was not pinned
         if ([self forwardToOriginalDelegateAuthenticationChallenge:challenge completionHandler:completionHandler forSession:session] == NO)
         {
             // The original delegate could not handle the challenge; use the default handler
@@ -250,12 +221,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
         trustDecision = [TSKPinningValidator evaluateTrust:challenge.protectionSpace.serverTrust
                                                forHostname:challenge.protectionSpace.host];
         _lastTrustDecision = trustDecision;
-        if ((trustDecision == TSKTrustDecisionShouldAllowConnection) || (trustDecision == TSKTrustDecisionDomainNotPinned))
-        {
-            // Don't do anything and forward the challenge to the original delegate
-            wasChallengeHandled = NO;
-        }
-        else
+        if (trustDecision == TSKTrustDecisionShouldBlockConnection)
         {
             // Pinning validation failed - block the connection
             wasChallengeHandled = YES;
@@ -266,6 +232,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
     // Forward all challenges (including client auth challenges) to the original delegate
     if (wasChallengeHandled == NO)
     {
+        // We will also get here if the pinning validation succeeded or the domain was not pinned
         // If we're in this delegate method (and not URLSession:didReceiveChallenge:completionHandler:)
         // it means the delegate definitely implements the handler method so we can call it directly
         [originalDelegate URLSession:session task:task didReceiveChallenge:challenge completionHandler:completionHandler];
