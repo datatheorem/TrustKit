@@ -128,6 +128,7 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
     {
         // Extract the certificate
         SecCertificateRef certificate = SecTrustGetCertificateAtIndex(serverTrust, i);
+        TSKLog(@"Checking certificate with CN: %@", SecCertificateCopySubjectSummary(certificate));
         
         // For each public key algorithm flagged as supported in the config, generate the subject public key info hash
         for (id savedAlgorithm in supportedAlgorithms)
