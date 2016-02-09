@@ -30,10 +30,11 @@ if __name__ == '__main__':
 
 
     # Parse the certificate and print its information
-    certificate_txt = check_output('openssl x509 -in {} -inform DER -text -noout'.format(args.certificate), shell=True)
+    certificate_txt = check_output('openssl x509 -inform {} -in {} -text -noout'.format(args.type,
+                                                                                        args.certificate), shell=True)
     print '\nCERTIFICATE INFO\n----------------'
-    print check_output('openssl x509 -subject -issuer -fingerprint -sha1 -noout -inform DER -in {}'.format(
-        args.certificate), shell=True)
+    print check_output('openssl x509 -subject -issuer -fingerprint -sha1 -noout -inform {} -in {}'.format(
+        args.type, args.certificate), shell=True)
 
 
     # Extract the certificate key's algorithm
@@ -66,8 +67,9 @@ if __name__ == '__main__':
     else:
         raise ValueError('Unexpected key algoriyhm')
 
-    spki = check_output('openssl x509  -pubkey -noout -inform DER -in {} '
-                        '| openssl {} -outform DER -pubin -in /dev/stdin 2>/dev/null'.format(args.certificate,
+    spki = check_output('openssl x509  -pubkey -noout -inform {} -in {} '
+                        '| openssl {} -outform DER -pubin -in /dev/stdin 2>/dev/null'.format(args.type,
+                                                                                             args.certificate,
                                                                                              openssl_alg),
                         shell=True)
 
