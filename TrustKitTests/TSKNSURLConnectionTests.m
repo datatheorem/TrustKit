@@ -228,7 +228,7 @@
                                               ]}}};
     
     [TrustKit initializeWithConfiguration:trustKitConfig];
-
+    
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLConnectionDelegate"];
     TestNSURLConnectionDelegateNoAuthHandler *delegate = [[TestNSURLConnectionDelegateNoAuthHandler alloc] initWithExpectation:expectation];
@@ -240,16 +240,57 @@
     [connection start];
     
     [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error)
-    {
-        if (error)
-        {
-            NSLog(@"Timeout Error: %@", error);
-        }
-    }];
+     {
+         if (error)
+         {
+             NSLog(@"Timeout Error: %@", error);
+         }
+     }];
     
     XCTAssert(([TSKNSURLConnectionDelegateProxy getLastTrustDecision] == TSKTrustDecisionShouldBlockConnection), @"TrustKit accepted an invalid certificate");
     XCTAssertNotNil(delegate.lastError, @"TrustKit did not trigger an error");
     XCTAssertNil(delegate.lastResponse, @"TrustKit returned a response although pin validation failed");
+}
+
+
+// Tests a secure connection to https://www.yahoo.com via its IP address in order to simulate a server with an invalid certificate chain and ensure that TrustKit is not disabling certificate validation
+- (void)testPinningValidationFailedChainNotTrusted
+{
+    // This is not needed but to ensure TrustKit does get initialized
+    NSDictionary *trustKitConfig =
+    @{
+      kTSKPinnedDomains :
+          @{
+              @"www.yahoo.com" : @{
+                      kTSKEnforcePinning : @YES,
+                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                      kTSKPublicKeyHashes : @[@"JbQbUG5JMJUoI6brnx0x3vZF6jilxsapbXGVfjhN8Fg=", // CA key
+                                              @"JbQbUG5JMJUoI6brnx0x3vZF6jilxsapbXGVfjhN8Fg=" // CA key
+                                              ]}}};
+    
+    [TrustKit initializeWithConfiguration:trustKitConfig];
+    
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLConnectionDelegate"];
+    TestNSURLConnectionDelegateNoAuthHandler *delegate = [[TestNSURLConnectionDelegateNoAuthHandler alloc] initWithExpectation:expectation];
+    // Use -initWithRequest:delegate:
+    NSURLConnection *connection = [[NSURLConnection alloc]
+                                   initWithRequest:[NSURLRequest requestWithURL:
+                                                    [NSURL URLWithString:@"https://206.190.36.105/"]]
+                                   delegate:delegate];
+    [connection start];
+    
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error)
+     {
+         if (error)
+         {
+             NSLog(@"Timeout Error: %@", error);
+         }
+     }];
+    
+    XCTAssert(([TSKNSURLConnectionDelegateProxy getLastTrustDecision] == TSKTrustDecisionDomainNotPinned), @"TrustKit accepted an invalid certificate");
+    XCTAssertNotNil(delegate.lastError, @"TrustKit did not trigger an error");
+    XCTAssertNil(delegate.lastResponse, @"TrustKit returned a response although the server's certificate is invalid");
 }
 
 
@@ -329,6 +370,7 @@
         }
     }];
 }
+
 
 // Ensure that if the original delegate has an auth handler, it also gets called when pinning validation succeed
 // so that we don't disrupt the App's usual flow because of TrustKit's swizzling
