@@ -169,9 +169,11 @@ validate the server's identity against the pinning policy. For these connections
 must be manually triggered: the server's trust object, which contains its certificate chain, needs to 
 be retrieved or built before being passed to the 
 [`TSKPinningValidator` class](https://datatheorem.github.io/TrustKit/documentation/Classes/TSKPinningValidator.html) 
-for validation. 
+for validation. Apple has released a 
+[technical note describing how the server's trust object can be retrieved][https://developer.apple.com/library/ios/technotes/tn2232/_index.html] 
+for the various network APIs (`NSStream`, `CFNetwork`, etc.) available on iOS and OS X.
  
-`TSKPinningValidator` returns a `TSKTrustDecision` which describes whether the SSL connection 
+`TSKPinningValidator` then returns a `TSKTrustDecision` which describes whether the SSL connection 
 should be allowed or blocked, based on the App's SSL pinning policy.
  
  The following connections require manual pin validation:
