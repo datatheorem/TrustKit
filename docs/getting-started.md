@@ -169,9 +169,7 @@ validate the server's identity against the pinning policy. For these connections
 must be manually triggered: the server's trust object, which contains its certificate chain, needs to 
 be retrieved or built before being passed to the 
 [`TSKPinningValidator` class](https://datatheorem.github.io/TrustKit/documentation/Classes/TSKPinningValidator.html) 
-for validation. Apple has released a 
-[technical note describing how the server's trust object can be retrieved][https://developer.apple.com/library/ios/technotes/tn2232/_index.html] 
-for the various network APIs (`NSStream`, `CFNetwork`, etc.) available on iOS and OS X.
+for validation. 
  
 `TSKPinningValidator` then returns a `TSKTrustDecision` which describes whether the SSL connection 
 should be allowed or blocked, based on the App's SSL pinning policy.
@@ -180,7 +178,7 @@ should be allowed or blocked, based on the App's SSL pinning policy.
  
  1. All connections within an App that disables TrustKit's network delegate swizzling by setting the `kTSKSwizzleNetworkDelegates` configuration key to `NO`.
  2. Connections that do not rely on the `NSURLConnection` or `NSURLSession` APIs:
-     * Connections leveraging different network APIs (such as `NSStream`). Instructions on how to retrieve the server's trust object are available in the [Apple documentation](https://developer.apple.com/library/mac/documentation/NetworkingInternet/Conceptual/NetworkingTopics/Articles/OverridingSSLChainValidationCorrectly.html).
+     * Connections leveraging different network APIs (such as `NSStream`). Apple has released a [technical note describing how the server's trust object can be retrieved][https://developer.apple.com/library/ios/technotes/tn2232/_index.html] for the various network APIs (`NSStream`, `CFNetwork`, etc.) available on iOS and OS X.
      * Connections initiated using a third-party SSL library such as OpenSSL. The server's trust object needs to be built using the received certificate chain.
  3. Connections happening within an external process:
      * `WKWebView` connections: the server's trust object can be retrieved and validated within the `webView:didReceiveAuthenticationChallenge:completionHandler:` method.
