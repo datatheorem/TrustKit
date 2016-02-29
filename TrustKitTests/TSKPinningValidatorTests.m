@@ -347,6 +347,7 @@
     // Create a configuration
     NSDictionary *trustKitConfig = @{kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
+                                                   kTSKEnforcePinning: @NO,  // Should fail even if pinning is not enforced
                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA key
                                                                            @"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=" // CA key

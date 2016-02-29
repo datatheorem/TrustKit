@@ -75,15 +75,23 @@
                                                CFRelease(serverTrust);
                                            });
                 
-                // Is pinning enforced?
-                if ([domainConfig[kTSKEnforcePinning] boolValue] == YES)
+                if (validationResult == TSKPinValidationResultFailed)
                 {
-                    // Yes - Block the connection
-                    finalTrustDecision = TSKTrustDecisionShouldBlockConnection;
+                    // Is pinning enforced?
+                    if ([domainConfig[kTSKEnforcePinning] boolValue] == YES)
+                    {
+                        // Yes - Block the connection
+                        finalTrustDecision = TSKTrustDecisionShouldBlockConnection;
+                    }
+                    else
+                    {
+                        finalTrustDecision = TSKTrustDecisionShouldAllowConnection;
+                    }
                 }
                 else
                 {
-                    finalTrustDecision = TSKTrustDecisionShouldAllowConnection;
+                    // Misc pinning errors (such as invalid certificate chain) - block the connection
+                    finalTrustDecision = TSKTrustDecisionShouldBlockConnection;
                 }
             }
         }
