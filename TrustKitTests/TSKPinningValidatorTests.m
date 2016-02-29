@@ -28,6 +28,7 @@
     SecCertificateRef _intermediateCertificate;
     SecCertificateRef _selfSignedCertificate;
     SecCertificateRef _leafCertificate;
+    SecCertificateRef _comodoRootCertificate;
 }
 
 
@@ -39,6 +40,7 @@
     _intermediateCertificate = [TSKCertificateUtils createCertificateFromDer:@"GoodIntermediateCA"];
     _leafCertificate = [TSKCertificateUtils createCertificateFromDer:@"www.good.com"];
     _selfSignedCertificate = [TSKCertificateUtils createCertificateFromDer:@"www.good.com.selfsigned"];
+    _comodoRootCertificate = [TSKCertificateUtils createCertificateFromDer:@"COMODORSACertificationAuthority"];
     
     [TrustKit resetConfiguration];
 }
@@ -406,6 +408,46 @@
     // Then test TSKPinningValidator
     [TrustKit initializeWithConfiguration:trustKitConfig];
     XCTAssert([TSKPinningValidator evaluateTrust:trust forHostname:@"www.bad.com"] == TSKTrustDecisionShouldBlockConnection);
+    CFRelease(trust);
+}
+
+
+// Pin the valid CA key but serve a different valid chain with the (unrelared) pinned CA certificate injected at the end
+- (void)testVerifyAgainstInjectedCaPublicKey
+{
+    // The certificate chain is valid for www.good.com but does not contain the pinned CA certificate, which we inject as an additional certificate
+    SecCertificateRef certChainArray[3] = {_leafCertificate, _comodoRootCertificate, _intermediateCertificate};
+    SecCertificateRef trustStoreArray[1] = {_rootCertificate};
+    SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
+                                                             arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
+                                                      anchorCertificates:(const void **)trustStoreArray
+                                                             arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
+    
+    
+    // Create a configuration
+    NSDictionary *trustKitConfig = @{kTSKPinnedDomains :
+                                         @{@"www.good.com" : @{
+                                                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                                                   kTSKPublicKeyHashes : @[@"grX4Ta9HpZx6tSHkmCrvpApTQGo67CYDnvprLg5yRME=", // Comodo CA
+                                                                           @"grX4Ta9HpZx6tSHkmCrvpApTQGo67CYDnvprLg5yRME=" // Comodo CA
+                                                                           ]}}};
+    
+    // First test the verifyPublicKeyPin() function
+    NSDictionary *parsedTrustKitConfig = parseTrustKitArguments(trustKitConfig);
+    
+    TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
+    verificationResult = verifyPublicKeyPin(trust,
+                                            @"www.good.com",
+                                            parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
+                                            parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes]);
+    
+    
+    XCTAssert(verificationResult == TSKTrustDecisionShouldBlockConnection, @"Validation must fail against injected pinned CA");
+    
+    
+    // Then test TSKPinningValidator
+    [TrustKit initializeWithConfiguration:trustKitConfig];
+    XCTAssert([TSKPinningValidator evaluateTrust:trust forHostname:@"www.good.com"] == TSKTrustDecisionShouldBlockConnection);
     CFRelease(trust);
 }
 
