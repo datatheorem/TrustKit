@@ -93,6 +93,9 @@
     [TrustKit initializeWithConfiguration:trustKitConfig];
     XCTAssert([TSKPinningValidator evaluateTrust:trust forHostname:@"www.good.com"] == TSKTrustDecisionShouldAllowConnection);
     
+    // Ensure the SPKI cache was persisted to the filesystem
+    // TODO: Perhaps move this to a different test suite
+    XCTAssert([getSpkiCacheFromFileSystem() count] == 1, @"SPKI cache must be persisted to the file system");
     CFRelease(trust);
 }
 
@@ -132,6 +135,12 @@
     // Then test TSKPinningValidator
     [TrustKit initializeWithConfiguration:trustKitConfig];
     XCTAssert([TSKPinningValidator evaluateTrust:trust forHostname:@"www.good.com"] == TSKTrustDecisionShouldAllowConnection);
+    
+    
+    // Ensure the SPKI cache was persisted to the filesystem
+    // TODO: Perhaps move this to a different test suite
+    XCTAssert([getSpkiCacheFromFileSystem() count] == 2, @"SPKI cache must be persisted to the file system");
+    
     CFRelease(trust);
 }
 

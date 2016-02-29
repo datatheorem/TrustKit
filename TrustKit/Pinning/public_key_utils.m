@@ -225,9 +225,7 @@ void initializeSubjectPublicKeyInfoCache(void)
 {
     // Initialize our cache of SPKI hashes
     // First try to load a cached version from the filesystem
-    NSString *spkiCachePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:_spkiCacheFilename];
-    NSData *serializedSpkiCache = [NSData dataWithContentsOfFile:spkiCachePath];
-    _subjectPublicKeyInfoHashesCache = [NSKeyedUnarchiver unarchiveObjectWithData:serializedSpkiCache];
+    _subjectPublicKeyInfoHashesCache = getSpkiCacheFromFileSystem();
     TSKLog(@"Loaded %d SPKI cache entries from the filesystem", [_subjectPublicKeyInfoHashesCache count]);
     if (_subjectPublicKeyInfoHashesCache == nil)
     {
@@ -269,4 +267,15 @@ void resetSubjectPublicKeyInfoCache(void)
     NSString *spkiCachePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:_spkiCacheFilename];
     [fileManager removeItemAtPath:spkiCachePath error:nil];
 }
+
+
+NSMutableDictionary *getSpkiCacheFromFileSystem(void)
+{
+    NSMutableDictionary *spkiCache;
+    NSString *spkiCachePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:_spkiCacheFilename];
+    NSData *serializedSpkiCache = [NSData dataWithContentsOfFile:spkiCachePath];
+    spkiCache = [NSKeyedUnarchiver unarchiveObjectWithData:serializedSpkiCache];
+    return spkiCache;
+}
+
 

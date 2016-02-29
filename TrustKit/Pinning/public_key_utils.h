@@ -25,8 +25,12 @@ typedef NS_ENUM(NSInteger, TSKPublicKeyAlgorithm)
 
 
 void initializeSubjectPublicKeyInfoCache(void);
-void resetSubjectPublicKeyInfoCache(void);
 
 NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate, TSKPublicKeyAlgorithm publicKeyAlgorithm);
+
+
+// For tests
+void resetSubjectPublicKeyInfoCache(void);
+NSMutableDictionary *getSpkiCacheFromFileSystem(void);
 
 #endif
