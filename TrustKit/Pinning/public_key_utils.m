@@ -18,12 +18,14 @@
 
 #pragma mark Global Cache for SPKI Hashes
 
-// One dictionnary cache per TSKPublicKeyAlgorithm defined
-// We use these to cache SPKI hashes instead of having to compute them on every connection
-NSMutableDictionary *_subjectPublicKeyInfoHashesCache[3] = {nil, nil, nil};
+// Dictionnary to cache SPKI hashes instead of having to compute them on every connection
+NSMutableDictionary *_subjectPublicKeyInfoHashesCache;
 
-static pthread_mutex_t _spkiCacheLock; // Used to lock access to our SPKI caches
+// Used to lock access to our SPKI cache
+static pthread_mutex_t _spkiCacheLock;
 
+// File name for persisting the cache in the filesystem
+static NSString *_spkiCacheFilename = @"TrustKitSpkiCache.plist";
 
 #pragma mark Missing ASN1 SPKI Headers
 
@@ -155,7 +157,6 @@ static NSData *getPublicKeyDataFromCertificate(SecCertificateRef certificate)
 
 NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate, TSKPublicKeyAlgorithm publicKeyAlgorithm)
 {
-    int algorithm = publicKeyAlgorithm;
     NSData *cachedSubjectPublicKeyInfo = NULL;
     
     // Have we seen this certificate before? Look for the SPKI in the cache
@@ -163,7 +164,7 @@ NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate, T
 
     pthread_mutex_lock(&_spkiCacheLock);
     {
-        cachedSubjectPublicKeyInfo = _subjectPublicKeyInfoHashesCache[algorithm][certificateData];
+        cachedSubjectPublicKeyInfo = _subjectPublicKeyInfoHashesCache[certificateData];
     }
     pthread_mutex_unlock(&_spkiCacheLock);
     
@@ -199,13 +200,20 @@ NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate, T
     CC_SHA256_Final((unsigned char *)[subjectPublicKeyInfoHash bytes], &shaCtx);
     
 
-    // Store the hash in our cache
+    // Store the hash in our memory cache
     pthread_mutex_lock(&_spkiCacheLock);
     {
-        _subjectPublicKeyInfoHashesCache[algorithm][certificateData] = subjectPublicKeyInfoHash;
+        _subjectPublicKeyInfoHashesCache[certificateData] = subjectPublicKeyInfoHash;
     }
     pthread_mutex_unlock(&_spkiCacheLock);
     
+    // Update the cache on the filesystem
+    NSString *spkiCachePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:_spkiCacheFilename];
+    NSData *serializedSpkiCache = [NSKeyedArchiver archivedDataWithRootObject:_subjectPublicKeyInfoHashesCache];
+    if ([serializedSpkiCache writeToFile:spkiCachePath atomically:YES] == NO)
+    {
+        TSKLog(@"Could not persist SPKI cache to the filesystem");
+    }
     
     CFRelease((__bridge CFTypeRef)(certificateData));
     return subjectPublicKeyInfoHash;
@@ -215,10 +223,16 @@ NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate, T
 
 void initializeSubjectPublicKeyInfoCache(void)
 {
-    // Initialize our caches of SPKI hashes; we have one per type of public keys to make it convenient
-    _subjectPublicKeyInfoHashesCache[TSKPublicKeyAlgorithmRsa2048] = [[NSMutableDictionary alloc]init];
-    _subjectPublicKeyInfoHashesCache[TSKPublicKeyAlgorithmRsa4096] = [[NSMutableDictionary alloc]init];
-    _subjectPublicKeyInfoHashesCache[TSKPublicKeyAlgorithmEcDsaSecp256r1] = [[NSMutableDictionary alloc]init];
+    // Initialize our cache of SPKI hashes
+    // First try to load a cached version from the filesystem
+    NSString *spkiCachePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:_spkiCacheFilename];
+    NSData *serializedSpkiCache = [NSData dataWithContentsOfFile:spkiCachePath];
+    _subjectPublicKeyInfoHashesCache = [NSKeyedUnarchiver unarchiveObjectWithData:serializedSpkiCache];
+    TSKLog(@"Loaded %d SPKI cache entries from the filesystem", [_subjectPublicKeyInfoHashesCache count]);
+    if (_subjectPublicKeyInfoHashesCache == nil)
+    {
+        _subjectPublicKeyInfoHashesCache = [[NSMutableDictionary alloc]init];
+    }
     
     // Initialize our locks
     pthread_mutex_init(&_spkiCacheLock, NULL);
@@ -249,8 +263,10 @@ void resetSubjectPublicKeyInfoCache(void)
 #endif
     
     // Discard SPKI cache
-    _subjectPublicKeyInfoHashesCache[TSKPublicKeyAlgorithmRsa2048] = nil;
-    _subjectPublicKeyInfoHashesCache[TSKPublicKeyAlgorithmRsa4096] = nil;
-    _subjectPublicKeyInfoHashesCache[TSKPublicKeyAlgorithmEcDsaSecp256r1] = nil;
+    _subjectPublicKeyInfoHashesCache = nil;
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *spkiCachePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:_spkiCacheFilename];
+    [fileManager removeItemAtPath:spkiCachePath error:nil];
 }
 
