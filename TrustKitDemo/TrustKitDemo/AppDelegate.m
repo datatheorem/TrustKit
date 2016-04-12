@@ -42,7 +42,8 @@
                               ],
                       
                       // Send reports for pinning failures
-                      kTSKReportUris: @[@"https://trustkit-reports-server.appspot.com/log_report"]
+                      // Email info@datatheorem.com if you need a free dashboard to see your App's reports
+                      kTSKReportUris: @[@"https://overmind.datatheorem.com/trustkit/report"]
                       },
               
               
