@@ -117,7 +117,7 @@ corresponding certificates' public key algorithms. For example:
                       kTSKIncludeSubdomains:@YES,
                       
                       // Do not block connections if pinning validation failed so the App doesn't break
-                      kTSKEnforcePinning:@YES,
+                      kTSKEnforcePinning:@NO,
                     
                       // Send reports for pin validation failures so we can track them
                       kTSKReportUris: @[@"https://trustkit-reports-server.appspot.com/log_report"],

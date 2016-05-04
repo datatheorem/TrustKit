@@ -59,7 +59,7 @@ FOUNDATION_EXPORT const NSString * kTSKAlgorithmEcDsaSecp256r1;
  | ____ `TSKReportUris`                         | Array      |
  | ____ `kTSKDisableDefaultReportUri`           | Boolean    |
  
- When setting the pinning policy programmatically, it has to be supplied to the `initializeWithConfiguration:` method as a dictionnary. For example:
+ When setting the pinning policy programmatically, it has to be supplied to the `initializeWithConfiguration:` method as a dictionary. For example:
  
     NSDictionary *trustKitConfig =
     @{
@@ -203,7 +203,7 @@ FOUNDATION_EXPORT const NSString * kTSKAlgorithmEcDsaSecp256r1;
  
  This method should be called as early as possible in the App's lifecycle to ensure that the App's very first SSL connections are validated by TrustKit.
  
- @param trustKitConfig A dictionnary containing various keys for configuring the global SSL pinning policy.
+ @param trustKitConfig A dictionary containing various keys for configuring the global SSL pinning policy.
  @exception NSException Thrown when the supplied configuration is invalid or TrustKit has already been initialized.
  
  */
