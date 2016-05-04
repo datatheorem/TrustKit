@@ -43,7 +43,7 @@ const NSString *kTSKAlgorithmEcDsaSecp256r1 = @"TSKAlgorithmEcDsaSecp256r1";
 
 
 #pragma mark TrustKit Global State
-// Global dictionnary for storing the public key hashes and domains
+// Global dictionary for storing the public key hashes and domains
 static NSDictionary *_trustKitGlobalConfiguration = nil;
 
 // Global preventing multiple initializations (double function interposition, etc.)
@@ -121,7 +121,7 @@ void sendPinFailureReport_async(TSKPinValidationResult validationResult, SecTrus
 
 NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
 {
-    // Convert settings supplied by the user to a configuration dictionnary that can be used by TrustKit
+    // Convert settings supplied by the user to a configuration dictionary that can be used by TrustKit
     // This includes checking the sanity of the settings and converting public key hashes/pins from an
     // NSSArray of NSStrings (as provided by the user) to an NSSet of NSData (as needed by TrustKit)
     

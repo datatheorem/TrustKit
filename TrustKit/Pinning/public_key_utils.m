@@ -79,7 +79,7 @@ static NSData *getPublicKeyDataFromCertificate(SecCertificateRef certificate)
     
     
     // Extract the actual bytes from the key reference using the Keychain
-    // Prepare the dictionnary to add the key
+    // Prepare the dictionary to add the key
     NSMutableDictionary *peerPublicKeyAdd = [[NSMutableDictionary alloc] init];
     [peerPublicKeyAdd setObject:(__bridge id)kSecClassKey forKey:(__bridge id)kSecClass];
     [peerPublicKeyAdd setObject:kTSKKeychainPublicKeyTag forKey:(__bridge id)kSecAttrApplicationTag];
@@ -91,7 +91,7 @@ static NSData *getPublicKeyDataFromCertificate(SecCertificateRef certificate)
     // Request the key's data to be returned
     [peerPublicKeyAdd setObject:(__bridge id)(kCFBooleanTrue) forKey:(__bridge id)kSecReturnData];
     
-    // Prepare the dictionnary to retrieve and delete the key
+    // Prepare the dictionary to retrieve and delete the key
     NSMutableDictionary * publicKeyGet = [[NSMutableDictionary alloc] init];
     [publicKeyGet setObject:(__bridge id)kSecClassKey forKey:(__bridge id)kSecClass];
     [publicKeyGet setObject:(kTSKKeychainPublicKeyTag) forKey:(__bridge id)kSecAttrApplicationTag];
