@@ -69,6 +69,15 @@
     }
     
     CFRelease(certificateChain);
+
+    // Certificates included in the test suite have certain expiration time window - between 11/3/15 and 3/29/16
+    // Set the verify date to be in that range so the certs do not need to be updated periodically
+    // The date we set to is 2016-01-22
+    CFAbsoluteTime verifyTime = 475163640.0;
+    CFDateRef testVerifyDate = CFDateCreate(NULL, verifyTime);
+    SecTrustSetVerifyDate(trust, testVerifyDate);
+    CFRelease(testVerifyDate);
+
     return trust;
 }
 
