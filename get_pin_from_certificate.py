@@ -57,13 +57,13 @@ if __name__ == '__main__':
     if key_algorithm == SupportedKeyAlgorithmsEnum.ECDSA_SECP256R1:
         # The OpenSSL command is different for ECDSA
         openssl_alg = 'ec'
-        trustkit_alg = 'TSKAlgorithmEcDsaSecp256r1'
+        trustkit_alg = 'kTSKAlgorithmEcDsaSecp256r1'
     elif key_algorithm == SupportedKeyAlgorithmsEnum.RSA_2048:
         openssl_alg = 'rsa'
-        trustkit_alg = 'TSKAlgorithmRsa2048'
+        trustkit_alg = 'kTSKAlgorithmRsa2048'
     elif key_algorithm == SupportedKeyAlgorithmsEnum.RSA_4096:
         openssl_alg = 'rsa'
-        trustkit_alg = 'TSKAlgorithmRsa4096'
+        trustkit_alg = 'kTSKAlgorithmRsa4096'
     else:
         raise ValueError('Unexpected key algoriyhm')
 
@@ -78,4 +78,4 @@ if __name__ == '__main__':
 
     print 'TRUSTKIT CONFIGURATION\n----------------------'
     print 'kTSKPublicKeyHashes: @[@"{}"] // You will also need to configure a backup pin'.format(hpkp_pin)
-    print 'kTSKPublicKeyAlgorithms: @[@"{}"]\n'.format(trustkit_alg)
+    print 'kTSKPublicKeyAlgorithms: @[{}]\n'.format(trustkit_alg)
