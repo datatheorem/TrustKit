@@ -303,8 +303,8 @@
           @{
               @"www.twitter.com" : @{
                       kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                      kTSKPublicKeyHashes : @[@"JbQbUG5JMJUoI6brnx0x3vZF6jilxsapbXGVfjhN8Fg=", // CA key
-                                              @"JbQbUG5JMJUoI6brnx0x3vZF6jilxsapbXGVfjhN8Fg=" // CA key
+                      kTSKPublicKeyHashes : @[@"RRM1dGqnDFsCJXBTHky16vi1obOlCgFFn/yOhI/y+ho=", // CA key
+                                              @"RRM1dGqnDFsCJXBTHky16vi1obOlCgFFn/yOhI/y+ho=" // CA key
                                               ]}}};
     
     [TrustKit initializeWithConfiguration:trustKitConfig];
