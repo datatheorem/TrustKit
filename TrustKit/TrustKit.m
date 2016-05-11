@@ -26,6 +26,7 @@ static const NSString *kTSKConfiguration = @"TSKConfiguration";
 // General keys
 const NSString *kTSKSwizzleNetworkDelegates = @"TSKSwizzleNetworkDelegates";
 const NSString *kTSKPinnedDomains = @"TSKPinnedDomains";
+const NSString *kTSKPostValidationNotifications = @"TSKPostValidationNotifications";
 
 // Keys for each domain within the TSKPinnedDomains entry
 const NSString *kTSKPublicKeyHashes = @"TSKPublicKeyHashes";
@@ -41,6 +42,11 @@ const NSString *kTSKAlgorithmRsa2048 = @"TSKAlgorithmRsa2048";
 const NSString *kTSKAlgorithmRsa4096 = @"TSKAlgorithmRsa4096";
 const NSString *kTSKAlgorithmEcDsaSecp256r1 = @"TSKAlgorithmEcDsaSecp256r1";
 
+#pragma mark Notification keys
+NSString * const kTSKValidationCompletedNotification   = @"TSKValidationCompletedNotification";
+NSString * const kTSKValidationDurationNotificationKey = @"TSKValidationDurationNotificationKey";
+NSString * const kTSKValidationResultNotificationKey   = @"TSKValidationResultNotificationKey";
+NSString * const kTSKValidationDecisionNotificationKey = @"TSKValidationDecisionNotificationKey";
 
 #pragma mark TrustKit Global State
 // Global dictionary for storing the public key hashes and domains
@@ -161,7 +167,18 @@ NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments)
     }
 #endif
     
-    
+    // Should we post notifications
+    NSNumber *shouldPostNotifications = TrustKitArguments[kTSKPostValidationNotifications];
+    if (shouldPostNotifications == nil)
+    {
+        // Default setting is NO
+        finalConfiguration[kTSKPostValidationNotifications] = [NSNumber numberWithBool:NO];
+    }
+    else
+    {
+        finalConfiguration[kTSKPostValidationNotifications] = shouldPostNotifications;
+    }
+
     // Retrieve the pinning policy for each domains
     if ((TrustKitArguments[kTSKPinnedDomains] == nil) || ([TrustKitArguments[kTSKPinnedDomains] count] < 1))
     {
