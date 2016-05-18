@@ -27,10 +27,19 @@
         TSKLog(@"Pin validation error - invalid parameters for %@", serverHostname);
         return TSKTrustDecisionShouldBlockConnection;
     }
-    
+
     TSKTrustDecision finalTrustDecision = TSKTrustDecisionShouldBlockConnection;
     NSDictionary *trustKitConfig = [TrustKit configuration];
-    
+
+    NSTimeInterval validationStartTime = 0;
+    BOOL shouldPostNotifications = ([trustKitConfig[kTSKPostValidationNotifications] boolValue] == YES);
+    if (shouldPostNotifications) {
+        // Register start time for duration computations
+        validationStartTime = [NSDate timeIntervalSinceReferenceDate];
+    }
+
+    TSKPinValidationResult validationResult = TSKPinValidationResultErrorInvalidParameters;
+
     // Retrieve the pinning configuration for this specific domain, if there is one
     NSString *domainConfigKey = getPinningConfigurationKeyForDomain(serverHostname, trustKitConfig);
     if (domainConfigKey == nil)
@@ -44,7 +53,7 @@
         CFRetain(serverTrust);
         NSDictionary *domainConfig = trustKitConfig[kTSKPinnedDomains][domainConfigKey];
         
-        TSKPinValidationResult validationResult = verifyPublicKeyPin(serverTrust, serverHostname, domainConfig[kTSKPublicKeyAlgorithms], domainConfig[kTSKPublicKeyHashes]);
+        validationResult = verifyPublicKeyPin(serverTrust, serverHostname, domainConfig[kTSKPublicKeyAlgorithms], domainConfig[kTSKPublicKeyHashes]);
         if (validationResult == TSKPinValidationResultSuccess)
         {
             // Pin validation was successful
@@ -96,6 +105,18 @@
             }
         }
     }
+
+    // For consumers that want to get notified about all validations performed, post
+    // a notification with duration and validation results/decision
+    if (shouldPostNotifications) {
+        NSTimeInterval validationDuration = [NSDate timeIntervalSinceReferenceDate] - validationStartTime;
+        [[NSNotificationCenter defaultCenter] postNotificationName:kTSKValidationCompletedNotification
+                                                            object:nil
+                                                          userInfo:@{kTSKValidationDurationNotificationKey : @(validationDuration),
+                                                                     kTSKValidationDecisionNotificationKey : @(finalTrustDecision),
+                                                                     kTSKValidationResultNotificationKey   : @(validationResult)}];
+    }
+
     return finalTrustDecision;
 }
 

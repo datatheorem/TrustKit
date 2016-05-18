@@ -487,6 +487,133 @@
     CFRelease(trust);
 }
 
+// Verify notification gets posted for TrustKit validations, with a positive result
+- (void)testValidationNotificationPosted
+{
+    // Create a valid server trust
+    SecCertificateRef certChainArray[2] = {_leafCertificate, _intermediateCertificate};
+    SecCertificateRef trustStoreArray[1] = {_rootCertificate};
+    SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
+                                                             arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
+                                                      anchorCertificates:(const void **)trustStoreArray
+                                                             arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
 
+    // Create a configuration with notifications ON
+    NSDictionary *trustKitConfig = @{kTSKPostValidationNotifications : @YES,
+                                     kTSKPinnedDomains :
+                                         @{@"www.good.com" : @{
+                                                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                   kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=", // Server key
+                                                                           @"khKI6ae4micEvX74MB/BZ4u15WCWGXPD6Gjg6iIRVeE=", // Intermediate key
+                                                                           @"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=" // CA key
+                                                                           ]}}};
+
+    // Configure notification listener
+    XCTestExpectation *notifReceivedExpectation = [self expectationWithDescription:@"TestNotificationReceivedExpectation"];
+    id observerId = [[NSNotificationCenter defaultCenter] addObserverForName:kTSKValidationCompletedNotification
+                                                                      object:nil
+                                                                       queue:nil
+                                                                  usingBlock:^(NSNotification * _Nonnull note) {
+        // Notification received, check the userInfo
+        XCTAssertNotNil([note userInfo][kTSKValidationDurationNotificationKey]);
+        XCTAssertEqual([note userInfo][kTSKValidationDecisionNotificationKey], @(TSKTrustDecisionShouldAllowConnection));
+        XCTAssertEqual([note userInfo][kTSKValidationResultNotificationKey], @(TSKPinValidationResultSuccess));
+        [notifReceivedExpectation fulfill];
+    }];
+
+    [TrustKit initializeWithConfiguration:trustKitConfig];
+    XCTAssert([TSKPinningValidator evaluateTrust:trust forHostname:@"www.good.com"] == TSKTrustDecisionShouldAllowConnection);
+
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Expectation timeout Error: %@", error);
+        }
+    }];
+
+    CFRelease(trust);
+    [[NSNotificationCenter defaultCenter] removeObserver:observerId];
+}
+
+// Verify notification gets posted for TrustKit validations, with a negative result
+- (void)testValidationNotificationPostedFailure
+{
+    // Create a valid server trust
+    SecCertificateRef certChainArray[2] = {_leafCertificate, _intermediateCertificate};
+    SecCertificateRef trustStoreArray[1] = {_rootCertificate};
+    SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
+                                                             arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
+                                                      anchorCertificates:(const void **)trustStoreArray
+                                                             arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
+
+    // Create a configuration with notifications ON
+    NSDictionary *trustKitConfig = @{kTSKPostValidationNotifications : @YES,
+                                     kTSKPinnedDomains :
+                                         @{@"www.good.com" : @{
+                                                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                   kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Bad Key
+                                                                           @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Bad Key
+                                                                           ]}}};
+
+    // Configure notification listener
+    XCTestExpectation *notifReceivedExpectation = [self expectationWithDescription:@"TestNotificationReceivedExpectation"];
+    id observerId = [[NSNotificationCenter defaultCenter] addObserverForName:kTSKValidationCompletedNotification
+                                                                      object:nil
+                                                                       queue:nil
+                                                                  usingBlock:^(NSNotification * _Nonnull note) {
+        // Notification received, check the userInfo
+        XCTAssertNotNil([note userInfo][kTSKValidationDurationNotificationKey]);
+        XCTAssertEqual([note userInfo][kTSKValidationDecisionNotificationKey], @(TSKTrustDecisionShouldBlockConnection));
+        XCTAssertEqual([note userInfo][kTSKValidationResultNotificationKey], @(TSKPinValidationResultFailed));
+        [notifReceivedExpectation fulfill];
+    }];
+
+    [TrustKit initializeWithConfiguration:trustKitConfig];
+    XCTAssert([TSKPinningValidator evaluateTrust:trust forHostname:@"www.good.com"] == TSKTrustDecisionShouldBlockConnection);
+    
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Expectation timeout Error: %@", error);
+        }
+    }];
+    
+    CFRelease(trust);
+    [[NSNotificationCenter defaultCenter] removeObserver:observerId];
+}
+
+// Verify notification does not gets posted for TrustKit validations when not opted in
+- (void)testValidationNotificationNotPosted
+{
+    // Create a valid server trust
+    SecCertificateRef certChainArray[2] = {_leafCertificate, _intermediateCertificate};
+    SecCertificateRef trustStoreArray[1] = {_rootCertificate};
+    SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
+                                                             arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
+                                                      anchorCertificates:(const void **)trustStoreArray
+                                                             arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
+
+    // Create a configuration with notifications ON
+    NSDictionary *trustKitConfig = @{kTSKPinnedDomains :
+                                         @{@"www.good.com" : @{
+                                                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                   kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=", // Server key
+                                                                           @"khKI6ae4micEvX74MB/BZ4u15WCWGXPD6Gjg6iIRVeE=", // Intermediate key
+                                                                           @"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=" // CA key
+                                                                           ]}}};
+
+    // Configure notification listener
+    id observerId = [[NSNotificationCenter defaultCenter] addObserverForName:kTSKValidationCompletedNotification
+                                                                      object:nil
+                                                                       queue:nil
+                                                                  usingBlock:^(NSNotification * _Nonnull note) {
+        // Notification received, not expected
+        XCTFail(@"kTSKValidationCompletedNotification should not have been posted");
+    }];
+
+    [TrustKit initializeWithConfiguration:trustKitConfig];
+    XCTAssert([TSKPinningValidator evaluateTrust:trust forHostname:@"www.good.com"] == TSKTrustDecisionShouldAllowConnection);
+    
+    CFRelease(trust);
+    [[NSNotificationCenter defaultCenter] removeObserver:observerId];
+}
 
 @end

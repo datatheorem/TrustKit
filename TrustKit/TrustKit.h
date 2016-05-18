@@ -31,12 +31,24 @@ FOUNDATION_EXPORT const NSString * kTSKPublicKeyAlgorithms;
 FOUNDATION_EXPORT const NSString * kTSKReportUris;
 FOUNDATION_EXPORT const NSString * kTSKDisableDefaultReportUri;
 FOUNDATION_EXPORT const NSString * kTSKIgnorePinningForUserDefinedTrustAnchors NS_AVAILABLE_MAC(10_9);
+FOUNDATION_EXPORT const NSString * kTSKPostValidationNotifications;
 
 
 #pragma mark Supported Public Key Algorithm Keys
+
 FOUNDATION_EXPORT const NSString * kTSKAlgorithmRsa2048;
 FOUNDATION_EXPORT const NSString * kTSKAlgorithmRsa4096;
 FOUNDATION_EXPORT const NSString * kTSKAlgorithmEcDsaSecp256r1;
+
+
+#pragma mark TrustKit Notifications
+// This notification is posted for every request that's going through TrustKit pinning validation
+FOUNDATION_EXPORT NSString * const kTSKValidationCompletedNotification;
+
+// Notifications get posted on a background thread, and may carry additional information in userInfo (see keys below)
+FOUNDATION_EXPORT NSString * const kTSKValidationDurationNotificationKey; // validation duration number (in seconds)
+FOUNDATION_EXPORT NSString * const kTSKValidationResultNotificationKey;   // validation result number (TSKPinValidationResult)
+FOUNDATION_EXPORT NSString * const kTSKValidationDecisionNotificationKey; // decision result number (TSKTrustDecision)
 
 
 /**
@@ -50,6 +62,7 @@ FOUNDATION_EXPORT const NSString * kTSKAlgorithmEcDsaSecp256r1;
  |----------------------------------------------|------------|
  | `TSKSwizzleNetworkDelegates`                 | Boolean    |
  | `TSKIgnorePinningForUserDefinedTrustAnchors` | Boolean    |
+ | 'TSKPostValidationNotifications'             | Boolean    |
  | `TSKPinnedDomains`                           | Dictionary |
  | __ `<domain-name-to-pin-as-string>`          | Dictionary |
  | ____ `TSKPublicKeyHashes`                    | Array      |
@@ -64,6 +77,7 @@ FOUNDATION_EXPORT const NSString * kTSKAlgorithmEcDsaSecp256r1;
     NSDictionary *trustKitConfig =
     @{
       kTSKSwizzleNetworkDelegates: @YES,
+      kTSKPostValidationNotifications: @NO,
       kTSKPinnedDomains : @{
               @"www.datatheorem.com" : @{
                       kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
@@ -126,7 +140,10 @@ FOUNDATION_EXPORT const NSString * kTSKAlgorithmEcDsaSecp256r1;
  
  This is useful for allowing SSL connections through corporate proxies or firewalls. See "How does key pinning interact with local proxies and filters?" within the Chromium security FAQ at https://www.chromium.org/Home/chromium-security/security-faq for more information.
 
- 
+
+ #### `kTSKPostValidationNotifications`
+ If set to `YES`, TrustKit will post notifications for all request validations performed. This allows clients to use custom tracking/performance reporting as needed.
+
  ### Required Domain-specific Keys
  
  #### `kTSKPublicKeyHashes`
