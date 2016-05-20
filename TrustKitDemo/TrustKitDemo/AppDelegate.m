@@ -27,6 +27,9 @@
       // Auto-swizzle NSURLSession delegates to add pinning validation
       kTSKSwizzleNetworkDelegates: @YES,
       
+      // Enable validation notifications for performance tracking
+      kTSKPostValidationNotifications: @YES,
+      
       kTSKPinnedDomains: @{
               
               // Pin invalid SPKI hashes to *.yahoo.com to demonstrate pinning failures
@@ -60,6 +63,17 @@
                       }}};
     
     [TrustKit initializeWithConfiguration:trustKitConfig];
+    
+    
+    // Receive validation notifications (only useful for performance/metrics)
+    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
+    NSOperationQueue *mainQueue = [NSOperationQueue mainQueue];
+    id observerId = [center addObserverForName:kTSKValidationCompletedNotification object:nil
+                                         queue:mainQueue usingBlock:^(NSNotification *note) {
+                                             NSDictionary* userInfo = [note userInfo];
+                                             NSLog(@"Received pinning validation notification: %@ %@ %@", userInfo[kTSKValidationDurationNotificationKey], userInfo[kTSKValidationDecisionNotificationKey], userInfo[kTSKValidationResultNotificationKey]);
+                                                     }];
+    
     return YES;
 }
 
