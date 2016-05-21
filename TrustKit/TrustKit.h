@@ -22,23 +22,23 @@ FOUNDATION_EXPORT const unsigned char TrustKitVersionString[];
 
 #pragma mark TrustKit Configuration Keys
 
-FOUNDATION_EXPORT const NSString * kTSKSwizzleNetworkDelegates;
-FOUNDATION_EXPORT const NSString * kTSKPinnedDomains;
-FOUNDATION_EXPORT const NSString * kTSKPublicKeyHashes;
-FOUNDATION_EXPORT const NSString * kTSKEnforcePinning;
-FOUNDATION_EXPORT const NSString * kTSKIncludeSubdomains;
-FOUNDATION_EXPORT const NSString * kTSKPublicKeyAlgorithms;
-FOUNDATION_EXPORT const NSString * kTSKReportUris;
-FOUNDATION_EXPORT const NSString * kTSKDisableDefaultReportUri;
-FOUNDATION_EXPORT const NSString * kTSKIgnorePinningForUserDefinedTrustAnchors NS_AVAILABLE_MAC(10_9);
-FOUNDATION_EXPORT const NSString * kTSKPostValidationNotifications;
+FOUNDATION_EXPORT NSString * const kTSKSwizzleNetworkDelegates;
+FOUNDATION_EXPORT NSString * const kTSKPinnedDomains;
+FOUNDATION_EXPORT NSString * const kTSKPublicKeyHashes;
+FOUNDATION_EXPORT NSString * const kTSKEnforcePinning;
+FOUNDATION_EXPORT NSString * const kTSKIncludeSubdomains;
+FOUNDATION_EXPORT NSString * const kTSKPublicKeyAlgorithms;
+FOUNDATION_EXPORT NSString * const kTSKReportUris;
+FOUNDATION_EXPORT NSString * const kTSKDisableDefaultReportUri;
+FOUNDATION_EXPORT NSString * const kTSKIgnorePinningForUserDefinedTrustAnchors NS_AVAILABLE_MAC(10_9);
+FOUNDATION_EXPORT NSString * const kTSKPostValidationNotifications;
 
 
 #pragma mark Supported Public Key Algorithm Keys
 
-FOUNDATION_EXPORT const NSString * kTSKAlgorithmRsa2048;
-FOUNDATION_EXPORT const NSString * kTSKAlgorithmRsa4096;
-FOUNDATION_EXPORT const NSString * kTSKAlgorithmEcDsaSecp256r1;
+FOUNDATION_EXPORT NSString * const kTSKAlgorithmRsa2048;
+FOUNDATION_EXPORT NSString * const kTSKAlgorithmRsa4096;
+FOUNDATION_EXPORT NSString * const kTSKAlgorithmEcDsaSecp256r1;
 
 
 #pragma mark TrustKit Notifications

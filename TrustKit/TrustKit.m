@@ -24,23 +24,23 @@
 static const NSString *kTSKConfiguration = @"TSKConfiguration";
 
 // General keys
-const NSString *kTSKSwizzleNetworkDelegates = @"TSKSwizzleNetworkDelegates";
-const NSString *kTSKPinnedDomains = @"TSKPinnedDomains";
-const NSString *kTSKPostValidationNotifications = @"TSKPostValidationNotifications";
+NSString * const kTSKSwizzleNetworkDelegates = @"TSKSwizzleNetworkDelegates";
+NSString * const kTSKPinnedDomains = @"TSKPinnedDomains";
+NSString * const kTSKPostValidationNotifications = @"TSKPostValidationNotifications";
 
 // Keys for each domain within the TSKPinnedDomains entry
-const NSString *kTSKPublicKeyHashes = @"TSKPublicKeyHashes";
-const NSString *kTSKEnforcePinning = @"TSKEnforcePinning";
-const NSString *kTSKIncludeSubdomains = @"TSKIncludeSubdomains";
-const NSString *kTSKPublicKeyAlgorithms = @"TSKPublicKeyAlgorithms";
-const NSString *kTSKReportUris = @"TSKReportUris";
-const NSString *kTSKDisableDefaultReportUri = @"TSKDisableDefaultReportUri";
-const NSString *kTSKIgnorePinningForUserDefinedTrustAnchors = @"TSKIgnorePinningForUserDefinedTrustAnchors";
+NSString * const kTSKPublicKeyHashes = @"TSKPublicKeyHashes";
+NSString * const kTSKEnforcePinning = @"TSKEnforcePinning";
+NSString * const kTSKIncludeSubdomains = @"TSKIncludeSubdomains";
+NSString * const kTSKPublicKeyAlgorithms = @"TSKPublicKeyAlgorithms";
+NSString * const kTSKReportUris = @"TSKReportUris";
+NSString * const kTSKDisableDefaultReportUri = @"TSKDisableDefaultReportUri";
+NSString * const kTSKIgnorePinningForUserDefinedTrustAnchors = @"TSKIgnorePinningForUserDefinedTrustAnchors";
 
 #pragma mark Public key Algorithms Constants
-const NSString *kTSKAlgorithmRsa2048 = @"TSKAlgorithmRsa2048";
-const NSString *kTSKAlgorithmRsa4096 = @"TSKAlgorithmRsa4096";
-const NSString *kTSKAlgorithmEcDsaSecp256r1 = @"TSKAlgorithmEcDsaSecp256r1";
+NSString * const kTSKAlgorithmRsa2048 = @"TSKAlgorithmRsa2048";
+NSString * const kTSKAlgorithmRsa4096 = @"TSKAlgorithmRsa4096";
+NSString * const kTSKAlgorithmEcDsaSecp256r1 = @"TSKAlgorithmEcDsaSecp256r1";
 
 #pragma mark Notification keys
 NSString * const kTSKValidationCompletedNotification   = @"TSKValidationCompletedNotification";
