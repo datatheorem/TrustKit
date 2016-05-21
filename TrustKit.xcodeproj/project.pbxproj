@@ -22,6 +22,9 @@
 		8C15F9A01B16094D00F06C0E /* TSKPinFailureReport.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C15F99E1B16094D00F06C0E /* TSKPinFailureReport.h */; };
 		8C15F9A11B16094E00F06C0E /* TSKPinFailureReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F99F1B16094D00F06C0E /* TSKPinFailureReport.m */; };
 		8C15F9A41B17564400F06C0E /* TSKPinConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F9A31B17564400F06C0E /* TSKPinConfigurationTests.m */; };
+		8C5D98B31CEFF079008E654B /* parse_configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C5D98B21CEFF079008E654B /* parse_configuration.m */; };
+		8C5D98B41CEFF079008E654B /* parse_configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C5D98B21CEFF079008E654B /* parse_configuration.m */; };
+		8C5D98B51CEFF079008E654B /* parse_configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C5D98B21CEFF079008E654B /* parse_configuration.m */; };
 		8C7D06811C69551900D3B3D2 /* www.cloudflare.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 8C7D06801C69551400D3B3D2 /* www.cloudflare.com.der */; };
 		8C7D06821C69551900D3B3D2 /* www.cloudflare.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 8C7D06801C69551400D3B3D2 /* www.cloudflare.com.der */; };
 		8C7D06871C6957FE00D3B3D2 /* COMODOECCExtendedValidationSecureServerCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8C7D06861C6957FE00D3B3D2 /* COMODOECCExtendedValidationSecureServerCA.der */; };
@@ -160,6 +163,8 @@
 		8C15F99E1B16094D00F06C0E /* TSKPinFailureReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKPinFailureReport.h; path = Reporting/TSKPinFailureReport.h; sourceTree = "<group>"; };
 		8C15F99F1B16094D00F06C0E /* TSKPinFailureReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKPinFailureReport.m; path = Reporting/TSKPinFailureReport.m; sourceTree = "<group>"; };
 		8C15F9A31B17564400F06C0E /* TSKPinConfigurationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKPinConfigurationTests.m; sourceTree = "<group>"; };
+		8C5D98B21CEFF079008E654B /* parse_configuration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = parse_configuration.m; sourceTree = "<group>"; };
+		8C5D98B61CEFF103008E654B /* parse_configuration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = parse_configuration.h; sourceTree = "<group>"; };
 		8C7D06801C69551400D3B3D2 /* www.cloudflare.com.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = www.cloudflare.com.der; sourceTree = "<group>"; };
 		8C7D06861C6957FE00D3B3D2 /* COMODOECCExtendedValidationSecureServerCA.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = COMODOECCExtendedValidationSecureServerCA.der; sourceTree = "<group>"; };
 		8C8480471A896EE30017C155 /* TrustKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TrustKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -306,6 +311,8 @@
 				8C84806C1A896F660017C155 /* TrustKit.m */,
 				2FA286123F801C437F35D240 /* TrustKit+Private.h */,
 				8C84804A1A896EE30017C155 /* Supporting Files */,
+				8C5D98B21CEFF079008E654B /* parse_configuration.m */,
+				8C5D98B61CEFF103008E654B /* parse_configuration.h */,
 			);
 			path = TrustKit;
 			sourceTree = "<group>";
@@ -696,6 +703,7 @@
 			files = (
 				8CE919221AEA077F002B29AE /* ssl_pin_verifier.m in Sources */,
 				8C9EBE031B619BBE00CA7EE0 /* TSKReportsRateLimiter.m in Sources */,
+				8C5D98B31CEFF079008E654B /* parse_configuration.m in Sources */,
 				6B2B06AF1B05157400FC749E /* TSKBackgroundReporter.m in Sources */,
 				8CD5F74B1BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.m in Sources */,
 				8CE9191F1AEA073C002B29AE /* public_key_utils.m in Sources */,
@@ -728,6 +736,7 @@
 			files = (
 				8C8716B71B23AA0B00267E1D /* TSKPinningValidator.m in Sources */,
 				8C8716B51B23AA0600267E1D /* public_key_utils.m in Sources */,
+				8C5D98B41CEFF079008E654B /* parse_configuration.m in Sources */,
 				8C8716B31B23A9F700267E1D /* TSKPinFailureReport.m in Sources */,
 				8C8716B41B23A9FA00267E1D /* reporting_utils.m in Sources */,
 				8C8716B81B23AA0D00267E1D /* TrustKit.m in Sources */,
@@ -748,6 +757,7 @@
 				8CA6CC1A1BAE2B6600BDA419 /* TSKBackgroundReporter.m in Sources */,
 				8CA6CC1C1BAE2B6600BDA419 /* TSKPinFailureReport.m in Sources */,
 				8CD5F74D1BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.m in Sources */,
+				8C5D98B51CEFF079008E654B /* parse_configuration.m in Sources */,
 				8CA6CC241BAE2B6A00BDA419 /* TSKPinningValidator.m in Sources */,
 				8C0237161C25736400855D43 /* osx_vendor_id.m in Sources */,
 				8CA6CC1E1BAE2B6600BDA419 /* reporting_utils.m in Sources */,
