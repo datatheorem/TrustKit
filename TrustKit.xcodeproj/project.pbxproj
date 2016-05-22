@@ -22,6 +22,10 @@
 		8C15F9A01B16094D00F06C0E /* TSKPinFailureReport.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C15F99E1B16094D00F06C0E /* TSKPinFailureReport.h */; };
 		8C15F9A11B16094E00F06C0E /* TSKPinFailureReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F99F1B16094D00F06C0E /* TSKPinFailureReport.m */; };
 		8C15F9A41B17564400F06C0E /* TSKPinConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F9A31B17564400F06C0E /* TSKPinConfigurationTests.m */; };
+		8C5AB45F1CF268FA00234B30 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C5AB45E1CF268FA00234B30 /* OCMock.framework */; };
+		8C5AB4621CF269DA00234B30 /* OCMock.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8C5AB45E1CF268FA00234B30 /* OCMock.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8C5AB4681CF26A2900234B30 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C5AB4671CF26A2900234B30 /* OCMock.framework */; };
+		8C5AB46A1CF26A3E00234B30 /* OCMock.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8C5AB4671CF26A2900234B30 /* OCMock.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8C5D98B31CEFF079008E654B /* parse_configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C5D98B21CEFF079008E654B /* parse_configuration.m */; };
 		8C5D98B41CEFF079008E654B /* parse_configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C5D98B21CEFF079008E654B /* parse_configuration.m */; };
 		8C5D98B51CEFF079008E654B /* parse_configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C5D98B21CEFF079008E654B /* parse_configuration.m */; };
@@ -133,6 +137,26 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		8C5AB4611CF269CE00234B30 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8C5AB4621CF269DA00234B30 /* OCMock.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C5AB4691CF26A3200234B30 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8C5AB46A1CF26A3E00234B30 /* OCMock.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8C8716941B23A91D00267E1D /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -161,6 +185,8 @@
 		8C15F99E1B16094D00F06C0E /* TSKPinFailureReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKPinFailureReport.h; path = Reporting/TSKPinFailureReport.h; sourceTree = "<group>"; };
 		8C15F99F1B16094D00F06C0E /* TSKPinFailureReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKPinFailureReport.m; path = Reporting/TSKPinFailureReport.m; sourceTree = "<group>"; };
 		8C15F9A31B17564400F06C0E /* TSKPinConfigurationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKPinConfigurationTests.m; sourceTree = "<group>"; };
+		8C5AB45E1CF268FA00234B30 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCMock.framework; path = Dependencies/OCMock/OSX/OCMock.framework; sourceTree = "<group>"; };
+		8C5AB4671CF26A2900234B30 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCMock.framework; path = Dependencies/OCMock/iOS/OCMock.framework; sourceTree = "<group>"; };
 		8C5D98B21CEFF079008E654B /* parse_configuration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = parse_configuration.m; sourceTree = "<group>"; };
 		8C5D98B61CEFF103008E654B /* parse_configuration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = parse_configuration.h; sourceTree = "<group>"; };
 		8C7D06801C69551400D3B3D2 /* www.cloudflare.com.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = www.cloudflare.com.der; sourceTree = "<group>"; };
@@ -221,6 +247,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C5AB4681CF26A2900234B30 /* OCMock.framework in Frameworks */,
 				8C8480531A896EE30017C155 /* TrustKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -249,6 +276,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C5AB45F1CF268FA00234B30 /* OCMock.framework in Frameworks */,
 				8CA6CC071BAE2ADD00BDA419 /* TrustKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -274,6 +302,39 @@
 				8CE919291AEA0F7E002B29AE /* domain_registry.h */,
 			);
 			name = domain_registry;
+			sourceTree = "<group>";
+		};
+		8C5AB4631CF26A0300234B30 /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				8C5AB4641CF26A0900234B30 /* OCMock */,
+			);
+			name = Dependencies;
+			sourceTree = "<group>";
+		};
+		8C5AB4641CF26A0900234B30 /* OCMock */ = {
+			isa = PBXGroup;
+			children = (
+				8C5AB4661CF26A1400234B30 /* iOS */,
+				8C5AB4651CF26A0E00234B30 /* OS X */,
+			);
+			name = OCMock;
+			sourceTree = "<group>";
+		};
+		8C5AB4651CF26A0E00234B30 /* OS X */ = {
+			isa = PBXGroup;
+			children = (
+				8C5AB45E1CF268FA00234B30 /* OCMock.framework */,
+			);
+			name = "OS X";
+			sourceTree = "<group>";
+		};
+		8C5AB4661CF26A1400234B30 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				8C5AB4671CF26A2900234B30 /* OCMock.framework */,
+			);
+			name = iOS;
 			sourceTree = "<group>";
 		};
 		8C84803D1A896EE30017C155 = {
@@ -325,6 +386,7 @@
 		8C8480561A896EE30017C155 /* TrustKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				8C5AB4631CF26A0300234B30 /* Dependencies */,
 				070868B31ADFF68200E5AFDC /* Certificates */,
 				8CD5F7371BCB02A7005801D8 /* TSKNSURLConnectionTests.m */,
 				8CD5F7561BCB7219005801D8 /* TSKNSURLSessionTests.m */,
@@ -526,6 +588,7 @@
 				8C84804E1A896EE30017C155 /* Sources */,
 				8C84804F1A896EE30017C155 /* Frameworks */,
 				8C8480501A896EE30017C155 /* Resources */,
+				8C5AB4691CF26A3200234B30 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -579,6 +642,7 @@
 				8CA6CC021BAE2ADD00BDA419 /* Sources */,
 				8CA6CC031BAE2ADD00BDA419 /* Frameworks */,
 				8CA6CC041BAE2ADD00BDA419 /* Resources */,
+				8C5AB4611CF269CE00234B30 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -979,6 +1043,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)",
 					"$(inherited)",
+					"$(PROJECT_DIR)/TrustKitTests/Dependencies/OCMock/iOS",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1006,6 +1071,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)",
 					"$(inherited)",
+					"$(PROJECT_DIR)/TrustKitTests/Dependencies/OCMock/iOS",
 				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = TrustKitTests/Info.plist;
@@ -1134,6 +1200,10 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TrustKitTests/Dependencies/OCMock/OSX",
+				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = TrustKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
@@ -1154,6 +1224,10 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TrustKitTests/Dependencies/OCMock/OSX",
+				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = TrustKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
