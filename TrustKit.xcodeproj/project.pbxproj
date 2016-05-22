@@ -45,7 +45,6 @@
 		8CA6CC071BAE2ADD00BDA419 /* TrustKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CA6CBFD1BAE2ADD00BDA419 /* TrustKit.framework */; };
 		8CA6CC141BAE2B6600BDA419 /* TSKReportsRateLimiter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C9EBE001B619BBE00CA7EE0 /* TSKReportsRateLimiter.h */; };
 		8CA6CC151BAE2B6600BDA419 /* TSKReportsRateLimiter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBE011B619BBE00CA7EE0 /* TSKReportsRateLimiter.m */; };
-		8CA6CC161BAE2B6600BDA419 /* TSKReporterDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE919261AEA0991002B29AE /* TSKReporterDelegate.h */; };
 		8CA6CC191BAE2B6600BDA419 /* TSKBackgroundReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B2B06AC1B05154A00FC749E /* TSKBackgroundReporter.h */; };
 		8CA6CC1A1BAE2B6600BDA419 /* TSKBackgroundReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B2B06AE1B05157400FC749E /* TSKBackgroundReporter.m */; };
 		8CA6CC1B1BAE2B6600BDA419 /* TSKPinFailureReport.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C15F99E1B16094D00F06C0E /* TSKPinFailureReport.h */; };
@@ -113,7 +112,6 @@
 		8CE9191F1AEA073C002B29AE /* public_key_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9191D1AEA073C002B29AE /* public_key_utils.m */; };
 		8CE919221AEA077F002B29AE /* ssl_pin_verifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE919211AEA077F002B29AE /* ssl_pin_verifier.m */; };
 		8CE919251AEA07C5002B29AE /* ssl_pin_verifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE919241AEA07C5002B29AE /* ssl_pin_verifier.h */; };
-		8CE919271AEA0991002B29AE /* TSKReporterDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE919261AEA0991002B29AE /* TSKReporterDelegate.h */; };
 		8CE9192D1AEA0F7E002B29AE /* domain_registry.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE919291AEA0F7E002B29AE /* domain_registry.h */; };
 /* End PBXBuildFile section */
 
@@ -205,7 +203,6 @@
 		8CE9191D1AEA073C002B29AE /* public_key_utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = public_key_utils.m; path = Pinning/public_key_utils.m; sourceTree = "<group>"; };
 		8CE919211AEA077F002B29AE /* ssl_pin_verifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ssl_pin_verifier.m; path = Pinning/ssl_pin_verifier.m; sourceTree = "<group>"; };
 		8CE919241AEA07C5002B29AE /* ssl_pin_verifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ssl_pin_verifier.h; path = Pinning/ssl_pin_verifier.h; sourceTree = "<group>"; };
-		8CE919261AEA0991002B29AE /* TSKReporterDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKReporterDelegate.h; path = Reporting/TSKReporterDelegate.h; sourceTree = "<group>"; };
 		8CE919291AEA0F7E002B29AE /* domain_registry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = domain_registry.h; path = Dependencies/domain_registry/domain_registry.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -439,7 +436,6 @@
 			children = (
 				8C9EBE001B619BBE00CA7EE0 /* TSKReportsRateLimiter.h */,
 				8C9EBE011B619BBE00CA7EE0 /* TSKReportsRateLimiter.m */,
-				8CE919261AEA0991002B29AE /* TSKReporterDelegate.h */,
 				6B2B06AC1B05154A00FC749E /* TSKBackgroundReporter.h */,
 				6B2B06AE1B05157400FC749E /* TSKBackgroundReporter.m */,
 				8C15F99E1B16094D00F06C0E /* TSKPinFailureReport.h */,
@@ -479,7 +475,6 @@
 				8C9492F61B2379A100F5DF38 /* reporting_utils.h in Headers */,
 				8C84804D1A896EE30017C155 /* TrustKit.h in Headers */,
 				8C15F9A01B16094D00F06C0E /* TSKPinFailureReport.h in Headers */,
-				8CE919271AEA0991002B29AE /* TSKReporterDelegate.h in Headers */,
 				8CE919251AEA07C5002B29AE /* ssl_pin_verifier.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -498,7 +493,6 @@
 				8CD5F7431BCB06F4005801D8 /* RSSwizzle.h in Headers */,
 				8CA6CC191BAE2B6600BDA419 /* TSKBackgroundReporter.h in Headers */,
 				8CA6CC271BAE2B7000BDA419 /* domain_registry.h in Headers */,
-				8CA6CC161BAE2B6600BDA419 /* TSKReporterDelegate.h in Headers */,
 				8CA6CC1D1BAE2B6600BDA419 /* reporting_utils.h in Headers */,
 				8CA6CC1F1BAE2B6A00BDA419 /* public_key_utils.h in Headers */,
 			);
