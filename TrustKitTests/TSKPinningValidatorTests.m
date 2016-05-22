@@ -13,6 +13,7 @@
 #import "TrustKit+Private.h"
 #import "ssl_pin_verifier.h"
 #import "public_key_utils.h"
+#import "parse_configuration.h"
 #import "TSKCertificateUtils.h"
 
 
@@ -76,7 +77,7 @@
                                                                            ]}}};
     
     // First test the verifyPublicKeyPin() function
-    NSDictionary *parsedTrustKitConfig = parseTrustKitArguments(trustKitConfig);
+    NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust,
@@ -120,7 +121,7 @@
                                                                            ]}}};
     
     // First test the verifyPublicKeyPin() function
-    NSDictionary *parsedTrustKitConfig = parseTrustKitArguments(trustKitConfig);
+    NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust,
@@ -165,7 +166,7 @@
                                                                            ]}}};
     
     // First test the verifyPublicKeyPin() function
-    NSDictionary *parsedTrustKitConfig = parseTrustKitArguments(trustKitConfig);
+    NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust,
@@ -204,7 +205,7 @@
                                                                            ]}}};
     
     // First test the verifyPublicKeyPin() function
-    NSDictionary *parsedTrustKitConfig = parseTrustKitArguments(trustKitConfig);
+    NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust,
@@ -243,7 +244,7 @@
                                                                            ]}}};
     
     // First test the verifyPublicKeyPin() function
-    NSDictionary *parsedTrustKitConfig = parseTrustKitArguments(trustKitConfig);
+    NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust,
@@ -283,7 +284,7 @@
                                                                            ]}}};
     
     // First test the verifyPublicKeyPin() function
-    NSDictionary *parsedTrustKitConfig = parseTrustKitArguments(trustKitConfig);
+    NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust,
@@ -323,7 +324,7 @@
                                                                            ]}}};
     
     // First test the verifyPublicKeyPin() function
-    NSDictionary *parsedTrustKitConfig = parseTrustKitArguments(trustKitConfig);
+    NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust,
@@ -363,7 +364,7 @@
                                                                            ]}}};
     
     // First test the verifyPublicKeyPin() function
-    NSDictionary *parsedTrustKitConfig = parseTrustKitArguments(trustKitConfig);
+    NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust,
@@ -403,7 +404,7 @@
                                                                            ]}}};
     
     // First test the verifyPublicKeyPin() function
-    NSDictionary *parsedTrustKitConfig = parseTrustKitArguments(trustKitConfig);
+    NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust,
@@ -443,7 +444,7 @@
                                                                            ]}}};
     
     // First test the verifyPublicKeyPin() function
-    NSDictionary *parsedTrustKitConfig = parseTrustKitArguments(trustKitConfig);
+    NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust,

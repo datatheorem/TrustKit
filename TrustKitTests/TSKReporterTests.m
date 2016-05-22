@@ -69,7 +69,7 @@
     TSKBackgroundReporter *reporter = [[TSKBackgroundReporter alloc] initAndRateLimitReports:NO];
     [reporter pinValidationFailedForHostname:@"mail.example.com"
                                         port:[NSNumber numberWithInt:443]
-                                       trust:_testTrust
+                                       certificateChain:convertTrustToPemArray(_testTrust)
                                notedHostname:@"example.com"
                                    reportURIs:@[[NSURL URLWithString:[TrustKit getDefaultReportUri]]]
                            includeSubdomains:YES

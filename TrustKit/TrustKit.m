@@ -15,6 +15,7 @@
 #import "TSKNSURLConnectionDelegateProxy.h"
 #import "TSKNSURLSessionDelegateProxy.h"
 #import "parse_configuration.h"
+#import "Reporting/reporting_utils.h"
 
 
 #pragma mark Configuration Constants
@@ -46,19 +47,24 @@ NSString * const kTSKValidationCompletedNotification   = @"TSKValidationComplete
 NSString * const kTSKValidationDurationNotificationKey = @"TSKValidationDurationNotificationKey";
 NSString * const kTSKValidationResultNotificationKey   = @"TSKValidationResultNotificationKey";
 NSString * const kTSKValidationDecisionNotificationKey = @"TSKValidationDecisionNotificationKey";
+NSString * const kTSKValidationCertificateChainNotificationKey = @"TSKValidationCertificateChainNotificationKey";
+NSString * const kTSKValidationNotedHostnameNotificationKey = @"TSKValidationNotedHostnameNotificationKey";
+NSString * const kTSKValidationServerHostnameNotificationKey = @"TSKValidationServerHostnameNotificationKey";
+
 
 #pragma mark TrustKit Global State
 // Global dictionary for storing the public key hashes and domains
 static NSDictionary *_trustKitGlobalConfiguration = nil;
 
-// Global preventing multiple initializations (double function interposition, etc.)
+// Global preventing multiple initializations (double method swizzling, etc.)
 static BOOL _isTrustKitInitialized = NO;
 static dispatch_once_t dispatchOnceTrustKitInit;
 
-// Reporter delegate for sending pin violation reports
+// Reporter for sending pin violation reports
 static TSKBackgroundReporter *_pinFailureReporter = nil;
 static char kTSKPinFailureReporterQueueLabel[] = "com.datatheorem.trustkit.reporterqueue";
 static dispatch_queue_t _pinFailureReporterQueue = NULL;
+static id _pinValidationObserver = nil;
 
 
 // Default report URI - can be disabled with TSKDisableDefaultReportUri
@@ -81,48 +87,76 @@ void TSKLog(NSString *format, ...)
 }
 
 
-#pragma mark Helper Function to Send Reports
+#pragma mark Helper Function to Send Notifications and Reports
 
-
-// Send a report if needed and release the serverTrust
-void sendPinFailureReport_async(TSKPinValidationResult validationResult, SecTrustRef serverTrust, NSString *serverHostname, NSString *notedHostname, NSDictionary *notedHostnameConfig, void (^onCompletion)(void))
+// Send a notification and release the serverTrust
+void sendValidationNotification_async(NSString *serverHostname, SecTrustRef serverTrust, NSString *notedHostname, TSKPinValidationResult validationResult, TSKTrustDecision finalTrustDecision, NSTimeInterval validationDuration, void (^onCompletion)(void))
 {
-    dispatch_async(_pinFailureReporterQueue, ^(void) {
-        
-        // Pin validation failed: retrieve the list of configured report URLs
-        NSMutableArray *reportUris = [NSMutableArray arrayWithArray:notedHostnameConfig[kTSKReportUris]];
-        
-        // Also enable the default reporting URL
-        if ([notedHostnameConfig[kTSKDisableDefaultReportUri] boolValue] == NO)
-        {
-            [reportUris addObject:[NSURL URLWithString:kTSKDefaultReportUri]];
-        }
-        
-        // If some report URLs have been defined, send the pin failure report
-        if ((reportUris != nil) && ([reportUris count] > 0))
-        {
-            [_pinFailureReporter pinValidationFailedForHostname:serverHostname
-                                                           port:nil
-                                                          trust:serverTrust
-                                                  notedHostname:notedHostname
-                                                     reportURIs:reportUris
-                                              includeSubdomains:[notedHostnameConfig[kTSKIncludeSubdomains] boolValue]
-                                                      knownPins:notedHostnameConfig[kTSKPublicKeyHashes]
-                                               validationResult:validationResult];
-        }
-        
-        if (onCompletion)
-        {
-            // We usually use this to CFRelease() the serverTrust
-            onCompletion();
-        }
-    });
+    dispatch_async(_pinFailureReporterQueue, ^(void)
+                   {
+                       // Convert the server trust to a certificate chain
+                       NSArray *certificateChain = convertTrustToPemArray(serverTrust);
+                       
+                       // Send the notification or consumers that want to get notified about all validations performed
+                       [[NSNotificationCenter defaultCenter] postNotificationName:kTSKValidationCompletedNotification
+                                                                           object:nil
+                                                                         userInfo:@{kTSKValidationDurationNotificationKey: @(validationDuration),
+                                                                                    kTSKValidationDecisionNotificationKey: @(finalTrustDecision),
+                                                                                    kTSKValidationResultNotificationKey: @(validationResult),
+                                                                                    kTSKValidationCertificateChainNotificationKey: certificateChain,
+                                                                                    kTSKValidationNotedHostnameNotificationKey: notedHostname,
+                                                                                    kTSKValidationServerHostnameNotificationKey: serverHostname}];
+                       if (onCompletion)
+                       {
+                           // We usually use this to CFRelease() the serverTrust
+                           onCompletion();
+                       }
+                   });
 }
 
 
+static void (^sendReportFromNotificationBlock)(NSNotification *note) = ^void(NSNotification *note)
+{
+    NSDictionary *userInfo = [note userInfo];
+    NSNumber *validationResult = userInfo[kTSKValidationResultNotificationKey];
+    
+    // Send a report only if the there was a pinning failure
+    if (validationResult != TSKPinValidationResultSuccess)
+    {
+#if !TARGET_OS_IPHONE
+        if (validationResult != TSKPinValidationResultFailedUserDefinedTrustAnchor)
+#endif
+        {
+            NSString *notedHostname = userInfo[kTSKValidationNotedHostnameNotificationKey];
+            NSDictionary *notedHostnameConfig = _trustKitGlobalConfiguration[notedHostname];
+            
+            // Pin validation failed: retrieve the list of configured report URLs
+            NSMutableArray *reportUris = [NSMutableArray arrayWithArray:notedHostnameConfig[kTSKReportUris]];
+            
+            // Also enable the default reporting URL
+            if ([notedHostnameConfig[kTSKDisableDefaultReportUri] boolValue] == NO)
+            {
+                [reportUris addObject:[NSURL URLWithString:kTSKDefaultReportUri]];
+            }
+            
+            // If some report URLs have been defined, send the pin failure report
+            if ((reportUris != nil) && ([reportUris count] > 0))
+            {
+                [_pinFailureReporter pinValidationFailedForHostname:userInfo[kTSKValidationServerHostnameNotificationKey]
+                                                               port:nil
+                                                   certificateChain:userInfo[kTSKValidationCertificateChainNotificationKey]
+                                                      notedHostname:notedHostname
+                                                         reportURIs:reportUris
+                                                  includeSubdomains:[notedHostnameConfig[kTSKIncludeSubdomains] boolValue]
+                                                          knownPins:notedHostnameConfig[kTSKPublicKeyHashes]
+                                                   validationResult:(TSKPinValidationResult)[validationResult integerValue]];
+            }
+        }
+    }
+};
+
 
 #pragma mark TrustKit Initialization Helper Functions
-
 
 static void initializeTrustKit(NSDictionary *trustKitConfig)
 {
@@ -143,13 +177,12 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
         initializeSubjectPublicKeyInfoCache();
         
         // Convert and store the SSL pins in our global variable
-        _trustKitGlobalConfiguration = [[NSDictionary alloc]initWithDictionary:parseConfiguration(trustKitConfig)];
+        _trustKitGlobalConfiguration = [[NSDictionary alloc]initWithDictionary:parseTrustKitConfiguration(trustKitConfig)];
         
         
         // We use dispatch_once() here only so that unit tests don't reset the reporter
         // or the swizzling logic when calling [TrustKit resetConfiguration]
         dispatch_once(&dispatchOnceTrustKitInit, ^{
-            
             // Create our reporter for sending pin validation failures; do this before hooking NSURLSession so we don't hook ourselves
             _pinFailureReporter = [[TSKBackgroundReporter alloc]initAndRateLimitReports:YES];
             
@@ -160,6 +193,13 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
             _pinFailureReporterQueue = dispatch_queue_create(kTSKPinFailureReporterQueueLabel, DISPATCH_QUEUE_SERIAL);
             dispatch_set_target_queue(_pinFailureReporterQueue, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0));
             
+            
+            // Register for pinning notifications in order to trigger reports
+            // Nil queue to run the block on the _pinFailureReporterQueue (where the notification is posted from)
+            _pinValidationObserver = [[NSNotificationCenter defaultCenter] addObserverForName:kTSKValidationCompletedNotification
+                                                                              object:nil
+                                                                               queue:nil
+                                                                          usingBlock:sendReportFromNotificationBlock];
             
             // Hook network APIs if needed
             if ([_trustKitGlobalConfiguration[kTSKSwizzleNetworkDelegates] boolValue] == YES)
@@ -207,7 +247,7 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
 
 + (void) resetConfiguration
 {
-    // This is only used for tests
+    // Reset is only available/used for tests
     resetSubjectPublicKeyInfoCache();
     _trustKitGlobalConfiguration = nil;
     _isTrustKitInitialized = NO;

@@ -14,7 +14,7 @@
 #import <CommonCrypto/CommonDigest.h>
 
 
-NSDictionary *parseConfiguration(NSDictionary *TrustKitArguments)
+NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
 {
     // Convert settings supplied by the user to a configuration dictionary that can be used by TrustKit
     // This includes checking the sanity of the settings and converting public key hashes/pins from an

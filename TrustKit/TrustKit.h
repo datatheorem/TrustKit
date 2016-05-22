@@ -31,7 +31,7 @@ FOUNDATION_EXPORT NSString * const kTSKPublicKeyAlgorithms;
 FOUNDATION_EXPORT NSString * const kTSKReportUris;
 FOUNDATION_EXPORT NSString * const kTSKDisableDefaultReportUri;
 FOUNDATION_EXPORT NSString * const kTSKIgnorePinningForUserDefinedTrustAnchors NS_AVAILABLE_MAC(10_9);
-FOUNDATION_EXPORT NSString * const kTSKPostValidationNotifications;
+FOUNDATION_EXPORT NSString * const kTSKPostValidationNotifications; // TODO: Remove this this
 
 
 #pragma mark Supported Public Key Algorithm Keys
@@ -49,7 +49,9 @@ FOUNDATION_EXPORT NSString * const kTSKValidationCompletedNotification;
 FOUNDATION_EXPORT NSString * const kTSKValidationDurationNotificationKey; // validation duration number (in seconds)
 FOUNDATION_EXPORT NSString * const kTSKValidationResultNotificationKey;   // validation result number (TSKPinValidationResult)
 FOUNDATION_EXPORT NSString * const kTSKValidationDecisionNotificationKey; // decision result number (TSKTrustDecision)
-
+FOUNDATION_EXPORT NSString * const kTSKValidationCertificateChainNotificationKey;
+FOUNDATION_EXPORT NSString * const kTSKValidationNotedHostnameNotificationKey;
+FOUNDATION_EXPORT NSString * const kTSKValidationServerHostnameNotificationKey;
 
 /**
  `TrustKit` is a class for programmatically configuring the global SSL pinning policy within an App.

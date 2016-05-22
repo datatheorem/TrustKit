@@ -22,10 +22,9 @@ void TSKLog(NSString *format, ...);
 
 void sendPinFailureReport_async(TSKPinValidationResult validationResult, SecTrustRef serverTrust, NSString *serverHostname, NSString *notedHostname, NSDictionary *notedHostnameConfig, void (^onCompletion)(void));
 
+void sendValidationNotification_async(NSString *serverHostname, SecTrustRef serverTrust, NSString *notedHostname, TSKPinValidationResult validationResult, TSKTrustDecision finalTrustDecision, NSTimeInterval validationDuration, void (^onCompletion)(void));
 
 #pragma mark Methods for the unit tests
-
-NSDictionary *parseTrustKitArguments(NSDictionary *TrustKitArguments);
 
 @interface TrustKit(Private)
 
