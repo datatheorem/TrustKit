@@ -14,7 +14,7 @@
 #import "reporting_utils.h"
 
 
-NSArray *convertTrustToPemArray(SecTrustRef serverTrust)
+NSArray<NSString *> *convertTrustToPemArray(SecTrustRef serverTrust)
 {
     // Convert the trust object into an array of PEM certificates
     NSMutableArray *certificateChain = [NSMutableArray array];
@@ -38,7 +38,7 @@ NSArray *convertTrustToPemArray(SecTrustRef serverTrust)
 }
 
 
-NSArray *convertPinsToHpkpPins(NSArray *knownPins)
+NSArray<NSString *> *convertPinsToHpkpPins(NSArray<NSData *> *knownPins)
 {
     // Convert the know pins from a set of data to an array of strings as described in the HPKP spec
     NSMutableArray *formattedPins = [NSMutableArray array];

@@ -42,9 +42,9 @@
                                    port:(NSNumber *) serverPort
                                   certificateChain:(NSArray *) certificateChain
                           notedHostname:(NSString *) notedHostname
-                             reportURIs:(NSArray *) reportURIs
+                             reportURIs:(NSArray<NSURL *> *) reportURIs
                       includeSubdomains:(BOOL) includeSubdomains
-                              knownPins:(NSArray *) knownPins
+                              knownPins:(NSArray<NSData *> *) knownPins
                        validationResult:(TSKPinValidationResult) validationResult;
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error;

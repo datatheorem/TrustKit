@@ -22,10 +22,10 @@
                                 port:(NSNumber *)serverPort
                             dateTime:(NSDate *)dateTime
                    includeSubdomains:(BOOL) includeSubdomains
-           validatedCertificateChain:(NSArray *)validatedCertificateChain
-                           knownPins:(NSArray *)knownPins
+           validatedCertificateChain:(NSArray<NSString *> *)validatedCertificateChain
+                           knownPins:(NSArray<NSString *> *)knownPins
                     validationResult:(TSKPinValidationResult) validationResult
-                       appVendorId:(NSString *)appVendorId
+                         appVendorId:(NSString *)appVendorId
 {
     self = [super init];
     if (self)

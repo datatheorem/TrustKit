@@ -19,7 +19,8 @@
 #pragma mark Global Cache for SPKI Hashes
 
 // Dictionnary to cache SPKI hashes instead of having to compute them on every connection
-NSMutableDictionary *_subjectPublicKeyInfoHashesCache;
+// Each key is a raw certificate data and each value is the certificate's raw SPKI data
+NSMutableDictionary<NSData *, NSData *> *_subjectPublicKeyInfoHashesCache;
 
 // Used to lock access to our SPKI cache
 static pthread_mutex_t _spkiCacheLock;
@@ -269,7 +270,7 @@ void resetSubjectPublicKeyInfoCache(void)
 }
 
 
-NSMutableDictionary *getSpkiCacheFromFileSystem(void)
+NSMutableDictionary<NSData *, NSData *> *getSpkiCacheFromFileSystem(void)
 {
     NSMutableDictionary *spkiCache;
     NSString *spkiCachePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:_spkiCacheFilename];
