@@ -118,7 +118,7 @@ void sendValidationNotification_async(NSString *serverHostname, SecTrustRef serv
 static void (^sendReportFromNotificationBlock)(NSNotification *note) = ^void(NSNotification *note)
 {
     NSDictionary *userInfo = [note userInfo];
-    NSNumber *validationResult = userInfo[kTSKValidationResultNotificationKey];
+    TSKPinValidationResult validationResult = [userInfo[kTSKValidationResultNotificationKey] integerValue];
     
     // Send a report only if the there was a pinning failure
     if (validationResult != TSKPinValidationResultSuccess)
@@ -149,7 +149,7 @@ static void (^sendReportFromNotificationBlock)(NSNotification *note) = ^void(NSN
                                                          reportURIs:reportUris
                                                   includeSubdomains:[notedHostnameConfig[kTSKIncludeSubdomains] boolValue]
                                                           knownPins:notedHostnameConfig[kTSKPublicKeyHashes]
-                                                   validationResult:(TSKPinValidationResult)[validationResult integerValue]];
+                                                   validationResult:validationResult];
             }
         }
     }
