@@ -215,7 +215,6 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
              NSLog(@"Timeout Error: %@", error);
          }
      }];
-    
     XCTAssert(([TSKNSURLSessionDelegateProxy getLastTrustDecision] == TSKTrustDecisionShouldBlockConnection), @"TrustKit accepted an invalid certificate");
     XCTAssertNotNil(delegate.lastError, @"TrustKit did not trigger an error");
     XCTAssertNil(delegate.lastResponse, @"TrustKit returned a response although pin validation failed");
@@ -266,7 +265,6 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
              NSLog(@"Timeout Error: %@", error);
          }
      }];
-    
     XCTAssert(([TSKNSURLSessionDelegateProxy getLastTrustDecision] == TSKTrustDecisionDomainNotPinned), @"TrustKit accepted an invalid certificate");
     XCTAssertNotNil(delegate.lastError, @"TrustKit did not trigger an error");
     XCTAssertNil(delegate.lastResponse, @"TrustKit returned a response although pin validation failed");
@@ -321,7 +319,6 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
             NSLog(@"Timeout Error: %@", error);
         }
     }];
-    
     XCTAssert(([TSKNSURLSessionDelegateProxy getLastTrustDecision] == TSKTrustDecisionShouldAllowConnection), @"TrustKit rejected a valid certificate");
     XCTAssertNil(delegate.lastError, @"TrustKit triggered an error");
     XCTAssertNotNil(delegate.lastResponse, @"TrustKit prevented a response from being returned");
@@ -415,7 +412,6 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
             NSLog(@"Timeout Error: %@", error);
         }
     }];
-    
     XCTAssert(delegate.wasAuthHandlerCalled, @"TrustKit prevented the original delegate's auth handler from being called");
     
     [[NSNotificationCenter defaultCenter] removeObserver:observerId];
@@ -470,7 +466,6 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
             NSLog(@"Timeout Error: %@", error);
         }
     }];
-    
     XCTAssert(delegate.wasAuthHandlerCalled, @"TrustKit prevented the original delegate's auth handler from being called");
     
     [[NSNotificationCenter defaultCenter] removeObserver:observerId];
