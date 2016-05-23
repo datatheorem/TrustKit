@@ -26,7 +26,6 @@ static const NSString *kTSKConfiguration = @"TSKConfiguration";
 // General keys
 NSString * const kTSKSwizzleNetworkDelegates = @"TSKSwizzleNetworkDelegates";
 NSString * const kTSKPinnedDomains = @"TSKPinnedDomains";
-NSString * const kTSKPostValidationNotifications = @"TSKPostValidationNotifications";
 
 // Keys for each domain within the TSKPinnedDomains entry
 NSString * const kTSKPublicKeyHashes = @"TSKPublicKeyHashes";

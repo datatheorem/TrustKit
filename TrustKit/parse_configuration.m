@@ -56,18 +56,6 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
     }
 #endif
     
-    // Should we post notifications
-    NSNumber *shouldPostNotifications = TrustKitArguments[kTSKPostValidationNotifications];
-    if (shouldPostNotifications == nil)
-    {
-        // Default setting is NO
-        finalConfiguration[kTSKPostValidationNotifications] = @(NO);
-    }
-    else
-    {
-        finalConfiguration[kTSKPostValidationNotifications] = shouldPostNotifications;
-    }
-    
     // Retrieve the pinning policy for each domains
     if ((TrustKitArguments[kTSKPinnedDomains] == nil) || ([TrustKitArguments[kTSKPinnedDomains] count] < 1))
     {
