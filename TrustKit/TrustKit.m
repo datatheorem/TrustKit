@@ -114,6 +114,7 @@ void sendValidationNotification_async(NSString *serverHostname, SecTrustRef serv
 }
 
 
+// The block which receives pin validation notification and turns them into pin validation reports
 static void (^sendReportFromNotificationBlock)(NSNotification *note) = ^void(NSNotification *note)
 {
     NSDictionary *userInfo = [note userInfo];
