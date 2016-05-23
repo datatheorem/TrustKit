@@ -16,6 +16,8 @@
 #import "reporting_utils.h"
 #import "TSKReportsRateLimiter.h"
 #import "TrustKit+Private.h"
+#import <OCMock/OCMock.h>
+
 
 #if !TARGET_OS_IPHONE
 #import "osx_vendor_id.h"
@@ -33,6 +35,7 @@
     SecCertificateRef _rootCertificate;
     SecCertificateRef _intermediateCertificate;
     SecCertificateRef _leafCertificate;
+    NSArray<NSString *> *_testCertificateChain;
 }
 
 
@@ -50,6 +53,7 @@
                                                       arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
                                                anchorCertificates:(const void **)trustStoreArray
                                                       arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
+    _testCertificateChain = convertTrustToPemArray(_testTrust);
 }
 
 - (void)tearDown
@@ -62,6 +66,77 @@
     [super tearDown];
 }
 
+- (void)testSendReportFromNotificationBlock
+{
+    // Ensure that a pin validation notification triggers the upload of a report if the validation failed
+    // Initialize TrustKit so the reporter block is ready to receive notifications
+    NSDictionary *trustKitConfig =
+    @{
+      kTSKPinnedDomains :
+          @{
+              @"www.test.com" : @{
+                      kTSKEnforcePinning : @YES,
+                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                      kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
+                                              @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
+                                              ]}}};
+    [TrustKit initializeWithConfiguration:trustKitConfig];
+    
+    // Setup mocking of the reporter
+    TSKBackgroundReporter *defaultReporter = [TrustKit getGlobalPinFailureReporter];
+    id pinFailureReporterMock = [OCMockObject mockForClass:[TSKBackgroundReporter class]];
+    [TrustKit setGlobalPinFailureReporter: pinFailureReporterMock];
+    
+    // Expect a report to be sent out when a notification is posted
+    NSSet *knownPins = [NSSet setWithArray:@[[[NSData alloc]initWithBase64EncodedString:@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+                                                                                options:(NSDataBase64DecodingOptions)0],
+                                             [[NSData alloc]initWithBase64EncodedString:@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+                                                                                options:(NSDataBase64DecodingOptions)0]]];
+    [[pinFailureReporterMock expect] pinValidationFailedForHostname:@"www.test.com"
+                                                               port:nil
+                                                   certificateChain:_testCertificateChain
+                                                      notedHostname:@"www.test.com"
+                                                         reportURIs:@[[NSURL URLWithString:@"https://overmind.datatheorem.com/trustkit/report"]]
+                                                  includeSubdomains:NO
+                                                          knownPins:knownPins
+                                                   validationResult:TSKPinValidationResultFailed];
+    
+    // Create a notification
+    [[NSNotificationCenter defaultCenter] postNotificationName:kTSKValidationCompletedNotification
+                                                        object:nil
+                                                      userInfo:@{kTSKValidationDurationNotificationKey: @(1),
+                                                                 kTSKValidationDecisionNotificationKey: @(1),
+                                                                 kTSKValidationResultNotificationKey: @(TSKPinValidationResultFailed),
+                                                                 kTSKValidationCertificateChainNotificationKey: _testCertificateChain,
+                                                                 kTSKValidationNotedHostnameNotificationKey: @"www.test.com",
+                                                                 kTSKValidationServerHostnameNotificationKey: @"www.test.com"}];
+    // Ensure that the reporter was called
+    [pinFailureReporterMock verify];
+    
+    
+    // Send a notification for a successful validation and ensure no report gets sent
+    id pinSuccessReporterMock = [OCMockObject mockForClass:[TSKBackgroundReporter class]];
+    [TrustKit setGlobalPinFailureReporter: pinSuccessReporterMock];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kTSKValidationCompletedNotification
+                                                        object:nil
+                                                      userInfo:@{kTSKValidationResultNotificationKey: @(TSKPinValidationResultSuccess)}];
+    // Ensure that the reporter was NOT called
+    [pinSuccessReporterMock verify];
+    
+#if !TARGET_OS_IPHONE
+    // OS X - Send a notification for a failed validation due to a custom CA and ensure no report gets sent
+    [[NSNotificationCenter defaultCenter] postNotificationName:kTSKValidationCompletedNotification
+                                                        object:nil
+                                                      userInfo:@{kTSKValidationResultNotificationKey: @(TSKPinValidationResultFailedUserDefinedTrustAnchor)}];
+    // Ensure that the reporter was NOT called
+    [pinSuccessReporterMock verify];
+#endif
+    
+    // Cleanup
+    [TrustKit setGlobalPinFailureReporter: defaultReporter];
+    [TrustKit resetConfiguration];
+}
+
 
 - (void)testReporter
 {
@@ -69,14 +144,15 @@
     TSKBackgroundReporter *reporter = [[TSKBackgroundReporter alloc] initAndRateLimitReports:NO];
     [reporter pinValidationFailedForHostname:@"mail.example.com"
                                         port:[NSNumber numberWithInt:443]
-                                       certificateChain:convertTrustToPemArray(_testTrust)
+                                       certificateChain:_testCertificateChain
                                notedHostname:@"example.com"
                                    reportURIs:@[[NSURL URLWithString:[TrustKit getDefaultReportUri]]]
                            includeSubdomains:YES
-                                   knownPins:@[
-                                               [[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM=" options:(NSDataBase64DecodingOptions)0],
-                                               [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g=" options:(NSDataBase64DecodingOptions)0],
-                                               ]
+                                   knownPins:[NSSet setWithArray:@[
+                                               [[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM="
+                                                                                  options:(NSDataBase64DecodingOptions)0],
+                                               [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g="
+                                                                                  options:(NSDataBase64DecodingOptions)0]]]
                             validationResult:TSKPinValidationResultFailed];
     
     [NSThread sleepForTimeInterval:2.0];
@@ -87,8 +163,11 @@
 {
     // Create the pin validation failure report
     NSArray *certificateChain = convertTrustToPemArray(_testTrust);
-    NSArray *formattedPins = convertPinsToHpkpPins(@[[[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM=" options:(NSDataBase64DecodingOptions)0],
-                                                     [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g=" options:(NSDataBase64DecodingOptions)0],]);
+    NSArray *formattedPins = convertPinsToHpkpPins([NSSet setWithArray:@[[[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM="
+                                                                                                            options:(NSDataBase64DecodingOptions)0],
+                                                                         [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g="
+                                                                                                            options:(NSDataBase64DecodingOptions)0]]
+                                                    ]);
     
 
     TSKPinFailureReport *report = [[TSKPinFailureReport alloc] initWithAppBundleId:@"test"
