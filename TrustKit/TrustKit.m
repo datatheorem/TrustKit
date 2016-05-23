@@ -258,6 +258,18 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
     return kTSKDefaultReportUri;
 }
 
+
++ (TSKBackgroundReporter *) getGlobalPinFailureReporter
+{
+    return _pinFailureReporter;
+}
+
+
++ (void) setGlobalPinFailureReporter:(TSKBackgroundReporter *) reporter
+{
+    _pinFailureReporter = reporter;
+}
+
 @end
 
 

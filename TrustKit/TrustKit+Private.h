@@ -14,13 +14,12 @@
 
 #import <TrustKit/TrustKit.h>
 #import "ssl_pin_verifier.h"
+#import "TSKBackgroundReporter.h"
 
 
 #pragma mark Utility functions
 
 void TSKLog(NSString *format, ...);
-
-void sendPinFailureReport_async(TSKPinValidationResult validationResult, SecTrustRef serverTrust, NSString *serverHostname, NSString *notedHostname, NSDictionary *notedHostnameConfig, void (^onCompletion)(void));
 
 void sendValidationNotification_async(NSString *serverHostname, SecTrustRef serverTrust, NSString *notedHostname, TSKPinValidationResult validationResult, TSKTrustDecision finalTrustDecision, NSTimeInterval validationDuration, void (^onCompletion)(void));
 
@@ -29,9 +28,10 @@ void sendValidationNotification_async(NSString *serverHostname, SecTrustRef serv
 @interface TrustKit(Private)
 
 + (void) resetConfiguration;
-+ (NSDictionary *) configuration;
 + (BOOL) wasTrustKitInitialized;
 + (NSString *) getDefaultReportUri;
++ (TSKBackgroundReporter *) getGlobalPinFailureReporter;
++ (void) setGlobalPinFailureReporter:(TSKBackgroundReporter *) reporter;
 
 @end
 
