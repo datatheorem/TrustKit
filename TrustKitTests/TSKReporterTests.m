@@ -99,14 +99,14 @@
                                                          reportURIs:@[[NSURL URLWithString:@"https://overmind.datatheorem.com/trustkit/report"]]
                                                   includeSubdomains:NO
                                                           knownPins:knownPins
-                                                   validationResult:TSKPinValidationResultFailed];
+                                                   validationResult:TSKPinValidationResultErrorCouldNotGenerateSpkiHash];
     
     // Create a notification
     [[NSNotificationCenter defaultCenter] postNotificationName:kTSKValidationCompletedNotification
                                                         object:nil
                                                       userInfo:@{kTSKValidationDurationNotificationKey: @(1),
                                                                  kTSKValidationDecisionNotificationKey: @(1),
-                                                                 kTSKValidationResultNotificationKey: @(TSKPinValidationResultFailed),
+                                                                 kTSKValidationResultNotificationKey: @(TSKPinValidationResultErrorCouldNotGenerateSpkiHash),
                                                                  kTSKValidationCertificateChainNotificationKey: _testCertificateChain,
                                                                  kTSKValidationNotedHostnameNotificationKey: @"www.test.com",
                                                                  kTSKValidationServerHostnameNotificationKey: @"www.test.com"}];
