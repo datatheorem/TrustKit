@@ -127,7 +127,7 @@ static void (^sendReportFromNotificationBlock)(NSNotification *note) = ^void(NSN
 #endif
         {
             NSString *notedHostname = userInfo[kTSKValidationNotedHostnameNotificationKey];
-            NSDictionary *notedHostnameConfig = _trustKitGlobalConfiguration[notedHostname];
+            NSDictionary *notedHostnameConfig = _trustKitGlobalConfiguration[kTSKPinnedDomains][notedHostname];
             
             // Pin validation failed: retrieve the list of configured report URLs
             NSMutableArray *reportUris = [NSMutableArray arrayWithArray:notedHostnameConfig[kTSKReportUris]];
