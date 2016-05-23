@@ -240,6 +240,9 @@
                                                                       XCTAssertEqualObjects(userInfo[kTSKValidationDecisionNotificationKey], @(TSKTrustDecisionShouldBlockConnection));
                                                                       XCTAssertEqualObjects(userInfo[kTSKValidationResultNotificationKey], @(TSKPinValidationResultFailed));
                                                                       XCTAssertEqualObjects(userInfo[kTSKValidationNotedHostnameNotificationKey], @"www.yahoo.com");
+                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationServerHostnameNotificationKey], @"www.yahoo.com");
+                                                                      XCTAssertGreaterThan([userInfo[kTSKValidationCertificateChainNotificationKey] count], (unsigned long)1);
+                                                                      XCTAssertGreaterThan([userInfo[kTSKValidationDurationNotificationKey] doubleValue], 0);
                                                                       [notifReceivedExpectation fulfill];
                                                                   }];
     
@@ -346,6 +349,9 @@
                                                                       XCTAssertEqualObjects(userInfo[kTSKValidationDecisionNotificationKey], @(TSKTrustDecisionShouldAllowConnection));
                                                                       XCTAssertEqualObjects(userInfo[kTSKValidationResultNotificationKey], @(TSKPinValidationResultSuccess));
                                                                       XCTAssertEqualObjects(userInfo[kTSKValidationNotedHostnameNotificationKey], @"www.twitter.com");
+                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationServerHostnameNotificationKey], @"www.twitter.com");
+                                                                      XCTAssertGreaterThan([userInfo[kTSKValidationCertificateChainNotificationKey] count], (unsigned long)1);
+                                                                      XCTAssertGreaterThan([userInfo[kTSKValidationDurationNotificationKey] doubleValue], 0);
                                                                       [notifReceivedExpectation fulfill];
                                                                   }];
     
@@ -430,6 +436,23 @@
     
     [TrustKit initializeWithConfiguration:trustKitConfig];
     
+    // Configure notification listener
+    XCTestExpectation *notifReceivedExpectation = [self expectationWithDescription:@"TestNotificationReceivedExpectation"];
+    id observerId = [[NSNotificationCenter defaultCenter] addObserverForName:kTSKValidationCompletedNotification
+                                                                      object:nil
+                                                                       queue:nil
+                                                                  usingBlock:^(NSNotification * _Nonnull note) {
+                                                                      NSDictionary *userInfo = [note userInfo];
+                                                                      // Notification received, check the userInfo
+                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationDecisionNotificationKey], @(TSKTrustDecisionShouldAllowConnection));
+                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationResultNotificationKey], @(TSKPinValidationResultSuccess));
+                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationNotedHostnameNotificationKey], @"www.apple.com");
+                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationServerHostnameNotificationKey], @"www.apple.com");
+                                                                      XCTAssertGreaterThan([userInfo[kTSKValidationCertificateChainNotificationKey] count], (unsigned long)1);
+                                                                      XCTAssertGreaterThan([userInfo[kTSKValidationDurationNotificationKey] doubleValue], 0);
+                                                                      [notifReceivedExpectation fulfill];
+                                                                  }];
+
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLConnectionDelegateDidReceiveAuth"];
     TestNSURLConnectionDelegateDidReceiveAuth *delegate = [[TestNSURLConnectionDelegateDidReceiveAuth alloc] initWithExpectation:expectation];
@@ -447,6 +470,8 @@
          }
      }];
     XCTAssert(delegate.wasAuthHandlerCalled, @"TrustKit prevented the original delegate's auth handler from being called.");
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:observerId];
 }
 
 
@@ -465,7 +490,23 @@
                                               ]}}};
     
     [TrustKit initializeWithConfiguration:trustKitConfig];
-
+    
+    // Configure notification listener
+    XCTestExpectation *notifReceivedExpectation = [self expectationWithDescription:@"TestNotificationReceivedExpectation"];
+    id observerId = [[NSNotificationCenter defaultCenter] addObserverForName:kTSKValidationCompletedNotification
+                                                                      object:nil
+                                                                       queue:nil
+                                                                  usingBlock:^(NSNotification * _Nonnull note) {
+                                                                      NSDictionary *userInfo = [note userInfo];
+                                                                      // Notification received, check the userInfo
+                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationDecisionNotificationKey], @(TSKTrustDecisionShouldAllowConnection));
+                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationResultNotificationKey], @(TSKPinValidationResultSuccess));
+                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationNotedHostnameNotificationKey], @"www.fastmail.fm");
+                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationServerHostnameNotificationKey], @"www.fastmail.fm");
+                                                                      XCTAssertGreaterThan([userInfo[kTSKValidationCertificateChainNotificationKey] count], (unsigned long)1);
+                                                                      XCTAssertGreaterThan([userInfo[kTSKValidationDurationNotificationKey] doubleValue], 0);
+                                                                      [notifReceivedExpectation fulfill];
+                                                                  }];
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLConnectionDelegateDidReceiveAuth"];
     TestNSURLConnectionDelegateWillSendRequestForAuth *delegate = [[TestNSURLConnectionDelegateWillSendRequestForAuth alloc] initWithExpectation:expectation];
@@ -483,6 +524,8 @@
          }
      }];
     XCTAssert(delegate.wasAuthHandlerCalled, @"TrustKit prevented the original delegate's auth handler from being called.");
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:observerId];
 }
 
 
