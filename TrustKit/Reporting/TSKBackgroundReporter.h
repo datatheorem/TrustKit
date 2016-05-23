@@ -44,7 +44,7 @@
                           notedHostname:(NSString *) notedHostname
                              reportURIs:(NSArray<NSURL *> *) reportURIs
                       includeSubdomains:(BOOL) includeSubdomains
-                              knownPins:(NSArray<NSData *> *) knownPins
+                              knownPins:(NSSet<NSData *> *) knownPins
                        validationResult:(TSKPinValidationResult) validationResult;
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error;

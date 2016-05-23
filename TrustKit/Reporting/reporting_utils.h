@@ -13,6 +13,6 @@
 #define TrustKit_reporting_utils_h
 
 NSArray<NSString *> *convertTrustToPemArray(SecTrustRef serverTrust);
-NSArray<NSString *> *convertPinsToHpkpPins(NSArray<NSData *> *knownPins);
+NSArray<NSString *> *convertPinsToHpkpPins(NSSet<NSData *> *knownPins);
 
 #endif

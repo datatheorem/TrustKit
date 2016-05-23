@@ -154,7 +154,7 @@ static dispatch_once_t dispatchOnceBackgroundSession;
                           notedHostname:(NSString *) notedHostname
                              reportURIs:(NSArray<NSURL *> *) reportURIs
                       includeSubdomains:(BOOL) includeSubdomains
-                              knownPins:(NSArray<NSData *> *) knownPins
+                              knownPins:(NSSet<NSData *> *) knownPins
                        validationResult:(TSKPinValidationResult) validationResult
 {
     // Default port to 0 if not specified

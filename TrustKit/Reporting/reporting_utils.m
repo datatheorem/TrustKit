@@ -38,7 +38,7 @@ NSArray<NSString *> *convertTrustToPemArray(SecTrustRef serverTrust)
 }
 
 
-NSArray<NSString *> *convertPinsToHpkpPins(NSArray<NSData *> *knownPins)
+NSArray<NSString *> *convertPinsToHpkpPins(NSSet<NSData *> *knownPins)
 {
     // Convert the know pins from a set of data to an array of strings as described in the HPKP spec
     NSMutableArray *formattedPins = [NSMutableArray array];
