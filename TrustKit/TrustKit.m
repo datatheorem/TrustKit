@@ -234,7 +234,7 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
 
 + (NSDictionary *) configuration
 {
-    return _trustKitGlobalConfiguration;
+    return [_trustKitGlobalConfiguration copy];
 }
 
 

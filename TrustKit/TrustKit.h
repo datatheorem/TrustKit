@@ -228,5 +228,7 @@ FOUNDATION_EXPORT NSString * const kTSKValidationServerHostnameNotificationKey;
  */
 + (void) initializeWithConfiguration:(NSDictionary *)trustKitConfig;
 
++ (NSDictionary *) configuration;
+
 @end
 NS_ASSUME_NONNULL_END
