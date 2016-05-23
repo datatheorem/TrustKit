@@ -232,7 +232,7 @@ FOUNDATION_EXPORT NSString * const kTSKValidationServerHostnameNotificationKey;
  The entry within the SSL pinning configuration that was used as the pinning policy for the server being validated. It will be the same as the `kTSKValidationServerHostnameNotificationKey` entry unless the server is a subdomain of a domain configured in the pinning policy with `kTSKIncludeSubdomains` enabled. The corresponding pinning configuration that was used for validation can be retrieved using:
     
      NSString *notedHostname = userInfo[kTSKValidationNotedHostnameNotificationKey];
-     NSString *hostnameConfiguration = [TrustKit configuration][kTSKPinnedDomains][notedHostname];
+     NSDictionary *hostnameConfiguration = [TrustKit configuration][kTSKPinnedDomains][notedHostname];
  
  #### `kTSKValidationCertificateChainNotificationKey`
  The certificate chain returned by the server as an array of PEM-formatted certificates.
