@@ -14,7 +14,7 @@ Overview
 * Simple API to configure an SSL pinning policy and enforce it within an App. The policy settings are heavily based on the [HTTP Public Key Pinning specification](https://tools.ietf.org/html/rfc7469).
 * Auto-pinning functionality by swizzling the App's _NSURLConnection_ and _NSURLSession_ delegates in order to automatically add pinning validation to the App's HTTPS connections; this allows deploying **TrustKit** without even modifying the App's source code.
 * Sane implementation by pinning the certificate's Subject Public Key Info, [as opposed to the certificate itself or the public key bits](https://www.imperialviolet.org/2011/05/04/pinning.html).
-* Reporting mechanism to notify a server about pinning validation failures happening within the App, when an unexpected certificate chain is detected. This is similar to the _report-uri_ directive described in the HPKP specification.
+* Reporting mechanism to notify a server about pinning validation failures happening within the App, when an unexpected certificate chain is detected. This is similar to the _report-uri_ directive described in the HPKP specification. The reporting mechanism can also be customized within the App by leveraging pin validation notifications sent by TrustKit.
 
 **TrustKit** was open-sourced at [Black Hat 2015 USA][bh2015-conf].
 
