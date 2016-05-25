@@ -64,7 +64,7 @@ FOUNDATION_EXPORT NSString * const kTSKValidationServerHostnameNotificationKey;
  | Key                                          | Type       |
  |----------------------------------------------|------------|
  | `TSKSwizzleNetworkDelegates`                 | Boolean    |
- | `TSKIgnorePinningForUserDefinedTrustAnchors` | Boolean    |=
+ | `TSKIgnorePinningForUserDefinedTrustAnchors` | Boolean    |
  | `TSKPinnedDomains`                           | Dictionary |
  | __ `<domain-name-to-pin-as-string>`          | Dictionary |
  | ____ `TSKPublicKeyHashes`                    | Array      |
