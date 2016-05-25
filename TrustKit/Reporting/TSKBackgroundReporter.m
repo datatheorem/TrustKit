@@ -150,11 +150,11 @@ static dispatch_once_t dispatchOnceBackgroundSession;
 
 - (void) pinValidationFailedForHostname:(NSString *) serverHostname
                                    port:(NSNumber *) serverPort
-                                  trust:(SecTrustRef) serverTrust
+                       certificateChain:(NSArray *) certificateChain
                           notedHostname:(NSString *) notedHostname
-                             reportURIs:(NSArray *) reportURIs
+                             reportURIs:(NSArray<NSURL *> *) reportURIs
                       includeSubdomains:(BOOL) includeSubdomains
-                              knownPins:(NSArray *) knownPins
+                              knownPins:(NSSet<NSData *> *) knownPins
                        validationResult:(TSKPinValidationResult) validationResult
 {
     // Default port to 0 if not specified
@@ -171,7 +171,6 @@ static dispatch_once_t dispatchOnceBackgroundSession;
     }
     
     // Create the pin validation failure report
-    NSArray *certificateChain = convertTrustToPemArray(serverTrust);
     NSArray *formattedPins = convertPinsToHpkpPins(knownPins);
     TSKPinFailureReport *report = [[TSKPinFailureReport alloc]initWithAppBundleId:_appBundleId
                                                                        appVersion:_appVersion
@@ -185,7 +184,6 @@ static dispatch_once_t dispatchOnceBackgroundSession;
                                                                         knownPins:formattedPins
                                                                  validationResult:validationResult
                                                                     appVendorId:_appVendorId];
-    
     
     // Should we rate-limit this report?
     if (_shouldRateLimitReports && [TSKReportsRateLimiter shouldRateLimitReport:report])

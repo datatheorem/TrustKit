@@ -16,6 +16,8 @@
 
 + (TSKTrustDecision) evaluateTrust:(SecTrustRef _Nonnull)serverTrust forHostname:(NSString * _Nonnull)serverHostname
 {
+    TSKTrustDecision finalTrustDecision = TSKTrustDecisionShouldBlockConnection;
+    
     if ([TrustKit wasTrustKitInitialized] == NO)
     {
         [NSException raise:@"TrustKit not initialized"
@@ -25,26 +27,18 @@
     if ((serverTrust == NULL) || (serverHostname == nil))
     {
         TSKLog(@"Pin validation error - invalid parameters for %@", serverHostname);
-        return TSKTrustDecisionShouldBlockConnection;
+        return finalTrustDecision;
     }
-
-    TSKTrustDecision finalTrustDecision = TSKTrustDecisionShouldBlockConnection;
-    NSDictionary *trustKitConfig = [TrustKit configuration];
-
-    NSTimeInterval validationStartTime = 0;
-    BOOL shouldPostNotifications = ([trustKitConfig[kTSKPostValidationNotifications] boolValue] == YES);
-    if (shouldPostNotifications) {
-        // Register start time for duration computations
-        validationStartTime = [NSDate timeIntervalSinceReferenceDate];
-    }
-
-    TSKPinValidationResult validationResult = TSKPinValidationResultErrorInvalidParameters;
-
+    
+    // Register start time for duration computations
+    NSTimeInterval validationStartTime = [NSDate timeIntervalSinceReferenceDate];
+    
     // Retrieve the pinning configuration for this specific domain, if there is one
+    NSDictionary *trustKitConfig = [TrustKit configuration];
     NSString *domainConfigKey = getPinningConfigurationKeyForDomain(serverHostname, trustKitConfig);
     if (domainConfigKey == nil)
     {
-        // The domain is not pinned: nothing to validate
+        // The domain is not pinned: nothing to do/validate
         finalTrustDecision = TSKTrustDecisionDomainNotPinned;
     }
     else
@@ -53,13 +47,12 @@
         CFRetain(serverTrust);
         NSDictionary *domainConfig = trustKitConfig[kTSKPinnedDomains][domainConfigKey];
         
-        validationResult = verifyPublicKeyPin(serverTrust, serverHostname, domainConfig[kTSKPublicKeyAlgorithms], domainConfig[kTSKPublicKeyHashes]);
+        TSKPinValidationResult validationResult = verifyPublicKeyPin(serverTrust, serverHostname, domainConfig[kTSKPublicKeyAlgorithms], domainConfig[kTSKPublicKeyHashes]);
         if (validationResult == TSKPinValidationResultSuccess)
         {
             // Pin validation was successful
             TSKLog(@"Pin validation succeeded for %@", serverHostname);
             finalTrustDecision = TSKTrustDecisionShouldAllowConnection;
-            CFRelease(serverTrust);
         }
         else
         {
@@ -72,18 +65,10 @@
                 // OS-X only: user-defined trust anchors can be whitelisted (for corporate proxies, etc.) so don't send reports
                 TSKLog(@"Ignoring pinning failure due to user-defined trust anchor for %@", serverHostname);
                 finalTrustDecision = TSKTrustDecisionShouldAllowConnection;
-                CFRelease(serverTrust);
             }
             else
 #endif
             {
-                // Send a pin failure report
-                sendPinFailureReport_async(validationResult, serverTrust, serverHostname, domainConfigKey, domainConfig, ^void (void)
-                                           {
-                                               // Release the trust once the report has been sent
-                                               CFRelease(serverTrust);
-                                           });
-                
                 if (validationResult == TSKPinValidationResultFailed)
                 {
                     // Is pinning enforced?
@@ -104,19 +89,15 @@
                 }
             }
         }
-    }
-
-    // For consumers that want to get notified about all validations performed, post
-    // a notification with duration and validation results/decision
-    if (shouldPostNotifications) {
+        // Send a notification after all validation is done; this will also trigger a report if pin validation failed
         NSTimeInterval validationDuration = [NSDate timeIntervalSinceReferenceDate] - validationStartTime;
-        [[NSNotificationCenter defaultCenter] postNotificationName:kTSKValidationCompletedNotification
-                                                            object:nil
-                                                          userInfo:@{kTSKValidationDurationNotificationKey : @(validationDuration),
-                                                                     kTSKValidationDecisionNotificationKey : @(finalTrustDecision),
-                                                                     kTSKValidationResultNotificationKey   : @(validationResult)}];
+        sendValidationNotification_async(serverHostname, serverTrust, domainConfigKey, validationResult, finalTrustDecision, validationDuration, ^void (void)
+                                         {
+                                             // Release the trust once the report has been sent
+                                             CFRelease(serverTrust);
+                                         });
     }
-
+    
     return finalTrustDecision;
 }
 

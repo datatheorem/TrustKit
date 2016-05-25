@@ -10,14 +10,13 @@
  */
 
 #import <Foundation/Foundation.h>
-#import "TSKReporterDelegate.h"
-
+#import "ssl_pin_verifier.h"
 
 /**
  `TSKSimpleBackgroundReporter` is a class for uploading pin failure reports using the background transfer service.
  
  */
-@interface TSKBackgroundReporter : NSObject <TSKReporterDelegate, NSURLSessionTaskDelegate>
+@interface TSKBackgroundReporter : NSObject <NSURLSessionTaskDelegate>
 
 ///---------------------
 /// @name Initialization
@@ -32,13 +31,20 @@
  */
 - (instancetype)initAndRateLimitReports:(BOOL)shouldRateLimitReports;
 
+///----------------------
+/// @name Sending Reports
+///----------------------
+
+/**
+ Send a pin validation failure report; each argument is described section 3. of RFC 7469.
+ */
 - (void) pinValidationFailedForHostname:(NSString *) serverHostname
                                    port:(NSNumber *) serverPort
-                                  trust:(SecTrustRef) serverTrust
+                                  certificateChain:(NSArray *) certificateChain
                           notedHostname:(NSString *) notedHostname
-                             reportURIs:(NSArray *) reportURIs
+                             reportURIs:(NSArray<NSURL *> *) reportURIs
                       includeSubdomains:(BOOL) includeSubdomains
-                              knownPins:(NSArray *) knownPins
+                              knownPins:(NSSet<NSData *> *) knownPins
                        validationResult:(TSKPinValidationResult) validationResult;
 
 - (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error;

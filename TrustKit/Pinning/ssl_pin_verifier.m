@@ -88,7 +88,7 @@ NSString *getPinningConfigurationKeyForDomain(NSString *hostname, NSDictionary *
 
 #pragma mark SSL Pin Verifier
 
-TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverHostname, NSArray *supportedAlgorithms, NSSet *knownPins)
+TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverHostname, NSArray<NSNumber *> *supportedAlgorithms, NSSet<NSData *> *knownPins)
 {
     if ((serverTrust == NULL) || (supportedAlgorithms == nil) || (knownPins == nil))
     {
@@ -131,7 +131,7 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
         TSKLog(@"Checking certificate with CN: %@", SecCertificateCopySubjectSummary(certificate));
         
         // For each public key algorithm flagged as supported in the config, generate the subject public key info hash
-        for (id savedAlgorithm in supportedAlgorithms)
+        for (NSNumber *savedAlgorithm in supportedAlgorithms)
         {
             TSKPublicKeyAlgorithm algorithm = [savedAlgorithm integerValue];
             NSData *subjectPublicKeyInfoHash = hashSubjectPublicKeyInfoFromCertificate(certificate, algorithm);

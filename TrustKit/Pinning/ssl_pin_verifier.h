@@ -58,7 +58,7 @@ typedef NS_ENUM(NSInteger, TSKPinValidationResult)
 NSString *getPinningConfigurationKeyForDomain(NSString *hostname, NSDictionary *trustKitConfiguration);
 
 // Validate that the server trust contains at least one of the know/expected pins
-TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverHostname, NSArray *supportedAlgorithms, NSSet *knownPins);
+TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverHostname, NSArray<NSNumber *> *supportedAlgorithms, NSSet<NSData *> *knownPins);
 
 
 #endif

@@ -22,38 +22,41 @@ FOUNDATION_EXPORT const unsigned char TrustKitVersionString[];
 
 #pragma mark TrustKit Configuration Keys
 
-FOUNDATION_EXPORT const NSString * kTSKSwizzleNetworkDelegates;
-FOUNDATION_EXPORT const NSString * kTSKPinnedDomains;
-FOUNDATION_EXPORT const NSString * kTSKPublicKeyHashes;
-FOUNDATION_EXPORT const NSString * kTSKEnforcePinning;
-FOUNDATION_EXPORT const NSString * kTSKIncludeSubdomains;
-FOUNDATION_EXPORT const NSString * kTSKPublicKeyAlgorithms;
-FOUNDATION_EXPORT const NSString * kTSKReportUris;
-FOUNDATION_EXPORT const NSString * kTSKDisableDefaultReportUri;
-FOUNDATION_EXPORT const NSString * kTSKIgnorePinningForUserDefinedTrustAnchors NS_AVAILABLE_MAC(10_9);
-FOUNDATION_EXPORT const NSString * kTSKPostValidationNotifications;
+FOUNDATION_EXPORT NSString * const kTSKSwizzleNetworkDelegates;
+FOUNDATION_EXPORT NSString * const kTSKPinnedDomains;
+FOUNDATION_EXPORT NSString * const kTSKPublicKeyHashes;
+FOUNDATION_EXPORT NSString * const kTSKEnforcePinning;
+FOUNDATION_EXPORT NSString * const kTSKIncludeSubdomains;
+FOUNDATION_EXPORT NSString * const kTSKPublicKeyAlgorithms;
+FOUNDATION_EXPORT NSString * const kTSKReportUris;
+FOUNDATION_EXPORT NSString * const kTSKDisableDefaultReportUri;
+FOUNDATION_EXPORT NSString * const kTSKIgnorePinningForUserDefinedTrustAnchors NS_AVAILABLE_MAC(10_9);
 
 
 #pragma mark Supported Public Key Algorithm Keys
 
-FOUNDATION_EXPORT const NSString * kTSKAlgorithmRsa2048;
-FOUNDATION_EXPORT const NSString * kTSKAlgorithmRsa4096;
-FOUNDATION_EXPORT const NSString * kTSKAlgorithmEcDsaSecp256r1;
+FOUNDATION_EXPORT NSString * const kTSKAlgorithmRsa2048;
+FOUNDATION_EXPORT NSString * const kTSKAlgorithmRsa4096;
+FOUNDATION_EXPORT NSString * const kTSKAlgorithmEcDsaSecp256r1;
 
 
 #pragma mark TrustKit Notifications
 // This notification is posted for every request that's going through TrustKit pinning validation
 FOUNDATION_EXPORT NSString * const kTSKValidationCompletedNotification;
 
-// Notifications get posted on a background thread, and may carry additional information in userInfo (see keys below)
-FOUNDATION_EXPORT NSString * const kTSKValidationDurationNotificationKey; // validation duration number (in seconds)
-FOUNDATION_EXPORT NSString * const kTSKValidationResultNotificationKey;   // validation result number (TSKPinValidationResult)
-FOUNDATION_EXPORT NSString * const kTSKValidationDecisionNotificationKey; // decision result number (TSKTrustDecision)
-
+// Notifications get posted on a background thread, and carry additional information in userInfo
+FOUNDATION_EXPORT NSString * const kTSKValidationDurationNotificationKey;
+FOUNDATION_EXPORT NSString * const kTSKValidationResultNotificationKey;
+FOUNDATION_EXPORT NSString * const kTSKValidationDecisionNotificationKey;
+FOUNDATION_EXPORT NSString * const kTSKValidationCertificateChainNotificationKey;
+FOUNDATION_EXPORT NSString * const kTSKValidationNotedHostnameNotificationKey;
+FOUNDATION_EXPORT NSString * const kTSKValidationServerHostnameNotificationKey;
 
 /**
  `TrustKit` is a class for programmatically configuring the global SSL pinning policy within an App.
 
+## Initialization
+ 
   The policy can be set either by adding it to the App's _Info.plist_ under the `TSKConfiguration` key, or by programmatically supplying it using the `TrustKit` class described here. Throughout the App's lifecycle, TrustKit can only be initialized once so only one of the two techniques should be used.
  
  A TrustKit SSL pinning policy is a dictionary which contains some global, App-wide settings as well as domain-specific configuration keys. The following table shows the keys and their types, and uses indentation to indicate structure:
@@ -61,8 +64,7 @@ FOUNDATION_EXPORT NSString * const kTSKValidationDecisionNotificationKey; // dec
  | Key                                          | Type       |
  |----------------------------------------------|------------|
  | `TSKSwizzleNetworkDelegates`                 | Boolean    |
- | `TSKIgnorePinningForUserDefinedTrustAnchors` | Boolean    |
- | 'TSKPostValidationNotifications'             | Boolean    |
+ | `TSKIgnorePinningForUserDefinedTrustAnchors` | Boolean    |=
  | `TSKPinnedDomains`                           | Dictionary |
  | __ `<domain-name-to-pin-as-string>`          | Dictionary |
  | ____ `TSKPublicKeyHashes`                    | Array      |
@@ -77,7 +79,6 @@ FOUNDATION_EXPORT NSString * const kTSKValidationDecisionNotificationKey; // dec
     NSDictionary *trustKitConfig =
     @{
       kTSKSwizzleNetworkDelegates: @YES,
-      kTSKPostValidationNotifications: @NO,
       kTSKPinnedDomains : @{
               @"www.datatheorem.com" : @{
                       kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
@@ -140,9 +141,6 @@ FOUNDATION_EXPORT NSString * const kTSKValidationDecisionNotificationKey; // dec
  
  This is useful for allowing SSL connections through corporate proxies or firewalls. See "How does key pinning interact with local proxies and filters?" within the Chromium security FAQ at https://www.chromium.org/Home/chromium-security/security-faq for more information.
 
-
- #### `kTSKPostValidationNotifications`
- If set to `YES`, TrustKit will post notifications for all request validations performed. This allows clients to use custom tracking/performance reporting as needed.
 
  ### Required Domain-specific Keys
  
@@ -208,6 +206,37 @@ FOUNDATION_EXPORT NSString * const kTSKValidationDecisionNotificationKey; // dec
  
  #### `kTSKAlgorithmEcDsaSecp256r1`
  
+ 
+ ## Pinning Validation Notifications
+ 
+ Once TrustKit has been initialized, notifications will be posted with `kTSKValidationCompletedNotification` as their `name` every time TrustKit validates the certificate chain for a server configured in the SSL pinning policy; if the server's hostname does not have an entry in the pinning policy, no notifications get posted as no pinning validation was performed.
+ 
+ These notifications can be used for performance measurement or to act upon any pinning validation performed by TrustKit (for example to customize the reporting mechanism). The notifications provide details about TrustKit's inner-workings which most Apps should not need to process. Hence, these notifications can be ignored unless the App requires some advanced customization in regards to pinning validation.
+ 
+ When a notification is posted, the notification's `userInfo` contains various entries with more information about the pinning validation that occured:
+ 
+ #### `kTSKValidationDurationNotificationKey`
+ The time in seconds it took for the SSL pinning validation to be performed.
+ 
+ #### `kTSKValidationResultNotificationKey`
+ The `TSKPinningValidationResult` returned when validating the server's certificate chain, which represents the result of evaluating the certificate chain against the configured SSL pins for this server.
+ 
+ #### `kTSKValidationDecisionNotificationKey`
+ The `TSKTrustDecision` returned when validating the certificate's chain, which describes whether the connection should be blocked or allowed, based on the `TSKPinningValidationResult` returned when evaluating the server's certificate chain and the SSL pining policy configured for this server. 
+ For example, the pinning validation could have failed (returning `TSKPinningValidationFailed`) but the policy might be set to ignore pinning validation failures for this server, thereby returning `TSKTrustDecisionShouldAllowConnection`.
+ 
+ #### `kTSKValidationServerHostnameNotificationKey`
+ The hostname of the server SSL pinning validation was performed against.
+ 
+ #### `kTSKValidationNotedHostnameNotificationKey`
+ The entry within the SSL pinning configuration that was used as the pinning policy for the server being validated. It will be the same as the `kTSKValidationServerHostnameNotificationKey` entry unless the server is a subdomain of a domain configured in the pinning policy with `kTSKIncludeSubdomains` enabled. The corresponding pinning configuration that was used for validation can be retrieved using:
+    
+     NSString *notedHostname = userInfo[kTSKValidationNotedHostnameNotificationKey];
+     NSDictionary *hostnameConfiguration = [TrustKit configuration][kTSKPinnedDomains][notedHostname];
+ 
+ #### `kTSKValidationCertificateChainNotificationKey`
+ The certificate chain returned by the server as an array of PEM-formatted certificates.
+ 
  */
 @interface TrustKit : NSObject
 
@@ -216,15 +245,27 @@ FOUNDATION_EXPORT NSString * const kTSKValidationDecisionNotificationKey; // dec
 ///---------------------
 
 /**
- Initializes the global SSL pinning policy with the supplied configuration.
+ Initialize the global SSL pinning policy with the supplied configuration.
  
- This method should be called as early as possible in the App's lifecycle to ensure that the App's very first SSL connections are validated by TrustKit.
+ This method should be called as early as possible in the App's lifecycle to ensure that the App's very first SSL connections are validated by TrustKit. Once TrustKit has been initialized, notifications will be posted for any SSL pinning validation performed.
  
  @param trustKitConfig A dictionary containing various keys for configuring the global SSL pinning policy.
  @exception NSException Thrown when the supplied configuration is invalid or TrustKit has already been initialized.
  
  */
 + (void) initializeWithConfiguration:(NSDictionary *)trustKitConfig;
+
+
+///----------------------------
+/// @name Current Configuration
+///----------------------------
+
+/**
+ Retrieve a copy of the global SSL pinning policy.
+ 
+ @return A dictionary with a copy of the current TrustKit configuration, or `nil` if TrustKit has not been initialized.
+ */
++ (nullable NSDictionary *) configuration;
 
 @end
 NS_ASSUME_NONNULL_END

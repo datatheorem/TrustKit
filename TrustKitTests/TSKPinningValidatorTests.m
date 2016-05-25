@@ -13,6 +13,8 @@
 #import "TrustKit+Private.h"
 #import "ssl_pin_verifier.h"
 #import "public_key_utils.h"
+#import "reporting_utils.h"
+#import "parse_configuration.h"
 #import "TSKCertificateUtils.h"
 
 
@@ -48,6 +50,7 @@
 
 - (void)tearDown
 {
+    [TrustKit resetConfiguration];
     CFRelease(_rootCertificate);
     CFRelease(_intermediateCertificate);
     CFRelease(_leafCertificate);
@@ -76,7 +79,7 @@
                                                                            ]}}};
     
     // First test the verifyPublicKeyPin() function
-    NSDictionary *parsedTrustKitConfig = parseTrustKitArguments(trustKitConfig);
+    NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust,
@@ -88,14 +91,39 @@
     XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against valid public key pins");
     
     
-    
     // Then test TSKPinningValidator
     [TrustKit initializeWithConfiguration:trustKitConfig];
-    XCTAssert([TSKPinningValidator evaluateTrust:trust forHostname:@"www.good.com"] == TSKTrustDecisionShouldAllowConnection);
+    
+    // Configure notification listener
+    XCTestExpectation *notifReceivedExpectation = [self expectationWithDescription:@"TestNotificationReceivedExpectation"];
+    id observerId = [[NSNotificationCenter defaultCenter] addObserverForName:kTSKValidationCompletedNotification
+                                                                      object:nil
+                                                                       queue:nil
+                                                                  usingBlock:^(NSNotification * _Nonnull note) {
+                                                                      NSDictionary *userInfo = [note userInfo];
+                                                                      // Notification received, check the userInfo
+                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationDecisionNotificationKey], @(TSKTrustDecisionShouldAllowConnection));
+                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationResultNotificationKey], @(TSKPinValidationResultSuccess));
+                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationCertificateChainNotificationKey], convertTrustToPemArray(trust));
+                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationNotedHostnameNotificationKey], @"www.good.com");
+                                                                      [notifReceivedExpectation fulfill];
+                                                                  }];
+    
+    // Call TSKPinningValidator
+    TSKTrustDecision result = [TSKPinningValidator evaluateTrust:trust forHostname:@"www.good.com"];
+    XCTAssert(result == TSKTrustDecisionShouldAllowConnection);
+    
+    // Ensure a validation notification was posted
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Expectation timeout Error: %@", error);
+        }
+    }];
+    [[NSNotificationCenter defaultCenter] removeObserver:observerId];
     
     // Ensure the SPKI cache was persisted to the filesystem
-    // TODO: Perhaps move this to a different test suite
     XCTAssert([getSpkiCacheFromFileSystem() count] == 1, @"SPKI cache must be persisted to the file system");
+    
     CFRelease(trust);
 }
 
@@ -120,7 +148,7 @@
                                                                            ]}}};
     
     // First test the verifyPublicKeyPin() function
-    NSDictionary *parsedTrustKitConfig = parseTrustKitArguments(trustKitConfig);
+    NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust,
@@ -138,9 +166,8 @@
     
     
     // Ensure the SPKI cache was persisted to the filesystem
-    // TODO: Perhaps move this to a different test suite
     XCTAssert([getSpkiCacheFromFileSystem() count] == 2, @"SPKI cache must be persisted to the file system");
-    
+
     CFRelease(trust);
 }
 
@@ -165,7 +192,7 @@
                                                                            ]}}};
     
     // First test the verifyPublicKeyPin() function
-    NSDictionary *parsedTrustKitConfig = parseTrustKitArguments(trustKitConfig);
+    NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust,
@@ -204,7 +231,7 @@
                                                                            ]}}};
     
     // First test the verifyPublicKeyPin() function
-    NSDictionary *parsedTrustKitConfig = parseTrustKitArguments(trustKitConfig);
+    NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust,
@@ -243,7 +270,7 @@
                                                                            ]}}};
     
     // First test the verifyPublicKeyPin() function
-    NSDictionary *parsedTrustKitConfig = parseTrustKitArguments(trustKitConfig);
+    NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust,
@@ -257,7 +284,34 @@
     
     // Then test TSKPinningValidator
     [TrustKit initializeWithConfiguration:trustKitConfig];
-    XCTAssert([TSKPinningValidator evaluateTrust:trust forHostname:@"www.good.com"] == TSKTrustDecisionShouldBlockConnection);
+    
+    // Configure notification listener
+    XCTestExpectation *notifReceivedExpectation = [self expectationWithDescription:@"TestNotificationReceivedExpectation"];
+    id observerId = [[NSNotificationCenter defaultCenter] addObserverForName:kTSKValidationCompletedNotification
+                                                                      object:nil
+                                                                       queue:nil
+                                                                  usingBlock:^(NSNotification * _Nonnull note) {
+                                                                      NSDictionary *userInfo = [note userInfo];
+                                                                      // Notification received, check the userInfo
+                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationDecisionNotificationKey], @(TSKTrustDecisionShouldBlockConnection));
+                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationResultNotificationKey], @(TSKPinValidationResultFailed));
+                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationCertificateChainNotificationKey], convertTrustToPemArray(trust));
+                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationNotedHostnameNotificationKey], @"www.good.com");
+                                                                      [notifReceivedExpectation fulfill];
+                                                                  }];
+    
+    // Call TSKPinningValidator
+    TSKTrustDecision result = [TSKPinningValidator evaluateTrust:trust forHostname:@"www.good.com"];
+    XCTAssert(result == TSKTrustDecisionShouldBlockConnection);
+    
+    // Ensure a validation notification was posted
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Expectation timeout Error: %@", error);
+        }
+    }];
+    [[NSNotificationCenter defaultCenter] removeObserver:observerId];
+    
     CFRelease(trust);
 }
 
@@ -283,7 +337,7 @@
                                                                            ]}}};
     
     // First test the verifyPublicKeyPin() function
-    NSDictionary *parsedTrustKitConfig = parseTrustKitArguments(trustKitConfig);
+    NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust,
@@ -297,7 +351,34 @@
     
     // Then test TSKPinningValidator
     [TrustKit initializeWithConfiguration:trustKitConfig];
-    XCTAssert([TSKPinningValidator evaluateTrust:trust forHostname:@"www.good.com"] == TSKTrustDecisionShouldAllowConnection);
+    
+    // Configure notification listener
+    XCTestExpectation *notifReceivedExpectation = [self expectationWithDescription:@"TestNotificationReceivedExpectation"];
+    id observerId = [[NSNotificationCenter defaultCenter] addObserverForName:kTSKValidationCompletedNotification
+                                                                      object:nil
+                                                                       queue:nil
+                                                                  usingBlock:^(NSNotification * _Nonnull note) {
+                                                                      NSDictionary *userInfo = [note userInfo];
+                                                                      // Notification received, check the userInfo
+                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationDecisionNotificationKey], @(TSKTrustDecisionShouldAllowConnection));
+                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationResultNotificationKey], @(TSKPinValidationResultFailed));
+                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationCertificateChainNotificationKey], convertTrustToPemArray(trust));
+                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationNotedHostnameNotificationKey], @"www.good.com");
+                                                                      [notifReceivedExpectation fulfill];
+                                                                  }];
+    
+    // Call TSKPinningValidator
+    TSKTrustDecision result = [TSKPinningValidator evaluateTrust:trust forHostname:@"www.good.com"];
+    XCTAssert(result == TSKTrustDecisionShouldAllowConnection);
+    
+    // Ensure a validation notification was posted
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Expectation timeout Error: %@", error);
+        }
+    }];
+    [[NSNotificationCenter defaultCenter] removeObserver:observerId];
+
     CFRelease(trust);
 }
 
@@ -323,7 +404,7 @@
                                                                            ]}}};
     
     // First test the verifyPublicKeyPin() function
-    NSDictionary *parsedTrustKitConfig = parseTrustKitArguments(trustKitConfig);
+    NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust,
@@ -363,7 +444,7 @@
                                                                            ]}}};
     
     // First test the verifyPublicKeyPin() function
-    NSDictionary *parsedTrustKitConfig = parseTrustKitArguments(trustKitConfig);
+    NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust,
@@ -377,7 +458,34 @@
     
     // Then test TSKPinningValidator
     [TrustKit initializeWithConfiguration:trustKitConfig];
-    XCTAssert([TSKPinningValidator evaluateTrust:trust forHostname:@"www.good.com"] == TSKTrustDecisionShouldBlockConnection);
+
+    // Configure notification listener
+    XCTestExpectation *notifReceivedExpectation = [self expectationWithDescription:@"TestNotificationReceivedExpectation"];
+    id observerId = [[NSNotificationCenter defaultCenter] addObserverForName:kTSKValidationCompletedNotification
+                                                                      object:nil
+                                                                       queue:nil
+                                                                  usingBlock:^(NSNotification * _Nonnull note) {
+                                                                      NSDictionary *userInfo = [note userInfo];
+                                                                      // Notification received, check the userInfo
+                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationDecisionNotificationKey], @(TSKTrustDecisionShouldBlockConnection));
+                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationResultNotificationKey], @(TSKPinValidationResultFailedCertificateChainNotTrusted));
+                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationCertificateChainNotificationKey], convertTrustToPemArray(trust));
+                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationNotedHostnameNotificationKey], @"www.good.com");
+                                                                      [notifReceivedExpectation fulfill];
+                                                                  }];
+    
+    // Call TSKPinningValidator
+    TSKTrustDecision result = [TSKPinningValidator evaluateTrust:trust forHostname:@"www.good.com"];
+    XCTAssert(result == TSKTrustDecisionShouldBlockConnection);
+    
+    // Ensure a validation notification was posted
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"Expectation timeout Error: %@", error);
+        }
+    }];
+    [[NSNotificationCenter defaultCenter] removeObserver:observerId];
+    
     CFRelease(trust);
 }
 
@@ -403,7 +511,7 @@
                                                                            ]}}};
     
     // First test the verifyPublicKeyPin() function
-    NSDictionary *parsedTrustKitConfig = parseTrustKitArguments(trustKitConfig);
+    NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust,
@@ -443,7 +551,7 @@
                                                                            ]}}};
     
     // First test the verifyPublicKeyPin() function
-    NSDictionary *parsedTrustKitConfig = parseTrustKitArguments(trustKitConfig);
+    NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust,
@@ -481,139 +589,24 @@
                                                                            @"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=" // CA Key
                                                                            ]}}};
   
+    
     // Then test TSKPinningValidator
     [TrustKit initializeWithConfiguration:trustKitConfig];
-    XCTAssert([TSKPinningValidator evaluateTrust:trust forHostname:@"www.bad.com"] == TSKTrustDecisionDomainNotPinned);
-    CFRelease(trust);
-}
-
-// Verify notification gets posted for TrustKit validations, with a positive result
-- (void)testValidationNotificationPosted
-{
-    // Create a valid server trust
-    SecCertificateRef certChainArray[2] = {_leafCertificate, _intermediateCertificate};
-    SecCertificateRef trustStoreArray[1] = {_rootCertificate};
-    SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
-                                                             arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
-                                                      anchorCertificates:(const void **)trustStoreArray
-                                                             arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
-
-    // Create a configuration with notifications ON
-    NSDictionary *trustKitConfig = @{kTSKPostValidationNotifications : @YES,
-                                     kTSKPinnedDomains :
-                                         @{@"www.good.com" : @{
-                                                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                                   kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=", // Server key
-                                                                           @"khKI6ae4micEvX74MB/BZ4u15WCWGXPD6Gjg6iIRVeE=", // Intermediate key
-                                                                           @"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=" // CA key
-                                                                           ]}}};
-
-    // Configure notification listener
-    XCTestExpectation *notifReceivedExpectation = [self expectationWithDescription:@"TestNotificationReceivedExpectation"];
-    id observerId = [[NSNotificationCenter defaultCenter] addObserverForName:kTSKValidationCompletedNotification
-                                                                      object:nil
-                                                                       queue:nil
-                                                                  usingBlock:^(NSNotification * _Nonnull note) {
-        // Notification received, check the userInfo
-        XCTAssertNotNil([note userInfo][kTSKValidationDurationNotificationKey]);
-        XCTAssertEqual([note userInfo][kTSKValidationDecisionNotificationKey], @(TSKTrustDecisionShouldAllowConnection));
-        XCTAssertEqual([note userInfo][kTSKValidationResultNotificationKey], @(TSKPinValidationResultSuccess));
-        [notifReceivedExpectation fulfill];
-    }];
-
-    [TrustKit initializeWithConfiguration:trustKitConfig];
-    XCTAssert([TSKPinningValidator evaluateTrust:trust forHostname:@"www.good.com"] == TSKTrustDecisionShouldAllowConnection);
-
-    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
-        if (error) {
-            NSLog(@"Expectation timeout Error: %@", error);
-        }
-    }];
-
-    CFRelease(trust);
-    [[NSNotificationCenter defaultCenter] removeObserver:observerId];
-}
-
-// Verify notification gets posted for TrustKit validations, with a negative result
-- (void)testValidationNotificationPostedFailure
-{
-    // Create a valid server trust
-    SecCertificateRef certChainArray[2] = {_leafCertificate, _intermediateCertificate};
-    SecCertificateRef trustStoreArray[1] = {_rootCertificate};
-    SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
-                                                             arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
-                                                      anchorCertificates:(const void **)trustStoreArray
-                                                             arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
-
-    // Create a configuration with notifications ON
-    NSDictionary *trustKitConfig = @{kTSKPostValidationNotifications : @YES,
-                                     kTSKPinnedDomains :
-                                         @{@"www.good.com" : @{
-                                                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                                   kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Bad Key
-                                                                           @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Bad Key
-                                                                           ]}}};
-
-    // Configure notification listener
-    XCTestExpectation *notifReceivedExpectation = [self expectationWithDescription:@"TestNotificationReceivedExpectation"];
-    id observerId = [[NSNotificationCenter defaultCenter] addObserverForName:kTSKValidationCompletedNotification
-                                                                      object:nil
-                                                                       queue:nil
-                                                                  usingBlock:^(NSNotification * _Nonnull note) {
-        // Notification received, check the userInfo
-        XCTAssertNotNil([note userInfo][kTSKValidationDurationNotificationKey]);
-        XCTAssertEqual([note userInfo][kTSKValidationDecisionNotificationKey], @(TSKTrustDecisionShouldBlockConnection));
-        XCTAssertEqual([note userInfo][kTSKValidationResultNotificationKey], @(TSKPinValidationResultFailed));
-        [notifReceivedExpectation fulfill];
-    }];
-
-    [TrustKit initializeWithConfiguration:trustKitConfig];
-    XCTAssert([TSKPinningValidator evaluateTrust:trust forHostname:@"www.good.com"] == TSKTrustDecisionShouldBlockConnection);
     
-    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
-        if (error) {
-            NSLog(@"Expectation timeout Error: %@", error);
-        }
-    }];
-    
-    CFRelease(trust);
-    [[NSNotificationCenter defaultCenter] removeObserver:observerId];
-}
-
-// Verify notification does not gets posted for TrustKit validations when not opted in
-- (void)testValidationNotificationNotPosted
-{
-    // Create a valid server trust
-    SecCertificateRef certChainArray[2] = {_leafCertificate, _intermediateCertificate};
-    SecCertificateRef trustStoreArray[1] = {_rootCertificate};
-    SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
-                                                             arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
-                                                      anchorCertificates:(const void **)trustStoreArray
-                                                             arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
-
-    // Create a configuration with notifications ON
-    NSDictionary *trustKitConfig = @{kTSKPinnedDomains :
-                                         @{@"www.good.com" : @{
-                                                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                                   kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=", // Server key
-                                                                           @"khKI6ae4micEvX74MB/BZ4u15WCWGXPD6Gjg6iIRVeE=", // Intermediate key
-                                                                           @"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=" // CA key
-                                                                           ]}}};
-
     // Configure notification listener
     id observerId = [[NSNotificationCenter defaultCenter] addObserverForName:kTSKValidationCompletedNotification
                                                                       object:nil
                                                                        queue:nil
                                                                   usingBlock:^(NSNotification * _Nonnull note) {
-        // Notification received, not expected
-        XCTFail(@"kTSKValidationCompletedNotification should not have been posted");
-    }];
-
-    [TrustKit initializeWithConfiguration:trustKitConfig];
-    XCTAssert([TSKPinningValidator evaluateTrust:trust forHostname:@"www.good.com"] == TSKTrustDecisionShouldAllowConnection);
+                                                                      // Ensure a validation notification was NOT posted
+                                                                      XCTFail(@"kTSKValidationCompletedNotification should not have been posted");
+                                                                  }];
+    // Call TSKPinningValidator
+    TSKTrustDecision result = [TSKPinningValidator evaluateTrust:trust forHostname:@"www.bad.com"];
+    XCTAssert(result == TSKTrustDecisionDomainNotPinned);
     
-    CFRelease(trust);
     [[NSNotificationCenter defaultCenter] removeObserver:observerId];
+    CFRelease(trust);
 }
 
 @end

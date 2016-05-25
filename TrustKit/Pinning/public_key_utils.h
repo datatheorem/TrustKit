@@ -31,6 +31,6 @@ NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate, T
 
 // For tests
 void resetSubjectPublicKeyInfoCache(void);
-NSMutableDictionary *getSpkiCacheFromFileSystem(void);
+NSMutableDictionary<NSData *, NSData *> *getSpkiCacheFromFileSystem(void);
 
 #endif
