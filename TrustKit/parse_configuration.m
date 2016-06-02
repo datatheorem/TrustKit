@@ -130,7 +130,7 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
         
         
         // Extract the list of public key algorithms to support and convert them from string to the TSKPublicKeyAlgorithm type
-        NSArray *publicKeyAlgsStr = domainPinningPolicy[kTSKPublicKeyAlgorithms];
+        NSArray<NSString *> *publicKeyAlgsStr = domainPinningPolicy[kTSKPublicKeyAlgorithms];
         if (publicKeyAlgsStr == nil)
         {
             [NSException raise:@"TrustKit configuration invalid"
@@ -161,10 +161,10 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
         
         
         // Extract and convert the report URIs if defined
-        NSArray *reportUriList = domainPinningPolicy[kTSKReportUris];
+        NSArray<NSString *> *reportUriList = domainPinningPolicy[kTSKReportUris];
         if (reportUriList != nil)
         {
-            NSMutableArray *reportUriListFinal = [NSMutableArray array];
+            NSMutableArray<NSURL *> *reportUriListFinal = [NSMutableArray array];
             for (NSString *reportUriStr in reportUriList)
             {
                 NSURL *reportUri = [NSURL URLWithString:reportUriStr];
