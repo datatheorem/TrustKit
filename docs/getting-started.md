@@ -124,6 +124,9 @@ corresponding certificates' public key algorithms. For example:
                       }}};
 
 
+Some additional consideration in regards to the right pinning policy to deploy follow. 
+
+
 #### Consider leveraging auto-swizzling for simple Apps
 
 By setting `kTSKSwizzleNetworkDelegates` to `YES`, TrustKit will perform method 
@@ -142,10 +145,10 @@ authentication via certificates or basic authentication.
 * Apps that do no use `NSURLSession` or `NSURLConnection` for their 
 connections.
 
-Auto-swizzling can be disabled by setting `kTSKSwizzleNetworkDelegates` to `NO`
-(which is also the default setting). Manual pinning validation can then be easily
-implemented in the App's authentication handlers'; see the "Manual Pin Validation" 
-section in this guide for instructions.
+Auto-swizzling can be disabled by setting `kTSKSwizzleNetworkDelegates` to 
+`NO`. Manual pinning validation can then be easily implemented in the App's 
+authentication handlers'; see the "Manual Pin Validation" section in this guide for 
+instructions.
 
 
 #### Always start with pinning enforcement disabled
@@ -226,6 +229,15 @@ validation). However, this approach still requires some testing as it seems like
 `webView:didReceiveAuthenticationChallenge:completionHandler:` delegate method [only works reliably on iOS 9](https://bugs.webkit.org/show_bug.cgi?id=135327).
 
 
+## Pin Validation Notifications
+
+Whenever TrustKit performs a pinning validation, an `NSNotification` is sent with 
+information about the server and certificate that were validated. These notifications 
+can be used for performance measurement or to act upon any pinning validation 
+performed by TrustKit (for example to customize the reporting mechanism). See 
+the TrustKit documentation for more information.
+
+
 ## Embedding TrustKit Without CocoaPods
 
 ### Adding TrustKit as a Dependency - Static Linking
@@ -268,5 +280,3 @@ dynamically linked.
     ![](https://datatheorem.github.io/TrustKit/images/linking2_dynamic.png)
 
 3. Lastly, initialize TrustKit with your pinning policy.
-
-
