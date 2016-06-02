@@ -33,8 +33,8 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
     NSNumber *shouldSwizzleNetworkDelegates = TrustKitArguments[kTSKSwizzleNetworkDelegates];
     if (shouldSwizzleNetworkDelegates == nil)
     {
-        // Default setting is YES
-        finalConfiguration[kTSKSwizzleNetworkDelegates] = @(YES);
+        // Default setting is NO
+        finalConfiguration[kTSKSwizzleNetworkDelegates] = @(NO);
     }
     else
     {

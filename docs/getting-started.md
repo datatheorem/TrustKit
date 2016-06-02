@@ -1,5 +1,4 @@
-Getting Started
-===============
+# Getting Started
 
 Adding TrustKit to an App can be achieved through the following steps:
 
@@ -9,8 +8,7 @@ policy.
 3. Initializing TrustKit with the pinning policy.
 
 
-Warning
--------
+## Warning
 
 Public key pinning can be dangerous and requires more than just code-level
 changes in your App. If you make a mistake, you might cause your App to pin a
@@ -24,8 +22,7 @@ the App servers' cryptographic identity very well, you should not use key
 pinning.
 
 
-Generating SSL Pins
--------------------
+## Generating SSL Pins
 
 Before deploying SSL pinning within your App, you first need to investigate and
 choose which domains and public keys need to be pinned. This is **very
@@ -49,27 +46,7 @@ certificate:
     $ python get_pin_from_certificate.py --type DER ca.der
 
 
-Deploying TrustKit
-------------------
-
-Enabling TrustKit within an App requires generating a pinning policy and then
-initializing TrustKit with this policy. There are two different ways to supply
-a pinning policy to TrustKit:
-
-* Programmatically, using TrustKit's `initializeWithConfig:` method.
-* By storing the pinning policy in the App's _Info.plist_; this approach allows 
-deploying TrustKit without having to modify the App's source code.
-
-After initialization, TrustKit will by default perform method swizzling on the 
-App's `NSURLSession` and `NSURLConnection` delegates in order to perform additional 
-validation against the server's certificate chain, based on the configured SSL pinning 
-policy. 
-
-If the developer wants a tighter control on the App's networking behavior or does
-not want auto-swizzling, it can be disabled by setting `kTSKSwizzleNetworkDelegates` to `NO`.
-Manual pinning validation can then be implemented in the App's authentication handlers' using the 
-[TSKPinningValidator class](https://datatheorem.github.io/TrustKit/documentation/Classes/TSKPinningValidator.html).
-
+## Deploying TrustKit
 
 ### Adding TrustKit as a Dependency - CocoaPods
 
@@ -88,7 +65,9 @@ instructions on how to do so are available at the end of this guide.
 
 ### Configuring a Pinning Policy
 
-There are two ways to supply a pinning policy to TrustKit:
+Enabling TrustKit within an App requires generating a pinning policy and then
+initializing TrustKit with this policy. There are two different ways to supply
+a pinning policy to TrustKit:
 
 * By adding configuration keys to the App's _Info.plist_ file under a 
 `TSKConfiguration` dictionary key:
@@ -120,7 +99,7 @@ corresponding certificates' public key algorithms. For example:
                       kTSKEnforcePinning:@NO,
                     
                       // Send reports for pin validation failures so we can track them
-                      kTSKReportUris: @[@"https://trustkit-reports-server.appspot.com/log_report"],
+                      kTSKReportUris: @[@"https://some-reporting-server.com/log_report"],
                       
                       // The pinned public keys' algorithms
                       kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
@@ -144,65 +123,110 @@ corresponding certificates' public key algorithms. For example:
                               ]
                       }}};
 
+
+#### Consider leveraging auto-swizzling for simple Apps
+
+By setting `kTSKSwizzleNetworkDelegates` to `YES`, TrustKit will perform method 
+swizzling on the App's `NSURLSession` and `NSURLConnection` delegates in order 
+to automatically perform SSL pinning validation against the server's certificate 
+chain, based on the configured pinning policy. This allows deploying TrustKit
+without changing the App's source code.
+
+Auto-swizzling should only be enabled for simple Apps, as it may not work properly 
+in several scenarios including:
+    
+* Apps with complex connection delegates, for example to handle client 
+authentication via certificates or basic authentication.
+* Apps where method swizzling is already performed by another module or library 
+(such as New Relic).
+* Apps that do no use `NSURLSession` or `NSURLConnection` for their 
+connections.
+
+Auto-swizzling can be disabled by setting `kTSKSwizzleNetworkDelegates` to `NO`
+(which is also the default setting). Manual pinning validation can then be easily
+implemented in the App's authentication handlers'; see the "Manual Pin Validation" 
+section in this guide for instructions.
+
+
+#### Always start with pinning enforcement disabled
+
 To avoid locking out too many users from your App when deploying SSL pinning
 for the first time, it is advisable to set `kTSKEnforcePinning` to `NO`, so that SSL 
-connections will succeed regardless of pin validation. 
+connections will succeed regardless of pin validation. This means that TrustKit
+will mirror iOS' default behavior.
 
-Also, adding a report URL using the `kTSKReportUris` setting to receive pin validation failure 
-reports will help track these failures. You can use your own report server or Data Theorem 
-(info@datatheorem.com) provides a dashboard to display these reports for free.
 
-This will give you an idea of how many users would be blocked, if pin validation was to be enforced.
+#### Deploy a reporting server or use Data Theorem's free server
+
+Adding a report URL using the `kTSKReportUris` setting to receive pin validation 
+failure reports will help track pin validation failures happening across your user 
+base. You can use your own report server or Data Theorem's, which provides a 
+dashboard to display these reports for free (email info@datatheorem.com for 
+access).
+
+This will give you an idea of how many users would be blocked, if pin validation 
+was to be enforced.
+
+#### Other configuration settings
 
 The list of all the configuration keys is available in the
 [documentation](https://datatheorem.github.io/TrustKit/documentation/Classes/TrustKit.html).
 
-After supplying the pinning policy, and if `kTSKSwizzleNetworkDelegates` is set to `YES`, all of 
-the App's `NSURLConnection` and `NSURLSession` delegates will automatically enforce the policy.
 
+## Manual Pin Validation
 
-Manual Pin Validation
----------------------
-
-In specific scenarios, TrustKit cannot intercept outgoing SSL connections and automatically 
-validate the server's identity against the pinning policy. For these connections, the pin validation 
-must be manually triggered: the server's trust object, which contains its certificate chain, needs to 
-be retrieved or built before being passed to the 
+Even when auto-swizzling is enabled with `kTSKSwizzleNetworkDelegates`, there
+are specific scenarios where TrustKit cannot intercept outgoing SSL connections 
+and automatically validate the server's identity against the pinning policy. For these 
+connections, the pin validation must be manually triggered: the server's trust object, 
+which contains its certificate chain, needs to be retrieved or built before being 
+passed to the
 [`TSKPinningValidator` class](https://datatheorem.github.io/TrustKit/documentation/Classes/TSKPinningValidator.html) 
 for validation. 
  
-`TSKPinningValidator` then returns a `TSKTrustDecision` which describes whether the SSL connection 
-should be allowed or blocked, based on the App's SSL pinning policy.
+`TSKPinningValidator` then returns a `TSKTrustDecision` which describes whether 
+the SSL connection should be allowed or blocked, based on the App's SSL pinning 
+policy.
  
  The following connections require manual pin validation:
  
- 1. All connections within an App that disables TrustKit's network delegate swizzling by setting the `kTSKSwizzleNetworkDelegates` configuration key to `NO`.
- 2. Connections that do not rely on the `NSURLConnection` or `NSURLSession` APIs:
-     * Connections leveraging different network APIs (such as `NSStream`). Apple has released a [technical note describing how the server's trust object can be retrieved][https://developer.apple.com/library/ios/technotes/tn2232/_index.html] for the various network APIs (`NSStream`, `CFNetwork`, etc.) available on iOS and OS X.
-     * Connections initiated using a third-party SSL library such as OpenSSL. The server's trust object needs to be built using the received certificate chain.
- 3. Connections happening within an external process:
-     * `WKWebView` connections: the server's trust object can be retrieved and validated within the `webView:didReceiveAuthenticationChallenge:completionHandler:` method.
-     * `NSURLSession` connections using the background transfer service: the server's trust object can be retrieved and validated within the `application:handleEventsForBackgroundURLSession:completionHandler:` method.
+ 1. All connections within an App that disables TrustKit's network delegate 
+ swizzling by setting the `kTSKSwizzleNetworkDelegates` configuration key to 
+ `NO`.
+ 2. Connections that do not rely on the `NSURLConnection` or `NSURLSession` 
+ APIs:
+     * Connections leveraging different network APIs (such as `NSStream`). Apple 
+     has released a [technical note describing how the server's trust object can be retrieved][https://developer.apple.com/library/ios/technotes/tn2232/_index.html] for the various network APIs (`NSStream`, `CFNetwork`, 
+     etc.) available on iOS and OS X.
+     * Connections initiated using a third-party SSL library such as OpenSSL. The 
+     server's trust object needs to be built using the received certificate chain.
+ 3. Connections happening outside of the App's process:
+     * `WKWebView` connections: the server's trust object can be retrieved and 
+     validated within the 
+     `webView:didReceiveAuthenticationChallenge:completionHandler:` method.
+     * `NSURLSession` connections using the background transfer service: the 
+     server's trust object can be retrieved and validated within the 
+     `application:handleEventsForBackgroundURLSession:completionHandler:` 
+     method.
 
 
-Pinning in WebViews
--------------------
+## Pinning in WebViews
 
-Adding SSL pinning to connections initiated within a `UIWebView` is difficult as the class does not
-provide direct APIs to handle authentication challenges. As mentionned in 
-[Apple's technical note about HTTPS trust evaluation](https://developer.apple.com/library/ios/technotes/tn2232/_index.html), 
-customizing certificate validation in a `UIWebView` can still be achieved using `NSURLProtocol` to intercept all outgoing
-connections. However, implemeting this technique is a complex and significant engineering effort. 
+Adding SSL pinning to connections initiated within a `UIWebView` is difficult as the 
+class does not provide direct APIs to handle authentication challenges. As 
+mentionned in [Apple's technical note about HTTPS trust evaluation](https://developer.apple.com/library/ios/technotes/tn2232/_index.html), 
+customizing certificate validation in a `UIWebView` can still be achieved using 
+`NSURLProtocol` to intercept all outgoing connections. However, implemeting this 
+technique is a complex and significant engineering effort. 
 
-Overall, the best approach to implementing SSL pinning in webviews seems to be by migrating to
-the `WKWebView` class introduced in iOS 8, which provides 
+Overall, the best approach to implementing SSL pinning in webviews is by 
+migrating to the `WKWebView` class introduced in iOS 8, which provides 
 [delegate methods](https://developer.apple.com/library/ios/documentation/WebKit/Reference/WKNavigationDelegate_Ref/) to handle authentication challenges (such as server SSL certificate 
 validation). However, this approach still requires some testing as it seems like the 
 `webView:didReceiveAuthenticationChallenge:completionHandler:` delegate method [only works reliably on iOS 9](https://bugs.webkit.org/show_bug.cgi?id=135327).
 
 
-Other Ways to Embed TrustKit
-----------------------------
+## Embedding TrustKit Without CocoaPods
 
 ### Adding TrustKit as a Dependency - Static Linking
 
