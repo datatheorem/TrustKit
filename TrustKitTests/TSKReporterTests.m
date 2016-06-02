@@ -78,7 +78,7 @@
                       kTSKEnforcePinning : @YES,
                       kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                       kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
-                                              @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
+                                              @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=" // Fake key 2
                                               ]}}};
     [TrustKit initializeWithConfiguration:trustKitConfig];
     
@@ -90,7 +90,7 @@
     // Expect a report to be sent out when a notification is posted
     NSSet *knownPins = [NSSet setWithArray:@[[[NSData alloc]initWithBase64EncodedString:@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
                                                                                 options:(NSDataBase64DecodingOptions)0],
-                                             [[NSData alloc]initWithBase64EncodedString:@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+                                             [[NSData alloc]initWithBase64EncodedString:@"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB="
                                                                                 options:(NSDataBase64DecodingOptions)0]]];
     [[pinFailureReporterMock expect] pinValidationFailedForHostname:@"www.test.com"
                                                                port:nil

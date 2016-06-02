@@ -181,14 +181,8 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
         
         
         // Extract and convert the subject public key info hashes
-        NSArray *serverSslPinsBase64 = domainPinningPolicy[kTSKPublicKeyHashes];
-        if ([serverSslPinsBase64 count] < 2)
-        {
-            [NSException raise:@"TrustKit configuration invalid"
-                        format:@"TrustKit was initialized with less than two pins (ie. no backup pins) for domain %@", domainName];
-        }
-        
-        NSMutableArray *serverSslPinsData = [[NSMutableArray alloc] init];
+        NSArray<NSString *> *serverSslPinsBase64 = domainPinningPolicy[kTSKPublicKeyHashes];
+        NSMutableSet<NSData *> *serverSslPinsSet = [NSMutableSet set];
         
         for (NSString *pinnedKeyHashBase64 in serverSslPinsBase64) {
             NSData *pinnedKeyHash = [[NSData alloc] initWithBase64EncodedString:pinnedKeyHashBase64 options:(NSDataBase64DecodingOptions)0];
@@ -200,11 +194,17 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
                             format:@"TrustKit was initialized with an invalid Pin %@ for domain %@", pinnedKeyHashBase64, domainName];
             }
             
-            [serverSslPinsData addObject:pinnedKeyHash];
+            [serverSslPinsSet addObject:pinnedKeyHash];
+        }
+        
+        if ([serverSslPinsSet count] < 2)
+        {
+            [NSException raise:@"TrustKit configuration invalid"
+                        format:@"TrustKit was initialized with less than two pins (ie. no backup pins) for domain %@. This might brick your App; please review the Getting Started guide in ./docs/getting-started.md", domainName];
         }
         
         // Save the hashes for this server as an NSSet for quick lookup
-        domainFinalConfiguration[kTSKPublicKeyHashes] = [NSSet setWithArray:serverSslPinsData];
+        domainFinalConfiguration[kTSKPublicKeyHashes] = [NSSet setWithSet:serverSslPinsSet];
         
         // Store the whole configuration
         finalConfiguration[kTSKPinnedDomains][domainName] = [NSDictionary dictionaryWithDictionary:domainFinalConfiguration];

@@ -55,7 +55,7 @@
                                                   @{@"www.datatheorem.com" : @{
                                                             kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                                                             kTSKPublicKeyHashes : @[@"NnUTm1c2kQBu1jepUWgce1VExzxgb9hfBfW3T9J2jeI=", // Leaf Key
-                                                                                    @"NnUTm1c2kQBu1jepUWgce1VExzxgb9hfBfW3T9J2jeI=", // Leaf Key
+                                                                                    @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                                                                     ]}}});
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
@@ -91,7 +91,7 @@
                                                   @{@"www.good.com" : @{
                                                             kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                             kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=", // Server Key
-                                                                                    @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=", // Server Key
+                                                                                    @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                                                                     ]}}});
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
@@ -131,7 +131,7 @@
                                                   @{@"www.cloudflare.com" : @{
                                                             kTSKPublicKeyAlgorithms : @[kTSKAlgorithmEcDsaSecp256r1],
                                                             kTSKPublicKeyHashes : @[@"Gc7EN2acfkbE0dUOAd34tr1XLr+JdkTiTrMAfhESQHI=", // Leaf Key
-                                                                                    @"Gc7EN2acfkbE0dUOAd34tr1XLr+JdkTiTrMAfhESQHI=", // Leaf Key
+                                                                                    @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                                                                     ]}}});
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;

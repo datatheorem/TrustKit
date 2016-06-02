@@ -218,13 +218,14 @@
 {
     NSDictionary *trustKitConfig =
     @{
+      kTSKSwizzleNetworkDelegates: @YES,
       kTSKPinnedDomains :
           @{
               @"www.yahoo.com" : @{
                       kTSKEnforcePinning : @YES,
                       kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                       kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
-                                              @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
+                                              @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=" // Fake key 2
                                               ]}}};
     
     [TrustKit initializeWithConfiguration:trustKitConfig];
@@ -278,13 +279,14 @@
     // This is not needed but to ensure TrustKit does get initialized
     NSDictionary *trustKitConfig =
     @{
+      kTSKSwizzleNetworkDelegates: @YES,
       kTSKPinnedDomains :
           @{
               @"www.yahoo.com" : @{
                       kTSKEnforcePinning : @YES,
                       kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                       kTSKPublicKeyHashes : @[@"JbQbUG5JMJUoI6brnx0x3vZF6jilxsapbXGVfjhN8Fg=", // CA key
-                                              @"JbQbUG5JMJUoI6brnx0x3vZF6jilxsapbXGVfjhN8Fg=" // CA key
+                                              @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                               ]}}};
     
     [TrustKit initializeWithConfiguration:trustKitConfig];
@@ -327,12 +329,13 @@
 {
     NSDictionary *trustKitConfig =
     @{
+      kTSKSwizzleNetworkDelegates: @YES,
       kTSKPinnedDomains :
           @{
               @"www.twitter.com" : @{
                       kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                       kTSKPublicKeyHashes : @[@"RRM1dGqnDFsCJXBTHky16vi1obOlCgFFn/yOhI/y+ho=", // CA key
-                                              @"RRM1dGqnDFsCJXBTHky16vi1obOlCgFFn/yOhI/y+ho=" // CA key
+                                              @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                               ]}}};
     
     [TrustKit initializeWithConfiguration:trustKitConfig];
@@ -386,13 +389,14 @@
 {
     NSDictionary *trustKitConfig =
     @{
+      kTSKSwizzleNetworkDelegates: @YES,
       kTSKPinnedDomains :
           @{
               @"www.google.com" : @{
                       kTSKEnforcePinning : @YES,
                       kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                       kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
-                                              @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
+                                              @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=" // Fake key 2
                                               ]}}};
     
     [TrustKit initializeWithConfiguration:trustKitConfig];
@@ -425,12 +429,13 @@
 {
     NSDictionary *trustKitConfig =
     @{
+      kTSKSwizzleNetworkDelegates: @YES,
       kTSKPinnedDomains :
           @{
               @"www.apple.com" : @{
                       kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                       kTSKPublicKeyHashes : @[@"gMxWOrX4PMQesK9qFNbYBxjBfjUvlkn/vN1n+L9lE5E=", // CA key
-                                              @"gMxWOrX4PMQesK9qFNbYBxjBfjUvlkn/vN1n+L9lE5E=" // CA key
+                                              @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                               ]}}};
     
     [TrustKit initializeWithConfiguration:trustKitConfig];
@@ -480,12 +485,13 @@
 {
     NSDictionary *trustKitConfig =
     @{
+      kTSKSwizzleNetworkDelegates: @YES,
       kTSKPinnedDomains :
           @{
               @"www.fastmail.fm" : @{
                       kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                       kTSKPublicKeyHashes : @[@"k2v657xBsOVe1PQRwOsHsw3bsGT2VzIqz5K+59sNQws=", // CA key
-                                              @"k2v657xBsOVe1PQRwOsHsw3bsGT2VzIqz5K+59sNQws=" // CA key
+                                              @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                               ]}}};
     
     [TrustKit initializeWithConfiguration:trustKitConfig];

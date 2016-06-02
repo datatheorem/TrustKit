@@ -42,7 +42,9 @@
     XCTAssertThrows(parseTrustKitConfiguration(@{kTSKPinnedDomains : @{
                                                      @"www.good.com" : @{
                                                              kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                                             kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY="
+                                                             kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                                                                                     @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY="
+                                                                                     @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=" // Fake key
                                                                                      ]}}}),
                     @"Configuration with one pin only must be rejected");
 }
@@ -56,7 +58,8 @@
                                                       @"www.good.com" : @{
                                                               kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                               kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
-                                                                                      @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY="]}}});
+                                                                                      @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
+                                                                                      ]}}});
     
     NSString *serverConfigKey = getPinningConfigurationKeyForDomain(@"www.good.com", trustKitConfig);
     XCTAssert([serverConfigKey isEqualToString:@"www.good.com"], @"Did not receive a configuration for a pinned domain");
@@ -70,7 +73,7 @@
                                                       @"good.com" : @{
                                                               kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                               kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
-                                                                                      @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY="
+                                                                                      @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                                                                       ]}}});
     
     // Ensure www.datatheorem.com gets no configuration
@@ -87,7 +90,7 @@
                                                               kTSKIncludeSubdomains : @YES,
                                                               kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                               kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
-                                                                                      @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY="
+                                                                                      @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                                                                       ]}}});
     
     // Ensure www.good.com gets the configuration set for good.com as includeSubdomains is enabled
@@ -103,7 +106,7 @@
                                                                             kTSKIncludeSubdomains : @YES,
                                                                             kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                                             kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
-                                                                                                    @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY="
+                                                                                                    @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                                                                                     ]}}});
     
     // Ensure good.com gets the configuration set for good.com as includeSubdomains is enabled
@@ -120,7 +123,7 @@
                                                             kTSKIncludeSubdomains : @YES,
                                                             kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                             kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
-                                                                                    @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY="
+                                                                                    @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                                                                     ]}}});
     
     NSString *serverConfigKey = getPinningConfigurationKeyForDomain(@"sub.www.good.com.www.good.com", trustKitConfig);
@@ -136,7 +139,7 @@
                                                             kTSKIncludeSubdomains : @YES,
                                                             kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                             kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
-                                                                                    @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY="
+                                                                                    @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                                                                     ]}}});
     
     // Corner case to ensure two different domains with similar strings don't get returned as subdomains
@@ -152,7 +155,7 @@
                                                            kTSKIncludeSubdomains : @YES,
                                                            kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                            kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
-                                                                                   @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY="
+                                                                                   @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                                                                    ]}}}),
                     @"Configuration that pins *.com must be rejected");
 }
@@ -166,7 +169,7 @@
                                                             kTSKIncludeSubdomains : @NO,
                                                             kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                             kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
-                                                                                    @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY="
+                                                                                    @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                                                                     ]}}});
     
     // Ensure www.good.com does not get the configuration set for good.com
@@ -183,12 +186,12 @@
                                                             kTSKIncludeSubdomains : @YES,
                                                             kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                             kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
-                                                                                    @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY="
+                                                                                    @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                                                                     ]},
                                                     @"www.good.com": @{
                                                             kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                                                             kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=",
-                                                                                    @"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0="
+                                                                                    @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                                                                     ]}}});
     
     // Ensure the configuration specific to www.good.com takes precedence over the more general config for good.com
@@ -213,7 +216,7 @@
                                                             kTSKIncludeSubdomains : @YES,
                                                             kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                             kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
-                                                                                    @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY="
+                                                                                    @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                                                                     ]}}});
     
     // Ensure the kTSKSwizzleNetworkDelegates setting was saved
