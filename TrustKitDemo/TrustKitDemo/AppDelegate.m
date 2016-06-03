@@ -38,7 +38,7 @@
                       // Wrong SPKI hashes to demonstrate pinning failure
                       kTSKPublicKeyHashes : @[
                               @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
-                              @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+                              @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB="
                               ],
                       
                       // Send reports for pinning failures
@@ -55,7 +55,7 @@
                       // Valid SPKI hashes to demonstrate success
                       kTSKPublicKeyHashes : @[
                               @"lCppFqbkrlJ3EcVFAkeip0+44VaoJUymbnOaEUk7tEU=", // CA key
-                              @"lCppFqbkrlJ3EcVFAkeip0+44VaoJUymbnOaEUk7tEU=" // CA key
+                              @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key but 2 pins need to be provided
                               ]
                       }}};
     
