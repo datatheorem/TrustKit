@@ -94,9 +94,9 @@ let trustKitConfig = [
 TrustKit.initializeWithConfiguration(config)
 ```
 
-Once **TrustKit** has been initialized, it will by default swizzle the App's _NSURLSession_ and _NSURLConnection_ delegates to verify the server's certificate against the configured pinning policy, whenever an HTTPS connection is initiated. If report URIs have been configured, the App will also send reports to the specified URIs whenever a pin validation failure occurred.
+Once **TrustKit** has been initialized and if `kTSKSwizzleNetworkDelegates` is enabled in the policy, TrustKit will automatically swizzle the App's _NSURLSession_ and _NSURLConnection_ delegates to verify the server's certificate against the configured pinning policy, whenever an HTTPS connection is initiated. If report URIs have been configured, the App will also send reports to the specified URIs whenever a pin validation failure occurred.
 
-The swizzling behavior can be disabled via the `kTSKSwizzleNetworkDelegates` setting, and a server's certificate chain can easily be checked against the App's SSL pinning policy using the `TSKPinningValidator` class, for example to implement an authentication handler.
+The swizzling behavior should only be used for simple Apps. When swizzling is disabled, a server's certificate chain can easily be manually checked against the App's SSL pinning policy using the `TSKPinningValidator` class, for example to implement an authentication handler.
 
 For more information, see the [Getting Started][getting-started] guide.
 

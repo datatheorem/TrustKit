@@ -70,7 +70,8 @@
                                                              arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
     
     // Create a configuration
-    NSDictionary *trustKitConfig = @{kTSKPinnedDomains :
+    NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
+                                     kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=", // Server key
@@ -140,7 +141,8 @@
                                                              arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
     
     // Create a configuration
-    NSDictionary *trustKitConfig = @{kTSKPinnedDomains :
+    NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
+                                     kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"khKI6ae4micEvX74MB/BZ4u15WCWGXPD6Gjg6iIRVeE=", // Intermediate Key
@@ -167,7 +169,7 @@
     
     // Ensure the SPKI cache was persisted to the filesystem
     XCTAssert([getSpkiCacheFromFileSystem() count] == 2, @"SPKI cache must be persisted to the file system");
-
+    
     CFRelease(trust);
 }
 
@@ -184,7 +186,8 @@
                                                              arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
     
     // Create a configuration
-    NSDictionary *trustKitConfig = @{kTSKPinnedDomains :
+    NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
+                                     kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA Key
@@ -223,7 +226,8 @@
                                                              arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
     
     // Create a configuration
-    NSDictionary *trustKitConfig = @{kTSKPinnedDomains :
+    NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
+                                     kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=", // Leaf Key
@@ -262,7 +266,8 @@
                                                              arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
     
     // Create a configuration
-    NSDictionary *trustKitConfig = @{kTSKPinnedDomains :
+    NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
+                                     kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Bad Key
@@ -328,7 +333,8 @@
                                                              arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
     
     // Create a configuration
-    NSDictionary *trustKitConfig = @{kTSKPinnedDomains :
+    NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
+                                     kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
                                                    kTSKEnforcePinning: @NO,
                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
@@ -378,7 +384,7 @@
         }
     }];
     [[NSNotificationCenter defaultCenter] removeObserver:observerId];
-
+    
     CFRelease(trust);
 }
 
@@ -396,7 +402,8 @@
                                                              arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
     
     // Create a configuration
-    NSDictionary *trustKitConfig = @{kTSKPinnedDomains :
+    NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
+                                     kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Bad key
@@ -435,7 +442,8 @@
                                                              arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
     
     // Create a configuration
-    NSDictionary *trustKitConfig = @{kTSKPinnedDomains :
+    NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
+                                     kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
                                                    kTSKEnforcePinning: @NO,  // Should fail even if pinning is not enforced
                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
@@ -458,7 +466,7 @@
     
     // Then test TSKPinningValidator
     [TrustKit initializeWithConfiguration:trustKitConfig];
-
+    
     // Configure notification listener
     XCTestExpectation *notifReceivedExpectation = [self expectationWithDescription:@"TestNotificationReceivedExpectation"];
     id observerId = [[NSNotificationCenter defaultCenter] addObserverForName:kTSKValidationCompletedNotification
@@ -503,7 +511,8 @@
     
     
     // Create a configuration
-    NSDictionary *trustKitConfig = @{kTSKPinnedDomains :
+    NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
+                                     kTSKPinnedDomains :
                                          @{@"www.bad.com" : @{
                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA Key
@@ -543,7 +552,8 @@
     
     
     // Create a configuration
-    NSDictionary *trustKitConfig = @{kTSKPinnedDomains :
+    NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
+                                     kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                                                    kTSKPublicKeyHashes : @[@"grX4Ta9HpZx6tSHkmCrvpApTQGo67CYDnvprLg5yRME=", // Comodo CA
@@ -582,13 +592,14 @@
     
     
     // Create a configuration
-    NSDictionary *trustKitConfig = @{kTSKPinnedDomains :
+    NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
+                                     kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA Key
                                                                            @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                                                            ]}}};
-  
+    
     
     // Then test TSKPinningValidator
     [TrustKit initializeWithConfiguration:trustKitConfig];

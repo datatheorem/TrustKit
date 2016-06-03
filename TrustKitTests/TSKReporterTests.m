@@ -71,7 +71,7 @@
     // Ensure that a pin validation notification triggers the upload of a report if the validation failed
     // Initialize TrustKit so the reporter block is ready to receive notifications
     NSDictionary *trustKitConfig =
-    @{
+    @{kTSKSwizzleNetworkDelegates: @NO,
       kTSKPinnedDomains :
           @{
               @"www.test.com" : @{
