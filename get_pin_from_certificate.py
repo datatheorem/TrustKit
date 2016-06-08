@@ -38,15 +38,15 @@ if __name__ == '__main__':
 
 
     # Extract the certificate key's algorithm
-    alg_txt = certificate_txt.split('Public Key Algorithm:')[1].split('\n')[0].strip()
+    alg_txt = certificate_txt.split('Public Key Algorithm:')[1].rsplit('\n')[0].rsplit()[0]
     key_algorithm = None
     if alg_txt == 'id-ecPublicKey':
         if 'prime256v1' in certificate_txt:
             key_algorithm = SupportedKeyAlgorithmsEnum.ECDSA_SECP256R1
     elif alg_txt == 'rsaEncryption':
-        if 'RSA Public Key: (2048 bit)' in certificate_txt:
+        if 'Public-Key: (2048 bit)' in certificate_txt:
             key_algorithm = SupportedKeyAlgorithmsEnum.RSA_2048
-        elif 'RSA Public Key: (4096 bit)' in certificate_txt:
+        elif 'Public-Key: (4096 bit)' in certificate_txt:
             key_algorithm = SupportedKeyAlgorithmsEnum.RSA_4096
 
     if key_algorithm is None:
