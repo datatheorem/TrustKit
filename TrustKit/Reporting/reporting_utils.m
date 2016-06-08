@@ -17,22 +17,20 @@
 NSArray<NSString *> *convertTrustToPemArray(SecTrustRef serverTrust)
 {
     // Convert the trust object into an array of PEM certificates
+    // Warning: SecTrustEvaluate() always needs to be called first on the serverTrust to be able to extract the certificates
     NSMutableArray *certificateChain = [NSMutableArray array];
     CFIndex chainLen = SecTrustGetCertificateCount(serverTrust);
     for (CFIndex i=0;i<chainLen;i++)
     {
         SecCertificateRef certificate = SecTrustGetCertificateAtIndex(serverTrust, i);
-        
-        // Get the data and transfer ownership to ARC
-        // Explicitly calling CFRelease() at the end of this function can crash the test suite
-        NSData *certificateData = (NSData *)CFBridgingRelease(SecCertificateCopyData(certificate));
+        CFDataRef certificateData = SecCertificateCopyData(certificate);
         
         // Craft the PEM certificate
         NSString *certificatePem = [NSString
                                     stringWithFormat:@"-----BEGIN CERTIFICATE-----\n%@\n-----END CERTIFICATE-----",
-                                    [certificateData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
-
+                                    [(__bridge NSData *)certificateData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength]];
         [certificateChain addObject:certificatePem];
+        CFRelease(certificateData);
     }
     return certificateChain;
 }

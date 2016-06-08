@@ -99,6 +99,7 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
     // First re-check the certificate chain using the default SSL validation in case it was disabled
     // This gives us revocation (only for EV certs I think?) and also ensures the certificate chain is sane
     // And also gives us the exact path that successfully validated the chain
+    CFRetain(serverTrust);
     
     // Create and use a sane SSL policy to force hostname validation, even if the supplied trust has a bad
     // policy configured (such as one from SecPolicyCreateBasicX509())
@@ -110,6 +111,7 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
     if (SecTrustEvaluate(serverTrust, &trustResult) != errSecSuccess)
     {
         TSKLog(@"SecTrustEvaluate error for %@", serverHostname);
+        CFRelease(serverTrust);
         return TSKPinValidationResultErrorInvalidParameters;
     }
     
@@ -119,6 +121,7 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
         CFDictionaryRef evaluationDetails = SecTrustCopyResult(serverTrust);
         TSKLog(@"Error: default SSL validation failed for %@: %@", serverHostname, evaluationDetails);
         CFRelease(evaluationDetails);
+        CFRelease(serverTrust);
         return TSKPinValidationResultFailedCertificateChainNotTrusted;
     }
     
@@ -140,6 +143,7 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
             if (subjectPublicKeyInfoHash == nil)
             {
                 TSKLog(@"Error - could not generate the SPKI hash for %@", serverHostname);
+                CFRelease(serverTrust);
                 return TSKPinValidationResultErrorCouldNotGenerateSpkiHash;
             }
             
@@ -148,6 +152,7 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
             if ([knownPins containsObject:subjectPublicKeyInfoHash])
             {
                 TSKLog(@"SSL Pin found for %@", serverHostname);
+                CFRelease(serverTrust);
                 return TSKPinValidationResultSuccess;
             }
         }
@@ -186,6 +191,7 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
             if ([customRootCerts containsObject:(__bridge id)(certificate)])
             {
                 TSKLog(@"Detected user-defined trust anchor in the certificate chain");
+                CFRelease(serverTrust);
                 return TSKPinValidationResultFailedUserDefinedTrustAnchor;
             }
         }
@@ -194,5 +200,6 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
     
     // If we get here, we didn't find any matching SPKI hash in the chain
     TSKLog(@"Error: SSL Pin not found for %@", serverHostname);
+    CFRelease(serverTrust);
     return TSKPinValidationResultFailed;
 }
