@@ -154,6 +154,7 @@ static dispatch_once_t dispatchOnceBackgroundSession;
                           notedHostname:(NSString *) notedHostname
                              reportURIs:(NSArray<NSURL *> *) reportURIs
                       includeSubdomains:(BOOL) includeSubdomains
+                         enforcePinning:(BOOL) enforcePinning
                               knownPins:(NSSet<NSData *> *) knownPins
                        validationResult:(TSKPinValidationResult) validationResult
 {
@@ -175,15 +176,17 @@ static dispatch_once_t dispatchOnceBackgroundSession;
     TSKPinFailureReport *report = [[TSKPinFailureReport alloc]initWithAppBundleId:_appBundleId
                                                                        appVersion:_appVersion
                                                                       appPlatform:_appPlatform
-                                                                    notedHostname:notedHostname
+                                                                      appVendorId:_appVendorId
+                                                                  trustkitVersion:TrustKitVersion
                                                                          hostname:serverHostname
                                                                              port:serverPort
                                                                          dateTime:[NSDate date] // Use the current time
+                                                                    notedHostname:notedHostname
                                                                 includeSubdomains:includeSubdomains
+                                                                   enforcePinning:enforcePinning
                                                         validatedCertificateChain:certificateChain
                                                                         knownPins:formattedPins
-                                                                 validationResult:validationResult
-                                                                    appVendorId:_appVendorId];
+                                                                 validationResult:validationResult];
     
     // Should we rate-limit this report?
     if (_shouldRateLimitReports && [TSKReportsRateLimiter shouldRateLimitReport:report])

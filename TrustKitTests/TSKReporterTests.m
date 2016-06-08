@@ -98,6 +98,7 @@
                                                       notedHostname:@"www.test.com"
                                                          reportURIs:@[[NSURL URLWithString:@"https://overmind.datatheorem.com/trustkit/report"]]
                                                   includeSubdomains:NO
+                                                  enforcePinning:YES
                                                           knownPins:knownPins
                                                    validationResult:TSKPinValidationResultErrorCouldNotGenerateSpkiHash];
     
@@ -146,8 +147,9 @@
                                         port:[NSNumber numberWithInt:443]
                                        certificateChain:_testCertificateChain
                                notedHostname:@"example.com"
-                                   reportURIs:@[[NSURL URLWithString:[TrustKit getDefaultReportUri]]]
+                                  reportURIs:@[[NSURL URLWithString:[TrustKit getDefaultReportUri]]]
                            includeSubdomains:YES
+                           enforcePinning:YES
                                    knownPins:[NSSet setWithArray:@[
                                                [[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM="
                                                                                   options:(NSDataBase64DecodingOptions)0],
@@ -172,16 +174,18 @@
 
     TSKPinFailureReport *report = [[TSKPinFailureReport alloc] initWithAppBundleId:@"test"
                                                                         appVersion:@"1.2.3"
-                                                                        appPlatform:@"IOS"
-                                                                     notedHostname:@"example.com"
+                                                                       appPlatform:@"IOS"
+                                                                       appVendorId:@"test"
+                                                                   trustkitVersion:@"4.3.2.1"
                                                                           hostname:@"mail.example.com"
                                                                               port:[NSNumber numberWithInt:443]
                                                                           dateTime:[NSDate date]
+                                                                     notedHostname:@"example.com"
                                                                  includeSubdomains:NO
+                                                                 enforcePinning:NO
                                                          validatedCertificateChain:certificateChain
                                                                          knownPins:formattedPins
-                                                                  validationResult:TSKPinValidationResultFailedCertificateChainNotTrusted
-                                                                      appVendorId:@"test"];
+                                                                  validationResult:TSKPinValidationResultFailedCertificateChainNotTrusted];
     
     // Ensure the same report will not be sent twice in a row
     XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == NO, @"Wrongly rate-limited a new report");
@@ -196,15 +200,17 @@
     report = [[TSKPinFailureReport alloc] initWithAppBundleId:@"test"
                                                    appVersion:@"1.2.3"
                                                   appPlatform:@"IOS"
-                                                notedHostname:@"example.com"
+                                                  appVendorId:@"test"
+                                              trustkitVersion:@"4.3.2.1"
                                                      hostname:@"mail.example.com"
                                                          port:[NSNumber numberWithInt:443]
                                                      dateTime:[NSDate date]
+                                                notedHostname:@"example.com"
                                             includeSubdomains:NO
+                                            enforcePinning:NO
                                     validatedCertificateChain:certificateChain
                                                     knownPins:formattedPins
-                                             validationResult:TSKPinValidationResultFailed
-                                                appVendorId:@"test"];
+                                             validationResult:TSKPinValidationResultFailed];
     XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == NO, @"Wrongly rate-limited a new report");
     XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == YES, @"Did not rate-limit an identical report");
     
@@ -213,15 +219,17 @@
     report = [[TSKPinFailureReport alloc] initWithAppBundleId:@"test"
                                                    appVersion:@"1.2.3"
                                                   appPlatform:@"IOS"
-                                                notedHostname:@"example.com"
+                                                  appVendorId:@"test"
+                                              trustkitVersion:@"4.3.2.1"
                                                      hostname:@"other.example.com"
                                                          port:[NSNumber numberWithInt:443]
                                                      dateTime:[NSDate date]
+                                                notedHostname:@"example.com"
                                             includeSubdomains:NO
+                                               enforcePinning:NO
                                     validatedCertificateChain:certificateChain
                                                     knownPins:formattedPins
-                                             validationResult:TSKPinValidationResultFailedCertificateChainNotTrusted
-                                                appVendorId:@"test"];
+                                             validationResult:TSKPinValidationResultFailedCertificateChainNotTrusted];
     XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == NO, @"Wrongly rate-limited a new report");
     XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == YES, @"Did not rate-limit an identical report");
     
@@ -230,15 +238,17 @@
     report = [[TSKPinFailureReport alloc] initWithAppBundleId:@"test"
                                                    appVersion:@"1.2.3"
                                                   appPlatform:@"IOS"
-                                                notedHostname:@"example.com"
+                                                  appVendorId:@"test"
+                                              trustkitVersion:@"4.3.2.1"
                                                      hostname:@"mail.example.com"
                                                          port:[NSNumber numberWithInt:443]
                                                      dateTime:[NSDate date]
+                                                notedHostname:@"example.com"
                                             includeSubdomains:NO
+                                            enforcePinning:NO
                                     validatedCertificateChain:[certificateChain subarrayWithRange:NSMakeRange(1, 2)]
                                                     knownPins:formattedPins
-                                             validationResult:TSKPinValidationResultFailedCertificateChainNotTrusted
-                                                appVendorId:@"test"];
+                                             validationResult:TSKPinValidationResultFailedCertificateChainNotTrusted];
     XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == NO, @"Wrongly rate-limited a new report");
     XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == YES, @"Did not rate-limit an identical report");
 }

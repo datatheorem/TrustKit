@@ -44,6 +44,7 @@
                           notedHostname:(NSString *) notedHostname
                              reportURIs:(NSArray<NSURL *> *) reportURIs
                       includeSubdomains:(BOOL) includeSubdomains
+                         enforcePinning:(BOOL) enforcePinning
                               knownPins:(NSSet<NSData *> *) knownPins
                        validationResult:(TSKPinValidationResult) validationResult;
 

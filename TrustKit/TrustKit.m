@@ -149,6 +149,7 @@ static void (^sendReportFromNotificationBlock)(NSNotification *note) = ^void(NSN
                                                       notedHostname:notedHostname
                                                          reportURIs:reportUris
                                                   includeSubdomains:[notedHostnameConfig[kTSKIncludeSubdomains] boolValue]
+                                                     enforcePinning:[notedHostnameConfig[kTSKEnforcePinning] boolValue]
                                                           knownPins:notedHostnameConfig[kTSKPublicKeyHashes]
                                                    validationResult:validationResult];
             }

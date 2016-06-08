@@ -17,15 +17,17 @@
 - (instancetype) initWithAppBundleId:(NSString *)appBundleId
                           appVersion:(NSString *)appVersion
                          appPlatform:(NSString *)appPlatform
-                       notedHostname:(NSString *)notedHostname
+                         appVendorId:(NSString *)appVendorId
+                     trustkitVersion:(NSString *)trustkitVersion
                             hostname:(NSString *)serverHostname
                                 port:(NSNumber *)serverPort
                             dateTime:(NSDate *)dateTime
+                       notedHostname:(NSString *)notedHostname
                    includeSubdomains:(BOOL) includeSubdomains
+                      enforcePinning:(BOOL)enforcePinning
            validatedCertificateChain:(NSArray<NSString *> *)validatedCertificateChain
                            knownPins:(NSArray<NSString *> *)knownPins
                     validationResult:(TSKPinValidationResult) validationResult
-                         appVendorId:(NSString *)appVendorId
 {
     self = [super init];
     if (self)
@@ -33,15 +35,17 @@
         _appBundleId = appBundleId;
         _appVersion = appVersion;
         _appPlatform = appPlatform;
-        _notedHostname = notedHostname;
+        _appVendorId = appVendorId;
+        _trustkitVersion = trustkitVersion;
         _hostname = serverHostname;
         _port = serverPort;
         _dateTime = dateTime;
+        _notedHostname = notedHostname;
         _includeSubdomains = includeSubdomains;
+        _enforcePinning = enforcePinning;
         _validatedCertificateChain = validatedCertificateChain;
         _knownPins = knownPins;
         _validationResult = validationResult;
-        _appVendorId = appVendorId;
     }
     return self;
 }
@@ -60,15 +64,17 @@
         @"app-bundle-id" : self.appBundleId,
         @"app-version" : self.appVersion,
         @"app-platform" : self.appPlatform,
+        @"app-vendor-id": self.appVendorId,
+        @"trustkit-version": self.trustkitVersion,
         @"date-time" : currentTimeStr,
         @"hostname" : self.hostname,
         @"port" : self.port,
-        @"include-subdomains" : [NSNumber numberWithBool:self.includeSubdomains],
         @"noted-hostname" : self.notedHostname,
+        @"include-subdomains" : [NSNumber numberWithBool:self.includeSubdomains],
+        @"enforce-pinning" : [NSNumber numberWithBool:self.enforcePinning],
         @"validated-certificate-chain" : self.validatedCertificateChain,
         @"known-pins" : self.knownPins,
-        @"validation-result": [NSNumber numberWithInt:self.validationResult],
-        @"app-vendor-id": self.appVendorId
+        @"validation-result": [NSNumber numberWithInt:self.validationResult]
     };
     
     NSError *error;
