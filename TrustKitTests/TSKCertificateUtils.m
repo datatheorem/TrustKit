@@ -33,42 +33,28 @@
                                arrayLength:(NSInteger)anchorArrayLength
 {
     CFArrayRef certificateChain = CFArrayCreate(NULL, (const void **)certArray, certArrayLength, NULL);
+    SecPolicyRef policy = SecPolicyCreateSSL(true, NULL);
     SecTrustRef trust;
     
-    SecPolicyRef policy = SecPolicyCreateSSL(true, NULL);
-    
-    if (SecTrustCreateWithCertificates(certificateChain, policy, &trust) != errSecSuccess)
+    OSStatus result = SecTrustCreateWithCertificates(certificateChain, policy, &trust);
+    CFRelease(certificateChain);
+    CFRelease(policy);
+    if (result != errSecSuccess)
     {
-        if (certificateChain)
-        {
-            CFRelease(certificateChain);
-        }
-        CFRelease(policy);
         [NSException raise:@"Test error" format:@"SecTrustCreateWithCertificates did not return errSecSuccess"];
     }
-    CFRelease(policy);
+    
     
     if (anchorCertificates)
     {
         CFArrayRef trustStore = CFArrayCreate(NULL, (const void **)anchorCertificates, anchorArrayLength, NULL);
-        
         if (SecTrustSetAnchorCertificates(trust, trustStore) != errSecSuccess)
         {
-            if (certificateChain)
-            {
-                CFRelease(certificateChain);
-            }
-            
-            if (trust)
-            {
-                CFRelease(trust);
-            }
+            CFRelease(trust);
             [NSException raise:@"Test error" format:@"SecTrustCreateWithCertificates did not return errSecSuccess"];
         }
         CFRelease(trustStore);
     }
-    
-    CFRelease(certificateChain);
 
     // Certificates included in the test suite have certain expiration time window - between 11/3/15 and 3/29/16
     // Set the verify date to be in that range so the certs do not need to be updated periodically
@@ -77,7 +63,6 @@
     CFDateRef testVerifyDate = CFDateCreate(NULL, verifyTime);
     SecTrustSetVerifyDate(trust, testVerifyDate);
     CFRelease(testVerifyDate);
-
     return trust;
 }
 
