@@ -38,15 +38,16 @@ if __name__ == '__main__':
 
 
     # Extract the certificate key's algorithm
+    # Tested on the output of OpenSSL 0.9.8zh and OpenSSL 1.0.2i
     alg_txt = certificate_txt.split('Public Key Algorithm:')[1].split('\n')[0].strip()
     key_algorithm = None
     if alg_txt == 'id-ecPublicKey':
         if 'prime256v1' in certificate_txt:
             key_algorithm = SupportedKeyAlgorithmsEnum.ECDSA_SECP256R1
     elif alg_txt == 'rsaEncryption':
-        if 'RSA Public Key: (2048 bit)' in certificate_txt:
+        if 'Key: (2048 bit)' in certificate_txt:
             key_algorithm = SupportedKeyAlgorithmsEnum.RSA_2048
-        elif 'RSA Public Key: (4096 bit)' in certificate_txt:
+        elif 'Key: (4096 bit)' in certificate_txt:
             key_algorithm = SupportedKeyAlgorithmsEnum.RSA_4096
 
     if key_algorithm is None:
@@ -65,7 +66,7 @@ if __name__ == '__main__':
         openssl_alg = 'rsa'
         trustkit_alg = 'kTSKAlgorithmRsa4096'
     else:
-        raise ValueError('Unexpected key algoriyhm')
+        raise ValueError('Unexpected key algorithm')
 
     spki = check_output('openssl x509  -pubkey -noout -inform {} -in {} '
                         '| openssl {} -outform DER -pubin -in /dev/stdin 2>/dev/null'.format(args.type,
@@ -79,3 +80,4 @@ if __name__ == '__main__':
     print 'TRUSTKIT CONFIGURATION\n----------------------'
     print 'kTSKPublicKeyHashes: @[@"{}"] // You will also need to configure a backup pin'.format(hpkp_pin)
     print 'kTSKPublicKeyAlgorithms: @[{}]\n'.format(trustkit_alg)
+    
