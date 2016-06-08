@@ -13,11 +13,10 @@
 #import <TrustKit/TSKPinningValidator.h>
 
 NS_ASSUME_NONNULL_BEGIN
-//! Project version number for TrustKit.
-FOUNDATION_EXPORT double TrustKitVersionNumber;
 
-//! Project version string for TrustKit.
-FOUNDATION_EXPORT const unsigned char TrustKitVersionString[];
+
+#pragma mark TrustKit Version Number
+FOUNDATION_EXPORT NSString * const TrustKitVersion;
 
 
 #pragma mark TrustKit Configuration Keys

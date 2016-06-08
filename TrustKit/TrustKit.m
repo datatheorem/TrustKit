@@ -18,6 +18,8 @@
 #import "Reporting/reporting_utils.h"
 
 
+NSString * const TrustKitVersion = @"1.3.1";
+
 #pragma mark Configuration Constants
 
 // Info.plist key we read the public key hashes from

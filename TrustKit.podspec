@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "TrustKit"
-  s.version      = "1.3.0"
+  s.version      = "1.3.1"
   s.summary      = 'TrustKit is an open source framework that makes it easy to deploy SSL pinning in any iOS or OS X App.'
   s.homepage     = "https://datatheorem.github.io/TrustKit"
   s.documentation_url = 'https://datatheorem.github.io/TrustKit/documentation/'
