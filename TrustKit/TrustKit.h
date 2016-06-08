@@ -77,7 +77,7 @@ FOUNDATION_EXPORT NSString * const kTSKValidationServerHostnameNotificationKey;
  
     NSDictionary *trustKitConfig =
     @{
-      kTSKSwizzleNetworkDelegates: @YES,
+      kTSKSwizzleNetworkDelegates: @NO,
       kTSKPinnedDomains : @{
               @"www.datatheorem.com" : @{
                       kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
@@ -103,6 +103,7 @@ FOUNDATION_EXPORT NSString * const kTSKValidationServerHostnameNotificationKey;
  Similarly, TrustKit can be initialized in Swift:
  
      let trustKitConfig = [
+         kTSKSwizzleNetworkDelegates: false,
          kTSKPinnedDomains: [
              "yahoo.com": [
                  kTSKPublicKeyAlgorithms: [kTSKAlgorithmRsa2048],
@@ -124,16 +125,22 @@ FOUNDATION_EXPORT NSString * const kTSKValidationServerHostnameNotificationKey;
  
  Each entry should contain domain-specific settings for performing pinning validation when connecting to the domain, including for example the domain's public key hashes. A list of all domain-specific keys is available in the "Domain-specific Keys" sections.
  
-
- ### Optional Global Configuration Keys
- 
  #### `kTSKSwizzleNetworkDelegates`
- If set to `YES`, TrustKit will perform method swizzling on the App's `NSURLConnection` and `NSURLSession` delegates in order to automatically add SSL pinning validation to the App's connections; default value is `YES`.
+ If set to `YES`, TrustKit will perform method swizzling on the App's `NSURLConnection` and `NSURLSession` delegates in order to automatically add SSL pinning validation to the App's connections.
  
- Swizzling allows enabling pinning within an App without having to find and modify each and every instance of `NSURLConnection` or `NSURLSession` delegates. However, it might clash with anti-tampering mechanisms, as well as analytics SDKs that also perform swizzling of the App's network delegates. In such scenarios or if the developer wants a tigher control on the App's networking behavior, `kTSKSwizzleNetworkDelegates` should be set to `NO`; the developer should then manually add pinning validation to the App's authentication handlers. 
+ Swizzling allows enabling pinning within an App without having to find and modify each and every instance of `NSURLConnection` or `NSURLSession` delegates. 
+ However, it should only be enabled for simple Apps, as it may not work properly in several scenarios including:
+ 
+ * Apps with complex connection delegates, for example to handle client authentication via certificates or basic authentication.
+ * Apps where method swizzling of the connection delegates is already performed by another module or library (such as Analytics SDKs).
+ * Apps that do no use `NSURLSession` or `NSURLConnection` for their connections.
+ 
+ In such scenarios or if the developer wants a tigher control on the App's networking behavior, `kTSKSwizzleNetworkDelegates` should be set to `NO`; the developer should then manually add pinning validation to the App's authentication handlers.
  
  See the `TSKPinningValidator` class for instructions on how to do so.
  
+ 
+ ### Optional Global Configuration Keys
 
  #### `kTSKIgnorePinningForUserDefinedTrustAnchors` (OS X only)
  If set to `YES`, pinning validation will be skipped if the server's certificate chain terminates at a user-defined trust anchor (such as a root CA that isn't part of OS X's default trust store) and no pin failure reports will be sent; default value is `YES`.

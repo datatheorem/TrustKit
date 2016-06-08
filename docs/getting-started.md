@@ -140,8 +140,8 @@ in several scenarios including:
     
 * Apps with complex connection delegates, for example to handle client 
 authentication via certificates or basic authentication.
-* Apps where method swizzling is already performed by another module or library 
-(such as New Relic).
+* Apps where method swizzling of the connection delegates is already performed 
+by another module or library (such as Analytics SDKs)
 * Apps that do no use `NSURLSession` or `NSURLConnection` for their 
 connections.
 
