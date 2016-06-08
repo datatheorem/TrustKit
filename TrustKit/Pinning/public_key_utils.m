@@ -184,6 +184,7 @@ NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate, T
     if (publicKeyData == nil)
     {
         TSKLog(@"Error - could not extract the public key bytes");
+        CFRelease((__bridge CFTypeRef)(certificateData));
         return nil;
     }
     
