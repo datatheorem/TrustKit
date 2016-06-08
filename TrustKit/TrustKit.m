@@ -89,14 +89,18 @@ void TSKLog(NSString *format, ...)
 #pragma mark Helper Function to Send Notifications and Reports
 
 // Send a notification and release the serverTrust
-void sendValidationNotification_async(NSString *serverHostname, SecTrustRef serverTrust, NSString *notedHostname, TSKPinValidationResult validationResult, TSKTrustDecision finalTrustDecision, NSTimeInterval validationDuration, void (^onCompletion)(void))
+void sendValidationNotification_async(NSString *serverHostname, SecTrustRef serverTrust, NSString *notedHostname, TSKPinValidationResult validationResult, TSKTrustDecision finalTrustDecision, NSTimeInterval validationDuration)
 {
+    // Convert the server trust to a certificate chain
+    // This cannot be done in the dispatch_async() block as sometimes the serverTrust seems to become invalid once the block gets scheduled, even tho its retain count is still positive
+    CFRetain(serverTrust);
+    NSArray *certificateChain = convertTrustToPemArray(serverTrust);
+    CFRelease(serverTrust);
+    
+    // Send the notification to consumers that want to get notified about all validations performed
+    // We use the _pinFailureReporterQueue so our receving block sendReportFromNotificationBlock gets executed on this queue as well
     dispatch_async(_pinFailureReporterQueue, ^(void)
                    {
-                       // Convert the server trust to a certificate chain
-                       NSArray *certificateChain = convertTrustToPemArray(serverTrust);
-                       
-                       // Send the notification or consumers that want to get notified about all validations performed
                        [[NSNotificationCenter defaultCenter] postNotificationName:kTSKValidationCompletedNotification
                                                                            object:nil
                                                                          userInfo:@{kTSKValidationDurationNotificationKey: @(validationDuration),
@@ -105,11 +109,6 @@ void sendValidationNotification_async(NSString *serverHostname, SecTrustRef serv
                                                                                     kTSKValidationCertificateChainNotificationKey: certificateChain,
                                                                                     kTSKValidationNotedHostnameNotificationKey: notedHostname,
                                                                                     kTSKValidationServerHostnameNotificationKey: serverHostname}];
-                       if (onCompletion)
-                       {
-                           // We usually use this to CFRelease() the serverTrust
-                           onCompletion();
-                       }
                    });
 }
 

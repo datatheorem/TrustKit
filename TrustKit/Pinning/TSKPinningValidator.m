@@ -29,6 +29,7 @@
         TSKLog(@"Pin validation error - invalid parameters for %@", serverHostname);
         return finalTrustDecision;
     }
+    CFRetain(serverTrust);
     
     // Register start time for duration computations
     NSTimeInterval validationStartTime = [NSDate timeIntervalSinceReferenceDate];
@@ -44,7 +45,6 @@
     else
     {
         // This domain is pinned: look for one the configured public key pins in the server's evaluated certificate chain
-        CFRetain(serverTrust);
         NSDictionary *domainConfig = trustKitConfig[kTSKPinnedDomains][domainConfigKey];
         
         TSKPinValidationResult validationResult = verifyPublicKeyPin(serverTrust, serverHostname, domainConfig[kTSKPublicKeyAlgorithms], domainConfig[kTSKPublicKeyHashes]);
@@ -91,12 +91,9 @@
         }
         // Send a notification after all validation is done; this will also trigger a report if pin validation failed
         NSTimeInterval validationDuration = [NSDate timeIntervalSinceReferenceDate] - validationStartTime;
-        sendValidationNotification_async(serverHostname, serverTrust, domainConfigKey, validationResult, finalTrustDecision, validationDuration, ^void (void)
-                                         {
-                                             // Release the trust once the report has been sent
-                                             CFRelease(serverTrust);
-                                         });
+        sendValidationNotification_async(serverHostname, serverTrust, domainConfigKey, validationResult, finalTrustDecision, validationDuration);
     }
+    CFRelease(serverTrust);
     
     return finalTrustDecision;
 }
