@@ -162,10 +162,13 @@ NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate, T
     
     // Have we seen this certificate before? Look for the SPKI in the cache
     NSData *certificateData = (__bridge NSData *)(SecCertificateCopyData(certificate));
+    
+    NSMutableData *certificateDataWithAlgorithm = [NSMutableData dataWithData:certificateData];
+    [certificateDataWithAlgorithm appendData:[NSData dataWithBytes:&publicKeyAlgorithm length:sizeof(int)]];
 
     pthread_mutex_lock(&_spkiCacheLock);
     {
-        cachedSubjectPublicKeyInfo = _subjectPublicKeyInfoHashesCache[certificateData];
+        cachedSubjectPublicKeyInfo = _subjectPublicKeyInfoHashesCache[certificateDataWithAlgorithm];
     }
     pthread_mutex_unlock(&_spkiCacheLock);
     
@@ -205,7 +208,7 @@ NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate, T
     // Store the hash in our memory cache
     pthread_mutex_lock(&_spkiCacheLock);
     {
-        _subjectPublicKeyInfoHashesCache[certificateData] = subjectPublicKeyInfoHash;
+        _subjectPublicKeyInfoHashesCache[certificateDataWithAlgorithm] = subjectPublicKeyInfoHash;
     }
     pthread_mutex_unlock(&_spkiCacheLock);
     
