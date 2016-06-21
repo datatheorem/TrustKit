@@ -19,8 +19,8 @@
 #pragma mark Global Cache for SPKI Hashes
 
 // Dictionnary to cache SPKI hashes instead of having to compute them on every connection
-// Each key is a raw certificate data and each value is the certificate's raw SPKI data
-NSMutableDictionary<NSData *, NSData *> *_subjectPublicKeyInfoHashesCache;
+// We store one cache dictionnary per TSKPublicKeyAlgorithm we support
+NSMutableDictionary<NSNumber *, SpkiCacheDictionnary *> *_subjectPublicKeyInfoHashesCache;
 
 // Used to lock access to our SPKI cache
 static pthread_mutex_t _spkiCacheLock;
@@ -159,13 +159,14 @@ static NSData *getPublicKeyDataFromCertificate(SecCertificateRef certificate)
 NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate, TSKPublicKeyAlgorithm publicKeyAlgorithm)
 {
     NSData *cachedSubjectPublicKeyInfo = NULL;
+    NSNumber *algorithmKey = [NSNumber numberWithInt:publicKeyAlgorithm];
     
     // Have we seen this certificate before? Look for the SPKI in the cache
     NSData *certificateData = (__bridge NSData *)(SecCertificateCopyData(certificate));
 
     pthread_mutex_lock(&_spkiCacheLock);
     {
-        cachedSubjectPublicKeyInfo = _subjectPublicKeyInfoHashesCache[certificateData];
+        cachedSubjectPublicKeyInfo = _subjectPublicKeyInfoHashesCache[algorithmKey][certificateData];
     }
     pthread_mutex_unlock(&_spkiCacheLock);
     
@@ -205,7 +206,7 @@ NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate, T
     // Store the hash in our memory cache
     pthread_mutex_lock(&_spkiCacheLock);
     {
-        _subjectPublicKeyInfoHashesCache[certificateData] = subjectPublicKeyInfoHash;
+        _subjectPublicKeyInfoHashesCache[algorithmKey][certificateData] = subjectPublicKeyInfoHash;
     }
     pthread_mutex_unlock(&_spkiCacheLock);
     
@@ -222,18 +223,27 @@ NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate, T
 }
 
 
-void initializeSubjectPublicKeyInfoCache(BOOL shouldLoadCacheFromFilesystem)
+void initializeSubjectPublicKeyInfoCache(void)
 {
     // Initialize our cache of SPKI hashes
     // First try to load a cached version from the filesystem
-    if (shouldLoadCacheFromFilesystem)
-    {
-        _subjectPublicKeyInfoHashesCache = getSpkiCacheFromFileSystem();
-    }
+    _subjectPublicKeyInfoHashesCache = getSpkiCacheFromFileSystem();
     TSKLog(@"Loaded %d SPKI cache entries from the filesystem", [_subjectPublicKeyInfoHashesCache count]);
+    
     if (_subjectPublicKeyInfoHashesCache == nil)
     {
         _subjectPublicKeyInfoHashesCache = [[NSMutableDictionary alloc]init];
+    }
+    
+    // Initialize any sub-dictionnary that hasn't been initialized
+    for (int i=0; i<=TSKPublicKeyAlgorithmLast; i++)
+    {
+        NSNumber *algorithmKey = [NSNumber numberWithInt:i];
+        if (_subjectPublicKeyInfoHashesCache[algorithmKey] == nil)
+        {
+            _subjectPublicKeyInfoHashesCache[algorithmKey] = [[NSMutableDictionary alloc]init];
+        }
+        
     }
     
     // Initialize our locks
@@ -276,7 +286,7 @@ void resetSubjectPublicKeyInfoCache(void)
 }
 
 
-NSMutableDictionary<NSData *, NSData *> *getSpkiCacheFromFileSystem(void)
+NSMutableDictionary<NSNumber *, SpkiCacheDictionnary *> *getSpkiCacheFromFileSystem(void)
 {
     NSMutableDictionary *spkiCache;
     NSString *spkiCachePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:_spkiCacheFilename];
@@ -286,7 +296,7 @@ NSMutableDictionary<NSData *, NSData *> *getSpkiCacheFromFileSystem(void)
 }
 
 
-NSMutableDictionary<NSData *, NSData *> *getSpkiCache(void)
+NSMutableDictionary<NSNumber *, SpkiCacheDictionnary *> *getSpkiCache(void)
 {
     return _subjectPublicKeyInfoHashesCache;
 }

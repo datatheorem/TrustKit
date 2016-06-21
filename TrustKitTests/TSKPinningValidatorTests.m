@@ -80,7 +80,7 @@
                                                                            ]}}};
     
     // Ensure the SPKI cache was on the filesystem is empty
-    XCTAssert([getSpkiCacheFromFileSystem() count] == 0, @"SPKI cache must be empty before the test");
+    XCTAssert([getSpkiCacheFromFileSystem()[@1] count] == 0, @"SPKI cache for RSA 4096 must be empty before the test");
     
     // First test the verifyPublicKeyPin() function
     NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
@@ -126,7 +126,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:observerId];
     
     // Ensure the SPKI cache was persisted to the filesystem
-    XCTAssert([getSpkiCacheFromFileSystem() count] == 1, @"SPKI cache must be persisted to the file system");
+    XCTAssert([getSpkiCacheFromFileSystem()[@1] count] == 1, @"SPKI cache for RSA 4096 must be persisted to the file system");
     
     CFRelease(trust);
 }
@@ -153,7 +153,7 @@
                                                                            ]}}};
     
     // Ensure the SPKI cache was on the filesystem is empty
-    XCTAssert([getSpkiCacheFromFileSystem() count] == 0, @"SPKI cache must be empty before the test");
+    XCTAssert([getSpkiCacheFromFileSystem()[@1] count] == 0, @"SPKI cache for RSA 4096 must be empty before the test");
     
     // First test the verifyPublicKeyPin() function
     NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
@@ -174,7 +174,7 @@
     
     
     // Ensure the SPKI cache was persisted to the filesystem
-    XCTAssert([getSpkiCacheFromFileSystem() count] == 2, @"SPKI cache must be persisted to the file system");
+    XCTAssert([getSpkiCacheFromFileSystem()[@1] count] == 2, @"SPKI cache for RSA 4096 must be persisted to the file system");
     
     CFRelease(trust);
 }

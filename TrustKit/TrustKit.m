@@ -176,7 +176,7 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
     
     if ([trustKitConfig count] > 0)
     {
-        initializeSubjectPublicKeyInfoCache(YES);
+        initializeSubjectPublicKeyInfoCache();
         
         // Convert and store the SSL pins in our global variable
         _trustKitGlobalConfiguration = [[NSDictionary alloc]initWithDictionary:parseTrustKitConfiguration(trustKitConfig)];

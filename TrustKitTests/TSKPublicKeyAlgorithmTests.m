@@ -60,8 +60,8 @@
                                                                                         ]}}});
     
     // Initialize the SPKI cache manually and don't load an existing cache from the filesystem
-    initializeSubjectPublicKeyInfoCache(NO);
-    XCTAssert([getSpkiCache() count] == 0, @"SPKI cache must be empty");
+    initializeSubjectPublicKeyInfoCache();
+    XCTAssert([getSpkiCache()[@0] count] == 0, @"SPKI cache for RSA 2048 must be empty");
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust,
@@ -70,7 +70,7 @@
                                             trustKitConfig[kTSKPinnedDomains][@"www.datatheorem.com"][kTSKPublicKeyHashes]);
     
     // Ensure the SPKI cache was used; the full certificate chain is four certs and we have to go through all of them to get to the pinned leaf
-    XCTAssert([getSpkiCache() count] == 4, @"SPKI cache must have been used");
+    XCTAssert([getSpkiCache()[@0] count] == 4, @"SPKI cache for RSA 2048 must have been used");
 
     CFRelease(trust);
     CFRelease(leafCertificate);
@@ -106,8 +106,8 @@
                                                                                         ]}}});
     
     // Initialize the SPKI cache manually and don't load an existing cache from the filesystem
-    initializeSubjectPublicKeyInfoCache(NO);
-    XCTAssert([getSpkiCache() count] == 0, @"SPKI cache must be empty");
+    initializeSubjectPublicKeyInfoCache();
+    XCTAssert([getSpkiCache()[@1] count] == 0, @"SPKI cache for RSA 4096 must be empty");
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust,
@@ -116,7 +116,7 @@
                                             trustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes]);
     
     // Ensure the SPKI cache was used; the full certificate chain is three certs and we have to go through all of them to get to the pinned leaf
-    XCTAssert([getSpkiCache() count] == 3, @"SPKI cache must have been used");
+    XCTAssert([getSpkiCache()[@1] count] == 3, @"SPKI cache for RSA 4096 must have been used");
     
     CFRelease(trust);
     CFRelease(leafCertificate);
@@ -156,8 +156,8 @@
                                                                                         ]}}});
     
     // Initialize the SPKI cache manually and don't load an existing cache from the filesystem
-    initializeSubjectPublicKeyInfoCache(NO);
-    XCTAssert([getSpkiCache() count] == 0, @"SPKI cache must be empty");
+    initializeSubjectPublicKeyInfoCache();
+    XCTAssert([getSpkiCache()[@2] count] == 0, @"SPKI cache for EC DSA must be empty");
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust,
@@ -166,7 +166,7 @@
                                             trustKitConfig[kTSKPinnedDomains][@"www.cloudflare.com"][kTSKPublicKeyHashes]);
     
     // Ensure the SPKI cache was used; the full certificate chain is three certs and we have to go through all of them to get to the pinned leaf
-    XCTAssert([getSpkiCache() count] == 3, @"SPKI cache must have been used");
+    XCTAssert([getSpkiCache()[@2] count] == 3, @"SPKI cache for EC DSA must have been used");
     
     CFRelease(trust);
     CFRelease(leafCertificate);
@@ -203,8 +203,9 @@
                                                                                         ]}}});
     
     // Initialize the SPKI cache manually and don't load an existing cache from the filesystem
-    initializeSubjectPublicKeyInfoCache(NO);
-    XCTAssert([getSpkiCache() count] == 0, @"SPKI cache must be empty");
+    initializeSubjectPublicKeyInfoCache();
+    XCTAssert([getSpkiCache()[@0] count] == 0, @"SPKI cache must be empty");
+    XCTAssert([getSpkiCache()[@1] count] == 0, @"SPKI cache must be empty");
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust,
@@ -213,7 +214,8 @@
                                             trustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes]);
     
     // Ensure the SPKI cache was used; the full certificate chain is three certs and we have to go through all of them to get to the pinned leaf
-    XCTAssert([getSpkiCache() count] == 3, @"SPKI cache must have been used");
+    XCTAssert([getSpkiCache()[@0] count] == 3, @"SPKI cache must have been used");
+    XCTAssert([getSpkiCache()[@1] count] == 3, @"SPKI cache must have been used");
     
     CFRelease(trust);
     CFRelease(leafCertificate);

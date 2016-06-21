@@ -18,21 +18,28 @@
 
 typedef NS_ENUM(NSInteger, TSKPublicKeyAlgorithm)
 {
+    // Some assumptions are made about this specific ordering in public_key_utils.m 
     TSKPublicKeyAlgorithmRsa2048 = 0,
     TSKPublicKeyAlgorithmRsa4096 = 1,
     TSKPublicKeyAlgorithmEcDsaSecp256r1 = 2,
+    
+    TSKPublicKeyAlgorithmLast = TSKPublicKeyAlgorithmEcDsaSecp256r1
 };
 
 
-void initializeSubjectPublicKeyInfoCache(BOOL shouldLoadCacheFromFilesystem);
+void initializeSubjectPublicKeyInfoCache(void);
 
 NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate, TSKPublicKeyAlgorithm publicKeyAlgorithm);
 
 
 // For tests
 void resetSubjectPublicKeyInfoCache(void);
-NSMutableDictionary<NSData *, NSData *> *getSpkiCache(void);
-NSMutableDictionary<NSData *, NSData *> *getSpkiCacheFromFileSystem(void);
+
+// Each key is a raw certificate data (for easy lookup) and each value is the certificate's raw SPKI data
+typedef NSMutableDictionary<NSData *, NSData *> SpkiCacheDictionnary;
+
+NSMutableDictionary<NSNumber *, SpkiCacheDictionnary *> *getSpkiCache(void);
+NSMutableDictionary<NSNumber *, SpkiCacheDictionnary *> *getSpkiCacheFromFileSystem(void);
 
 
 #endif
