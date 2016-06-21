@@ -222,12 +222,14 @@ NSData *hashSubjectPublicKeyInfoFromCertificate(SecCertificateRef certificate, T
 }
 
 
-
-void initializeSubjectPublicKeyInfoCache(void)
+void initializeSubjectPublicKeyInfoCache(BOOL shouldLoadCacheFromFilesystem)
 {
     // Initialize our cache of SPKI hashes
     // First try to load a cached version from the filesystem
-    _subjectPublicKeyInfoHashesCache = getSpkiCacheFromFileSystem();
+    if (shouldLoadCacheFromFilesystem)
+    {
+        _subjectPublicKeyInfoHashesCache = getSpkiCacheFromFileSystem();
+    }
     TSKLog(@"Loaded %d SPKI cache entries from the filesystem", [_subjectPublicKeyInfoHashesCache count]);
     if (_subjectPublicKeyInfoHashesCache == nil)
     {
@@ -251,6 +253,9 @@ void initializeSubjectPublicKeyInfoCache(void)
     pthread_mutex_unlock(&_keychainLock);
 #endif
 }
+
+
+#pragma mark Functions used by the Test Suite
 
 void resetSubjectPublicKeyInfoCache(void)
 {
@@ -281,3 +286,7 @@ NSMutableDictionary<NSData *, NSData *> *getSpkiCacheFromFileSystem(void)
 }
 
 
+NSMutableDictionary<NSData *, NSData *> *getSpkiCache(void)
+{
+    return _subjectPublicKeyInfoHashesCache;
+}
