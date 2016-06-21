@@ -59,14 +59,23 @@
                                                                                         @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                                                                         ]}}});
     
+    // Initialize the SPKI cache manually and don't load an existing cache from the filesystem
+    initializeSubjectPublicKeyInfoCache(NO);
+    XCTAssert([getSpkiCache() count] == 0, @"SPKI cache must be empty");
+    
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust,
                                             @"www.datatheorem.com",
                                             trustKitConfig[kTSKPinnedDomains][@"www.datatheorem.com"][kTSKPublicKeyAlgorithms],
                                             trustKitConfig[kTSKPinnedDomains][@"www.datatheorem.com"][kTSKPublicKeyHashes]);
+    
+    // Ensure the SPKI cache was used; the full certificate chain is four certs and we have to go through all of them to get to the pinned leaf
+    XCTAssert([getSpkiCache() count] == 4, @"SPKI cache must have been used");
+
     CFRelease(trust);
     CFRelease(leafCertificate);
     CFRelease(intermediateCertificate);
+    resetSubjectPublicKeyInfoCache();
     
     XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against valid public key pins for RSA 2048");
 }
@@ -96,15 +105,24 @@
                                                                                         @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                                                                         ]}}});
     
+    // Initialize the SPKI cache manually and don't load an existing cache from the filesystem
+    initializeSubjectPublicKeyInfoCache(NO);
+    XCTAssert([getSpkiCache() count] == 0, @"SPKI cache must be empty");
+    
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust,
                                             @"www.good.com",
                                             trustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
                                             trustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes]);
+    
+    // Ensure the SPKI cache was used; the full certificate chain is three certs and we have to go through all of them to get to the pinned leaf
+    XCTAssert([getSpkiCache() count] == 3, @"SPKI cache must have been used");
+    
     CFRelease(trust);
     CFRelease(leafCertificate);
     CFRelease(intermediateCertificate);
     CFRelease(rootCertificate);
+    resetSubjectPublicKeyInfoCache();
     
     XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against valid public key pins for RSA 4096");
 }
@@ -137,14 +155,23 @@
                                                                                         @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                                                                         ]}}});
     
+    // Initialize the SPKI cache manually and don't load an existing cache from the filesystem
+    initializeSubjectPublicKeyInfoCache(NO);
+    XCTAssert([getSpkiCache() count] == 0, @"SPKI cache must be empty");
+    
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust,
                                             @"www.cloudflare.com",
                                             trustKitConfig[kTSKPinnedDomains][@"www.cloudflare.com"][kTSKPublicKeyAlgorithms],
                                             trustKitConfig[kTSKPinnedDomains][@"www.cloudflare.com"][kTSKPublicKeyHashes]);
+    
+    // Ensure the SPKI cache was used; the full certificate chain is three certs and we have to go through all of them to get to the pinned leaf
+    XCTAssert([getSpkiCache() count] == 3, @"SPKI cache must have been used");
+    
     CFRelease(trust);
     CFRelease(leafCertificate);
     CFRelease(intermediateCertificate);
+    resetSubjectPublicKeyInfoCache();
     
     XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against valid public key pins for ECDSA secp256r1");
 }

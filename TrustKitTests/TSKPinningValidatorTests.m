@@ -79,6 +79,9 @@
                                                                            @"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=" // CA key
                                                                            ]}}};
     
+    // Ensure the SPKI cache was on the filesystem is empty
+    XCTAssert([getSpkiCacheFromFileSystem() count] == 0, @"SPKI cache must be empty before the test");
+    
     // First test the verifyPublicKeyPin() function
     NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
     
@@ -148,6 +151,9 @@
                                                    kTSKPublicKeyHashes : @[@"khKI6ae4micEvX74MB/BZ4u15WCWGXPD6Gjg6iIRVeE=", // Intermediate Key
                                                                            @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                                                            ]}}};
+    
+    // Ensure the SPKI cache was on the filesystem is empty
+    XCTAssert([getSpkiCacheFromFileSystem() count] == 0, @"SPKI cache must be empty before the test");
     
     // First test the verifyPublicKeyPin() function
     NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
