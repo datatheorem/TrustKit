@@ -40,7 +40,7 @@ static TSKTrustDecision _lastTrustDecision = (TSKTrustDecision)-1;
         // iOS 8+
         NSURLSessionClass = @"NSURLSession";
     }
-    else if (NSClassFromString(@"NSURLSession") != nil)
+    else if (NSClassFromString(@"__NSCFURLSession") != nil)
     {
         // Pre iOS 8, for some reason hooking NSURLSession doesn't work. We need to use the real/private class __NSCFURLSession
         NSURLSessionClass = @"__NSCFURLSession";
@@ -155,7 +155,7 @@ static TSKTrustDecision _lastTrustDecision = (TSKTrustDecision)-1;
                                              forSession:(NSURLSession * _Nonnull)session
 {
     BOOL wasChallengeHandled = NO;
-    
+
     // Can the original delegate handle this challenge ?
     if  ([originalDelegate respondsToSelector:@selector(URLSession:didReceiveChallenge:completionHandler:)])
     {
@@ -173,14 +173,14 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
                                       NSURLCredential * _Nullable credential))completionHandler
 {
     BOOL wasChallengeHandled = NO;
-    
+
     // For SSL pinning we only care about server authentication
     if([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust])
     {
         TSKTrustDecision trustDecision = TSKTrustDecisionShouldBlockConnection;
         SecTrustRef serverTrust = challenge.protectionSpace.serverTrust;
         NSString *serverHostname = challenge.protectionSpace.host;
-        
+
         // Check the trust object against the pinning policy
         trustDecision = [TSKPinningValidator evaluateTrust:serverTrust forHostname:serverHostname];
         _lastTrustDecision = trustDecision;
@@ -191,7 +191,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
             completionHandler(NSURLSessionAuthChallengeCancelAuthenticationChallenge, NULL);
         }
     }
-    
+
     // Forward all challenges (including client auth challenges) to the original delegate
     if (wasChallengeHandled == NO)
     {
@@ -211,12 +211,12 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
                                       NSURLCredential * _Nullable credential))completionHandler
 {
     BOOL wasChallengeHandled = NO;
-    
+
     // For SSL pinning we only care about server authentication
     if([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust])
     {
         TSKTrustDecision trustDecision = TSKTrustDecisionShouldBlockConnection;
-        
+
         // Check the trust object against the pinning policy
         trustDecision = [TSKPinningValidator evaluateTrust:challenge.protectionSpace.serverTrust
                                                forHostname:challenge.protectionSpace.host];
@@ -228,7 +228,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
             completionHandler(NSURLSessionAuthChallengeCancelAuthenticationChallenge, NULL);
         }
     }
-    
+
     // Forward all challenges (including client auth challenges) to the original delegate
     if (wasChallengeHandled == NO)
     {
