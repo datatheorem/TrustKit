@@ -83,14 +83,21 @@ void TSKLog(NSString *format, ...)
     NSString *newFormat = [[NSString alloc] initWithFormat:@"=== TrustKit: %@", format];
     va_list args;
     va_start(args, format);
-    NSLogv(newFormat, args);
+    if(_loggerMethod) {
+        // log using the method set by application
+        NSString *logMsg = [[NSString alloc] initWithFormat:newFormat arguments:args];
+        _loggerMethod(logMsg);
+    }
+    else {
+        NSLogv(newFormat, args);
+    }
     va_end(args);
 #else
     // Check if the app/framework user wants logs or not
     if(_loggerMethod) {
+        NSString *newFormat = [[NSString alloc] initWithFormat:@"=== TrustKit: %@", format];
         va_list args;
         va_start(args, format);
-        NSString *newFormat = [[NSString alloc] initWithFormat:@"=== TrustKit: %@", format];
         NSString *logMsg = [[NSString alloc] initWithFormat:newFormat arguments:args];
         _loggerMethod(logMsg);
         va_end(args);

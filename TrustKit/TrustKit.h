@@ -275,6 +275,16 @@ typedef void(*TSKLoggerMethod) (NSString *logMessage);
  @return A dictionary with a copy of the current TrustKit configuration, or `nil` if TrustKit has not been initialized.
  */
 + (nullable NSDictionary *) configuration;
+
+///----------------------------
+/// @name Logging
+///----------------------------
+
+/**
+ Set a logging method to log TrustKit logs in release mode
+ 
+ @param method A function pointer to log TrustKit log messages in release mode or `nil` to stop logging in release mode 
+ */
 + (void)setLoggerMethod:(TSKLoggerMethod)method;
 
 @end
