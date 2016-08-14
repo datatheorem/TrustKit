@@ -25,6 +25,9 @@ NSString * const TrustKitVersion = @"1.3.2";
 // Info.plist key we read the public key hashes from
 static const NSString *kTSKConfiguration = @"TSKConfiguration";
 
+// Set-able scheme argument to disable logs during debug mode
+NSString * const kTSKDisableDebugLogs = @"-TSKDisableDebugLogs";
+
 // General keys
 NSString * const kTSKSwizzleNetworkDelegates = @"TSKSwizzleNetworkDelegates";
 NSString * const kTSKPinnedDomains = @"TSKPinnedDomains";
@@ -79,11 +82,13 @@ void TSKLog(NSString *format, ...)
 {
     // Only log in debug builds
 #if DEBUG
-    NSString *newFormat = [[NSString alloc] initWithFormat:@"=== TrustKit: %@", format];
-    va_list args;
-    va_start(args, format);
-    NSLogv(newFormat, args);
-    va_end(args);
+    if (NO == [[[NSProcessInfo processInfo] arguments] containsObject:kTSKDisableDebugLogs]) {
+        NSString *newFormat = [[NSString alloc] initWithFormat:@"=== TrustKit: %@", format];
+        va_list args;
+        va_start(args, format);
+        NSLogv(newFormat, args);
+        va_end(args);
+    }
 #endif
 }
 
