@@ -36,6 +36,53 @@
 		8C84804D1A896EE30017C155 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C84804C1A896EE30017C155 /* TrustKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8C8480531A896EE30017C155 /* TrustKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C8480471A896EE30017C155 /* TrustKit.framework */; };
 		8C84806D1A896F660017C155 /* TrustKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C84806C1A896F660017C155 /* TrustKit.m */; };
+		8C84CB911D6E0981009B3E7D /* ssl_pin_verifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE919211AEA077F002B29AE /* ssl_pin_verifier.m */; };
+		8C84CB921D6E0981009B3E7D /* TSKReportsRateLimiter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBE011B619BBE00CA7EE0 /* TSKReportsRateLimiter.m */; };
+		8C84CB931D6E0981009B3E7D /* parse_configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C5D98B21CEFF079008E654B /* parse_configuration.m */; };
+		8C84CB941D6E0981009B3E7D /* TSKBackgroundReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B2B06AE1B05157400FC749E /* TSKBackgroundReporter.m */; };
+		8C84CB951D6E0981009B3E7D /* TSKNSURLSessionDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD5F7481BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.m */; };
+		8C84CB961D6E0981009B3E7D /* public_key_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9191D1AEA073C002B29AE /* public_key_utils.m */; };
+		8C84CB971D6E0981009B3E7D /* TSKPinFailureReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F99F1B16094D00F06C0E /* TSKPinFailureReport.m */; };
+		8C84CB981D6E0981009B3E7D /* TSKPinningValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F9921B132F9200F06C0E /* TSKPinningValidator.m */; };
+		8C84CB991D6E0981009B3E7D /* TSKNSURLConnectionDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD5F7301BC5ED4A005801D8 /* TSKNSURLConnectionDelegateProxy.m */; };
+		8C84CB9A1D6E0981009B3E7D /* TrustKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C84806C1A896F660017C155 /* TrustKit.m */; };
+		8C84CB9B1D6E0981009B3E7D /* reporting_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CCBD15A1B186D1100CB88AF /* reporting_utils.m */; };
+		8C84CB9C1D6E0981009B3E7D /* RSSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD5F7411BCB06F4005801D8 /* RSSwizzle.m */; settings = {COMPILER_FLAGS = "-Wno-sign-conversion -Wno-sign-compare"; }; };
+		8C84CBA21D6E0981009B3E7D /* domain_registry.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE919291AEA0F7E002B29AE /* domain_registry.h */; };
+		8C84CBA31D6E0981009B3E7D /* TSKPinningValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C15F9911B132F9200F06C0E /* TSKPinningValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8C84CBA41D6E0981009B3E7D /* TSKNSURLSessionDelegateProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CD5F7471BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.h */; };
+		8C84CBA51D6E0981009B3E7D /* public_key_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE9191C1AEA073C002B29AE /* public_key_utils.h */; };
+		8C84CBA61D6E0981009B3E7D /* TSKBackgroundReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B2B06AC1B05154A00FC749E /* TSKBackgroundReporter.h */; };
+		8C84CBA71D6E0981009B3E7D /* TSKNSURLConnectionDelegateProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CD5F72F1BC5ED4A005801D8 /* TSKNSURLConnectionDelegateProxy.h */; };
+		8C84CBA81D6E0981009B3E7D /* TSKReportsRateLimiter.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C9EBE001B619BBE00CA7EE0 /* TSKReportsRateLimiter.h */; };
+		8C84CBA91D6E0981009B3E7D /* RSSwizzle.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CD5F7401BCB06F4005801D8 /* RSSwizzle.h */; };
+		8C84CBAA1D6E0981009B3E7D /* reporting_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C9492F51B2379A100F5DF38 /* reporting_utils.h */; };
+		8C84CBAB1D6E0981009B3E7D /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C84804C1A896EE30017C155 /* TrustKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8C84CBAC1D6E0981009B3E7D /* TSKPinFailureReport.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C15F99E1B16094D00F06C0E /* TSKPinFailureReport.h */; };
+		8C84CBAD1D6E0981009B3E7D /* ssl_pin_verifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE919241AEA07C5002B29AE /* ssl_pin_verifier.h */; };
+		8C84CBBC1D6E1620009B3E7D /* libassert_lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C84CBB61D6E15B3009B3E7D /* libassert_lib.a */; };
+		8C84CBBD1D6E1620009B3E7D /* libdomain_registry_lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C84CBB71D6E15B3009B3E7D /* libdomain_registry_lib.a */; };
+		8C84CBBE1D6E1620009B3E7D /* libinit_registry_tables_lib.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C84CBB81D6E15B3009B3E7D /* libinit_registry_tables_lib.a */; };
+		8C84CBC31D6E1718009B3E7D /* TSKNSURLConnectionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD5F7371BCB02A7005801D8 /* TSKNSURLConnectionTests.m */; };
+		8C84CBC41D6E1718009B3E7D /* TSKPinConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F9A31B17564400F06C0E /* TSKPinConfigurationTests.m */; };
+		8C84CBC51D6E1718009B3E7D /* TSKPinningValidatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA2868CAFECA46ADE0B6E3E /* TSKPinningValidatorTests.m */; };
+		8C84CBC61D6E1718009B3E7D /* TSKPublicKeyAlgorithmTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC78B241B1B616500523A25 /* TSKPublicKeyAlgorithmTests.m */; };
+		8C84CBC71D6E1718009B3E7D /* TSKReporterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B032D3F1AF1AEB600EAFA69 /* TSKReporterTests.m */; };
+		8C84CBC81D6E1718009B3E7D /* TSKNSURLSessionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD5F7561BCB7219005801D8 /* TSKNSURLSessionTests.m */; };
+		8C84CBC91D6E1718009B3E7D /* TSKCertificateUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC78B1F1B1B586F00523A25 /* TSKCertificateUtils.m */; };
+		8C84CBCB1D6E1718009B3E7D /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C5AB4671CF26A2900234B30 /* OCMock.framework */; };
+		8C84CBCE1D6E1718009B3E7D /* datatheorem.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CD2D5FA1C08F8A500C4F2B5 /* datatheorem.com.der */; };
+		8C84CBCF1D6E1718009B3E7D /* COMODORSADomainValidationSecureServerCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CD2D5F71C08F89D00C4F2B5 /* COMODORSADomainValidationSecureServerCA.der */; };
+		8C84CBD01D6E1718009B3E7D /* GoodRootCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868B41ADFF6B000E5AFDC /* GoodRootCA.der */; };
+		8C84CBD11D6E1718009B3E7D /* COMODORSACertificationAuthority.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CD2D5F41C08F88E00C4F2B5 /* COMODORSACertificationAuthority.der */; };
+		8C84CBD21D6E1718009B3E7D /* COMODOECCExtendedValidationSecureServerCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8C7D06861C6957FE00D3B3D2 /* COMODOECCExtendedValidationSecureServerCA.der */; };
+		8C84CBD31D6E1718009B3E7D /* www.good.com.selfsigned.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868BA1AE1672D00E5AFDC /* www.good.com.selfsigned.der */; };
+		8C84CBD41D6E1718009B3E7D /* GoodIntermediateCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868B11ADFF67200E5AFDC /* GoodIntermediateCA.der */; };
+		8C84CBD51D6E1718009B3E7D /* COMODOECCCertificationAuthority.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CD5F7821BCC40AF005801D8 /* COMODOECCCertificationAuthority.der */; };
+		8C84CBD61D6E1718009B3E7D /* www.cloudflare.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 8C7D06801C69551400D3B3D2 /* www.cloudflare.com.der */; };
+		8C84CBD71D6E1718009B3E7D /* www.good.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868B21ADFF67200E5AFDC /* www.good.com.der */; };
+		8C84CBD91D6E1718009B3E7D /* OCMock.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8C5AB4671CF26A2900234B30 /* OCMock.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8C84CBE11D6E176A009B3E7D /* TrustKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C84CBB21D6E0981009B3E7D /* TrustKit.framework */; };
 		8C8716B21B23A9F400267E1D /* TSKBackgroundReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B2B06AE1B05157400FC749E /* TSKBackgroundReporter.m */; };
 		8C8716B31B23A9F700267E1D /* TSKPinFailureReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F99F1B16094D00F06C0E /* TSKPinFailureReport.m */; };
 		8C8716B41B23A9FA00267E1D /* reporting_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CCBD15A1B186D1100CB88AF /* reporting_utils.m */; };
@@ -127,6 +174,13 @@
 			remoteGlobalIDString = 8C8480461A896EE30017C155;
 			remoteInfo = TrustKit;
 		};
+		8C84CBDF1D6E1762009B3E7D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8C84803E1A896EE30017C155 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8C84CB8F1D6E0981009B3E7D;
+			remoteInfo = "TrustKit tvOS";
+		};
 		8CA6CC081BAE2ADD00BDA419 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 8C84803E1A896EE30017C155 /* Project object */;
@@ -154,6 +208,16 @@
 			dstSubfolderSpec = 10;
 			files = (
 				8C5AB46A1CF26A3E00234B30 /* OCMock.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C84CBD81D6E1718009B3E7D /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				8C84CBD91D6E1718009B3E7D /* OCMock.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,6 +261,15 @@
 		8C8480521A896EE30017C155 /* TrustKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrustKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C8480581A896EE30017C155 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C84806C1A896F660017C155 /* TrustKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrustKit.m; sourceTree = "<group>"; };
+		8C84CB681D6E08A4009B3E7D /* TrustKit copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "TrustKit copy-Info.plist"; path = "/Users/nabla/Documents/ios/TrustKit/TrustKit copy-Info.plist"; sourceTree = "<absolute>"; };
+		8C84CB8E1D6E0907009B3E7D /* TrustKit OS X copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "TrustKit OS X copy-Info.plist"; path = "/Users/nabla/Documents/ios/TrustKit/TrustKit OS X copy-Info.plist"; sourceTree = "<absolute>"; };
+		8C84CBB21D6E0981009B3E7D /* TrustKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TrustKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C84CBB31D6E0981009B3E7D /* TrustKit copy2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "TrustKit copy2-Info.plist"; path = "/Users/nabla/Documents/ios/TrustKit/TrustKit copy2-Info.plist"; sourceTree = "<absolute>"; };
+		8C84CBB61D6E15B3009B3E7D /* libassert_lib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libassert_lib.a; path = Dependencies/domain_registry/tvos/libassert_lib.a; sourceTree = "<group>"; };
+		8C84CBB71D6E15B3009B3E7D /* libdomain_registry_lib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libdomain_registry_lib.a; path = Dependencies/domain_registry/tvos/libdomain_registry_lib.a; sourceTree = "<group>"; };
+		8C84CBB81D6E15B3009B3E7D /* libinit_registry_tables_lib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libinit_registry_tables_lib.a; path = Dependencies/domain_registry/tvos/libinit_registry_tables_lib.a; sourceTree = "<group>"; };
+		8C84CBDD1D6E1718009B3E7D /* TrustKit tvOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TrustKit tvOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8C84CBDE1D6E1718009B3E7D /* TrustKitTests copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "TrustKitTests copy-Info.plist"; path = "/Users/nabla/Documents/ios/TrustKit/TrustKitTests copy-Info.plist"; sourceTree = "<absolute>"; };
 		8C8716961B23A91D00267E1D /* libTrustKit_Static.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libTrustKit_Static.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C9492F51B2379A100F5DF38 /* reporting_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = reporting_utils.h; path = Reporting/reporting_utils.h; sourceTree = "<group>"; };
 		8C9EBE001B619BBE00CA7EE0 /* TSKReportsRateLimiter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKReportsRateLimiter.h; path = Reporting/TSKReportsRateLimiter.h; sourceTree = "<group>"; };
@@ -252,6 +325,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8C84CB9D1D6E0981009B3E7D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C84CBBC1D6E1620009B3E7D /* libassert_lib.a in Frameworks */,
+				8C84CBBD1D6E1620009B3E7D /* libdomain_registry_lib.a in Frameworks */,
+				8C84CBBE1D6E1620009B3E7D /* libinit_registry_tables_lib.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C84CBCA1D6E1718009B3E7D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C84CBE11D6E176A009B3E7D /* TrustKit.framework in Frameworks */,
+				8C84CBCB1D6E1718009B3E7D /* OCMock.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8C8716931B23A91D00267E1D /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -297,6 +389,7 @@
 		8C3492901ADCA059001849FD /* domain_registry */ = {
 			isa = PBXGroup;
 			children = (
+				8C84CBB51D6E1596009B3E7D /* tvOS */,
 				8CA6CC2B1BAE2BF000BDA419 /* OS X */,
 				8CA6CC2A1BAE2BEA00BDA419 /* iOS */,
 				8CE919291AEA0F7E002B29AE /* domain_registry.h */,
@@ -343,6 +436,10 @@
 				8C8480491A896EE30017C155 /* TrustKit */,
 				8C8480561A896EE30017C155 /* TrustKitTests */,
 				8C8480481A896EE30017C155 /* Products */,
+				8C84CB681D6E08A4009B3E7D /* TrustKit copy-Info.plist */,
+				8C84CB8E1D6E0907009B3E7D /* TrustKit OS X copy-Info.plist */,
+				8C84CBB31D6E0981009B3E7D /* TrustKit copy2-Info.plist */,
+				8C84CBDE1D6E1718009B3E7D /* TrustKitTests copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -354,6 +451,8 @@
 				8C8716961B23A91D00267E1D /* libTrustKit_Static.a */,
 				8CA6CBFD1BAE2ADD00BDA419 /* TrustKit.framework */,
 				8CA6CC061BAE2ADD00BDA419 /* TrustKit OS XTests.xctest */,
+				8C84CBB21D6E0981009B3E7D /* TrustKit.framework */,
+				8C84CBDD1D6E1718009B3E7D /* TrustKit tvOS Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -407,6 +506,16 @@
 				8C8480581A896EE30017C155 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8C84CBB51D6E1596009B3E7D /* tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				8C84CBB61D6E15B3009B3E7D /* libassert_lib.a */,
+				8C84CBB71D6E15B3009B3E7D /* libdomain_registry_lib.a */,
+				8C84CBB81D6E15B3009B3E7D /* libinit_registry_tables_lib.a */,
+			);
+			name = tvOS;
 			sourceTree = "<group>";
 		};
 		8CA6CC2A1BAE2BEA00BDA419 /* iOS */ = {
@@ -541,6 +650,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8C84CBA11D6E0981009B3E7D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C84CBA21D6E0981009B3E7D /* domain_registry.h in Headers */,
+				8C84CBA31D6E0981009B3E7D /* TSKPinningValidator.h in Headers */,
+				8C84CBA41D6E0981009B3E7D /* TSKNSURLSessionDelegateProxy.h in Headers */,
+				8C84CBA51D6E0981009B3E7D /* public_key_utils.h in Headers */,
+				8C84CBA61D6E0981009B3E7D /* TSKBackgroundReporter.h in Headers */,
+				8C84CBA71D6E0981009B3E7D /* TSKNSURLConnectionDelegateProxy.h in Headers */,
+				8C84CBA81D6E0981009B3E7D /* TSKReportsRateLimiter.h in Headers */,
+				8C84CBA91D6E0981009B3E7D /* RSSwizzle.h in Headers */,
+				8C84CBAA1D6E0981009B3E7D /* reporting_utils.h in Headers */,
+				8C84CBAB1D6E0981009B3E7D /* TrustKit.h in Headers */,
+				8C84CBAC1D6E0981009B3E7D /* TSKPinFailureReport.h in Headers */,
+				8C84CBAD1D6E0981009B3E7D /* ssl_pin_verifier.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8CA6CBFA1BAE2ADD00BDA419 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -598,6 +726,43 @@
 			name = TrustKitTests;
 			productName = TrustKitTests;
 			productReference = 8C8480521A896EE30017C155 /* TrustKitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		8C84CB8F1D6E0981009B3E7D /* TrustKit tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8C84CBAF1D6E0981009B3E7D /* Build configuration list for PBXNativeTarget "TrustKit tvOS" */;
+			buildPhases = (
+				8C84CB901D6E0981009B3E7D /* Sources */,
+				8C84CB9D1D6E0981009B3E7D /* Frameworks */,
+				8C84CBA11D6E0981009B3E7D /* Headers */,
+				8C84CBAE1D6E0981009B3E7D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "TrustKit tvOS";
+			productName = TrustKit;
+			productReference = 8C84CBB21D6E0981009B3E7D /* TrustKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		8C84CBBF1D6E1718009B3E7D /* TrustKit tvOS Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8C84CBDA1D6E1718009B3E7D /* Build configuration list for PBXNativeTarget "TrustKit tvOS Tests" */;
+			buildPhases = (
+				8C84CBC21D6E1718009B3E7D /* Sources */,
+				8C84CBCA1D6E1718009B3E7D /* Frameworks */,
+				8C84CBCD1D6E1718009B3E7D /* Resources */,
+				8C84CBD81D6E1718009B3E7D /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8C84CBE01D6E1762009B3E7D /* PBXTargetDependency */,
+			);
+			name = "TrustKit tvOS Tests";
+			productName = TrustKitTests;
+			productReference = 8C84CBDD1D6E1718009B3E7D /* TrustKit tvOS Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		8C8716951B23A91D00267E1D /* TrustKit_Static */ = {
@@ -699,6 +864,8 @@
 				8C8480511A896EE30017C155 /* TrustKitTests */,
 				8CA6CBFC1BAE2ADD00BDA419 /* TrustKit OS X */,
 				8CA6CC051BAE2ADD00BDA419 /* TrustKit OS XTests */,
+				8C84CB8F1D6E0981009B3E7D /* TrustKit tvOS */,
+				8C84CBBF1D6E1718009B3E7D /* TrustKit tvOS Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -725,6 +892,30 @@
 				8CD5F7831BCC40AF005801D8 /* COMODOECCCertificationAuthority.der in Resources */,
 				8C7D06811C69551900D3B3D2 /* www.cloudflare.com.der in Resources */,
 				070868B81ADFFADF00E5AFDC /* www.good.com.der in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C84CBAE1D6E0981009B3E7D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C84CBCD1D6E1718009B3E7D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C84CBCE1D6E1718009B3E7D /* datatheorem.com.der in Resources */,
+				8C84CBCF1D6E1718009B3E7D /* COMODORSADomainValidationSecureServerCA.der in Resources */,
+				8C84CBD01D6E1718009B3E7D /* GoodRootCA.der in Resources */,
+				8C84CBD11D6E1718009B3E7D /* COMODORSACertificationAuthority.der in Resources */,
+				8C84CBD21D6E1718009B3E7D /* COMODOECCExtendedValidationSecureServerCA.der in Resources */,
+				8C84CBD31D6E1718009B3E7D /* www.good.com.selfsigned.der in Resources */,
+				8C84CBD41D6E1718009B3E7D /* GoodIntermediateCA.der in Resources */,
+				8C84CBD51D6E1718009B3E7D /* COMODOECCCertificationAuthority.der in Resources */,
+				8C84CBD61D6E1718009B3E7D /* www.cloudflare.com.der in Resources */,
+				8C84CBD71D6E1718009B3E7D /* www.good.com.der in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -788,6 +979,39 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		8C84CB901D6E0981009B3E7D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C84CB911D6E0981009B3E7D /* ssl_pin_verifier.m in Sources */,
+				8C84CB921D6E0981009B3E7D /* TSKReportsRateLimiter.m in Sources */,
+				8C84CB931D6E0981009B3E7D /* parse_configuration.m in Sources */,
+				8C84CB941D6E0981009B3E7D /* TSKBackgroundReporter.m in Sources */,
+				8C84CB951D6E0981009B3E7D /* TSKNSURLSessionDelegateProxy.m in Sources */,
+				8C84CB961D6E0981009B3E7D /* public_key_utils.m in Sources */,
+				8C84CB971D6E0981009B3E7D /* TSKPinFailureReport.m in Sources */,
+				8C84CB981D6E0981009B3E7D /* TSKPinningValidator.m in Sources */,
+				8C84CB991D6E0981009B3E7D /* TSKNSURLConnectionDelegateProxy.m in Sources */,
+				8C84CB9A1D6E0981009B3E7D /* TrustKit.m in Sources */,
+				8C84CB9B1D6E0981009B3E7D /* reporting_utils.m in Sources */,
+				8C84CB9C1D6E0981009B3E7D /* RSSwizzle.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8C84CBC21D6E1718009B3E7D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C84CBC31D6E1718009B3E7D /* TSKNSURLConnectionTests.m in Sources */,
+				8C84CBC41D6E1718009B3E7D /* TSKPinConfigurationTests.m in Sources */,
+				8C84CBC51D6E1718009B3E7D /* TSKPinningValidatorTests.m in Sources */,
+				8C84CBC61D6E1718009B3E7D /* TSKPublicKeyAlgorithmTests.m in Sources */,
+				8C84CBC71D6E1718009B3E7D /* TSKReporterTests.m in Sources */,
+				8C84CBC81D6E1718009B3E7D /* TSKNSURLSessionTests.m in Sources */,
+				8C84CBC91D6E1718009B3E7D /* TSKCertificateUtils.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8C8716921B23A91D00267E1D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -848,6 +1072,11 @@
 			isa = PBXTargetDependency;
 			target = 8C8480461A896EE30017C155 /* TrustKit */;
 			targetProxy = 8C8480541A896EE30017C155 /* PBXContainerItemProxy */;
+		};
+		8C84CBE01D6E1762009B3E7D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8C84CB8F1D6E0981009B3E7D /* TrustKit tvOS */;
+			targetProxy = 8C84CBDF1D6E1762009B3E7D /* PBXContainerItemProxy */;
 		};
 		8CA6CC091BAE2ADD00BDA419 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1085,6 +1314,127 @@
 			};
 			name = Release;
 		};
+		8C84CBB01D6E0981009B3E7D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = "$(inherited)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = "$(inherited)";
+				INFOPLIST_FILE = "$(SRCROOT)/TrustKit/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TrustKit",
+					"$(PROJECT_DIR)/TrustKit/Dependencies/domain_registry/tvos",
+				);
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.datatheorem.TrustKit;
+				PRODUCT_NAME = TrustKit;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "appletvsimulator appletvos";
+				TARGETED_DEVICE_FAMILY = "1,2,3";
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
+			};
+			name = Debug;
+		};
+		8C84CBB11D6E0981009B3E7D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = "$(inherited)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = "$(inherited)";
+				INFOPLIST_FILE = "$(SRCROOT)/TrustKit/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TrustKit",
+					"$(PROJECT_DIR)/TrustKit/Dependencies/domain_registry/tvos",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.datatheorem.TrustKit;
+				PRODUCT_NAME = TrustKit;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SUPPORTED_PLATFORMS = "appletvsimulator appletvos";
+				TARGETED_DEVICE_FAMILY = "1,2,3";
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
+			};
+			name = Release;
+		};
+		8C84CBDB1D6E1718009B3E7D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)",
+					"$(inherited)",
+					"$(PROJECT_DIR)/TrustKitTests/Dependencies/OCMock/iOS",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				INFOPLIST_FILE = TrustKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks @loader_path/../Frameworks @executable_path/../Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SUPPORTED_PLATFORMS = "appletvsimulator appletvos";
+				TARGETED_DEVICE_FAMILY = "1,2,3";
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
+			};
+			name = Debug;
+		};
+		8C84CBDC1D6E1718009B3E7D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)",
+					"$(inherited)",
+					"$(PROJECT_DIR)/TrustKitTests/Dependencies/OCMock/iOS",
+				);
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				INFOPLIST_FILE = TrustKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks @loader_path/../Frameworks @executable_path/../Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SUPPORTED_PLATFORMS = "appletvsimulator appletvos";
+				TARGETED_DEVICE_FAMILY = "1,2,3";
+				VALID_ARCHS = "$(ARCHS_STANDARD)";
+			};
+			name = Release;
+		};
 		8C8716A71B23A91D00267E1D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1266,6 +1616,24 @@
 			buildConfigurations = (
 				8C8480611A896EE30017C155 /* Debug */,
 				8C8480621A896EE30017C155 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8C84CBAF1D6E0981009B3E7D /* Build configuration list for PBXNativeTarget "TrustKit tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8C84CBB01D6E0981009B3E7D /* Debug */,
+				8C84CBB11D6E0981009B3E7D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8C84CBDA1D6E1718009B3E7D /* Build configuration list for PBXNativeTarget "TrustKit tvOS Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8C84CBDB1D6E1718009B3E7D /* Debug */,
+				8C84CBDC1D6E1718009B3E7D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
