@@ -17,11 +17,8 @@
 #import "TSKReportsRateLimiter.h"
 #import "TrustKit+Private.h"
 #import <OCMock/OCMock.h>
+#import "vendor_identifier.h"
 
-
-#if !TARGET_OS_IPHONE
-#import "osx_vendor_id.h"
-#endif
 
 #pragma mark Test suite
 
@@ -254,13 +251,10 @@
 }
 
 
-
-#if !TARGET_OS_IPHONE
-- (void)testOSXIdentifierForVendor
+- (void)testIdentifierForVendor
 {
-    NSString *idfv = osx_identifier_for_vendor(@"com.fake.bundle.id");
+    NSString *idfv = identifier_for_vendor(@"com.fake.bundle.id");
     XCTAssertNotNil(idfv);
 }
-#endif
 
 @end

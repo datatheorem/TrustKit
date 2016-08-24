@@ -1,23 +1,37 @@
-/*
- 
- osx_vendor_id.m
- TrustKit
- 
- Copyright 2015 The TrustKit Project Authors
- Licensed under the MIT license, see associated LICENSE file for terms.
- See AUTHORS file for the list of project authors.
- 
- */
-#import "osx_vendor_id.h"
-#import <IOKit/IOKitLib.h>
-#import <Foundation/Foundation.h>
-#include <CommonCrypto/CommonDigest.h>
+//
+//  vendor_identifier.m
+//  TrustKit
+//
+//  Created by Alban Diquet on 8/24/16.
+//  Copyright © 2016 TrustKit. All rights reserved.
+//
 
+#import "vendor_identifier.h"
+
+
+#if TARGET_OS_IPHONE
+
+#pragma mark Vendor identifier - macOS, tvOS
+
+@import UIKit; // For accessing the IDFV
+
+NSString *identifier_for_vendor(NSString *bundleId)
+{
+    return [[[UIDevice currentDevice] identifierForVendor]UUIDString];
+}
+
+#else
+
+#pragma mark Vendor identifier - macOS
+
+#import <IOKit/IOKitLib.h>
+#include <CommonCrypto/CommonDigest.h>
 
 static CFDataRef copy_mac_address(void);
 
 
-NSString *osx_identifier_for_vendor(NSString *bundleId)
+// On macOS we use the SHA1 hash of the device's MAC address and the App's bundle ID
+NSString *identifier_for_vendor(NSString *bundleId)
 {
     // Get the mac address
     NSData *macAddress = (__bridge_transfer NSData *)(copy_mac_address());
@@ -91,3 +105,7 @@ static CFDataRef copy_mac_address(void)
     
     return macAddress;
 }
+
+#endif
+
+

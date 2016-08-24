@@ -14,13 +14,7 @@
 #import "TSKPinFailureReport.h"
 #import "reporting_utils.h"
 #import "TSKReportsRateLimiter.h"
-
-#if TARGET_OS_IPHONE
-@import UIKit; // For accessing the IDFV
-#else
-#import "osx_vendor_id.h"  // Home-made IDFV for OS X
-#endif
-
+#import "vendor_identifier.h"
 
 
 // Session identifier for background uploads: <bundle_id>.TSKBackgroundReporter
@@ -90,13 +84,8 @@ static dispatch_once_t dispatchOnceBackgroundSession;
         else
         {
             // Get the vendor identifier
-#if TARGET_OS_IPHONE
-            // On iOS use the IDFV
-            _appVendorId = [[[UIDevice currentDevice] identifierForVendor]UUIDString];
-#else
-            // On OS X we use a hash of the mac address and bundle ID
-            _appVendorId = osx_identifier_for_vendor(_appBundleId);
-#endif
+            _appVendorId = identifier_for_vendor(_appBundleId);
+
             
             // We're not running unit tests - use a background session
             /*
