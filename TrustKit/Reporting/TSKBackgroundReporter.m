@@ -54,7 +54,7 @@ static dispatch_once_t dispatchOnceBackgroundSession;
         _appPlatform = @"IOS";
 #endif
 #else
-        _appPlatform = @"OSX";
+        _appPlatform = @"MACOS";
 #endif
         
         CFBundleRef appBundle = CFBundleGetMainBundle();
