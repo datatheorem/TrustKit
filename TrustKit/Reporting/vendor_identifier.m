@@ -9,7 +9,7 @@
 #import "vendor_identifier.h"
 
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH
 
 #pragma mark Vendor identifier - macOS, tvOS
 
@@ -22,7 +22,7 @@ NSString *identifier_for_vendor(void)
 
 #else
 
-#pragma mark Vendor identifier - macOS
+#pragma mark Vendor identifier - macOS, watchOS
 
 #include <pthread.h>
 
