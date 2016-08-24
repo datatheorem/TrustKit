@@ -54,7 +54,11 @@ static dispatch_once_t dispatchOnceBackgroundSession;
         
         // Retrieve the App's information
 #if TARGET_OS_IPHONE
+#if TARGET_OS_TV
+        _appPlatform = @"TVOS";
+#else
         _appPlatform = @"IOS";
+#endif
 #else
         _appPlatform = @"OSX";
 #endif
