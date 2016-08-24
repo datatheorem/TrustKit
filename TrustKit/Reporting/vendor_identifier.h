@@ -10,4 +10,4 @@
 
 
 // Will return the IDFV on platforms that support it (iOS, tvOS) and a randomly generated UUID on other platforms (macOS)
-NSString *identifier_for_vendor(NSString *bundleId);
+NSString *identifier_for_vendor(void);

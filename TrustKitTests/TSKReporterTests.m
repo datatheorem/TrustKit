@@ -253,8 +253,9 @@
 
 - (void)testIdentifierForVendor
 {
-    NSString *idfv = identifier_for_vendor(@"com.fake.bundle.id");
-    XCTAssertNotNil(idfv);
+    NSString *idfv1 = identifier_for_vendor();
+    NSString *idfv2 = identifier_for_vendor();
+    XCTAssertEqual(idfv1, idfv2);
 }
 
 @end

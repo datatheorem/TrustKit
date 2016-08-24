@@ -84,7 +84,7 @@ static dispatch_once_t dispatchOnceBackgroundSession;
         else
         {
             // Get the vendor identifier
-            _appVendorId = identifier_for_vendor(_appBundleId);
+            _appVendorId = identifier_for_vendor();
 
             
             // We're not running unit tests - use a background session
