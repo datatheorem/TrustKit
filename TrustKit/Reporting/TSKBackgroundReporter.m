@@ -50,6 +50,8 @@ static dispatch_once_t dispatchOnceBackgroundSession;
 #if TARGET_OS_IPHONE
 #if TARGET_OS_TV
         _appPlatform = @"TVOS";
+#elif TARGET_OS_WATCH
+        _appPlatform = @"WATCHOS";
 #else
         _appPlatform = @"IOS";
 #endif
