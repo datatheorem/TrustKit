@@ -11,12 +11,7 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = '10.9'
   s.tvos.deployment_target = '9.0'
   s.source_files = 'TrustKit', 'TrustKit/**/*.{h,m}'
-  s.ios.exclude_files = 'TrustKit/Reporting/osx_vendor_id.{h,m}'
-  s.tvos.exclude_files = 'TrustKit/Reporting/osx_vendor_id.{h,m}'
   s.public_header_files = 'TrustKit/TrustKit.h', 'TrustKit/Pinning/TSKPinningValidator.h'
   s.frameworks = 'Foundation', 'Security'
-  s.ios.vendored_libraries = 'TrustKit/Dependencies/domain_registry/ios/*.a'
-  s.tvos.vendored_libraries = 'TrustKit/Dependencies/domain_registry/tvos/*.a'
-  s.osx.vendored_libraries = 'TrustKit/Dependencies/domain_registry/osx/*.a'
   s.requires_arc = true
 end
