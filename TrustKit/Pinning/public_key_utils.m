@@ -52,17 +52,40 @@ static unsigned char *asn1HeaderBytes[3] = { rsa2048Asn1Header, rsa4096Asn1Heade
 static unsigned int asn1HeaderSizes[3] = { sizeof(rsa2048Asn1Header), sizeof(rsa4096Asn1Header), sizeof(ecDsaSecp256r1Asn1Header) };
 
 
+#if TARGET_OS_WATCH || TARGET_OS_TV || (TARGET_OS_IOS &&__IPHONE_OS_VERSION_MAX_ALLOWED >= 100000) || (!TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MAX_ALLOWED >= 1200)
 
-#if TARGET_OS_IPHONE
+#pragma mark Public Key Converter - iOS 10.0+, macOS 10.12+, watchOS 3.0, tvOS 10.0
 
-#pragma mark Public Key Converter - iOS
+// Use the unified SecKey API (specifically SecKeyCopyExternalRepresentation())
+static NSData *getPublicKeyDataFromCertificate(SecCertificateRef certificate)
+{
+    SecKeyRef publicKey;
+    SecTrustRef tempTrust;
+    SecPolicyRef policy = SecPolicyCreateBasicX509();
+    
+    // Get a public key reference from the certificate
+    SecTrustCreateWithCertificates(certificate, policy, &tempTrust);
+    SecTrustEvaluate(tempTrust, NULL);
+    publicKey = SecTrustCopyPublicKey(tempTrust);
+    CFRelease(policy);
+    CFRelease(tempTrust);
+    
+    CFDataRef publicKeyData = SecKeyCopyExternalRepresentation(publicKey, NULL);
+    return (NSData *)CFBridgingRelease(publicKeyData);
+}
+
+#elif TARGET_OS_IOS
+#define LEGACY_IOS_KEY_EXTRACTION 1
+// iOS before 10.0
+// The one and only way to get a key's data in a buffer on iOS is to put it in the Keychain and then ask for the data back...
+
+#pragma mark Public Key Converter - iOS before 10.0
 
 static const NSString *kTSKKeychainPublicKeyTag = @"TSKKeychainPublicKeyTag"; // Used to add and find the public key in the Keychain
 
 static pthread_mutex_t _keychainLock; // Used to lock access to our Keychain item
 
 
-// The one and only way to get a key's data in a buffer on iOS is to put it in the Keychain and then ask for the data back...
 static NSData *getPublicKeyDataFromCertificate(SecCertificateRef certificate)
 {
     NSData *publicKeyData = nil;
@@ -120,14 +143,14 @@ static NSData *getPublicKeyDataFromCertificate(SecCertificateRef certificate)
 
 #else
 
-#pragma mark Public Key Converter - OS X
+#pragma mark Public Key Converter - macOS before 10.12
 
 static NSData *getPublicKeyDataFromCertificate(SecCertificateRef certificate)
 {
     NSData *publicKeyData = nil;
     CFErrorRef error = NULL;
     
-    // SecCertificateCopyValues() is OS X only
+    // SecCertificateCopyValues() is macOS only
     NSArray *oids = [NSArray arrayWithObject:(__bridge id)(kSecOIDX509V1SubjectPublicKey)];
     CFDictionaryRef certificateValues = SecCertificateCopyValues(certificate, (__bridge CFArrayRef)(oids), &error);
     if (certificateValues == NULL)
@@ -249,7 +272,7 @@ void initializeSubjectPublicKeyInfoCache(void)
     // Initialize our locks
     pthread_mutex_init(&_spkiCacheLock, NULL);
     
-#if TARGET_OS_IPHONE
+#if LEGACY_IOS_KEY_EXTRACTION
     pthread_mutex_init(&_keychainLock, NULL);
     // Cleanup the Keychain in case the App previously crashed
     NSMutableDictionary * publicKeyGet = [[NSMutableDictionary alloc] init];
@@ -273,7 +296,7 @@ void resetSubjectPublicKeyInfoCache(void)
     // Destroy our locks
     pthread_mutex_destroy(&_spkiCacheLock);
     
-#if TARGET_OS_IPHONE
+#if LEGACY_IOS_KEY_EXTRACTION
     pthread_mutex_destroy(&_keychainLock);
 #endif
     
