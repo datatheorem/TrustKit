@@ -319,12 +319,8 @@
 		8C8480521A896EE30017C155 /* TrustKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrustKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C8480581A896EE30017C155 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C84806C1A896F660017C155 /* TrustKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrustKit.m; sourceTree = "<group>"; };
-		8C84CB681D6E08A4009B3E7D /* TrustKit copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "TrustKit copy-Info.plist"; path = "/Users/nabla/Documents/ios/TrustKit/TrustKit copy-Info.plist"; sourceTree = "<absolute>"; };
-		8C84CB8E1D6E0907009B3E7D /* TrustKit OS X copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "TrustKit OS X copy-Info.plist"; path = "/Users/nabla/Documents/ios/TrustKit/TrustKit OS X copy-Info.plist"; sourceTree = "<absolute>"; };
 		8C84CBB21D6E0981009B3E7D /* TrustKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TrustKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8C84CBB31D6E0981009B3E7D /* TrustKit copy2-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "TrustKit copy2-Info.plist"; path = "/Users/nabla/Documents/ios/TrustKit/TrustKit copy2-Info.plist"; sourceTree = "<absolute>"; };
 		8C84CBDD1D6E1718009B3E7D /* TrustKit tvOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TrustKit tvOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8C84CBDE1D6E1718009B3E7D /* TrustKitTests copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "TrustKitTests copy-Info.plist"; path = "/Users/nabla/Documents/ios/TrustKit/TrustKitTests copy-Info.plist"; sourceTree = "<absolute>"; };
 		8C84CC071D6E3C67009B3E7D /* vendor_identifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vendor_identifier.h; path = Reporting/vendor_identifier.h; sourceTree = "<group>"; };
 		8C84CC081D6E3C67009B3E7D /* vendor_identifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = vendor_identifier.m; path = Reporting/vendor_identifier.m; sourceTree = "<group>"; };
 		8C84CCBF1D6E5D5A009B3E7D /* assert.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = assert.c; path = Dependencies/domain_registry/private/assert.c; sourceTree = "<group>"; };
@@ -344,8 +340,6 @@
 		8CA6CBFD1BAE2ADD00BDA419 /* TrustKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TrustKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CA6CC061BAE2ADD00BDA419 /* TrustKit OS XTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TrustKit OS XTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CC5D24E1D6E64D10074F515 /* TrustKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TrustKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8CC5D24F1D6E64D10074F515 /* TrustKit copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "TrustKit copy-Info.plist"; path = "/Users/nabla/Documents/ios/TrustKit/TrustKit copy-Info.plist"; sourceTree = "<absolute>"; };
-		8CC5D26F1D6E66540074F515 /* TrustKitTests copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "TrustKitTests copy-Info.plist"; path = "/Users/nabla/Documents/ios/TrustKit/TrustKitTests copy-Info.plist"; sourceTree = "<absolute>"; };
 		8CC78B1E1B1B586F00523A25 /* TSKCertificateUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSKCertificateUtils.h; sourceTree = "<group>"; };
 		8CC78B1F1B1B586F00523A25 /* TSKCertificateUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKCertificateUtils.m; sourceTree = "<group>"; };
 		8CC78B241B1B616500523A25 /* TSKPublicKeyAlgorithmTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKPublicKeyAlgorithmTests.m; sourceTree = "<group>"; };
@@ -494,12 +488,6 @@
 				8C8480491A896EE30017C155 /* TrustKit */,
 				8C8480561A896EE30017C155 /* TrustKitTests */,
 				8C8480481A896EE30017C155 /* Products */,
-				8C84CB681D6E08A4009B3E7D /* TrustKit copy-Info.plist */,
-				8C84CB8E1D6E0907009B3E7D /* TrustKit OS X copy-Info.plist */,
-				8C84CBB31D6E0981009B3E7D /* TrustKit copy2-Info.plist */,
-				8C84CBDE1D6E1718009B3E7D /* TrustKitTests copy-Info.plist */,
-				8CC5D24F1D6E64D10074F515 /* TrustKit copy-Info.plist */,
-				8CC5D26F1D6E66540074F515 /* TrustKitTests copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
