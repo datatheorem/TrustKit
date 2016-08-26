@@ -52,12 +52,12 @@ static unsigned char *asn1HeaderBytes[3] = { rsa2048Asn1Header, rsa4096Asn1Heade
 static unsigned int asn1HeaderSizes[3] = { sizeof(rsa2048Asn1Header), sizeof(rsa4096Asn1Header), sizeof(ecDsaSecp256r1Asn1Header) };
 
 
-#if TARGET_OS_WATCH || TARGET_OS_TV || (TARGET_OS_IOS &&__IPHONE_OS_VERSION_MAX_ALLOWED >= 100000) || (!TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MAX_ALLOWED >= 1200)
+#if TARGET_OS_WATCH || TARGET_OS_TV || (TARGET_OS_IOS &&__IPHONE_OS_VERSION_MAX_ALLOWED >= 100000) || (!TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MAX_ALLOWED >= 101200)
 
 #pragma mark Public Key Converter - iOS 10.0+, macOS 10.12+, watchOS 3.0, tvOS 10.0
 
 // Use the unified SecKey API (specifically SecKeyCopyExternalRepresentation())
-static NSData *getPublicKeyDataFromCertificate(SecCertificateRef certificate)
+static NSData *getPublicKeyDataFromCertificate_unified(SecCertificateRef certificate)
 {
     SecKeyRef publicKey;
     SecTrustRef tempTrust;
@@ -73,20 +73,23 @@ static NSData *getPublicKeyDataFromCertificate(SecCertificateRef certificate)
     CFDataRef publicKeyData = SecKeyCopyExternalRepresentation(publicKey, NULL);
     return (NSData *)CFBridgingRelease(publicKeyData);
 }
+#endif
 
-#elif TARGET_OS_IOS
-#define LEGACY_IOS_KEY_EXTRACTION 1
-// iOS before 10.0
-// The one and only way to get a key's data in a buffer on iOS is to put it in the Keychain and then ask for the data back...
+
+#if TARGET_OS_IOS && __IPHONE_OS_VERSION_MIN_REQUIRED < 100000
 
 #pragma mark Public Key Converter - iOS before 10.0
+
+// Need to support iOS before 10.0
+// The one and only way to get a key's data in a buffer on iOS is to put it in the Keychain and then ask for the data back...
+#define LEGACY_IOS_KEY_EXTRACTION 1
 
 static const NSString *kTSKKeychainPublicKeyTag = @"TSKKeychainPublicKeyTag"; // Used to add and find the public key in the Keychain
 
 static pthread_mutex_t _keychainLock; // Used to lock access to our Keychain item
 
 
-static NSData *getPublicKeyDataFromCertificate(SecCertificateRef certificate)
+static NSData *getPublicKeyDataFromCertificate_legacy_ios(SecCertificateRef certificate)
 {
     NSData *publicKeyData = nil;
     OSStatus resultAdd, resultDel = noErr;
@@ -140,12 +143,16 @@ static NSData *getPublicKeyDataFromCertificate(SecCertificateRef certificate)
     
     return publicKeyData;
 }
+#endif
 
-#else
+
+#if !TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MIN_REQUIRED < 101200
 
 #pragma mark Public Key Converter - macOS before 10.12
 
-static NSData *getPublicKeyDataFromCertificate(SecCertificateRef certificate)
+// Need to support macOS before 10.12
+
+static NSData *getPublicKeyDataFromCertificate_legacy_macos(SecCertificateRef certificate)
 {
     NSData *publicKeyData = nil;
     CFErrorRef error = NULL;
@@ -173,8 +180,54 @@ static NSData *getPublicKeyDataFromCertificate(SecCertificateRef certificate)
     CFRelease(certificateValues);
     return publicKeyData;
 }
-
 #endif
+
+
+static NSData *getPublicKeyDataFromCertificate(SecCertificateRef certificate)
+{
+#if TARGET_OS_WATCH || TARGET_OS_TV
+    // watchOS 3+ or tvOS 10+
+    return getPublicKeyDataFromCertificate_unified(certificate);
+#elif TARGET_OS_IOS
+    // iOS 7+
+#if __IPHONE_OS_VERSION_MAX_ALLOWED < 100000
+    // Base SDK is iOS 7, 8 or 9
+    return getPublicKeyDataFromCertificate_legacy_ios(certificate);
+#else
+    // Base SDK is iOS 10+ - try to use the unified Security APIs if available
+    NSProcessInfo *processInfo = [NSProcessInfo processInfo];
+    if ([processInfo respondsToSelector:@selector(isOperatingSystemAtLeastVersion:)] && [processInfo isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){10, 0, 0}])
+    {
+        // iOS 10+
+        return getPublicKeyDataFromCertificate_unified(certificate);
+    }
+    else
+    {
+        // iOS 7, 8, 9
+        return getPublicKeyDataFromCertificate_legacy_ios(certificate);
+    }
+#endif
+#else
+    // macOS 10.9+
+#if __MAC_OS_X_VERSION_MAX_ALLOWED < 101200
+    // Base SDK is macOS 10.9, 10.10 or 10.11
+    return getPublicKeyDataFromCertificate_legacy_macos(certificate);
+#else
+    // Base SDK is macOS 10.12 - try to use the unified Security APIs if available
+    NSProcessInfo *processInfo = [NSProcessInfo processInfo];
+    if ([processInfo respondsToSelector:@selector(isOperatingSystemAtLeastVersion:)] && [processInfo isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){10, 12, 0}])
+    {
+        // macOS 10.12+
+        return getPublicKeyDataFromCertificate_unified(certificate);
+    }
+    else
+    {
+        // macOS 10.9, 10.10, 10.11
+        return getPublicKeyDataFromCertificate_legacy_macos(certificate);
+    }
+#endif
+#endif
+}
 
 
 #pragma mark SPKI Hashing Function
