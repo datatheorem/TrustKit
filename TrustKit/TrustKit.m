@@ -73,17 +73,35 @@ static id _pinValidationObserver = nil;
 static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.com/trustkit/report";
 
 
-#pragma mark Logging Function
+#pragma mark - Logging Function
+static TSKLoggerMethod _loggerMethod = NULL;
 
 void TSKLog(NSString *format, ...)
 {
-    // Only log in debug builds
 #if DEBUG
+    // Only log in debug builds
     NSString *newFormat = [[NSString alloc] initWithFormat:@"=== TrustKit: %@", format];
     va_list args;
     va_start(args, format);
-    NSLogv(newFormat, args);
+    if(_loggerMethod) {
+        // log using the method set by application
+        NSString *logMsg = [[NSString alloc] initWithFormat:newFormat arguments:args];
+        _loggerMethod(logMsg);
+    }
+    else {
+        NSLogv(newFormat, args);
+    }
     va_end(args);
+#else
+    // Check if the app/framework user wants logs or not
+    if(_loggerMethod) {
+        NSString *newFormat = [[NSString alloc] initWithFormat:@"=== TrustKit: %@", format];
+        va_list args;
+        va_start(args, format);
+        NSString *logMsg = [[NSString alloc] initWithFormat:newFormat arguments:args];
+        _loggerMethod(logMsg);
+        va_end(args);
+    }
 #endif
 }
 
@@ -271,6 +289,11 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
 + (void) setGlobalPinFailureReporter:(TSKBackgroundReporter *) reporter
 {
     _pinFailureReporter = reporter;
+}
+
++ (void)setLoggerMethod:(TSKLoggerMethod)method
+{
+    _loggerMethod = method;
 }
 
 @end

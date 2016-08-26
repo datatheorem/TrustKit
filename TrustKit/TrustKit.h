@@ -15,11 +15,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 
-#pragma mark TrustKit Version Number
+#pragma mark - TrustKit Version Number
 FOUNDATION_EXPORT NSString * const TrustKitVersion;
 
 
-#pragma mark TrustKit Configuration Keys
+#pragma mark - TrustKit Configuration Keys
 
 FOUNDATION_EXPORT NSString * const kTSKSwizzleNetworkDelegates;
 FOUNDATION_EXPORT NSString * const kTSKPinnedDomains;
@@ -32,14 +32,14 @@ FOUNDATION_EXPORT NSString * const kTSKDisableDefaultReportUri;
 FOUNDATION_EXPORT NSString * const kTSKIgnorePinningForUserDefinedTrustAnchors NS_AVAILABLE_MAC(10_9);
 
 
-#pragma mark Supported Public Key Algorithm Keys
+#pragma mark - Supported Public Key Algorithm Keys
 
 FOUNDATION_EXPORT NSString * const kTSKAlgorithmRsa2048;
 FOUNDATION_EXPORT NSString * const kTSKAlgorithmRsa4096;
 FOUNDATION_EXPORT NSString * const kTSKAlgorithmEcDsaSecp256r1;
 
 
-#pragma mark TrustKit Notifications
+#pragma mark - TrustKit Notifications
 // This notification is posted for every request that's going through TrustKit pinning validation
 FOUNDATION_EXPORT NSString * const kTSKValidationCompletedNotification;
 
@@ -50,6 +50,9 @@ FOUNDATION_EXPORT NSString * const kTSKValidationDecisionNotificationKey;
 FOUNDATION_EXPORT NSString * const kTSKValidationCertificateChainNotificationKey;
 FOUNDATION_EXPORT NSString * const kTSKValidationNotedHostnameNotificationKey;
 FOUNDATION_EXPORT NSString * const kTSKValidationServerHostnameNotificationKey;
+
+#pragma mark - logger method type
+typedef void(*TSKLoggerMethod) (NSString *logMessage);
 
 /**
  `TrustKit` is a class for programmatically configuring the global SSL pinning policy within an App.
@@ -272,6 +275,17 @@ FOUNDATION_EXPORT NSString * const kTSKValidationServerHostnameNotificationKey;
  @return A dictionary with a copy of the current TrustKit configuration, or `nil` if TrustKit has not been initialized.
  */
 + (nullable NSDictionary *) configuration;
+
+///----------------------------
+/// @name Logging
+///----------------------------
+
+/**
+ Set a logging method to log TrustKit logs in release mode
+ 
+ @param method A function pointer to log TrustKit log messages in release mode or `nil` to stop logging in release mode 
+ */
++ (void)setLoggerMethod:(TSKLoggerMethod)method;
 
 @end
 NS_ASSUME_NONNULL_END
