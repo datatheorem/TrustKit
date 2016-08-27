@@ -21,9 +21,6 @@
 		8C15F9A01B16094D00F06C0E /* TSKPinFailureReport.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C15F99E1B16094D00F06C0E /* TSKPinFailureReport.h */; };
 		8C15F9A11B16094E00F06C0E /* TSKPinFailureReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F99F1B16094D00F06C0E /* TSKPinFailureReport.m */; };
 		8C15F9A41B17564400F06C0E /* TSKPinConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F9A31B17564400F06C0E /* TSKPinConfigurationTests.m */; };
-		8C5AB45F1CF268FA00234B30 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C5AB45E1CF268FA00234B30 /* OCMock.framework */; };
-		8C5AB4621CF269DA00234B30 /* OCMock.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8C5AB45E1CF268FA00234B30 /* OCMock.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		8C5AB4681CF26A2900234B30 /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C5AB4671CF26A2900234B30 /* OCMock.framework */; };
 		8C5AB46A1CF26A3E00234B30 /* OCMock.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8C5AB4671CF26A2900234B30 /* OCMock.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8C5D98B31CEFF079008E654B /* parse_configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C5D98B21CEFF079008E654B /* parse_configuration.m */; };
 		8C5D98B41CEFF079008E654B /* parse_configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C5D98B21CEFF079008E654B /* parse_configuration.m */; };
@@ -33,7 +30,6 @@
 		8C7D06871C6957FE00D3B3D2 /* COMODOECCExtendedValidationSecureServerCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8C7D06861C6957FE00D3B3D2 /* COMODOECCExtendedValidationSecureServerCA.der */; };
 		8C7D06881C6957FE00D3B3D2 /* COMODOECCExtendedValidationSecureServerCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8C7D06861C6957FE00D3B3D2 /* COMODOECCExtendedValidationSecureServerCA.der */; };
 		8C84804D1A896EE30017C155 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C84804C1A896EE30017C155 /* TrustKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8C8480531A896EE30017C155 /* TrustKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C8480471A896EE30017C155 /* TrustKit.framework */; };
 		8C84806D1A896F660017C155 /* TrustKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C84806C1A896F660017C155 /* TrustKit.m */; };
 		8C84CB911D6E0981009B3E7D /* ssl_pin_verifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE919211AEA077F002B29AE /* ssl_pin_verifier.m */; };
 		8C84CB921D6E0981009B3E7D /* TSKReportsRateLimiter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBE011B619BBE00CA7EE0 /* TSKReportsRateLimiter.m */; };
@@ -66,7 +62,6 @@
 		8C84CBC71D6E1718009B3E7D /* TSKReporterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B032D3F1AF1AEB600EAFA69 /* TSKReporterTests.m */; };
 		8C84CBC81D6E1718009B3E7D /* TSKNSURLSessionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD5F7561BCB7219005801D8 /* TSKNSURLSessionTests.m */; };
 		8C84CBC91D6E1718009B3E7D /* TSKCertificateUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC78B1F1B1B586F00523A25 /* TSKCertificateUtils.m */; };
-		8C84CBCB1D6E1718009B3E7D /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C5AB4671CF26A2900234B30 /* OCMock.framework */; };
 		8C84CBCE1D6E1718009B3E7D /* datatheorem.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CD2D5FA1C08F8A500C4F2B5 /* datatheorem.com.der */; };
 		8C84CBCF1D6E1718009B3E7D /* COMODORSADomainValidationSecureServerCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CD2D5F71C08F89D00C4F2B5 /* COMODORSADomainValidationSecureServerCA.der */; };
 		8C84CBD01D6E1718009B3E7D /* GoodRootCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868B41ADFF6B000E5AFDC /* GoodRootCA.der */; };
@@ -77,7 +72,6 @@
 		8C84CBD51D6E1718009B3E7D /* COMODOECCCertificationAuthority.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CD5F7821BCC40AF005801D8 /* COMODOECCCertificationAuthority.der */; };
 		8C84CBD61D6E1718009B3E7D /* www.cloudflare.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 8C7D06801C69551400D3B3D2 /* www.cloudflare.com.der */; };
 		8C84CBD71D6E1718009B3E7D /* www.good.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868B21ADFF67200E5AFDC /* www.good.com.der */; };
-		8C84CBD91D6E1718009B3E7D /* OCMock.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8C5AB4671CF26A2900234B30 /* OCMock.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8C84CBE11D6E176A009B3E7D /* TrustKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C84CBB21D6E0981009B3E7D /* TrustKit.framework */; };
 		8C84CC091D6E3C67009B3E7D /* vendor_identifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C84CC071D6E3C67009B3E7D /* vendor_identifier.h */; };
 		8C84CC0A1D6E3C67009B3E7D /* vendor_identifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C84CC071D6E3C67009B3E7D /* vendor_identifier.h */; };
@@ -219,6 +213,11 @@
 		8CD5F7581BCB7219005801D8 /* TSKNSURLSessionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD5F7561BCB7219005801D8 /* TSKNSURLSessionTests.m */; };
 		8CD5F7831BCC40AF005801D8 /* COMODOECCCertificationAuthority.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CD5F7821BCC40AF005801D8 /* COMODOECCCertificationAuthority.der */; };
 		8CD5F7841BCC40AF005801D8 /* COMODOECCCertificationAuthority.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CD5F7821BCC40AF005801D8 /* COMODOECCCertificationAuthority.der */; };
+		8CDF24681D70E07500CCA32A /* TrustKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C8480471A896EE30017C155 /* TrustKit.framework */; };
+		8CDF246A1D71345100CCA32A /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CDF245C1D70DEBA00CCA32A /* OCMock.framework */; };
+		8CDF246B1D71347000CCA32A /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C5AB4671CF26A2900234B30 /* OCMock.framework */; };
+		8CDF246C1D71347E00CCA32A /* OCMock.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8CDF245C1D70DEBA00CCA32A /* OCMock.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		8CDF246D1D71348C00CCA32A /* OCMock.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8CDF245F1D70DED000CCA32A /* OCMock.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8CE9191E1AEA073C002B29AE /* public_key_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE9191C1AEA073C002B29AE /* public_key_utils.h */; };
 		8CE9191F1AEA073C002B29AE /* public_key_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9191D1AEA073C002B29AE /* public_key_utils.m */; };
 		8CE919221AEA077F002B29AE /* ssl_pin_verifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE919211AEA077F002B29AE /* ssl_pin_verifier.m */; };
@@ -257,7 +256,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				8C5AB4621CF269DA00234B30 /* OCMock.framework in CopyFiles */,
+				8CDF246C1D71347E00CCA32A /* OCMock.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,7 +276,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				8C84CBD91D6E1718009B3E7D /* OCMock.framework in CopyFiles */,
+				8CDF246D1D71348C00CCA32A /* OCMock.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -307,7 +306,6 @@
 		8C15F99E1B16094D00F06C0E /* TSKPinFailureReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKPinFailureReport.h; path = Reporting/TSKPinFailureReport.h; sourceTree = "<group>"; };
 		8C15F99F1B16094D00F06C0E /* TSKPinFailureReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKPinFailureReport.m; path = Reporting/TSKPinFailureReport.m; sourceTree = "<group>"; };
 		8C15F9A31B17564400F06C0E /* TSKPinConfigurationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKPinConfigurationTests.m; sourceTree = "<group>"; };
-		8C5AB45E1CF268FA00234B30 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCMock.framework; path = Dependencies/OCMock/OSX/OCMock.framework; sourceTree = "<group>"; };
 		8C5AB4671CF26A2900234B30 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCMock.framework; path = Dependencies/OCMock/iOS/OCMock.framework; sourceTree = "<group>"; };
 		8C5D98B21CEFF079008E654B /* parse_configuration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = parse_configuration.m; sourceTree = "<group>"; };
 		8C5D98B61CEFF103008E654B /* parse_configuration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = parse_configuration.h; sourceTree = "<group>"; };
@@ -356,6 +354,8 @@
 		8CD5F7481BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKNSURLSessionDelegateProxy.m; path = Swizzling/TSKNSURLSessionDelegateProxy.m; sourceTree = "<group>"; };
 		8CD5F7561BCB7219005801D8 /* TSKNSURLSessionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKNSURLSessionTests.m; sourceTree = "<group>"; };
 		8CD5F7821BCC40AF005801D8 /* COMODOECCCertificationAuthority.der */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COMODOECCCertificationAuthority.der; sourceTree = "<group>"; };
+		8CDF245C1D70DEBA00CCA32A /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCMock.framework; path = Dependencies/OCMock/Mac/OCMock.framework; sourceTree = "<group>"; };
+		8CDF245F1D70DED000CCA32A /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCMock.framework; path = Dependencies/OCMock/tvOS/OCMock.framework; sourceTree = "<group>"; };
 		8CE9191C1AEA073C002B29AE /* public_key_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = public_key_utils.h; path = Pinning/public_key_utils.h; sourceTree = "<group>"; };
 		8CE9191D1AEA073C002B29AE /* public_key_utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = public_key_utils.m; path = Pinning/public_key_utils.m; sourceTree = "<group>"; };
 		8CE919211AEA077F002B29AE /* ssl_pin_verifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ssl_pin_verifier.m; path = Pinning/ssl_pin_verifier.m; sourceTree = "<group>"; };
@@ -375,8 +375,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C5AB4681CF26A2900234B30 /* OCMock.framework in Frameworks */,
-				8C8480531A896EE30017C155 /* TrustKit.framework in Frameworks */,
+				8CDF246B1D71347000CCA32A /* OCMock.framework in Frameworks */,
+				8CDF24681D70E07500CCA32A /* TrustKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,7 +392,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C84CBE11D6E176A009B3E7D /* TrustKit.framework in Frameworks */,
-				8C84CBCB1D6E1718009B3E7D /* OCMock.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,7 +413,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C5AB45F1CF268FA00234B30 /* OCMock.framework in Frameworks */,
+				8CDF246A1D71345100CCA32A /* OCMock.framework in Frameworks */,
 				8CA6CC071BAE2ADD00BDA419 /* TrustKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -460,18 +459,11 @@
 		8C5AB4641CF26A0900234B30 /* OCMock */ = {
 			isa = PBXGroup;
 			children = (
+				8CDF245E1D70DEBE00CCA32A /* tvOS */,
+				8CDF245B1D70DEAB00CCA32A /* macOS */,
 				8C5AB4661CF26A1400234B30 /* iOS */,
-				8C5AB4651CF26A0E00234B30 /* OS X */,
 			);
 			name = OCMock;
-			sourceTree = "<group>";
-		};
-		8C5AB4651CF26A0E00234B30 /* OS X */ = {
-			isa = PBXGroup;
-			children = (
-				8C5AB45E1CF268FA00234B30 /* OCMock.framework */,
-			);
-			name = "OS X";
 			sourceTree = "<group>";
 		};
 		8C5AB4661CF26A1400234B30 /* iOS */ = {
@@ -630,6 +622,22 @@
 				8CD5F7411BCB06F4005801D8 /* RSSwizzle.m */,
 			);
 			name = RSSwizzle;
+			sourceTree = "<group>";
+		};
+		8CDF245B1D70DEAB00CCA32A /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				8CDF245C1D70DEBA00CCA32A /* OCMock.framework */,
+			);
+			name = macOS;
+			sourceTree = "<group>";
+		};
+		8CDF245E1D70DEBE00CCA32A /* tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				8CDF245F1D70DED000CCA32A /* OCMock.framework */,
+			);
+			name = tvOS;
 			sourceTree = "<group>";
 		};
 		8CE9191B1AEA072A002B29AE /* Pinning */ = {
@@ -1441,6 +1449,7 @@
 				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = TrustKitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks @loader_path/../Frameworks @executable_path/../Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.$(PRODUCT_NAME:rfc1034identifier)";
@@ -1465,6 +1474,7 @@
 				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = TrustKitTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks @loader_path/../Frameworks @executable_path/../Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.$(PRODUCT_NAME:rfc1034identifier)";
@@ -1554,7 +1564,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)",
 					"$(inherited)",
-					"$(PROJECT_DIR)/TrustKitTests/Dependencies/OCMock/iOS",
+					"$(PROJECT_DIR)/TrustKitTests/Dependencies/OCMock/tvOS",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1583,7 +1593,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)",
 					"$(inherited)",
-					"$(PROJECT_DIR)/TrustKitTests/Dependencies/OCMock/iOS",
+					"$(PROJECT_DIR)/TrustKitTests/Dependencies/OCMock/tvOS",
 				);
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = TrustKitTests/Info.plist;
@@ -1715,12 +1725,12 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/TrustKitTests/Dependencies/OCMock/OSX",
+					"$(PROJECT_DIR)/TrustKitTests/Dependencies/OCMock/Mac",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = TrustKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.TrustKit-OS-XTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1739,12 +1749,12 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/TrustKitTests/Dependencies/OCMock/OSX",
+					"$(PROJECT_DIR)/TrustKitTests/Dependencies/OCMock/Mac",
 				);
 				GCC_NO_COMMON_BLOCKS = YES;
 				INFOPLIST_FILE = TrustKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.TrustKit-OS-XTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";

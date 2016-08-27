@@ -4,92 +4,114 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>Resources/Info.plist</key>
-		<data>
-		c7hSc4xOedATML3W0RDGj7bymSA=
-		</data>
-		<key>Resources/en.lproj/InfoPlist.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			MiLKDDnrUKr4EmuvhS5VQwxHGK8=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
-	</dict>
-	<key>files2</key>
-	<dict>
 		<key>Headers/NSNotificationCenter+OCMAdditions.h</key>
 		<data>
-		pFhPKZzX9HM07wFLAmeFF43SG6Q=
+		4p/E2pG9sufNWdo9fOl1vDmfsl4=
 		</data>
 		<key>Headers/OCMArg.h</key>
 		<data>
-		eXH6306vchCAoMs2SOo05ZgYfyE=
+		IeLS5yF3KwzJwiWh9GAAjLhwmps=
 		</data>
 		<key>Headers/OCMConstraint.h</key>
 		<data>
-		FRbc5GvcXMiiCFl1PgW3OvepNYA=
+		rZucTOzgr8jLwUlO4dsD+zcQyEY=
 		</data>
 		<key>Headers/OCMFunctions.h</key>
 		<data>
-		CyzP7WkZ+OOYELFA5WsZaWO5kxg=
+		GgOJdGHFu813/EsF8G5lGCqC59U=
 		</data>
 		<key>Headers/OCMLocation.h</key>
 		<data>
-		qjhhruQ18SiTXjsRjKGUD1eCM/g=
+		tlvpwb//eIDZm/m/MJvwReRXGGI=
 		</data>
 		<key>Headers/OCMMacroState.h</key>
 		<data>
-		qJJTF+b6OeQggRm1gDg8v6UIzpM=
+		u8dxB0/Nai3FP2zbTN5/Exb/cjg=
 		</data>
 		<key>Headers/OCMRecorder.h</key>
 		<data>
-		diyYzxk+iLvIqBa+mGMSxgNx5Hs=
+		bR8CRv3j6qsvmQWXv7By/v+9whI=
 		</data>
 		<key>Headers/OCMStubRecorder.h</key>
 		<data>
-		jk2b9AjWJ1SRj0ju7Uu+U3C3uT8=
+		rRQdd3h0k392qDt5Xhz2N07g+nA=
 		</data>
 		<key>Headers/OCMock.h</key>
 		<data>
-		93kK1Oj0uYy5eT+GMc5l1IOm+E0=
+		QD3+fpl2aZ8OTVPNCOhn57odyHE=
 		</data>
 		<key>Headers/OCMockObject.h</key>
 		<data>
-		oZEWGlkN3u1F+7KPHoLi3MYbU0k=
+		7fPD5/51qFCDDbEH1z1XZUd4rSk=
+		</data>
+		<key>Info.plist</key>
+		<data>
+		G+ixgDyDuUWDDWwlLo3Fsz4Sc2s=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
 		C/zv4wGd+b+kg7T2q31cWmGbPX0=
 		</data>
-		<key>Resources/Info.plist</key>
+	</dict>
+	<key>files2</key>
+	<dict>
+		<key>Headers/NSNotificationCenter+OCMAdditions.h</key>
 		<data>
-		c7hSc4xOedATML3W0RDGj7bymSA=
+		4p/E2pG9sufNWdo9fOl1vDmfsl4=
 		</data>
-		<key>Resources/en.lproj/InfoPlist.strings</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			MiLKDDnrUKr4EmuvhS5VQwxHGK8=
-			</data>
-			<key>optional</key>
-			<true/>
-		</dict>
+		<key>Headers/OCMArg.h</key>
+		<data>
+		IeLS5yF3KwzJwiWh9GAAjLhwmps=
+		</data>
+		<key>Headers/OCMConstraint.h</key>
+		<data>
+		rZucTOzgr8jLwUlO4dsD+zcQyEY=
+		</data>
+		<key>Headers/OCMFunctions.h</key>
+		<data>
+		GgOJdGHFu813/EsF8G5lGCqC59U=
+		</data>
+		<key>Headers/OCMLocation.h</key>
+		<data>
+		tlvpwb//eIDZm/m/MJvwReRXGGI=
+		</data>
+		<key>Headers/OCMMacroState.h</key>
+		<data>
+		u8dxB0/Nai3FP2zbTN5/Exb/cjg=
+		</data>
+		<key>Headers/OCMRecorder.h</key>
+		<data>
+		bR8CRv3j6qsvmQWXv7By/v+9whI=
+		</data>
+		<key>Headers/OCMStubRecorder.h</key>
+		<data>
+		rRQdd3h0k392qDt5Xhz2N07g+nA=
+		</data>
+		<key>Headers/OCMock.h</key>
+		<data>
+		QD3+fpl2aZ8OTVPNCOhn57odyHE=
+		</data>
+		<key>Headers/OCMockObject.h</key>
+		<data>
+		7fPD5/51qFCDDbEH1z1XZUd4rSk=
+		</data>
+		<key>Modules/module.modulemap</key>
+		<data>
+		C/zv4wGd+b+kg7T2q31cWmGbPX0=
+		</data>
 	</dict>
 	<key>rules</key>
 	<dict>
-		<key>^Resources/</key>
+		<key>^</key>
 		<true/>
-		<key>^Resources/.*\.lproj/</key>
+		<key>^.*\.lproj/</key>
 		<dict>
 			<key>optional</key>
 			<true/>
 			<key>weight</key>
 			<real>1000</real>
 		</dict>
-		<key>^Resources/.*\.lproj/locversion.plist$</key>
+		<key>^.*\.lproj/locversion.plist$</key>
 		<dict>
 			<key>omit</key>
 			<true/>
@@ -105,6 +127,11 @@
 		<dict>
 			<key>weight</key>
 			<real>11</real>
+		</dict>
+		<key>^</key>
+		<dict>
+			<key>weight</key>
+			<real>20</real>
 		</dict>
 		<key>^(.*/)?\.DS_Store$</key>
 		<dict>
@@ -122,6 +149,20 @@
 		</dict>
 		<key>^.*</key>
 		<true/>
+		<key>^.*\.lproj/</key>
+		<dict>
+			<key>optional</key>
+			<true/>
+			<key>weight</key>
+			<real>1000</real>
+		</dict>
+		<key>^.*\.lproj/locversion.plist$</key>
+		<dict>
+			<key>omit</key>
+			<true/>
+			<key>weight</key>
+			<real>1100</real>
+		</dict>
 		<key>^Info\.plist$</key>
 		<dict>
 			<key>omit</key>
@@ -135,25 +176,6 @@
 			<true/>
 			<key>weight</key>
 			<real>20</real>
-		</dict>
-		<key>^Resources/</key>
-		<dict>
-			<key>weight</key>
-			<real>20</real>
-		</dict>
-		<key>^Resources/.*\.lproj/</key>
-		<dict>
-			<key>optional</key>
-			<true/>
-			<key>weight</key>
-			<real>1000</real>
-		</dict>
-		<key>^Resources/.*\.lproj/locversion.plist$</key>
-		<dict>
-			<key>omit</key>
-			<true/>
-			<key>weight</key>
-			<real>1100</real>
 		</dict>
 		<key>^[^/]+$</key>
 		<dict>
