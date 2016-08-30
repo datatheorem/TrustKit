@@ -273,8 +273,13 @@ FOUNDATION_EXPORT NSString * const kTSKValidationServerHostnameNotificationKey;
  */
 + (nullable NSDictionary *) configuration;
 
-
-// TODO(ad): Add documentation
+/**
+ Set the global logger.
+ 
+ This method sets the global logger, used when TrustKit needs to display a message to the developer. 
+ 
+ If a global logger is not set, the default logger will be used, which will print TrustKit log messages (using `NSLog()`) when the App is built in Debug mode. If the App was built for Release, the default logger will not print any messages at all.
+ */
 + (void)setLoggerBlock:(void (^)(NSString *))block;
 
 @end
