@@ -21,6 +21,15 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    // Override TrustKit's logger method
+    void (^loggerBlock)(NSString *) = ^void(NSString *message)
+    {
+        NSLog(@"TrustKit log: %@", message);
+    };
+    [TrustKit setLoggerBlock:loggerBlock];
+    
+    
     // Initialize TrustKit
     NSDictionary *trustKitConfig =
     @{

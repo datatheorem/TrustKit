@@ -273,5 +273,9 @@ FOUNDATION_EXPORT NSString * const kTSKValidationServerHostnameNotificationKey;
  */
 + (nullable NSDictionary *) configuration;
 
+
+// TODO(ad): Add documentation
++ (void)setLoggerBlock:(void (^)(NSString *))block;
+
 @end
 NS_ASSUME_NONNULL_END

@@ -29,6 +29,9 @@
 		8C7D06821C69551900D3B3D2 /* www.cloudflare.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 8C7D06801C69551400D3B3D2 /* www.cloudflare.com.der */; };
 		8C7D06871C6957FE00D3B3D2 /* COMODOECCExtendedValidationSecureServerCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8C7D06861C6957FE00D3B3D2 /* COMODOECCExtendedValidationSecureServerCA.der */; };
 		8C7D06881C6957FE00D3B3D2 /* COMODOECCExtendedValidationSecureServerCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8C7D06861C6957FE00D3B3D2 /* COMODOECCExtendedValidationSecureServerCA.der */; };
+		8C80249D1D750D0100678959 /* TSKLoggerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C80249C1D750D0100678959 /* TSKLoggerTests.m */; };
+		8C80249E1D750D0100678959 /* TSKLoggerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C80249C1D750D0100678959 /* TSKLoggerTests.m */; };
+		8C80249F1D750D0100678959 /* TSKLoggerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C80249C1D750D0100678959 /* TSKLoggerTests.m */; };
 		8C84804D1A896EE30017C155 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C84804C1A896EE30017C155 /* TrustKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8C84806D1A896F660017C155 /* TrustKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C84806C1A896F660017C155 /* TrustKit.m */; };
 		8C84CB911D6E0981009B3E7D /* ssl_pin_verifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE919211AEA077F002B29AE /* ssl_pin_verifier.m */; };
@@ -311,6 +314,7 @@
 		8C5D98B61CEFF103008E654B /* parse_configuration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = parse_configuration.h; sourceTree = "<group>"; };
 		8C7D06801C69551400D3B3D2 /* www.cloudflare.com.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = www.cloudflare.com.der; sourceTree = "<group>"; };
 		8C7D06861C6957FE00D3B3D2 /* COMODOECCExtendedValidationSecureServerCA.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = COMODOECCExtendedValidationSecureServerCA.der; sourceTree = "<group>"; };
+		8C80249C1D750D0100678959 /* TSKLoggerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKLoggerTests.m; sourceTree = "<group>"; };
 		8C8480471A896EE30017C155 /* TrustKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TrustKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C84804B1A896EE30017C155 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C84804C1A896EE30017C155 /* TrustKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrustKit.h; sourceTree = "<group>"; };
@@ -537,6 +541,7 @@
 				8CC78B1E1B1B586F00523A25 /* TSKCertificateUtils.h */,
 				8CC78B1F1B1B586F00523A25 /* TSKCertificateUtils.m */,
 				8CC78B241B1B616500523A25 /* TSKPublicKeyAlgorithmTests.m */,
+				8C80249C1D750D0100678959 /* TSKLoggerTests.m */,
 			);
 			path = TrustKitTests;
 			sourceTree = "<group>";
@@ -1098,6 +1103,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C80249D1D750D0100678959 /* TSKLoggerTests.m in Sources */,
 				8CD5F7381BCB02A7005801D8 /* TSKNSURLConnectionTests.m in Sources */,
 				8C15F9A41B17564400F06C0E /* TSKPinConfigurationTests.m in Sources */,
 				075AA1091AC985FD00178223 /* TSKPinningValidatorTests.m in Sources */,
@@ -1136,6 +1142,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C80249F1D750D0100678959 /* TSKLoggerTests.m in Sources */,
 				8C84CBC31D6E1718009B3E7D /* TSKNSURLConnectionTests.m in Sources */,
 				8C84CBC41D6E1718009B3E7D /* TSKPinConfigurationTests.m in Sources */,
 				8C84CBC51D6E1718009B3E7D /* TSKPinningValidatorTests.m in Sources */,
@@ -1194,6 +1201,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C80249E1D750D0100678959 /* TSKLoggerTests.m in Sources */,
 				8CD5F7391BCB02A7005801D8 /* TSKNSURLConnectionTests.m in Sources */,
 				8CA6CC3A1BAE2C7C00BDA419 /* TSKReporterTests.m in Sources */,
 				8CA6CC391BAE2C7200BDA419 /* TSKPinningValidatorTests.m in Sources */,
