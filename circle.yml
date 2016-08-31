@@ -4,6 +4,7 @@ machine:
 test:
   override:
     # iOS 10 platform with iOS 10 SDK
+    - xcrun simctl list
     - xcodebuild clean test
       CODE_SIGNING_REQUIRED=NO
       CODE_SIGN_IDENTITY=
