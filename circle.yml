@@ -1,0 +1,12 @@
+machine:
+  xcode:
+    version: 8.0
+test:
+  override:
+    - xcodebuild test
+      CODE_SIGNING_REQUIRED=NO
+      CODE_SIGN_IDENTITY=
+      -destination 'platform=iOS Simulator,name=iPhone 6,OS=10.0'
+      -sdk iphonesimulator
+      -scheme "TrustKit"
+      build build-tests run-tests
