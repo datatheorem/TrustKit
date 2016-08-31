@@ -24,10 +24,10 @@ test:
       -destination 'platform=tvOS Simulator,name=Apple TV 1080p,OS=10.0'
       -sdk appletvsimulator10.0
       -scheme "TrustKit tvOS"
-      # OS X 10.11 platform with OS X 10.11 SDK
+      # OS X 10.11 platform with OS X 10.12 SDK
     - xcodebuild clean test
       CODE_SIGNING_REQUIRED=NO
       CODE_SIGN_IDENTITY=
       -destination 'platform=OS X'
-      -sdk macosx
+      -sdk macosx10.12
       -scheme "TrustKit OS X"
