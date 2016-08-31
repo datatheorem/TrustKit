@@ -25,7 +25,7 @@ test:
       -sdk macosx10.12
       -scheme "TrustKit OS X"
     # iOS 8 platform with iOS 9 SDK
-     - sudo xcode-select --switch /Applications/Xcode-7.3.1.app
+    - sudo xcode-select --switch /Applications/Xcode-7.3.1.app
     - xcodebuild clean test
       CODE_SIGNING_REQUIRED=NO
       CODE_SIGN_IDENTITY=
