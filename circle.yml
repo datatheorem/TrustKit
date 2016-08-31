@@ -10,19 +10,12 @@ test:
       -destination 'platform=iOS Simulator,name=iPhone 6,OS=10.0'
       -sdk iphonesimulator10.0
       -scheme "TrustKit"
-    # iOS 8 platform with iOS 10 SDK
+    # iOS 8 platform with iOS 8 SDK
     - xcodebuild clean test
       CODE_SIGNING_REQUIRED=NO
       CODE_SIGN_IDENTITY=
       -destination 'platform=iOS Simulator,name=iPhone 4S,OS=8.4'
-      -sdk iphonesimulator10.0
-      -scheme "TrustKit"
-    # iOS 8 platform with iOS 9 SDK
-    - xcodebuild clean test
-      CODE_SIGNING_REQUIRED=NO
-      CODE_SIGN_IDENTITY=
-      -destination 'platform=iOS Simulator,name=iPhone 4S,OS=8.4'
-      -sdk iphonesimulator9.3
+      -sdk iphonesimulator8.4
       -scheme "TrustKit"
     # tvOS 10 platform with tvOS 10 SDK
     - xcodebuild clean test
@@ -36,5 +29,5 @@ test:
       CODE_SIGNING_REQUIRED=NO
       CODE_SIGN_IDENTITY=
       -destination 'platform=OS X'
-      -sdk macosx10.11
+      -sdk macosx
       -scheme "TrustKit OS X"
