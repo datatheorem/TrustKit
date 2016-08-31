@@ -71,6 +71,7 @@ static NSData *getPublicKeyDataFromCertificate_unified(SecCertificateRef certifi
     CFRelease(tempTrust);
     
     CFDataRef publicKeyData = SecKeyCopyExternalRepresentation(publicKey, NULL);
+    CFRelease(publicKey);
     return (NSData *)CFBridgingRelease(publicKeyData);
 }
 #endif
