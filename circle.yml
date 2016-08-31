@@ -14,14 +14,14 @@ test:
     - xcodebuild clean test
       CODE_SIGNING_REQUIRED=NO
       CODE_SIGN_IDENTITY=
-      -destination 'platform=iOS Simulator,name=iPhone 4S,OS=8.0'
+      -destination 'platform=iOS Simulator,name=iPhone 4S,OS=8.4'
       -sdk iphonesimulator10.0
       -scheme "TrustKit"
     # iOS 8 platform with iOS 9 SDK
     - xcodebuild clean test
       CODE_SIGNING_REQUIRED=NO
       CODE_SIGN_IDENTITY=
-      -destination 'platform=iOS Simulator,name=iPhone 4S,OS=8.0'
+      -destination 'platform=iOS Simulator,name=iPhone 4S,OS=8.4'
       -sdk iphonesimulator9.3
       -scheme "TrustKit"
     # tvOS 10 platform with tvOS 10 SDK
