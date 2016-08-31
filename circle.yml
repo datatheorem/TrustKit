@@ -24,8 +24,11 @@ test:
       -destination 'platform=OS X'
       -sdk macosx10.12
       -scheme "TrustKit OS X"
-    # iOS 8 platform with iOS 9 SDK
+      # Cleanup and switch to Xcode 7
+    - xcrun simctl shutdown "iPhone 6"
+    - xcrun simctl shutdown "Apple TV 1080p"
     - sudo xcode-select --switch /Applications/Xcode-7.3.app
+    # iOS 8 platform with iOS 9 SDK
     - xcodebuild clean test
       CODE_SIGNING_REQUIRED=NO
       CODE_SIGN_IDENTITY=
