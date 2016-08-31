@@ -3,8 +3,25 @@ machine:
     version: 8.0
 test:
   override:
+    # First run Xcode 7 tests
+    - sudo xcode-select --switch /Applications/Xcode-7.3.app
+    # iOS 8 platform with iOS 9 SDK
+    - xcodebuild clean test
+      CODE_SIGNING_REQUIRED=NO
+      CODE_SIGN_IDENTITY=
+      -destination 'platform=iOS Simulator,name=iPhone 4S,OS=8.4'
+      -sdk iphonesimulator9.3
+      -scheme "TrustKit"
+    # OS X 10.11 platform with OS X 10.11 SDK
+    - xcodebuild clean test
+      CODE_SIGNING_REQUIRED=NO
+      CODE_SIGN_IDENTITY=
+      -destination 'platform=OS X'
+      -sdk macosx10.11
+      -scheme "TrustKit OS X"
+    # Switch to Xcode 8
+    - sudo xcode-select --switch /Applications/Xcode-8.app
     # iOS 10 platform with iOS 10 SDK
-    - xcrun simctl list
     - xcodebuild clean test
       CODE_SIGNING_REQUIRED=NO
       CODE_SIGN_IDENTITY=
@@ -18,28 +35,11 @@ test:
       -destination 'platform=tvOS Simulator,name=Apple TV 1080p,OS=10.0'
       -sdk appletvsimulator10.0
       -scheme "TrustKit tvOS"
-      # OS X 10.11 platform with OS X 10.12 SDK
+    # OS X 10.11 platform with OS X 10.12 SDK
     - xcodebuild clean test
       CODE_SIGNING_REQUIRED=NO
       CODE_SIGN_IDENTITY=
       -destination 'platform=OS X'
       -sdk macosx10.12
       -scheme "TrustKit OS X"
-      # Cleanup and switch to Xcode 7
-    - xcrun simctl shutdown "iPhone 6"
-    - xcrun simctl shutdown "Apple TV 1080p"
-    - sudo xcode-select --switch /Applications/Xcode-7.3.app
-    # iOS 8 platform with iOS 9 SDK
-    - xcodebuild clean test
-      CODE_SIGNING_REQUIRED=NO
-      CODE_SIGN_IDENTITY=
-      -destination 'platform=iOS Simulator,name=iPhone 4S,OS=8.4'
-      -sdk iphonesimulator9.3
-      -scheme "TrustKit"
-      # OS X 10.11 platform with OS X 10.11 SDK
-    - xcodebuild clean test
-      CODE_SIGNING_REQUIRED=NO
-      CODE_SIGN_IDENTITY=
-      -destination 'platform=OS X'
-      -sdk macosx10.11
-      -scheme "TrustKit OS X"
+
