@@ -20,7 +20,7 @@ test:
       -sdk macosx10.11
       -scheme "TrustKit OS X"
     # Switch to Xcode 8
-    - sudo xcode-select --switch /Applications/Xcode.app
+    - sudo xcode-select --switch /Applications/Xcode-8.0.app
     # iOS 10 platform with iOS 10 SDK
     - xcodebuild clean test
       CODE_SIGNING_REQUIRED=NO
