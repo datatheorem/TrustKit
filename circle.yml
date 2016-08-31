@@ -3,9 +3,38 @@ machine:
     version: 8.0
 test:
   override:
+    # iOS 10 platform with iOS 10 SDK
     - xcodebuild clean test
       CODE_SIGNING_REQUIRED=NO
       CODE_SIGN_IDENTITY=
       -destination 'platform=iOS Simulator,name=iPhone 6,OS=10.0'
-      -sdk iphonesimulator
+      -sdk iphonesimulator10.0
       -scheme "TrustKit"
+    # iOS 8 platform with iOS 10 SDK
+    - xcodebuild clean test
+      CODE_SIGNING_REQUIRED=NO
+      CODE_SIGN_IDENTITY=
+      -destination 'platform=iOS Simulator,name=iPhone 4S,OS=8.0'
+      -sdk iphonesimulator10.0
+      -scheme "TrustKit"
+    # iOS 8 platform with iOS 9 SDK
+    - xcodebuild clean test
+      CODE_SIGNING_REQUIRED=NO
+      CODE_SIGN_IDENTITY=
+      -destination 'platform=iOS Simulator,name=iPhone 4S,OS=8.0'
+      -sdk iphonesimulator9.3
+      -scheme "TrustKit"
+    # tvOS 10 platform with tvOS 10 SDK
+    - xcodebuild clean test
+      CODE_SIGNING_REQUIRED=NO
+      CODE_SIGN_IDENTITY=
+      -destination 'platform=tvOS Simulator,name=Apple TV 1080p,OS=10.0'
+      -sdk appletvsimulator10.0
+      -scheme "TrustKit tvOS"
+      # OS X 10.11 platform with OS X 10.11 SDK
+    - xcodebuild clean test
+      CODE_SIGNING_REQUIRED=NO
+      CODE_SIGN_IDENTITY=
+      -destination 'platform=OS X'
+      -sdk macosx10.11
+      -scheme "TrustKit OS X"
