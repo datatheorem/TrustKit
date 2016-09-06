@@ -9,7 +9,8 @@ Pod::Spec.new do |s|
   s.source       = { :git => "https://github.com/datatheorem/TrustKit.git", :tag => "#{s.version}" }
   s.ios.deployment_target = '7.0'
   s.osx.deployment_target = '10.9'
-  s.tvos.deployment_target = '9.0'
+  s.tvos.deployment_target = '10.0'
+  s.watchos.deployment_target = '3.0'
   s.source_files = 'TrustKit', 'TrustKit/**/*.{h,m}'
   s.public_header_files = 'TrustKit/TrustKit.h', 'TrustKit/Pinning/TSKPinningValidator.h'
   s.frameworks = 'Foundation', 'Security'
