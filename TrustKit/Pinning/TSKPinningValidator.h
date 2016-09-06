@@ -75,20 +75,9 @@ typedef NS_ENUM(NSInteger, TSKTrustDecision)
         }
         else if (trustDecision == TSKTrustDecisionDomainNotPinned)
         {
-            // Domain was not pinned; we need to do the default validation ourselves to avoid disabling
+            // Domain was not pinned; we need to do the default validation to avoid disabling
             // SSL validation for all non-pinned domains
-            SecTrustResultType trustResult = 0;
-            SecTrustEvaluate(serverTrust, &trustResult);
-            if ((trustResult != kSecTrustResultUnspecified) && (trustResult != kSecTrustResultProceed))
-            {
-                // Default SSL validation failed - block the connection
-                completionHandler(NSURLSessionAuthChallengeCancelAuthenticationChallenge, NULL);
-            }
-            else
-            {
-                // Default SSL validation succeeded
-                completionHandler(NSURLSessionAuthChallengeUseCredential, 
-                                  [NSURLCredential credentialForTrust:serverTrust]);
+            completionHandler(NSURLSessionAuthChallengePerformDefaultHandling, NULL);
             }
         }
         else
