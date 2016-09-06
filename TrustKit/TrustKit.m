@@ -18,7 +18,7 @@
 #import "Reporting/reporting_utils.h"
 
 
-NSString * const TrustKitVersion = @"1.3.2";
+NSString * const TrustKitVersion = @"1.4.0";
 
 #pragma mark Configuration Constants
 

@@ -1,7 +1,7 @@
 TrustKit
 ========
 
-[![Build Status](https://travis-ci.org/datatheorem/TrustKit.svg?branch=1.3.2)](https://travis-ci.org/datatheorem/TrustKit) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Version Status](https://img.shields.io/cocoapods/v/TrustKit.svg?style=flat)](https://cocoapods.org/pods/TrustKit) [![Platform](https://img.shields.io/cocoapods/p/TrustKit.svg?style=flat)](https://cocoapods.org/pods/TrustKit) [![License MIT](https://img.shields.io/cocoapods/l/TrustKit.svg?style=flat)](https://en.wikipedia.org/wiki/MIT_License)
+[![Build Status](https://travis-ci.org/datatheorem/TrustKit.svg?branch=1.4.0)](https://travis-ci.org/datatheorem/TrustKit) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Version Status](https://img.shields.io/cocoapods/v/TrustKit.svg?style=flat)](https://cocoapods.org/pods/TrustKit) [![Platform](https://img.shields.io/cocoapods/p/TrustKit.svg?style=flat)](https://cocoapods.org/pods/TrustKit) [![License MIT](https://img.shields.io/cocoapods/l/TrustKit.svg?style=flat)](https://en.wikipedia.org/wiki/MIT_License)
 
 **TrustKit** is an open source framework that makes it easy to deploy SSL public key pinning in any iOS, macOS or tvOS App; it supports both Swift and Objective-C Apps.
 
