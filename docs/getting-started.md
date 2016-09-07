@@ -186,31 +186,6 @@ which contains its certificate chain, needs to be retrieved or built before bein
 passed to the
 [`TSKPinningValidator` class](https://datatheorem.github.io/TrustKit/documentation/Classes/TSKPinningValidator.html) 
 for validation. 
- 
-`TSKPinningValidator` then returns a `TSKTrustDecision` which describes whether 
-the SSL connection should be allowed or blocked, based on the App's SSL pinning 
-policy.
- 
- The following connections require manual pin validation:
- 
- 1. All connections within an App that disables TrustKit's network delegate 
- swizzling by setting the `kTSKSwizzleNetworkDelegates` configuration key to 
- `NO`.
- 2. Connections that do not rely on the `NSURLConnection` or `NSURLSession` 
- APIs:
-     * Connections leveraging different network APIs (such as `NSStream`). Apple 
-     has released a [technical note describing how the server's trust object can be retrieved][https://developer.apple.com/library/ios/technotes/tn2232/_index.html] for the various network APIs (`NSStream`, `CFNetwork`, 
-     etc.) available on iOS and OS X.
-     * Connections initiated using a third-party SSL library such as OpenSSL. The 
-     server's trust object needs to be built using the received certificate chain.
- 3. Connections happening outside of the App's process:
-     * `WKWebView` connections: the server's trust object can be retrieved and 
-     validated within the 
-     `webView:didReceiveAuthenticationChallenge:completionHandler:` method.
-     * `NSURLSession` connections using the background transfer service: the 
-     server's trust object can be retrieved and validated within the 
-     `application:handleEventsForBackgroundURLSession:completionHandler:` 
-     method.
 
 
 ## Pinning in WebViews
