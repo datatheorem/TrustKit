@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = '10.9'
   s.tvos.deployment_target = '10.0'
   s.watchos.deployment_target = '3.0'
-  s.source_files = 'TrustKit', 'TrustKit/**/*.{h,m}'
+  s.source_files = 'TrustKit', 'TrustKit/**/*.{h,m,c}'
   s.public_header_files = 'TrustKit/TrustKit.h', 'TrustKit/Pinning/TSKPinningValidator.h'
   s.frameworks = 'Foundation', 'Security'
   s.requires_arc = true
