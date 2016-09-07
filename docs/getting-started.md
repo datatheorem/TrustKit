@@ -242,8 +242,8 @@ Settings.
 
 ### Adding TrustKit as a Dependency - Dynamic Linking
 
-If CocoaPods can't be used and for Apps targeting iOS 8+, macOS, or tvOS, 
-TrustKit can be dynamically linked.
+If CocoaPods can't be used and for Apps targeting iOS 8+, macOS, tvOS or
+watchOS, TrustKit can be dynamically linked.
 
 1. Drag and drop the TrustKit Xcode project file in your project:
 
