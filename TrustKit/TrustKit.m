@@ -18,7 +18,7 @@
 #import "Reporting/reporting_utils.h"
 
 
-NSString * const TrustKitVersion = @"1.3.2";
+NSString * const TrustKitVersion = @"1.4.0";
 
 #pragma mark Configuration Constants
 
@@ -73,18 +73,25 @@ static id _pinValidationObserver = nil;
 static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.com/trustkit/report";
 
 
-#pragma mark Logging Function
+#pragma mark Default Logging Block
 
+// Default logger block: only log in debug builds and add TrustKit at the beginning of the line
+void (^_loggerBlock)(NSString *) = ^void(NSString *message)
+{
+#if DEBUG
+    NSLog(@"=== TrustKit: %@", message);
+#endif
+};
+
+
+// The logging function we use within TrustKit
 void TSKLog(NSString *format, ...)
 {
-    // Only log in debug builds
-#if DEBUG
-    NSString *newFormat = [[NSString alloc] initWithFormat:@"=== TrustKit: %@", format];
     va_list args;
     va_start(args, format);
-    NSLogv(newFormat, args);
+    NSString *message = [[NSString alloc] initWithFormat: format arguments:args];
     va_end(args);
-#endif
+    _loggerBlock(message);
 }
 
 
@@ -230,6 +237,11 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
 {
     TSKLog(@"Configuration passed via explicit call to initializeWithConfiguration:");
     initializeTrustKit(trustKitConfig);
+}
+
++ (void)setLoggerBlock:(void (^)(NSString *))block
+{
+    _loggerBlock = block;
 }
 
 

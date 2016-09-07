@@ -98,4 +98,37 @@
     return finalTrustDecision;
 }
 
+
++ (BOOL) handleChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge completionHandler:(void (^ _Nonnull)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential))completionHandler
+{
+    BOOL wasChallengeHandled = NO;
+    if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust])
+    {
+        // Check the trust object against the pinning policy
+        SecTrustRef serverTrust = challenge.protectionSpace.serverTrust;
+        NSString *serverHostname = challenge.protectionSpace.host;
+        
+        TSKTrustDecision trustDecision = [TSKPinningValidator evaluateTrust:serverTrust forHostname:serverHostname];
+        if (trustDecision == TSKTrustDecisionShouldAllowConnection)
+        {
+            // Success
+            wasChallengeHandled = YES;
+            completionHandler(NSURLSessionAuthChallengeUseCredential, [NSURLCredential credentialForTrust:serverTrust]);
+        }
+        else if (trustDecision == TSKTrustDecisionDomainNotPinned)
+        {
+            // Domain was not pinned; we need to do the default validation to avoid disabling SSL validation for all non-pinned domains
+            wasChallengeHandled = YES;
+            completionHandler(NSURLSessionAuthChallengePerformDefaultHandling, NULL);
+        }
+        else
+        {
+            // Pinning validation failed - block the connection
+            wasChallengeHandled = YES;
+            completionHandler(NSURLSessionAuthChallengeCancelAuthenticationChallenge, NULL);
+        }
+    }
+    return wasChallengeHandled;
+}
+
 @end

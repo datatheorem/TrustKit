@@ -224,7 +224,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
 }
 
 
-// Tests a secure connection to https://www.yahoo.com via its IP address in order to simulate a server with an invalid certificate chain and ensure that TrustKit is not disabling certificate validation
+// Tests a secure connection to https://self-signed.badssl.com with an invalid certificate chain and ensure that TrustKit is not disabling default certificate validation
 - (void)testPinningValidationFailedChainNotTrusted
 {
     // This is not needed but to ensure TrustKit does get initialized
@@ -233,11 +233,52 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
       kTSKSwizzleNetworkDelegates: @YES,
       kTSKPinnedDomains :
           @{
-              @"www.yahoo.com" : @{
-                      kTSKEnforcePinning : @YES,
+              @"self-signed.badssl.com" : @{
+                      kTSKEnforcePinning : @NO,  // Do not enforce pinning to ensure default SSL validation is still enabled
                       kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                      kTSKPublicKeyHashes : @[@"JbQbUG5JMJUoI6brnx0x3vZF6jilxsapbXGVfjhN8Fg=", // CA key
-                                              @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
+                      kTSKPublicKeyHashes : @[@"9SLklscvzMYj8f+52lp5ze/hY0CFHyLSPQzSpYYIBm8=", // Leaf key
+                                              @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
+                                              ]}}};
+    
+    [TrustKit initializeWithConfiguration:trustKitConfig];
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLSessionTaskDelegate"];
+    TestNSURLSessionDelegate* delegate = [[TestNSURLSessionDelegate alloc] initWithExpectation:expectation];
+    
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]
+                                                          delegate:delegate
+                                                     delegateQueue:nil];
+    
+    NSURLSessionDataTask *task = [session dataTaskWithURL:[NSURL URLWithString:@"https://self-signed.badssl.com/"]];
+    [task resume];
+    
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error)
+     {
+         if (error)
+         {
+             NSLog(@"Timeout Error: %@", error);
+         }
+     }];
+    XCTAssert(([TSKNSURLSessionDelegateProxy getLastTrustDecision] == TSKTrustDecisionShouldBlockConnection), @"TrustKit accepted an invalid certificate");
+    XCTAssertNotNil(delegate.lastError, @"TrustKit did not trigger an error");
+    XCTAssertNil(delegate.lastResponse, @"TrustKit returned a response although pin validation failed");
+}
+
+
+// Tests a secure connection to https://self-signed.badssl.com with an invalid certificate chain and ensure that TrustKit is not disabling default certificate validation for domains that are not even pinned
+- (void)testPinningValidationFailedChainNotTrustedAndNotPinned
+{
+    // This is not needed but to ensure TrustKit does get initialized
+    NSDictionary *trustKitConfig =
+    @{
+      kTSKSwizzleNetworkDelegates: @YES,
+      kTSKPinnedDomains :
+          @{
+              @"www.yahoo.com" : @{
+                      kTSKEnforcePinning : @NO,  // Do not enforce pinning to ensure default SSL validation is still enabled
+                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                      kTSKPublicKeyHashes : @[@"9SLklscvzMYj8f+52lp5ze/hY0CFHyLSPQzSpYYIBm8=", // Leaf key
+                                              @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                               ]}}};
     
     [TrustKit initializeWithConfiguration:trustKitConfig];
@@ -257,7 +298,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
                                                           delegate:delegate
                                                      delegateQueue:nil];
     
-    NSURLSessionDataTask *task = [session dataTaskWithURL:[NSURL URLWithString:@"https://206.190.36.105/"]];
+    NSURLSessionDataTask *task = [session dataTaskWithURL:[NSURL URLWithString:@"https://self-signed.badssl.com/"]];
     [task resume];
     
     [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error)
