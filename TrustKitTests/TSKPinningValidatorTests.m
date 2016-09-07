@@ -16,6 +16,7 @@
 #import "reporting_utils.h"
 #import "parse_configuration.h"
 #import "TSKCertificateUtils.h"
+#import <OCMock/OCMock.h>
 
 
 @interface TSKPinningValidatorTests : XCTestCase
@@ -57,6 +58,8 @@
     [super tearDown];
 }
 
+
+#pragma mark Tests for evaluateTrust:forHostname:
 
 // Pin to any of CA, Intermediate CA and Leaf certificates public keys (all valid) and ensure it succeeds
 - (void)testVerifyAgainstAnyPublicKey
@@ -588,7 +591,7 @@
 
 - (void)testDomainNotPinned
 {
-    // The certificate chain is valid for www.good.com but we are connecting to www.bad.com
+    // The certificate chain is valid for www.good.com but we are connecting to www.nonpinned.com
     SecCertificateRef certChainArray[2] = {_leafCertificate, _intermediateCertificate};
     SecCertificateRef trustStoreArray[1] = {_rootCertificate};
     SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
@@ -619,11 +622,211 @@
                                                                       XCTFail(@"kTSKValidationCompletedNotification should not have been posted");
                                                                   }];
     // Call TSKPinningValidator
-    TSKTrustDecision result = [TSKPinningValidator evaluateTrust:trust forHostname:@"www.bad.com"];
+    TSKTrustDecision result = [TSKPinningValidator evaluateTrust:trust forHostname:@"www.nonpinned.com"];
     XCTAssert(result == TSKTrustDecisionDomainNotPinned);
     
     [[NSNotificationCenter defaultCenter] removeObserver:observerId];
     CFRelease(trust);
 }
+
+
+#pragma mark Tests for handleChallenge:completionHandler:
+
+// Ensure handleChallenge:completionHandler: properly calls evaluateTrust:forHostname:
+-(void) testHandleChallengeCompletionHandlerDomainNotPinned
+{
+    // The certificate chain is valid for www.good.com but we are connecting to www.nonpinned.com
+    SecCertificateRef certChainArray[2] = {_leafCertificate, _intermediateCertificate};
+    SecCertificateRef trustStoreArray[1] = {_rootCertificate};
+    SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
+                                                             arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
+                                                      anchorCertificates:(const void **)trustStoreArray
+                                                             arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
+    
+    
+    // Create a configuration
+    NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
+                                     kTSKPinnedDomains :
+                                         @{@"www.good.com" : @{
+                                                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                   kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA Key
+                                                                           @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
+                                                                           ]}}};
+    [TrustKit initializeWithConfiguration:trustKitConfig];
+    
+    __block BOOL wasHandlerCalled = NO;
+    void (^completionHandler)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable) = ^void(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential)
+    {
+        // For a non-pinned domain, we expect the default SSL validation to be called
+        XCTAssert(disposition == NSURLSessionAuthChallengePerformDefaultHandling);
+        XCTAssertNil(credential);
+        wasHandlerCalled = YES;
+    };
+    
+    // Mock a protection space
+    id protectionSpaceMock = [OCMockObject mockForClass:[NSURLProtectionSpace class]];
+    OCMStub([protectionSpaceMock authenticationMethod]).andReturn(NSURLAuthenticationMethodServerTrust);
+    OCMStub([protectionSpaceMock host]).andReturn(@"www.nonpinned.com");
+    OCMStub([protectionSpaceMock serverTrust]).andReturn(trust);
+    
+    // Mock an authentication challenge
+    id challengeMock = [OCMockObject mockForClass:[NSURLAuthenticationChallenge class]];
+    OCMStub([challengeMock protectionSpace]).andReturn(protectionSpaceMock);
+    
+    // Test the helper method
+    BOOL wasChallengeHandled = [TSKPinningValidator handleChallenge:challengeMock completionHandler:completionHandler];
+
+    XCTAssert(wasChallengeHandled == YES);
+    XCTAssert(wasHandlerCalled == YES);
+    
+    CFRelease(trust);
+}
+
+
+-(void) testHandleChallengeCompletionHandlerPinningFailed
+{
+    SecCertificateRef certChainArray[2] = {_leafCertificate, _intermediateCertificate};
+    SecCertificateRef trustStoreArray[1] = {_rootCertificate};
+    SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
+                                                             arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
+                                                      anchorCertificates:(const void **)trustStoreArray
+                                                             arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
+    
+    
+    // Create a configuration
+    NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
+                                     kTSKPinnedDomains :
+                                         @{@"www.good.com" : @{
+                                                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                   kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", //Fake Key
+                                                                           @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=", // Fake key
+                                                                           ]}}};
+    [TrustKit initializeWithConfiguration:trustKitConfig];
+    
+    __block BOOL wasHandlerCalled = NO;
+    void (^completionHandler)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable) = ^void(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential)
+    {
+        // For a pinning failure, we expect the authentication challenge to be cancelled
+        XCTAssert(disposition == NSURLSessionAuthChallengeCancelAuthenticationChallenge);
+        XCTAssertNil(credential);
+        wasHandlerCalled = YES;
+    };
+    
+    // Mock a protection space
+    id protectionSpaceMock = [OCMockObject mockForClass:[NSURLProtectionSpace class]];
+    OCMStub([protectionSpaceMock authenticationMethod]).andReturn(NSURLAuthenticationMethodServerTrust);
+    OCMStub([protectionSpaceMock host]).andReturn(@"www.good.com");
+    OCMStub([protectionSpaceMock serverTrust]).andReturn(trust);
+    
+    // Mock an authentication challenge
+    id challengeMock = [OCMockObject mockForClass:[NSURLAuthenticationChallenge class]];
+    OCMStub([challengeMock protectionSpace]).andReturn(protectionSpaceMock);
+    
+    // Test the helper method
+    BOOL wasChallengeHandled = [TSKPinningValidator handleChallenge:challengeMock completionHandler:completionHandler];
+    
+    XCTAssert(wasChallengeHandled == YES);
+    XCTAssert(wasHandlerCalled == YES);
+    
+    CFRelease(trust);
+}
+
+
+-(void) testHandleChallengeCompletionHandlerPinningSuccessful
+{
+    SecCertificateRef certChainArray[2] = {_leafCertificate, _intermediateCertificate};
+    SecCertificateRef trustStoreArray[1] = {_rootCertificate};
+    SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
+                                                             arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
+                                                      anchorCertificates:(const void **)trustStoreArray
+                                                             arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
+    
+    
+    // Create a configuration
+    NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
+                                     kTSKPinnedDomains :
+                                         @{@"www.good.com" : @{
+                                                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                   kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA Key
+                                                                           @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=", // Fake key
+                                                                           ]}}};
+    [TrustKit initializeWithConfiguration:trustKitConfig];
+    
+    __block BOOL wasHandlerCalled = NO;
+    void (^completionHandler)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable) = ^void(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential)
+    {
+        // For a pinning success, we expect the authentication challenge to use the supplied credential
+        XCTAssert(disposition == NSURLSessionAuthChallengeUseCredential);
+        XCTAssertTrue([credential isEqual:[NSURLCredential credentialForTrust:trust]]);
+        wasHandlerCalled = YES;
+    };
+    
+    // Mock a protection space
+    id protectionSpaceMock = [OCMockObject mockForClass:[NSURLProtectionSpace class]];
+    OCMStub([protectionSpaceMock authenticationMethod]).andReturn(NSURLAuthenticationMethodServerTrust);
+    OCMStub([protectionSpaceMock host]).andReturn(@"www.good.com");
+    OCMStub([protectionSpaceMock serverTrust]).andReturn(trust);
+    
+    // Mock an authentication challenge
+    id challengeMock = [OCMockObject mockForClass:[NSURLAuthenticationChallenge class]];
+    OCMStub([challengeMock protectionSpace]).andReturn(protectionSpaceMock);
+    
+    // Test the helper method
+    BOOL wasChallengeHandled = [TSKPinningValidator handleChallenge:challengeMock completionHandler:completionHandler];
+    
+    XCTAssert(wasChallengeHandled == YES);
+    XCTAssert(wasHandlerCalled == YES);
+    
+    CFRelease(trust);
+}
+
+
+-(void) testHandleChallengeCompletionHandlerNotServerTrustAuthenticationMethod
+{
+    SecCertificateRef certChainArray[2] = {_leafCertificate, _intermediateCertificate};
+    SecCertificateRef trustStoreArray[1] = {_rootCertificate};
+    SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
+                                                             arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
+                                                      anchorCertificates:(const void **)trustStoreArray
+                                                             arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
+    
+    
+    // Create a configuration
+    NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
+                                     kTSKPinnedDomains :
+                                         @{@"www.good.com" : @{
+                                                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                   kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA Key
+                                                                           @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=", // Fake key
+                                                                           ]}}};
+    [TrustKit initializeWithConfiguration:trustKitConfig];
+    
+    __block BOOL wasHandlerCalled = NO;
+    void (^completionHandler)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable) = ^void(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential)
+    {
+        // This should not be called when the challenge is not for server trust
+        wasHandlerCalled = YES;
+    };
+    
+    // Mock a protection space
+    id protectionSpaceMock = [OCMockObject mockForClass:[NSURLProtectionSpace class]];
+    // Not a server trust challenge
+    OCMStub([protectionSpaceMock authenticationMethod]).andReturn(NSURLAuthenticationMethodNTLM);
+    OCMStub([protectionSpaceMock host]).andReturn(@"www.good.com");
+    OCMStub([protectionSpaceMock serverTrust]).andReturn(trust);
+    
+    // Mock an authentication challenge
+    id challengeMock = [OCMockObject mockForClass:[NSURLAuthenticationChallenge class]];
+    OCMStub([challengeMock protectionSpace]).andReturn(protectionSpaceMock);
+    
+    // Test the helper method
+    BOOL wasChallengeHandled = [TSKPinningValidator handleChallenge:challengeMock completionHandler:completionHandler];
+    
+    XCTAssert(wasChallengeHandled == NO);
+    XCTAssert(wasHandlerCalled == NO);
+    
+    CFRelease(trust);
+}
+
 
 @end
