@@ -26,9 +26,9 @@
 static const size_t kMaxHostnameLen = 255;
 
 /* strdup() is not part of ANSI C89 so we define our own. */
-static char* StrDup(const char* s) {
+static char *StrDup(const char *s) {
   const size_t len = strlen(s);
-  char* s2 = malloc(len + 1);
+  char *s2 = malloc(len + 1);
   if (s2 == NULL) {
     return NULL;
   }
@@ -38,19 +38,20 @@ static char* StrDup(const char* s) {
 }
 
 /* strnlen() is not part of ANSI C89 so we define our own. */
-static size_t StrnLen(const char* s, size_t max) {
-  const char* end = s + max;
-  const char* i;
+static size_t StrnLen(const char *s, size_t max) {
+  const char *end = s + max;
+  const char *i;
   for (i = s; i < end; ++i) {
-    if (*i == 0) break;
+    if (*i == 0)
+      break;
   }
-  return i - s;
+  return (size_t)(i - s);
 }
 
-static int IsStringASCII(const char* s) {
-  const char* it = s;
+static int IsStringASCII(const char *s) {
+  const char *it = s;
   for (; *it != 0; ++it) {
-    unsigned const char unsigned_char = *it;
+    unsigned const char unsigned_char = (unsigned const char)*it;
     if (unsigned_char > 0x7f) {
       return 0;
     }
@@ -58,7 +59,7 @@ static int IsStringASCII(const char* s) {
   return 1;
 }
 
-static int IsValidHostname(const char* hostname) {
+static int IsValidHostname(const char *hostname) {
   /*
    * http://www.ietf.org/rfc/rfc1035.txt (DNS) and
    * http://tools.ietf.org/html/rfc1123 (Internet host requirements)
@@ -94,8 +95,8 @@ static int IsValidHostname(const char* hostname) {
  * is an exception component, this will seek past the
  * rule_part. Otherwise this will simply return the component itself.
  */
-static const char* GetDomainRegistryStr(const char* rule_part,
-                                        const char* component) {
+static const char *GetDomainRegistryStr(const char *rule_part,
+                                        const char *component) {
   if (IsExceptionComponent(rule_part)) {
     return component + strlen(component) + 1;
   } else {
@@ -110,29 +111,28 @@ static const char* GetDomainRegistryStr(const char* rule_part,
  * character, we will return a pointer to "com", then "bar", then
  * "foo".
  */
-static const char* GetNextHostnamePartImpl(const char* start,
-                                           const char* end,
-                                           char sep,
-                                           void** ctx) {
-  const char* last;
-  const char* i;
+static const char *GetNextHostnamePartImpl(const char *start, const char *end,
+                                           char sep, void **ctx) {
+  const char *last;
+  const char *i;
 
   if (*ctx == NULL) {
-    *ctx = (void*) end;
+    *ctx = (void *)end;
 
     /*
      * Special case: a single trailing dot indicates a fully-qualified
      * domain name. Skip over it.
      */
     if (end > start && *(end - 1) == sep) {
-      *ctx = (void*) (end - 1);
+      *ctx = (void *)(end - 1);
     }
   }
   last = *ctx;
-  if (start > last) return NULL;
+  if (start > last)
+    return NULL;
   for (i = last - 1; i >= start; --i) {
     if (*i == sep) {
-      *ctx = (void*) i;
+      *ctx = (void *)i;
       return i + 1;
     }
   }
@@ -143,17 +143,15 @@ static const char* GetNextHostnamePartImpl(const char* start,
      * there is a non-NULL first component, then visit the first
      * component.
      */
-    *ctx = (void*) start;
+    *ctx = (void *)start;
     return start;
   }
   return NULL;
 }
 
-static const char* GetNextHostnamePart(const char* start,
-                                       const char* end,
-                                       char sep,
-                                       void** ctx) {
-  const char* hostname_part = GetNextHostnamePartImpl(start, end, sep, ctx);
+static const char *GetNextHostnamePart(const char *start, const char *end,
+                                       char sep, void **ctx) {
+  const char *hostname_part = GetNextHostnamePartImpl(start, end, sep, ctx);
   if (IsInvalidComponent(hostname_part)) {
     return NULL;
   }
@@ -164,21 +162,21 @@ static const char* GetNextHostnamePart(const char* start,
  * Iterate over all hostname-parts between value and value_end, where
  * the hostname-parts are separated by character sep.
  */
-static const char* GetRegistryForHostname(const char* value,
-                                          const char* value_end,
+static const char *GetRegistryForHostname(const char *value,
+                                          const char *value_end,
                                           const char sep) {
   void *ctx = NULL;
-  const struct TrieNode* current = NULL;
-  const char* component = NULL;
-  const char* last_valid = NULL;
+  const struct TrieNode *current = NULL;
+  const char *component = NULL;
+  const char *last_valid = NULL;
 
   /*
    * Iterate over the hostname components one at a time, e.g. if value
    * is foo.com, we will first visit component com, then component foo.
    */
-  while ((component =
-          GetNextHostnamePart(value, value_end, sep, &ctx)) != NULL) {
-    const char* leaf_node;
+  while ((component = GetNextHostnamePart(value, value_end, sep, &ctx)) !=
+         NULL) {
+    const char *leaf_node;
 
     current = FindRegistryNode(component, current);
     if (current == NULL) {
@@ -210,12 +208,10 @@ static const char* GetRegistryForHostname(const char* value,
   return last_valid;
 }
 
-static size_t GetRegistryLengthImpl(
-    const char* value,
-    const char* value_end,
-    const char sep,
-    int allow_unknown_registries) {
-  const char* registry;
+static size_t GetRegistryLengthImpl(const char *value, const char *value_end,
+                                    const char sep,
+                                    int allow_unknown_registries) {
+  const char *registry;
   size_t match_len;
 
   while (*value == sep && value < value_end) {
@@ -230,8 +226,8 @@ static size_t GetRegistryLengthImpl(
      * valid registry, and return its length.
      */
     if (allow_unknown_registries != 0) {
-      void* ctx = NULL;
-      const char* root_hostname_part =
+      void *ctx = NULL;
+      const char *root_hostname_part =
           GetNextHostnamePart(value, value_end, sep, &ctx);
       /*
        * See if the root hostname-part is in the table. If it's not in
@@ -257,9 +253,9 @@ static size_t GetRegistryLengthImpl(
   return match_len;
 }
 
-size_t GetRegistryLength(const char* hostname) {
-  const char* buf_end;
-  char* buf;
+size_t GetRegistryLength(const char *hostname) {
+  const char *buf_end;
+  char *buf;
   size_t registry_length;
 
   if (hostname == NULL) {
@@ -290,9 +286,9 @@ size_t GetRegistryLength(const char* hostname) {
   return registry_length;
 }
 
-size_t GetRegistryLengthAllowUnknownRegistries(const char* hostname) {
-  const char* buf_end;
-  char* buf;
+size_t GetRegistryLengthAllowUnknownRegistries(const char *hostname) {
+  const char *buf_end;
+  char *buf;
   size_t registry_length;
 
   if (hostname == NULL) {
