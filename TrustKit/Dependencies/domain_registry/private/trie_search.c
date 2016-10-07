@@ -21,6 +21,13 @@
 #include <stdlib.h>
 #include <string.h>
 
+const struct TrieNode *FindNodeInRange(const char *value,
+                                       const struct TrieNode *start,
+                                       const struct TrieNode *end);
+
+const char *FindLeafNodeInRange(const char *value, const REGISTRY_U16 *start,
+                                const REGISTRY_U16 *end);
+
 /*
  * Helper macro that chooses the node half-way between the start and
  * end nodes. Used for binary search.
@@ -31,10 +38,10 @@
  * Global data structures used to perform the search. Should be
  * populated once at startup by a call to SetRegistryTables.
  */
-static const char* g_string_table = NULL;
-static const struct TrieNode* g_node_table = NULL;
+static const char *g_string_table = NULL;
+static const struct TrieNode *g_node_table = NULL;
 static size_t g_num_root_children = 0;
-static const REGISTRY_U16* g_leaf_node_table = NULL;
+static const REGISTRY_U16 *g_leaf_node_table = NULL;
 static size_t g_leaf_node_table_offset = 0;
 
 /*
@@ -42,14 +49,14 @@ static size_t g_leaf_node_table_offset = 0;
  * if component is "foo", will return "!foo". The caller is
  * responsible for freeing the returned memory.
  */
-static char* StrDupExceptionComponent(const char* component) {
+static char *StrDupExceptionComponent(const char *component) {
   /*
    * TODO(bmcquade): could use thread-local storage of sufficient size
    * to avoid this allocation. This should be invoked infrequently
    * enough that it's probably fine for us to perform the allocation.
    */
   const size_t component_len = strlen(component);
-  char* exception_component = malloc(component_len + 2);
+  char *exception_component = malloc(component_len + 2);
   if (exception_component == NULL) {
     return NULL;
   }
@@ -64,29 +71,32 @@ static char* StrDupExceptionComponent(const char* component) {
  * and end, inclusive. Would normally have static linkage but is made
  * public for testing.
  */
-const struct TrieNode* FindNodeInRange(
-    const char* value,
-    const struct TrieNode* start,
-    const struct TrieNode* end) {
+const struct TrieNode *FindNodeInRange(const char *value,
+                                       const struct TrieNode *start,
+                                       const struct TrieNode *end) {
   DCHECK(value != NULL);
   DCHECK(start != NULL);
   DCHECK(end != NULL);
-  if (start > end) return NULL;
+  if (start > end)
+    return NULL;
   while (1) {
-    const struct TrieNode* candidate;
-    const char* candidate_str;
+    const struct TrieNode *candidate;
+    const char *candidate_str;
     int result;
 
     DCHECK(start <= end);
     candidate = MIDDLE(start, end);
     candidate_str = g_string_table + candidate->string_table_offset;
     result = HostnamePartCmp(value, candidate_str);
-    if (result == 0) return candidate;
+    if (result == 0)
+      return candidate;
     if (result > 0) {
-      if (end == candidate) return NULL;
+      if (end == candidate)
+        return NULL;
       start = candidate + 1;
     } else {
-      if (start == candidate) return NULL;
+      if (start == candidate)
+        return NULL;
       end = candidate - 1;
     }
   }
@@ -97,28 +107,30 @@ const struct TrieNode* FindNodeInRange(
  * and end, inclusive. Would normally have static linkage but is made
  * public for testing.
  */
-const char* FindLeafNodeInRange(
-    const char* value,
-    const REGISTRY_U16* start,
-    const REGISTRY_U16* end) {
+const char *FindLeafNodeInRange(const char *value, const REGISTRY_U16 *start,
+                                const REGISTRY_U16 *end) {
   DCHECK(value != NULL);
   DCHECK(start != NULL);
   DCHECK(end != NULL);
-  if (start > end) return NULL;
+  if (start > end)
+    return NULL;
   while (1) {
-    const REGISTRY_U16* candidate;
-    const char* candidate_str;
+    const REGISTRY_U16 *candidate;
+    const char *candidate_str;
     int result;
     DCHECK(start <= end);
     candidate = MIDDLE(start, end);
     candidate_str = g_string_table + *candidate;
     result = HostnamePartCmp(value, candidate_str);
-    if (result == 0) return candidate_str;
+    if (result == 0)
+      return candidate_str;
     if (result > 0) {
-      if (end == candidate) return NULL;
+      if (end == candidate)
+        return NULL;
       start = candidate + 1;
     } else {
-      if (start == candidate) return NULL;
+      if (start == candidate)
+        return NULL;
       end = candidate - 1;
     }
   }
@@ -129,12 +141,12 @@ const char* FindLeafNodeInRange(
  * identifier and the given parent node. If parent is null, searches
  * starting from the root node.
  */
-const struct TrieNode* FindRegistryNode(const char* component,
-                                        const struct TrieNode* parent) {
-  const struct TrieNode* start;
-  const struct TrieNode* end;
-  const struct TrieNode* current;
-  const struct TrieNode* exception;
+const struct TrieNode *FindRegistryNode(const char *component,
+                                        const struct TrieNode *parent) {
+  const struct TrieNode *start;
+  const struct TrieNode *end;
+  const struct TrieNode *current;
+  const struct TrieNode *exception;
 
   DCHECK(g_string_table != NULL);
   DCHECK(g_node_table != NULL);
@@ -160,7 +172,7 @@ const struct TrieNode* FindRegistryNode(const char* component,
 
     /* We'll be searching the specified parent node's children. */
     start = g_node_table + parent->first_child_offset;
-    end = start + ((int) parent->num_children - 1);
+    end = start + ((int)parent->num_children - 1);
   }
   current = FindNodeInRange(component, start, end);
   if (current != NULL) {
@@ -187,13 +199,11 @@ const struct TrieNode* FindRegistryNode(const char* component,
      * rule. An exception rule takes priority over any other matching
      * rule.".
      */
-    char* exception_component = StrDupExceptionComponent(component);
+    char *exception_component = StrDupExceptionComponent(component);
     if (exception_component == NULL) {
       return NULL;
     }
-    exception = FindNodeInRange(exception_component,
-                                start,
-                                end);
+    exception = FindNodeInRange(exception_component, start, end);
     free(exception_component);
     if (exception != NULL) {
       current = exception;
@@ -202,13 +212,13 @@ const struct TrieNode* FindRegistryNode(const char* component,
   return current;
 }
 
-const char* FindRegistryLeafNode(const char* component,
-                                 const struct TrieNode* parent) {
+const char *FindRegistryLeafNode(const char *component,
+                                 const struct TrieNode *parent) {
   size_t offset;
-  const REGISTRY_U16* leaf_start;
-  const REGISTRY_U16* leaf_end;
-  const char* match;
-  const char* exception;
+  const REGISTRY_U16 *leaf_start;
+  const REGISTRY_U16 *leaf_end;
+  const char *match;
+  const char *exception;
 
   DCHECK(g_string_table != NULL);
   DCHECK(g_node_table != NULL);
@@ -229,10 +239,8 @@ const char* FindRegistryLeafNode(const char* component,
 
   offset = parent->first_child_offset - g_leaf_node_table_offset;
   leaf_start = g_leaf_node_table + offset;
-  leaf_end = leaf_start + ((int) parent->num_children - 1);
-  match = FindLeafNodeInRange(component,
-                              leaf_start,
-                              leaf_end);
+  leaf_end = leaf_start + ((int)parent->num_children - 1);
+  match = FindLeafNodeInRange(component, leaf_start, leaf_end);
   if (match != NULL) {
     return match;
   }
@@ -256,13 +264,11 @@ const char* FindRegistryLeafNode(const char* component,
      * rule. An exception rule takes priority over any other matching
      * rule.".
      */
-    char* exception_component = StrDupExceptionComponent(component);
+    char *exception_component = StrDupExceptionComponent(component);
     if (exception_component == NULL) {
       return NULL;
     }
-    exception = FindLeafNodeInRange(exception_component,
-                                    leaf_start,
-                                    leaf_end);
+    exception = FindLeafNodeInRange(exception_component, leaf_start, leaf_end);
     free(exception_component);
     if (exception != NULL) {
       match = exception;
@@ -271,20 +277,21 @@ const char* FindRegistryLeafNode(const char* component,
   return match;
 }
 
-const char* GetHostnamePart(size_t offset) {
+const char *GetHostnamePart(size_t offset) {
   DCHECK(g_string_table != NULL);
   return g_string_table + offset;
 }
 
-int HasLeafChildren(const struct TrieNode* node) {
-  if (node->first_child_offset < g_leaf_node_table_offset) return 0;
+int HasLeafChildren(const struct TrieNode *node) {
+  if (node->first_child_offset < g_leaf_node_table_offset)
+    return 0;
   return 1;
 }
 
-void SetRegistryTables(const char* string_table,
-                       const struct TrieNode* node_table,
+void SetRegistryTables(const char *string_table,
+                       const struct TrieNode *node_table,
                        size_t num_root_children,
-                       const REGISTRY_U16* leaf_node_table,
+                       const REGISTRY_U16 *leaf_node_table,
                        size_t leaf_node_table_offset) {
   g_string_table = string_table;
   g_node_table = node_table;
