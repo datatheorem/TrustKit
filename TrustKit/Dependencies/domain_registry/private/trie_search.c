@@ -64,7 +64,7 @@ static char* StrDupExceptionComponent(const char* component) {
  * and end, inclusive. Would normally have static linkage but is made
  * public for testing.
  */
-const struct TrieNode* FindNodeInRange(
+static const struct TrieNode* FindNodeInRange(
     const char* value,
     const struct TrieNode* start,
     const struct TrieNode* end) {
@@ -97,7 +97,7 @@ const struct TrieNode* FindNodeInRange(
  * and end, inclusive. Would normally have static linkage but is made
  * public for testing.
  */
-const char* FindLeafNodeInRange(
+static const char* FindLeafNodeInRange(
     const char* value,
     const REGISTRY_U16* start,
     const REGISTRY_U16* end) {

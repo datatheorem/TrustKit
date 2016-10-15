@@ -20,7 +20,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void DefaultAssertHandler(const char* file, int line, const char* cond_str) {
+static void DefaultAssertHandler(const char* file, int line, const char* cond_str) {
     fprintf(stderr, "%s:%d. CHECK failed: %s\n", file, line, cond_str);
     abort();
 }
