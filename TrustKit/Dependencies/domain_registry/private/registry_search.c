@@ -44,13 +44,13 @@ static size_t StrnLen(const char* s, size_t max) {
   for (i = s; i < end; ++i) {
     if (*i == 0) break;
   }
-  return i - s;
+  return (size_t) (i - s);
 }
 
 static int IsStringASCII(const char* s) {
   const char* it = s;
   for (; *it != 0; ++it) {
-    unsigned const char unsigned_char = *it;
+    unsigned const char unsigned_char = (unsigned char)*it;
     if (unsigned_char > 0x7f) {
       return 0;
     }
@@ -253,7 +253,7 @@ static size_t GetRegistryLengthImpl(
     DCHECK(registry < value_end);
     return 0;
   }
-  match_len = value_end - registry;
+  match_len = (size_t) (value_end - registry);
   return match_len;
 }
 
