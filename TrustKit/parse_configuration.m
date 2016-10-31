@@ -200,10 +200,11 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
             [serverSslPinsSet addObject:pinnedKeyHash];
         }
         
-        if ([serverSslPinsSet count] < 2)
+        NSUInteger requiredNumberOfPins = [domainFinalConfiguration[kTSKEnforcePinning] boolValue] ? 2 : 1;
+        if([serverSslPinsSet count] < requiredNumberOfPins)
         {
             [NSException raise:@"TrustKit configuration invalid"
-                        format:@"TrustKit was initialized with less than two pins (ie. no backup pins) for domain %@. This might brick your App; please review the Getting Started guide in ./docs/getting-started.md", domainName];
+                        format:@"TrustKit was initialized with less than %i pins (ie. no backup pins) for domain %@. This might brick your App; please review the Getting Started guide in ./docs/getting-started.md", requiredNumberOfPins, domainName];
         }
         
         // Save the hashes for this server as an NSSet for quick lookup
