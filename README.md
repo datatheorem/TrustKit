@@ -43,8 +43,19 @@ Then run:
 $ pod install
 ```
 
-Then, the deploying SSL pinning in the App requires initializing **TrustKit** 
-with a pinning policy (domains, Subject Public Key Info hashes, and additional settings).
+Alternatively, Carthage can be used by adding the following line to your Cartfile:
+
+```
+github "datatheorem/TrustKit"
+```
+
+Then run:
+
+```sh
+carthage build --platform iOS
+```
+
+Then, deploying SSL pinning in the App requires initializing **TrustKit** with a pinning policy (domains, Subject Public Key Info hashes, and additional settings).
 
 The policy can be configured within the App's `Info.plist`:
 
