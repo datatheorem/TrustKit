@@ -29,22 +29,6 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
     
     // Retrieve global settings
     
-    // Should we auto-swizzle network delegates
-    NSNumber *shouldSwizzleNetworkDelegates = TrustKitArguments[kTSKSwizzleNetworkDelegates];
-    if (shouldSwizzleNetworkDelegates == nil)
-    {
-        // This is a required argument
-        [NSException raise:@"TrustKit configuration invalid"
-                    format:@"TrustKit was initialized without specifying the kTSKSwizzleNetworkDelegates setting. Please add this boolean entry to the root of your TrustKit configuration in order to specify if auto-swizzling of the App's connection delegates should be enabled or not; see the documentation for more information."];
-        // Default setting is YES
-        finalConfiguration[kTSKSwizzleNetworkDelegates] = @(YES);
-    }
-    else
-    {
-        finalConfiguration[kTSKSwizzleNetworkDelegates] = shouldSwizzleNetworkDelegates;
-    }
-    
-    
 #if !TARGET_OS_IPHONE
     // OS X only: extract the optional ignorePinningForUserDefinedTrustAnchors setting
     NSNumber *shouldIgnorePinningForUserDefinedTrustAnchors = TrustKitArguments[kTSKIgnorePinningForUserDefinedTrustAnchors];
@@ -117,20 +101,7 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
             // Default setting is YES
             domainFinalConfiguration[kTSKEnforcePinning] = @(YES);
         }
-        
-        
-        // Extract the optional disableDefaultReportUri setting
-        NSNumber *shouldDisableDefaultReportUri = domainPinningPolicy[kTSKDisableDefaultReportUri];
-        if (shouldDisableDefaultReportUri)
-        {
-            domainFinalConfiguration[kTSKDisableDefaultReportUri] = shouldDisableDefaultReportUri;
-        }
-        else
-        {
-            // Default setting is NO
-            domainFinalConfiguration[kTSKDisableDefaultReportUri] = @(NO);
-        }
-        
+
         
         // Extract the list of public key algorithms to support and convert them from string to the TSKPublicKeyAlgorithm type
         NSArray<NSString *> *publicKeyAlgsStr = domainPinningPolicy[kTSKPublicKeyAlgorithms];
@@ -162,27 +133,7 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
         }
         domainFinalConfiguration[kTSKPublicKeyAlgorithms] = [NSArray arrayWithArray:publicKeyAlgs];
         
-        
-        // Extract and convert the report URIs if defined
-        NSArray<NSString *> *reportUriList = domainPinningPolicy[kTSKReportUris];
-        if (reportUriList != nil)
-        {
-            NSMutableArray<NSURL *> *reportUriListFinal = [NSMutableArray array];
-            for (NSString *reportUriStr in reportUriList)
-            {
-                NSURL *reportUri = [NSURL URLWithString:reportUriStr];
-                if (reportUri == nil)
-                {
-                    [NSException raise:@"TrustKit configuration invalid"
-                                format:@"TrustKit was initialized with an invalid value for %@ for domain %@", kTSKReportUris, domainName];
-                }
-                [reportUriListFinal addObject:reportUri];
-            }
-            
-            domainFinalConfiguration[kTSKReportUris] = [NSArray arrayWithArray:reportUriListFinal];
-        }
-        
-        
+
         // Extract and convert the subject public key info hashes
         NSArray<NSString *> *serverSslPinsBase64 = domainPinningPolicy[kTSKPublicKeyHashes];
         NSMutableSet<NSData *> *serverSslPinsSet = [NSMutableSet set];
@@ -204,7 +155,7 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
         if([serverSslPinsSet count] < requiredNumberOfPins)
         {
             [NSException raise:@"TrustKit configuration invalid"
-                        format:@"TrustKit was initialized with less than %i pins (ie. no backup pins) for domain %@. This might brick your App; please review the Getting Started guide in ./docs/getting-started.md", requiredNumberOfPins, domainName];
+                        format:@"TrustKit was initialized with less than %lu pins (ie. no backup pins) for domain %@. This might brick your App; please review the Getting Started guide in ./docs/getting-started.md", (unsigned long)requiredNumberOfPins, domainName];
         }
         
         // Save the hashes for this server as an NSSet for quick lookup
