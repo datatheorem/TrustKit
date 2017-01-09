@@ -1,7 +1,8 @@
 #!/usr/bin/env python2.7
 """Helper script to generate a TrustKit or HPKP pin from a PEM/DER certificate file.
 """
-from subprocess import check_output
+from subprocess import Popen, PIPE
+from sys import stdin
 import os.path
 import argparse
 import hashlib
@@ -17,25 +18,30 @@ class SupportedKeyAlgorithmsEnum(object):
 if __name__ == '__main__':
     # Parse the command line
     parser = argparse.ArgumentParser(description='Generate HPKP / TrustKit SSL Pins.')
-    parser.add_argument('certificate')
+    parser.add_argument('certificate', metavar='FILE', nargs='?', help='certificate file to read, if empty, stdin is used')
     parser.add_argument('--type', dest='type', action='store', default='PEM',
                         help='Certificate file type; "PEM" (default) or "DER".')
     args = parser.parse_args()
 
-    if not os.path.isfile(args.certificate):
+    if not args.certificate:
+        certificate = stdin.read()
+    elif os.path.isfile(args.certificate):
+        with open(args.certificate, 'r') as certFile:
+            certificate = certFile.read()
+    else:
         raise ValueError('Could not open certificate file {}'.format(args.certificate))
 
     if args.type not in ['DER', 'PEM']:
         raise ValueError('Invalid certificate type {}; expected DER or PEM'.format(args.type))
 
-
     # Parse the certificate and print its information
-    certificate_txt = check_output('openssl x509 -inform {} -in {} -text -noout'.format(args.type,
-                                                                                        args.certificate), shell=True)
-    print '\nCERTIFICATE INFO\n----------------'
-    print check_output('openssl x509 -subject -issuer -fingerprint -sha1 -noout -inform {} -in {}'.format(
-        args.type, args.certificate), shell=True)
+    p1 = Popen('openssl x509 -inform {} -text -noout'.format(args.type), shell=True, stdin=PIPE, stdout=PIPE)
+    certificate_txt = p1.communicate(input=certificate)[0]
 
+    print '\nCERTIFICATE INFO\n----------------'
+    p1 = Popen('openssl x509 -subject -issuer -fingerprint -sha1 -noout -inform {}'.format(
+        args.type), shell=True, stdin=PIPE, stdout=PIPE)
+    print p1.communicate(input=certificate)[0]
 
     # Extract the certificate key's algorithm
     # Tested on the output of OpenSSL 0.9.8zh and OpenSSL 1.0.2i
@@ -68,11 +74,11 @@ if __name__ == '__main__':
     else:
         raise ValueError('Unexpected key algorithm')
 
-    spki = check_output('openssl x509  -pubkey -noout -inform {} -in {} '
-                        '| openssl {} -outform DER -pubin -in /dev/stdin 2>/dev/null'.format(args.type,
-                                                                                             args.certificate,
-                                                                                             openssl_alg),
-                        shell=True)
+    p1 = Popen('openssl x509  -pubkey -noout -inform {} '
+               '| openssl {} -outform DER -pubin -in /dev/stdin 2>/dev/null'.format(args.type,
+                                                                                       openssl_alg),
+            shell=True, stdin=PIPE, stdout=PIPE)
+    spki = p1.communicate(input=certificate)[0]
 
     spki_hash = hashlib.sha256(spki).digest()
     hpkp_pin = base64.b64encode(spki_hash)
