@@ -10,7 +10,7 @@
  */
 
 #import <Foundation/Foundation.h>
-#import "Pinning/TSKPinningValidator.h"
+#import <TrustKit/TSKPinningValidator.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
