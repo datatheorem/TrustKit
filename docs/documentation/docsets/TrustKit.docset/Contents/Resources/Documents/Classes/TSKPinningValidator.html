@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>TSKPinningValidator Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/objc/Class/TSKPinningValidator" class="dashAnchor"></a>
+    <a title="TSKPinningValidator Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">TrustKit Docs</a></p>
+        <p class="header-right"><a href="https://github.com/datatheorem/TrustKit"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">TrustKit Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        TSKPinningValidator Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/TSKPinningValidator.html">TSKPinningValidator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/TrustKit.html">TrustKit</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Constants.html">Constants</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@TrustKitVersion">TrustKitVersion</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kTSKAlgorithmEcDsaSecp256r1">kTSKAlgorithmEcDsaSecp256r1</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kTSKAlgorithmRsa2048">kTSKAlgorithmRsa2048</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kTSKAlgorithmRsa4096">kTSKAlgorithmRsa4096</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kTSKDisableDefaultReportUri">kTSKDisableDefaultReportUri</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kTSKEnforcePinning">kTSKEnforcePinning</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kTSKIgnorePinningForUserDefinedTrustAnchors">kTSKIgnorePinningForUserDefinedTrustAnchors</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kTSKIncludeSubdomains">kTSKIncludeSubdomains</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kTSKPinnedDomains">kTSKPinnedDomains</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kTSKPublicKeyAlgorithms">kTSKPublicKeyAlgorithms</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kTSKPublicKeyHashes">kTSKPublicKeyHashes</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kTSKReportUris">kTSKReportUris</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kTSKSwizzleNetworkDelegates">kTSKSwizzleNetworkDelegates</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kTSKValidationCertificateChainNotificationKey">kTSKValidationCertificateChainNotificationKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kTSKValidationCompletedNotification">kTSKValidationCompletedNotification</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kTSKValidationDecisionNotificationKey">kTSKValidationDecisionNotificationKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kTSKValidationDurationNotificationKey">kTSKValidationDurationNotificationKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kTSKValidationNotedHostnameNotificationKey">kTSKValidationNotedHostnameNotificationKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kTSKValidationResultNotificationKey">kTSKValidationResultNotificationKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kTSKValidationServerHostnameNotificationKey">kTSKValidationServerHostnameNotificationKey</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/TSKTrustDecision.html">TSKTrustDecision</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Type Definitions.html">Type Definitions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Type Definitions.html#/c:TrustKit.h@T@TSKDomainConfigurationKey">TSKDomainConfigurationKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Type Definitions.html#/c:TrustKit.h@T@TSKGlobalConfigurationKey">TSKGlobalConfigurationKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Type Definitions.html#/c:TrustKit.h@T@TSKNotificationUserInfoKey">TSKNotificationUserInfoKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Type Definitions.html#/c:TrustKit.h@T@TSKSupportedAlgorithm">TSKSupportedAlgorithm</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>TSKPinningValidator</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="k">@interface</span> <span class="nc">TSKPinningValidator</span> <span class="p">:</span> <span class="nc">NSObject</span></code></pre>
+
+                </div>
+              </div>
+            <p><code>TSKPinningValidator</code> is a class for manually verifying a server&rsquo;s identity against the global SSL pinning policy.</p>
+
+<p>In specific scenarios, TrustKit cannot intercept outgoing SSL connections and automatically validate the server&rsquo;s identity against the pinning policy:</p>
+
+<ul>
+<li>All connections within an App that disables TrustKit&rsquo;s network delegate swizzling by setting the <code><a href="../Constants.html#/c:@kTSKSwizzleNetworkDelegates">kTSKSwizzleNetworkDelegates</a></code> configuration key to <code>NO</code>.</li>
+<li>Connections that do not rely on the <code>NSURLConnection</code> or <code>NSURLSession</code> APIs:
+
+<ul>
+<li><code>WKWebView</code> connections.</li>
+<li>Connections leveraging low-level network APIs (such as <code>NSStream</code>).</li>
+<li>Connections initiated using a third-party SSL library such as OpenSSL.</li>
+</ul></li>
+</ul>
+
+<p>For these connections, pin validation must be manually triggered using one of the two available methods:</p>
+
+<ul>
+<li><code>evaluateTrust:forHostname:</code> which evaluates the server&rsquo;s certificate chain against the global SSL pinning policy.</li>
+<li><code>handleChallenge:completionHandler:</code> a helper method to be used for implementing pinning validation in challenge handler methods within <code>NSURLSession</code> and <code>WKWebView</code> delegates.</li>
+</ul>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Manual%20SSL%20Pinning%20Validation"></a>
+                <a name="//apple_ref/objc/Section/Manual SSL Pinning Validation" class="dashAnchor"></a>
+                <a href="#/Manual%20SSL%20Pinning%20Validation">
+                  <h3 class="section-name">Manual SSL Pinning Validation</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)TSKPinningValidator(cm)evaluateTrust:forHostname:"></a>
+                    <a name="//apple_ref/objc/Method/+evaluateTrust:forHostname:" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)TSKPinningValidator(cm)evaluateTrust:forHostname:">+evaluateTrust:forHostname:</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Evaluate the supplied server trust against the global SSL pinning policy previously configured. If the validation fails, a pin failure report will be sent.</p>
+
+<p>When using the <code>NSURLSession</code> or <code>WKWebView</code> network APIs, the <code>handleChallenge:completionHandler:</code> method should be called instead, as it is simpler to use.</p>
+
+<p>When using low-level network APIs (such as <code>NSStream</code>), instructions on how to retrieve the connection&rsquo;s <code>serverTrust</code> are available at <a href="https://developer.apple.com/library/mac/documentation/NetworkingInternet/Conceptual/NetworkingTopics/Articles/OverridingSSLChainValidationCorrectly.html">https://developer.apple.com/library/mac/documentation/NetworkingInternet/Conceptual/NetworkingTopics/Articles/OverridingSSLChainValidationCorrectly.html</a> .</p>
+
+<div class="aside aside-warning">
+    <p class="aside-title">Warning</p>
+    <p>If no SSL pinning policy was configured for the supplied <em>serverHostname</em>, this method has no effect and will return <code>TSKTrustDecisionDomainNotPinned</code> without validating the supplied <em>serverTrust</em> at all. This means that the server&rsquo;s <em>serverTrust</em> object <strong>must</strong> be verified against the device&rsquo;s trust store using <code>SecTrustEvaluate()</code>. Failing to do so will <strong>disable SSL certificate validation</strong>.</p>
+
+</div>
+
+<p>@exception NSException Thrown when TrustKit has not been initialized with a pinning policy.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight"><code><span class="k">+</span> <span class="p">(</span><span class="n"><a href="../Enums/TSKTrustDecision.html">TSKTrustDecision</a></span><span class="p">)</span><span class="nf">evaluateTrust</span><span class="p">:(</span><span class="n">SecTrustRef</span> <span class="n">_Nonnull</span><span class="p">)</span><span class="nv">serverTrust</span>
+                      <span class="nf">forHostname</span><span class="p">:(</span><span class="n">NSString</span> <span class="o">*</span><span class="n">_Nonnull</span><span class="p">)</span><span class="nv">serverHostname</span><span class="p">;</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kd">func</span> <span class="nf">evaluateTrust</span><span class="p">(</span><span class="n">_</span> <span class="nv">serverTrust</span><span class="p">:</span> <span class="kt">SecTrust</span><span class="p">,</span> <span class="n">forHostname</span> <span class="nv">serverHostname</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Enums/TSKTrustDecision.html">TSKTrustDecision</a></span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>serverTrust</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The trust object representing the server&rsquo;s certificate chain. The trust&rsquo;s evaluation policy is always overridden using <code>SecTrustSetPolicies()</code> to ensure all the proper SSL checks (expiration, hostname validation, etc.) are enabled.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>serverHostname</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The hostname of the server whose identity is being validated.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>A <code><a href="../Enums/TSKTrustDecision.html">TSKTrustDecision</a></code> which describes whether the SSL connection should be allowed or blocked, based on the global pinning policy.</p>
+
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.0/TrustKit/Pinning/TSKPinningValidator.h#L83">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)TSKPinningValidator(cm)handleChallenge:completionHandler:"></a>
+                    <a name="//apple_ref/objc/Method/+handleChallenge:completionHandler:" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)TSKPinningValidator(cm)handleChallenge:completionHandler:">+handleChallenge:completionHandler:</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Helper method for handling authentication challenges received within a <code>NSURLSessionDelegate</code>, <code>NSURLSessionTaskDelegate</code> or <code>WKNavigationDelegate</code>.</p>
+
+<p>This method will evaluate the server trust within the authentication challenge against the global SSL pinning policy previously configured, and then call the <code>completionHandler</code> with the corresponding <code>disposition</code> and <code>credential</code>. For example, this method can be leveraged in a <code>WKNavigationDelegate</code> challenge handler method:</p>
+
+<pre class="highlight plaintext"><code>- (void)webView:(WKWebView *)webView
+didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
+completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition,
+NSURLCredential *credential))completionHandler
+{
+    if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust])
+    {
+        [TSKPinningValidator handleChallenge:challenge completionHandler:completionHandler];
+    }
+}
+</code></pre>
+
+<p>@exception NSException Thrown when TrustKit has not been initialized with a pinning policy.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight"><code><span class="k">+</span> <span class="p">(</span><span class="n">BOOL</span><span class="p">)</span><span class="nf">handleChallenge</span><span class="p">:(</span><span class="n">NSURLAuthenticationChallenge</span> <span class="o">*</span><span class="n">_Nonnull</span><span class="p">)</span><span class="nv">challenge</span>
+      <span class="nf">completionHandler</span><span class="p">:</span>
+          <span class="p">(</span><span class="kt">void</span> <span class="p">(</span><span class="o">^</span><span class="n">_Nonnull</span><span class="p">)(</span><span class="n">NSURLSessionAuthChallengeDisposition</span><span class="p">,</span>
+                            <span class="n">NSURLCredential</span> <span class="o">*</span><span class="n">_Nullable</span><span class="p">))</span><span class="n">completionHandler</span><span class="p">;</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kd">func</span> <span class="nf">handle</span><span class="p">(</span><span class="n">_</span> <span class="nv">challenge</span><span class="p">:</span> <span class="kt">URLAuthenticationChallenge</span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">URLSession</span><span class="o">.</span><span class="kt">AuthChallengeDisposition</span><span class="p">,</span> <span class="kt">URLCredential</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>challenge</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The authentication challenge, supplied by the URL loading system to the delegate&rsquo;s challenge handler method.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completionHandler</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>A block to invoke to respond to the challenge, supplied by the URL loading system to the delegate&rsquo;s challenge handler method.</p>
+
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p><code>YES</code> if the challenge was handled and the <code>completionHandler</code> was successfuly invoked. <code>NO</code> if the challenge could not be handled because it was not for server certificate validation (ie. the challenge&rsquo;s <code>authenticationMethod</code> was not <code>NSURLAuthenticationMethodServerTrust</code>).</p>
+
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.0/TrustKit/Pinning/TSKPinningValidator.h#L110-L112">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2017 <a class="link" href="https://datatheorem.github.io" target="_blank" rel="external">Data Theorem</a>. All rights reserved. (Last updated: 2017-01-11)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
