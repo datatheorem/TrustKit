@@ -123,8 +123,8 @@ License
 
 **TrustKit** is released under the MIT license. See `LICENSE` for details.
 
-[getting-started]: https://datatheorem.github.io/TrustKit/getting-started.html
-[bh2015-pdf]: https://datatheorem.github.io/TrustKit/files/TrustKit-BH2015.pdf
+[getting-started]: https://github.com/datatheorem/TrustKit/blob/master/docs/getting-started.md
+[bh2015-pdf]: https://github.com/datatheorem/TrustKit/blob/master/docs/TrustKit-BH2015.pdf
 [bh2015-conf]: https://www.blackhat.com/us-15/briefings.html#trustkit-code-injection-on-ios-8-for-the-greater-good
 [api-doc]: https://datatheorem.github.io/TrustKit/documentation
 [ios9-post]: https://datatheorem.github.io/ios/2015/10/17/trustkit-ios-9-shared-cache/
