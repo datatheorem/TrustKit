@@ -204,7 +204,7 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
         if([serverSslPinsSet count] < requiredNumberOfPins)
         {
             [NSException raise:@"TrustKit configuration invalid"
-                        format:@"TrustKit was initialized with less than %i pins (ie. no backup pins) for domain %@. This might brick your App; please review the Getting Started guide in ./docs/getting-started.md", requiredNumberOfPins, domainName];
+                        format:@"TrustKit was initialized with less than %lu pins (ie. no backup pins) for domain %@. This might brick your App; please review the Getting Started guide in ./docs/getting-started.md", (unsigned long)requiredNumberOfPins, domainName];
         }
         
         // Save the hashes for this server as an NSSet for quick lookup
