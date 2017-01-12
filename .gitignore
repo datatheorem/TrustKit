@@ -34,4 +34,7 @@ infer-out/
 # Jekyll
 _site
 
+# Jazzy
+*.tgz
+
 
