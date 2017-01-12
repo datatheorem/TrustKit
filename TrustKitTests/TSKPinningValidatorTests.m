@@ -102,7 +102,9 @@
     [TrustKit initializeWithConfiguration:trustKitConfig];
     
     // Configure notification listener
-    XCTestExpectation *notifReceivedExpectation = [self expectationWithDescription:@"TestNotificationReceivedExpectation"];
+    // weak to work around fullfill being called multiple times
+    // http://stackoverflow.com/questions/27555499/xctestexpectation-how-to-avoid-calling-the-fulfill-method-after-the-wait-contex
+    __weak XCTestExpectation *notifReceivedExpectation = [self expectationWithDescription:@"TestNotificationReceivedExpectation"];
     id observerId = [[NSNotificationCenter defaultCenter] addObserverForName:kTSKValidationCompletedNotification
                                                                       object:nil
                                                                        queue:nil
@@ -300,7 +302,7 @@
     [TrustKit initializeWithConfiguration:trustKitConfig];
     
     // Configure notification listener
-    XCTestExpectation *notifReceivedExpectation = [self expectationWithDescription:@"TestNotificationReceivedExpectation"];
+    __weak XCTestExpectation *notifReceivedExpectation = [self expectationWithDescription:@"TestNotificationReceivedExpectation"];
     id observerId = [[NSNotificationCenter defaultCenter] addObserverForName:kTSKValidationCompletedNotification
                                                                       object:nil
                                                                        queue:nil
@@ -368,7 +370,7 @@
     [TrustKit initializeWithConfiguration:trustKitConfig];
     
     // Configure notification listener
-    XCTestExpectation *notifReceivedExpectation = [self expectationWithDescription:@"TestNotificationReceivedExpectation"];
+    __weak XCTestExpectation *notifReceivedExpectation = [self expectationWithDescription:@"TestNotificationReceivedExpectation"];
     id observerId = [[NSNotificationCenter defaultCenter] addObserverForName:kTSKValidationCompletedNotification
                                                                       object:nil
                                                                        queue:nil
@@ -477,7 +479,7 @@
     [TrustKit initializeWithConfiguration:trustKitConfig];
     
     // Configure notification listener
-    XCTestExpectation *notifReceivedExpectation = [self expectationWithDescription:@"TestNotificationReceivedExpectation"];
+    __weak XCTestExpectation *notifReceivedExpectation = [self expectationWithDescription:@"TestNotificationReceivedExpectation"];
     id observerId = [[NSNotificationCenter defaultCenter] addObserverForName:kTSKValidationCompletedNotification
                                                                       object:nil
                                                                        queue:nil
