@@ -39,8 +39,7 @@
 // Pin to only one key and ensure it fails; TrustKit requires at least two pins (which should include a backup pin)
 - (void)testPinOnePublicKey
 {
-    XCTAssertThrows(parseTrustKitConfiguration(@{kTSKSwizzleNetworkDelegates: @NO,
-                                                 kTSKPinnedDomains : @{
+    XCTAssertThrows(parseTrustKitConfiguration(@{kTSKPinnedDomains : @{
                                                          @"www.good.com" : @{
                                                                  kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                                  kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
@@ -50,23 +49,10 @@
 }
 
 
-- (void)testNokTSKSwizzleNetworkDelegates
-{
-    XCTAssertThrows(parseTrustKitConfiguration(@{kTSKPinnedDomains : @{
-                                                         @"www.good.com" : @{
-                                                                 kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                                                 kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
-                                                                                         @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
-                                                                                         ]}}}),
-                    @"Configuration that does not specify kTSKSwizzleNetworkDelegates must be rejected");
-}
-
-
 - (void)testGetConfigurationPinningEnabled
 {
     NSDictionary *trustKitConfig;
-    trustKitConfig = parseTrustKitConfiguration(@{kTSKSwizzleNetworkDelegates: @NO,
-                                                  kTSKPinnedDomains : @{
+    trustKitConfig = parseTrustKitConfiguration(@{kTSKPinnedDomains : @{
                                                       @"www.good.com" : @{
                                                               kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                               kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
@@ -81,8 +67,7 @@
 - (void)testGetConfigurationPinningDisabled
 {
     NSDictionary *trustKitConfig;
-    trustKitConfig = parseTrustKitConfiguration(@{kTSKSwizzleNetworkDelegates: @NO,
-                                                  kTSKPinnedDomains : @{
+    trustKitConfig = parseTrustKitConfiguration(@{kTSKPinnedDomains : @{
                                                       @"good.com" : @{
                                                               kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                               kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
@@ -98,8 +83,7 @@
 - (void)testIncludeSubdomainsEnabled
 {
     NSDictionary *trustKitConfig;
-    trustKitConfig = parseTrustKitConfiguration(@{kTSKSwizzleNetworkDelegates: @NO,
-                                                  kTSKPinnedDomains : @{
+    trustKitConfig = parseTrustKitConfiguration(@{kTSKPinnedDomains : @{
                                                       @"good.com" : @{
                                                               kTSKIncludeSubdomains : @YES,
                                                               kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
@@ -116,8 +100,7 @@
 - (void)testIncludeSubdomainsEnabledSameDomain
 {
     NSDictionary *trustKitConfig;
-    trustKitConfig = parseTrustKitConfiguration(@{kTSKSwizzleNetworkDelegates: @NO,
-                                                  kTSKPinnedDomains : @{@"good.com" : @{
+    trustKitConfig = parseTrustKitConfiguration(@{kTSKPinnedDomains : @{@"good.com" : @{
                                                                             kTSKIncludeSubdomains : @YES,
                                                                             kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                                             kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
@@ -133,8 +116,7 @@
 - (void)testIncludeSubdomainsEnabledSubSubDomain
 {
     NSDictionary *trustKitConfig;
-    trustKitConfig = parseTrustKitConfiguration(@{kTSKSwizzleNetworkDelegates: @NO,
-                                                  kTSKPinnedDomains :
+    trustKitConfig = parseTrustKitConfiguration(@{kTSKPinnedDomains :
                                                   @{@"www.good.com" : @{
                                                             kTSKIncludeSubdomains : @YES,
                                                             kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
@@ -150,8 +132,7 @@
 - (void)testIncludeSubdomainsEnabledNotSubdomain
 {
     NSDictionary *trustKitConfig;
-    trustKitConfig = parseTrustKitConfiguration(@{kTSKSwizzleNetworkDelegates: @NO,
-                                                  kTSKPinnedDomains :
+    trustKitConfig = parseTrustKitConfiguration(@{kTSKPinnedDomains :
                                                   @{@"good.com" : @{
                                                             kTSKIncludeSubdomains : @YES,
                                                             kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
@@ -167,8 +148,7 @@
 
 - (void)testIncludeSubdomainsEnabledForSuffix
 {
-    XCTAssertThrows(parseTrustKitConfiguration(@{kTSKSwizzleNetworkDelegates: @NO,
-                                                 kTSKPinnedDomains :
+    XCTAssertThrows(parseTrustKitConfiguration(@{kTSKPinnedDomains :
                                                  @{@"com" : @{
                                                            kTSKIncludeSubdomains : @YES,
                                                            kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
@@ -182,8 +162,7 @@
 - (void)testIncludeSubdomainsDisabled
 {
     NSDictionary *trustKitConfig;
-    trustKitConfig = parseTrustKitConfiguration(@{kTSKSwizzleNetworkDelegates: @NO,
-                                                  kTSKPinnedDomains :
+    trustKitConfig = parseTrustKitConfiguration(@{kTSKPinnedDomains :
                                                   @{@"good.com" : @{
                                                             kTSKIncludeSubdomains : @NO,
                                                             kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
@@ -200,8 +179,7 @@
 - (void)testIncludeSubdomainsEnabledAndSpecificConfiguration
 {
     NSDictionary *trustKitConfig;
-    trustKitConfig = parseTrustKitConfiguration(@{kTSKSwizzleNetworkDelegates: @NO,
-                                                  kTSKPinnedDomains :
+    trustKitConfig = parseTrustKitConfiguration(@{kTSKPinnedDomains :
                                                   @{@"good.com" : @{
                                                             kTSKIncludeSubdomains : @YES,
                                                             kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
@@ -222,7 +200,7 @@
 
 - (void)testNoPinnedDomains
 {
-    XCTAssertThrows(parseTrustKitConfiguration(@{kTSKSwizzleNetworkDelegates : @YES}),
+    XCTAssertThrows(parseTrustKitConfiguration(@{}),
                     @"Configuration with no pinned domains must be rejected");
 }
 
@@ -230,17 +208,13 @@
 - (void)testGlobalSettings
 {
     NSDictionary *trustKitConfig;
-    trustKitConfig = parseTrustKitConfiguration(@{kTSKSwizzleNetworkDelegates: @NO,
-                                                  kTSKPinnedDomains :
+    trustKitConfig = parseTrustKitConfiguration(@{kTSKPinnedDomains :
                                                       @{@"good.com" : @{
                                                                 kTSKIncludeSubdomains : @YES,
                                                                 kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                                 kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
                                                                                         @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                                                                         ]}}});
-    
-    // Ensure the kTSKSwizzleNetworkDelegates setting was saved
-    XCTAssert([trustKitConfig[kTSKSwizzleNetworkDelegates] boolValue] ==  NO, @"kTSKSwizzleNetworkDelegates was not saved in the configuration");
 }
 
 @end

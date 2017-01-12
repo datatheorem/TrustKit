@@ -13,7 +13,6 @@
 #import "TrustKit+Private.h"
 #import "ssl_pin_verifier.h"
 #import "public_key_utils.h"
-#import "reporting_utils.h"
 #import "parse_configuration.h"
 #import "TSKCertificateUtils.h"
 #import <OCMock/OCMock.h>
@@ -73,8 +72,7 @@
                                                              arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
     
     // Create a configuration
-    NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
-                                     kTSKPinnedDomains :
+    NSDictionary *trustKitConfig = @{kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=", // Server key
@@ -100,34 +98,11 @@
     
     // Then test TSKPinningValidator
     [TrustKit initializeWithConfiguration:trustKitConfig];
-    
-    // Configure notification listener
-    XCTestExpectation *notifReceivedExpectation = [self expectationWithDescription:@"TestNotificationReceivedExpectation"];
-    id observerId = [[NSNotificationCenter defaultCenter] addObserverForName:kTSKValidationCompletedNotification
-                                                                      object:nil
-                                                                       queue:nil
-                                                                  usingBlock:^(NSNotification * _Nonnull note) {
-                                                                      NSDictionary *userInfo = [note userInfo];
-                                                                      // Notification received, check the userInfo
-                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationDecisionNotificationKey], @(TSKTrustDecisionShouldAllowConnection));
-                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationResultNotificationKey], @(TSKPinValidationResultSuccess));
-                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationCertificateChainNotificationKey], convertTrustToPemArray(trust));
-                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationNotedHostnameNotificationKey], @"www.good.com");
-                                                                      [notifReceivedExpectation fulfill];
-                                                                  }];
-    
+
     // Call TSKPinningValidator
     TSKTrustDecision result = [TSKPinningValidator evaluateTrust:trust forHostname:@"www.good.com"];
     XCTAssert(result == TSKTrustDecisionShouldAllowConnection);
-    
-    // Ensure a validation notification was posted
-    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
-        if (error) {
-            NSLog(@"Expectation timeout Error: %@", error);
-        }
-    }];
-    [[NSNotificationCenter defaultCenter] removeObserver:observerId];
-    
+
     // Ensure the SPKI cache was persisted to the filesystem
     XCTAssert([getSpkiCacheFromFileSystem()[@1] count] == 1, @"SPKI cache for RSA 4096 must be persisted to the file system");
     
@@ -147,8 +122,7 @@
                                                              arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
     
     // Create a configuration
-    NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
-                                     kTSKPinnedDomains :
+    NSDictionary *trustKitConfig = @{kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"khKI6ae4micEvX74MB/BZ4u15WCWGXPD6Gjg6iIRVeE=", // Intermediate Key
@@ -195,8 +169,7 @@
                                                              arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
     
     // Create a configuration
-    NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
-                                     kTSKPinnedDomains :
+    NSDictionary *trustKitConfig = @{kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA Key
@@ -235,8 +208,7 @@
                                                              arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
     
     // Create a configuration
-    NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
-                                     kTSKPinnedDomains :
+    NSDictionary *trustKitConfig = @{kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=", // Leaf Key
@@ -275,8 +247,7 @@
                                                              arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
     
     // Create a configuration
-    NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
-                                     kTSKPinnedDomains :
+    NSDictionary *trustKitConfig = @{kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Bad Key
@@ -299,32 +270,9 @@
     // Then test TSKPinningValidator
     [TrustKit initializeWithConfiguration:trustKitConfig];
     
-    // Configure notification listener
-    XCTestExpectation *notifReceivedExpectation = [self expectationWithDescription:@"TestNotificationReceivedExpectation"];
-    id observerId = [[NSNotificationCenter defaultCenter] addObserverForName:kTSKValidationCompletedNotification
-                                                                      object:nil
-                                                                       queue:nil
-                                                                  usingBlock:^(NSNotification * _Nonnull note) {
-                                                                      NSDictionary *userInfo = [note userInfo];
-                                                                      // Notification received, check the userInfo
-                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationDecisionNotificationKey], @(TSKTrustDecisionShouldBlockConnection));
-                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationResultNotificationKey], @(TSKPinValidationResultFailed));
-                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationCertificateChainNotificationKey], convertTrustToPemArray(trust));
-                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationNotedHostnameNotificationKey], @"www.good.com");
-                                                                      [notifReceivedExpectation fulfill];
-                                                                  }];
-    
     // Call TSKPinningValidator
     TSKTrustDecision result = [TSKPinningValidator evaluateTrust:trust forHostname:@"www.good.com"];
     XCTAssert(result == TSKTrustDecisionShouldBlockConnection);
-    
-    // Ensure a validation notification was posted
-    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
-        if (error) {
-            NSLog(@"Expectation timeout Error: %@", error);
-        }
-    }];
-    [[NSNotificationCenter defaultCenter] removeObserver:observerId];
     
     CFRelease(trust);
 }
@@ -342,8 +290,7 @@
                                                              arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
     
     // Create a configuration
-    NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
-                                     kTSKPinnedDomains :
+    NSDictionary *trustKitConfig = @{kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
                                                    kTSKEnforcePinning: @NO,
                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
@@ -367,32 +314,9 @@
     // Then test TSKPinningValidator
     [TrustKit initializeWithConfiguration:trustKitConfig];
     
-    // Configure notification listener
-    XCTestExpectation *notifReceivedExpectation = [self expectationWithDescription:@"TestNotificationReceivedExpectation"];
-    id observerId = [[NSNotificationCenter defaultCenter] addObserverForName:kTSKValidationCompletedNotification
-                                                                      object:nil
-                                                                       queue:nil
-                                                                  usingBlock:^(NSNotification * _Nonnull note) {
-                                                                      NSDictionary *userInfo = [note userInfo];
-                                                                      // Notification received, check the userInfo
-                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationDecisionNotificationKey], @(TSKTrustDecisionShouldAllowConnection));
-                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationResultNotificationKey], @(TSKPinValidationResultFailed));
-                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationCertificateChainNotificationKey], convertTrustToPemArray(trust));
-                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationNotedHostnameNotificationKey], @"www.good.com");
-                                                                      [notifReceivedExpectation fulfill];
-                                                                  }];
-    
     // Call TSKPinningValidator
     TSKTrustDecision result = [TSKPinningValidator evaluateTrust:trust forHostname:@"www.good.com"];
     XCTAssert(result == TSKTrustDecisionShouldAllowConnection);
-    
-    // Ensure a validation notification was posted
-    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
-        if (error) {
-            NSLog(@"Expectation timeout Error: %@", error);
-        }
-    }];
-    [[NSNotificationCenter defaultCenter] removeObserver:observerId];
     
     CFRelease(trust);
 }
@@ -411,8 +335,7 @@
                                                              arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
     
     // Create a configuration
-    NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
-                                     kTSKPinnedDomains :
+    NSDictionary *trustKitConfig = @{kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Bad key
@@ -451,8 +374,7 @@
                                                              arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
     
     // Create a configuration
-    NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
-                                     kTSKPinnedDomains :
+    NSDictionary *trustKitConfig = @{kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
                                                    kTSKEnforcePinning: @NO,  // Should fail even if pinning is not enforced
                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
@@ -476,32 +398,9 @@
     // Then test TSKPinningValidator
     [TrustKit initializeWithConfiguration:trustKitConfig];
     
-    // Configure notification listener
-    XCTestExpectation *notifReceivedExpectation = [self expectationWithDescription:@"TestNotificationReceivedExpectation"];
-    id observerId = [[NSNotificationCenter defaultCenter] addObserverForName:kTSKValidationCompletedNotification
-                                                                      object:nil
-                                                                       queue:nil
-                                                                  usingBlock:^(NSNotification * _Nonnull note) {
-                                                                      NSDictionary *userInfo = [note userInfo];
-                                                                      // Notification received, check the userInfo
-                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationDecisionNotificationKey], @(TSKTrustDecisionShouldBlockConnection));
-                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationResultNotificationKey], @(TSKPinValidationResultFailedCertificateChainNotTrusted));
-                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationCertificateChainNotificationKey], convertTrustToPemArray(trust));
-                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationNotedHostnameNotificationKey], @"www.good.com");
-                                                                      [notifReceivedExpectation fulfill];
-                                                                  }];
-    
     // Call TSKPinningValidator
     TSKTrustDecision result = [TSKPinningValidator evaluateTrust:trust forHostname:@"www.good.com"];
     XCTAssert(result == TSKTrustDecisionShouldBlockConnection);
-    
-    // Ensure a validation notification was posted
-    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError * _Nullable error) {
-        if (error) {
-            NSLog(@"Expectation timeout Error: %@", error);
-        }
-    }];
-    [[NSNotificationCenter defaultCenter] removeObserver:observerId];
     
     CFRelease(trust);
 }
@@ -520,8 +419,7 @@
     
     
     // Create a configuration
-    NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
-                                     kTSKPinnedDomains :
+    NSDictionary *trustKitConfig = @{kTSKPinnedDomains :
                                          @{@"www.bad.com" : @{
                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA Key
@@ -561,8 +459,7 @@
     
     
     // Create a configuration
-    NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
-                                     kTSKPinnedDomains :
+    NSDictionary *trustKitConfig = @{kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                                                    kTSKPublicKeyHashes : @[@"grX4Ta9HpZx6tSHkmCrvpApTQGo67CYDnvprLg5yRME=", // Comodo CA
@@ -601,8 +498,7 @@
     
     
     // Create a configuration
-    NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
-                                     kTSKPinnedDomains :
+    NSDictionary *trustKitConfig = @{kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA Key
@@ -613,19 +509,10 @@
     // Then test TSKPinningValidator
     [TrustKit initializeWithConfiguration:trustKitConfig];
     
-    // Configure notification listener
-    id observerId = [[NSNotificationCenter defaultCenter] addObserverForName:kTSKValidationCompletedNotification
-                                                                      object:nil
-                                                                       queue:nil
-                                                                  usingBlock:^(NSNotification * _Nonnull note) {
-                                                                      // Ensure a validation notification was NOT posted
-                                                                      XCTFail(@"kTSKValidationCompletedNotification should not have been posted");
-                                                                  }];
     // Call TSKPinningValidator
     TSKTrustDecision result = [TSKPinningValidator evaluateTrust:trust forHostname:@"www.nonpinned.com"];
     XCTAssert(result == TSKTrustDecisionDomainNotPinned);
     
-    [[NSNotificationCenter defaultCenter] removeObserver:observerId];
     CFRelease(trust);
 }
 
@@ -645,8 +532,7 @@
     
     
     // Create a configuration
-    NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
-                                     kTSKPinnedDomains :
+    NSDictionary *trustKitConfig = @{kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA Key
@@ -694,8 +580,7 @@
     
     
     // Create a configuration
-    NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
-                                     kTSKPinnedDomains :
+    NSDictionary *trustKitConfig = @{kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", //Fake Key
@@ -743,8 +628,7 @@
     
     
     // Create a configuration
-    NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
-                                     kTSKPinnedDomains :
+    NSDictionary *trustKitConfig = @{kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA Key
@@ -792,8 +676,7 @@
     
     
     // Create a configuration
-    NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
-                                     kTSKPinnedDomains :
+    NSDictionary *trustKitConfig = @{kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA Key

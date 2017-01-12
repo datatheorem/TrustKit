@@ -21,13 +21,13 @@ typedef NS_ENUM(NSInteger, TSKTrustDecision)
 {
 /**
  Based on the server's certificate chain and the global pinning policy for this domain, the SSL connection should be allowed.
- This return value does not necessarily mean that the pinning validation succeded (for example if `kTSKEnforcePinning` was set to `NO` for this domain). If a pinning validation failure occured and if a report URI was configured, a pin failure report was sent.
+ This return value does not necessarily mean that the pinning validation succeded (for example if `kTSKEnforcePinning` was set to `NO` for this domain). If a pinning validation failure occured.
  */
     TSKTrustDecisionShouldAllowConnection,
     
 /**
  Based on the server's certificate chain and the global pinning policy for this domain, the SSL connection should be blocked.
- A pinning validation failure occured and if a report URI was configured, a pin failure report was sent.
+ A pinning validation failure occured.
  */
     TSKTrustDecisionShouldBlockConnection,
     
@@ -64,7 +64,7 @@ typedef NS_ENUM(NSInteger, TSKTrustDecision)
 ///------------------------------------
 
 /**
- Evaluate the supplied server trust against the global SSL pinning policy previously configured. If the validation fails, a pin failure report will be sent.
+ Evaluate the supplied server trust against the global SSL pinning policy previously configured.
  
  When using the `NSURLSession` or `WKWebView` network APIs, the `handleChallenge:completionHandler:` method should be called instead, as it is simpler to use.
  
