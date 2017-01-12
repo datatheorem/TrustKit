@@ -325,7 +325,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
           @{
               @"www.datatheorem.com" : @{
                       kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                      kTSKPublicKeyHashes : @[@"klO23nT2ehFDXCfx3eHTDRESMz3asj1muO+4aIdjiuY=", // CA key
+                      kTSKPublicKeyHashes : @[@"cGuxAXyFXFkWm61cF4HPWX8S0srS9j0aSqN0k4AP+4A=", // CA key
                                               @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                               ]}}};
     
@@ -475,7 +475,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
           @{
               @"www.fastmail.fm" : @{
                       kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                      kTSKPublicKeyHashes : @[@"k2v657xBsOVe1PQRwOsHsw3bsGT2VzIqz5K+59sNQws=", // CA key
+                      kTSKPublicKeyHashes : @[@"5kJvNEMw0KjrCAu7eXY5HZdvyCS13BbA0VJG1RSP91w=", // CA key
                                               @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                               ]}}};
     

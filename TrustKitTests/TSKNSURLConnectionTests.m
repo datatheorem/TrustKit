@@ -531,7 +531,7 @@
           @{
               @"www.fastmail.fm" : @{
                       kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                      kTSKPublicKeyHashes : @[@"k2v657xBsOVe1PQRwOsHsw3bsGT2VzIqz5K+59sNQws=", // CA key
+                      kTSKPublicKeyHashes : @[@"5kJvNEMw0KjrCAu7eXY5HZdvyCS13BbA0VJG1RSP91w=", // CA key
                                               @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                               ]}}};
     

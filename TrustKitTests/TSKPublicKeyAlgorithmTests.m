@@ -39,10 +39,10 @@
 - (void)testVerifyRsa2048
 {
     // Create a valid server trust
-    SecCertificateRef leafCertificate = [TSKCertificateUtils createCertificateFromDer:@"datatheorem.com"];
-    SecCertificateRef intermediateCertificate = [TSKCertificateUtils createCertificateFromDer:@"COMODORSADomainValidationSecureServerCA"];
-    SecCertificateRef intermediateCertificate2 = [TSKCertificateUtils createCertificateFromDer:@"COMODORSACertificationAuthority"];
-    SecCertificateRef certChainArray[3] = {leafCertificate, intermediateCertificate, intermediateCertificate2};
+    SecCertificateRef leafCertificate = [TSKCertificateUtils createCertificateFromDer:@"www.globalsign.com"];
+    SecCertificateRef intermediateCertificate = [TSKCertificateUtils createCertificateFromDer:@"GlobalSignDomainValidationCA-SHA256-G2"];
+    //SecCertificateRef intermediateCertificate2 = [TSKCertificateUtils createCertificateFromDer:@"GlobalSignRootCA"];
+    SecCertificateRef certChainArray[2] = {leafCertificate, intermediateCertificate};//, intermediateCertificate2};
     
     SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
                                                              arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
@@ -53,9 +53,9 @@
     NSDictionary *trustKitConfig;
     trustKitConfig = parseTrustKitConfiguration(@{kTSKSwizzleNetworkDelegates: @NO,
                                                   kTSKPinnedDomains :
-                                                      @{@"www.datatheorem.com" : @{
+                                                      @{@"www.globalsign.com" : @{
                                                                 kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                                                                kTSKPublicKeyHashes : @[@"NnUTm1c2kQBu1jepUWgce1VExzxgb9hfBfW3T9J2jeI=", // Leaf Key
+                                                                kTSKPublicKeyHashes : @[@"iie1VXtL7HzAMF+/PVPR9xzT80kQxdZeJ+zduCB3uj0=", // CA Key
                                                                                         @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                                                                         ]}}});
     
@@ -65,12 +65,12 @@
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust,
-                                            @"www.datatheorem.com",
-                                            trustKitConfig[kTSKPinnedDomains][@"www.datatheorem.com"][kTSKPublicKeyAlgorithms],
-                                            trustKitConfig[kTSKPinnedDomains][@"www.datatheorem.com"][kTSKPublicKeyHashes]);
+                                            @"www.globalsign.com",
+                                            trustKitConfig[kTSKPinnedDomains][@"www.globalsign.com"][kTSKPublicKeyAlgorithms],
+                                            trustKitConfig[kTSKPinnedDomains][@"www.globalsign.com"][kTSKPublicKeyHashes]);
     
     // Ensure the SPKI cache was used; the full certificate chain is four certs and we have to go through all of them to get to the pinned leaf
-    XCTAssert([getSpkiCache()[@0] count] == 4, @"SPKI cache for RSA 2048 must have been used");
+    XCTAssert([getSpkiCache()[@0] count] == 1, @"SPKI cache for RSA 2048 must have been used");
 
     CFRelease(trust);
     CFRelease(leafCertificate);

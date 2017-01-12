@@ -31,7 +31,7 @@
     SecCertificateRef _intermediateCertificate;
     SecCertificateRef _selfSignedCertificate;
     SecCertificateRef _leafCertificate;
-    SecCertificateRef _comodoRootCertificate;
+    SecCertificateRef _globalsignRootCertificate;
 }
 
 
@@ -43,7 +43,7 @@
     _intermediateCertificate = [TSKCertificateUtils createCertificateFromDer:@"GoodIntermediateCA"];
     _leafCertificate = [TSKCertificateUtils createCertificateFromDer:@"www.good.com"];
     _selfSignedCertificate = [TSKCertificateUtils createCertificateFromDer:@"www.good.com.selfsigned"];
-    _comodoRootCertificate = [TSKCertificateUtils createCertificateFromDer:@"COMODORSACertificationAuthority"];
+    _globalsignRootCertificate = [TSKCertificateUtils createCertificateFromDer:@"GlobalSignRootCA"];
     
     [TrustKit resetConfiguration];
 }
@@ -552,7 +552,7 @@
 - (void)testVerifyAgainstInjectedCaPublicKey
 {
     // The certificate chain is valid for www.good.com but does not contain the pinned CA certificate, which we inject as an additional certificate
-    SecCertificateRef certChainArray[3] = {_leafCertificate, _comodoRootCertificate, _intermediateCertificate};
+    SecCertificateRef certChainArray[3] = {_leafCertificate, _globalsignRootCertificate, _intermediateCertificate};
     SecCertificateRef trustStoreArray[1] = {_rootCertificate};
     SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
                                                              arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
@@ -565,7 +565,7 @@
                                      kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                                                   kTSKPublicKeyHashes : @[@"grX4Ta9HpZx6tSHkmCrvpApTQGo67CYDnvprLg5yRME=", // Comodo CA
+                                                   kTSKPublicKeyHashes : @[@"cGuxAXyFXFkWm61cF4HPWX8S0srS9j0aSqN0k4AP+4A=", // Globalsign CA
                                                                            @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                                                            ]}}};
     
