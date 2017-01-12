@@ -26,31 +26,33 @@ NSString * const TrustKitVersion = @"1.4.0";
 static const NSString *kTSKConfiguration = @"TSKConfiguration";
 
 // General keys
-NSString * const kTSKSwizzleNetworkDelegates = @"TSKSwizzleNetworkDelegates";
-NSString * const kTSKPinnedDomains = @"TSKPinnedDomains";
+const TSKGlobalConfigurationKey kTSKSwizzleNetworkDelegates = @"TSKSwizzleNetworkDelegates";
+const TSKGlobalConfigurationKey kTSKPinnedDomains = @"TSKPinnedDomains";
+
+const TSKGlobalConfigurationKey kTSKIgnorePinningForUserDefinedTrustAnchors = @"TSKIgnorePinningForUserDefinedTrustAnchors";
 
 // Keys for each domain within the TSKPinnedDomains entry
-NSString * const kTSKPublicKeyHashes = @"TSKPublicKeyHashes";
-NSString * const kTSKEnforcePinning = @"TSKEnforcePinning";
-NSString * const kTSKIncludeSubdomains = @"TSKIncludeSubdomains";
-NSString * const kTSKPublicKeyAlgorithms = @"TSKPublicKeyAlgorithms";
-NSString * const kTSKReportUris = @"TSKReportUris";
-NSString * const kTSKDisableDefaultReportUri = @"TSKDisableDefaultReportUri";
-NSString * const kTSKIgnorePinningForUserDefinedTrustAnchors = @"TSKIgnorePinningForUserDefinedTrustAnchors";
+const TSKDomainConfigurationKey kTSKPublicKeyHashes = @"TSKPublicKeyHashes";
+const TSKDomainConfigurationKey kTSKEnforcePinning = @"TSKEnforcePinning";
+
+const TSKDomainConfigurationKey kTSKIncludeSubdomains = @"TSKIncludeSubdomains";
+const TSKDomainConfigurationKey kTSKPublicKeyAlgorithms = @"TSKPublicKeyAlgorithms";
+const TSKDomainConfigurationKey kTSKReportUris = @"TSKReportUris";
+const TSKDomainConfigurationKey kTSKDisableDefaultReportUri = @"TSKDisableDefaultReportUri";
 
 #pragma mark Public key Algorithms Constants
-NSString * const kTSKAlgorithmRsa2048 = @"TSKAlgorithmRsa2048";
-NSString * const kTSKAlgorithmRsa4096 = @"TSKAlgorithmRsa4096";
-NSString * const kTSKAlgorithmEcDsaSecp256r1 = @"TSKAlgorithmEcDsaSecp256r1";
+const TSKSupportedAlgorithm kTSKAlgorithmRsa2048 = @"TSKAlgorithmRsa2048";
+const TSKSupportedAlgorithm kTSKAlgorithmRsa4096 = @"TSKAlgorithmRsa4096";
+const TSKSupportedAlgorithm kTSKAlgorithmEcDsaSecp256r1 = @"TSKAlgorithmEcDsaSecp256r1";
 
 #pragma mark Notification keys
-NSString * const kTSKValidationCompletedNotification   = @"TSKValidationCompletedNotification";
-NSString * const kTSKValidationDurationNotificationKey = @"TSKValidationDurationNotificationKey";
-NSString * const kTSKValidationResultNotificationKey   = @"TSKValidationResultNotificationKey";
-NSString * const kTSKValidationDecisionNotificationKey = @"TSKValidationDecisionNotificationKey";
-NSString * const kTSKValidationCertificateChainNotificationKey = @"TSKValidationCertificateChainNotificationKey";
-NSString * const kTSKValidationNotedHostnameNotificationKey = @"TSKValidationNotedHostnameNotificationKey";
-NSString * const kTSKValidationServerHostnameNotificationKey = @"TSKValidationServerHostnameNotificationKey";
+const NSString *kTSKValidationCompletedNotification   = @"TSKValidationCompletedNotification";
+const TSKNotificationUserInfoKey kTSKValidationDurationNotificationKey = @"TSKValidationDurationNotificationKey";
+const TSKNotificationUserInfoKey kTSKValidationResultNotificationKey   = @"TSKValidationResultNotificationKey";
+const TSKNotificationUserInfoKey kTSKValidationDecisionNotificationKey = @"TSKValidationDecisionNotificationKey";
+const TSKNotificationUserInfoKey kTSKValidationCertificateChainNotificationKey = @"TSKValidationCertificateChainNotificationKey";
+const TSKNotificationUserInfoKey kTSKValidationNotedHostnameNotificationKey = @"TSKValidationNotedHostnameNotificationKey";
+const TSKNotificationUserInfoKey kTSKValidationServerHostnameNotificationKey = @"TSKValidationServerHostnameNotificationKey";
 
 
 #pragma mark TrustKit Global State

@@ -1,3 +1,5 @@
+# TrustKit Documentation
+
 TrustKit is an open source framework that makes it easy to deploy SSL public key
 pinning in any iOS, macOS, tvOS or watchOS App.
 
@@ -10,7 +12,7 @@ deployment target.
 
 Two classes are available enabling SSL pinning in an App:
 
-* TrustKit, for programmatically configuring the global SSL pinning policy within an 
+* `TrustKit`, for programmatically configuring the global SSL pinning policy within an 
 App.
-* TSKPinningValidator, for manually validating a certificate chain against the App's
+* `TSKPinningValidator`, for manually validating a certificate chain against the App's
 configured pinning policy.
