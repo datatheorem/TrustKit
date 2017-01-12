@@ -3,7 +3,9 @@ TrustKit
 
 [![Build Status](https://circleci.com/gh/datatheorem/TrustKit.svg?style=svg)](https://circleci.com/gh/datatheorem/TrustKit) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Version Status](https://img.shields.io/cocoapods/v/TrustKit.svg?style=flat)](https://cocoapods.org/pods/TrustKit) [![Platform](https://img.shields.io/cocoapods/p/TrustKit.svg?style=flat)](https://cocoapods.org/pods/TrustKit) [![License MIT](https://img.shields.io/cocoapods/l/TrustKit.svg?style=flat)](https://en.wikipedia.org/wiki/MIT_License)
 
-**TrustKit** is an open source framework that makes it easy to deploy SSL public key pinning in any iOS 7+, macOS 10.9+, tvOS 10+ or watchOS 3+ App; it supports both Swift and Objective-C Apps.
+**TrustKit** is an open source framework that makes it easy to deploy SSL public key pinning and reporting in any iOS 7+, macOS 10.9+, tvOS 10+ or watchOS 3+ App; it supports both Swift and Objective-C Apps.
+
+If you need SSL pinning/reporting in your Android App. we have also released **TrustKit for Android** at [https://github.com/datatheorem/TrustKit-Android](https://github.com/datatheorem/TrustKit-Android).
 
 
 Overview
@@ -12,9 +14,9 @@ Overview
 **TrustKit** provides the following features:
 
 * Simple API to configure an SSL pinning policy and enforce it within an App. The policy settings are heavily based on the [HTTP Public Key Pinning specification](https://tools.ietf.org/html/rfc7469).
-* Auto-pinning functionality by swizzling the App's _NSURLConnection_ and _NSURLSession_ delegates in order to automatically add pinning validation to the App's HTTPS connections; this allows deploying **TrustKit** without even modifying the App's source code.
 * Sane implementation by pinning the certificate's Subject Public Key Info, [as opposed to the certificate itself or the public key bits](https://www.imperialviolet.org/2011/05/04/pinning.html).
 * Reporting mechanism to notify a server about pinning validation failures happening within the App, when an unexpected certificate chain is detected. This is similar to the _report-uri_ directive described in the HPKP specification. The reporting mechanism can also be customized within the App by leveraging pin validation notifications sent by TrustKit.
+* Auto-pinning functionality by swizzling the App's _NSURLConnection_ and _NSURLSession_ delegates in order to automatically add pinning validation to the App's HTTPS connections; this allows deploying **TrustKit** without even modifying the App's source code.
 
 **TrustKit** was open-sourced at [Black Hat 2015 USA][bh2015-conf].
 
