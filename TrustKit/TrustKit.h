@@ -192,7 +192,7 @@ FOUNDATION_EXPORT const TSKSupportedAlgorithm kTSKAlgorithmEcDsaSecp256r1;
  
  These notifications can be used for performance measurement or to act upon any pinning validation performed by TrustKit (for example to customize the reporting mechanism). The notifications provide details about TrustKit's inner-workings which most Apps should not need to process. Hence, these notifications can be ignored unless the App requires some advanced customization in regards to pinning validation.
  */
-FOUNDATION_EXPORT const NSNotificationName kTSKValidationCompletedNotification;
+FOUNDATION_EXPORT NSString *kTSKValidationCompletedNotification;
 
 
 #pragma mark Pinning Validation Notification UserInfo Keys

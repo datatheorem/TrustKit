@@ -46,7 +46,7 @@ const TSKSupportedAlgorithm kTSKAlgorithmRsa4096 = @"TSKAlgorithmRsa4096";
 const TSKSupportedAlgorithm kTSKAlgorithmEcDsaSecp256r1 = @"TSKAlgorithmEcDsaSecp256r1";
 
 #pragma mark Notification keys
-const NSNotificationName kTSKValidationCompletedNotification   = @"TSKValidationCompletedNotification";
+NSString *kTSKValidationCompletedNotification   = @"TSKValidationCompletedNotification";
 
 const TSKNotificationUserInfoKey kTSKValidationDurationNotificationKey = @"TSKValidationDurationNotificationKey";
 const TSKNotificationUserInfoKey kTSKValidationResultNotificationKey   = @"TSKValidationResultNotificationKey";
