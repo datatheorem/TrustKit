@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "TrustKit+Private.h"
+#import "../TrustKit/TrustKit+Private.h"
 
 
 @interface TSKLoggerTests : XCTestCase

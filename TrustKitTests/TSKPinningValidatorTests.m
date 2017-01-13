@@ -10,11 +10,14 @@
  */
 
 #import <XCTest/XCTest.h>
-#import "TrustKit+Private.h"
-#import "ssl_pin_verifier.h"
-#import "public_key_utils.h"
-#import "reporting_utils.h"
-#import "parse_configuration.h"
+#import "../TrustKit/TrustKit+Private.h"
+#import "../TrustKit/parse_configuration.h"
+
+#import "../TrustKit/Pinning/ssl_pin_verifier.h"
+#import "../TrustKit/Pinning/public_key_utils.h"
+#import "../TrustKit/Reporting/reporting_utils.h"
+
+
 #import "TSKCertificateUtils.h"
 #import <OCMock/OCMock.h>
 

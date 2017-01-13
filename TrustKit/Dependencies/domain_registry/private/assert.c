@@ -16,7 +16,7 @@
 
 #include "assert.h"
 
-#include "domain_registry.h"
+#include "../domain_registry.h"
 #include <stdio.h>
 #include <stdlib.h>
 

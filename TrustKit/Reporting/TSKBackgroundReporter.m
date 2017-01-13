@@ -10,7 +10,7 @@
  */
 
 #import "TSKBackgroundReporter.h"
-#import "TrustKit+Private.h"
+#import "../TrustKit+Private.h"
 #import "TSKPinFailureReport.h"
 #import "reporting_utils.h"
 #import "TSKReportsRateLimiter.h"

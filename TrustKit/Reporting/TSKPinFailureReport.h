@@ -10,7 +10,7 @@
  */
 
 #import <Foundation/Foundation.h>
-#import "ssl_pin_verifier.h"
+#import "../Pinning/ssl_pin_verifier.h"
 
 
 @interface TSKPinFailureReport : NSObject

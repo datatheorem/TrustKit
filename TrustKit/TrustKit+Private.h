@@ -12,9 +12,9 @@
 #ifndef TrustKit_TrustKit_Private____FILEEXTENSION___
 #define TrustKit_TrustKit_Private____FILEEXTENSION___
 
-#import <TrustKit/TrustKit.h>
-#import "ssl_pin_verifier.h"
-#import "TSKBackgroundReporter.h"
+#import "TrustKit.h"
+#import "Pinning/ssl_pin_verifier.h"
+#import "Reporting/TSKBackgroundReporter.h"
 
 
 #pragma mark Utility functions

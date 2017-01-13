@@ -7,8 +7,8 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "TrustKit+Private.h"
-#import "TSKNSURLSessionDelegateProxy.h"
+#import "../TrustKit/TrustKit+Private.h"
+#import "../TrustKit/Swizzling/TSKNSURLSessionDelegateProxy.h"
 
 
 #pragma mark Private test methods

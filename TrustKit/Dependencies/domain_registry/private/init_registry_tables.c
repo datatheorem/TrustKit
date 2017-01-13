@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include "domain_registry.h"
+#import "../domain_registry.h"
 
 #include <stdlib.h>
 
@@ -23,7 +23,7 @@
 #include "trie_search.h"
 
 /* Include the generated file that contains the actual registry tables. */
-#include "registry_tables.h"
+#include "../registry_tables_genfiles/registry_tables.h"
 
 void InitializeDomainRegistry(void) {
   SetRegistryTables(kStringTable,

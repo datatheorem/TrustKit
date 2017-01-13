@@ -13,7 +13,7 @@
 #import "public_key_utils.h"
 #include <pthread.h>
 #import <CommonCrypto/CommonDigest.h>
-#import "TrustKit+Private.h"
+#import "../TrustKit+Private.h"
 
 
 #pragma mark Global Cache for SPKI Hashes

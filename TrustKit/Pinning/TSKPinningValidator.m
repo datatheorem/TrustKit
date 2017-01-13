@@ -9,7 +9,7 @@
  
  */
 
-#import "TrustKit+Private.h"
+#import "../TrustKit+Private.h"
 
 
 @implementation TSKPinningValidator

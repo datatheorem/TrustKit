@@ -10,14 +10,17 @@
  */
 
 #import <XCTest/XCTest.h>
-#import "TSKBackgroundReporter.h"
-#import "TSKPinFailureReport.h"
-#import "TSKCertificateUtils.h"
-#import "reporting_utils.h"
-#import "TSKReportsRateLimiter.h"
-#import "TrustKit+Private.h"
+
+#import "../TrustKit/TrustKit+Private.h"
+
+#import "../TrustKit/Reporting/TSKBackgroundReporter.h"
+#import "../TrustKit/Reporting/TSKPinFailureReport.h"
+#import "../TrustKit/Reporting/reporting_utils.h"
+#import "../TrustKit/Reporting/TSKReportsRateLimiter.h"
+
 #import <OCMock/OCMock.h>
-#import "vendor_identifier.h"
+#import "../TrustKit/Reporting/vendor_identifier.h"
+#import "TSKCertificateUtils.h"
 
 
 #pragma mark Test suite

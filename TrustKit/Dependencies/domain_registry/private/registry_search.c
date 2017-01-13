@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include "domain_registry.h"
+#include "../domain_registry.h"
 
 #include <string.h>
 

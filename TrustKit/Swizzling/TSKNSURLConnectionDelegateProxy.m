@@ -7,9 +7,9 @@
 //
 
 #import "TSKNSURLConnectionDelegateProxy.h"
-#import "TSKPinningValidator.h"
-#import "TrustKit+Private.h"
-#import "RSSwizzle.h"
+#import "../Pinning/TSKPinningValidator.h"
+#import "../TrustKit+Private.h"
+#import "../Dependencies/RSSwizzle/RSSwizzle.h"
 
 
 

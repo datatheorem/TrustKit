@@ -10,10 +10,10 @@
  */
 
 #import "TrustKit+Private.h"
-#import "public_key_utils.h"
-#import "TSKBackgroundReporter.h"
-#import "TSKNSURLConnectionDelegateProxy.h"
-#import "TSKNSURLSessionDelegateProxy.h"
+#import "Pinning/public_key_utils.h"
+#import "Reporting/TSKBackgroundReporter.h"
+#import "Swizzling/TSKNSURLConnectionDelegateProxy.h"
+#import "Swizzling/TSKNSURLSessionDelegateProxy.h"
 #import "parse_configuration.h"
 #import "Reporting/reporting_utils.h"
 

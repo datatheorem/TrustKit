@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <TrustKit/TrustKit.h>
-#import "domain_registry.h"
+#import "TrustKit.h"
+#import "Dependencies/domain_registry/domain_registry.h"
 #import "parse_configuration.h"
-#import "public_key_utils.h"
+#import "Pinning/public_key_utils.h"
 #import <CommonCrypto/CommonDigest.h>
 
 

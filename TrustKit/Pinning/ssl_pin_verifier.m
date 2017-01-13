@@ -10,9 +10,9 @@
  */
 
 #import "ssl_pin_verifier.h"
-#import "domain_registry.h"
+#import "../Dependencies/domain_registry/domain_registry.h"
 #import "public_key_utils.h"
-#import "TrustKit+Private.h"
+#import "../TrustKit+Private.h"
 
 
 

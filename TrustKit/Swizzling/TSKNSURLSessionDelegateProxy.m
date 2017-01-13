@@ -7,8 +7,8 @@
 //
 
 #import "TSKNSURLSessionDelegateProxy.h"
-#import "RSSwizzle.h"
-#import "TrustKit+Private.h"
+#import "../Dependencies/RSSwizzle/RSSwizzle.h"
+#import "../TrustKit+Private.h"
 
 
 @implementation TSKNSURLSessionDelegateProxy
