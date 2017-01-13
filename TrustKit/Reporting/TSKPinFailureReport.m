@@ -55,6 +55,11 @@
 {
     // Convert the date to a string
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    
+    // Explicitely set the locale to avoid an iOS 8 bug
+    // http://stackoverflow.com/questions/29374181/nsdateformatter-hh-returning-am-pm-on-ios-8-device
+    [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"]];
+    
     [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
     [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
     NSString *currentTimeStr = [dateFormatter stringFromDate: self.dateTime];
