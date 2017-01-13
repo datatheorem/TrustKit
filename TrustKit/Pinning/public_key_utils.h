@@ -18,12 +18,13 @@
 
 typedef NS_ENUM(NSInteger, TSKPublicKeyAlgorithm)
 {
-    // Some assumptions are made about this specific ordering in public_key_utils.m 
+    // Some assumptions are made about this specific ordering in public_key_utils.m
     TSKPublicKeyAlgorithmRsa2048 = 0,
     TSKPublicKeyAlgorithmRsa4096 = 1,
     TSKPublicKeyAlgorithmEcDsaSecp256r1 = 2,
+    TSKPublicKeyAlgorithmEcDsaSecp384r1 = 3,
     
-    TSKPublicKeyAlgorithmLast = TSKPublicKeyAlgorithmEcDsaSecp256r1
+    TSKPublicKeyAlgorithmLast = TSKPublicKeyAlgorithmEcDsaSecp384r1
 };
 
 

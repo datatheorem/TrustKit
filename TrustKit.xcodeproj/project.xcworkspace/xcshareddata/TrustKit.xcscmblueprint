@@ -9,7 +9,7 @@
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "FEA687C9-BCA7-46D9-BC27-A17B542FAC0A",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
-    "E302059AEA03412BDA59789695F25F6B3B3F4EE6" : "TrustKit",
+    "E302059AEA03412BDA59789695F25F6B3B3F4EE6" : "TrustKit\/",
     "2B8D60F823B54095FDE698DB84D10E9A0B2DB18B" : "github\/PLPatchMaster"
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "TrustKit",

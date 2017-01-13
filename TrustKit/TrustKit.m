@@ -44,6 +44,7 @@ const TSKDomainConfigurationKey kTSKDisableDefaultReportUri = @"TSKDisableDefaul
 const TSKSupportedAlgorithm kTSKAlgorithmRsa2048 = @"TSKAlgorithmRsa2048";
 const TSKSupportedAlgorithm kTSKAlgorithmRsa4096 = @"TSKAlgorithmRsa4096";
 const TSKSupportedAlgorithm kTSKAlgorithmEcDsaSecp256r1 = @"TSKAlgorithmEcDsaSecp256r1";
+const TSKSupportedAlgorithm kTSKAlgorithmEcDsaSecp384r1 = @"TSKAlgorithmEcDsaSecp384r1";
 
 #pragma mark Notification keys
 NSString *kTSKValidationCompletedNotification   = @"TSKValidationCompletedNotification";
