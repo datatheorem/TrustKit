@@ -132,9 +132,6 @@
 		8CA6CC3B1BAE2C7E00BDA419 /* TSKPinConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F9A31B17564400F06C0E /* TSKPinConfigurationTests.m */; };
 		8CA6CC3C1BAE2C8100BDA419 /* TSKPublicKeyAlgorithmTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC78B241B1B616500523A25 /* TSKPublicKeyAlgorithmTests.m */; };
 		8CA6CC3D1BAE2C8500BDA419 /* TSKCertificateUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC78B1F1B1B586F00523A25 /* TSKCertificateUtils.m */; };
-		8CBA05B61E2873B50045D8B3 /* enter.thewhiterabbit.space.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05B41E2873B50045D8B3 /* enter.thewhiterabbit.space.der */; };
-		8CBA05B71E2873B50045D8B3 /* enter.thewhiterabbit.space.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05B41E2873B50045D8B3 /* enter.thewhiterabbit.space.der */; };
-		8CBA05B81E2873B50045D8B3 /* enter.thewhiterabbit.space.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05B41E2873B50045D8B3 /* enter.thewhiterabbit.space.der */; };
 		8CBA05C71E28AA6C0045D8B3 /* GlobalSignDomainValidationCA-SHA256-G2.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05C41E28AA6C0045D8B3 /* GlobalSignDomainValidationCA-SHA256-G2.der */; };
 		8CBA05C81E28AA6C0045D8B3 /* GlobalSignDomainValidationCA-SHA256-G2.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05C41E28AA6C0045D8B3 /* GlobalSignDomainValidationCA-SHA256-G2.der */; };
 		8CBA05C91E28AA6C0045D8B3 /* GlobalSignDomainValidationCA-SHA256-G2.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05C41E28AA6C0045D8B3 /* GlobalSignDomainValidationCA-SHA256-G2.der */; };
@@ -159,6 +156,9 @@
 		8CBA05E11E28AAA40045D8B3 /* www.good.com.selfsigned.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05D71E28AAA40045D8B3 /* www.good.com.selfsigned.der */; };
 		8CBA05E21E28AAA40045D8B3 /* www.good.com.selfsigned.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05D71E28AAA40045D8B3 /* www.good.com.selfsigned.der */; };
 		8CBA05E31E28AAA40045D8B3 /* www.good.com.selfsigned.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05D71E28AAA40045D8B3 /* www.good.com.selfsigned.der */; };
+		8CBA05E51E294CC30045D8B3 /* GeoTrust_Primary_CA_G2_ECC.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05E41E294CC30045D8B3 /* GeoTrust_Primary_CA_G2_ECC.der */; };
+		8CBA05E61E294CC30045D8B3 /* GeoTrust_Primary_CA_G2_ECC.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05E41E294CC30045D8B3 /* GeoTrust_Primary_CA_G2_ECC.der */; };
+		8CBA05E71E294CC30045D8B3 /* GeoTrust_Primary_CA_G2_ECC.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05E41E294CC30045D8B3 /* GeoTrust_Primary_CA_G2_ECC.der */; };
 		8CC5D2241D6E64D10074F515 /* init_registry_tables.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C84CCC11D6E5D5A009B3E7D /* init_registry_tables.c */; };
 		8CC5D2251D6E64D10074F515 /* ssl_pin_verifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE919211AEA077F002B29AE /* ssl_pin_verifier.m */; };
 		8CC5D2261D6E64D10074F515 /* vendor_identifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C84CC081D6E3C67009B3E7D /* vendor_identifier.m */; };
@@ -227,15 +227,6 @@
 		8CE919221AEA077F002B29AE /* ssl_pin_verifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE919211AEA077F002B29AE /* ssl_pin_verifier.m */; };
 		8CE919251AEA07C5002B29AE /* ssl_pin_verifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE919241AEA07C5002B29AE /* ssl_pin_verifier.h */; };
 		8CE9192D1AEA0F7E002B29AE /* domain_registry.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE919291AEA0F7E002B29AE /* domain_registry.h */; };
-		FCD74BEC1E29418500693D4F /* GeoTrust_Intermediate_ECC_EV_SSL_CA.der in Resources */ = {isa = PBXBuildFile; fileRef = FCD74BE91E29418500693D4F /* GeoTrust_Intermediate_ECC_EV_SSL_CA.der */; };
-		FCD74BED1E29418500693D4F /* GeoTrust_Intermediate_ECC_EV_SSL_CA.der in Resources */ = {isa = PBXBuildFile; fileRef = FCD74BE91E29418500693D4F /* GeoTrust_Intermediate_ECC_EV_SSL_CA.der */; };
-		FCD74BEE1E29418500693D4F /* GeoTrust_Intermediate_ECC_EV_SSL_CA.der in Resources */ = {isa = PBXBuildFile; fileRef = FCD74BE91E29418500693D4F /* GeoTrust_Intermediate_ECC_EV_SSL_CA.der */; };
-		FCD74BEF1E29418500693D4F /* GeoTrust_Primary_CA_G2_ECC.der in Resources */ = {isa = PBXBuildFile; fileRef = FCD74BEA1E29418500693D4F /* GeoTrust_Primary_CA_G2_ECC.der */; };
-		FCD74BF01E29418500693D4F /* GeoTrust_Primary_CA_G2_ECC.der in Resources */ = {isa = PBXBuildFile; fileRef = FCD74BEA1E29418500693D4F /* GeoTrust_Primary_CA_G2_ECC.der */; };
-		FCD74BF11E29418500693D4F /* GeoTrust_Primary_CA_G2_ECC.der in Resources */ = {isa = PBXBuildFile; fileRef = FCD74BEA1E29418500693D4F /* GeoTrust_Primary_CA_G2_ECC.der */; };
-		FCD74BF21E29418500693D4F /* ssltest42.ssl.symclab.com.der in Resources */ = {isa = PBXBuildFile; fileRef = FCD74BEB1E29418500693D4F /* ssltest42.ssl.symclab.com.der */; };
-		FCD74BF31E29418500693D4F /* ssltest42.ssl.symclab.com.der in Resources */ = {isa = PBXBuildFile; fileRef = FCD74BEB1E29418500693D4F /* ssltest42.ssl.symclab.com.der */; };
-		FCD74BF41E29418500693D4F /* ssltest42.ssl.symclab.com.der in Resources */ = {isa = PBXBuildFile; fileRef = FCD74BEB1E29418500693D4F /* ssltest42.ssl.symclab.com.der */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -345,7 +336,6 @@
 		8C9EBE011B619BBE00CA7EE0 /* TSKReportsRateLimiter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKReportsRateLimiter.m; path = Reporting/TSKReportsRateLimiter.m; sourceTree = "<group>"; };
 		8CA6CBFD1BAE2ADD00BDA419 /* TrustKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TrustKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CA6CC061BAE2ADD00BDA419 /* TrustKit OS XTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TrustKit OS XTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8CBA05B41E2873B50045D8B3 /* enter.thewhiterabbit.space.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = enter.thewhiterabbit.space.der; path = Certificates/ECDSA_sec384r1/enter.thewhiterabbit.space.der; sourceTree = "<group>"; };
 		8CBA05C41E28AA6C0045D8B3 /* GlobalSignDomainValidationCA-SHA256-G2.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = "GlobalSignDomainValidationCA-SHA256-G2.der"; path = "Certificates/RSA_2048/GlobalSignDomainValidationCA-SHA256-G2.der"; sourceTree = "<group>"; };
 		8CBA05C51E28AA6C0045D8B3 /* GlobalSignRootCA.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = GlobalSignRootCA.der; path = Certificates/RSA_2048/GlobalSignRootCA.der; sourceTree = "<group>"; };
 		8CBA05C61E28AA6C0045D8B3 /* www.globalsign.com.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = www.globalsign.com.der; path = Certificates/RSA_2048/www.globalsign.com.der; sourceTree = "<group>"; };
@@ -354,6 +344,7 @@
 		8CBA05D51E28AAA40045D8B3 /* GoodRootCA.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = GoodRootCA.der; path = Certificates/RSA_4096/GoodRootCA.der; sourceTree = "<group>"; };
 		8CBA05D61E28AAA40045D8B3 /* www.good.com.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = www.good.com.der; path = Certificates/RSA_4096/www.good.com.der; sourceTree = "<group>"; };
 		8CBA05D71E28AAA40045D8B3 /* www.good.com.selfsigned.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = www.good.com.selfsigned.der; path = Certificates/RSA_4096/www.good.com.selfsigned.der; sourceTree = "<group>"; };
+		8CBA05E41E294CC30045D8B3 /* GeoTrust_Primary_CA_G2_ECC.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = GeoTrust_Primary_CA_G2_ECC.der; path = Certificates/ECDSA_sec384r1/GeoTrust_Primary_CA_G2_ECC.der; sourceTree = "<group>"; };
 		8CC5D24E1D6E64D10074F515 /* TrustKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TrustKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CC78B1E1B1B586F00523A25 /* TSKCertificateUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSKCertificateUtils.h; sourceTree = "<group>"; };
 		8CC78B1F1B1B586F00523A25 /* TSKCertificateUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKCertificateUtils.m; sourceTree = "<group>"; };
@@ -374,9 +365,6 @@
 		8CE919211AEA077F002B29AE /* ssl_pin_verifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ssl_pin_verifier.m; path = Pinning/ssl_pin_verifier.m; sourceTree = "<group>"; };
 		8CE919241AEA07C5002B29AE /* ssl_pin_verifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ssl_pin_verifier.h; path = Pinning/ssl_pin_verifier.h; sourceTree = "<group>"; };
 		8CE919291AEA0F7E002B29AE /* domain_registry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = domain_registry.h; path = Dependencies/domain_registry/domain_registry.h; sourceTree = "<group>"; };
-		FCD74BE91E29418500693D4F /* GeoTrust_Intermediate_ECC_EV_SSL_CA.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = GeoTrust_Intermediate_ECC_EV_SSL_CA.der; path = Certificates/secp384r1/GeoTrust_Intermediate_ECC_EV_SSL_CA.der; sourceTree = "<group>"; };
-		FCD74BEA1E29418500693D4F /* GeoTrust_Primary_CA_G2_ECC.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = GeoTrust_Primary_CA_G2_ECC.der; path = Certificates/secp384r1/GeoTrust_Primary_CA_G2_ECC.der; sourceTree = "<group>"; };
-		FCD74BEB1E29418500693D4F /* ssltest42.ssl.symclab.com.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = ssltest42.ssl.symclab.com.der; path = Certificates/secp384r1/ssltest42.ssl.symclab.com.der; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -450,8 +438,7 @@
 				8CBA05B31E28739D0045D8B3 /* ECDSA sec384r1 */,
 				8CC78B1B1B1B552100523A25 /* RSA 4096 */,
 				8CC78B1A1B1B551400523A25 /* RSA 2048 */,
-				8CC78B191B1B54F700523A25 /* ECDSA  sec256r1 */,
-				FCD74BD41E28B58100693D4F /* ECDSA sec384r1 */,
+				8CC78B191B1B54F700523A25 /* ECDSA sec256r1 */,
 			);
 			name = Certificates;
 			sourceTree = "<group>";
@@ -606,17 +593,17 @@
 		8CBA05B31E28739D0045D8B3 /* ECDSA sec384r1 */ = {
 			isa = PBXGroup;
 			children = (
-				8CBA05B41E2873B50045D8B3 /* enter.thewhiterabbit.space.der */,
+				8CBA05E41E294CC30045D8B3 /* GeoTrust_Primary_CA_G2_ECC.der */,
 			);
 			name = "ECDSA sec384r1";
 			sourceTree = "<group>";
 		};
-		8CC78B191B1B54F700523A25 /* ECDSA  sec256r1 */ = {
+		8CC78B191B1B54F700523A25 /* ECDSA sec256r1 */ = {
 			isa = PBXGroup;
 			children = (
 				8CBA05D01E28AA7B0045D8B3 /* www.cloudflare.com.der */,
 			);
-			name = "ECDSA  sec256r1";
+			name = "ECDSA sec256r1";
 			sourceTree = "<group>";
 		};
 		8CC78B1A1B1B551400523A25 /* RSA 2048 */ = {
@@ -702,16 +689,6 @@
 				8C3492901ADCA059001849FD /* domain_registry */,
 			);
 			name = Dependencies;
-			sourceTree = "<group>";
-		};
-		FCD74BD41E28B58100693D4F /* ECDSA sec384r1 */ = {
-			isa = PBXGroup;
-			children = (
-				FCD74BE91E29418500693D4F /* GeoTrust_Intermediate_ECC_EV_SSL_CA.der */,
-				FCD74BEA1E29418500693D4F /* GeoTrust_Primary_CA_G2_ECC.der */,
-				FCD74BEB1E29418500693D4F /* ssltest42.ssl.symclab.com.der */,
-			);
-			name = "ECDSA sec384r1";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1035,7 +1012,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CBA05D81E28AAA40045D8B3 /* GoodIntermediateCA.der in Resources */,
-				8CBA05B61E2873B50045D8B3 /* enter.thewhiterabbit.space.der in Resources */,
+				8CBA05E51E294CC30045D8B3 /* GeoTrust_Primary_CA_G2_ECC.der in Resources */,
 				8CBA05E11E28AAA40045D8B3 /* www.good.com.selfsigned.der in Resources */,
 				8CBA05C71E28AA6C0045D8B3 /* GlobalSignDomainValidationCA-SHA256-G2.der in Resources */,
 				8CBA05DB1E28AAA40045D8B3 /* GoodRootCA.der in Resources */,
@@ -1058,7 +1035,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CBA05DA1E28AAA40045D8B3 /* GoodIntermediateCA.der in Resources */,
-				8CBA05B81E2873B50045D8B3 /* enter.thewhiterabbit.space.der in Resources */,
+				8CBA05E71E294CC30045D8B3 /* GeoTrust_Primary_CA_G2_ECC.der in Resources */,
 				8CBA05E31E28AAA40045D8B3 /* www.good.com.selfsigned.der in Resources */,
 				8CBA05C91E28AA6C0045D8B3 /* GlobalSignDomainValidationCA-SHA256-G2.der in Resources */,
 				8CBA05DD1E28AAA40045D8B3 /* GoodRootCA.der in Resources */,
@@ -1081,7 +1058,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CBA05D91E28AAA40045D8B3 /* GoodIntermediateCA.der in Resources */,
-				8CBA05B71E2873B50045D8B3 /* enter.thewhiterabbit.space.der in Resources */,
+				8CBA05E61E294CC30045D8B3 /* GeoTrust_Primary_CA_G2_ECC.der in Resources */,
 				8CBA05E21E28AAA40045D8B3 /* www.good.com.selfsigned.der in Resources */,
 				8CBA05C81E28AA6C0045D8B3 /* GlobalSignDomainValidationCA-SHA256-G2.der in Resources */,
 				8CBA05DC1E28AAA40045D8B3 /* GoodRootCA.der in Resources */,
