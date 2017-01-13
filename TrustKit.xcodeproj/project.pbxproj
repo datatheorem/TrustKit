@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		070868B51ADFFADF00E5AFDC /* GoodRootCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868B41ADFF6B000E5AFDC /* GoodRootCA.der */; };
-		070868B71ADFFADF00E5AFDC /* GoodIntermediateCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868B11ADFF67200E5AFDC /* GoodIntermediateCA.der */; };
-		070868B81ADFFADF00E5AFDC /* www.good.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868B21ADFF67200E5AFDC /* www.good.com.der */; };
-		070868BB1AE1672D00E5AFDC /* www.good.com.selfsigned.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868BA1AE1672D00E5AFDC /* www.good.com.selfsigned.der */; };
 		075AA1091AC985FD00178223 /* TSKPinningValidatorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FA2868CAFECA46ADE0B6E3E /* TSKPinningValidatorTests.m */; };
 		0DB3B67C1DA3B24100DA730D /* init_registry_tables.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C84CCC11D6E5D5A009B3E7D /* init_registry_tables.c */; };
 		0DB3B67D1DA3B26700DA730D /* assert.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C84CCBF1D6E5D5A009B3E7D /* assert.c */; };
@@ -29,19 +25,6 @@
 		8C5D98B31CEFF079008E654B /* parse_configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C5D98B21CEFF079008E654B /* parse_configuration.m */; };
 		8C5D98B41CEFF079008E654B /* parse_configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C5D98B21CEFF079008E654B /* parse_configuration.m */; };
 		8C5D98B51CEFF079008E654B /* parse_configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C5D98B21CEFF079008E654B /* parse_configuration.m */; };
-		8C7850411E272B3100D98381 /* GlobalSignDomainValidationCA-SHA256-G2.der in Resources */ = {isa = PBXBuildFile; fileRef = 8C78503C1E272B3100D98381 /* GlobalSignDomainValidationCA-SHA256-G2.der */; };
-		8C7850421E272B3100D98381 /* GlobalSignDomainValidationCA-SHA256-G2.der in Resources */ = {isa = PBXBuildFile; fileRef = 8C78503C1E272B3100D98381 /* GlobalSignDomainValidationCA-SHA256-G2.der */; };
-		8C7850431E272B3100D98381 /* GlobalSignDomainValidationCA-SHA256-G2.der in Resources */ = {isa = PBXBuildFile; fileRef = 8C78503C1E272B3100D98381 /* GlobalSignDomainValidationCA-SHA256-G2.der */; };
-		8C7850441E272B3100D98381 /* GlobalSignRootCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8C78503D1E272B3100D98381 /* GlobalSignRootCA.der */; };
-		8C7850451E272B3100D98381 /* GlobalSignRootCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8C78503D1E272B3100D98381 /* GlobalSignRootCA.der */; };
-		8C7850461E272B3100D98381 /* GlobalSignRootCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8C78503D1E272B3100D98381 /* GlobalSignRootCA.der */; };
-		8C7850481E272FB000D98381 /* www.globalsign.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 8C7850471E272FB000D98381 /* www.globalsign.com.der */; };
-		8C7850491E272FB000D98381 /* www.globalsign.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 8C7850471E272FB000D98381 /* www.globalsign.com.der */; };
-		8C78504A1E272FB000D98381 /* www.globalsign.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 8C7850471E272FB000D98381 /* www.globalsign.com.der */; };
-		8C7D06811C69551900D3B3D2 /* www.cloudflare.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 8C7D06801C69551400D3B3D2 /* www.cloudflare.com.der */; };
-		8C7D06821C69551900D3B3D2 /* www.cloudflare.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 8C7D06801C69551400D3B3D2 /* www.cloudflare.com.der */; };
-		8C7D06871C6957FE00D3B3D2 /* COMODOECCExtendedValidationSecureServerCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8C7D06861C6957FE00D3B3D2 /* COMODOECCExtendedValidationSecureServerCA.der */; };
-		8C7D06881C6957FE00D3B3D2 /* COMODOECCExtendedValidationSecureServerCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8C7D06861C6957FE00D3B3D2 /* COMODOECCExtendedValidationSecureServerCA.der */; };
 		8C80249D1D750D0100678959 /* TSKLoggerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C80249C1D750D0100678959 /* TSKLoggerTests.m */; };
 		8C80249E1D750D0100678959 /* TSKLoggerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C80249C1D750D0100678959 /* TSKLoggerTests.m */; };
 		8C80249F1D750D0100678959 /* TSKLoggerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C80249C1D750D0100678959 /* TSKLoggerTests.m */; };
@@ -78,13 +61,6 @@
 		8C84CBC71D6E1718009B3E7D /* TSKReporterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B032D3F1AF1AEB600EAFA69 /* TSKReporterTests.m */; };
 		8C84CBC81D6E1718009B3E7D /* TSKNSURLSessionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD5F7561BCB7219005801D8 /* TSKNSURLSessionTests.m */; };
 		8C84CBC91D6E1718009B3E7D /* TSKCertificateUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC78B1F1B1B586F00523A25 /* TSKCertificateUtils.m */; };
-		8C84CBD01D6E1718009B3E7D /* GoodRootCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868B41ADFF6B000E5AFDC /* GoodRootCA.der */; };
-		8C84CBD21D6E1718009B3E7D /* COMODOECCExtendedValidationSecureServerCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8C7D06861C6957FE00D3B3D2 /* COMODOECCExtendedValidationSecureServerCA.der */; };
-		8C84CBD31D6E1718009B3E7D /* www.good.com.selfsigned.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868BA1AE1672D00E5AFDC /* www.good.com.selfsigned.der */; };
-		8C84CBD41D6E1718009B3E7D /* GoodIntermediateCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868B11ADFF67200E5AFDC /* GoodIntermediateCA.der */; };
-		8C84CBD51D6E1718009B3E7D /* COMODOECCCertificationAuthority.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CD5F7821BCC40AF005801D8 /* COMODOECCCertificationAuthority.der */; };
-		8C84CBD61D6E1718009B3E7D /* www.cloudflare.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 8C7D06801C69551400D3B3D2 /* www.cloudflare.com.der */; };
-		8C84CBD71D6E1718009B3E7D /* www.good.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868B21ADFF67200E5AFDC /* www.good.com.der */; };
 		8C84CBE11D6E176A009B3E7D /* TrustKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C84CBB21D6E0981009B3E7D /* TrustKit.framework */; };
 		8C84CC091D6E3C67009B3E7D /* vendor_identifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C84CC071D6E3C67009B3E7D /* vendor_identifier.h */; };
 		8C84CC0A1D6E3C67009B3E7D /* vendor_identifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C84CC071D6E3C67009B3E7D /* vendor_identifier.h */; };
@@ -156,10 +132,33 @@
 		8CA6CC3B1BAE2C7E00BDA419 /* TSKPinConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F9A31B17564400F06C0E /* TSKPinConfigurationTests.m */; };
 		8CA6CC3C1BAE2C8100BDA419 /* TSKPublicKeyAlgorithmTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC78B241B1B616500523A25 /* TSKPublicKeyAlgorithmTests.m */; };
 		8CA6CC3D1BAE2C8500BDA419 /* TSKCertificateUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CC78B1F1B1B586F00523A25 /* TSKCertificateUtils.m */; };
-		8CA6CC3E1BAE2E8300BDA419 /* www.good.com.selfsigned.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868BA1AE1672D00E5AFDC /* www.good.com.selfsigned.der */; };
-		8CA6CC3F1BAE2E8300BDA419 /* GoodRootCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868B41ADFF6B000E5AFDC /* GoodRootCA.der */; };
-		8CA6CC401BAE2E8300BDA419 /* GoodIntermediateCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868B11ADFF67200E5AFDC /* GoodIntermediateCA.der */; };
-		8CA6CC411BAE2E8300BDA419 /* www.good.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 070868B21ADFF67200E5AFDC /* www.good.com.der */; };
+		8CBA05B61E2873B50045D8B3 /* enter.thewhiterabbit.space.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05B41E2873B50045D8B3 /* enter.thewhiterabbit.space.der */; };
+		8CBA05B71E2873B50045D8B3 /* enter.thewhiterabbit.space.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05B41E2873B50045D8B3 /* enter.thewhiterabbit.space.der */; };
+		8CBA05B81E2873B50045D8B3 /* enter.thewhiterabbit.space.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05B41E2873B50045D8B3 /* enter.thewhiterabbit.space.der */; };
+		8CBA05C71E28AA6C0045D8B3 /* GlobalSignDomainValidationCA-SHA256-G2.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05C41E28AA6C0045D8B3 /* GlobalSignDomainValidationCA-SHA256-G2.der */; };
+		8CBA05C81E28AA6C0045D8B3 /* GlobalSignDomainValidationCA-SHA256-G2.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05C41E28AA6C0045D8B3 /* GlobalSignDomainValidationCA-SHA256-G2.der */; };
+		8CBA05C91E28AA6C0045D8B3 /* GlobalSignDomainValidationCA-SHA256-G2.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05C41E28AA6C0045D8B3 /* GlobalSignDomainValidationCA-SHA256-G2.der */; };
+		8CBA05CA1E28AA6C0045D8B3 /* GlobalSignRootCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05C51E28AA6C0045D8B3 /* GlobalSignRootCA.der */; };
+		8CBA05CB1E28AA6C0045D8B3 /* GlobalSignRootCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05C51E28AA6C0045D8B3 /* GlobalSignRootCA.der */; };
+		8CBA05CC1E28AA6C0045D8B3 /* GlobalSignRootCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05C51E28AA6C0045D8B3 /* GlobalSignRootCA.der */; };
+		8CBA05CD1E28AA6C0045D8B3 /* www.globalsign.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05C61E28AA6C0045D8B3 /* www.globalsign.com.der */; };
+		8CBA05CE1E28AA6C0045D8B3 /* www.globalsign.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05C61E28AA6C0045D8B3 /* www.globalsign.com.der */; };
+		8CBA05CF1E28AA6C0045D8B3 /* www.globalsign.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05C61E28AA6C0045D8B3 /* www.globalsign.com.der */; };
+		8CBA05D11E28AA7B0045D8B3 /* www.cloudflare.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05D01E28AA7B0045D8B3 /* www.cloudflare.com.der */; };
+		8CBA05D21E28AA7B0045D8B3 /* www.cloudflare.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05D01E28AA7B0045D8B3 /* www.cloudflare.com.der */; };
+		8CBA05D31E28AA7B0045D8B3 /* www.cloudflare.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05D01E28AA7B0045D8B3 /* www.cloudflare.com.der */; };
+		8CBA05D81E28AAA40045D8B3 /* GoodIntermediateCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05D41E28AAA40045D8B3 /* GoodIntermediateCA.der */; };
+		8CBA05D91E28AAA40045D8B3 /* GoodIntermediateCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05D41E28AAA40045D8B3 /* GoodIntermediateCA.der */; };
+		8CBA05DA1E28AAA40045D8B3 /* GoodIntermediateCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05D41E28AAA40045D8B3 /* GoodIntermediateCA.der */; };
+		8CBA05DB1E28AAA40045D8B3 /* GoodRootCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05D51E28AAA40045D8B3 /* GoodRootCA.der */; };
+		8CBA05DC1E28AAA40045D8B3 /* GoodRootCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05D51E28AAA40045D8B3 /* GoodRootCA.der */; };
+		8CBA05DD1E28AAA40045D8B3 /* GoodRootCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05D51E28AAA40045D8B3 /* GoodRootCA.der */; };
+		8CBA05DE1E28AAA40045D8B3 /* www.good.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05D61E28AAA40045D8B3 /* www.good.com.der */; };
+		8CBA05DF1E28AAA40045D8B3 /* www.good.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05D61E28AAA40045D8B3 /* www.good.com.der */; };
+		8CBA05E01E28AAA40045D8B3 /* www.good.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05D61E28AAA40045D8B3 /* www.good.com.der */; };
+		8CBA05E11E28AAA40045D8B3 /* www.good.com.selfsigned.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05D71E28AAA40045D8B3 /* www.good.com.selfsigned.der */; };
+		8CBA05E21E28AAA40045D8B3 /* www.good.com.selfsigned.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05D71E28AAA40045D8B3 /* www.good.com.selfsigned.der */; };
+		8CBA05E31E28AAA40045D8B3 /* www.good.com.selfsigned.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05D71E28AAA40045D8B3 /* www.good.com.selfsigned.der */; };
 		8CC5D2241D6E64D10074F515 /* init_registry_tables.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C84CCC11D6E5D5A009B3E7D /* init_registry_tables.c */; };
 		8CC5D2251D6E64D10074F515 /* ssl_pin_verifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE919211AEA077F002B29AE /* ssl_pin_verifier.m */; };
 		8CC5D2261D6E64D10074F515 /* vendor_identifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C84CC081D6E3C67009B3E7D /* vendor_identifier.m */; };
@@ -218,8 +217,6 @@
 		8CD5F74D1BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD5F7481BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.m */; };
 		8CD5F7571BCB7219005801D8 /* TSKNSURLSessionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD5F7561BCB7219005801D8 /* TSKNSURLSessionTests.m */; };
 		8CD5F7581BCB7219005801D8 /* TSKNSURLSessionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CD5F7561BCB7219005801D8 /* TSKNSURLSessionTests.m */; };
-		8CD5F7831BCC40AF005801D8 /* COMODOECCCertificationAuthority.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CD5F7821BCC40AF005801D8 /* COMODOECCCertificationAuthority.der */; };
-		8CD5F7841BCC40AF005801D8 /* COMODOECCCertificationAuthority.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CD5F7821BCC40AF005801D8 /* COMODOECCCertificationAuthority.der */; };
 		8CDF24681D70E07500CCA32A /* TrustKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C8480471A896EE30017C155 /* TrustKit.framework */; };
 		8CDF246A1D71345100CCA32A /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CDF245C1D70DEBA00CCA32A /* OCMock.framework */; };
 		8CDF246B1D71347000CCA32A /* OCMock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C5AB4671CF26A2900234B30 /* OCMock.framework */; };
@@ -299,10 +296,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		070868B11ADFF67200E5AFDC /* GoodIntermediateCA.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = GoodIntermediateCA.der; sourceTree = "<group>"; };
-		070868B21ADFF67200E5AFDC /* www.good.com.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = www.good.com.der; sourceTree = "<group>"; };
-		070868B41ADFF6B000E5AFDC /* GoodRootCA.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = GoodRootCA.der; sourceTree = "<group>"; };
-		070868BA1AE1672D00E5AFDC /* www.good.com.selfsigned.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = www.good.com.selfsigned.der; sourceTree = "<group>"; };
 		2FA286123F801C437F35D240 /* TrustKit+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TrustKit+Private.h"; sourceTree = "<group>"; };
 		2FA2868CAFECA46ADE0B6E3E /* TSKPinningValidatorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKPinningValidatorTests.m; sourceTree = "<group>"; };
 		6B032D3F1AF1AEB600EAFA69 /* TSKReporterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSKReporterTests.m; sourceTree = "<group>"; };
@@ -316,11 +309,6 @@
 		8C5AB4671CF26A2900234B30 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCMock.framework; path = Dependencies/OCMock/iOS/OCMock.framework; sourceTree = "<group>"; };
 		8C5D98B21CEFF079008E654B /* parse_configuration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = parse_configuration.m; sourceTree = "<group>"; };
 		8C5D98B61CEFF103008E654B /* parse_configuration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = parse_configuration.h; sourceTree = "<group>"; };
-		8C78503C1E272B3100D98381 /* GlobalSignDomainValidationCA-SHA256-G2.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = "GlobalSignDomainValidationCA-SHA256-G2.der"; path = "Certificates/RSA2048/GlobalSignDomainValidationCA-SHA256-G2.der"; sourceTree = "<group>"; };
-		8C78503D1E272B3100D98381 /* GlobalSignRootCA.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = GlobalSignRootCA.der; path = Certificates/RSA2048/GlobalSignRootCA.der; sourceTree = "<group>"; };
-		8C7850471E272FB000D98381 /* www.globalsign.com.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = www.globalsign.com.der; path = Certificates/RSA2048/www.globalsign.com.der; sourceTree = "<group>"; };
-		8C7D06801C69551400D3B3D2 /* www.cloudflare.com.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = www.cloudflare.com.der; sourceTree = "<group>"; };
-		8C7D06861C6957FE00D3B3D2 /* COMODOECCExtendedValidationSecureServerCA.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = COMODOECCExtendedValidationSecureServerCA.der; sourceTree = "<group>"; };
 		8C80249C1D750D0100678959 /* TSKLoggerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKLoggerTests.m; sourceTree = "<group>"; };
 		8C8480471A896EE30017C155 /* TrustKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TrustKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C84804B1A896EE30017C155 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -348,6 +336,15 @@
 		8C9EBE011B619BBE00CA7EE0 /* TSKReportsRateLimiter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKReportsRateLimiter.m; path = Reporting/TSKReportsRateLimiter.m; sourceTree = "<group>"; };
 		8CA6CBFD1BAE2ADD00BDA419 /* TrustKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TrustKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CA6CC061BAE2ADD00BDA419 /* TrustKit OS XTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TrustKit OS XTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CBA05B41E2873B50045D8B3 /* enter.thewhiterabbit.space.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = enter.thewhiterabbit.space.der; path = Certificates/ECDSA_sec384r1/enter.thewhiterabbit.space.der; sourceTree = "<group>"; };
+		8CBA05C41E28AA6C0045D8B3 /* GlobalSignDomainValidationCA-SHA256-G2.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = "GlobalSignDomainValidationCA-SHA256-G2.der"; path = "Certificates/RSA_2048/GlobalSignDomainValidationCA-SHA256-G2.der"; sourceTree = "<group>"; };
+		8CBA05C51E28AA6C0045D8B3 /* GlobalSignRootCA.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = GlobalSignRootCA.der; path = Certificates/RSA_2048/GlobalSignRootCA.der; sourceTree = "<group>"; };
+		8CBA05C61E28AA6C0045D8B3 /* www.globalsign.com.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = www.globalsign.com.der; path = Certificates/RSA_2048/www.globalsign.com.der; sourceTree = "<group>"; };
+		8CBA05D01E28AA7B0045D8B3 /* www.cloudflare.com.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = www.cloudflare.com.der; path = Certificates/ECDSA_sec256r1/www.cloudflare.com.der; sourceTree = "<group>"; };
+		8CBA05D41E28AAA40045D8B3 /* GoodIntermediateCA.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = GoodIntermediateCA.der; path = Certificates/RSA_4096/GoodIntermediateCA.der; sourceTree = "<group>"; };
+		8CBA05D51E28AAA40045D8B3 /* GoodRootCA.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = GoodRootCA.der; path = Certificates/RSA_4096/GoodRootCA.der; sourceTree = "<group>"; };
+		8CBA05D61E28AAA40045D8B3 /* www.good.com.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = www.good.com.der; path = Certificates/RSA_4096/www.good.com.der; sourceTree = "<group>"; };
+		8CBA05D71E28AAA40045D8B3 /* www.good.com.selfsigned.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = www.good.com.selfsigned.der; path = Certificates/RSA_4096/www.good.com.selfsigned.der; sourceTree = "<group>"; };
 		8CC5D24E1D6E64D10074F515 /* TrustKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TrustKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CC78B1E1B1B586F00523A25 /* TSKCertificateUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSKCertificateUtils.h; sourceTree = "<group>"; };
 		8CC78B1F1B1B586F00523A25 /* TSKCertificateUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKCertificateUtils.m; sourceTree = "<group>"; };
@@ -361,7 +358,6 @@
 		8CD5F7471BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKNSURLSessionDelegateProxy.h; path = Swizzling/TSKNSURLSessionDelegateProxy.h; sourceTree = "<group>"; };
 		8CD5F7481BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKNSURLSessionDelegateProxy.m; path = Swizzling/TSKNSURLSessionDelegateProxy.m; sourceTree = "<group>"; };
 		8CD5F7561BCB7219005801D8 /* TSKNSURLSessionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKNSURLSessionTests.m; sourceTree = "<group>"; };
-		8CD5F7821BCC40AF005801D8 /* COMODOECCCertificationAuthority.der */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = COMODOECCCertificationAuthority.der; sourceTree = "<group>"; };
 		8CDF245C1D70DEBA00CCA32A /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCMock.framework; path = Dependencies/OCMock/Mac/OCMock.framework; sourceTree = "<group>"; };
 		8CDF245F1D70DED000CCA32A /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCMock.framework; path = Dependencies/OCMock/tvOS/OCMock.framework; sourceTree = "<group>"; };
 		8CE9191C1AEA073C002B29AE /* public_key_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = public_key_utils.h; path = Pinning/public_key_utils.h; sourceTree = "<group>"; };
@@ -439,6 +435,7 @@
 		070868B31ADFF68200E5AFDC /* Certificates */ = {
 			isa = PBXGroup;
 			children = (
+				8CBA05B31E28739D0045D8B3 /* ECDSA sec384r1 */,
 				8CC78B1B1B1B552100523A25 /* RSA 4096 */,
 				8CC78B1A1B1B551400523A25 /* RSA 2048 */,
 				8CC78B191B1B54F700523A25 /* ECDSA  sec256r1 */,
@@ -593,12 +590,18 @@
 			name = Swizzling;
 			sourceTree = "<group>";
 		};
+		8CBA05B31E28739D0045D8B3 /* ECDSA sec384r1 */ = {
+			isa = PBXGroup;
+			children = (
+				8CBA05B41E2873B50045D8B3 /* enter.thewhiterabbit.space.der */,
+			);
+			name = "ECDSA sec384r1";
+			sourceTree = "<group>";
+		};
 		8CC78B191B1B54F700523A25 /* ECDSA  sec256r1 */ = {
 			isa = PBXGroup;
 			children = (
-				8C7D06801C69551400D3B3D2 /* www.cloudflare.com.der */,
-				8C7D06861C6957FE00D3B3D2 /* COMODOECCExtendedValidationSecureServerCA.der */,
-				8CD5F7821BCC40AF005801D8 /* COMODOECCCertificationAuthority.der */,
+				8CBA05D01E28AA7B0045D8B3 /* www.cloudflare.com.der */,
 			);
 			name = "ECDSA  sec256r1";
 			sourceTree = "<group>";
@@ -606,9 +609,9 @@
 		8CC78B1A1B1B551400523A25 /* RSA 2048 */ = {
 			isa = PBXGroup;
 			children = (
-				8C7850471E272FB000D98381 /* www.globalsign.com.der */,
-				8C78503C1E272B3100D98381 /* GlobalSignDomainValidationCA-SHA256-G2.der */,
-				8C78503D1E272B3100D98381 /* GlobalSignRootCA.der */,
+				8CBA05C41E28AA6C0045D8B3 /* GlobalSignDomainValidationCA-SHA256-G2.der */,
+				8CBA05C51E28AA6C0045D8B3 /* GlobalSignRootCA.der */,
+				8CBA05C61E28AA6C0045D8B3 /* www.globalsign.com.der */,
 			);
 			name = "RSA 2048";
 			sourceTree = "<group>";
@@ -616,10 +619,10 @@
 		8CC78B1B1B1B552100523A25 /* RSA 4096 */ = {
 			isa = PBXGroup;
 			children = (
-				070868BA1AE1672D00E5AFDC /* www.good.com.selfsigned.der */,
-				070868B41ADFF6B000E5AFDC /* GoodRootCA.der */,
-				070868B11ADFF67200E5AFDC /* GoodIntermediateCA.der */,
-				070868B21ADFF67200E5AFDC /* www.good.com.der */,
+				8CBA05D41E28AAA40045D8B3 /* GoodIntermediateCA.der */,
+				8CBA05D51E28AAA40045D8B3 /* GoodRootCA.der */,
+				8CBA05D61E28AAA40045D8B3 /* www.good.com.der */,
+				8CBA05D71E28AAA40045D8B3 /* www.good.com.selfsigned.der */,
 			);
 			name = "RSA 4096";
 			sourceTree = "<group>";
@@ -1008,16 +1011,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				070868B51ADFFADF00E5AFDC /* GoodRootCA.der in Resources */,
-				8C7D06871C6957FE00D3B3D2 /* COMODOECCExtendedValidationSecureServerCA.der in Resources */,
-				8C7850411E272B3100D98381 /* GlobalSignDomainValidationCA-SHA256-G2.der in Resources */,
-				8C7850481E272FB000D98381 /* www.globalsign.com.der in Resources */,
-				070868BB1AE1672D00E5AFDC /* www.good.com.selfsigned.der in Resources */,
-				070868B71ADFFADF00E5AFDC /* GoodIntermediateCA.der in Resources */,
-				8C7850441E272B3100D98381 /* GlobalSignRootCA.der in Resources */,
-				8CD5F7831BCC40AF005801D8 /* COMODOECCCertificationAuthority.der in Resources */,
-				8C7D06811C69551900D3B3D2 /* www.cloudflare.com.der in Resources */,
-				070868B81ADFFADF00E5AFDC /* www.good.com.der in Resources */,
+				8CBA05D81E28AAA40045D8B3 /* GoodIntermediateCA.der in Resources */,
+				8CBA05B61E2873B50045D8B3 /* enter.thewhiterabbit.space.der in Resources */,
+				8CBA05E11E28AAA40045D8B3 /* www.good.com.selfsigned.der in Resources */,
+				8CBA05C71E28AA6C0045D8B3 /* GlobalSignDomainValidationCA-SHA256-G2.der in Resources */,
+				8CBA05DB1E28AAA40045D8B3 /* GoodRootCA.der in Resources */,
+				8CBA05CD1E28AA6C0045D8B3 /* www.globalsign.com.der in Resources */,
+				8CBA05D11E28AA7B0045D8B3 /* www.cloudflare.com.der in Resources */,
+				8CBA05CA1E28AA6C0045D8B3 /* GlobalSignRootCA.der in Resources */,
+				8CBA05DE1E28AAA40045D8B3 /* www.good.com.der in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1032,16 +1034,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C84CBD01D6E1718009B3E7D /* GoodRootCA.der in Resources */,
-				8C84CBD21D6E1718009B3E7D /* COMODOECCExtendedValidationSecureServerCA.der in Resources */,
-				8C7850431E272B3100D98381 /* GlobalSignDomainValidationCA-SHA256-G2.der in Resources */,
-				8C78504A1E272FB000D98381 /* www.globalsign.com.der in Resources */,
-				8C84CBD31D6E1718009B3E7D /* www.good.com.selfsigned.der in Resources */,
-				8C84CBD41D6E1718009B3E7D /* GoodIntermediateCA.der in Resources */,
-				8C7850461E272B3100D98381 /* GlobalSignRootCA.der in Resources */,
-				8C84CBD51D6E1718009B3E7D /* COMODOECCCertificationAuthority.der in Resources */,
-				8C84CBD61D6E1718009B3E7D /* www.cloudflare.com.der in Resources */,
-				8C84CBD71D6E1718009B3E7D /* www.good.com.der in Resources */,
+				8CBA05DA1E28AAA40045D8B3 /* GoodIntermediateCA.der in Resources */,
+				8CBA05B81E2873B50045D8B3 /* enter.thewhiterabbit.space.der in Resources */,
+				8CBA05E31E28AAA40045D8B3 /* www.good.com.selfsigned.der in Resources */,
+				8CBA05C91E28AA6C0045D8B3 /* GlobalSignDomainValidationCA-SHA256-G2.der in Resources */,
+				8CBA05DD1E28AAA40045D8B3 /* GoodRootCA.der in Resources */,
+				8CBA05CF1E28AA6C0045D8B3 /* www.globalsign.com.der in Resources */,
+				8CBA05D31E28AA7B0045D8B3 /* www.cloudflare.com.der in Resources */,
+				8CBA05CC1E28AA6C0045D8B3 /* GlobalSignRootCA.der in Resources */,
+				8CBA05E01E28AAA40045D8B3 /* www.good.com.der in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1056,16 +1057,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CA6CC3F1BAE2E8300BDA419 /* GoodRootCA.der in Resources */,
-				8CA6CC401BAE2E8300BDA419 /* GoodIntermediateCA.der in Resources */,
-				8C7850421E272B3100D98381 /* GlobalSignDomainValidationCA-SHA256-G2.der in Resources */,
-				8C7850491E272FB000D98381 /* www.globalsign.com.der in Resources */,
-				8C7D06881C6957FE00D3B3D2 /* COMODOECCExtendedValidationSecureServerCA.der in Resources */,
-				8CA6CC411BAE2E8300BDA419 /* www.good.com.der in Resources */,
-				8C7850451E272B3100D98381 /* GlobalSignRootCA.der in Resources */,
-				8CD5F7841BCC40AF005801D8 /* COMODOECCCertificationAuthority.der in Resources */,
-				8C7D06821C69551900D3B3D2 /* www.cloudflare.com.der in Resources */,
-				8CA6CC3E1BAE2E8300BDA419 /* www.good.com.selfsigned.der in Resources */,
+				8CBA05D91E28AAA40045D8B3 /* GoodIntermediateCA.der in Resources */,
+				8CBA05B71E2873B50045D8B3 /* enter.thewhiterabbit.space.der in Resources */,
+				8CBA05E21E28AAA40045D8B3 /* www.good.com.selfsigned.der in Resources */,
+				8CBA05C81E28AA6C0045D8B3 /* GlobalSignDomainValidationCA-SHA256-G2.der in Resources */,
+				8CBA05DC1E28AAA40045D8B3 /* GoodRootCA.der in Resources */,
+				8CBA05CE1E28AA6C0045D8B3 /* www.globalsign.com.der in Resources */,
+				8CBA05D21E28AA7B0045D8B3 /* www.cloudflare.com.der in Resources */,
+				8CBA05CB1E28AA6C0045D8B3 /* GlobalSignRootCA.der in Resources */,
+				8CBA05DF1E28AAA40045D8B3 /* www.good.com.der in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
