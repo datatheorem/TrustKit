@@ -47,9 +47,16 @@ static unsigned char ecDsaSecp256r1Asn1Header[] = {
     0x42, 0x00
 };
 
+static unsigned char ecDsaSecp384r1Asn1Header[] = {
+    0x30, 0x76, 0x30, 0x10, 0x06, 0x07, 0x2a, 0x86, 0x48, 0xce, 0x3d, 0x02,
+    0x01, 0x06, 0x05, 0x2b, 0x81, 0x04, 0x00, 0x22, 0x03, 0x62, 0x00
+};
+
 // Careful with the order... must match how TSKPublicKeyAlgorithm is defined
-static unsigned char *asn1HeaderBytes[3] = { rsa2048Asn1Header, rsa4096Asn1Header, ecDsaSecp256r1Asn1Header };
-static unsigned int asn1HeaderSizes[3] = { sizeof(rsa2048Asn1Header), sizeof(rsa4096Asn1Header), sizeof(ecDsaSecp256r1Asn1Header) };
+static unsigned char *asn1HeaderBytes[4] = { rsa2048Asn1Header, rsa4096Asn1Header,
+    ecDsaSecp256r1Asn1Header, ecDsaSecp384r1Asn1Header };
+static unsigned int asn1HeaderSizes[4] = { sizeof(rsa2048Asn1Header), sizeof(rsa4096Asn1Header),
+    sizeof(ecDsaSecp256r1Asn1Header), sizeof(ecDsaSecp384r1Asn1Header) };
 
 
 #if TARGET_OS_WATCH || TARGET_OS_TV || (TARGET_OS_IOS &&__IPHONE_OS_VERSION_MAX_ALLOWED >= 100000) || (!TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MAX_ALLOWED >= 101200)

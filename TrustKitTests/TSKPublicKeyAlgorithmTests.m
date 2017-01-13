@@ -79,6 +79,54 @@
     CFRelease(certificate);
 }
 
+- (void)testVerifyEcDsaSecp384r1
+{
+    // Create a valid server trust
+    SecCertificateRef leafCertificate = [TSKCertificateUtils createCertificateFromDer:@"ssltest42.ssl.symclab.com"];
+    SecCertificateRef intermediateCertificate = [TSKCertificateUtils createCertificateFromDer:@"GeoTrust_Intermediate_ECC_EV_SSL_CA"];
+    SecCertificateRef intermediateCertificate2 = [TSKCertificateUtils createCertificateFromDer:@"GeoTrust_Primary_CA_G2_ECC"];
+    SecCertificateRef certChainArray[3] = {leafCertificate, intermediateCertificate, intermediateCertificate2};
+    
+    // If we put the real root CA, the test fails on OS X; using the last intermediate cert instead
+    //SecCertificateRef rootCertificate = [TSKCertificateUtils createCertificateFromDer:@"AddTrustExternalRootCA"];
+    SecCertificateRef trustStoreArray[1] = {intermediateCertificate2};
+    
+    SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
+                                                             arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
+                                                      anchorCertificates:(const void **)trustStoreArray
+                                                             arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
+    
+    // Create a configuration and parse it so we get the right format
+    NSDictionary *trustKitConfig;
+    trustKitConfig = parseTrustKitConfiguration(@{kTSKSwizzleNetworkDelegates: @NO,
+                                                  kTSKPinnedDomains :
+                                                      @{@"ssltest42.ssl.symclab.com" : @{
+                                                                kTSKPublicKeyAlgorithms : @[kTSKAlgorithmEcDsaSecp384r1],
+                                                                kTSKPublicKeyHashes : @[@"vPtEqrmtAhAVcGtBIep2HIHJ6IlnWQ9vlK50TciLePs=", // Root CA Key
+                                                                                        @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
+                                                                                        ]}}});
+    
+    // Initialize the SPKI cache manually and don't load an existing cache from the filesystem
+    initializeSubjectPublicKeyInfoCache();
+    XCTAssert([getSpkiCache()[@3] count] == 0, @"SPKI cache for EC DSA 384 must be empty");
+    
+    TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
+    verificationResult = verifyPublicKeyPin(trust,
+                                            @"ssltest42.ssl.symclab.com",
+                                            trustKitConfig[kTSKPinnedDomains][@"ssltest42.ssl.symclab.com"][kTSKPublicKeyAlgorithms],
+                                            trustKitConfig[kTSKPinnedDomains][@"ssltest42.ssl.symclab.com"][kTSKPublicKeyHashes]);
+    
+    // Ensure the SPKI cache was used; the full certificate chain is three certs and we have to go through all of them to get to the pinned leaf
+    XCTAssert([getSpkiCache()[@3] count] == 1, @"SPKI cache for EC DSA 384 must have been used");
+    
+    CFRelease(trust);
+    CFRelease(leafCertificate);
+    CFRelease(intermediateCertificate);
+    resetSubjectPublicKeyInfoCache();
+    
+    XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against valid public key pins for ECDSA secp384r1");
+}
+
 
 
 - (void)testVerifyMultipleAlgorithms

@@ -13,6 +13,7 @@ class SupportedKeyAlgorithmsEnum(object):
     RSA_2048 = 1
     RSA_4096 = 2
     ECDSA_SECP256R1 = 3
+    ECDSA_SECP384R1 = 4
 
 
 if __name__ == '__main__':
@@ -50,6 +51,8 @@ if __name__ == '__main__':
     if alg_txt == 'id-ecPublicKey':
         if 'prime256v1' in certificate_txt:
             key_algorithm = SupportedKeyAlgorithmsEnum.ECDSA_SECP256R1
+        if 'secp384r1' in certificate_txt:
+            key_algorithm = SupportedKeyAlgorithmsEnum.ECDSA_SECP384R1
     elif alg_txt == 'rsaEncryption':
         if 'Key: (2048 bit)' in certificate_txt:
             key_algorithm = SupportedKeyAlgorithmsEnum.RSA_2048
@@ -62,9 +65,13 @@ if __name__ == '__main__':
 
     # Generate the Subject Public Key Info hash
     if key_algorithm == SupportedKeyAlgorithmsEnum.ECDSA_SECP256R1:
-        # The OpenSSL command is different for ECDSA
+        # The OpenSSL command is different for ECDSA secp256
         openssl_alg = 'ec'
         trustkit_alg = 'kTSKAlgorithmEcDsaSecp256r1'
+    elif key_algorithm == SupportedKeyAlgorithmsEnum.ECDSA_SECP384R1:
+        # The OpenSSL command is different for ECDSA secp384
+        openssl_alg = 'ec'
+        trustkit_alg = 'kTSKAlgorithmEcDsaSecp384r1'
     elif key_algorithm == SupportedKeyAlgorithmsEnum.RSA_2048:
         openssl_alg = 'rsa'
         trustkit_alg = 'kTSKAlgorithmRsa2048'

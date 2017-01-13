@@ -227,6 +227,15 @@
 		8CE919221AEA077F002B29AE /* ssl_pin_verifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE919211AEA077F002B29AE /* ssl_pin_verifier.m */; };
 		8CE919251AEA07C5002B29AE /* ssl_pin_verifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE919241AEA07C5002B29AE /* ssl_pin_verifier.h */; };
 		8CE9192D1AEA0F7E002B29AE /* domain_registry.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE919291AEA0F7E002B29AE /* domain_registry.h */; };
+		FCD74BEC1E29418500693D4F /* GeoTrust_Intermediate_ECC_EV_SSL_CA.der in Resources */ = {isa = PBXBuildFile; fileRef = FCD74BE91E29418500693D4F /* GeoTrust_Intermediate_ECC_EV_SSL_CA.der */; };
+		FCD74BED1E29418500693D4F /* GeoTrust_Intermediate_ECC_EV_SSL_CA.der in Resources */ = {isa = PBXBuildFile; fileRef = FCD74BE91E29418500693D4F /* GeoTrust_Intermediate_ECC_EV_SSL_CA.der */; };
+		FCD74BEE1E29418500693D4F /* GeoTrust_Intermediate_ECC_EV_SSL_CA.der in Resources */ = {isa = PBXBuildFile; fileRef = FCD74BE91E29418500693D4F /* GeoTrust_Intermediate_ECC_EV_SSL_CA.der */; };
+		FCD74BEF1E29418500693D4F /* GeoTrust_Primary_CA_G2_ECC.der in Resources */ = {isa = PBXBuildFile; fileRef = FCD74BEA1E29418500693D4F /* GeoTrust_Primary_CA_G2_ECC.der */; };
+		FCD74BF01E29418500693D4F /* GeoTrust_Primary_CA_G2_ECC.der in Resources */ = {isa = PBXBuildFile; fileRef = FCD74BEA1E29418500693D4F /* GeoTrust_Primary_CA_G2_ECC.der */; };
+		FCD74BF11E29418500693D4F /* GeoTrust_Primary_CA_G2_ECC.der in Resources */ = {isa = PBXBuildFile; fileRef = FCD74BEA1E29418500693D4F /* GeoTrust_Primary_CA_G2_ECC.der */; };
+		FCD74BF21E29418500693D4F /* ssltest42.ssl.symclab.com.der in Resources */ = {isa = PBXBuildFile; fileRef = FCD74BEB1E29418500693D4F /* ssltest42.ssl.symclab.com.der */; };
+		FCD74BF31E29418500693D4F /* ssltest42.ssl.symclab.com.der in Resources */ = {isa = PBXBuildFile; fileRef = FCD74BEB1E29418500693D4F /* ssltest42.ssl.symclab.com.der */; };
+		FCD74BF41E29418500693D4F /* ssltest42.ssl.symclab.com.der in Resources */ = {isa = PBXBuildFile; fileRef = FCD74BEB1E29418500693D4F /* ssltest42.ssl.symclab.com.der */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -365,6 +374,9 @@
 		8CE919211AEA077F002B29AE /* ssl_pin_verifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ssl_pin_verifier.m; path = Pinning/ssl_pin_verifier.m; sourceTree = "<group>"; };
 		8CE919241AEA07C5002B29AE /* ssl_pin_verifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ssl_pin_verifier.h; path = Pinning/ssl_pin_verifier.h; sourceTree = "<group>"; };
 		8CE919291AEA0F7E002B29AE /* domain_registry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = domain_registry.h; path = Dependencies/domain_registry/domain_registry.h; sourceTree = "<group>"; };
+		FCD74BE91E29418500693D4F /* GeoTrust_Intermediate_ECC_EV_SSL_CA.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = GeoTrust_Intermediate_ECC_EV_SSL_CA.der; path = Certificates/secp384r1/GeoTrust_Intermediate_ECC_EV_SSL_CA.der; sourceTree = "<group>"; };
+		FCD74BEA1E29418500693D4F /* GeoTrust_Primary_CA_G2_ECC.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = GeoTrust_Primary_CA_G2_ECC.der; path = Certificates/secp384r1/GeoTrust_Primary_CA_G2_ECC.der; sourceTree = "<group>"; };
+		FCD74BEB1E29418500693D4F /* ssltest42.ssl.symclab.com.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = ssltest42.ssl.symclab.com.der; path = Certificates/secp384r1/ssltest42.ssl.symclab.com.der; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -439,6 +451,7 @@
 				8CC78B1B1B1B552100523A25 /* RSA 4096 */,
 				8CC78B1A1B1B551400523A25 /* RSA 2048 */,
 				8CC78B191B1B54F700523A25 /* ECDSA  sec256r1 */,
+				FCD74BD41E28B58100693D4F /* ECDSA sec384r1 */,
 			);
 			name = Certificates;
 			sourceTree = "<group>";
@@ -689,6 +702,16 @@
 				8C3492901ADCA059001849FD /* domain_registry */,
 			);
 			name = Dependencies;
+			sourceTree = "<group>";
+		};
+		FCD74BD41E28B58100693D4F /* ECDSA sec384r1 */ = {
+			isa = PBXGroup;
+			children = (
+				FCD74BE91E29418500693D4F /* GeoTrust_Intermediate_ECC_EV_SSL_CA.der */,
+				FCD74BEA1E29418500693D4F /* GeoTrust_Primary_CA_G2_ECC.der */,
+				FCD74BEB1E29418500693D4F /* ssltest42.ssl.symclab.com.der */,
+			);
+			name = "ECDSA sec384r1";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
