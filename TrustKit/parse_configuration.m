@@ -154,6 +154,10 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
             {
                 [publicKeyAlgs addObject:@(TSKPublicKeyAlgorithmEcDsaSecp256r1)];
             }
+            else if ([kTSKAlgorithmEcDsaSecp384r1 isEqualToString:algorithm])
+            {
+                [publicKeyAlgs addObject:@(TSKPublicKeyAlgorithmEcDsaSecp384r1)];
+            }
             else
             {
                 [NSException raise:@"TrustKit configuration invalid"

@@ -160,6 +160,7 @@ FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKDisableDefaultReportUri;
  * `kTSKAlgorithmRsa2048`
  * `kTSKAlgorithmRsa4096`
  * `kTSKAlgorithmEcDsaSecp256r1`
+ * `kTSKAlgorithmEcDsaSecp384r1`
  
  */
 typedef NSString *TSKSupportedAlgorithm;
@@ -182,6 +183,11 @@ FOUNDATION_EXPORT const TSKSupportedAlgorithm kTSKAlgorithmRsa4096;
  */
 FOUNDATION_EXPORT const TSKSupportedAlgorithm kTSKAlgorithmEcDsaSecp256r1;
 
+
+/**
+ ECDSA with secp384r1 curve.
+ */
+FOUNDATION_EXPORT const TSKSupportedAlgorithm kTSKAlgorithmEcDsaSecp384r1;
 
 
 #pragma mark Pinning Validation Notification Name
