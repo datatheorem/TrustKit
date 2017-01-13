@@ -57,7 +57,7 @@ if __name__ == '__main__':
             key_algorithm = SupportedKeyAlgorithmsEnum.RSA_4096
 
     if key_algorithm is None:
-        raise ValueError('Error: Certificate key algorithm not supported.')
+        raise ValueError('Error: Certificate key algorithm not supported: {}.'.format(alg_txt))
 
 
     # Generate the Subject Public Key Info hash
