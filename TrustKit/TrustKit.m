@@ -28,6 +28,8 @@ static const NSString *kTSKConfiguration = @"TSKConfiguration";
 // General keys
 const TSKGlobalConfigurationKey kTSKSwizzleNetworkDelegates = @"TSKSwizzleNetworkDelegates";
 const TSKGlobalConfigurationKey kTSKPinnedDomains = @"TSKPinnedDomains";
+const TSKGlobalConfigurationKey kTSKShouldRateLimitReports = @"TSKShouldRateLimitReports";
+
 
 const TSKGlobalConfigurationKey kTSKIgnorePinningForUserDefinedTrustAnchors = @"TSKIgnorePinningForUserDefinedTrustAnchors";
 
@@ -197,7 +199,14 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
         // or the swizzling logic when calling [TrustKit resetConfiguration]
         dispatch_once(&dispatchOnceTrustKitInit, ^{
             // Create our reporter for sending pin validation failures; do this before hooking NSURLSession so we don't hook ourselves
-            _pinFailureReporter = [[TSKBackgroundReporter alloc]initAndRateLimitReports:YES];
+            BOOL shouldRateLimitReports = YES;
+            
+            if ([[_trustKitGlobalConfiguration allKeys] containsObject: kTSKShouldRateLimitReports])
+            {
+                shouldRateLimitReports = [_trustKitGlobalConfiguration[kTSKShouldRateLimitReports] boolValue];
+            }
+            
+            _pinFailureReporter = [[TSKBackgroundReporter alloc]initAndRateLimitReports:shouldRateLimitReports];
             
             
             // Create a dispatch queue for activating the reporter
