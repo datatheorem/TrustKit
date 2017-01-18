@@ -199,12 +199,8 @@ static void initializeTrustKit(NSDictionary *trustKitConfig)
         // or the swizzling logic when calling [TrustKit resetConfiguration]
         dispatch_once(&dispatchOnceTrustKitInit, ^{
             // Create our reporter for sending pin validation failures; do this before hooking NSURLSession so we don't hook ourselves
-            BOOL shouldRateLimitReports = YES;
-            
-            if ([[_trustKitGlobalConfiguration allKeys] containsObject: kTSKShouldRateLimitReports])
-            {
-                shouldRateLimitReports = [_trustKitGlobalConfiguration[kTSKShouldRateLimitReports] boolValue];
-            }
+            NSNumber *rateLimitOverride = _trustKitGlobalConfiguration[kTSKShouldRateLimitReports];
+            BOOL shouldRateLimitReports = rateLimitOverride ? rateLimitOverride.boolValue : YES;
             
             _pinFailureReporter = [[TSKBackgroundReporter alloc]initAndRateLimitReports:shouldRateLimitReports];
             
