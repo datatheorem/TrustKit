@@ -75,6 +75,40 @@
     
     NSString *serverConfigKey = getPinningConfigurationKeyForDomain(@"www.good.com", trustKitConfig);
     XCTAssert([serverConfigKey isEqualToString:@"www.good.com"], @"Did not receive a configuration for a pinned domain");
+    
+    // Validate the content of the config
+    NSDictionary *serverConfig = trustKitConfig[kTSKPinnedDomains][serverConfigKey];
+    XCTAssertNil(serverConfig[kTSKExpirationDate]);
+    XCTAssertEqual(serverConfig[kTSKPublicKeyAlgorithms][0], @(TSKPublicKeyAlgorithmRsa4096));
+    XCTAssertEqual([serverConfig[kTSKPublicKeyHashes] count], (unsigned long) 2);
+}
+
+
+- (void)testGetConfigurationPinningEnabledWithExpirationDate
+{
+    NSString *expirationDateStr = @"2015-01-01";
+    NSDictionary *trustKitConfig;
+    trustKitConfig = parseTrustKitConfiguration(@{kTSKSwizzleNetworkDelegates: @NO,
+                                                  kTSKPinnedDomains : @{
+                                                          @"www.good.com" : @{
+                                                                  kTSKExpirationDate: expirationDateStr,
+                                                                  kTSKPublicKeyAlgorithms : @[kTSKAlgorithmEcDsaSecp384r1],
+                                                                  kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                                                                                          @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
+                                                                                          ]}}});
+    
+    NSString *serverConfigKey = getPinningConfigurationKeyForDomain(@"www.good.com", trustKitConfig);
+    XCTAssert([serverConfigKey isEqualToString:@"www.good.com"], @"Did not receive a configuration for a pinned domain");
+    
+    // Validate the content of the config
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+    NSDate *expirationDate = [dateFormat dateFromString:expirationDateStr];
+    
+    NSDictionary *serverConfig = trustKitConfig[kTSKPinnedDomains][serverConfigKey];
+    XCTAssert([expirationDate isEqualToDate:serverConfig[kTSKExpirationDate]]);
+    XCTAssertEqual(serverConfig[kTSKPublicKeyAlgorithms][0], @(TSKPublicKeyAlgorithmEcDsaSecp384r1));
+    XCTAssertEqual([serverConfig[kTSKPublicKeyHashes] count], (unsigned long) 2);
 }
 
 
@@ -83,11 +117,11 @@
     NSDictionary *trustKitConfig;
     trustKitConfig = parseTrustKitConfiguration(@{kTSKSwizzleNetworkDelegates: @NO,
                                                   kTSKPinnedDomains : @{
-                                                      @"good.com" : @{
-                                                              kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                                                              kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
-                                                                                      @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
-                                                                                      ]}}});
+                                                          @"good.com" : @{
+                                                                  kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                                  kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                                                                                          @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
+                                                                                          ]}}});
     
     // Ensure www.datatheorem.com gets no configuration
     NSString *serverConfigKey = getPinningConfigurationKeyForDomain(@"www.datatheorem.com", trustKitConfig);

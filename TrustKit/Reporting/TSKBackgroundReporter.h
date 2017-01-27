@@ -29,7 +29,7 @@
  @exception NSException Thrown when the App does not have a bundle ID, meaning we're running in unit tests where the background transfer service can't be used.
  
  */
-- (instancetype)initAndRateLimitReports:(BOOL)shouldRateLimitReports;
+- (nonnull instancetype)initAndRateLimitReports:(BOOL)shouldRateLimitReports;
 
 ///----------------------
 /// @name Sending Reports
@@ -38,17 +38,18 @@
 /**
  Send a pin validation failure report; each argument is described section 3. of RFC 7469.
  */
-- (void) pinValidationFailedForHostname:(NSString *) serverHostname
-                                   port:(NSNumber *) serverPort
-                                  certificateChain:(NSArray *) certificateChain
-                          notedHostname:(NSString *) notedHostname
-                             reportURIs:(NSArray<NSURL *> *) reportURIs
+- (void) pinValidationFailedForHostname:(nonnull NSString *) serverHostname
+                                   port:(nullable NSNumber *) serverPort
+                                  certificateChain:(nonnull NSArray *) certificateChain
+                          notedHostname:(nonnull NSString *) notedHostname
+                             reportURIs:(nonnull NSArray<NSURL *> *) reportURIs
                       includeSubdomains:(BOOL) includeSubdomains
                          enforcePinning:(BOOL) enforcePinning
-                              knownPins:(NSSet<NSData *> *) knownPins
-                       validationResult:(TSKPinValidationResult) validationResult;
+                              knownPins:(nonnull NSSet<NSData *> *) knownPins
+                       validationResult:(TSKPinValidationResult) validationResult
+                         expirationDate:(nullable NSDate *)knownPinsExpirationDate;
 
-- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error;
+- (void)URLSession:(nonnull NSURLSession *)session task:(nonnull NSURLSessionTask *)task didCompleteWithError:(nullable NSError *)error;
 
 @end
 

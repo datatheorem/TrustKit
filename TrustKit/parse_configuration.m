@@ -106,6 +106,18 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
         }
         
         
+        // Extract the optional expiration date setting
+        NSString *expirationDateStr = domainPinningPolicy[kTSKExpirationDate];
+        if (expirationDateStr != nil)
+        {
+            // Convert the string in the yyyy-MM-dd format into an actual date
+            NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+            [dateFormat setDateFormat:@"yyyy-MM-dd"];
+            NSDate *expirationDate = [dateFormat dateFromString:expirationDateStr];
+            domainFinalConfiguration[kTSKExpirationDate] = expirationDate;
+        }
+        
+        
         // Extract the optional enforcePinning setting
         NSNumber *shouldEnforcePinning = domainPinningPolicy[kTSKEnforcePinning];
         if (shouldEnforcePinning)

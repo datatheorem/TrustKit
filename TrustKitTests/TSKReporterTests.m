@@ -70,12 +70,14 @@
 {
     // Ensure that a pin validation notification triggers the upload of a report if the validation failed
     // Initialize TrustKit so the reporter block is ready to receive notifications
+    NSString *expirationDateStr = @"2019-01-01";
     NSDictionary *trustKitConfig =
     @{kTSKSwizzleNetworkDelegates: @NO,
       kTSKPinnedDomains :
           @{
               @"www.test.com" : @{
                       kTSKEnforcePinning : @YES,
+                      kTSKExpirationDate : expirationDateStr,
                       kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                       kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                               @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=" // Fake key 2
@@ -92,6 +94,12 @@
                                                                                 options:(NSDataBase64DecodingOptions)0],
                                              [[NSData alloc]initWithBase64EncodedString:@"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB="
                                                                                 options:(NSDataBase64DecodingOptions)0]]];
+    
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+    NSDate *expirationDate = [dateFormat dateFromString:expirationDateStr];
+    
     [[pinFailureReporterMock expect] pinValidationFailedForHostname:@"www.test.com"
                                                                port:nil
                                                    certificateChain:_testCertificateChain
@@ -100,7 +108,8 @@
                                                   includeSubdomains:NO
                                                   enforcePinning:YES
                                                           knownPins:knownPins
-                                                   validationResult:TSKPinValidationResultErrorCouldNotGenerateSpkiHash];
+                                                   validationResult:TSKPinValidationResultErrorCouldNotGenerateSpkiHash
+                                                     expirationDate:expirationDate];
     
     // Create a notification
     [[NSNotificationCenter defaultCenter] postNotificationName:kTSKValidationCompletedNotification
@@ -145,17 +154,40 @@
     TSKBackgroundReporter *reporter = [[TSKBackgroundReporter alloc] initAndRateLimitReports:NO];
     [reporter pinValidationFailedForHostname:@"mail.example.com"
                                         port:[NSNumber numberWithInt:443]
-                                       certificateChain:_testCertificateChain
+                            certificateChain:_testCertificateChain
                                notedHostname:@"example.com"
                                   reportURIs:@[[NSURL URLWithString:[TrustKit getDefaultReportUri]]]
                            includeSubdomains:YES
-                           enforcePinning:YES
+                              enforcePinning:YES
                                    knownPins:[NSSet setWithArray:@[
-                                               [[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM="
-                                                                                  options:(NSDataBase64DecodingOptions)0],
-                                               [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g="
-                                                                                  options:(NSDataBase64DecodingOptions)0]]]
-                            validationResult:TSKPinValidationResultFailed];
+                                                                   [[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM="
+                                                                                                      options:(NSDataBase64DecodingOptions)0],
+                                                                   [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g="
+                                                                                                      options:(NSDataBase64DecodingOptions)0]]]
+                            validationResult:TSKPinValidationResultFailed
+                              expirationDate:[NSDate date]];
+    
+    [NSThread sleepForTimeInterval:2.0];
+}
+
+- (void)testReporterNilExpirationDate
+{
+    // Just try a simple valid case to see if we can post this to the default report URL
+    TSKBackgroundReporter *reporter = [[TSKBackgroundReporter alloc] initAndRateLimitReports:NO];
+    [reporter pinValidationFailedForHostname:@"mail.example.com"
+                                        port:[NSNumber numberWithInt:443]
+                            certificateChain:_testCertificateChain
+                               notedHostname:@"example.com"
+                                  reportURIs:@[[NSURL URLWithString:[TrustKit getDefaultReportUri]]]
+                           includeSubdomains:YES
+                              enforcePinning:YES
+                                   knownPins:[NSSet setWithArray:@[
+                                                                   [[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM="
+                                                                                                      options:(NSDataBase64DecodingOptions)0],
+                                                                   [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g="
+                                                                                                      options:(NSDataBase64DecodingOptions)0]]]
+                            validationResult:TSKPinValidationResultFailed
+                              expirationDate:nil];
     
     [NSThread sleepForTimeInterval:2.0];
 }
@@ -185,7 +217,8 @@
                                                                  enforcePinning:NO
                                                          validatedCertificateChain:certificateChain
                                                                          knownPins:formattedPins
-                                                                  validationResult:TSKPinValidationResultFailedCertificateChainNotTrusted];
+                                                                  validationResult:TSKPinValidationResultFailedCertificateChainNotTrusted
+                                                                    expirationDate:[NSDate date]];
     
     // Ensure the same report will not be sent twice in a row
     XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == NO, @"Wrongly rate-limited a new report");
@@ -210,7 +243,8 @@
                                             enforcePinning:NO
                                     validatedCertificateChain:certificateChain
                                                     knownPins:formattedPins
-                                             validationResult:TSKPinValidationResultFailed];
+                                             validationResult:TSKPinValidationResultFailed
+                                               expirationDate:[NSDate date]];
     XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == NO, @"Wrongly rate-limited a new report");
     XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == YES, @"Did not rate-limit an identical report");
     
@@ -229,7 +263,8 @@
                                                enforcePinning:NO
                                     validatedCertificateChain:certificateChain
                                                     knownPins:formattedPins
-                                             validationResult:TSKPinValidationResultFailedCertificateChainNotTrusted];
+                                             validationResult:TSKPinValidationResultFailedCertificateChainNotTrusted
+                                               expirationDate:[NSDate date]];
     XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == NO, @"Wrongly rate-limited a new report");
     XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == YES, @"Did not rate-limit an identical report");
     
@@ -248,7 +283,8 @@
                                             enforcePinning:NO
                                     validatedCertificateChain:[certificateChain subarrayWithRange:NSMakeRange(1, 2)]
                                                     knownPins:formattedPins
-                                             validationResult:TSKPinValidationResultFailedCertificateChainNotTrusted];
+                                             validationResult:TSKPinValidationResultFailedCertificateChainNotTrusted
+                                               expirationDate:[NSDate date]];
     XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == NO, @"Wrongly rate-limited a new report");
     XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == YES, @"Did not rate-limit an identical report");
 }

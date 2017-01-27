@@ -14,20 +14,21 @@
 @implementation TSKPinFailureReport
 
 
-- (instancetype) initWithAppBundleId:(NSString *)appBundleId
-                          appVersion:(NSString *)appVersion
-                         appPlatform:(NSString *)appPlatform
-                         appVendorId:(NSString *)appVendorId
-                     trustkitVersion:(NSString *)trustkitVersion
-                            hostname:(NSString *)serverHostname
-                                port:(NSNumber *)serverPort
-                            dateTime:(NSDate *)dateTime
-                       notedHostname:(NSString *)notedHostname
-                   includeSubdomains:(BOOL) includeSubdomains
-                      enforcePinning:(BOOL)enforcePinning
-           validatedCertificateChain:(NSArray<NSString *> *)validatedCertificateChain
-                           knownPins:(NSArray<NSString *> *)knownPins
-                    validationResult:(TSKPinValidationResult) validationResult
+- (nonnull instancetype) initWithAppBundleId:(nonnull NSString *)appBundleId
+                                  appVersion:(nonnull NSString *)appVersion
+                                 appPlatform:(nonnull NSString *)appPlatform
+                                 appVendorId:(nonnull NSString *)appVendorId
+                             trustkitVersion:(nonnull NSString *)trustkitVersion
+                                    hostname:(nonnull NSString *)serverHostname
+                                        port:(nonnull NSNumber *)serverPort
+                                    dateTime:(nonnull NSDate *)dateTime
+                               notedHostname:(nonnull NSString *)notedHostname
+                           includeSubdomains:(BOOL) includeSubdomains
+                              enforcePinning:(BOOL)enforcePinning
+                   validatedCertificateChain:(nonnull NSArray<NSString *> *)validatedCertificateChain
+                                   knownPins:(nonnull NSArray<NSString *> *)knownPins
+                            validationResult:(TSKPinValidationResult) validationResult
+                              expirationDate:(nullable NSDate *)knownPinsExpirationDate
 {
     self = [super init];
     if (self)
@@ -46,12 +47,13 @@
         _validatedCertificateChain = validatedCertificateChain;
         _knownPins = knownPins;
         _validationResult = validationResult;
+        _knownPinsExpirationDate = knownPinsExpirationDate;
     }
     return self;
 }
 
 
-- (NSData *)json;
+- (nonnull NSData *)json;
 {
     // Convert the date to a string
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -63,6 +65,14 @@
     [dateFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
     [dateFormatter setTimeZone:[NSTimeZone timeZoneWithAbbreviation:@"UTC"]];
     NSString *currentTimeStr = [dateFormatter stringFromDate: self.dateTime];
+    
+    id expirationDateStr = [NSNull null];
+    if (self.knownPinsExpirationDate)
+    {
+        // For the expiration date, only return the expiration day, as specified in the pinning policy
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+        expirationDateStr = [dateFormatter stringFromDate:self.knownPinsExpirationDate];
+    }
     
     // Create the dictionary
     NSDictionary *requestData = @ {
@@ -79,7 +89,8 @@
         @"enforce-pinning" : [NSNumber numberWithBool:self.enforcePinning],
         @"validated-certificate-chain" : self.validatedCertificateChain,
         @"known-pins" : self.knownPins,
-        @"validation-result": [NSNumber numberWithInt:self.validationResult]
+        @"validation-result": [NSNumber numberWithInt:self.validationResult],
+        @"known-pins-expiration-date": expirationDateStr
     };
     
     NSError *error;
@@ -88,7 +99,7 @@
 }
 
 
-- (NSMutableURLRequest *)requestToUri:(NSURL *)reportUri
+- (nonnull NSMutableURLRequest *)requestToUri:(NSURL *)reportUri
 {
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:reportUri];
     [request setHTTPMethod:@"POST"];

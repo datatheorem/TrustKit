@@ -335,6 +335,48 @@
 }
 
 
+// Pin a bad key but the pinning policy expired and ensure the connection is left untouched
+- (void)testVerifyAgainstBadPublicKeyPinsExpired
+{
+    // Create a valid server trust
+    SecCertificateRef certChainArray[2] = {_leafCertificate, _intermediateCertificate};
+    SecCertificateRef trustStoreArray[1] = {_rootCertificate};
+    SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
+                                                             arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
+                                                      anchorCertificates:(const void **)trustStoreArray
+                                                             arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
+    
+    // Create a configuration
+    NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
+                                     kTSKPinnedDomains :
+                                         @{@"www.good.com" : @{
+                                                   // Totally expired
+                                                   kTSKExpirationDate: @"2014-01-01",
+                                                   kTSKEnforcePinning: @YES,
+                                                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                   kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Bad Key
+                                                                           @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=" // Bad key 2
+                                                                           ]}}};
+    
+    // Test TSKPinningValidator
+    [TrustKit initializeWithConfiguration:trustKitConfig];
+    
+    // Configure notification listener
+    id observerId = [[NSNotificationCenter defaultCenter] addObserverForName:kTSKValidationCompletedNotification
+                                                                      object:nil
+                                                                       queue:nil
+                                                                  usingBlock:^(NSNotification * _Nonnull note) {
+                                                                      // Ensure a validation notification was NOT posted
+                                                                      XCTFail(@"kTSKValidationCompletedNotification should not have been posted");
+                                                                  }];
+    // Call TSKPinningValidator
+    TSKTrustDecision result = [TSKPinningValidator evaluateTrust:trust forHostname:@"www.good.com"];
+    XCTAssert(result == TSKTrustDecisionDomainNotPinned);
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:observerId];
+    CFRelease(trust);
+}
+
 // Pin a bad key but do not enforce pinning and ensure the connection is allowed
 - (void)testVerifyAgainstBadPublicKeyPinningNotEnforced
 {
@@ -401,7 +443,6 @@
     
     CFRelease(trust);
 }
-
 
 
 // Pin a bad key and a good key and ensure validation succeeds

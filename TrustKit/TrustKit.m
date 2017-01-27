@@ -39,6 +39,7 @@ const TSKDomainConfigurationKey kTSKIncludeSubdomains = @"TSKIncludeSubdomains";
 const TSKDomainConfigurationKey kTSKPublicKeyAlgorithms = @"TSKPublicKeyAlgorithms";
 const TSKDomainConfigurationKey kTSKReportUris = @"TSKReportUris";
 const TSKDomainConfigurationKey kTSKDisableDefaultReportUri = @"TSKDisableDefaultReportUri";
+const TSKDomainConfigurationKey kTSKExpirationDate = @"TSKExpirationDate";
 
 #pragma mark Public key Algorithms Constants
 const TSKSupportedAlgorithm kTSKAlgorithmRsa2048 = @"TSKAlgorithmRsa2048";
@@ -162,7 +163,8 @@ static void (^sendReportFromNotificationBlock)(NSNotification *note) = ^void(NSN
                                                   includeSubdomains:[notedHostnameConfig[kTSKIncludeSubdomains] boolValue]
                                                      enforcePinning:[notedHostnameConfig[kTSKEnforcePinning] boolValue]
                                                           knownPins:notedHostnameConfig[kTSKPublicKeyHashes]
-                                                   validationResult:validationResult];
+                                                   validationResult:validationResult
+                                                     expirationDate:notedHostnameConfig[kTSKExpirationDate]];
             }
         }
     }

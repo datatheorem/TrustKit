@@ -39,7 +39,7 @@ static dispatch_once_t dispatchOnceBackgroundSession;
 
 #pragma mark Public methods
 
-- (instancetype)initAndRateLimitReports:(BOOL)shouldRateLimitReports
+- (nonnull instancetype)initAndRateLimitReports:(BOOL)shouldRateLimitReports;
 {
     self = [super init];
     if (self)
@@ -143,15 +143,16 @@ static dispatch_once_t dispatchOnceBackgroundSession;
 }
 
 
-- (void) pinValidationFailedForHostname:(NSString *) serverHostname
-                                   port:(NSNumber *) serverPort
-                       certificateChain:(NSArray *) certificateChain
-                          notedHostname:(NSString *) notedHostname
-                             reportURIs:(NSArray<NSURL *> *) reportURIs
+- (void) pinValidationFailedForHostname:(nonnull NSString *) serverHostname
+                                   port:(nullable NSNumber *) serverPort
+                       certificateChain:(nonnull NSArray *) certificateChain
+                          notedHostname:(nonnull NSString *) notedHostname
+                             reportURIs:(nonnull NSArray<NSURL *> *) reportURIs
                       includeSubdomains:(BOOL) includeSubdomains
                          enforcePinning:(BOOL) enforcePinning
-                              knownPins:(NSSet<NSData *> *) knownPins
+                              knownPins:(nonnull NSSet<NSData *> *) knownPins
                        validationResult:(TSKPinValidationResult) validationResult
+                         expirationDate:(nullable NSDate *)knownPinsExpirationDate
 {
     // Default port to 0 if not specified
     if (serverPort == nil)
@@ -181,7 +182,8 @@ static dispatch_once_t dispatchOnceBackgroundSession;
                                                                    enforcePinning:enforcePinning
                                                         validatedCertificateChain:certificateChain
                                                                         knownPins:formattedPins
-                                                                 validationResult:validationResult];
+                                                                 validationResult:validationResult
+                                                                   expirationDate:knownPinsExpirationDate];
     
     // Should we rate-limit this report?
     if (_shouldRateLimitReports && [TSKReportsRateLimiter shouldRateLimitReport:report])
@@ -233,7 +235,7 @@ static dispatch_once_t dispatchOnceBackgroundSession;
 
 
 
-- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error
+- (void)URLSession:(nonnull NSURLSession *)session task:(nonnull NSURLSessionTask *)task didCompleteWithError:(nullable NSError *)error
 {
     if (error == nil)
     {
