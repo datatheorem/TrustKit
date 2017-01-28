@@ -10,11 +10,7 @@
  */
 
 
-#ifndef TrustKit_ssl_pin_verifier_h
-#define TrustKit_ssl_pin_verifier_h
-
 #import <Foundation/Foundation.h>
-#import "TSKPinningValidator.h"
 
 
 /**
@@ -60,5 +56,3 @@ NSString *getPinningConfigurationKeyForDomain(NSString *hostname, NSDictionary *
 // Validate that the server trust contains at least one of the know/expected pins
 TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverHostname, NSArray<NSNumber *> *supportedAlgorithms, NSSet<NSData *> *knownPins);
 
-
-#endif

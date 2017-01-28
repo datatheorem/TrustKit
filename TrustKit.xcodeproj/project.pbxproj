@@ -301,6 +301,7 @@
 		6B032D3F1AF1AEB600EAFA69 /* TSKReporterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSKReporterTests.m; sourceTree = "<group>"; };
 		6B2B06AC1B05154A00FC749E /* TSKBackgroundReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKBackgroundReporter.h; path = Reporting/TSKBackgroundReporter.h; sourceTree = "<group>"; };
 		6B2B06AE1B05157400FC749E /* TSKBackgroundReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKBackgroundReporter.m; path = Reporting/TSKBackgroundReporter.m; sourceTree = "<group>"; };
+		8C0C90111E3C196A003851A8 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		8C15F9911B132F9200F06C0E /* TSKPinningValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKPinningValidator.h; path = Pinning/TSKPinningValidator.h; sourceTree = "<group>"; };
 		8C15F9921B132F9200F06C0E /* TSKPinningValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKPinningValidator.m; path = Pinning/TSKPinningValidator.m; sourceTree = "<group>"; };
 		8C15F99E1B16094D00F06C0E /* TSKPinFailureReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKPinFailureReport.h; path = Reporting/TSKPinFailureReport.h; sourceTree = "<group>"; };
@@ -506,6 +507,7 @@
 		8C8480491A896EE30017C155 /* TrustKit */ = {
 			isa = PBXGroup;
 			children = (
+				8C0C90111E3C196A003851A8 /* module.modulemap */,
 				8CA6CC571BAF60DA00BDA419 /* Swizzling */,
 				8CE919281AEA0F61002B29AE /* Dependencies */,
 				8CE919201AEA0745002B29AE /* Reporting */,
@@ -1291,6 +1293,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
 				ENABLE_BITCODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1318,6 +1321,7 @@
 				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				MODULEMAP_FILE = "$(SRCROOT)/TrustKit/module.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -1355,6 +1359,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
 				ENABLE_BITCODE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1375,6 +1380,7 @@
 				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				MODULEMAP_FILE = "$(SRCROOT)/TrustKit/module.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";

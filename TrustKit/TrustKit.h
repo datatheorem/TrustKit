@@ -281,45 +281,47 @@ FOUNDATION_EXPORT const TSKNotificationUserInfoKey kTSKValidationServerHostnameN
  
  ```
     NSDictionary *trustKitConfig =
-    @{
-      kTSKSwizzleNetworkDelegates: @NO,
-      kTSKPinnedDomains : @{
-              @"www.datatheorem.com" : @{
-                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                      kTSKPublicKeyHashes : @[
-                              @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=",
-                              @"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8="
-                              ],
-                      kTSKEnforcePinning : @NO,
-                      kTSKReportUris : @[@"http://report.datatheorem.com/log_report"],
-                      },
-              @"yahoo.com" : @{
-                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                      kTSKPublicKeyHashes : @[
-                              @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
-                              @"rFjc3wG7lTZe43zeYTvPq8k4xdDEutCmIhI5dn4oCeE=",
-                              ],
-                      kTSKIncludeSubdomains : @YES
-                      }
-              }};
-
+  @{
+    kTSKSwizzleNetworkDelegates: @NO,
+    kTSKPinnedDomains : @{
+            @"www.datatheorem.com" : @{
+                    kTSKExpirationDate: @"2017-12-01",
+                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                    kTSKPublicKeyHashes : @[
+                            @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=",
+                            @"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8="
+                            ],
+                    kTSKEnforcePinning : @NO,
+                    kTSKReportUris : @[@"http://report.datatheorem.com/log_report"],
+                    },
+            @"yahoo.com" : @{
+                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                    kTSKPublicKeyHashes : @[
+                            @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                            @"rFjc3wG7lTZe43zeYTvPq8k4xdDEutCmIhI5dn4oCeE=",
+                            ],
+                    kTSKIncludeSubdomains : @YES
+                    }
+            }};
+    
     [TrustKit initializeWithConfiguration:trustKitConfig];
  ```
  
  Similarly, TrustKit can be initialized in Swift:
  
  ```
-     let trustKitConfig = [
-         kTSKSwizzleNetworkDelegates: false,
-         kTSKPinnedDomains: [
-             "yahoo.com": [
-                 kTSKPublicKeyAlgorithms: [kTSKAlgorithmRsa2048],
-                 kTSKPublicKeyHashes: [
-                     "JbQbUG5JMJUoI6brnx0x3vZF6jilxsapbXGVfjhN8Fg=",
-                     "WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18="
-                   ],]]]
+        let trustKitConfig = [
+            kTSKSwizzleNetworkDelegates: false,
+            kTSKPinnedDomains: [
+                "yahoo.com": [
+                    kTSKExpirationDate: "2017-12-01",
+                    kTSKPublicKeyAlgorithms: [kTSKAlgorithmRsa2048],
+                    kTSKPublicKeyHashes: [
+                        "JbQbUG5JMJUoI6brnx0x3vZF6jilxsapbXGVfjhN8Fg=",
+                        "WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18="
+                    ],]]] as [String : Any]
         
-     TrustKit.initializeWithConfiguration(config)
+        TrustKit.initialize(withConfiguration:trustKitConfig)
  ```
  
  The various configuration keys that can be specified in the policy are described in the "Constants" section of the documentation.
