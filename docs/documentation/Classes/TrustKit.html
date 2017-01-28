@@ -49,6 +49,9 @@
                 <a href="../Constants.html#/c:@kTSKAlgorithmEcDsaSecp256r1">kTSKAlgorithmEcDsaSecp256r1</a>
               </li>
               <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kTSKAlgorithmEcDsaSecp384r1">kTSKAlgorithmEcDsaSecp384r1</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="../Constants.html#/c:@kTSKAlgorithmRsa2048">kTSKAlgorithmRsa2048</a>
               </li>
               <li class="nav-group-task">
@@ -59,6 +62,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Constants.html#/c:@kTSKEnforcePinning">kTSKEnforcePinning</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Constants.html#/c:@kTSKExpirationDate">kTSKExpirationDate</a>
               </li>
               <li class="nav-group-task">
                 <a href="../Constants.html#/c:@kTSKIgnorePinningForUserDefinedTrustAnchors">kTSKIgnorePinningForUserDefinedTrustAnchors</a>
@@ -164,44 +170,46 @@
 <p>When setting the pinning policy programmatically, it has to be supplied to the <code>initializeWithConfiguration:</code> method as a dictionary. For example:</p>
 
 <pre class="highlight plaintext"><code>   NSDictionary *trustKitConfig =
-   @{
-     kTSKSwizzleNetworkDelegates: @NO,
-     kTSKPinnedDomains : @{
-             @"www.datatheorem.com" : @{
-                     kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                     kTSKPublicKeyHashes : @[
-                             @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=",
-                             @"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8="
-                             ],
-                     kTSKEnforcePinning : @NO,
-                     kTSKReportUris : @[@"http://report.datatheorem.com/log_report"],
-                     },
-             @"yahoo.com" : @{
-                     kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                     kTSKPublicKeyHashes : @[
-                             @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
-                             @"rFjc3wG7lTZe43zeYTvPq8k4xdDEutCmIhI5dn4oCeE=",
-                             ],
-                     kTSKIncludeSubdomains : @YES
-                     }
-             }};
+ @{
+   kTSKSwizzleNetworkDelegates: @NO,
+   kTSKPinnedDomains : @{
+           @"www.datatheorem.com" : @{
+                   kTSKExpirationDate: @"2017-12-01",
+                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                   kTSKPublicKeyHashes : @[
+                           @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=",
+                           @"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8="
+                           ],
+                   kTSKEnforcePinning : @NO,
+                   kTSKReportUris : @[@"http://report.datatheorem.com/log_report"],
+                   },
+           @"yahoo.com" : @{
+                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                   kTSKPublicKeyHashes : @[
+                           @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                           @"rFjc3wG7lTZe43zeYTvPq8k4xdDEutCmIhI5dn4oCeE=",
+                           ],
+                   kTSKIncludeSubdomains : @YES
+                   }
+           }};
 
    [TrustKit initializeWithConfiguration:trustKitConfig];
 </code></pre>
 
 <p>Similarly, TrustKit can be initialized in Swift:</p>
 
-<pre class="highlight plaintext"><code>    let trustKitConfig = [
-        kTSKSwizzleNetworkDelegates: false,
-        kTSKPinnedDomains: [
-            "yahoo.com": [
-                kTSKPublicKeyAlgorithms: [kTSKAlgorithmRsa2048],
-                kTSKPublicKeyHashes: [
-                    "JbQbUG5JMJUoI6brnx0x3vZF6jilxsapbXGVfjhN8Fg=",
-                    "WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18="
-                  ],]]]
+<pre class="highlight plaintext"><code>       let trustKitConfig = [
+           kTSKSwizzleNetworkDelegates: false,
+           kTSKPinnedDomains: [
+               "yahoo.com": [
+                   kTSKExpirationDate: "2017-12-01",
+                   kTSKPublicKeyAlgorithms: [kTSKAlgorithmRsa2048],
+                   kTSKPublicKeyHashes: [
+                       "JbQbUG5JMJUoI6brnx0x3vZF6jilxsapbXGVfjhN8Fg=",
+                       "WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18="
+                   ],]]] as [String : Any]
 
-    TrustKit.initializeWithConfiguration(config)
+       TrustKit.initialize(withConfiguration:trustKitConfig)
 </code></pre>
 
 <p>The various configuration keys that can be specified in the policy are described in the <q>Constants</q> section of the documentation.</p>
@@ -271,7 +279,7 @@
                         </table>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.0/TrustKit/TrustKit.h#L330">Show on GitHub</a>
+                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.1/TrustKit/TrustKit.h#L347">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -322,7 +330,7 @@
 
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.0/TrustKit/TrustKit.h#L342">Show on GitHub</a>
+                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.1/TrustKit/TrustKit.h#L359">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -361,7 +369,7 @@
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.0/TrustKit/TrustKit.h#L351">Show on GitHub</a>
+                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.1/TrustKit/TrustKit.h#L368">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -371,7 +379,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="https://datatheorem.github.io" target="_blank" rel="external">Data Theorem</a>. All rights reserved. (Last updated: 2017-01-11)</p>
+          <p>&copy; 2017 <a class="link" href="https://datatheorem.github.io" target="_blank" rel="external">Data Theorem</a>. All rights reserved. (Last updated: 2017-01-27)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
