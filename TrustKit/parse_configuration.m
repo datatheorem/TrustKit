@@ -146,7 +146,7 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
         
         // Extract the list of public key algorithms to support and convert them from string to the TSKPublicKeyAlgorithm type
         NSArray<NSString *> *publicKeyAlgsStr = domainPinningPolicy[kTSKPublicKeyAlgorithms];
-        if (publicKeyAlgsStr == nil)
+        if (publicKeyAlgsStr == nil && [domainFinalConfiguration[kTSKEnforcePinning]  isEqual: @(YES)])
         {
             [NSException raise:@"TrustKit configuration invalid"
                         format:@"TrustKit was initialized with an invalid value for %@ for domain %@", kTSKPublicKeyAlgorithms, domainName];
@@ -217,7 +217,7 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
         }
         
         NSUInteger requiredNumberOfPins = [domainFinalConfiguration[kTSKEnforcePinning] boolValue] ? 2 : 1;
-        if([serverSslPinsSet count] < requiredNumberOfPins)
+        if([serverSslPinsSet count] < requiredNumberOfPins && [domainFinalConfiguration[kTSKEnforcePinning]  isEqual: @(YES)])
         {
             [NSException raise:@"TrustKit configuration invalid"
                         format:@"TrustKit was initialized with less than %lu pins (ie. no backup pins) for domain %@. This might brick your App; please review the Getting Started guide in ./docs/getting-started.md", (unsigned long)requiredNumberOfPins, domainName];

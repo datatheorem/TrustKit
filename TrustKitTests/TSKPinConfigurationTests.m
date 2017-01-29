@@ -49,6 +49,20 @@
                     @"Configuration with one pin only must be rejected");
 }
 
+- (void)testDisablePinningAndNoPublicKey
+{
+    NSDictionary *trustKitConfig;
+    trustKitConfig = parseTrustKitConfiguration(@{kTSKSwizzleNetworkDelegates: @NO,
+                                                 kTSKPinnedDomains : @{
+                                                         @"www.good.com" : @{
+                                                                 kTSKEnforcePinning: @FALSE
+                                                                 }
+                                                         }
+                                 });
+    
+    NSString *serverConfigKey = getPinningConfigurationKeyForDomain(@"www.good.com", trustKitConfig);
+    XCTAssert([serverConfigKey isEqualToString:@"www.good.com"], @"Did not receive a configuration for a pinned domain");
+}
 
 - (void)testNokTSKSwizzleNetworkDelegates
 {
