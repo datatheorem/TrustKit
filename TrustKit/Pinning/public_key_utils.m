@@ -372,10 +372,12 @@ void resetSubjectPublicKeyInfoCache(void)
 
 NSMutableDictionary<NSNumber *, SpkiCacheDictionnary *> *getSpkiCacheFromFileSystem(void)
 {
-    NSMutableDictionary *spkiCache;
+    NSMutableDictionary *spkiCache = nil;
     NSString *spkiCachePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:_spkiCacheFilename];
     NSData *serializedSpkiCache = [NSData dataWithContentsOfFile:spkiCachePath];
-    spkiCache = [NSKeyedUnarchiver unarchiveObjectWithData:serializedSpkiCache];
+    if (serializedSpkiCache) {
+        spkiCache = [NSKeyedUnarchiver unarchiveObjectWithData:serializedSpkiCache];
+    }
     return spkiCache;
 }
 
