@@ -108,6 +108,7 @@ FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKPublicKeyAlgorithms;
  */
 FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKEnforcePinning;
 
+FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKExcludeSubdomainFromParentPolicy;
 
 /**
  A boolean. If set to `YES`, also pin all the subdomains of the specified domain; default value is `NO`.

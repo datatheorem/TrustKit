@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "TrustKit.h"
 #import "Dependencies/domain_registry/domain_registry.h"
+#import "Utils/DomainUtils.h"
 #import "parse_configuration.h"
 #import "Pinning/public_key_utils.h"
 #import <CommonCrypto/CommonDigest.h>
@@ -130,6 +131,29 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
             domainFinalConfiguration[kTSKEnforcePinning] = @(YES);
         }
         
+        // Extract the optional excludeSubDomain setting
+        NSNumber *shouldExcludeSubdomain = domainPinningPolicy[kTSKExcludeSubdomainFromParentPolicy];
+        if (shouldExcludeSubdomain)
+        {
+            
+            BOOL foundParentDomain = NO;
+            
+            for (NSString *parentDomainName in TrustKitArguments[kTSKPinnedDomains]){
+                foundParentDomain = isSubdomain(parentDomainName, domainName);
+            }
+            
+            if (!foundParentDomain){
+                [NSException raise:@"TrustKit configuration invalid"
+                            format:@"TrustKit was initialized with kTSKExcludeSubdomainFromParentPolicy for a domain suffix %@ without parent domain", domainName];
+            }
+
+            domainFinalConfiguration[kTSKExcludeSubdomainFromParentPolicy] = shouldExcludeSubdomain;
+        }
+        else
+        {
+            // Default setting is NO
+            domainFinalConfiguration[kTSKExcludeSubdomainFromParentPolicy] = @(NO);
+        }
         
         // Extract the optional disableDefaultReportUri setting
         NSNumber *shouldDisableDefaultReportUri = domainPinningPolicy[kTSKDisableDefaultReportUri];
@@ -146,7 +170,7 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
         
         // Extract the list of public key algorithms to support and convert them from string to the TSKPublicKeyAlgorithm type
         NSArray<NSString *> *publicKeyAlgsStr = domainPinningPolicy[kTSKPublicKeyAlgorithms];
-        if (publicKeyAlgsStr == nil && [domainFinalConfiguration[kTSKEnforcePinning]  isEqual: @(YES)])
+        if (publicKeyAlgsStr == nil && [domainFinalConfiguration[kTSKExcludeSubdomainFromParentPolicy]  isEqual: @(NO)])
         {
             [NSException raise:@"TrustKit configuration invalid"
                         format:@"TrustKit was initialized with an invalid value for %@ for domain %@", kTSKPublicKeyAlgorithms, domainName];
@@ -217,7 +241,7 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
         }
         
         NSUInteger requiredNumberOfPins = [domainFinalConfiguration[kTSKEnforcePinning] boolValue] ? 2 : 1;
-        if([serverSslPinsSet count] < requiredNumberOfPins && [domainFinalConfiguration[kTSKEnforcePinning]  isEqual: @(YES)])
+        if([serverSslPinsSet count] < requiredNumberOfPins && [domainFinalConfiguration[kTSKExcludeSubdomainFromParentPolicy]  isEqual: @(NO)])
         {
             [NSException raise:@"TrustKit configuration invalid"
                         format:@"TrustKit was initialized with less than %lu pins (ie. no backup pins) for domain %@. This might brick your App; please review the Getting Started guide in ./docs/getting-started.md", (unsigned long)requiredNumberOfPins, domainName];

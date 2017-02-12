@@ -49,20 +49,39 @@
                     @"Configuration with one pin only must be rejected");
 }
 
-- (void)testDisablePinningAndNoPublicKey
+- (void)testDisablePinningForSubdomainAndNoPublicKey
 {
     NSDictionary *trustKitConfig;
     trustKitConfig = parseTrustKitConfiguration(@{kTSKSwizzleNetworkDelegates: @NO,
                                                  kTSKPinnedDomains : @{
-                                                         @"www.good.com" : @{
-                                                                 kTSKEnforcePinning: @FALSE
+                                                         @"good.com" : @{
+                                                                 kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                                 kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                                                                                         @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+                                                                                         ],
+                                                                 kTSKIncludeSubdomains: @YES},
+                                                        @"unsecured.good.com": @{
+                                                                 kTSKExcludeSubdomainFromParentPolicy: @YES
                                                                  }
                                                          }
                                  });
     
-    NSString *serverConfigKey = getPinningConfigurationKeyForDomain(@"www.good.com", trustKitConfig);
-    XCTAssert([serverConfigKey isEqualToString:@"www.good.com"], @"Did not receive a configuration for a pinned domain");
+    NSString *serverConfigKey = getPinningConfigurationKeyForDomain(@"unsecured.good.com", trustKitConfig);
+    XCTAssert([serverConfigKey isEqualToString:@"unsecured.good.com"], @"Did not receive a configuration for a pinned domain");
 }
+
+- (void)testDisablePinningForSubdomainWithoutParentAndNoPublicKey
+{
+    XCTAssertThrows(parseTrustKitConfiguration(@{kTSKSwizzleNetworkDelegates: @NO,
+                                                  kTSKPinnedDomains : @{
+                                                          @"unsecured.google.com": @{
+                                                                  kTSKExcludeSubdomainFromParentPolicy: @YES
+                                                                  }
+                                                          }
+                                                 }),
+                    @"Configuration with kTSKExcludeSubdomainFromParentPolicy must have paranet");
+}
+
 
 - (void)testNokTSKSwizzleNetworkDelegates
 {

@@ -874,5 +874,34 @@
     CFRelease(trust);
 }
 
+- (void)testExcludedSubdomain
+{
+    // Create a valid server trust
+    SecCertificateRef certChainArray[2] = {_leafCertificate, _intermediateCertificate};
+    SecCertificateRef trustStoreArray[1] = {_rootCertificate};
+    SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
+                                                             arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
+                                                      anchorCertificates:(const void **)trustStoreArray
+                                                             arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
+    
+    // Create a configuration
+    NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
+                                     kTSKPinnedDomains : @{
+                                             @"good.com" : @{
+                                                     kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                     kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA Key
+                                                                             @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=", // Fake key
+                                                                             ],
+                                                     kTSKIncludeSubdomains: @YES},
+                                             @"unsecured.good.com": @{
+                                                     kTSKExcludeSubdomainFromParentPolicy: @YES
+                                                     }
+                                             }};
+
+    // Then test TSKPinningValidator
+    [TrustKit initializeWithConfiguration:trustKitConfig];
+    XCTAssert([TSKPinningValidator evaluateTrust:trust forHostname:@"unsecured.good.com"] == TSKTrustDecisionDomainNotPinned);
+    CFRelease(trust);
+}
 
 @end

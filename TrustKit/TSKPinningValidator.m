@@ -55,6 +55,11 @@
             finalTrustDecision = TSKTrustDecisionDomainNotPinned;
             
         }
+        //Should exclude subdomain
+        else if (domainConfig[kTSKExcludeSubdomainFromParentPolicy]){
+            //yes should exclude
+            finalTrustDecision = TSKTrustDecisionDomainNotPinned;
+        }
         else
         {
             // The pinning policy has not expired
