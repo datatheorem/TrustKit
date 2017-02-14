@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "TrustKit.h"
 #import "Dependencies/domain_registry/domain_registry.h"
-#import "Utils/DomainUtils.h"
+#import "Utils/domain_utils.h"
 #import "parse_configuration.h"
 #import "Pinning/public_key_utils.h"
 #import <CommonCrypto/CommonDigest.h>

@@ -13,7 +13,7 @@
 #import "../Dependencies/domain_registry/domain_registry.h"
 #import "public_key_utils.h"
 #import "../TrustKit+Private.h"
-#import "../Utils/DomainUtils.h"
+#import "../Utils/domain_utils.h"
 
 #pragma mark Utility functions
 

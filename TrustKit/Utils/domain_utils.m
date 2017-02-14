@@ -1,5 +1,5 @@
 /*
- DomainUtils.m
+ domain_utils.m
  TrustKit
  
  Copyright 2015 The TrustKit Project Authors
@@ -8,7 +8,7 @@
  
  */
 
-#import "DomainUtils.h"
+#import "domain_utils.h"
 #import "../Dependencies/domain_registry/domain_registry.h"
 
 BOOL isSubdomain(NSString *domain, NSString *subdomain)

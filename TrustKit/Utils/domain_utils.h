@@ -1,5 +1,5 @@
 /*
- DomainUtils.h
+ domain_utils.h
  TrustKit
  
  Copyright 2015 The TrustKit Project Authors
