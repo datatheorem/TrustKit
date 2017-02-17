@@ -8,7 +8,15 @@
 
 #import "RSSwizzle.h"
 #import <objc/runtime.h>
+
+//use os_unfair_lock over OSSpinLock when building with ios sdk 10 or osx sdk 10.12
+#define TARGET_SDK_GE_10 (TARGET_OS_IPHONE && __IPHONE_OS_VERSION_MAX_ALLOWED >= 100000) || (!TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MAX_ALLOWED >= 101200)
+
+#if TARGET_SDK_GE_10
+#import <os/lock.h>
+#else
 #import <libkern/OSAtomic.h>
+#endif
 
 #if !__has_feature(objc_arc)
 #error This code needs ARC. Use compiler option -fobjc-arc
@@ -92,7 +100,7 @@ static BOOL blockIsCompatibleWithMethodType(id block, const char *methodType){
     }
     
     NSMethodSignature *methodSignature =
-        [NSMethodSignature signatureWithObjCTypes:methodType];
+    [NSMethodSignature signatureWithObjCTypes:methodType];
     
     if (!blockSignature || !methodSignature) {
         return NO;
@@ -194,21 +202,36 @@ static void swizzle(Class classToSwizzle,
               classToSwizzle);
     
     NSCAssert(blockIsAnImpFactoryBlock(factoryBlock),
-             @"Wrong type of implementation factory block.");
+              @"Wrong type of implementation factory block.");
     
+#if TARGET_SDK_GE_10
+    __block os_unfair_lock lock = OS_UNFAIR_LOCK_INIT;
+#else
     __block OSSpinLock lock = OS_SPINLOCK_INIT;
+#endif
+    
     // To keep things thread-safe, we fill in the originalIMP later,
     // with the result of the class_replaceMethod call below.
     __block IMP originalIMP = NULL;
-
+    
     // This block will be called by the client to get original implementation and call it.
     RSSWizzleImpProvider originalImpProvider = ^IMP{
         // It's possible that another thread can call the method between the call to
         // class_replaceMethod and its return value being set.
         // So to be sure originalIMP has the right value, we need a lock.
+        
+#if TARGET_SDK_GE_10
+        os_unfair_lock_lock(&lock);
+#else
         OSSpinLockLock(&lock);
+#endif
         IMP imp = originalIMP;
+        
+#if TARGET_SDK_GE_10
+        os_unfair_lock_unlock(&lock);
+#else
         OSSpinLockUnlock(&lock);
+#endif
         
         if (NULL == imp){
             // If the class does not implement the method
@@ -231,7 +254,7 @@ static void swizzle(Class classToSwizzle,
     const char *methodType = method_getTypeEncoding(method);
     
     NSCAssert(blockIsCompatibleWithMethodType(newIMPBlock,methodType),
-             @"Block returned from factory is not compatible with method type.");
+              @"Block returned from factory is not compatible with method type.");
     
     IMP newIMP = imp_implementationWithBlock(newIMPBlock);
     
@@ -244,10 +267,23 @@ static void swizzle(Class classToSwizzle,
     //
     // We need a lock to be sure that originalIMP has the right value in the
     // originalImpProvider block above.
+    
+#if TARGET_SDK_GE_10
+    os_unfair_lock_lock(&lock);
+#else
     OSSpinLockLock(&lock);
+#endif
+    
     originalIMP = class_replaceMethod(classToSwizzle, selector, newIMP, methodType);
+    
+#if TARGET_SDK_GE_10
+    os_unfair_lock_unlock(&lock);
+#else
     OSSpinLockUnlock(&lock);
+#endif
+    
 }
+
 
 static NSMutableDictionary *swizzledClassesDictionary(){
     static NSMutableDictionary *swizzledClasses;
@@ -277,7 +313,7 @@ static NSMutableSet *swizzledClassesForKey(const void *key){
 {
     NSAssert(!(NULL == key && RSSwizzleModeAlways != mode),
              @"Key may not be NULL if mode is not RSSwizzleModeAlways.");
-
+    
     @synchronized(swizzledClassesDictionary()){
         if (key){
             NSSet *swizzledClasses = swizzledClassesForKey(key);
