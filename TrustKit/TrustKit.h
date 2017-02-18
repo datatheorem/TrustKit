@@ -334,6 +334,16 @@ FOUNDATION_EXPORT const TSKNotificationUserInfoKey kTSKValidationServerHostnameN
 ///---------------------
 /// @name Initialization
 ///---------------------
+#pragma mark Class Methods
+
+
+/**
+ Access the shared TrustKit singleton instance. Raises an exception if +initializeWithConfiguration:
+ has not yet been invoked.
+
+ @return the shared TrustKit singleton
+ */
++ (instancetype)sharedInstance;
 
 /**
  Initialize the global SSL pinning policy with the supplied configuration.
@@ -344,7 +354,7 @@ FOUNDATION_EXPORT const TSKNotificationUserInfoKey kTSKValidationServerHostnameN
  @exception NSException Thrown when the supplied configuration is invalid or TrustKit has already been initialized.
  
  */
-+ (void) initializeWithConfiguration:(NSDictionary *)trustKitConfig;
++ (void)initializeWithConfiguration:(NSDictionary *)trustKitConfig;
 
 
 ///----------------------------
@@ -356,7 +366,7 @@ FOUNDATION_EXPORT const TSKNotificationUserInfoKey kTSKValidationServerHostnameN
  
  @return A dictionary with a copy of the current TrustKit configuration, or `nil` if TrustKit has not been initialized.
  */
-+ (nullable NSDictionary *) configuration;
++ (NSDictionary * _Nullable) configuration;
 
 /**
  Set the global logger.
@@ -365,7 +375,38 @@ FOUNDATION_EXPORT const TSKNotificationUserInfoKey kTSKValidationServerHostnameN
  
  If a global logger is not set, the default logger will be used, which will print TrustKit log messages (using `NSLog()`) when the App is built in Debug mode. If the App was built for Release, the default logger will not print any messages at all.
  */
-+ (void)setLoggerBlock:(void (^)(NSString *))block;
++ (void)setLoggerBlock:(void (^ _Nullable)(NSString * _Nonnull))block;
+
+#pragma mark Instance Methods
+
+/**
+ Initialize a TrustKit instance with the supplied SSL pinning policy configuration.
+ 
+ This method should be called as early as possible in the App's lifecycle to ensure that the App's very first SSL connections are validated by TrustKit. Once TrustKit has been initialized, notifications will be posted for any SSL pinning validation performed.
+ 
+ @param trustKitConfig A dictionary containing various keys for configuring the global SSL pinning policy.
+ */
+- (instancetype)initWithConfiguration:(NSDictionary<NSString *, id> * _Nullable)trustKitConfig;
+
+/**
+ Retrieve the SSL pinning policy for this instance.
+ 
+ @return A dictionary with the current TrustKit configuration
+ */
+@property (nonatomic, readonly, nullable) NSDictionary *configuration;
+
+/**
+ Set the logger used by this instance, used when TrustKit needs to display a message to the developer.
+ 
+ If a global logger is not set, the default logger will be used, which will print TrustKit log messages (using `NSLog()`) when the App is built in Debug mode. If the App was built for Release, the default logger will not print any messages at all.
+ */
+@property (nonatomic, nullable) void(^loggerBlock)(NSString * _Nonnull msg);
+
+
+/**
+ A pinning validator instance conforming to the configuration of this TrustKit instance.
+ */
+@property (nonatomic, nonnull) TSKPinningValidator *pinningValidator;
 
 @end
 NS_ASSUME_NONNULL_END

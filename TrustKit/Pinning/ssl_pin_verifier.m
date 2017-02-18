@@ -10,8 +10,8 @@
  */
 
 #import "ssl_pin_verifier.h"
+#import "TSKSPKIHashCache.h"
 #import "../Dependencies/domain_registry/domain_registry.h"
-#import "public_key_utils.h"
 #import "../TrustKit+Private.h"
 
 
@@ -46,10 +46,9 @@ static BOOL isSubdomain(NSString *domain, NSString *subdomain)
 }
 
 
-NSString *getPinningConfigurationKeyForDomain(NSString *hostname, NSDictionary *trustKitConfiguration)
+NSString *getPinningConfigurationKeyForDomain(NSString *hostname, NSDictionary *domainsPinningPolicy)
 {
     NSString *configHostname = nil;
-    NSDictionary *domainsPinningPolicy = trustKitConfiguration[kTSKPinnedDomains];
     
     if (domainsPinningPolicy[hostname] == nil)
     {
@@ -88,7 +87,7 @@ NSString *getPinningConfigurationKeyForDomain(NSString *hostname, NSDictionary *
 
 #pragma mark SSL Pin Verifier
 
-TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverHostname, NSArray<NSNumber *> *supportedAlgorithms, NSSet<NSData *> *knownPins)
+TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverHostname, NSArray<NSNumber *> *supportedAlgorithms, NSSet<NSData *> *knownPins, TSKSPKIHashCache *hashCache)
 {
     if ((serverTrust == NULL) || (supportedAlgorithms == nil) || (knownPins == nil))
     {
@@ -139,7 +138,8 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
         for (NSNumber *savedAlgorithm in supportedAlgorithms)
         {
             TSKPublicKeyAlgorithm algorithm = [savedAlgorithm integerValue];
-            NSData *subjectPublicKeyInfoHash = hashSubjectPublicKeyInfoFromCertificate(certificate, algorithm);
+            NSData *subjectPublicKeyInfoHash = [hashCache hashSubjectPublicKeyInfoFromCertificate:certificate
+                                                                               publicKeyAlgorithm:algorithm];
             if (subjectPublicKeyInfoHash == nil)
             {
                 TSKLog(@"Error - could not generate the SPKI hash for %@", serverHostname);

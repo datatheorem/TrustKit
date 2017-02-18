@@ -10,7 +10,7 @@
 #import "TrustKit.h"
 #import "Dependencies/domain_registry/domain_registry.h"
 #import "parse_configuration.h"
-#import "Pinning/public_key_utils.h"
+#import "Pinning/TSKPublicKeyAlgorithm.h"
 #import <CommonCrypto/CommonDigest.h>
 
 
@@ -230,7 +230,7 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
         finalConfiguration[kTSKPinnedDomains][domainName] = [NSDictionary dictionaryWithDictionary:domainFinalConfiguration];
     }
     
-    return finalConfiguration;
+    return [finalConfiguration copy];
 }
 
 
