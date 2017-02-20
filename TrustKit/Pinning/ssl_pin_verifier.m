@@ -13,49 +13,7 @@
 #import "../Dependencies/domain_registry/domain_registry.h"
 #import "public_key_utils.h"
 #import "../TrustKit+Private.h"
-#import "../Utils/domain_utils.h"
-
-#pragma mark Utility functions
-
-
-NSString *getPinningConfigurationKeyForDomain(NSString *hostname, NSDictionary *trustKitConfiguration)
-{
-    NSString *configHostname = nil;
-    NSDictionary *domainsPinningPolicy = trustKitConfiguration[kTSKPinnedDomains];
-    
-    if (domainsPinningPolicy[hostname] == nil)
-    {
-        // No pins explicitly configured for this domain
-        // Look for an includeSubdomain pin that applies
-        for (NSString *pinnedServerName in domainsPinningPolicy)
-        {
-            // Check each domain configured with the includeSubdomain flag
-            if ([domainsPinningPolicy[pinnedServerName][kTSKIncludeSubdomains] boolValue])
-            {
-                // Is the server a subdomain of this pinned server?
-                TSKLog(@"Checking includeSubdomains configuration for %@", pinnedServerName);
-                if (isSubdomain(pinnedServerName, hostname))
-                {
-                    // Yes; let's use the parent domain's pinning configuration
-                    TSKLog(@"Applying includeSubdomains configuration from %@ to %@", pinnedServerName, hostname);
-                    configHostname = pinnedServerName;
-                    break;
-                }
-            }
-        }
-    }
-    else
-    {
-        // This hostname has a pinnning configuration
-        configHostname = hostname;
-    }
-    
-    if (configHostname == nil)
-    {
-        TSKLog(@"Domain %@ is not pinned", hostname);
-    }
-    return configHostname;
-}
+#import "../configuration_utils.h"
 
 
 #pragma mark SSL Pin Verifier

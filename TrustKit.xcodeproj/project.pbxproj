@@ -28,6 +28,15 @@
 		8C15F9A01B16094D00F06C0E /* TSKPinFailureReport.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C15F99E1B16094D00F06C0E /* TSKPinFailureReport.h */; };
 		8C15F9A11B16094E00F06C0E /* TSKPinFailureReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F99F1B16094D00F06C0E /* TSKPinFailureReport.m */; };
 		8C15F9A41B17564400F06C0E /* TSKPinConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F9A31B17564400F06C0E /* TSKPinConfigurationTests.m */; };
+		8C4346D61E5B894A008023F9 /* configuration_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C4346D41E5B894A008023F9 /* configuration_utils.h */; };
+		8C4346D71E5B894A008023F9 /* configuration_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C4346D41E5B894A008023F9 /* configuration_utils.h */; };
+		8C4346D81E5B894A008023F9 /* configuration_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C4346D41E5B894A008023F9 /* configuration_utils.h */; };
+		8C4346D91E5B894A008023F9 /* configuration_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C4346D41E5B894A008023F9 /* configuration_utils.h */; };
+		8C4346DA1E5B894A008023F9 /* configuration_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4346D51E5B894A008023F9 /* configuration_utils.m */; };
+		8C4346DB1E5B894A008023F9 /* configuration_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4346D51E5B894A008023F9 /* configuration_utils.m */; };
+		8C4346DC1E5B894A008023F9 /* configuration_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4346D51E5B894A008023F9 /* configuration_utils.m */; };
+		8C4346DD1E5B894A008023F9 /* configuration_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4346D51E5B894A008023F9 /* configuration_utils.m */; };
+		8C4346DE1E5B894A008023F9 /* configuration_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C4346D51E5B894A008023F9 /* configuration_utils.m */; };
 		8C5AB46A1CF26A3E00234B30 /* OCMock.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8C5AB4671CF26A2900234B30 /* OCMock.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8C5D98B31CEFF079008E654B /* parse_configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C5D98B21CEFF079008E654B /* parse_configuration.m */; };
 		8C5D98B41CEFF079008E654B /* parse_configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C5D98B21CEFF079008E654B /* parse_configuration.m */; };
@@ -227,15 +236,6 @@
 		8CE919221AEA077F002B29AE /* ssl_pin_verifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE919211AEA077F002B29AE /* ssl_pin_verifier.m */; };
 		8CE919251AEA07C5002B29AE /* ssl_pin_verifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE919241AEA07C5002B29AE /* ssl_pin_verifier.h */; };
 		8CE9192D1AEA0F7E002B29AE /* domain_registry.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE919291AEA0F7E002B29AE /* domain_registry.h */; };
-		A790500F1E4CB33000F507DC /* domain_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = A790500D1E4CB33000F507DC /* domain_utils.m */; };
-		A79050101E4CB33000F507DC /* domain_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = A790500E1E4CB33000F507DC /* domain_utils.h */; };
-		A79050111E4CB37700F507DC /* domain_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = A790500E1E4CB33000F507DC /* domain_utils.h */; };
-		A79050121E4CB37800F507DC /* domain_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = A790500E1E4CB33000F507DC /* domain_utils.h */; };
-		A79050131E4CB37900F507DC /* domain_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = A790500E1E4CB33000F507DC /* domain_utils.h */; };
-		A79050141E4CB37E00F507DC /* domain_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = A790500D1E4CB33000F507DC /* domain_utils.m */; };
-		A79050151E4CB37F00F507DC /* domain_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = A790500D1E4CB33000F507DC /* domain_utils.m */; };
-		A79050161E4CB38000F507DC /* domain_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = A790500D1E4CB33000F507DC /* domain_utils.m */; };
-		A79050171E4CB38100F507DC /* domain_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = A790500D1E4CB33000F507DC /* domain_utils.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -316,6 +316,8 @@
 		8C15F99E1B16094D00F06C0E /* TSKPinFailureReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKPinFailureReport.h; path = Reporting/TSKPinFailureReport.h; sourceTree = "<group>"; };
 		8C15F99F1B16094D00F06C0E /* TSKPinFailureReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKPinFailureReport.m; path = Reporting/TSKPinFailureReport.m; sourceTree = "<group>"; };
 		8C15F9A31B17564400F06C0E /* TSKPinConfigurationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKPinConfigurationTests.m; sourceTree = "<group>"; };
+		8C4346D41E5B894A008023F9 /* configuration_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = configuration_utils.h; sourceTree = "<group>"; };
+		8C4346D51E5B894A008023F9 /* configuration_utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = configuration_utils.m; sourceTree = "<group>"; };
 		8C5AB4671CF26A2900234B30 /* OCMock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OCMock.framework; path = Dependencies/OCMock/iOS/OCMock.framework; sourceTree = "<group>"; };
 		8C5D98B21CEFF079008E654B /* parse_configuration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = parse_configuration.m; sourceTree = "<group>"; };
 		8C5D98B61CEFF103008E654B /* parse_configuration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = parse_configuration.h; sourceTree = "<group>"; };
@@ -375,8 +377,6 @@
 		8CE919211AEA077F002B29AE /* ssl_pin_verifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ssl_pin_verifier.m; path = Pinning/ssl_pin_verifier.m; sourceTree = "<group>"; };
 		8CE919241AEA07C5002B29AE /* ssl_pin_verifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ssl_pin_verifier.h; path = Pinning/ssl_pin_verifier.h; sourceTree = "<group>"; };
 		8CE919291AEA0F7E002B29AE /* domain_registry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = domain_registry.h; path = Dependencies/domain_registry/domain_registry.h; sourceTree = "<group>"; };
-		A790500D1E4CB33000F507DC /* domain_utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = domain_utils.m; path = Utils/domain_utils.m; sourceTree = "<group>"; };
-		A790500E1E4CB33000F507DC /* domain_utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = domain_utils.h; path = Utils/domain_utils.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -518,7 +518,6 @@
 		8C8480491A896EE30017C155 /* TrustKit */ = {
 			isa = PBXGroup;
 			children = (
-				A79050091E4CB1FB00F507DC /* Utils */,
 				8C0C90111E3C196A003851A8 /* module.modulemap */,
 				8CA6CC571BAF60DA00BDA419 /* Swizzling */,
 				8CE919281AEA0F61002B29AE /* Dependencies */,
@@ -532,6 +531,8 @@
 				8C84804A1A896EE30017C155 /* Supporting Files */,
 				8C5D98B21CEFF079008E654B /* parse_configuration.m */,
 				8C5D98B61CEFF103008E654B /* parse_configuration.h */,
+				8C4346D41E5B894A008023F9 /* configuration_utils.h */,
+				8C4346D51E5B894A008023F9 /* configuration_utils.m */,
 			);
 			path = TrustKit;
 			sourceTree = "<group>";
@@ -705,15 +706,6 @@
 			name = Dependencies;
 			sourceTree = "<group>";
 		};
-		A79050091E4CB1FB00F507DC /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				A790500D1E4CB33000F507DC /* domain_utils.m */,
-				A790500E1E4CB33000F507DC /* domain_utils.h */,
-			);
-			name = Utils;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -725,7 +717,7 @@
 				8C0C904E1E3C4210003851A8 /* TSKPinningValidator.h in Headers */,
 				8CE9192D1AEA0F7E002B29AE /* domain_registry.h in Headers */,
 				8CD5F7491BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.h in Headers */,
-				A79050101E4CB33000F507DC /* domain_utils.h in Headers */,
+				8C4346D61E5B894A008023F9 /* configuration_utils.h in Headers */,
 				8CE9191E1AEA073C002B29AE /* public_key_utils.h in Headers */,
 				8C84CCF11D6E5DE9009B3E7D /* registry_tables.h in Headers */,
 				8C84CCCE1D6E5D5A009B3E7D /* assert.h in Headers */,
@@ -752,7 +744,7 @@
 				8C0C90501E3C4212003851A8 /* TSKPinningValidator.h in Headers */,
 				8C84CBA21D6E0981009B3E7D /* domain_registry.h in Headers */,
 				8C84CBA41D6E0981009B3E7D /* TSKNSURLSessionDelegateProxy.h in Headers */,
-				A79050121E4CB37800F507DC /* domain_utils.h in Headers */,
+				8C4346D81E5B894A008023F9 /* configuration_utils.h in Headers */,
 				8C84CBA51D6E0981009B3E7D /* public_key_utils.h in Headers */,
 				8C84CCF31D6E5DE9009B3E7D /* registry_tables.h in Headers */,
 				8C84CCD01D6E5D5A009B3E7D /* assert.h in Headers */,
@@ -779,7 +771,7 @@
 				8C0C904F1E3C4212003851A8 /* TSKPinningValidator.h in Headers */,
 				8CA6CC251BAE2B6A00BDA419 /* TrustKit.h in Headers */,
 				8CD5F74A1BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.h in Headers */,
-				A79050111E4CB37700F507DC /* domain_utils.h in Headers */,
+				8C4346D71E5B894A008023F9 /* configuration_utils.h in Headers */,
 				8CA6CC1B1BAE2B6600BDA419 /* TSKPinFailureReport.h in Headers */,
 				8C84CCF21D6E5DE9009B3E7D /* registry_tables.h in Headers */,
 				8C84CCCF1D6E5D5A009B3E7D /* assert.h in Headers */,
@@ -806,7 +798,7 @@
 				8C0C90511E3C4213003851A8 /* TSKPinningValidator.h in Headers */,
 				8CC5D2381D6E64D10074F515 /* domain_registry.h in Headers */,
 				8CC5D23A1D6E64D10074F515 /* TSKNSURLSessionDelegateProxy.h in Headers */,
-				A79050131E4CB37900F507DC /* domain_utils.h in Headers */,
+				8C4346D91E5B894A008023F9 /* configuration_utils.h in Headers */,
 				8CC5D23B1D6E64D10074F515 /* public_key_utils.h in Headers */,
 				8CC5D23C1D6E64D10074F515 /* registry_tables.h in Headers */,
 				8CC5D23D1D6E64D10074F515 /* assert.h in Headers */,
@@ -1119,8 +1111,8 @@
 				6B2B06AF1B05157400FC749E /* TSKBackgroundReporter.m in Sources */,
 				8CD5F74B1BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.m in Sources */,
 				8CE9191F1AEA073C002B29AE /* public_key_utils.m in Sources */,
-				A790500F1E4CB33000F507DC /* domain_utils.m in Sources */,
 				8C84CCD71D6E5D5A009B3E7D /* registry_search.c in Sources */,
+				8C4346DA1E5B894A008023F9 /* configuration_utils.m in Sources */,
 				8C84CCCB1D6E5D5A009B3E7D /* assert.c in Sources */,
 				8C15F9A11B16094E00F06C0E /* TSKPinFailureReport.m in Sources */,
 				8CD5F7331BC5ED4A005801D8 /* TSKNSURLConnectionDelegateProxy.m in Sources */,
@@ -1159,8 +1151,8 @@
 				8C84CB941D6E0981009B3E7D /* TSKBackgroundReporter.m in Sources */,
 				8C84CB951D6E0981009B3E7D /* TSKNSURLSessionDelegateProxy.m in Sources */,
 				8C84CB961D6E0981009B3E7D /* public_key_utils.m in Sources */,
-				A79050161E4CB38000F507DC /* domain_utils.m in Sources */,
 				8C84CCD91D6E5D5A009B3E7D /* registry_search.c in Sources */,
+				8C4346DD1E5B894A008023F9 /* configuration_utils.m in Sources */,
 				8C84CCCD1D6E5D5A009B3E7D /* assert.c in Sources */,
 				8C84CB971D6E0981009B3E7D /* TSKPinFailureReport.m in Sources */,
 				8C84CB991D6E0981009B3E7D /* TSKNSURLConnectionDelegateProxy.m in Sources */,
@@ -1199,8 +1191,8 @@
 				8C5D98B41CEFF079008E654B /* parse_configuration.m in Sources */,
 				8C8716B31B23A9F700267E1D /* TSKPinFailureReport.m in Sources */,
 				8C8716B41B23A9FA00267E1D /* reporting_utils.m in Sources */,
-				A79050141E4CB37E00F507DC /* domain_utils.m in Sources */,
 				8C8716B81B23AA0D00267E1D /* TrustKit.m in Sources */,
+				8C4346DB1E5B894A008023F9 /* configuration_utils.m in Sources */,
 				8C8716B21B23A9F400267E1D /* TSKBackgroundReporter.m in Sources */,
 				0E64A7601B867BA000CA164A /* TSKReportsRateLimiter.m in Sources */,
 				8CD5F74C1BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.m in Sources */,
@@ -1224,8 +1216,8 @@
 				8CD5F74D1BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.m in Sources */,
 				8C5D98B51CEFF079008E654B /* parse_configuration.m in Sources */,
 				8C84CCD81D6E5D5A009B3E7D /* registry_search.c in Sources */,
-				A79050151E4CB37F00F507DC /* domain_utils.m in Sources */,
 				8C84CCCC1D6E5D5A009B3E7D /* assert.c in Sources */,
+				8C4346DC1E5B894A008023F9 /* configuration_utils.m in Sources */,
 				8CA6CC1E1BAE2B6600BDA419 /* reporting_utils.m in Sources */,
 				8CA6CC261BAE2B6A00BDA419 /* TrustKit.m in Sources */,
 				8CA6CC151BAE2B6600BDA419 /* TSKReportsRateLimiter.m in Sources */,
@@ -1264,8 +1256,8 @@
 				8CC5D22A1D6E64D10074F515 /* TSKBackgroundReporter.m in Sources */,
 				8CC5D22B1D6E64D10074F515 /* TSKNSURLSessionDelegateProxy.m in Sources */,
 				8CC5D22C1D6E64D10074F515 /* public_key_utils.m in Sources */,
-				A79050171E4CB38100F507DC /* domain_utils.m in Sources */,
 				8CC5D22D1D6E64D10074F515 /* registry_search.c in Sources */,
+				8C4346DE1E5B894A008023F9 /* configuration_utils.m in Sources */,
 				8CC5D22E1D6E64D10074F515 /* assert.c in Sources */,
 				8CC5D22F1D6E64D10074F515 /* TSKPinFailureReport.m in Sources */,
 				8CC5D2311D6E64D10074F515 /* TSKNSURLConnectionDelegateProxy.m in Sources */,

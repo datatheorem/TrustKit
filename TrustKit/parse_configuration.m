@@ -9,10 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "TrustKit.h"
 #import "Dependencies/domain_registry/domain_registry.h"
-#import "Utils/domain_utils.h"
 #import "parse_configuration.h"
 #import "Pinning/public_key_utils.h"
 #import <CommonCrypto/CommonDigest.h>
+#import "configuration_utils.h"
 
 
 NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
@@ -83,6 +83,29 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
         NSMutableDictionary *domainFinalConfiguration = [[NSMutableDictionary alloc]init];
         
         
+        // Always start with the optional excludeSubDomain setting; if it set, no other TSKDomainConfigurationKey can be set for this domain
+        NSNumber *shouldExcludeSubdomain = domainPinningPolicy[kTSKExcludeSubdomainFromParentPolicy];
+        if (shouldExcludeSubdomain)
+        {
+            // Confirm that no other TSKDomainConfigurationKeys were set for this domain
+            if ([[domainPinningPolicy allKeys] count] > 1)
+            {
+                [NSException raise:@"TrustKit configuration invalid"
+                            format:@"TrustKit was initialized with TSKExcludeSubdomainFromParentPolicy for domain %@ but detected additional configuration keys", domainName];
+            }
+            
+            // Store the whole configuration and continue to the next domain entry
+            domainFinalConfiguration[kTSKExcludeSubdomainFromParentPolicy] = @(YES);
+            finalConfiguration[kTSKPinnedDomains][domainName] = [NSDictionary dictionaryWithDictionary:domainFinalConfiguration];
+            continue;
+        }
+        else
+        {
+            // Default setting is NO
+            domainFinalConfiguration[kTSKExcludeSubdomainFromParentPolicy] = @(NO);
+        }
+        
+        
         // Extract the optional includeSubdomains setting
         NSNumber *shouldIncludeSubdomains = domainPinningPolicy[kTSKIncludeSubdomains];
         if (shouldIncludeSubdomains == nil)
@@ -130,30 +153,7 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
             // Default setting is YES
             domainFinalConfiguration[kTSKEnforcePinning] = @(YES);
         }
-        
-        // Extract the optional excludeSubDomain setting
-        NSNumber *shouldExcludeSubdomain = domainPinningPolicy[kTSKExcludeSubdomainFromParentPolicy];
-        if (shouldExcludeSubdomain)
-        {
-            
-            BOOL foundParentDomain = NO;
-            
-            for (NSString *parentDomainName in TrustKitArguments[kTSKPinnedDomains]){
-                foundParentDomain = isSubdomain(parentDomainName, domainName);
-            }
-            
-            if (!foundParentDomain){
-                [NSException raise:@"TrustKit configuration invalid"
-                            format:@"TrustKit was initialized with kTSKExcludeSubdomainFromParentPolicy for a domain suffix %@ without parent domain", domainName];
-            }
 
-            domainFinalConfiguration[kTSKExcludeSubdomainFromParentPolicy] = shouldExcludeSubdomain;
-        }
-        else
-        {
-            // Default setting is NO
-            domainFinalConfiguration[kTSKExcludeSubdomainFromParentPolicy] = @(NO);
-        }
         
         // Extract the optional disableDefaultReportUri setting
         NSNumber *shouldDisableDefaultReportUri = domainPinningPolicy[kTSKDisableDefaultReportUri];
@@ -170,7 +170,7 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
         
         // Extract the list of public key algorithms to support and convert them from string to the TSKPublicKeyAlgorithm type
         NSArray<NSString *> *publicKeyAlgsStr = domainPinningPolicy[kTSKPublicKeyAlgorithms];
-        if (publicKeyAlgsStr == nil && [domainFinalConfiguration[kTSKExcludeSubdomainFromParentPolicy]  isEqual: @(NO)])
+        if (publicKeyAlgsStr == nil)
         {
             [NSException raise:@"TrustKit configuration invalid"
                         format:@"TrustKit was initialized with an invalid value for %@ for domain %@", kTSKPublicKeyAlgorithms, domainName];
@@ -240,8 +240,9 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
             [serverSslPinsSet addObject:pinnedKeyHash];
         }
         
+        
         NSUInteger requiredNumberOfPins = [domainFinalConfiguration[kTSKEnforcePinning] boolValue] ? 2 : 1;
-        if([serverSslPinsSet count] < requiredNumberOfPins && [domainFinalConfiguration[kTSKExcludeSubdomainFromParentPolicy]  isEqual: @(NO)])
+        if([serverSslPinsSet count] < requiredNumberOfPins)
         {
             [NSException raise:@"TrustKit configuration invalid"
                         format:@"TrustKit was initialized with less than %lu pins (ie. no backup pins) for domain %@. This might brick your App; please review the Getting Started guide in ./docs/getting-started.md", (unsigned long)requiredNumberOfPins, domainName];
@@ -254,6 +255,22 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
         finalConfiguration[kTSKPinnedDomains][domainName] = [NSDictionary dictionaryWithDictionary:domainFinalConfiguration];
     }
     
+    
+    // Lastly, ensure that we can find a parent policy for subdomains configured with TSKExcludeSubdomainFromParentPolicy
+    for (NSString *domainName in finalConfiguration[kTSKPinnedDomains])
+    {
+        if ([finalConfiguration[kTSKPinnedDomains][domainName][kTSKExcludeSubdomainFromParentPolicy] boolValue])
+        {
+            // To force the lookup of a parent domain, we append 'a' to this subdomain so we don't retrieve its policy
+            NSString *parentDomainConfigKey = getPinningConfigurationKeyForDomain([@"a" stringByAppendingString:domainName], finalConfiguration);
+            if (parentDomainConfigKey == nil)
+            {
+                [NSException raise:@"TrustKit configuration invalid"
+                            format:@"TrustKit was initialized with TSKExcludeSubdomainFromParentPolicy for domain %@ but could not find a policy for a parent domain", domainName];
+            }
+        }
+    }
+
     return finalConfiguration;
 }
 
