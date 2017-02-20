@@ -108,12 +108,19 @@ FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKPublicKeyAlgorithms;
  */
 FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKEnforcePinning;
 
-FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKExcludeSubdomainFromParentPolicy;
 
 /**
  A boolean. If set to `YES`, also pin all the subdomains of the specified domain; default value is `NO`.
  */
 FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKIncludeSubdomains;
+
+
+/**
+ A boolean. If set to `YES`, TrustKit will not pin this specific domain if `kTSKIncludeSubdomains` was set for this domain's parent domain.
+ 
+ This allows excluding specific subdomains from a pinning policy that was applied to a parent domain.
+ */
+FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKExcludeSubdomainFromParentPolicy;
 
 
 /**
