@@ -7,7 +7,7 @@ import os.path
 import argparse
 import hashlib
 import base64
-
+import platform
 
 class SupportedKeyAlgorithmsEnum(object):
     RSA_2048 = 1
@@ -81,9 +81,13 @@ if __name__ == '__main__':
     else:
         raise ValueError('Unexpected key algorithm')
 
+    if platform.system() == 'Windows':
+        cmd_redirects = '2>nul'
+    else:
+        cmd_redirects = '-in /dev/stdin 2>/dev/null'
+        
     p1 = Popen('openssl x509  -pubkey -noout -inform {} '
-               '| openssl {} -outform DER -pubin -in /dev/stdin 2>/dev/null'.format(args.type,
-                                                                                       openssl_alg),
+               '| openssl {} -outform DER -pubin {}'.format(args.type, openssl_alg, cmd_redirects),
             shell=True, stdin=PIPE, stdout=PIPE)
     spki = p1.communicate(input=certificate)[0]
 
