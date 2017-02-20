@@ -55,7 +55,7 @@
             finalTrustDecision = TSKTrustDecisionDomainNotPinned;
             
         }
-        else if (domainConfig[kTSKExcludeSubdomainFromParentPolicy])
+        else if ([domainConfig[kTSKExcludeSubdomainFromParentPolicy] boolValue])
         {
             // This is a subdomain that was explicitely excluded from the parent domain's policy
             finalTrustDecision = TSKTrustDecisionDomainNotPinned;
