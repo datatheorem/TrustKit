@@ -129,14 +129,17 @@ FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKExcludeSubdomainFromParent
  To minimize the performance impact of sending reports on each validation failure, the reports are uploaded using the background transfer service and are also rate-limited to one per day and per type of failure. For HTTPS report URLs, the HTTPS connections will ignore the SSL pinning policy and use the default certificate validation mechanisms, in order to maximize the chance of the reports reaching the server. The format of the reports is similar to the one described in RFC 7469 for the HPKP specification:
  
     {
-        "app-bundle-id":"com.example.ABC",
-        "app-version":"1.0",
-        "app-vendor-id":"599F9C00-92DC-4B5C-9464-7971F01F8370",
-        "date-time": "2015-07-10T20:03:14Z",
-        "hostname": "mail.example.com",
+        "app-bundle-id": "com.datatheorem.testtrustkit2",
+        "app-version": "1",
+        "app-vendor-id": "599F9C00-92DC-4B5C-9464-7971F01F8370",
+        "app-platform": "IOS",
+        "app-platform-version": "10.2.0",
+        "trustkit-version": "1.3.1",
+        "hostname": "www.datatheorem.com",
         "port": 0,
+        "noted-hostname": "datatheorem.com",
         "include-subdomains": true,
-        "noted-hostname": "example.com",
+        "enforce-pinning": true,
         "validated-certificate-chain": [
             pem1, ... pemN
         ],

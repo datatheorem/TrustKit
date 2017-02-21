@@ -18,6 +18,7 @@
 @property (readonly, nonatomic, nonnull) NSString *appBundleId; // Not part of the HPKP spec
 @property (readonly, nonatomic, nonnull) NSString *appVersion; // Not part of the HPKP spec
 @property (readonly, nonatomic, nonnull) NSString *appPlatform; // Not part of the HPKP spec
+@property (readonly, nonatomic, nonnull) NSString *appPlatformVersion; // Not part of the HPKP spec
 @property (readonly, nonatomic, nonnull) NSString *appVendorId; // Not part of the HPKP spec
 @property (readonly, nonatomic, nonnull) NSString *trustkitVersion; // Not part of the HPKP spec
 @property (readonly, nonatomic, nonnull) NSString *notedHostname;
@@ -34,20 +35,21 @@
 
 // Init with default bundle ID and current time as the date-time
 - (nonnull instancetype) initWithAppBundleId:(nonnull NSString *)appBundleId
-                          appVersion:(nonnull NSString *)appVersion
-                         appPlatform:(nonnull NSString *)appPlatform
-                         appVendorId:(nonnull NSString *)appVendorId
-                     trustkitVersion:(nonnull NSString *)trustkitVersion
-                            hostname:(nonnull NSString *)serverHostname
-                                port:(nonnull NSNumber *)serverPort
-                            dateTime:(nonnull NSDate *)dateTime
-                       notedHostname:(nonnull NSString *)notedHostname
-                   includeSubdomains:(BOOL) includeSubdomains
-                      enforcePinning:(BOOL)enforcePinning
-           validatedCertificateChain:(nonnull NSArray<NSString *> *)validatedCertificateChain
-                           knownPins:(nonnull NSArray<NSString *> *)knownPins
-                    validationResult:(TSKPinValidationResult) validationResult
-                      expirationDate:(nullable NSDate *)knownPinsExpirationDate;
+                                  appVersion:(nonnull NSString *)appVersion
+                                 appPlatform:(nonnull NSString *)appPlatform
+                          appPlatformVersion:(nonnull NSString *)appPlatformVersion
+                                 appVendorId:(nonnull NSString *)appVendorId
+                             trustkitVersion:(nonnull NSString *)trustkitVersion
+                                    hostname:(nonnull NSString *)serverHostname
+                                        port:(nonnull NSNumber *)serverPort
+                                    dateTime:(nonnull NSDate *)dateTime
+                               notedHostname:(nonnull NSString *)notedHostname
+                           includeSubdomains:(BOOL)includeSubdomains
+                              enforcePinning:(BOOL)enforcePinning
+                   validatedCertificateChain:(nonnull NSArray<NSString *> *)validatedCertificateChain
+                                   knownPins:(nonnull NSArray<NSString *> *)knownPins
+                            validationResult:(TSKPinValidationResult)validationResult
+                              expirationDate:(nullable NSDate *)knownPinsExpirationDate;
 
 // Return the report in JSON format for POSTing it
 - (nonnull NSData *)json;
