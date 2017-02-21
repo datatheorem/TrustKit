@@ -91,14 +91,13 @@ static dispatch_once_t dispatchOnceBackgroundSession;
         
         
         CFBundleRef appBundle = CFBundleGetMainBundle();
-        _appBundleId = (__bridge NSString *)CFBundleGetIdentifier(appBundle);
-        _appVersion =  (__bridge NSString *)CFBundleGetValueForInfoDictionaryKey(appBundle, kCFBundleVersionKey);
-        
+        _appVersion =  (__bridge NSString *)CFBundleGetValueForInfoDictionaryKey(appBundle, (CFStringRef) @"CFBundleShortVersionString");
         if (_appVersion == nil)
         {
-            _appVersion = @"N/A";
+            _appVersion = @"";
         }
         
+        _appBundleId = (__bridge NSString *)CFBundleGetIdentifier(appBundle);
         if (_appBundleId == nil)
         {
             // The bundle ID we get is nil if we're running tests on Travis. If the bundle ID is nil, background sessions can't be used
