@@ -8,19 +8,77 @@
 
 #import "RSSwizzle.h"
 #import <objc/runtime.h>
+#include <dlfcn.h>
 
-//use os_unfair_lock over OSSpinLock when building with ios sdk 10 or osx sdk 10.12
-#define TARGET_SDK_GE_10 (TARGET_OS_IPHONE && __IPHONE_OS_VERSION_MAX_ALLOWED >= 100000) || (!TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MAX_ALLOWED >= 101200)
+// Use os_unfair_lock over OSSpinLock when building with ios sdk 10 or macos sdk 10.12
+#define TARGET_SDK_GE_10 ((TARGET_OS_IOS && __IPHONE_OS_VERSION_MIN_REQUIRED >= 100000) || (!TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MAX_ALLOWED >= 101200))
 
 #if TARGET_SDK_GE_10
 #import <os/lock.h>
 #else
-#import <libkern/OSAtomic.h>
+//use this struct to inialize an unfair_lock
+typedef struct _os_unfair_lock_s {
+    uint32_t _os_unfair_lock_opaque;
+} os_unfair_lock, *os_unfair_lock_t;
 #endif
+
+#import <libkern/OSAtomic.h>
 
 #if !__has_feature(objc_arc)
 #error This code needs ARC. Use compiler option -fobjc-arc
 #endif
+
+#pragma mark Locking
+
+// This function will lock a lock using os_unfair_lock_lock (on ios10/macos10.12) or OSSpinLockLock (9 and lower).
+void chooseLock(void *lock)
+{
+#if TARGET_SDK_GE_10
+    // iOS 10+, os_unfair_lock_lock is available
+    os_unfair_lock_lock(lock);
+#else
+    // NSDimension was introduced at the same time that os_unfair_lock_lock was made public.
+    // To make sure we dont access unfair_lock on an iOS version where it isnt public, check for the presence of NSDimension before proceeding.
+    if (objc_getClass("NSDimension"))
+    {
+        // Attempt to use 'os_unfair_lock_lock'
+        void (*os_unfair_lock_lock)(void *lock) = dlsym(dlopen(NULL, RTLD_NOW | RTLD_GLOBAL), "os_unfair_lock_lock");
+        if (os_unfair_lock_lock != NULL)
+        {
+            os_unfair_lock_lock(lock);
+            return;
+        }
+    }
+    
+    // Unfair locks are not available on iOS 9 and lower, using deprecated OSSpinLock.
+    OSSpinLockLock(lock);
+#endif
+}
+
+// This function will unlock a lock using os_unfair_lock_unlock (on ios10/macos10.12) or OSSpinLockUnlock (9 and lower).
+void chooseUnlock(void *lock)
+{
+#if TARGET_SDK_GE_10
+    // iOS 10+, os_unfair_lock_unlock is available
+    os_unfair_lock_unlock(lock);
+#else
+    // NSDimension was introduced at the same time that os_unfair_lock_unlock was made public.
+    // To make sure we dont access unfair_unlock on an iOS version where it isnt public, check for the presence of NSDimension before proceeding.
+    if (objc_getClass("NSDimension"))
+    {
+        // Attempt to use 'os_unfair_lock_unlock'.
+        void (*os_unfair_lock_unlock)(void *lock) = dlsym(dlopen(NULL, RTLD_NOW | RTLD_GLOBAL), "os_unfair_lock_unlock");
+        if (os_unfair_lock_unlock != NULL)
+        {
+            os_unfair_lock_unlock(lock);
+            return;
+        }
+    }
+    
+    // Unfair locks are not available on iOS 9 and lower, using deprecated OSSpinUnlock.
+    OSSpinLockUnlock(lock);
+#endif
+}
 
 #pragma mark - Block Helpers
 #if !defined(NS_BLOCK_ASSERTIONS)
@@ -207,7 +265,8 @@ static void swizzle(Class classToSwizzle,
 #if TARGET_SDK_GE_10
     __block os_unfair_lock lock = OS_UNFAIR_LOCK_INIT;
 #else
-    __block OSSpinLock lock = OS_SPINLOCK_INIT;
+    // Below iOS 10, OS_UNFAIR_LOCK_INIT will not exist. Note that this type works with OSSpinLock
+    __block os_unfair_lock lock = ((os_unfair_lock){0});
 #endif
     
     // To keep things thread-safe, we fill in the originalIMP later,
@@ -220,18 +279,12 @@ static void swizzle(Class classToSwizzle,
         // class_replaceMethod and its return value being set.
         // So to be sure originalIMP has the right value, we need a lock.
         
-#if TARGET_SDK_GE_10
-        os_unfair_lock_lock(&lock);
-#else
-        OSSpinLockLock(&lock);
-#endif
+        
+        chooseLock(&lock);
+        
         IMP imp = originalIMP;
         
-#if TARGET_SDK_GE_10
-        os_unfair_lock_unlock(&lock);
-#else
-        OSSpinLockUnlock(&lock);
-#endif
+        chooseUnlock(&lock);
         
         if (NULL == imp){
             // If the class does not implement the method
@@ -268,20 +321,11 @@ static void swizzle(Class classToSwizzle,
     // We need a lock to be sure that originalIMP has the right value in the
     // originalImpProvider block above.
     
-#if TARGET_SDK_GE_10
-    os_unfair_lock_lock(&lock);
-#else
-    OSSpinLockLock(&lock);
-#endif
+    chooseLock(&lock);
     
     originalIMP = class_replaceMethod(classToSwizzle, selector, newIMP, methodType);
     
-#if TARGET_SDK_GE_10
-    os_unfair_lock_unlock(&lock);
-#else
-    OSSpinLockUnlock(&lock);
-#endif
-    
+    chooseUnlock(&lock);
 }
 
 
@@ -353,6 +397,5 @@ static NSMutableSet *swizzledClassesForKey(const void *key){
                            mode:RSSwizzleModeAlways
                             key:NULL];
 }
-
 
 @end
