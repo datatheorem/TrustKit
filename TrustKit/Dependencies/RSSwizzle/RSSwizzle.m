@@ -10,8 +10,15 @@
 #import <objc/runtime.h>
 #include <dlfcn.h>
 
-// Use os_unfair_lock over OSSpinLock when building with ios sdk 10 or macos sdk 10.12
-#define TARGET_SDK_GE_10 ((TARGET_OS_IOS && __IPHONE_OS_VERSION_MIN_REQUIRED >= 100000) || (!TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MAX_ALLOWED >= 101200))
+
+#if !__has_feature(objc_arc)
+#error This code needs ARC. Use compiler option -fobjc-arc
+#endif
+
+
+// Use os_unfair_lock over OSSpinLock when building with the following SDKs: iOS 10, macOS 10.12 and any tvOS and watchOS
+#define TARGET_SDK_GE_10 TARGET_OS_WATCH || TARGET_OS_TV || (TARGET_OS_IOS &&__IPHONE_OS_VERSION_MIN_REQUIRED >= 100000) || (!TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MIN_ALLOWED >= 101200)
+
 
 #if TARGET_SDK_GE_10
 #import <os/lock.h>
@@ -24,9 +31,6 @@ typedef struct _os_unfair_lock_s {
 
 #import <libkern/OSAtomic.h>
 
-#if !__has_feature(objc_arc)
-#error This code needs ARC. Use compiler option -fobjc-arc
-#endif
 
 #pragma mark Locking
 
