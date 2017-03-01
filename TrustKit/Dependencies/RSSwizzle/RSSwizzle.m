@@ -24,6 +24,10 @@
 
 #if BASE_SDK_HIGHER_THAN_10
 #import <os/lock.h>
+#else
+typedef struct _os_unfair_lock_s {
+    uint32_t _os_unfair_lock_opaque;
+} os_unfair_lock, *os_unfair_lock_t;
 #endif
 
 
@@ -32,20 +36,22 @@
 #endif
 
 
+// NSDimension was introduced at the same time that os_unfair_lock_lock was made public, ie. iOS 10
+#define DEVICE_HIGHER_THAN_10 objc_getClass("NSDimension")
+
+
 #pragma mark Locking
 
 // This function will lock a lock using os_unfair_lock_lock (on ios10/macos10.12) or OSSpinLockLock (9 and lower).
-static void chooseLock(void *lock)
+static void chooseLock(os_unfair_lock *lock)
 {
 #if DEPLOYMENT_TARGET_HIGHER_THAN_10
     // iOS 10+, os_unfair_lock_lock is available
     os_unfair_lock_lock(lock);
 #else
-    // NSDimension was introduced at the same time that os_unfair_lock_lock was made public.
-    // To make sure we dont access unfair_lock on an iOS version where it isnt public, check for the presence of NSDimension before proceeding.
-    if (objc_getClass("NSDimension"))
+    if (DEVICE_HIGHER_THAN_10)
     {
-        // Attempt to use 'os_unfair_lock_lock'
+        // Attempt to use os_unfair_lock_lock().
         void (*os_unfair_lock_lock)(void *lock) = dlsym(dlopen(NULL, RTLD_NOW | RTLD_GLOBAL), "os_unfair_lock_lock");
         if (os_unfair_lock_lock != NULL)
         {
@@ -55,22 +61,20 @@ static void chooseLock(void *lock)
     }
     
     // Unfair locks are not available on iOS 9 and lower, using deprecated OSSpinLock.
-    OSSpinLockLock(lock);
+    OSSpinLockLock((void *)lock);
 #endif
 }
 
 // This function will unlock a lock using os_unfair_lock_unlock (on ios10/macos10.12) or OSSpinLockUnlock (9 and lower).
-static void chooseUnlock(void *lock)
+static void chooseUnlock(os_unfair_lock *lock)
 {
 #if DEPLOYMENT_TARGET_HIGHER_THAN_10
     // iOS 10+, os_unfair_lock_unlock is available
     os_unfair_lock_unlock(lock);
 #else
-    // NSDimension was introduced at the same time that os_unfair_lock_unlock was made public.
-    // To make sure we dont access unfair_unlock on an iOS version where it isnt public, check for the presence of NSDimension before proceeding.
-    if (objc_getClass("NSDimension"))
+    if (DEVICE_HIGHER_THAN_10)
     {
-        // Attempt to use 'os_unfair_lock_unlock'.
+        // Attempt to use os_unfair_lock_unlock().
         void (*os_unfair_lock_unlock)(void *lock) = dlsym(dlopen(NULL, RTLD_NOW | RTLD_GLOBAL), "os_unfair_lock_unlock");
         if (os_unfair_lock_unlock != NULL)
         {
@@ -80,11 +84,13 @@ static void chooseUnlock(void *lock)
     }
     
     // Unfair locks are not available on iOS 9 and lower, using deprecated OSSpinUnlock.
-    OSSpinLockUnlock(lock);
+    OSSpinLockUnlock((void *)lock);
 #endif
 }
 
+
 #pragma mark - Block Helpers
+
 #if !defined(NS_BLOCK_ASSERTIONS)
 
 // See http://clang.llvm.org/docs/Block-ABI-Apple.html#high-level
@@ -266,12 +272,16 @@ static void swizzle(Class classToSwizzle,
     NSCAssert(blockIsAnImpFactoryBlock(factoryBlock),
               @"Wrong type of implementation factory block.");
     
-#if TARGET_SDK_GE_10
-    __block os_unfair_lock lock = OS_UNFAIR_LOCK_INIT;
-#else
-    // Below iOS 10, OS_UNFAIR_LOCK_INIT will not exist. Note that this type works with OSSpinLock
-    __block os_unfair_lock lock = ((os_unfair_lock){0});
-#endif
+    __block os_unfair_lock lock;
+    if (DEVICE_HIGHER_THAN_10)
+    {
+        lock = OS_UNFAIR_LOCK_INIT;
+    }
+    else
+    {
+        // Below iOS 10, OS_UNFAIR_LOCK_INIT will not exist. Note that this type works with OSSpinLock
+        lock = ((os_unfair_lock){0});
+    }
     
     // To keep things thread-safe, we fill in the originalIMP later,
     // with the result of the class_replaceMethod call below.
