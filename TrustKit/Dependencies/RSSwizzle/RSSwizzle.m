@@ -17,19 +17,19 @@
 
 
 // Use os_unfair_lock over OSSpinLock when building with the following SDKs: iOS 10, macOS 10.12 and any tvOS and watchOS
-#define TARGET_SDK_GE_10 TARGET_OS_WATCH || TARGET_OS_TV || (TARGET_OS_IOS &&__IPHONE_OS_VERSION_MIN_REQUIRED >= 100000) || (!TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MIN_ALLOWED >= 101200)
+#define DEPLOYMENT_TARGET_HIGHER_THAN_10 TARGET_OS_WATCH || TARGET_OS_TV || (TARGET_OS_IOS &&__IPHONE_OS_VERSION_MIN_REQUIRED >= 100000) || (!TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MIN_ALLOWED >= 101200)
+
+#define BASE_SDK_HIGHER_THAN_10 (TARGET_OS_WATCH || TARGET_OS_TV || (TARGET_OS_IOS &&__IPHONE_OS_VERSION_MAX_ALLOWED >= 100000) || (!TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MAX_ALLOWED >= 101200))
 
 
-#if TARGET_SDK_GE_10
+#if BASE_SDK_HIGHER_THAN_10
 #import <os/lock.h>
-#else
-//use this struct to inialize an unfair_lock
-typedef struct _os_unfair_lock_s {
-    uint32_t _os_unfair_lock_opaque;
-} os_unfair_lock, *os_unfair_lock_t;
 #endif
 
+
+#if !DEPLOYMENT_TARGET_HIGHER_THAN_10
 #import <libkern/OSAtomic.h>
+#endif
 
 
 #pragma mark Locking
@@ -37,7 +37,7 @@ typedef struct _os_unfair_lock_s {
 // This function will lock a lock using os_unfair_lock_lock (on ios10/macos10.12) or OSSpinLockLock (9 and lower).
 static void chooseLock(void *lock)
 {
-#if TARGET_SDK_GE_10
+#if DEPLOYMENT_TARGET_HIGHER_THAN_10
     // iOS 10+, os_unfair_lock_lock is available
     os_unfair_lock_lock(lock);
 #else
@@ -62,7 +62,7 @@ static void chooseLock(void *lock)
 // This function will unlock a lock using os_unfair_lock_unlock (on ios10/macos10.12) or OSSpinLockUnlock (9 and lower).
 static void chooseUnlock(void *lock)
 {
-#if TARGET_SDK_GE_10
+#if DEPLOYMENT_TARGET_HIGHER_THAN_10
     // iOS 10+, os_unfair_lock_unlock is available
     os_unfair_lock_unlock(lock);
 #else
