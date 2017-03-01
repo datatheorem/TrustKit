@@ -31,7 +31,7 @@ typedef struct _os_unfair_lock_s {
 #pragma mark Locking
 
 // This function will lock a lock using os_unfair_lock_lock (on ios10/macos10.12) or OSSpinLockLock (9 and lower).
-void chooseLock(void *lock)
+static void chooseLock(void *lock)
 {
 #if TARGET_SDK_GE_10
     // iOS 10+, os_unfair_lock_lock is available
@@ -56,7 +56,7 @@ void chooseLock(void *lock)
 }
 
 // This function will unlock a lock using os_unfair_lock_unlock (on ios10/macos10.12) or OSSpinLockUnlock (9 and lower).
-void chooseUnlock(void *lock)
+static void chooseUnlock(void *lock)
 {
 #if TARGET_SDK_GE_10
     // iOS 10+, os_unfair_lock_unlock is available
