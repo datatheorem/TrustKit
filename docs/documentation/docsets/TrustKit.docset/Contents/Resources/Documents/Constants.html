@@ -63,6 +63,9 @@
                 <a href="Constants.html#/c:@kTSKEnforcePinning">kTSKEnforcePinning</a>
               </li>
               <li class="nav-group-task">
+                <a href="Constants.html#/c:@kTSKExcludeSubdomainFromParentPolicy">kTSKExcludeSubdomainFromParentPolicy</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Constants.html#/c:@kTSKExpirationDate">kTSKExpirationDate</a>
               </li>
               <li class="nav-group-task">
@@ -505,6 +508,43 @@ However, it should only be enabled for simple Apps, as it may not work properly 
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/c:@kTSKExcludeSubdomainFromParentPolicy"></a>
+                    <a name="//apple_ref/objc/Constant/kTSKExcludeSubdomainFromParentPolicy" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@kTSKExcludeSubdomainFromParentPolicy">kTSKExcludeSubdomainFromParentPolicy</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A boolean. If set to <code>YES</code>, TrustKit will not pin this specific domain if <code><a href="Constants.html#/c:@kTSKIncludeSubdomains">kTSKIncludeSubdomains</a></code> was set for this domain&rsquo;s parent domain.</p>
+
+<p>This allows excluding specific subdomains from a pinning policy that was applied to a parent domain.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight"><code><span class="k">extern</span> <span class="k">const</span> <span class="n"><a href="Type Definitions.html#/c:TrustKit.h@T@TSKDomainConfigurationKey">TSKDomainConfigurationKey</a></span> <span class="n">_Nonnull</span> <span class="n">kTSKExcludeSubdomainFromParentPolicy</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">let</span> <span class="nv">kTSKExcludeSubdomainFromParentPolicy</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.1/TrustKit/TrustKit.h#L123">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/c:@kTSKReportUris"></a>
                     <a name="//apple_ref/objc/Constant/kTSKReportUris" class="dashAnchor"></a>
                     <a class="token" href="#/c:@kTSKReportUris">kTSKReportUris</a>
@@ -520,14 +560,17 @@ However, it should only be enabled for simple Apps, as it may not work properly 
 <p>To minimize the performance impact of sending reports on each validation failure, the reports are uploaded using the background transfer service and are also rate-limited to one per day and per type of failure. For HTTPS report URLs, the HTTPS connections will ignore the SSL pinning policy and use the default certificate validation mechanisms, in order to maximize the chance of the reports reaching the server. The format of the reports is similar to the one described in RFC 7469 for the HPKP specification:</p>
 
 <p>{
-       <q>app-bundle-id</q>:<q>com.example.ABC</q>,
-       <q>app-version</q>:<q>1.0</q>,
-       <q>app-vendor-id</q>:<q>599F9C00-92DC-4B5C-9464-7971F01F8370</q>,
-       <q>date-time</q>: <q>2015-07-10T20:03:14Z</q>,
-       <q>hostname</q>: <q>mail.example.com</q>,
+       <q>app-bundle-id</q>: <q>com.datatheorem.testtrustkit2</q>,
+       <q>app-version</q>: <q>1</q>,
+       <q>app-vendor-id</q>: <q>599F9C00-92DC-4B5C-9464-7971F01F8370</q>,
+       <q>app-platform</q>: <q>IOS</q>,
+       <q>app-platform-version</q>: <q>10.2.0</q>,
+       <q>trustkit-version</q>: <q>1.3.1</q>,
+       <q>hostname</q>: <q>www.datatheorem.com</q>,
        <q>port</q>: 0,
+       <q>noted-hostname</q>: <q>datatheorem.com</q>,
        <q>include-subdomains</q>: true,
-       <q>noted-hostname</q>: <q>example.com</q>,
+       <q>enforce-pinning</q>: true,
        <q>validated-certificate-chain</q>: [
            pem1, &hellip; pemN
        ],
@@ -553,7 +596,7 @@ However, it should only be enabled for simple Apps, as it may not work properly 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.1/TrustKit/TrustKit.h#L142">Show on GitHub</a>
+                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.1/TrustKit/TrustKit.h#L153">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -590,7 +633,7 @@ However, it should only be enabled for simple Apps, as it may not work properly 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.1/TrustKit/TrustKit.h#L150">Show on GitHub</a>
+                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.1/TrustKit/TrustKit.h#L161">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -627,7 +670,7 @@ However, it should only be enabled for simple Apps, as it may not work properly 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.1/TrustKit/TrustKit.h#L158">Show on GitHub</a>
+                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.1/TrustKit/TrustKit.h#L169">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -673,7 +716,7 @@ However, it should only be enabled for simple Apps, as it may not work properly 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.1/TrustKit/TrustKit.h#L180">Show on GitHub</a>
+                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.1/TrustKit/TrustKit.h#L191">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -708,7 +751,7 @@ However, it should only be enabled for simple Apps, as it may not work properly 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.1/TrustKit/TrustKit.h#L186">Show on GitHub</a>
+                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.1/TrustKit/TrustKit.h#L197">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -743,7 +786,7 @@ However, it should only be enabled for simple Apps, as it may not work properly 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.1/TrustKit/TrustKit.h#L192">Show on GitHub</a>
+                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.1/TrustKit/TrustKit.h#L203">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -778,7 +821,7 @@ However, it should only be enabled for simple Apps, as it may not work properly 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.1/TrustKit/TrustKit.h#L198">Show on GitHub</a>
+                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.1/TrustKit/TrustKit.h#L209">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -828,7 +871,7 @@ However, it should only be enabled for simple Apps, as it may not work properly 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.1/TrustKit/TrustKit.h#L210">Show on GitHub</a>
+                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.1/TrustKit/TrustKit.h#L221">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -874,7 +917,7 @@ However, it should only be enabled for simple Apps, as it may not work properly 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.1/TrustKit/TrustKit.h#L224">Show on GitHub</a>
+                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.1/TrustKit/TrustKit.h#L235">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -909,7 +952,7 @@ However, it should only be enabled for simple Apps, as it may not work properly 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.1/TrustKit/TrustKit.h#L230">Show on GitHub</a>
+                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.1/TrustKit/TrustKit.h#L241">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -946,7 +989,7 @@ However, it should only be enabled for simple Apps, as it may not work properly 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.1/TrustKit/TrustKit.h#L237">Show on GitHub</a>
+                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.1/TrustKit/TrustKit.h#L248">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -981,7 +1024,7 @@ However, it should only be enabled for simple Apps, as it may not work properly 
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.1/TrustKit/TrustKit.h#L242">Show on GitHub</a>
+                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.1/TrustKit/TrustKit.h#L253">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1020,7 +1063,7 @@ NSDictionary *hostnameConfiguration = [TrustKit configuration][kTSKPinnedDomains
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.1/TrustKit/TrustKit.h#L250">Show on GitHub</a>
+                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.1/TrustKit/TrustKit.h#L261">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1055,7 +1098,7 @@ NSDictionary *hostnameConfiguration = [TrustKit configuration][kTSKPinnedDomains
                         </div>
                       </div>
                       <div class="slightly-smaller">
-                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.1/TrustKit/TrustKit.h#L255">Show on GitHub</a>
+                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.1/TrustKit/TrustKit.h#L266">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -1065,7 +1108,7 @@ NSDictionary *hostnameConfiguration = [TrustKit configuration][kTSKPinnedDomains
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="https://datatheorem.github.io" target="_blank" rel="external">Data Theorem</a>. All rights reserved. (Last updated: 2017-01-27)</p>
+          <p>&copy; 2017 <a class="link" href="https://datatheorem.github.io" target="_blank" rel="external">Data Theorem</a>. All rights reserved. (Last updated: 2017-03-01)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
