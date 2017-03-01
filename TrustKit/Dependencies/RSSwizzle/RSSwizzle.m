@@ -25,6 +25,9 @@
 #if BASE_SDK_HIGHER_THAN_10
 #import <os/lock.h>
 #else
+// Below iOS 10, OS_UNFAIR_LOCK_INIT will not exist. Note that this type works with OSSpinLock
+#define OS_UNFAIR_LOCK_INIT ((os_unfair_lock){0})
+
 typedef struct _os_unfair_lock_s {
     uint32_t _os_unfair_lock_opaque;
 } os_unfair_lock, *os_unfair_lock_t;
@@ -272,16 +275,7 @@ static void swizzle(Class classToSwizzle,
     NSCAssert(blockIsAnImpFactoryBlock(factoryBlock),
               @"Wrong type of implementation factory block.");
     
-    __block os_unfair_lock lock;
-    if (DEVICE_HIGHER_THAN_10)
-    {
-        lock = OS_UNFAIR_LOCK_INIT;
-    }
-    else
-    {
-        // Below iOS 10, OS_UNFAIR_LOCK_INIT will not exist. Note that this type works with OSSpinLock
-        lock = ((os_unfair_lock){0});
-    }
+    __block os_unfair_lock lock = OS_UNFAIR_LOCK_INIT;
     
     // To keep things thread-safe, we fill in the originalIMP later,
     // with the result of the class_replaceMethod call below.
