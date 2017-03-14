@@ -17,7 +17,7 @@
 #import "TSKPinningValidatorResult.h"
 
 
-NSString * const TrustKitVersion = @"1.4.1";
+NSString * const TrustKitVersion = @"1.4.2";
 
 #pragma mark Configuration Constants
 
@@ -33,6 +33,7 @@ const TSKGlobalConfigurationKey kTSKIgnorePinningForUserDefinedTrustAnchors = @"
 // Keys for each domain within the TSKPinnedDomains entry
 const TSKDomainConfigurationKey kTSKPublicKeyHashes = @"TSKPublicKeyHashes";
 const TSKDomainConfigurationKey kTSKEnforcePinning = @"TSKEnforcePinning";
+const TSKDomainConfigurationKey kTSKExcludeSubdomainFromParentPolicy = @"kSKExcludeSubdomainFromParentPolicy";
 
 const TSKDomainConfigurationKey kTSKIncludeSubdomains = @"TSKIncludeSubdomains";
 const TSKDomainConfigurationKey kTSKPublicKeyAlgorithms = @"TSKPublicKeyAlgorithms";

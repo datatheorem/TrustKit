@@ -8,13 +8,92 @@
 
 #import "RSSwizzle.h"
 #import <objc/runtime.h>
-#import <libkern/OSAtomic.h>
+#include <dlfcn.h>
+
 
 #if !__has_feature(objc_arc)
 #error This code needs ARC. Use compiler option -fobjc-arc
 #endif
 
+
+// Use os_unfair_lock over OSSpinLock when building with the following SDKs: iOS 10, macOS 10.12 and any tvOS and watchOS
+#define DEPLOYMENT_TARGET_HIGHER_THAN_10 TARGET_OS_WATCH || TARGET_OS_TV || (TARGET_OS_IOS &&__IPHONE_OS_VERSION_MIN_REQUIRED >= 100000) || (!TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MIN_ALLOWED >= 101200)
+
+#define BASE_SDK_HIGHER_THAN_10 (TARGET_OS_WATCH || TARGET_OS_TV || (TARGET_OS_IOS &&__IPHONE_OS_VERSION_MAX_ALLOWED >= 100000) || (!TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MAX_ALLOWED >= 101200))
+
+
+#if BASE_SDK_HIGHER_THAN_10
+#import <os/lock.h>
+#else
+// Below iOS 10, OS_UNFAIR_LOCK_INIT will not exist. Note that this type works with OSSpinLock
+#define OS_UNFAIR_LOCK_INIT ((os_unfair_lock){0})
+
+typedef struct _os_unfair_lock_s {
+    uint32_t _os_unfair_lock_opaque;
+} os_unfair_lock, *os_unfair_lock_t;
+#endif
+
+
+#if !DEPLOYMENT_TARGET_HIGHER_THAN_10
+#import <libkern/OSAtomic.h>
+#endif
+
+
+// NSDimension was introduced at the same time that os_unfair_lock_lock was made public, ie. iOS 10
+#define DEVICE_HIGHER_THAN_10 objc_getClass("NSDimension")
+
+
+#pragma mark Locking
+
+// This function will lock a lock using os_unfair_lock_lock (on ios10/macos10.12) or OSSpinLockLock (9 and lower).
+static void chooseLock(os_unfair_lock *lock)
+{
+#if DEPLOYMENT_TARGET_HIGHER_THAN_10
+    // iOS 10+, os_unfair_lock_lock is available
+    os_unfair_lock_lock(lock);
+#else
+    if (DEVICE_HIGHER_THAN_10)
+    {
+        // Attempt to use os_unfair_lock_lock().
+        void (*os_unfair_lock_lock)(void *lock) = dlsym(dlopen(NULL, RTLD_NOW | RTLD_GLOBAL), "os_unfair_lock_lock");
+        if (os_unfair_lock_lock != NULL)
+        {
+            os_unfair_lock_lock(lock);
+            return;
+        }
+    }
+    
+    // Unfair locks are not available on iOS 9 and lower, using deprecated OSSpinLock.
+    OSSpinLockLock((void *)lock);
+#endif
+}
+
+// This function will unlock a lock using os_unfair_lock_unlock (on ios10/macos10.12) or OSSpinLockUnlock (9 and lower).
+static void chooseUnlock(os_unfair_lock *lock)
+{
+#if DEPLOYMENT_TARGET_HIGHER_THAN_10
+    // iOS 10+, os_unfair_lock_unlock is available
+    os_unfair_lock_unlock(lock);
+#else
+    if (DEVICE_HIGHER_THAN_10)
+    {
+        // Attempt to use os_unfair_lock_unlock().
+        void (*os_unfair_lock_unlock)(void *lock) = dlsym(dlopen(NULL, RTLD_NOW | RTLD_GLOBAL), "os_unfair_lock_unlock");
+        if (os_unfair_lock_unlock != NULL)
+        {
+            os_unfair_lock_unlock(lock);
+            return;
+        }
+    }
+    
+    // Unfair locks are not available on iOS 9 and lower, using deprecated OSSpinUnlock.
+    OSSpinLockUnlock((void *)lock);
+#endif
+}
+
+
 #pragma mark - Block Helpers
+
 #if !defined(NS_BLOCK_ASSERTIONS)
 
 // See http://clang.llvm.org/docs/Block-ABI-Apple.html#high-level
@@ -92,7 +171,7 @@ static BOOL blockIsCompatibleWithMethodType(id block, const char *methodType){
     }
     
     NSMethodSignature *methodSignature =
-        [NSMethodSignature signatureWithObjCTypes:methodType];
+    [NSMethodSignature signatureWithObjCTypes:methodType];
     
     if (!blockSignature || !methodSignature) {
         return NO;
@@ -194,21 +273,26 @@ static void swizzle(Class classToSwizzle,
               classToSwizzle);
     
     NSCAssert(blockIsAnImpFactoryBlock(factoryBlock),
-             @"Wrong type of implementation factory block.");
+              @"Wrong type of implementation factory block.");
     
-    __block OSSpinLock lock = OS_SPINLOCK_INIT;
+    __block os_unfair_lock lock = OS_UNFAIR_LOCK_INIT;
+    
     // To keep things thread-safe, we fill in the originalIMP later,
     // with the result of the class_replaceMethod call below.
     __block IMP originalIMP = NULL;
-
+    
     // This block will be called by the client to get original implementation and call it.
     RSSWizzleImpProvider originalImpProvider = ^IMP{
         // It's possible that another thread can call the method between the call to
         // class_replaceMethod and its return value being set.
         // So to be sure originalIMP has the right value, we need a lock.
-        OSSpinLockLock(&lock);
+        
+        
+        chooseLock(&lock);
+        
         IMP imp = originalIMP;
-        OSSpinLockUnlock(&lock);
+        
+        chooseUnlock(&lock);
         
         if (NULL == imp){
             // If the class does not implement the method
@@ -231,7 +315,7 @@ static void swizzle(Class classToSwizzle,
     const char *methodType = method_getTypeEncoding(method);
     
     NSCAssert(blockIsCompatibleWithMethodType(newIMPBlock,methodType),
-             @"Block returned from factory is not compatible with method type.");
+              @"Block returned from factory is not compatible with method type.");
     
     IMP newIMP = imp_implementationWithBlock(newIMPBlock);
     
@@ -244,10 +328,14 @@ static void swizzle(Class classToSwizzle,
     //
     // We need a lock to be sure that originalIMP has the right value in the
     // originalImpProvider block above.
-    OSSpinLockLock(&lock);
+    
+    chooseLock(&lock);
+    
     originalIMP = class_replaceMethod(classToSwizzle, selector, newIMP, methodType);
-    OSSpinLockUnlock(&lock);
+    
+    chooseUnlock(&lock);
 }
+
 
 static NSMutableDictionary *swizzledClassesDictionary(){
     static NSMutableDictionary *swizzledClasses;
@@ -277,7 +365,7 @@ static NSMutableSet *swizzledClassesForKey(const void *key){
 {
     NSAssert(!(NULL == key && RSSwizzleModeAlways != mode),
              @"Key may not be NULL if mode is not RSSwizzleModeAlways.");
-
+    
     @synchronized(swizzledClassesDictionary()){
         if (key){
             NSSet *swizzledClasses = swizzledClassesForKey(key);
@@ -317,6 +405,5 @@ static NSMutableSet *swizzledClassesForKey(const void *key){
                            mode:RSSwizzleModeAlways
                             key:NULL];
 }
-
 
 @end

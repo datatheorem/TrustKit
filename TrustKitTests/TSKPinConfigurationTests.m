@@ -50,6 +50,70 @@
 }
 
 
+- (void)testDisablePinningForSubdomainAndNoPublicKey
+{
+    NSDictionary *trustKitConfig;
+    trustKitConfig = parseTrustKitConfiguration(@{kTSKSwizzleNetworkDelegates: @NO,
+                                                  kTSKPinnedDomains : @{
+                                                          @"good.com" : @{
+                                                                  kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                                  kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                                                                                          @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+                                                                                          ],
+                                                                  kTSKIncludeSubdomains: @YES},
+                                                          @"unsecured.good.com": @{
+                                                                  // When using this option, TrustKit should accept an empty policy for the domain
+                                                                  kTSKExcludeSubdomainFromParentPolicy: @YES
+                                                                  }
+                                                          }
+                                                  });
+    
+    NSString *serverConfigKey = getPinningConfigurationKeyForDomain(@"unsecured.good.com", trustKitConfig);
+    XCTAssert([serverConfigKey isEqualToString:@"unsecured.good.com"], @"Did not receive a configuration for pinned subdomain");
+}
+
+
+- (void)testDisablePinningForSubdomainWithoutParentAndNoPublicKey
+{
+    XCTAssertThrows(parseTrustKitConfiguration(@{kTSKSwizzleNetworkDelegates: @NO,
+                                                 kTSKPinnedDomains : @{
+                                                         @"good.com" : @{
+                                                                 kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                                 kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                                                                                         @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+                                                                                         ],
+                                                                 // IncludeSubdomains set to NO so the configuration here is invalid
+                                                                 kTSKIncludeSubdomains: @NO},
+                                                         @"unsecured.good.com": @{
+                                                                 kTSKExcludeSubdomainFromParentPolicy: @YES
+                                                                 }
+                                                         }
+                                                 }),
+                    @"Configuration with kTSKExcludeSubdomainFromParentPolicy must have a parent");
+}
+
+
+- (void)testDisablePinningForSubdomainAdditionalDomainKeys
+{
+    XCTAssertThrows(parseTrustKitConfiguration(@{kTSKSwizzleNetworkDelegates: @NO,
+                                                 kTSKPinnedDomains : @{
+                                                         @"good.com" : @{
+                                                                 kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                                 kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                                                                                         @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+                                                                                         ],
+                                                                 kTSKIncludeSubdomains: @YES},
+                                                         @"unsecured.good.com": @{
+                                                                 // When using this option, TrustKit should reject additional keys for the domain
+                                                                 kTSKExcludeSubdomainFromParentPolicy: @YES,
+                                                                 kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096]
+                                                                 }
+                                                         }
+                                                 }),
+                    @"Configuration with kTSKExcludeSubdomainFromParentPolicy must reject additional domain keys");
+}
+
+
 - (void)testNokTSKSwizzleNetworkDelegates
 {
     XCTAssertThrows(parseTrustKitConfiguration(@{kTSKPinnedDomains : @{

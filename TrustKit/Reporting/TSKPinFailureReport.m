@@ -17,17 +17,18 @@
 - (nonnull instancetype) initWithAppBundleId:(nonnull NSString *)appBundleId
                                   appVersion:(nonnull NSString *)appVersion
                                  appPlatform:(nonnull NSString *)appPlatform
+                          appPlatformVersion:(nonnull NSString *)appPlatformVersion
                                  appVendorId:(nonnull NSString *)appVendorId
                              trustkitVersion:(nonnull NSString *)trustkitVersion
                                     hostname:(nonnull NSString *)serverHostname
                                         port:(nonnull NSNumber *)serverPort
                                     dateTime:(nonnull NSDate *)dateTime
                                notedHostname:(nonnull NSString *)notedHostname
-                           includeSubdomains:(BOOL) includeSubdomains
+                           includeSubdomains:(BOOL)includeSubdomains
                               enforcePinning:(BOOL)enforcePinning
                    validatedCertificateChain:(nonnull NSArray<NSString *> *)validatedCertificateChain
                                    knownPins:(nonnull NSArray<NSString *> *)knownPins
-                            validationResult:(TSKPinValidationResult) validationResult
+                            validationResult:(TSKPinValidationResult)validationResult
                               expirationDate:(nullable NSDate *)knownPinsExpirationDate
 {
     self = [super init];
@@ -38,6 +39,7 @@
         _appPlatform = appPlatform;
         _appVendorId = appVendorId;
         _trustkitVersion = trustkitVersion;
+        _appPlatformVersion = appPlatformVersion;
         _hostname = serverHostname;
         _port = serverPort;
         _dateTime = dateTime;
@@ -75,12 +77,13 @@
     }
     
     // Create the dictionary
-    NSDictionary *requestData = @ {
+    NSDictionary *requestData = @{
         @"app-bundle-id" : self.appBundleId,
         @"app-version" : self.appVersion,
         @"app-platform" : self.appPlatform,
-        @"app-vendor-id": self.appVendorId,
-        @"trustkit-version": self.trustkitVersion,
+        @"app-platform-version" : self.appPlatformVersion,
+        @"app-vendor-id" : self.appVendorId,
+        @"trustkit-version" : self.trustkitVersion,
         @"date-time" : currentTimeStr,
         @"hostname" : self.hostname,
         @"port" : self.port,

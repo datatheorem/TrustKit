@@ -116,19 +116,30 @@ FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKIncludeSubdomains;
 
 
 /**
+ A boolean. If set to `YES`, TrustKit will not pin this specific domain if `kTSKIncludeSubdomains` was set for this domain's parent domain.
+ 
+ This allows excluding specific subdomains from a pinning policy that was applied to a parent domain.
+ */
+FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKExcludeSubdomainFromParentPolicy;
+
+
+/**
  An array of URLs to which pin validation failures should be reported.
  
  To minimize the performance impact of sending reports on each validation failure, the reports are uploaded using the background transfer service and are also rate-limited to one per day and per type of failure. For HTTPS report URLs, the HTTPS connections will ignore the SSL pinning policy and use the default certificate validation mechanisms, in order to maximize the chance of the reports reaching the server. The format of the reports is similar to the one described in RFC 7469 for the HPKP specification:
  
     {
-        "app-bundle-id":"com.example.ABC",
-        "app-version":"1.0",
-        "app-vendor-id":"599F9C00-92DC-4B5C-9464-7971F01F8370",
-        "date-time": "2015-07-10T20:03:14Z",
-        "hostname": "mail.example.com",
+        "app-bundle-id": "com.datatheorem.testtrustkit2",
+        "app-version": "1",
+        "app-vendor-id": "599F9C00-92DC-4B5C-9464-7971F01F8370",
+        "app-platform": "IOS",
+        "app-platform-version": "10.2.0",
+        "trustkit-version": "1.3.1",
+        "hostname": "www.datatheorem.com",
         "port": 0,
+        "noted-hostname": "datatheorem.com",
         "include-subdomains": true,
-        "noted-hostname": "example.com",
+        "enforce-pinning": true,
         "validated-certificate-chain": [
             pem1, ... pemN
         ],
@@ -260,21 +271,22 @@ FOUNDATION_EXPORT const TSKNotificationUserInfoKey kTSKValidationServerHostnameN
  
   The policy can be set either by adding it to the App's _Info.plist_ under the `TSKConfiguration` key, or by programmatically supplying it using the `TrustKit` class described here. Throughout the App's lifecycle, TrustKit can only be initialized once so only one of the two techniques should be used.
  
- A TrustKit pinning policy is a dictionary which contains some global, App-wide settings as well as domain-specific configuration keys. The following table shows the keys and their types, and uses indentation to indicate structure:
+ A TrustKit pinning policy is a dictionary which contains some global, App-wide settings (of type `TSKGlobalConfigurationKey`) as well as domain-specific configuration keys (of type `TSKDomainConfigurationKey`) to be defined under the `kTSKPinnedDomains` entry. The following table shows the keys and the types of the corresponding values, and uses indentation to indicate structure:
  
  ```
  | Key                                          | Type       |
  |----------------------------------------------|------------|
- | `TSKSwizzleNetworkDelegates`                 | Boolean    |
- | `TSKIgnorePinningForUserDefinedTrustAnchors` | Boolean    |
- | `TSKPinnedDomains`                           | Dictionary |
- | __ `<domain-name-to-pin-as-string>`          | Dictionary |
- | ____ `TSKPublicKeyHashes`                    | Array      |
- | ____ `TSKPublicKeyAlgorithms`                | Array      |
- | ____ `TSKIncludeSubdomains`                  | Boolean    |
- | ____ `TSKEnforcePinning`                     | Boolean    |
- | ____ `TSKReportUris`                         | Array      |
- | ____ `kTSKDisableDefaultReportUri`           | Boolean    |
+ | TSKSwizzleNetworkDelegates                   | Boolean    |
+ | TSKIgnorePinningForUserDefinedTrustAnchors   | Boolean    |
+ | TSKPinnedDomains                             | Dictionary |
+ | __ <domain-name-to-pin-as-string>            | Dictionary |
+ | ____ TSKPublicKeyHashes                      | Array      |
+ | ____ TSKPublicKeyAlgorithms                  | Array      |
+ | ____ TSKIncludeSubdomains                    | Boolean    |
+ | ____ TSKExcludeSubdomainFromParentPolicy     | Boolean    |
+ | ____ TSKEnforcePinning                       | Boolean    |
+ | ____ TSKReportUris                           | Array      |
+ | ____ TSKDisableDefaultReportUri              | Boolean    |
  ```
  
  When setting the pinning policy programmatically, it has to be supplied to the `initializeWithConfiguration:` method as a dictionary. For example:

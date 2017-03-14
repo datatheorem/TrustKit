@@ -71,12 +71,12 @@
     NSString *domainConfigKey = getPinningConfigurationKeyForDomain(serverHostname, self.pinnedDomains);
     if (domainConfigKey == nil)
     {
-        // The domain is not pinned: nothing to do/validate
+        // The domain has no pinning policy: nothing to do/validate
         finalTrustDecision = TSKTrustDecisionDomainNotPinned;
     }
     else
     {
-        // This domain is pinned
+        // This domain has a pinning policy
         NSDictionary *domainConfig = self.pinnedDomains[domainConfigKey];
         
         // Has the pinning policy expired?
@@ -87,9 +87,14 @@
             finalTrustDecision = TSKTrustDecisionDomainNotPinned;
             
         }
+        else if ([domainConfig[kTSKExcludeSubdomainFromParentPolicy] boolValue])
+        {
+            // This is a subdomain that was explicitely excluded from the parent domain's policy
+            finalTrustDecision = TSKTrustDecisionDomainNotPinned;
+        }
         else
         {
-            // The pinning policy has not expired
+            // The domain has a pinning policy that has not expired
             // Look for one the configured public key pins in the server's evaluated certificate chain
             TSKPinValidationResult validationResult = verifyPublicKeyPin(serverTrust, serverHostname, domainConfig[kTSKPublicKeyAlgorithms], domainConfig[kTSKPublicKeyHashes], self.spkiHashCache);
             if (validationResult == TSKPinValidationResultSuccess)

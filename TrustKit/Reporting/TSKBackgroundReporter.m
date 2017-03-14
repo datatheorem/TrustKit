@@ -15,6 +15,7 @@
 #import "reporting_utils.h"
 #import "TSKReportsRateLimiter.h"
 #import "vendor_identifier.h"
+#import <Foundation/NSObjCRuntime.h>
 
 
 // Session identifier for background uploads: <bundle_id>.TSKBackgroundReporter
@@ -25,12 +26,12 @@ static dispatch_once_t dispatchOnceBackgroundSession;
 
 @interface TSKBackgroundReporter()
 
-@property (nonatomic, strong) NSString *appBundleId;
-@property (nonatomic, strong) NSString *appVersion;
-@property (nonatomic, strong) NSString *appVendorId;
-@property (nonatomic, strong) NSString *appPlatform;
+@property (nonatomic, strong, nonnull) NSString *appBundleId;
+@property (nonatomic, strong, nonnull) NSString *appVersion;
+@property (nonatomic, strong, nonnull) NSString *appVendorId;
+@property (nonatomic, strong, nonnull) NSString *appPlatform;
+@property (nonatomic, strong, nonnull) NSString *appPlatformVersion;
 @property BOOL shouldRateLimitReports;
-
 
 @end
 
@@ -46,7 +47,7 @@ static dispatch_once_t dispatchOnceBackgroundSession;
     {
         _shouldRateLimitReports = shouldRateLimitReports;
         
-        // Retrieve the App's information
+        // Retrieve the App and device's information
 #if TARGET_OS_IPHONE
 #if TARGET_OS_TV
         _appPlatform = @"TVOS";
@@ -54,20 +55,49 @@ static dispatch_once_t dispatchOnceBackgroundSession;
         _appPlatform = @"WATCHOS";
 #else
         _appPlatform = @"IOS";
+        
+        // Before iOS 8 we need to build the OS version manually
+        // The number will not be perfectly accurate as we can't detect the patch version
+        if (NSFoundationVersionNumber == NSFoundationVersionNumber_iOS_7_0)
+        {
+            _appPlatformVersion = @"7.0.0";
+        }
+        else if (NSFoundationVersionNumber == NSFoundationVersionNumber_iOS_7_1)
+        {
+            _appPlatformVersion = @"7.1.0";
+        }
 #endif
 #else
         _appPlatform = @"MACOS";
+        
+        // Before macOS 10.10 we need to build the OS version manually
+        // The number will not be perfectly accurate as we can't detect the patch version
+        if (NSFoundationVersionNumber == NSFoundationVersionNumber10_9)
+        {
+            _appPlatformVersion = @"10.9.0";
+        }
+        else if (NSFoundationVersionNumber == NSFoundationVersionNumber10_9_2)
+        {
+            _appPlatformVersion = @"10.9.2";
+        }
 #endif
         
-        CFBundleRef appBundle = CFBundleGetMainBundle();
-        _appBundleId = (__bridge NSString *)CFBundleGetIdentifier(appBundle);
-        _appVersion =  (__bridge NSString *)CFBundleGetValueForInfoDictionaryKey(appBundle, kCFBundleVersionKey);
-        
-        if (_appVersion == nil)
+        // If we don't have the OS version yet, we are on a device that provides the operatingSystemVersion method
+        if (_appPlatformVersion == nil)
         {
-            _appVersion = @"N/A";
+            NSOperatingSystemVersion version = [[NSProcessInfo processInfo] operatingSystemVersion];
+            _appPlatformVersion = [NSString stringWithFormat:@"%ld.%ld.%ld", (long)version.majorVersion, (long)version.minorVersion, (long)version.patchVersion];
         }
         
+        
+        CFBundleRef appBundle = CFBundleGetMainBundle();
+        _appVersion =  (__bridge NSString *)CFBundleGetValueForInfoDictionaryKey(appBundle, (CFStringRef) @"CFBundleShortVersionString");
+        if (_appVersion == nil)
+        {
+            _appVersion = @"";
+        }
+        
+        _appBundleId = (__bridge NSString *)CFBundleGetIdentifier(appBundle);
         if (_appBundleId == nil)
         {
             // The bundle ID we get is nil if we're running tests on Travis. If the bundle ID is nil, background sessions can't be used
@@ -172,6 +202,7 @@ static dispatch_once_t dispatchOnceBackgroundSession;
     TSKPinFailureReport *report = [[TSKPinFailureReport alloc]initWithAppBundleId:_appBundleId
                                                                        appVersion:_appVersion
                                                                       appPlatform:_appPlatform
+                                                               appPlatformVersion:_appPlatformVersion
                                                                       appVendorId:_appVendorId
                                                                   trustkitVersion:TrustKitVersion
                                                                          hostname:serverHostname
