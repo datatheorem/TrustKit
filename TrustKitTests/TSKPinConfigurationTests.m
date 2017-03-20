@@ -12,7 +12,7 @@
 #import <XCTest/XCTest.h>
 #import "../TrustKit/TrustKit+Private.h"
 #import "../TrustKit/Pinning/ssl_pin_verifier.h"
-#import "../TrustKit/Pinning/public_key_utils.h"
+//#import "../TrustKit/Pinning/TSKSPKIHashCache.h"
 #import "../TrustKit/parse_configuration.h"
 
 

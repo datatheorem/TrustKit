@@ -16,12 +16,12 @@
 #import "Pinning/ssl_pin_verifier.h"
 #import "Reporting/TSKBackgroundReporter.h"
 
-
-#pragma mark Utility functions
-
-void TSKLog(NSString *format, ...);
-
-void sendValidationNotification_async(NSString *serverHostname, SecTrustRef serverTrust, NSString *notedHostname, TSKPinValidationResult validationResult, TSKTrustDecision finalTrustDecision, NSTimeInterval validationDuration);
+// The logging function we use within TrustKit
+#ifdef DEBUG
+#define TSKLog(format, ...) NSLog(@"=== TrustKit: " format, ##__VA_ARGS__);
+#else
+#define TSKLog(format, ...)
+#endif
 
 #pragma mark Methods for the unit tests
 

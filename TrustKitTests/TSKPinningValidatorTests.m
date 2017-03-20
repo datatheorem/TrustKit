@@ -14,7 +14,7 @@
 #import "../TrustKit/parse_configuration.h"
 
 #import "../TrustKit/Pinning/ssl_pin_verifier.h"
-#import "../TrustKit/Pinning/public_key_utils.h"
+#import "../TrustKit/Pinning/TSKSPKIHashCache.h"
 #import "../TrustKit/Reporting/reporting_utils.h"
 
 
@@ -24,7 +24,7 @@
 
 @interface TSKPinningValidatorTests : XCTestCase
 {
-    
+    TSKSPKIHashCache *spkiCache;
 }
 @end
 
@@ -41,6 +41,7 @@
 - (void)setUp
 {
     [super setUp];
+    
     // Create our certificate objects
     _rootCertificate = [TSKCertificateUtils createCertificateFromDer:@"GoodRootCA"];
     _intermediateCertificate = [TSKCertificateUtils createCertificateFromDer:@"GoodIntermediateCA"];
@@ -48,16 +49,25 @@
     _selfSignedCertificate = [TSKCertificateUtils createCertificateFromDer:@"www.good.com.selfsigned"];
     _globalsignRootCertificate = [TSKCertificateUtils createCertificateFromDer:@"GlobalSignRootCA"];
     
-    [TrustKit resetConfiguration];
+    spkiCache = [TSKSPKIHashCache new];
 }
 
 
 - (void)tearDown
 {
-    [TrustKit resetConfiguration];
     CFRelease(_rootCertificate);
     CFRelease(_intermediateCertificate);
+    CFRelease(_selfSignedCertificate);
     CFRelease(_leafCertificate);
+    CFRelease(_globalsignRootCertificate);
+    
+    _rootCertificate = nil;
+    _intermediateCertificate = nil;
+    _leafCertificate = nil;
+    _selfSignedCertificate = nil;
+    _globalsignRootCertificate = nil;
+    
+    spkiCache = nil;
     [super tearDown];
 }
 
@@ -86,16 +96,19 @@
                                                                            ]}}};
     
     // Ensure the SPKI cache was on the filesystem is empty
-    XCTAssert([getSpkiCacheFromFileSystem()[@1] count] == 0, @"SPKI cache for RSA 4096 must be empty before the test");
+    NSDictionary *fsCache = [spkiCache getSpkiCacheFromFileSystem];
+    XCTAssert([fsCache[@(TSKPublicKeyAlgorithmRsa4096)] count] == 0, @"SPKI cache for RSA 4096 must be empty before the test");
     
     // First test the verifyPublicKeyPin() function
     NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
+    NSDictionary *domainConfig = parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"];
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust,
                                             @"www.good.com",
-                                            parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
-                                            parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes]);
+                                            domainConfig[kTSKPublicKeyAlgorithms],
+                                            domainConfig[kTSKPublicKeyHashes],
+                                            spkiCache);
     
     
     XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against valid public key pins");
@@ -134,7 +147,8 @@
     [[NSNotificationCenter defaultCenter] removeObserver:observerId];
     
     // Ensure the SPKI cache was persisted to the filesystem
-    XCTAssert([getSpkiCacheFromFileSystem()[@1] count] == 1, @"SPKI cache for RSA 4096 must be persisted to the file system");
+    fsCache = [spkiCache getSpkiCacheFromFileSystem];
+    XCTAssert([fsCache[@1] count] == 1, @"SPKI cache for RSA 4096 must be persisted to the file system");
     
     CFRelease(trust);
 }
@@ -161,7 +175,8 @@
                                                                            ]}}};
     
     // Ensure the SPKI cache was on the filesystem is empty
-    XCTAssert([getSpkiCacheFromFileSystem()[@1] count] == 0, @"SPKI cache for RSA 4096 must be empty before the test");
+    NSDictionary *fsCache = [spkiCache getSpkiCacheFromFileSystem];
+    XCTAssert([fsCache[@1] count] == 0, @"SPKI cache for RSA 4096 must be empty before the test");
     
     // First test the verifyPublicKeyPin() function
     NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
@@ -170,7 +185,8 @@
     verificationResult = verifyPublicKeyPin(trust,
                                             @"www.good.com",
                                             parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
-                                            parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes]);
+                                            parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes],
+                                            spkiCache);
     
     
     XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against valid public key pins");
@@ -182,7 +198,8 @@
     
     
     // Ensure the SPKI cache was persisted to the filesystem
-    XCTAssert([getSpkiCacheFromFileSystem()[@1] count] == 2, @"SPKI cache for RSA 4096 must be persisted to the file system");
+    fsCache = [spkiCache getSpkiCacheFromFileSystem];
+    XCTAssert([fsCache[@1] count] == 2, @"SPKI cache for RSA 4096 must be persisted to the file system");
     
     CFRelease(trust);
 }
@@ -215,7 +232,8 @@
     verificationResult = verifyPublicKeyPin(trust,
                                             @"www.good.com",
                                             parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
-                                            parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes]);
+                                            parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes],
+                                            spkiCache);
     
     
     XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against valid public key pins");
@@ -255,7 +273,8 @@
     verificationResult = verifyPublicKeyPin(trust,
                                             @"www.good.com",
                                             parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
-                                            parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes]);
+                                            parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes],
+                                            spkiCache);
     
     
     XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against valid public key pins");
@@ -295,7 +314,8 @@
     verificationResult = verifyPublicKeyPin(trust,
                                             @"www.good.com",
                                             parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
-                                            parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes]);
+                                            parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes],
+                                            spkiCache);
     
     
     XCTAssert(verificationResult == TSKPinValidationResultFailed, @"Validation must fail against bad public key pins");
@@ -405,7 +425,8 @@
     verificationResult = verifyPublicKeyPin(trust,
                                             @"www.good.com",
                                             parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
-                                            parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes]);
+                                            parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes],
+                                            spkiCache);
     
     
     XCTAssert(verificationResult == TSKPinValidationResultFailed, @"Validation must fail against bad public key pins");
@@ -472,7 +493,8 @@
     verificationResult = verifyPublicKeyPin(trust,
                                             @"www.good.com",
                                             parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
-                                            parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes]);
+                                            parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes],
+                                            spkiCache);
     
     
     XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against valid public key pins");
@@ -513,7 +535,8 @@
     verificationResult = verifyPublicKeyPin(trust,
                                             @"www.good.com",
                                             parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
-                                            parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes]);
+                                            parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes],
+                                            spkiCache);
     
     
     XCTAssert(verificationResult == TSKPinValidationResultFailedCertificateChainNotTrusted, @"Validation must fail against bad certificate chain");
@@ -581,7 +604,8 @@
     verificationResult = verifyPublicKeyPin(trust,
                                             @"www.bad.com",
                                             parsedTrustKitConfig[kTSKPinnedDomains][@"www.bad.com"][kTSKPublicKeyAlgorithms],
-                                            parsedTrustKitConfig[kTSKPinnedDomains][@"www.bad.com"][kTSKPublicKeyHashes]);
+                                            parsedTrustKitConfig[kTSKPinnedDomains][@"www.bad.com"][kTSKPublicKeyHashes],
+                                            spkiCache);
     
     
     XCTAssert(verificationResult == TSKPinValidationResultFailedCertificateChainNotTrusted, @"Validation must fail against bad hostname");
@@ -622,7 +646,8 @@
     verificationResult = verifyPublicKeyPin(trust,
                                             @"www.good.com",
                                             parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
-                                            parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes]);
+                                            parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes],
+                                            spkiCache);
     
     
     XCTAssert(verificationResult == TSKTrustDecisionShouldBlockConnection, @"Validation must fail against injected pinned CA");

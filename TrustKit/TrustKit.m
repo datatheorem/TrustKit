@@ -47,17 +47,6 @@ const TSKSupportedAlgorithm kTSKAlgorithmRsa4096 = @"TSKAlgorithmRsa4096";
 const TSKSupportedAlgorithm kTSKAlgorithmEcDsaSecp256r1 = @"TSKAlgorithmEcDsaSecp256r1";
 const TSKSupportedAlgorithm kTSKAlgorithmEcDsaSecp384r1 = @"TSKAlgorithmEcDsaSecp384r1";
 
-#pragma mark Notification keys
-NSString *kTSKValidationCompletedNotification   = @"TSKValidationCompletedNotification";
-
-const TSKNotificationUserInfoKey kTSKValidationDurationNotificationKey = @"TSKValidationDurationNotificationKey";
-const TSKNotificationUserInfoKey kTSKValidationResultNotificationKey   = @"TSKValidationResultNotificationKey";
-const TSKNotificationUserInfoKey kTSKValidationDecisionNotificationKey = @"TSKValidationDecisionNotificationKey";
-const TSKNotificationUserInfoKey kTSKValidationCertificateChainNotificationKey = @"TSKValidationCertificateChainNotificationKey";
-const TSKNotificationUserInfoKey kTSKValidationNotedHostnameNotificationKey = @"TSKValidationNotedHostnameNotificationKey";
-const TSKNotificationUserInfoKey kTSKValidationServerHostnameNotificationKey = @"TSKValidationServerHostnameNotificationKey";
-
-
 #pragma mark TrustKit Global State
 // Shared TrustKit singleton instance
 static TrustKit *sharedTrustKit = nil;
@@ -67,29 +56,6 @@ static char kTSKPinFailureReporterQueueLabel[] = "com.datatheorem.trustkit.repor
 // Default report URI - can be disabled with TSKDisableDefaultReportUri
 // Email info@datatheorem.com if you need a free dashboard to see your App's reports
 static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.com/trustkit/report";
-
-
-#pragma mark Default Logging Block
-
-// Default logger block: only log in debug builds and add TrustKit at the beginning of the line
-void (^_loggerBlock)(NSString *) = ^void(NSString *message)
-{
-#if DEBUG
-    NSLog(@"=== TrustKit: %@", message);
-#endif
-};
-
-
-// The logging function we use within TrustKit
-void TSKLog(NSString *format, ...)
-{
-    va_list args;
-    va_start(args, format);
-    NSString *message = [[NSString alloc] initWithFormat: format arguments:args];
-    va_end(args);
-    _loggerBlock(message);
-}
-
 
 #pragma mark TrustKit Initialization Helper Functions
 
@@ -134,7 +100,6 @@ void TSKLog(NSString *format, ...)
 + (void)setLoggerBlock:(void (^)(NSString *))block
 {
     TrustKit *singleton = [self sharedInstance];
-    singleton.loggerBlock = block;
 }
 
 + (NSDictionary * _Nullable)configuration
@@ -157,6 +122,8 @@ void TSKLog(NSString *format, ...)
         // Convert and store the SSL pins in our global variable
         _configuration = parseTrustKitConfiguration(trustKitConfig);
         
+        _validationDelegateQueue = dispatch_get_main_queue();
+        
         // Create a dispatch queue for activating the reporter
         // We use a serial queue targetting the global default queue in order to ensure reports are sent one by one
         // even when a lot of pin failures are occuring, instead of spamming the global queue with events to process
@@ -177,6 +144,16 @@ void TSKLog(NSString *format, ...)
                                                       ignorePinsForUserTrustAnchors:userTrustAnchorBypass
                                                               validationResultQueue:_pinFailureReporterQueue
                                                             validationResultHandler:^(TSKPinningValidatorResult * _Nonnull result) {
+                                                            
+                                                                // Invoke client handler if set
+                                                                void(^callback)(TSKPinningValidatorResult *) = self.validationDelegateCallback;
+                                                                if (callback) {
+                                                                    dispatch_async(self.validationDelegateQueue, ^{
+                                                                        callback(result);
+                                                                    });
+                                                                }
+                                                                
+                                                                // Send analytics report
                                                                 [weakSelf sendValidationReport:result];
                                                             }];
         
@@ -227,6 +204,11 @@ void TSKLog(NSString *format, ...)
             }
         }
     }
+}
+
+- (void)setValidationDelegateQueue:(dispatch_queue_t)validationDelegateQueue
+{
+    _validationDelegateQueue = validationDelegateQueue ?: dispatch_get_main_queue();
 }
 
 # pragma mark Private / Test Methods

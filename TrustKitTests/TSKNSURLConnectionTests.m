@@ -23,7 +23,7 @@
 #pragma mark Test NSURLConnection delegate with no auth handler
 @interface TestNSURLConnectionDelegateNoAuthHandler : NSObject <NSURLConnectionDataDelegate>
 {
-    XCTestExpectation *testExpectation;
+    XCTestExpectation *_testExpectation;
 }
 
 @property NSError *lastError;
@@ -46,9 +46,8 @@
 - (instancetype)initWithExpectation:(XCTestExpectation *)expectation
 {
     self = [super init];
-    if (self)
-    {
-        testExpectation = expectation;
+    if (self) {
+        _testExpectation = expectation;
     }
     return self;
 }
@@ -59,7 +58,7 @@
 {
     NSLog(@"Received error, %@", error);
     _lastError = error;
-    [testExpectation fulfill];
+    [_testExpectation fulfill];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
@@ -70,7 +69,7 @@
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
     _lastResponse = response;
-    [testExpectation fulfill];
+    [_testExpectation fulfill];
 }
 
 
