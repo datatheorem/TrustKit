@@ -10,9 +10,6 @@
 
 
 @interface TSKNSURLConnectionDelegateProxy : NSObject<NSURLConnectionDelegate>
-{
-    id<NSURLConnectionDelegate> originalDelegate; // The NSURLConnectionDelegate we're going to proxy
-}
 
 // Initalize our hooks
 + (void)swizzleNSURLConnectionConstructors;

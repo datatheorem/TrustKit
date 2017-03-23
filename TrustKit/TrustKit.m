@@ -97,11 +97,6 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
     });
 }
 
-+ (void)setLoggerBlock:(void (^)(NSString *))block
-{
-    TrustKit *singleton = [self sharedInstance];
-}
-
 + (NSDictionary * _Nullable)configuration
 {
     TrustKit *singleton = [self sharedInstance];

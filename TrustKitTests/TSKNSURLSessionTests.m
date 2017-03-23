@@ -10,7 +10,7 @@
 #import "../TrustKit/TrustKit+Private.h"
 #import "../TrustKit/Swizzling/TSKNSURLSessionDelegateProxy.h"
 
-
+/*
 #pragma mark Private test methods
 @interface TSKNSURLSessionDelegateProxy(Private)
 
@@ -519,3 +519,4 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
 }
 
 @end
+*/

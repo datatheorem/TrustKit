@@ -26,4 +26,29 @@
     return _certificateChain;
 }
 
+- (instancetype _Nullable)initWithServerHostname:(NSString * _Nonnull)serverHostname
+                                     serverTrust:(SecTrustRef _Nonnull)serverTrust
+                                   notedHostname:(NSString * _Nonnull)notedHostname
+                                validationResult:(TSKPinValidationResult)validationResult
+                              finalTrustDecision:(TSKTrustDecision)finalTrustDecision
+                              validationDuration:(NSTimeInterval)validationDuration
+                                certificateChain:(NSArray * _Nullable)certificateChain
+{
+    NSParameterAssert(serverHostname);
+    NSParameterAssert(serverTrust);
+    NSParameterAssert(notedHostname);
+    
+    self = [super init];
+    if (self) {
+        _serverHostname = serverHostname;
+        _serverTrust = serverTrust;
+        _notedHostname = notedHostname;
+        _validationResult = validationResult;
+        _finalTrustDecision = finalTrustDecision;
+        _validationDuration = validationDuration;
+        _certificateChain = certificateChain;
+    }
+    return self;
+}
+
 @end

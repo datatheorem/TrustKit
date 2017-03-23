@@ -27,6 +27,10 @@
 
 @interface TrustKit(Private)
 
+@property (nonatomic) TSKBackgroundReporter *pinFailureReporter;
+
+- (void)sendValidationReport:(TSKPinningValidatorResult *)result;
+
 + (void) resetConfiguration;
 + (BOOL) wasTrustKitInitialized;
 + (NSString *) getDefaultReportUri;

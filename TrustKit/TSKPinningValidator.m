@@ -140,15 +140,15 @@
             }
             // Send a notification after all validation is done; this will also trigger a report if pin validation failed
             if (self.validationResultQueue && self.validationResultHandler) {
+                NSTimeInterval validationDuration = [NSDate timeIntervalSinceReferenceDate] - validationStartTime;
+                TSKPinningValidatorResult *result = [[TSKPinningValidatorResult alloc] initWithServerHostname:serverHostname
+                                                                                                  serverTrust:serverTrust
+                                                                                                notedHostname:domainConfigKey
+                                                                                             validationResult:validationResult
+                                                                                           finalTrustDecision:finalTrustDecision
+                                                                                           validationDuration:validationDuration
+                                                                                             certificateChain:nil];
                 dispatch_async(self.validationResultQueue, ^{
-                    TSKPinningValidatorResult *result = [TSKPinningValidatorResult new];
-                    result.serverHostname = serverHostname;
-                    result.serverTrust = serverTrust;
-                    result.notedHostname = domainConfigKey;
-                    result.validationResult = validationResult;
-                    result.finalTrustDecision = finalTrustDecision;
-                    result.validationDuration = [NSDate timeIntervalSinceReferenceDate] - validationStartTime;
-                    
                     self.validationResultHandler(result);
                 });
             }

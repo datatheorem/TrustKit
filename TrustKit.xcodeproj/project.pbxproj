@@ -531,10 +531,11 @@
 			isa = PBXGroup;
 			children = (
 				8C0C90111E3C196A003851A8 /* module.modulemap */,
-				8CA6CC571BAF60DA00BDA419 /* Swizzling */,
 				8CE919281AEA0F61002B29AE /* Dependencies */,
+				8CA6CC571BAF60DA00BDA419 /* Swizzling */,
 				8CE919201AEA0745002B29AE /* Reporting */,
 				8CE9191B1AEA072A002B29AE /* Pinning */,
+				FC663F551E8421BE008E2EFE /* Configuration */,
 				8C84804C1A896EE30017C155 /* TrustKit.h */,
 				8C84806C1A896F660017C155 /* TrustKit.m */,
 				2FA286123F801C437F35D240 /* TrustKit+Private.h */,
@@ -543,10 +544,6 @@
 				FC1A08FD1E579F630055B12C /* TSKPinValidatorResult.h */,
 				FC1A08FE1E57A4BB0055B12C /* TSKPinningValidatorResult.h */,
 				FC1A08FF1E57A4BB0055B12C /* TSKPinningValidatorResult.m */,
-				8C5D98B21CEFF079008E654B /* parse_configuration.m */,
-				8C5D98B61CEFF103008E654B /* parse_configuration.h */,
-				8C4346D41E5B894A008023F9 /* configuration_utils.h */,
-				8C4346D51E5B894A008023F9 /* configuration_utils.m */,
 				8C84804A1A896EE30017C155 /* Supporting Files */,
 			);
 			path = TrustKit;
@@ -723,6 +720,17 @@
 				8C3492901ADCA059001849FD /* domain_registry */,
 			);
 			name = Dependencies;
+			sourceTree = "<group>";
+		};
+		FC663F551E8421BE008E2EFE /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				8C5D98B21CEFF079008E654B /* parse_configuration.m */,
+				8C5D98B61CEFF103008E654B /* parse_configuration.h */,
+				8C4346D41E5B894A008023F9 /* configuration_utils.h */,
+				8C4346D51E5B894A008023F9 /* configuration_utils.m */,
+			);
+			name = Configuration;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

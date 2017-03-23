@@ -17,12 +17,12 @@
 /**
  The hostname of the server SSL pinning validation was performed against.
  */
-@property (nonatomic, nonnull) NSString *serverHostname;
+@property (nonatomic, readonly, nonnull) NSString *serverHostname;
 
 /**
  The original SecTrustRef that validation was performed against.
  */
-@property (nonatomic, nonnull) SecTrustRef serverTrust;
+@property (nonatomic, readonly, nonnull) SecTrustRef serverTrust;
 
 /**
  The entry within the SSL pinning configuration that was used as the pinning policy for the
@@ -34,14 +34,14 @@
      NSString *notedHostname = userInfo[kTSKValidationNotedHostnameNotificationKey];
      NSDictionary *hostnameConfiguration = [TrustKit configuration][kTSKPinnedDomains][notedHostname];
  */
-@property (nonatomic, nonnull) NSString *notedHostname;
+@property (nonatomic, readonly, nonnull) NSString *notedHostname;
 
 /**
  The `TSKPinValidationResult` returned when validating the server's certificate chain, which
  represents the result of evaluating the certificate chain against the configured SSL pins 
  for this server.
  */
-@property (nonatomic) TSKPinValidationResult validationResult;
+@property (nonatomic, readonly) TSKPinValidationResult validationResult;
 
 /**
  The `TSKTrustDecision` returned when validating the certificate's chain, which describes
@@ -53,16 +53,24 @@
  but the policy might be set to ignore pinning validation failures for this server, thereby
  returning `TSKTrustDecisionShouldAllowConnection`.
  */
-@property (nonatomic) TSKTrustDecision finalTrustDecision;
+@property (nonatomic, readonly) TSKTrustDecision finalTrustDecision;
 
 /**
  The time in seconds it took for the SSL pinning validation to be performed.
  */
-@property (nonatomic) NSTimeInterval validationDuration;
+@property (nonatomic, readonly) NSTimeInterval validationDuration;
 
 /**
  The certificate chain returned by the server as an array of PEM-formatted certificates.
  */
 @property (nonatomic, readonly, nullable) NSArray *certificateChain;
+
+- (instancetype _Nullable)initWithServerHostname:(NSString * _Nonnull)serverHostname
+                           serverTrust:(SecTrustRef _Nonnull)serverTrust
+                         notedHostname:(NSString * _Nonnull)notedHostname
+                      validationResult:(TSKPinValidationResult)validationResult
+                    finalTrustDecision:(TSKTrustDecision)finalTrustDecision
+                    validationDuration:(NSTimeInterval)validationDuration
+                      certificateChain:(NSArray * _Nullable)certificateChain;
 
 @end

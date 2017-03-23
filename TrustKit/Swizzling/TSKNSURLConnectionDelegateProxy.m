@@ -10,33 +10,14 @@
 #import "../TrustKit+Private.h"
 #import "../Dependencies/RSSwizzle/RSSwizzle.h"
 
-
-
 typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NSError *connectionError);
 
-
-@interface TSKNSURLConnectionDelegateProxy(Private)
--(BOOL)forwardToOriginalDelegateAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge forConnection:(NSURLConnection *)connection;
+@interface TSKNSURLConnectionDelegateProxy ()
+@property (nonatomic) id<NSURLConnectionDelegate> originalDelegate; // The NSURLConnectionDelegate we're going to proxy
+@property (nonatomic) TSKTrustDecision lastTrustDecision;
 @end
 
-
 @implementation TSKNSURLConnectionDelegateProxy
-
-
-#pragma mark Private methods used for tests
-
-static TSKTrustDecision _lastTrustDecision = (TSKTrustDecision)-1;
-
-+(void)resetLastTrustDecision
-{
-    _lastTrustDecision = (TSKTrustDecision)-1;
-}
-
-+(TSKTrustDecision)getLastTrustDecision
-{
-    return _lastTrustDecision;
-}
-
 
 #pragma mark Public methods
 
@@ -126,19 +107,21 @@ static TSKTrustDecision _lastTrustDecision = (TSKTrustDecision)-1;
 }
 
 
+#pragma mark Instance Constructors
+
 - (instancetype)initWithDelegate:(id)delegate
 {
     self = [super init];
     if (self)
     {
-        originalDelegate = delegate;
+        _originalDelegate = delegate;
+        _lastTrustDecision = (TSKTrustDecision)-1;
     }
     TSKLog(@"Proxy-ing NSURLConnectionDelegate: %@", NSStringFromClass([delegate class]));
     return self;
 }
 
-
-#pragma mark Delegate methods
+#pragma mark NSObject overrides
 
 - (BOOL)respondsToSelector:(SEL)aSelector
 {
@@ -150,7 +133,7 @@ static TSKTrustDecision _lastTrustDecision = (TSKTrustDecision)-1;
     else
     {
         // The delegate proxy should mirror the original delegate's methods so that it doesn't change the app flow
-        return [originalDelegate respondsToSelector:aSelector];
+        return [_originalDelegate respondsToSelector:aSelector];
     }
 }
 
@@ -158,38 +141,33 @@ static TSKTrustDecision _lastTrustDecision = (TSKTrustDecision)-1;
 - (id)forwardingTargetForSelector:(SEL)sel
 {
     // Forward messages to the original delegate if the proxy doesn't implement the method
-    return originalDelegate;
+    return _originalDelegate;
 }
 
+#pragma mark Instance methods
 
-// NSURLConnection is deprecated in iOS 9
 #pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
--(BOOL)forwardToOriginalDelegateAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge forConnection:(NSURLConnection *)connection
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations" // NSURLConnection is deprecated in iOS 9
+- (BOOL)forwardToOriginalDelegateAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge forConnection:(NSURLConnection *)connection
 {
-    BOOL wasChallengeHandled = NO;
-    
     // Can the original delegate handle this challenge ?
-    if  ([originalDelegate respondsToSelector:@selector(connection:willSendRequestForAuthenticationChallenge:)])
+    if  ([_originalDelegate respondsToSelector:@selector(connection:willSendRequestForAuthenticationChallenge:)])
     {
         // Yes - forward the challenge to the original delegate
-        wasChallengeHandled = YES;
-        [originalDelegate connection:connection willSendRequestForAuthenticationChallenge:challenge];
+        [_originalDelegate connection:connection willSendRequestForAuthenticationChallenge:challenge];
+        return YES;
     }
-    else if ([originalDelegate respondsToSelector:@selector(connection:canAuthenticateAgainstProtectionSpace:)])
+    
+    if ([_originalDelegate respondsToSelector:@selector(connection:canAuthenticateAgainstProtectionSpace:)]
+        && [_originalDelegate connection:connection canAuthenticateAgainstProtectionSpace:challenge.protectionSpace])
     {
-        if ([originalDelegate connection:connection canAuthenticateAgainstProtectionSpace:challenge.protectionSpace])
-        {
-            // Yes - forward the challenge to the original delegate
-            wasChallengeHandled = YES;
-            [originalDelegate connection:connection didReceiveAuthenticationChallenge:challenge];
-        }
+        // Yes - forward the challenge to the original delegate
+        [_originalDelegate connection:connection didReceiveAuthenticationChallenge:challenge];
+        return YES;
     }
 
-    return wasChallengeHandled;
+    return NO;
 }
-#pragma GCC diagnostic pop
-
 
 - (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
 {
@@ -214,7 +192,7 @@ static TSKTrustDecision _lastTrustDecision = (TSKTrustDecision)-1;
     }
     
     // Forward all challenges (including client auth challenges) to the original delegate
-    if (wasChallengeHandled == NO)
+    if (!wasChallengeHandled)
     {
         // We will also get here if the pinning validation succeeded or the domain was not pinned
         if ([self forwardToOriginalDelegateAuthenticationChallenge:challenge forConnection:connection] == NO)
@@ -224,6 +202,6 @@ static TSKTrustDecision _lastTrustDecision = (TSKTrustDecision)-1;
         }
     }
 }
-
+#pragma GCC diagnostic pop
 
 @end

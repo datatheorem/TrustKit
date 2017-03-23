@@ -13,6 +13,7 @@
 
 #import "../TrustKit/TrustKit+Private.h"
 
+#import "../TrustKit/TSKPinningValidatorResult.h"
 #import "../TrustKit/Reporting/TSKBackgroundReporter.h"
 #import "../TrustKit/Reporting/TSKPinFailureReport.h"
 #import "../TrustKit/Reporting/reporting_utils.h"
@@ -31,6 +32,7 @@
 
 @implementation TSKReporterTests
 {
+    TrustKit *_trustKit;
     SecTrustRef _testTrust;
     SecCertificateRef _rootCertificate;
     SecCertificateRef _intermediateCertificate;
@@ -62,11 +64,13 @@
     CFRelease(_intermediateCertificate);
     CFRelease(_leafCertificate);
     CFRelease(_testTrust);
+    _trustKit = nil;
     
     [super tearDown];
 }
 
-- (void)testSendReportFromNotificationBlock
+// NOTE: this is more of a test of TrustKit.m
+- (void)testSendReportFromValidationReport
 {
     // Ensure that a pin validation notification triggers the upload of a report if the validation failed
     // Initialize TrustKit so the reporter block is ready to receive notifications
@@ -82,12 +86,8 @@
                       kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                               @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=" // Fake key 2
                                               ]}}};
-    [TrustKit initializeWithConfiguration:trustKitConfig];
     
-    // Setup mocking of the reporter
-    TSKBackgroundReporter *defaultReporter = [TrustKit getGlobalPinFailureReporter];
-    id pinFailureReporterMock = [OCMockObject mockForClass:[TSKBackgroundReporter class]];
-    [TrustKit setGlobalPinFailureReporter: pinFailureReporterMock];
+    _trustKit = [[TrustKit alloc] initWithConfiguration:trustKitConfig];
     
     // Expect a report to be sent out when a notification is posted
     NSSet *knownPins = [NSSet setWithArray:@[[[NSData alloc]initWithBase64EncodedString:@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
@@ -100,51 +100,79 @@
     [dateFormat setDateFormat:@"yyyy-MM-dd"];
     NSDate *expirationDate = [dateFormat dateFromString:expirationDateStr];
     
-    [[pinFailureReporterMock expect] pinValidationFailedForHostname:@"www.test.com"
-                                                               port:nil
-                                                   certificateChain:_testCertificateChain
+    TSKPinningValidatorResult *res;
+    
+    // TEST FAILURE
+    // Setup mocking of the reporter
+    id pinReporterMock = OCMClassMock([TSKBackgroundReporter class]);
+    _trustKit.pinFailureReporter = pinReporterMock;
+    
+    OCMExpect([pinReporterMock pinValidationFailedForHostname:@"www.test.com"
+                                                         port:nil
+                                             certificateChain:_testCertificateChain
+                                                notedHostname:@"www.test.com"
+                                                   reportURIs:@[[NSURL URLWithString:@"https://overmind.datatheorem.com/trustkit/report"]]
+                                            includeSubdomains:NO
+                                               enforcePinning:YES
+                                                    knownPins:knownPins
+                                             validationResult:TSKPinValidationResultErrorCouldNotGenerateSpkiHash
+                                               expirationDate:expirationDate]);
+    
+    res = [[TSKPinningValidatorResult alloc] initWithServerHostname:@"www.test.com"
+                                                        serverTrust:_testTrust
                                                       notedHostname:@"www.test.com"
-                                                         reportURIs:@[[NSURL URLWithString:@"https://overmind.datatheorem.com/trustkit/report"]]
-                                                  includeSubdomains:NO
-                                                  enforcePinning:YES
-                                                          knownPins:knownPins
                                                    validationResult:TSKPinValidationResultErrorCouldNotGenerateSpkiHash
-                                                     expirationDate:expirationDate];
+                                                 finalTrustDecision:TSKTrustDecisionShouldBlockConnection
+                                                 validationDuration:1.0
+                                                   certificateChain:_testCertificateChain];
+    [_trustKit sendValidationReport:res];
     
-    // Create a notification
-    [[NSNotificationCenter defaultCenter] postNotificationName:kTSKValidationCompletedNotification
-                                                        object:nil
-                                                      userInfo:@{kTSKValidationDurationNotificationKey: @(1),
-                                                                 kTSKValidationDecisionNotificationKey: @(1),
-                                                                 kTSKValidationResultNotificationKey: @(TSKPinValidationResultErrorCouldNotGenerateSpkiHash),
-                                                                 kTSKValidationCertificateChainNotificationKey: _testCertificateChain,
-                                                                 kTSKValidationNotedHostnameNotificationKey: @"www.test.com",
-                                                                 kTSKValidationServerHostnameNotificationKey: @"www.test.com"}];
     // Ensure that the reporter was called
-    [pinFailureReporterMock verify];
+    [pinReporterMock verify];
     
+    [pinReporterMock stopMocking];
+    _trustKit.pinFailureReporter = nil;
     
+    // TEST CA SUCCESS
     // Send a notification for a successful validation and ensure no report gets sent
-    id pinSuccessReporterMock = [OCMockObject mockForClass:[TSKBackgroundReporter class]];
-    [TrustKit setGlobalPinFailureReporter: pinSuccessReporterMock];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kTSKValidationCompletedNotification
-                                                        object:nil
-                                                      userInfo:@{kTSKValidationResultNotificationKey: @(TSKPinValidationResultSuccess)}];
+    pinReporterMock = OCMClassMock([TSKBackgroundReporter class]);
+    _trustKit.pinFailureReporter = pinReporterMock;
+    
+    res = [[TSKPinningValidatorResult alloc] initWithServerHostname:@"www.test.com"
+                                                        serverTrust:_testTrust
+                                                      notedHostname:@"www.test.com"
+                                                   validationResult:TSKPinValidationResultSuccess
+                                                 finalTrustDecision:TSKTrustDecisionShouldAllowConnection
+                                                 validationDuration:1.0
+                                                   certificateChain:_testCertificateChain];
+
     // Ensure that the reporter was NOT called
-    [pinSuccessReporterMock verify];
+    [_trustKit sendValidationReport:res];
+    [pinReporterMock verify];
+    
+    [pinReporterMock stopMocking];
+    _trustKit.pinFailureReporter = nil;
     
 #if !TARGET_OS_IPHONE
-    // OS X - Send a notification for a failed validation due to a custom CA and ensure no report gets sent
-    [[NSNotificationCenter defaultCenter] postNotificationName:kTSKValidationCompletedNotification
-                                                        object:nil
-                                                      userInfo:@{kTSKValidationResultNotificationKey: @(TSKPinValidationResultFailedUserDefinedTrustAnchor)}];
-    // Ensure that the reporter was NOT called
-    [pinSuccessReporterMock verify];
-#endif
+    // TEST USER-DEFINED SUCCESS
+    // Send a notification for a successful validation and ensure no report gets sent
+    pinReporterMock = OCMClassMock([TSKBackgroundReporter class]);
+    _trustKit.pinFailureReporter = pinReporterMock;
     
-    // Cleanup
-    [TrustKit setGlobalPinFailureReporter: defaultReporter];
-    [TrustKit resetConfiguration];
+    res = [[TSKPinningValidatorResult alloc] initWithServerHostname:@"www.test.com"
+                                                        serverTrust:_testTrust
+                                                      notedHostname:@"www.test.com"
+                                                   validationResult:TSKPinValidationResultFailedUserDefinedTrustAnchor
+                                                 finalTrustDecision:TSKTrustDecisionShouldAllowConnection
+                                                 validationDuration:1.0
+                                                   certificateChain:_testCertificateChain];
+    
+    // Ensure that the reporter was NOT called
+    [_trustKit sendValidationReport:res];
+    [pinReporterMock verify];
+    [pinReporterMock stopMocking];
+    pinReporterMock = nil;
+#endif
 }
 
 
@@ -167,7 +195,7 @@
                             validationResult:TSKPinValidationResultFailed
                               expirationDate:[NSDate date]];
     
-    [NSThread sleepForTimeInterval:2.0];
+    [NSThread sleepForTimeInterval:0.1];
 }
 
 - (void)testReporterNilExpirationDate
@@ -189,7 +217,7 @@
                             validationResult:TSKPinValidationResultFailed
                               expirationDate:nil];
     
-    [NSThread sleepForTimeInterval:2.0];
+    [NSThread sleepForTimeInterval:0.1];
 }
 
 
