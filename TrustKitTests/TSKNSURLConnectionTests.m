@@ -225,20 +225,19 @@
     XCTAssertFalse([proxy respondsToSelector:NSSelectorFromString(@"argle:bargle:")]);
 }
 
-#pragma mark - forwardingTargetForSelector override
-
-
-- (void)test_respondsToSelector_forwardsTargetForSelector
-{
-    TestModeADelegate *delegate = OCMStrictClassMock([TestModeADelegate class]);
-    OCMExpect([delegate fakeMethod]);
-    
-    TSKNSURLConnectionDelegateProxy *proxy = [[TSKNSURLConnectionDelegateProxy alloc] initWithDelegate:delegate];
-    [(id)proxy fakeMethod];
-    
-    OCMVerifyAll((id)delegate);
-    [(id)delegate stopMocking];
-}
+//#pragma mark - forwardingTargetForSelector override
+//
+//- (void)test_respondsToSelector_forwardsTargetForSelector
+//{
+//    TestModeADelegate *delegate = OCMStrictClassMock([TestModeADelegate class]);
+//    OCMExpect([delegate fakeMethod]);
+//
+//    TSKNSURLConnectionDelegateProxy *proxy = [[TSKNSURLConnectionDelegateProxy alloc] initWithDelegate:delegate];
+//    [(id)proxy fakeMethod];
+//
+//    OCMVerifyAll((id)delegate);
+//    [(id)delegate stopMocking];
+//}
 
 #pragma mark - forwardToOriginalDelegateAuthenticationChallenge
 
@@ -301,7 +300,7 @@
     OCMVerifyAll((id)delegate);
 }
 
-- (void)test_connectionWillSendRequestForAuthenticationChallenge_serverTrustA
+- (void)test_connectionWillSendRequestForAuthenticationChallenge_serverTrustA_allow
 {
     TestModeADelegate *delegate = OCMStrictClassMock([TestModeADelegate class]);
     
@@ -338,7 +337,7 @@
     [(id)proxy stopMocking];
 }
 
-- (void)test_connectionWillSendRequestForAuthenticationChallenge_serverTrustB
+- (void)test_connectionWillSendRequestForAuthenticationChallenge_serverTrustB_allow
 {
     TestModeBDelegate *delegate = OCMPartialMock([TestModeBDelegate new]);
     
@@ -375,6 +374,43 @@
     [(id)delegate stopMocking];
     [(id)proxy stopMocking];
 }
+
+// Test the block case: only need to test for one because the failure handling is identical
+- (void)test_connectionWillSendRequestForAuthenticationChallenge_serverTrustB_block
+{
+    TestModeBDelegate *delegate = OCMPartialMock([TestModeBDelegate new]);
+    
+    TSKPinningValidator *validator = OCMStrictClassMock([TSKPinningValidator class]);
+    [TrustKit initializeWithConfiguration:@{}];
+    [TrustKit sharedInstance].pinningValidator = validator;
+    
+    NSURLConnection *cnxn = [[NSURLConnection alloc] init];
+    NSURLProtectionSpace *space = [[NSURLProtectionSpace alloc] initWithHost:@"hostname" port:0 protocol:nil realm:nil
+                                                        authenticationMethod:NSURLAuthenticationMethodServerTrust];
+    NSURLAuthenticationChallenge *challenge = [[NSURLAuthenticationChallenge alloc] initWithProtectionSpace:space
+                                                                                         proposedCredential:nil
+                                                                                       previousFailureCount:0
+                                                                                            failureResponse:nil
+                                                                                                      error:nil
+                                                                                                     sender:delegate];
+    
+    TSKNSURLConnectionDelegateProxy *proxy = OCMPartialMock([[TSKNSURLConnectionDelegateProxy alloc] initWithDelegate:delegate]);
+    
+    OCMExpect([validator evaluateTrust:space.serverTrust forHostname:@"hostname"]).andReturn(TSKTrustDecisionShouldBlockConnection);
+    OCMExpect([delegate cancelAuthenticationChallenge:challenge]);
+    
+    [proxy connection:cnxn willSendRequestForAuthenticationChallenge:challenge];
+    
+    OCMVerifyAll((id)delegate);
+    OCMVerifyAll((id)validator);
+    OCMVerifyAll((id)proxy);
+    
+    [TrustKit sharedInstance].pinningValidator = [TSKPinningValidator new];
+    [(id)validator stopMocking];
+    [(id)delegate stopMocking];
+    [(id)proxy stopMocking];
+}
+
 
 
 // TODO: add swizzling tests to ensure the above tested methods are properly invoked.

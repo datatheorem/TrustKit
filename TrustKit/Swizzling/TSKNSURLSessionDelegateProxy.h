@@ -8,31 +8,25 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
+typedef void(^TSKURLSessionAuthChallengeCallback)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential);
 
 @interface TSKNSURLSessionDelegateProxy : NSObject
-{
-    id<NSURLSessionDelegate, NSURLSessionTaskDelegate> originalDelegate; // The NSURLSessionDelegate we're going to proxy
-}
 
 + (void)swizzleNSURLSessionConstructors;
 
-- (_Nullable instancetype)initWithDelegate:(_Nonnull id)delegate;
+- (instancetype _Nullable)initWithDelegate:(id)delegate;
 
-// Mirror the original delegate's list of implemented methods
-- (BOOL)respondsToSelector:(_Nonnull SEL)aSelector;
+- (void)URLSession:(NSURLSession *)session
+didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
+ completionHandler:(TSKURLSessionAuthChallengeCallback)completionHandler;
 
-// Forward messages to the original delegate if the proxy doesn't implement the method
-- (_Nonnull id)forwardingTargetForSelector:(_Nonnull SEL)sel;
-
-- (void)URLSession:(NSURLSession * _Nonnull)session
-didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
- completionHandler:(void (^ _Nonnull)(NSURLSessionAuthChallengeDisposition disposition,
-                                      NSURLCredential * _Nullable credential))completionHandler;
-
-- (void)URLSession:(NSURLSession * _Nonnull)session
-              task:(NSURLSessionTask * _Nonnull)task
-didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
- completionHandler:(void (^ _Nonnull)(NSURLSessionAuthChallengeDisposition disposition,
-                                      NSURLCredential * _Nullable credential))completionHandler;
+- (void)URLSession:(NSURLSession *)session
+              task:(NSURLSessionTask *)task
+didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
+ completionHandler:(TSKURLSessionAuthChallengeCallback)completionHandler;
 
 @end
+
+NS_ASSUME_NONNULL_END

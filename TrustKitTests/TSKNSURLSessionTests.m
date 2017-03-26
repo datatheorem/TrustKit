@@ -10,6 +10,15 @@
 #import "../TrustKit/TrustKit+Private.h"
 #import "../TrustKit/Swizzling/TSKNSURLSessionDelegateProxy.h"
 
+@interface TSKNSURLSessionDelegateProxy (TestSupport)
+@property (nonatomic) id<NSURLSessionDelegate, NSURLSessionTaskDelegate> originalDelegate;
+@property (nonatomic) TSKPinValidationResult lastTrustDecision;
+
+- (BOOL)forwardToOriginalDelegateAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
+                                       completionHandler:(TSKURLSessionAuthChallengeCallback)completionHandler
+                                              forSession:(NSURLSession * _Nonnull)session;
+@end
+
 /*
 #pragma mark Private test methods
 @interface TSKNSURLSessionDelegateProxy(Private)
@@ -145,8 +154,122 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
 }
 
 @end
+*/
 
+// An NSURLSessionDelegate
+@interface SessionDelegate : NSObject<NSURLSessionDelegate>
+@end
+@implementation SessionDelegate
 
+- (void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler
+{ }
+
+- (void)fakeMethod { }
+
+@end
+
+// An NSURLSession and Task delegate
+@interface TaskAndSessionDelegate : SessionDelegate<NSURLSessionTaskDelegate>
+@end
+@implementation TaskAndSessionDelegate
+
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler
+{ }
+
+- (void)fakeMethod { }
+
+@end
+
+// An NSURLSessionTask delegate (only, no NSURLSessionDelegate methods)
+@interface TaskDelegate : NSObject<NSURLSessionTaskDelegate> @end
+@implementation TaskDelegate
+
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler
+{ }
+
+- (void)fakeMethod { }
+
+@end
+
+// A delegate that doesn't actually implement any of the optional handlers
+@interface NoOptionalsDelegate : NSObject<NSURLSessionTaskDelegate> @end
+@implementation NoOptionalsDelegate
+- (void)fakeMethod { }
+@end
+
+#pragma mark - Test suite
+
+@interface TSKNSURLSessionTests : XCTestCase
+
+@end
+
+@implementation TSKNSURLSessionTests
+
+- (void)setUp {
+    [super setUp];
+}
+
+- (void)tearDown {
+    [super tearDown];
+}
+
+#pragma mark respondsToSelector override
+
+- (void)test_respondsToSelector_sessionDelegate
+{
+    TSKNSURLSessionDelegateProxy *proxy = [[TSKNSURLSessionDelegateProxy alloc] initWithDelegate:[SessionDelegate new]];
+    
+    XCTAssertTrue([proxy respondsToSelector:@selector(URLSession:didReceiveChallenge:completionHandler:)]);
+
+    XCTAssertFalse([proxy respondsToSelector:@selector(URLSession:task:didReceiveChallenge:completionHandler:)]);
+    
+    XCTAssertTrue([proxy respondsToSelector:@selector(fakeMethod)]);
+
+    XCTAssertFalse([proxy respondsToSelector:NSSelectorFromString(@"unimplementedMethod")]);
+}
+
+- (void)test_respondsToSelector_taskDelegate
+{
+    TSKNSURLSessionDelegateProxy *proxy = [[TSKNSURLSessionDelegateProxy alloc] initWithDelegate:[TaskDelegate new]];
+    
+    XCTAssertFalse([proxy respondsToSelector:@selector(URLSession:didReceiveChallenge:completionHandler:)]);
+    
+    XCTAssertTrue([proxy respondsToSelector:@selector(URLSession:task:didReceiveChallenge:completionHandler:)]);
+    
+    XCTAssertTrue([proxy respondsToSelector:@selector(fakeMethod)]);
+    
+    XCTAssertFalse([proxy respondsToSelector:NSSelectorFromString(@"unimplementedMethod")]);
+}
+
+- (void)test_respondsToSelector_taskAndSessionDelegate
+{
+    TSKNSURLSessionDelegateProxy *proxy = [[TSKNSURLSessionDelegateProxy alloc] initWithDelegate:[TaskAndSessionDelegate new]];
+    
+    XCTAssertTrue([proxy respondsToSelector:@selector(URLSession:didReceiveChallenge:completionHandler:)]);
+    
+    XCTAssertTrue([proxy respondsToSelector:@selector(URLSession:task:didReceiveChallenge:completionHandler:)]);
+    
+    XCTAssertTrue([proxy respondsToSelector:@selector(fakeMethod)]);
+    
+    XCTAssertFalse([proxy respondsToSelector:NSSelectorFromString(@"unimplementedMethod")]);
+}
+
+- (void)test_respondsToSelector_noOptionalsDelegate
+{
+    TSKNSURLSessionDelegateProxy *proxy = [[TSKNSURLSessionDelegateProxy alloc] initWithDelegate:[NoOptionalsDelegate new]];
+    
+    XCTAssertTrue([proxy respondsToSelector:@selector(URLSession:didReceiveChallenge:completionHandler:)]);
+    
+    XCTAssertFalse([proxy respondsToSelector:@selector(URLSession:task:didReceiveChallenge:completionHandler:)]);
+    
+    XCTAssertTrue([proxy respondsToSelector:@selector(fakeMethod)]);
+    
+    XCTAssertFalse([proxy respondsToSelector:NSSelectorFromString(@"unimplementedMethod")]);
+}
+
+@end
+
+/*
 #pragma mark Test suite
 @interface TSKNSURLSessionTests : XCTestCase
 

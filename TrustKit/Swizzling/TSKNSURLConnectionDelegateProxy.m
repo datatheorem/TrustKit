@@ -137,13 +137,6 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
     }
 }
 
-
-- (id)forwardingTargetForSelector:(SEL)sel
-{
-    // Forward messages to the original delegate if the proxy doesn't implement the method
-    return _originalDelegate;
-}
-
 #pragma mark Instance methods
 
 #pragma GCC diagnostic push
@@ -171,8 +164,6 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
 
 - (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
 {
-    BOOL wasChallengeHandled = NO;
-    
     // For SSL pinning we only care about server authentication
     if([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust])
     {
@@ -186,20 +177,17 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
         if (trustDecision == TSKTrustDecisionShouldBlockConnection)
         {
             // Pinning validation failed - block the connection
-            wasChallengeHandled = YES;
             [challenge.sender cancelAuthenticationChallenge:challenge];
+            return;
         }
     }
     
     // Forward all challenges (including client auth challenges) to the original delegate
-    if (!wasChallengeHandled)
+    // We will also get here if the pinning validation succeeded or the domain was not pinned
+    if ([self forwardToOriginalDelegateAuthenticationChallenge:challenge forConnection:connection] == NO)
     {
-        // We will also get here if the pinning validation succeeded or the domain was not pinned
-        if ([self forwardToOriginalDelegateAuthenticationChallenge:challenge forConnection:connection] == NO)
-        {
-            // The original delegate could not handle the challenge; use the default handler
-            [challenge.sender performDefaultHandlingForAuthenticationChallenge:challenge];
-        }
+        // The original delegate could not handle the challenge; use the default handler
+        [challenge.sender performDefaultHandlingForAuthenticationChallenge:challenge];
     }
 }
 #pragma GCC diagnostic pop

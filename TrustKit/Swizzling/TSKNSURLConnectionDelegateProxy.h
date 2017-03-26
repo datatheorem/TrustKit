@@ -8,21 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+NS_ASSUME_NONNULL_BEGIN
 
 @interface TSKNSURLConnectionDelegateProxy : NSObject<NSURLConnectionDelegate>
 
 // Initalize our hooks
 + (void)swizzleNSURLConnectionConstructors;
 
-- (instancetype)initWithDelegate:(id)delegate;
-
-// Mirror the original delegate's list of implemented methods
-- (BOOL)respondsToSelector:(SEL)aSelector ;
-
-// Forward messages to the original delegate if the proxy doesn't implement the method
-- (id)forwardingTargetForSelector:(SEL)sel;
+- (instancetype _Nullable)initWithDelegate:(id)delegate;
 
 - (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
 
-
 @end
+
+NS_ASSUME_NONNULL_END
