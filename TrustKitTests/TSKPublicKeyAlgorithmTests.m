@@ -20,18 +20,24 @@
 #import "TSKCertificateUtils.h"
 
 
+@interface TSKSPKIHashCache (TestSupport)
+- (void)resetSubjectPublicKeyInfoDiskCache;
+@end
+
+
 @interface TSKPublicKeyAlgorithmTests : XCTestCase
-{
-    TSKSPKIHashCache *spkiCache;
-}
 @end
 
 @implementation TSKPublicKeyAlgorithmTests
+{
+    TSKSPKIHashCache *spkiCache;
+}
 
 - (void)setUp
 {
     [super setUp];
     spkiCache = [TSKSPKIHashCache new];
+    [spkiCache resetSubjectPublicKeyInfoDiskCache];
 }
 
 - (void)tearDown
@@ -119,8 +125,8 @@
                                                                 kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=", // Server Key
                                                                                         @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                                                                         ]}}});
-    XCTAssert([spkiCache.getSpkiCache[@0] count] == 0, @"SPKI cache must be empty");
-    XCTAssert([spkiCache.getSpkiCache[@1] count] == 0, @"SPKI cache must be empty");
+    XCTAssertEqual([spkiCache.getSpkiCache[@0] count], 0UL, @"SPKI cache must be empty");
+    XCTAssertEqual([spkiCache.getSpkiCache[@1] count], 0UL, @"SPKI cache must be empty");
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust,
@@ -130,8 +136,8 @@
                                             spkiCache);
     
     // Ensure the SPKI cache was used; the full certificate chain is three certs and we have to go through all of them to get to the pinned leaf
-    XCTAssert([spkiCache.getSpkiCache[@0] count] == 3, @"SPKI cache must have been used");
-    XCTAssert([spkiCache.getSpkiCache[@1] count] == 3, @"SPKI cache must have been used");
+    XCTAssertEqual([spkiCache.getSpkiCache[@0] count], 3UL, @"SPKI cache must have been used");
+    XCTAssertEqual([spkiCache.getSpkiCache[@1] count], 3UL, @"SPKI cache must have been used");
     
     CFRelease(trust);
     CFRelease(leafCertificate);

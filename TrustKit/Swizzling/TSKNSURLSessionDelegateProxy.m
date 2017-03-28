@@ -13,7 +13,6 @@
 @interface TSKNSURLSessionDelegateProxy ()
 /* The NSURLSessionDelegate we're going to proxy */
 @property (nonatomic) id<NSURLSessionDelegate, NSURLSessionTaskDelegate> originalDelegate;
-@property (nonatomic, getter=getLastTrustDecision) TSKTrustDecision lastTrustDecision;
 @end
 
 @implementation TSKNSURLSessionDelegateProxy
@@ -81,7 +80,6 @@
     if (self)
     {
         _originalDelegate = delegate;
-        _lastTrustDecision = (TSKTrustDecision)-1;
     }
     TSKLog(@"Proxy-ing NSURLSessionDelegate: %@", NSStringFromClass([delegate class]));
     return self;
@@ -144,9 +142,9 @@
     if([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust])
     {
         // Check the trust object against the pinning policy
-        _lastTrustDecision = [TSKPinningValidator evaluateTrust:challenge.protectionSpace.serverTrust
-                                                    forHostname:challenge.protectionSpace.host];
-        if (_lastTrustDecision == TSKTrustDecisionShouldBlockConnection)
+        TSKTrustDecision trustDecision = [TSKPinningValidator evaluateTrust:challenge.protectionSpace.serverTrust
+                                                                forHostname:challenge.protectionSpace.host];
+        if (trustDecision == TSKTrustDecisionShouldBlockConnection)
         {
             // Pinning validation failed - block the connection
             completionHandler(NSURLSessionAuthChallengeCancelAuthenticationChallenge, NULL);

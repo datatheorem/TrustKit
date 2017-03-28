@@ -135,7 +135,7 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
         BOOL userTrustAnchorBypass = [_configuration[kTSKIgnorePinningForUserDefinedTrustAnchors] boolValue];
 #endif
         __weak typeof(self) weakSelf = self;
-        _pinningValidator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:_configuration[kTSKPinnedDomains]
+        _pinningValidator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:_configuration
                                                       ignorePinsForUserTrustAnchors:userTrustAnchorBypass
                                                               validationResultQueue:_pinFailureReporterQueue
                                                             validationResultHandler:^(TSKPinningValidatorResult * _Nonnull result) {

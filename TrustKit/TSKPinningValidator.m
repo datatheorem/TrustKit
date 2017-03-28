@@ -77,7 +77,7 @@
     else
     {
         // This domain has a pinning policy
-        NSDictionary *domainConfig = self.pinnedDomains[domainConfigKey];
+        NSDictionary *domainConfig = self.pinnedDomains[kTSKPinnedDomains][domainConfigKey];
         
         // Has the pinning policy expired?
         NSDate *expirationDate = domainConfig[kTSKExpirationDate];

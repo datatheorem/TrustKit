@@ -10,6 +10,8 @@
 #import "../TrustKit/TrustKit+Private.h"
 #import "../TrustKit/Swizzling/TSKNSURLSessionDelegateProxy.h"
 
+#import <OCMock/OCMock.h>
+
 @interface TSKNSURLSessionDelegateProxy (TestSupport)
 @property (nonatomic) id<NSURLSessionDelegate, NSURLSessionTaskDelegate> originalDelegate;
 @property (nonatomic) TSKPinValidationResult lastTrustDecision;
@@ -17,6 +19,12 @@
 - (BOOL)forwardToOriginalDelegateAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
                                        completionHandler:(TSKURLSessionAuthChallengeCallback)completionHandler
                                               forSession:(NSURLSession * _Nonnull)session;
+
+- (void)common_URLSession:(NSURLSession * _Nonnull)session
+                challenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
+        completionHandler:(void (^ _Nonnull)(NSURLSessionAuthChallengeDisposition disposition,
+                                             NSURLCredential * _Nullable credential))completionHandler;
+
 @end
 
 /*
@@ -157,14 +165,22 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
 */
 
 // An NSURLSessionDelegate
-@interface SessionDelegate : NSObject<NSURLSessionDelegate>
+@interface SessionDelegate : NSObject<NSURLSessionDelegate, NSURLAuthenticationChallengeSender>
 @end
 @implementation SessionDelegate
 
 - (void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler
-{ }
+{
+    completionHandler(NSURLSessionAuthChallengeUseCredential, challenge.proposedCredential);
+}
 
 - (void)fakeMethod { }
+
+- (void)useCredential:(NSURLCredential *)credential forAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {}
+
+- (void)continueWithoutCredentialForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {}
+
+- (void)cancelAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {}
 
 @end
 
@@ -265,6 +281,249 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
     XCTAssertTrue([proxy respondsToSelector:@selector(fakeMethod)]);
     
     XCTAssertFalse([proxy respondsToSelector:NSSelectorFromString(@"unimplementedMethod")]);
+}
+
+#pragma mark forwardToOriginalDelegateAuthenticationChallenge
+
+// Test session delegate that implements @selector(URLSession:didReceiveChallenge:completionHandler:)
+- (void)test_forwardToOriginalDelegateAuthenticationChallenge_implements
+{
+    TSKNSURLSessionDelegateProxy *proxy = [[TSKNSURLSessionDelegateProxy alloc] initWithDelegate:[SessionDelegate new]];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]];
+    NSURLAuthenticationChallenge *challenge = [NSURLAuthenticationChallenge new];
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"CallbackInvoked"];
+    
+    BOOL result = [proxy forwardToOriginalDelegateAuthenticationChallenge:challenge
+                                                        completionHandler:^(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential) {
+                                                            [expectation fulfill];
+                                                        } forSession:session];
+    
+    XCTAssertTrue(result);
+    
+    [self waitForExpectationsWithTimeout:5.0 handler:nil];
+}
+
+// Test task delegate that doesn't implement @selector(URLSession:didReceiveChallenge:completionHandler:)
+- (void)test_forwardToOriginalDelegateAuthenticationChallenge_doesNotImplement
+{
+    TSKNSURLSessionDelegateProxy *proxy = [[TSKNSURLSessionDelegateProxy alloc] initWithDelegate:[TaskDelegate new]];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]];
+    NSURLAuthenticationChallenge *challenge = [NSURLAuthenticationChallenge new];
+    
+    BOOL result = [proxy forwardToOriginalDelegateAuthenticationChallenge:challenge
+                                                        completionHandler:^(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential) {
+                                                            XCTFail(@"Should not be invoked");
+                                                        } forSession:session];
+    
+    XCTAssertFalse(result);
+}
+
+#pragma mark common_URLSession:challenge:challenge:completionHandler:
+
+- (void)test_common_URLSession_invalidAuthMethod_session
+{
+    SessionDelegate *delegate = [SessionDelegate new];
+    TSKNSURLSessionDelegateProxy *proxy = [[TSKNSURLSessionDelegateProxy alloc] initWithDelegate:delegate];
+    
+    NSURLSession *session = [NSURLSession new];
+    NSURLAuthenticationChallenge *challenge = ({
+        NSURLProtectionSpace *space = [[NSURLProtectionSpace alloc] initWithHost:@""
+                                                                            port:443
+                                                                        protocol:@""
+                                                                           realm:@""
+                                                            authenticationMethod:NSURLAuthenticationMethodHTTPBasic];
+        [[NSURLAuthenticationChallenge alloc] initWithProtectionSpace:space
+                                                   proposedCredential:nil
+                                                 previousFailureCount:0
+                                                      failureResponse:nil
+                                                                error:nil
+                                                               sender:delegate];
+    });
+    
+    [proxy common_URLSession:session
+                   challenge:challenge
+           completionHandler:^(NSURLSessionAuthChallengeDisposition disposition,
+                               NSURLCredential *credential) {
+               XCTAssertEqual(disposition, NSURLSessionAuthChallengeUseCredential);
+               XCTAssertEqual(credential, challenge.proposedCredential);
+           }];
+}
+
+- (void)test_common_URLSession_invalidAuthMethod_task
+{
+    TaskDelegate *delegate = [TaskDelegate new];
+    TSKNSURLSessionDelegateProxy *proxy = [[TSKNSURLSessionDelegateProxy alloc] initWithDelegate:delegate];
+    
+    NSURLSession *session = [NSURLSession new];
+    NSURLAuthenticationChallenge *challenge = ({
+        NSURLProtectionSpace *space = [[NSURLProtectionSpace alloc] initWithHost:@""
+                                                                            port:443
+                                                                        protocol:@""
+                                                                           realm:@""
+                                                            authenticationMethod:NSURLAuthenticationMethodHTTPBasic];
+        [[NSURLAuthenticationChallenge alloc] initWithProtectionSpace:space
+                                                   proposedCredential:nil
+                                                 previousFailureCount:0
+                                                      failureResponse:nil
+                                                                error:nil
+                                                               sender:[SessionDelegate new]];
+    });
+    
+    [proxy common_URLSession:session
+                   challenge:challenge
+           completionHandler:^(NSURLSessionAuthChallengeDisposition disposition,
+                               NSURLCredential *credential) {
+               XCTAssertEqual(disposition, NSURLSessionAuthChallengePerformDefaultHandling);
+               XCTAssertEqual(credential, challenge.proposedCredential);
+           }];
+}
+
+- (void)test_common_URLSession_session_pinFailed
+{
+    SessionDelegate *delegate = [SessionDelegate new];
+    TSKNSURLSessionDelegateProxy *proxy = [[TSKNSURLSessionDelegateProxy alloc] initWithDelegate:delegate];
+    
+    NSURLSession *session = [NSURLSession new];
+    NSURLAuthenticationChallenge *challenge = ({
+        NSURLProtectionSpace *space = [[NSURLProtectionSpace alloc] initWithHost:@"hostname"
+                                                                            port:443
+                                                                        protocol:@""
+                                                                           realm:@""
+                                                            authenticationMethod:NSURLAuthenticationMethodServerTrust];
+        [[NSURLAuthenticationChallenge alloc] initWithProtectionSpace:space
+                                                   proposedCredential:nil
+                                                 previousFailureCount:0
+                                                      failureResponse:nil
+                                                                error:nil
+                                                               sender:delegate];
+    });
+    
+    TSKPinningValidator *validator = OCMStrictClassMock([TSKPinningValidator class]);
+    [TrustKit initializeWithConfiguration:@{}];
+    [TrustKit sharedInstance].pinningValidator = validator;
+    
+    OCMExpect([validator evaluateTrust:challenge.protectionSpace.serverTrust forHostname:@"hostname"]).andReturn(TSKTrustDecisionShouldBlockConnection);
+    
+    [proxy common_URLSession:session
+                   challenge:challenge
+           completionHandler:^(NSURLSessionAuthChallengeDisposition disposition,
+                               NSURLCredential *credential) {
+               XCTAssertEqual(disposition, NSURLSessionAuthChallengeCancelAuthenticationChallenge);
+               XCTAssertEqual(credential, challenge.proposedCredential);
+           }];
+    
+    [(id)validator stopMocking];
+    [TrustKit sharedInstance].pinningValidator = [TSKPinningValidator new];
+}
+
+- (void)test_common_URLSession_session_pinSuccess
+{
+    SessionDelegate *delegate = [SessionDelegate new];
+    TSKNSURLSessionDelegateProxy *proxy = [[TSKNSURLSessionDelegateProxy alloc] initWithDelegate:delegate];
+    
+    NSURLSession *session = [NSURLSession new];
+    NSURLAuthenticationChallenge *challenge = ({
+        NSURLProtectionSpace *space = [[NSURLProtectionSpace alloc] initWithHost:@"hostname"
+                                                                            port:443
+                                                                        protocol:@""
+                                                                           realm:@""
+                                                            authenticationMethod:NSURLAuthenticationMethodServerTrust];
+        [[NSURLAuthenticationChallenge alloc] initWithProtectionSpace:space
+                                                   proposedCredential:nil
+                                                 previousFailureCount:0
+                                                      failureResponse:nil
+                                                                error:nil
+                                                               sender:delegate];
+    });
+    
+    TSKPinningValidator *validator = OCMStrictClassMock([TSKPinningValidator class]);
+    [TrustKit initializeWithConfiguration:@{}];
+    [TrustKit sharedInstance].pinningValidator = validator;
+    
+    OCMExpect([validator evaluateTrust:challenge.protectionSpace.serverTrust forHostname:@"hostname"]).andReturn(TSKTrustDecisionShouldAllowConnection);
+    
+    [proxy common_URLSession:session
+                   challenge:challenge
+           completionHandler:^(NSURLSessionAuthChallengeDisposition disposition,
+                               NSURLCredential *credential) {
+               XCTAssertEqual(disposition, NSURLSessionAuthChallengeUseCredential);
+               XCTAssertEqual(credential, challenge.proposedCredential);
+           }];
+    
+    [(id)validator stopMocking];
+    [TrustKit sharedInstance].pinningValidator = [TSKPinningValidator new];
+}
+
+#pragma mark URLSession:didReceiveChallenge:challenge:completionHandler:
+
+- (void)test_urlSessionChallengeDelegate
+{
+    SessionDelegate *delegate = [SessionDelegate new];
+    TSKNSURLSessionDelegateProxy *proxy = OCMPartialMock([[TSKNSURLSessionDelegateProxy alloc] initWithDelegate:delegate]);
+    
+    NSURLSession *session = [NSURLSession new];
+    NSURLAuthenticationChallenge *challenge = ({
+        NSURLProtectionSpace *space = [[NSURLProtectionSpace alloc] initWithHost:@"hostname"
+                                                                            port:443
+                                                                        protocol:@""
+                                                                           realm:@""
+                                                            authenticationMethod:NSURLAuthenticationMethodServerTrust];
+        [[NSURLAuthenticationChallenge alloc] initWithProtectionSpace:space
+                                                   proposedCredential:nil
+                                                 previousFailureCount:0
+                                                      failureResponse:nil
+                                                                error:nil
+                                                               sender:delegate];
+    });
+    
+    TSKURLSessionAuthChallengeCallback completionHandler = ^(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential) {};
+    
+    OCMExpect([proxy common_URLSession:session
+                             challenge:challenge
+                     completionHandler:completionHandler]).andDo(^(NSInvocation *i){});
+    
+    [proxy URLSession:session didReceiveChallenge:challenge completionHandler:completionHandler];
+    
+    OCMVerifyAll((id)proxy);
+    [(id)proxy stopMocking];
+}
+
+#pragma mark URLSession:task:didReceiveChallenge:completionHandler:
+
+- (void)test_urlSessionTaskChallengeDelegate
+{
+    SessionDelegate *delegate = [SessionDelegate new];
+    TSKNSURLSessionDelegateProxy *proxy = OCMPartialMock([[TSKNSURLSessionDelegateProxy alloc] initWithDelegate:delegate]);
+    
+    NSURLSession *session = [NSURLSession new];
+    NSURLAuthenticationChallenge *challenge = ({
+        NSURLProtectionSpace *space = [[NSURLProtectionSpace alloc] initWithHost:@"hostname"
+                                                                            port:443
+                                                                        protocol:@""
+                                                                           realm:@""
+                                                            authenticationMethod:NSURLAuthenticationMethodServerTrust];
+        [[NSURLAuthenticationChallenge alloc] initWithProtectionSpace:space
+                                                   proposedCredential:nil
+                                                 previousFailureCount:0
+                                                      failureResponse:nil
+                                                                error:nil
+                                                               sender:delegate];
+    });
+    
+    TSKURLSessionAuthChallengeCallback completionHandler = ^(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential) {};
+    
+    OCMExpect([proxy common_URLSession:session
+                             challenge:challenge
+                     completionHandler:completionHandler]).andDo(^(NSInvocation *i){});
+    
+    [proxy URLSession:session
+                 task:[NSURLSessionTask new]
+  didReceiveChallenge:challenge
+    completionHandler:completionHandler];
+    
+    OCMVerifyAll((id)proxy);
+    [(id)proxy stopMocking];
 }
 
 @end

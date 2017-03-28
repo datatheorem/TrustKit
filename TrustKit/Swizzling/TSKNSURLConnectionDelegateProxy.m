@@ -14,7 +14,6 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
 
 @interface TSKNSURLConnectionDelegateProxy ()
 @property (nonatomic) id<NSURLConnectionDelegate> originalDelegate; // The NSURLConnectionDelegate we're going to proxy
-@property (nonatomic) TSKTrustDecision lastTrustDecision;
 @end
 
 @implementation TSKNSURLConnectionDelegateProxy
@@ -115,7 +114,6 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
     if (self)
     {
         _originalDelegate = delegate;
-        _lastTrustDecision = (TSKTrustDecision)-1;
     }
     TSKLog(@"Proxy-ing NSURLConnectionDelegate: %@", NSStringFromClass([delegate class]));
     return self;
@@ -167,13 +165,12 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
     // For SSL pinning we only care about server authentication
     if([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust])
     {
-        TSKTrustDecision trustDecision = TSKTrustDecisionShouldBlockConnection;
         SecTrustRef serverTrust = challenge.protectionSpace.serverTrust;
         NSString *serverHostname = challenge.protectionSpace.host;
     
         // Check the trust object against the pinning policy
-        trustDecision = [TSKPinningValidator evaluateTrust:serverTrust forHostname:serverHostname];
-        _lastTrustDecision = trustDecision;
+        TSKTrustDecision trustDecision = [TSKPinningValidator evaluateTrust:serverTrust
+                                                                forHostname:serverHostname];
         if (trustDecision == TSKTrustDecisionShouldBlockConnection)
         {
             // Pinning validation failed - block the connection

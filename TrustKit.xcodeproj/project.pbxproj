@@ -561,12 +561,12 @@
 		8C8480561A896EE30017C155 /* TrustKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				8C8480571A896EE30017C155 /* Supporting Files */,
 				8C5AB4631CF26A0300234B30 /* Dependencies */,
 				070868B31ADFF68200E5AFDC /* Certificates */,
 				8CD5F7371BCB02A7005801D8 /* TSKNSURLConnectionTests.m */,
 				8CD5F7561BCB7219005801D8 /* TSKNSURLSessionTests.m */,
 				2FA2868CAFECA46ADE0B6E3E /* TSKPinningValidatorTests.m */,
-				8C8480571A896EE30017C155 /* Supporting Files */,
 				6B032D3F1AF1AEB600EAFA69 /* TSKReporterTests.m */,
 				8C15F9A31B17564400F06C0E /* TSKPinConfigurationTests.m */,
 				8CC78B1E1B1B586F00523A25 /* TSKCertificateUtils.h */,

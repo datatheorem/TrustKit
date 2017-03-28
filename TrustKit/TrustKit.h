@@ -326,14 +326,8 @@ FOUNDATION_EXPORT const TSKSupportedAlgorithm kTSKAlgorithmEcDsaSecp384r1;
         TrustKit.initialize(withConfiguration:trustKitConfig)
  ```
  
- The various configuration keys that can be specified in the policy are described in the 
+ The various configuration keys that can be specified in the policy are described in the
  "Constants" section of the documentation.
- 
- Lastly, once TrustKit has been initialized, `kTSKValidationCompletedNotification` notifications
- will be posted every time TrustKit validates the certificate chain of a server; these 
- notifications provide some information about the validation that was done and can be used 
- for example for performance measurement.
- 
  */
 @interface TrustKit : NSObject
 

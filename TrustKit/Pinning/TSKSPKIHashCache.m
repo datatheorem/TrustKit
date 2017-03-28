@@ -100,6 +100,7 @@ static unsigned int asn1HeaderSizes[4] = { sizeof(rsa2048Asn1Header), sizeof(rsa
     if (self) {
         // Initialize our cache of SPKI hashes
         // First try to load a cached version from the filesystem
+        _spkiCacheFilename = @"spki-hash.cache";
         _subjectPublicKeyInfoHashesCache = [self getSpkiCacheFromFileSystem];
         TSKLog(@"Loaded %lu SPKI cache entries from the filesystem", (unsigned long)_subjectPublicKeyInfoHashesCache.count);
         
