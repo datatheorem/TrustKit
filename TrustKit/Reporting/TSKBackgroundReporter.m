@@ -26,12 +26,13 @@ static dispatch_once_t dispatchOnceBackgroundSession;
 
 @interface TSKBackgroundReporter()
 
-@property (nonatomic, strong, nonnull) NSString *appBundleId;
-@property (nonatomic, strong, nonnull) NSString *appVersion;
-@property (nonatomic, strong, nonnull) NSString *appVendorId;
-@property (nonatomic, strong, nonnull) NSString *appPlatform;
-@property (nonatomic, strong, nonnull) NSString *appPlatformVersion;
-@property BOOL shouldRateLimitReports;
+@property (nonatomic, nonnull) NSString *appBundleId;
+@property (nonatomic, nonnull) NSString *appVersion;
+@property (nonatomic, nonnull) NSString *appVendorId;
+@property (nonatomic, nonnull) NSString *appPlatform;
+@property (nonatomic, nonnull) NSString *appPlatformVersion;
+@property (nonatomic, nonnull) TSKReportsRateLimiter *rateLimiter;
+@property (nonatomic) BOOL shouldRateLimitReports;
 
 @end
 
@@ -46,6 +47,7 @@ static dispatch_once_t dispatchOnceBackgroundSession;
     if (self)
     {
         _shouldRateLimitReports = shouldRateLimitReports;
+        _rateLimiter = [TSKReportsRateLimiter new];
         
         // Retrieve the App and device's information
 #if TARGET_OS_IPHONE
@@ -217,7 +219,7 @@ static dispatch_once_t dispatchOnceBackgroundSession;
                                                                    expirationDate:knownPinsExpirationDate];
     
     // Should we rate-limit this report?
-    if (_shouldRateLimitReports && [TSKReportsRateLimiter shouldRateLimitReport:report])
+    if (_shouldRateLimitReports && [self.rateLimiter shouldRateLimitReport:report])
     {
         // We recently sent the exact same report; do not send this report
         TSKLog(@"Pin failure report for %@ was not sent due to rate-limiting", serverHostname);

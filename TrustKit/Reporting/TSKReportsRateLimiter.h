@@ -21,13 +21,6 @@
  */
 @interface TSKReportsRateLimiter : NSObject
 
-+ (BOOL) shouldRateLimitReport:(TSKPinFailureReport *)report;
+- (BOOL)shouldRateLimitReport:(TSKPinFailureReport * _Nonnull)report;
 
-@end
-
-
-
-@interface TSKReportsRateLimiter(Private)
-// Helper method for running tests
-+ (void) setLastReportsCacheResetDate:(NSDate *)date;
 @end

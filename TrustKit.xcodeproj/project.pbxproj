@@ -241,6 +241,7 @@
 		FC1A090F1E57AC450055B12C /* TSKSPKIHashCache.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1A09091E57AC450055B12C /* TSKSPKIHashCache.m */; };
 		FC1A09101E57AC450055B12C /* TSKSPKIHashCache.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1A09091E57AC450055B12C /* TSKSPKIHashCache.m */; };
 		FC1A09111E57AC450055B12C /* TSKSPKIHashCache.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1A09091E57AC450055B12C /* TSKSPKIHashCache.m */; };
+		FC4CAC7B1E958E0500DAC41E /* TSKReportsRateLimiterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4CAC7A1E958E0500DAC41E /* TSKReportsRateLimiterTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -389,6 +390,7 @@
 		FC1A09081E57AC450055B12C /* TSKSPKIHashCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKSPKIHashCache.h; path = Pinning/TSKSPKIHashCache.h; sourceTree = "<group>"; };
 		FC1A09091E57AC450055B12C /* TSKSPKIHashCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKSPKIHashCache.m; path = Pinning/TSKSPKIHashCache.m; sourceTree = "<group>"; };
 		FC1A09121E57C6820055B12C /* TSKPublicKeyAlgorithm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TSKPublicKeyAlgorithm.h; path = Pinning/TSKPublicKeyAlgorithm.h; sourceTree = "<group>"; };
+		FC4CAC7A1E958E0500DAC41E /* TSKReportsRateLimiterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKReportsRateLimiterTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -561,13 +563,13 @@
 		8C8480561A896EE30017C155 /* TrustKitTests */ = {
 			isa = PBXGroup;
 			children = (
+				FC4CAC791E958DC600DAC41E /* Reporting */,
 				8C8480571A896EE30017C155 /* Supporting Files */,
 				8C5AB4631CF26A0300234B30 /* Dependencies */,
 				070868B31ADFF68200E5AFDC /* Certificates */,
 				8CD5F7371BCB02A7005801D8 /* TSKNSURLConnectionTests.m */,
 				8CD5F7561BCB7219005801D8 /* TSKNSURLSessionTests.m */,
 				2FA2868CAFECA46ADE0B6E3E /* TSKPinningValidatorTests.m */,
-				6B032D3F1AF1AEB600EAFA69 /* TSKReporterTests.m */,
 				8C15F9A31B17564400F06C0E /* TSKPinConfigurationTests.m */,
 				8CC78B1E1B1B586F00523A25 /* TSKCertificateUtils.h */,
 				8CC78B1F1B1B586F00523A25 /* TSKCertificateUtils.m */,
@@ -720,6 +722,15 @@
 				8C3492901ADCA059001849FD /* domain_registry */,
 			);
 			name = Dependencies;
+			sourceTree = "<group>";
+		};
+		FC4CAC791E958DC600DAC41E /* Reporting */ = {
+			isa = PBXGroup;
+			children = (
+				6B032D3F1AF1AEB600EAFA69 /* TSKReporterTests.m */,
+				FC4CAC7A1E958E0500DAC41E /* TSKReportsRateLimiterTests.m */,
+			);
+			name = Reporting;
 			sourceTree = "<group>";
 		};
 		FC663F551E8421BE008E2EFE /* Configuration */ = {
@@ -1163,6 +1174,7 @@
 				8CC78B251B1B616500523A25 /* TSKPublicKeyAlgorithmTests.m in Sources */,
 				6B032D401AF1AEC200EAFA69 /* TSKReporterTests.m in Sources */,
 				8CD5F7571BCB7219005801D8 /* TSKNSURLSessionTests.m in Sources */,
+				FC4CAC7B1E958E0500DAC41E /* TSKReportsRateLimiterTests.m in Sources */,
 				8CC78B201B1B586F00523A25 /* TSKCertificateUtils.m in Sources */,
 				FC06FE821E7DF3B800AF0B4D /* TSKTestURLSessionDelegate.m in Sources */,
 			);
