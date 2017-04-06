@@ -12,15 +12,10 @@
 #import <XCTest/XCTest.h>
 #import "../TrustKit/TrustKit+Private.h"
 #import "../TrustKit/Pinning/ssl_pin_verifier.h"
-//#import "../TrustKit/Pinning/TSKSPKIHashCache.h"
 #import "../TrustKit/parse_configuration.h"
 
 
-
 @interface TSKPinConfigurationTests : XCTestCase
-{
-    
-}
 @end
 
 @implementation TSKPinConfigurationTests
@@ -69,7 +64,7 @@
                                                   });
     
     NSString *serverConfigKey = getPinningConfigurationKeyForDomain(@"unsecured.good.com", trustKitConfig);
-    XCTAssert([serverConfigKey isEqualToString:@"unsecured.good.com"], @"Did not receive a configuration for pinned subdomain");
+    XCTAssertEqualObjects(serverConfigKey, @"unsecured.good.com", @"Did not receive a configuration for pinned subdomain");
 }
 
 
@@ -138,7 +133,7 @@
                                                                                       ]}}});
     
     NSString *serverConfigKey = getPinningConfigurationKeyForDomain(@"www.good.com", trustKitConfig);
-    XCTAssert([serverConfigKey isEqualToString:@"www.good.com"], @"Did not receive a configuration for a pinned domain");
+    XCTAssertEqualObjects(serverConfigKey, @"www.good.com", @"Did not receive a configuration for a pinned domain");
     
     // Validate the content of the config
     NSDictionary *serverConfig = trustKitConfig[kTSKPinnedDomains][serverConfigKey];
@@ -162,7 +157,7 @@
                                                                                           ]}}});
     
     NSString *serverConfigKey = getPinningConfigurationKeyForDomain(@"www.good.com", trustKitConfig);
-    XCTAssert([serverConfigKey isEqualToString:@"www.good.com"], @"Did not receive a configuration for a pinned domain");
+    XCTAssertEqualObjects(serverConfigKey, @"www.good.com", @"Did not receive a configuration for a pinned domain");
     
     // Validate the content of the config
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
@@ -170,9 +165,9 @@
     NSDate *expirationDate = [dateFormat dateFromString:expirationDateStr];
     
     NSDictionary *serverConfig = trustKitConfig[kTSKPinnedDomains][serverConfigKey];
-    XCTAssert([expirationDate isEqualToDate:serverConfig[kTSKExpirationDate]]);
+    XCTAssertEqualObjects(expirationDate, serverConfig[kTSKExpirationDate]);
     XCTAssertEqual(serverConfig[kTSKPublicKeyAlgorithms][0], @(TSKPublicKeyAlgorithmEcDsaSecp384r1));
-    XCTAssertEqual([serverConfig[kTSKPublicKeyHashes] count], (unsigned long) 2);
+    XCTAssertEqual([serverConfig[kTSKPublicKeyHashes] count], (unsigned long)2);
 }
 
 
@@ -189,7 +184,7 @@
     
     // Ensure www.datatheorem.com gets no configuration
     NSString *serverConfigKey = getPinningConfigurationKeyForDomain(@"www.datatheorem.com", trustKitConfig);
-    XCTAssert(serverConfigKey == nil, @"Received a configuration a non-pinned domain");
+    XCTAssertNil(serverConfigKey, @"Received a configuration a non-pinned domain");
 }
 
 
@@ -207,7 +202,7 @@
     
     // Ensure www.good.com gets the configuration set for good.com as includeSubdomains is enabled
     NSString *serverConfigKey = getPinningConfigurationKeyForDomain(@"www.good.com", trustKitConfig);
-    XCTAssert([serverConfigKey isEqualToString:@"good.com"], @"IncludeSubdomains did not work");
+    XCTAssertEqualObjects(serverConfigKey, @"good.com", @"IncludeSubdomains did not work");
 }
 
 
@@ -224,7 +219,7 @@
     
     // Ensure good.com gets the configuration set for good.com as includeSubdomains is enabled
     NSString *serverConfigKey = getPinningConfigurationKeyForDomain(@"good.com", trustKitConfig);
-    XCTAssert([serverConfigKey isEqualToString:@"good.com"], @"IncludeSubdomains did not work");
+    XCTAssertEqualObjects(serverConfigKey, @"good.com", @"IncludeSubdomains did not work");
 }
 
 
@@ -241,7 +236,7 @@
                                                                                     ]}}});
     
     NSString *serverConfigKey = getPinningConfigurationKeyForDomain(@"sub.www.good.com.www.good.com", trustKitConfig);
-    XCTAssert([serverConfigKey isEqualToString:@"www.good.com"], @"IncludeSubdomains did not work");
+    XCTAssertEqualObjects(serverConfigKey, @"www.good.com", @"IncludeSubdomains did not work");
 }
 
 
@@ -291,7 +286,7 @@
     
     // Ensure www.good.com does not get the configuration set for good.com
     NSString *serverConfigKey = getPinningConfigurationKeyForDomain(@"www.good.com", trustKitConfig);
-    XCTAssert(serverConfigKey == nil, @"IncludeSubdomains did not work");
+    XCTAssertNil(serverConfigKey, @"IncludeSubdomains did not work");
 }
 
 
@@ -314,7 +309,8 @@
     
     // Ensure the configuration specific to www.good.com takes precedence over the more general config for good.com
     NSString *serverConfigKey = getPinningConfigurationKeyForDomain(@"www.good.com", trustKitConfig);
-    XCTAssert([serverConfigKey isEqualToString:@"www.good.com"], @"IncludeSubdomains took precedence over a more specialized configuration");
+    XCTAssertEqualObjects(serverConfigKey, @"www.good.com",
+                          @"IncludeSubdomains took precedence over a more specialized configuration");
 }
 
 
@@ -338,7 +334,8 @@
                                                                                         ]}}});
     
     // Ensure the kTSKSwizzleNetworkDelegates setting was saved
-    XCTAssert([trustKitConfig[kTSKSwizzleNetworkDelegates] boolValue] ==  NO, @"kTSKSwizzleNetworkDelegates was not saved in the configuration");
+    XCTAssertFalse([trustKitConfig[kTSKSwizzleNetworkDelegates] boolValue],
+                   @"kTSKSwizzleNetworkDelegates was not saved in the configuration");
 }
 
 @end

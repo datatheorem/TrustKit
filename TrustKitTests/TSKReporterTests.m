@@ -47,8 +47,8 @@
     _intermediateCertificate = [TSKCertificateUtils createCertificateFromDer:@"GoodIntermediateCA"];
     _leafCertificate = [TSKCertificateUtils createCertificateFromDer:@"www.good.com"];
     
-    SecCertificateRef certChainArray[2] = {_leafCertificate, _intermediateCertificate};
-    SecCertificateRef trustStoreArray[1] = {_rootCertificate};
+    SecCertificateRef certChainArray[2] = { _leafCertificate, _intermediateCertificate };
+    SecCertificateRef trustStoreArray[1] = { _rootCertificate };
     
     _testTrust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
                                                       arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])

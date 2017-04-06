@@ -55,7 +55,7 @@
     NSData *spkiHash = [spkiCache hashSubjectPublicKeyInfoFromCertificate:certificate publicKeyAlgorithm:TSKPublicKeyAlgorithmRsa2048];
     NSString *spkiPin = [spkiHash base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
 
-    XCTAssert([spkiPin isEqualToString:@"NDCIt6TrQnfOk+lquunrmlPQB3K/7CLOCmSS5kW+KCc="]);
+    XCTAssertEqualObjects(spkiPin, @"NDCIt6TrQnfOk+lquunrmlPQB3K/7CLOCmSS5kW+KCc=");
     CFRelease(certificate);
 }
 
@@ -68,7 +68,7 @@
     NSData *spkiHash = [spkiCache hashSubjectPublicKeyInfoFromCertificate:certificate publicKeyAlgorithm:TSKPublicKeyAlgorithmRsa4096];
     NSString *spkiPin = [spkiHash base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     
-    XCTAssert([spkiPin isEqualToString:@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY="]);
+    XCTAssertEqualObjects(spkiPin, @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=");
     CFRelease(certificate);
 }
 
@@ -81,7 +81,7 @@
     NSData *spkiHash = [spkiCache hashSubjectPublicKeyInfoFromCertificate:certificate publicKeyAlgorithm:TSKPublicKeyAlgorithmEcDsaSecp256r1];
     NSString *spkiPin = [spkiHash base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     
-    XCTAssert([spkiPin isEqualToString:@"Gc7EN2acfkbE0dUOAd34tr1XLr+JdkTiTrMAfhESQHI="]);
+    XCTAssertEqualObjects(spkiPin, @"Gc7EN2acfkbE0dUOAd34tr1XLr+JdkTiTrMAfhESQHI=");
     CFRelease(certificate);
 }
 
@@ -94,7 +94,7 @@
     NSData *spkiHash = [spkiCache hashSubjectPublicKeyInfoFromCertificate:certificate publicKeyAlgorithm:TSKPublicKeyAlgorithmEcDsaSecp384r1];
     NSString *spkiPin = [spkiHash base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     
-    XCTAssert([spkiPin isEqualToString:@"vPtEqrmtAhAVcGtBIep2HIHJ6IlnWQ9vlK50TciLePs="]);
+    XCTAssertEqualObjects(spkiPin, @"vPtEqrmtAhAVcGtBIep2HIHJ6IlnWQ9vlK50TciLePs=");
     CFRelease(certificate);
 }
 
@@ -144,7 +144,7 @@
     CFRelease(intermediateCertificate);
     CFRelease(rootCertificate);
     
-    XCTAssert(verificationResult == TSKPinValidationResultSuccess, @"Validation must pass against valid public key pins with multiple algorithms");
+    XCTAssertEqual(verificationResult, TSKPinValidationResultSuccess, @"Validation must pass against valid public key pins with multiple algorithms");
 }
 
 
