@@ -14,6 +14,7 @@
 #import "Swizzling/TSKNSURLConnectionDelegateProxy.h"
 #import "Swizzling/TSKNSURLSessionDelegateProxy.h"
 #import "parse_configuration.h"
+#import "TSKPinningValidator.h"
 #import "TSKPinningValidatorResult.h"
 
 

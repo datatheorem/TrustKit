@@ -392,6 +392,7 @@
 		FC4CAC7E1E96917B00DAC41E /* TSKTrustKitConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSKTrustKitConfig.h; sourceTree = "<group>"; };
 		FC4CAC7F1E96A2D600DAC41E /* TSKCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSKCommon.h; sourceTree = "<group>"; };
 		FC4CAC801E96A95D00DAC41E /* TSKTrustKit-Umbrella.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TSKTrustKit-Umbrella.h"; sourceTree = "<group>"; };
+		FCD0CC031E96ADF00076D431 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -512,6 +513,7 @@
 				8C8480491A896EE30017C155 /* TrustKit */,
 				8C8480561A896EE30017C155 /* TrustKitTests */,
 				8C8480481A896EE30017C155 /* Products */,
+				FCD0CC021E96ADF00076D431 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -743,6 +745,14 @@
 				8C4346D51E5B894A008023F9 /* configuration_utils.m */,
 			);
 			name = Configuration;
+			sourceTree = "<group>";
+		};
+		FCD0CC021E96ADF00076D431 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FCD0CC031E96ADF00076D431 /* Foundation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1373,7 +1383,6 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_TREAT_WARNINGS_AS_ERRORS = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
@@ -1389,13 +1398,11 @@
 				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MODULEMAP_FILE = "$(SRCROOT)/TrustKit/TrustKit.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USE_HEADERMAP = NO;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -1448,12 +1455,10 @@
 				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MODULEMAP_FILE = "$(SRCROOT)/TrustKit/TrustKit.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				USE_HEADERMAP = NO;
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1474,6 +1479,7 @@
 				ENABLE_BITCODE = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TrustKit/TrustKit-Prefix.pch";
+				GENERATE_PKGINFO_FILE = YES;
 				INFOPLIST_FILE = TrustKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1504,6 +1510,7 @@
 				ENABLE_BITCODE = "$(inherited)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TrustKit/TrustKit-Prefix.pch";
+				GENERATE_PKGINFO_FILE = YES;
 				INFOPLIST_FILE = TrustKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

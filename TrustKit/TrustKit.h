@@ -9,8 +9,10 @@
  
  */
 
-#import "TSKPinningValidator.h"
 #import "TSKTrustKitConfig.h"
+
+@class TSKPinningValidator;
+@class TSKPinningValidatorResult;
 
 NS_ASSUME_NONNULL_BEGIN
 

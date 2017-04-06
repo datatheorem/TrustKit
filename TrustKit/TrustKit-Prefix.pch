@@ -1,9 +1,15 @@
 //  Copyright © 2017 TrustKit. All rights reserved.
 
+#import <Availability.h>
 #import "TSKCommon.h"
 
-#ifdef __OBJC__
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
 
+#ifdef __OBJC__
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
 #import <Foundation/Foundation.h>
+#endif
 
 #endif

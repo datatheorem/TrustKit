@@ -16,7 +16,6 @@
 #import "TSKReportsRateLimiter.h"
 #import "vendor_identifier.h"
 
-
 // Session identifier for background uploads: <bundle_id>.TSKBackgroundReporter
 static NSString * const kTSKBackgroundSessionIdentifierFormat = @"%@.TSKBackgroundReporter.%@";
 
@@ -32,7 +31,6 @@ static NSString * const kTSKBackgroundSessionIdentifierFormat = @"%@.TSKBackgrou
 @property (nonatomic) BOOL shouldRateLimitReports;
 
 @end
-
 
 @implementation TSKBackgroundReporter
 
@@ -120,7 +118,7 @@ static NSString * const kTSKBackgroundSessionIdentifierFormat = @"%@.TSKBackgrou
             // identifier should never be created, so ensure that cannot happen by creating
             // a unique ID per instance.
             NSString *backgroundSessionId = [NSString stringWithFormat:kTSKBackgroundSessionIdentifierFormat,
-                                             _appBundleId, @""];
+                                             _appBundleId, [[NSUUID UUID] UUIDString]];
             
             // The API for creating background sessions changed between iOS 7 and iOS 8 and OS X 10.9 and 10.10
             // Try to use the new API if available at runtime

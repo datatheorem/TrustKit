@@ -7,7 +7,8 @@
 //
 
 #import "TSKNSURLConnectionDelegateProxy.h"
-#import "../TrustKit.h"
+#import "../TSKPinValidatorResult.h"
+#import "../TSKPinningValidator.h"
 #import "../Dependencies/RSSwizzle/RSSwizzle.h"
 
 typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NSError *connectionError);

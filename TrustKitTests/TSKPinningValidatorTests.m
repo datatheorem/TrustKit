@@ -11,6 +11,7 @@
 
 #import <XCTest/XCTest.h>
 #import "../TrustKit/TrustKit.h"
+#import "../TrustKit/TSKPinningValidator.h"
 #import "../TrustKit/TSKTrustKitConfig.h"
 #import "../TrustKit/parse_configuration.h"
 #import "../TrustKit/TSKPinningValidatorResult.h"

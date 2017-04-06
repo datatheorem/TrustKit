@@ -6,7 +6,7 @@
 //  Copyright © 2016 TrustKit. All rights reserved.
 //
 
-#import "TrustKit.h"
+#import "TSKTrustKitConfig.h"
 #import "Dependencies/domain_registry/domain_registry.h"
 #import "parse_configuration.h"
 #import "Pinning/TSKPublicKeyAlgorithm.h"
