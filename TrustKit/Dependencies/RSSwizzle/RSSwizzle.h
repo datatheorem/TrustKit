@@ -6,6 +6,8 @@
 //
 //
 
+@import Foundation;
+
 #pragma mark - Macros Based API
 
 /// A macro for wrapping the return type of the swizzled method.

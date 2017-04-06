@@ -9,8 +9,7 @@
 // These externs are currently fulfilled in TrustKit.m. They are here to prevent reverse
 // includes since both TrustKit instances and low level internal C API need the definitions
 
-#ifndef TSKTrustKitConfig_h
-#define TSKTrustKitConfig_h
+@import Foundation;
 
 #pragma mark TrustKit Version Number
 
@@ -242,5 +241,3 @@ FOUNDATION_EXPORT const TSKSupportedAlgorithm kTSKAlgorithmEcDsaSecp256r1;
  ECDSA with secp384r1 curve.
  */
 FOUNDATION_EXPORT const TSKSupportedAlgorithm kTSKAlgorithmEcDsaSecp384r1;
-
-#endif /* TSKTrustKitConfig_h */

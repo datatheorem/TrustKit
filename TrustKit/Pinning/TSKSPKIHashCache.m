@@ -10,6 +10,7 @@
  */
 
 #import "TSKSPKIHashCache.h"
+#import "../TSKLog.h"
 #import <CommonCrypto/CommonDigest.h>
 
 #if TARGET_OS_IOS && __IPHONE_OS_VERSION_MIN_REQUIRED <= 100000

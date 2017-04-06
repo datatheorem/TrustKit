@@ -13,6 +13,7 @@
 #import "TSKSPKIHashCache.h"
 #import "../Dependencies/domain_registry/domain_registry.h"
 #import "../configuration_utils.h"
+#import "../TSKLog.h"
 
 
 #pragma mark SSL Pin Verifier

@@ -12,6 +12,8 @@
 #ifndef TSKPublicKeyAlgorithm_h
 #define TSKPublicKeyAlgorithm_h
 
+@import Foundation;
+
 typedef NS_ENUM(NSInteger, TSKPublicKeyAlgorithm)
 {
     // Some assumptions are made about this specific ordering in public_key_utils.m

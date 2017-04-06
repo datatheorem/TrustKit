@@ -6,6 +6,8 @@
 //  Copyright © 2015 TrustKit. All rights reserved.
 //
 
+@import Foundation;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @class TrustKit;

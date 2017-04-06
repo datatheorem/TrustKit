@@ -16,7 +16,7 @@
 #import "parse_configuration.h"
 #import "TSKPinningValidator.h"
 #import "TSKPinningValidatorResult.h"
-
+#import "TSKLog.h"
 
 NSString * const TrustKitVersion = @"1.4.2";
 

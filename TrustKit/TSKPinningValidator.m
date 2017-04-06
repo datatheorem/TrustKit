@@ -16,6 +16,7 @@
 #import "Pinning/TSKSPKIHashCache.h"
 #import "Pinning/ssl_pin_verifier.h"
 #import "TrustKit.h"
+#import "TSKLog.h"
 
 @interface TSKPinningValidator ()
 @property (nonatomic) TSKSPKIHashCache *spkiHashCache;

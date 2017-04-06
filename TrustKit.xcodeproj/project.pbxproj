@@ -381,7 +381,6 @@
 		8CE919211AEA077F002B29AE /* ssl_pin_verifier.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ssl_pin_verifier.m; path = Pinning/ssl_pin_verifier.m; sourceTree = "<group>"; };
 		8CE919241AEA07C5002B29AE /* ssl_pin_verifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ssl_pin_verifier.h; path = Pinning/ssl_pin_verifier.h; sourceTree = "<group>"; };
 		8CE919291AEA0F7E002B29AE /* domain_registry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = domain_registry.h; path = Dependencies/domain_registry/domain_registry.h; sourceTree = "<group>"; };
-		FC06FE7F1E7C3FFA00AF0B4D /* TrustKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TrustKit-Prefix.pch"; sourceTree = "<group>"; };
 		FC1A08FD1E579F630055B12C /* TSKPinValidatorResult.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSKPinValidatorResult.h; sourceTree = "<group>"; };
 		FC1A08FE1E57A4BB0055B12C /* TSKPinningValidatorResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSKPinningValidatorResult.h; sourceTree = "<group>"; };
 		FC1A08FF1E57A4BB0055B12C /* TSKPinningValidatorResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKPinningValidatorResult.m; sourceTree = "<group>"; };
@@ -390,7 +389,7 @@
 		FC1A09121E57C6820055B12C /* TSKPublicKeyAlgorithm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TSKPublicKeyAlgorithm.h; path = Pinning/TSKPublicKeyAlgorithm.h; sourceTree = "<group>"; };
 		FC4CAC7A1E958E0500DAC41E /* TSKReportsRateLimiterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKReportsRateLimiterTests.m; sourceTree = "<group>"; };
 		FC4CAC7E1E96917B00DAC41E /* TSKTrustKitConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSKTrustKitConfig.h; sourceTree = "<group>"; };
-		FC4CAC7F1E96A2D600DAC41E /* TSKCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSKCommon.h; sourceTree = "<group>"; };
+		FC4CAC7F1E96A2D600DAC41E /* TSKLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSKLog.h; sourceTree = "<group>"; };
 		FC4CAC801E96A95D00DAC41E /* TSKTrustKit-Umbrella.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TSKTrustKit-Umbrella.h"; sourceTree = "<group>"; };
 		FCD0CC031E96ADF00076D431 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
@@ -542,7 +541,7 @@
 				FC663F551E8421BE008E2EFE /* Configuration */,
 				8C84804C1A896EE30017C155 /* TrustKit.h */,
 				8C84806C1A896F660017C155 /* TrustKit.m */,
-				FC4CAC7F1E96A2D600DAC41E /* TSKCommon.h */,
+				FC4CAC7F1E96A2D600DAC41E /* TSKLog.h */,
 				FC4CAC7E1E96917B00DAC41E /* TSKTrustKitConfig.h */,
 				8C0C90471E3C41F3003851A8 /* TSKPinningValidator.h */,
 				8C0C90481E3C41F3003851A8 /* TSKPinningValidator.m */,
@@ -560,7 +559,6 @@
 				8C0C90111E3C196A003851A8 /* TrustKit.modulemap */,
 				8C84804B1A896EE30017C155 /* Info.plist */,
 				FC4CAC801E96A95D00DAC41E /* TSKTrustKit-Umbrella.h */,
-				FC06FE7F1E7C3FFA00AF0B4D /* TrustKit-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1479,8 +1477,6 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = "$(inherited)";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TrustKit/TrustKit-Prefix.pch";
 				GENERATE_PKGINFO_FILE = YES;
 				INFOPLIST_FILE = TrustKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1511,8 +1507,6 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = "$(inherited)";
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TrustKit/TrustKit-Prefix.pch";
 				GENERATE_PKGINFO_FILE = YES;
 				INFOPLIST_FILE = TrustKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";

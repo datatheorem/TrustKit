@@ -11,10 +11,12 @@
 
 #import "TSKBackgroundReporter.h"
 #import "../TSKTrustKitConfig.h"
+#import "../TSKLog.h"
 #import "TSKPinFailureReport.h"
 #import "reporting_utils.h"
 #import "TSKReportsRateLimiter.h"
 #import "vendor_identifier.h"
+
 
 // Session identifier for background uploads: <bundle_id>.TSKBackgroundReporter
 static NSString * const kTSKBackgroundSessionIdentifierFormat = @"%@.TSKBackgroundReporter.%@";
