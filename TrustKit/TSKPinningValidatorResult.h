@@ -9,7 +9,6 @@
  
  */
 
-#import <Foundation/Foundation.h>
 #import "TSKPinValidatorResult.h"
 
 @interface TSKPinningValidatorResult : NSObject

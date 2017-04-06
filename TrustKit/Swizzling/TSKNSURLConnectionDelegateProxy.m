@@ -7,7 +7,7 @@
 //
 
 #import "TSKNSURLConnectionDelegateProxy.h"
-#import "../TrustKit+Private.h"
+#import "../TrustKit.h"
 #import "../Dependencies/RSSwizzle/RSSwizzle.h"
 
 typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NSError *connectionError);

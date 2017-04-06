@@ -8,7 +8,7 @@
 
 #import "TSKNSURLSessionDelegateProxy.h"
 #import "../Dependencies/RSSwizzle/RSSwizzle.h"
-#import "../TrustKit+Private.h"
+#import "../TrustKit.h"
 
 @interface TSKNSURLSessionDelegateProxy ()
 /* The NSURLSessionDelegate we're going to proxy */

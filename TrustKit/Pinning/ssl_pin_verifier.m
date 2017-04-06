@@ -12,7 +12,6 @@
 #import "ssl_pin_verifier.h"
 #import "TSKSPKIHashCache.h"
 #import "../Dependencies/domain_registry/domain_registry.h"
-#import "../TrustKit+Private.h"
 #import "../configuration_utils.h"
 
 

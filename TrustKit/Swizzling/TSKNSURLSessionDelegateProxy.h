@@ -6,8 +6,6 @@
 //  Copyright © 2015 TrustKit. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 NS_ASSUME_NONNULL_BEGIN
 
 typedef void(^TSKURLSessionAuthChallengeCallback)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential);

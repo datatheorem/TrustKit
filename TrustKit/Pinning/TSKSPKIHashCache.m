@@ -10,7 +10,6 @@
  */
 
 #import "TSKSPKIHashCache.h"
-#import "../TrustKit+Private.h"
 #import <CommonCrypto/CommonDigest.h>
 
 #if TARGET_OS_IOS && __IPHONE_OS_VERSION_MIN_REQUIRED <= 100000
@@ -35,31 +34,31 @@ typedef NSMutableDictionary<NSData *, NSData *> SpkiCacheDictionnary;
 #pragma mark Missing ASN1 SPKI Headers
 
 // These are the ASN1 headers for the Subject Public Key Info section of a certificate
-static unsigned char rsa2048Asn1Header[] = {
+static const unsigned char rsa2048Asn1Header[] = {
     0x30, 0x82, 0x01, 0x22, 0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86,
     0xf7, 0x0d, 0x01, 0x01, 0x01, 0x05, 0x00, 0x03, 0x82, 0x01, 0x0f, 0x00
 };
 
-static unsigned char rsa4096Asn1Header[] = {
+static const unsigned char rsa4096Asn1Header[] = {
     0x30, 0x82, 0x02, 0x22, 0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86,
     0xf7, 0x0d, 0x01, 0x01, 0x01, 0x05, 0x00, 0x03, 0x82, 0x02, 0x0f, 0x00
 };
 
-static unsigned char ecDsaSecp256r1Asn1Header[] = {
+static const unsigned char ecDsaSecp256r1Asn1Header[] = {
     0x30, 0x59, 0x30, 0x13, 0x06, 0x07, 0x2a, 0x86, 0x48, 0xce, 0x3d, 0x02,
     0x01, 0x06, 0x08, 0x2a, 0x86, 0x48, 0xce, 0x3d, 0x03, 0x01, 0x07, 0x03,
     0x42, 0x00
 };
 
-static unsigned char ecDsaSecp384r1Asn1Header[] = {
+static const unsigned char ecDsaSecp384r1Asn1Header[] = {
     0x30, 0x76, 0x30, 0x10, 0x06, 0x07, 0x2a, 0x86, 0x48, 0xce, 0x3d, 0x02,
     0x01, 0x06, 0x05, 0x2b, 0x81, 0x04, 0x00, 0x22, 0x03, 0x62, 0x00
 };
 
 // Careful with the order... must match how TSKPublicKeyAlgorithm is defined
-static unsigned char *asn1HeaderBytes[4] = { rsa2048Asn1Header, rsa4096Asn1Header,
+static const unsigned char *asn1HeaderBytes[4] = { rsa2048Asn1Header, rsa4096Asn1Header,
     ecDsaSecp256r1Asn1Header, ecDsaSecp384r1Asn1Header };
-static unsigned int asn1HeaderSizes[4] = { sizeof(rsa2048Asn1Header), sizeof(rsa4096Asn1Header),
+static const unsigned int asn1HeaderSizes[4] = { sizeof(rsa2048Asn1Header), sizeof(rsa4096Asn1Header),
     sizeof(ecDsaSecp256r1Asn1Header), sizeof(ecDsaSecp384r1Asn1Header) };
 
 

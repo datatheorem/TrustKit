@@ -9,11 +9,13 @@
  
  */
 
-#import "TrustKit+Private.h"
+#import "TSKPinningValidator.h"
+#import "TSKTrustKitConfig.h"
 #import "TSKPinValidatorResult.h"
 #import "TSKPinningValidatorResult.h"
 #import "Pinning/TSKSPKIHashCache.h"
-
+#import "Pinning/ssl_pin_verifier.h"
+#import "TrustKit.h"
 
 @interface TSKPinningValidator ()
 @property (nonatomic) TSKSPKIHashCache *spkiHashCache;

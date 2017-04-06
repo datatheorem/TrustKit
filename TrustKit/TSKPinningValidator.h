@@ -9,7 +9,6 @@
  
  */
 
-#import <Foundation/Foundation.h>
 #import "TSKPinValidatorResult.h"
 #import "Pinning/TSKPublicKeyAlgorithm.h"
 

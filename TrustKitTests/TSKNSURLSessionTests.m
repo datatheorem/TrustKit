@@ -7,10 +7,14 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "../TrustKit/TrustKit+Private.h"
+#import "../TrustKit/TrustKit.h"
 #import "../TrustKit/Swizzling/TSKNSURLSessionDelegateProxy.h"
 
 #import <OCMock/OCMock.h>
+
+@interface TrustKit (TestSupport)
++ (void)resetConfiguration;
+@end
 
 @interface TSKNSURLSessionDelegateProxy (TestSupport)
 @property (nonatomic) id<NSURLSessionDelegate, NSURLSessionTaskDelegate> originalDelegate;

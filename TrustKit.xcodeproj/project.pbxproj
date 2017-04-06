@@ -241,6 +241,8 @@
 		FC1A09101E57AC450055B12C /* TSKSPKIHashCache.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1A09091E57AC450055B12C /* TSKSPKIHashCache.m */; };
 		FC1A09111E57AC450055B12C /* TSKSPKIHashCache.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1A09091E57AC450055B12C /* TSKSPKIHashCache.m */; };
 		FC4CAC7B1E958E0500DAC41E /* TSKReportsRateLimiterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4CAC7A1E958E0500DAC41E /* TSKReportsRateLimiterTests.m */; };
+		FC4CAC7C1E96891A00DAC41E /* TSKReportsRateLimiterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4CAC7A1E958E0500DAC41E /* TSKReportsRateLimiterTests.m */; };
+		FC4CAC7D1E96891B00DAC41E /* TSKReportsRateLimiterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4CAC7A1E958E0500DAC41E /* TSKReportsRateLimiterTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -310,12 +312,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2FA286123F801C437F35D240 /* TrustKit+Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TrustKit+Private.h"; sourceTree = "<group>"; };
 		2FA2868CAFECA46ADE0B6E3E /* TSKPinningValidatorTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKPinningValidatorTests.m; sourceTree = "<group>"; };
 		6B032D3F1AF1AEB600EAFA69 /* TSKReporterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSKReporterTests.m; sourceTree = "<group>"; };
 		6B2B06AC1B05154A00FC749E /* TSKBackgroundReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKBackgroundReporter.h; path = Reporting/TSKBackgroundReporter.h; sourceTree = "<group>"; };
 		6B2B06AE1B05157400FC749E /* TSKBackgroundReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKBackgroundReporter.m; path = Reporting/TSKBackgroundReporter.m; sourceTree = "<group>"; };
-		8C0C90111E3C196A003851A8 /* module.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		8C0C90111E3C196A003851A8 /* TrustKit.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = TrustKit.modulemap; sourceTree = "<group>"; };
 		8C0C90471E3C41F3003851A8 /* TSKPinningValidator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSKPinningValidator.h; sourceTree = "<group>"; };
 		8C0C90481E3C41F3003851A8 /* TSKPinningValidator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSKPinningValidator.m; sourceTree = "<group>"; };
 		8C15F99E1B16094D00F06C0E /* TSKPinFailureReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKPinFailureReport.h; path = Reporting/TSKPinFailureReport.h; sourceTree = "<group>"; };
@@ -388,6 +389,9 @@
 		FC1A09091E57AC450055B12C /* TSKSPKIHashCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKSPKIHashCache.m; path = Pinning/TSKSPKIHashCache.m; sourceTree = "<group>"; };
 		FC1A09121E57C6820055B12C /* TSKPublicKeyAlgorithm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TSKPublicKeyAlgorithm.h; path = Pinning/TSKPublicKeyAlgorithm.h; sourceTree = "<group>"; };
 		FC4CAC7A1E958E0500DAC41E /* TSKReportsRateLimiterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKReportsRateLimiterTests.m; sourceTree = "<group>"; };
+		FC4CAC7E1E96917B00DAC41E /* TSKTrustKitConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSKTrustKitConfig.h; sourceTree = "<group>"; };
+		FC4CAC7F1E96A2D600DAC41E /* TSKCommon.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSKCommon.h; sourceTree = "<group>"; };
+		FC4CAC801E96A95D00DAC41E /* TSKTrustKit-Umbrella.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TSKTrustKit-Umbrella.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -529,7 +533,7 @@
 		8C8480491A896EE30017C155 /* TrustKit */ = {
 			isa = PBXGroup;
 			children = (
-				8C0C90111E3C196A003851A8 /* module.modulemap */,
+				8C0C90111E3C196A003851A8 /* TrustKit.modulemap */,
 				8CE919281AEA0F61002B29AE /* Dependencies */,
 				8CA6CC571BAF60DA00BDA419 /* Swizzling */,
 				8CE919201AEA0745002B29AE /* Reporting */,
@@ -537,7 +541,8 @@
 				FC663F551E8421BE008E2EFE /* Configuration */,
 				8C84804C1A896EE30017C155 /* TrustKit.h */,
 				8C84806C1A896F660017C155 /* TrustKit.m */,
-				2FA286123F801C437F35D240 /* TrustKit+Private.h */,
+				FC4CAC7F1E96A2D600DAC41E /* TSKCommon.h */,
+				FC4CAC7E1E96917B00DAC41E /* TSKTrustKitConfig.h */,
 				8C0C90471E3C41F3003851A8 /* TSKPinningValidator.h */,
 				8C0C90481E3C41F3003851A8 /* TSKPinningValidator.m */,
 				FC1A08FD1E579F630055B12C /* TSKPinValidatorResult.h */,
@@ -552,6 +557,7 @@
 			isa = PBXGroup;
 			children = (
 				8C84804B1A896EE30017C155 /* Info.plist */,
+				FC4CAC801E96A95D00DAC41E /* TSKTrustKit-Umbrella.h */,
 				FC06FE7F1E7C3FFA00AF0B4D /* TrustKit-Prefix.pch */,
 			);
 			name = "Supporting Files";
@@ -1206,6 +1212,7 @@
 			files = (
 				8C80249F1D750D0100678959 /* TSKLoggerTests.m in Sources */,
 				8C84CBC31D6E1718009B3E7D /* TSKNSURLConnectionTests.m in Sources */,
+				FC4CAC7D1E96891B00DAC41E /* TSKReportsRateLimiterTests.m in Sources */,
 				8C84CBC41D6E1718009B3E7D /* TSKPinConfigurationTests.m in Sources */,
 				8C84CBC51D6E1718009B3E7D /* TSKPinningValidatorTests.m in Sources */,
 				8C84CBC61D6E1718009B3E7D /* TSKPublicKeyAlgorithmTests.m in Sources */,
@@ -1271,6 +1278,7 @@
 			files = (
 				8C80249E1D750D0100678959 /* TSKLoggerTests.m in Sources */,
 				8CD5F7391BCB02A7005801D8 /* TSKNSURLConnectionTests.m in Sources */,
+				FC4CAC7C1E96891A00DAC41E /* TSKReportsRateLimiterTests.m in Sources */,
 				8CA6CC3A1BAE2C7C00BDA419 /* TSKReporterTests.m in Sources */,
 				8CA6CC391BAE2C7200BDA419 /* TSKPinningValidatorTests.m in Sources */,
 				8CA6CC3C1BAE2C8100BDA419 /* TSKPublicKeyAlgorithmTests.m in Sources */,
@@ -1381,7 +1389,7 @@
 				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MODULEMAP_FILE = "$(SRCROOT)/TrustKit/module.modulemap";
+				MODULEMAP_FILE = "$(SRCROOT)/TrustKit/TrustKit.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -1440,7 +1448,7 @@
 				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MODULEMAP_FILE = "$(SRCROOT)/TrustKit/module.modulemap";
+				MODULEMAP_FILE = "$(SRCROOT)/TrustKit/TrustKit.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
@@ -1531,6 +1539,7 @@
 				INFOPLIST_FILE = TrustKitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks @loader_path/../Frameworks @executable_path/../Frameworks";
+				MODULEMAP_FILE = "";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1556,6 +1565,7 @@
 				INFOPLIST_FILE = TrustKitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks @loader_path/../Frameworks @executable_path/../Frameworks";
+				MODULEMAP_FILE = "";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1645,6 +1655,7 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = TrustKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks @loader_path/../Frameworks @executable_path/../Frameworks";
+				MODULEMAP_FILE = "";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1671,6 +1682,7 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = TrustKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks @loader_path/../Frameworks @executable_path/../Frameworks";
+				MODULEMAP_FILE = "";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1795,6 +1807,7 @@
 				INFOPLIST_FILE = TrustKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MODULEMAP_FILE = "";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.TrustKit-OS-XTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1819,6 +1832,7 @@
 				INFOPLIST_FILE = TrustKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				MODULEMAP_FILE = "";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.TrustKit-OS-XTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";

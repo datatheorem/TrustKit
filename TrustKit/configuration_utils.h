@@ -6,6 +6,5 @@
 //  Copyright © 2017 TrustKit. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 
 NSString *getPinningConfigurationKeyForDomain(NSString *hostname, NSDictionary *trustKitConfiguration);

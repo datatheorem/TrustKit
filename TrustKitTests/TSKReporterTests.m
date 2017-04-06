@@ -11,7 +11,7 @@
 
 #import <XCTest/XCTest.h>
 
-#import "../TrustKit/TrustKit+Private.h"
+#import "../TrustKit/TrustKit.h"
 
 #import "../TrustKit/TSKPinningValidatorResult.h"
 #import "../TrustKit/Reporting/TSKBackgroundReporter.h"
@@ -23,6 +23,12 @@
 #import "TSKCertificateUtils.h"
 
 #pragma mark Test suite
+
+@interface TrustKit (TestSupport)
+@property (nonatomic) TSKBackgroundReporter *pinFailureReporter;
++ (NSString *)getDefaultReportUri;
+- (void)sendValidationReport:(TSKPinningValidatorResult *)result;
+@end
 
 @interface TSKReporterTests : XCTestCase
 

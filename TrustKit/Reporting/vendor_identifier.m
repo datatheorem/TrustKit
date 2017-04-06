@@ -8,12 +8,11 @@
 
 #import "vendor_identifier.h"
 
-
 #if TARGET_OS_IPHONE && !TARGET_OS_WATCH
 
 #pragma mark Vendor identifier - macOS, tvOS
 
-@import UIKit; // For accessing the IDFV
+@import UIKit; // for accessing IDFV
 
 NSString *identifier_for_vendor(void)
 {

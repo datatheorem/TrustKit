@@ -9,7 +9,6 @@
  
  */
 
-#import <Foundation/Foundation.h>
 #import "TSKPublicKeyAlgorithm.h"
 
 @import Security;

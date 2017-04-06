@@ -7,14 +7,17 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "../TrustKit/TrustKit+Private.h"
-#import "../TrustKit/TSKPinningValidatorResult.h"
+#import "../TrustKit/TrustKit.h"
 #import "../TrustKit/Swizzling/TSKNSURLConnectionDelegateProxy.h"
 #import <OCMock/OCMock.h>
 
 @interface TSKNSURLConnectionDelegateProxy (TestSupport)
 @property (nonatomic) TSKPinValidationResult lastTrustDecision;
 -(BOOL)forwardToOriginalDelegateAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge forConnection:(NSURLConnection *)connection;
+@end
+
+@interface TrustKit (TestSupport)
++ (void)resetConfiguration;
 @end
 
 /*

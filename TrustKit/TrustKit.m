@@ -9,7 +9,7 @@
  
  */
 
-#import "TrustKit+Private.h"
+#import "TrustKit.h"
 #import "Reporting/TSKBackgroundReporter.h"
 #import "Swizzling/TSKNSURLConnectionDelegateProxy.h"
 #import "Swizzling/TSKNSURLSessionDelegateProxy.h"
