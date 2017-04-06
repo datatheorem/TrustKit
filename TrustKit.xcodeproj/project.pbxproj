@@ -535,7 +535,6 @@
 		8C8480491A896EE30017C155 /* TrustKit */ = {
 			isa = PBXGroup;
 			children = (
-				8C0C90111E3C196A003851A8 /* TrustKit.modulemap */,
 				8CE919281AEA0F61002B29AE /* Dependencies */,
 				8CA6CC571BAF60DA00BDA419 /* Swizzling */,
 				8CE919201AEA0745002B29AE /* Reporting */,
@@ -558,6 +557,7 @@
 		8C84804A1A896EE30017C155 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				8C0C90111E3C196A003851A8 /* TrustKit.modulemap */,
 				8C84804B1A896EE30017C155 /* Info.plist */,
 				FC4CAC801E96A95D00DAC41E /* TSKTrustKit-Umbrella.h */,
 				FC06FE7F1E7C3FFA00AF0B4D /* TrustKit-Prefix.pch */,
@@ -1487,6 +1487,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				MODULEMAP_FILE = "$(SRCROOT)/TrustKit/TrustKit.modulemap";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1518,6 +1519,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				MODULEMAP_FILE = "$(SRCROOT)/TrustKit/TrustKit.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

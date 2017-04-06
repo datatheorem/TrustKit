@@ -33,8 +33,8 @@
     // Initialize TrustKit
     NSDictionary *trustKitConfig =
     @{
-      // Auto-swizzle NSURLSession delegates to add pinning validation
-      kTSKSwizzleNetworkDelegates: @YES,
+      // Do not auto-swizzle NSURLSession delegates
+      kTSKSwizzleNetworkDelegates: @NO,
       
       kTSKPinnedDomains: @{
               
