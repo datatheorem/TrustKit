@@ -90,10 +90,10 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
         // Hook network APIs if needed
         if ([sharedTrustKit.configuration[kTSKSwizzleNetworkDelegates] boolValue]) {
             // NSURLConnection
-            [TSKNSURLConnectionDelegateProxy swizzleNSURLConnectionConstructors];
+            [TSKNSURLConnectionDelegateProxy swizzleNSURLConnectionConstructors:sharedTrustKit];
             
             // NSURLSession
-            [TSKNSURLSessionDelegateProxy swizzleNSURLSessionConstructors];
+            [TSKNSURLSessionDelegateProxy swizzleNSURLSessionConstructors:sharedTrustKit];
         }
     });
 }

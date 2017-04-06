@@ -10,6 +10,7 @@
  */
 
 #import "../TSKPinValidatorResult.h"
+@import Foundation;
 
 @class TSKSPKIHashCache;
 

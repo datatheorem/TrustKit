@@ -739,8 +739,8 @@
 		FC663F551E8421BE008E2EFE /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
-				8C5D98B21CEFF079008E654B /* parse_configuration.m */,
 				8C5D98B61CEFF103008E654B /* parse_configuration.h */,
+				8C5D98B21CEFF079008E654B /* parse_configuration.m */,
 				8C4346D41E5B894A008023F9 /* configuration_utils.h */,
 				8C4346D51E5B894A008023F9 /* configuration_utils.m */,
 			);
@@ -1398,6 +1398,7 @@
 				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				MODULEMAP_FILE = "$(SRCROOT)/TrustKit/TrustKit.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -1455,6 +1456,7 @@
 				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				MODULEMAP_FILE = "$(SRCROOT)/TrustKit/TrustKit.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";

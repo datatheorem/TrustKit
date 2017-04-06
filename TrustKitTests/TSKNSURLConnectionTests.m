@@ -180,15 +180,15 @@
 // WARNING 2: If the domain sends a redirection, two pinning validation will occur, thereby setting the
 // lastTrustDecision to an unexpected value
 
-@interface TSKNSURLConnectionTests : XCTestCase {
-    
-}
+@interface TSKNSURLConnectionTests : XCTestCase
+@property (nonatomic) TrustKit *trustKit;
 @end
 
 @implementation TSKNSURLConnectionTests
 
 - (void)setUp {
     [super setUp];
+    _trustKit = [[TrustKit alloc] initWithConfiguration:@{ }];
 }
 
 - (void)tearDown {
@@ -204,10 +204,12 @@
 {
     TSKNSURLConnectionDelegateProxy *proxy;
     
-    proxy = [[TSKNSURLConnectionDelegateProxy alloc] initWithDelegate:[TestModeADelegate new]];
+    proxy = [[TSKNSURLConnectionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                   connectionDelegate:[TestModeADelegate new]];
     XCTAssertTrue([proxy respondsToSelector:@selector(connection:willSendRequestForAuthenticationChallenge:)]);
-    
-    proxy = [[TSKNSURLConnectionDelegateProxy alloc] initWithDelegate:[TestModeBDelegate new]];
+
+    proxy = [[TSKNSURLConnectionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                   connectionDelegate:[TestModeBDelegate new]];
     XCTAssertTrue([proxy respondsToSelector:@selector(connection:willSendRequestForAuthenticationChallenge:)]);
 }
 
@@ -215,18 +217,21 @@
 {
     TSKNSURLConnectionDelegateProxy *proxy;
     
-    proxy = [[TSKNSURLConnectionDelegateProxy alloc] initWithDelegate:[TestModeADelegate new]];
+    proxy = [[TSKNSURLConnectionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                   connectionDelegate:[TestModeADelegate new]];
     XCTAssertTrue([proxy respondsToSelector:@selector(fakeMethod)]);
-    
-    proxy = [[TSKNSURLConnectionDelegateProxy alloc] initWithDelegate:[TestModeBDelegate new]];
+
+    proxy = [[TSKNSURLConnectionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                   connectionDelegate:[TestModeBDelegate new]];
     XCTAssertFalse([proxy respondsToSelector:@selector(fakeMethod)]);
 }
 
 - (void)test_respondsToSelector_falseForUnimplementedMethods
 {
     TSKNSURLConnectionDelegateProxy *proxy;
-    
-    proxy = [[TSKNSURLConnectionDelegateProxy alloc] initWithDelegate:[TestModeADelegate new]];
+
+    proxy = [[TSKNSURLConnectionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                   connectionDelegate:[TestModeADelegate new]];
     XCTAssertFalse([proxy respondsToSelector:NSSelectorFromString(@"argle:bargle:")]);
 }
 
@@ -254,7 +259,8 @@
     TestModeADelegate *delegate = OCMStrictClassMock([TestModeADelegate class]);
     OCMExpect([delegate connection:cnxn willSendRequestForAuthenticationChallenge:challenge]);
     
-    TSKNSURLConnectionDelegateProxy *proxy = [[TSKNSURLConnectionDelegateProxy alloc] initWithDelegate:delegate];
+    TSKNSURLConnectionDelegateProxy *proxy = [[TSKNSURLConnectionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                                                    connectionDelegate:delegate];
     [(id)proxy forwardToOriginalDelegateAuthenticationChallenge:challenge forConnection:cnxn];
 
     OCMVerifyAll((id)delegate);
@@ -276,7 +282,8 @@
     OCMExpect([delegate connection:cnxn canAuthenticateAgainstProtectionSpace:space]).andReturn(YES);
     OCMExpect([delegate connection:cnxn didReceiveAuthenticationChallenge:challenge]);
     
-    TSKNSURLConnectionDelegateProxy *proxy = [[TSKNSURLConnectionDelegateProxy alloc] initWithDelegate:delegate];
+    TSKNSURLConnectionDelegateProxy *proxy = [[TSKNSURLConnectionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                                                    connectionDelegate:delegate];
     [(id)proxy forwardToOriginalDelegateAuthenticationChallenge:challenge forConnection:cnxn];
     
     OCMVerifyAll((id)delegate);
@@ -288,7 +295,8 @@
 - (void)test_connectionWillSendRequestForAuthenticationChallenge_notServerTrust
 {
     TestModeADelegate *delegate = OCMStrictClassMock([TestModeADelegate class]);
-    TSKNSURLConnectionDelegateProxy *proxy = [[TSKNSURLConnectionDelegateProxy alloc] initWithDelegate:delegate];
+    TSKNSURLConnectionDelegateProxy *proxy = [[TSKNSURLConnectionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                                                    connectionDelegate:delegate];
     
     NSURLConnection *cnxn = [[NSURLConnection alloc] init];
     NSURLProtectionSpace *space = [[NSURLProtectionSpace alloc] initWithHost:@"host" port:0 protocol:nil realm:nil
@@ -308,10 +316,9 @@
 - (void)test_connectionWillSendRequestForAuthenticationChallenge_serverTrustA_allow
 {
     TestModeADelegate *delegate = OCMStrictClassMock([TestModeADelegate class]);
-    
+
     TSKPinningValidator *validator = OCMStrictClassMock([TSKPinningValidator class]);
-    [TrustKit initializeWithConfiguration:@{}];
-    [TrustKit sharedInstance].pinningValidator = validator;
+    self.trustKit.pinningValidator = validator;
     
     NSURLConnection *cnxn = [[NSURLConnection alloc] init];
     NSURLProtectionSpace *space = [[NSURLProtectionSpace alloc] initWithHost:@"hostname" port:0 protocol:nil realm:nil
@@ -323,7 +330,8 @@
                                                                                                       error:nil
                                                                                                      sender:delegate];
     
-    TSKNSURLConnectionDelegateProxy *proxy = OCMPartialMock([[TSKNSURLConnectionDelegateProxy alloc] initWithDelegate:delegate]);
+    TSKNSURLConnectionDelegateProxy *proxy = OCMPartialMock([[TSKNSURLConnectionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                                                                   connectionDelegate:delegate]);
     
     OCMExpect([validator evaluateTrust:space.serverTrust forHostname:@"hostname"]).andReturn(TSKTrustDecisionShouldAllowConnection);
     OCMExpect([proxy forwardToOriginalDelegateAuthenticationChallenge:challenge forConnection:cnxn]);
@@ -336,7 +344,6 @@
     OCMVerifyAll((id)validator);
     OCMVerifyAll((id)proxy);
     
-    [TrustKit sharedInstance].pinningValidator = [TSKPinningValidator new];
     [(id)validator stopMocking];
     [(id)delegate stopMocking];
     [(id)proxy stopMocking];
@@ -347,8 +354,7 @@
     TestModeBDelegate *delegate = OCMPartialMock([TestModeBDelegate new]);
     
     TSKPinningValidator *validator = OCMStrictClassMock([TSKPinningValidator class]);
-    [TrustKit initializeWithConfiguration:@{}];
-    [TrustKit sharedInstance].pinningValidator = validator;
+    self.trustKit.pinningValidator = validator;
     
     NSURLConnection *cnxn = [[NSURLConnection alloc] init];
     NSURLProtectionSpace *space = [[NSURLProtectionSpace alloc] initWithHost:@"hostname" port:0 protocol:nil realm:nil
@@ -360,7 +366,8 @@
                                                                                                       error:nil
                                                                                                      sender:delegate];
     
-    TSKNSURLConnectionDelegateProxy *proxy = OCMPartialMock([[TSKNSURLConnectionDelegateProxy alloc] initWithDelegate:delegate]);
+    TSKNSURLConnectionDelegateProxy *proxy = OCMPartialMock([[TSKNSURLConnectionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                                                                   connectionDelegate:delegate]);
     
     OCMExpect([validator evaluateTrust:space.serverTrust forHostname:@"hostname"]).andReturn(TSKTrustDecisionShouldAllowConnection);
     OCMStub([proxy connection:cnxn willSendRequestForAuthenticationChallenge:challenge]).andForwardToRealObject();
@@ -374,7 +381,6 @@
     OCMVerifyAll((id)validator);
     OCMVerifyAll((id)proxy);
     
-    [TrustKit sharedInstance].pinningValidator = [TSKPinningValidator new];
     [(id)validator stopMocking];
     [(id)delegate stopMocking];
     [(id)proxy stopMocking];
@@ -386,8 +392,7 @@
     TestModeBDelegate *delegate = OCMPartialMock([TestModeBDelegate new]);
     
     TSKPinningValidator *validator = OCMStrictClassMock([TSKPinningValidator class]);
-    [TrustKit initializeWithConfiguration:@{}];
-    [TrustKit sharedInstance].pinningValidator = validator;
+    self.trustKit.pinningValidator = validator;
     
     NSURLConnection *cnxn = [[NSURLConnection alloc] init];
     NSURLProtectionSpace *space = [[NSURLProtectionSpace alloc] initWithHost:@"hostname" port:0 protocol:nil realm:nil
@@ -399,7 +404,8 @@
                                                                                                       error:nil
                                                                                                      sender:delegate];
     
-    TSKNSURLConnectionDelegateProxy *proxy = OCMPartialMock([[TSKNSURLConnectionDelegateProxy alloc] initWithDelegate:delegate]);
+    TSKNSURLConnectionDelegateProxy *proxy = OCMPartialMock([[TSKNSURLConnectionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                                                                   connectionDelegate:delegate]);
     
     OCMExpect([validator evaluateTrust:space.serverTrust forHostname:@"hostname"]).andReturn(TSKTrustDecisionShouldBlockConnection);
     OCMExpect([delegate cancelAuthenticationChallenge:challenge]);
@@ -410,7 +416,6 @@
     OCMVerifyAll((id)validator);
     OCMVerifyAll((id)proxy);
     
-    [TrustKit sharedInstance].pinningValidator = [TSKPinningValidator new];
     [(id)validator stopMocking];
     [(id)delegate stopMocking];
     [(id)proxy stopMocking];

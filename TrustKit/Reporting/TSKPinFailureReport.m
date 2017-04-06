@@ -13,7 +13,6 @@
 
 @implementation TSKPinFailureReport
 
-
 - (nonnull instancetype) initWithAppBundleId:(nonnull NSString *)appBundleId
                                   appVersion:(nonnull NSString *)appVersion
                                  appPlatform:(nonnull NSString *)appPlatform

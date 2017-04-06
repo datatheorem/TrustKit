@@ -222,13 +222,14 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
 #pragma mark - Test suite
 
 @interface TSKNSURLSessionTests : XCTestCase
-
+@property (nonatomic) TrustKit *trustKit;
 @end
 
 @implementation TSKNSURLSessionTests
 
 - (void)setUp {
     [super setUp];
+    _trustKit = [[TrustKit alloc] initWithConfiguration:@{ }];
 }
 
 - (void)tearDown {
@@ -239,7 +240,8 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
 
 - (void)test_respondsToSelector_sessionDelegate
 {
-    TSKNSURLSessionDelegateProxy *proxy = [[TSKNSURLSessionDelegateProxy alloc] initWithDelegate:[SessionDelegate new]];
+    TSKNSURLSessionDelegateProxy *proxy = [[TSKNSURLSessionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                                                 sessionDelegate:[SessionDelegate new]];
     
     XCTAssertTrue([proxy respondsToSelector:@selector(URLSession:didReceiveChallenge:completionHandler:)]);
 
@@ -252,7 +254,8 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
 
 - (void)test_respondsToSelector_taskDelegate
 {
-    TSKNSURLSessionDelegateProxy *proxy = [[TSKNSURLSessionDelegateProxy alloc] initWithDelegate:[TaskDelegate new]];
+    TSKNSURLSessionDelegateProxy *proxy = [[TSKNSURLSessionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                                                 sessionDelegate:[TaskDelegate new]];
     
     XCTAssertFalse([proxy respondsToSelector:@selector(URLSession:didReceiveChallenge:completionHandler:)]);
     
@@ -265,7 +268,8 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
 
 - (void)test_respondsToSelector_taskAndSessionDelegate
 {
-    TSKNSURLSessionDelegateProxy *proxy = [[TSKNSURLSessionDelegateProxy alloc] initWithDelegate:[TaskAndSessionDelegate new]];
+    TSKNSURLSessionDelegateProxy *proxy = [[TSKNSURLSessionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                                                 sessionDelegate:[TaskAndSessionDelegate new]];
     
     XCTAssertTrue([proxy respondsToSelector:@selector(URLSession:didReceiveChallenge:completionHandler:)]);
     
@@ -278,7 +282,8 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
 
 - (void)test_respondsToSelector_noOptionalsDelegate
 {
-    TSKNSURLSessionDelegateProxy *proxy = [[TSKNSURLSessionDelegateProxy alloc] initWithDelegate:[NoOptionalsDelegate new]];
+    TSKNSURLSessionDelegateProxy *proxy = [[TSKNSURLSessionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                                                 sessionDelegate:[NoOptionalsDelegate new]];
     
     XCTAssertTrue([proxy respondsToSelector:@selector(URLSession:didReceiveChallenge:completionHandler:)]);
     
@@ -294,7 +299,8 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
 // Test session delegate that implements @selector(URLSession:didReceiveChallenge:completionHandler:)
 - (void)test_forwardToOriginalDelegateAuthenticationChallenge_implements
 {
-    TSKNSURLSessionDelegateProxy *proxy = [[TSKNSURLSessionDelegateProxy alloc] initWithDelegate:[SessionDelegate new]];
+    TSKNSURLSessionDelegateProxy *proxy = [[TSKNSURLSessionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                                                 sessionDelegate:[SessionDelegate new]];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]];
     NSURLAuthenticationChallenge *challenge = [NSURLAuthenticationChallenge new];
     
@@ -313,7 +319,8 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
 // Test task delegate that doesn't implement @selector(URLSession:didReceiveChallenge:completionHandler:)
 - (void)test_forwardToOriginalDelegateAuthenticationChallenge_doesNotImplement
 {
-    TSKNSURLSessionDelegateProxy *proxy = [[TSKNSURLSessionDelegateProxy alloc] initWithDelegate:[TaskDelegate new]];
+    TSKNSURLSessionDelegateProxy *proxy = [[TSKNSURLSessionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                                                 sessionDelegate:[TaskDelegate new]];
     NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]];
     NSURLAuthenticationChallenge *challenge = [NSURLAuthenticationChallenge new];
     
@@ -330,7 +337,8 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
 - (void)test_common_URLSession_invalidAuthMethod_session
 {
     SessionDelegate *delegate = [SessionDelegate new];
-    TSKNSURLSessionDelegateProxy *proxy = [[TSKNSURLSessionDelegateProxy alloc] initWithDelegate:delegate];
+    TSKNSURLSessionDelegateProxy *proxy = [[TSKNSURLSessionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                                                 sessionDelegate:delegate];
     
     NSURLSession *session = [NSURLSession new];
     NSURLAuthenticationChallenge *challenge = ({
@@ -359,7 +367,8 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
 - (void)test_common_URLSession_invalidAuthMethod_task
 {
     TaskDelegate *delegate = [TaskDelegate new];
-    TSKNSURLSessionDelegateProxy *proxy = [[TSKNSURLSessionDelegateProxy alloc] initWithDelegate:delegate];
+    TSKNSURLSessionDelegateProxy *proxy = [[TSKNSURLSessionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                                                 sessionDelegate:delegate];
     
     NSURLSession *session = [NSURLSession new];
     NSURLAuthenticationChallenge *challenge = ({
@@ -388,7 +397,8 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
 - (void)test_common_URLSession_session_pinFailed
 {
     SessionDelegate *delegate = [SessionDelegate new];
-    TSKNSURLSessionDelegateProxy *proxy = [[TSKNSURLSessionDelegateProxy alloc] initWithDelegate:delegate];
+    TSKNSURLSessionDelegateProxy *proxy = [[TSKNSURLSessionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                                                 sessionDelegate:delegate];
     
     NSURLSession *session = [NSURLSession new];
     NSURLAuthenticationChallenge *challenge = ({
@@ -406,8 +416,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
     });
     
     TSKPinningValidator *validator = OCMStrictClassMock([TSKPinningValidator class]);
-    [TrustKit initializeWithConfiguration:@{}];
-    [TrustKit sharedInstance].pinningValidator = validator;
+    self.trustKit.pinningValidator = validator;
     
     OCMExpect([validator evaluateTrust:challenge.protectionSpace.serverTrust forHostname:@"hostname"]).andReturn(TSKTrustDecisionShouldBlockConnection);
     
@@ -420,13 +429,13 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
            }];
     
     [(id)validator stopMocking];
-    [TrustKit sharedInstance].pinningValidator = [TSKPinningValidator new];
 }
 
 - (void)test_common_URLSession_session_pinSuccess
 {
     SessionDelegate *delegate = [SessionDelegate new];
-    TSKNSURLSessionDelegateProxy *proxy = [[TSKNSURLSessionDelegateProxy alloc] initWithDelegate:delegate];
+    TSKNSURLSessionDelegateProxy *proxy = [[TSKNSURLSessionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                                                 sessionDelegate:delegate];
     
     NSURLSession *session = [NSURLSession new];
     NSURLAuthenticationChallenge *challenge = ({
@@ -444,8 +453,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
     });
     
     TSKPinningValidator *validator = OCMStrictClassMock([TSKPinningValidator class]);
-    [TrustKit initializeWithConfiguration:@{}];
-    [TrustKit sharedInstance].pinningValidator = validator;
+    self.trustKit.pinningValidator = validator;
     
     OCMExpect([validator evaluateTrust:challenge.protectionSpace.serverTrust forHostname:@"hostname"]).andReturn(TSKTrustDecisionShouldAllowConnection);
     
@@ -458,7 +466,6 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
            }];
     
     [(id)validator stopMocking];
-    [TrustKit sharedInstance].pinningValidator = [TSKPinningValidator new];
 }
 
 #pragma mark URLSession:didReceiveChallenge:challenge:completionHandler:
@@ -466,7 +473,8 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
 - (void)test_urlSessionChallengeDelegate
 {
     SessionDelegate *delegate = [SessionDelegate new];
-    TSKNSURLSessionDelegateProxy *proxy = OCMPartialMock([[TSKNSURLSessionDelegateProxy alloc] initWithDelegate:delegate]);
+    TSKNSURLSessionDelegateProxy *proxy = OCMPartialMock([[TSKNSURLSessionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                                                                sessionDelegate:delegate]);
     
     NSURLSession *session = [NSURLSession new];
     NSURLAuthenticationChallenge *challenge = ({
@@ -500,7 +508,8 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
 - (void)test_urlSessionTaskChallengeDelegate
 {
     SessionDelegate *delegate = [SessionDelegate new];
-    TSKNSURLSessionDelegateProxy *proxy = OCMPartialMock([[TSKNSURLSessionDelegateProxy alloc] initWithDelegate:delegate]);
+    TSKNSURLSessionDelegateProxy *proxy = OCMPartialMock([[TSKNSURLSessionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                                                                sessionDelegate:delegate]);
     
     NSURLSession *session = [NSURLSession new];
     NSURLAuthenticationChallenge *challenge = ({

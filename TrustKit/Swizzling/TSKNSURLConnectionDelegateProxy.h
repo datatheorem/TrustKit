@@ -8,12 +8,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class TrustKit;
+
 @interface TSKNSURLConnectionDelegateProxy : NSObject<NSURLConnectionDelegate>
 
 // Initalize our hooks
-+ (void)swizzleNSURLConnectionConstructors;
++ (void)swizzleNSURLConnectionConstructors:(TrustKit *)trustKit;
 
-- (instancetype _Nullable)initWithDelegate:(id)delegate;
+- (instancetype  _Nullable)initWithTrustKit:(TrustKit *)trustKit connectionDelegate:(id<NSURLConnectionDelegate> _Nullable)delegate;
 
 - (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
 

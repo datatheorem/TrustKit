@@ -10,13 +10,13 @@
 
 #if TARGET_OS_IPHONE && !TARGET_OS_WATCH
 
-#pragma mark Vendor identifier - macOS, tvOS
+#pragma mark Vendor identifier - iOS, tvOS
 
-@import UIKit; // for accessing IDFV
+@import UIKit; // for accessing the IDFV
 
 NSString *identifier_for_vendor(void)
 {
-    return [[[UIDevice currentDevice] identifierForVendor]UUIDString];
+    return [[[UIDevice currentDevice] identifierForVendor] UUIDString];
 }
 
 #else

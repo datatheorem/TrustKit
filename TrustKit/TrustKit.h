@@ -10,6 +10,7 @@
  */
 
 #import "TSKTrustKitConfig.h"
+@import Foundation;
 
 @class TSKPinningValidator;
 @class TSKPinningValidatorResult;

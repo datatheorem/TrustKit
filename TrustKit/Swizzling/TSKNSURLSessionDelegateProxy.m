@@ -7,20 +7,22 @@
 //
 
 #import "TSKNSURLSessionDelegateProxy.h"
+#import "../TrustKit.h"
 #import "../TSKPinValidatorResult.h"
 #import "../TSKPinningValidator.h"
 #import "../Dependencies/RSSwizzle/RSSwizzle.h"
 
 @interface TSKNSURLSessionDelegateProxy ()
 /* The NSURLSessionDelegate we're going to proxy */
-@property (nonatomic) id<NSURLSessionDelegate, NSURLSessionTaskDelegate> originalDelegate;
+@property (nonatomic) id<NSURLSessionDelegate> originalDelegate;
+@property (nonatomic) TrustKit *trustKit;
 @end
 
 @implementation TSKNSURLSessionDelegateProxy
 
 #pragma mark Public methods
 
-+ (void)swizzleNSURLSessionConstructors
++ (void)swizzleNSURLSessionConstructors:(TrustKit *)trustKit
 {
     // Figure out NSURLSession's "real" class
     // Pre iOS 8, for some reason hooking NSURLSession doesn't work. We need to use the real/private class __NSCFURLSession
@@ -60,7 +62,8 @@
                                              else
                                              {
                                                  // Replace the delegate with our own so we can intercept and handle authentication challenges
-                                                 TSKNSURLSessionDelegateProxy *swizzledDelegate = [[TSKNSURLSessionDelegateProxy alloc]initWithDelegate:delegate];
+                                                 TSKNSURLSessionDelegateProxy *swizzledDelegate = [[TSKNSURLSessionDelegateProxy alloc] initWithTrustKit:trustKit
+                                                                                                                                         sessionDelegate:delegate];
                                                  session = RSSWCallOriginal(configuration, swizzledDelegate, queue);
                                              }
 
@@ -72,8 +75,7 @@
 #pragma clang diagnostic pop
 }
 
-
-- (instancetype)initWithDelegate:(id)delegate
+- (instancetype _Nullable)initWithTrustKit:(TrustKit *)trustKit sessionDelegate:(id<NSURLSessionDelegate>)delegate
 {
     NSParameterAssert(delegate);
     
@@ -81,6 +83,7 @@
     if (self)
     {
         _originalDelegate = delegate;
+        _trustKit = trustKit;
     }
     TSKLog(@"Proxy-ing NSURLSessionDelegate: %@", NSStringFromClass([delegate class]));
     return self;
@@ -143,8 +146,8 @@
     if([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust])
     {
         // Check the trust object against the pinning policy
-        TSKTrustDecision trustDecision = [TSKPinningValidator evaluateTrust:challenge.protectionSpace.serverTrust
-                                                                forHostname:challenge.protectionSpace.host];
+        TSKTrustDecision trustDecision = [self.trustKit.pinningValidator evaluateTrust:challenge.protectionSpace.serverTrust
+                                                                           forHostname:challenge.protectionSpace.host];
         if (trustDecision == TSKTrustDecisionShouldBlockConnection)
         {
             // Pinning validation failed - block the connection

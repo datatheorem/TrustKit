@@ -6,15 +6,19 @@
 //  Copyright © 2015 TrustKit. All rights reserved.
 //
 
+@import Foundation;
+
 NS_ASSUME_NONNULL_BEGIN
+
+@class TrustKit;
 
 typedef void(^TSKURLSessionAuthChallengeCallback)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential);
 
 @interface TSKNSURLSessionDelegateProxy : NSObject
 
-+ (void)swizzleNSURLSessionConstructors;
++ (void)swizzleNSURLSessionConstructors:(TrustKit *)trustKit;
 
-- (instancetype _Nullable)initWithDelegate:(id)delegate;
+- (instancetype _Nullable)initWithTrustKit:(TrustKit *)trustKit sessionDelegate:(id<NSURLSessionDelegate>)delegate;
 
 - (void)URLSession:(NSURLSession *)session
 didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge

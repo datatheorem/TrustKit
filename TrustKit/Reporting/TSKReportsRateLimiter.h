@@ -10,6 +10,7 @@
  */
 
 #import "TSKPinFailureReport.h"
+@import Foundation;
 
 /*
  * Simple helper class which caches reports for 24 hours to prevent identical reports from being sent twice

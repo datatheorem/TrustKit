@@ -7,6 +7,7 @@
 //
 
 #import "TSKNSURLConnectionDelegateProxy.h"
+#import "../TrustKit.h"
 #import "../TSKPinValidatorResult.h"
 #import "../TSKPinningValidator.h"
 #import "../Dependencies/RSSwizzle/RSSwizzle.h"
@@ -15,13 +16,14 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
 
 @interface TSKNSURLConnectionDelegateProxy ()
 @property (nonatomic) id<NSURLConnectionDelegate> originalDelegate; // The NSURLConnectionDelegate we're going to proxy
+@property (nonatomic) TrustKit *trustKit;
 @end
 
 @implementation TSKNSURLConnectionDelegateProxy
 
 #pragma mark Public methods
 
-+ (void)swizzleNSURLConnectionConstructors
++ (void)swizzleNSURLConnectionConstructors:(TrustKit *)trustKit
 {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wshadow"
@@ -42,7 +44,8 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
                                                 else
                                                 {
                                                     // Replace the delegate with our own so we can intercept and handle authentication challenges
-                                                    TSKNSURLConnectionDelegateProxy *swizzledDelegate = [[TSKNSURLConnectionDelegateProxy alloc]initWithDelegate:delegate];
+                                                    TSKNSURLConnectionDelegateProxy *swizzledDelegate = [[TSKNSURLConnectionDelegateProxy alloc] initWithTrustKit:trustKit
+                                                                                                                                               connectionDelegate:delegate];
                                                      connection = RSSWCallOriginal(request, swizzledDelegate);
                                                 }
                                                 return connection;
@@ -67,7 +70,8 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
                                                 else
                                                 {
                                                     // Replace the delegate with our own so we can intercept and handle authentication challenges
-                                                    TSKNSURLConnectionDelegateProxy *swizzledDelegate = [[TSKNSURLConnectionDelegateProxy alloc]initWithDelegate:delegate];
+                                                    TSKNSURLConnectionDelegateProxy *swizzledDelegate = [[TSKNSURLConnectionDelegateProxy alloc] initWithTrustKit:trustKit
+                                                                                                                                               connectionDelegate:delegate];
                                                     connection = RSSWCallOriginal(request, swizzledDelegate, startImmediately);
                                                 }
                                                 return connection;
@@ -109,12 +113,13 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
 
 #pragma mark Instance Constructors
 
-- (instancetype)initWithDelegate:(id)delegate
+- (instancetype)initWithTrustKit:(TrustKit *)trustKit connectionDelegate:(id<NSURLConnectionDelegate>)delegate
 {
     self = [super init];
     if (self)
     {
         _originalDelegate = delegate;
+        _trustKit = trustKit;
     }
     TSKLog(@"Proxy-ing NSURLConnectionDelegate: %@", NSStringFromClass([delegate class]));
     return self;
@@ -170,8 +175,8 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
         NSString *serverHostname = challenge.protectionSpace.host;
     
         // Check the trust object against the pinning policy
-        TSKTrustDecision trustDecision = [TSKPinningValidator evaluateTrust:serverTrust
-                                                                forHostname:serverHostname];
+        TSKTrustDecision trustDecision = [self.trustKit.pinningValidator evaluateTrust:serverTrust
+                                                                           forHostname:serverHostname];
         if (trustDecision == TSKTrustDecisionShouldBlockConnection)
         {
             // Pinning validation failed - block the connection

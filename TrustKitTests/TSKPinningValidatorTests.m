@@ -834,7 +834,7 @@
                                                    kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA Key
                                                                            @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                                                            ]}}};
-    [TrustKit initializeWithConfiguration:trustKitConfig];
+    TrustKit *tk = [[TrustKit alloc] initWithConfiguration:trustKitConfig];
     
     __block BOOL wasHandlerCalled = NO;
     void (^completionHandler)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable) = ^void(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential)
@@ -856,7 +856,7 @@
     OCMStub([challengeMock protectionSpace]).andReturn(protectionSpaceMock);
     
     // Test the helper method
-    BOOL wasChallengeHandled = [TSKPinningValidator handleChallenge:challengeMock completionHandler:completionHandler];
+    BOOL wasChallengeHandled = [tk.pinningValidator handleChallenge:challengeMock completionHandler:completionHandler];
 
     XCTAssertTrue(wasChallengeHandled);
     XCTAssertTrue(wasHandlerCalled);
@@ -884,6 +884,7 @@
                                                    kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", //Fake Key
                                                                            @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=", // Fake key
                                                                            ]}}};
+    
     TSKPinningValidator *validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:trustKitConfig
                                                                ignorePinsForUserTrustAnchors:YES
                                                                        validationResultQueue:dispatch_get_main_queue()
@@ -1002,7 +1003,7 @@
                                                    kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA Key
                                                                            @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=", // Fake key
                                                                            ]}}};
-    [TrustKit initializeWithConfiguration:trustKitConfig];
+    TrustKit *tk = [[TrustKit alloc] initWithConfiguration:trustKitConfig];
     
     __block BOOL wasHandlerCalled = NO;
     void (^completionHandler)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable) = ^void(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential)
@@ -1023,7 +1024,7 @@
     OCMStub([challengeMock protectionSpace]).andReturn(protectionSpaceMock);
     
     // Test the helper method
-    BOOL wasChallengeHandled = [TSKPinningValidator handleChallenge:challengeMock completionHandler:completionHandler];
+    BOOL wasChallengeHandled = [tk.pinningValidator handleChallenge:challengeMock completionHandler:completionHandler];
     
     XCTAssertFalse(wasChallengeHandled);
     XCTAssertFalse(wasHandlerCalled);
@@ -1056,9 +1057,9 @@
                                              }};
 
     // Then test TSKPinningValidator
-    [TrustKit initializeWithConfiguration:trustKitConfig];
+    TrustKit *tk = [[TrustKit alloc] initWithConfiguration:trustKitConfig];
     
-    XCTAssertEqual([TSKPinningValidator evaluateTrust:trust forHostname:@"unsecured.good.com"],
+    XCTAssertEqual([tk.pinningValidator evaluateTrust:trust forHostname:@"unsecured.good.com"],
                    TSKTrustDecisionDomainNotPinned);
     
     CFRelease(trust);

@@ -23,20 +23,6 @@
 
 @implementation TSKPinningValidator
 
-#pragma mark Class Methods For Shared Singleton
-
-+ (TSKTrustDecision) evaluateTrust:(SecTrustRef _Nonnull)serverTrust forHostname:(NSString * _Nonnull)serverHostname
-{
-    TrustKit *trustKit = [TrustKit sharedInstance];
-    return [trustKit.pinningValidator evaluateTrust:serverTrust forHostname:serverHostname];
-}
-
-+ (BOOL) handleChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge completionHandler:(void (^ _Nonnull)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential))completionHandler
-{
-    TrustKit *trustKit = [TrustKit sharedInstance];
-    return [trustKit.pinningValidator handleChallenge:challenge completionHandler:completionHandler];
-}
-
 #pragma mark Instance Methods
 
 - (instancetype _Nullable)initWithPinnedDomainConfig:(NSDictionary * _Nullable)pinnedDomains

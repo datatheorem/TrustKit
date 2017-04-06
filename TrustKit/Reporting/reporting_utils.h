@@ -9,6 +9,8 @@
  
  */
 
+@import Foundation;
+
 #ifndef TrustKit_reporting_utils_h
 #define TrustKit_reporting_utils_h
 

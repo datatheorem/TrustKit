@@ -8,6 +8,7 @@
  See AUTHORS file for the list of project authors.
  
  */
+@import Foundation;
 
 /**
  Possible return values when verifying a server's identity.

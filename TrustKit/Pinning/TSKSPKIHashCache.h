@@ -11,6 +11,7 @@
 
 #import "TSKPublicKeyAlgorithm.h"
 
+@import Foundation;
 @import Security;
 
 // Each key is a raw certificate data (for easy lookup) and each value is the certificate's raw SPKI data
