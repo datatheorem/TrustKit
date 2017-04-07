@@ -36,12 +36,13 @@
 - (void)setUp
 {
     [super setUp];
-    spkiCache = [TSKSPKIHashCache new];
     [spkiCache resetSubjectPublicKeyInfoDiskCache];
+    spkiCache = [[TSKSPKIHashCache alloc] initWithIdentifier:@"test"];
 }
 
 - (void)tearDown
 {
+    [spkiCache resetSubjectPublicKeyInfoDiskCache];
     spkiCache = nil;
     [super tearDown];
 }

@@ -27,6 +27,7 @@
 #pragma mark Instance Methods
 
 - (instancetype _Nullable)initWithPinnedDomainConfig:(NSDictionary * _Nullable)pinnedDomains
+                                          identifier:(NSString *)name
                        ignorePinsForUserTrustAnchors:(BOOL)ignorePinsForUserTrustAnchors
                                validationResultQueue:(dispatch_queue_t _Nonnull)validationResultQueue
                              validationResultHandler:(void(^ _Nonnull)(TSKPinningValidatorResult * _Nonnull result))validationResultHandler
@@ -37,12 +38,12 @@
         _ignorePinsForUserTrustAnchors = ignorePinsForUserTrustAnchors;
         _validationResultQueue = validationResultQueue;
         _validationResultHandler = validationResultHandler;
-        _spkiHashCache = [TSKSPKIHashCache new];
+        _spkiHashCache = [[TSKSPKIHashCache alloc] initWithIdentifier:name];
     }
     return self;
 }
 
-- (TSKTrustDecision) evaluateTrust:(SecTrustRef _Nonnull)serverTrust forHostname:(NSString * _Nonnull)serverHostname
+- (TSKTrustDecision)evaluateTrust:(SecTrustRef _Nonnull)serverTrust forHostname:(NSString * _Nonnull)serverHostname
 {
     TSKTrustDecision finalTrustDecision = TSKTrustDecisionShouldBlockConnection;
     
@@ -149,7 +150,7 @@
 }
 
 
-- (BOOL) handleChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge completionHandler:(void (^ _Nonnull)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential))completionHandler
+- (BOOL)handleChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge completionHandler:(void (^ _Nonnull)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential))completionHandler
 {
     BOOL wasChallengeHandled = NO;
     if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust])

@@ -47,6 +47,7 @@ typedef NSData* _Nullable(^HashCertificateBlock)(_Nonnull SecCertificateRef cert
 @property (nonatomic, readonly, nonnull) void(^validationResultHandler)(TSKPinningValidatorResult * _Nonnull result);
 
 - (instancetype _Nullable)initWithPinnedDomainConfig:(NSDictionary * _Nullable)pinnedDomains
+                                          identifier:(NSString *_Nullable)name
                        ignorePinsForUserTrustAnchors:(BOOL)ignorePinsForUserTrustAnchors
                                validationResultQueue:(dispatch_queue_t _Nonnull)validationResultQueue
                              validationResultHandler:(void(^ _Nonnull)(TSKPinningValidatorResult * _Nonnull result))validationResultHandler;
@@ -68,7 +69,7 @@ typedef NSData* _Nullable(^HashCertificateBlock)(_Nonnull SecCertificateRef cert
  
  @exception NSException Thrown when TrustKit has not been initialized with a pinning policy.
  */
-- (TSKTrustDecision) evaluateTrust:(SecTrustRef _Nonnull)serverTrust forHostname:(NSString * _Nonnull)serverHostname;
+- (TSKTrustDecision)evaluateTrust:(SecTrustRef _Nonnull)serverTrust forHostname:(NSString * _Nonnull)serverHostname;
 
 
 /**
@@ -95,8 +96,8 @@ typedef NSData* _Nullable(^HashCertificateBlock)(_Nonnull SecCertificateRef cert
  
  @exception NSException Thrown when TrustKit has not been initialized with a pinning policy.
  */
-- (BOOL) handleChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
-       completionHandler:(void (^ _Nonnull)(NSURLSessionAuthChallengeDisposition disposition,
-                                            NSURLCredential * _Nullable credential))completionHandler;
+- (BOOL)handleChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
+      completionHandler:(void (^ _Nonnull)(NSURLSessionAuthChallengeDisposition disposition,
+                                           NSURLCredential * _Nullable credential))completionHandler;
 
 @end

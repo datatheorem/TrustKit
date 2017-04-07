@@ -58,6 +58,9 @@ static char kTSKPinFailureReporterQueueLabel[] = "com.datatheorem.trustkit.repor
 // Email info@datatheorem.com if you need a free dashboard to see your App's reports
 static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.com/trustkit/report";
 
+// Internal SPKI hash cache file name – we'll use as identifier
+static NSString * const kTSKSharedInstanceIdentifier = @"spki-hash.cache";
+
 #pragma mark TrustKit Initialization Helper Functions
 
 @interface TrustKit ()
@@ -85,7 +88,8 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedTrustKit = [[TrustKit alloc] initWithConfiguration:trustKitConfig];
+        sharedTrustKit = [[TrustKit alloc] initWithConfiguration:trustKitConfig
+                                                      identifier:kTSKSharedInstanceIdentifier];
         
         // Hook network APIs if needed
         if ([sharedTrustKit.configuration[kTSKSwizzleNetworkDelegates] boolValue]) {
@@ -106,7 +110,7 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
 
 #pragma mark Instance
 
-- (instancetype)initWithConfiguration:(NSDictionary<NSString *, id> *)trustKitConfig
+- (instancetype)initWithConfiguration:(NSDictionary<NSString *, id> *)trustKitConfig identifier:(NSString *)uniqueIdentifier
 {
     NSParameterAssert(trustKitConfig);
     if (!trustKitConfig) {
@@ -137,6 +141,7 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
 #endif
         __weak typeof(self) weakSelf = self;
         _pinningValidator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:_configuration
+                                                                         identifier:uniqueIdentifier
                                                       ignorePinsForUserTrustAnchors:userTrustAnchorBypass
                                                               validationResultQueue:_pinFailureReporterQueue
                                                             validationResultHandler:^(TSKPinningValidatorResult * _Nonnull result) {
@@ -214,7 +219,6 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
     //sharedTrustKitOnceToken = 0;
     // Reset is only available/used for tests
     //resetSubjectPublicKeyInfoCache();
-    //_spkiHashCache = [TSKSPKIHashCache new];
     //_configuration = nil;
 //    _isTrustKitInitialized = NO;
 }

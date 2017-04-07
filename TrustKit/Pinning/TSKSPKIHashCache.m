@@ -94,16 +94,18 @@ static const unsigned int asn1HeaderSizes[4] = { sizeof(rsa2048Asn1Header), size
 
 @implementation TSKSPKIHashCache
 
-- (instancetype)init
+- (instancetype)initWithIdentifier:(NSString *)uniqueIdentifier
 {
     self = [super init];
     if (self) {
-        // Initialize our cache of SPKI hashes
+        // Initialize our locks
+        _lockQueue = dispatch_queue_create("TSKSPKIHashLock", DISPATCH_QUEUE_CONCURRENT);
+
+        _spkiCacheFilename = uniqueIdentifier; // if this value is nil, persistence will always fail.
+        
         // First try to load a cached version from the filesystem
-        _spkiCacheFilename = @"spki-hash.cache";
         _subjectPublicKeyInfoHashesCache = [self getSpkiCacheFromFileSystem];
         TSKLog(@"Loaded %lu SPKI cache entries from the filesystem", (unsigned long)_subjectPublicKeyInfoHashesCache.count);
-        
         if (_subjectPublicKeyInfoHashesCache == nil)
         {
             _subjectPublicKeyInfoHashesCache = [NSMutableDictionary new];
@@ -119,9 +121,6 @@ static const unsigned int asn1HeaderSizes[4] = { sizeof(rsa2048Asn1Header), size
             }
             
         }
-        
-        // Initialize our locks
-        _lockQueue = dispatch_queue_create("TSKSPKIHashLock", DISPATCH_QUEUE_CONCURRENT);
         
 #if LEGACY_IOS_KEY_EXTRACTION
         _keychainQueue = dispatch_queue_create("TSKSPKIKeychainLock", DISPATCH_QUEUE_SERIAL);
@@ -187,12 +186,15 @@ static const unsigned int asn1HeaderSizes[4] = { sizeof(rsa2048Asn1Header), size
     });
     
     // Update the cache on the filesystem
-    NSString *spkiCachePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0]
-                               stringByAppendingPathComponent:self.spkiCacheFilename];
-    NSData *serializedSpkiCache = [NSKeyedArchiver archivedDataWithRootObject:_subjectPublicKeyInfoHashesCache];
-    if ([serializedSpkiCache writeToFile:spkiCachePath atomically:YES] == NO)
-    {
-        TSKLog(@"Could not persist SPKI cache to the filesystem");
+    if (self.spkiCacheFilename.length > 0) {
+        NSURL *cachesDirUrl = [[[NSFileManager defaultManager] URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] firstObject];
+        NSURL *cacheUrl = [cachesDirUrl URLByAppendingPathComponent:self.spkiCacheFilename];
+        NSData *serializedSpkiCache = [NSKeyedArchiver archivedDataWithRootObject:_subjectPublicKeyInfoHashesCache];
+        if ([serializedSpkiCache writeToURL:cacheUrl atomically:YES] == NO)
+        {
+            NSAssert(false, @"Failed to write cache");
+            TSKLog(@"Could not persist SPKI cache to the filesystem");
+        }
     }
     
     return subjectPublicKeyInfoHash;

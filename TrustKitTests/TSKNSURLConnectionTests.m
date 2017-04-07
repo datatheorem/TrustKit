@@ -188,7 +188,7 @@
 
 - (void)setUp {
     [super setUp];
-    _trustKit = [[TrustKit alloc] initWithConfiguration:@{ }];
+    _trustKit = [[TrustKit alloc] initWithConfiguration:@{ } identifier:nil];
 }
 
 - (void)tearDown {
