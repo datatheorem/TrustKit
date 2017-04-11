@@ -18,7 +18,9 @@ typedef void(^TSKURLSessionAuthChallengeCallback)(NSURLSessionAuthChallengeDispo
 
 + (void)swizzleNSURLSessionConstructors:(TrustKit *)trustKit;
 
-- (instancetype _Nullable)initWithTrustKit:(TrustKit *)trustKit sessionDelegate:(id<NSURLSessionDelegate>)delegate;
+- (instancetype)init NS_UNAVAILABLE;
+
+- (instancetype _Nullable)initWithTrustKit:(TrustKit *)trustKit sessionDelegate:(id<NSURLSessionDelegate>)delegate NS_DESIGNATED_INITIALIZER;
 
 - (void)URLSession:(NSURLSession *)session
 didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge

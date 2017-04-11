@@ -17,7 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 // Initalize our hooks
 + (void)swizzleNSURLConnectionConstructors:(TrustKit *)trustKit;
 
-- (instancetype  _Nullable)initWithTrustKit:(TrustKit *)trustKit connectionDelegate:(id<NSURLConnectionDelegate> _Nullable)delegate;
+- (instancetype)init NS_UNAVAILABLE;
+
+- (instancetype _Nullable)initWithTrustKit:(TrustKit *)trustKit connectionDelegate:(id<NSURLConnectionDelegate> _Nullable)delegate NS_DESIGNATED_INITIALIZER;
 
 - (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
 
