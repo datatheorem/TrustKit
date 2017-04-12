@@ -59,11 +59,11 @@
               // Pin valid SPKI hashes to www.datatheorem.com to demonstrate success
               @"www.datatheorem.com" : @{
                       kTSKEnforcePinning:@YES,
-                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmEcDsaSecp384r1],
                       
                       // Valid SPKI hashes to demonstrate success
                       kTSKPublicKeyHashes : @[
-                              @"lCppFqbkrlJ3EcVFAkeip0+44VaoJUymbnOaEUk7tEU=", // CA key
+                              @"58qRu/uxh4gFezqAcERupSkRYBlBAvfcw7mEjGPLnNU=", // CA key: COMODO ECC Certification Authority
                               @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key but 2 pins need to be provided
                               ]
                       }}};
