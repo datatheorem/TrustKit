@@ -221,7 +221,7 @@
 		8CE919221AEA077F002B29AE /* ssl_pin_verifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE919211AEA077F002B29AE /* ssl_pin_verifier.m */; };
 		8CE919251AEA07C5002B29AE /* ssl_pin_verifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE919241AEA07C5002B29AE /* ssl_pin_verifier.h */; };
 		8CE9192D1AEA0F7E002B29AE /* domain_registry.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE919291AEA0F7E002B29AE /* domain_registry.h */; };
-		FC1A09001E57A4BB0055B12C /* TSKPinningValidatorResult.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1A08FE1E57A4BB0055B12C /* TSKPinningValidatorResult.h */; };
+		FC1A09001E57A4BB0055B12C /* TSKPinningValidatorResult.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1A08FE1E57A4BB0055B12C /* TSKPinningValidatorResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FC1A09011E57A4BB0055B12C /* TSKPinningValidatorResult.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1A08FE1E57A4BB0055B12C /* TSKPinningValidatorResult.h */; };
 		FC1A09021E57A4BB0055B12C /* TSKPinningValidatorResult.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1A08FE1E57A4BB0055B12C /* TSKPinningValidatorResult.h */; };
 		FC1A09031E57A4BB0055B12C /* TSKPinningValidatorResult.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1A08FE1E57A4BB0055B12C /* TSKPinningValidatorResult.h */; };
@@ -756,6 +756,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C84CCDA1D6E5D5A009B3E7D /* registry_types.h in Headers */,
+				FC1A09001E57A4BB0055B12C /* TSKPinningValidatorResult.h in Headers */,
 				8C0C904E1E3C4210003851A8 /* TSKPinningValidator.h in Headers */,
 				8CE9192D1AEA0F7E002B29AE /* domain_registry.h in Headers */,
 				8CD5F7491BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.h in Headers */,
@@ -770,7 +771,6 @@
 				8C9EBE021B619BBE00CA7EE0 /* TSKReportsRateLimiter.h in Headers */,
 				8C84CCEC1D6E5D5A009B3E7D /* trie_search.h in Headers */,
 				8CD5F7421BCB06F4005801D8 /* RSSwizzle.h in Headers */,
-				FC1A09001E57A4BB0055B12C /* TSKPinningValidatorResult.h in Headers */,
 				8C9492F61B2379A100F5DF38 /* reporting_utils.h in Headers */,
 				8C84804D1A896EE30017C155 /* TrustKit.h in Headers */,
 				8C15F9A01B16094D00F06C0E /* TSKPinFailureReport.h in Headers */,

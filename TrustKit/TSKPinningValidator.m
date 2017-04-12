@@ -71,11 +71,10 @@
         
         // Has the pinning policy expired?
         NSDate *expirationDate = domainConfig[kTSKExpirationDate];
-        if ((expirationDate != nil) && ([expirationDate compare:[NSDate date]] == NSOrderedAscending))
+        if (expirationDate != nil && [expirationDate compare:[NSDate date]] == NSOrderedAscending)
         {
             // Yes the policy has expired
             finalTrustDecision = TSKTrustDecisionDomainNotPinned;
-            
         }
         else if ([domainConfig[kTSKExcludeSubdomainFromParentPolicy] boolValue])
         {
