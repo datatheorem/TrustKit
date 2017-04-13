@@ -84,6 +84,7 @@ static const unsigned int asn1HeaderSizes[4] = { sizeof(rsa2048Asn1Header), size
 #if LEGACY_MACOS_KEY_EXTRACTION
 @interface TSKSPKIHashCache (LegacyMacOS)
 - (NSData *)getPublicKeyDataFromCertificate_legacy_macos:(SecCertificateRef)certificate;
+@end
 #endif
 
 #if UNIFIED_KEY_EXTRACTION
