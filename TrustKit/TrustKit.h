@@ -66,7 +66,11 @@ FOUNDATION_EXPORT const TSKGlobalConfigurationKey kTSKSwizzleNetworkDelegates;
  */
 FOUNDATION_EXPORT const TSKGlobalConfigurationKey kTSKPinnedDomains;
 
-
+/**
+ A boolean. If set to `YES`, TrustKit will rate limit the certificate pinning violation reports. If set to `NO`, send report on each certificate pinning violation. 
+ If this value is not set, default value of `YES` assumed.
+ */
+FOUNDATION_EXPORT const TSKGlobalConfigurationKey kTSKShouldRateLimitReports;
 
 #pragma mark Global Configuration Keys - Optional
 
