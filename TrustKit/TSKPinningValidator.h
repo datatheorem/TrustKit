@@ -9,35 +9,13 @@
  
  */
 
-#import <Foundation/Foundation.h>
+#import "TSKPinValidatorResult.h"
+#import "Pinning/TSKPublicKeyAlgorithm.h"
+@import Foundation;
 
+@class TSKPinningValidatorResult;
 
-
-/**
- Possible return values when verifying a server's identity against the global SSL pinning policy using `TSKPinningValidator`.
- 
- */
-typedef NS_ENUM(NSInteger, TSKTrustDecision)
-{
-/**
- Based on the server's certificate chain and the global pinning policy for this domain, the SSL connection should be allowed.
- This return value does not necessarily mean that the pinning validation succeded (for example if `kTSKEnforcePinning` was set to `NO` for this domain). If a pinning validation failure occured and if a report URI was configured, a pin failure report was sent.
- */
-    TSKTrustDecisionShouldAllowConnection,
-    
-/**
- Based on the server's certificate chain and the global pinning policy for this domain, the SSL connection should be blocked.
- A pinning validation failure occured and if a report URI was configured, a pin failure report was sent.
- */
-    TSKTrustDecisionShouldBlockConnection,
-    
-/**
- No pinning policy was configured for this domain and TrustKit did not validate the server's identity.
- Because this will happen in an authentication handler, it means that the server's _serverTrust_ object __needs__ to be verified against the device's trust store using `SecTrustEvaluate()`. Failing to do so will __disable SSL certificate validation__.
- */
-    TSKTrustDecisionDomainNotPinned,
-};
-
+typedef NSData* _Nullable(^HashCertificateBlock)(_Nonnull SecCertificateRef certificate, TSKPublicKeyAlgorithm algorithm);
 
 /**
  `TSKPinningValidator` is a class for manually verifying a server's identity against the global SSL pinning policy.
@@ -63,6 +41,17 @@ typedef NS_ENUM(NSInteger, TSKTrustDecision)
 /// @name Manual SSL Pinning Validation
 ///------------------------------------
 
+@property (nonatomic, readonly, nullable) NSDictionary *pinnedDomains;
+@property (nonatomic, readonly) BOOL ignorePinsForUserTrustAnchors;
+@property (nonatomic, readonly, nonnull) dispatch_queue_t validationResultQueue;
+@property (nonatomic, readonly, nonnull) void(^validationResultHandler)(TSKPinningValidatorResult * _Nonnull result);
+
+- (instancetype _Nullable)initWithPinnedDomainConfig:(NSDictionary * _Nullable)pinnedDomains
+                                          identifier:(NSString *_Nullable)name
+                       ignorePinsForUserTrustAnchors:(BOOL)ignorePinsForUserTrustAnchors
+                               validationResultQueue:(dispatch_queue_t _Nonnull)validationResultQueue
+                             validationResultHandler:(void(^ _Nonnull)(TSKPinningValidatorResult * _Nonnull result))validationResultHandler;
+
 /**
  Evaluate the supplied server trust against the global SSL pinning policy previously configured. If the validation fails, a pin failure report will be sent.
  
@@ -80,26 +69,24 @@ typedef NS_ENUM(NSInteger, TSKTrustDecision)
  
  @exception NSException Thrown when TrustKit has not been initialized with a pinning policy.
  */
-+ (TSKTrustDecision) evaluateTrust:(SecTrustRef _Nonnull)serverTrust forHostname:(NSString * _Nonnull)serverHostname;
+- (TSKTrustDecision)evaluateTrust:(SecTrustRef _Nonnull)serverTrust forHostname:(NSString * _Nonnull)serverHostname;
 
 
 /**
  Helper method for handling authentication challenges received within a `NSURLSessionDelegate`, `NSURLSessionTaskDelegate` or `WKNavigationDelegate`.
  
  This method will evaluate the server trust within the authentication challenge against the global SSL pinning policy previously configured, and then call the `completionHandler` with the corresponding `disposition` and `credential`. For example, this method can be leveraged in a `WKNavigationDelegate` challenge handler method:
-     
-     - (void)webView:(WKWebView *)webView
-     didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
-     completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition,
-     NSURLCredential *credential))completionHandler
-     {
-         if (![TSKPinningValidator handleChallenge:challenge completionHandler:completionHandler]) 
-         {
-             // TrustKit did not handle this challenge: perhaps it was not for server trust
-             // or the domain was not pinned. Fall back to the default behavior
-             completionHandler(NSURLSessionAuthChallengePerformDefaultHandling, nil);
-         }
-     }
+
+    - (void)webView:(WKWebView *)webView
+    didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
+    completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition,
+                                NSURLCredential *credential))completionHandler
+    {
+        if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust])
+        {
+            [TSKPinningValidator handleChallenge:challenge completionHandler:completionHandler];
+        }
+    }
  
  @param challenge The authentication challenge, supplied by the URL loading system to the delegate's challenge handler method.
  
@@ -109,7 +96,8 @@ typedef NS_ENUM(NSInteger, TSKTrustDecision)
  
  @exception NSException Thrown when TrustKit has not been initialized with a pinning policy.
  */
-+ (BOOL) handleChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
-       completionHandler:(void (^ _Nonnull)(NSURLSessionAuthChallengeDisposition disposition,
-                                            NSURLCredential * _Nullable credential))completionHandler;
+- (BOOL)handleChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
+      completionHandler:(void (^ _Nonnull)(NSURLSessionAuthChallengeDisposition disposition,
+                                           NSURLCredential * _Nullable credential))completionHandler;
+
 @end

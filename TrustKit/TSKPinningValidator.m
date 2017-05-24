@@ -9,20 +9,43 @@
  
  */
 
-#import "TrustKit+Private.h"
+#import "TSKPinningValidator.h"
+#import "TSKTrustKitConfig.h"
+#import "TSKPinValidatorResult.h"
+#import "TSKPinningValidatorResult.h"
+#import "Pinning/TSKSPKIHashCache.h"
+#import "Pinning/ssl_pin_verifier.h"
+#import "TrustKit.h"
+#import "TSKLog.h"
 
+@interface TSKPinningValidator ()
+@property (nonatomic) TSKSPKIHashCache *spkiHashCache;
+@end
 
 @implementation TSKPinningValidator
 
-+ (TSKTrustDecision) evaluateTrust:(SecTrustRef _Nonnull)serverTrust forHostname:(NSString * _Nonnull)serverHostname
+#pragma mark Instance Methods
+
+- (instancetype _Nullable)initWithPinnedDomainConfig:(NSDictionary * _Nullable)pinnedDomains
+                                          identifier:(NSString *)name
+                       ignorePinsForUserTrustAnchors:(BOOL)ignorePinsForUserTrustAnchors
+                               validationResultQueue:(dispatch_queue_t _Nonnull)validationResultQueue
+                             validationResultHandler:(void(^ _Nonnull)(TSKPinningValidatorResult * _Nonnull result))validationResultHandler
+{
+    self = [super init];
+    if (self) {
+        _pinnedDomains = pinnedDomains;
+        _ignorePinsForUserTrustAnchors = ignorePinsForUserTrustAnchors;
+        _validationResultQueue = validationResultQueue;
+        _validationResultHandler = validationResultHandler;
+        _spkiHashCache = [[TSKSPKIHashCache alloc] initWithIdentifier:name];
+    }
+    return self;
+}
+
+- (TSKTrustDecision)evaluateTrust:(SecTrustRef _Nonnull)serverTrust forHostname:(NSString * _Nonnull)serverHostname
 {
     TSKTrustDecision finalTrustDecision = TSKTrustDecisionShouldBlockConnection;
-    
-    if ([TrustKit wasTrustKitInitialized] == NO)
-    {
-        [NSException raise:@"TrustKit not initialized"
-                    format:@"TrustKit has not been initialized with a pinning configuration"];
-    }
     
     if ((serverTrust == NULL) || (serverHostname == nil))
     {
@@ -35,8 +58,7 @@
     NSTimeInterval validationStartTime = [NSDate timeIntervalSinceReferenceDate];
     
     // Retrieve the pinning configuration for this specific domain, if there is one
-    NSDictionary *trustKitConfig = [TrustKit configuration];
-    NSString *domainConfigKey = getPinningConfigurationKeyForDomain(serverHostname, trustKitConfig);
+    NSString *domainConfigKey = getPinningConfigurationKeyForDomain(serverHostname, self.pinnedDomains);
     if (domainConfigKey == nil)
     {
         // The domain has no pinning policy: nothing to do/validate
@@ -45,15 +67,14 @@
     else
     {
         // This domain has a pinning policy
-        NSDictionary *domainConfig = trustKitConfig[kTSKPinnedDomains][domainConfigKey];
+        NSDictionary *domainConfig = self.pinnedDomains[kTSKPinnedDomains][domainConfigKey];
         
         // Has the pinning policy expired?
         NSDate *expirationDate = domainConfig[kTSKExpirationDate];
-        if ((expirationDate != nil) && ([expirationDate compare:[NSDate date]] == NSOrderedAscending))
+        if (expirationDate != nil && [expirationDate compare:[NSDate date]] == NSOrderedAscending)
         {
             // Yes the policy has expired
             finalTrustDecision = TSKTrustDecisionDomainNotPinned;
-            
         }
         else if ([domainConfig[kTSKExcludeSubdomainFromParentPolicy] boolValue])
         {
@@ -64,7 +85,7 @@
         {
             // The domain has a pinning policy that has not expired
             // Look for one the configured public key pins in the server's evaluated certificate chain
-            TSKPinValidationResult validationResult = verifyPublicKeyPin(serverTrust, serverHostname, domainConfig[kTSKPublicKeyAlgorithms], domainConfig[kTSKPublicKeyHashes]);
+            TSKPinValidationResult validationResult = verifyPublicKeyPin(serverTrust, serverHostname, domainConfig[kTSKPublicKeyAlgorithms], domainConfig[kTSKPublicKeyHashes], self.spkiHashCache);
             if (validationResult == TSKPinValidationResultSuccess)
             {
                 // Pin validation was successful
@@ -77,7 +98,7 @@
                 TSKLog(@"Pin validation failed for %@", serverHostname);
 #if !TARGET_OS_IPHONE
                 if ((validationResult == TSKPinValidationResultFailedUserDefinedTrustAnchor)
-                    && ([trustKitConfig[kTSKIgnorePinningForUserDefinedTrustAnchors] boolValue] == YES))
+                    && (self.ignorePinsForUserTrustAnchors))
                 {
                     // OS-X only: user-defined trust anchors can be whitelisted (for corporate proxies, etc.) so don't send reports
                     TSKLog(@"Ignoring pinning failure due to user-defined trust anchor for %@", serverHostname);
@@ -107,8 +128,19 @@
                 }
             }
             // Send a notification after all validation is done; this will also trigger a report if pin validation failed
-            NSTimeInterval validationDuration = [NSDate timeIntervalSinceReferenceDate] - validationStartTime;
-            sendValidationNotification_async(serverHostname, serverTrust, domainConfigKey, validationResult, finalTrustDecision, validationDuration);
+            if (self.validationResultQueue && self.validationResultHandler) {
+                NSTimeInterval validationDuration = [NSDate timeIntervalSinceReferenceDate] - validationStartTime;
+                TSKPinningValidatorResult *result = [[TSKPinningValidatorResult alloc] initWithServerHostname:serverHostname
+                                                                                                  serverTrust:serverTrust
+                                                                                                notedHostname:domainConfigKey
+                                                                                             validationResult:validationResult
+                                                                                           finalTrustDecision:finalTrustDecision
+                                                                                           validationDuration:validationDuration
+                                                                                             certificateChain:nil];
+                dispatch_async(self.validationResultQueue, ^{
+                    self.validationResultHandler(result);
+                });
+            }
         }
     }
     CFRelease(serverTrust);
@@ -117,7 +149,7 @@
 }
 
 
-+ (BOOL) handleChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge completionHandler:(void (^ _Nonnull)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential))completionHandler
+- (BOOL)handleChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge completionHandler:(void (^ _Nonnull)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential))completionHandler
 {
     BOOL wasChallengeHandled = NO;
     if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust])
@@ -126,7 +158,7 @@
         SecTrustRef serverTrust = challenge.protectionSpace.serverTrust;
         NSString *serverHostname = challenge.protectionSpace.host;
         
-        TSKTrustDecision trustDecision = [TSKPinningValidator evaluateTrust:serverTrust forHostname:serverHostname];
+        TSKTrustDecision trustDecision = [self evaluateTrust:serverTrust forHostname:serverHostname];
         if (trustDecision == TSKTrustDecisionShouldAllowConnection)
         {
             // Success

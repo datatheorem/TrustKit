@@ -7,8 +7,9 @@
 //
 
 #import "configuration_utils.h"
+#import "TSKTrustKitConfig.h"
 #import "Dependencies/domain_registry/domain_registry.h"
-#import "TrustKit+Private.h"
+#import "TSKLog.h"
 
 
 static BOOL isSubdomain(NSString *domain, NSString *subdomain)

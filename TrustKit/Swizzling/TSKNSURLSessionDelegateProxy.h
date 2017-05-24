@@ -6,33 +6,31 @@
 //  Copyright © 2015 TrustKit. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
+NS_ASSUME_NONNULL_BEGIN
+
+@class TrustKit;
+
+typedef void(^TSKURLSessionAuthChallengeCallback)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential);
 
 @interface TSKNSURLSessionDelegateProxy : NSObject
-{
-    id<NSURLSessionDelegate, NSURLSessionTaskDelegate> originalDelegate; // The NSURLSessionDelegate we're going to proxy
-}
 
-+ (void)swizzleNSURLSessionConstructors;
++ (void)swizzleNSURLSessionConstructors:(TrustKit *)trustKit;
 
-- (_Nullable instancetype)initWithDelegate:(_Nonnull id)delegate;
+- (instancetype)init NS_UNAVAILABLE;
 
-// Mirror the original delegate's list of implemented methods
-- (BOOL)respondsToSelector:(_Nonnull SEL)aSelector;
+- (instancetype _Nullable)initWithTrustKit:(TrustKit *)trustKit sessionDelegate:(id<NSURLSessionDelegate>)delegate NS_DESIGNATED_INITIALIZER;
 
-// Forward messages to the original delegate if the proxy doesn't implement the method
-- (_Nonnull id)forwardingTargetForSelector:(_Nonnull SEL)sel;
+- (void)URLSession:(NSURLSession *)session
+didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
+ completionHandler:(TSKURLSessionAuthChallengeCallback)completionHandler;
 
-- (void)URLSession:(NSURLSession * _Nonnull)session
-didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
- completionHandler:(void (^ _Nonnull)(NSURLSessionAuthChallengeDisposition disposition,
-                                      NSURLCredential * _Nullable credential))completionHandler;
-
-- (void)URLSession:(NSURLSession * _Nonnull)session
-              task:(NSURLSessionTask * _Nonnull)task
-didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
- completionHandler:(void (^ _Nonnull)(NSURLSessionAuthChallengeDisposition disposition,
-                                      NSURLCredential * _Nullable credential))completionHandler;
+- (void)URLSession:(NSURLSession *)session
+              task:(NSURLSessionTask *)task
+didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
+ completionHandler:(TSKURLSessionAuthChallengeCallback)completionHandler;
 
 @end
+
+NS_ASSUME_NONNULL_END

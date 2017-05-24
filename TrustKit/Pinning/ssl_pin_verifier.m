@@ -10,15 +10,15 @@
  */
 
 #import "ssl_pin_verifier.h"
+#import "TSKSPKIHashCache.h"
 #import "../Dependencies/domain_registry/domain_registry.h"
-#import "public_key_utils.h"
-#import "../TrustKit+Private.h"
 #import "../configuration_utils.h"
+#import "../TSKLog.h"
 
 
 #pragma mark SSL Pin Verifier
 
-TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverHostname, NSArray<NSNumber *> *supportedAlgorithms, NSSet<NSData *> *knownPins)
+TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverHostname, NSArray<NSNumber *> *supportedAlgorithms, NSSet<NSData *> *knownPins, TSKSPKIHashCache *hashCache)
 {
     if ((serverTrust == NULL) || (supportedAlgorithms == nil) || (knownPins == nil))
     {
@@ -69,7 +69,8 @@ TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *ser
         for (NSNumber *savedAlgorithm in supportedAlgorithms)
         {
             TSKPublicKeyAlgorithm algorithm = [savedAlgorithm integerValue];
-            NSData *subjectPublicKeyInfoHash = hashSubjectPublicKeyInfoFromCertificate(certificate, algorithm);
+            NSData *subjectPublicKeyInfoHash = [hashCache hashSubjectPublicKeyInfoFromCertificate:certificate
+                                                                               publicKeyAlgorithm:algorithm];
             if (subjectPublicKeyInfoHash == nil)
             {
                 TSKLog(@"Error - could not generate the SPKI hash for %@", serverHostname);

@@ -7,48 +7,43 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "../TrustKit/TrustKit+Private.h"
+#import "../TrustKit/TrustKit.h"
+#import "../TrustKit/TSKPinningValidator.h"
+#import "../TrustKit/TSKPinningValidatorResult.h"
 #import "../TrustKit/Swizzling/TSKNSURLConnectionDelegateProxy.h"
+#import <OCMock/OCMock.h>
 
-
-#pragma mark Private test methods
-@interface TSKNSURLConnectionDelegateProxy(Private)
-
-+(TSKPinValidationResult)getLastTrustDecision;
-+(void)resetLastTrustDecision;
-
+@interface TSKNSURLConnectionDelegateProxy (TestSupport)
+@property (nonatomic) TSKPinValidationResult lastTrustDecision;
+-(BOOL)forwardToOriginalDelegateAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge forConnection:(NSURLConnection *)connection;
 @end
 
+@interface TrustKit (TestSupport)
++ (void)resetConfiguration;
+@end
 
+/*
 #pragma mark Test NSURLConnection delegate with no auth handler
 @interface TestNSURLConnectionDelegateNoAuthHandler : NSObject <NSURLConnectionDataDelegate>
 {
-    XCTestExpectation *testExpectation;
+    XCTestExpectation *_testExpectation;
 }
 
+@property TrustKit *trustKit;
 @property NSError *lastError;
 @property NSURLResponse *lastResponse;
 
 - (instancetype)initWithExpectation:(XCTestExpectation *)expectation;
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection;
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response;
-- (NSURLRequest *)connection:(NSURLConnection *)connection
-             willSendRequest:(NSURLRequest *)request
-            redirectResponse:(NSURLResponse *)redirectResponse;
-
 @end
 
+@implementation TestNSURLConnectionDelegateNoAuthHandler
 
-@implementation TestNSURLConnectionDelegateNoAuthHandler {
-}
-
-- (instancetype)initWithExpectation:(XCTestExpectation *)expectation
+- (instancetype)initWithExpectation:(XCTestExpectation *)expectation trustKit:(TrustKit *)trustKit
 {
     self = [super init];
-    if (self)
-    {
-        testExpectation = expectation;
+    if (self) {
+        _testExpectation = expectation;
+        _trustKit = trustKit;
     }
     return self;
 }
@@ -59,18 +54,15 @@
 {
     NSLog(@"Received error, %@", error);
     _lastError = error;
-    [testExpectation fulfill];
+    [_testExpectation fulfill];
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-}
-
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data { }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
 {
     _lastResponse = response;
-    [testExpectation fulfill];
+    [_testExpectation fulfill];
 }
 
 
@@ -94,50 +86,87 @@
 }
 
 @end
+ 
+ 
+ @implementation TestNSURLConnectionDelegateDidReceiveAuth
+ - (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
+ {
+ _wasAuthHandlerCalled = YES;
+ [_testExpectation fulfill];
+ }
+ 
+ - (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace
+ {
+ return YES;
+ }
+ @end
+ 
+ 
+ 
+ #pragma mark Test NSURLConnection delegate with connection:didReceiveAuthenticationChallenge:
+ @interface TestNSURLConnectionDelegateDidReceiveAuth : TestNSURLConnectionDelegateNoAuthHandler
+ 
+ @property BOOL wasAuthHandlerCalled; // Used to validate that the delegate's auth handler was called
+ 
+ - (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
+ - (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace;
+ @end
 
+ 
+ #pragma mark Test NSURLConnection delegate with connection:willSendRequestForAuthenticationChallenge:
+ @interface TestNSURLConnectionDelegateWillSendRequestForAuth : TestNSURLConnectionDelegateNoAuthHandler
+ 
+ @property BOOL wasAuthHandlerCalled; // Used to validate that the delegate's auth handler was called
+ 
+ - (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
+ @end
+ 
+ 
+ @implementation TestNSURLConnectionDelegateWillSendRequestForAuth
+ - (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
+ {
+ _wasAuthHandlerCalled = YES;
+ [_testExpectation fulfill];
+ }
+ 
+ @end
+*/
 
-#pragma mark Test NSURLConnection delegate with connection:didReceiveAuthenticationChallenge:
-@interface TestNSURLConnectionDelegateDidReceiveAuth : TestNSURLConnectionDelegateNoAuthHandler
+///// These are classes that respond to specific combinations of methods. Mock the methods
+///// as needed for the tests.
 
-@property BOOL wasAuthHandlerCalled; // Used to validate that the delegate's auth handler was called
-
-- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
-- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace;
+@interface TestModeADelegate : NSObject<NSURLConnectionDelegate, NSURLAuthenticationChallengeSender>
 @end
 
+@implementation TestModeADelegate
+- (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge { }
+- (void)fakeMethod { } // used in some tests
 
-@implementation TestNSURLConnectionDelegateDidReceiveAuth
-- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
-{
-    _wasAuthHandlerCalled = YES;
-    [testExpectation fulfill];
+// Protocol requirements
+- (void)useCredential:(NSURLCredential *)credential forAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {}
+- (void)continueWithoutCredentialForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {}
+- (void)cancelAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {}
+- (void)performDefaultHandlingForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {}
+@end
+
+@interface TestModeBDelegate : NSObject<NSURLConnectionDelegate, NSURLAuthenticationChallengeSender>
+@property (nonatomic) BOOL shouldAuthenticate; // the value returned by `canAuthenticate...:`
+@end
+
+@implementation TestModeBDelegate
+- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace {
+    return self.shouldAuthenticate;
 }
+- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge { }
 
-- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace
-{
-    return YES;
-}
+// Protocol requirements
+- (void)useCredential:(NSURLCredential *)credential forAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {}
+- (void)continueWithoutCredentialForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {}
+- (void)cancelAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {}
+- (void)performDefaultHandlingForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {}
 @end
 
-
-
-#pragma mark Test NSURLConnection delegate with connection:willSendRequestForAuthenticationChallenge:
-@interface TestNSURLConnectionDelegateWillSendRequestForAuth : TestNSURLConnectionDelegateNoAuthHandler
-
-@property BOOL wasAuthHandlerCalled; // Used to validate that the delegate's auth handler was called
-
-- (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
-@end
-
-
-@implementation TestNSURLConnectionDelegateWillSendRequestForAuth
-- (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
-{
-    _wasAuthHandlerCalled = YES;
-    [testExpectation fulfill];
-}
-
-@end
+/////
 
 
 #pragma mark Test suite
@@ -152,25 +181,253 @@
 // lastTrustDecision to an unexpected value
 
 @interface TSKNSURLConnectionTests : XCTestCase
-
+@property (nonatomic) TrustKit *trustKit;
 @end
 
 @implementation TSKNSURLConnectionTests
 
 - (void)setUp {
     [super setUp];
-    [TrustKit resetConfiguration];
-    [TSKNSURLConnectionDelegateProxy resetLastTrustDecision];
-    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+    _trustKit = [[TrustKit alloc] initWithConfiguration:@{ } identifier:nil];
 }
 
 - (void)tearDown {
     [super tearDown];
 }
 
-// NSURLConnection is deprecated - disable Xcode warnings
 #pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations" // NSURLConnection is deprecated - disable Xcode warnings
+
+#pragma mark - respondsToSelector override
+
+- (void)test_respondsToSelector_alwaysTrueForWillSendRequest
+{
+    TSKNSURLConnectionDelegateProxy *proxy;
+    
+    proxy = [[TSKNSURLConnectionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                   connectionDelegate:[TestModeADelegate new]];
+    XCTAssertTrue([proxy respondsToSelector:@selector(connection:willSendRequestForAuthenticationChallenge:)]);
+
+    proxy = [[TSKNSURLConnectionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                   connectionDelegate:[TestModeBDelegate new]];
+    XCTAssertTrue([proxy respondsToSelector:@selector(connection:willSendRequestForAuthenticationChallenge:)]);
+}
+
+- (void)respondsToSelector_trueForOriginalMethods
+{
+    TSKNSURLConnectionDelegateProxy *proxy;
+    
+    proxy = [[TSKNSURLConnectionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                   connectionDelegate:[TestModeADelegate new]];
+    XCTAssertTrue([proxy respondsToSelector:@selector(fakeMethod)]);
+
+    proxy = [[TSKNSURLConnectionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                   connectionDelegate:[TestModeBDelegate new]];
+    XCTAssertFalse([proxy respondsToSelector:@selector(fakeMethod)]);
+}
+
+- (void)test_respondsToSelector_falseForUnimplementedMethods
+{
+    TSKNSURLConnectionDelegateProxy *proxy;
+
+    proxy = [[TSKNSURLConnectionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                   connectionDelegate:[TestModeADelegate new]];
+    XCTAssertFalse([proxy respondsToSelector:NSSelectorFromString(@"argle:bargle:")]);
+}
+
+//#pragma mark - forwardingTargetForSelector override
+//
+//- (void)test_respondsToSelector_forwardsTargetForSelector
+//{
+//    TestModeADelegate *delegate = OCMStrictClassMock([TestModeADelegate class]);
+//    OCMExpect([delegate fakeMethod]);
+//
+//    TSKNSURLConnectionDelegateProxy *proxy = [[TSKNSURLConnectionDelegateProxy alloc] initWithDelegate:delegate];
+//    [(id)proxy fakeMethod];
+//
+//    OCMVerifyAll((id)delegate);
+//    [(id)delegate stopMocking];
+//}
+
+#pragma mark - forwardToOriginalDelegateAuthenticationChallenge
+
+- (void)test_forwardToOriginalDelegateAuthenticationChallenge_respondsToWillSend
+{
+    NSURLConnection *cnxn = [[NSURLConnection alloc] init];
+    NSURLAuthenticationChallenge *challenge = [[NSURLAuthenticationChallenge alloc] init];
+    
+    TestModeADelegate *delegate = OCMStrictClassMock([TestModeADelegate class]);
+    OCMExpect([delegate connection:cnxn willSendRequestForAuthenticationChallenge:challenge]);
+    
+    TSKNSURLConnectionDelegateProxy *proxy = [[TSKNSURLConnectionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                                                    connectionDelegate:delegate];
+    [(id)proxy forwardToOriginalDelegateAuthenticationChallenge:challenge forConnection:cnxn];
+
+    OCMVerifyAll((id)delegate);
+    [(id)delegate stopMocking];
+}
+
+- (void)test_forwardToOriginalDelegateAuthenticationChallenge_respondsToCanAuthenticate
+{
+    TestModeBDelegate *delegate = OCMStrictClassMock([TestModeBDelegate class]);
+    
+    NSURLConnection *cnxn = [[NSURLConnection alloc] init];
+    NSURLProtectionSpace *space = [[NSURLProtectionSpace alloc] init];
+    NSURLAuthenticationChallenge *challenge = [[NSURLAuthenticationChallenge alloc] initWithProtectionSpace:space
+                                                                                         proposedCredential:nil
+                                                                                       previousFailureCount:0
+                                                                                            failureResponse:nil
+                                                                                                      error:nil
+                                                                                                     sender:delegate];
+    OCMExpect([delegate connection:cnxn canAuthenticateAgainstProtectionSpace:space]).andReturn(YES);
+    OCMExpect([delegate connection:cnxn didReceiveAuthenticationChallenge:challenge]);
+    
+    TSKNSURLConnectionDelegateProxy *proxy = [[TSKNSURLConnectionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                                                    connectionDelegate:delegate];
+    [(id)proxy forwardToOriginalDelegateAuthenticationChallenge:challenge forConnection:cnxn];
+    
+    OCMVerifyAll((id)delegate);
+    [(id)delegate stopMocking];
+}
+
+#pragma mark - connection:willSendRequestForAuthenticationChallenge:
+
+- (void)test_connectionWillSendRequestForAuthenticationChallenge_notServerTrust
+{
+    TestModeADelegate *delegate = OCMStrictClassMock([TestModeADelegate class]);
+    TSKNSURLConnectionDelegateProxy *proxy = [[TSKNSURLConnectionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                                                    connectionDelegate:delegate];
+    
+    NSURLConnection *cnxn = [[NSURLConnection alloc] init];
+    NSURLProtectionSpace *space = [[NSURLProtectionSpace alloc] initWithHost:@"host" port:0 protocol:nil realm:nil
+                                                        authenticationMethod:NSURLAuthenticationMethodHTTPBasic];
+    NSURLAuthenticationChallenge *challenge = [[NSURLAuthenticationChallenge alloc] initWithProtectionSpace:space
+                                                                                         proposedCredential:nil
+                                                                                       previousFailureCount:0
+                                                                                            failureResponse:nil
+                                                                                                      error:nil
+                                                                                                     sender:delegate];
+    // Expect fallthrough because this connection was not blocked.
+    OCMExpect([delegate connection:cnxn willSendRequestForAuthenticationChallenge:challenge]);
+    [proxy connection:cnxn willSendRequestForAuthenticationChallenge:challenge];
+    OCMVerifyAll((id)delegate);
+}
+
+- (void)test_connectionWillSendRequestForAuthenticationChallenge_serverTrustA_allow
+{
+    TestModeADelegate *delegate = OCMStrictClassMock([TestModeADelegate class]);
+
+    TSKPinningValidator *validator = OCMStrictClassMock([TSKPinningValidator class]);
+    self.trustKit.pinningValidator = validator;
+    
+    NSURLConnection *cnxn = [[NSURLConnection alloc] init];
+    NSURLProtectionSpace *space = [[NSURLProtectionSpace alloc] initWithHost:@"hostname" port:0 protocol:nil realm:nil
+                                                        authenticationMethod:NSURLAuthenticationMethodServerTrust];
+    NSURLAuthenticationChallenge *challenge = [[NSURLAuthenticationChallenge alloc] initWithProtectionSpace:space
+                                                                                         proposedCredential:nil
+                                                                                       previousFailureCount:0
+                                                                                            failureResponse:nil
+                                                                                                      error:nil
+                                                                                                     sender:delegate];
+    
+    TSKNSURLConnectionDelegateProxy *proxy = OCMPartialMock([[TSKNSURLConnectionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                                                                   connectionDelegate:delegate]);
+    
+    OCMExpect([validator evaluateTrust:space.serverTrust forHostname:@"hostname"]).andReturn(TSKTrustDecisionShouldAllowConnection);
+    OCMExpect([proxy forwardToOriginalDelegateAuthenticationChallenge:challenge forConnection:cnxn]);
+    OCMStub([proxy connection:cnxn willSendRequestForAuthenticationChallenge:challenge]).andForwardToRealObject();
+    OCMExpect([delegate performDefaultHandlingForAuthenticationChallenge:challenge]);
+    
+    [proxy connection:cnxn willSendRequestForAuthenticationChallenge:challenge];
+    
+    OCMVerifyAll((id)delegate);
+    OCMVerifyAll((id)validator);
+    OCMVerifyAll((id)proxy);
+    
+    [(id)validator stopMocking];
+    [(id)delegate stopMocking];
+    [(id)proxy stopMocking];
+}
+
+- (void)test_connectionWillSendRequestForAuthenticationChallenge_serverTrustB_allow
+{
+    TestModeBDelegate *delegate = OCMPartialMock([TestModeBDelegate new]);
+    
+    TSKPinningValidator *validator = OCMStrictClassMock([TSKPinningValidator class]);
+    self.trustKit.pinningValidator = validator;
+    
+    NSURLConnection *cnxn = [[NSURLConnection alloc] init];
+    NSURLProtectionSpace *space = [[NSURLProtectionSpace alloc] initWithHost:@"hostname" port:0 protocol:nil realm:nil
+                                                        authenticationMethod:NSURLAuthenticationMethodServerTrust];
+    NSURLAuthenticationChallenge *challenge = [[NSURLAuthenticationChallenge alloc] initWithProtectionSpace:space
+                                                                                         proposedCredential:nil
+                                                                                       previousFailureCount:0
+                                                                                            failureResponse:nil
+                                                                                                      error:nil
+                                                                                                     sender:delegate];
+    
+    TSKNSURLConnectionDelegateProxy *proxy = OCMPartialMock([[TSKNSURLConnectionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                                                                   connectionDelegate:delegate]);
+    
+    OCMExpect([validator evaluateTrust:space.serverTrust forHostname:@"hostname"]).andReturn(TSKTrustDecisionShouldAllowConnection);
+    OCMStub([proxy connection:cnxn willSendRequestForAuthenticationChallenge:challenge]).andForwardToRealObject();
+    // Test that the forward method was called – that method was tested in it's own unit tests.
+    OCMExpect([proxy forwardToOriginalDelegateAuthenticationChallenge:challenge forConnection:cnxn]).andReturn(NO);
+    OCMExpect([delegate performDefaultHandlingForAuthenticationChallenge:challenge]);
+    
+    [proxy connection:cnxn willSendRequestForAuthenticationChallenge:challenge];
+    
+    OCMVerifyAll((id)delegate);
+    OCMVerifyAll((id)validator);
+    OCMVerifyAll((id)proxy);
+    
+    [(id)validator stopMocking];
+    [(id)delegate stopMocking];
+    [(id)proxy stopMocking];
+}
+
+// Test the block case: only need to test for one because the failure handling is identical
+- (void)test_connectionWillSendRequestForAuthenticationChallenge_serverTrustB_block
+{
+    TestModeBDelegate *delegate = OCMPartialMock([TestModeBDelegate new]);
+    
+    TSKPinningValidator *validator = OCMStrictClassMock([TSKPinningValidator class]);
+    self.trustKit.pinningValidator = validator;
+    
+    NSURLConnection *cnxn = [[NSURLConnection alloc] init];
+    NSURLProtectionSpace *space = [[NSURLProtectionSpace alloc] initWithHost:@"hostname" port:0 protocol:nil realm:nil
+                                                        authenticationMethod:NSURLAuthenticationMethodServerTrust];
+    NSURLAuthenticationChallenge *challenge = [[NSURLAuthenticationChallenge alloc] initWithProtectionSpace:space
+                                                                                         proposedCredential:nil
+                                                                                       previousFailureCount:0
+                                                                                            failureResponse:nil
+                                                                                                      error:nil
+                                                                                                     sender:delegate];
+    
+    TSKNSURLConnectionDelegateProxy *proxy = OCMPartialMock([[TSKNSURLConnectionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                                                                   connectionDelegate:delegate]);
+    
+    OCMExpect([validator evaluateTrust:space.serverTrust forHostname:@"hostname"]).andReturn(TSKTrustDecisionShouldBlockConnection);
+    OCMExpect([delegate cancelAuthenticationChallenge:challenge]);
+    
+    [proxy connection:cnxn willSendRequestForAuthenticationChallenge:challenge];
+    
+    OCMVerifyAll((id)delegate);
+    OCMVerifyAll((id)validator);
+    OCMVerifyAll((id)proxy);
+    
+    [(id)validator stopMocking];
+    [(id)delegate stopMocking];
+    [(id)proxy stopMocking];
+}
+
+
+
+// TODO: add swizzling tests to ensure the above tested methods are properly invoked.
+
+
+// LEGACY BELOW
+
 
 
 // Disable auto-swizzling and ensure TrustKit does not get called
@@ -212,7 +469,7 @@
 }
 */
 
-
+/*
 // Tests a secure connection to https://www.yahoo.com and forces validation to fail by providing a fake hash
 - (void)testPinningValidationFailed
 {
@@ -228,25 +485,21 @@
                                               @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=" // Fake key 2
                                               ]}}};
     
-    [TrustKit initializeWithConfiguration:trustKitConfig];
+    TrustKit *trustKit = [[TrustKit alloc] initWithConfiguration:trustKitConfig];
     
     // Configure notification listener
     XCTestExpectation *notifReceivedExpectation = [self expectationWithDescription:@"TestNotificationReceivedExpectation"];
-    id observerId = [[NSNotificationCenter defaultCenter] addObserverForName:kTSKValidationCompletedNotification
-                                                                      object:nil
-                                                                       queue:nil
-                                                                  usingBlock:^(NSNotification * _Nonnull note) {
-                                                                      NSDictionary *userInfo = [note userInfo];
-                                                                      // Notification received, check the userInfo
-                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationDecisionNotificationKey], @(TSKTrustDecisionShouldBlockConnection));
-                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationResultNotificationKey], @(TSKPinValidationResultFailed));
-                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationNotedHostnameNotificationKey], @"www.yahoo.com");
-                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationServerHostnameNotificationKey], @"www.yahoo.com");
-                                                                      XCTAssertGreaterThan([userInfo[kTSKValidationCertificateChainNotificationKey] count], (unsigned long)1);
-                                                                      XCTAssertGreaterThan([userInfo[kTSKValidationDurationNotificationKey] doubleValue], 0);
-                                                                      [notifReceivedExpectation fulfill];
-                                                                  }];
-    
+    trustKit.validationDelegateCallback = ^(TSKPinningValidatorResult *result) {
+        // Notification received, check the userInfo
+        XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldBlockConnection);
+        XCTAssertEqual(result.validationResult, TSKPinValidationResultFailed);
+        XCTAssertEqualObjects(result.notedHostname, @"www.yahoo.com");
+        XCTAssertEqualObjects(result.serverHostname, @"www.yahoo.com");
+        XCTAssertGreaterThan(result.certificateChain.count, (unsigned long)1);
+        XCTAssertGreaterThan(result.validationDuration, 0);
+        
+        [notifReceivedExpectation fulfill];
+    };
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLConnectionDelegate"];
     TestNSURLConnectionDelegateNoAuthHandler *delegate = [[TestNSURLConnectionDelegateNoAuthHandler alloc] initWithExpectation:expectation];
@@ -268,8 +521,6 @@
     XCTAssert(([TSKNSURLConnectionDelegateProxy getLastTrustDecision] == TSKTrustDecisionShouldBlockConnection), @"TrustKit accepted an invalid certificate");
     XCTAssertNotNil(delegate.lastError, @"TrustKit did not trigger an error");
     XCTAssertNil(delegate.lastResponse, @"TrustKit returned a response although pin validation failed");
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:observerId];
 }
 
 
@@ -289,7 +540,8 @@
                                               @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                               ]}}};
     
-    [TrustKit initializeWithConfiguration:trustKitConfig];
+    
+    TrustKit *trustKit = [[TrustKit alloc] initWithConfiguration:trustKitConfig];
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLConnectionDelegate"];
     TestNSURLConnectionDelegateNoAuthHandler *delegate = [[TestNSURLConnectionDelegateNoAuthHandler alloc] initWithExpectation:expectation];
@@ -330,16 +582,14 @@
                                               @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                               ]}}};
     
-    [TrustKit initializeWithConfiguration:trustKitConfig];
+    
+    TrustKit *trustKit = [[TrustKit alloc] initWithConfiguration:trustKitConfig];
     
     // Configure notification listener
-    id observerId = [[NSNotificationCenter defaultCenter] addObserverForName:kTSKValidationCompletedNotification
-                                                                      object:nil
-                                                                       queue:nil
-                                                                  usingBlock:^(NSNotification * _Nonnull note) {
-                                                                      // Ensure a validation notification was NOT posted
-                                                                      XCTFail(@"kTSKValidationCompletedNotification should not have been posted");
-                                                                  }];
+    trustKit.validationDelegateCallback = ^(TSKPinningValidatorResult *result) {
+        // Ensure a validation notification was NOT posted
+        XCTFail(@"kTSKValidationCompletedNotification should not have been posted");
+    };
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLConnectionDelegate"];
     TestNSURLConnectionDelegateNoAuthHandler *delegate = [[TestNSURLConnectionDelegateNoAuthHandler alloc] initWithExpectation:expectation];
@@ -360,8 +610,6 @@
     XCTAssert(([TSKNSURLConnectionDelegateProxy getLastTrustDecision] == TSKTrustDecisionDomainNotPinned), @"TrustKit accepted an invalid certificate");
     XCTAssertNotNil(delegate.lastError, @"TrustKit did not trigger an error");
     XCTAssertNil(delegate.lastResponse, @"TrustKit returned a response although the server's certificate is invalid");
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:observerId];
 }
 
 
@@ -379,24 +627,20 @@
                                               @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                               ]}}};
     
-    [TrustKit initializeWithConfiguration:trustKitConfig];
+    TrustKit *trustKit = [[TrustKit alloc] initWithConfiguration:trustKitConfig];
     
-    // Configure notification listener
     XCTestExpectation *notifReceivedExpectation = [self expectationWithDescription:@"TestNotificationReceivedExpectation"];
-    id observerId = [[NSNotificationCenter defaultCenter] addObserverForName:kTSKValidationCompletedNotification
-                                                                      object:nil
-                                                                       queue:nil
-                                                                  usingBlock:^(NSNotification * _Nonnull note) {
-                                                                      NSDictionary *userInfo = [note userInfo];
-                                                                      // Notification received, check the userInfo
-                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationDecisionNotificationKey], @(TSKTrustDecisionShouldAllowConnection));
-                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationResultNotificationKey], @(TSKPinValidationResultSuccess));
-                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationNotedHostnameNotificationKey], @"www.twitter.com");
-                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationServerHostnameNotificationKey], @"www.twitter.com");
-                                                                      XCTAssertGreaterThan([userInfo[kTSKValidationCertificateChainNotificationKey] count], (unsigned long)1);
-                                                                      XCTAssertGreaterThan([userInfo[kTSKValidationDurationNotificationKey] doubleValue], 0);
-                                                                      [notifReceivedExpectation fulfill];
-                                                                  }];
+    trustKit.validationDelegateCallback = ^(TSKPinningValidatorResult *result) {
+        // Notification received, check the userInfo
+        XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldAllowConnection);
+        XCTAssertEqual(result.validationResult, TSKPinValidationResultSuccess);
+        XCTAssertEqualObjects(result.notedHostname, @"www.twitter.com");
+        XCTAssertEqualObjects(result.serverHostname, @"www.twitter.com");
+        XCTAssertGreaterThan(result.certificateChain.count, (unsigned long)1);
+        XCTAssertGreaterThan(result.validationDuration, 0);
+        
+        [notifReceivedExpectation fulfill];
+    };
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLConnectionDelegate"];
     TestNSURLConnectionDelegateNoAuthHandler *delegate = [[TestNSURLConnectionDelegateNoAuthHandler alloc] initWithExpectation:expectation];
@@ -421,8 +665,6 @@
     XCTAssertNil(delegate.lastError, @"TrustKit triggered an error");
     XCTAssertNotNil(delegate.lastResponse, @"TrustKit prevented a response from being returned");
     XCTAssert([(NSHTTPURLResponse *)delegate.lastResponse statusCode] == 301, @"TrustKit prevented a response from being returned");
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:observerId];
 }
 
 
@@ -461,6 +703,8 @@
             NSLog(@"Timeout Error: %@", error);
         }
     }];
+    
+    [TrustKit resetConfiguration];
 }
 
 
@@ -479,26 +723,23 @@
                                               @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                               ]}}};
     
-    [TrustKit initializeWithConfiguration:trustKitConfig];
+    TrustKit *trustKit = [[TrustKit alloc] initWithConfiguration:trustKitConfig];
     
     // Configure notification listener
     XCTestExpectation *notifReceivedExpectation = [self expectationWithDescription:@"TestNotificationReceivedExpectation"];
-    id observerId = [[NSNotificationCenter defaultCenter] addObserverForName:kTSKValidationCompletedNotification
-                                                                      object:nil
-                                                                       queue:nil
-                                                                  usingBlock:^(NSNotification * _Nonnull note) {
-                                                                      NSDictionary *userInfo = [note userInfo];
-                                                                      // Notification received, check the userInfo
-                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationDecisionNotificationKey], @(TSKTrustDecisionShouldAllowConnection));
-                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationResultNotificationKey], @(TSKPinValidationResultSuccess));
-                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationNotedHostnameNotificationKey], @"www.apple.com");
-                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationServerHostnameNotificationKey], @"www.apple.com");
-                                                                      XCTAssertGreaterThan([userInfo[kTSKValidationCertificateChainNotificationKey] count], (unsigned long)1);
-                                                                      XCTAssertGreaterThan([userInfo[kTSKValidationDurationNotificationKey] doubleValue], 0);
-                                                                      [notifReceivedExpectation fulfill];
-                                                                  }];
-
+    trustKit.validationDelegateCallback = ^(TSKPinningValidatorResult *result) {
+        // Notification received, check the userInfo
+        XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldAllowConnection);
+        XCTAssertEqual(result.validationResult, TSKPinValidationResultSuccess);
+        XCTAssertEqualObjects(result.notedHostname, @"www.apple.com");
+        XCTAssertEqualObjects(result.serverHostname, @"www.apple.com");
+        XCTAssertGreaterThan(result.certificateChain.count, (unsigned long)1);
+        XCTAssertGreaterThan(result.validationDuration, 0);
+        
+        [notifReceivedExpectation fulfill];
+    };
     
+    // Configure notification listener
     XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLConnectionDelegateDidReceiveAuth"];
     TestNSURLConnectionDelegateDidReceiveAuth *delegate = [[TestNSURLConnectionDelegateDidReceiveAuth alloc] initWithExpectation:expectation];
     NSURLConnection *connection = [[NSURLConnection alloc]
@@ -515,8 +756,6 @@
          }
      }];
     XCTAssert(delegate.wasAuthHandlerCalled, @"TrustKit prevented the original delegate's auth handler from being called.");
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:observerId];
 }
 
 
@@ -535,24 +774,21 @@
                                               @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                               ]}}};
     
-    [TrustKit initializeWithConfiguration:trustKitConfig];
+    TrustKit *trustKit = [[TrustKit alloc] initWithConfiguration:trustKitConfig];
     
     // Configure notification listener
     XCTestExpectation *notifReceivedExpectation = [self expectationWithDescription:@"TestNotificationReceivedExpectation"];
-    id observerId = [[NSNotificationCenter defaultCenter] addObserverForName:kTSKValidationCompletedNotification
-                                                                      object:nil
-                                                                       queue:nil
-                                                                  usingBlock:^(NSNotification * _Nonnull note) {
-                                                                      NSDictionary *userInfo = [note userInfo];
-                                                                      // Notification received, check the userInfo
-                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationDecisionNotificationKey], @(TSKTrustDecisionShouldAllowConnection));
-                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationResultNotificationKey], @(TSKPinValidationResultSuccess));
-                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationNotedHostnameNotificationKey], @"www.fastmail.fm");
-                                                                      XCTAssertEqualObjects(userInfo[kTSKValidationServerHostnameNotificationKey], @"www.fastmail.fm");
-                                                                      XCTAssertGreaterThan([userInfo[kTSKValidationCertificateChainNotificationKey] count], (unsigned long)1);
-                                                                      XCTAssertGreaterThan([userInfo[kTSKValidationDurationNotificationKey] doubleValue], 0);
-                                                                      [notifReceivedExpectation fulfill];
-                                                                  }];
+    trustKit.validationDelegateCallback = ^(TSKPinningValidatorResult *result) {
+        // Notification received, check the userInfo
+        XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldAllowConnection);
+        XCTAssertEqual(result.validationResult, TSKPinValidationResultSuccess);
+        XCTAssertEqualObjects(result.notedHostname, @"www.fastmail.fm");
+        XCTAssertEqualObjects(result.serverHostname, @"www.fastmail.fm");
+        XCTAssertGreaterThan(result.certificateChain.count, (unsigned long)1);
+        XCTAssertGreaterThan(result.validationDuration, 0);
+        
+        [notifReceivedExpectation fulfill];
+    };
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLConnectionDelegateDidReceiveAuth"];
     TestNSURLConnectionDelegateWillSendRequestForAuth *delegate = [[TestNSURLConnectionDelegateWillSendRequestForAuth alloc] initWithExpectation:expectation];
@@ -570,10 +806,8 @@
          }
      }];
     XCTAssert(delegate.wasAuthHandlerCalled, @"TrustKit prevented the original delegate's auth handler from being called.");
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:observerId];
 }
 
-
+*/
 #pragma GCC diagnostic pop
 @end

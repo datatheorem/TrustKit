@@ -9,6 +9,8 @@
 #ifndef parse_configuration_h
 #define parse_configuration_h
 
+@import Foundation;
+
 NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments);
 
 #endif /* parse_configuration_h */

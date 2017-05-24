@@ -11,6 +11,8 @@
 
 #import "AppDelegate.h"
 #import <TrustKit/TrustKit.h>
+#import <TrustKit/TSKPinningValidator.h>
+#import <TrustKit/TSKPinningValidatorResult.h>
 
 @interface AppDelegate ()
 
@@ -18,16 +20,16 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
     // Override TrustKit's logger method
-    void (^loggerBlock)(NSString *) = ^void(NSString *message)
-    {
-        NSLog(@"TrustKit log: %@", message);
-    };
-    [TrustKit setLoggerBlock:loggerBlock];
+    // FIXME: logger
+//    void (^loggerBlock)(NSString *) = ^void(NSString *message)
+//    {
+//        NSLog(@"TrustKit log: %@", message);
+//    };
+//    [TrustKit setLoggerBlock:loggerBlock];
     
     
     // Initialize TrustKit
@@ -39,13 +41,13 @@
       kTSKPinnedDomains: @{
               
               // Pin invalid SPKI hashes to *.yahoo.com to demonstrate pinning failures
-              @"yahoo.com" : @{
-                      kTSKEnforcePinning:@YES,
-                      kTSKIncludeSubdomains:@YES,
-                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+              @"yahoo.com": @{
+                      kTSKEnforcePinning: @YES,
+                      kTSKIncludeSubdomains: @YES,
+                      kTSKPublicKeyAlgorithms: @[kTSKAlgorithmRsa2048],
                       
                       // Wrong SPKI hashes to demonstrate pinning failure
-                      kTSKPublicKeyHashes : @[
+                      kTSKPublicKeyHashes: @[
                               @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
                               @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB="
                               ],
@@ -69,44 +71,18 @@
                       }}};
     
     [TrustKit initializeWithConfiguration:trustKitConfig];
-    
-    
+
     // Demonstrate how to receive pin validation notifications (only useful for performance/metrics)
-    NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
-    NSOperationQueue *mainQueue = [NSOperationQueue mainQueue];
-    [center addObserverForName:kTSKValidationCompletedNotification object:nil
-                                         queue:mainQueue usingBlock:^(NSNotification *note) {
-                                             NSDictionary* userInfo = [note userInfo];
-                                             NSLog(@"Received pinning validation notification:\n  Duration: %@\n  Decision: %@\n  Result: %@\n  Hostname: %@",
-                                                   userInfo[kTSKValidationDurationNotificationKey],
-                                                   userInfo[kTSKValidationDecisionNotificationKey],
-                                                   userInfo[kTSKValidationResultNotificationKey],
-                                                   userInfo[kTSKValidationServerHostnameNotificationKey]);
-                                                     }];
+    [TrustKit sharedInstance].validationDelegateQueue =dispatch_get_main_queue();
+    [TrustKit sharedInstance].validationDelegateCallback = ^(TSKPinningValidatorResult * _Nonnull result) {
+        NSLog(@"Received pinning validation notification:\n\tDuration: %0.4f\n\tDecision: %ld\n\tResult: %ld\n\tHostname: %@",
+              result.validationDuration,
+              (long)result.finalTrustDecision,
+              (long)result.validationResult,
+              result.serverHostname);
+    };
     
     return YES;
-}
-
-- (void)applicationWillResignActive:(UIApplication *)application {
-    // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-    // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application {
-    // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
 @end

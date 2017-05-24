@@ -11,6 +11,7 @@
 
 #import "ViewController.h"
 #import <TrustKit/TrustKit.h>
+#import <TrustKit/TSKPinningValidator.h>
 
 @interface ViewController ()
 
@@ -25,13 +26,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.destinationWebView.delegate = self;
     
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]
-                                                          delegate:self
-                                                     delegateQueue:nil];
-    self.session = session;
-    
+    self.session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]
+                                                 delegate:self
+                                            delegateQueue:nil];
+
     // First demonstrate pinning failure
     [self loadUrlWithPinningFailure];
 }
@@ -62,7 +63,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
  completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler
 {
     // Call into TrustKit here to do pinning validation
-    if (![TSKPinningValidator handleChallenge:challenge completionHandler:completionHandler])
+    if (![[TrustKit sharedInstance].pinningValidator handleChallenge:challenge completionHandler:completionHandler])
     {
         // TrustKit did not handle this challenge: perhaps it was not for server trust
         // or the domain was not pinned. Fall back to the default behavior

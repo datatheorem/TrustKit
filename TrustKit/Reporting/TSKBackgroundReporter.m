@@ -10,31 +10,29 @@
  */
 
 #import "TSKBackgroundReporter.h"
-#import "../TrustKit+Private.h"
+#import "../TSKTrustKitConfig.h"
+#import "../TSKLog.h"
 #import "TSKPinFailureReport.h"
 #import "reporting_utils.h"
 #import "TSKReportsRateLimiter.h"
 #import "vendor_identifier.h"
-#import <Foundation/NSObjCRuntime.h>
 
 
 // Session identifier for background uploads: <bundle_id>.TSKBackgroundReporter
-static NSString *kTSKBackgroundSessionIdentifierFormat = @"%@.TSKBackgroundReporter";
-static NSURLSession *_backgroundSession = nil;
-static dispatch_once_t dispatchOnceBackgroundSession;
-
+static NSString * const kTSKBackgroundSessionIdentifierFormat = @"%@.TSKBackgroundReporter.%@";
 
 @interface TSKBackgroundReporter()
 
-@property (nonatomic, strong, nonnull) NSString *appBundleId;
-@property (nonatomic, strong, nonnull) NSString *appVersion;
-@property (nonatomic, strong, nonnull) NSString *appVendorId;
-@property (nonatomic, strong, nonnull) NSString *appPlatform;
-@property (nonatomic, strong, nonnull) NSString *appPlatformVersion;
-@property BOOL shouldRateLimitReports;
+@property (nonatomic, nonnull) NSURLSession *backgroundSession;
+@property (nonatomic, nonnull) NSString *appBundleId;
+@property (nonatomic, nonnull) NSString *appVersion;
+@property (nonatomic, nonnull) NSString *appVendorId;
+@property (nonatomic, nonnull) NSString *appPlatform;
+@property (nonatomic, nonnull) NSString *appPlatformVersion;
+@property (nonatomic, nonnull) TSKReportsRateLimiter *rateLimiter;
+@property (nonatomic) BOOL shouldRateLimitReports;
 
 @end
-
 
 @implementation TSKBackgroundReporter
 
@@ -46,6 +44,7 @@ static dispatch_once_t dispatchOnceBackgroundSession;
     if (self)
     {
         _shouldRateLimitReports = shouldRateLimitReports;
+        _rateLimiter = [TSKReportsRateLimiter new];
         
         // Retrieve the App and device's information
 #if TARGET_OS_IPHONE
@@ -101,72 +100,60 @@ static dispatch_once_t dispatchOnceBackgroundSession;
         if (_appBundleId == nil)
         {
             // The bundle ID we get is nil if we're running tests on Travis. If the bundle ID is nil, background sessions can't be used
-            // backgroundSessionConfigurationWithIdentifier: will throw an exception within dispatch_once() which can't be handled
-            // Use a regular session instead
+            // backgroundSessionConfigurationWithIdentifier: will throw an exception
             TSKLog(@"Null bundle ID: we are running the test suite; falling back to a normal session.");
             _appBundleId = @"N/A";
             _appVendorId = @"unit-tests";
             
-            dispatch_once(&dispatchOnceBackgroundSession, ^{
-                _backgroundSession = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]
-                                                                   delegate:self
-                                                              delegateQueue:nil];
-            });
+            _backgroundSession = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]
+                                                               delegate:self
+                                                          delegateQueue:nil];
         }
         else
         {
             // Get the vendor identifier
             _appVendorId = identifier_for_vendor();
-
+            
             
             // We're not running unit tests - use a background session
-            /*
-             Using dispatch_once here ensures that multiple background sessions with the same identifier are not created
-             in this instance of the application. If you want to support multiple background sessions within a single process,
-             you should create each session with its own identifier.
-             */
-            dispatch_once(&dispatchOnceBackgroundSession, ^{
-                NSURLSessionConfiguration *backgroundConfiguration = nil;
-                
-                // The API for creating background sessions changed between iOS 7 and iOS 8 and OS X 10.9 and 10.10
-#if (TARGET_OS_IPHONE &&__IPHONE_OS_VERSION_MAX_ALLOWED < 80000) || (!TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MAX_ALLOWED < 1100)
-                // iOS 7 or OS X 10.9 as the max SDK: awlays use the deprecated/iOS 7 API
-                backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfiguration:[NSString stringWithFormat:kTSKBackgroundSessionIdentifierFormat, _appBundleId]];
-#else
-                // iOS 8+ or OS X 10.10+ as the max SDK
-#if (TARGET_OS_IPHONE &&__IPHONE_OS_VERSION_MIN_REQUIRED < 80000) || (!TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MIN_REQUIRED < 1100)
-                // iOS 7 or OS X 10.9 as the min SDK
-                // Try to use the new API if available at runtime
-                if (![NSURLSessionConfiguration respondsToSelector:@selector(backgroundSessionConfigurationWithIdentifier:)])
-                {
-                    // Device runs on iOS 7 or OS X 10.9
-                    backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfiguration:[NSString stringWithFormat:kTSKBackgroundSessionIdentifierFormat, _appBundleId]];
-                }
-                else
-#endif
-                {
-                    // Device runs on iOS 8+ or OS X 10.10+ or min SDK is iOS 8+ or OS X 10.10+
-                    backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier: [NSString stringWithFormat:kTSKBackgroundSessionIdentifierFormat, _appBundleId]];
-                }
-#endif
-                
-                
-                
+            // AppleDoc (currently 10.3) state that multiple background sessions with the same
+            // identifier should never be created, so ensure that cannot happen by creating
+            // a unique ID per instance.
+            NSString *backgroundSessionId = [NSString stringWithFormat:kTSKBackgroundSessionIdentifierFormat,
+                                             _appBundleId, [[NSUUID UUID] UUIDString]];
+            
+            // The API for creating background sessions changed between iOS 7 and iOS 8 and OS X 10.9 and 10.10
+            // Try to use the new API if available at runtime
+            NSURLSessionConfiguration *backgroundConfiguration;
+            if ([NSURLSessionConfiguration respondsToSelector:@selector(backgroundSessionConfigurationWithIdentifier:)])
+            {
+                // Device runs on iOS 8+ or OS X 10.10+ or min SDK is iOS 8+ or OS X 10.10+
+                backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:backgroundSessionId];
+            }
+            else
+            {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+                // Device runs on iOS 7 or OS X 10.9
+                backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfiguration:backgroundSessionId];
+#pragma clang diagnostic pop
+            }
+            
+            
 #if TARGET_OS_IPHONE
-                // iOS-only settings
-                // Do not wake up the App after completing the upload
-                backgroundConfiguration.sessionSendsLaunchEvents = NO;
+            // iOS-only settings
+            // Do not wake up the App after completing the upload
+            backgroundConfiguration.sessionSendsLaunchEvents = NO;
 #endif
-                
+            
 #if (TARGET_OS_IPHONE) || ((!TARGET_OS_IPHONE) && (__MAC_OS_X_VERSION_MIN_REQUIRED >= 1100))
-                // On OS X discretionary is only available on 10.10
-                backgroundConfiguration.discretionary = YES;
+            // On OS X discretionary is only available on 10.10
+            backgroundConfiguration.discretionary = YES;
 #endif
-                // We have to use a delegate as background sessions can't use completion handlers
-                _backgroundSession = [NSURLSession sessionWithConfiguration:backgroundConfiguration
-                                                                   delegate:self
-                                                              delegateQueue:nil];
-            });
+            // We have to use a delegate as background sessions can't use completion handlers
+            _backgroundSession = [NSURLSession sessionWithConfiguration:backgroundConfiguration
+                                                               delegate:self
+                                                          delegateQueue:nil];
         }
     }
     return self;
@@ -217,7 +204,7 @@ static dispatch_once_t dispatchOnceBackgroundSession;
                                                                    expirationDate:knownPinsExpirationDate];
     
     // Should we rate-limit this report?
-    if (_shouldRateLimitReports && [TSKReportsRateLimiter shouldRateLimitReport:report])
+    if (_shouldRateLimitReports && [self.rateLimiter shouldRateLimitReport:report])
     {
         // We recently sent the exact same report; do not send this report
         TSKLog(@"Pin failure report for %@ was not sent due to rate-limiting", serverHostname);

@@ -10,8 +10,7 @@
  */
 
 #import "TSKPinFailureReport.h"
-#import <Foundation/Foundation.h>
-
+@import Foundation;
 
 /*
  * Simple helper class which caches reports for 24 hours to prevent identical reports from being sent twice
@@ -21,13 +20,6 @@
  */
 @interface TSKReportsRateLimiter : NSObject
 
-+ (BOOL) shouldRateLimitReport:(TSKPinFailureReport *)report;
+- (BOOL)shouldRateLimitReport:(TSKPinFailureReport * _Nonnull)report;
 
-@end
-
-
-
-@interface TSKReportsRateLimiter(Private)
-// Helper method for running tests
-+ (void) setLastReportsCacheResetDate:(NSDate *)date;
 @end

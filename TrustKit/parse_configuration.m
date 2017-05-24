@@ -6,11 +6,10 @@
 //  Copyright © 2016 TrustKit. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import "TrustKit.h"
+#import "TSKTrustKitConfig.h"
 #import "Dependencies/domain_registry/domain_registry.h"
 #import "parse_configuration.h"
-#import "Pinning/public_key_utils.h"
+#import "Pinning/TSKPublicKeyAlgorithm.h"
 #import <CommonCrypto/CommonDigest.h>
 #import "configuration_utils.h"
 
@@ -255,7 +254,6 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
         finalConfiguration[kTSKPinnedDomains][domainName] = [NSDictionary dictionaryWithDictionary:domainFinalConfiguration];
     }
     
-    
     // Lastly, ensure that we can find a parent policy for subdomains configured with TSKExcludeSubdomainFromParentPolicy
     for (NSString *domainName in finalConfiguration[kTSKPinnedDomains])
     {
@@ -271,7 +269,7 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
         }
     }
 
-    return finalConfiguration;
+    return [finalConfiguration copy];
 }
 
 
