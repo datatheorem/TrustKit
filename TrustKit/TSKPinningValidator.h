@@ -41,13 +41,41 @@ typedef NSData* _Nullable(^HashCertificateBlock)(_Nonnull SecCertificateRef cert
 /// @name Manual SSL Pinning Validation
 ///------------------------------------
 
+
+/**
+ Domain pinning configuration, typically obtained by parseTrustKitConfiguration()
+ */
 @property (nonatomic, readonly, nullable) NSDictionary *pinnedDomains;
+
+/**
+ Set to true to ignore the trust anchors in the user trust store. Only applicable
+ to platforms that support a user trust store (Mac OS).
+ */
 @property (nonatomic, readonly) BOOL ignorePinsForUserTrustAnchors;
+
+/**
+ The queue use when invoking the validationResultHandler
+ */
 @property (nonatomic, readonly, nonnull) dispatch_queue_t validationResultQueue;
+
+/**
+ The callback invoked with validation results
+ */
 @property (nonatomic, readonly, nonnull) void(^validationResultHandler)(TSKPinningValidatorResult * _Nonnull result);
 
+/**
+ Initialize an instance of TSKPinningValidatorResult
+
+ @param pinnedDomains Domain pinning configuration, typically obtained by parseTrustKitConfiguration()
+ @param name A name for this instance. It should be unique to differentiate insstances
+    in logs and cache files.
+ @param ignorePinsForUserTrustAnchors Set to true to ignore the trust anchors in the user trust store
+ @param validationResultQueue The queue use when invoking the validationResultHandler
+ @param validationResultHandler The callback invoked with validation results
+ @return Initialized instance
+ */
 - (instancetype _Nullable)initWithPinnedDomainConfig:(NSDictionary * _Nullable)pinnedDomains
-                                          identifier:(NSString *_Nullable)name
+                                          identifier:(NSString * _Nonnull)name
                        ignorePinsForUserTrustAnchors:(BOOL)ignorePinsForUserTrustAnchors
                                validationResultQueue:(dispatch_queue_t _Nonnull)validationResultQueue
                              validationResultHandler:(void(^ _Nonnull)(TSKPinningValidatorResult * _Nonnull result))validationResultHandler;

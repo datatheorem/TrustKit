@@ -20,6 +20,13 @@
  */
 @interface TSKReportsRateLimiter : NSObject
 
+/**
+ Determine if the report should be reported or ignored due to the rate limiting policy.
+
+ @param report The report to check whether or not to rate limit
+ @return True if the report should be ignored under the rate-limiting policy that
+    is in effect.
+ */
 - (BOOL)shouldRateLimitReport:(TSKPinFailureReport * _Nonnull)report;
 
 @end

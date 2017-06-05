@@ -59,20 +59,22 @@ static const NSTimeInterval kIntervalBetweenReportsCacheReset = 3600 * 24;
     __block BOOL shouldRateLimitReport = NO;
     __weak typeof(self) weakSelf = self;
     dispatch_sync(self.reportsCacheQueue, ^{
+        typeof(self) strongSelf = weakSelf;
+        
         if (secondsSinceCacheReset > kIntervalBetweenReportsCacheReset)
         {
             // Reset the cache
-            [weakSelf.reportsCache removeAllObjects];
-            weakSelf.lastReportsCacheResetDate = [NSDate date];
+            [strongSelf.reportsCache removeAllObjects];
+            strongSelf.lastReportsCacheResetDate = [NSDate date];
         }
         
         // Check if the exact same report has already been sent recently
-        shouldRateLimitReport = [weakSelf.reportsCache containsObject:pinFailureInfo];
+        shouldRateLimitReport = [strongSelf.reportsCache containsObject:pinFailureInfo];
         if (shouldRateLimitReport == NO)
         {
             // An identical report has NOT been sent recently
             // Add this report to the cache for rate-limiting
-            [weakSelf.reportsCache addObject:pinFailureInfo];
+            [strongSelf.reportsCache addObject:pinFailureInfo];
         }
     });
     
