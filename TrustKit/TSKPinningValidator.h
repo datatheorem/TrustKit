@@ -70,7 +70,7 @@ typedef NSData* _Nullable(^HashCertificateBlock)(_Nonnull SecCertificateRef cert
  @param name A name for this instance. It should be unique to differentiate insstances
     in logs and cache files.
  @param ignorePinsForUserTrustAnchors Set to true to ignore the trust anchors in the user trust store
- @param validationResultQueue The queue use when invoking the validationResultHandler
+ @param validationResultQueue The queue used when invoking the validationResultHandler
  @param validationResultHandler The callback invoked with validation results
  @return Initialized instance
  */
