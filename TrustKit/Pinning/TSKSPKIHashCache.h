@@ -36,7 +36,7 @@ typedef NSMutableDictionary<NSData *, NSData *> SPKICacheDictionnary;
 
 /**
  Get a pin cache for the provided certificate and public key algorithm. The pins
- are cached so
+ are cached so subsequent calls will be faster than the initial call.
 
  @param certificate The certificate containing the public key that will be hashed
  @param publicKeyAlgorithm The public algorithm to expect was used in this certificate
