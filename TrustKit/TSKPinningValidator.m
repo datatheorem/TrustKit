@@ -27,7 +27,7 @@
 #pragma mark Instance Methods
 
 - (instancetype _Nullable)initWithPinnedDomainConfig:(NSDictionary * _Nullable)pinnedDomains
-                                          identifier:(NSString *)name
+                                           hashCache:(TSKSPKIHashCache * _Nullable)hashCache
                        ignorePinsForUserTrustAnchors:(BOOL)ignorePinsForUserTrustAnchors
                                validationResultQueue:(dispatch_queue_t _Nonnull)validationResultQueue
                              validationResultHandler:(void(^ _Nonnull)(TSKPinningValidatorResult * _Nonnull result))validationResultHandler
@@ -38,7 +38,7 @@
         _ignorePinsForUserTrustAnchors = ignorePinsForUserTrustAnchors;
         _validationResultQueue = validationResultQueue;
         _validationResultHandler = validationResultHandler;
-        _spkiHashCache = [[TSKSPKIHashCache alloc] initWithIdentifier:name];
+        _spkiHashCache = hashCache;
     }
     return self;
 }

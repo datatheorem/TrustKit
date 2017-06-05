@@ -13,6 +13,7 @@
 #import "Reporting/TSKBackgroundReporter.h"
 #import "Swizzling/TSKNSURLConnectionDelegateProxy.h"
 #import "Swizzling/TSKNSURLSessionDelegateProxy.h"
+#import "Pinning/TSKSPKIHashCache.h"
 #import "parse_configuration.h"
 #import "TSKPinningValidator.h"
 #import "TSKPinningValidatorResult.h"
@@ -51,6 +52,9 @@ const TSKSupportedAlgorithm kTSKAlgorithmEcDsaSecp384r1 = @"TSKAlgorithmEcDsaSec
 #pragma mark TrustKit Global State
 // Shared TrustKit singleton instance
 static TrustKit *sharedTrustKit = nil;
+
+// A shared hash cache for use by all TrustKit instances
+static TSKSPKIHashCache *sharedHashCache;
 
 static char kTSKPinFailureReporterQueueLabel[] = "com.datatheorem.trustkit.reporterqueue";
 
@@ -139,9 +143,15 @@ static NSString * const kTSKSharedInstanceIdentifier = @"spki-hash.cache";
 #else
         BOOL userTrustAnchorBypass = [_configuration[kTSKIgnorePinningForUserDefinedTrustAnchors] boolValue];
 #endif
+
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            sharedHashCache = [[TSKSPKIHashCache alloc] initWithIdentifier:@"trustkit"];
+        });
+        
         __weak typeof(self) weakSelf = self;
         _pinningValidator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:_configuration
-                                                                         identifier:uniqueIdentifier
+                                                                         hashCache:sharedHashCache
                                                       ignorePinsForUserTrustAnchors:userTrustAnchorBypass
                                                               validationResultQueue:_pinFailureReporterQueue
                                                             validationResultHandler:^(TSKPinningValidatorResult * _Nonnull result) {

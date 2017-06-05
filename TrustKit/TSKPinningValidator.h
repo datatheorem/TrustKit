@@ -14,6 +14,7 @@
 @import Foundation;
 
 @class TSKPinningValidatorResult;
+@class TSKSPKIHashCache;
 
 typedef NSData* _Nullable(^HashCertificateBlock)(_Nonnull SecCertificateRef certificate, TSKPublicKeyAlgorithm algorithm);
 
@@ -67,15 +68,14 @@ typedef NSData* _Nullable(^HashCertificateBlock)(_Nonnull SecCertificateRef cert
  Initialize an instance of TSKPinningValidatorResult
 
  @param pinnedDomains Domain pinning configuration, typically obtained by parseTrustKitConfiguration()
- @param name A name for this instance. It should be unique to differentiate insstances
-    in logs and cache files.
+ @param hashCache The hash cache to use. If nil, no caching is performed, performance may suffer.
  @param ignorePinsForUserTrustAnchors Set to true to ignore the trust anchors in the user trust store
  @param validationResultQueue The queue use when invoking the validationResultHandler
  @param validationResultHandler The callback invoked with validation results
  @return Initialized instance
  */
 - (instancetype _Nullable)initWithPinnedDomainConfig:(NSDictionary * _Nullable)pinnedDomains
-                                          identifier:(NSString * _Nonnull)name
+                                           hashCache:(TSKSPKIHashCache * _Nullable)hashCache
                        ignorePinsForUserTrustAnchors:(BOOL)ignorePinsForUserTrustAnchors
                                validationResultQueue:(dispatch_queue_t _Nonnull)validationResultQueue
                              validationResultHandler:(void(^ _Nonnull)(TSKPinningValidatorResult * _Nonnull result))validationResultHandler;
