@@ -258,20 +258,20 @@ static NSString * const kTSKSharedInstanceIdentifier = @"spki-hash.cache";
 // TRUSTKIT_SKIP_LIB_INITIALIZATION define allows consumers to opt out of the dylib constructor.
 // This might be useful to mitigate integration risks, if the consumer doens't wish to use
 // plist file, and wants to initialize lib manually later on.
-//#ifndef TRUSTKIT_SKIP_LIB_INITIALIZATION
-//
-//__attribute__((constructor)) static void initializeWithInfoPlist(int argc, const char **argv)
-//{
-//    // TrustKit just got started in the App
-//    CFBundleRef appBundle = CFBundleGetMainBundle();
-//    
-//    // Retrieve the configuration from the App's Info.plist file
-//    NSDictionary *trustKitConfigFromInfoPlist = (__bridge NSDictionary *)CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)kTSKConfiguration);
-//    if (trustKitConfigFromInfoPlist)
-//    {
-//        TSKLog(@"Configuration supplied via the App's Info.plist");
-//        initializeTrustKit(trustKitConfigFromInfoPlist);
-//    }
-//}
-//
-//#endif
+#ifndef TRUSTKIT_SKIP_LIB_INITIALIZATION
+
+__attribute__((constructor)) static void initializeWithInfoPlist(int argc, const char **argv)
+{
+    // TrustKit just got started in the App
+    CFBundleRef appBundle = CFBundleGetMainBundle();
+    
+    // Retrieve the configuration from the App's Info.plist file
+    NSDictionary *trustKitConfigFromInfoPlist = (__bridge NSDictionary *)CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)kTSKConfiguration);
+    if (trustKitConfigFromInfoPlist)
+    {
+        TSKLog(@"Configuration supplied via the App's Info.plist");
+        [TrustKit initializeWithConfiguration:trustKitConfigFromInfoPlist];
+    }
+}
+
+#endif
