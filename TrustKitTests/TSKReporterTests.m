@@ -26,7 +26,6 @@
 
 @interface TrustKit (TestSupport)
 @property (nonatomic) TSKBackgroundReporter *pinFailureReporter;
-+ (NSString *)getDefaultReportUri;
 - (void)sendValidationReport:(TSKPinningValidatorResult *)result;
 @end
 
@@ -190,7 +189,7 @@
                                         port:[NSNumber numberWithInt:443]
                             certificateChain:_testCertificateChain
                                notedHostname:@"example.com"
-                                  reportURIs:@[[NSURL URLWithString:[TrustKit getDefaultReportUri]]]
+                                  reportURIs:@[[NSURL URLWithString:kTSKDefaultReportUri]]
                            includeSubdomains:YES
                               enforcePinning:YES
                                    knownPins:[NSSet setWithArray:@[
@@ -212,7 +211,7 @@
                                         port:[NSNumber numberWithInt:443]
                             certificateChain:_testCertificateChain
                                notedHostname:@"example.com"
-                                  reportURIs:@[[NSURL URLWithString:[TrustKit getDefaultReportUri]]]
+                                  reportURIs:@[[NSURL URLWithString:kTSKDefaultReportUri]]
                            includeSubdomains:YES
                               enforcePinning:YES
                                    knownPins:[NSSet setWithArray:@[
