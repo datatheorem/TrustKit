@@ -16,6 +16,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+// The identifier used for the default shared hash cache. Use this identifier
+// in the TSKSPKIHashCache constructor to use the shared cache.
+static NSString * const kTSKSPKISharedHashCacheIdentifier = @"spki-hash.cache";
+
 // Each key is a raw certificate data (for easy lookup) and each value is the certificate's raw SPKI data
 typedef NSMutableDictionary<NSData *, NSData *> SPKICacheDictionnary;
 

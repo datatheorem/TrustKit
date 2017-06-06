@@ -11,6 +11,7 @@
 
 #import "TrustKit.h"
 #import "Reporting/TSKBackgroundReporter.h"
+#import "Pinning/TSKSPKIHashCache.h"
 #import "Swizzling/TSKNSURLConnectionDelegateProxy.h"
 #import "Swizzling/TSKNSURLSessionDelegateProxy.h"
 #import "Pinning/TSKSPKIHashCache.h"
@@ -60,10 +61,7 @@ static char kTSKPinFailureReporterQueueLabel[] = "com.datatheorem.trustkit.repor
 
 // Default report URI - can be disabled with TSKDisableDefaultReportUri
 // Email info@datatheorem.com if you need a free dashboard to see your App's reports
-static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.com/trustkit/report";
-
-// Internal SPKI hash cache file name – we'll use as identifier
-static NSString * const kTSKSharedInstanceIdentifier = @"spki-hash.cache";
+NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.com/trustkit/report";
 
 #pragma mark TrustKit Initialization Helper Functions
 
@@ -93,7 +91,7 @@ static NSString * const kTSKSharedInstanceIdentifier = @"spki-hash.cache";
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedTrustKit = [[TrustKit alloc] initWithConfiguration:trustKitConfig
-                                                      identifier:kTSKSharedInstanceIdentifier];
+                                                      identifier:@"TrustKitShared"];
         
         // Hook network APIs if needed
         if ([sharedTrustKit.configuration[kTSKSwizzleNetworkDelegates] boolValue]) {
@@ -151,7 +149,7 @@ static NSString * const kTSKSharedInstanceIdentifier = @"spki-hash.cache";
         
         __weak typeof(self) weakSelf = self;
         _pinningValidator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:_configuration
-                                                                         hashCache:sharedHashCache
+                                                                          hashCache:[[TSKSPKIHashCache alloc] initWithIdentifier:kTSKSPKISharedHashCacheIdentifier]
                                                       ignorePinsForUserTrustAnchors:userTrustAnchorBypass
                                                               validationResultQueue:_pinFailureReporterQueue
                                                             validationResultHandler:^(TSKPinningValidatorResult * _Nonnull result) {
@@ -222,34 +220,6 @@ static NSString * const kTSKSharedInstanceIdentifier = @"spki-hash.cache";
     _validationDelegateQueue = validationDelegateQueue ?: dispatch_get_main_queue();
 }
 
-# pragma mark Private / Test Methods
-
-+ (void)resetConfiguration
-{
-    //sharedTrustKitOnceToken = 0;
-    // Reset is only available/used for tests
-    //resetSubjectPublicKeyInfoCache();
-    //_configuration = nil;
-//    _isTrustKitInitialized = NO;
-}
-
-+ (NSString *)getDefaultReportUri
-{
-    return kTSKDefaultReportUri;
-}
-
-+ (TSKBackgroundReporter *)getGlobalPinFailureReporter
-{
-    TrustKit *singleton = [self sharedInstance];
-    return singleton.pinFailureReporter;
-}
-
-+ (void)setGlobalPinFailureReporter:(TSKBackgroundReporter *) reporter
-{
-    TrustKit *singleton = [self sharedInstance];
-    singleton.pinFailureReporter = reporter;
-}
-
 @end
 
 
@@ -258,20 +228,20 @@ static NSString * const kTSKSharedInstanceIdentifier = @"spki-hash.cache";
 // TRUSTKIT_SKIP_LIB_INITIALIZATION define allows consumers to opt out of the dylib constructor.
 // This might be useful to mitigate integration risks, if the consumer doens't wish to use
 // plist file, and wants to initialize lib manually later on.
-//#ifndef TRUSTKIT_SKIP_LIB_INITIALIZATION
-//
-//__attribute__((constructor)) static void initializeWithInfoPlist(int argc, const char **argv)
-//{
-//    // TrustKit just got started in the App
-//    CFBundleRef appBundle = CFBundleGetMainBundle();
-//    
-//    // Retrieve the configuration from the App's Info.plist file
-//    NSDictionary *trustKitConfigFromInfoPlist = (__bridge NSDictionary *)CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)kTSKConfiguration);
-//    if (trustKitConfigFromInfoPlist)
-//    {
-//        TSKLog(@"Configuration supplied via the App's Info.plist");
-//        initializeTrustKit(trustKitConfigFromInfoPlist);
-//    }
-//}
-//
-//#endif
+#ifndef TRUSTKIT_SKIP_LIB_INITIALIZATION
+
+__attribute__((constructor)) static void initializeWithInfoPlist(int argc, const char **argv)
+{
+    // TrustKit just got started in the App
+    CFBundleRef appBundle = CFBundleGetMainBundle();
+    
+    // Retrieve the configuration from the App's Info.plist file
+    NSDictionary *trustKitConfigFromInfoPlist = (__bridge NSDictionary *)CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)kTSKConfiguration);
+    if (trustKitConfigFromInfoPlist)
+    {
+        TSKLog(@"Configuration supplied via the App's Info.plist");
+        [TrustKit initializeWithConfiguration:trustKitConfigFromInfoPlist];
+    }
+}
+
+#endif

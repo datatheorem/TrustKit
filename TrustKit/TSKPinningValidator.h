@@ -35,7 +35,6 @@ typedef NSData* _Nullable(^HashCertificateBlock)(_Nonnull SecCertificateRef cert
  * `handleChallenge:completionHandler:` a helper method to be used for implementing pinning validation in challenge handler methods within `NSURLSession` and `WKWebView` delegates.
  
  */
-
 @interface TSKPinningValidator : NSObject
 
 ///------------------------------------
@@ -75,7 +74,7 @@ typedef NSData* _Nullable(^HashCertificateBlock)(_Nonnull SecCertificateRef cert
  @return Initialized instance
  */
 - (instancetype _Nullable)initWithPinnedDomainConfig:(NSDictionary * _Nullable)pinnedDomains
-                                           hashCache:(TSKSPKIHashCache * _Nullable)hashCache
+                                           hashCache:(TSKSPKIHashCache * _Nonnull)hashCache
                        ignorePinsForUserTrustAnchors:(BOOL)ignorePinsForUserTrustAnchors
                                validationResultQueue:(dispatch_queue_t _Nonnull)validationResultQueue
                              validationResultHandler:(void(^ _Nonnull)(TSKPinningValidatorResult * _Nonnull result))validationResultHandler;

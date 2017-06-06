@@ -205,7 +205,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
     validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
-                                                             hashCache:spkiCache
+                                                              hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
                                                   validationResultQueue:dispatch_get_main_queue()
                                                 validationResultHandler:^(TSKPinningValidatorResult *result) {
@@ -272,7 +272,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
     validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
-                                                             hashCache:spkiCache
+                                                              hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
                                                   validationResultQueue:dispatch_get_main_queue()
                                                 validationResultHandler:^(TSKPinningValidatorResult *result) {
@@ -335,7 +335,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
     validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
-                                                             hashCache:spkiCache
+                                                              hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
                                                   validationResultQueue:dispatch_get_main_queue()
                                                 validationResultHandler:^(TSKPinningValidatorResult *result) {
@@ -398,7 +398,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
     validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
-                                                             hashCache:spkiCache
+                                                              hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
                                                   validationResultQueue:dispatch_get_main_queue()
                                                 validationResultHandler:^(TSKPinningValidatorResult *result) {
@@ -450,7 +450,7 @@
     // Test TSKPinningValidator
     TSKPinningValidator *validator;
     validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:trustKitConfig
-                                                             hashCache:spkiCache
+                                                              hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
                                                   validationResultQueue:dispatch_get_main_queue()
                                                 validationResultHandler:^(TSKPinningValidatorResult *result) {
@@ -501,7 +501,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
     validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
-                                                             hashCache:spkiCache
+                                                              hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
                                                   validationResultQueue:dispatch_get_main_queue()
                                                 validationResultHandler:^(TSKPinningValidatorResult *result) {
@@ -566,7 +566,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
     validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
-                                                             hashCache:spkiCache
+                                                              hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
                                                   validationResultQueue:dispatch_get_main_queue()
                                                 validationResultHandler:^(TSKPinningValidatorResult *result) {
@@ -631,7 +631,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
     validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
-                                                             hashCache:spkiCache
+                                                              hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
                                                   validationResultQueue:dispatch_get_main_queue()
                                                 validationResultHandler:^(TSKPinningValidatorResult *result) {
@@ -697,7 +697,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
     validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
-                                                             hashCache:spkiCache
+                                                              hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
                                                   validationResultQueue:dispatch_get_main_queue()
                                                 validationResultHandler:^(TSKPinningValidatorResult *result) {
@@ -762,7 +762,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
     validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
-                                                             hashCache:spkiCache
+                                                              hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
                                                   validationResultQueue:dispatch_get_main_queue()
                                                 validationResultHandler:^(TSKPinningValidatorResult *result) {
@@ -811,7 +811,7 @@
     // Then test TSKPinningValidator
     TSKPinningValidator *validator;
     validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:trustKitConfig
-                                                             hashCache:spkiCache
+                                                              hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
                                                   validationResultQueue:dispatch_get_main_queue()
                                                 validationResultHandler:^(TSKPinningValidatorResult *result) {
@@ -900,7 +900,7 @@
                                                                            ]}}};
     
     TSKPinningValidator *validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:trustKitConfig
-                                                                                  hashCache:spkiCache
+                                                                                   hashCache:spkiCache
                                                                ignorePinsForUserTrustAnchors:YES
                                                                        validationResultQueue:dispatch_get_main_queue()
                                                                      validationResultHandler:^(TSKPinningValidatorResult * _Nonnull result) {
@@ -957,7 +957,7 @@
                                                                            ]}}};
     
     TSKPinningValidator *validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:trustKitConfig
-                                                                                  hashCache:spkiCache
+                                                                                   hashCache:spkiCache
                                                                ignorePinsForUserTrustAnchors:YES
                                                                        validationResultQueue:dispatch_get_main_queue()
                                                                      validationResultHandler:^(TSKPinningValidatorResult * _Nonnull result) {

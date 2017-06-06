@@ -17,6 +17,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/** The default URI – maintained by DataTheorem – used for pinning failure reports
+ if none is specified in the configuration.
+ */
+extern NSString * const kTSKDefaultReportUri;
+
 /**
  `TrustKit` is a class for programmatically configuring the global SSL pinning policy 
  within an App.
