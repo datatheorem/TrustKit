@@ -17,7 +17,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 // Each key is a raw certificate data (for easy lookup) and each value is the certificate's raw SPKI data
-typedef NSMutableDictionary<NSData *, NSData *> SpkiCacheDictionnary;
+typedef NSMutableDictionary<NSData *, NSData *> SPKICacheDictionnary;
 
 @interface TSKSPKIHashCache : NSObject
 
@@ -34,11 +34,25 @@ typedef NSMutableDictionary<NSData *, NSData *> SpkiCacheDictionnary;
  */
 - (instancetype _Nullable)initWithIdentifier:(NSString * _Nullable)uniqueIdentifier NS_DESIGNATED_INITIALIZER;
 
+/**
+ Get a pin cache for the provided certificate and public key algorithm. The pins
+ are cached so subsequent calls will be faster than the initial call.
+
+ @param certificate The certificate containing the public key that will be hashed
+ @param publicKeyAlgorithm The public algorithm to expect was used in this certificate
+ @return The hash of the public key assuming it used the provided algorithm
+ */
 - (NSData *)hashSubjectPublicKeyInfoFromCertificate:(SecCertificateRef)certificate publicKeyAlgorithm:(TSKPublicKeyAlgorithm)publicKeyAlgorithm;
 
-- (NSMutableDictionary<NSNumber *, SpkiCacheDictionnary *> *)getSpkiCache;
+/**
+ Obtain the current cache used by this instance.
+ */
+@property (nonatomic, nullable, readonly) NSMutableDictionary<NSNumber *, SPKICacheDictionnary *> *SPKICache;
 
-- (NSMutableDictionary<NSNumber *, SpkiCacheDictionnary *> *)getSpkiCacheFromFileSystem;
+/**
+ Load the SPKI cache from the filesystem. This triggers blocking file I/O.
+ */
+@property (nonatomic, nullable, readonly) NSMutableDictionary<NSNumber *, SPKICacheDictionnary *> *SPKICacheFromFileSystem;
 
 @end
 

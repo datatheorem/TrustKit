@@ -126,8 +126,8 @@
                                                                 kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=", // Server Key
                                                                                         @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                                                                         ]}}});
-    XCTAssertEqual([spkiCache.getSpkiCache[@0] count], 0UL, @"SPKI cache must be empty");
-    XCTAssertEqual([spkiCache.getSpkiCache[@1] count], 0UL, @"SPKI cache must be empty");
+    XCTAssertEqual([spkiCache.SPKICache[@0] count], 0UL, @"SPKI cache must be empty");
+    XCTAssertEqual([spkiCache.SPKICache[@1] count], 0UL, @"SPKI cache must be empty");
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust,
@@ -137,8 +137,8 @@
                                             spkiCache);
     
     // Ensure the SPKI cache was used; the full certificate chain is three certs and we have to go through all of them to get to the pinned leaf
-    XCTAssertEqual([spkiCache.getSpkiCache[@0] count], 3UL, @"SPKI cache must have been used");
-    XCTAssertEqual([spkiCache.getSpkiCache[@1] count], 3UL, @"SPKI cache must have been used");
+    XCTAssertEqual([spkiCache.SPKICache[@0] count], 3UL, @"SPKI cache must have been used");
+    XCTAssertEqual([spkiCache.SPKICache[@1] count], 3UL, @"SPKI cache must have been used");
     
     CFRelease(trust);
     CFRelease(leafCertificate);

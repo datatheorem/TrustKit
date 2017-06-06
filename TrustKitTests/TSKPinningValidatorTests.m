@@ -15,6 +15,7 @@
 #import "../TrustKit/TSKTrustKitConfig.h"
 #import "../TrustKit/parse_configuration.h"
 #import "../TrustKit/TSKPinningValidatorResult.h"
+#import "../TrustKit/Pinning/TSKSPKIHashCache.h"
 
 #import "../TrustKit/Pinning/ssl_pin_verifier.h"
 #import "../TrustKit/Pinning/TSKSPKIHashCache.h"
@@ -112,7 +113,7 @@
                                                                            ]}}};
     
     // Ensure the SPKI cache was on the filesystem is empty
-    NSDictionary *fsCache = [spkiCache getSpkiCacheFromFileSystem];
+    NSDictionary *fsCache = spkiCache.SPKICacheFromFileSystem;
     XCTAssert([fsCache[@1] count] == 0, @"SPKI cache for RSA 4096 must be empty before the test");
     
     // First test the verifyPublicKeyPin() function
@@ -131,7 +132,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
     validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
-                                                             identifier:nil
+                                                              hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
                                                   validationResultQueue:dispatch_get_main_queue()
                                                 validationResultHandler:^(TSKPinningValidatorResult *result) {
@@ -154,7 +155,7 @@
     [self waitForExpectationsWithTimeout:2.0 handler:nil];
     
     // Ensure the SPKI cache was persisted to the filesystem
-    fsCache = [spkiCache getSpkiCacheFromFileSystem];
+    fsCache = spkiCache.SPKICacheFromFileSystem;
     XCTAssertEqual([fsCache[@1] count], 1UL, @"SPKI cache for RSA 4096 must be persisted to the file system");
     
     CFRelease(trust);
@@ -182,7 +183,7 @@
                                                                            ]}}};
     
     // Ensure the SPKI cache was on the filesystem is empty
-    NSDictionary *fsCache = [spkiCache getSpkiCacheFromFileSystem];
+    NSDictionary *fsCache = spkiCache.SPKICacheFromFileSystem;
     XCTAssertEqual([fsCache[@1] count], 0UL, @"SPKI cache for RSA 4096 must be empty before the test");
     
     // First test the verifyPublicKeyPin() function
@@ -204,7 +205,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
     validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
-                                                             identifier:nil
+                                                             hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
                                                   validationResultQueue:dispatch_get_main_queue()
                                                 validationResultHandler:^(TSKPinningValidatorResult *result) {
@@ -225,7 +226,7 @@
     [self waitForExpectationsWithTimeout:2.0 handler:nil];
     
     // Ensure the SPKI cache was persisted to the filesystem
-    fsCache = [spkiCache getSpkiCacheFromFileSystem];
+    fsCache = spkiCache.SPKICacheFromFileSystem;
     XCTAssertEqual([fsCache[@1] count], 2UL, @"SPKI cache for RSA 4096 must be persisted to the file system");
     
     CFRelease(trust);
@@ -271,7 +272,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
     validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
-                                                             identifier:nil
+                                                             hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
                                                   validationResultQueue:dispatch_get_main_queue()
                                                 validationResultHandler:^(TSKPinningValidatorResult *result) {
@@ -334,7 +335,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
     validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
-                                                             identifier:nil
+                                                             hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
                                                   validationResultQueue:dispatch_get_main_queue()
                                                 validationResultHandler:^(TSKPinningValidatorResult *result) {
@@ -397,7 +398,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
     validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
-                                                             identifier:nil
+                                                             hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
                                                   validationResultQueue:dispatch_get_main_queue()
                                                 validationResultHandler:^(TSKPinningValidatorResult *result) {
@@ -449,7 +450,7 @@
     // Test TSKPinningValidator
     TSKPinningValidator *validator;
     validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:trustKitConfig
-                                                             identifier:nil
+                                                             hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
                                                   validationResultQueue:dispatch_get_main_queue()
                                                 validationResultHandler:^(TSKPinningValidatorResult *result) {
@@ -500,7 +501,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
     validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
-                                                             identifier:nil
+                                                             hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
                                                   validationResultQueue:dispatch_get_main_queue()
                                                 validationResultHandler:^(TSKPinningValidatorResult *result) {
@@ -565,7 +566,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
     validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
-                                                             identifier:nil
+                                                             hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
                                                   validationResultQueue:dispatch_get_main_queue()
                                                 validationResultHandler:^(TSKPinningValidatorResult *result) {
@@ -630,7 +631,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
     validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
-                                                             identifier:nil
+                                                             hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
                                                   validationResultQueue:dispatch_get_main_queue()
                                                 validationResultHandler:^(TSKPinningValidatorResult *result) {
@@ -696,7 +697,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
     validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
-                                                             identifier:nil
+                                                             hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
                                                   validationResultQueue:dispatch_get_main_queue()
                                                 validationResultHandler:^(TSKPinningValidatorResult *result) {
@@ -761,7 +762,7 @@
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
     validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
-                                                             identifier:nil
+                                                             hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
                                                   validationResultQueue:dispatch_get_main_queue()
                                                 validationResultHandler:^(TSKPinningValidatorResult *result) {
@@ -810,7 +811,7 @@
     // Then test TSKPinningValidator
     TSKPinningValidator *validator;
     validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:trustKitConfig
-                                                             identifier:nil
+                                                             hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
                                                   validationResultQueue:dispatch_get_main_queue()
                                                 validationResultHandler:^(TSKPinningValidatorResult *result) {
@@ -847,7 +848,7 @@
                                                    kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA Key
                                                                            @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                                                            ]}}};
-    TrustKit *tk = [[TrustKit alloc] initWithConfiguration:trustKitConfig identifier:nil];
+    TrustKit *tk = [[TrustKit alloc] initWithConfiguration:trustKitConfig identifier:@"test"];
     
     __block BOOL wasHandlerCalled = NO;
     void (^completionHandler)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable) = ^void(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential)
@@ -899,7 +900,7 @@
                                                                            ]}}};
     
     TSKPinningValidator *validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:trustKitConfig
-                                                                                  identifier:nil
+                                                                                  hashCache:spkiCache
                                                                ignorePinsForUserTrustAnchors:YES
                                                                        validationResultQueue:dispatch_get_main_queue()
                                                                      validationResultHandler:^(TSKPinningValidatorResult * _Nonnull result) {
@@ -956,7 +957,7 @@
                                                                            ]}}};
     
     TSKPinningValidator *validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:trustKitConfig
-                                                                                  identifier:nil
+                                                                                  hashCache:spkiCache
                                                                ignorePinsForUserTrustAnchors:YES
                                                                        validationResultQueue:dispatch_get_main_queue()
                                                                      validationResultHandler:^(TSKPinningValidatorResult * _Nonnull result) {
@@ -1018,7 +1019,7 @@
                                                    kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA Key
                                                                            @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=", // Fake key
                                                                            ]}}};
-    TrustKit *tk = [[TrustKit alloc] initWithConfiguration:trustKitConfig identifier:nil];
+    TrustKit *tk = [[TrustKit alloc] initWithConfiguration:trustKitConfig identifier:@"test"];
     
     __block BOOL wasHandlerCalled = NO;
     void (^completionHandler)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable) = ^void(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential)
@@ -1072,7 +1073,7 @@
                                              }};
     
     // Then test TSKPinningValidator
-    TrustKit *tk = [[TrustKit alloc] initWithConfiguration:trustKitConfig identifier:nil];
+    TrustKit *tk = [[TrustKit alloc] initWithConfiguration:trustKitConfig identifier:@"test"];
     
     XCTAssertEqual([tk.pinningValidator evaluateTrust:trust forHostname:@"unsecured.good.com"],
                    TSKTrustDecisionDomainNotPinned);

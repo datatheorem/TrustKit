@@ -28,10 +28,6 @@ static const NSString *kTSKKeychainPublicKeyTag = @"TSKKeychainPublicKeyTag"; //
 #define UNIFIED_KEY_EXTRACTION 1
 #endif
 
-
-// Each key is a raw certificate data (for easy lookup) and each value is the certificate's raw SPKI data
-typedef NSMutableDictionary<NSData *, NSData *> SpkiCacheDictionnary;
-
 #pragma mark Missing ASN1 SPKI Headers
 
 // These are the ASN1 headers for the Subject Public Key Info section of a certificate
@@ -57,16 +53,25 @@ static const unsigned char ecDsaSecp384r1Asn1Header[] = {
 };
 
 // Careful with the order... must match how TSKPublicKeyAlgorithm is defined
-static const unsigned char *asn1HeaderBytes[4] = { rsa2048Asn1Header, rsa4096Asn1Header,
-    ecDsaSecp256r1Asn1Header, ecDsaSecp384r1Asn1Header };
-static const unsigned int asn1HeaderSizes[4] = { sizeof(rsa2048Asn1Header), sizeof(rsa4096Asn1Header),
-    sizeof(ecDsaSecp256r1Asn1Header), sizeof(ecDsaSecp384r1Asn1Header) };
+static const unsigned char *asn1HeaderBytes[4] = {
+    rsa2048Asn1Header,
+    rsa4096Asn1Header,
+    ecDsaSecp256r1Asn1Header,
+    ecDsaSecp384r1Asn1Header
+};
+
+static const unsigned int asn1HeaderSizes[4] = {
+    sizeof(rsa2048Asn1Header),
+    sizeof(rsa4096Asn1Header),
+    sizeof(ecDsaSecp256r1Asn1Header),
+    sizeof(ecDsaSecp384r1Asn1Header)
+};
 
 
 @interface TSKSPKIHashCache ()
 // Dictionnary to cache SPKI hashes instead of having to compute them on every connection
 // We store one cache dictionnary per TSKPublicKeyAlgorithm we support
-@property (nonatomic) NSMutableDictionary<NSNumber *, SpkiCacheDictionnary *> *subjectPublicKeyInfoHashesCache;
+@property (nonatomic) NSMutableDictionary<NSNumber *, SPKICacheDictionnary *> *subjectPublicKeyInfoHashesCache;
 @property (nonatomic) dispatch_queue_t lockQueue;
 @property (nonatomic) NSString *spkiCacheFilename;
 @end
@@ -105,7 +110,7 @@ static const unsigned int asn1HeaderSizes[4] = { sizeof(rsa2048Asn1Header), size
         _spkiCacheFilename = uniqueIdentifier; // if this value is nil, persistence will always fail.
         
         // First try to load a cached version from the filesystem
-        _subjectPublicKeyInfoHashesCache = [self getSpkiCacheFromFileSystem];
+        _subjectPublicKeyInfoHashesCache = self.SPKICacheFromFileSystem;
         TSKLog(@"Loaded %lu SPKI cache entries from the filesystem", (unsigned long)_subjectPublicKeyInfoHashesCache.count);
         if (_subjectPublicKeyInfoHashesCache == nil)
         {
@@ -188,10 +193,8 @@ static const unsigned int asn1HeaderSizes[4] = { sizeof(rsa2048Asn1Header), size
     
     // Update the cache on the filesystem
     if (self.spkiCacheFilename.length > 0) {
-        NSURL *cachesDirUrl = [[[NSFileManager defaultManager] URLsForDirectory:NSCachesDirectory inDomains:NSUserDomainMask] firstObject];
-        NSURL *cacheUrl = [cachesDirUrl URLByAppendingPathComponent:self.spkiCacheFilename];
         NSData *serializedSpkiCache = [NSKeyedArchiver archivedDataWithRootObject:_subjectPublicKeyInfoHashesCache];
-        if ([serializedSpkiCache writeToURL:cacheUrl atomically:YES] == NO)
+        if ([serializedSpkiCache writeToURL:[self SPKICachePath] atomically:YES] == NO)
         {
             NSAssert(false, @"Failed to write cache");
             TSKLog(@"Could not persist SPKI cache to the filesystem");
@@ -201,19 +204,17 @@ static const unsigned int asn1HeaderSizes[4] = { sizeof(rsa2048Asn1Header), size
     return subjectPublicKeyInfoHash;
 }
 
-- (NSMutableDictionary<NSNumber *, SpkiCacheDictionnary *> *)getSpkiCacheFromFileSystem
+- (NSMutableDictionary<NSNumber *, SPKICacheDictionnary *> *)SPKICacheFromFileSystem
 {
     NSMutableDictionary *spkiCache;
-    NSString *spkiCachePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0]
-                               stringByAppendingPathComponent:self.spkiCacheFilename];
-    NSData *serializedSpkiCache = [NSData dataWithContentsOfFile:spkiCachePath];
+    NSData *serializedSpkiCache = [NSData dataWithContentsOfURL:[self SPKICachePath]];
     if (serializedSpkiCache) {
         spkiCache = [NSKeyedUnarchiver unarchiveObjectWithData:serializedSpkiCache];
     }
     return spkiCache;
 }
 
-- (NSMutableDictionary<NSNumber *, SpkiCacheDictionnary *> *)getSpkiCache
+- (NSMutableDictionary<NSNumber *, SPKICacheDictionnary *> *)SPKICache
 {
     return _subjectPublicKeyInfoHashesCache;
 }
@@ -265,6 +266,14 @@ static const unsigned int asn1HeaderSizes[4] = { sizeof(rsa2048Asn1Header), size
     }
 #endif
 #endif
+}
+
+- (NSURL *)SPKICachePath
+{
+    NSAssert(self.spkiCacheFilename, @"SPKI filename should not be nil");
+    NSURL *cachesDirUrl = [NSFileManager.defaultManager URLsForDirectory:NSCachesDirectory
+                                                               inDomains:NSUserDomainMask].firstObject;
+    return [cachesDirUrl URLByAppendingPathComponent:self.spkiCacheFilename];
 }
 
 @end
@@ -400,10 +409,7 @@ static const unsigned int asn1HeaderSizes[4] = { sizeof(rsa2048Asn1Header), size
 
 - (void)resetSubjectPublicKeyInfoDiskCache {
     // Discard SPKI cache
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *spkiCachePath = [[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) objectAtIndex:0]
-                               stringByAppendingPathComponent:self.spkiCacheFilename];
-    [fileManager removeItemAtPath:spkiCachePath error:nil];
+    [NSFileManager.defaultManager removeItemAtURL:[self SPKICachePath] error:nil];
 }
 
 @end
