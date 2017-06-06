@@ -223,32 +223,35 @@ static const unsigned int asn1HeaderSizes[4] = {
 
 - (NSData *)getPublicKeyDataFromCertificate:(SecCertificateRef)certificate
 {
+    // ****** TvOS or WatchOS ******
 #if TARGET_OS_WATCH || TARGET_OS_TV
     // watchOS 3+ or tvOS 10+
     return [self getPublicKeyDataFromCertificate_unified:certificate];
 #elif TARGET_OS_IOS
-    // iOS 7+
+    // ****** iOS ******
 #if __IPHONE_OS_VERSION_MAX_ALLOWED < 100000
-    // Base SDK is iOS 7, 8 or 9
+    // Base SDK is iOS 8 or 9
     return [self getPublicKeyDataFromCertificate_legacy_ios:certificate ];
 #else
     // Base SDK is iOS 10+ - try to use the unified Security APIs if available
     NSProcessInfo *processInfo = [NSProcessInfo processInfo];
-    if ([processInfo respondsToSelector:@selector(isOperatingSystemAtLeastVersion:)] && [processInfo isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){10, 0, 0}])
+    if ([processInfo respondsToSelector:@selector(isOperatingSystemAtLeastVersion:)]
+        && [processInfo isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion){10, 0, 0}])
     {
         // iOS 10+
         return [self getPublicKeyDataFromCertificate_unified:certificate];
     }
     else
     {
-        // iOS 7, 8, 9
+        // iOS 8 or 9
         return [self getPublicKeyDataFromCertificate_legacy_ios:certificate];
     }
 #endif
+    // ****** macOS ******
 #else
-    // macOS 10.9+
+    // macOS 10.10+
 #if LEGACY_MACOS_KEY_EXTRACTION
-    // Base SDK is macOS 10.9, 10.10 or 10.11
+    // Base SDK is macOS 10.10 or 10.11
     return [self getPublicKeyDataFromCertificate_legacy_macos:certificate];
 #else
     // Base SDK is macOS 10.12 - try to use the unified Security APIs if available
@@ -261,7 +264,7 @@ static const unsigned int asn1HeaderSizes[4] = {
     }
     else
     {
-        // macOS 10.9, 10.10, 10.11
+        // macOS 10.10 or 10.11
         return [self getPublicKeyDataFromCertificate_legacy_macos:certificate];
     }
 #endif

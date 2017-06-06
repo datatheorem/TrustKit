@@ -54,38 +54,19 @@ static NSString * const kTSKBackgroundSessionIdentifierFormat = @"%@.TSKBackgrou
         _appPlatform = @"WATCHOS";
 #else
         _appPlatform = @"IOS";
-        
-        // Before iOS 8 we need to build the OS version manually
-        // The number will not be perfectly accurate as we can't detect the patch version
-        if (NSFoundationVersionNumber == NSFoundationVersionNumber_iOS_7_0)
-        {
-            _appPlatformVersion = @"7.0.0";
-        }
-        else if (NSFoundationVersionNumber == NSFoundationVersionNumber_iOS_7_1)
-        {
-            _appPlatformVersion = @"7.1.0";
-        }
 #endif
 #else
         _appPlatform = @"MACOS";
-        
-        // Before macOS 10.10 we need to build the OS version manually
-        // The number will not be perfectly accurate as we can't detect the patch version
-        if (NSFoundationVersionNumber == NSFoundationVersionNumber10_9)
-        {
-            _appPlatformVersion = @"10.9.0";
-        }
-        else if (NSFoundationVersionNumber == NSFoundationVersionNumber10_9_2)
-        {
-            _appPlatformVersion = @"10.9.2";
-        }
 #endif
         
         // If we don't have the OS version yet, we are on a device that provides the operatingSystemVersion method
         if (_appPlatformVersion == nil)
         {
             NSOperatingSystemVersion version = [[NSProcessInfo processInfo] operatingSystemVersion];
-            _appPlatformVersion = [NSString stringWithFormat:@"%ld.%ld.%ld", (long)version.majorVersion, (long)version.minorVersion, (long)version.patchVersion];
+            _appPlatformVersion = [NSString stringWithFormat:@"%ld.%ld.%ld",
+                                   (long)version.majorVersion,
+                                   (long)version.minorVersion,
+                                   (long)version.patchVersion];
         }
         
         
@@ -122,23 +103,8 @@ static NSString * const kTSKBackgroundSessionIdentifierFormat = @"%@.TSKBackgrou
             NSString *backgroundSessionId = [NSString stringWithFormat:kTSKBackgroundSessionIdentifierFormat,
                                              _appBundleId, [[NSUUID UUID] UUIDString]];
             
-            // The API for creating background sessions changed between iOS 7 and iOS 8 and OS X 10.9 and 10.10
-            // Try to use the new API if available at runtime
-            NSURLSessionConfiguration *backgroundConfiguration;
-            if ([NSURLSessionConfiguration respondsToSelector:@selector(backgroundSessionConfigurationWithIdentifier:)])
-            {
-                // Device runs on iOS 8+ or OS X 10.10+ or min SDK is iOS 8+ or OS X 10.10+
-                backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:backgroundSessionId];
-            }
-            else
-            {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-                // Device runs on iOS 7 or OS X 10.9
-                backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfiguration:backgroundSessionId];
-#pragma clang diagnostic pop
-            }
-            
+            NSURLSessionConfiguration *backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:backgroundSessionId];
+            backgroundConfiguration.discretionary = YES;
             
 #if TARGET_OS_IPHONE
             // iOS-only settings
@@ -146,10 +112,6 @@ static NSString * const kTSKBackgroundSessionIdentifierFormat = @"%@.TSKBackgrou
             backgroundConfiguration.sessionSendsLaunchEvents = NO;
 #endif
             
-#if (TARGET_OS_IPHONE) || ((!TARGET_OS_IPHONE) && (__MAC_OS_X_VERSION_MIN_REQUIRED >= 1100))
-            // On OS X discretionary is only available on 10.10
-            backgroundConfiguration.discretionary = YES;
-#endif
             // We have to use a delegate as background sessions can't use completion handlers
             _backgroundSession = [NSURLSession sessionWithConfiguration:backgroundConfiguration
                                                                delegate:self
@@ -160,21 +122,21 @@ static NSString * const kTSKBackgroundSessionIdentifierFormat = @"%@.TSKBackgrou
 }
 
 
-- (void) pinValidationFailedForHostname:(nonnull NSString *) serverHostname
-                                   port:(nullable NSNumber *) serverPort
-                       certificateChain:(nonnull NSArray *) certificateChain
-                          notedHostname:(nonnull NSString *) notedHostname
-                             reportURIs:(nonnull NSArray<NSURL *> *) reportURIs
-                      includeSubdomains:(BOOL) includeSubdomains
-                         enforcePinning:(BOOL) enforcePinning
-                              knownPins:(nonnull NSSet<NSData *> *) knownPins
-                       validationResult:(TSKPinValidationResult) validationResult
+- (void) pinValidationFailedForHostname:(nonnull NSString *)serverHostname
+                                   port:(nullable NSNumber *)serverPort
+                       certificateChain:(nonnull NSArray *)certificateChain
+                          notedHostname:(nonnull NSString *)notedHostname
+                             reportURIs:(nonnull NSArray<NSURL *> *)reportURIs
+                      includeSubdomains:(BOOL)includeSubdomains
+                         enforcePinning:(BOOL)enforcePinning
+                              knownPins:(nonnull NSSet<NSData *> *)knownPins
+                       validationResult:(TSKPinValidationResult)validationResult
                          expirationDate:(nullable NSDate *)knownPinsExpirationDate
 {
     // Default port to 0 if not specified
     if (serverPort == nil)
     {
-        serverPort = [NSNumber numberWithInt:0];
+        serverPort = @(0);
     }
     
     if (reportURIs == nil)
@@ -194,7 +156,7 @@ static NSString * const kTSKBackgroundSessionIdentifierFormat = @"%@.TSKBackgrou
                                                                   trustkitVersion:TrustKitVersion
                                                                          hostname:serverHostname
                                                                              port:serverPort
-                                                                         dateTime:[NSDate date] // Use the current time
+                                                                         dateTime:[NSDate date] // current date & time
                                                                     notedHostname:notedHostname
                                                                 includeSubdomains:includeSubdomains
                                                                    enforcePinning:enforcePinning
@@ -213,7 +175,8 @@ static NSString * const kTSKBackgroundSessionIdentifierFormat = @"%@.TSKBackgrou
     
     // Create a temporary file for storing the JSON data in ~/tmp
     NSURL *tmpDirURL = [NSURL fileURLWithPath:NSTemporaryDirectory() isDirectory:YES];
-    NSURL *tmpFileURL = [[tmpDirURL URLByAppendingPathComponent:[[NSProcessInfo processInfo] globallyUniqueString]] URLByAppendingPathExtension:@"tsk-report"];
+    NSURL *tmpFileURL = [[tmpDirURL URLByAppendingPathComponent:[[NSProcessInfo processInfo] globallyUniqueString]]
+                         URLByAppendingPathExtension:@"tsk-report"];
     
     // Write the JSON report data to the temporary file
     NSError *error;
