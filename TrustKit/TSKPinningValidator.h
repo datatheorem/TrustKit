@@ -70,7 +70,7 @@ typedef NSData* _Nullable(^HashCertificateBlock)(_Nonnull SecCertificateRef cert
  @param pinnedDomains Domain pinning configuration, typically obtained by parseTrustKitConfiguration()
  @param hashCache The hash cache to use. If nil, no caching is performed, performance may suffer.
  @param ignorePinsForUserTrustAnchors Set to true to ignore the trust anchors in the user trust store
- @param validationResultQueue The queue use when invoking the validationResultHandler
+ @param validationResultQueue The queue used when invoking the validationResultHandler
  @param validationResultHandler The callback invoked with validation results
  @return Initialized instance
  */
