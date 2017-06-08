@@ -10,6 +10,7 @@
  */
 
 #import "TSKBackgroundReporter.h"
+#import "../TrustKit.h"
 #import "../TSKTrustKitConfig.h"
 #import "../TSKLog.h"
 #import "TSKPinFailureReport.h"

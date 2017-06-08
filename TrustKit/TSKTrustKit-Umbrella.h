@@ -10,6 +10,9 @@
 #define TSKTrustKit_Umbrella_h
 
 #import <Foundation/Foundation.h>
-#import "TSKCommon.h"
+
+#import "TSKTrustKitConfig.h"
+#import "TSKPinValidatorResult.h"
+#import "Pinning/TSKPublicKeyAlgorithm.h"
 
 #endif /* TSKTrustKit_Umbrella_h */

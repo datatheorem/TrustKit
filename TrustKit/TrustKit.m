@@ -18,37 +18,13 @@
 #import "parse_configuration.h"
 #import "TSKPinningValidator.h"
 #import "TSKPinningValidatorResult.h"
+#import "TSKTrustKitConfig.h"
 #import "TSKLog.h"
 
-NSString * const TrustKitVersion = @"1.4.2";
-
-#pragma mark Configuration Constants
+NSString * const TrustKitVersion = @"1.5.0";
 
 // Info.plist key we read the public key hashes from
 static const NSString *kTSKConfiguration = @"TSKConfiguration";
-
-// General keys
-const TSKGlobalConfigurationKey kTSKSwizzleNetworkDelegates = @"TSKSwizzleNetworkDelegates";
-const TSKGlobalConfigurationKey kTSKPinnedDomains = @"TSKPinnedDomains";
-
-const TSKGlobalConfigurationKey kTSKIgnorePinningForUserDefinedTrustAnchors = @"TSKIgnorePinningForUserDefinedTrustAnchors";
-
-// Keys for each domain within the TSKPinnedDomains entry
-const TSKDomainConfigurationKey kTSKPublicKeyHashes = @"TSKPublicKeyHashes";
-const TSKDomainConfigurationKey kTSKEnforcePinning = @"TSKEnforcePinning";
-const TSKDomainConfigurationKey kTSKExcludeSubdomainFromParentPolicy = @"kSKExcludeSubdomainFromParentPolicy";
-
-const TSKDomainConfigurationKey kTSKIncludeSubdomains = @"TSKIncludeSubdomains";
-const TSKDomainConfigurationKey kTSKPublicKeyAlgorithms = @"TSKPublicKeyAlgorithms";
-const TSKDomainConfigurationKey kTSKReportUris = @"TSKReportUris";
-const TSKDomainConfigurationKey kTSKDisableDefaultReportUri = @"TSKDisableDefaultReportUri";
-const TSKDomainConfigurationKey kTSKExpirationDate = @"TSKExpirationDate";
-
-#pragma mark Public key Algorithms Constants
-const TSKSupportedAlgorithm kTSKAlgorithmRsa2048 = @"TSKAlgorithmRsa2048";
-const TSKSupportedAlgorithm kTSKAlgorithmRsa4096 = @"TSKAlgorithmRsa4096";
-const TSKSupportedAlgorithm kTSKAlgorithmEcDsaSecp256r1 = @"TSKAlgorithmEcDsaSecp256r1";
-const TSKSupportedAlgorithm kTSKAlgorithmEcDsaSecp384r1 = @"TSKAlgorithmEcDsaSecp384r1";
 
 #pragma mark TrustKit Global State
 // Shared TrustKit singleton instance
