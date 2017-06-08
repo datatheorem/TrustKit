@@ -11,6 +11,13 @@
 
 @import Foundation;
 
+
+/**
+ The version of TrustKit, such as "1.4.0".
+ */
+FOUNDATION_EXPORT NSString * const TrustKitVersion;
+
+
 #pragma mark Configuration Keys
 
 
