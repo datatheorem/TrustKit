@@ -11,15 +11,15 @@
 
 @import Foundation;
 
-@class TSKPinningValidator;
-@class TSKPinningValidatorResult;
+#ifndef _TRUSTKIT_
+#define _TRUSTKIT_
+    #import "TSKTrustKitConfig.h"
+    #import "TSKPublicKeyAlgorithm.h"
+    #import "TSKPinningValidator.h"
+    #import "TSKPinValidatorResult.h"
+#endif /* _TRUSTKIT_ */
 
 NS_ASSUME_NONNULL_BEGIN
-
-/**
- The version of TrustKit, such as "1.4.0".
- */
-FOUNDATION_EXPORT NSString * const TrustKitVersion;
 
 /** The default URI – maintained by DataTheorem – used for pinning failure reports
  if none is specified in the configuration.

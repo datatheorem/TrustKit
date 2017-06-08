@@ -14,7 +14,6 @@ Pod::Spec.new do |s|
   s.watchos.deployment_target = '3.0'
 
   s.source_files = ['TrustKit', 'TrustKit/**/*.{h,m,c}']
-  s.header_mappings_dir = 'TrustKit'
   s.public_header_files = [
     'TrustKit/TrustKit.h',
     'TrustKit/TSKTrustKitConfig.h',

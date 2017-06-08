@@ -16,12 +16,8 @@
 #import "Swizzling/TSKNSURLSessionDelegateProxy.h"
 #import "Pinning/TSKSPKIHashCache.h"
 #import "parse_configuration.h"
-#import "TSKPinningValidator.h"
 #import "TSKPinningValidatorResult.h"
-#import "TSKTrustKitConfig.h"
 #import "TSKLog.h"
-
-NSString * const TrustKitVersion = @"1.5.0";
 
 // Info.plist key we read the public key hashes from
 static const NSString *kTSKConfiguration = @"TSKConfiguration";

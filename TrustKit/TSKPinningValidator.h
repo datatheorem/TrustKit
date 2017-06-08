@@ -10,7 +10,7 @@
  */
 
 #import "TSKPinValidatorResult.h"
-#import "Pinning/TSKPublicKeyAlgorithm.h"
+#import "TSKPublicKeyAlgorithm.h"
 @import Foundation;
 
 @class TSKPinningValidatorResult;
