@@ -201,6 +201,20 @@ FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKDisableDefaultReportUri;
  */
 FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKExpirationDate;
 
+/**
+ An NSArray of additional trust anchors that can be used for validating the trust
+ chain of pinned certificates that do not end in an OS trusted CA anchor.
+ 
+ The entries in the array should each be a single PEM-encdoded public certificate.
+ 
+ ~~ SECURITY WARNING ~~
+ Misuse of this configuration option could potentially render your application
+ vulnerable to exploits since it bypasses the normal operating system trust store.
+ It is intended for enterprise scenarios where a company might be running their
+ own internal production-grade certificate authority for debugging purposes.
+ */
+FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKAdditionalTrustAnchors;
+
 #pragma mark Supported Public Key Algorithm Keys
 
 

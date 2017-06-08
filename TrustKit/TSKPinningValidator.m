@@ -15,6 +15,7 @@
 #import "TSKPinningValidatorResult.h"
 #import "Pinning/TSKSPKIHashCache.h"
 #import "Pinning/ssl_pin_verifier.h"
+#import "configuration_utils.h"
 #import "TrustKit.h"
 #import "TSKLog.h"
 
@@ -78,14 +79,37 @@
         }
         else if ([domainConfig[kTSKExcludeSubdomainFromParentPolicy] boolValue])
         {
-            // This is a subdomain that was explicitely excluded from the parent domain's policy
+            // This is a subdomain that was explicitly excluded from the parent domain's policy
             finalTrustDecision = TSKTrustDecisionDomainNotPinned;
         }
         else
         {
+            // Add bundled trust anchors if specified in the configuration
+            NSArray *additionalTrustAnchors = domainConfig[kTSKAdditionalTrustAnchors];
+            if (additionalTrustAnchors.count)
+            {
+                SecTrustSetAnchorCertificates(serverTrust, (__bridge CFArrayRef)additionalTrustAnchors);
+                SecTrustSetAnchorCertificatesOnly(serverTrust, false); // trust union of OS and user anchor certificate sets
+            }
+            
             // The domain has a pinning policy that has not expired
             // Look for one the configured public key pins in the server's evaluated certificate chain
-            TSKPinValidationResult validationResult = verifyPublicKeyPin(serverTrust, serverHostname, domainConfig[kTSKPublicKeyAlgorithms], domainConfig[kTSKPublicKeyHashes], self.spkiHashCache);
+            TSKPinValidationResult validationResult = verifyPublicKeyPin(serverTrust,
+                                                                         serverHostname,
+                                                                         domainConfig[kTSKPublicKeyAlgorithms],
+                                                                         domainConfig[kTSKPublicKeyHashes],
+                                                                         self.spkiHashCache);
+            
+            // Remove configured additional trust anchors
+            if (additionalTrustAnchors.count)
+            {
+                // SecTrustSetAnchorCertificates is documented to restore default anchor
+                // certs if NULL is passed as the second parameter, but that param is also
+                // annotated as non-null, causing a warning and confusion...
+                CFArrayRef nullArray = NULL;
+                SecTrustSetAnchorCertificates(serverTrust, nullArray);
+            }
+            
             if (validationResult == TSKPinValidationResultSuccess)
             {
                 // Pin validation was successful
@@ -127,6 +151,7 @@
                     }
                 }
             }
+            
             // Send a notification after all validation is done; this will also trigger a report if pin validation failed
             if (self.validationResultQueue && self.validationResultHandler) {
                 NSTimeInterval validationDuration = [NSDate timeIntervalSinceReferenceDate] - validationStartTime;
