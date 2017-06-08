@@ -222,9 +222,9 @@
 		8CE919251AEA07C5002B29AE /* ssl_pin_verifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE919241AEA07C5002B29AE /* ssl_pin_verifier.h */; };
 		8CE9192D1AEA0F7E002B29AE /* domain_registry.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE919291AEA0F7E002B29AE /* domain_registry.h */; };
 		FC1A09001E57A4BB0055B12C /* TSKPinningValidatorResult.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1A08FE1E57A4BB0055B12C /* TSKPinningValidatorResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FC1A09011E57A4BB0055B12C /* TSKPinningValidatorResult.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1A08FE1E57A4BB0055B12C /* TSKPinningValidatorResult.h */; };
-		FC1A09021E57A4BB0055B12C /* TSKPinningValidatorResult.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1A08FE1E57A4BB0055B12C /* TSKPinningValidatorResult.h */; };
-		FC1A09031E57A4BB0055B12C /* TSKPinningValidatorResult.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1A08FE1E57A4BB0055B12C /* TSKPinningValidatorResult.h */; };
+		FC1A09011E57A4BB0055B12C /* TSKPinningValidatorResult.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1A08FE1E57A4BB0055B12C /* TSKPinningValidatorResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FC1A09021E57A4BB0055B12C /* TSKPinningValidatorResult.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1A08FE1E57A4BB0055B12C /* TSKPinningValidatorResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FC1A09031E57A4BB0055B12C /* TSKPinningValidatorResult.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1A08FE1E57A4BB0055B12C /* TSKPinningValidatorResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FC1A09041E57A4BB0055B12C /* TSKPinningValidatorResult.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1A08FF1E57A4BB0055B12C /* TSKPinningValidatorResult.m */; };
 		FC1A09051E57A4BB0055B12C /* TSKPinningValidatorResult.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1A08FF1E57A4BB0055B12C /* TSKPinningValidatorResult.m */; };
 		FC1A09061E57A4BB0055B12C /* TSKPinningValidatorResult.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1A08FF1E57A4BB0055B12C /* TSKPinningValidatorResult.m */; };
@@ -240,6 +240,15 @@
 		FC4CAC7B1E958E0500DAC41E /* TSKReportsRateLimiterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4CAC7A1E958E0500DAC41E /* TSKReportsRateLimiterTests.m */; };
 		FC4CAC7C1E96891A00DAC41E /* TSKReportsRateLimiterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4CAC7A1E958E0500DAC41E /* TSKReportsRateLimiterTests.m */; };
 		FC4CAC7D1E96891B00DAC41E /* TSKReportsRateLimiterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4CAC7A1E958E0500DAC41E /* TSKReportsRateLimiterTests.m */; };
+		FCE7D62D1EE9F6610081EEEF /* TSKTrustKitConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE7D62C1EE9F6610081EEEF /* TSKTrustKitConfig.m */; };
+		FCE7D62E1EE9F6610081EEEF /* TSKTrustKitConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE7D62C1EE9F6610081EEEF /* TSKTrustKitConfig.m */; };
+		FCE7D62F1EE9F6610081EEEF /* TSKTrustKitConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE7D62C1EE9F6610081EEEF /* TSKTrustKitConfig.m */; };
+		FCE7D6301EE9F6610081EEEF /* TSKTrustKitConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE7D62C1EE9F6610081EEEF /* TSKTrustKitConfig.m */; };
+		FCE7D6311EE9F66A0081EEEF /* TSKTrustKitConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE7D62C1EE9F6610081EEEF /* TSKTrustKitConfig.m */; };
+		FCE7D6321EE9FDFD0081EEEF /* TSKPublicKeyAlgorithm.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1A09121E57C6820055B12C /* TSKPublicKeyAlgorithm.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FCE7D6331EE9FE080081EEEF /* TSKPublicKeyAlgorithm.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1A09121E57C6820055B12C /* TSKPublicKeyAlgorithm.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FCE7D6341EE9FE260081EEEF /* TSKPublicKeyAlgorithm.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1A09121E57C6820055B12C /* TSKPublicKeyAlgorithm.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FCE7D6351EE9FE2F0081EEEF /* TSKPublicKeyAlgorithm.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1A09121E57C6820055B12C /* TSKPublicKeyAlgorithm.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -313,9 +322,8 @@
 		6B032D3F1AF1AEB600EAFA69 /* TSKReporterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSKReporterTests.m; sourceTree = "<group>"; };
 		6B2B06AC1B05154A00FC749E /* TSKBackgroundReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKBackgroundReporter.h; path = Reporting/TSKBackgroundReporter.h; sourceTree = "<group>"; };
 		6B2B06AE1B05157400FC749E /* TSKBackgroundReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKBackgroundReporter.m; path = Reporting/TSKBackgroundReporter.m; sourceTree = "<group>"; };
-		8C0C90111E3C196A003851A8 /* TrustKit.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = TrustKit.modulemap; sourceTree = "<group>"; };
-		8C0C90471E3C41F3003851A8 /* TSKPinningValidator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TSKPinningValidator.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
-		8C0C90481E3C41F3003851A8 /* TSKPinningValidator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TSKPinningValidator.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		8C0C90471E3C41F3003851A8 /* TSKPinningValidator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = TSKPinningValidator.h; sourceTree = "<group>"; };
+		8C0C90481E3C41F3003851A8 /* TSKPinningValidator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TSKPinningValidator.m; sourceTree = "<group>"; };
 		8C15F99E1B16094D00F06C0E /* TSKPinFailureReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKPinFailureReport.h; path = Reporting/TSKPinFailureReport.h; sourceTree = "<group>"; };
 		8C15F99F1B16094D00F06C0E /* TSKPinFailureReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKPinFailureReport.m; path = Reporting/TSKPinFailureReport.m; sourceTree = "<group>"; };
 		8C15F9A31B17564400F06C0E /* TSKPinConfigurationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKPinConfigurationTests.m; sourceTree = "<group>"; };
@@ -325,11 +333,10 @@
 		8C5D98B21CEFF079008E654B /* parse_configuration.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = parse_configuration.m; sourceTree = "<group>"; };
 		8C5D98B61CEFF103008E654B /* parse_configuration.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = parse_configuration.h; sourceTree = "<group>"; };
 		8C8480471A896EE30017C155 /* TrustKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TrustKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8C84804B1A896EE30017C155 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8C84804C1A896EE30017C155 /* TrustKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrustKit.h; sourceTree = "<group>"; };
 		8C8480521A896EE30017C155 /* TrustKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrustKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C8480581A896EE30017C155 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8C84806C1A896F660017C155 /* TrustKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TrustKit.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		8C84806C1A896F660017C155 /* TrustKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TrustKit.m; sourceTree = "<group>"; };
 		8C84CBB21D6E0981009B3E7D /* TrustKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TrustKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C84CBDD1D6E1718009B3E7D /* TrustKit tvOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TrustKit tvOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8C84CC071D6E3C67009B3E7D /* vendor_identifier.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = vendor_identifier.h; path = Reporting/vendor_identifier.h; sourceTree = "<group>"; };
@@ -393,8 +400,11 @@
 		FC4CAC7A1E958E0500DAC41E /* TSKReportsRateLimiterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKReportsRateLimiterTests.m; sourceTree = "<group>"; };
 		FC4CAC7E1E96917B00DAC41E /* TSKTrustKitConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSKTrustKitConfig.h; sourceTree = "<group>"; };
 		FC4CAC7F1E96A2D600DAC41E /* TSKLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSKLog.h; sourceTree = "<group>"; };
-		FC4CAC801E96A95D00DAC41E /* TSKTrustKit-Umbrella.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TSKTrustKit-Umbrella.h"; sourceTree = "<group>"; };
 		FCD0CC031E96ADF00076D431 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		FCE7D62C1EE9F6610081EEEF /* TSKTrustKitConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKTrustKitConfig.m; sourceTree = "<group>"; };
+		FCE7D6381EEA04180081EEEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FCE7D6391EEA04180081EEEF /* TrustKit-umbrella.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TrustKit-umbrella.h"; sourceTree = "<group>"; };
+		FCE7D63A1EEA04180081EEEF /* TrustKit.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = TrustKit.modulemap; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -547,24 +557,15 @@
 				8C84806C1A896F660017C155 /* TrustKit.m */,
 				FC4CAC7F1E96A2D600DAC41E /* TSKLog.h */,
 				FC4CAC7E1E96917B00DAC41E /* TSKTrustKitConfig.h */,
+				FCE7D62C1EE9F6610081EEEF /* TSKTrustKitConfig.m */,
 				8C0C90471E3C41F3003851A8 /* TSKPinningValidator.h */,
 				8C0C90481E3C41F3003851A8 /* TSKPinningValidator.m */,
 				FC1A08FD1E579F630055B12C /* TSKPinValidatorResult.h */,
 				FC1A08FE1E57A4BB0055B12C /* TSKPinningValidatorResult.h */,
 				FC1A08FF1E57A4BB0055B12C /* TSKPinningValidatorResult.m */,
-				8C84804A1A896EE30017C155 /* Supporting Files */,
+				FCE7D6371EEA04180081EEEF /* Framework */,
 			);
 			path = TrustKit;
-			sourceTree = "<group>";
-		};
-		8C84804A1A896EE30017C155 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				8C0C90111E3C196A003851A8 /* TrustKit.modulemap */,
-				8C84804B1A896EE30017C155 /* Info.plist */,
-				FC4CAC801E96A95D00DAC41E /* TSKTrustKit-Umbrella.h */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		8C8480561A896EE30017C155 /* TrustKitTests */ = {
@@ -770,6 +771,16 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		FCE7D6371EEA04180081EEEF /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				FCE7D6381EEA04180081EEEF /* Info.plist */,
+				FCE7D6391EEA04180081EEEF /* TrustKit-umbrella.h */,
+				FCE7D63A1EEA04180081EEEF /* TrustKit.modulemap */,
+			);
+			path = Framework;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -779,6 +790,7 @@
 			files = (
 				8C84CCDA1D6E5D5A009B3E7D /* registry_types.h in Headers */,
 				FC1A09001E57A4BB0055B12C /* TSKPinningValidatorResult.h in Headers */,
+				FCE7D6321EE9FDFD0081EEEF /* TSKPublicKeyAlgorithm.h in Headers */,
 				8C0C904E1E3C4210003851A8 /* TSKPinningValidator.h in Headers */,
 				8CE9192D1AEA0F7E002B29AE /* domain_registry.h in Headers */,
 				8CD5F7491BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.h in Headers */,
@@ -804,7 +816,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC1A09021E57A4BB0055B12C /* TSKPinningValidatorResult.h in Headers */,
 				8C84CCDC1D6E5D5A009B3E7D /* registry_types.h in Headers */,
+				FCE7D6341EE9FE260081EEEF /* TSKPublicKeyAlgorithm.h in Headers */,
 				8C0C90501E3C4212003851A8 /* TSKPinningValidator.h in Headers */,
 				8C84CBA21D6E0981009B3E7D /* domain_registry.h in Headers */,
 				8C84CBA41D6E0981009B3E7D /* TSKNSURLSessionDelegateProxy.h in Headers */,
@@ -819,7 +833,6 @@
 				8C84CBA81D6E0981009B3E7D /* TSKReportsRateLimiter.h in Headers */,
 				8C84CCEE1D6E5D5A009B3E7D /* trie_search.h in Headers */,
 				8C84CBA91D6E0981009B3E7D /* RSSwizzle.h in Headers */,
-				FC1A09021E57A4BB0055B12C /* TSKPinningValidatorResult.h in Headers */,
 				8C84CBAA1D6E0981009B3E7D /* reporting_utils.h in Headers */,
 				8C84CBAB1D6E0981009B3E7D /* TrustKit.h in Headers */,
 				8C84CBAC1D6E0981009B3E7D /* TSKPinFailureReport.h in Headers */,
@@ -831,8 +844,10 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC1A09011E57A4BB0055B12C /* TSKPinningValidatorResult.h in Headers */,
 				8C84CCDB1D6E5D5A009B3E7D /* registry_types.h in Headers */,
 				8C0C904F1E3C4212003851A8 /* TSKPinningValidator.h in Headers */,
+				FCE7D6331EE9FE080081EEEF /* TSKPublicKeyAlgorithm.h in Headers */,
 				8CA6CC251BAE2B6A00BDA419 /* TrustKit.h in Headers */,
 				8CD5F74A1BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.h in Headers */,
 				8C4346D71E5B894A008023F9 /* configuration_utils.h in Headers */,
@@ -848,7 +863,6 @@
 				8CA6CC211BAE2B6A00BDA419 /* ssl_pin_verifier.h in Headers */,
 				8C84CCED1D6E5D5A009B3E7D /* trie_search.h in Headers */,
 				8CD5F7431BCB06F4005801D8 /* RSSwizzle.h in Headers */,
-				FC1A09011E57A4BB0055B12C /* TSKPinningValidatorResult.h in Headers */,
 				8CA6CC191BAE2B6600BDA419 /* TSKBackgroundReporter.h in Headers */,
 				8CA6CC271BAE2B7000BDA419 /* domain_registry.h in Headers */,
 				8CA6CC1D1BAE2B6600BDA419 /* reporting_utils.h in Headers */,
@@ -859,7 +873,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC1A09031E57A4BB0055B12C /* TSKPinningValidatorResult.h in Headers */,
 				8CC5D2371D6E64D10074F515 /* registry_types.h in Headers */,
+				FCE7D6351EE9FE2F0081EEEF /* TSKPublicKeyAlgorithm.h in Headers */,
 				8C0C90511E3C4213003851A8 /* TSKPinningValidator.h in Headers */,
 				8CC5D2381D6E64D10074F515 /* domain_registry.h in Headers */,
 				8CC5D23A1D6E64D10074F515 /* TSKNSURLSessionDelegateProxy.h in Headers */,
@@ -874,7 +890,6 @@
 				8CC5D2431D6E64D10074F515 /* TSKReportsRateLimiter.h in Headers */,
 				8CC5D2441D6E64D10074F515 /* trie_search.h in Headers */,
 				8CC5D2451D6E64D10074F515 /* RSSwizzle.h in Headers */,
-				FC1A09031E57A4BB0055B12C /* TSKPinningValidatorResult.h in Headers */,
 				8CC5D2461D6E64D10074F515 /* reporting_utils.h in Headers */,
 				8CC5D2471D6E64D10074F515 /* TrustKit.h in Headers */,
 				8CC5D2481D6E64D10074F515 /* TSKPinFailureReport.h in Headers */,
@@ -1167,6 +1182,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCE7D62D1EE9F6610081EEEF /* TSKTrustKitConfig.m in Sources */,
 				8C84CCD11D6E5D5A009B3E7D /* init_registry_tables.c in Sources */,
 				8CE919221AEA077F002B29AE /* ssl_pin_verifier.m in Sources */,
 				8C84CC0C1D6E3C67009B3E7D /* vendor_identifier.m in Sources */,
@@ -1208,6 +1224,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCE7D62F1EE9F6610081EEEF /* TSKTrustKitConfig.m in Sources */,
 				8C84CCD31D6E5D5A009B3E7D /* init_registry_tables.c in Sources */,
 				8C84CB911D6E0981009B3E7D /* ssl_pin_verifier.m in Sources */,
 				8C84CC0F1D6E3C67009B3E7D /* vendor_identifier.m in Sources */,
@@ -1251,6 +1268,7 @@
 			files = (
 				0DB3B67D1DA3B26700DA730D /* assert.c in Sources */,
 				0DB3B67E1DA3B26700DA730D /* registry_search.c in Sources */,
+				FCE7D6311EE9F66A0081EEEF /* TSKTrustKitConfig.m in Sources */,
 				0DB3B67F1DA3B26700DA730D /* trie_search.c in Sources */,
 				0DB3B67C1DA3B24100DA730D /* init_registry_tables.c in Sources */,
 				8C84CC0D1D6E3C67009B3E7D /* vendor_identifier.m in Sources */,
@@ -1273,6 +1291,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCE7D62E1EE9F6610081EEEF /* TSKTrustKitConfig.m in Sources */,
 				8C84CCD21D6E5D5A009B3E7D /* init_registry_tables.c in Sources */,
 				8C84CC0E1D6E3C67009B3E7D /* vendor_identifier.m in Sources */,
 				FC1A090F1E57AC450055B12C /* TSKSPKIHashCache.m in Sources */,
@@ -1314,6 +1333,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCE7D6301EE9F6610081EEEF /* TSKTrustKitConfig.m in Sources */,
 				8CC5D2241D6E64D10074F515 /* init_registry_tables.c in Sources */,
 				8CC5D2251D6E64D10074F515 /* ssl_pin_verifier.m in Sources */,
 				8CC5D2261D6E64D10074F515 /* vendor_identifier.m in Sources */,
@@ -1383,7 +1403,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
 				ENABLE_BITCODE = YES;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1409,7 +1428,8 @@
 				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MODULEMAP_FILE = "$(SRCROOT)/TrustKit/TrustKit.modulemap";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/**";
+				MODULEMAP_FILE = "$(SRCROOT)/TrustKit/Framework/TrustKit.modulemap";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -1446,7 +1466,6 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
 				ENABLE_BITCODE = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1467,7 +1486,8 @@
 				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MODULEMAP_FILE = "$(SRCROOT)/TrustKit/TrustKit.modulemap";
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/**";
+				MODULEMAP_FILE = "$(SRCROOT)/TrustKit/Framework/TrustKit.modulemap";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
@@ -1492,12 +1512,11 @@
 				ENABLE_BITCODE = "$(inherited)";
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				GENERATE_PKGINFO_FILE = YES;
-				INFOPLIST_FILE = TrustKit/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/TrustKit/Framework/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MODULEMAP_FILE = "$(SRCROOT)/TrustKit/TrustKit.modulemap";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1523,12 +1542,11 @@
 				ENABLE_BITCODE = "$(inherited)";
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				GENERATE_PKGINFO_FILE = YES;
-				INFOPLIST_FILE = TrustKit/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/TrustKit/Framework/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				MODULEMAP_FILE = "$(SRCROOT)/TrustKit/TrustKit.modulemap";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -1559,7 +1577,6 @@
 				INFOPLIST_FILE = TrustKitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks @loader_path/../Frameworks @executable_path/../Frameworks";
-				MODULEMAP_FILE = "";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1585,7 +1602,6 @@
 				INFOPLIST_FILE = TrustKitTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks @loader_path/../Frameworks @executable_path/../Frameworks";
-				MODULEMAP_FILE = "";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1609,7 +1625,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = "$(inherited)";
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/TrustKit/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/TrustKit/Framework/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1641,7 +1657,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = "$(inherited)";
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/TrustKit/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/TrustKit/Framework/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1677,7 +1693,6 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = TrustKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks @loader_path/../Frameworks @executable_path/../Frameworks";
-				MODULEMAP_FILE = "";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1704,7 +1719,6 @@
 				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = TrustKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks @loader_path/../Frameworks @executable_path/../Frameworks";
-				MODULEMAP_FILE = "";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1773,7 +1787,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/TrustKit/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/TrustKit/Framework/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
@@ -1802,7 +1816,7 @@
 				FRAMEWORK_VERSION = A;
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/TrustKit/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/TrustKit/Framework/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
@@ -1831,7 +1845,6 @@
 				INFOPLIST_FILE = TrustKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				MODULEMAP_FILE = "";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.TrustKit-OS-XTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1856,7 +1869,6 @@
 				INFOPLIST_FILE = TrustKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				MODULEMAP_FILE = "";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.TrustKit-OS-XTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1879,7 +1891,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = "$(inherited)";
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/TrustKit/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/TrustKit/Framework/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1911,7 +1923,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				ENABLE_BITCODE = "$(inherited)";
 				GCC_GENERATE_TEST_COVERAGE_FILES = YES;
-				INFOPLIST_FILE = "$(SRCROOT)/TrustKit/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/TrustKit/Framework/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

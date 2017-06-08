@@ -10,7 +10,9 @@
  */
 
 #import <XCTest/XCTest.h>
+
 #import "../TrustKit/TrustKit.h"
+#import "../TrustKit/TSKTrustKitConfig.h"
 #import "../TrustKit/Pinning/ssl_pin_verifier.h"
 #import "../TrustKit/Pinning/TSKPublicKeyAlgorithm.h"
 #import "../TrustKit/parse_configuration.h"

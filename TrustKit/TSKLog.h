@@ -1,6 +1,6 @@
 /*
  
- TSKCommon.h
+ TSKLog.h
  TrustKit
  
  Copyright 2015 The TrustKit Project Authors
@@ -11,8 +11,8 @@
 
 // Common header with internal constants and defines.
 
-#ifndef TSKCommon_h
-#define TSKCommon_h
+#ifndef TSKLog_h
+#define TSKLog_h
 
 // The logging function we use within TrustKit
 #ifdef DEBUG
@@ -21,4 +21,4 @@
 #define TSKLog(format, ...)
 #endif
 
-#endif /* TSKCommon_h */
+#endif /* TSKLog_h */

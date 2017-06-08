@@ -11,7 +11,6 @@
 
 @import Foundation;
 
-#pragma mark TrustKit Version Number
 
 /**
  The version of TrustKit, such as "1.4.0".
@@ -201,8 +200,6 @@ FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKDisableDefaultReportUri;
  pin set, such as when the user disables App updates.
  */
 FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKExpirationDate;
-
-
 
 #pragma mark Supported Public Key Algorithm Keys
 

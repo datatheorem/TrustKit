@@ -9,18 +9,22 @@
  
  */
 
-#import "TSKTrustKitConfig.h"
 @import Foundation;
 
-@class TSKPinningValidator;
-@class TSKPinningValidatorResult;
+#ifndef _TRUSTKIT_
+#define _TRUSTKIT_
+    #import "TSKTrustKitConfig.h"
+    #import "TSKPublicKeyAlgorithm.h"
+    #import "TSKPinningValidator.h"
+    #import "TSKPinValidatorResult.h"
+#endif /* _TRUSTKIT_ */
 
 NS_ASSUME_NONNULL_BEGIN
 
 /** The default URI – maintained by DataTheorem – used for pinning failure reports
  if none is specified in the configuration.
  */
-extern NSString * const kTSKDefaultReportUri;
+FOUNDATION_EXPORT NSString * const kTSKDefaultReportUri;
 
 /**
  `TrustKit` is a class for programmatically configuring the global SSL pinning policy 
