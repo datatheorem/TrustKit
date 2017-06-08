@@ -20,6 +20,9 @@
 
 TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverHostname, NSArray<NSNumber *> *supportedAlgorithms, NSSet<NSData *> *knownPins, TSKSPKIHashCache *hashCache)
 {
+    NSCParameterAssert(serverTrust);
+    NSCParameterAssert(supportedAlgorithms);
+    NSCParameterAssert(knownPins);
     if ((serverTrust == NULL) || (supportedAlgorithms == nil) || (knownPins == nil))
     {
         TSKLog(@"Invalid pinning parameters for %@", serverHostname);

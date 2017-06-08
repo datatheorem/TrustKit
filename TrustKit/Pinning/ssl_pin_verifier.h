@@ -14,8 +14,9 @@
 
 @class TSKSPKIHashCache;
 
-// Figure out if a specific domain is pinned and retrieve this domain's configuration key; returns nil if no configuration was found
-NSString *getPinningConfigurationKeyForDomain(NSString *hostname, NSDictionary *trustKitConfiguration);
-
 // Validate that the server trust contains at least one of the know/expected pins
-TSKPinValidationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverHostname, NSArray<NSNumber *> *supportedAlgorithms, NSSet<NSData *> *knownPins, TSKSPKIHashCache *hashCache);
+TSKPinValidationResult verifyPublicKeyPin(SecTrustRef _Nonnull serverTrust,
+                                          NSString * _Nonnull serverHostname,
+                                          NSArray<NSNumber *> * _Nonnull supportedAlgorithms,
+                                          NSSet<NSData *> * _Nonnull knownPins,
+                                          TSKSPKIHashCache * _Nullable hashCache);
