@@ -41,6 +41,15 @@ typedef NSData* _Nullable(^HashCertificateBlock)(_Nonnull SecCertificateRef cert
 /// @name Manual SSL Pinning Validation
 ///------------------------------------
 
+/**
+ If this property returns YES, pinning may include any additional trust anchors
+ provided in a domain configuration under the kTSKAdditionalTrustAnchors key.
+
+ This property is YES only when the preprocessor flag DEBUG is set to 1 (the
+ default behavior for the "Debug" configuration of an Xcode project). Subclasses
+ may override this method – with extreme caution – to alter this behavior.
+ */
+@property (nonatomic, class, readonly) BOOL allowsAdditionalTrustAnchors;
 
 /**
  Domain pinning configuration, typically obtained by parseTrustKitConfiguration()

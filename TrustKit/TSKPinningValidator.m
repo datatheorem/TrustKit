@@ -25,6 +25,18 @@
 
 @implementation TSKPinningValidator
 
++ (BOOL)allowsAdditionalTrustAnchors
+{
+    static const BOOL allowAdditionalTrustAnchors = {
+#if DEBUG == 1
+        YES
+#else
+        NO
+#endif
+    };
+    return allowAdditionalTrustAnchors;
+}
+
 #pragma mark Instance Methods
 
 - (instancetype _Nullable)initWithPinnedDomainConfig:(NSDictionary * _Nullable)pinnedDomains
@@ -85,11 +97,14 @@
         else
         {
             // Add bundled trust anchors if specified in the configuration
-            NSArray *additionalTrustAnchors = domainConfig[kTSKAdditionalTrustAnchors];
-            if (additionalTrustAnchors.count)
-            {
-                SecTrustSetAnchorCertificates(serverTrust, (__bridge CFArrayRef)additionalTrustAnchors);
-                SecTrustSetAnchorCertificatesOnly(serverTrust, false); // trust union of OS and user anchor certificate sets
+            if (self.class.allowsAdditionalTrustAnchors) {
+                NSArray *additionalTrustAnchors = domainConfig[kTSKAdditionalTrustAnchors];
+                if (additionalTrustAnchors.count)
+                {
+                    TSKLog(@"Pin validation includes %ld potentially unsafe trust anchors", (long)additionalTrustAnchors.count);
+                    SecTrustSetAnchorCertificates(serverTrust, (__bridge CFArrayRef)additionalTrustAnchors);
+                    SecTrustSetAnchorCertificatesOnly(serverTrust, false); // trust union of OS and user anchor certificate sets
+                }
             }
             
             // The domain has a pinning policy that has not expired
@@ -99,16 +114,6 @@
                                                                          domainConfig[kTSKPublicKeyAlgorithms],
                                                                          domainConfig[kTSKPublicKeyHashes],
                                                                          self.spkiHashCache);
-            
-            // Remove configured additional trust anchors
-            if (additionalTrustAnchors.count)
-            {
-                // SecTrustSetAnchorCertificates is documented to restore default anchor
-                // certs if NULL is passed as the second parameter, but that param is also
-                // annotated as non-null, causing a warning and confusion...
-                CFArrayRef nullArray = NULL;
-                SecTrustSetAnchorCertificates(serverTrust, nullArray);
-            }
             
             if (validationResult == TSKPinValidationResultSuccess)
             {
