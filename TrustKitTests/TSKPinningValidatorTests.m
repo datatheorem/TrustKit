@@ -37,6 +37,16 @@
 - (void)resetSubjectPublicKeyInfoDiskCache;
 @end
 
+static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
+@interface TestPinningValidator: TSKPinningValidator
+@end
+@implementation TestPinningValidator
++ (BOOL)allowsAdditionalTrustAnchors
+{
+    return AllowsAdditionalTrustAnchors;
+}
+@end
+
 
 @interface TSKPinningValidatorTests : XCTestCase
 @end
@@ -1079,6 +1089,68 @@
                    TSKTrustDecisionDomainNotPinned);
     
     CFRelease(trust);
+}
+
+- (void)testAdditionalTrustAnchors
+{
+    // Load and set custom trust anchor
+    SecCertificateRef anchor = [TSKCertificateUtils createCertificateFromPem:@"anchor-ca.cert"];
+    CFArrayRef anchors = CFArrayCreate(NULL, (const void **)&anchor, 1, &kCFTypeArrayCallBacks);
+    CFRelease(anchor);
+    
+    NSDictionary *config = @{ kTSKPinnedDomains : @{
+                                      @"fake.yahoo.com" : @{
+                                              kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                                              kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0="],
+                                              kTSKAdditionalTrustAnchors : (__bridge_transfer NSArray *)anchors } } };
+    
+    TestPinningValidator *pinningValidator = [[TestPinningValidator alloc] initWithPinnedDomainConfig:config
+                                                                                            hashCache:spkiCache
+                                                                        ignorePinsForUserTrustAnchors:YES
+                                                                                validationResultQueue:dispatch_get_main_queue()
+                                                                              validationResultHandler:^(TSKPinningValidatorResult *x) {}];
+    XCTAssertTrue(TestPinningValidator.allowsAdditionalTrustAnchors);
+    
+    SecTrustRef(^createTestServerTrust)(void) = ^() {
+        // Create the server trust for this chain
+        SecCertificateRef intermediate = [TSKCertificateUtils createCertificateFromPem:@"anchor-intermediate.cert"];
+        SecCertificateRef leaf = [TSKCertificateUtils createCertificateFromPem:@"anchor-fake.yahoo.com.cert"];
+        SecCertificateRef certChainArray[2] = {leaf, intermediate};
+        
+        SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
+                                                                 arrayLength:2
+                                                          anchorCertificates:(const void **)NULL
+                                                                 arrayLength:0];
+        CFRelease(leaf);
+        CFRelease(intermediate);
+        
+        // Set a date in which these certificates are valid (any time after July 2017 is fine)
+        SecTrustSetVerifyDate(trust, (__bridge CFDateRef)[NSDate dateWithTimeIntervalSince1970:1497145990]);
+        return trust;
+    };
+    
+    SecTrustRef serverTrust;
+    TSKTrustDecision decision;
+    
+    // Trust anchors should be applied only if the allowsAdditionalTrustAnchors
+    // class property returns true
+    {
+        AllowsAdditionalTrustAnchors = YES;
+        serverTrust = createTestServerTrust();
+        decision = [pinningValidator evaluateTrust:serverTrust forHostname:@"fake.yahoo.com"];
+        XCTAssertEqual(decision, TSKTrustDecisionShouldAllowConnection);
+        CFRelease(serverTrust);
+    }
+    
+    // Trust anchors should be ignored if the allowsAdditionalTrustAnchors class
+    // property returns false
+    {
+        AllowsAdditionalTrustAnchors = NO;
+        serverTrust = createTestServerTrust();
+        decision = [pinningValidator evaluateTrust:serverTrust forHostname:@"fake.yahoo.com"];
+        XCTAssertEqual(decision, TSKTrustDecisionShouldBlockConnection);
+        CFRelease(serverTrust);
+    }
 }
 
 @end

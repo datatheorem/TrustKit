@@ -221,6 +221,12 @@
 		8CE919221AEA077F002B29AE /* ssl_pin_verifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE919211AEA077F002B29AE /* ssl_pin_verifier.m */; };
 		8CE919251AEA07C5002B29AE /* ssl_pin_verifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE919241AEA07C5002B29AE /* ssl_pin_verifier.h */; };
 		8CE9192D1AEA0F7E002B29AE /* domain_registry.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE919291AEA0F7E002B29AE /* domain_registry.h */; };
+		FC049B3A1EECD1B000FDC5F4 /* anchor-ca.cert.pem in Resources */ = {isa = PBXBuildFile; fileRef = FCC1DD051EECD19E00AB3D81 /* anchor-ca.cert.pem */; };
+		FC049B3B1EECD1B000FDC5F4 /* anchor-fake.yahoo.com.cert.pem in Resources */ = {isa = PBXBuildFile; fileRef = FCC1DD061EECD19E00AB3D81 /* anchor-fake.yahoo.com.cert.pem */; };
+		FC049B3C1EECD1B000FDC5F4 /* anchor-intermediate.cert.pem in Resources */ = {isa = PBXBuildFile; fileRef = FCC1DD071EECD19E00AB3D81 /* anchor-intermediate.cert.pem */; };
+		FC049B3D1EECD1B100FDC5F4 /* anchor-ca.cert.pem in Resources */ = {isa = PBXBuildFile; fileRef = FCC1DD051EECD19E00AB3D81 /* anchor-ca.cert.pem */; };
+		FC049B3E1EECD1B100FDC5F4 /* anchor-fake.yahoo.com.cert.pem in Resources */ = {isa = PBXBuildFile; fileRef = FCC1DD061EECD19E00AB3D81 /* anchor-fake.yahoo.com.cert.pem */; };
+		FC049B3F1EECD1B100FDC5F4 /* anchor-intermediate.cert.pem in Resources */ = {isa = PBXBuildFile; fileRef = FCC1DD071EECD19E00AB3D81 /* anchor-intermediate.cert.pem */; };
 		FC1A09001E57A4BB0055B12C /* TSKPinningValidatorResult.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1A08FE1E57A4BB0055B12C /* TSKPinningValidatorResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FC1A09011E57A4BB0055B12C /* TSKPinningValidatorResult.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1A08FE1E57A4BB0055B12C /* TSKPinningValidatorResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FC1A09021E57A4BB0055B12C /* TSKPinningValidatorResult.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1A08FE1E57A4BB0055B12C /* TSKPinningValidatorResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -240,6 +246,9 @@
 		FC4CAC7B1E958E0500DAC41E /* TSKReportsRateLimiterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4CAC7A1E958E0500DAC41E /* TSKReportsRateLimiterTests.m */; };
 		FC4CAC7C1E96891A00DAC41E /* TSKReportsRateLimiterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4CAC7A1E958E0500DAC41E /* TSKReportsRateLimiterTests.m */; };
 		FC4CAC7D1E96891B00DAC41E /* TSKReportsRateLimiterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4CAC7A1E958E0500DAC41E /* TSKReportsRateLimiterTests.m */; };
+		FCC1DD081EECD19E00AB3D81 /* anchor-ca.cert.pem in Resources */ = {isa = PBXBuildFile; fileRef = FCC1DD051EECD19E00AB3D81 /* anchor-ca.cert.pem */; };
+		FCC1DD091EECD19E00AB3D81 /* anchor-fake.yahoo.com.cert.pem in Resources */ = {isa = PBXBuildFile; fileRef = FCC1DD061EECD19E00AB3D81 /* anchor-fake.yahoo.com.cert.pem */; };
+		FCC1DD0A1EECD19E00AB3D81 /* anchor-intermediate.cert.pem in Resources */ = {isa = PBXBuildFile; fileRef = FCC1DD071EECD19E00AB3D81 /* anchor-intermediate.cert.pem */; };
 		FCE7D62D1EE9F6610081EEEF /* TSKTrustKitConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE7D62C1EE9F6610081EEEF /* TSKTrustKitConfig.m */; };
 		FCE7D62E1EE9F6610081EEEF /* TSKTrustKitConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE7D62C1EE9F6610081EEEF /* TSKTrustKitConfig.m */; };
 		FCE7D62F1EE9F6610081EEEF /* TSKTrustKitConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE7D62C1EE9F6610081EEEF /* TSKTrustKitConfig.m */; };
@@ -400,6 +409,9 @@
 		FC4CAC7A1E958E0500DAC41E /* TSKReportsRateLimiterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKReportsRateLimiterTests.m; sourceTree = "<group>"; };
 		FC4CAC7E1E96917B00DAC41E /* TSKTrustKitConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSKTrustKitConfig.h; sourceTree = "<group>"; };
 		FC4CAC7F1E96A2D600DAC41E /* TSKLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSKLog.h; sourceTree = "<group>"; };
+		FCC1DD051EECD19E00AB3D81 /* anchor-ca.cert.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "anchor-ca.cert.pem"; sourceTree = "<group>"; };
+		FCC1DD061EECD19E00AB3D81 /* anchor-fake.yahoo.com.cert.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "anchor-fake.yahoo.com.cert.pem"; sourceTree = "<group>"; };
+		FCC1DD071EECD19E00AB3D81 /* anchor-intermediate.cert.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "anchor-intermediate.cert.pem"; sourceTree = "<group>"; };
 		FCD0CC031E96ADF00076D431 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		FCE7D62C1EE9F6610081EEEF /* TSKTrustKitConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKTrustKitConfig.m; sourceTree = "<group>"; };
 		FCE7D6381EEA04180081EEEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -475,6 +487,7 @@
 		070868B31ADFF68200E5AFDC /* Certificates */ = {
 			isa = PBXGroup;
 			children = (
+				FCC1DD041EECD19E00AB3D81 /* TrustAnchor */,
 				8CBA05B31E28739D0045D8B3 /* ECDSA sec384r1 */,
 				8CC78B1B1B1B552100523A25 /* RSA 4096 */,
 				8CC78B1A1B1B551400523A25 /* RSA 2048 */,
@@ -761,6 +774,17 @@
 				8C4346D51E5B894A008023F9 /* configuration_utils.m */,
 			);
 			name = Configuration;
+			sourceTree = "<group>";
+		};
+		FCC1DD041EECD19E00AB3D81 /* TrustAnchor */ = {
+			isa = PBXGroup;
+			children = (
+				FCC1DD051EECD19E00AB3D81 /* anchor-ca.cert.pem */,
+				FCC1DD061EECD19E00AB3D81 /* anchor-fake.yahoo.com.cert.pem */,
+				FCC1DD071EECD19E00AB3D81 /* anchor-intermediate.cert.pem */,
+			);
+			name = TrustAnchor;
+			path = Certificates/TrustAnchor;
 			sourceTree = "<group>";
 		};
 		FCD0CC021E96ADF00076D431 /* Frameworks */ = {
@@ -1111,9 +1135,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CBA05D81E28AAA40045D8B3 /* GoodIntermediateCA.der in Resources */,
+				FCC1DD091EECD19E00AB3D81 /* anchor-fake.yahoo.com.cert.pem in Resources */,
 				8CBA05E51E294CC30045D8B3 /* GeoTrust_Primary_CA_G2_ECC.der in Resources */,
+				FCC1DD0A1EECD19E00AB3D81 /* anchor-intermediate.cert.pem in Resources */,
 				8CBA05E11E28AAA40045D8B3 /* www.good.com.selfsigned.der in Resources */,
 				8CBA05C71E28AA6C0045D8B3 /* GlobalSignDomainValidationCA-SHA256-G2.der in Resources */,
+				FCC1DD081EECD19E00AB3D81 /* anchor-ca.cert.pem in Resources */,
 				8CBA05DB1E28AAA40045D8B3 /* GoodRootCA.der in Resources */,
 				8CBA05CD1E28AA6C0045D8B3 /* www.globalsign.com.der in Resources */,
 				8CBA05D11E28AA7B0045D8B3 /* www.cloudflare.com.der in Resources */,
@@ -1134,9 +1161,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CBA05DA1E28AAA40045D8B3 /* GoodIntermediateCA.der in Resources */,
+				FC049B3E1EECD1B100FDC5F4 /* anchor-fake.yahoo.com.cert.pem in Resources */,
 				8CBA05E71E294CC30045D8B3 /* GeoTrust_Primary_CA_G2_ECC.der in Resources */,
+				FC049B3F1EECD1B100FDC5F4 /* anchor-intermediate.cert.pem in Resources */,
 				8CBA05E31E28AAA40045D8B3 /* www.good.com.selfsigned.der in Resources */,
 				8CBA05C91E28AA6C0045D8B3 /* GlobalSignDomainValidationCA-SHA256-G2.der in Resources */,
+				FC049B3D1EECD1B100FDC5F4 /* anchor-ca.cert.pem in Resources */,
 				8CBA05DD1E28AAA40045D8B3 /* GoodRootCA.der in Resources */,
 				8CBA05CF1E28AA6C0045D8B3 /* www.globalsign.com.der in Resources */,
 				8CBA05D31E28AA7B0045D8B3 /* www.cloudflare.com.der in Resources */,
@@ -1157,9 +1187,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CBA05D91E28AAA40045D8B3 /* GoodIntermediateCA.der in Resources */,
+				FC049B3B1EECD1B000FDC5F4 /* anchor-fake.yahoo.com.cert.pem in Resources */,
 				8CBA05E61E294CC30045D8B3 /* GeoTrust_Primary_CA_G2_ECC.der in Resources */,
+				FC049B3C1EECD1B000FDC5F4 /* anchor-intermediate.cert.pem in Resources */,
 				8CBA05E21E28AAA40045D8B3 /* www.good.com.selfsigned.der in Resources */,
 				8CBA05C81E28AA6C0045D8B3 /* GlobalSignDomainValidationCA-SHA256-G2.der in Resources */,
+				FC049B3A1EECD1B000FDC5F4 /* anchor-ca.cert.pem in Resources */,
 				8CBA05DC1E28AAA40045D8B3 /* GoodRootCA.der in Resources */,
 				8CBA05CE1E28AA6C0045D8B3 /* www.globalsign.com.der in Resources */,
 				8CBA05D21E28AA7B0045D8B3 /* www.cloudflare.com.der in Resources */,

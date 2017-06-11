@@ -291,10 +291,13 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
 
 SecCertificateRef certificateFromPEM(NSString *pem)
 {
-    // NOTE: multiple certificate PEM is not supported since these are anchor certificates
-    //
+    // NOTE: multi-certificate PEM is not supported since this is for individual
+    // trust anchor certificates.
+    
     // Strip PEM header and footers. We don't support multi-certificate PEM.
-    NSMutableString *pemMutable = pem.mutableCopy;
+    NSMutableString *pemMutable = [pem stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet].mutableCopy;
+    
+    // Strip PEM header and footer
     [pemMutable replaceOccurrencesOfString:@"-----BEGIN CERTIFICATE-----"
                                 withString:@""
                                    options:(NSStringCompareOptions)(NSAnchoredSearch | NSLiteralSearch)
@@ -307,7 +310,11 @@ SecCertificateRef certificateFromPEM(NSString *pem)
     
     NSData *pemData = [[NSData alloc] initWithBase64EncodedString:pemMutable
                                                           options:NSDataBase64DecodingIgnoreUnknownCharacters];
-    return SecCertificateCreateWithData(NULL, (CFDataRef)pemData);
-    
+    SecCertificateRef cert = SecCertificateCreateWithData(NULL, (CFDataRef)pemData);
+    if (!cert)
+    {
+        [NSException raise:@"TrustKit configuration invalid" format:@"Failed to parse PEM certificate"];
+    }
+    return cert;
 }
 
