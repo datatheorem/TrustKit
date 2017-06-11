@@ -1109,7 +1109,6 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                                                         ignorePinsForUserTrustAnchors:YES
                                                                                 validationResultQueue:dispatch_get_main_queue()
                                                                               validationResultHandler:^(TSKPinningValidatorResult *x) {}];
-    XCTAssertTrue(TestPinningValidator.allowsAdditionalTrustAnchors);
     
     SecTrustRef(^createTestServerTrust)(void) = ^() {
         // Create the server trust for this chain
