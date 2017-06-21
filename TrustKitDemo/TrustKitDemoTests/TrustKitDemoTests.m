@@ -1,15 +1,11 @@
-/*
- 
- TrustKitDemoTests.m
- TrustKitDemoTests
- 
- Copyright 2015 The TrustKit Project Authors
- Licensed under the MIT license, see associated LICENSE file for terms.
- See AUTHORS file for the list of project authors.
- 
- */
+//
+//  TrustKitDemoTests.m
+//  TrustKitDemoTests
+//
+//  Created by Nishant Paul on 19/06/17.
+//  Copyright © 2017 DataTheorem. All rights reserved.
+//
 
-#import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 
 @interface TrustKitDemoTests : XCTestCase
@@ -30,7 +26,7 @@
 
 - (void)testExample {
     // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
+    // Use XCTAssert and related functions to verify your tests produce the correct results.
 }
 
 - (void)testPerformanceExample {

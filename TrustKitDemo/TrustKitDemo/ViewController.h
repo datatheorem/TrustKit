@@ -1,25 +1,17 @@
-/*
- 
- ViewController.h
- TrustKitDemo
- 
- Copyright 2015 The TrustKit Project Authors
- Licensed under the MIT license, see associated LICENSE file for terms.
- See AUTHORS file for the list of project authors.
- 
- */
+//
+//  ViewController.h
+//  TrustKitDemo
+//
+//  Created by Nishant Paul on 19/06/17.
+//  Copyright © 2017 DataTheorem. All rights reserved.
+//
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController <UIWebViewDelegate, NSURLSessionDataDelegate>
+@interface ViewController : UIViewController <NSURLSessionDelegate>
 
-- (void)URLSession:(NSURLSession * _Nonnull)session
-              task:(NSURLSessionTask * _Nonnull)task
-didCompleteWithError:(NSError * _Nullable)error;
-
-- (void)URLSession:(NSURLSession * _Nonnull)session
-          dataTask:(NSURLSessionDataTask * _Nonnull)dataTask
-    didReceiveData:(NSData * _Nonnull)data;
+@property (weak, nonatomic) IBOutlet UIButton *invalidPinBtn;
+@property (weak, nonatomic) IBOutlet UIButton *validPinBtn;
 
 @end
 
