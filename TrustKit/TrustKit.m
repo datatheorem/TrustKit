@@ -145,7 +145,7 @@ NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.com/trust
 
 #pragma mark Notification Handlers
 
-// The block which receives pin validation notification and turns them into pin validation reports
+// The block which receives pin validation results and turns them into pin validation reports
 - (void)sendValidationReport:(TSKPinningValidatorResult *)result
 {
     TSKPinValidationResult validationResult = result.validationResult;
