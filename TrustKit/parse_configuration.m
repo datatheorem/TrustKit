@@ -13,7 +13,36 @@
 #import <CommonCrypto/CommonDigest.h>
 #import "configuration_utils.h"
 
-SecCertificateRef certificateFromPEM(NSString *pem);
+
+static SecCertificateRef certificateFromPEM(NSString *pem)
+{
+    // NOTE: multi-certificate PEM is not supported since this is for individual
+    // trust anchor certificates.
+    
+    // Strip PEM header and footers. We don't support multi-certificate PEM.
+    NSMutableString *pemMutable = [pem stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet].mutableCopy;
+    
+    // Strip PEM header and footer
+    [pemMutable replaceOccurrencesOfString:@"-----BEGIN CERTIFICATE-----"
+                                withString:@""
+                                   options:(NSStringCompareOptions)(NSAnchoredSearch | NSLiteralSearch)
+                                     range:NSMakeRange(0, pemMutable.length)];
+    
+    [pemMutable replaceOccurrencesOfString:@"-----END CERTIFICATE-----"
+                                withString:@""
+                                   options:(NSStringCompareOptions)(NSAnchoredSearch | NSBackwardsSearch | NSLiteralSearch)
+                                     range:NSMakeRange(0, pemMutable.length)];
+    
+    NSData *pemData = [[NSData alloc] initWithBase64EncodedString:pemMutable
+                                                          options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    SecCertificateRef cert = SecCertificateCreateWithData(NULL, (CFDataRef)pemData);
+    if (!cert)
+    {
+        [NSException raise:@"TrustKit configuration invalid" format:@"Failed to parse PEM certificate"];
+    }
+    return cert;
+}
+
 
 NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
 {
@@ -288,33 +317,3 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
 
     return [finalConfiguration copy];
 }
-
-SecCertificateRef certificateFromPEM(NSString *pem)
-{
-    // NOTE: multi-certificate PEM is not supported since this is for individual
-    // trust anchor certificates.
-    
-    // Strip PEM header and footers. We don't support multi-certificate PEM.
-    NSMutableString *pemMutable = [pem stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet].mutableCopy;
-    
-    // Strip PEM header and footer
-    [pemMutable replaceOccurrencesOfString:@"-----BEGIN CERTIFICATE-----"
-                                withString:@""
-                                   options:(NSStringCompareOptions)(NSAnchoredSearch | NSLiteralSearch)
-                                     range:NSMakeRange(0, pemMutable.length)];
-    
-    [pemMutable replaceOccurrencesOfString:@"-----END CERTIFICATE-----"
-                                withString:@""
-                                   options:(NSStringCompareOptions)(NSAnchoredSearch | NSBackwardsSearch | NSLiteralSearch)
-                                     range:NSMakeRange(0, pemMutable.length)];
-    
-    NSData *pemData = [[NSData alloc] initWithBase64EncodedString:pemMutable
-                                                          options:NSDataBase64DecodingIgnoreUnknownCharacters];
-    SecCertificateRef cert = SecCertificateCreateWithData(NULL, (CFDataRef)pemData);
-    if (!cert)
-    {
-        [NSException raise:@"TrustKit configuration invalid" format:@"Failed to parse PEM certificate"];
-    }
-    return cert;
-}
-
