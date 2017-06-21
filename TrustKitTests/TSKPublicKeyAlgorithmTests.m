@@ -22,6 +22,7 @@
 
 @interface TSKSPKIHashCache (TestSupport)
 - (void)resetSubjectPublicKeyInfoDiskCache;
+- (NSMutableDictionary<NSNumber *, SPKICacheDictionnary *> *)getSubjectPublicKeyInfoHashesCache;
 @end
 
 
@@ -126,8 +127,8 @@
                                                                 kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=", // Server Key
                                                                                         @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                                                                         ]}}});
-    XCTAssertEqual([spkiCache.SPKICache[@0] count], 0UL, @"SPKI cache must be empty");
-    XCTAssertEqual([spkiCache.SPKICache[@1] count], 0UL, @"SPKI cache must be empty");
+    XCTAssertEqual([[spkiCache getSubjectPublicKeyInfoHashesCache][@0] count], 0UL, @"SPKI cache must be empty");
+    XCTAssertEqual([[spkiCache getSubjectPublicKeyInfoHashesCache][@1] count], 0UL, @"SPKI cache must be empty");
     
     TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
     verificationResult = verifyPublicKeyPin(trust,
@@ -137,8 +138,8 @@
                                             spkiCache);
     
     // Ensure the SPKI cache was used; the full certificate chain is three certs and we have to go through all of them to get to the pinned leaf
-    XCTAssertEqual([spkiCache.SPKICache[@0] count], 3UL, @"SPKI cache must have been used");
-    XCTAssertEqual([spkiCache.SPKICache[@1] count], 3UL, @"SPKI cache must have been used");
+    XCTAssertEqual([[spkiCache getSubjectPublicKeyInfoHashesCache][@0] count], 3UL, @"SPKI cache must have been used");
+    XCTAssertEqual([[spkiCache getSubjectPublicKeyInfoHashesCache][@1] count], 3UL, @"SPKI cache must have been used");
     
     CFRelease(trust);
     CFRelease(leafCertificate);

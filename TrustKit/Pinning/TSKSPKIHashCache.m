@@ -69,11 +69,19 @@ static const unsigned int asn1HeaderSizes[4] = {
 
 
 @interface TSKSPKIHashCache ()
+
 // Dictionnary to cache SPKI hashes instead of having to compute them on every connection
 // We store one cache dictionnary per TSKPublicKeyAlgorithm we support
 @property (nonatomic) NSMutableDictionary<NSNumber *, SPKICacheDictionnary *> *subjectPublicKeyInfoHashesCache;
 @property (nonatomic) dispatch_queue_t lockQueue;
 @property (nonatomic) NSString *spkiCacheFilename;
+
+
+/**
+ Load the SPKI cache from the filesystem. This triggers blocking file I/O.
+ */
+- (NSMutableDictionary<NSNumber *, SPKICacheDictionnary *> *)loadSPKICacheFromFileSystem;
+
 @end
 
 #if LEGACY_IOS_KEY_EXTRACTION
@@ -110,7 +118,7 @@ static const unsigned int asn1HeaderSizes[4] = {
         _spkiCacheFilename = uniqueIdentifier; // if this value is nil, persistence will always fail.
         
         // First try to load a cached version from the filesystem
-        _subjectPublicKeyInfoHashesCache = self.SPKICacheFromFileSystem;
+        _subjectPublicKeyInfoHashesCache = [self loadSPKICacheFromFileSystem];
         TSKLog(@"Loaded %lu SPKI cache entries from the filesystem", (unsigned long)_subjectPublicKeyInfoHashesCache.count);
         if (_subjectPublicKeyInfoHashesCache == nil)
         {
@@ -204,7 +212,7 @@ static const unsigned int asn1HeaderSizes[4] = {
     return subjectPublicKeyInfoHash;
 }
 
-- (NSMutableDictionary<NSNumber *, SPKICacheDictionnary *> *)SPKICacheFromFileSystem
+- (NSMutableDictionary<NSNumber *, SPKICacheDictionnary *> *)loadSPKICacheFromFileSystem
 {
     NSMutableDictionary *spkiCache;
     NSData *serializedSpkiCache = [NSData dataWithContentsOfURL:[self SPKICachePath]];
@@ -214,10 +222,6 @@ static const unsigned int asn1HeaderSizes[4] = {
     return spkiCache;
 }
 
-- (NSMutableDictionary<NSNumber *, SPKICacheDictionnary *> *)SPKICache
-{
-    return _subjectPublicKeyInfoHashesCache;
-}
 
 #pragma mark Private
 
@@ -410,9 +414,16 @@ static const unsigned int asn1HeaderSizes[4] = {
 
 @implementation TSKSPKIHashCache (TestSupport)
 
-- (void)resetSubjectPublicKeyInfoDiskCache {
+- (void)resetSubjectPublicKeyInfoDiskCache
+{
     // Discard SPKI cache
     [NSFileManager.defaultManager removeItemAtURL:[self SPKICachePath] error:nil];
+}
+
+
+- (NSMutableDictionary<NSNumber *, SPKICacheDictionnary *> *)getSubjectPublicKeyInfoHashesCache
+{
+    return _subjectPublicKeyInfoHashesCache;
 }
 
 @end

@@ -48,16 +48,6 @@ typedef NSMutableDictionary<NSData *, NSData *> SPKICacheDictionnary;
  */
 - (NSData *)hashSubjectPublicKeyInfoFromCertificate:(SecCertificateRef)certificate publicKeyAlgorithm:(TSKPublicKeyAlgorithm)publicKeyAlgorithm;
 
-/**
- Obtain the current cache used by this instance.
- */
-@property (nonatomic, nullable, readonly) NSMutableDictionary<NSNumber *, SPKICacheDictionnary *> *SPKICache;
-
-/**
- Load the SPKI cache from the filesystem. This triggers blocking file I/O.
- */
-@property (nonatomic, nullable, readonly) NSMutableDictionary<NSNumber *, SPKICacheDictionnary *> *SPKICacheFromFileSystem;
-
 @end
 
 NS_ASSUME_NONNULL_END

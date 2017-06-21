@@ -35,6 +35,8 @@
 
 @interface TSKSPKIHashCache (TestSupport)
 - (void)resetSubjectPublicKeyInfoDiskCache;
+- (NSMutableDictionary<NSNumber *, SPKICacheDictionnary *> *)getSubjectPublicKeyInfoHashesCache;
+- (NSMutableDictionary<NSNumber *, SPKICacheDictionnary *> *)loadSPKICacheFromFileSystem;
 @end
 
 static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
@@ -123,7 +125,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                                                            ]}}};
     
     // Ensure the SPKI cache was on the filesystem is empty
-    NSDictionary *fsCache = spkiCache.SPKICacheFromFileSystem;
+    NSDictionary *fsCache = [spkiCache loadSPKICacheFromFileSystem];
     XCTAssert([fsCache[@1] count] == 0, @"SPKI cache for RSA 4096 must be empty before the test");
     
     // First test the verifyPublicKeyPin() function
@@ -165,7 +167,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     [self waitForExpectationsWithTimeout:2.0 handler:nil];
     
     // Ensure the SPKI cache was persisted to the filesystem
-    fsCache = spkiCache.SPKICacheFromFileSystem;
+    fsCache = [spkiCache loadSPKICacheFromFileSystem];
     XCTAssertEqual([fsCache[@1] count], 1UL, @"SPKI cache for RSA 4096 must be persisted to the file system");
     
     CFRelease(trust);
@@ -193,7 +195,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                                                            ]}}};
     
     // Ensure the SPKI cache was on the filesystem is empty
-    NSDictionary *fsCache = spkiCache.SPKICacheFromFileSystem;
+    NSDictionary *fsCache = [spkiCache loadSPKICacheFromFileSystem];
     XCTAssertEqual([fsCache[@1] count], 0UL, @"SPKI cache for RSA 4096 must be empty before the test");
     
     // First test the verifyPublicKeyPin() function
@@ -236,7 +238,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     [self waitForExpectationsWithTimeout:2.0 handler:nil];
     
     // Ensure the SPKI cache was persisted to the filesystem
-    fsCache = spkiCache.SPKICacheFromFileSystem;
+    fsCache = [spkiCache loadSPKICacheFromFileSystem];
     XCTAssertEqual([fsCache[@1] count], 2UL, @"SPKI cache for RSA 4096 must be persisted to the file system");
     
     CFRelease(trust);
