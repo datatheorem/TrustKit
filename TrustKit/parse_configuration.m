@@ -13,6 +13,7 @@
 #import <CommonCrypto/CommonDigest.h>
 #import "configuration_utils.h"
 
+SecCertificateRef certificateFromPEM(NSString *pem);
 
 NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
 {
@@ -166,6 +167,22 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
             domainFinalConfiguration[kTSKDisableDefaultReportUri] = @(NO);
         }
         
+        NSArray *additionalTrustAnchors = domainPinningPolicy[kTSKAdditionalTrustAnchors];
+        if (additionalTrustAnchors)
+        {
+            CFMutableArrayRef anchorCerts = CFArrayCreateMutable(NULL, (CFIndex)additionalTrustAnchors.count, &kCFTypeArrayCallBacks);
+            NSInteger certIndex = 0; // used for logging error messages
+            for (NSString *pem in additionalTrustAnchors) {
+                SecCertificateRef cert = certificateFromPEM(pem);
+                if (cert == nil) {
+                    [NSException raise:@"TrustKit configuration invalid"
+                                format:@"Failed to parse PEM-encoded certificate at index %ld for domain %@", (long)certIndex, domainName];
+                }
+                CFArrayAppendValue(anchorCerts, cert);
+                certIndex++;
+            }
+            domainFinalConfiguration[kTSKAdditionalTrustAnchors] = [(__bridge NSMutableArray *)anchorCerts copy];
+        }
         
         // Extract the list of public key algorithms to support and convert them from string to the TSKPublicKeyAlgorithm type
         NSArray<NSString *> *publicKeyAlgsStr = domainPinningPolicy[kTSKPublicKeyAlgorithms];
@@ -272,4 +289,32 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
     return [finalConfiguration copy];
 }
 
+SecCertificateRef certificateFromPEM(NSString *pem)
+{
+    // NOTE: multi-certificate PEM is not supported since this is for individual
+    // trust anchor certificates.
+    
+    // Strip PEM header and footers. We don't support multi-certificate PEM.
+    NSMutableString *pemMutable = [pem stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet].mutableCopy;
+    
+    // Strip PEM header and footer
+    [pemMutable replaceOccurrencesOfString:@"-----BEGIN CERTIFICATE-----"
+                                withString:@""
+                                   options:(NSStringCompareOptions)(NSAnchoredSearch | NSLiteralSearch)
+                                     range:NSMakeRange(0, pemMutable.length)];
+    
+    [pemMutable replaceOccurrencesOfString:@"-----END CERTIFICATE-----"
+                                withString:@""
+                                   options:(NSStringCompareOptions)(NSAnchoredSearch | NSBackwardsSearch | NSLiteralSearch)
+                                     range:NSMakeRange(0, pemMutable.length)];
+    
+    NSData *pemData = [[NSData alloc] initWithBase64EncodedString:pemMutable
+                                                          options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    SecCertificateRef cert = SecCertificateCreateWithData(NULL, (CFDataRef)pemData);
+    if (!cert)
+    {
+        [NSException raise:@"TrustKit configuration invalid" format:@"Failed to parse PEM certificate"];
+    }
+    return cert;
+}
 

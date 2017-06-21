@@ -201,6 +201,27 @@ FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKDisableDefaultReportUri;
  */
 FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKExpirationDate;
 
+/**
+ An array of strings representing additional trust anchors usable for validating
+ the trust chain of pinned certificates that do not end in an OS trust anchor.
+ 
+ The default behavior of TrustKit is to ignore these trust anchors unless compiled
+ in debug mode (pass -DDEBUG=1 to the preprocessor). This behavior can be modified
+ by subclassing TSKPinningValidator and overriding +allowsAdditionalTrustAnchors.
+ 
+ The entries in the array should each be a single PEM-encoded public certificate.
+ Standard RFC-7468 PEM format is supported (see https://tools.ietf.org/html/rfc7468#section-2 ).
+ Note that the header, footer and any newlines are optional, but aid in readability.
+ 
+ ~~ SECURITY WARNING ~~
+ Misuse of this configuration option could potentially render your application
+ vulnerable to exploits since it bypasses the normal operating system trust store.
+ It is intended for enterprise scenarios where a company might be running their
+ own internal production-grade certificate authority for debugging purposes.
+ */
+FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKAdditionalTrustAnchors;
+
+
 #pragma mark Supported Public Key Algorithm Keys
 
 

@@ -13,13 +13,32 @@
 
 @implementation TSKCertificateUtils
 
-+ (SecCertificateRef)createCertificateFromDer:(NSString *)derCertiticatePath
++ (SecCertificateRef)createCertificateFromPem:(NSString *)pemFilename
+{
+    NSBundle *bundle = [NSBundle bundleForClass:self.class];
+    NSString *pemFilepath = [bundle pathForResource:pemFilename ofType:@"pem"];
+    NSString *pemString = [NSString stringWithContentsOfFile:pemFilepath usedEncoding:nil error:nil];
+    pemString ?: [NSException raise:@"Test error" format:@"Could not open PEM file %@", pemFilename];
+    
+    pemString = [pemString stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet];
+    pemString = [pemString stringByReplacingOccurrencesOfString:@"-----BEGIN CERTIFICATE-----" withString:@""];
+    pemString = [pemString stringByReplacingOccurrencesOfString:@"-----END CERTIFICATE-----" withString:@""];
+    
+    NSData *der = [[NSData alloc] initWithBase64EncodedString:pemString options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    der ?: [NSException raise:@"Test error" format:@"Could not convert PEM to DER from %@", pemFilename];
+    
+    SecCertificateRef certificate = SecCertificateCreateWithData(kCFAllocatorDefault, (__bridge CFDataRef)der);
+    return certificate;
+}
+
+
++ (SecCertificateRef)createCertificateFromDer:(NSString *)derFilename
 {
     NSBundle *bundle = [NSBundle bundleForClass:[self class]];
-    CFDataRef certData = (__bridge_retained CFDataRef)[NSData dataWithContentsOfFile:[bundle pathForResource:derCertiticatePath ofType:@"der"]];
+    CFDataRef certData = (__bridge_retained CFDataRef)[NSData dataWithContentsOfFile:[bundle pathForResource:derFilename ofType:@"der"]];
     if (!certData)
     {
-        [NSException raise:@"Test error" format:@"Could not open certificate at path %@", derCertiticatePath];
+        [NSException raise:@"Test error" format:@"Could not open certificate at path %@", derFilename];
     }
     SecCertificateRef certificate = SecCertificateCreateWithData(kCFAllocatorDefault, certData);
     CFRelease(certData);
@@ -32,7 +51,7 @@
                         anchorCertificates:(const void **)anchorCertificates
                                arrayLength:(NSInteger)anchorArrayLength
 {
-    CFArrayRef certificateChain = CFArrayCreate(NULL, (const void **)certArray, certArrayLength, NULL);
+    CFArrayRef certificateChain = CFArrayCreate(NULL, (const void **)certArray, certArrayLength, &kCFTypeArrayCallBacks);
     SecPolicyRef policy = SecPolicyCreateSSL(true, NULL);
     SecTrustRef trust;
     
