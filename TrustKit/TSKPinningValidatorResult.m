@@ -14,7 +14,7 @@
 
 @implementation TSKPinningValidatorResult
 
-@synthesize certificateChain=_certificateChain;
+@synthesize certificateChain = _certificateChain;
 
 - (NSArray * _Nullable)certificateChain
 {
