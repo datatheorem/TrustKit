@@ -198,6 +198,7 @@ FOUNDATION_EXPORT NSString * const kTSKDefaultReportUri;
  validation. Keep in mind that, if set, the callback may be invoked very frequently and is
  not a suitable place for expensive tasks.
  */
+// TODO(AD): Mention the fact that this will override the validation mechanism or address this
 @property (nonatomic, nullable) void(^validationDelegateCallback)(TSKPinningValidatorResult * _Nonnull result);
 
 /**
