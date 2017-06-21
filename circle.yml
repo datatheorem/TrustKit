@@ -1,10 +1,10 @@
 machine:
   xcode:
-    version: 8.3
+    version: 9.0
 test:
   override:
-    # First run Xcode 8.0 tests
-    - sudo xcode-select --switch /Applications/Xcode-8.0.app
+    # First run Xcode 8.3 tests
+    - sudo xcode-select --switch /Applications/Xcode-8.3.app
     # iOS 8 platform with iOS 9 SDK
     - xcodebuild clean test
       CODE_SIGNING_REQUIRED=NO
@@ -20,8 +20,8 @@ test:
       -sdk macosx10.11
       -scheme "TrustKit OS X"
 
-    # Switch to Xcode 8.3
-    - sudo xcode-select --switch /Applications/Xcode-8.3.app
+    # Switch to Xcode 9.0
+    - sudo xcode-select --switch /Applications/Xcode-9.0.app
     # iOS 10 platform with iOS 10 SDK
     - xcodebuild clean test
       CODE_SIGNING_REQUIRED=NO
