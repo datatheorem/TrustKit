@@ -16,7 +16,6 @@
 @class TSKPinningValidatorResult;
 @class TSKSPKIHashCache;
 
-typedef NSData* _Nullable(^HashCertificateBlock)(_Nonnull SecCertificateRef certificate, TSKPublicKeyAlgorithm algorithm);
 
 /**
  `TSKPinningValidator` is a class for manually verifying a server's identity against the global SSL pinning policy.
