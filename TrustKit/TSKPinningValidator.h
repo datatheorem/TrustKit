@@ -112,16 +112,18 @@
  
  This method will evaluate the server trust within the authentication challenge against the global SSL pinning policy previously configured, and then call the `completionHandler` with the corresponding `disposition` and `credential`. For example, this method can be leveraged in a `WKNavigationDelegate` challenge handler method:
 
-    - (void)webView:(WKWebView *)webView
-    didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
-    completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition,
-                                NSURLCredential *credential))completionHandler
-    {
-        if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust])
-        {
-            [TSKPinningValidator handleChallenge:challenge completionHandler:completionHandler];
-        }
-    }
+     - (void)webView:(WKWebView *)webView
+     didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
+     completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition,
+     NSURLCredential *credential))completionHandler
+     {
+         if (![TSKPinningValidator handleChallenge:challenge completionHandler:completionHandler]) 
+         {
+             // TrustKit did not handle this challenge: perhaps it was not for server trust
+             // or the domain was not pinned. Fall back to the default behavior
+             completionHandler(NSURLSessionAuthChallengePerformDefaultHandling, nil);
+         }
+     }
  
  @param challenge The authentication challenge, supplied by the URL loading system to the delegate's challenge handler method.
  
