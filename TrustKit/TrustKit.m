@@ -37,7 +37,7 @@ static char kTSKPinFailureReporterQueueLabel[] = "com.datatheorem.trustkit.repor
 
 // Default report URI - can be disabled with TSKDisableDefaultReportUri
 // Email info@datatheorem.com if you need a free dashboard to see your App's reports
-NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.com/trustkit/report";
+static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.com/trustkit/report";
 
 #pragma mark TrustKit Initialization Helper Functions
 

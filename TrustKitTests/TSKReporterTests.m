@@ -30,6 +30,10 @@
 - (void)sendValidationReport:(TSKPinningValidatorResult *)result;
 @end
 
+
+static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.com/trustkit/report";
+
+
 @interface TSKReporterTests : XCTestCase
 
 @end
