@@ -129,8 +129,7 @@
                                                       notedHostname:@"www.test.com"
                                                    validationResult:TSKPinValidationResultErrorCouldNotGenerateSpkiHash
                                                  finalTrustDecision:TSKTrustDecisionShouldBlockConnection
-                                                 validationDuration:1.0
-                                                   certificateChain:_testCertificateChain];
+                                                 validationDuration:1.0];
     [_trustKit sendValidationReport:res];
     
     // Ensure that the reporter was called
@@ -149,8 +148,7 @@
                                                       notedHostname:@"www.test.com"
                                                    validationResult:TSKPinValidationResultSuccess
                                                  finalTrustDecision:TSKTrustDecisionShouldAllowConnection
-                                                 validationDuration:1.0
-                                                   certificateChain:_testCertificateChain];
+                                                 validationDuration:1.0];
 
     // Ensure that the reporter was NOT called
     [_trustKit sendValidationReport:res];
@@ -170,8 +168,7 @@
                                                       notedHostname:@"www.test.com"
                                                    validationResult:TSKPinValidationResultFailedUserDefinedTrustAnchor
                                                  finalTrustDecision:TSKTrustDecisionShouldAllowConnection
-                                                 validationDuration:1.0
-                                                   certificateChain:_testCertificateChain];
+                                                 validationDuration:1.0];
     
     // Ensure that the reporter was NOT called
     [_trustKit sendValidationReport:res];

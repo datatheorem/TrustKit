@@ -70,7 +70,6 @@
                          notedHostname:(NSString * _Nonnull)notedHostname
                       validationResult:(TSKPinValidationResult)validationResult
                     finalTrustDecision:(TSKTrustDecision)finalTrustDecision
-                    validationDuration:(NSTimeInterval)validationDuration
-                      certificateChain:(NSArray * _Nullable)certificateChain;
+                    validationDuration:(NSTimeInterval)validationDuration;
 
 @end

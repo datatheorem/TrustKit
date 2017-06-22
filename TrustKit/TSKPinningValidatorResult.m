@@ -32,7 +32,6 @@
                                 validationResult:(TSKPinValidationResult)validationResult
                               finalTrustDecision:(TSKTrustDecision)finalTrustDecision
                               validationDuration:(NSTimeInterval)validationDuration
-                                certificateChain:(NSArray * _Nullable)certificateChain
 {
     NSParameterAssert(serverHostname);
     NSParameterAssert(serverTrust);
@@ -46,7 +45,7 @@
         _validationResult = validationResult;
         _finalTrustDecision = finalTrustDecision;
         _validationDuration = validationDuration;
-        _certificateChain = certificateChain;
+        _certificateChain = nil;
     }
     return self;
 }

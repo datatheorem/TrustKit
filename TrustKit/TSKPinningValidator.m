@@ -165,8 +165,7 @@
                                                                                                 notedHostname:domainConfigKey
                                                                                              validationResult:validationResult
                                                                                            finalTrustDecision:finalTrustDecision
-                                                                                           validationDuration:validationDuration
-                                                                                             certificateChain:nil];
+                                                                                           validationDuration:validationDuration];
                 dispatch_async(self.validationResultQueue, ^{
                     self.validationResultHandler(result);
                 });
