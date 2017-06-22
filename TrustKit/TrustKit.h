@@ -139,18 +139,6 @@ FOUNDATION_EXPORT NSString * const kTSKDefaultReportUri;
 + (void)initializeWithConfiguration:(NSDictionary *)trustKitConfig;
 
 
-///----------------------------
-/// @name Current Configuration
-///----------------------------
-
-/**
- Retrieve a copy of the global SSL pinning policy.
- 
- @return A dictionary with a copy of the current TrustKit configuration, or `nil` if
- TrustKit has not been initialized.
- */
-+ (NSDictionary * _Nullable) configuration;
-
 #pragma mark Instance Methods
 
 /**

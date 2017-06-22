@@ -80,11 +80,6 @@ NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.com/trust
     });
 }
 
-+ (NSDictionary * _Nullable)configuration
-{
-    TrustKit *singleton = [self sharedInstance];
-    return singleton.configuration;
-}
 
 #pragma mark Instance
 
