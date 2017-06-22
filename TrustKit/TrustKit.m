@@ -148,10 +148,10 @@ NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.com/trust
 // The block which receives pin validation results and turns them into pin validation reports
 - (void)sendValidationReport:(TSKPinningValidatorResult *)result
 {
-    TSKPinValidationResult validationResult = result.validationResult;
+    TSKTrustEvaluationResult validationResult = result.validationResult;
     
     // Send a report only if the there was a pinning failure
-    if (validationResult != TSKPinValidationResultSuccess)
+    if (validationResult != TSKTrustEvaluationSuccess)
     {
 #if !TARGET_OS_IPHONE
         if (validationResult != TSKPinValidationResultFailedUserDefinedTrustAnchor)

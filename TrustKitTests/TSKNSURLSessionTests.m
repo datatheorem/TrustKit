@@ -20,7 +20,7 @@
 
 @interface TSKNSURLSessionDelegateProxy (TestSupport)
 @property (nonatomic) id<NSURLSessionDelegate, NSURLSessionTaskDelegate> originalDelegate;
-@property (nonatomic) TSKPinValidationResult lastTrustDecision;
+@property (nonatomic) TSKTrustEvaluationResult lastTrustDecision;
 
 - (BOOL)forwardToOriginalDelegateAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
                                        completionHandler:(TSKURLSessionAuthChallengeCallback)completionHandler

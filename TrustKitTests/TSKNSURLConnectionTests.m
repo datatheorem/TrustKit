@@ -14,7 +14,7 @@
 #import <OCMock/OCMock.h>
 
 @interface TSKNSURLConnectionDelegateProxy (TestSupport)
-@property (nonatomic) TSKPinValidationResult lastTrustDecision;
+@property (nonatomic) TSKTrustEvaluationResult lastTrustDecision;
 -(BOOL)forwardToOriginalDelegateAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge forConnection:(NSURLConnection *)connection;
 @end
 

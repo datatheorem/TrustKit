@@ -9,7 +9,7 @@
  
  */
 
-#import "TSKPinValidationResult.h"
+#import "TSKTrustDecision.h"
 @import Foundation;
 
 @interface TSKPinningValidatorResult : NSObject
@@ -41,7 +41,7 @@
  represents the result of evaluating the certificate chain against the configured SSL pins 
  for this server.
  */
-@property (nonatomic, readonly) TSKPinValidationResult validationResult;
+@property (nonatomic, readonly) TSKTrustEvaluationResult validationResult;
 
 /**
  The `TSKTrustDecision` returned when validating the certificate's chain, which describes
@@ -68,7 +68,7 @@
 - (instancetype _Nullable)initWithServerHostname:(NSString * _Nonnull)serverHostname
                            serverTrust:(SecTrustRef _Nonnull)serverTrust
                          notedHostname:(NSString * _Nonnull)notedHostname
-                      validationResult:(TSKPinValidationResult)validationResult
+                      validationResult:(TSKTrustEvaluationResult)validationResult
                     finalTrustDecision:(TSKTrustDecision)finalTrustDecision
                     validationDuration:(NSTimeInterval)validationDuration;
 

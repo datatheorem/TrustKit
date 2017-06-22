@@ -11,7 +11,7 @@
 
 #import "TSKPinningValidator.h"
 #import "TSKTrustKitConfig.h"
-#import "TSKPinValidationResult.h"
+#import "TSKTrustDecision.h"
 #import "TSKPinningValidatorResult.h"
 #import "Pinning/TSKSPKIHashCache.h"
 #import "Pinning/ssl_pin_verifier.h"
@@ -109,13 +109,13 @@
             
             // The domain has a pinning policy that has not expired
             // Look for one the configured public key pins in the server's evaluated certificate chain
-            TSKPinValidationResult validationResult = verifyPublicKeyPin(serverTrust,
-                                                                         serverHostname,
-                                                                         domainConfig[kTSKPublicKeyAlgorithms],
-                                                                         domainConfig[kTSKPublicKeyHashes],
-                                                                         self.spkiHashCache);
+            TSKTrustEvaluationResult validationResult = verifyPublicKeyPin(serverTrust,
+                                                                           serverHostname,
+                                                                           domainConfig[kTSKPublicKeyAlgorithms],
+                                                                           domainConfig[kTSKPublicKeyHashes],
+                                                                           self.spkiHashCache);
             
-            if (validationResult == TSKPinValidationResultSuccess)
+            if (validationResult == TSKTrustEvaluationSuccess)
             {
                 // Pin validation was successful
                 TSKLog(@"Pin validation succeeded for %@", serverHostname);
@@ -136,7 +136,7 @@
                 else
 #endif
                 {
-                    if (validationResult == TSKPinValidationResultFailed)
+                    if (validationResult == TSKTrustEvaluationFailedNoMatchingPin)
                     {
                         // Is pinning enforced?
                         if ([domainConfig[kTSKEnforcePinning] boolValue] == YES)

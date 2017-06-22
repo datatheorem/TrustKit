@@ -121,13 +121,13 @@
                                             includeSubdomains:NO
                                                enforcePinning:YES
                                                     knownPins:knownPins
-                                             validationResult:TSKPinValidationResultErrorCouldNotGenerateSpkiHash
+                                             validationResult:TSKTrustEvaluationErrorCouldNotGenerateSpkiHash
                                                expirationDate:expirationDate]);
     
     res = [[TSKPinningValidatorResult alloc] initWithServerHostname:@"www.test.com"
                                                         serverTrust:_testTrust
                                                       notedHostname:@"www.test.com"
-                                                   validationResult:TSKPinValidationResultErrorCouldNotGenerateSpkiHash
+                                                   validationResult:TSKTrustEvaluationErrorCouldNotGenerateSpkiHash
                                                  finalTrustDecision:TSKTrustDecisionShouldBlockConnection
                                                  validationDuration:1.0];
     [_trustKit sendValidationReport:res];
@@ -146,7 +146,7 @@
     res = [[TSKPinningValidatorResult alloc] initWithServerHostname:@"www.test.com"
                                                         serverTrust:_testTrust
                                                       notedHostname:@"www.test.com"
-                                                   validationResult:TSKPinValidationResultSuccess
+                                                   validationResult:TSKTrustEvaluationSuccess
                                                  finalTrustDecision:TSKTrustDecisionShouldAllowConnection
                                                  validationDuration:1.0];
 
@@ -166,7 +166,7 @@
     res = [[TSKPinningValidatorResult alloc] initWithServerHostname:@"www.test.com"
                                                         serverTrust:_testTrust
                                                       notedHostname:@"www.test.com"
-                                                   validationResult:TSKPinValidationResultFailedUserDefinedTrustAnchor
+                                                   validationResult:TSKTrustEvaluationFailedUserDefinedTrustAnchor
                                                  finalTrustDecision:TSKTrustDecisionShouldAllowConnection
                                                  validationDuration:1.0];
     
@@ -195,7 +195,7 @@
                                                                                                       options:(NSDataBase64DecodingOptions)0],
                                                                    [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g="
                                                                                                       options:(NSDataBase64DecodingOptions)0]]]
-                            validationResult:TSKPinValidationResultFailed
+                            validationResult:TSKTrustEvaluationFailedNoMatchingPin
                               expirationDate:[NSDate date]];
     
     [NSThread sleepForTimeInterval:0.1];
@@ -217,7 +217,7 @@
                                                                                                       options:(NSDataBase64DecodingOptions)0],
                                                                    [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g="
                                                                                                       options:(NSDataBase64DecodingOptions)0]]]
-                            validationResult:TSKPinValidationResultFailed
+                            validationResult:TSKTrustEvaluationFailedNoMatchingPin
                               expirationDate:nil];
     
     [NSThread sleepForTimeInterval:0.1];

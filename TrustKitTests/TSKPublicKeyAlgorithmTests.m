@@ -130,7 +130,7 @@
     XCTAssertEqual([[spkiCache getSubjectPublicKeyInfoHashesCache][@0] count], 0UL, @"SPKI cache must be empty");
     XCTAssertEqual([[spkiCache getSubjectPublicKeyInfoHashesCache][@1] count], 0UL, @"SPKI cache must be empty");
     
-    TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
+    TSKTrustEvaluationResult verificationResult = TSKTrustEvaluationFailedNoMatchingPin;
     verificationResult = verifyPublicKeyPin(trust,
                                             @"www.good.com",
                                             trustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
@@ -146,7 +146,7 @@
     CFRelease(intermediateCertificate);
     CFRelease(rootCertificate);
     
-    XCTAssertEqual(verificationResult, TSKPinValidationResultSuccess, @"Validation must pass against valid public key pins with multiple algorithms");
+    XCTAssertEqual(verificationResult, TSKTrustEvaluationSuccess, @"Validation must pass against valid public key pins with multiple algorithms");
 }
 
 
