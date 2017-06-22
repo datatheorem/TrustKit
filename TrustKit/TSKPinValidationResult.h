@@ -1,6 +1,6 @@
 /*
  
- TSKPinningValidator.h
+ TSKPinningValidation.h
  TrustKit
  
  Copyright 2015 The TrustKit Project Authors

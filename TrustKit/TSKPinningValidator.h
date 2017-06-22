@@ -9,7 +9,7 @@
  
  */
 
-#import "TSKPinValidatorResult.h"
+#import "TSKPinValidationResult.h"
 #import "TSKPublicKeyAlgorithm.h"
 @import Foundation;
 

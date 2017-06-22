@@ -11,7 +11,7 @@
 
 #import "TSKPinningValidator.h"
 #import "TSKTrustKitConfig.h"
-#import "TSKPinValidatorResult.h"
+#import "TSKPinValidationResult.h"
 #import "TSKPinningValidatorResult.h"
 #import "Pinning/TSKSPKIHashCache.h"
 #import "Pinning/ssl_pin_verifier.h"
