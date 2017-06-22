@@ -184,24 +184,23 @@ FOUNDATION_EXPORT NSString * const kTSKDefaultReportUri;
  Register a block to be invoked for every request that is going through TrustKit's pinning
  validation mechanism.
  
- Once TrustKit has been initialized, the callback will be invoked every time TrustKit validates 
- the certificate chain for a server configured in the SSL pinning policy; if the server's 
- hostname does not have an entry in the pinning policy, no invocations will result as no
- pinning validation was performed.
+ The callback will be invoked every time TrustKit validates the certificate chain for a 
+ server configured in the SSL pinning policy; if the server's hostname does not have an 
+ entry in the pinning policy, no invocations will result as no pinning validation was 
+ performed.
  
- This callback can be used for performance measurement or to act upon any pinning validation
- performed by TrustKit (for example to customize the reporting mechanism). The callback
- provide the `TSKPinningValidatorResult` resulting from the validation. That instance provides
- access to TrustKit's inner-workings which most Apps should not need. Hence, this callback
- should not be set unless the App requires some advanced customization in regards to pinning
- validation. Keep in mind that, if set, the callback may be invoked very frequently and is
- not a suitable place for expensive tasks.
+ The callback provides the `TSKPinningValidatorResult` resulting from the validation, and can be 
+ used for advanced features such as performance measurement or customizing the reporting mechanism.
+ Hence, most Apps should not have to use this callback. If set, the callback may be invoked very 
+ frequently and is not a suitable place for expensive tasks.
+ 
+ Lastly, the callback is always invoked after the validation has been completed, and therefore
+ cannot be used to modify the result of the validation (for example to accept invalid certificates).
  */
-// TODO(AD): Mention the fact that this will override the validation mechanism or address this
 @property (nonatomic, nullable) void(^validationDelegateCallback)(TSKPinningValidatorResult * _Nonnull result);
 
 /**
- Queue on which to invoke `validationDelegateCallback` (if set). Default value is main queue.
+ Queue on which to invoke `validationDelegateCallback` (if set). Default value is the main queue.
  */
 @property (nonatomic, null_resettable) dispatch_queue_t validationDelegateQueue;
 
