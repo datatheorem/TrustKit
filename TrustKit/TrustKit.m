@@ -20,11 +20,15 @@
 #import "TSKLog.h"
 
 // Info.plist key we read the public key hashes from
-static const NSString *kTSKConfiguration = @"TSKConfiguration";
+static NSString * const kTSKConfiguration = @"TSKConfiguration";
+
 
 #pragma mark TrustKit Global State
 // Shared TrustKit singleton instance
 static TrustKit *sharedTrustKit = nil;
+
+// The identifier we use for the singleton instance of TrustKit
+static NSString * const kTSKSharedInstanceIdentifier = @"TSKSharedInstanceIdentifier";
 
 // A shared hash cache for use by all TrustKit instances
 static TSKSPKIHashCache *sharedHashCache;
@@ -49,7 +53,7 @@ NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.com/trust
 + (instancetype)sharedInstance
 {
     if (!sharedTrustKit) {
-        // TrustKit should only be initialized once so we don't double interpose SecureTransport or get into anything unexpected
+        // TrustKit should only be initialized once so we don't double swizzle or get into anything unexpected
         [NSException raise:@"TrustKit was not initialized"
                     format:@"TrustKit must be initialized using +initializeWithConfiguration: prior to accessing sharedInstance"];
     }
@@ -63,7 +67,7 @@ NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.com/trust
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedTrustKit = [[TrustKit alloc] initWithConfiguration:trustKitConfig
-                                                      identifier:@"TrustKitShared"];
+                                                      identifier:kTSKSharedInstanceIdentifier];
         
         // Hook network APIs if needed
         if ([sharedTrustKit.configuration[kTSKSwizzleNetworkDelegates] boolValue]) {
@@ -106,14 +110,34 @@ NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.com/trust
         // Create our reporter for sending pin validation failures; do this before hooking NSURLSession so we don't hook ourselves
         _pinFailureReporter = [[TSKBackgroundReporter alloc] initAndRateLimitReports:YES];
         
-        // Configure the pinning validator and register for pinning callbacks in order to
-        // trigger reports on the pinning failure reporter background queue.
+        // Handle global configuration flags here
+        // TSKIgnorePinningForUserDefinedTrustAnchors
 #if TARGET_OS_IPHONE
         BOOL userTrustAnchorBypass = NO;
 #else
         BOOL userTrustAnchorBypass = [_configuration[kTSKIgnorePinningForUserDefinedTrustAnchors] boolValue];
 #endif
-
+        
+        // TSKSwizzleNetworkDelegates - check if we are initializing the shared instance
+        if (![uniqueIdentifier isEqualToString:kTSKSharedInstanceIdentifier])
+        {
+            if ([_configuration[kTSKSwizzleNetworkDelegates] boolValue] == YES)
+            {
+                // TSKSwizzleNetworkDelegates can only be enabled when using the shared instance, to avoid double swizzling
+                [NSException raise:@"TrustKit configuration invalid"
+                            format:@"Cannot use TSKSwizzleNetworkDelegates outside the TrustKit sharedInstance"];
+            }
+            
+            if ((sharedTrustKit) && ([[sharedTrustKit configuration][kTSKSwizzleNetworkDelegates] boolValue] == YES))
+            {
+                // Local instances cannot be used if a shared instance with swizzling enabled is used, to avoid double pinning validation
+                [NSException raise:@"TrustKit configuration invalid"
+                              format:@"Cannot use local TrustKit instances when the TrustKit sharedInstance has been initialized with kTSKSwizzleNetworkDelegates enabled"];
+            }
+        }
+        
+        // Configure the pinning validator and register for pinning callbacks in order to
+        // trigger reports on the pinning failure reporter background queue.
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
             sharedHashCache = [[TSKSPKIHashCache alloc] initWithIdentifier:@"trustkit"];

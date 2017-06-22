@@ -385,4 +385,22 @@
     XCTAssertEqualObjects(expectPem, gotPem);
 }
 
+- (void)testSwizzleNetworkDelegatesInLocalInstance
+{
+    NSDictionary *trustKitConfig;
+    // Swizzling can only be enabled in the shared instance
+    trustKitConfig = @{kTSKSwizzleNetworkDelegates: @YES,
+                                                  kTSKPinnedDomains :
+                                                      @{@"good.com" : @{
+                                                                kTSKIncludeSubdomains : @YES,
+                                                                kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                                kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                                                                                        @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
+                                                                                        ]}}};
+    
+    
+    XCTAssertThrows([[TrustKit alloc] initWithConfiguration:trustKitConfig identifier:@"local"]);
+}
+
+
 @end
