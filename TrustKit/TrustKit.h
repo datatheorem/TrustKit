@@ -128,8 +128,7 @@ FOUNDATION_EXPORT NSString * const kTSKDefaultReportUri;
  Initialize the global SSL pinning policy with the supplied configuration.
  
  This method should be called as early as possible in the App's lifecycle to ensure that
- the App's very first SSL connections are validated by TrustKit. Once TrustKit has been
- initialized, notifications will be posted for any SSL pinning validation performed.
+ the App's very first SSL connections are validated by TrustKit.
  
  @param trustKitConfig A dictionary containing various keys for configuring the global SSL
  pinning policy.
