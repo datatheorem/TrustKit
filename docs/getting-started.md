@@ -92,7 +92,7 @@ A pinning policy is a dictionary of domain names and pinning configuration keys.
 At a minimum, the configuration should specify a list of SSL pins and the
 corresponding certificates' public key algorithms. For example:
 
-```
+```objc
 #import <TrustKit/TrustKit.h>
 
 NSDictionary *trustKitConfig =
@@ -143,13 +143,14 @@ After TrustKit has been initialized, a
 can be retrieved from the TrustKit singleton, and can be used to perform SSL pinning validation 
 in the App's network delegates. For example in an NSURLSessionDelegate:
 
-```
+```objc
 - (void)URLSession:(NSURLSession *)session 
               task:(NSURLSessionTask *)task 
 didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge 
  completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler {
 {
     TSKPinningValidator *pinningValidator = [[TrustKit sharedInstance] pinningValidator];
+    // Pass the authentication challenge to the validator; if the validation fails, the connection will be blocked
     if (![pinningValidator handleChallenge:challenge completionHandler:completionHandler])
     {
         // TrustKit did not handle this challenge: perhaps it was not for server trust

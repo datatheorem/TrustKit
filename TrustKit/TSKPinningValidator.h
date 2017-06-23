@@ -36,14 +36,15 @@
 /**
  Helper method for handling authentication challenges received within a `NSURLSessionDelegate`, `NSURLSessionTaskDelegate` or `WKNavigationDelegate`.
  
- This method will evaluate the server trust within the authentication challenge against the global SSL pinning policy previously configured, and then call the `completionHandler` with the corresponding `disposition` and `credential`. For example, this method can be leveraged in a `WKNavigationDelegate` challenge handler method:
+ This method will evaluate the server trust within the authentication challenge against the global SSL pinning policy previously configured, and then call the `completionHandler` with the corresponding `disposition` and `credential`. For example, this method can be leveraged in a NSURLSessionDelegate challenge handler method:
 
-     - (void)webView:(WKWebView *)webView
-     didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
-     completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition,
-     NSURLCredential *credential))completionHandler
+     -  (void)URLSession:(NSURLSession *)session
+                    task:(NSURLSessionTask *)task
+     didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
+       completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler {
      {
          TSKPinningValidator *pinningValidator = [[TrustKit sharedInstance] pinningValidator];
+         // Pass the authentication challenge to the validator; if the validation fails, the connection will be blocked
          if (![pinningValidator handleChallenge:challenge completionHandler:completionHandler])
          {
              // TrustKit did not handle this challenge: perhaps it was not for server trust

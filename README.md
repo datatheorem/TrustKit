@@ -33,31 +33,7 @@ Getting Started
 Sample Usage
 ------------
 
-**TrustKit** can be deployed using CocoaPods, by adding the following line to your Podfile:
-
-```ruby
-pod 'TrustKit'
-```
-
-Then run:
-
-```sh
-$ pod install
-```
-
-Alternatively, Carthage can be used by adding the following line to your Cartfile:
-
-```
-github "datatheorem/TrustKit"
-```
-
-Then run:
-
-```sh
-carthage build --platform iOS
-```
-
-Then, deploying SSL pinning in the App requires initializing **TrustKit** with a pinning policy (domains, Subject Public Key Info hashes, and additional settings).
+Deploying SSL pinning in the App requires initializing **TrustKit** with a pinning policy (domains, Subject Public Key Info hashes, and additional settings).
 
 The policy can be configured within the App's `Info.plist`:
 
@@ -110,9 +86,27 @@ The policy can also be set programmatically in Swift Apps:
         TrustKit.initialize(withConfiguration:trustKitConfig)
 ```
 
-Once **TrustKit** has been initialized and if `kTSKSwizzleNetworkDelegates` is enabled in the policy, TrustKit will automatically swizzle the App's _NSURLSession_ and _NSURLConnection_ delegates to verify the server's certificate against the configured pinning policy, whenever an HTTPS connection is initiated. If report URIs have been configured, the App will also send reports to the specified URIs whenever a pin validation failure occurred.
+After TrustKit has been initialized, a 
+[`TSKPinningValidator` instance](https://datatheorem.github.io/TrustKit/documentation/Classes/TSKPinningValidator.html) 
+can be retrieved from the TrustKit singleton, and can be used to perform SSL pinning validation 
+in the App's network delegates. For example in an NSURLSessionDelegate:
 
-The swizzling behavior should only be used for simple Apps. When swizzling is disabled, a server's certificate chain can easily be manually checked against the App's SSL pinning policy using the `TSKPinningValidator` class, for example to implement an authentication handler.
+```objc
+- (void)URLSession:(NSURLSession *)session 
+              task:(NSURLSessionTask *)task 
+didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge 
+ completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler {
+{
+    TSKPinningValidator *pinningValidator = [[TrustKit sharedInstance] pinningValidator];
+    // Pass the authentication challenge to the validator; if the validation fails, the connection will be blocked
+    if (![pinningValidator handleChallenge:challenge completionHandler:completionHandler])
+    {
+        // TrustKit did not handle this challenge: perhaps it was not for server trust
+        // or the domain was not pinned. Fall back to the default behavior
+        completionHandler(NSURLSessionAuthChallengePerformDefaultHandling, nil);
+    }
+}
+```
 
 For more information, see the [Getting Started][getting-started] guide.
 
@@ -120,7 +114,7 @@ For more information, see the [Getting Started][getting-started] guide.
 Credits
 -------
 
-**TrustKit** is a joint-effort between the security teams at Data Theorem and Yahoo. See `AUTHORS` for details.
+**TrustKit** is a joint-effort between the mobile teams at Data Theorem and Yahoo. See `AUTHORS` for details.
 
 
 License
