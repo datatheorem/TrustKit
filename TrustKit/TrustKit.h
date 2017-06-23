@@ -29,14 +29,14 @@ NS_ASSUME_NONNULL_BEGIN
  configured for the App. In singleton mode, the policy can be set either:
  
  * By adding it to the App's _Info.plist_ under the `TSKConfiguration` key, or 
- * By programmatically supplying it using the `initializeWithConfiguration:` method. 
+ * By programmatically supplying it using the `+initializeWithConfiguration:` method.
  
  In singleton mode, TrustKit can only be initialized once so only one of the two techniques 
  should be used.
  
  For more complex Apps where multiple SSL pinning policies need to be used independently 
  (for example within different frameworks), TrustKit can be used in "multi-instance" mode
- by leveraging the `initWithConfiguration:identifier:` method described at the end of this 
+ by leveraging the `-initWithConfiguration:identifier:` method described at the end of this 
  page.
  
  A TrustKit pinning policy is a dictionary which contains some global, App-wide settings
@@ -132,20 +132,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /**
- Retrieve the global TrustKit singleton instance. Raises an exception if +initializeWithConfiguration:
+ Retrieve the global TrustKit singleton instance. Raises an exception if `+initializeWithConfiguration:`
  has not yet been invoked.
  
  @return the shared TrustKit singleton
  */
 + (instancetype)sharedInstance;
-
-
-/**
- Retrieve the SSL pinning policy configured for this TrustKit instance.
- 
- @return A dictionary with the current TrustKit configuration
- */
-@property (nonatomic, readonly, nullable) NSDictionary *configuration;
 
 
 /**
@@ -179,6 +171,14 @@ NS_ASSUME_NONNULL_BEGIN
  Queue on which to invoke `validationDelegateCallback` (if set). Default value is the main queue.
  */
 @property (nonatomic, null_resettable) dispatch_queue_t validationDelegateQueue;
+
+
+/**
+ Retrieve the SSL pinning policy configured for this TrustKit instance. 
+ 
+ @return A dictionary with the current TrustKit configuration
+ */
+@property (nonatomic, readonly, nullable) NSDictionary *configuration;
 
 
 #pragma mark Multi-Instance Mode
