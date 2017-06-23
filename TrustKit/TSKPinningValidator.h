@@ -118,9 +118,11 @@ typedef NSData* _Nullable(^HashCertificateBlock)(_Nonnull SecCertificateRef cert
     completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition,
                                 NSURLCredential *credential))completionHandler
     {
-        if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust])
+        if (![TSKPinningValidator handleChallenge:challenge completionHandler:completionHandler])
         {
-            [TSKPinningValidator handleChallenge:challenge completionHandler:completionHandler];
+            // TrustKit did not handle this challenge: perhaps it was not for server trust
+            // or the domain was not pinned. Fall back to the default behavior
+            completionHandler(NSURLSessionAuthChallengePerformDefaultHandling, nil);
         }
     }
  

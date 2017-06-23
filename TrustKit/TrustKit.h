@@ -163,11 +163,8 @@ FOUNDATION_EXPORT NSString * const kTSKDefaultReportUri;
  
  @param trustKitConfig A dictionary containing various keys for configuring the global
         SSL pinning policy.
- @param uniqueIdentifier An identifier for this instance. It is required if you want the
-        pin to be persisted to disk.
  */
-- (instancetype)initWithConfiguration:(NSDictionary<NSString *, id> * _Nullable)trustKitConfig
-                           identifier:(NSString * _Nullable)uniqueIdentifier;
+- (instancetype)initWithConfiguration:(NSDictionary<NSString *, id> * _Nullable)trustKitConfig;
 
 /**
  Retrieve the SSL pinning policy for this instance.

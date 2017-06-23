@@ -93,7 +93,7 @@
                                               @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=" // Fake key 2
                                               ]}}};
     
-    _trustKit = [[TrustKit alloc] initWithConfiguration:trustKitConfig identifier:@"test"];
+    _trustKit = [[TrustKit alloc] initWithConfiguration:trustKitConfig];
     
     // Expect a report to be sent out when a notification is posted
     NSSet *knownPins = [NSSet setWithArray:@[[[NSData alloc]initWithBase64EncodedString:@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
