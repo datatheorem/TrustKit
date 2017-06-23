@@ -399,7 +399,7 @@
                                                                                         ]}}};
     
     
-    XCTAssertThrows([[TrustKit alloc] initWithConfiguration:trustKitConfig identifier:@"local"]);
+    XCTAssertThrows([[TrustKit alloc] initWithConfiguration:trustKitConfig]);
 }
 
 

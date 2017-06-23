@@ -24,11 +24,9 @@ static NSString * const kTSKConfiguration = @"TSKConfiguration";
 
 
 #pragma mark TrustKit Global State
+
 // Shared TrustKit singleton instance
 static TrustKit *sharedTrustKit = nil;
-
-// The identifier we use for the singleton instance of TrustKit
-static NSString * const kTSKSharedInstanceIdentifier = @"TSKSharedInstanceIdentifier";
 
 // A shared hash cache for use by all TrustKit instances
 static TSKSPKIHashCache *sharedHashCache;
@@ -42,6 +40,7 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
 #pragma mark TrustKit Initialization Helper Functions
 
 @interface TrustKit ()
+- (instancetype)initWithConfiguration:(NSDictionary<NSString *, id> *)trustKitConfig isSingleton:(BOOL)isSingleton;
 @property (nonatomic) TSKBackgroundReporter *pinFailureReporter;
 @property (nonatomic) dispatch_queue_t pinFailureReporterQueue;
 @end
@@ -66,7 +65,7 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedTrustKit = [[TrustKit alloc] initWithConfiguration:trustKitConfig];
+        sharedTrustKit = [[TrustKit alloc] initWithConfiguration:trustKitConfig isSingleton:YES];
         
         // Hook network APIs if needed
         if ([sharedTrustKit.configuration[kTSKSwizzleNetworkDelegates] boolValue]) {
@@ -82,7 +81,14 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
 
 #pragma mark Instance
 
+
 - (instancetype)initWithConfiguration:(NSDictionary<NSString *, id> *)trustKitConfig
+{
+    return [self initWithConfiguration:trustKitConfig isSingleton:NO];
+}
+
+
+- (instancetype)initWithConfiguration:(NSDictionary<NSString *, id> *)trustKitConfig isSingleton:(BOOL)isSingleton
 {
     NSParameterAssert(trustKitConfig);
     if (!trustKitConfig) {
@@ -112,8 +118,8 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
         BOOL userTrustAnchorBypass = [_configuration[kTSKIgnorePinningForUserDefinedTrustAnchors] boolValue];
 #endif
         
-        // TSKSwizzleNetworkDelegates - check if we are initializing the shared instance
-        if (![uniqueIdentifier isEqualToString:kTSKSharedInstanceIdentifier])
+        // TSKSwizzleNetworkDelegates - check if we are initializing the singleton / shared instance
+        if (!isSingleton)
         {
             if ([_configuration[kTSKSwizzleNetworkDelegates] boolValue] == YES)
             {
@@ -126,7 +132,7 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
             {
                 // Local instances cannot be used if a shared instance with swizzling enabled is used, to avoid double pinning validation
                 [NSException raise:@"TrustKit configuration invalid"
-                              format:@"Cannot use local TrustKit instances when the TrustKit sharedInstance has been initialized with kTSKSwizzleNetworkDelegates enabled"];
+                            format:@"Cannot use local TrustKit instances when the TrustKit sharedInstance has been initialized with kTSKSwizzleNetworkDelegates enabled"];
             }
         }
         
@@ -164,6 +170,7 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
     }
     return self;
 }
+
 
 #pragma mark Notification Handlers
 
