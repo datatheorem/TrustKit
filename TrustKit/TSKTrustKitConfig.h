@@ -6,8 +6,6 @@
 //  Copyright © 2017 TrustKit. All rights reserved.
 //
 
-// These externs are currently fulfilled in TrustKit.m. They are here to prevent reverse
-// includes since both TrustKit instances and low level internal C API need the definitions
 
 @import Foundation;
 
@@ -40,7 +38,8 @@ typedef NSString *TSKDomainConfigurationKey;
 /**
  A boolean. If set to `YES`, TrustKit will perform method swizzling on the App's
  `NSURLConnection` and `NSURLSession` delegates in order to automatically add SSL pinning
- validation to the App's connections.
+ validation to the App's connections. This option can only be used if TrustKit is 
+ initialized in singleton mode.
  
  Swizzling allows enabling pinning within an App without having to find and modify each
  and every instance of `NSURLConnection` or `NSURLSession` delegates.
