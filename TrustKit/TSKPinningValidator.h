@@ -10,7 +10,6 @@
  */
 
 #import "TSKTrustDecision.h"
-#import "TSKPublicKeyAlgorithm.h"
 @import Foundation;
 
 @class TSKPinningValidatorResult;
