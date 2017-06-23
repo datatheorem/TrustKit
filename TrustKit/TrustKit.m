@@ -135,12 +135,12 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
         // trigger reports on the pinning failure reporter background queue.
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
-            sharedHashCache = [[TSKSPKIHashCache alloc] initWithIdentifier:@"trustkit"];
+            sharedHashCache = [[TSKSPKIHashCache alloc] initWithIdentifier:kTSKSPKISharedHashCacheIdentifier];
         });
         
         __weak typeof(self) weakSelf = self;
         _pinningValidator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:_configuration
-                                                                          hashCache:[[TSKSPKIHashCache alloc] initWithIdentifier:kTSKSPKISharedHashCacheIdentifier]
+                                                                          hashCache:sharedHashCache
                                                       ignorePinsForUserTrustAnchors:userTrustAnchorBypass
                                                               validationResultQueue:_pinFailureReporterQueue
                                                             validationResultHandler:^(TSKPinningValidatorResult * _Nonnull result) {
