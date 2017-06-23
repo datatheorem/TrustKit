@@ -48,10 +48,11 @@ certificate:
 
 ## Deploying TrustKit
 
-### Adding TrustKit as a Dependency - CocoaPods
+### Adding TrustKit as a Dependency
 
-The easiest way to deploy TrustKit in an App is via CocoaPods. To do so, add the 
-following line to your Podfile:
+#### CocoaPods
+
+Add the following line to your Podfile:
 
     pod 'TrustKit'
 
@@ -59,9 +60,19 @@ Then run:
 
     $ pod install
 
-If CocoaPods cannot be used, TrustKit can be added to an Xcode project manually;
-instructions on how to do so are available at the end of this guide.
+#### Carthage
 
+Add the following line to your Cartfile:
+    
+    github "datatheorem/TrustKit" == 1.5.0
+
+Then run:
+
+    $ carthage build --platform iOS
+
+Lastly, on your application targets’ “General” settings tab, in the “Embedded Binaries” 
+section, drag and drop the TrustKit framework you want to use from the Carthage/Build
+folder on disk.
 
 ### Configuring a Pinning Policy
 
@@ -81,51 +92,76 @@ A pinning policy is a dictionary of domain names and pinning configuration keys.
 At a minimum, the configuration should specify a list of SSL pins and the
 corresponding certificates' public key algorithms. For example:
 
-    #import <TrustKit/TrustKit.h>
+```
+#import <TrustKit/TrustKit.h>
 
-    NSDictionary *trustKitConfig =
-    @{
-      // Auto-swizzle NSURLSession and NSURLConnection delegates to add pinning validation
-      kTSKSwizzleNetworkDelegates: @YES,
-      
-      // The list of domains we want to pin and their configuration
-      kTSKPinnedDomains: @{
-              
-              @"yahoo.com" : @{
-                      // Pin all subdomains of yahoo.com
-                      kTSKIncludeSubdomains:@YES,
-                      
-                      // Do not block connections if pinning validation failed so the App doesn't break
-                      kTSKEnforcePinning:@NO,
-                    
-                      // Send reports for pin validation failures so we can track them
-                      kTSKReportUris: @[@"https://some-reporting-server.com/log_report"],
-                      
-                      // The pinned public keys' algorithms
-                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                      
-                      // The pinned public keys' Subject Public Key Info hashes
-                      kTSKPublicKeyHashes : @[
-                              @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
-                              @"rFjc3wG7lTZe43zeYTvPq8k4xdDEutCmIhI5dn4oCeE=",
-                              ],
-                      },
-              
-              @"www.datatheorem.com" : @{
-                      // Block connections if pinning validation failed
-                      kTSKEnforcePinning:@YES,
-                      
-                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                      
-                      kTSKPublicKeyHashes : @[
-                              @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=",
-                              @"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8="
-                              ]
-                      }}};
+NSDictionary *trustKitConfig =
+@{
+  // The list of domains we want to pin and their configuration
+  kTSKPinnedDomains: @{
+          
+          @"yahoo.com" : @{
+                  // Pin all subdomains of yahoo.com
+                  kTSKIncludeSubdomains:@YES,
+                  
+                  // Do not block connections if pinning validation failed so the App doesn't break
+                  kTSKEnforcePinning:@NO,
+                
+                  // Send reports for pin validation failures so we can track them
+                  kTSKReportUris: @[@"https://some-reporting-server.com/log_report"],
+                  
+                  // The pinned public keys' algorithms
+                  kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                  
+                  // The pinned public keys' Subject Public Key Info hashes
+                  kTSKPublicKeyHashes : @[
+                          @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                          @"rFjc3wG7lTZe43zeYTvPq8k4xdDEutCmIhI5dn4oCeE=",
+                          ],
+                  },
+          
+          @"www.datatheorem.com" : @{
+                  // Block connections if pinning validation failed
+                  kTSKEnforcePinning:@YES,
+                  
+                  kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                  
+                  kTSKPublicKeyHashes : @[
+                          @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=",
+                          @"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8="
+                          ]
+}}};
+```
 
+The list of all the configuration keys is available in the
+[documentation](https://datatheorem.github.io/TrustKit/documentation/Classes/TrustKit.html).
+
+### Implementing Pinning Validation
+
+After TrustKit has been initialized, a 
+[`TSKPinningValidator` instance](https://datatheorem.github.io/TrustKit/documentation/Classes/TSKPinningValidator.html) 
+can be retrieved from the TrustKit singleton, and can be used to perform SSL pinning validation 
+in the App's network delegates. For example in an NSURLSessionDelegate:
+
+```
+- (void)URLSession:(NSURLSession *)session 
+              task:(NSURLSessionTask *)task 
+didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge 
+ completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler {
+{
+    TSKPinningValidator *pinningValidator = [[TrustKit sharedInstance] pinningValidator];
+    if (![pinningValidator handleChallenge:challenge completionHandler:completionHandler])
+    {
+        // TrustKit did not handle this challenge: perhaps it was not for server trust
+        // or the domain was not pinned. Fall back to the default behavior
+        completionHandler(NSURLSessionAuthChallengePerformDefaultHandling, nil);
+    }
+}
+```
 
 Some additional consideration in regards to the right pinning policy to deploy follow. 
 
+### Additional Notes
 
 #### Always start with pinning enforcement disabled
 
@@ -155,6 +191,24 @@ intermediate CA in order to allow their users to use the app, or face weeks of
 the app being unusable.
 
 
+#### Properly implement pinning in WebViews
+
+Adding SSL pinning to connections initiated within a `UIWebView` is difficult as the 
+class does not provide direct APIs to handle authentication challenges. As 
+mentionned in [Apple's technical note about HTTPS trust evaluation](https://developer.apple.com/library/ios/technotes/tn2232/_index.html), 
+customizing certificate validation in a `UIWebView` can still be achieved using 
+`NSURLProtocol` to intercept all outgoing connections. However, implemeting this 
+technique is a complex and significant engineering effort. 
+
+Overall, the best approach to implementing SSL pinning in webviews is by 
+migrating to the `WKWebView` class introduced in iOS 8, which provides 
+[delegate methods](https://developer.apple.com/library/ios/documentation/WebKit/Reference/WKNavigationDelegate_Ref/) 
+to handle authentication challenges (such as server SSL certificate validation).
+However, this approach still requires some testing as it seems like the 
+`webView:didReceiveAuthenticationChallenge:completionHandler:` delegate method 
+[only works reliably on iOS 9](https://bugs.webkit.org/show_bug.cgi?id=135327).
+
+
 #### Consider leveraging auto-swizzling for simple Apps
 
 By setting `kTSKSwizzleNetworkDelegates` to `YES`, TrustKit will perform method 
@@ -173,11 +227,12 @@ by another module or library (such as Analytics SDKs)
 * Apps that do no use `NSURLSession` or `NSURLConnection` for their 
 connections.
 
-Auto-swizzling can be disabled by setting `kTSKSwizzleNetworkDelegates` to 
-`NO`. Manual pinning validation can then be easily implemented in the App's 
-authentication handlers'; see the "Manual Pin Validation" section in this guide for 
-instructions.
-
+Even when auto-swizzling is enabled with `kTSKSwizzleNetworkDelegates`, there
+are specific scenarios where TrustKit cannot intercept outgoing SSL connections 
+and automatically validate the server's identity against the pinning policy. For these 
+connections, the pin validation must be manually implemented using the 
+[`TSKPinningValidator` class](https://datatheorem.github.io/TrustKit/documentation/Classes/TSKPinningValidator.html) 
+class. 
 
 #### Deploy a reporting server or use Data Theorem's free server
 
@@ -190,7 +245,9 @@ access).
 This will give you an idea of how many users would be blocked, if pin validation 
 was to be enforced.
 
-### Debugging with TrustKit
+## Appendices
+
+### Debugging network connections with TrustKit
 
 SSL pinning can make it difficult for developers to develop network clients or
 troubleshoot network requests. Common tools like Charles Proxy use self-signed
@@ -201,7 +258,7 @@ man-in-the-middle attack, TrustKit will reject such proxied SSL connections.
 
 There are several options available to mitigate this issue.
 
-#### For Small Development Teams
+#### For small development teams
 
 Create a self-signed SSL certificate authority for Charles to use instead of it's
 default randomly generated CA. This team CA cert & private key can be shared among
@@ -213,7 +270,7 @@ For debugging in production, users will need to trust the self-signed root CA �
 which is potentially dangerous and requires the owner of the device to enter their
 passcode.
 
-#### For Large or Enterprise Development Teams
+#### For large or enterprise development teams
 
 If you're working in an enterprise environment where sharing a root CA certificate
 and private key is impractical, issuing intermediate CA certs and keys might work
@@ -239,7 +296,7 @@ that you can pin your untrusted root debugging certificate from Charles, but not
 specifically add it to the OS trust store on your simulators/devices/computers.
 
 To use custom trust anchors, add the certificate strings to a list under the
-kTSKAdditionalTrustAnchors configuration key. Each entry should include ony one
+`kTSKAdditionalTrustAnchors` configuration key. Each entry should include ony one
 certificate in PEM format, with no password (it's a public key, right?). Exmaple:
 
 ```
@@ -298,9 +355,9 @@ certificate in PEM format, with no password (it's a public key, right?). Exmaple
 
 By default TrustKit is hard-coded to ignore the custom trust anchors created using
 the above processes in a production build. TrustKit does this by checking a define
-in TSKPinningValidator: custom anchors are ignored unless #if DEBUG == 1.
+in `TSKPinningValidator`: custom anchors are ignored unless `#if DEBUG == 1`.
 
-The idea is that kTSKAdditionalTrustAnchors configuration is primarily intended for
+The idea is that `kTSKAdditionalTrustAnchors` configuration is primarily intended for
 use during development. It simplifies your workflow by not requiring the iOS Simulator
 or iOS device to manually add a custom OS trust anchor (or added to Keychain for macOS).
 
@@ -315,91 +372,6 @@ debugging.
 - Add DEBUG=1 to "Preprocessor Macros" in the Xcode target build settings for your
 distribution configuration (named "Release" by default). This will probably cause
 issues in your app.
-- Subclass TSKPinningValidator and override +allowsAdditionalTrustAnchors to return
-true.
+- Subclass `TSKPinningValidator` and override `+allowsAdditionalTrustAnchors` to return
+`true`.
 
-#### Other configuration settings
-
-The list of all the configuration keys is available in the
-[documentation](https://datatheorem.github.io/TrustKit/documentation/Classes/TrustKit.html).
-
-
-## Manual Pin Validation
-
-Even when auto-swizzling is enabled with `kTSKSwizzleNetworkDelegates`, there
-are specific scenarios where TrustKit cannot intercept outgoing SSL connections 
-and automatically validate the server's identity against the pinning policy. For these 
-connections, the pin validation must be manually triggered: the server's trust object, 
-which contains its certificate chain, needs to be retrieved or built before being 
-passed to the
-[`TSKPinningValidator` class](https://datatheorem.github.io/TrustKit/documentation/Classes/TSKPinningValidator.html) 
-for validation. 
-
-
-## Pinning in WebViews
-
-Adding SSL pinning to connections initiated within a `UIWebView` is difficult as the 
-class does not provide direct APIs to handle authentication challenges. As 
-mentionned in [Apple's technical note about HTTPS trust evaluation](https://developer.apple.com/library/ios/technotes/tn2232/_index.html), 
-customizing certificate validation in a `UIWebView` can still be achieved using 
-`NSURLProtocol` to intercept all outgoing connections. However, implemeting this 
-technique is a complex and significant engineering effort. 
-
-Overall, the best approach to implementing SSL pinning in webviews is by 
-migrating to the `WKWebView` class introduced in iOS 8, which provides 
-[delegate methods](https://developer.apple.com/library/ios/documentation/WebKit/Reference/WKNavigationDelegate_Ref/) to handle authentication challenges (such as server SSL certificate 
-validation). However, this approach still requires some testing as it seems like the 
-`webView:didReceiveAuthenticationChallenge:completionHandler:` delegate method [only works reliably on iOS 9](https://bugs.webkit.org/show_bug.cgi?id=135327).
-
-
-## Pin Validation Notifications
-
-Whenever TrustKit performs a pinning validation, an `NSNotification` is sent with 
-information about the server and certificate that were validated. These notifications 
-can be used for performance measurement or to act upon any pinning validation 
-performed by TrustKit (for example to customize the reporting mechanism). See 
-the TrustKit documentation for more information.
-
-
-## Embedding TrustKit Without CocoaPods
-
-### Adding TrustKit as a Dependency - Static Linking
-
-If CocoaPods can't be used and for Apps targeting iOS 7, TrustKit can be statically 
-linked.
-
-1. Drag and drop the TrustKit Xcode project file in your project:
-
-    ![](https://datatheorem.github.io/TrustKit/images/linking1.png)
-
-2. Within the "General" tab for your App's target, add _libTrustKit_Static.a_ to
-the "Linked Framework and Binaries" section:
-
-    ![](https://datatheorem.github.io/TrustKit/images/linking2_static.png)
-
-3. Within the "Build Settings", add TrustKit's folder to the "User Header Search
-Paths" setting and set "Always Search Header Paths" to "Yes":
-
-    ![](https://datatheorem.github.io/TrustKit/images/linking3_static.png)
-
-4. Add `-ObjC` to the to the "Other Linker Flags" parameter within the App's Build 
-Settings.
-
-5. Lastly, initialize TrustKit with your pinning policy.
-
-
-### Adding TrustKit as a Dependency - Dynamic Linking
-
-If CocoaPods can't be used and for Apps targeting iOS 8+, macOS, tvOS or
-watchOS, TrustKit can be dynamically linked.
-
-1. Drag and drop the TrustKit Xcode project file in your project:
-
-    ![](https://datatheorem.github.io/TrustKit/images/linking1.png)
-
-2. Within the "General" tab for your App's target, add TrustKit to the
-"Embedded Binaries" section:
-
-    ![](https://datatheorem.github.io/TrustKit/images/linking2_dynamic.png)
-
-3. Lastly, initialize TrustKit with your pinning policy.
