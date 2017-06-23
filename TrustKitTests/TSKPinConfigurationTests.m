@@ -16,6 +16,7 @@
 #import "../TrustKit/Pinning/ssl_pin_verifier.h"
 #import "../TrustKit/Pinning/TSKPublicKeyAlgorithm.h"
 #import "../TrustKit/parse_configuration.h"
+#import "../TrustKit/configuration_utils.h"
 #import "TSKCertificateUtils.h"
 
 @interface TSKPinConfigurationTests : XCTestCase

@@ -858,7 +858,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                                    kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA Key
                                                                            @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                                                            ]}}};
-    TrustKit *tk = [[TrustKit alloc] initWithConfiguration:trustKitConfig identifier:@"test"];
+    TrustKit *tk = [[TrustKit alloc] initWithConfiguration:trustKitConfig];
     
     __block BOOL wasHandlerCalled = NO;
     void (^completionHandler)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable) = ^void(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential)
@@ -1029,7 +1029,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                                    kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA Key
                                                                            @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=", // Fake key
                                                                            ]}}};
-    TrustKit *tk = [[TrustKit alloc] initWithConfiguration:trustKitConfig identifier:@"test"];
+    TrustKit *tk = [[TrustKit alloc] initWithConfiguration:trustKitConfig];
     
     __block BOOL wasHandlerCalled = NO;
     void (^completionHandler)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable) = ^void(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential)
@@ -1083,7 +1083,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                              }};
     
     // Then test TSKPinningValidator
-    TrustKit *tk = [[TrustKit alloc] initWithConfiguration:trustKitConfig identifier:@"test"];
+    TrustKit *tk = [[TrustKit alloc] initWithConfiguration:trustKitConfig];
     
     XCTAssertEqual([tk.pinningValidator evaluateTrust:trust forHostname:@"unsecured.good.com"],
                    TSKTrustDecisionDomainNotPinned);
