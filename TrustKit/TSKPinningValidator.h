@@ -43,7 +43,8 @@
      completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition,
      NSURLCredential *credential))completionHandler
      {
-         if (![TSKPinningValidator handleChallenge:challenge completionHandler:completionHandler]) 
+         TSKPinningValidator *pinningValidator = [[TrustKit sharedInstance] pinningValidator];
+         if (![pinningValidator handleChallenge:challenge completionHandler:completionHandler])
          {
              // TrustKit did not handle this challenge: perhaps it was not for server trust
              // or the domain was not pinned. Fall back to the default behavior
