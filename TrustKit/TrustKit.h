@@ -14,6 +14,7 @@
 #ifndef _TRUSTKIT_
 #define _TRUSTKIT_
     #import "TSKTrustKitConfig.h"
+    #import "TSKPinningValidatorResult.h"
     #import "TSKPinningValidator.h"
     #import "TSKTrustDecision.h"
 #endif /* _TRUSTKIT_ */
