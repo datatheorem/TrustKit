@@ -63,8 +63,8 @@ NS_ASSUME_NONNULL_BEGIN
  ```
  
  When setting the pinning policy programmatically, it has to be supplied to the
- `initializeWithConfiguration:` method as a dictionary in order to initialize the TrustKit 
- singleton. For example:
+ `initializeWithConfiguration:` method as a dictionary in order to initialize TrustKit. 
+ For example:
  
  ```
     NSDictionary *trustKitConfig =

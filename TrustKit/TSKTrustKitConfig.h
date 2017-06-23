@@ -212,7 +212,7 @@ FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKExpirationDate;
  Standard RFC-7468 PEM format is supported (see https://tools.ietf.org/html/rfc7468#section-2 ).
  Note that the header, footer and any newlines are optional, but aid in readability.
  
- ~~ SECURITY WARNING ~~
+ __SECURITY WARNING:__
  Misuse of this configuration option could potentially render your application
  vulnerable to exploits since it bypasses the normal operating system trust store.
  It is intended for enterprise scenarios where a company might be running their
@@ -225,13 +225,7 @@ FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKAdditionalTrustAnchors;
 
 
 /**
- A public key algorithm supported by TrustKit for computing SSL pins:
- 
- * `kTSKAlgorithmRsa2048`
- * `kTSKAlgorithmRsa4096`
- * `kTSKAlgorithmEcDsaSecp256r1`
- * `kTSKAlgorithmEcDsaSecp384r1`
- 
+ A public key algorithm supported by TrustKit for generating the SSL pin for a certificate.
  */
 typedef NSString *TSKSupportedAlgorithm;
 

@@ -48,7 +48,6 @@ typedef NS_ENUM(NSInteger, TSKTrustEvaluationResult)
 
 /**
  Possible return values when verifying a server's identity against an SSL pinning policy.
- 
  */
 typedef NS_ENUM(NSInteger, TSKTrustDecision)
 {
