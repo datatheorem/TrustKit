@@ -39,7 +39,7 @@ typedef NSString *TSKDomainConfigurationKey;
  A boolean. If set to `YES`, TrustKit will perform method swizzling on the App's
  `NSURLConnection` and `NSURLSession` delegates in order to automatically add SSL pinning
  validation to the App's connections. This option can only be used if TrustKit is 
- initialized in singleton mode.
+ initialized in singleton mode; default value is `NO`.
  
  Swizzling allows enabling pinning within an App without having to find and modify each
  and every instance of `NSURLConnection` or `NSURLSession` delegates.

@@ -63,11 +63,8 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
     NSNumber *shouldSwizzleNetworkDelegates = TrustKitArguments[kTSKSwizzleNetworkDelegates];
     if (shouldSwizzleNetworkDelegates == nil)
     {
-        // This is a required argument
-        [NSException raise:@"TrustKit configuration invalid"
-                    format:@"TrustKit was initialized without specifying the kTSKSwizzleNetworkDelegates setting. Please add this boolean entry to the root of your TrustKit configuration in order to specify if auto-swizzling of the App's connection delegates should be enabled or not; see the documentation for more information."];
-        // Default setting is YES
-        finalConfiguration[kTSKSwizzleNetworkDelegates] = @(YES);
+        // Default setting is NO
+        finalConfiguration[kTSKSwizzleNetworkDelegates] = @(NO);
     }
     else
     {
