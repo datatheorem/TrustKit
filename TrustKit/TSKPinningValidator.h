@@ -17,7 +17,7 @@
 
 
 /**
- `TSKPinningValidator` is a class for manually verifying a server's identity against an SSL pinning policy.
+ A `TSKPinningValidator` instance can be used to verify a server's identity against an SSL pinning policy.
  
  In specific scenarios, TrustKit cannot intercept outgoing SSL connections and automatically validate the server's identity against the pinning policy:
  

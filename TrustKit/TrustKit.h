@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /**
- `TrustKit` is a class for programmatically configuring an SSL pinning policy within an App.
+ `TrustKit` is the main class for configuring an SSL pinning policy within an App.
  
  For most Apps, TrustKit should be used as a singleton, where a global SSL pinning policy is
  configured for the App. In singleton mode, the policy can be set either:
@@ -69,7 +69,6 @@ NS_ASSUME_NONNULL_BEGIN
  ```
     NSDictionary *trustKitConfig =
   @{
-    kTSKSwizzleNetworkDelegates: @NO,
     kTSKPinnedDomains : @{
             @"www.datatheorem.com" : @{
                     kTSKExpirationDate: @"2017-12-01",
@@ -114,6 +113,9 @@ NS_ASSUME_NONNULL_BEGIN
  
  The various configuration keys that can be specified in the policy are described in the
  "Constants" section of the documentation.
+ 
+ After initialization, the `TrustKit` instance's `pinningValidator` should be used to implement
+ pinning validation within the App's network authentication handlers.
  */
 @interface TrustKit : NSObject
 
@@ -140,6 +142,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)sharedInstance;
 
 
+#pragma mark Pinning Validation
+
 /**
  Retrieve the validator instance conforming to the pinning policy of this TrustKit instance.
  
@@ -147,6 +151,19 @@ NS_ASSUME_NONNULL_BEGIN
  authentication handlers.
  */
 @property (nonatomic, nonnull) TSKPinningValidator *pinningValidator;
+
+
+/**
+ Retrieve the SSL pinning policy configured for this TrustKit instance.
+ 
+ @return A dictionary with the current TrustKit configuration
+ */
+@property (nonatomic, readonly, nullable) NSDictionary *configuration;
+
+
+
+#pragma mark Validation Callback
+
 
 /**
  Register a block to be invoked for every request that is going through TrustKit's pinning
@@ -172,12 +189,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, null_resettable) dispatch_queue_t validationDelegateQueue;
 
 
-/**
- Retrieve the SSL pinning policy configured for this TrustKit instance. 
- 
- @return A dictionary with the current TrustKit configuration
- */
-@property (nonatomic, readonly, nullable) NSDictionary *configuration;
 
 
 #pragma mark Multi-Instance Mode

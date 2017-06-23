@@ -12,6 +12,10 @@
 #import "TSKTrustDecision.h"
 @import Foundation;
 
+/**
+ A `TSKPinningValidatorResult` instance contains all the details regarding a pinning validation
+ performed against a specific server.
+ */
 @interface TSKPinningValidatorResult : NSObject
 
 /**
