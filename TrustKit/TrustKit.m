@@ -66,8 +66,7 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedTrustKit = [[TrustKit alloc] initWithConfiguration:trustKitConfig
-                                                      identifier:kTSKSharedInstanceIdentifier];
+        sharedTrustKit = [[TrustKit alloc] initWithConfiguration:trustKitConfig];
         
         // Hook network APIs if needed
         if ([sharedTrustKit.configuration[kTSKSwizzleNetworkDelegates] boolValue]) {
@@ -83,7 +82,7 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
 
 #pragma mark Instance
 
-- (instancetype)initWithConfiguration:(NSDictionary<NSString *, id> *)trustKitConfig identifier:(NSString *)uniqueIdentifier
+- (instancetype)initWithConfiguration:(NSDictionary<NSString *, id> *)trustKitConfig
 {
     NSParameterAssert(trustKitConfig);
     if (!trustKitConfig) {
@@ -144,9 +143,13 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
                                                       ignorePinsForUserTrustAnchors:userTrustAnchorBypass
                                                               validationResultQueue:_pinFailureReporterQueue
                                                             validationResultHandler:^(TSKPinningValidatorResult * _Nonnull result) {
-                                                            
+                                                                typeof(self) strongSelf = weakSelf;
+                                                                if (!strongSelf) {
+                                                                    return;
+                                                                }
+                                                                
                                                                 // Invoke client handler if set
-                                                                void(^callback)(TSKPinningValidatorResult *) = self.validationDelegateCallback;
+                                                                void(^callback)(TSKPinningValidatorResult *) = strongSelf.validationDelegateCallback;
                                                                 if (callback) {
                                                                     dispatch_async(self.validationDelegateQueue, ^{
                                                                         callback(result);
@@ -154,7 +157,7 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
                                                                 }
                                                                 
                                                                 // Send analytics report
-                                                                [weakSelf sendValidationReport:result];
+                                                                [strongSelf sendValidationReport:result];
                                                             }];
         
         TSKLog(@"Successfully initialized with configuration %@", _configuration);

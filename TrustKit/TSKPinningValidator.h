@@ -143,6 +143,4 @@
                                validationResultQueue:(dispatch_queue_t _Nonnull)validationResultQueue
                              validationResultHandler:(void(^ _Nonnull)(TSKPinningValidatorResult * _Nonnull result))validationResultHandler;
 
-
-
 @end

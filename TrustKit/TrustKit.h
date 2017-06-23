@@ -148,7 +148,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, nonnull) TSKPinningValidator *pinningValidator;
 
-
 /**
  Register a block to be invoked for every request that is going through TrustKit's pinning
  validation mechanism.
@@ -192,10 +191,8 @@ NS_ASSUME_NONNULL_BEGIN
  of the App's other components.
  
  @param trustKitConfig A dictionary containing various keys for configuring the SSL pinning policy.
- @param uniqueIdentifier An identifier for this instance.
  */
-- (instancetype)initWithConfiguration:(NSDictionary<NSString *, id> * _Nullable)trustKitConfig
-                           identifier:(NSString * _Nonnull)uniqueIdentifier;
+- (instancetype)initWithConfiguration:(NSDictionary<NSString *, id> * _Nullable)trustKitConfig;
 
 
 @end
