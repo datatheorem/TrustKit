@@ -18,6 +18,8 @@
 #import "parse_configuration.h"
 #import "TSKPinningValidatorResult.h"
 #import "TSKLog.h"
+#import "TSKPinningValidator_Private.h"
+
 
 // Info.plist key we read the public key hashes from
 static NSString * const kTSKConfiguration = @"TSKConfiguration";

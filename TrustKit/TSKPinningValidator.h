@@ -79,7 +79,7 @@
  
  @param serverHostname The hostname of the server whose identity is being validated.
  
- @return A `TSKTrustDecision` which describes whether the SSL connection should be allowed or blocked, based on the global pinning policy.
+ @return A `TSKTrustDecision` which describes whether the SSL connection should be allowed or blocked, based on the configured pinning policy.
  
  @warning If no SSL pinning policy was configured for the supplied _serverHostname_, this method has no effect and will return `TSKTrustDecisionDomainNotPinned` without validating the supplied _serverTrust_ at all. This means that the server's _serverTrust_ object __must__ be verified against the device's trust store using `SecTrustEvaluate()`. Failing to do so will __disable SSL certificate validation__.
  
@@ -88,24 +88,5 @@
 - (TSKTrustDecision)evaluateTrust:(SecTrustRef _Nonnull)serverTrust forHostname:(NSString * _Nonnull)serverHostname;
 
 
-#pragma mark Internal Methods
-
-
-/**
- /// :nodoc:
- Initialize an instance of TSKPinningValidatorResult - should only be used within TrustKit.
- 
- @param pinnedDomains Domain pinning configuration, typically obtained by parseTrustKitConfiguration()
- @param hashCache The hash cache to use. If nil, no caching is performed, performance may suffer.
- @param ignorePinsForUserTrustAnchors Set to true to ignore the trust anchors in the user trust store
- @param validationResultQueue The queue used when invoking the validationResultHandler
- @param validationResultHandler The callback invoked with validation results
- @return Initialized instance
- */
-- (instancetype _Nullable)initWithPinnedDomainConfig:(NSDictionary * _Nullable)pinnedDomains
-                                           hashCache:(TSKSPKIHashCache * _Nonnull)hashCache
-                       ignorePinsForUserTrustAnchors:(BOOL)ignorePinsForUserTrustAnchors
-                               validationResultQueue:(dispatch_queue_t _Nonnull)validationResultQueue
-                             validationResultHandler:(void(^ _Nonnull)(TSKPinningValidatorResult * _Nonnull result))validationResultHandler;
 
 @end

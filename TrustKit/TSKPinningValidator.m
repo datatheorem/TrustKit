@@ -18,6 +18,8 @@
 #import "configuration_utils.h"
 #import "TrustKit.h"
 #import "TSKLog.h"
+#import "TSKPinningValidator_Private.h"
+
 
 @interface TSKPinningValidator ()
 

@@ -66,12 +66,4 @@
  */
 @property (nonatomic, readonly, nullable) NSArray *certificateChain;
 
-/// :nodoc:
-- (instancetype _Nullable)initWithServerHostname:(NSString * _Nonnull)serverHostname
-                           serverTrust:(SecTrustRef _Nonnull)serverTrust
-                         notedHostname:(NSString * _Nonnull)notedHostname
-                      validationResult:(TSKTrustEvaluationResult)validationResult
-                    finalTrustDecision:(TSKTrustDecision)finalTrustDecision
-                    validationDuration:(NSTimeInterval)validationDuration;
-
 @end
