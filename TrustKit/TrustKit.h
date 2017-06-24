@@ -120,7 +120,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface TrustKit : NSObject
 
 
-#pragma mark Singleton Mode
+#pragma mark Usage in Singleton Mode
 
 /**
  Initialize the global TrustKit singleton with the supplied pinning policy.
@@ -142,7 +142,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)sharedInstance;
 
 
-#pragma mark Pinning Validation
+#pragma mark Implementing Pinning Validation
+
 
 /**
  Retrieve the validator instance conforming to the pinning policy of this TrustKit instance.
@@ -153,16 +154,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, nonnull) TSKPinningValidator *pinningValidator;
 
 
-/**
- Retrieve the SSL pinning policy configured for this TrustKit instance.
- 
- @return A dictionary with the current TrustKit configuration
- */
-@property (nonatomic, readonly, nullable) NSDictionary *configuration;
-
-
-
-#pragma mark Validation Callback
+#pragma mark Configuring a Validation Callback
 
 
 /**
@@ -189,9 +181,19 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, null_resettable) dispatch_queue_t validationDelegateQueue;
 
 
+#pragma mark Additional Settings
 
 
-#pragma mark Multi-Instance Mode
+/**
+ Retrieve the SSL pinning policy configured for this TrustKit instance.
+ 
+ @return A dictionary with the current TrustKit configuration
+ */
+@property (nonatomic, readonly, nullable) NSDictionary *configuration;
+
+
+
+#pragma mark Usage in Multi-Instance Mode
 
 /**
  Initialize a local TrustKit instance with the supplied SSL pinning policy configuration.
