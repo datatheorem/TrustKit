@@ -90,41 +90,6 @@
 
 #pragma mark Internal Methods
 
-/**
- /// :nodoc:
- If this property returns YES, pinning may include any additional trust anchors
- provided in a domain configuration under the kTSKAdditionalTrustAnchors key.
- 
- This property is YES only when the preprocessor flag DEBUG is set to 1 (the
- default behavior for the "Debug" configuration of an Xcode project). Subclasses
- may override this method – with extreme caution – to alter this behavior.
- */
-@property (nonatomic, class, readonly) BOOL allowsAdditionalTrustAnchors;
-
-/**
- /// :nodoc:
- Domain pinning configuration, typically obtained by parseTrustKitConfiguration()
- */
-@property (nonatomic, readonly, nullable) NSDictionary *pinnedDomains;
-
-/**
- /// :nodoc:
- Set to true to ignore the trust anchors in the user trust store. Only applicable
- to platforms that support a user trust store (Mac OS).
- */
-@property (nonatomic, readonly) BOOL ignorePinsForUserTrustAnchors;
-
-/**
- /// :nodoc:
- The queue use when invoking the validationResultHandler
- */
-@property (nonatomic, readonly, nonnull) dispatch_queue_t validationResultQueue;
-
-/**
- /// :nodoc:
- The callback invoked with validation results
- */
-@property (nonatomic, readonly, nonnull) void(^validationResultHandler)(TSKPinningValidatorResult * _Nonnull result);
 
 /**
  /// :nodoc:
