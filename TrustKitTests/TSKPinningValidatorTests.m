@@ -453,7 +453,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                      kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
                                                    // Totally expired
-                                                   kTSKExpirationDate: [NSDate dateWithTimeIntervalSinceReferenceDate:0],
+                                                   kTSKExpirationDate: @"2015-01-01",
                                                    kTSKEnforcePinning: @YES,
                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Bad Key
@@ -1105,17 +1105,21 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
 - (void)testAdditionalTrustAnchors
 {
     // Load and set custom trust anchor
-    SecCertificateRef anchor = [TSKCertificateUtils createCertificateFromPem:@"anchor-ca.cert"];
-    CFArrayRef anchors = CFArrayCreate(NULL, (const void **)&anchor, 1, &kCFTypeArrayCallBacks);
-    CFRelease(anchor);
+    NSBundle *bundle = [NSBundle bundleForClass:self.class];
+    NSString *pemFilepath = [bundle pathForResource:@"anchor-ca.cert" ofType:@"pem"];
+    NSString *anchorAsPem = [NSString stringWithContentsOfFile:pemFilepath usedEncoding:nil error:nil];
+    NSArray *anchors = [NSArray arrayWithObject:anchorAsPem];
     
     NSDictionary *config = @{ kTSKPinnedDomains : @{
                                       @"fake.yahoo.com" : @{
-                                              kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                                              kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0="],
-                                              kTSKAdditionalTrustAnchors : (__bridge_transfer NSArray *)anchors } } };
+                                              kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                              kTSKPublicKeyHashes : @[@"H6ts7uvqaU077Y8GlTM7nP31ir2ykBr61+oKjuvKSt0=",
+                                                                      @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB="],
+                                              kTSKAdditionalTrustAnchors : anchors} } };
     
-    TestPinningValidator *pinningValidator = [[TestPinningValidator alloc] initWithPinnedDomainConfig:config
+    NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(config);
+    
+    TestPinningValidator *pinningValidator = [[TestPinningValidator alloc] initWithDomainPinningPolicies:parsedTrustKitConfig[kTSKPinnedDomains]
                                                                                             hashCache:spkiCache
                                                                         ignorePinsForUserTrustAnchors:YES
                                                                               validationCallbackQueue:dispatch_get_main_queue()
