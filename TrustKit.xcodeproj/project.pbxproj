@@ -227,6 +227,9 @@
 		8CF27A981F01B341009369B0 /* TSKSwizzlingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF27A971F01B341009369B0 /* TSKSwizzlingTests.m */; };
 		8CF27A991F01B341009369B0 /* TSKSwizzlingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF27A971F01B341009369B0 /* TSKSwizzlingTests.m */; };
 		8CF27A9A1F01B341009369B0 /* TSKSwizzlingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF27A971F01B341009369B0 /* TSKSwizzlingTests.m */; };
+		8CF27AA21F01BB7B009369B0 /* TSKLoggerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF27AA11F01BB7B009369B0 /* TSKLoggerTests.m */; };
+		8CF27AA31F01BB7B009369B0 /* TSKLoggerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF27AA11F01BB7B009369B0 /* TSKLoggerTests.m */; };
+		8CF27AA41F01BB7B009369B0 /* TSKLoggerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF27AA11F01BB7B009369B0 /* TSKLoggerTests.m */; };
 		FC049B3A1EECD1B000FDC5F4 /* anchor-ca.cert.pem in Resources */ = {isa = PBXBuildFile; fileRef = FCC1DD051EECD19E00AB3D81 /* anchor-ca.cert.pem */; };
 		FC049B3B1EECD1B000FDC5F4 /* anchor-fake.yahoo.com.cert.pem in Resources */ = {isa = PBXBuildFile; fileRef = FCC1DD061EECD19E00AB3D81 /* anchor-fake.yahoo.com.cert.pem */; };
 		FC049B3C1EECD1B000FDC5F4 /* anchor-intermediate.cert.pem in Resources */ = {isa = PBXBuildFile; fileRef = FCC1DD071EECD19E00AB3D81 /* anchor-intermediate.cert.pem */; };
@@ -403,6 +406,7 @@
 		8CF27A921F0185EC009369B0 /* TSKPinningValidatorCallback.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSKPinningValidatorCallback.h; sourceTree = "<group>"; };
 		8CF27A931F01A0B8009369B0 /* TSKEndToEndNSURLSessionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKEndToEndNSURLSessionTests.m; sourceTree = "<group>"; };
 		8CF27A971F01B341009369B0 /* TSKSwizzlingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKSwizzlingTests.m; sourceTree = "<group>"; };
+		8CF27AA11F01BB7B009369B0 /* TSKLoggerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKLoggerTests.m; sourceTree = "<group>"; };
 		FC1A08FD1E579F630055B12C /* TSKTrustDecision.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSKTrustDecision.h; sourceTree = "<group>"; };
 		FC1A08FE1E57A4BB0055B12C /* TSKPinningValidatorResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSKPinningValidatorResult.h; sourceTree = "<group>"; };
 		FC1A08FF1E57A4BB0055B12C /* TSKPinningValidatorResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKPinningValidatorResult.m; sourceTree = "<group>"; };
@@ -602,6 +606,7 @@
 				070868B31ADFF68200E5AFDC /* Certificates */,
 				8CD5F7371BCB02A7005801D8 /* TSKNSURLConnectionTests.m */,
 				8CF27A971F01B341009369B0 /* TSKSwizzlingTests.m */,
+				8CF27AA11F01BB7B009369B0 /* TSKLoggerTests.m */,
 				8CF27A931F01A0B8009369B0 /* TSKEndToEndNSURLSessionTests.m */,
 				8CD5F7561BCB7219005801D8 /* TSKNSURLSessionTests.m */,
 				2FA2868CAFECA46ADE0B6E3E /* TSKPinningValidatorTests.m */,
@@ -1265,6 +1270,7 @@
 				8CD5F7571BCB7219005801D8 /* TSKNSURLSessionTests.m in Sources */,
 				FC4CAC7B1E958E0500DAC41E /* TSKReportsRateLimiterTests.m in Sources */,
 				8CF27A981F01B341009369B0 /* TSKSwizzlingTests.m in Sources */,
+				8CF27AA21F01BB7B009369B0 /* TSKLoggerTests.m in Sources */,
 				8CC78B201B1B586F00523A25 /* TSKCertificateUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1309,6 +1315,7 @@
 				8C84CBC71D6E1718009B3E7D /* TSKReporterTests.m in Sources */,
 				8C84CBC81D6E1718009B3E7D /* TSKNSURLSessionTests.m in Sources */,
 				8CF27A9A1F01B341009369B0 /* TSKSwizzlingTests.m in Sources */,
+				8CF27AA41F01BB7B009369B0 /* TSKLoggerTests.m in Sources */,
 				8C84CBC91D6E1718009B3E7D /* TSKCertificateUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1378,6 +1385,7 @@
 				8CA6CC3B1BAE2C7E00BDA419 /* TSKPinConfigurationTests.m in Sources */,
 				8CD5F7581BCB7219005801D8 /* TSKNSURLSessionTests.m in Sources */,
 				8CF27A991F01B341009369B0 /* TSKSwizzlingTests.m in Sources */,
+				8CF27AA31F01BB7B009369B0 /* TSKLoggerTests.m in Sources */,
 				8CA6CC3D1BAE2C8500BDA419 /* TSKCertificateUtils.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

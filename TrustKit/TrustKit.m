@@ -40,6 +40,26 @@ static char kTSKPinFailureReporterQueueLabel[] = "com.datatheorem.trustkit.repor
 static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.com/trustkit/report";
 
 
+// Default logger block: only log in debug builds and add TrustKit at the beginning of the line
+void (^_loggerBlock)(NSString *) = ^void(NSString *message)
+{
+#if DEBUG
+    NSLog(@"=== TrustKit: %@", message);
+#endif
+};
+
+// The logging function we use within TrustKit
+void TSKLog(NSString *format, ...)
+{
+    va_list args;
+    va_start(args, format);
+    NSString *message = [[NSString alloc] initWithFormat: format arguments:args];
+    va_end(args);
+    _loggerBlock(message);
+}
+
+
+
 #pragma mark TrustKit Initialization Helper Functions
 
 @interface TrustKit ()
@@ -55,7 +75,7 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
 
 @implementation TrustKit
 
-#pragma mark Shared TrustKit Explicit Initialization
+#pragma mark Singleton Initialization
 
 + (instancetype)sharedInstance
 {
@@ -87,7 +107,7 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
 }
 
 
-#pragma mark Instance
+#pragma mark Instance Initialization
 
 
 - (instancetype)initWithConfiguration:(NSDictionary<NSString *, id> *)trustKitConfig
@@ -181,7 +201,7 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
 }
 
 
-#pragma mark Notification Handlers
+#pragma mark Validation Callback
 
 // The block which receives pin validation results and turns them into pin validation reports
 - (void)sendValidationReport:(TSKPinningValidatorResult *)result notedHostname:(NSString *)notedHostname pinningPolicy:(NSDictionary<TSKDomainConfigurationKey, id> *)notedHostnamePinningPolicy
@@ -225,6 +245,15 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
 - (void)setPinningValidatorCallbackQueue:(dispatch_queue_t)pinningValidatorCallbackQueue
 {
     _pinningValidatorCallbackQueue = pinningValidatorCallbackQueue ?: dispatch_get_main_queue();
+}
+
+
+#pragma mark Configuring Logging
+
+
++ (void)setLoggerBlock:(void (^)(NSString *))block
+{
+    _loggerBlock = block;
 }
 
 @end
