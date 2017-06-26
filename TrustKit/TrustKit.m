@@ -186,7 +186,7 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
 // The block which receives pin validation results and turns them into pin validation reports
 - (void)sendValidationReport:(TSKPinningValidatorResult *)result notedHostname:(NSString *)notedHostname pinningPolicy:(NSDictionary<TSKDomainConfigurationKey, id> *)notedHostnamePinningPolicy
 {
-    TSKTrustEvaluationResult validationResult = result.validationResult;
+    TSKTrustEvaluationResult validationResult = result.evaluationResult;
     
     // Send a report only if the there was a pinning failure
     if (validationResult != TSKTrustEvaluationSuccess)

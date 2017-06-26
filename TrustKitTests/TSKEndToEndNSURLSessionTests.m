@@ -154,7 +154,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
     trustKit.pinningValidatorCallback = ^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, TKSDomainPinningPolicy *_Nonnull notedHostnamePinningPolicy) {
         // Check the received values
         XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldBlockConnection);
-        XCTAssertEqual(result.validationResult, TSKTrustEvaluationFailedNoMatchingPin);
+        XCTAssertEqual(result.evaluationResult, TSKTrustEvaluationFailedNoMatchingPin);
         
         XCTAssertEqualObjects(result.serverHostname,  @"www.yahoo.com");
         XCTAssertGreaterThan([result.certificateChain count], (unsigned long)1);
@@ -209,7 +209,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
     trustKit.pinningValidatorCallback = ^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, TKSDomainPinningPolicy *_Nonnull notedHostnamePinningPolicy) {
         // Check the received values
         XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldAllowConnection);
-        XCTAssertEqual(result.validationResult, TSKTrustEvaluationSuccess);
+        XCTAssertEqual(result.evaluationResult, TSKTrustEvaluationSuccess);
         
         XCTAssertEqualObjects(result.serverHostname,  @"www.datatheorem.com");
         XCTAssertGreaterThan([result.certificateChain count], (unsigned long)1);
@@ -267,7 +267,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
     trustKit.pinningValidatorCallback = ^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, TKSDomainPinningPolicy *_Nonnull notedHostnamePinningPolicy) {
         // Check the received values
         XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldBlockConnection);
-        XCTAssertEqual(result.validationResult, TSKTrustEvaluationFailedInvalidCertificateChain);
+        XCTAssertEqual(result.evaluationResult, TSKTrustEvaluationFailedInvalidCertificateChain);
         
         XCTAssertEqualObjects(result.serverHostname,  @"self-signed.badssl.com");
         XCTAssertEqual([result.certificateChain count], (unsigned long)1);

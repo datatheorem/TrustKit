@@ -33,11 +33,11 @@
  The result of validating the server's certificate chain against the set of SSL pins configured for 
  the `notedHostname`.
  */
-@property (nonatomic, readonly) TSKTrustEvaluationResult validationResult;
+@property (nonatomic, readonly) TSKTrustEvaluationResult evaluationResult;
 
 /**
  The trust decision returned for this connection, which describes whether the connection should be blocked 
- or allowed, based on the `validationResult` returned when evaluating the `serverTrust` and the SSL pining 
+ or allowed, based on the `evaluationResult` returned when evaluating the `serverTrust` and the SSL pining 
  policy configured for this server.
 
  For example, the pinning validation could have failed (ie. validationResult being 

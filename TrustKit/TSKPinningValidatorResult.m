@@ -39,7 +39,7 @@
     if (self) {
         _serverHostname = serverHostname;
         _serverTrust = serverTrust;
-        _validationResult = validationResult;
+        _evaluationResult = validationResult;
         _finalTrustDecision = finalTrustDecision;
         _validationDuration = validationDuration;
         _certificateChain = nil;

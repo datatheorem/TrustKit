@@ -151,7 +151,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                                      validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                     XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldAllowConnection);
                                                     
-                                                    XCTAssertEqual(result.validationResult, TSKTrustEvaluationSuccess);
+                                                    XCTAssertEqual(result.evaluationResult, TSKTrustEvaluationSuccess);
                                                     
                                                     XCTAssertEqualObjects(result.certificateChain, convertTrustToPemArray(trust));
                                                     
@@ -224,7 +224,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                                      validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                     XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldAllowConnection);
                                                     
-                                                    XCTAssertEqual(result.validationResult, TSKTrustEvaluationSuccess);
+                                                    XCTAssertEqual(result.evaluationResult, TSKTrustEvaluationSuccess);
                                                     
                                                     XCTAssertEqualObjects(result.certificateChain, convertTrustToPemArray(trust));
                                                     
@@ -291,7 +291,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                                      validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                     XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldAllowConnection);
                                                     
-                                                    XCTAssertEqual(result.validationResult, TSKTrustEvaluationSuccess);
+                                                    XCTAssertEqual(result.evaluationResult, TSKTrustEvaluationSuccess);
                                                     
                                                     XCTAssertEqualObjects(result.certificateChain, convertTrustToPemArray(trust));
                                                     
@@ -354,7 +354,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                                      validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                     XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldAllowConnection);
                                                     
-                                                    XCTAssertEqual(result.validationResult, TSKTrustEvaluationSuccess);
+                                                    XCTAssertEqual(result.evaluationResult, TSKTrustEvaluationSuccess);
                                                     
                                                     XCTAssertEqualObjects(result.certificateChain, convertTrustToPemArray(trust));
                                                     
@@ -417,7 +417,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                                      validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                     XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldBlockConnection);
                                                     
-                                                    XCTAssertEqual(result.validationResult, TSKTrustEvaluationFailedNoMatchingPin);
+                                                    XCTAssertEqual(result.evaluationResult, TSKTrustEvaluationFailedNoMatchingPin);
                                                     
                                                     XCTAssertEqualObjects(result.certificateChain, convertTrustToPemArray(trust));
                                                     
@@ -522,7 +522,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                                      validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                     XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldAllowConnection);
                                                     
-                                                    XCTAssertEqual(result.validationResult, TSKTrustEvaluationFailedNoMatchingPin);
+                                                    XCTAssertEqual(result.evaluationResult, TSKTrustEvaluationFailedNoMatchingPin);
                                                     
                                                     XCTAssertEqualObjects(result.certificateChain, convertTrustToPemArray(trust));
                                                     
@@ -587,7 +587,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                                      validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                     XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldAllowConnection);
                                                     
-                                                    XCTAssertEqual(result.validationResult, TSKTrustEvaluationSuccess);
+                                                    XCTAssertEqual(result.evaluationResult, TSKTrustEvaluationSuccess);
                                                     
                                                     XCTAssertEqualObjects(result.certificateChain, convertTrustToPemArray(trust));
                                                     
@@ -652,7 +652,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                                      validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                     XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldBlockConnection);
                                                     
-                                                    XCTAssertEqual(result.validationResult, TSKTrustEvaluationFailedInvalidCertificateChain);
+                                                    XCTAssertEqual(result.evaluationResult, TSKTrustEvaluationFailedInvalidCertificateChain);
                                                     
                                                     XCTAssertEqualObjects(result.certificateChain, convertTrustToPemArray(trust));
                                                     
@@ -718,7 +718,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                                      validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                     XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldBlockConnection);
                                                     
-                                                    XCTAssertEqual(result.validationResult, TSKTrustEvaluationFailedInvalidCertificateChain);
+                                                    XCTAssertEqual(result.evaluationResult, TSKTrustEvaluationFailedInvalidCertificateChain);
                                                     
                                                     XCTAssertEqualObjects(result.certificateChain, convertTrustToPemArray(trust));
                                                     
@@ -783,7 +783,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                                      validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                     XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldBlockConnection);
                                                     
-                                                    XCTAssertEqual(result.validationResult, TSKTrustEvaluationFailedNoMatchingPin);
+                                                    XCTAssertEqual(result.evaluationResult, TSKTrustEvaluationFailedNoMatchingPin);
                                                     
                                                     XCTAssertEqualObjects(result.certificateChain, convertTrustToPemArray(trust));
                                                     
