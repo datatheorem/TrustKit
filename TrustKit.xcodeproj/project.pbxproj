@@ -221,6 +221,9 @@
 		8CE919221AEA077F002B29AE /* ssl_pin_verifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE919211AEA077F002B29AE /* ssl_pin_verifier.m */; };
 		8CE919251AEA07C5002B29AE /* ssl_pin_verifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE919241AEA07C5002B29AE /* ssl_pin_verifier.h */; };
 		8CE9192D1AEA0F7E002B29AE /* domain_registry.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE919291AEA0F7E002B29AE /* domain_registry.h */; };
+		8CF27A941F01A0B8009369B0 /* TSKEndToEndNSURLSessionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF27A931F01A0B8009369B0 /* TSKEndToEndNSURLSessionTests.m */; };
+		8CF27A951F01A0B8009369B0 /* TSKEndToEndNSURLSessionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF27A931F01A0B8009369B0 /* TSKEndToEndNSURLSessionTests.m */; };
+		8CF27A961F01A0B8009369B0 /* TSKEndToEndNSURLSessionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF27A931F01A0B8009369B0 /* TSKEndToEndNSURLSessionTests.m */; };
 		FC049B3A1EECD1B000FDC5F4 /* anchor-ca.cert.pem in Resources */ = {isa = PBXBuildFile; fileRef = FCC1DD051EECD19E00AB3D81 /* anchor-ca.cert.pem */; };
 		FC049B3B1EECD1B000FDC5F4 /* anchor-fake.yahoo.com.cert.pem in Resources */ = {isa = PBXBuildFile; fileRef = FCC1DD061EECD19E00AB3D81 /* anchor-fake.yahoo.com.cert.pem */; };
 		FC049B3C1EECD1B000FDC5F4 /* anchor-intermediate.cert.pem in Resources */ = {isa = PBXBuildFile; fileRef = FCC1DD071EECD19E00AB3D81 /* anchor-intermediate.cert.pem */; };
@@ -395,6 +398,7 @@
 		8CE919291AEA0F7E002B29AE /* domain_registry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = domain_registry.h; path = Dependencies/domain_registry/domain_registry.h; sourceTree = "<group>"; };
 		8CF27A911EFDE7D9009369B0 /* TSKPinningValidator_Private.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSKPinningValidator_Private.h; sourceTree = "<group>"; };
 		8CF27A921F0185EC009369B0 /* TSKPinningValidatorCallback.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSKPinningValidatorCallback.h; sourceTree = "<group>"; };
+		8CF27A931F01A0B8009369B0 /* TSKEndToEndNSURLSessionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKEndToEndNSURLSessionTests.m; sourceTree = "<group>"; };
 		FC1A08FD1E579F630055B12C /* TSKTrustDecision.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSKTrustDecision.h; sourceTree = "<group>"; };
 		FC1A08FE1E57A4BB0055B12C /* TSKPinningValidatorResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSKPinningValidatorResult.h; sourceTree = "<group>"; };
 		FC1A08FF1E57A4BB0055B12C /* TSKPinningValidatorResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKPinningValidatorResult.m; sourceTree = "<group>"; };
@@ -593,6 +597,7 @@
 				FC4CAC791E958DC600DAC41E /* Reporting */,
 				070868B31ADFF68200E5AFDC /* Certificates */,
 				8CD5F7371BCB02A7005801D8 /* TSKNSURLConnectionTests.m */,
+				8CF27A931F01A0B8009369B0 /* TSKEndToEndNSURLSessionTests.m */,
 				8CD5F7561BCB7219005801D8 /* TSKNSURLSessionTests.m */,
 				2FA2868CAFECA46ADE0B6E3E /* TSKPinningValidatorTests.m */,
 				8C15F9A31B17564400F06C0E /* TSKPinConfigurationTests.m */,
@@ -1246,6 +1251,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CF27A941F01A0B8009369B0 /* TSKEndToEndNSURLSessionTests.m in Sources */,
 				8CD5F7381BCB02A7005801D8 /* TSKNSURLConnectionTests.m in Sources */,
 				8C15F9A41B17564400F06C0E /* TSKPinConfigurationTests.m in Sources */,
 				075AA1091AC985FD00178223 /* TSKPinningValidatorTests.m in Sources */,
@@ -1288,6 +1294,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CF27A961F01A0B8009369B0 /* TSKEndToEndNSURLSessionTests.m in Sources */,
 				8C84CBC31D6E1718009B3E7D /* TSKNSURLConnectionTests.m in Sources */,
 				FC4CAC7D1E96891B00DAC41E /* TSKReportsRateLimiterTests.m in Sources */,
 				8C84CBC41D6E1718009B3E7D /* TSKPinConfigurationTests.m in Sources */,
@@ -1355,6 +1362,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8CF27A951F01A0B8009369B0 /* TSKEndToEndNSURLSessionTests.m in Sources */,
 				8CD5F7391BCB02A7005801D8 /* TSKNSURLConnectionTests.m in Sources */,
 				FC4CAC7C1E96891A00DAC41E /* TSKReportsRateLimiterTests.m in Sources */,
 				8CA6CC3A1BAE2C7C00BDA419 /* TSKReporterTests.m in Sources */,
