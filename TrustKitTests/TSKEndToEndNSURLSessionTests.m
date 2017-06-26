@@ -302,4 +302,51 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
 }
 
 
+// Test a secure connection to https://self-signed.badssl.com with an invalid certificate chain and ensure that TrustKit is not disabling default certificate validation for domains that are not even pinned
+- (void)testPinningValidationFailedChainNotTrustedAndNotPinned
+{
+    // This is not needed but to ensure TrustKit does get initialized
+    NSDictionary *trustKitConfig =
+    @{
+      kTSKPinnedDomains :
+          @{
+              @"www.yahoo.com" : @{
+                      kTSKEnforcePinning : @NO,  // Do not enforce pinning to only test default SSL validation
+                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                      kTSKPublicKeyHashes : @[@"9SLklscvzMYj8f+52lp5ze/hY0CFHyLSPQzSpYYIBm8=", // Leaf key
+                                              @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
+                                              ]}}};
+    
+    TrustKit *trustKit = [[TrustKit alloc] initWithConfiguration:trustKitConfig];
+    
+    // Configure a validation callback
+    trustKit.pinningValidatorCallback = ^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, TKSDomainPinningPolicy *_Nonnull notedHostnamePinningPolicy) {
+        // Ensure the validation callback was NOT called
+        XCTFail(@"Callback should not have been called");
+    };
+    
+    XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLSessionTaskDelegate"];
+    TestNSURLSessionDelegate* delegate = [[TestNSURLSessionDelegate alloc] initWithValidator:trustKit.pinningValidator expectation:expectation];
+    
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]
+                                                          delegate:delegate
+                                                     delegateQueue:nil];
+    
+    NSURLSessionDataTask *task = [session dataTaskWithURL:[NSURL URLWithString:@"https://wrong.host.badssl.com/"]];
+    [task resume];
+    
+    // Wait for the connection to succeed and ensure a notification was posted
+    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error)
+     {
+         if (error)
+         {
+             NSLog(@"Timeout Error: %@", error);
+         }
+     }];
+    XCTAssertNotNil(delegate.lastError, @"TrustKit did not trigger an error; TrustKit accepted an invalid certificate");
+    XCTAssertNil(delegate.lastResponse, @"TrustKit returned a response although pin validation failed");
+}
+
+
+
 @end
