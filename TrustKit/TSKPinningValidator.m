@@ -47,14 +47,14 @@
 @property (nonatomic, readonly) BOOL ignorePinsForUserTrustAnchors;
 
 /**
- The queue use when invoking the validationResultHandler
+ The callback invoked with validation results.
  */
-@property (nonatomic, readonly, nonnull) dispatch_queue_t validationResultQueue;
+@property (nonatomic, readonly, nonnull) TSKPinningValidatorCallback validationCallback;
 
 /**
- The callback invoked with validation results
+ The queue use when invoking the `validationCallback`.
  */
-@property (nonatomic, readonly, nonnull) void(^validationResultHandler)(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy);
+@property (nonatomic, readonly, nonnull) dispatch_queue_t validationCallbackQueue;
 
 @end
 
@@ -77,15 +77,15 @@
 - (instancetype _Nullable)initWithPinnedDomainConfig:(NSDictionary * _Nullable)pinnedDomains
                                            hashCache:(TSKSPKIHashCache * _Nonnull)hashCache
                        ignorePinsForUserTrustAnchors:(BOOL)ignorePinsForUserTrustAnchors
-                               validationResultQueue:(dispatch_queue_t _Nonnull)validationResultQueue
-                             validationResultHandler:(void(^ _Nonnull)(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy))validationResultHandler
+                             validationCallbackQueue:(dispatch_queue_t _Nonnull)validationCallbackQueue
+                                  validationCallback:(TSKPinningValidatorCallback)validationCallback
 {
     self = [super init];
     if (self) {
         _pinnedDomains = pinnedDomains;
         _ignorePinsForUserTrustAnchors = ignorePinsForUserTrustAnchors;
-        _validationResultQueue = validationResultQueue;
-        _validationResultHandler = validationResultHandler;
+        _validationCallbackQueue = validationCallbackQueue;
+        _validationCallback = validationCallback;
         _spkiHashCache = hashCache;
     }
     return self;
@@ -193,15 +193,15 @@
             }
             
             // Send a notification after all validation is done; this will also trigger a report if pin validation failed
-            if (self.validationResultQueue && self.validationResultHandler) {
+            if (self.validationCallbackQueue && self.validationCallback) {
                 NSTimeInterval validationDuration = [NSDate timeIntervalSinceReferenceDate] - validationStartTime;
                 TSKPinningValidatorResult *result = [[TSKPinningValidatorResult alloc] initWithServerHostname:serverHostname
                                                                                                   serverTrust:serverTrust
                                                                                              validationResult:validationResult
                                                                                            finalTrustDecision:finalTrustDecision
                                                                                            validationDuration:validationDuration];
-                dispatch_async(self.validationResultQueue, ^{
-                    self.validationResultHandler(result, domainConfigKey, domainConfig);
+                dispatch_async(self.validationCallbackQueue, ^{
+                    self.validationCallback(result, domainConfigKey, domainConfig);
                 });
             }
         }

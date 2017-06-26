@@ -15,6 +15,7 @@
 #define _TRUSTKIT_
     #import "TSKTrustKitConfig.h"
     #import "TSKPinningValidatorResult.h"
+    #import "TSKPinningValidatorCallback.h"
     #import "TSKPinningValidator.h"
     #import "TSKTrustDecision.h"
 #endif /* _TRUSTKIT_ */
@@ -111,9 +112,6 @@ NS_ASSUME_NONNULL_BEGIN
         TrustKit.initialize(withConfiguration:trustKitConfig)
  ```
  
- The various configuration keys that can be specified in the policy are described in the
- "Constants" section of the documentation.
- 
  After initialization, the `TrustKit` instance's `pinningValidator` should be used to implement
  pinning validation within the App's network authentication handlers.
  */
@@ -159,29 +157,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Register a block to be invoked for every request that is going through TrustKit's pinning
- validation mechanism.
- 
- The callback will be invoked every time the validator performs pinning validation against a server's
- certificate chain; if the server's hostname is not defined in the pinning policy, no invocations will
- result as no pinning validation was performed.
- 
- The callback provides the `TSKPinningValidatorResult` resulting from the validation of the server's 
- identity. It also returns the notedHostname, which is the entry within the SSL pinning configuration 
- that was used for the server being validated. This policy is provided as the notedHostnamePinningPolicy.
- 
- The callback can be used for advanced features such as performance measurement or customizing the 
- reporting mechanism. Hence, most Apps should not have to use this callback. If set, the callback may 
- be invoked very frequently and is not a suitable place for expensive tasks.
- 
- Lastly, the callback is always invoked after the validation has been completed, and therefore
- cannot be used to modify the result of the validation (for example to accept invalid certificates).
+ validation mechanism. See `TSKPinningValidatorCallback` for more information.
  */
-@property (nonatomic, nullable) void(^validationDelegateCallback)(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy);
+@property (nonatomic, nullable) TSKPinningValidatorCallback pinningValidatorCallback;
 
 /**
- Queue on which to invoke `validationDelegateCallback` (if set). Default value is the main queue.
+ Queue on which to invoke the `pinningValidatorCallback`; default value is the main queue.
  */
-@property (nonatomic, null_resettable) dispatch_queue_t validationDelegateQueue;
+@property (nonatomic, null_resettable) dispatch_queue_t pinningValidatorCallbackQueue;
 
 
 #pragma mark Usage in Multi-Instance Mode

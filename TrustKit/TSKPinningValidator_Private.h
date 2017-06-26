@@ -19,18 +19,17 @@
  @param pinnedDomains Domain pinning configuration, typically obtained by parseTrustKitConfiguration()
  @param hashCache The hash cache to use. If nil, no caching is performed, performance may suffer.
  @param ignorePinsForUserTrustAnchors Set to true to ignore the trust anchors in the user trust store
- @param validationResultQueue The queue used when invoking the validationResultHandler
- @param validationResultHandler The callback invoked with validation results
+ @param validationCallbackQueue The queue used when invoking the validationResultHandler
+ @param validationCallback The callback invoked with validation results
  @return Initialized instance
  */
 - (instancetype _Nullable)initWithPinnedDomainConfig:(NSDictionary * _Nullable)pinnedDomains
                                            hashCache:(TSKSPKIHashCache * _Nonnull)hashCache
                        ignorePinsForUserTrustAnchors:(BOOL)ignorePinsForUserTrustAnchors
-                               validationResultQueue:(dispatch_queue_t _Nonnull)validationResultQueue
-                             validationResultHandler:(void(^ _Nonnull)(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy))validationResultHandler;
+                             validationCallbackQueue:(dispatch_queue_t _Nonnull)validationCallbackQueue
+                                  validationCallback:(TSKPinningValidatorCallback _Nonnull)validationCallback;
 
 @end
-
 
 
 @interface TSKPinningValidatorResult (Internal)

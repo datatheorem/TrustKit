@@ -147,8 +147,8 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
-                                                  validationResultQueue:dispatch_get_main_queue()
-                                                validationResultHandler:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
+                                                  validationCallbackQueue:dispatch_get_main_queue()
+                                                     validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                     XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldAllowConnection);
                                                     
                                                     XCTAssertEqual(result.validationResult, TSKTrustEvaluationSuccess);
@@ -220,8 +220,8 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
-                                                  validationResultQueue:dispatch_get_main_queue()
-                                                validationResultHandler:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
+                                                validationCallbackQueue:dispatch_get_main_queue()
+                                                     validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                     XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldAllowConnection);
                                                     
                                                     XCTAssertEqual(result.validationResult, TSKTrustEvaluationSuccess);
@@ -287,8 +287,8 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
-                                                  validationResultQueue:dispatch_get_main_queue()
-                                                validationResultHandler:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
+                                                validationCallbackQueue:dispatch_get_main_queue()
+                                                     validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                     XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldAllowConnection);
                                                     
                                                     XCTAssertEqual(result.validationResult, TSKTrustEvaluationSuccess);
@@ -350,8 +350,8 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
-                                                  validationResultQueue:dispatch_get_main_queue()
-                                                validationResultHandler:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
+                                                validationCallbackQueue:dispatch_get_main_queue()
+                                                     validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                     XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldAllowConnection);
                                                     
                                                     XCTAssertEqual(result.validationResult, TSKTrustEvaluationSuccess);
@@ -413,8 +413,8 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
-                                                  validationResultQueue:dispatch_get_main_queue()
-                                                validationResultHandler:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
+                                                validationCallbackQueue:dispatch_get_main_queue()
+                                                     validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                     XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldBlockConnection);
                                                     
                                                     XCTAssertEqual(result.validationResult, TSKTrustEvaluationFailedNoMatchingPin);
@@ -465,8 +465,8 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:trustKitConfig
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
-                                                  validationResultQueue:dispatch_get_main_queue()
-                                                validationResultHandler:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
+                                                validationCallbackQueue:dispatch_get_main_queue()
+                                                     validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                     XCTFail(@"Should not be invoked");
                                                 }];
     
@@ -516,8 +516,8 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
-                                                  validationResultQueue:dispatch_get_main_queue()
-                                                validationResultHandler:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
+                                                validationCallbackQueue:dispatch_get_main_queue()
+                                                     validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                     XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldAllowConnection);
                                                     
                                                     XCTAssertEqual(result.validationResult, TSKTrustEvaluationFailedNoMatchingPin);
@@ -581,8 +581,8 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
-                                                  validationResultQueue:dispatch_get_main_queue()
-                                                validationResultHandler:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
+                                                validationCallbackQueue:dispatch_get_main_queue()
+                                                     validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                     XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldAllowConnection);
                                                     
                                                     XCTAssertEqual(result.validationResult, TSKTrustEvaluationSuccess);
@@ -646,8 +646,8 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
-                                                  validationResultQueue:dispatch_get_main_queue()
-                                                validationResultHandler:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
+                                                validationCallbackQueue:dispatch_get_main_queue()
+                                                     validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                     XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldBlockConnection);
                                                     
                                                     XCTAssertEqual(result.validationResult, TSKTrustEvaluationFailedInvalidCertificateChain);
@@ -712,8 +712,8 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
-                                                  validationResultQueue:dispatch_get_main_queue()
-                                                validationResultHandler:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
+                                                validationCallbackQueue:dispatch_get_main_queue()
+                                                     validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                     XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldBlockConnection);
                                                     
                                                     XCTAssertEqual(result.validationResult, TSKTrustEvaluationFailedInvalidCertificateChain);
@@ -777,8 +777,8 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
-                                                  validationResultQueue:dispatch_get_main_queue()
-                                                validationResultHandler:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
+                                                validationCallbackQueue:dispatch_get_main_queue()
+                                                     validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                     XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldBlockConnection);
                                                     
                                                     XCTAssertEqual(result.validationResult, TSKTrustEvaluationFailedNoMatchingPin);
@@ -826,8 +826,8 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:trustKitConfig
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
-                                                  validationResultQueue:dispatch_get_main_queue()
-                                                validationResultHandler:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
+                                                validationCallbackQueue:dispatch_get_main_queue()
+                                                     validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                     XCTFail(@"Should not invoke callback");
                                                 }];
     
@@ -915,8 +915,8 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     TSKPinningValidator *validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:trustKitConfig
                                                                                    hashCache:spkiCache
                                                                ignorePinsForUserTrustAnchors:YES
-                                                                       validationResultQueue:dispatch_get_main_queue()
-                                                                     validationResultHandler:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
+                                                                     validationCallbackQueue:dispatch_get_main_queue()
+                                                                          validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                                          //
                                                                      }];
     
@@ -972,8 +972,8 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     TSKPinningValidator *validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:trustKitConfig
                                                                                    hashCache:spkiCache
                                                                ignorePinsForUserTrustAnchors:YES
-                                                                       validationResultQueue:dispatch_get_main_queue()
-                                                                     validationResultHandler:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
+                                                                     validationCallbackQueue:dispatch_get_main_queue()
+                                                                          validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                                          //
                                                                      }];
     
@@ -1110,8 +1110,8 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     TestPinningValidator *pinningValidator = [[TestPinningValidator alloc] initWithPinnedDomainConfig:config
                                                                                             hashCache:spkiCache
                                                                         ignorePinsForUserTrustAnchors:YES
-                                                                                validationResultQueue:dispatch_get_main_queue()
-                                                                              validationResultHandler:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {}];
+                                                                              validationCallbackQueue:dispatch_get_main_queue()
+                                                                                   validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {}];
     
     SecTrustRef(^createTestServerTrust)(void) = ^() {
         // Create the server trust for this chain

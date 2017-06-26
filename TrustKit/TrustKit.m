@@ -108,7 +108,7 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
         // Convert and store the SSL pins in our global variable
         _configuration = parseTrustKitConfiguration(trustKitConfig);
         
-        _validationDelegateQueue = dispatch_get_main_queue();
+        _pinningValidatorCallbackQueue = dispatch_get_main_queue();
         
         // Create a dispatch queue for activating the reporter
         // We use a serial queue targetting the global default queue in order to ensure reports are sent one by one
@@ -155,24 +155,24 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
         _pinningValidator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:_configuration
                                                                           hashCache:sharedHashCache
                                                       ignorePinsForUserTrustAnchors:userTrustAnchorBypass
-                                                              validationResultQueue:_pinFailureReporterQueue
-                                                            validationResultHandler:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
-                                                                typeof(self) strongSelf = weakSelf;
-                                                                if (!strongSelf) {
-                                                                    return;
-                                                                }
-                                                                
-                                                                // Invoke client handler if set
-                                                                void(^callback)(TSKPinningValidatorResult *, NSString *, NSDictionary<TSKDomainConfigurationKey, id> *) = strongSelf.validationDelegateCallback;
-                                                                if (callback) {
-                                                                    dispatch_async(self.validationDelegateQueue, ^{
-                                                                        callback(result, notedHostname, notedHostnamePinningPolicy);
-                                                                    });
-                                                                }
-                                                                
-                                                                // Send analytics report
-                                                                [strongSelf sendValidationReport:result notedHostname:notedHostname pinningPolicy:notedHostnamePinningPolicy];
-                                                            }];
+                                                            validationCallbackQueue:_pinFailureReporterQueue
+                                                                 validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, TKSDomainPinningPolicy *_Nonnull notedHostnamePinningPolicy) {
+                                                                     typeof(self) strongSelf = weakSelf;
+                                                                     if (!strongSelf) {
+                                                                         return;
+                                                                     }
+                                                                     
+                                                                     // Invoke client handler if set
+                                                                     TSKPinningValidatorCallback userDefinedCallback = strongSelf.pinningValidatorCallback;
+                                                                     if (userDefinedCallback) {
+                                                                         dispatch_async(self.pinningValidatorCallbackQueue, ^{
+                                                                             userDefinedCallback(result, notedHostname, notedHostnamePinningPolicy);
+                                                                         });
+                                                                     }
+                                                                     
+                                                                     // Send analytics report
+                                                                     [strongSelf sendValidationReport:result notedHostname:notedHostname pinningPolicy:notedHostnamePinningPolicy];
+                                                                 }];
         
         TSKLog(@"Successfully initialized with configuration %@", _configuration);
     }
@@ -221,9 +221,9 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
     }
 }
 
-- (void)setValidationDelegateQueue:(dispatch_queue_t)validationDelegateQueue
+- (void)setPinningValidatorCallbackQueue:(dispatch_queue_t)pinningValidatorCallbackQueue
 {
-    _validationDelegateQueue = validationDelegateQueue ?: dispatch_get_main_queue();
+    _pinningValidatorCallbackQueue = pinningValidatorCallbackQueue ?: dispatch_get_main_queue();
 }
 
 @end

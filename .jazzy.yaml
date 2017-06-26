@@ -25,6 +25,8 @@ custom_categories:
 
   - name: Receiving Validation Notifications
     children:
+    - TSKPinningValidatorCallback
+    - TKSDomainPinningPolicy
     - TSKPinningValidatorResult
     - TSKTrustEvaluationResult
   

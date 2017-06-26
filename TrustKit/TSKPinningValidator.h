@@ -31,7 +31,7 @@
  */
 @interface TSKPinningValidator : NSObject
 
-#pragma mark High Level Validation Method
+#pragma mark High-level Validation Method
 
 /**
  Helper method for handling authentication challenges received within a `NSURLSessionDelegate`, `NSURLSessionTaskDelegate` or `WKNavigationDelegate`.
@@ -66,7 +66,7 @@
                                            NSURLCredential * _Nullable credential))completionHandler;
 
 
-#pragma mark Low Level Validation Method
+#pragma mark Low-level Validation Method
 
 /**
  Evaluate the supplied server trust against the SSL pinning policy previously configured. If the validation fails, a pin failure report will be sent.
