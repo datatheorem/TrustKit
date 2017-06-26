@@ -4,7 +4,7 @@ machine:
 test:
   override:
     # First run Xcode 8.3 tests
-    - sudo xcode-select --switch /Applications/Xcode-8.3.app
+    - sudo xcode-select --switch /Applications/Xcode-8.3.3.app
     # iOS 8 platform with iOS 9 SDK
     - xcodebuild clean test
       CODE_SIGNING_REQUIRED=NO
@@ -22,21 +22,21 @@ test:
 
     # Switch to Xcode 9.0
     - sudo xcode-select --switch /Applications/Xcode-9.0.app
-    # iOS 10 platform with iOS 10 SDK
+    # iOS 11 platform with iOS 11 SDK
     - xcodebuild clean test
       CODE_SIGNING_REQUIRED=NO
       CODE_SIGN_IDENTITY=
-      -destination 'platform=iOS Simulator,name=iPhone 6,OS=10.0'
-      -sdk iphonesimulator10.0
+      -destination 'platform=iOS Simulator,name=iPhone 7,OS=11.0'
+      -sdk iphonesimulator11.0
       -scheme "TrustKit"
-    # tvOS 10 platform with tvOS 10 SDK
+    # tvOS 11 platform with tvOS 11 SDK
     - xcodebuild clean test
       CODE_SIGNING_REQUIRED=NO
       CODE_SIGN_IDENTITY=
-      -destination 'platform=tvOS Simulator,name=Apple TV 1080p,OS=10.0'
-      -sdk appletvsimulator10.0
+      -destination 'platform=tvOS Simulator,name=Apple TV 1080p,OS=11.0'
+      -sdk appletvsimulator11.0
       -scheme "TrustKit tvOS"
-    # OS X 10.11 platform with OS X 10.12 SDK
+    # OS X 10.12 platform with OS X 10.12 SDK
     - xcodebuild clean test
       CODE_SIGNING_REQUIRED=NO
       CODE_SIGN_IDENTITY=
