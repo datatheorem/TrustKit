@@ -188,10 +188,11 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Set the global logger.
  
- This method sets the global logger, used when TrustKit needs to display a message to the developer.
+ This method sets the global logger, used when any `TrustKit` instance needs to display a message to 
+ the developer.
  
- If a global logger is not set, the default logger will be used, which will print TrustKit log messages 
- (using `NSLog()`) when the App is built in Debug mode. If the App was built for Release, the default 
+ If a global logger is not set, the default logger will be used, which will only print TrustKit log 
+ messages (using `NSLog()`) when the App is built in Debug mode. If the App was built for Release, the default 
  logger will not print any messages at all.
  */
 + (void)setLoggerBlock:(void (^)(NSString *))block;
