@@ -44,7 +44,7 @@ static SecCertificateRef certificateFromPEM(NSString *pem)
 }
 
 
-NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
+NSDictionary *parseTrustKitConfiguration(NSDictionary *trustKitArguments)
 {
     // Convert settings supplied by the user to a configuration dictionary that can be used by TrustKit
     // This includes checking the sanity of the settings and converting public key hashes/pins from an
@@ -60,7 +60,7 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
     // Retrieve global settings
     
     // Should we auto-swizzle network delegates
-    NSNumber *shouldSwizzleNetworkDelegates = TrustKitArguments[kTSKSwizzleNetworkDelegates];
+    NSNumber *shouldSwizzleNetworkDelegates = trustKitArguments[kTSKSwizzleNetworkDelegates];
     if (shouldSwizzleNetworkDelegates == nil)
     {
         // Default setting is NO
@@ -74,7 +74,7 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
     
 #if !TARGET_OS_IPHONE
     // OS X only: extract the optional ignorePinningForUserDefinedTrustAnchors setting
-    NSNumber *shouldIgnorePinningForUserDefinedTrustAnchors = TrustKitArguments[kTSKIgnorePinningForUserDefinedTrustAnchors];
+    NSNumber *shouldIgnorePinningForUserDefinedTrustAnchors = trustKitArguments[kTSKIgnorePinningForUserDefinedTrustAnchors];
     if (shouldIgnorePinningForUserDefinedTrustAnchors == nil)
     {
         // Default setting is YES
@@ -87,14 +87,14 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
 #endif
     
     // Retrieve the pinning policy for each domains
-    if ((TrustKitArguments[kTSKPinnedDomains] == nil) || ([TrustKitArguments[kTSKPinnedDomains] count] < 1))
+    if ((trustKitArguments[kTSKPinnedDomains] == nil) || ([trustKitArguments[kTSKPinnedDomains] count] < 1))
     {
         [NSException raise:@"TrustKit configuration invalid"
                     format:@"TrustKit was initialized with no pinned domains. The configuration format has changed: ensure your domain pinning policies are under the TSKPinnedDomains key within TSKConfiguration."];
     }
     
     
-    for (NSString *domainName in TrustKitArguments[kTSKPinnedDomains])
+    for (NSString *domainName in trustKitArguments[kTSKPinnedDomains])
     {
         // Sanity checks on the domain name
         if (GetRegistryLength([domainName UTF8String]) == 0)
@@ -105,7 +105,7 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
         
         
         // Retrieve the supplied arguments for this domain
-        NSDictionary *domainPinningPolicy = TrustKitArguments[kTSKPinnedDomains][domainName];
+        NSDictionary *domainPinningPolicy = trustKitArguments[kTSKPinnedDomains][domainName];
         NSMutableDictionary *domainFinalConfiguration = [[NSMutableDictionary alloc]init];
         
         
@@ -193,6 +193,7 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
             domainFinalConfiguration[kTSKDisableDefaultReportUri] = @(NO);
         }
         
+        // Extract the optional additionalTrustAnchors setting
         NSArray *additionalTrustAnchors = domainPinningPolicy[kTSKAdditionalTrustAnchors];
         if (additionalTrustAnchors)
         {
@@ -303,7 +304,7 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
         if ([finalConfiguration[kTSKPinnedDomains][domainName][kTSKExcludeSubdomainFromParentPolicy] boolValue])
         {
             // To force the lookup of a parent domain, we append 'a' to this subdomain so we don't retrieve its policy
-            NSString *parentDomainConfigKey = getPinningConfigurationKeyForDomain([@"a" stringByAppendingString:domainName], finalConfiguration);
+            NSString *parentDomainConfigKey = getPinningConfigurationKeyForDomain([@"a" stringByAppendingString:domainName], finalConfiguration[kTSKPinnedDomains]);
             if (parentDomainConfigKey == nil)
             {
                 [NSException raise:@"TrustKit configuration invalid"

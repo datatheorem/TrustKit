@@ -11,6 +11,6 @@
 
 @import Foundation;
 
-NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments);
+NSDictionary *parseTrustKitConfiguration(NSDictionary *trustKitArguments);
 
 #endif /* parse_configuration_h */

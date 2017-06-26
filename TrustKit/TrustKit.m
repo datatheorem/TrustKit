@@ -139,6 +139,7 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
             if ((sharedTrustKit) && ([[sharedTrustKit configuration][kTSKSwizzleNetworkDelegates] boolValue] == YES))
             {
                 // Local instances cannot be used if a shared instance with swizzling enabled is used, to avoid double pinning validation
+                // There is a race condition here on whether the shared VS local instance get instantiated first, but better than nothing
                 [NSException raise:@"TrustKit configuration invalid"
                             format:@"Cannot use local TrustKit instances when the TrustKit sharedInstance has been initialized with kTSKSwizzleNetworkDelegates enabled"];
             }

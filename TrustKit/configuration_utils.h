@@ -6,7 +6,9 @@
 //  Copyright © 2017 TrustKit. All rights reserved.
 //
 
+#import "TSKPinningValidatorCallback.h"
+
 @import Foundation;
 
 // Figure out if a specific domain is pinned and retrieve this domain's configuration key; returns nil if no configuration was found
-NSString * _Nullable getPinningConfigurationKeyForDomain(NSString * _Nonnull hostname, NSDictionary * _Nonnull trustKitConfiguration);
+NSString *getPinningConfigurationKeyForDomain(NSString *hostname, NSDictionary<NSString *, TKSDomainPinningPolicy *> *domainPinningPolicies);

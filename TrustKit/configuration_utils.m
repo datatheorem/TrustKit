@@ -39,19 +39,17 @@ static BOOL isSubdomain(NSString *domain, NSString *subdomain)
 }
 
 
-NSString *getPinningConfigurationKeyForDomain(NSString *hostname, NSDictionary *trustKitConfiguration)
+NSString *getPinningConfigurationKeyForDomain(NSString *hostname, NSDictionary<NSString *, TKSDomainPinningPolicy *> *domainPinningPolicies)
 {
-    NSString *configHostname = nil;
-    NSDictionary *domainsPinningPolicy = trustKitConfiguration[kTSKPinnedDomains];
-    
-    if (domainsPinningPolicy[hostname] == nil)
+    NSString *notedHostname = nil;
+    if (domainPinningPolicies[hostname] == nil)
     {
         // No pins explicitly configured for this domain
         // Look for an includeSubdomain pin that applies
-        for (NSString *pinnedServerName in domainsPinningPolicy)
+        for (NSString *pinnedServerName in domainPinningPolicies)
         {
             // Check each domain configured with the includeSubdomain flag
-            if ([domainsPinningPolicy[pinnedServerName][kTSKIncludeSubdomains] boolValue])
+            if ([domainPinningPolicies[pinnedServerName][kTSKIncludeSubdomains] boolValue])
             {
                 // Is the server a subdomain of this pinned server?
                 TSKLog(@"Checking includeSubdomains configuration for %@", pinnedServerName);
@@ -59,7 +57,7 @@ NSString *getPinningConfigurationKeyForDomain(NSString *hostname, NSDictionary *
                 {
                     // Yes; let's use the parent domain's pinning configuration
                     TSKLog(@"Applying includeSubdomains configuration from %@ to %@", pinnedServerName, hostname);
-                    configHostname = pinnedServerName;
+                    notedHostname = pinnedServerName;
                     break;
                 }
             }
@@ -68,12 +66,12 @@ NSString *getPinningConfigurationKeyForDomain(NSString *hostname, NSDictionary *
     else
     {
         // This hostname has a pinnning configuration
-        configHostname = hostname;
+        notedHostname = hostname;
     }
     
-    if (configHostname == nil)
+    if (notedHostname == nil)
     {
         TSKLog(@"Domain %@ is not pinned", hostname);
     }
-    return configHostname;
+    return notedHostname;
 }
