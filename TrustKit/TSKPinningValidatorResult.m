@@ -28,20 +28,17 @@
 
 - (instancetype _Nullable)initWithServerHostname:(NSString * _Nonnull)serverHostname
                                      serverTrust:(SecTrustRef _Nonnull)serverTrust
-                                   notedHostname:(NSString * _Nonnull)notedHostname
                                 validationResult:(TSKTrustEvaluationResult)validationResult
                               finalTrustDecision:(TSKTrustDecision)finalTrustDecision
                               validationDuration:(NSTimeInterval)validationDuration
 {
     NSParameterAssert(serverHostname);
     NSParameterAssert(serverTrust);
-    NSParameterAssert(notedHostname);
     
     self = [super init];
     if (self) {
         _serverHostname = serverHostname;
         _serverTrust = serverTrust;
-        _notedHostname = notedHostname;
         _validationResult = validationResult;
         _finalTrustDecision = finalTrustDecision;
         _validationDuration = validationDuration;

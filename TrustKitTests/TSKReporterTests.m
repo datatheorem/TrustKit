@@ -15,6 +15,7 @@
 #import "../TrustKit/TSKTrustKitConfig.h"
 
 #import "../TrustKit/TSKPinningValidatorResult.h"
+#import "../TrustKit/TSKPinningValidator_Private.h"
 #import "../TrustKit/Reporting/TSKBackgroundReporter.h"
 #import "../TrustKit/Reporting/TSKPinFailureReport.h"
 #import "../TrustKit/Reporting/reporting_utils.h"
@@ -27,7 +28,9 @@
 
 @interface TrustKit (TestSupport)
 @property (nonatomic) TSKBackgroundReporter *pinFailureReporter;
-- (void)sendValidationReport:(TSKPinningValidatorResult *)result;
+@property (nonatomic, readonly, nullable) NSDictionary *configuration;
+
+- (void)sendValidationReport:(TSKPinningValidatorResult *)result notedHostname:(NSString *)notedHostname pinningPolicy:(NSDictionary<TSKDomainConfigurationKey, id> *)notedHostnamePinningPolicy;
 @end
 
 
@@ -130,11 +133,10 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
     
     res = [[TSKPinningValidatorResult alloc] initWithServerHostname:@"www.test.com"
                                                         serverTrust:_testTrust
-                                                      notedHostname:@"www.test.com"
                                                    validationResult:TSKTrustEvaluationErrorCouldNotGenerateSpkiHash
                                                  finalTrustDecision:TSKTrustDecisionShouldBlockConnection
                                                  validationDuration:1.0];
-    [_trustKit sendValidationReport:res];
+    [_trustKit sendValidationReport:res notedHostname:@"www.test.com" pinningPolicy:_trustKit.configuration[kTSKPinnedDomains][@"www.test.com"]];
     
     // Ensure that the reporter was called
     [pinReporterMock verify];
@@ -149,13 +151,12 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
     
     res = [[TSKPinningValidatorResult alloc] initWithServerHostname:@"www.test.com"
                                                         serverTrust:_testTrust
-                                                      notedHostname:@"www.test.com"
                                                    validationResult:TSKTrustEvaluationSuccess
                                                  finalTrustDecision:TSKTrustDecisionShouldAllowConnection
                                                  validationDuration:1.0];
 
     // Ensure that the reporter was NOT called
-    [_trustKit sendValidationReport:res];
+    [_trustKit sendValidationReport:res notedHostname:@"www.test.com" pinningPolicy:_trustKit.configuration[kTSKPinnedDomains][@"www.test.com"]];
     [pinReporterMock verify];
     
     [pinReporterMock stopMocking];
@@ -169,13 +170,12 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
     
     res = [[TSKPinningValidatorResult alloc] initWithServerHostname:@"www.test.com"
                                                         serverTrust:_testTrust
-                                                      notedHostname:@"www.test.com"
                                                    validationResult:TSKTrustEvaluationFailedUserDefinedTrustAnchor
                                                  finalTrustDecision:TSKTrustDecisionShouldAllowConnection
                                                  validationDuration:1.0];
     
     // Ensure that the reporter was NOT called
-    [_trustKit sendValidationReport:res];
+    [_trustKit sendValidationReport:res notedHostname:@"www.test.com" pinningPolicy:_trustKit.configuration[kTSKPinnedDomains][@"www.test.com"]];
     [pinReporterMock verify];
     [pinReporterMock stopMocking];
     pinReporterMock = nil;

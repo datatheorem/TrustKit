@@ -54,7 +54,7 @@
 /**
  The callback invoked with validation results
  */
-@property (nonatomic, readonly, nonnull) void(^validationResultHandler)(TSKPinningValidatorResult * _Nonnull result);
+@property (nonatomic, readonly, nonnull) void(^validationResultHandler)(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy);
 
 @end
 
@@ -78,7 +78,7 @@
                                            hashCache:(TSKSPKIHashCache * _Nonnull)hashCache
                        ignorePinsForUserTrustAnchors:(BOOL)ignorePinsForUserTrustAnchors
                                validationResultQueue:(dispatch_queue_t _Nonnull)validationResultQueue
-                             validationResultHandler:(void(^ _Nonnull)(TSKPinningValidatorResult * _Nonnull result))validationResultHandler
+                             validationResultHandler:(void(^ _Nonnull)(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy))validationResultHandler
 {
     self = [super init];
     if (self) {
@@ -197,12 +197,11 @@
                 NSTimeInterval validationDuration = [NSDate timeIntervalSinceReferenceDate] - validationStartTime;
                 TSKPinningValidatorResult *result = [[TSKPinningValidatorResult alloc] initWithServerHostname:serverHostname
                                                                                                   serverTrust:serverTrust
-                                                                                                notedHostname:domainConfigKey
                                                                                              validationResult:validationResult
                                                                                            finalTrustDecision:finalTrustDecision
                                                                                            validationDuration:validationDuration];
                 dispatch_async(self.validationResultQueue, ^{
-                    self.validationResultHandler(result);
+                    self.validationResultHandler(result, domainConfigKey, domainConfig);
                 });
             }
         }

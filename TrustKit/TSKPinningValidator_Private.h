@@ -24,10 +24,10 @@
  @return Initialized instance
  */
 - (instancetype _Nullable)initWithPinnedDomainConfig:(NSDictionary * _Nullable)pinnedDomains
-hashCache:(TSKSPKIHashCache * _Nonnull)hashCache
-ignorePinsForUserTrustAnchors:(BOOL)ignorePinsForUserTrustAnchors
-validationResultQueue:(dispatch_queue_t _Nonnull)validationResultQueue
-validationResultHandler:(void(^ _Nonnull)(TSKPinningValidatorResult * _Nonnull result))validationResultHandler;
+                                           hashCache:(TSKSPKIHashCache * _Nonnull)hashCache
+                       ignorePinsForUserTrustAnchors:(BOOL)ignorePinsForUserTrustAnchors
+                               validationResultQueue:(dispatch_queue_t _Nonnull)validationResultQueue
+                             validationResultHandler:(void(^ _Nonnull)(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy))validationResultHandler;
 
 @end
 
@@ -36,11 +36,10 @@ validationResultHandler:(void(^ _Nonnull)(TSKPinningValidatorResult * _Nonnull r
 @interface TSKPinningValidatorResult (Internal)
 
 - (instancetype _Nullable)initWithServerHostname:(NSString * _Nonnull)serverHostname
-serverTrust:(SecTrustRef _Nonnull)serverTrust
-notedHostname:(NSString * _Nonnull)notedHostname
-validationResult:(TSKTrustEvaluationResult)validationResult
-finalTrustDecision:(TSKTrustDecision)finalTrustDecision
-validationDuration:(NSTimeInterval)validationDuration;
+                                     serverTrust:(SecTrustRef _Nonnull)serverTrust
+                                validationResult:(TSKTrustEvaluationResult)validationResult
+                              finalTrustDecision:(TSKTrustDecision)finalTrustDecision
+                              validationDuration:(NSTimeInterval)validationDuration;
 
 @end
 

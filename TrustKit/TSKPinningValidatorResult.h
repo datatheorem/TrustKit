@@ -29,16 +29,6 @@
 @property (nonatomic, readonly, nonnull) SecTrustRef serverTrust;
 
 /**
- The entry within the SSL pinning configuration that was used as the pinning policy for the
- server being validated. It will be the same as the `serverHostname` unless the server is a 
- subdomain of the domain configured in the pinning policy with `kTSKIncludeSubdomains` enabled. 
- The corresponding pinning configuration that was used for validation can be retrieved using:
-
-     NSDictionary *hostnameConfiguration = [trustKit configuration][kTSKPinnedDomains][notedHostname];
- */
-@property (nonatomic, readonly, nonnull) NSString *notedHostname;
-
-/**
  The result of validating the server's certificate chain against the set of SSL pins configured for 
  the `notedHostname`.
  */

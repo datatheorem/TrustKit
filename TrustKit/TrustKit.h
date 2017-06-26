@@ -165,32 +165,23 @@ NS_ASSUME_NONNULL_BEGIN
  certificate chain; if the server's hostname is not defined in the pinning policy, no invocations will
  result as no pinning validation was performed.
  
- The callback provides the `TSKPinningValidatorResult` resulting from the validation, and can be 
- used for advanced features such as performance measurement or customizing the reporting mechanism.
- Hence, most Apps should not have to use this callback. If set, the callback may be invoked very
- frequently and is not a suitable place for expensive tasks.
+ The callback provides the `TSKPinningValidatorResult` resulting from the validation of the server's 
+ identity. It also returns the notedHostname, which is the entry within the SSL pinning configuration 
+ that was used for the server being validated. This policy is provided as the notedHostnamePinningPolicy.
+ 
+ The callback can be used for advanced features such as performance measurement or customizing the 
+ reporting mechanism. Hence, most Apps should not have to use this callback. If set, the callback may 
+ be invoked very frequently and is not a suitable place for expensive tasks.
  
  Lastly, the callback is always invoked after the validation has been completed, and therefore
  cannot be used to modify the result of the validation (for example to accept invalid certificates).
  */
-@property (nonatomic, nullable) void(^validationDelegateCallback)(TSKPinningValidatorResult * _Nonnull result);
+@property (nonatomic, nullable) void(^validationDelegateCallback)(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy);
 
 /**
  Queue on which to invoke `validationDelegateCallback` (if set). Default value is the main queue.
  */
 @property (nonatomic, null_resettable) dispatch_queue_t validationDelegateQueue;
-
-
-#pragma mark Additional Settings
-
-
-/**
- Retrieve the SSL pinning policy configured for this TrustKit instance.
- 
- @return A dictionary with the current TrustKit configuration
- */
-@property (nonatomic, readonly, nullable) NSDictionary *configuration;
-
 
 
 #pragma mark Usage in Multi-Instance Mode

@@ -39,13 +39,19 @@ static char kTSKPinFailureReporterQueueLabel[] = "com.datatheorem.trustkit.repor
 // Email info@datatheorem.com if you need a free dashboard to see your App's reports
 static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.com/trustkit/report";
 
+
 #pragma mark TrustKit Initialization Helper Functions
 
 @interface TrustKit ()
 - (instancetype)initWithConfiguration:(NSDictionary<NSString *, id> *)trustKitConfig isSingleton:(BOOL)isSingleton;
+
 @property (nonatomic) TSKBackgroundReporter *pinFailureReporter;
 @property (nonatomic) dispatch_queue_t pinFailureReporterQueue;
+
+@property (nonatomic, readonly, nullable) NSDictionary *configuration;
+
 @end
+
 
 @implementation TrustKit
 
@@ -150,22 +156,22 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
                                                                           hashCache:sharedHashCache
                                                       ignorePinsForUserTrustAnchors:userTrustAnchorBypass
                                                               validationResultQueue:_pinFailureReporterQueue
-                                                            validationResultHandler:^(TSKPinningValidatorResult * _Nonnull result) {
+                                                            validationResultHandler:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                                 typeof(self) strongSelf = weakSelf;
                                                                 if (!strongSelf) {
                                                                     return;
                                                                 }
                                                                 
                                                                 // Invoke client handler if set
-                                                                void(^callback)(TSKPinningValidatorResult *) = strongSelf.validationDelegateCallback;
+                                                                void(^callback)(TSKPinningValidatorResult *, NSString *, NSDictionary<TSKDomainConfigurationKey, id> *) = strongSelf.validationDelegateCallback;
                                                                 if (callback) {
                                                                     dispatch_async(self.validationDelegateQueue, ^{
-                                                                        callback(result);
+                                                                        callback(result, notedHostname, notedHostnamePinningPolicy);
                                                                     });
                                                                 }
                                                                 
                                                                 // Send analytics report
-                                                                [strongSelf sendValidationReport:result];
+                                                                [strongSelf sendValidationReport:result notedHostname:notedHostname pinningPolicy:notedHostnamePinningPolicy];
                                                             }];
         
         TSKLog(@"Successfully initialized with configuration %@", _configuration);
@@ -177,7 +183,7 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
 #pragma mark Notification Handlers
 
 // The block which receives pin validation results and turns them into pin validation reports
-- (void)sendValidationReport:(TSKPinningValidatorResult *)result
+- (void)sendValidationReport:(TSKPinningValidatorResult *)result notedHostname:(NSString *)notedHostname pinningPolicy:(NSDictionary<TSKDomainConfigurationKey, id> *)notedHostnamePinningPolicy
 {
     TSKTrustEvaluationResult validationResult = result.validationResult;
     
@@ -188,14 +194,11 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
         if (validationResult != TSKPinValidationResultFailedUserDefinedTrustAnchor)
 #endif
         {
-            NSString *notedHostname = result.notedHostname;
-            NSDictionary *notedHostnameConfig = self.configuration[kTSKPinnedDomains][notedHostname];
-            
             // Pin validation failed: retrieve the list of configured report URLs
-            NSMutableArray *reportUris = [NSMutableArray arrayWithArray:notedHostnameConfig[kTSKReportUris]];
+            NSMutableArray *reportUris = [NSMutableArray arrayWithArray:notedHostnamePinningPolicy[kTSKReportUris]];
             
             // Also enable the default reporting URL
-            if ([notedHostnameConfig[kTSKDisableDefaultReportUri] boolValue] == NO)
+            if ([notedHostnamePinningPolicy[kTSKDisableDefaultReportUri] boolValue] == NO)
             {
                 [reportUris addObject:[NSURL URLWithString:kTSKDefaultReportUri]];
             }
@@ -208,11 +211,11 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
                                                        certificateChain:result.certificateChain
                                                           notedHostname:notedHostname
                                                              reportURIs:reportUris
-                                                      includeSubdomains:[notedHostnameConfig[kTSKIncludeSubdomains] boolValue]
-                                                         enforcePinning:[notedHostnameConfig[kTSKEnforcePinning] boolValue]
-                                                              knownPins:notedHostnameConfig[kTSKPublicKeyHashes]
+                                                      includeSubdomains:[notedHostnamePinningPolicy[kTSKIncludeSubdomains] boolValue]
+                                                         enforcePinning:[notedHostnamePinningPolicy[kTSKEnforcePinning] boolValue]
+                                                              knownPins:notedHostnamePinningPolicy[kTSKPublicKeyHashes]
                                                        validationResult:validationResult
-                                                         expirationDate:notedHostnameConfig[kTSKExpirationDate]];
+                                                         expirationDate:notedHostnamePinningPolicy[kTSKExpirationDate]];
             }
         }
     }
