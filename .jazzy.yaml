@@ -23,11 +23,11 @@ custom_categories:
     - TSKPinningValidator
     - TSKTrustDecision
 
-  - name: Receiving Validation Notifications
+  - name: Setting up a Validation Callback
     children:
     - TSKPinningValidatorCallback
-    - TKSDomainPinningPolicy
     - TSKPinningValidatorResult
+    - TKSDomainPinningPolicy
     - TSKTrustEvaluationResult
   
   - name: Global Configuration Keys
