@@ -152,27 +152,27 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
         });
         
         __weak typeof(self) weakSelf = self;
-        _pinningValidator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:_configuration
-                                                                          hashCache:sharedHashCache
-                                                      ignorePinsForUserTrustAnchors:userTrustAnchorBypass
-                                                            validationCallbackQueue:_pinFailureReporterQueue
-                                                                 validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, TKSDomainPinningPolicy *_Nonnull notedHostnamePinningPolicy) {
-                                                                     typeof(self) strongSelf = weakSelf;
-                                                                     if (!strongSelf) {
-                                                                         return;
-                                                                     }
-                                                                     
-                                                                     // Invoke client handler if set
-                                                                     TSKPinningValidatorCallback userDefinedCallback = strongSelf.pinningValidatorCallback;
-                                                                     if (userDefinedCallback) {
-                                                                         dispatch_async(self.pinningValidatorCallbackQueue, ^{
-                                                                             userDefinedCallback(result, notedHostname, notedHostnamePinningPolicy);
-                                                                         });
-                                                                     }
-                                                                     
-                                                                     // Send analytics report
-                                                                     [strongSelf sendValidationReport:result notedHostname:notedHostname pinningPolicy:notedHostnamePinningPolicy];
-                                                                 }];
+        _pinningValidator = [[TSKPinningValidator alloc] initWithDomainPinningPolicies:_configuration[kTSKPinnedDomains]
+                                                                             hashCache:sharedHashCache
+                                                         ignorePinsForUserTrustAnchors:userTrustAnchorBypass
+                                                               validationCallbackQueue:_pinFailureReporterQueue
+                                                                    validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, TKSDomainPinningPolicy *_Nonnull notedHostnamePinningPolicy) {
+                                                                        typeof(self) strongSelf = weakSelf;
+                                                                        if (!strongSelf) {
+                                                                            return;
+                                                                        }
+                                                                        
+                                                                        // Invoke client handler if set
+                                                                        TSKPinningValidatorCallback userDefinedCallback = strongSelf.pinningValidatorCallback;
+                                                                        if (userDefinedCallback) {
+                                                                            dispatch_async(self.pinningValidatorCallbackQueue, ^{
+                                                                                userDefinedCallback(result, notedHostname, notedHostnamePinningPolicy);
+                                                                            });
+                                                                        }
+                                                                        
+                                                                        // Send analytics report
+                                                                        [strongSelf sendValidationReport:result notedHostname:notedHostname pinningPolicy:notedHostnamePinningPolicy];
+                                                                    }];
         
         TSKLog(@"Successfully initialized with configuration %@", _configuration);
     }

@@ -36,9 +36,9 @@
 @property (nonatomic, class, readonly) BOOL allowsAdditionalTrustAnchors;
 
 /**
- Domain pinning configuration, typically obtained by parseTrustKitConfiguration()
+ The dictionary of domains that were configured and their corresponding pinning policy.
  */
-@property (nonatomic, readonly, nullable) NSDictionary *pinnedDomains;
+@property (nonatomic, readonly, nonnull) NSDictionary<NSString *, TKSDomainPinningPolicy *> *domainPinningPolicies;
 
 /**
  Set to true to ignore the trust anchors in the user trust store. Only applicable
@@ -74,15 +74,15 @@
 
 #pragma mark Instance Methods
 
-- (instancetype _Nullable)initWithPinnedDomainConfig:(NSDictionary * _Nullable)pinnedDomains
-                                           hashCache:(TSKSPKIHashCache * _Nonnull)hashCache
-                       ignorePinsForUserTrustAnchors:(BOOL)ignorePinsForUserTrustAnchors
-                             validationCallbackQueue:(dispatch_queue_t _Nonnull)validationCallbackQueue
-                                  validationCallback:(TSKPinningValidatorCallback)validationCallback
+- (instancetype _Nullable)initWithDomainPinningPolicies:(NSDictionary<NSString *, TKSDomainPinningPolicy *> * _Nonnull)domainPinningPolicies
+                                              hashCache:(TSKSPKIHashCache * _Nonnull)hashCache
+                          ignorePinsForUserTrustAnchors:(BOOL)ignorePinsForUserTrustAnchors
+                                validationCallbackQueue:(dispatch_queue_t _Nonnull)validationCallbackQueue
+                                     validationCallback:(TSKPinningValidatorCallback)validationCallback
 {
     self = [super init];
     if (self) {
-        _pinnedDomains = pinnedDomains;
+        _domainPinningPolicies = domainPinningPolicies;
         _ignorePinsForUserTrustAnchors = ignorePinsForUserTrustAnchors;
         _validationCallbackQueue = validationCallbackQueue;
         _validationCallback = validationCallback;
@@ -106,7 +106,7 @@
     NSTimeInterval validationStartTime = [NSDate timeIntervalSinceReferenceDate];
     
     // Retrieve the pinning configuration for this specific domain, if there is one
-    NSString *domainConfigKey = getPinningConfigurationKeyForDomain(serverHostname, self.pinnedDomains);
+    NSString *domainConfigKey = getPinningConfigurationKeyForDomain(serverHostname, self.domainPinningPolicies);
     if (domainConfigKey == nil)
     {
         // The domain has no pinning policy: nothing to do/validate
@@ -115,7 +115,7 @@
     else
     {
         // This domain has a pinning policy
-        NSDictionary *domainConfig = self.pinnedDomains[kTSKPinnedDomains][domainConfigKey];
+        NSDictionary *domainConfig = self.domainPinningPolicies[domainConfigKey];
         
         // Has the pinning policy expired?
         NSDate *expirationDate = domainConfig[kTSKExpirationDate];

@@ -144,7 +144,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
-    validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
+    validator = [[TSKPinningValidator alloc] initWithDomainPinningPolicies:parsedTrustKitConfig[kTSKPinnedDomains]
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
                                                   validationCallbackQueue:dispatch_get_main_queue()
@@ -217,7 +217,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     // Then test TSKPinningValidator
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
-    validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
+    validator = [[TSKPinningValidator alloc] initWithDomainPinningPolicies:parsedTrustKitConfig[kTSKPinnedDomains]
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
                                                 validationCallbackQueue:dispatch_get_main_queue()
@@ -284,7 +284,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     // Then test TSKPinningValidator
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
-    validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
+    validator = [[TSKPinningValidator alloc] initWithDomainPinningPolicies:parsedTrustKitConfig[kTSKPinnedDomains]
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
                                                 validationCallbackQueue:dispatch_get_main_queue()
@@ -347,7 +347,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     // Then test TSKPinningValidator
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
-    validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
+    validator = [[TSKPinningValidator alloc] initWithDomainPinningPolicies:parsedTrustKitConfig[kTSKPinnedDomains]
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
                                                 validationCallbackQueue:dispatch_get_main_queue()
@@ -410,7 +410,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     // Then test TSKPinningValidator
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
-    validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
+    validator = [[TSKPinningValidator alloc] initWithDomainPinningPolicies:parsedTrustKitConfig[kTSKPinnedDomains]
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
                                                 validationCallbackQueue:dispatch_get_main_queue()
@@ -460,9 +460,11 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                                                            @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=" // Bad key 2
                                                                            ]}}};
     
+    NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
+    
     // Test TSKPinningValidator
     TSKPinningValidator *validator;
-    validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:trustKitConfig
+    validator = [[TSKPinningValidator alloc] initWithDomainPinningPolicies:parsedTrustKitConfig[kTSKPinnedDomains]
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
                                                 validationCallbackQueue:dispatch_get_main_queue()
@@ -513,7 +515,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     // Then test TSKPinningValidator
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
-    validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
+    validator = [[TSKPinningValidator alloc] initWithDomainPinningPolicies:parsedTrustKitConfig[kTSKPinnedDomains]
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
                                                 validationCallbackQueue:dispatch_get_main_queue()
@@ -578,7 +580,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     // Then test TSKPinningValidator
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
-    validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
+    validator = [[TSKPinningValidator alloc] initWithDomainPinningPolicies:parsedTrustKitConfig[kTSKPinnedDomains]
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
                                                 validationCallbackQueue:dispatch_get_main_queue()
@@ -643,7 +645,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     // Then test TSKPinningValidator
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
-    validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
+    validator = [[TSKPinningValidator alloc] initWithDomainPinningPolicies:parsedTrustKitConfig[kTSKPinnedDomains]
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
                                                 validationCallbackQueue:dispatch_get_main_queue()
@@ -709,7 +711,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     // Then test TSKPinningValidator
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
-    validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
+    validator = [[TSKPinningValidator alloc] initWithDomainPinningPolicies:parsedTrustKitConfig[kTSKPinnedDomains]
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
                                                 validationCallbackQueue:dispatch_get_main_queue()
@@ -774,7 +776,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     // Then test TSKPinningValidator
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
-    validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
+    validator = [[TSKPinningValidator alloc] initWithDomainPinningPolicies:parsedTrustKitConfig[kTSKPinnedDomains]
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
                                                 validationCallbackQueue:dispatch_get_main_queue()
@@ -820,10 +822,11 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                                                            @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                                                            ]}}};
     
+    NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
     
     // Then test TSKPinningValidator
     TSKPinningValidator *validator;
-    validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:trustKitConfig
+    validator = [[TSKPinningValidator alloc] initWithDomainPinningPolicies:parsedTrustKitConfig[kTSKPinnedDomains]
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
                                                 validationCallbackQueue:dispatch_get_main_queue()
@@ -912,7 +915,9 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                                                            @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=", // Fake key
                                                                            ]}}};
     
-    TSKPinningValidator *validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:trustKitConfig
+    NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
+    
+    TSKPinningValidator *validator = [[TSKPinningValidator alloc] initWithDomainPinningPolicies:parsedTrustKitConfig[kTSKPinnedDomains]
                                                                                    hashCache:spkiCache
                                                                ignorePinsForUserTrustAnchors:YES
                                                                      validationCallbackQueue:dispatch_get_main_queue()
@@ -969,7 +974,10 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                                                            @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=", // Fake key
                                                                            ]}}};
     
-    TSKPinningValidator *validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:trustKitConfig
+    
+    NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
+    
+    TSKPinningValidator *validator = [[TSKPinningValidator alloc] initWithDomainPinningPolicies:parsedTrustKitConfig[kTSKPinnedDomains]
                                                                                    hashCache:spkiCache
                                                                ignorePinsForUserTrustAnchors:YES
                                                                      validationCallbackQueue:dispatch_get_main_queue()
