@@ -13,7 +13,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="DTViewController" customModule="TrustKitDemoInSwift" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -32,7 +32,7 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="Test Invalid Pinning"/>
                                 <connections>
-                                    <action selector="testInvalidPinning:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BpP-OW-o3x"/>
+                                    <action selector="testInvalidPinning:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Izd-0Z-AY8"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v4z-tv-wOm">
@@ -45,25 +45,25 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="Test Valid Pinning"/>
                                 <connections>
-                                    <action selector="testValidPinning:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ARn-Nr-6H3"/>
+                                    <action selector="testValidPinning:" destination="BYZ-38-t0r" eventType="touchUpInside" id="I51-QU-1sQ"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="v4z-tv-wOm" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="50" id="Gjr-v8-0iD"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="v4z-tv-wOm" secondAttribute="trailing" constant="50" id="JMC-7Z-bd7"/>
+                            <constraint firstItem="v4z-tv-wOm" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="50" id="5GJ-vq-IAX"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="v4z-tv-wOm" secondAttribute="trailing" constant="50" id="GTq-Om-Ol2"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="fUD-nR-oCW" secondAttribute="trailing" constant="50" id="Juw-cU-20R"/>
+                            <constraint firstItem="fUD-nR-oCW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="50" id="Lmn-0D-d1y"/>
                             <constraint firstItem="fUD-nR-oCW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="LpS-ga-Iaw"/>
-                            <constraint firstItem="fUD-nR-oCW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="50" id="Nme-7t-78D"/>
                             <constraint firstItem="v4z-tv-wOm" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="40" id="QJQ-1o-u6o"/>
                             <constraint firstItem="v4z-tv-wOm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bS8-8Q-5W2"/>
                             <constraint firstItem="fUD-nR-oCW" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-40" id="bgF-MR-dT5"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="fUD-nR-oCW" secondAttribute="trailing" constant="50" id="dRN-Bi-sZ0"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="invalidPinBtn" destination="fUD-nR-oCW" id="Epm-VC-3ty"/>
-                        <outlet property="validPinBtn" destination="v4z-tv-wOm" id="bCG-Fk-VLt"/>
+                        <outlet property="testInvalidPinBtn" destination="fUD-nR-oCW" id="ci3-dt-kmx"/>
+                        <outlet property="testValidPinBtn" destination="v4z-tv-wOm" id="hcK-fV-qTS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
