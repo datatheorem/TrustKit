@@ -3,45 +3,35 @@ machine:
     version: 8.3
 test:
   override:
-    # First run Xcode 8.3 tests
-    - ls /Applications/
-    - sudo xcode-select --switch /Applications/Xcode-8.3.3.app
-    # iOS 8 platform with iOS 9 SDK
+    # iOS 9.0 platform with iOS 10.3 SDK
     - xcodebuild clean test
       CODE_SIGNING_REQUIRED=NO
       CODE_SIGN_IDENTITY=
-      -destination 'platform=iOS Simulator,name=iPhone 4S,OS=8.4'
-      -sdk iphonesimulator9.3
+      -destination 'platform=iOS Simulator,name=iPhone 5,OS=9.0'
+      -sdk iphonesimulator10.3
       -scheme "TrustKit"
-    # OS X 10.11 platform with OS X 10.11 SDK
+      
+    # iOS 10.3 platform with iOS 10.3 SDK
     - xcodebuild clean test
       CODE_SIGNING_REQUIRED=NO
       CODE_SIGN_IDENTITY=
-      -destination 'platform=OS X'
-      -sdk macosx10.11
-      -scheme "TrustKit OS X"
-
-    # Switch to Xcode 9.0
-    - sudo xcode-select --switch /Applications/Xcode-9.0.app
-    # iOS 11 platform with iOS 11 SDK
-    - xcodebuild clean test
-      CODE_SIGNING_REQUIRED=NO
-      CODE_SIGN_IDENTITY=
-      -destination 'platform=iOS Simulator,name=iPhone 7,OS=11.0'
+      -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.3'
       -sdk iphonesimulator11.0
       -scheme "TrustKit"
-    # tvOS 11 platform with tvOS 11 SDK
-    - xcodebuild clean test
-      CODE_SIGNING_REQUIRED=NO
-      CODE_SIGN_IDENTITY=
-      -destination 'platform=tvOS Simulator,name=Apple TV 1080p,OS=11.0'
-      -sdk appletvsimulator11.0
-      -scheme "TrustKit tvOS"
-    # OS X 10.12 platform with OS X 10.12 SDK
+      
+    # macOS 10.12 platform with macOS 10.12 SDK
     - xcodebuild clean test
       CODE_SIGNING_REQUIRED=NO
       CODE_SIGN_IDENTITY=
       -destination 'platform=OS X'
-      -sdk macosx10.13
+      -sdk macosx10.12
       -scheme "TrustKit OS X"
 
+    # tvOS 10.3 platform with tvOS 10.3 SDK
+    - xcodebuild clean test
+      CODE_SIGNING_REQUIRED=NO
+      CODE_SIGN_IDENTITY=
+      -destination 'platform=tvOS Simulator,name=Apple TV 1080p,OS=10.3'
+      -sdk appletvsimulator10.3
+      -scheme "TrustKit tvOS"
+      
