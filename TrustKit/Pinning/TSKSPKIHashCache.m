@@ -11,7 +11,6 @@
 
 #import "TSKSPKIHashCache.h"
 #import "../TSKLog.h"
-#include <pthread.h>
 #import <CommonCrypto/CommonDigest.h>
 
 #if TARGET_OS_IOS && __IPHONE_OS_VERSION_MIN_REQUIRED <= 100000
@@ -87,7 +86,10 @@ static const unsigned int asn1HeaderSizes[4] = {
 #if LEGACY_IOS_KEY_EXTRACTION
 
 static const NSString *kTSKKeychainPublicKeyTag = @"TSKKeychainPublicKeyTag"; // Used to add and find the public key in the Keychain
-static pthread_mutex_t _keychainLock; // Used to lock access to our Keychain item
+
+@interface TSKSPKIHashCache ()
+@property (nonatomic) dispatch_queue_t keychainQueue;
+@end
 
 @interface TSKSPKIHashCache (LegacyIos)
 - (NSData *)getPublicKeyDataFromCertificate_legacy_ios:(SecCertificateRef)certificate;
@@ -137,17 +139,15 @@ static pthread_mutex_t _keychainLock; // Used to lock access to our Keychain ite
         }
         
 #if LEGACY_IOS_KEY_EXTRACTION
-        pthread_mutex_init(&_keychainLock, NULL);
+        _keychainQueue = dispatch_queue_create("TSKSPKIKeychainLock", DISPATCH_QUEUE_SERIAL);
         // Cleanup the Keychain in case the App previously crashed
         NSMutableDictionary * publicKeyGet = [[NSMutableDictionary alloc] init];
         [publicKeyGet setObject:(__bridge id)kSecClassKey forKey:(__bridge id)kSecClass];
         [publicKeyGet setObject:(kTSKKeychainPublicKeyTag) forKey:(__bridge id)kSecAttrApplicationTag];
         [publicKeyGet setObject:(__bridge id)(kCFBooleanTrue) forKey:(__bridge id)kSecReturnData];
-        pthread_mutex_lock(&_keychainLock);
-        {
+        dispatch_sync(_keychainQueue, ^{
             SecItemDelete((__bridge CFDictionaryRef)(publicKeyGet));
-        }
-        pthread_mutex_unlock(&_keychainLock);
+        });
 #endif
     }
     return self;
@@ -321,7 +321,7 @@ static pthread_mutex_t _keychainLock; // Used to lock access to our Keychain ite
 
 - (NSData *)getPublicKeyDataFromCertificate_legacy_ios:(SecCertificateRef)certificate
 {
-    NSData *publicKeyData = nil;
+    __block NSData *publicKeyData = nil;
     __block OSStatus resultAdd, __block resultDel = noErr;
     SecKeyRef publicKey;
     SecTrustRef tempTrust;
@@ -354,13 +354,12 @@ static pthread_mutex_t _keychainLock; // Used to lock access to our Keychain ite
     [publicKeyGet setObject:(kTSKKeychainPublicKeyTag) forKey:(__bridge id)kSecAttrApplicationTag];
     [publicKeyGet setObject:(__bridge id)(kCFBooleanTrue) forKey:(__bridge id)kSecReturnData];
     
+    
     // Get the key bytes from the Keychain atomically
-    pthread_mutex_lock(&_keychainLock);
-    {
+    dispatch_sync(self.keychainQueue, ^{
         resultAdd = SecItemAdd((__bridge CFDictionaryRef) peerPublicKeyAdd, (void *)&publicKeyData);
         resultDel = SecItemDelete((__bridge CFDictionaryRef)(publicKeyGet));
-    }
-    pthread_mutex_unlock(&_keychainLock);
+    });
     
     CFRelease(publicKey);
     if ((resultAdd != errSecSuccess) || (resultDel != errSecSuccess))
