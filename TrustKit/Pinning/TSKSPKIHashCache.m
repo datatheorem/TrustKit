@@ -11,13 +11,13 @@
 
 #import "TSKSPKIHashCache.h"
 #import "../TSKLog.h"
+#include <pthread.h>
 #import <CommonCrypto/CommonDigest.h>
 
 #if TARGET_OS_IOS && __IPHONE_OS_VERSION_MIN_REQUIRED <= 100000
 // Need to support iOS before 10.0
 // The one and only way to get a key's data in a buffer on iOS is to put it in the Keychain and then ask for the data back...
 #define LEGACY_IOS_KEY_EXTRACTION 1
-static const NSString *kTSKKeychainPublicKeyTag = @"TSKKeychainPublicKeyTag"; // Used to add and find the public key in the Keychain
 #endif
 
 #if !TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MIN_REQUIRED < 101200
@@ -85,9 +85,9 @@ static const unsigned int asn1HeaderSizes[4] = {
 @end
 
 #if LEGACY_IOS_KEY_EXTRACTION
-@interface TSKSPKIHashCache ()
-@property (nonatomic) dispatch_queue_t keychainQueue;
-@end
+
+static const NSString *kTSKKeychainPublicKeyTag = @"TSKKeychainPublicKeyTag"; // Used to add and find the public key in the Keychain
+static pthread_mutex_t _keychainLock; // Used to lock access to our Keychain item
 
 @interface TSKSPKIHashCache (LegacyIos)
 - (NSData *)getPublicKeyDataFromCertificate_legacy_ios:(SecCertificateRef)certificate;
@@ -137,15 +137,17 @@ static const unsigned int asn1HeaderSizes[4] = {
         }
         
 #if LEGACY_IOS_KEY_EXTRACTION
-        _keychainQueue = dispatch_queue_create("TSKSPKIKeychainLock", DISPATCH_QUEUE_SERIAL);
+        pthread_mutex_init(&_keychainLock, NULL);
         // Cleanup the Keychain in case the App previously crashed
         NSMutableDictionary * publicKeyGet = [[NSMutableDictionary alloc] init];
         [publicKeyGet setObject:(__bridge id)kSecClassKey forKey:(__bridge id)kSecClass];
         [publicKeyGet setObject:(kTSKKeychainPublicKeyTag) forKey:(__bridge id)kSecAttrApplicationTag];
         [publicKeyGet setObject:(__bridge id)(kCFBooleanTrue) forKey:(__bridge id)kSecReturnData];
-        dispatch_sync(_keychainQueue, ^{
+        pthread_mutex_lock(&_keychainLock);
+        {
             SecItemDelete((__bridge CFDictionaryRef)(publicKeyGet));
-        });
+        }
+        pthread_mutex_unlock(&_keychainLock);
 #endif
     }
     return self;
@@ -352,12 +354,13 @@ static const unsigned int asn1HeaderSizes[4] = {
     [publicKeyGet setObject:(kTSKKeychainPublicKeyTag) forKey:(__bridge id)kSecAttrApplicationTag];
     [publicKeyGet setObject:(__bridge id)(kCFBooleanTrue) forKey:(__bridge id)kSecReturnData];
     
-    
     // Get the key bytes from the Keychain atomically
-    dispatch_sync(self.keychainQueue, ^{
+    pthread_mutex_lock(&_keychainLock);
+    {
         resultAdd = SecItemAdd((__bridge CFDictionaryRef) peerPublicKeyAdd, (void *)&publicKeyData);
         resultDel = SecItemDelete((__bridge CFDictionaryRef)(publicKeyGet));
-    });
+    }
+    pthread_mutex_unlock(&_keychainLock);
     
     CFRelease(publicKey);
     if ((resultAdd != errSecSuccess) || (resultDel != errSecSuccess))
