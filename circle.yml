@@ -16,7 +16,7 @@ test:
       CODE_SIGNING_REQUIRED=NO
       CODE_SIGN_IDENTITY=
       -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.3'
-      -sdk iphonesimulator10.2
+      -sdk iphonesimulator10.3
       -scheme "TrustKit"
       
     # macOS 10.12 platform with macOS 10.12 SDK
