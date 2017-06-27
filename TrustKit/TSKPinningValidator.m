@@ -161,7 +161,7 @@
                 // Pin validation failed
                 TSKLog(@"Pin validation failed for %@", serverHostname);
 #if !TARGET_OS_IPHONE
-                if ((validationResult == TSKPinValidationResultFailedUserDefinedTrustAnchor)
+                if ((validationResult == TSKTrustEvaluationFailedUserDefinedTrustAnchor)
                     && (self.ignorePinsForUserTrustAnchors))
                 {
                     // OS-X only: user-defined trust anchors can be whitelisted (for corporate proxies, etc.) so don't send reports

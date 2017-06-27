@@ -212,7 +212,7 @@ void TSKLog(NSString *format, ...)
     if (validationResult != TSKTrustEvaluationSuccess)
     {
 #if !TARGET_OS_IPHONE
-        if (validationResult != TSKPinValidationResultFailedUserDefinedTrustAnchor)
+        if (validationResult != TSKTrustEvaluationFailedUserDefinedTrustAnchor)
 #endif
         {
             // Pin validation failed: retrieve the list of configured report URLs

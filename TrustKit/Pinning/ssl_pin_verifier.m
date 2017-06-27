@@ -126,7 +126,7 @@ TSKTrustEvaluationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *s
             {
                 TSKLog(@"Detected user-defined trust anchor in the certificate chain");
                 CFRelease(serverTrust);
-                return TSKPinValidationResultFailedUserDefinedTrustAnchor;
+                return TSKTrustEvaluationFailedUserDefinedTrustAnchor;
             }
         }
     }
