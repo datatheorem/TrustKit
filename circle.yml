@@ -4,6 +4,7 @@ machine:
 test:
   override:
     # First run Xcode 8.3 tests
+    - ls /Applications/
     - sudo xcode-select --switch /Applications/Xcode-8.3.3.app
     # iOS 8 platform with iOS 9 SDK
     - xcodebuild clean test
@@ -41,6 +42,6 @@ test:
       CODE_SIGNING_REQUIRED=NO
       CODE_SIGN_IDENTITY=
       -destination 'platform=OS X'
-      -sdk macosx10.12
+      -sdk macosx10.13
       -scheme "TrustKit OS X"
 
