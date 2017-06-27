@@ -1,10 +1,13 @@
-//
-//  AppDelegate.swift
-//  TrustKitDemoInSwift
-//
-//  Created by Nishant Paul on 20/06/17.
-//  Copyright © 2017 DataTheorem. All rights reserved.
-//
+/*
+ 
+ AppDelegate.swift
+ TrustKitDemoInSwift
+ 
+ Copyright 2017 The TrustKit Project Authors
+ Licensed under the MIT license, see associated LICENSE file for terms.
+ See AUTHORS file for the list of project authors.
+ 
+ */
 
 import UIKit
 import TrustKit
@@ -26,6 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     kTSKEnforcePinning: true,
                     kTSKIncludeSubdomains: true,
                     kTSKPublicKeyAlgorithms: [kTSKAlgorithmRsa2048],
+                    
+                    // Invalid pins to demonstrate a pinning failure
                     kTSKPublicKeyHashes: [
                          "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
                          "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB="
@@ -35,9 +40,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 "www.datatheorem.com": [
                     kTSKEnforcePinning: true,
                     kTSKPublicKeyAlgorithms: [kTSKAlgorithmEcDsaSecp384r1],
+                    
+                    // Valid pin and backup pin
                     kTSKPublicKeyHashes: [
                         "58qRu/uxh4gFezqAcERupSkRYBlBAvfcw7mEjGPLnNU=",
-                        "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+                        "pL1+qb9HTMRZJmuC/bB/ZI9d302BYrrqiVuRyW+DGrU="
                     ],
                     kTSKReportUris:["https://overmind.datatheorem.com/trustkit/report"],
                 ]

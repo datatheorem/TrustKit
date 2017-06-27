@@ -1,10 +1,13 @@
-//
-//  ViewController.m
-//  TrustKitDemo
-//
-//  Created by Nishant Paul on 19/06/17.
-//  Copyright © 2017 DataTheorem. All rights reserved.
-//
+/*
+ 
+ ViewController.m
+ TrustKitDemo
+ 
+ Copyright 2017 The TrustKit Project Authors
+ Licensed under the MIT license, see associated LICENSE file for terms.
+ See AUTHORS file for the list of project authors.
+ 
+ */
 
 #import "ViewController.h"
 #import <TrustKit/TrustKit.h>
@@ -55,13 +58,13 @@ static NSString *const baseURLDT = @"https://www.datatheorem.com/";
         if (!error) {
             // Display Success Alert
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self displayAlertWithTitle:@"Test Result" andMessage:[NSString stringWithFormat:@"SSL Pin found for %@", [url absoluteString]]];
+                [self displayAlertWithTitle:@"Test Result" andMessage:[NSString stringWithFormat:@"Pinning validation succeeded for %@", [url absoluteString]]];
             });
         }
         else {
             // Display Error Alert
             dispatch_async(dispatch_get_main_queue(), ^{
-                [self displayAlertWithTitle:@"Test Result" andMessage:[NSString stringWithFormat:@"Pinning Test Unsuccessful for reason: %@", error.description]];
+                [self displayAlertWithTitle:@"Test Result" andMessage:[NSString stringWithFormat:@"Pinning validation failed for [%@] : [%@]", [url absoluteString], error.description]];
             });
         }
     }];

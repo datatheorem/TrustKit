@@ -1,10 +1,13 @@
-//
-//  ViewController.swift
-//  TrustKitDemoInSwift
-//
-//  Created by Nishant Paul on 20/06/17.
-//  Copyright © 2017 DataTheorem. All rights reserved.
-//
+/*
+ 
+ DTViewController.swift
+ TrustKitDemoInSwift
+ 
+ Copyright 2017 The TrustKit Project Authors
+ Licensed under the MIT license, see associated LICENSE file for terms.
+ See AUTHORS file for the list of project authors.
+ 
+ */
 
 import UIKit
 import TrustKit
@@ -43,13 +46,13 @@ class DTViewController: UIViewController, URLSessionDelegate {
             if error == nil {
                 // Display Success Alert
                 DispatchQueue.main.async {
-                    self.displayAlert(withTitle: "Test Result", messsage: "SSL Pin found for \(url.absoluteString)")
+                    self.displayAlert(withTitle: "Test Result", messsage: "Pinning validation succeeded for \(url.absoluteString)")
                 }
             }
             else {
                 // Display Error Alert
                 DispatchQueue.main.async {
-                    self.displayAlert(withTitle: "Test Result", messsage: "SSL Pin NOT found for reason: \(error.debugDescription)")
+                    self.displayAlert(withTitle: "Test Result", messsage: "Pinning validation failed for [\(url.absoluteString)] : [\(error.debugDescription)]")
                 }
             }
         }

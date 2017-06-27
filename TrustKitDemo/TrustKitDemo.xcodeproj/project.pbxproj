@@ -13,9 +13,6 @@
 		194230AB1EF7C91A00029B04 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 194230A91EF7C91A00029B04 /* Main.storyboard */; };
 		194230AD1EF7C91A00029B04 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 194230AC1EF7C91A00029B04 /* Assets.xcassets */; };
 		194230B01EF7C91A00029B04 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 194230AE1EF7C91A00029B04 /* LaunchScreen.storyboard */; };
-		194230BB1EF7C91B00029B04 /* TrustKitDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 194230BA1EF7C91B00029B04 /* TrustKitDemoTests.m */; };
-		194231061EF8431400029B04 /* TrustKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194230F51EF7DCCA00029B04 /* TrustKit.framework */; };
-		194231071EF8431400029B04 /* TrustKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 194230F51EF7DCCA00029B04 /* TrustKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		194231161EF9658800029B04 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194231151EF9658800029B04 /* AppDelegate.swift */; };
 		194231181EF9658800029B04 /* DTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194231171EF9658800029B04 /* DTViewController.swift */; };
 		1942311D1EF9658800029B04 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1942311C1EF9658800029B04 /* Assets.xcassets */; };
@@ -24,75 +21,61 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		194230B71EF7C91B00029B04 /* PBXContainerItemProxy */ = {
+		19ECC2621F028C9800D81F79 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 194230951EF7C91A00029B04 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 1942309C1EF7C91A00029B04;
-			remoteInfo = TrustKitDemo;
-		};
-		194230F41EF7DCCA00029B04 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 194230E91EF7DCCA00029B04 /* TrustKit.xcodeproj */;
+			containerPortal = 19ECC2571F028C9800D81F79 /* TrustKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 8C8480471A896EE30017C155;
 			remoteInfo = TrustKit;
 		};
-		194230F61EF7DCCA00029B04 /* PBXContainerItemProxy */ = {
+		19ECC2641F028C9800D81F79 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 194230E91EF7DCCA00029B04 /* TrustKit.xcodeproj */;
+			containerPortal = 19ECC2571F028C9800D81F79 /* TrustKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 8C8716961B23A91D00267E1D;
 			remoteInfo = TrustKit_Static;
 		};
-		194230F81EF7DCCA00029B04 /* PBXContainerItemProxy */ = {
+		19ECC2661F028C9800D81F79 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 194230E91EF7DCCA00029B04 /* TrustKit.xcodeproj */;
+			containerPortal = 19ECC2571F028C9800D81F79 /* TrustKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 8C8480521A896EE30017C155;
 			remoteInfo = TrustKitTests;
 		};
-		194230FA1EF7DCCA00029B04 /* PBXContainerItemProxy */ = {
+		19ECC2681F028C9800D81F79 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 194230E91EF7DCCA00029B04 /* TrustKit.xcodeproj */;
+			containerPortal = 19ECC2571F028C9800D81F79 /* TrustKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 8CA6CBFD1BAE2ADD00BDA419;
 			remoteInfo = "TrustKit OS X";
 		};
-		194230FC1EF7DCCA00029B04 /* PBXContainerItemProxy */ = {
+		19ECC26A1F028C9800D81F79 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 194230E91EF7DCCA00029B04 /* TrustKit.xcodeproj */;
+			containerPortal = 19ECC2571F028C9800D81F79 /* TrustKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 8CA6CC061BAE2ADD00BDA419;
 			remoteInfo = "TrustKit OS XTests";
 		};
-		194230FE1EF7DCCA00029B04 /* PBXContainerItemProxy */ = {
+		19ECC26C1F028C9800D81F79 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 194230E91EF7DCCA00029B04 /* TrustKit.xcodeproj */;
+			containerPortal = 19ECC2571F028C9800D81F79 /* TrustKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 8C84CBB21D6E0981009B3E7D;
 			remoteInfo = "TrustKit tvOS";
 		};
-		194231001EF7DCCA00029B04 /* PBXContainerItemProxy */ = {
+		19ECC26E1F028C9800D81F79 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 194230E91EF7DCCA00029B04 /* TrustKit.xcodeproj */;
+			containerPortal = 19ECC2571F028C9800D81F79 /* TrustKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 8C84CBDD1D6E1718009B3E7D;
 			remoteInfo = "TrustKit tvOS Tests";
 		};
-		194231021EF7DCCA00029B04 /* PBXContainerItemProxy */ = {
+		19ECC2701F028C9800D81F79 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 194230E91EF7DCCA00029B04 /* TrustKit.xcodeproj */;
+			containerPortal = 19ECC2571F028C9800D81F79 /* TrustKit.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 8CC5D24E1D6E64D10074F515;
 			remoteInfo = "TrustKit watchOS";
-		};
-		194231081EF8431400029B04 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 194230E91EF7DCCA00029B04 /* TrustKit.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 8C8480461A896EE30017C155;
-			remoteInfo = TrustKit;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -103,7 +86,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				194231071EF8431400029B04 /* TrustKit.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -121,10 +103,6 @@
 		194230AC1EF7C91A00029B04 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		194230AF1EF7C91A00029B04 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		194230B11EF7C91A00029B04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		194230B61EF7C91B00029B04 /* TrustKitDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrustKitDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		194230BA1EF7C91B00029B04 /* TrustKitDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrustKitDemoTests.m; sourceTree = "<group>"; };
-		194230BC1EF7C91B00029B04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		194230E91EF7DCCA00029B04 /* TrustKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TrustKit.xcodeproj; path = ../../TrustKit.xcodeproj; sourceTree = "<group>"; };
 		194231131EF9658800029B04 /* TrustKitDemoInSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrustKitDemoInSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		194231151EF9658800029B04 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		194231171EF9658800029B04 /* DTViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTViewController.swift; sourceTree = "<group>"; };
@@ -132,18 +110,11 @@
 		1942311F1EF9658800029B04 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		194231211EF9658800029B04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		194231261EF9663F00029B04 /* MainStoryboardForSwift.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboardForSwift.storyboard; sourceTree = "<group>"; };
+		19ECC2571F028C9800D81F79 /* TrustKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TrustKit.xcodeproj; path = ../TrustKit.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		1942309A1EF7C91A00029B04 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				194231061EF8431400029B04 /* TrustKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		194230B31EF7C91B00029B04 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -163,9 +134,8 @@
 		194230941EF7C91A00029B04 = {
 			isa = PBXGroup;
 			children = (
-				194230E91EF7DCCA00029B04 /* TrustKit.xcodeproj */,
+				19ECC2571F028C9800D81F79 /* TrustKit.xcodeproj */,
 				1942309F1EF7C91A00029B04 /* TrustKitDemo */,
-				194230B91EF7C91B00029B04 /* TrustKitDemoTests */,
 				194231141EF9658800029B04 /* TrustKitDemoInSwift */,
 				1942309E1EF7C91A00029B04 /* Products */,
 			);
@@ -175,7 +145,6 @@
 			isa = PBXGroup;
 			children = (
 				1942309D1EF7C91A00029B04 /* TrustKitDemo.app */,
-				194230B61EF7C91B00029B04 /* TrustKitDemoTests.xctest */,
 				194231131EF9658800029B04 /* TrustKitDemoInSwift.app */,
 			);
 			name = Products;
@@ -188,10 +157,7 @@
 				194230A41EF7C91A00029B04 /* AppDelegate.m */,
 				194230A61EF7C91A00029B04 /* ViewController.h */,
 				194230A71EF7C91A00029B04 /* ViewController.m */,
-				194230A91EF7C91A00029B04 /* Main.storyboard */,
 				194230AC1EF7C91A00029B04 /* Assets.xcassets */,
-				194230AE1EF7C91A00029B04 /* LaunchScreen.storyboard */,
-				194230B11EF7C91A00029B04 /* Info.plist */,
 				194230A01EF7C91A00029B04 /* Supporting Files */,
 			);
 			path = TrustKitDemo;
@@ -200,33 +166,12 @@
 		194230A01EF7C91A00029B04 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				194230B11EF7C91A00029B04 /* Info.plist */,
+				194230AE1EF7C91A00029B04 /* LaunchScreen.storyboard */,
+				194230A91EF7C91A00029B04 /* Main.storyboard */,
 				194230A11EF7C91A00029B04 /* main.m */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		194230B91EF7C91B00029B04 /* TrustKitDemoTests */ = {
-			isa = PBXGroup;
-			children = (
-				194230BA1EF7C91B00029B04 /* TrustKitDemoTests.m */,
-				194230BC1EF7C91B00029B04 /* Info.plist */,
-			);
-			path = TrustKitDemoTests;
-			sourceTree = "<group>";
-		};
-		194230EA1EF7DCCA00029B04 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				194230F51EF7DCCA00029B04 /* TrustKit.framework */,
-				194230F71EF7DCCA00029B04 /* libTrustKit_Static.a */,
-				194230F91EF7DCCA00029B04 /* TrustKitTests.xctest */,
-				194230FB1EF7DCCA00029B04 /* TrustKit.framework */,
-				194230FD1EF7DCCA00029B04 /* TrustKit OS XTests.xctest */,
-				194230FF1EF7DCCA00029B04 /* TrustKit.framework */,
-				194231011EF7DCCA00029B04 /* TrustKit tvOS Tests.xctest */,
-				194231031EF7DCCA00029B04 /* TrustKit.framework */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		194231141EF9658800029B04 /* TrustKitDemoInSwift */ = {
@@ -240,6 +185,21 @@
 				194231211EF9658800029B04 /* Info.plist */,
 			);
 			path = TrustKitDemoInSwift;
+			sourceTree = "<group>";
+		};
+		19ECC2581F028C9800D81F79 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				19ECC2631F028C9800D81F79 /* TrustKit.framework */,
+				19ECC2651F028C9800D81F79 /* libTrustKit_Static.a */,
+				19ECC2671F028C9800D81F79 /* TrustKitTests.xctest */,
+				19ECC2691F028C9800D81F79 /* TrustKit.framework */,
+				19ECC26B1F028C9800D81F79 /* TrustKit OS XTests.xctest */,
+				19ECC26D1F028C9800D81F79 /* TrustKit.framework */,
+				19ECC26F1F028C9800D81F79 /* TrustKit tvOS Tests.xctest */,
+				19ECC2711F028C9800D81F79 /* TrustKit.framework */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,30 +217,11 @@
 			buildRules = (
 			);
 			dependencies = (
-				194231091EF8431400029B04 /* PBXTargetDependency */,
 			);
 			name = TrustKitDemo;
 			productName = TrustKitDemo;
 			productReference = 1942309D1EF7C91A00029B04 /* TrustKitDemo.app */;
 			productType = "com.apple.product-type.application";
-		};
-		194230B51EF7C91B00029B04 /* TrustKitDemoTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 194230C21EF7C91B00029B04 /* Build configuration list for PBXNativeTarget "TrustKitDemoTests" */;
-			buildPhases = (
-				194230B21EF7C91B00029B04 /* Sources */,
-				194230B31EF7C91B00029B04 /* Frameworks */,
-				194230B41EF7C91B00029B04 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				194230B81EF7C91B00029B04 /* PBXTargetDependency */,
-			);
-			name = TrustKitDemoTests;
-			productName = TrustKitDemoTests;
-			productReference = 194230B61EF7C91B00029B04 /* TrustKitDemoTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		194231121EF9658800029B04 /* TrustKitDemoInSwift */ = {
 			isa = PBXNativeTarget;
@@ -314,12 +255,6 @@
 						DevelopmentTeam = B2EWK89Q2H;
 						ProvisioningStyle = Automatic;
 					};
-					194230B51EF7C91B00029B04 = {
-						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = B2EWK89Q2H;
-						ProvisioningStyle = Automatic;
-						TestTargetID = 1942309C1EF7C91A00029B04;
-					};
 					194231121EF9658800029B04 = {
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = B2EWK89Q2H;
@@ -340,74 +275,73 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 194230EA1EF7DCCA00029B04 /* Products */;
-					ProjectRef = 194230E91EF7DCCA00029B04 /* TrustKit.xcodeproj */;
+					ProductGroup = 19ECC2581F028C9800D81F79 /* Products */;
+					ProjectRef = 19ECC2571F028C9800D81F79 /* TrustKit.xcodeproj */;
 				},
 			);
 			projectRoot = "";
 			targets = (
 				1942309C1EF7C91A00029B04 /* TrustKitDemo */,
-				194230B51EF7C91B00029B04 /* TrustKitDemoTests */,
 				194231121EF9658800029B04 /* TrustKitDemoInSwift */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		194230F51EF7DCCA00029B04 /* TrustKit.framework */ = {
+		19ECC2631F028C9800D81F79 /* TrustKit.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = TrustKit.framework;
-			remoteRef = 194230F41EF7DCCA00029B04 /* PBXContainerItemProxy */;
+			remoteRef = 19ECC2621F028C9800D81F79 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		194230F71EF7DCCA00029B04 /* libTrustKit_Static.a */ = {
+		19ECC2651F028C9800D81F79 /* libTrustKit_Static.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libTrustKit_Static.a;
-			remoteRef = 194230F61EF7DCCA00029B04 /* PBXContainerItemProxy */;
+			remoteRef = 19ECC2641F028C9800D81F79 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		194230F91EF7DCCA00029B04 /* TrustKitTests.xctest */ = {
+		19ECC2671F028C9800D81F79 /* TrustKitTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = TrustKitTests.xctest;
-			remoteRef = 194230F81EF7DCCA00029B04 /* PBXContainerItemProxy */;
+			remoteRef = 19ECC2661F028C9800D81F79 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		194230FB1EF7DCCA00029B04 /* TrustKit.framework */ = {
+		19ECC2691F028C9800D81F79 /* TrustKit.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = TrustKit.framework;
-			remoteRef = 194230FA1EF7DCCA00029B04 /* PBXContainerItemProxy */;
+			remoteRef = 19ECC2681F028C9800D81F79 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		194230FD1EF7DCCA00029B04 /* TrustKit OS XTests.xctest */ = {
+		19ECC26B1F028C9800D81F79 /* TrustKit OS XTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = "TrustKit OS XTests.xctest";
-			remoteRef = 194230FC1EF7DCCA00029B04 /* PBXContainerItemProxy */;
+			remoteRef = 19ECC26A1F028C9800D81F79 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		194230FF1EF7DCCA00029B04 /* TrustKit.framework */ = {
+		19ECC26D1F028C9800D81F79 /* TrustKit.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = TrustKit.framework;
-			remoteRef = 194230FE1EF7DCCA00029B04 /* PBXContainerItemProxy */;
+			remoteRef = 19ECC26C1F028C9800D81F79 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		194231011EF7DCCA00029B04 /* TrustKit tvOS Tests.xctest */ = {
+		19ECC26F1F028C9800D81F79 /* TrustKit tvOS Tests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			path = "TrustKit tvOS Tests.xctest";
-			remoteRef = 194231001EF7DCCA00029B04 /* PBXContainerItemProxy */;
+			remoteRef = 19ECC26E1F028C9800D81F79 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		194231031EF7DCCA00029B04 /* TrustKit.framework */ = {
+		19ECC2711F028C9800D81F79 /* TrustKit.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = TrustKit.framework;
-			remoteRef = 194231021EF7DCCA00029B04 /* PBXContainerItemProxy */;
+			remoteRef = 19ECC2701F028C9800D81F79 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -420,13 +354,6 @@
 				194230B01EF7C91A00029B04 /* LaunchScreen.storyboard in Resources */,
 				194230AD1EF7C91A00029B04 /* Assets.xcassets in Resources */,
 				194230AB1EF7C91A00029B04 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		194230B41EF7C91B00029B04 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -453,14 +380,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		194230B21EF7C91B00029B04 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				194230BB1EF7C91B00029B04 /* TrustKitDemoTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		1942310F1EF9658800029B04 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -471,19 +390,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		194230B81EF7C91B00029B04 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 1942309C1EF7C91A00029B04 /* TrustKitDemo */;
-			targetProxy = 194230B71EF7C91B00029B04 /* PBXContainerItemProxy */;
-		};
-		194231091EF8431400029B04 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = TrustKit;
-			targetProxy = 194231081EF8431400029B04 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		194230A91EF7C91A00029B04 /* Main.storyboard */ = {
@@ -631,32 +537,6 @@
 			};
 			name = Release;
 		};
-		194230C31EF7C91B00029B04 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = B2EWK89Q2H;
-				INFOPLIST_FILE = TrustKitDemoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.datatheorem.TrustKitDemoTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TrustKitDemo.app/TrustKitDemo";
-			};
-			name = Debug;
-		};
-		194230C41EF7C91B00029B04 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = B2EWK89Q2H;
-				INFOPLIST_FILE = TrustKitDemoTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.datatheorem.TrustKitDemoTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TrustKitDemo.app/TrustKitDemo";
-			};
-			name = Release;
-		};
 		194231231EF9658800029B04 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -707,15 +587,6 @@
 			buildConfigurations = (
 				194230C01EF7C91B00029B04 /* Debug */,
 				194230C11EF7C91B00029B04 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		194230C21EF7C91B00029B04 /* Build configuration list for PBXNativeTarget "TrustKitDemoTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				194230C31EF7C91B00029B04 /* Debug */,
-				194230C41EF7C91B00029B04 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
