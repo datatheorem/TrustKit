@@ -23,7 +23,6 @@ NSString *identifier_for_vendor(void)
 
 #pragma mark Vendor identifier - macOS, watchOS
 
-#include <pthread.h>
 
 static NSString * const kTSKVendorIdentifierKey = @"TSKVendorIdentifier";
 
@@ -36,11 +35,13 @@ NSString *identifier_for_vendor(void)
     if (vendorId == nil)
     {
         // Generate and store a new UUID
-        [preferences setObject:NSUUID.UUID.UUIDString forKey:kTSKVendorIdentifierKey];
+        vendorId = NSUUID.UUID.UUIDString;
+        [preferences setObject:vendorId forKey:kTSKVendorIdentifierKey];
         [preferences synchronize];
     }
     return vendorId;
 }
+
 
 #endif
 
