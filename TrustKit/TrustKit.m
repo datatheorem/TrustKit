@@ -63,7 +63,7 @@ void TSKLog(NSString *format, ...)
 #pragma mark TrustKit Initialization Helper Functions
 
 @interface TrustKit ()
-- (instancetype)initWithConfiguration:(NSDictionary<NSString *, id> *)trustKitConfig isSingleton:(BOOL)isSingleton;
+- (instancetype)initWithConfiguration:(NSDictionary<TSKGlobalConfigurationKey, id> *)trustKitConfig isSingleton:(BOOL)isSingleton;
 
 @property (nonatomic) TSKBackgroundReporter *pinFailureReporter;
 @property (nonatomic) dispatch_queue_t pinFailureReporterQueue;
