@@ -87,7 +87,7 @@ void TSKLog(NSString *format, ...)
     return sharedTrustKit;
 }
 
-+ (void)initializeWithConfiguration:(NSDictionary *)trustKitConfig
++ (void)initializeWithConfiguration:(NSDictionary<TSKGlobalConfigurationKey, id> *)trustKitConfig
 {
     TSKLog(@"Configuration passed via explicit call to initializeWithConfiguration:");
     
@@ -110,13 +110,13 @@ void TSKLog(NSString *format, ...)
 #pragma mark Instance Initialization
 
 
-- (instancetype)initWithConfiguration:(NSDictionary<NSString *, id> *)trustKitConfig
+- (instancetype)initWithConfiguration:(NSDictionary<TSKGlobalConfigurationKey, id> *)trustKitConfig
 {
     return [self initWithConfiguration:trustKitConfig isSingleton:NO];
 }
 
 
-- (instancetype)initWithConfiguration:(NSDictionary<NSString *, id> *)trustKitConfig isSingleton:(BOOL)isSingleton
+- (instancetype)initWithConfiguration:(NSDictionary<TSKGlobalConfigurationKey, id> *)trustKitConfig isSingleton:(BOOL)isSingleton
 {
     NSParameterAssert(trustKitConfig);
     if (!trustKitConfig) {

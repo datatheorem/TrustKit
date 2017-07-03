@@ -128,7 +128,7 @@ NS_ASSUME_NONNULL_BEGIN
  already been initialized.
  
  */
-+ (void)initializeWithConfiguration:(NSDictionary *)trustKitConfig;
++ (void)initializeWithConfiguration:(NSDictionary<TSKGlobalConfigurationKey, id> *)trustKitConfig;
 
 
 /**
@@ -179,7 +179,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  @param trustKitConfig A dictionary containing various keys for configuring the SSL pinning policy.
  */
-- (instancetype)initWithConfiguration:(NSDictionary<NSString *, id> * _Nullable)trustKitConfig;
+- (instancetype)initWithConfiguration:(NSDictionary<TSKGlobalConfigurationKey, id> *)trustKitConfig;
 
 
 
