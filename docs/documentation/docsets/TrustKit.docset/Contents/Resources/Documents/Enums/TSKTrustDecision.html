@@ -4,145 +4,174 @@
     <title>TSKTrustDecision Enum Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
-    <meta charset='utf-8'>
+    <meta charset="utf-8">
     <script src="../js/jquery.min.js" defer></script>
     <script src="../js/jazzy.js" defer></script>
     
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
   </head>
   <body>
+
     <a name="//apple_ref/objc/Enum/TSKTrustDecision" class="dashAnchor"></a>
+
     <a title="TSKTrustDecision Enum Reference"></a>
-    <header>
-      <div class="content-wrapper">
-        <p><a href="../index.html">TrustKit Docs</a></p>
-        <p class="header-right"><a href="https://github.com/datatheorem/TrustKit"><img src="../img/gh.png"/>View on GitHub</a></p>
-      </div>
-    </header>
-    <div class="content-wrapper">
-      <p id="breadcrumbs">
-        <a href="../index.html">TrustKit Reference</a>
-        <img id="carat" src="../img/carat.png" />
-        TSKTrustDecision Enum Reference
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+          TrustKit Docs
+        </a>
+        
       </p>
-    </div>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/datatheorem/TrustKit">
+            <img class="header-icon" src="../img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html">TrustKit Reference</a>
+      <img class="carat" src="../img/carat.png" />
+      TSKTrustDecision Enum Reference
+    </p>
+
     <div class="content-wrapper">
-      <nav class="sidebar">
+      <nav class="navigation">
         <ul class="nav-groups">
           <li class="nav-group-name">
-            <a href="../Classes.html">Classes</a>
+            <a class="nav-group-name-link" href="../Initalizing TrustKit.html">Initalizing TrustKit</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Classes/TSKPinningValidator.html">TSKPinningValidator</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Classes/TrustKit.html">TrustKit</a>
+                <a class="nav-group-task-link" href="../Classes/TrustKit.html">TrustKit</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="../Constants.html">Constants</a>
+            <a class="nav-group-name-link" href="../Implementing Pinning Validation.html">Implementing Pinning Validation</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Constants.html#/c:@TrustKitVersion">TrustKitVersion</a>
+                <a class="nav-group-task-link" href="../Classes/TSKPinningValidator.html">TSKPinningValidator</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Constants.html#/c:@kTSKAlgorithmEcDsaSecp256r1">kTSKAlgorithmEcDsaSecp256r1</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Constants.html#/c:@kTSKAlgorithmEcDsaSecp384r1">kTSKAlgorithmEcDsaSecp384r1</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Constants.html#/c:@kTSKAlgorithmRsa2048">kTSKAlgorithmRsa2048</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Constants.html#/c:@kTSKAlgorithmRsa4096">kTSKAlgorithmRsa4096</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Constants.html#/c:@kTSKDisableDefaultReportUri">kTSKDisableDefaultReportUri</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Constants.html#/c:@kTSKEnforcePinning">kTSKEnforcePinning</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Constants.html#/c:@kTSKExcludeSubdomainFromParentPolicy">kTSKExcludeSubdomainFromParentPolicy</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Constants.html#/c:@kTSKExpirationDate">kTSKExpirationDate</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Constants.html#/c:@kTSKIgnorePinningForUserDefinedTrustAnchors">kTSKIgnorePinningForUserDefinedTrustAnchors</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Constants.html#/c:@kTSKIncludeSubdomains">kTSKIncludeSubdomains</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Constants.html#/c:@kTSKPinnedDomains">kTSKPinnedDomains</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Constants.html#/c:@kTSKPublicKeyAlgorithms">kTSKPublicKeyAlgorithms</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Constants.html#/c:@kTSKPublicKeyHashes">kTSKPublicKeyHashes</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Constants.html#/c:@kTSKReportUris">kTSKReportUris</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Constants.html#/c:@kTSKSwizzleNetworkDelegates">kTSKSwizzleNetworkDelegates</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Constants.html#/c:@kTSKValidationCertificateChainNotificationKey">kTSKValidationCertificateChainNotificationKey</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Constants.html#/c:@kTSKValidationCompletedNotification">kTSKValidationCompletedNotification</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Constants.html#/c:@kTSKValidationDecisionNotificationKey">kTSKValidationDecisionNotificationKey</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Constants.html#/c:@kTSKValidationDurationNotificationKey">kTSKValidationDurationNotificationKey</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Constants.html#/c:@kTSKValidationNotedHostnameNotificationKey">kTSKValidationNotedHostnameNotificationKey</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Constants.html#/c:@kTSKValidationResultNotificationKey">kTSKValidationResultNotificationKey</a>
-              </li>
-              <li class="nav-group-task">
-                <a href="../Constants.html#/c:@kTSKValidationServerHostnameNotificationKey">kTSKValidationServerHostnameNotificationKey</a>
+                <a class="nav-group-task-link" href="../Enums/TSKTrustDecision.html">TSKTrustDecision</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="../Enums.html">Enums</a>
+            <a class="nav-group-name-link" href="../Setting up a Validation Callback.html">Setting up a Validation Callback</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Enums/TSKTrustDecision.html">TSKTrustDecision</a>
+                <a class="nav-group-task-link" href="../Setting up a Validation Callback.html#/c:TSKPinningValidatorCallback.h@T@TSKPinningValidatorCallback">TSKPinningValidatorCallback</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TSKPinningValidatorResult.html">TSKPinningValidatorResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Setting up a Validation Callback.html#/c:TSKPinningValidatorCallback.h@T@TKSDomainPinningPolicy">TKSDomainPinningPolicy</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/TSKTrustEvaluationResult.html">TSKTrustEvaluationResult</a>
               </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="../Type Definitions.html">Type Definitions</a>
+            <a class="nav-group-name-link" href="../Global Configuration Keys.html">Global Configuration Keys</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="../Type Definitions.html#/c:TrustKit.h@T@TSKDomainConfigurationKey">TSKDomainConfigurationKey</a>
+                <a class="nav-group-task-link" href="../Global Configuration Keys.html#/c:TSKTrustKitConfig.h@T@TSKGlobalConfigurationKey">TSKGlobalConfigurationKey</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Type Definitions.html#/c:TrustKit.h@T@TSKGlobalConfigurationKey">TSKGlobalConfigurationKey</a>
+                <a class="nav-group-task-link" href="../Global Configuration Keys.html#/c:@kTSKSwizzleNetworkDelegates">kTSKSwizzleNetworkDelegates</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Type Definitions.html#/c:TrustKit.h@T@TSKNotificationUserInfoKey">TSKNotificationUserInfoKey</a>
+                <a class="nav-group-task-link" href="../Global Configuration Keys.html#/c:@kTSKPinnedDomains">kTSKPinnedDomains</a>
               </li>
               <li class="nav-group-task">
-                <a href="../Type Definitions.html#/c:TrustKit.h@T@TSKSupportedAlgorithm">TSKSupportedAlgorithm</a>
+                <a class="nav-group-task-link" href="../Global Configuration Keys.html#/c:@kTSKIgnorePinningForUserDefinedTrustAnchors">kTSKIgnorePinningForUserDefinedTrustAnchors</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Domain Configuration Keys.html">Domain Configuration Keys</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Domain Configuration Keys.html#/c:TSKTrustKitConfig.h@T@TSKDomainConfigurationKey">TSKDomainConfigurationKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Domain Configuration Keys.html#/c:@kTSKPublicKeyHashes">kTSKPublicKeyHashes</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Domain Configuration Keys.html#/c:@kTSKPublicKeyAlgorithms">kTSKPublicKeyAlgorithms</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Domain Configuration Keys.html#/c:@kTSKEnforcePinning">kTSKEnforcePinning</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Domain Configuration Keys.html#/c:@kTSKIncludeSubdomains">kTSKIncludeSubdomains</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Domain Configuration Keys.html#/c:@kTSKExcludeSubdomainFromParentPolicy">kTSKExcludeSubdomainFromParentPolicy</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Domain Configuration Keys.html#/c:@kTSKReportUris">kTSKReportUris</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Domain Configuration Keys.html#/c:@kTSKDisableDefaultReportUri">kTSKDisableDefaultReportUri</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Domain Configuration Keys.html#/c:@kTSKExpirationDate">kTSKExpirationDate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Domain Configuration Keys.html#/c:@kTSKAdditionalTrustAnchors">kTSKAdditionalTrustAnchors</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Public Key Algorithm Keys.html">Public Key Algorithm Keys</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Public Key Algorithm Keys.html#/c:TSKTrustKitConfig.h@T@TSKSupportedAlgorithm">TSKSupportedAlgorithm</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Public Key Algorithm Keys.html#/c:@kTSKAlgorithmRsa2048">kTSKAlgorithmRsa2048</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Public Key Algorithm Keys.html#/c:@kTSKAlgorithmRsa4096">kTSKAlgorithmRsa4096</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Public Key Algorithm Keys.html#/c:@kTSKAlgorithmEcDsaSecp256r1">kTSKAlgorithmEcDsaSecp256r1</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Public Key Algorithm Keys.html#/c:@kTSKAlgorithmEcDsaSecp384r1">kTSKAlgorithmEcDsaSecp384r1</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Other Constants.html">Other Constants</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other Constants.html#/c:@TrustKitVersion">TrustKitVersion</a>
               </li>
             </ul>
           </li>
         </ul>
       </nav>
       <article class="main-content">
-        <section>
-          <section class="section">
+
+        <section class="section">
+          <div class="section-content">
             <h1>TSKTrustDecision</h1>
               <div class="declaration">
                 <div class="language">
@@ -150,12 +179,15 @@
 
                 </div>
               </div>
-            <p>Possible return values when verifying a server&rsquo;s identity against the global SSL pinning policy using <code><a href="../Classes/TSKPinningValidator.html">TSKPinningValidator</a></code>.</p>
+            <p>Possible return values when verifying a server&rsquo;s identity against an SSL pinning policy.</p>
 
-          </section>
-          <section class="section task-group-section">
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
             <div class="task-group">
-              <ul>
+              <ul class="item-container">
                 <li class="item">
                   <div>
                     <code>
@@ -169,8 +201,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Based on the server&rsquo;s certificate chain and the global pinning policy for this domain, the SSL connection should be allowed.
-This return value does not necessarily mean that the pinning validation succeded (for example if <code><a href="../Constants.html#/c:@kTSKEnforcePinning">kTSKEnforcePinning</a></code> was set to <code>NO</code> for this domain). If a pinning validation failure occured and if a report URI was configured, a pin failure report was sent.</p>
+                        <p>Based on the server&rsquo;s certificate chain and the configured pinning policy for this domain, the SSL connection should be allowed.
+This return value does not necessarily mean that the pinning validation succeded (for example if <code><a href="../Domain Configuration Keys.html#/c:@kTSKEnforcePinning">kTSKEnforcePinning</a></code> was set to <code>NO</code> for this domain). If a pinning validation failure occured and if a report URI was configured, a pin failure report was sent.</p>
 
                       </div>
                       <div class="declaration">
@@ -185,9 +217,6 @@ This return value does not necessarily mean that the pinning validation succeded
                           <pre class="highlight"><code><span class="k">case</span> <span class="n">shouldAllowConnection</span> <span class="o">=</span> <span class="mi">0</span></code></pre>
 
                         </div>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.1/TrustKit/TSKPinningValidator.h#L26">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -205,7 +234,7 @@ This return value does not necessarily mean that the pinning validation succeded
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Based on the server&rsquo;s certificate chain and the global pinning policy for this domain, the SSL connection should be blocked.
+                        <p>Based on the server&rsquo;s certificate chain and the configured pinning policy for this domain, the SSL connection should be blocked.
 A pinning validation failure occured and if a report URI was configured, a pin failure report was sent.</p>
 
                       </div>
@@ -221,9 +250,6 @@ A pinning validation failure occured and if a report URI was configured, a pin f
                           <pre class="highlight"><code><span class="k">case</span> <span class="n">shouldBlockConnection</span> <span class="o">=</span> <span class="mi">1</span></code></pre>
 
                         </div>
-                      </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.1/TrustKit/TSKPinningValidator.h#L32">Show on GitHub</a>
                       </div>
                     </section>
                   </div>
@@ -258,22 +284,20 @@ Because this will happen in an authentication handler, it means that the server&
 
                         </div>
                       </div>
-                      <div class="slightly-smaller">
-                        <a href="https://github.com/datatheorem/TrustKit/tree/1.4.1/TrustKit/TSKPinningValidator.h#L38">Show on GitHub</a>
-                      </div>
                     </section>
                   </div>
                 </li>
               </ul>
             </div>
-          </section>
+          </div>
         </section>
-        <section id="footer">
-          <p>&copy; 2017 <a class="link" href="https://datatheorem.github.io" target="_blank" rel="external">Data Theorem</a>. All rights reserved. (Last updated: 2017-03-01)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
-        </section>
+
       </article>
     </div>
+    <section class="footer">
+      <p>&copy; 2017 <a class="link" href="https://datatheorem.github.io" target="_blank" rel="external">Data Theorem</a>. All rights reserved. (Last updated: 2017-07-07)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
   </body>
 </div>
 </html>

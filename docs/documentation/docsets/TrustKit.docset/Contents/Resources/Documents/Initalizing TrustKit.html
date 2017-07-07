@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>TrustKit  Reference</title>
+    <title>Initalizing TrustKit  Reference</title>
     <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="css/highlight.css" />
     <meta charset="utf-8">
@@ -15,7 +15,7 @@
   <body>
 
 
-    <a title="TrustKit  Reference"></a>
+    <a title="Initalizing TrustKit  Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -43,7 +43,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="index.html">TrustKit Reference</a>
       <img class="carat" src="img/carat.png" />
-      TrustKit  Reference
+      Initalizing TrustKit  Reference
     </p>
 
     <div class="content-wrapper">
@@ -171,23 +171,137 @@
 
         <section class="section">
           <div class="section-content">
+            <h1>Initalizing TrustKit</h1>
             
-            <h1 id='trustkit-documentation' class='heading'>TrustKit Documentation</h1>
-
-<p>TrustKit is an open source framework that makes it easy to deploy SSL public key pinning in any iOS, macOS, tvOS or watchOS App.</p>
-
-<p>This is the API documentation for TrustKit. A <q>Getting Started</q> guide is available at <a href="https://github.com/datatheorem/TrustKit/blob/master/docs/getting-started.md">https://github.com/datatheorem/TrustKit/blob/master/docs/getting-started.md</a>.</p>
-
-<p>TrustKit exposes two core classes for enabling SSL pinning in an App:</p>
-
-<ul>
-<li><code>TrustKit</code> for configuring an SSL pinning policy and initializing the framework.</li>
-<li><code>TSKPinningValidator</code>, for validating a server&rsquo;s certificate chain against an SSL pinning policy.</li>
-</ul>
-
           </div>
         </section>
 
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)TrustKit"></a>
+                    <a name="//apple_ref/objc/Class/TrustKit" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)TrustKit">TrustKit</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p><code>TrustKit</code> is the main class for configuring an SSL pinning policy within an App.</p>
+
+<p>For most Apps, TrustKit should be used as a singleton, where a global SSL pinning policy is
+configured for the App. In singleton mode, the policy can be set either:</p>
+
+<ul>
+<li>By adding it to the App&rsquo;s <em>Info.plist</em> under the <code>TSKConfiguration</code> key, or</li>
+<li>By programmatically supplying it using the <code><a href="Classes/TrustKit.html#/c:objc(cs)TrustKit(cm)initializeWithConfiguration:">+initializeWithConfiguration:</a></code> method.</li>
+</ul>
+
+<p>In singleton mode, TrustKit can only be initialized once so only one of the two techniques 
+should be used.</p>
+
+<p>For more complex Apps where multiple SSL pinning policies need to be used independently 
+(for example within different frameworks), TrustKit can be used in <q>multi-instance</q> mode
+by leveraging the <code>-initWithConfiguration:identifier:</code> method described at the end of this 
+page.</p>
+
+<p>A TrustKit pinning policy is a dictionary which contains some global, App-wide settings
+(of type <code><a href="Global Configuration Keys.html#/c:TSKTrustKitConfig.h@T@TSKGlobalConfigurationKey">TSKGlobalConfigurationKey</a></code>) as well as domain-specific configuration keys
+(of type <code><a href="Domain Configuration Keys.html#/c:TSKTrustKitConfig.h@T@TSKDomainConfigurationKey">TSKDomainConfigurationKey</a></code>) to be defined under the <code><a href="Global Configuration Keys.html#/c:@kTSKPinnedDomains">kTSKPinnedDomains</a></code> entry. 
+The following table shows the keys and the types of the corresponding values, and uses
+indentation to indicate structure:</p>
+<pre class="highlight plaintext"><code>| Key                                          | Type       |
+|----------------------------------------------|------------|
+| TSKSwizzleNetworkDelegates                   | Boolean    |
+| TSKIgnorePinningForUserDefinedTrustAnchors   | Boolean    |
+| TSKPinnedDomains                             | Dictionary |
+| __ &lt;domain-name-to-pin-as-string&gt;            | Dictionary |
+| ____ TSKPublicKeyHashes                      | Array      |
+| ____ TSKPublicKeyAlgorithms                  | Array      |
+| ____ TSKIncludeSubdomains                    | Boolean    |
+| ____ TSKExcludeSubdomainFromParentPolicy     | Boolean    |
+| ____ TSKEnforcePinning                       | Boolean    |
+| ____ TSKReportUris                           | Array      |
+| ____ TSKDisableDefaultReportUri              | Boolean    |
+| ____ TSKAdditionalTrustAnchors               | Array      |
+</code></pre>
+
+<p>When setting the pinning policy programmatically, it has to be supplied to the
+<code>initializeWithConfiguration:</code> method as a dictionary in order to initialize TrustKit. 
+For example:</p>
+<pre class="highlight plaintext"><code>   NSDictionary *trustKitConfig =
+ @{
+   kTSKPinnedDomains : @{
+           @"www.datatheorem.com" : @{
+                   kTSKExpirationDate: @"2017-12-01",
+                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                   kTSKPublicKeyHashes : @[
+                           @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=",
+                           @"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8="
+                           ],
+                   kTSKEnforcePinning : @NO,
+                   kTSKReportUris : @[@"http://report.datatheorem.com/log_report"],
+                   },
+           @"yahoo.com" : @{
+                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                   kTSKPublicKeyHashes : @[
+                           @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                           @"rFjc3wG7lTZe43zeYTvPq8k4xdDEutCmIhI5dn4oCeE=",
+                           ],
+                   kTSKIncludeSubdomains : @YES
+                   }
+           }};
+
+   [TrustKit initializeWithConfiguration:trustKitConfig];
+   trustKit = [TrustKit sharedInstance];
+</code></pre>
+
+<p>Similarly, the TrustKit singleton can be initialized in Swift:</p>
+<pre class="highlight plaintext"><code>       let trustKitConfig = [
+           kTSKSwizzleNetworkDelegates: false,
+           kTSKPinnedDomains: [
+               "yahoo.com": [
+                   kTSKExpirationDate: "2017-12-01",
+                   kTSKPublicKeyAlgorithms: [kTSKAlgorithmRsa2048],
+                   kTSKPublicKeyHashes: [
+                       "JbQbUG5JMJUoI6brnx0x3vZF6jilxsapbXGVfjhN8Fg=",
+                       "WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18="
+                   ],]]] as [String : Any]
+
+       TrustKit.initialize(withConfiguration:trustKitConfig)
+</code></pre>
+
+<p>After initialization, the <code>TrustKit</code> instance&rsquo;s <code>pinningValidator</code> should be used to implement
+pinning validation within the App&rsquo;s network authentication handlers.</p>
+
+                        <a href="Classes/TrustKit.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight"><code><span class="k">@interface</span> <span class="nc">TrustKit</span> <span class="p">:</span> <span class="nc">NSObject</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">TrustKit</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
 
       </article>
     </div>

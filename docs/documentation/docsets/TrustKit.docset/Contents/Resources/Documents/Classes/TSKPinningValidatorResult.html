@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>TSKTrustDecision Enum Reference</title>
+    <title>TSKPinningValidatorResult Class Reference</title>
     <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
   </head>
   <body>
 
-    <a name="//apple_ref/objc/Enum/TSKTrustDecision" class="dashAnchor"></a>
+    <a name="//apple_ref/objc/Class/TSKPinningValidatorResult" class="dashAnchor"></a>
 
-    <a title="TSKTrustDecision Enum Reference"></a>
+    <a title="TSKPinningValidatorResult Class Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -44,7 +44,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="../index.html">TrustKit Reference</a>
       <img class="carat" src="../img/carat.png" />
-      TSKTrustDecision Enum Reference
+      TSKPinningValidatorResult Class Reference
     </p>
 
     <div class="content-wrapper">
@@ -172,14 +172,15 @@
 
         <section class="section">
           <div class="section-content">
-            <h1>TSKTrustDecision</h1>
+            <h1>TSKPinningValidatorResult</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="k">enum</span> <span class="n">TSKTrustDecision</span> <span class="o">:</span> <span class="n">NSInteger</span> <span class="p">{}</span></code></pre>
+                  <pre class="highlight"><code><span class="k">@interface</span> <span class="nc">TSKPinningValidatorResult</span> <span class="p">:</span> <span class="nc">NSObject</span></code></pre>
 
                 </div>
               </div>
-            <p>Possible return values when verifying a server&rsquo;s identity against an SSL pinning policy.</p>
+            <p>A <code>TSKPinningValidatorResult</code> instance contains all the details regarding a pinning validation
+performed against a specific server.</p>
 
           </div>
         </section>
@@ -191,9 +192,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@E@TSKTrustDecision@TSKTrustDecisionShouldAllowConnection"></a>
-                    <a name="//apple_ref/objc/Case/TSKTrustDecisionShouldAllowConnection" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@E@TSKTrustDecision@TSKTrustDecisionShouldAllowConnection">TSKTrustDecisionShouldAllowConnection</a>
+                    <a name="/c:objc(cs)TSKPinningValidatorResult(py)serverHostname"></a>
+                    <a name="//apple_ref/objc/Property/serverHostname" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)TSKPinningValidatorResult(py)serverHostname">serverHostname</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -201,20 +202,19 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Based on the server&rsquo;s certificate chain and the configured pinning policy for this domain, the SSL connection should be allowed.
-This return value does not necessarily mean that the pinning validation succeded (for example if <code><a href="../Domain Configuration Keys.html#/c:@kTSKEnforcePinning">kTSKEnforcePinning</a></code> was set to <code>NO</code> for this domain). If a pinning validation failure occured and if a report URI was configured, a pin failure report was sent.</p>
+                        <p>The hostname of the server SSL pinning validation was performed against.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Objective-C</p>
-                          <pre class="highlight"><code><span class="n">TSKTrustDecisionShouldAllowConnection</span></code></pre>
+                          <pre class="highlight"><code><span class="k">@property</span> <span class="p">(</span><span class="n">readonly</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">,</span> <span class="n">nonnull</span><span class="p">)</span> <span class="n">NSString</span> <span class="o">*</span><span class="n">serverHostname</span><span class="p">;</span></code></pre>
 
                         </div>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">shouldAllowConnection</span> <span class="o">=</span> <span class="mi">0</span></code></pre>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">serverHostname</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -224,9 +224,9 @@ This return value does not necessarily mean that the pinning validation succeded
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@E@TSKTrustDecision@TSKTrustDecisionShouldBlockConnection"></a>
-                    <a name="//apple_ref/objc/Case/TSKTrustDecisionShouldBlockConnection" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@E@TSKTrustDecision@TSKTrustDecisionShouldBlockConnection">TSKTrustDecisionShouldBlockConnection</a>
+                    <a name="/c:objc(cs)TSKPinningValidatorResult(py)serverTrust"></a>
+                    <a name="//apple_ref/objc/Property/serverTrust" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)TSKPinningValidatorResult(py)serverTrust">serverTrust</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -234,20 +234,19 @@ This return value does not necessarily mean that the pinning validation succeded
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Based on the server&rsquo;s certificate chain and the configured pinning policy for this domain, the SSL connection should be blocked.
-A pinning validation failure occured and if a report URI was configured, a pin failure report was sent.</p>
+                        <p>The original <code>SecTrustRef</code> that validation was performed against.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Objective-C</p>
-                          <pre class="highlight"><code><span class="n">TSKTrustDecisionShouldBlockConnection</span></code></pre>
+                          <pre class="highlight"><code><span class="k">@property</span> <span class="p">(</span><span class="n">readonly</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">,</span> <span class="n">nonnull</span><span class="p">)</span> <span class="n">SecTrustRef</span> <span class="n">serverTrust</span><span class="p">;</span></code></pre>
 
                         </div>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">shouldBlockConnection</span> <span class="o">=</span> <span class="mi">1</span></code></pre>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">serverTrust</span><span class="p">:</span> <span class="kt">SecTrust</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -257,9 +256,9 @@ A pinning validation failure occured and if a report URI was configured, a pin f
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:@E@TSKTrustDecision@TSKTrustDecisionDomainNotPinned"></a>
-                    <a name="//apple_ref/objc/Case/TSKTrustDecisionDomainNotPinned" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@E@TSKTrustDecision@TSKTrustDecisionDomainNotPinned">TSKTrustDecisionDomainNotPinned</a>
+                    <a name="/c:objc(cs)TSKPinningValidatorResult(py)evaluationResult"></a>
+                    <a name="//apple_ref/objc/Property/evaluationResult" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)TSKPinningValidatorResult(py)evaluationResult">evaluationResult</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -267,20 +266,123 @@ A pinning validation failure occured and if a report URI was configured, a pin f
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>No pinning policy was configured for this domain and TrustKit did not validate the server&rsquo;s identity.
-Because this will happen in an authentication handler, it means that the server&rsquo;s <em>serverTrust</em> object <strong>needs</strong> to be verified against the device&rsquo;s trust store using <code>SecTrustEvaluate()</code>. Failing to do so will <strong>disable SSL certificate validation</strong>.</p>
+                        <p>The result of validating the server&rsquo;s certificate chain against the set of SSL pins configured for 
+the <code>notedHostname</code>.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Objective-C</p>
-                          <pre class="highlight"><code><span class="n">TSKTrustDecisionDomainNotPinned</span></code></pre>
+                          <pre class="highlight"><code><span class="k">@property</span> <span class="p">(</span><span class="n">readonly</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="n"><a href="../Enums/TSKTrustEvaluationResult.html">TSKTrustEvaluationResult</a></span> <span class="n">evaluationResult</span><span class="p">;</span></code></pre>
 
                         </div>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">case</span> <span class="n">domainNotPinned</span> <span class="o">=</span> <span class="mi">2</span></code></pre>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">evaluationResult</span><span class="p">:</span> <span class="kt"><a href="../Enums/TSKTrustEvaluationResult.html">TSKTrustEvaluationResult</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)TSKPinningValidatorResult(py)finalTrustDecision"></a>
+                    <a name="//apple_ref/objc/Property/finalTrustDecision" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)TSKPinningValidatorResult(py)finalTrustDecision">finalTrustDecision</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The trust decision returned for this connection, which describes whether the connection should be blocked 
+or allowed, based on the <code><a href="../Classes/TSKPinningValidatorResult.html#/c:objc(cs)TSKPinningValidatorResult(py)evaluationResult">evaluationResult</a></code> returned when evaluating the <code><a href="../Classes/TSKPinningValidatorResult.html#/c:objc(cs)TSKPinningValidatorResult(py)serverTrust">serverTrust</a></code> and the SSL pining 
+policy configured for this server.</p>
+
+<p>For example, the pinning validation could have failed (ie. validationResult being 
+<code>TSKTrustEvaluationFailedNoMatchingPin</code>) but the policy might be set to ignore pinning validation failures 
+for this server, thereby returning <code>TSKTrustDecisionShouldAllowConnection</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight"><code><span class="k">@property</span> <span class="p">(</span><span class="n">readonly</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="n"><a href="../Enums/TSKTrustDecision.html">TSKTrustDecision</a></span> <span class="n">finalTrustDecision</span><span class="p">;</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">finalTrustDecision</span><span class="p">:</span> <span class="kt"><a href="../Enums/TSKTrustDecision.html">TSKTrustDecision</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)TSKPinningValidatorResult(py)validationDuration"></a>
+                    <a name="//apple_ref/objc/Property/validationDuration" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)TSKPinningValidatorResult(py)validationDuration">validationDuration</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The time it took for the SSL pinning validation to be performed.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight"><code><span class="k">@property</span> <span class="p">(</span><span class="n">readonly</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="n">NSTimeInterval</span> <span class="n">validationDuration</span><span class="p">;</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">validationDuration</span><span class="p">:</span> <span class="kt">TimeInterval</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)TSKPinningValidatorResult(py)certificateChain"></a>
+                    <a name="//apple_ref/objc/Property/certificateChain" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)TSKPinningValidatorResult(py)certificateChain">certificateChain</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The certificate chain extracted from the <code><a href="../Classes/TSKPinningValidatorResult.html#/c:objc(cs)TSKPinningValidatorResult(py)serverTrust">serverTrust</a></code> as PEM-formatted certificates. This is the 
+certificate chain sent by the server when establishing the connection.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight"><code><span class="k">@property</span> <span class="p">(</span><span class="n">readonly</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">,</span> <span class="n">nullable</span><span class="p">)</span> <span class="n">NSArray</span> <span class="o">*</span><span class="n">certificateChain</span><span class="p">;</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">certificateChain</span><span class="p">:</span> <span class="p">[</span><span class="kt">Any</span><span class="p">]?</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>

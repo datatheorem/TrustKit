@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>TrustKit  Reference</title>
+    <title>Implementing Pinning Validation  Reference</title>
     <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="css/highlight.css" />
     <meta charset="utf-8">
@@ -15,7 +15,7 @@
   <body>
 
 
-    <a title="TrustKit  Reference"></a>
+    <a title="Implementing Pinning Validation  Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -43,7 +43,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="index.html">TrustKit Reference</a>
       <img class="carat" src="img/carat.png" />
-      TrustKit  Reference
+      Implementing Pinning Validation  Reference
     </p>
 
     <div class="content-wrapper">
@@ -171,23 +171,104 @@
 
         <section class="section">
           <div class="section-content">
+            <h1>Implementing Pinning Validation</h1>
             
-            <h1 id='trustkit-documentation' class='heading'>TrustKit Documentation</h1>
-
-<p>TrustKit is an open source framework that makes it easy to deploy SSL public key pinning in any iOS, macOS, tvOS or watchOS App.</p>
-
-<p>This is the API documentation for TrustKit. A <q>Getting Started</q> guide is available at <a href="https://github.com/datatheorem/TrustKit/blob/master/docs/getting-started.md">https://github.com/datatheorem/TrustKit/blob/master/docs/getting-started.md</a>.</p>
-
-<p>TrustKit exposes two core classes for enabling SSL pinning in an App:</p>
-
-<ul>
-<li><code>TrustKit</code> for configuring an SSL pinning policy and initializing the framework.</li>
-<li><code>TSKPinningValidator</code>, for validating a server&rsquo;s certificate chain against an SSL pinning policy.</li>
-</ul>
-
           </div>
         </section>
 
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)TSKPinningValidator"></a>
+                    <a name="//apple_ref/objc/Class/TSKPinningValidator" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)TSKPinningValidator">TSKPinningValidator</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A <code>TSKPinningValidator</code> instance can be used to verify a server&rsquo;s identity against an SSL pinning policy.</p>
+
+<p>In specific scenarios, TrustKit cannot intercept outgoing SSL connections and automatically validate the server&rsquo;s identity against the pinning policy:</p>
+
+<ul>
+<li>All connections within an App that disables TrustKit&rsquo;s network delegate swizzling by setting the <code><a href="Global Configuration Keys.html#/c:@kTSKSwizzleNetworkDelegates">kTSKSwizzleNetworkDelegates</a></code> configuration key to <code>NO</code>.</li>
+<li>Connections that do not rely on the <code>NSURLConnection</code> or <code>NSURLSession</code> APIs:
+
+<ul>
+<li><code>WKWebView</code> connections.</li>
+<li>Connections leveraging low-level network APIs (such as <code>NSStream</code>).</li>
+<li>Connections initiated using a third-party SSL library such as OpenSSL.</li>
+</ul></li>
+</ul>
+
+<p>For these connections, pin validation must be manually triggered using one of the two available methods within <code>TSKPinningValidator</code>.</p>
+
+                        <a href="Classes/TSKPinningValidator.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight"><code><span class="k">@interface</span> <span class="nc">TSKPinningValidator</span> <span class="p">:</span> <span class="nc">NSObject</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">TSKPinningValidator</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@E@TSKTrustDecision"></a>
+                    <a name="//apple_ref/objc/Enum/TSKTrustDecision" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@E@TSKTrustDecision">TSKTrustDecision</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Possible return values when verifying a server&rsquo;s identity against an SSL pinning policy.</p>
+
+                        <a href="Enums/TSKTrustDecision.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight"><code><span class="k">enum</span> <span class="n">TSKTrustDecision</span> <span class="o">:</span> <span class="n">NSInteger</span> <span class="p">{}</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">enum</span> <span class="kt">TSKTrustDecision</span> <span class="p">:</span> <span class="kt">Int</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
 
       </article>
     </div>
