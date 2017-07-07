@@ -1,0 +1,16 @@
+PODS:
+  - TrustKit (1.5.0)
+
+DEPENDENCIES:
+  - TrustKit (from `../`)
+
+EXTERNAL SOURCES:
+  TrustKit:
+    :path: ../
+
+SPEC CHECKSUMS:
+  TrustKit: 2dcd8ba734fa6982293cfd1396d23abcbbef3453
+
+PODFILE CHECKSUM: cfe2050486f48c1ad6467e5ab977bf535466a580
+
+COCOAPODS: 1.2.1

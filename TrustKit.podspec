@@ -18,6 +18,7 @@ Pod::Spec.new do |s|
     'TrustKit/TrustKit.h',
     'TrustKit/TSKTrustKitConfig.h',
     'TrustKit/TSKPinningValidator.h',
+    'TrustKit/TSKPinningValidatorCallback.h',
     'TrustKit/TSKPinValidatorResult.h',
     'TrustKit/Pinning/TSKPublicKeyAlgorithm.h'
   ]
