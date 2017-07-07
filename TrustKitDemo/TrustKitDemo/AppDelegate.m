@@ -12,7 +12,7 @@
 #import "AppDelegate.h"
 #import <TrustKit/TrustKit.h>
 #import <TrustKit/TSKPinningValidator.h>
-#import <TrustKit/TSKPinningValidatorResult.h>
+#import <TrustKit/TSKPinningValidatorCallback.h>
 
 @interface AppDelegate ()
 
@@ -30,7 +30,6 @@
 //        NSLog(@"TrustKit log: %@", message);
 //    };
 //    [TrustKit setLoggerBlock:loggerBlock];
-    
     
     // Initialize TrustKit
     NSDictionary *trustKitConfig =
@@ -71,14 +70,14 @@
                       }}};
     
     [TrustKit initializeWithConfiguration:trustKitConfig];
-
+    
     // Demonstrate how to receive pin validation notifications (only useful for performance/metrics)
-    [TrustKit sharedInstance].validationDelegateQueue =dispatch_get_main_queue();
-    [TrustKit sharedInstance].validationDelegateCallback = ^(TSKPinningValidatorResult * _Nonnull result) {
+    [TrustKit sharedInstance].pinningValidatorCallbackQueue =dispatch_get_main_queue();
+    [TrustKit sharedInstance].pinningValidatorCallback = ^(TSKPinningValidatorResult *result, NSString *notedHostname, TKSDomainPinningPolicy *policy) {
         NSLog(@"Received pinning validation notification:\n\tDuration: %0.4f\n\tDecision: %ld\n\tResult: %ld\n\tHostname: %@",
               result.validationDuration,
               (long)result.finalTrustDecision,
-              (long)result.validationResult,
+              (long)result.evaluationResult,
               result.serverHostname);
     };
     

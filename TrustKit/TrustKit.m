@@ -24,58 +24,57 @@
 // Info.plist key we read the public key hashes from
 static NSString * const kTSKConfiguration = @"TSKConfiguration";
 
-
-#pragma mark TrustKit Global State
-
-// Shared TrustKit singleton instance
-static TrustKit *sharedTrustKit = nil;
-
-// A shared hash cache for use by all TrustKit instances
-static TSKSPKIHashCache *sharedHashCache;
-
-static char kTSKPinFailureReporterQueueLabel[] = "com.datatheorem.trustkit.reporterqueue";
-
 // Default report URI - can be disabled with TSKDisableDefaultReportUri
 // Email info@datatheorem.com if you need a free dashboard to see your App's reports
 static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.com/trustkit/report";
 
+static const char kTSKPinFailureReporterQueueLabel[] = "com.datatheorem.trustkit.reporterqueue";
+
+
+#pragma mark TrustKit Global State
+
+
+// Shared TrustKit singleton instance
+static TrustKit *sharedTrustKit;
+
+// A shared hash cache for use by all TrustKit instances
+static TSKSPKIHashCache *sharedHashCache;
 
 // Default logger block: only log in debug builds and add TrustKit at the beginning of the line
-void (^_loggerBlock)(NSString *) = ^void(NSString *message)
-{
 #if DEBUG
-    NSLog(@"=== TrustKit: %@", message);
+void (^_loggerBlock)(NSString *) = ^void(NSString *message) { NSLog(@"=== TrustKit: %@", message); };
+#else
+void (^_loggerBlock)(NSString *) = NULL;
 #endif
-};
 
 // The logging function we use within TrustKit
 void TSKLog(NSString *format, ...)
 {
-    va_list args;
-    va_start(args, format);
-    NSString *message = [[NSString alloc] initWithFormat: format arguments:args];
-    va_end(args);
-    _loggerBlock(message);
+    if (_loggerBlock) {
+        va_list args;
+        va_start(args, format);
+        NSString *message = [[NSString alloc] initWithFormat:format arguments:args];
+        va_end(args);
+        _loggerBlock(message);
+    }
 }
 
 
+#pragma mark TrustKit Private API
 
-#pragma mark TrustKit Initialization Helper Functions
 
 @interface TrustKit ()
-- (instancetype)initWithConfiguration:(NSDictionary<TSKGlobalConfigurationKey, id> *)trustKitConfig isSingleton:(BOOL)isSingleton;
-
 @property (nonatomic) TSKBackgroundReporter *pinFailureReporter;
 @property (nonatomic) dispatch_queue_t pinFailureReporterQueue;
-
 @property (nonatomic, readonly, nullable) NSDictionary *configuration;
-
 @end
 
 
 @implementation TrustKit
 
+
 #pragma mark Singleton Initialization
+
 
 + (instancetype)sharedInstance
 {
@@ -186,13 +185,15 @@ void TSKLog(NSString *format, ...)
                                                                         // Invoke client handler if set
                                                                         TSKPinningValidatorCallback userDefinedCallback = strongSelf.pinningValidatorCallback;
                                                                         if (userDefinedCallback) {
-                                                                            dispatch_async(self.pinningValidatorCallbackQueue, ^{
+                                                                            dispatch_async(strongSelf.pinningValidatorCallbackQueue, ^{
                                                                                 userDefinedCallback(result, notedHostname, notedHostnamePinningPolicy);
                                                                             });
                                                                         }
                                                                         
                                                                         // Send analytics report
-                                                                        [strongSelf sendValidationReport:result notedHostname:notedHostname pinningPolicy:notedHostnamePinningPolicy];
+                                                                        [strongSelf sendValidationReport:result
+                                                                                           notedHostname:notedHostname
+                                                                                           pinningPolicy:notedHostnamePinningPolicy];
                                                                     }];
         
         TSKLog(@"Successfully initialized with configuration %@", _configuration);
@@ -202,6 +203,7 @@ void TSKLog(NSString *format, ...)
 
 
 #pragma mark Validation Callback
+
 
 // The block which receives pin validation results and turns them into pin validation reports
 - (void)sendValidationReport:(TSKPinningValidatorResult *)result notedHostname:(NSString *)notedHostname pinningPolicy:(NSDictionary<TSKDomainConfigurationKey, id> *)notedHostnamePinningPolicy
