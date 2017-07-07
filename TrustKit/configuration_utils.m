@@ -38,8 +38,7 @@ static BOOL isSubdomain(NSString *domain, NSString *subdomain)
     return NO;
 }
 
-
-NSString *getPinningConfigurationKeyForDomain(NSString *hostname, NSDictionary<NSString *, TKSDomainPinningPolicy *> *domainPinningPolicies)
+NSString * _Nullable getPinningConfigurationKeyForDomain(NSString * _Nonnull hostname , NSDictionary<NSString *, TKSDomainPinningPolicy *> * _Nonnull domainPinningPolicies)
 {
     NSString *notedHostname = nil;
     if (domainPinningPolicies[hostname] == nil)
