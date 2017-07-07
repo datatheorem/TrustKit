@@ -15,7 +15,7 @@ test:
     - xcodebuild clean test
       CODE_SIGNING_REQUIRED=NO
       CODE_SIGN_IDENTITY=
-      -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.3'
+      -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.3.1'
       -sdk iphonesimulator10.3
       -scheme "TrustKit"
       
