@@ -42,7 +42,6 @@
         _evaluationResult = validationResult;
         _finalTrustDecision = finalTrustDecision;
         _validationDuration = validationDuration;
-        _certificateChain = nil;
     }
     return self;
 }
