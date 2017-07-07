@@ -77,15 +77,7 @@ folder on disk.
 ### Configuring a Pinning Policy
 
 Enabling TrustKit within an App requires generating a pinning policy and then
-initializing TrustKit with this policy. There are two different ways to supply
-a pinning policy to TrustKit:
-
-* By adding configuration keys to the App's _Info.plist_ file under a 
-`TSKConfiguration` dictionary key:
-
-    ![](https://datatheorem.github.io/TrustKit/images/linking3_dynamic.png)
-
-* Programmatically, by calling the `initializeWithConfiguration:` method with your 
+initializing TrustKit by calling the `initializeWithConfiguration:` method with your 
 pinning policy.
 
 A pinning policy is a dictionary of domain names and pinning configuration keys.
@@ -212,10 +204,19 @@ However, this approach still requires some testing as it seems like the
 
 #### Consider leveraging auto-swizzling for simple Apps
 
-By setting `kTSKSwizzleNetworkDelegates` to `YES`, TrustKit will perform method 
-swizzling on the App's `NSURLSession` and `NSURLConnection` delegates in order 
-to automatically perform SSL pinning validation against the server's certificate 
-chain, based on the configured pinning policy. This allows deploying TrustKit
+For simple Apps, TrustKit can be deployed without having to modify the App's
+source code. 
+
+First, TrustKit should be initialized by adding configuration keys to the App's 
+_Info.plist_ file under a `TSKConfiguration` dictionary key, instead of using 
+`TrustKit`'s initialization method:
+
+    ![](https://datatheorem.github.io/TrustKit/images/linking3_dynamic.png)
+
+By setting the `kTSKSwizzleNetworkDelegates` key to `YES`, TrustKit will then 
+perform method swizzling on the App's `NSURLSession` and `NSURLConnection` 
+delegates in order to automatically perform SSL pinning validation against the server's 
+certificate chain, based on the configured pinning policy. This allows deploying TrustKit
 without changing the App's source code.
 
 Auto-swizzling should only be enabled for simple Apps, as it may not work properly 
