@@ -1,10 +1,13 @@
-//
-//  TSKPinningValidatorCallback.h
-//  TrustKit
-//
-//  Created by Alban Diquet on 6/26/17.
-//  Copyright © 2017 TrustKit. All rights reserved.
-//
+/*
+ 
+ TSKPinningValidatorCallback.h
+ TrustKit
+ 
+ Copyright 2017 The TrustKit Project Authors
+ Licensed under the MIT license, see associated LICENSE file for terms.
+ See AUTHORS file for the list of project authors.
+ 
+ */
 
 #ifndef TSKPinningValidatorCallback_h
 #define TSKPinningValidatorCallback_h

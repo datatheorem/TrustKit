@@ -1,10 +1,14 @@
-//
-//  TSKTrustKitConfig.h
-//  TrustKit
-//
-//  Created by Adam Kaplan on 4/6/17.
-//  Copyright © 2017 TrustKit. All rights reserved.
-//
+/*
+ 
+ TSKTrustKitConfig.m
+ TrustKit
+ 
+ Copyright 2017 The TrustKit Project Authors
+ Licensed under the MIT license, see associated LICENSE file for terms.
+ See AUTHORS file for the list of project authors.
+ 
+ */
+
 #import "TSKTrustKitConfig.h"
 
 NSString * const TrustKitVersion = @"1.5.0";
