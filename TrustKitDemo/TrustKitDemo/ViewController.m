@@ -3,7 +3,7 @@
  ViewController.m
  TrustKitDemo
  
- Copyright 2015 The TrustKit Project Authors
+ Copyright 2017 The TrustKit Project Authors
  Licensed under the MIT license, see associated LICENSE file for terms.
  See AUTHORS file for the list of project authors.
  
@@ -14,53 +14,75 @@
 #import <TrustKit/TSKPinningValidator.h>
 
 @interface ViewController ()
+{
+    UIActivityIndicatorView *activityIndicator;
+}
 
-@property (weak, nonatomic) IBOutlet UITextField *connectionTextfield;
-@property (weak, nonatomic) IBOutlet UIWebView *destinationWebView;
-@property NSURL *baseUrl;
-@property NSURLSession *session;
+@property (nonatomic, strong) NSURLSession *session;
 
 @end
 
 @implementation ViewController
 
-- (void)viewDidLoad {
+static NSString *const baseURLYahoo = @"https://www.yahoo.com/";
+static NSString *const baseURLDT = @"https://www.datatheorem.com/";
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     
-    self.destinationWebView.delegate = self;
+    self.invalidPinBtn.layer.cornerRadius = 4;
+    self.validPinBtn.layer.cornerRadius = 4;
     
-    self.session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]
-                                                 delegate:self
-                                            delegateQueue:nil];
-
-    // First demonstrate pinning failure
-    [self loadUrlWithPinningFailure];
+    self.session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration] delegate:self delegateQueue:nil];
+    
+    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 }
 
 
-- (void)loadUrlWithPinningFailure {
+- (void)loadUrlWithPinningFailure: (NSURL *)url
+{
     // Load a URL with a bad pinning configuration to demonstrate a pinning failure with a report being sent
-    NSURLSessionDataTask *task = [self.session dataTaskWithURL:[NSURL URLWithString:@"https://www.yahoo.com/"]];
+    NSURLSessionDataTask *task = [self.session dataTaskWithURL:url];
     [task resume];
+    [self showActivityIndicatorInCurrentViewController];
 }
 
-- (void)loadUrlWithPinningSuccess {
+- (void)loadUrl:(NSURL *)url
+{
+    // Show loading view
+    [self showActivityIndicatorInCurrentViewController];
+    
     // Load a URL with a good pinning configuration
-    self.baseUrl = [NSURL URLWithString:@"https://www.datatheorem.com/"];
-    NSURLSessionDataTask *task = [self.session dataTaskWithURL:self.baseUrl];
+    NSURLSessionDataTask *task = [self.session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+        if (!error) {
+            // Display Success Alert
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self displayAlertWithTitle:@"Test Result" andMessage:[NSString stringWithFormat:@"Pinning validation succeeded for %@", [url absoluteString]]];
+            });
+        }
+        else {
+            // Display Error Alert
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self displayAlertWithTitle:@"Test Result" andMessage:[NSString stringWithFormat:@"Pinning validation failed for [%@] : [%@]", [url absoluteString], error.description]];
+            });
+        }
+    }];
     [task resume];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (IBAction)testInvalidPinning:(UIButton *)sender
+{
+    [self loadUrl:[NSURL URLWithString:baseURLYahoo]];
 }
 
+- (IBAction)testValidPinning:(UIButton *)sender
+{
+    [self loadUrl:[NSURL URLWithString:baseURLDT]];
+}
 
-- (void)URLSession:(NSURLSession *)session
-              task:(NSURLSessionTask *)task
-didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
- completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler
+- (void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler
 {
     // Call into TrustKit here to do pinning validation
     if (![[TrustKit sharedInstance].pinningValidator handleChallenge:challenge completionHandler:completionHandler])
@@ -71,31 +93,31 @@ didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
     }
 }
 
-
-- (void)URLSession:(NSURLSession * _Nonnull)session
-              task:(NSURLSessionTask * _Nonnull)task
-didCompleteWithError:(NSError * _Nullable)error
+- (void)displayAlertWithTitle:(NSString *)title andMessage:(NSString *)message
 {
-    if (error)
-    {
-        // An error will only be triggered when loading
-        NSLog(@"Received error %@", error);
+    // Hide Activity Indicator
+    [self hideActivityIndicator];
     
-        // Now try a valid connection
-        [self loadUrlWithPinningSuccess];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+- (void)showActivityIndicatorInCurrentViewController
+{
+    [self.view setUserInteractionEnabled:NO];
+    if (![activityIndicator isAnimating]) {
+        activityIndicator.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, [UIScreen mainScreen].bounds.size.height/2 + 100);
+        [self.view addSubview:activityIndicator];
+        [activityIndicator startAnimating];
     }
 }
 
-
-- (void)URLSession:(NSURLSession * _Nonnull)session
-          dataTask:(NSURLSessionDataTask * _Nonnull)dataTask
-    didReceiveData:(NSData * _Nonnull)data
+- (void)hideActivityIndicator
 {
-    // Display the content in the webview
-    NSLog(@"Loading content");
-    [self.destinationWebView loadHTMLString:[[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]
-                                    baseURL:self.baseUrl];
+    [self.view setUserInteractionEnabled:YES];
+    [activityIndicator stopAnimating];
+    [activityIndicator removeFromSuperview];
 }
-
 
 @end

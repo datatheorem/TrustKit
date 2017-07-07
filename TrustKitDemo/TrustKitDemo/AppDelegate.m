@@ -3,7 +3,7 @@
  AppDelegate.m
  TrustKitDemo
  
- Copyright 2015 The TrustKit Project Authors
+ Copyright 2017 The TrustKit Project Authors
  Licensed under the MIT license, see associated LICENSE file for terms.
  See AUTHORS file for the list of project authors.
  
@@ -20,16 +20,16 @@
 
 @implementation AppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
-    
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
     // Override TrustKit's logger method
-    // FIXME: logger
-//    void (^loggerBlock)(NSString *) = ^void(NSString *message)
-//    {
-//        NSLog(@"TrustKit log: %@", message);
-//    };
-//    [TrustKit setLoggerBlock:loggerBlock];
+    void (^loggerBlock)(NSString *) = ^void(NSString *message)
+    {
+        NSLog(@"TrustKit log: %@", message);
+
+    };
+    [TrustKit setLoggerBlock:loggerBlock];
     
     // Initialize TrustKit
     NSDictionary *trustKitConfig =
