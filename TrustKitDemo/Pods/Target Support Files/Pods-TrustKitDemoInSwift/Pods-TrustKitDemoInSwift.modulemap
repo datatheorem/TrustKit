@@ -1,0 +1,6 @@
+framework module Pods_TrustKitDemoInSwift {
+  umbrella header "Pods-TrustKitDemoInSwift-umbrella.h"
+
+  export *
+  module * { export * }
+}
