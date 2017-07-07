@@ -19,8 +19,8 @@ Pod::Spec.new do |s|
     'TrustKit/TSKTrustKitConfig.h',
     'TrustKit/TSKPinningValidator.h',
     'TrustKit/TSKPinningValidatorCallback.h',
-    'TrustKit/TSKPinValidatorResult.h',
-    'TrustKit/Pinning/TSKPublicKeyAlgorithm.h'
+    'TrustKit/TSKPinningValidatorResult.h',
+    'TrustKit/TSKTrustDecision.h',
   ]
   s.frameworks = ['Foundation', 'Security']
   s.requires_arc = true
