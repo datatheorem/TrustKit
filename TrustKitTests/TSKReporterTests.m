@@ -15,6 +15,7 @@
 #import "../TrustKit/TSKTrustKitConfig.h"
 
 #import "../TrustKit/TSKPinningValidatorResult.h"
+#import "../TrustKit/TSKPinningValidator_Private.h"
 #import "../TrustKit/Reporting/TSKBackgroundReporter.h"
 #import "../TrustKit/Reporting/TSKPinFailureReport.h"
 #import "../TrustKit/Reporting/reporting_utils.h"
@@ -27,8 +28,14 @@
 
 @interface TrustKit (TestSupport)
 @property (nonatomic) TSKBackgroundReporter *pinFailureReporter;
-- (void)sendValidationReport:(TSKPinningValidatorResult *)result;
+@property (nonatomic, readonly, nullable) NSDictionary *configuration;
+
+- (void)sendValidationReport:(TSKPinningValidatorResult *)result notedHostname:(NSString *)notedHostname pinningPolicy:(NSDictionary<TSKDomainConfigurationKey, id> *)notedHostnamePinningPolicy;
 @end
+
+
+static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.com/trustkit/report";
+
 
 @interface TSKReporterTests : XCTestCase
 
@@ -121,17 +128,15 @@
                                             includeSubdomains:NO
                                                enforcePinning:YES
                                                     knownPins:knownPins
-                                             validationResult:TSKPinValidationResultErrorCouldNotGenerateSpkiHash
+                                             validationResult:TSKTrustEvaluationErrorCouldNotGenerateSpkiHash
                                                expirationDate:expirationDate]);
     
     res = [[TSKPinningValidatorResult alloc] initWithServerHostname:@"www.test.com"
                                                         serverTrust:_testTrust
-                                                      notedHostname:@"www.test.com"
-                                                   validationResult:TSKPinValidationResultErrorCouldNotGenerateSpkiHash
+                                                   validationResult:TSKTrustEvaluationErrorCouldNotGenerateSpkiHash
                                                  finalTrustDecision:TSKTrustDecisionShouldBlockConnection
-                                                 validationDuration:1.0
-                                                   certificateChain:_testCertificateChain];
-    [_trustKit sendValidationReport:res];
+                                                 validationDuration:1.0];
+    [_trustKit sendValidationReport:res notedHostname:@"www.test.com" pinningPolicy:_trustKit.configuration[kTSKPinnedDomains][@"www.test.com"]];
     
     // Ensure that the reporter was called
     [pinReporterMock verify];
@@ -146,14 +151,12 @@
     
     res = [[TSKPinningValidatorResult alloc] initWithServerHostname:@"www.test.com"
                                                         serverTrust:_testTrust
-                                                      notedHostname:@"www.test.com"
-                                                   validationResult:TSKPinValidationResultSuccess
+                                                   validationResult:TSKTrustEvaluationSuccess
                                                  finalTrustDecision:TSKTrustDecisionShouldAllowConnection
-                                                 validationDuration:1.0
-                                                   certificateChain:_testCertificateChain];
+                                                 validationDuration:1.0];
 
     // Ensure that the reporter was NOT called
-    [_trustKit sendValidationReport:res];
+    [_trustKit sendValidationReport:res notedHostname:@"www.test.com" pinningPolicy:_trustKit.configuration[kTSKPinnedDomains][@"www.test.com"]];
     [pinReporterMock verify];
     
     [pinReporterMock stopMocking];
@@ -167,14 +170,12 @@
     
     res = [[TSKPinningValidatorResult alloc] initWithServerHostname:@"www.test.com"
                                                         serverTrust:_testTrust
-                                                      notedHostname:@"www.test.com"
-                                                   validationResult:TSKPinValidationResultFailedUserDefinedTrustAnchor
+                                                   validationResult:TSKTrustEvaluationFailedUserDefinedTrustAnchor
                                                  finalTrustDecision:TSKTrustDecisionShouldAllowConnection
-                                                 validationDuration:1.0
-                                                   certificateChain:_testCertificateChain];
+                                                 validationDuration:1.0];
     
     // Ensure that the reporter was NOT called
-    [_trustKit sendValidationReport:res];
+    [_trustKit sendValidationReport:res notedHostname:@"www.test.com" pinningPolicy:_trustKit.configuration[kTSKPinnedDomains][@"www.test.com"]];
     [pinReporterMock verify];
     [pinReporterMock stopMocking];
     pinReporterMock = nil;
@@ -198,7 +199,7 @@
                                                                                                       options:(NSDataBase64DecodingOptions)0],
                                                                    [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g="
                                                                                                       options:(NSDataBase64DecodingOptions)0]]]
-                            validationResult:TSKPinValidationResultFailed
+                            validationResult:TSKTrustEvaluationFailedNoMatchingPin
                               expirationDate:[NSDate date]];
     
     [NSThread sleepForTimeInterval:0.1];
@@ -220,7 +221,7 @@
                                                                                                       options:(NSDataBase64DecodingOptions)0],
                                                                    [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g="
                                                                                                       options:(NSDataBase64DecodingOptions)0]]]
-                            validationResult:TSKPinValidationResultFailed
+                            validationResult:TSKTrustEvaluationFailedNoMatchingPin
                               expirationDate:nil];
     
     [NSThread sleepForTimeInterval:0.1];

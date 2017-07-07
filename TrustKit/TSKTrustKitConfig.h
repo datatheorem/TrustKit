@@ -1,13 +1,13 @@
-//
-//  TSKTrustKitConfig.h
-//  TrustKit
-//
-//  Created by Adam Kaplan on 4/6/17.
-//  Copyright © 2017 TrustKit. All rights reserved.
-//
-
-// These externs are currently fulfilled in TrustKit.m. They are here to prevent reverse
-// includes since both TrustKit instances and low level internal C API need the definitions
+/*
+ 
+ TSKTrustKitConfig.h
+ TrustKit
+ 
+ Copyright 2017 The TrustKit Project Authors
+ Licensed under the MIT license, see associated LICENSE file for terms.
+ See AUTHORS file for the list of project authors.
+ 
+ */
 
 @import Foundation;
 
@@ -40,7 +40,8 @@ typedef NSString *TSKDomainConfigurationKey;
 /**
  A boolean. If set to `YES`, TrustKit will perform method swizzling on the App's
  `NSURLConnection` and `NSURLSession` delegates in order to automatically add SSL pinning
- validation to the App's connections.
+ validation to the App's connections. This option can only be used if TrustKit is 
+ initialized in singleton mode; default value is `NO`.
  
  Swizzling allows enabling pinning within an App without having to find and modify each
  and every instance of `NSURLConnection` or `NSURLSession` delegates.
@@ -213,7 +214,7 @@ FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKExpirationDate;
  Standard RFC-7468 PEM format is supported (see https://tools.ietf.org/html/rfc7468#section-2 ).
  Note that the header, footer and any newlines are optional, but aid in readability.
  
- ~~ SECURITY WARNING ~~
+ __SECURITY WARNING:__
  Misuse of this configuration option could potentially render your application
  vulnerable to exploits since it bypasses the normal operating system trust store.
  It is intended for enterprise scenarios where a company might be running their
@@ -226,13 +227,7 @@ FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKAdditionalTrustAnchors;
 
 
 /**
- A public key algorithm supported by TrustKit for computing SSL pins:
- 
- * `kTSKAlgorithmRsa2048`
- * `kTSKAlgorithmRsa4096`
- * `kTSKAlgorithmEcDsaSecp256r1`
- * `kTSKAlgorithmEcDsaSecp384r1`
- 
+ A public key algorithm supported by TrustKit for generating the SSL pin for a certificate.
  */
 typedef NSString *TSKSupportedAlgorithm;
 

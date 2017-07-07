@@ -14,28 +14,33 @@
 #ifndef _TRUSTKIT_
 #define _TRUSTKIT_
     #import "TSKTrustKitConfig.h"
-    #import "TSKPublicKeyAlgorithm.h"
+    #import "TSKPinningValidatorResult.h"
+    #import "TSKPinningValidatorCallback.h"
     #import "TSKPinningValidator.h"
-    #import "TSKPinValidatorResult.h"
+    #import "TSKTrustDecision.h"
 #endif /* _TRUSTKIT_ */
 
 NS_ASSUME_NONNULL_BEGIN
 
-/** The default URI – maintained by DataTheorem – used for pinning failure reports
- if none is specified in the configuration.
- */
-FOUNDATION_EXPORT NSString * const kTSKDefaultReportUri;
 
 /**
- `TrustKit` is a class for programmatically configuring the global SSL pinning policy 
- within an App.
+ `TrustKit` is the main class for configuring an SSL pinning policy within an App.
  
-  The policy can be set either by adding it to the App's _Info.plist_ under the 
- `TSKConfiguration` key, or by programmatically supplying it using the `TrustKit` class 
- described here. Throughout the App's lifecycle, TrustKit can only be initialized once so 
- only one of the two techniques should be used.
+ For most Apps, TrustKit should be used as a singleton, where a global SSL pinning policy is
+ configured for the App. In singleton mode, the policy can be set either:
  
- A TrustKit pinning policy is a dictionary which contains some global, App-wide settings 
+ * By adding it to the App's _Info.plist_ under the `TSKConfiguration` key, or 
+ * By programmatically supplying it using the `+initializeWithConfiguration:` method.
+ 
+ In singleton mode, TrustKit can only be initialized once so only one of the two techniques 
+ should be used.
+ 
+ For more complex Apps where multiple SSL pinning policies need to be used independently 
+ (for example within different frameworks), TrustKit can be used in "multi-instance" mode
+ by leveraging the `-initWithConfiguration:identifier:` method described at the end of this 
+ page.
+ 
+ A TrustKit pinning policy is a dictionary which contains some global, App-wide settings
  (of type `TSKGlobalConfigurationKey`) as well as domain-specific configuration keys
  (of type `TSKDomainConfigurationKey`) to be defined under the `kTSKPinnedDomains` entry. 
  The following table shows the keys and the types of the corresponding values, and uses
@@ -55,15 +60,16 @@ FOUNDATION_EXPORT NSString * const kTSKDefaultReportUri;
  | ____ TSKEnforcePinning                       | Boolean    |
  | ____ TSKReportUris                           | Array      |
  | ____ TSKDisableDefaultReportUri              | Boolean    |
+ | ____ TSKAdditionalTrustAnchors               | Array      |
  ```
  
  When setting the pinning policy programmatically, it has to be supplied to the
- `initializeWithConfiguration:` method as a dictionary. For example:
+ `initializeWithConfiguration:` method as a dictionary in order to initialize TrustKit. 
+ For example:
  
  ```
     NSDictionary *trustKitConfig =
   @{
-    kTSKSwizzleNetworkDelegates: @NO,
     kTSKPinnedDomains : @{
             @"www.datatheorem.com" : @{
                     kTSKExpirationDate: @"2017-12-01",
@@ -86,9 +92,10 @@ FOUNDATION_EXPORT NSString * const kTSKDefaultReportUri;
             }};
     
     [TrustKit initializeWithConfiguration:trustKitConfig];
+    trustKit = [TrustKit sharedInstance];
  ```
  
- Similarly, TrustKit can be initialized in Swift:
+ Similarly, the TrustKit singleton can be initialized in Swift:
  
  ```
         let trustKitConfig = [
@@ -105,102 +112,90 @@ FOUNDATION_EXPORT NSString * const kTSKDefaultReportUri;
         TrustKit.initialize(withConfiguration:trustKitConfig)
  ```
  
- The various configuration keys that can be specified in the policy are described in the
- "Constants" section of the documentation.
+ After initialization, the `TrustKit` instance's `pinningValidator` should be used to implement
+ pinning validation within the App's network authentication handlers.
  */
 @interface TrustKit : NSObject
 
-///---------------------
-/// @name Initialization
-///---------------------
-#pragma mark Class Methods
 
+#pragma mark Usage in Singleton Mode
 
 /**
- Access the shared TrustKit singleton instance. Raises an exception if +initializeWithConfiguration:
- has not yet been invoked.
-
- @return the shared TrustKit singleton
- */
-+ (instancetype)sharedInstance;
-
-/**
- Initialize the global SSL pinning policy with the supplied configuration.
+ Initialize the global TrustKit singleton with the supplied pinning policy.
  
- This method should be called as early as possible in the App's lifecycle to ensure that
- the App's very first SSL connections are validated by TrustKit. Once TrustKit has been
- initialized, notifications will be posted for any SSL pinning validation performed.
- 
- @param trustKitConfig A dictionary containing various keys for configuring the global SSL
- pinning policy.
+ @param trustKitConfig A dictionary containing various keys for configuring the SSL pinning policy.
  @exception NSException Thrown when the supplied configuration is invalid or TrustKit has
  already been initialized.
  
  */
-+ (void)initializeWithConfiguration:(NSDictionary *)trustKitConfig;
++ (void)initializeWithConfiguration:(NSDictionary<TSKGlobalConfigurationKey, id> *)trustKitConfig;
 
-
-///----------------------------
-/// @name Current Configuration
-///----------------------------
 
 /**
- Retrieve a copy of the global SSL pinning policy.
+ Retrieve the global TrustKit singleton instance. Raises an exception if `+initializeWithConfiguration:`
+ has not yet been invoked.
  
- @return A dictionary with a copy of the current TrustKit configuration, or `nil` if
- TrustKit has not been initialized.
+ @return the shared TrustKit singleton
  */
-+ (NSDictionary * _Nullable) configuration;
++ (instancetype)sharedInstance;
 
-#pragma mark Instance Methods
 
-/**
- Initialize a TrustKit instance with the supplied SSL pinning policy configuration.
- 
- This method should be called as early as possible in the App's lifecycle to ensure that 
- the App's very first SSL connections are validated by TrustKit. Once TrustKit has been
- initialized, notifications will be posted for any SSL pinning validation performed.
- 
- @param trustKitConfig A dictionary containing various keys for configuring the global
-        SSL pinning policy.
- */
-- (instancetype)initWithConfiguration:(NSDictionary<NSString *, id> * _Nullable)trustKitConfig;
+#pragma mark Implementing Pinning Validation
+
 
 /**
- Retrieve the SSL pinning policy for this instance.
+ Retrieve the validator instance conforming to the pinning policy of this TrustKit instance.
  
- @return A dictionary with the current TrustKit configuration
- */
-@property (nonatomic, readonly, nullable) NSDictionary *configuration;
-
-/**
- A pinning validator instance conforming to the configuration of this TrustKit instance.
+ The validator should be used to implement pinning validation within the App's network
+ authentication handlers.
  */
 @property (nonatomic, nonnull) TSKPinningValidator *pinningValidator;
 
-/**
- Register a block to be invoked for every request that is going through TrustKit's pinning
- validation mechanism.
- 
- Once TrustKit has been initialized, the callback will be invoked every time TrustKit validates 
- the certificate chain for a server configured in the SSL pinning policy; if the server's 
- hostname does not have an entry in the pinning policy, no invocations will result as no
- pinning validation was performed.
- 
- This callback can be used for performance measurement or to act upon any pinning validation
- performed by TrustKit (for example to customize the reporting mechanism). The callback
- provide the `TSKPinningValidatorResult` resulting from the validation. That instance provides
- access to TrustKit's inner-workings which most Apps should not need. Hence, this callback
- should not be set unless the App requires some advanced customization in regards to pinning
- validation. Keep in mind that, if set, the callback may be invoked very frequently and is
- not a suitable place for expensive tasks.
- */
-@property (nonatomic, nullable) void(^validationDelegateCallback)(TSKPinningValidatorResult * _Nonnull result);
+
+#pragma mark Configuring a Validation Callback
+
 
 /**
- Queue on which to invoke `validationDelegateCallback` (if set). Default value is main queue.
+ Register a block to be invoked for every request that is going through TrustKit's pinning
+ validation mechanism. See `TSKPinningValidatorCallback` for more information.
  */
-@property (nonatomic, null_resettable) dispatch_queue_t validationDelegateQueue;
+@property (nonatomic, nullable) TSKPinningValidatorCallback pinningValidatorCallback;
+
+/**
+ Queue on which to invoke the `pinningValidatorCallback`; default value is the main queue.
+ */
+@property (nonatomic, null_resettable) dispatch_queue_t pinningValidatorCallbackQueue;
+
+
+#pragma mark Usage in Multi-Instance Mode
+
+/**
+ Initialize a local TrustKit instance with the supplied SSL pinning policy configuration.
+ 
+ This method is useful in scenarios where the TrustKit singleton cannot be used, for example within
+ larger Apps that have split some of their functionality into multiple framework/SDK. Each 
+ framework can initialize its own instance of TrustKit and use it for pinning validation independently
+ of the App's other components.
+ 
+ @param trustKitConfig A dictionary containing various keys for configuring the SSL pinning policy.
+ */
+- (instancetype)initWithConfiguration:(NSDictionary<TSKGlobalConfigurationKey, id> *)trustKitConfig;
+
+
+
+#pragma mark Other Settings
+
+/**
+ Set the global logger.
+ 
+ This method sets the global logger, used when any `TrustKit` instance needs to display a message to 
+ the developer.
+ 
+ If a global logger is not set, the default logger will be used, which will only print TrustKit log 
+ messages (using `NSLog()`) when the App is built in Debug mode. If the App was built for Release, the default 
+ logger will not print any messages at all.
+ */
++ (void)setLoggerBlock:(void (^)(NSString *))block;
 
 @end
 NS_ASSUME_NONNULL_END

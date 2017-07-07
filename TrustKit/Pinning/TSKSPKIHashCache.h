@@ -44,19 +44,9 @@ typedef NSMutableDictionary<NSData *, NSData *> SPKICacheDictionnary;
 
  @param certificate The certificate containing the public key that will be hashed
  @param publicKeyAlgorithm The public algorithm to expect was used in this certificate
- @return The hash of the public key assuming it used the provided algorithm
+ @return The hash of the public key assuming it used the provided algorithm or nil if the hash could not be generated
  */
-- (NSData *)hashSubjectPublicKeyInfoFromCertificate:(SecCertificateRef)certificate publicKeyAlgorithm:(TSKPublicKeyAlgorithm)publicKeyAlgorithm;
-
-/**
- Obtain the current cache used by this instance.
- */
-@property (nonatomic, nullable, readonly) NSMutableDictionary<NSNumber *, SPKICacheDictionnary *> *SPKICache;
-
-/**
- Load the SPKI cache from the filesystem. This triggers blocking file I/O.
- */
-@property (nonatomic, nullable, readonly) NSMutableDictionary<NSNumber *, SPKICacheDictionnary *> *SPKICacheFromFileSystem;
+- (NSData * _Nullable)hashSubjectPublicKeyInfoFromCertificate:(SecCertificateRef)certificate publicKeyAlgorithm:(TSKPublicKeyAlgorithm)publicKeyAlgorithm;
 
 @end
 

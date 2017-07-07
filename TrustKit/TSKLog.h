@@ -15,10 +15,7 @@
 #define TSKLog_h
 
 // The logging function we use within TrustKit
-#ifdef DEBUG
-#define TSKLog(format, ...) NSLog(@"=== TrustKit: " format, ##__VA_ARGS__);
-#else
-#define TSKLog(format, ...)
-#endif
+void TSKLog(NSString *format, ...);
+
 
 #endif /* TSKLog_h */

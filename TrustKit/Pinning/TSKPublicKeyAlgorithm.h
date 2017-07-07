@@ -14,6 +14,7 @@
 
 @import Foundation;
 
+// The internal enum we use for public key algorithms; not to be confused with the exported TSKSupportedAlgorithm
 typedef NS_ENUM(NSInteger, TSKPublicKeyAlgorithm)
 {
     // Some assumptions are made about this specific ordering in public_key_utils.m

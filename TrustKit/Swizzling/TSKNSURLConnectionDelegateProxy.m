@@ -1,15 +1,18 @@
-//
-//  TSKNSURLConnectionDelegateProxy.m
-//  TrustKit
-//
-//  Created by Alban Diquet on 10/7/15.
-//  Copyright © 2015 TrustKit. All rights reserved.
-//
+/*
+ 
+ TSKNSURLConnectionDelegateProxy.h
+ TrustKit
+ 
+ Copyright 2015 The TrustKit Project Authors
+ Licensed under the MIT license, see associated LICENSE file for terms.
+ See AUTHORS file for the list of project authors.
+ 
+ */
 
 #import "TSKNSURLConnectionDelegateProxy.h"
 #import "../TrustKit.h"
 #import "../TSKLog.h"
-#import "../TSKPinValidatorResult.h"
+#import "../TSKTrustDecision.h"
 #import "../TSKPinningValidator.h"
 #import "../Dependencies/RSSwizzle/RSSwizzle.h"
 

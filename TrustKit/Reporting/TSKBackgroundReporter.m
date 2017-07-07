@@ -130,7 +130,7 @@ static NSString * const kTSKBackgroundSessionIdentifierFormat = @"%@.TSKBackgrou
                       includeSubdomains:(BOOL)includeSubdomains
                          enforcePinning:(BOOL)enforcePinning
                               knownPins:(nonnull NSSet<NSData *> *)knownPins
-                       validationResult:(TSKPinValidationResult)validationResult
+                       validationResult:(TSKTrustEvaluationResult)validationResult
                          expirationDate:(nullable NSDate *)knownPinsExpirationDate
 {
     // Default port to 0 if not specified

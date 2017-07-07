@@ -1,15 +1,18 @@
-//
-//  TSKNSURLSessionDelegateProxy.m
-//  TrustKit
-//
-//  Created by Alban Diquet on 10/11/15.
-//  Copyright © 2015 TrustKit. All rights reserved.
-//
+/*
+ 
+ TSKNSURLSessionDelegateProxy.m
+ TrustKit
+ 
+ Copyright 2015 The TrustKit Project Authors
+ Licensed under the MIT license, see associated LICENSE file for terms.
+ See AUTHORS file for the list of project authors.
+ 
+ */
 
 #import "TSKNSURLSessionDelegateProxy.h"
 #import "../TrustKit.h"
 #import "../TSKLog.h"
-#import "../TSKPinValidatorResult.h"
+#import "../TSKTrustDecision.h"
 #import "../TSKPinningValidator.h"
 #import "../Dependencies/RSSwizzle/RSSwizzle.h"
 
@@ -25,22 +28,10 @@
 
 + (void)swizzleNSURLSessionConstructors:(TrustKit *)trustKit
 {
-    // Figure out NSURLSession's "real" class
-    // Pre iOS 8, for some reason hooking NSURLSession doesn't work. We need to use the real/private class __NSCFURLSession
-    // TODO: Remove support for iOS < 8?
-    Class NSURLSessionClass = (NSClassFromString(@"NSURLSession")           /* iOS 8+ */
-                               ?: NSClassFromString(@"__NSCFURLSession")    /* iOS <8 */);
-    if (NSURLSessionClass == nil)
-    {
-        NSAssert(false, @"ERROR: Could not find NSURLSession's class");
-        TSKLog(@"ERROR: Could not find NSURLSession's class");
-        return;
-    }
-
     // + sessionWithConfiguration:delegate:delegateQueue:
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wshadow"
-    RSSwizzleClassMethod(NSURLSessionClass,
+    RSSwizzleClassMethod(NSURLSession.class,
                          @selector(sessionWithConfiguration:delegate:delegateQueue:),
                          RSSWReturnType(NSURLSession *),
                          RSSWArguments(NSURLSessionConfiguration * _Nonnull configuration, id _Nullable delegate, NSOperationQueue * _Nullable queue),

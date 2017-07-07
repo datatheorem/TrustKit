@@ -67,7 +67,7 @@
                                                     enforcePinning:NO
                                          validatedCertificateChain:certificateChain
                                                          knownPins:formattedPins
-                                                  validationResult:TSKPinValidationResultFailedCertificateChainNotTrusted
+                                                  validationResult:TSKTrustEvaluationFailedInvalidCertificateChain
                                                     expirationDate:[NSDate dateWithTimeIntervalSinceReferenceDate:0]];
 
 }
@@ -176,7 +176,7 @@
     XCTAssertFalse([self.rateLimiter shouldRateLimitReport:self.testReport], @"Wrongly rate-limited a new report");
     
     TSKPinFailureReport *mockReport = OCMPartialMock(self.testReport);
-    OCMStub(mockReport.validationResult).andReturn(TSKPinValidationResultErrorCouldNotGenerateSpkiHash);
+    OCMStub(mockReport.validationResult).andReturn(TSKTrustEvaluationErrorCouldNotGenerateSpkiHash);
     
     XCTAssertFalse([self.rateLimiter shouldRateLimitReport:mockReport], @"Wrongly rate-limited a new report");
     

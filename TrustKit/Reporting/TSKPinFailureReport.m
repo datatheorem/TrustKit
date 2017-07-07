@@ -27,7 +27,7 @@
                               enforcePinning:(BOOL)enforcePinning
                    validatedCertificateChain:(nonnull NSArray<NSString *> *)validatedCertificateChain
                                    knownPins:(nonnull NSArray<NSString *> *)knownPins
-                            validationResult:(TSKPinValidationResult)validationResult
+                            validationResult:(TSKTrustEvaluationResult)validationResult
                               expirationDate:(nullable NSDate *)knownPinsExpirationDate
 {
     self = [super init];

@@ -17,7 +17,6 @@
 // Need to support iOS before 10.0
 // The one and only way to get a key's data in a buffer on iOS is to put it in the Keychain and then ask for the data back...
 #define LEGACY_IOS_KEY_EXTRACTION 1
-static const NSString *kTSKKeychainPublicKeyTag = @"TSKKeychainPublicKeyTag"; // Used to add and find the public key in the Keychain
 #endif
 
 #if !TARGET_OS_IPHONE && __MAC_OS_X_VERSION_MIN_REQUIRED < 101200
@@ -69,14 +68,25 @@ static const unsigned int asn1HeaderSizes[4] = {
 
 
 @interface TSKSPKIHashCache ()
+
 // Dictionnary to cache SPKI hashes instead of having to compute them on every connection
 // We store one cache dictionnary per TSKPublicKeyAlgorithm we support
 @property (nonatomic) NSMutableDictionary<NSNumber *, SPKICacheDictionnary *> *subjectPublicKeyInfoHashesCache;
 @property (nonatomic) dispatch_queue_t lockQueue;
 @property (nonatomic) NSString *spkiCacheFilename;
+
+
+/**
+ Load the SPKI cache from the filesystem. This triggers blocking file I/O.
+ */
+- (NSMutableDictionary<NSNumber *, SPKICacheDictionnary *> *)loadSPKICacheFromFileSystem;
+
 @end
 
 #if LEGACY_IOS_KEY_EXTRACTION
+
+static const NSString *kTSKKeychainPublicKeyTag = @"TSKKeychainPublicKeyTag"; // Used to add and find the public key in the Keychain
+
 @interface TSKSPKIHashCache ()
 @property (nonatomic) dispatch_queue_t keychainQueue;
 @end
@@ -110,7 +120,7 @@ static const unsigned int asn1HeaderSizes[4] = {
         _spkiCacheFilename = uniqueIdentifier; // if this value is nil, persistence will always fail.
         
         // First try to load a cached version from the filesystem
-        _subjectPublicKeyInfoHashesCache = self.SPKICacheFromFileSystem;
+        _subjectPublicKeyInfoHashesCache = [self loadSPKICacheFromFileSystem];
         TSKLog(@"Loaded %lu SPKI cache entries from the filesystem", (unsigned long)_subjectPublicKeyInfoHashesCache.count);
         if (_subjectPublicKeyInfoHashesCache == nil)
         {
@@ -204,7 +214,7 @@ static const unsigned int asn1HeaderSizes[4] = {
     return subjectPublicKeyInfoHash;
 }
 
-- (NSMutableDictionary<NSNumber *, SPKICacheDictionnary *> *)SPKICacheFromFileSystem
+- (NSMutableDictionary<NSNumber *, SPKICacheDictionnary *> *)loadSPKICacheFromFileSystem
 {
     NSMutableDictionary *spkiCache;
     NSData *serializedSpkiCache = [NSData dataWithContentsOfURL:[self SPKICachePath]];
@@ -214,10 +224,6 @@ static const unsigned int asn1HeaderSizes[4] = {
     return spkiCache;
 }
 
-- (NSMutableDictionary<NSNumber *, SPKICacheDictionnary *> *)SPKICache
-{
-    return _subjectPublicKeyInfoHashesCache;
-}
 
 #pragma mark Private
 
@@ -315,7 +321,7 @@ static const unsigned int asn1HeaderSizes[4] = {
 
 - (NSData *)getPublicKeyDataFromCertificate_legacy_ios:(SecCertificateRef)certificate
 {
-    NSData *publicKeyData = nil;
+    __block NSData *publicKeyData = nil;
     __block OSStatus resultAdd, __block resultDel = noErr;
     SecKeyRef publicKey;
     SecTrustRef tempTrust;
@@ -410,9 +416,16 @@ static const unsigned int asn1HeaderSizes[4] = {
 
 @implementation TSKSPKIHashCache (TestSupport)
 
-- (void)resetSubjectPublicKeyInfoDiskCache {
+- (void)resetSubjectPublicKeyInfoDiskCache
+{
     // Discard SPKI cache
     [NSFileManager.defaultManager removeItemAtURL:[self SPKICachePath] error:nil];
+}
+
+
+- (NSMutableDictionary<NSNumber *, SPKICacheDictionnary *> *)getSubjectPublicKeyInfoHashesCache
+{
+    return _subjectPublicKeyInfoHashesCache;
 }
 
 @end

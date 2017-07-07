@@ -15,6 +15,7 @@
 #import "../TrustKit/TSKTrustKitConfig.h"
 #import "../TrustKit/parse_configuration.h"
 #import "../TrustKit/TSKPinningValidatorResult.h"
+#import "../TrustKit/TSKPinningValidator_Private.h"
 #import "../TrustKit/Pinning/TSKSPKIHashCache.h"
 
 #import "../TrustKit/Pinning/ssl_pin_verifier.h"
@@ -35,6 +36,8 @@
 
 @interface TSKSPKIHashCache (TestSupport)
 - (void)resetSubjectPublicKeyInfoDiskCache;
+- (NSMutableDictionary<NSNumber *, SPKICacheDictionnary *> *)getSubjectPublicKeyInfoHashesCache;
+- (NSMutableDictionary<NSNumber *, SPKICacheDictionnary *> *)loadSPKICacheFromFileSystem;
 @end
 
 static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
@@ -123,36 +126,36 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                                                            ]}}};
     
     // Ensure the SPKI cache was on the filesystem is empty
-    NSDictionary *fsCache = spkiCache.SPKICacheFromFileSystem;
+    NSDictionary *fsCache = [spkiCache loadSPKICacheFromFileSystem];
     XCTAssert([fsCache[@1] count] == 0, @"SPKI cache for RSA 4096 must be empty before the test");
     
     // First test the verifyPublicKeyPin() function
     NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
     NSDictionary *domainConfig = parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"];
     
-    TSKPinValidationResult verificationResult = verifyPublicKeyPin(trust,
-                                                                   @"www.good.com",
-                                                                   domainConfig[kTSKPublicKeyAlgorithms],
-                                                                   domainConfig[kTSKPublicKeyHashes],
-                                                                   spkiCache);
+    TSKTrustEvaluationResult verificationResult = verifyPublicKeyPin(trust,
+                                                                     @"www.good.com",
+                                                                     domainConfig[kTSKPublicKeyAlgorithms],
+                                                                     domainConfig[kTSKPublicKeyHashes],
+                                                                     spkiCache);
     
-    XCTAssertEqual(verificationResult, TSKPinValidationResultSuccess,
+    XCTAssertEqual(verificationResult, TSKTrustEvaluationSuccess,
                    @"Validation must pass against valid public key pins");
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
-    validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
+    validator = [[TSKPinningValidator alloc] initWithDomainPinningPolicies:parsedTrustKitConfig[kTSKPinnedDomains]
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
-                                                  validationResultQueue:dispatch_get_main_queue()
-                                                validationResultHandler:^(TSKPinningValidatorResult *result) {
+                                                  validationCallbackQueue:dispatch_get_main_queue()
+                                                     validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                     XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldAllowConnection);
                                                     
-                                                    XCTAssertEqual(result.validationResult, TSKPinValidationResultSuccess);
+                                                    XCTAssertEqual(result.evaluationResult, TSKTrustEvaluationSuccess);
                                                     
                                                     XCTAssertEqualObjects(result.certificateChain, convertTrustToPemArray(trust));
                                                     
-                                                    XCTAssertEqualObjects(result.notedHostname, @"www.good.com");
+                                                    XCTAssertEqualObjects(notedHostname, @"www.good.com");
                                                     
                                                     [expectation fulfill];
                                                 }];
@@ -165,7 +168,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     [self waitForExpectationsWithTimeout:2.0 handler:nil];
     
     // Ensure the SPKI cache was persisted to the filesystem
-    fsCache = spkiCache.SPKICacheFromFileSystem;
+    fsCache = [spkiCache loadSPKICacheFromFileSystem];
     XCTAssertEqual([fsCache[@1] count], 1UL, @"SPKI cache for RSA 4096 must be persisted to the file system");
     
     CFRelease(trust);
@@ -193,13 +196,13 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                                                            ]}}};
     
     // Ensure the SPKI cache was on the filesystem is empty
-    NSDictionary *fsCache = spkiCache.SPKICacheFromFileSystem;
+    NSDictionary *fsCache = [spkiCache loadSPKICacheFromFileSystem];
     XCTAssertEqual([fsCache[@1] count], 0UL, @"SPKI cache for RSA 4096 must be empty before the test");
     
     // First test the verifyPublicKeyPin() function
     NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
     
-    TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
+    TSKTrustEvaluationResult verificationResult = TSKTrustEvaluationFailedNoMatchingPin;
     verificationResult = verifyPublicKeyPin(trust,
                                             @"www.good.com",
                                             parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
@@ -207,25 +210,25 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                             spkiCache);
     
     
-    XCTAssertEqual(verificationResult, TSKPinValidationResultSuccess,
+    XCTAssertEqual(verificationResult, TSKTrustEvaluationSuccess,
                    @"Validation must pass against valid public key pins");
     
     
     // Then test TSKPinningValidator
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
-    validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
+    validator = [[TSKPinningValidator alloc] initWithDomainPinningPolicies:parsedTrustKitConfig[kTSKPinnedDomains]
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
-                                                  validationResultQueue:dispatch_get_main_queue()
-                                                validationResultHandler:^(TSKPinningValidatorResult *result) {
+                                                validationCallbackQueue:dispatch_get_main_queue()
+                                                     validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                     XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldAllowConnection);
                                                     
-                                                    XCTAssertEqual(result.validationResult, TSKPinValidationResultSuccess);
+                                                    XCTAssertEqual(result.evaluationResult, TSKTrustEvaluationSuccess);
                                                     
                                                     XCTAssertEqualObjects(result.certificateChain, convertTrustToPemArray(trust));
                                                     
-                                                    XCTAssertEqualObjects(result.notedHostname, @"www.good.com");
+                                                    XCTAssertEqualObjects(notedHostname, @"www.good.com");
                                                     
                                                     [expectation fulfill];
                                                 }];
@@ -236,7 +239,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     [self waitForExpectationsWithTimeout:2.0 handler:nil];
     
     // Ensure the SPKI cache was persisted to the filesystem
-    fsCache = spkiCache.SPKICacheFromFileSystem;
+    fsCache = [spkiCache loadSPKICacheFromFileSystem];
     XCTAssertEqual([fsCache[@1] count], 2UL, @"SPKI cache for RSA 4096 must be persisted to the file system");
     
     CFRelease(trust);
@@ -266,7 +269,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     // First test the verifyPublicKeyPin() function
     NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
     
-    TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
+    TSKTrustEvaluationResult verificationResult = TSKTrustEvaluationFailedNoMatchingPin;
     verificationResult = verifyPublicKeyPin(trust,
                                             @"www.good.com",
                                             parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
@@ -274,25 +277,25 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                             spkiCache);
     
     
-    XCTAssertEqual(verificationResult, TSKPinValidationResultSuccess,
+    XCTAssertEqual(verificationResult, TSKTrustEvaluationSuccess,
                    @"Validation must pass against valid public key pins");
     
     
     // Then test TSKPinningValidator
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
-    validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
+    validator = [[TSKPinningValidator alloc] initWithDomainPinningPolicies:parsedTrustKitConfig[kTSKPinnedDomains]
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
-                                                  validationResultQueue:dispatch_get_main_queue()
-                                                validationResultHandler:^(TSKPinningValidatorResult *result) {
+                                                validationCallbackQueue:dispatch_get_main_queue()
+                                                     validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                     XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldAllowConnection);
                                                     
-                                                    XCTAssertEqual(result.validationResult, TSKPinValidationResultSuccess);
+                                                    XCTAssertEqual(result.evaluationResult, TSKTrustEvaluationSuccess);
                                                     
                                                     XCTAssertEqualObjects(result.certificateChain, convertTrustToPemArray(trust));
                                                     
-                                                    XCTAssertEqualObjects(result.notedHostname, @"www.good.com");
+                                                    XCTAssertEqualObjects(notedHostname, @"www.good.com");
                                                     
                                                     [expectation fulfill];
                                                 }];
@@ -329,7 +332,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     // First test the verifyPublicKeyPin() function
     NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
     
-    TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
+    TSKTrustEvaluationResult verificationResult = TSKTrustEvaluationFailedNoMatchingPin;
     verificationResult = verifyPublicKeyPin(trust,
                                             @"www.good.com",
                                             parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
@@ -337,25 +340,25 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                             spkiCache);
     
     
-    XCTAssertEqual(verificationResult, TSKPinValidationResultSuccess,
+    XCTAssertEqual(verificationResult, TSKTrustEvaluationSuccess,
                    @"Validation must pass against valid public key pins");
     
     
     // Then test TSKPinningValidator
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
-    validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
+    validator = [[TSKPinningValidator alloc] initWithDomainPinningPolicies:parsedTrustKitConfig[kTSKPinnedDomains]
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
-                                                  validationResultQueue:dispatch_get_main_queue()
-                                                validationResultHandler:^(TSKPinningValidatorResult *result) {
+                                                validationCallbackQueue:dispatch_get_main_queue()
+                                                     validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                     XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldAllowConnection);
                                                     
-                                                    XCTAssertEqual(result.validationResult, TSKPinValidationResultSuccess);
+                                                    XCTAssertEqual(result.evaluationResult, TSKTrustEvaluationSuccess);
                                                     
                                                     XCTAssertEqualObjects(result.certificateChain, convertTrustToPemArray(trust));
                                                     
-                                                    XCTAssertEqualObjects(result.notedHostname, @"www.good.com");
+                                                    XCTAssertEqualObjects(notedHostname, @"www.good.com");
                                                     
                                                     [expectation fulfill];
                                                 }];
@@ -392,7 +395,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     // First test the verifyPublicKeyPin() function
     NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
     
-    TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
+    TSKTrustEvaluationResult verificationResult = TSKTrustEvaluationErrorInvalidParameters;
     verificationResult = verifyPublicKeyPin(trust,
                                             @"www.good.com",
                                             parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
@@ -400,25 +403,25 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                             spkiCache);
     
     
-    XCTAssertEqual(verificationResult, TSKPinValidationResultFailed,
+    XCTAssertEqual(verificationResult, TSKTrustEvaluationFailedNoMatchingPin,
                    @"Validation must fail against bad public key pins");
     
     
     // Then test TSKPinningValidator
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
-    validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
+    validator = [[TSKPinningValidator alloc] initWithDomainPinningPolicies:parsedTrustKitConfig[kTSKPinnedDomains]
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
-                                                  validationResultQueue:dispatch_get_main_queue()
-                                                validationResultHandler:^(TSKPinningValidatorResult *result) {
+                                                validationCallbackQueue:dispatch_get_main_queue()
+                                                     validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                     XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldBlockConnection);
                                                     
-                                                    XCTAssertEqual(result.validationResult, TSKPinValidationResultFailed);
+                                                    XCTAssertEqual(result.evaluationResult, TSKTrustEvaluationFailedNoMatchingPin);
                                                     
                                                     XCTAssertEqualObjects(result.certificateChain, convertTrustToPemArray(trust));
                                                     
-                                                    XCTAssertEqualObjects(result.notedHostname, @"www.good.com");
+                                                    XCTAssertEqualObjects(notedHostname, @"www.good.com");
                                                     
                                                     [expectation fulfill];
                                                 }];
@@ -450,20 +453,22 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                      kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
                                                    // Totally expired
-                                                   kTSKExpirationDate: [NSDate dateWithTimeIntervalSinceReferenceDate:0],
+                                                   kTSKExpirationDate: @"2015-01-01",
                                                    kTSKEnforcePinning: @YES,
                                                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Bad Key
                                                                            @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=" // Bad key 2
                                                                            ]}}};
     
+    NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
+    
     // Test TSKPinningValidator
     TSKPinningValidator *validator;
-    validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:trustKitConfig
+    validator = [[TSKPinningValidator alloc] initWithDomainPinningPolicies:parsedTrustKitConfig[kTSKPinnedDomains]
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
-                                                  validationResultQueue:dispatch_get_main_queue()
-                                                validationResultHandler:^(TSKPinningValidatorResult *result) {
+                                                validationCallbackQueue:dispatch_get_main_queue()
+                                                     validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                     XCTFail(@"Should not be invoked");
                                                 }];
     
@@ -498,30 +503,30 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     // First test the verifyPublicKeyPin() function
     NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
     
-    TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
+    TSKTrustEvaluationResult verificationResult = TSKTrustEvaluationErrorInvalidParameters;
     verificationResult = verifyPublicKeyPin(trust,
                                             @"www.good.com",
                                             parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
                                             parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes],
                                             spkiCache);
     
-    XCTAssertEqual(verificationResult, TSKPinValidationResultFailed, @"Validation must fail against bad public key pins");
+    XCTAssertEqual(verificationResult, TSKTrustEvaluationFailedNoMatchingPin, @"Validation must fail against bad public key pins");
     
     // Then test TSKPinningValidator
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
-    validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
+    validator = [[TSKPinningValidator alloc] initWithDomainPinningPolicies:parsedTrustKitConfig[kTSKPinnedDomains]
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
-                                                  validationResultQueue:dispatch_get_main_queue()
-                                                validationResultHandler:^(TSKPinningValidatorResult *result) {
+                                                validationCallbackQueue:dispatch_get_main_queue()
+                                                     validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                     XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldAllowConnection);
                                                     
-                                                    XCTAssertEqual(result.validationResult, TSKPinValidationResultFailed);
+                                                    XCTAssertEqual(result.evaluationResult, TSKTrustEvaluationFailedNoMatchingPin);
                                                     
                                                     XCTAssertEqualObjects(result.certificateChain, convertTrustToPemArray(trust));
                                                     
-                                                    XCTAssertEqualObjects(result.notedHostname, @"www.good.com");
+                                                    XCTAssertEqualObjects(notedHostname, @"www.good.com");
                                                     
                                                     [expectation fulfill];
                                                 }];
@@ -560,7 +565,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     // First test the verifyPublicKeyPin() function
     NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
     
-    TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
+    TSKTrustEvaluationResult verificationResult = TSKTrustEvaluationErrorInvalidParameters;
     verificationResult = verifyPublicKeyPin(trust,
                                             @"www.good.com",
                                             parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
@@ -568,25 +573,25 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                             spkiCache);
     
     
-    XCTAssertEqual(verificationResult, TSKPinValidationResultSuccess,
+    XCTAssertEqual(verificationResult, TSKTrustEvaluationSuccess,
                    @"Validation must pass against valid public key pins");
     
     
     // Then test TSKPinningValidator
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
-    validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
+    validator = [[TSKPinningValidator alloc] initWithDomainPinningPolicies:parsedTrustKitConfig[kTSKPinnedDomains]
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
-                                                  validationResultQueue:dispatch_get_main_queue()
-                                                validationResultHandler:^(TSKPinningValidatorResult *result) {
+                                                validationCallbackQueue:dispatch_get_main_queue()
+                                                     validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                     XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldAllowConnection);
                                                     
-                                                    XCTAssertEqual(result.validationResult, TSKPinValidationResultSuccess);
+                                                    XCTAssertEqual(result.evaluationResult, TSKTrustEvaluationSuccess);
                                                     
                                                     XCTAssertEqualObjects(result.certificateChain, convertTrustToPemArray(trust));
                                                     
-                                                    XCTAssertEqualObjects(result.notedHostname, @"www.good.com");
+                                                    XCTAssertEqualObjects(notedHostname, @"www.good.com");
                                                     
                                                     [expectation fulfill];
                                                 }];
@@ -625,7 +630,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     // First test the verifyPublicKeyPin() function
     NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
     
-    TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
+    TSKTrustEvaluationResult verificationResult = TSKTrustEvaluationErrorInvalidParameters;
     verificationResult = verifyPublicKeyPin(trust,
                                             @"www.good.com",
                                             parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
@@ -633,25 +638,25 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                             spkiCache);
     
     
-    XCTAssertEqual(verificationResult, TSKPinValidationResultFailedCertificateChainNotTrusted,
+    XCTAssertEqual(verificationResult, TSKTrustEvaluationFailedInvalidCertificateChain,
                    @"Validation must fail against bad certificate chain");
     
     
     // Then test TSKPinningValidator
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
-    validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
+    validator = [[TSKPinningValidator alloc] initWithDomainPinningPolicies:parsedTrustKitConfig[kTSKPinnedDomains]
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
-                                                  validationResultQueue:dispatch_get_main_queue()
-                                                validationResultHandler:^(TSKPinningValidatorResult *result) {
+                                                validationCallbackQueue:dispatch_get_main_queue()
+                                                     validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                     XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldBlockConnection);
                                                     
-                                                    XCTAssertEqual(result.validationResult, TSKPinValidationResultFailedCertificateChainNotTrusted);
+                                                    XCTAssertEqual(result.evaluationResult, TSKTrustEvaluationFailedInvalidCertificateChain);
                                                     
                                                     XCTAssertEqualObjects(result.certificateChain, convertTrustToPemArray(trust));
                                                     
-                                                    XCTAssertEqualObjects(result.notedHostname, @"www.good.com");
+                                                    XCTAssertEqualObjects(notedHostname, @"www.good.com");
                                                     
                                                     [expectation fulfill];
                                                 }];
@@ -691,7 +696,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     // First test the verifyPublicKeyPin() function
     NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
     
-    TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
+    TSKTrustEvaluationResult verificationResult = TSKTrustEvaluationErrorInvalidParameters;
     verificationResult = verifyPublicKeyPin(trust,
                                             @"www.bad.com",
                                             parsedTrustKitConfig[kTSKPinnedDomains][@"www.bad.com"][kTSKPublicKeyAlgorithms],
@@ -699,25 +704,25 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                             spkiCache);
     
     
-    XCTAssertEqual(verificationResult, TSKPinValidationResultFailedCertificateChainNotTrusted,
+    XCTAssertEqual(verificationResult, TSKTrustEvaluationFailedInvalidCertificateChain,
                    @"Validation must fail against bad hostname");
     
     
     // Then test TSKPinningValidator
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
-    validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
+    validator = [[TSKPinningValidator alloc] initWithDomainPinningPolicies:parsedTrustKitConfig[kTSKPinnedDomains]
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
-                                                  validationResultQueue:dispatch_get_main_queue()
-                                                validationResultHandler:^(TSKPinningValidatorResult *result) {
+                                                validationCallbackQueue:dispatch_get_main_queue()
+                                                     validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                     XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldBlockConnection);
                                                     
-                                                    XCTAssertEqual(result.validationResult, TSKPinValidationResultFailedCertificateChainNotTrusted);
+                                                    XCTAssertEqual(result.evaluationResult, TSKTrustEvaluationFailedInvalidCertificateChain);
                                                     
                                                     XCTAssertEqualObjects(result.certificateChain, convertTrustToPemArray(trust));
                                                     
-                                                    XCTAssertEqualObjects(result.notedHostname, @"www.bad.com");
+                                                    XCTAssertEqualObjects(notedHostname, @"www.bad.com");
                                                     
                                                     [expectation fulfill];
                                                 }];
@@ -756,7 +761,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     // First test the verifyPublicKeyPin() function
     NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
     
-    TSKPinValidationResult verificationResult = TSKPinValidationResultFailed;
+    TSKTrustEvaluationResult verificationResult = TSKTrustEvaluationErrorInvalidParameters;
     verificationResult = verifyPublicKeyPin(trust,
                                             @"www.good.com",
                                             parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
@@ -764,25 +769,25 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                             spkiCache);
     
     
-    XCTAssertEqual(verificationResult, TSKTrustDecisionShouldBlockConnection,
+    XCTAssertEqual(verificationResult, TSKTrustEvaluationFailedNoMatchingPin,
                    @"Validation must fail against injected pinned CA");
     
     
     // Then test TSKPinningValidator
     XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
     TSKPinningValidator *validator;
-    validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:parsedTrustKitConfig
+    validator = [[TSKPinningValidator alloc] initWithDomainPinningPolicies:parsedTrustKitConfig[kTSKPinnedDomains]
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
-                                                  validationResultQueue:dispatch_get_main_queue()
-                                                validationResultHandler:^(TSKPinningValidatorResult *result) {
+                                                validationCallbackQueue:dispatch_get_main_queue()
+                                                     validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                     XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldBlockConnection);
                                                     
-                                                    XCTAssertEqual(result.validationResult, TSKPinValidationResultFailed);
+                                                    XCTAssertEqual(result.evaluationResult, TSKTrustEvaluationFailedNoMatchingPin);
                                                     
                                                     XCTAssertEqualObjects(result.certificateChain, convertTrustToPemArray(trust));
                                                     
-                                                    XCTAssertEqualObjects(result.notedHostname, @"www.good.com");
+                                                    XCTAssertEqualObjects(notedHostname, @"www.good.com");
                                                     
                                                     [expectation fulfill];
                                                 }];
@@ -817,14 +822,15 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                                                            @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                                                            ]}}};
     
+    NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
     
     // Then test TSKPinningValidator
     TSKPinningValidator *validator;
-    validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:trustKitConfig
+    validator = [[TSKPinningValidator alloc] initWithDomainPinningPolicies:parsedTrustKitConfig[kTSKPinnedDomains]
                                                               hashCache:spkiCache
                                           ignorePinsForUserTrustAnchors:NO
-                                                  validationResultQueue:dispatch_get_main_queue()
-                                                validationResultHandler:^(TSKPinningValidatorResult *result) {
+                                                validationCallbackQueue:dispatch_get_main_queue()
+                                                     validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                     XCTFail(@"Should not invoke callback");
                                                 }];
     
@@ -909,11 +915,13 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                                                            @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=", // Fake key
                                                                            ]}}};
     
-    TSKPinningValidator *validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:trustKitConfig
+    NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
+    
+    TSKPinningValidator *validator = [[TSKPinningValidator alloc] initWithDomainPinningPolicies:parsedTrustKitConfig[kTSKPinnedDomains]
                                                                                    hashCache:spkiCache
                                                                ignorePinsForUserTrustAnchors:YES
-                                                                       validationResultQueue:dispatch_get_main_queue()
-                                                                     validationResultHandler:^(TSKPinningValidatorResult * _Nonnull result) {
+                                                                     validationCallbackQueue:dispatch_get_main_queue()
+                                                                          validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                                          //
                                                                      }];
     
@@ -966,11 +974,14 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                                                            @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=", // Fake key
                                                                            ]}}};
     
-    TSKPinningValidator *validator = [[TSKPinningValidator alloc] initWithPinnedDomainConfig:trustKitConfig
+    
+    NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
+    
+    TSKPinningValidator *validator = [[TSKPinningValidator alloc] initWithDomainPinningPolicies:parsedTrustKitConfig[kTSKPinnedDomains]
                                                                                    hashCache:spkiCache
                                                                ignorePinsForUserTrustAnchors:YES
-                                                                       validationResultQueue:dispatch_get_main_queue()
-                                                                     validationResultHandler:^(TSKPinningValidatorResult * _Nonnull result) {
+                                                                     validationCallbackQueue:dispatch_get_main_queue()
+                                                                          validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
                                                                          //
                                                                      }];
     
@@ -1094,21 +1105,25 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
 - (void)testAdditionalTrustAnchors
 {
     // Load and set custom trust anchor
-    SecCertificateRef anchor = [TSKCertificateUtils createCertificateFromPem:@"anchor-ca.cert"];
-    CFArrayRef anchors = CFArrayCreate(NULL, (const void **)&anchor, 1, &kCFTypeArrayCallBacks);
-    CFRelease(anchor);
+    NSBundle *bundle = [NSBundle bundleForClass:self.class];
+    NSString *pemFilepath = [bundle pathForResource:@"anchor-ca.cert" ofType:@"pem"];
+    NSString *anchorAsPem = [NSString stringWithContentsOfFile:pemFilepath usedEncoding:nil error:nil];
+    NSArray *anchors = [NSArray arrayWithObject:anchorAsPem];
     
     NSDictionary *config = @{ kTSKPinnedDomains : @{
                                       @"fake.yahoo.com" : @{
-                                              kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                                              kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0="],
-                                              kTSKAdditionalTrustAnchors : (__bridge_transfer NSArray *)anchors } } };
+                                              kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                              kTSKPublicKeyHashes : @[@"H6ts7uvqaU077Y8GlTM7nP31ir2ykBr61+oKjuvKSt0=",
+                                                                      @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB="],
+                                              kTSKAdditionalTrustAnchors : anchors} } };
     
-    TestPinningValidator *pinningValidator = [[TestPinningValidator alloc] initWithPinnedDomainConfig:config
+    NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(config);
+    
+    TestPinningValidator *pinningValidator = [[TestPinningValidator alloc] initWithDomainPinningPolicies:parsedTrustKitConfig[kTSKPinnedDomains]
                                                                                             hashCache:spkiCache
                                                                         ignorePinsForUserTrustAnchors:YES
-                                                                                validationResultQueue:dispatch_get_main_queue()
-                                                                              validationResultHandler:^(TSKPinningValidatorResult *x) {}];
+                                                                              validationCallbackQueue:dispatch_get_main_queue()
+                                                                                   validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {}];
     
     SecTrustRef(^createTestServerTrust)(void) = ^() {
         // Create the server trust for this chain

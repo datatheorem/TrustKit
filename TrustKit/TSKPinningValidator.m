@@ -11,16 +11,51 @@
 
 #import "TSKPinningValidator.h"
 #import "TSKTrustKitConfig.h"
-#import "TSKPinValidatorResult.h"
+#import "TSKTrustDecision.h"
 #import "TSKPinningValidatorResult.h"
 #import "Pinning/TSKSPKIHashCache.h"
 #import "Pinning/ssl_pin_verifier.h"
 #import "configuration_utils.h"
 #import "TrustKit.h"
 #import "TSKLog.h"
+#import "TSKPinningValidator_Private.h"
+
 
 @interface TSKPinningValidator ()
+
 @property (nonatomic) TSKSPKIHashCache *spkiHashCache;
+
+/**
+ If this property returns YES, pinning may include any additional trust anchors
+ provided in a domain configuration under the kTSKAdditionalTrustAnchors key.
+ 
+ This property is YES only when the preprocessor flag DEBUG is set to 1 (the
+ default behavior for the "Debug" configuration of an Xcode project). Subclasses
+ may override this method – with extreme caution – to alter this behavior.
+ */
+@property (nonatomic, class, readonly) BOOL allowsAdditionalTrustAnchors;
+
+/**
+ The dictionary of domains that were configured and their corresponding pinning policy.
+ */
+@property (nonatomic, readonly, nonnull) NSDictionary<NSString *, TKSDomainPinningPolicy *> *domainPinningPolicies;
+
+/**
+ Set to true to ignore the trust anchors in the user trust store. Only applicable
+ to platforms that support a user trust store (Mac OS).
+ */
+@property (nonatomic, readonly) BOOL ignorePinsForUserTrustAnchors;
+
+/**
+ The callback invoked with validation results.
+ */
+@property (nonatomic, readonly, nonnull) TSKPinningValidatorCallback validationCallback;
+
+/**
+ The queue use when invoking the `validationCallback`.
+ */
+@property (nonatomic, readonly, nonnull) dispatch_queue_t validationCallbackQueue;
+
 @end
 
 @implementation TSKPinningValidator
@@ -39,18 +74,18 @@
 
 #pragma mark Instance Methods
 
-- (instancetype _Nullable)initWithPinnedDomainConfig:(NSDictionary * _Nullable)pinnedDomains
-                                           hashCache:(TSKSPKIHashCache * _Nonnull)hashCache
-                       ignorePinsForUserTrustAnchors:(BOOL)ignorePinsForUserTrustAnchors
-                               validationResultQueue:(dispatch_queue_t _Nonnull)validationResultQueue
-                             validationResultHandler:(void(^ _Nonnull)(TSKPinningValidatorResult * _Nonnull result))validationResultHandler
+- (instancetype _Nullable)initWithDomainPinningPolicies:(NSDictionary<NSString *, TKSDomainPinningPolicy *> * _Nonnull)domainPinningPolicies
+                                              hashCache:(TSKSPKIHashCache * _Nonnull)hashCache
+                          ignorePinsForUserTrustAnchors:(BOOL)ignorePinsForUserTrustAnchors
+                                validationCallbackQueue:(dispatch_queue_t _Nonnull)validationCallbackQueue
+                                     validationCallback:(TSKPinningValidatorCallback)validationCallback
 {
     self = [super init];
     if (self) {
-        _pinnedDomains = pinnedDomains;
+        _domainPinningPolicies = domainPinningPolicies;
         _ignorePinsForUserTrustAnchors = ignorePinsForUserTrustAnchors;
-        _validationResultQueue = validationResultQueue;
-        _validationResultHandler = validationResultHandler;
+        _validationCallbackQueue = validationCallbackQueue;
+        _validationCallback = validationCallback;
         _spkiHashCache = hashCache;
     }
     return self;
@@ -71,7 +106,7 @@
     NSTimeInterval validationStartTime = [NSDate timeIntervalSinceReferenceDate];
     
     // Retrieve the pinning configuration for this specific domain, if there is one
-    NSString *domainConfigKey = getPinningConfigurationKeyForDomain(serverHostname, self.pinnedDomains);
+    NSString *domainConfigKey = getPinningConfigurationKeyForDomain(serverHostname, self.domainPinningPolicies);
     if (domainConfigKey == nil)
     {
         // The domain has no pinning policy: nothing to do/validate
@@ -80,7 +115,7 @@
     else
     {
         // This domain has a pinning policy
-        NSDictionary *domainConfig = self.pinnedDomains[kTSKPinnedDomains][domainConfigKey];
+        NSDictionary *domainConfig = self.domainPinningPolicies[domainConfigKey];
         
         // Has the pinning policy expired?
         NSDate *expirationDate = domainConfig[kTSKExpirationDate];
@@ -109,13 +144,13 @@
             
             // The domain has a pinning policy that has not expired
             // Look for one the configured public key pins in the server's evaluated certificate chain
-            TSKPinValidationResult validationResult = verifyPublicKeyPin(serverTrust,
-                                                                         serverHostname,
-                                                                         domainConfig[kTSKPublicKeyAlgorithms],
-                                                                         domainConfig[kTSKPublicKeyHashes],
-                                                                         self.spkiHashCache);
+            TSKTrustEvaluationResult validationResult = verifyPublicKeyPin(serverTrust,
+                                                                           serverHostname,
+                                                                           domainConfig[kTSKPublicKeyAlgorithms],
+                                                                           domainConfig[kTSKPublicKeyHashes],
+                                                                           self.spkiHashCache);
             
-            if (validationResult == TSKPinValidationResultSuccess)
+            if (validationResult == TSKTrustEvaluationSuccess)
             {
                 // Pin validation was successful
                 TSKLog(@"Pin validation succeeded for %@", serverHostname);
@@ -126,7 +161,7 @@
                 // Pin validation failed
                 TSKLog(@"Pin validation failed for %@", serverHostname);
 #if !TARGET_OS_IPHONE
-                if ((validationResult == TSKPinValidationResultFailedUserDefinedTrustAnchor)
+                if ((validationResult == TSKTrustEvaluationFailedUserDefinedTrustAnchor)
                     && (self.ignorePinsForUserTrustAnchors))
                 {
                     // OS-X only: user-defined trust anchors can be whitelisted (for corporate proxies, etc.) so don't send reports
@@ -136,7 +171,7 @@
                 else
 #endif
                 {
-                    if (validationResult == TSKPinValidationResultFailed)
+                    if (validationResult == TSKTrustEvaluationFailedNoMatchingPin)
                     {
                         // Is pinning enforced?
                         if ([domainConfig[kTSKEnforcePinning] boolValue] == YES)
@@ -158,17 +193,15 @@
             }
             
             // Send a notification after all validation is done; this will also trigger a report if pin validation failed
-            if (self.validationResultQueue && self.validationResultHandler) {
+            if (self.validationCallbackQueue && self.validationCallback) {
                 NSTimeInterval validationDuration = [NSDate timeIntervalSinceReferenceDate] - validationStartTime;
                 TSKPinningValidatorResult *result = [[TSKPinningValidatorResult alloc] initWithServerHostname:serverHostname
                                                                                                   serverTrust:serverTrust
-                                                                                                notedHostname:domainConfigKey
                                                                                              validationResult:validationResult
                                                                                            finalTrustDecision:finalTrustDecision
-                                                                                           validationDuration:validationDuration
-                                                                                             certificateChain:nil];
-                dispatch_async(self.validationResultQueue, ^{
-                    self.validationResultHandler(result);
+                                                                                           validationDuration:validationDuration];
+                dispatch_async(self.validationCallbackQueue, ^{
+                    self.validationCallback(result, domainConfigKey, domainConfig);
                 });
             }
         }
