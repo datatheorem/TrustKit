@@ -1,10 +1,13 @@
-//
-//  TSKPinningValidatorCallback.h
-//  TrustKit
-//
-//  Created by Alban Diquet on 6/26/17.
-//  Copyright © 2017 TrustKit. All rights reserved.
-//
+/*
+ 
+ TSKPinningValidatorCallback.h
+ TrustKit
+ 
+ Copyright 2017 The TrustKit Project Authors
+ Licensed under the MIT license, see associated LICENSE file for terms.
+ See AUTHORS file for the list of project authors.
+ 
+ */
 
 #ifndef TSKPinningValidatorCallback_h
 #define TSKPinningValidatorCallback_h
@@ -40,7 +43,7 @@ typedef NSDictionary<TSKDomainConfigurationKey, id> TKSDomainPinningPolicy;
  Lastly, the callback is always invoked after the validation has been completed, and therefore
  cannot be used to modify the result of the validation (for example to accept invalid certificates).
  */
-typedef void (^TSKPinningValidatorCallback)(TSKPinningValidatorResult * _Nonnull, NSString * _Nonnull, TKSDomainPinningPolicy * _Nonnull);
+typedef void (^TSKPinningValidatorCallback)(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, TKSDomainPinningPolicy * _Nonnull policy);
 
 
 

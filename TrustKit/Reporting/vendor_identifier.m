@@ -1,10 +1,13 @@
-//
-//  vendor_identifier.m
-//  TrustKit
-//
-//  Created by Alban Diquet on 8/24/16.
-//  Copyright © 2016 TrustKit. All rights reserved.
-//
+/*
+ 
+ vendor_identifier.m
+ TrustKit
+ 
+ Copyright 2016 The TrustKit Project Authors
+ Licensed under the MIT license, see associated LICENSE file for terms.
+ See AUTHORS file for the list of project authors.
+ 
+ */
 
 #import "vendor_identifier.h"
 
