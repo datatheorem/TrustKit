@@ -43,7 +43,7 @@ typedef NSDictionary<TSKDomainConfigurationKey, id> TKSDomainPinningPolicy;
  Lastly, the callback is always invoked after the validation has been completed, and therefore
  cannot be used to modify the result of the validation (for example to accept invalid certificates).
  */
-typedef void (^TSKPinningValidatorCallback)(TSKPinningValidatorResult * _Nonnull, NSString * _Nonnull, TKSDomainPinningPolicy * _Nonnull);
+typedef void (^TSKPinningValidatorCallback)(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, TKSDomainPinningPolicy * _Nonnull policy);
 
 
 
