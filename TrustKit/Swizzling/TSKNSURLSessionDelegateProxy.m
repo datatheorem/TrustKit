@@ -28,7 +28,7 @@
     // + sessionWithConfiguration:delegate:delegateQueue:
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wshadow"
-    RSSwizzleClassMethod(NSClassFromString(@"NSURLSession"),
+    RSSwizzleClassMethod(NSURLSession.class,
                          @selector(sessionWithConfiguration:delegate:delegateQueue:),
                          RSSWReturnType(NSURLSession *),
                          RSSWArguments(NSURLSessionConfiguration * _Nonnull configuration, id _Nullable delegate, NSOperationQueue * _Nullable queue),
