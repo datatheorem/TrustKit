@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.17" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.14"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,46 +22,52 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fUD-nR-oCW">
-                                <rect key="frame" x="66" y="276.5" width="243" height="35"/>
-                                <color key="backgroundColor" red="0.10980392160000001" green="0.2784313725" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="kQR-v2-MNc"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Test Invalid Pinning"/>
-                                <connections>
-                                    <action selector="testInvalidPinning:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Izd-0Z-AY8"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v4z-tv-wOm">
-                                <rect key="frame" x="66" y="356.5" width="243" height="35"/>
-                                <color key="backgroundColor" red="0.10980392160000001" green="0.2784313725" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="hZ3-Kp-Tbr"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Test Valid Pinning"/>
-                                <connections>
-                                    <action selector="testValidPinning:" destination="BYZ-38-t0r" eventType="touchUpInside" id="I51-QU-1sQ"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="ZDW-cY-WSk">
+                                <rect key="frame" x="36" y="283.5" width="303" height="100"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fUD-nR-oCW">
+                                        <rect key="frame" x="0.0" y="0.0" width="303" height="35"/>
+                                        <color key="backgroundColor" red="0.10980392160000001" green="0.2784313725" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="kQR-v2-MNc"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="Test Invalid Pinning"/>
+                                        <connections>
+                                            <action selector="testInvalidPinning:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Izd-0Z-AY8"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v4z-tv-wOm">
+                                        <rect key="frame" x="0.0" y="65" width="303" height="35"/>
+                                        <color key="backgroundColor" red="0.10980392160000001" green="0.2784313725" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="hZ3-Kp-Tbr"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="Test Valid Pinning"/>
+                                        <connections>
+                                            <action selector="testValidPinning:" destination="BYZ-38-t0r" eventType="touchUpInside" id="I51-QU-1sQ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="MH7-tJ-gOY">
+                                <rect key="frame" x="177.5" y="413.5" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="v4z-tv-wOm" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="50" id="5GJ-vq-IAX"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="v4z-tv-wOm" secondAttribute="trailing" constant="50" id="GTq-Om-Ol2"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="fUD-nR-oCW" secondAttribute="trailing" constant="50" id="Juw-cU-20R"/>
-                            <constraint firstItem="fUD-nR-oCW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="50" id="Lmn-0D-d1y"/>
-                            <constraint firstItem="fUD-nR-oCW" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="LpS-ga-Iaw"/>
-                            <constraint firstItem="v4z-tv-wOm" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="40" id="QJQ-1o-u6o"/>
-                            <constraint firstItem="v4z-tv-wOm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bS8-8Q-5W2"/>
-                            <constraint firstItem="fUD-nR-oCW" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-40" id="bgF-MR-dT5"/>
+                            <constraint firstItem="ZDW-cY-WSk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6NL-cD-BpT"/>
+                            <constraint firstItem="MH7-tJ-gOY" firstAttribute="centerX" secondItem="ZDW-cY-WSk" secondAttribute="centerX" id="7ag-h7-iJs"/>
+                            <constraint firstItem="ZDW-cY-WSk" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="1:2.2" id="Ree-6T-7Fl"/>
+                            <constraint firstItem="MH7-tJ-gOY" firstAttribute="top" secondItem="ZDW-cY-WSk" secondAttribute="bottom" constant="30" id="WfA-2a-Cux"/>
+                            <constraint firstItem="ZDW-cY-WSk" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="cYS-zW-apl"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="MH7-tJ-gOY" id="xB5-Y9-diA"/>
                         <outlet property="testInvalidPinBtn" destination="fUD-nR-oCW" id="ci3-dt-kmx"/>
                         <outlet property="testValidPinBtn" destination="v4z-tv-wOm" id="hcK-fV-qTS"/>
                     </connections>
