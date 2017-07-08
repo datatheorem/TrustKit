@@ -13,19 +13,16 @@
 #import <TrustKit/TrustKit.h>
 #import <TrustKit/TSKPinningValidator.h>
 
-@interface ViewController ()
-{
-    UIActivityIndicatorView *activityIndicator;
-}
+static NSString *const baseURLYahoo = @"https://www.yahoo.com/";
+static NSString *const baseURLDT = @"https://www.datatheorem.com/";
 
-@property (nonatomic, strong) NSURLSession *session;
+@interface ViewController ()
+
+@property (nonatomic) NSURLSession *session;
 
 @end
 
 @implementation ViewController
-
-static NSString *const baseURLYahoo = @"https://www.yahoo.com/";
-static NSString *const baseURLDT = @"https://www.datatheorem.com/";
 
 - (void)viewDidLoad
 {
@@ -34,19 +31,25 @@ static NSString *const baseURLDT = @"https://www.datatheorem.com/";
     self.invalidPinBtn.layer.cornerRadius = 4;
     self.validPinBtn.layer.cornerRadius = 4;
     
-    self.session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration] delegate:self delegateQueue:nil];
-    
-    activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]
+                                                 delegate:self
+                                            delegateQueue:NSOperationQueue.mainQueue];
 }
 
+#pragma mark TrustKit Pinning Reference
 
-- (void)loadUrlWithPinningFailure: (NSURL *)url
+- (void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler
 {
-    // Load a URL with a bad pinning configuration to demonstrate a pinning failure with a report being sent
-    NSURLSessionDataTask *task = [self.session dataTaskWithURL:url];
-    [task resume];
-    [self showActivityIndicatorInCurrentViewController];
+    // Call into TrustKit here to do pinning validation
+    if (![TrustKit.sharedInstance.pinningValidator handleChallenge:challenge completionHandler:completionHandler])
+    {
+        // TrustKit did not handle this challenge: perhaps it was not for server trust
+        // or the domain was not pinned. Fall back to the default behavior
+        completionHandler(NSURLSessionAuthChallengePerformDefaultHandling, nil);
+    }
 }
+
+#pragma mark Test Control
 
 - (void)loadUrl:(NSURL *)url
 {
@@ -56,17 +59,13 @@ static NSString *const baseURLDT = @"https://www.datatheorem.com/";
     // Load a URL with a good pinning configuration
     NSURLSessionDataTask *task = [self.session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
-        if (!error) {
-            // Display Success Alert
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self displayAlertWithTitle:@"Test Result" andMessage:[NSString stringWithFormat:@"Pinning validation succeeded for %@", [url absoluteString]]];
-            });
+        if (error) {
+            // Display Error Alert
+            [self displayAlertWithTitle:@"Test Result" messageFormat:@"Pinning validation failed for %@\n\n%@", url.absoluteString, error.description];
         }
         else {
-            // Display Error Alert
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self displayAlertWithTitle:@"Test Result" andMessage:[NSString stringWithFormat:@"Pinning validation failed for [%@] : [%@]", [url absoluteString], error.description]];
-            });
+            // Display Success Alert
+            [self displayAlertWithTitle:@"Test Result" messageFormat:@"Pinning validation succeeded for %@", url.absoluteString];
         }
     }];
     [task resume];
@@ -82,42 +81,33 @@ static NSString *const baseURLDT = @"https://www.datatheorem.com/";
     [self loadUrl:[NSURL URLWithString:baseURLDT]];
 }
 
-- (void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler
-{
-    // Call into TrustKit here to do pinning validation
-    if (![[TrustKit sharedInstance].pinningValidator handleChallenge:challenge completionHandler:completionHandler])
-    {
-        // TrustKit did not handle this challenge: perhaps it was not for server trust
-        // or the domain was not pinned. Fall back to the default behavior
-        completionHandler(NSURLSessionAuthChallengePerformDefaultHandling, nil);
-    }
-}
-
-- (void)displayAlertWithTitle:(NSString *)title andMessage:(NSString *)message
+- (void)displayAlertWithTitle:(NSString *)title messageFormat:(NSString *)format, ...
 {
     // Hide Activity Indicator
     [self hideActivityIndicator];
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    va_list args;
+    va_start(args, format);
+    NSString *message = [[NSString alloc] initWithFormat:format arguments:args];
+    va_end(args);
+    
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title
+                                                                             message:message
+                                                                      preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (void)showActivityIndicatorInCurrentViewController
 {
-    [self.view setUserInteractionEnabled:NO];
-    if (![activityIndicator isAnimating]) {
-        activityIndicator.center = CGPointMake([UIScreen mainScreen].bounds.size.width/2, [UIScreen mainScreen].bounds.size.height/2 + 100);
-        [self.view addSubview:activityIndicator];
-        [activityIndicator startAnimating];
-    }
+    self.view.userInteractionEnabled = NO;
+    [self.activityIndicator startAnimating];
 }
 
 - (void)hideActivityIndicator
 {
-    [self.view setUserInteractionEnabled:YES];
-    [activityIndicator stopAnimating];
-    [activityIndicator removeFromSuperview];
+    self.view.userInteractionEnabled = YES;
+    [self.activityIndicator stopAnimating];
 }
 
 @end

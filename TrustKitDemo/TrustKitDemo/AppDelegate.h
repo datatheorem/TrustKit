@@ -13,8 +13,9 @@
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
+@property (nonatomic) UIWindow *window;
 
+@property (nonatomic, readonly) NSDictionary *trustKitConfig;
 
 @end
 
