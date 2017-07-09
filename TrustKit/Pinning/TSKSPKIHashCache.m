@@ -66,7 +66,6 @@ static const unsigned int asn1HeaderSizes[4] = {
     sizeof(ecDsaSecp384r1Asn1Header)
 };
 
-
 @interface TSKSPKIHashCache ()
 
 // Dictionnary to cache SPKI hashes instead of having to compute them on every connection
@@ -142,11 +141,11 @@ static const NSString *kTSKKeychainPublicKeyTag = @"TSKKeychainPublicKeyTag"; //
         _keychainQueue = dispatch_queue_create("TSKSPKIKeychainLock", DISPATCH_QUEUE_SERIAL);
         // Cleanup the Keychain in case the App previously crashed
         NSMutableDictionary * publicKeyGet = [[NSMutableDictionary alloc] init];
-        [publicKeyGet setObject:(__bridge id)kSecClassKey forKey:(__bridge id)kSecClass];
-        [publicKeyGet setObject:(kTSKKeychainPublicKeyTag) forKey:(__bridge id)kSecAttrApplicationTag];
-        [publicKeyGet setObject:(__bridge id)(kCFBooleanTrue) forKey:(__bridge id)kSecReturnData];
+        publicKeyGet[(__bridge id)kSecClass] = (__bridge id)kSecClassKey;
+        publicKeyGet[(__bridge id)kSecAttrApplicationTag] = kTSKKeychainPublicKeyTag;
+        publicKeyGet[(__bridge id)kSecReturnData] = @YES;
         dispatch_sync(_keychainQueue, ^{
-            SecItemDelete((__bridge CFDictionaryRef)(publicKeyGet));
+            SecItemDelete((__bridge CFDictionaryRef)publicKeyGet);
         });
 #endif
     }
@@ -295,20 +294,22 @@ static const NSString *kTSKKeychainPublicKeyTag = @"TSKKeychainPublicKeyTag"; //
 // Use the unified SecKey API (specifically SecKeyCopyExternalRepresentation())
 - (NSData *)getPublicKeyDataFromCertificate_unified:(SecCertificateRef)certificate
 {
-    SecKeyRef publicKey;
-    SecTrustRef tempTrust;
+    // Create an X509 trust using the using the certificate
+    SecTrustRef trust;
     SecPolicyRef policy = SecPolicyCreateBasicX509();
+    SecTrustCreateWithCertificates(certificate, policy, &trust);
     
-    // Get a public key reference from the certificate
-    SecTrustCreateWithCertificates(certificate, policy, &tempTrust);
-    SecTrustEvaluate(tempTrust, NULL);
-    publicKey = SecTrustCopyPublicKey(tempTrust);
+    // Get a public key reference for the certificate from the trust
+    SecTrustEvaluate(trust, NULL);
+    SecKeyRef publicKey = SecTrustCopyPublicKey(trust);
     CFRelease(policy);
-    CFRelease(tempTrust);
+    CFRelease(trust);
     
+    // Obtain the public key bytes from the key reference
     CFDataRef publicKeyData = SecKeyCopyExternalRepresentation(publicKey, NULL);
     CFRelease(publicKey);
-    return (NSData *)CFBridgingRelease(publicKeyData);
+    
+    return (__bridge_transfer NSData *)publicKeyData;
 }
 
 @end
@@ -335,30 +336,30 @@ static const NSString *kTSKKeychainPublicKeyTag = @"TSKKeychainPublicKeyTag"; //
     CFRelease(tempTrust);
     
     
-    // Extract the actual bytes from the key reference using the Keychain
+    /// Extract the actual bytes from the key reference using the Keychain
     // Prepare the dictionary to add the key
     NSMutableDictionary *peerPublicKeyAdd = [[NSMutableDictionary alloc] init];
-    [peerPublicKeyAdd setObject:(__bridge id)kSecClassKey forKey:(__bridge id)kSecClass];
-    [peerPublicKeyAdd setObject:kTSKKeychainPublicKeyTag forKey:(__bridge id)kSecAttrApplicationTag];
-    [peerPublicKeyAdd setObject:(__bridge id)(publicKey) forKey:(__bridge id)kSecValueRef];
+    peerPublicKeyAdd[(__bridge id)kSecClass] = (__bridge id)kSecClassKey;
+    peerPublicKeyAdd[(__bridge id)kSecAttrApplicationTag] = kTSKKeychainPublicKeyTag;
+    peerPublicKeyAdd[(__bridge id)kSecValueRef] = (__bridge id)publicKey;
     
     // Avoid issues with background fetching while the device is locked
-    [peerPublicKeyAdd setObject:(__bridge id)kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly forKey:(__bridge id)kSecAttrAccessible];
-    
+    peerPublicKeyAdd[(__bridge id)kSecAttrAccessible] = (__bridge id)kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly;
+
     // Request the key's data to be returned
-    [peerPublicKeyAdd setObject:(__bridge id)(kCFBooleanTrue) forKey:(__bridge id)kSecReturnData];
+    peerPublicKeyAdd[(__bridge id)kSecReturnData] = @YES;
     
     // Prepare the dictionary to retrieve and delete the key
     NSMutableDictionary * publicKeyGet = [[NSMutableDictionary alloc] init];
-    [publicKeyGet setObject:(__bridge id)kSecClassKey forKey:(__bridge id)kSecClass];
-    [publicKeyGet setObject:(kTSKKeychainPublicKeyTag) forKey:(__bridge id)kSecAttrApplicationTag];
-    [publicKeyGet setObject:(__bridge id)(kCFBooleanTrue) forKey:(__bridge id)kSecReturnData];
+    publicKeyGet[(__bridge id)kSecClass] = (__bridge id)kSecClassKey;
+    publicKeyGet[(__bridge id)kSecAttrApplicationTag] = kTSKKeychainPublicKeyTag;
+    publicKeyGet[(__bridge id)kSecReturnData] = @YES;
     
     
     // Get the key bytes from the Keychain atomically
     dispatch_sync(self.keychainQueue, ^{
         resultAdd = SecItemAdd((__bridge CFDictionaryRef) peerPublicKeyAdd, (void *)&publicKeyData);
-        resultDel = SecItemDelete((__bridge CFDictionaryRef)(publicKeyGet));
+        resultDel = SecItemDelete((__bridge CFDictionaryRef)publicKeyGet);
     });
     
     CFRelease(publicKey);
@@ -388,9 +389,9 @@ static const NSString *kTSKKeychainPublicKeyTag = @"TSKKeychainPublicKeyTag"; //
     CFErrorRef error = NULL;
     
     // SecCertificateCopyValues() is macOS only
-    NSArray *oids = [NSArray arrayWithObject:(__bridge id)(kSecOIDX509V1SubjectPublicKey)];
-    CFDictionaryRef certificateValues = SecCertificateCopyValues(certificate, (__bridge CFArrayRef)(oids), &error);
-    if (certificateValues == NULL)
+    NSArray *oids = @[ (__bridge id)kSecOIDX509V1SubjectPublicKey ];
+    NSDictionary *certificateValues = (__bridge_transfer NSDictionary *)SecCertificateCopyValues(certificate, (__bridge CFArrayRef)(oids), &error);
+    if (certificateValues == nil)
     {
         CFStringRef errorDescription = CFErrorCopyDescription(error);
         TSKLog(@"SecCertificateCopyValues() error: %@", errorDescription);
@@ -399,15 +400,15 @@ static const NSString *kTSKKeychainPublicKeyTag = @"TSKKeychainPublicKeyTag"; //
         return nil;
     }
     
-    for (NSString* fieldName in (__bridge NSDictionary *)certificateValues)
+    for (NSString *fieldName in certificateValues)
     {
-        NSDictionary *fieldDict = CFDictionaryGetValue(certificateValues, (__bridge const void *)(fieldName));
-        if ([fieldDict[(__bridge __strong id)(kSecPropertyKeyLabel)] isEqualToString:@"Public Key Data"])
+        NSDictionary *fieldDict = certificateValues[fieldName];
+        NSString *fieldLabel = fieldDict[(__bridge id)kSecPropertyKeyLabel];
+        if ([fieldLabel isEqualToString:@"Public Key Data"])
         {
-            publicKeyData = fieldDict[(__bridge __strong id)(kSecPropertyKeyValue)];
+            publicKeyData = fieldDict[(__bridge id)kSecPropertyKeyValue];
         }
     }
-    CFRelease(certificateValues);
     return publicKeyData;
 }
 
