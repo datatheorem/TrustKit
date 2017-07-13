@@ -22,7 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         TrustKit.setLoggerBlock { (message) in
             print("TrustKit log: \(message)")
         }
-        let trustKitConfig = [
+        
+        let trustKitConfig: [String: Any] = [
             kTSKSwizzleNetworkDelegates: false,
             kTSKPinnedDomains: [
                 "yahoo.com": [
@@ -48,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     ],
                     kTSKReportUris:["https://overmind.datatheorem.com/trustkit/report"],
                 ]
-            ]] as [String : Any]
+            ]]
         
         TrustKit.initSharedInstance(withConfiguration: trustKitConfig)
         

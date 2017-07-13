@@ -32,7 +32,7 @@
     [TrustKit setLoggerBlock:loggerBlock];
     
     // Initialize TrustKit
-    NSDictionary *trustKitConfig =
+    _trustKitConfig =
     @{
       // Do not auto-swizzle NSURLSession delegates
       kTSKSwizzleNetworkDelegates: @NO,
@@ -69,10 +69,10 @@
                               ]
                       }}};
     
-    [TrustKit initSharedInstanceWithConfiguration:trustKitConfig];
+    [TrustKit initSharedInstanceWithConfiguration:_trustKitConfig];
     
     // Demonstrate how to receive pin validation notifications (only useful for performance/metrics)
-    [TrustKit sharedInstance].pinningValidatorCallbackQueue =dispatch_get_main_queue();
+    [TrustKit sharedInstance].pinningValidatorCallbackQueue = dispatch_get_main_queue();
     [TrustKit sharedInstance].pinningValidatorCallback = ^(TSKPinningValidatorResult *result, NSString *notedHostname, TKSDomainPinningPolicy *policy) {
         NSLog(@"Received pinning validation notification:\n\tDuration: %0.4f\n\tDecision: %ld\n\tResult: %ld\n\tHostname: %@",
               result.validationDuration,
