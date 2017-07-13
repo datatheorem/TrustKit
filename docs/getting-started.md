@@ -123,6 +123,7 @@ NSDictionary *trustKitConfig =
                           @"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8="
                           ]
 }}};
+[TrustKit initSharedInstanceWithConfiguration:trustKitConfig];
 ```
 
 The list of all the configuration keys is available in the
