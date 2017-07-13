@@ -13,6 +13,8 @@
 		0DB3B67E1DA3B26700DA730D /* registry_search.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C84CCC31D6E5D5A009B3E7D /* registry_search.c */; };
 		0DB3B67F1DA3B26700DA730D /* trie_search.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C84CCC91D6E5D5A009B3E7D /* trie_search.c */; };
 		0E64A7601B867BA000CA164A /* TSKReportsRateLimiter.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C9EBE011B619BBE00CA7EE0 /* TSKReportsRateLimiter.m */; };
+		401379A31F17F63100567137 /* TSKPinningValidatorResult.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1A08FF1E57A4BB0055B12C /* TSKPinningValidatorResult.m */; };
+		401379A41F17F63500567137 /* TSKSPKIHashCache.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1A09091E57AC450055B12C /* TSKSPKIHashCache.m */; };
 		6B032D401AF1AEC200EAFA69 /* TSKReporterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B032D3F1AF1AEB600EAFA69 /* TSKReporterTests.m */; };
 		6B2B06AD1B05154A00FC749E /* TSKBackgroundReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B2B06AC1B05154A00FC749E /* TSKBackgroundReporter.h */; };
 		6B2B06AF1B05157400FC749E /* TSKBackgroundReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B2B06AE1B05157400FC749E /* TSKBackgroundReporter.m */; };
@@ -1338,11 +1340,13 @@
 				8C8716B81B23AA0D00267E1D /* TrustKit.m in Sources */,
 				8C4346DB1E5B894A008023F9 /* configuration_utils.m in Sources */,
 				8C8716B21B23A9F400267E1D /* TSKBackgroundReporter.m in Sources */,
+				401379A31F17F63100567137 /* TSKPinningValidatorResult.m in Sources */,
 				0E64A7601B867BA000CA164A /* TSKReportsRateLimiter.m in Sources */,
 				8CD5F74C1BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.m in Sources */,
 				8CD5F7341BC5ED4A005801D8 /* TSKNSURLConnectionDelegateProxy.m in Sources */,
 				8C0C904A1E3C41FA003851A8 /* TSKPinningValidator.m in Sources */,
 				8C8716B61B23AA0800267E1D /* ssl_pin_verifier.m in Sources */,
+				401379A41F17F63500567137 /* TSKSPKIHashCache.m in Sources */,
 				8CD0D4171BD42A7D004478C0 /* RSSwizzle.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
