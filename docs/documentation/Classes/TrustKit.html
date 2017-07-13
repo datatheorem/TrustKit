@@ -186,7 +186,7 @@ configured for the App. In singleton mode, the policy can be set either:</p>
 
 <ul>
 <li>By adding it to the App&rsquo;s <em>Info.plist</em> under the <code>TSKConfiguration</code> key, or</li>
-<li>By programmatically supplying it using the <code><a href="../Classes/TrustKit.html#/c:objc(cs)TrustKit(cm)initializeWithConfiguration:">+initializeWithConfiguration:</a></code> method.</li>
+<li>By programmatically supplying it using the <code><a href="../Classes/TrustKit.html#/c:objc(cs)TrustKit(cm)initSharedInstanceWithConfiguration:">+initSharedInstanceWithConfiguration:</a></code> method.</li>
 </ul>
 
 <p>In singleton mode, TrustKit can only be initialized once so only one of the two techniques 
@@ -194,8 +194,7 @@ should be used.</p>
 
 <p>For more complex Apps where multiple SSL pinning policies need to be used independently 
 (for example within different frameworks), TrustKit can be used in <q>multi-instance</q> mode
-by leveraging the <code>-initWithConfiguration:identifier:</code> method described at the end of this 
-page.</p>
+by leveraging the <code><a href="../Classes/TrustKit.html#/c:objc(cs)TrustKit(im)initWithConfiguration:">-initWithConfiguration:</a></code> method described at the end of this page.</p>
 
 <p>A TrustKit pinning policy is a dictionary which contains some global, App-wide settings
 (of type <code><a href="../Global Configuration Keys.html#/c:TSKTrustKitConfig.h@T@TSKGlobalConfigurationKey">TSKGlobalConfigurationKey</a></code>) as well as domain-specific configuration keys
@@ -219,8 +218,8 @@ indentation to indicate structure:</p>
 </code></pre>
 
 <p>When setting the pinning policy programmatically, it has to be supplied to the
-<code>initializeWithConfiguration:</code> method as a dictionary in order to initialize TrustKit. 
-For example:</p>
+<code>initSharedInstanceWithConfiguration:</code> method as a dictionary in order to initialize 
+TrustKit. For example:</p>
 <pre class="highlight plaintext"><code>   NSDictionary *trustKitConfig =
  @{
    kTSKPinnedDomains : @{
@@ -244,7 +243,7 @@ For example:</p>
                    }
            }};
 
-   [TrustKit initializeWithConfiguration:trustKitConfig];
+   [TrustKit initSharedInstanceWithConfiguration:trustKitConfig];
    trustKit = [TrustKit sharedInstance];
 </code></pre>
 
@@ -260,7 +259,7 @@ For example:</p>
                        "WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18="
                    ],]]] as [String : Any]
 
-       TrustKit.initialize(withConfiguration:trustKitConfig)
+       TrustKit.initSharedInstance(withConfiguration:trustKitConfig)
 </code></pre>
 
 <p>After initialization, the <code>TrustKit</code> instance&rsquo;s <code>pinningValidator</code> should be used to implement
@@ -283,9 +282,9 @@ pinning validation within the App&rsquo;s network authentication handlers.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:objc(cs)TrustKit(cm)initializeWithConfiguration:"></a>
-                    <a name="//apple_ref/objc/Method/+initializeWithConfiguration:" class="dashAnchor"></a>
-                    <a class="token" href="#/c:objc(cs)TrustKit(cm)initializeWithConfiguration:">+initializeWithConfiguration:</a>
+                    <a name="/c:objc(cs)TrustKit(cm)initSharedInstanceWithConfiguration:"></a>
+                    <a name="//apple_ref/objc/Method/+initSharedInstanceWithConfiguration:" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)TrustKit(cm)initSharedInstanceWithConfiguration:">+initSharedInstanceWithConfiguration:</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -300,13 +299,13 @@ pinning validation within the App&rsquo;s network authentication handlers.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Objective-C</p>
-                          <pre class="highlight"><code><span class="k">+</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">initializeWithConfiguration</span><span class="p">:</span>
+                          <pre class="highlight"><code><span class="k">+</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">initSharedInstanceWithConfiguration</span><span class="p">:</span>
     <span class="p">(</span><span class="n">nonnull</span> <span class="n">NSDictionary</span><span class="o">&lt;</span><span class="n"><a href="../Global Configuration Keys.html#/c:TSKTrustKitConfig.h@T@TSKGlobalConfigurationKey">TSKGlobalConfigurationKey</a></span><span class="p">,</span> <span class="n">id</span><span class="o">&gt;</span> <span class="o">*</span><span class="p">)</span><span class="nv">trustKitConfig</span><span class="p">;</span></code></pre>
 
                         </div>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">class</span> <span class="kd">func</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">withConfiguration</span> <span class="nv">trustKitConfig</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">])</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">class</span> <span class="kd">func</span> <span class="nf">initSharedInstance</span><span class="p">(</span><span class="n">withConfiguration</span> <span class="nv">trustKitConfig</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span> <span class="p">:</span> <span class="kt">Any</span><span class="p">])</span></code></pre>
 
                         </div>
                       </div>
@@ -347,7 +346,7 @@ already been initialized.</p>
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Retrieve the global TrustKit singleton instance. Raises an exception if <code><a href="../Classes/TrustKit.html#/c:objc(cs)TrustKit(cm)initializeWithConfiguration:">+initializeWithConfiguration:</a></code>
+                        <p>Retrieve the global TrustKit singleton instance. Raises an exception if <code><a href="../Classes/TrustKit.html#/c:objc(cs)TrustKit(cm)initSharedInstanceWithConfiguration:">+initSharedInstanceWithConfiguration:</a></code>
 has not yet been invoked.</p>
 
                       </div>
@@ -622,7 +621,7 @@ logger will not print any messages at all.</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2017 <a class="link" href="https://datatheorem.github.io" target="_blank" rel="external">Data Theorem</a>. All rights reserved. (Last updated: 2017-07-07)</p>
+      <p>&copy; 2017 <a class="link" href="https://datatheorem.github.io" target="_blank" rel="external">Data Theorem</a>. All rights reserved. (Last updated: 2017-07-13)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
