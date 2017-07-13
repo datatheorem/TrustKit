@@ -69,7 +69,7 @@
                               ]
                       }}};
     
-    [TrustKit initializeWithConfiguration:trustKitConfig];
+    [TrustKit initSharedInstanceWithConfiguration:trustKitConfig];
     
     // Demonstrate how to receive pin validation notifications (only useful for performance/metrics)
     [TrustKit sharedInstance].pinningValidatorCallbackQueue =dispatch_get_main_queue();

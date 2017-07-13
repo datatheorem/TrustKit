@@ -81,14 +81,14 @@ void TSKLog(NSString *format, ...)
     if (!sharedTrustKit) {
         // TrustKit should only be initialized once so we don't double swizzle or get into anything unexpected
         [NSException raise:@"TrustKit was not initialized"
-                    format:@"TrustKit must be initialized using +initializeWithConfiguration: prior to accessing sharedInstance"];
+                    format:@"TrustKit must be initialized using +initSharedInstanceWithConfiguration: prior to accessing sharedInstance"];
     }
     return sharedTrustKit;
 }
 
-+ (void)initializeWithConfiguration:(NSDictionary<TSKGlobalConfigurationKey, id> *)trustKitConfig
++ (void)initSharedInstanceWithConfiguration:(NSDictionary<TSKGlobalConfigurationKey, id> *)trustKitConfig
 {
-    TSKLog(@"Configuration passed via explicit call to initializeWithConfiguration:");
+    TSKLog(@"Configuration passed via explicit call to initSharedInstanceWithConfiguration:");
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -266,6 +266,6 @@ __attribute__((constructor)) static void initializeWithInfoPlist(int argc, const
     if (trustKitConfigFromInfoPlist)
     {
         TSKLog(@"Configuration supplied via the App's Info.plist");
-        [TrustKit initializeWithConfiguration:trustKitConfigFromInfoPlist];
+        [TrustKit initSharedInstanceWithConfiguration:trustKitConfigFromInfoPlist];
     }
 }

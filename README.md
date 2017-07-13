@@ -66,7 +66,7 @@ Alternatively, the pinning policy can be set programmatically:
                     }
             }};
     
-    [TrustKit initializeWithConfiguration:trustKitConfig];
+    [TrustKit initSharedInstanceWithConfiguration:trustKitConfig];
 ```
 
 The policy can also be set programmatically in Swift Apps:
@@ -83,7 +83,7 @@ The policy can also be set programmatically in Swift Apps:
                         "WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18="
                     ],]]] as [String : Any]
         
-        TrustKit.initialize(withConfiguration:trustKitConfig)
+        TrustKit.initSharedInstance(withConfiguration:trustKitConfig)
 ```
 
 After TrustKit has been initialized, a 

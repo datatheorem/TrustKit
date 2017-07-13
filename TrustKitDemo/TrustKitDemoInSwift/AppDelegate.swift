@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 ]
             ]] as [String : Any]
         
-        TrustKit.initialize(withConfiguration: trustKitConfig)
+        TrustKit.initSharedInstance(withConfiguration: trustKitConfig)
         
         return true
     }

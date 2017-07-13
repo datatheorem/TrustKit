@@ -77,7 +77,7 @@ folder on disk.
 ### Configuring a Pinning Policy
 
 Enabling TrustKit within an App requires generating a pinning policy and then
-initializing TrustKit by calling the `initializeWithConfiguration:` method with your 
+initializing TrustKit by calling the `initSharedInstanceWithConfiguration:` method with your 
 pinning policy.
 
 A pinning policy is a dictionary of domain names and pinning configuration keys.

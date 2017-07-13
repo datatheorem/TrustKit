@@ -30,15 +30,14 @@ NS_ASSUME_NONNULL_BEGIN
  configured for the App. In singleton mode, the policy can be set either:
  
  * By adding it to the App's _Info.plist_ under the `TSKConfiguration` key, or 
- * By programmatically supplying it using the `+initializeWithConfiguration:` method.
+ * By programmatically supplying it using the `+initSharedInstanceWithConfiguration:` method.
  
  In singleton mode, TrustKit can only be initialized once so only one of the two techniques 
  should be used.
  
  For more complex Apps where multiple SSL pinning policies need to be used independently 
  (for example within different frameworks), TrustKit can be used in "multi-instance" mode
- by leveraging the `-initWithConfiguration:identifier:` method described at the end of this 
- page.
+ by leveraging the `-initWithConfiguration:` method described at the end of this page.
  
  A TrustKit pinning policy is a dictionary which contains some global, App-wide settings
  (of type `TSKGlobalConfigurationKey`) as well as domain-specific configuration keys
@@ -64,8 +63,8 @@ NS_ASSUME_NONNULL_BEGIN
  ```
  
  When setting the pinning policy programmatically, it has to be supplied to the
- `initializeWithConfiguration:` method as a dictionary in order to initialize TrustKit. 
- For example:
+ `initSharedInstanceWithConfiguration:` method as a dictionary in order to initialize 
+ TrustKit. For example:
  
  ```
     NSDictionary *trustKitConfig =
@@ -91,7 +90,7 @@ NS_ASSUME_NONNULL_BEGIN
                     }
             }};
     
-    [TrustKit initializeWithConfiguration:trustKitConfig];
+    [TrustKit initSharedInstanceWithConfiguration:trustKitConfig];
     trustKit = [TrustKit sharedInstance];
  ```
  
@@ -109,7 +108,7 @@ NS_ASSUME_NONNULL_BEGIN
                         "WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18="
                     ],]]] as [String : Any]
         
-        TrustKit.initialize(withConfiguration:trustKitConfig)
+        TrustKit.initSharedInstance(withConfiguration:trustKitConfig)
  ```
  
  After initialization, the `TrustKit` instance's `pinningValidator` should be used to implement
@@ -128,11 +127,11 @@ NS_ASSUME_NONNULL_BEGIN
  already been initialized.
  
  */
-+ (void)initializeWithConfiguration:(NSDictionary<TSKGlobalConfigurationKey, id> *)trustKitConfig;
++ (void)initSharedInstanceWithConfiguration:(NSDictionary<TSKGlobalConfigurationKey, id> *)trustKitConfig;
 
 
 /**
- Retrieve the global TrustKit singleton instance. Raises an exception if `+initializeWithConfiguration:`
+ Retrieve the global TrustKit singleton instance. Raises an exception if `+initSharedInstanceWithConfiguration:`
  has not yet been invoked.
  
  @return the shared TrustKit singleton
