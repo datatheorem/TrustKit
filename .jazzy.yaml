@@ -1,0 +1,62 @@
+module: TrustKit
+author: Data Theorem
+author_url: https://datatheorem.github.io
+github_url: https://github.com/datatheorem/TrustKit
+
+clean: true
+hide_documentation_coverage: true
+theme: fullwidth
+
+objc: true
+umbrella_header: "TrustKit/TrustKit.h"
+framework_root: "./TrustKit"
+
+readme: "docs/documentation-readme.md"
+output: "docs/documentation"
+
+custom_categories:
+  - name: Initalizing TrustKit
+    children:
+    - TrustKit
+
+  - name: Implementing Pinning Validation
+    children:
+    - TSKPinningValidator
+    - TSKTrustDecision
+
+  - name: Setting up a Validation Callback
+    children:
+    - TSKPinningValidatorCallback
+    - TSKPinningValidatorResult
+    - TKSDomainPinningPolicy
+    - TSKTrustEvaluationResult
+  
+  - name: Global Configuration Keys
+    children:
+    - TSKGlobalConfigurationKey
+    - kTSKSwizzleNetworkDelegates
+    - kTSKPinnedDomains
+    - kTSKIgnorePinningForUserDefinedTrustAnchors
+    
+  - name: Domain Configuration Keys
+    children:
+    - TSKDomainConfigurationKey
+    - kTSKPublicKeyHashes
+    - kTSKPublicKeyAlgorithms
+    - kTSKEnforcePinning
+    - kTSKIncludeSubdomains
+    - kTSKExcludeSubdomainFromParentPolicy
+    - kTSKReportUris
+    - kTSKDisableDefaultReportUri 
+    - kTSKExpirationDate
+    - kTSKAdditionalTrustAnchors
+
+  - name: Public Key Algorithm Keys
+    children:
+    - TSKSupportedAlgorithm
+    - kTSKAlgorithmRsa2048
+    - kTSKAlgorithmRsa4096
+    - kTSKAlgorithmEcDsaSecp256r1
+    - kTSKAlgorithmEcDsaSecp384r1
+    
+

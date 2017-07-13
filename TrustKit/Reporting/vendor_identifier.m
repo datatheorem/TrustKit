@@ -1,30 +1,31 @@
-//
-//  vendor_identifier.m
-//  TrustKit
-//
-//  Created by Alban Diquet on 8/24/16.
-//  Copyright © 2016 TrustKit. All rights reserved.
-//
+/*
+ 
+ vendor_identifier.m
+ TrustKit
+ 
+ Copyright 2016 The TrustKit Project Authors
+ Licensed under the MIT license, see associated LICENSE file for terms.
+ See AUTHORS file for the list of project authors.
+ 
+ */
 
 #import "vendor_identifier.h"
 
-
 #if TARGET_OS_IPHONE && !TARGET_OS_WATCH
 
-#pragma mark Vendor identifier - macOS, tvOS
+#pragma mark Vendor identifier - iOS, tvOS
 
-@import UIKit; // For accessing the IDFV
+@import UIKit; // for accessing the IDFV
 
 NSString *identifier_for_vendor(void)
 {
-    return [[[UIDevice currentDevice] identifierForVendor]UUIDString];
+    return UIDevice.currentDevice.identifierForVendor.UUIDString;
 }
 
 #else
 
 #pragma mark Vendor identifier - macOS, watchOS
 
-#include <pthread.h>
 
 static NSString * const kTSKVendorIdentifierKey = @"TSKVendorIdentifier";
 
@@ -32,18 +33,18 @@ static NSString * const kTSKVendorIdentifierKey = @"TSKVendorIdentifier";
 NSString *identifier_for_vendor(void)
 {
     // Try to retrieve the vendor ID from the preferences
-    NSUserDefaults *preferences = [NSUserDefaults standardUserDefaults];
+    NSUserDefaults *preferences = NSUserDefaults.standardUserDefaults;
     NSString *vendorId = [preferences stringForKey:kTSKVendorIdentifierKey];
     if (vendorId == nil)
     {
         // Generate and store a new UUID
-        vendorId = [[NSUUID UUID] UUIDString];
-        
+        vendorId = NSUUID.UUID.UUIDString;
         [preferences setObject:vendorId forKey:kTSKVendorIdentifierKey];
         [preferences synchronize];
     }
     return vendorId;
 }
+
 
 #endif
 

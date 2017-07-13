@@ -16,68 +16,12 @@
 		194231161EF9658800029B04 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194231151EF9658800029B04 /* AppDelegate.swift */; };
 		194231181EF9658800029B04 /* DTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 194231171EF9658800029B04 /* DTViewController.swift */; };
 		1942311D1EF9658800029B04 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1942311C1EF9658800029B04 /* Assets.xcassets */; };
-		194231201EF9658800029B04 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1942311E1EF9658800029B04 /* LaunchScreen.storyboard */; };
-		194231271EF9663F00029B04 /* MainStoryboardForSwift.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 194231261EF9663F00029B04 /* MainStoryboardForSwift.storyboard */; };
+		194231271EF9663F00029B04 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 194231261EF9663F00029B04 /* Main.storyboard */; };
+		5A8D1A59570DDDCEA069122F /* Pods_TrustKitDemo_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA439ED79C3CC872A6212881 /* Pods_TrustKitDemo_Swift.framework */; };
+		5C1DE70282AFDA569285EAC8 /* libPods-TrustKitDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ED236495884111AC895A025E /* libPods-TrustKitDemo.a */; };
+		E90DE1D752D726C6764F55E6 /* libPods-TrustKitDemo-ObjC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4594D1F801A2D85113A8D4A7 /* libPods-TrustKitDemo-ObjC.a */; };
+		F563B5060C50A25EA583DA9A /* Pods_TrustKitDemoInSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F77E736E3DC0DB307912893 /* Pods_TrustKitDemoInSwift.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		19ECC2621F028C9800D81F79 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 19ECC2571F028C9800D81F79 /* TrustKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8C8480471A896EE30017C155;
-			remoteInfo = TrustKit;
-		};
-		19ECC2641F028C9800D81F79 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 19ECC2571F028C9800D81F79 /* TrustKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8C8716961B23A91D00267E1D;
-			remoteInfo = TrustKit_Static;
-		};
-		19ECC2661F028C9800D81F79 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 19ECC2571F028C9800D81F79 /* TrustKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8C8480521A896EE30017C155;
-			remoteInfo = TrustKitTests;
-		};
-		19ECC2681F028C9800D81F79 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 19ECC2571F028C9800D81F79 /* TrustKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8CA6CBFD1BAE2ADD00BDA419;
-			remoteInfo = "TrustKit OS X";
-		};
-		19ECC26A1F028C9800D81F79 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 19ECC2571F028C9800D81F79 /* TrustKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8CA6CC061BAE2ADD00BDA419;
-			remoteInfo = "TrustKit OS XTests";
-		};
-		19ECC26C1F028C9800D81F79 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 19ECC2571F028C9800D81F79 /* TrustKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8C84CBB21D6E0981009B3E7D;
-			remoteInfo = "TrustKit tvOS";
-		};
-		19ECC26E1F028C9800D81F79 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 19ECC2571F028C9800D81F79 /* TrustKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8C84CBDD1D6E1718009B3E7D;
-			remoteInfo = "TrustKit tvOS Tests";
-		};
-		19ECC2701F028C9800D81F79 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 19ECC2571F028C9800D81F79 /* TrustKit.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8CC5D24E1D6E64D10074F515;
-			remoteInfo = "TrustKit watchOS";
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		1942310A1EF8431400029B04 /* Embed Frameworks */ = {
@@ -93,7 +37,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1942309D1EF7C91A00029B04 /* TrustKitDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrustKitDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		03B1C8789B008BB8F706D702 /* Pods-TrustKitDemoInSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrustKitDemoInSwift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TrustKitDemoInSwift/Pods-TrustKitDemoInSwift.debug.xcconfig"; sourceTree = "<group>"; };
+		1942309D1EF7C91A00029B04 /* TrustKitDemo-ObjC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TrustKitDemo-ObjC.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		194230A11EF7C91A00029B04 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		194230A31EF7C91A00029B04 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		194230A41EF7C91A00029B04 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -103,14 +48,24 @@
 		194230AC1EF7C91A00029B04 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		194230AF1EF7C91A00029B04 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		194230B11EF7C91A00029B04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		194231131EF9658800029B04 /* TrustKitDemoInSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrustKitDemoInSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		194231131EF9658800029B04 /* TrustKitDemo-Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TrustKitDemo-Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		194231151EF9658800029B04 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		194231171EF9658800029B04 /* DTViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTViewController.swift; sourceTree = "<group>"; };
 		1942311C1EF9658800029B04 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		1942311F1EF9658800029B04 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		194231211EF9658800029B04 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		194231261EF9663F00029B04 /* MainStoryboardForSwift.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = MainStoryboardForSwift.storyboard; sourceTree = "<group>"; };
-		19ECC2571F028C9800D81F79 /* TrustKit.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = TrustKit.xcodeproj; path = ../TrustKit.xcodeproj; sourceTree = "<group>"; };
+		194231261EF9663F00029B04 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		229FD9B70132921DEF151965 /* Pods-TrustKitDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrustKitDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TrustKitDemo/Pods-TrustKitDemo.debug.xcconfig"; sourceTree = "<group>"; };
+		30535E1438B5A9A32F97C7F3 /* Pods-TrustKitDemo-ObjC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrustKitDemo-ObjC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TrustKitDemo-ObjC/Pods-TrustKitDemo-ObjC.debug.xcconfig"; sourceTree = "<group>"; };
+		4594D1F801A2D85113A8D4A7 /* libPods-TrustKitDemo-ObjC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TrustKitDemo-ObjC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		756D66A433A7A1257803FD3D /* Pods-TrustKitDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrustKitDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrustKitDemo/Pods-TrustKitDemo.release.xcconfig"; sourceTree = "<group>"; };
+		9F77E736E3DC0DB307912893 /* Pods_TrustKitDemoInSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrustKitDemoInSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9FDCACA5A2721D9EF3F32921 /* Pods-TrustKitDemo-Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrustKitDemo-Swift.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrustKitDemo-Swift/Pods-TrustKitDemo-Swift.release.xcconfig"; sourceTree = "<group>"; };
+		BE18B1D51351C2F2618BD2F7 /* Pods-TrustKitDemo-Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrustKitDemo-Swift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TrustKitDemo-Swift/Pods-TrustKitDemo-Swift.debug.xcconfig"; sourceTree = "<group>"; };
+		D2731A50771388BDCC19542B /* Pods-TrustKitDemo-ObjC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrustKitDemo-ObjC.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrustKitDemo-ObjC/Pods-TrustKitDemo-ObjC.release.xcconfig"; sourceTree = "<group>"; };
+		DA439ED79C3CC872A6212881 /* Pods_TrustKitDemo_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrustKitDemo_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EC7EA2F77D7200BFD66DB095 /* Pods-TrustKitDemoInSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrustKitDemoInSwift.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrustKitDemoInSwift/Pods-TrustKitDemoInSwift.release.xcconfig"; sourceTree = "<group>"; };
+		ED236495884111AC895A025E /* libPods-TrustKitDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TrustKitDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FCB0DD861F117CBE00741410 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FCB0DD881F117D4C00741410 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +73,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5C1DE70282AFDA569285EAC8 /* libPods-TrustKitDemo.a in Frameworks */,
+				E90DE1D752D726C6764F55E6 /* libPods-TrustKitDemo-ObjC.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +82,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F563B5060C50A25EA583DA9A /* Pods_TrustKitDemoInSwift.framework in Frameworks */,
+				5A8D1A59570DDDCEA069122F /* Pods_TrustKitDemo_Swift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,33 +93,33 @@
 		194230941EF7C91A00029B04 = {
 			isa = PBXGroup;
 			children = (
-				19ECC2571F028C9800D81F79 /* TrustKit.xcodeproj */,
-				1942309F1EF7C91A00029B04 /* TrustKitDemo */,
-				194231141EF9658800029B04 /* TrustKitDemoInSwift */,
+				1942309F1EF7C91A00029B04 /* TrustKitDemo-ObjC */,
+				194231141EF9658800029B04 /* TrustKitDemo-Swift */,
 				1942309E1EF7C91A00029B04 /* Products */,
+				D967AF3E12D8D8B5235F2256 /* Pods */,
+				F58942AA5E9A3C720DDF8006 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		1942309E1EF7C91A00029B04 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1942309D1EF7C91A00029B04 /* TrustKitDemo.app */,
-				194231131EF9658800029B04 /* TrustKitDemoInSwift.app */,
+				1942309D1EF7C91A00029B04 /* TrustKitDemo-ObjC.app */,
+				194231131EF9658800029B04 /* TrustKitDemo-Swift.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		1942309F1EF7C91A00029B04 /* TrustKitDemo */ = {
+		1942309F1EF7C91A00029B04 /* TrustKitDemo-ObjC */ = {
 			isa = PBXGroup;
 			children = (
 				194230A31EF7C91A00029B04 /* AppDelegate.h */,
 				194230A41EF7C91A00029B04 /* AppDelegate.m */,
 				194230A61EF7C91A00029B04 /* ViewController.h */,
 				194230A71EF7C91A00029B04 /* ViewController.m */,
-				194230AC1EF7C91A00029B04 /* Assets.xcassets */,
 				194230A01EF7C91A00029B04 /* Supporting Files */,
 			);
-			path = TrustKitDemo;
+			path = "TrustKitDemo-ObjC";
 			sourceTree = "<group>";
 		};
 		194230A01EF7C91A00029B04 /* Supporting Files */ = {
@@ -169,75 +128,101 @@
 				194230B11EF7C91A00029B04 /* Info.plist */,
 				194230AE1EF7C91A00029B04 /* LaunchScreen.storyboard */,
 				194230A91EF7C91A00029B04 /* Main.storyboard */,
+				194230AC1EF7C91A00029B04 /* Assets.xcassets */,
 				194230A11EF7C91A00029B04 /* main.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		194231141EF9658800029B04 /* TrustKitDemoInSwift */ = {
+		194231141EF9658800029B04 /* TrustKitDemo-Swift */ = {
 			isa = PBXGroup;
 			children = (
 				194231151EF9658800029B04 /* AppDelegate.swift */,
 				194231171EF9658800029B04 /* DTViewController.swift */,
-				194231261EF9663F00029B04 /* MainStoryboardForSwift.storyboard */,
-				1942311C1EF9658800029B04 /* Assets.xcassets */,
-				1942311E1EF9658800029B04 /* LaunchScreen.storyboard */,
-				194231211EF9658800029B04 /* Info.plist */,
+				FCB0DD871F117CCD00741410 /* Supporting FIles */,
 			);
-			path = TrustKitDemoInSwift;
+			path = "TrustKitDemo-Swift";
 			sourceTree = "<group>";
 		};
-		19ECC2581F028C9800D81F79 /* Products */ = {
+		D967AF3E12D8D8B5235F2256 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				19ECC2631F028C9800D81F79 /* TrustKit.framework */,
-				19ECC2651F028C9800D81F79 /* libTrustKit_Static.a */,
-				19ECC2671F028C9800D81F79 /* TrustKitTests.xctest */,
-				19ECC2691F028C9800D81F79 /* TrustKit.framework */,
-				19ECC26B1F028C9800D81F79 /* TrustKit OS XTests.xctest */,
-				19ECC26D1F028C9800D81F79 /* TrustKit.framework */,
-				19ECC26F1F028C9800D81F79 /* TrustKit tvOS Tests.xctest */,
-				19ECC2711F028C9800D81F79 /* TrustKit.framework */,
+				229FD9B70132921DEF151965 /* Pods-TrustKitDemo.debug.xcconfig */,
+				756D66A433A7A1257803FD3D /* Pods-TrustKitDemo.release.xcconfig */,
+				03B1C8789B008BB8F706D702 /* Pods-TrustKitDemoInSwift.debug.xcconfig */,
+				EC7EA2F77D7200BFD66DB095 /* Pods-TrustKitDemoInSwift.release.xcconfig */,
+				30535E1438B5A9A32F97C7F3 /* Pods-TrustKitDemo-ObjC.debug.xcconfig */,
+				D2731A50771388BDCC19542B /* Pods-TrustKitDemo-ObjC.release.xcconfig */,
+				BE18B1D51351C2F2618BD2F7 /* Pods-TrustKitDemo-Swift.debug.xcconfig */,
+				9FDCACA5A2721D9EF3F32921 /* Pods-TrustKitDemo-Swift.release.xcconfig */,
 			);
-			name = Products;
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		F58942AA5E9A3C720DDF8006 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ED236495884111AC895A025E /* libPods-TrustKitDemo.a */,
+				9F77E736E3DC0DB307912893 /* Pods_TrustKitDemoInSwift.framework */,
+				4594D1F801A2D85113A8D4A7 /* libPods-TrustKitDemo-ObjC.a */,
+				DA439ED79C3CC872A6212881 /* Pods_TrustKitDemo_Swift.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FCB0DD871F117CCD00741410 /* Supporting FIles */ = {
+			isa = PBXGroup;
+			children = (
+				FCB0DD861F117CBE00741410 /* Info.plist */,
+				FCB0DD881F117D4C00741410 /* LaunchScreen.storyboard */,
+				194231261EF9663F00029B04 /* Main.storyboard */,
+				1942311C1EF9658800029B04 /* Assets.xcassets */,
+			);
+			name = "Supporting FIles";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		1942309C1EF7C91A00029B04 /* TrustKitDemo */ = {
+		1942309C1EF7C91A00029B04 /* TrustKitDemo-ObjC */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 194230BF1EF7C91B00029B04 /* Build configuration list for PBXNativeTarget "TrustKitDemo" */;
+			buildConfigurationList = 194230BF1EF7C91B00029B04 /* Build configuration list for PBXNativeTarget "TrustKitDemo-ObjC" */;
 			buildPhases = (
+				FE484BC2D3DE5A98FB396530 /* [CP] Check Pods Manifest.lock */,
 				194230991EF7C91A00029B04 /* Sources */,
 				1942309A1EF7C91A00029B04 /* Frameworks */,
 				1942309B1EF7C91A00029B04 /* Resources */,
 				1942310A1EF8431400029B04 /* Embed Frameworks */,
+				F3519FE17357D96DE9D6DC8F /* [CP] Embed Pods Frameworks */,
+				B0B8C588FDD7DE19BF5403D9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = TrustKitDemo;
+			name = "TrustKitDemo-ObjC";
 			productName = TrustKitDemo;
-			productReference = 1942309D1EF7C91A00029B04 /* TrustKitDemo.app */;
+			productReference = 1942309D1EF7C91A00029B04 /* TrustKitDemo-ObjC.app */;
 			productType = "com.apple.product-type.application";
 		};
-		194231121EF9658800029B04 /* TrustKitDemoInSwift */ = {
+		194231121EF9658800029B04 /* TrustKitDemo-Swift */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 194231221EF9658800029B04 /* Build configuration list for PBXNativeTarget "TrustKitDemoInSwift" */;
+			buildConfigurationList = 194231221EF9658800029B04 /* Build configuration list for PBXNativeTarget "TrustKitDemo-Swift" */;
 			buildPhases = (
+				8CA07DBE8A9BC5BDBC638FC6 /* [CP] Check Pods Manifest.lock */,
 				1942310F1EF9658800029B04 /* Sources */,
 				194231101EF9658800029B04 /* Frameworks */,
 				194231111EF9658800029B04 /* Resources */,
+				BBC1A58CA4B22D26E361B87D /* [CP] Embed Pods Frameworks */,
+				4103682D359FAAA8C92466D1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = TrustKitDemoInSwift;
+			name = "TrustKitDemo-Swift";
 			productName = TrustKitDemoInSwift;
-			productReference = 194231131EF9658800029B04 /* TrustKitDemoInSwift.app */;
+			productReference = 194231131EF9658800029B04 /* TrustKitDemo-Swift.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -273,78 +258,13 @@
 			mainGroup = 194230941EF7C91A00029B04;
 			productRefGroup = 1942309E1EF7C91A00029B04 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 19ECC2581F028C9800D81F79 /* Products */;
-					ProjectRef = 19ECC2571F028C9800D81F79 /* TrustKit.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
-				1942309C1EF7C91A00029B04 /* TrustKitDemo */,
-				194231121EF9658800029B04 /* TrustKitDemoInSwift */,
+				1942309C1EF7C91A00029B04 /* TrustKitDemo-ObjC */,
+				194231121EF9658800029B04 /* TrustKitDemo-Swift */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		19ECC2631F028C9800D81F79 /* TrustKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = TrustKit.framework;
-			remoteRef = 19ECC2621F028C9800D81F79 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		19ECC2651F028C9800D81F79 /* libTrustKit_Static.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libTrustKit_Static.a;
-			remoteRef = 19ECC2641F028C9800D81F79 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		19ECC2671F028C9800D81F79 /* TrustKitTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = TrustKitTests.xctest;
-			remoteRef = 19ECC2661F028C9800D81F79 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		19ECC2691F028C9800D81F79 /* TrustKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = TrustKit.framework;
-			remoteRef = 19ECC2681F028C9800D81F79 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		19ECC26B1F028C9800D81F79 /* TrustKit OS XTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "TrustKit OS XTests.xctest";
-			remoteRef = 19ECC26A1F028C9800D81F79 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		19ECC26D1F028C9800D81F79 /* TrustKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = TrustKit.framework;
-			remoteRef = 19ECC26C1F028C9800D81F79 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		19ECC26F1F028C9800D81F79 /* TrustKit tvOS Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "TrustKit tvOS Tests.xctest";
-			remoteRef = 19ECC26E1F028C9800D81F79 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		19ECC2711F028C9800D81F79 /* TrustKit.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = TrustKit.framework;
-			remoteRef = 19ECC2701F028C9800D81F79 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1942309B1EF7C91A00029B04 /* Resources */ = {
@@ -361,13 +281,105 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				194231201EF9658800029B04 /* LaunchScreen.storyboard in Resources */,
 				1942311D1EF9658800029B04 /* Assets.xcassets in Resources */,
-				194231271EF9663F00029B04 /* MainStoryboardForSwift.storyboard in Resources */,
+				194231271EF9663F00029B04 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4103682D359FAAA8C92466D1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TrustKitDemo-Swift/Pods-TrustKitDemo-Swift-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8CA07DBE8A9BC5BDBC638FC6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B0B8C588FDD7DE19BF5403D9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TrustKitDemo-ObjC/Pods-TrustKitDemo-ObjC-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BBC1A58CA4B22D26E361B87D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TrustKitDemo-Swift/Pods-TrustKitDemo-Swift-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F3519FE17357D96DE9D6DC8F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TrustKitDemo-ObjC/Pods-TrustKitDemo-ObjC-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FE484BC2D3DE5A98FB396530 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		194230991EF7C91A00029B04 /* Sources */ = {
@@ -404,14 +416,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				194230AF1EF7C91A00029B04 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		1942311E1EF9658800029B04 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				1942311F1EF9658800029B04 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -511,13 +515,14 @@
 		};
 		194230C01EF7C91B00029B04 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 30535E1438B5A9A32F97C7F3 /* Pods-TrustKitDemo-ObjC.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = B2EWK89Q2H;
-				INFOPLIST_FILE = TrustKitDemo/Info.plist;
+				INFOPLIST_FILE = "TrustKitDemo-ObjC/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.datatheorem.TrustKitDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.TrustKitDemo-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -525,13 +530,14 @@
 		};
 		194230C11EF7C91B00029B04 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D2731A50771388BDCC19542B /* Pods-TrustKitDemo-ObjC.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = B2EWK89Q2H;
-				INFOPLIST_FILE = TrustKitDemo/Info.plist;
+				INFOPLIST_FILE = "TrustKitDemo-ObjC/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.datatheorem.TrustKitDemo;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.TrustKitDemo-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -539,13 +545,14 @@
 		};
 		194231231EF9658800029B04 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BE18B1D51351C2F2618BD2F7 /* Pods-TrustKitDemo-Swift.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = B2EWK89Q2H;
-				INFOPLIST_FILE = TrustKitDemoInSwift/Info.plist;
+				INFOPLIST_FILE = "TrustKitDemo-Swift/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.datatheorem.TrustKitDemoInSwift;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.TrustKitDemo-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -556,13 +563,14 @@
 		};
 		194231241EF9658800029B04 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9FDCACA5A2721D9EF3F32921 /* Pods-TrustKitDemo-Swift.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = B2EWK89Q2H;
-				INFOPLIST_FILE = TrustKitDemoInSwift/Info.plist;
+				INFOPLIST_FILE = "TrustKitDemo-Swift/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.datatheorem.TrustKitDemoInSwift;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.TrustKitDemo-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_VERSION = 3.0;
@@ -582,7 +590,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		194230BF1EF7C91B00029B04 /* Build configuration list for PBXNativeTarget "TrustKitDemo" */ = {
+		194230BF1EF7C91B00029B04 /* Build configuration list for PBXNativeTarget "TrustKitDemo-ObjC" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				194230C01EF7C91B00029B04 /* Debug */,
@@ -591,7 +599,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		194231221EF9658800029B04 /* Build configuration list for PBXNativeTarget "TrustKitDemoInSwift" */ = {
+		194231221EF9658800029B04 /* Build configuration list for PBXNativeTarget "TrustKitDemo-Swift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				194231231EF9658800029B04 /* Debug */,

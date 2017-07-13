@@ -10,83 +10,81 @@
  */
 
 #import "TSKReportsRateLimiter.h"
-#include <pthread.h>
 #import "reporting_utils.h"
 
+static const NSTimeInterval kIntervalBetweenReportsCacheReset = 3600 * 24;
 
-// Variables to rate-limit the number of pin failure reports that get sent
-static dispatch_once_t _dispatchOnceInit;
-static NSMutableSet *_reportsCache = nil;
-static pthread_mutex_t _reportsCacheLock;
-// We reset the reports cache every 24 hours to ensure identical reports are only sent once per day
-#define INTERVAL_BETWEEN_REPORTS_CACHE_RESET 3600*24
-static NSDate *_lastReportsCacheResetDate = nil;
+@interface TSKReportsRateLimiter ()
 
+/** Cache to rate-limit the number of pin failure reports that get sent */
+@property (nonatomic) NSMutableSet *reportsCache;
 
+/** We reset the reports cache every 24 hours to ensure identical reports are only sent once per day */
+@property (nonatomic) NSDate *lastReportsCacheResetDate;
 
+/** Concurrent queue for multi-reader, single-writer to the reports cache using dispatch barriers */
+@property (nonatomic) dispatch_queue_t reportsCacheQueue;
+
+@end
 
 @implementation TSKReportsRateLimiter
 
-+ (BOOL) shouldRateLimitReport:(TSKPinFailureReport *)report
+- (instancetype)init
 {
-    // Initialize all the internal state for rate-limiting report uploads
-    dispatch_once(&_dispatchOnceInit, ^
-                  {
-                      // Initialize state for rate-limiting
-                      pthread_mutex_init(&_reportsCacheLock, NULL);
-                      _lastReportsCacheResetDate = [NSDate date];
-                      _reportsCache = [NSMutableSet set];
-                  });
-    
+    self = [super init];
+    if (self) {
+        // Initialize all the internal state for rate-limiting report uploads
+        _reportsCache = [NSMutableSet set];
+        _lastReportsCacheResetDate = [NSDate date];
+        _reportsCacheQueue = dispatch_queue_create("TSKReportsRateLimiter", DISPATCH_QUEUE_SERIAL);
+    }
+    return self;
+}
+
+- (BOOL)shouldRateLimitReport:(TSKPinFailureReport *)report
+{
+    NSParameterAssert(report);
     
     // Check if we need to clear the reports cache for rate-limiting
-    NSDate *currentDate = [NSDate date];
-    NSTimeInterval secondsSinceCacheReset = [currentDate timeIntervalSinceDate:_lastReportsCacheResetDate];
-    if (secondsSinceCacheReset > INTERVAL_BETWEEN_REPORTS_CACHE_RESET)
-    {
-        // Reset the cache
-        pthread_mutex_lock(&_reportsCacheLock);
-        {
-            [_reportsCache removeAllObjects];
-            _lastReportsCacheResetDate = currentDate;
-        }
-        pthread_mutex_unlock(&_reportsCacheLock);
-    }
-    
+    NSTimeInterval secondsSinceCacheReset = -[self.lastReportsCacheResetDate timeIntervalSinceNow];
     
     // Create an array containg the gist of the pin failure report; do not include the dates
-    NSArray *pinFailureInfo = @[report.notedHostname, report.hostname, report.port, report.validatedCertificateChain, report.knownPins, [NSNumber numberWithInt:report.validationResult]];
+    NSArray *pinFailureInfo = @[ report.notedHostname,
+                                 report.hostname,
+                                 report.port,
+                                 report.validatedCertificateChain,
+                                 report.knownPins,
+                                 @(report.validationResult) ];
     
-    
-    // Check if the exact same report has already been sent recently
-    BOOL shouldRateLimitReport = NO;
-    pthread_mutex_lock(&_reportsCacheLock);
-    {
-        shouldRateLimitReport = [_reportsCache containsObject:pinFailureInfo];
-    }
-    pthread_mutex_unlock(&_reportsCacheLock);
-    
-    if (shouldRateLimitReport == NO)
-    {
-        // An identical report has NOT been sent recently
-        // Add this report to the cache for rate-limiting
-        pthread_mutex_lock(&_reportsCacheLock);
+    __block BOOL shouldRateLimitReport = NO;
+    __weak typeof(self) weakSelf = self;
+    dispatch_sync(self.reportsCacheQueue, ^{
+        typeof(self) strongSelf = weakSelf;
+        
+        if (secondsSinceCacheReset > kIntervalBetweenReportsCacheReset)
         {
-            [_reportsCache addObject:pinFailureInfo];
+            // Reset the cache
+            [strongSelf.reportsCache removeAllObjects];
+            strongSelf.lastReportsCacheResetDate = [NSDate date];
         }
-        pthread_mutex_unlock(&_reportsCacheLock);
-    }
+        
+        // Check if the exact same report has already been sent recently
+        shouldRateLimitReport = [strongSelf.reportsCache containsObject:pinFailureInfo];
+        if (shouldRateLimitReport == NO)
+        {
+            // An identical report has NOT been sent recently
+            // Add this report to the cache for rate-limiting
+            [strongSelf.reportsCache addObject:pinFailureInfo];
+        }
+    });
+    
     return shouldRateLimitReport;
 }
 
-
-+ (void) setLastReportsCacheResetDate:(NSDate *)date
+- (void)setLastReportsCacheResetDate:(NSDate *)lastReportsCacheResetDate
 {
-    pthread_mutex_lock(&_reportsCacheLock);
-    {
-        _lastReportsCacheResetDate = date;
-    }
-    pthread_mutex_unlock(&_reportsCacheLock);
+    NSParameterAssert(lastReportsCacheResetDate);
+    _lastReportsCacheResetDate = lastReportsCacheResetDate;
 }
 
 @end

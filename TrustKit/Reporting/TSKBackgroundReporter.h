@@ -9,8 +9,8 @@
  
  */
 
-#import <Foundation/Foundation.h>
 #import "../Pinning/ssl_pin_verifier.h"
+@import Foundation;
 
 /**
  `TSKSimpleBackgroundReporter` is a class for uploading pin failure reports using the background transfer service.
@@ -46,7 +46,7 @@
                       includeSubdomains:(BOOL) includeSubdomains
                          enforcePinning:(BOOL) enforcePinning
                               knownPins:(nonnull NSSet<NSData *> *) knownPins
-                       validationResult:(TSKPinValidationResult) validationResult
+                       validationResult:(TSKTrustEvaluationResult) validationResult
                          expirationDate:(nullable NSDate *)knownPinsExpirationDate;
 
 - (void)URLSession:(nonnull NSURLSession *)session task:(nonnull NSURLSessionTask *)task didCompleteWithError:(nullable NSError *)error;

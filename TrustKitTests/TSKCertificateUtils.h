@@ -9,11 +9,13 @@
  
  */
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 @interface TSKCertificateUtils : NSObject
 
-+ (SecCertificateRef)createCertificateFromDer:(NSString *)derCertiticatePath;
++ (SecCertificateRef)createCertificateFromPem:(NSString *)pemFilename;
+
++ (SecCertificateRef)createCertificateFromDer:(NSString *)derFilename;
 
 + (SecTrustRef)createTrustWithCertificates:(const void **)certArray
                                arrayLength:(NSInteger)certArrayLength

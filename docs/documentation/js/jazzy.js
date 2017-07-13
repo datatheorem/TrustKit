@@ -23,9 +23,6 @@ $(".token").click(function(event) {
   }
   var link = $(this);
   var animationDuration = 300;
-  var tokenOffset = "15px";
-  var original = link.css('marginLeft') == tokenOffset;
-  link.animate({'margin-left':original ? "0px" : tokenOffset}, animationDuration);
   $content = link.parent().parent().next();
   $content.slideToggle(animationDuration);
 
@@ -37,4 +34,10 @@ $(".token").click(function(event) {
     location.hash = href;
   }
   event.preventDefault();
+});
+
+// Dumb down quotes within code blocks that delimit strings instead of quotations
+// https://github.com/realm/jazzy/issues/714
+$("code q").replaceWith(function () {
+  return ["\"", $(this).contents(), "\""];
 });

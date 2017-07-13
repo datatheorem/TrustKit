@@ -7,7 +7,8 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "../TrustKit/TrustKit+Private.h"
+#import "../TrustKit/TrustKit.h"
+#import "../TrustKit/TSKLog.h"
 
 
 @interface TSKLoggerTests : XCTestCase
@@ -40,7 +41,7 @@
         XCTAssert(message, @"test test");
         wasBlockCalled = true;
     };
-
+    
     [TrustKit setLoggerBlock:loggerBlock];
     TSKLog(@"test %@", @"test");
     XCTAssertTrue(wasBlockCalled);

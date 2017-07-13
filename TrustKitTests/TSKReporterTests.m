@@ -11,19 +11,31 @@
 
 #import <XCTest/XCTest.h>
 
-#import "../TrustKit/TrustKit+Private.h"
+#import "../TrustKit/TrustKit.h"
+#import "../TrustKit/TSKTrustKitConfig.h"
 
+#import "../TrustKit/TSKPinningValidatorResult.h"
+#import "../TrustKit/TSKPinningValidator_Private.h"
 #import "../TrustKit/Reporting/TSKBackgroundReporter.h"
 #import "../TrustKit/Reporting/TSKPinFailureReport.h"
 #import "../TrustKit/Reporting/reporting_utils.h"
-#import "../TrustKit/Reporting/TSKReportsRateLimiter.h"
 
 #import <OCMock/OCMock.h>
 #import "../TrustKit/Reporting/vendor_identifier.h"
 #import "TSKCertificateUtils.h"
 
-
 #pragma mark Test suite
+
+@interface TrustKit (TestSupport)
+@property (nonatomic) TSKBackgroundReporter *pinFailureReporter;
+@property (nonatomic, readonly, nullable) NSDictionary *configuration;
+
+- (void)sendValidationReport:(TSKPinningValidatorResult *)result notedHostname:(NSString *)notedHostname pinningPolicy:(NSDictionary<TSKDomainConfigurationKey, id> *)notedHostnamePinningPolicy;
+@end
+
+
+static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.com/trustkit/report";
+
 
 @interface TSKReporterTests : XCTestCase
 
@@ -31,6 +43,8 @@
 
 @implementation TSKReporterTests
 {
+    TrustKit *_trustKit;
+    //TSKPinFailureReport *_testReporter;
     SecTrustRef _testTrust;
     SecCertificateRef _rootCertificate;
     SecCertificateRef _intermediateCertificate;
@@ -46,8 +60,8 @@
     _intermediateCertificate = [TSKCertificateUtils createCertificateFromDer:@"GoodIntermediateCA"];
     _leafCertificate = [TSKCertificateUtils createCertificateFromDer:@"www.good.com"];
     
-    SecCertificateRef certChainArray[2] = {_leafCertificate, _intermediateCertificate};
-    SecCertificateRef trustStoreArray[1] = {_rootCertificate};
+    SecCertificateRef certChainArray[2] = { _leafCertificate, _intermediateCertificate };
+    SecCertificateRef trustStoreArray[1] = { _rootCertificate };
     
     _testTrust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
                                                       arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
@@ -62,11 +76,14 @@
     CFRelease(_intermediateCertificate);
     CFRelease(_leafCertificate);
     CFRelease(_testTrust);
+    _trustKit = nil;
+    //_testReporter = nil;
     
     [super tearDown];
 }
 
-- (void)testSendReportFromNotificationBlock
+// NOTE: this is more of a test of TrustKit.m
+- (void)testSendReportFromValidationReport
 {
     // Ensure that a pin validation notification triggers the upload of a report if the validation failed
     // Initialize TrustKit so the reporter block is ready to receive notifications
@@ -82,12 +99,8 @@
                       kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                               @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=" // Fake key 2
                                               ]}}};
-    [TrustKit initializeWithConfiguration:trustKitConfig];
     
-    // Setup mocking of the reporter
-    TSKBackgroundReporter *defaultReporter = [TrustKit getGlobalPinFailureReporter];
-    id pinFailureReporterMock = [OCMockObject mockForClass:[TSKBackgroundReporter class]];
-    [TrustKit setGlobalPinFailureReporter: pinFailureReporterMock];
+    _trustKit = [[TrustKit alloc] initWithConfiguration:trustKitConfig];
     
     // Expect a report to be sent out when a notification is posted
     NSSet *knownPins = [NSSet setWithArray:@[[[NSData alloc]initWithBase64EncodedString:@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
@@ -100,51 +113,73 @@
     [dateFormat setDateFormat:@"yyyy-MM-dd"];
     NSDate *expirationDate = [dateFormat dateFromString:expirationDateStr];
     
-    [[pinFailureReporterMock expect] pinValidationFailedForHostname:@"www.test.com"
-                                                               port:nil
-                                                   certificateChain:_testCertificateChain
-                                                      notedHostname:@"www.test.com"
-                                                         reportURIs:@[[NSURL URLWithString:@"https://overmind.datatheorem.com/trustkit/report"]]
-                                                  includeSubdomains:NO
-                                                  enforcePinning:YES
-                                                          knownPins:knownPins
-                                                   validationResult:TSKPinValidationResultErrorCouldNotGenerateSpkiHash
-                                                     expirationDate:expirationDate];
+    TSKPinningValidatorResult *res;
     
-    // Create a notification
-    [[NSNotificationCenter defaultCenter] postNotificationName:kTSKValidationCompletedNotification
-                                                        object:nil
-                                                      userInfo:@{kTSKValidationDurationNotificationKey: @(1),
-                                                                 kTSKValidationDecisionNotificationKey: @(1),
-                                                                 kTSKValidationResultNotificationKey: @(TSKPinValidationResultErrorCouldNotGenerateSpkiHash),
-                                                                 kTSKValidationCertificateChainNotificationKey: _testCertificateChain,
-                                                                 kTSKValidationNotedHostnameNotificationKey: @"www.test.com",
-                                                                 kTSKValidationServerHostnameNotificationKey: @"www.test.com"}];
+    // TEST FAILURE
+    // Setup mocking of the reporter
+    id pinReporterMock = OCMClassMock([TSKBackgroundReporter class]);
+    _trustKit.pinFailureReporter = pinReporterMock;
+    
+    OCMExpect([pinReporterMock pinValidationFailedForHostname:@"www.test.com"
+                                                         port:nil
+                                             certificateChain:_testCertificateChain
+                                                notedHostname:@"www.test.com"
+                                                   reportURIs:@[[NSURL URLWithString:@"https://overmind.datatheorem.com/trustkit/report"]]
+                                            includeSubdomains:NO
+                                               enforcePinning:YES
+                                                    knownPins:knownPins
+                                             validationResult:TSKTrustEvaluationErrorCouldNotGenerateSpkiHash
+                                               expirationDate:expirationDate]);
+    
+    res = [[TSKPinningValidatorResult alloc] initWithServerHostname:@"www.test.com"
+                                                        serverTrust:_testTrust
+                                                   validationResult:TSKTrustEvaluationErrorCouldNotGenerateSpkiHash
+                                                 finalTrustDecision:TSKTrustDecisionShouldBlockConnection
+                                                 validationDuration:1.0];
+    [_trustKit sendValidationReport:res notedHostname:@"www.test.com" pinningPolicy:_trustKit.configuration[kTSKPinnedDomains][@"www.test.com"]];
+    
     // Ensure that the reporter was called
-    [pinFailureReporterMock verify];
+    [pinReporterMock verify];
     
+    [pinReporterMock stopMocking];
+    _trustKit.pinFailureReporter = nil;
     
+    // TEST CA SUCCESS
     // Send a notification for a successful validation and ensure no report gets sent
-    id pinSuccessReporterMock = [OCMockObject mockForClass:[TSKBackgroundReporter class]];
-    [TrustKit setGlobalPinFailureReporter: pinSuccessReporterMock];
-    [[NSNotificationCenter defaultCenter] postNotificationName:kTSKValidationCompletedNotification
-                                                        object:nil
-                                                      userInfo:@{kTSKValidationResultNotificationKey: @(TSKPinValidationResultSuccess)}];
+    pinReporterMock = OCMClassMock([TSKBackgroundReporter class]);
+    _trustKit.pinFailureReporter = pinReporterMock;
+    
+    res = [[TSKPinningValidatorResult alloc] initWithServerHostname:@"www.test.com"
+                                                        serverTrust:_testTrust
+                                                   validationResult:TSKTrustEvaluationSuccess
+                                                 finalTrustDecision:TSKTrustDecisionShouldAllowConnection
+                                                 validationDuration:1.0];
+
     // Ensure that the reporter was NOT called
-    [pinSuccessReporterMock verify];
+    [_trustKit sendValidationReport:res notedHostname:@"www.test.com" pinningPolicy:_trustKit.configuration[kTSKPinnedDomains][@"www.test.com"]];
+    [pinReporterMock verify];
+    
+    [pinReporterMock stopMocking];
+    _trustKit.pinFailureReporter = nil;
     
 #if !TARGET_OS_IPHONE
-    // OS X - Send a notification for a failed validation due to a custom CA and ensure no report gets sent
-    [[NSNotificationCenter defaultCenter] postNotificationName:kTSKValidationCompletedNotification
-                                                        object:nil
-                                                      userInfo:@{kTSKValidationResultNotificationKey: @(TSKPinValidationResultFailedUserDefinedTrustAnchor)}];
-    // Ensure that the reporter was NOT called
-    [pinSuccessReporterMock verify];
-#endif
+    // TEST USER-DEFINED SUCCESS
+    // Send a notification for a successful validation and ensure no report gets sent
+    pinReporterMock = OCMClassMock([TSKBackgroundReporter class]);
+    _trustKit.pinFailureReporter = pinReporterMock;
     
-    // Cleanup
-    [TrustKit setGlobalPinFailureReporter: defaultReporter];
-    [TrustKit resetConfiguration];
+    res = [[TSKPinningValidatorResult alloc] initWithServerHostname:@"www.test.com"
+                                                        serverTrust:_testTrust
+                                                   validationResult:TSKTrustEvaluationFailedUserDefinedTrustAnchor
+                                                 finalTrustDecision:TSKTrustDecisionShouldAllowConnection
+                                                 validationDuration:1.0];
+    
+    // Ensure that the reporter was NOT called
+    [_trustKit sendValidationReport:res notedHostname:@"www.test.com" pinningPolicy:_trustKit.configuration[kTSKPinnedDomains][@"www.test.com"]];
+    [pinReporterMock verify];
+    [pinReporterMock stopMocking];
+    pinReporterMock = nil;
+#endif
 }
 
 
@@ -156,7 +191,7 @@
                                         port:[NSNumber numberWithInt:443]
                             certificateChain:_testCertificateChain
                                notedHostname:@"example.com"
-                                  reportURIs:@[[NSURL URLWithString:[TrustKit getDefaultReportUri]]]
+                                  reportURIs:@[[NSURL URLWithString:kTSKDefaultReportUri]]
                            includeSubdomains:YES
                               enforcePinning:YES
                                    knownPins:[NSSet setWithArray:@[
@@ -164,10 +199,10 @@
                                                                                                       options:(NSDataBase64DecodingOptions)0],
                                                                    [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g="
                                                                                                       options:(NSDataBase64DecodingOptions)0]]]
-                            validationResult:TSKPinValidationResultFailed
+                            validationResult:TSKTrustEvaluationFailedNoMatchingPin
                               expirationDate:[NSDate date]];
     
-    [NSThread sleepForTimeInterval:2.0];
+    [NSThread sleepForTimeInterval:0.1];
 }
 
 - (void)testReporterNilExpirationDate
@@ -178,7 +213,7 @@
                                         port:[NSNumber numberWithInt:443]
                             certificateChain:_testCertificateChain
                                notedHostname:@"example.com"
-                                  reportURIs:@[[NSURL URLWithString:[TrustKit getDefaultReportUri]]]
+                                  reportURIs:@[[NSURL URLWithString:kTSKDefaultReportUri]]
                            includeSubdomains:YES
                               enforcePinning:YES
                                    knownPins:[NSSet setWithArray:@[
@@ -186,113 +221,11 @@
                                                                                                       options:(NSDataBase64DecodingOptions)0],
                                                                    [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g="
                                                                                                       options:(NSDataBase64DecodingOptions)0]]]
-                            validationResult:TSKPinValidationResultFailed
+                            validationResult:TSKTrustEvaluationFailedNoMatchingPin
                               expirationDate:nil];
     
-    [NSThread sleepForTimeInterval:2.0];
+    [NSThread sleepForTimeInterval:0.1];
 }
-
-
-- (void)testReportsRateLimiter
-{
-    // Create the pin validation failure report
-    NSArray *certificateChain = convertTrustToPemArray(_testTrust);
-    NSArray *formattedPins = convertPinsToHpkpPins([NSSet setWithArray:@[[[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM="
-                                                                                                            options:(NSDataBase64DecodingOptions)0],
-                                                                         [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g="
-                                                                                                            options:(NSDataBase64DecodingOptions)0]]
-                                                    ]);
-    
-
-    TSKPinFailureReport *report = [[TSKPinFailureReport alloc] initWithAppBundleId:@"test"
-                                                                        appVersion:@"1.2.3"
-                                                                       appPlatform:@"IOS"
-                                                                appPlatformVersion:@"9.0.0"
-                                                                       appVendorId:@"test"
-                                                                   trustkitVersion:@"4.3.2.1"
-                                                                          hostname:@"mail.example.com"
-                                                                              port:[NSNumber numberWithInt:443]
-                                                                          dateTime:[NSDate date]
-                                                                     notedHostname:@"example.com"
-                                                                 includeSubdomains:NO
-                                                                 enforcePinning:NO
-                                                         validatedCertificateChain:certificateChain
-                                                                         knownPins:formattedPins
-                                                                  validationResult:TSKPinValidationResultFailedCertificateChainNotTrusted
-                                                                    expirationDate:[NSDate date]];
-    
-    // Ensure the same report will not be sent twice in a row
-    XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == NO, @"Wrongly rate-limited a new report");
-    XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == YES, @"Did not rate-limit an identical report");
-    
-    // Set the last time the cache was reset to more than 24 hours ago and ensure the report is sent again
-    [TSKReportsRateLimiter setLastReportsCacheResetDate:[[NSDate date] dateByAddingTimeInterval:-3700*24]];
-    XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == NO, @"Reports cache was not properly reset after 24 hours");
-
-    
-    // Ensure the same report with a different validation result will be sent
-    report = [[TSKPinFailureReport alloc] initWithAppBundleId:@"test"
-                                                   appVersion:@"1.2.3"
-                                                  appPlatform:@"IOS"
-                                           appPlatformVersion:@"9.0.0"
-                                                  appVendorId:@"test"
-                                              trustkitVersion:@"4.3.2.1"
-                                                     hostname:@"mail.example.com"
-                                                         port:[NSNumber numberWithInt:443]
-                                                     dateTime:[NSDate date]
-                                                notedHostname:@"example.com"
-                                            includeSubdomains:NO
-                                            enforcePinning:NO
-                                    validatedCertificateChain:certificateChain
-                                                    knownPins:formattedPins
-                                             validationResult:TSKPinValidationResultFailed
-                                               expirationDate:[NSDate date]];
-    XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == NO, @"Wrongly rate-limited a new report");
-    XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == YES, @"Did not rate-limit an identical report");
-    
-    
-    // Ensure the same report with a different hostname will be sent
-    report = [[TSKPinFailureReport alloc] initWithAppBundleId:@"test"
-                                                   appVersion:@"1.2.3"
-                                                  appPlatform:@"IOS"
-                                           appPlatformVersion:@"9.0.0"
-                                                  appVendorId:@"test"
-                                              trustkitVersion:@"4.3.2.1"
-                                                     hostname:@"other.example.com"
-                                                         port:[NSNumber numberWithInt:443]
-                                                     dateTime:[NSDate date]
-                                                notedHostname:@"example.com"
-                                            includeSubdomains:NO
-                                               enforcePinning:NO
-                                    validatedCertificateChain:certificateChain
-                                                    knownPins:formattedPins
-                                             validationResult:TSKPinValidationResultFailedCertificateChainNotTrusted
-                                               expirationDate:[NSDate date]];
-    XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == NO, @"Wrongly rate-limited a new report");
-    XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == YES, @"Did not rate-limit an identical report");
-    
-    
-    // Ensure the same report with a different certificate chain will be sent
-    report = [[TSKPinFailureReport alloc] initWithAppBundleId:@"test"
-                                                   appVersion:@"1.2.3"
-                                                  appPlatform:@"IOS"
-                                           appPlatformVersion:@"9.0.0"
-                                                  appVendorId:@"test"
-                                              trustkitVersion:@"4.3.2.1"
-                                                     hostname:@"mail.example.com"
-                                                         port:[NSNumber numberWithInt:443]
-                                                     dateTime:[NSDate date]
-                                                notedHostname:@"example.com"
-                                            includeSubdomains:NO
-                                            enforcePinning:NO
-                                    validatedCertificateChain:[certificateChain subarrayWithRange:NSMakeRange(1, 2)]
-                                                    knownPins:formattedPins
-                                             validationResult:TSKPinValidationResultFailedCertificateChainNotTrusted
-                                               expirationDate:[NSDate date]];
-    XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == NO, @"Wrongly rate-limited a new report");
-    XCTAssert([TSKReportsRateLimiter shouldRateLimitReport:report] == YES, @"Did not rate-limit an identical report");
-}
-
 
 - (void)testIdentifierForVendor
 {

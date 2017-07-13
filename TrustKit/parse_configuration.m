@@ -1,21 +1,53 @@
-//
-//  parse_configuration.m
-//  TrustKit
-//
-//  Created by Alban Diquet on 5/20/16.
-//  Copyright © 2016 TrustKit. All rights reserved.
-//
+/*
+ 
+ parse_configuration.m
+ TrustKit
+ 
+ Copyright 2016 The TrustKit Project Authors
+ Licensed under the MIT license, see associated LICENSE file for terms.
+ See AUTHORS file for the list of project authors.
+ 
+ */
 
-#import <Foundation/Foundation.h>
-#import "TrustKit.h"
+#import "TSKTrustKitConfig.h"
 #import "Dependencies/domain_registry/domain_registry.h"
 #import "parse_configuration.h"
-#import "Pinning/public_key_utils.h"
+#import "Pinning/TSKPublicKeyAlgorithm.h"
 #import <CommonCrypto/CommonDigest.h>
 #import "configuration_utils.h"
 
 
-NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
+static SecCertificateRef certificateFromPEM(NSString *pem)
+{
+    // NOTE: multi-certificate PEM is not supported since this is for individual
+    // trust anchor certificates.
+    
+    // Strip PEM header and footers. We don't support multi-certificate PEM.
+    NSMutableString *pemMutable = [pem stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet].mutableCopy;
+    
+    // Strip PEM header and footer
+    [pemMutable replaceOccurrencesOfString:@"-----BEGIN CERTIFICATE-----"
+                                withString:@""
+                                   options:(NSStringCompareOptions)(NSAnchoredSearch | NSLiteralSearch)
+                                     range:NSMakeRange(0, pemMutable.length)];
+    
+    [pemMutable replaceOccurrencesOfString:@"-----END CERTIFICATE-----"
+                                withString:@""
+                                   options:(NSStringCompareOptions)(NSAnchoredSearch | NSBackwardsSearch | NSLiteralSearch)
+                                     range:NSMakeRange(0, pemMutable.length)];
+    
+    NSData *pemData = [[NSData alloc] initWithBase64EncodedString:pemMutable
+                                                          options:NSDataBase64DecodingIgnoreUnknownCharacters];
+    SecCertificateRef cert = SecCertificateCreateWithData(NULL, (CFDataRef)pemData);
+    if (!cert)
+    {
+        [NSException raise:@"TrustKit configuration invalid" format:@"Failed to parse PEM certificate"];
+    }
+    return cert;
+}
+
+
+NSDictionary *parseTrustKitConfiguration(NSDictionary *trustKitArguments)
 {
     // Convert settings supplied by the user to a configuration dictionary that can be used by TrustKit
     // This includes checking the sanity of the settings and converting public key hashes/pins from an
@@ -31,14 +63,11 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
     // Retrieve global settings
     
     // Should we auto-swizzle network delegates
-    NSNumber *shouldSwizzleNetworkDelegates = TrustKitArguments[kTSKSwizzleNetworkDelegates];
+    NSNumber *shouldSwizzleNetworkDelegates = trustKitArguments[kTSKSwizzleNetworkDelegates];
     if (shouldSwizzleNetworkDelegates == nil)
     {
-        // This is a required argument
-        [NSException raise:@"TrustKit configuration invalid"
-                    format:@"TrustKit was initialized without specifying the kTSKSwizzleNetworkDelegates setting. Please add this boolean entry to the root of your TrustKit configuration in order to specify if auto-swizzling of the App's connection delegates should be enabled or not; see the documentation for more information."];
-        // Default setting is YES
-        finalConfiguration[kTSKSwizzleNetworkDelegates] = @(YES);
+        // Default setting is NO
+        finalConfiguration[kTSKSwizzleNetworkDelegates] = @(NO);
     }
     else
     {
@@ -48,7 +77,7 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
     
 #if !TARGET_OS_IPHONE
     // OS X only: extract the optional ignorePinningForUserDefinedTrustAnchors setting
-    NSNumber *shouldIgnorePinningForUserDefinedTrustAnchors = TrustKitArguments[kTSKIgnorePinningForUserDefinedTrustAnchors];
+    NSNumber *shouldIgnorePinningForUserDefinedTrustAnchors = trustKitArguments[kTSKIgnorePinningForUserDefinedTrustAnchors];
     if (shouldIgnorePinningForUserDefinedTrustAnchors == nil)
     {
         // Default setting is YES
@@ -61,14 +90,14 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
 #endif
     
     // Retrieve the pinning policy for each domains
-    if ((TrustKitArguments[kTSKPinnedDomains] == nil) || ([TrustKitArguments[kTSKPinnedDomains] count] < 1))
+    if ((trustKitArguments[kTSKPinnedDomains] == nil) || ([trustKitArguments[kTSKPinnedDomains] count] < 1))
     {
         [NSException raise:@"TrustKit configuration invalid"
                     format:@"TrustKit was initialized with no pinned domains. The configuration format has changed: ensure your domain pinning policies are under the TSKPinnedDomains key within TSKConfiguration."];
     }
     
     
-    for (NSString *domainName in TrustKitArguments[kTSKPinnedDomains])
+    for (NSString *domainName in trustKitArguments[kTSKPinnedDomains])
     {
         // Sanity checks on the domain name
         if (GetRegistryLength([domainName UTF8String]) == 0)
@@ -79,7 +108,7 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
         
         
         // Retrieve the supplied arguments for this domain
-        NSDictionary *domainPinningPolicy = TrustKitArguments[kTSKPinnedDomains][domainName];
+        NSDictionary *domainPinningPolicy = trustKitArguments[kTSKPinnedDomains][domainName];
         NSMutableDictionary *domainFinalConfiguration = [[NSMutableDictionary alloc]init];
         
         
@@ -167,6 +196,23 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
             domainFinalConfiguration[kTSKDisableDefaultReportUri] = @(NO);
         }
         
+        // Extract the optional additionalTrustAnchors setting
+        NSArray *additionalTrustAnchors = domainPinningPolicy[kTSKAdditionalTrustAnchors];
+        if (additionalTrustAnchors)
+        {
+            CFMutableArrayRef anchorCerts = CFArrayCreateMutable(NULL, (CFIndex)additionalTrustAnchors.count, &kCFTypeArrayCallBacks);
+            NSInteger certIndex = 0; // used for logging error messages
+            for (NSString *pem in additionalTrustAnchors) {
+                SecCertificateRef cert = certificateFromPEM(pem);
+                if (cert == nil) {
+                    [NSException raise:@"TrustKit configuration invalid"
+                                format:@"Failed to parse PEM-encoded certificate at index %ld for domain %@", (long)certIndex, domainName];
+                }
+                CFArrayAppendValue(anchorCerts, cert);
+                certIndex++;
+            }
+            domainFinalConfiguration[kTSKAdditionalTrustAnchors] = [(__bridge NSMutableArray *)anchorCerts copy];
+        }
         
         // Extract the list of public key algorithms to support and convert them from string to the TSKPublicKeyAlgorithm type
         NSArray<NSString *> *publicKeyAlgsStr = domainPinningPolicy[kTSKPublicKeyAlgorithms];
@@ -255,14 +301,13 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
         finalConfiguration[kTSKPinnedDomains][domainName] = [NSDictionary dictionaryWithDictionary:domainFinalConfiguration];
     }
     
-    
     // Lastly, ensure that we can find a parent policy for subdomains configured with TSKExcludeSubdomainFromParentPolicy
     for (NSString *domainName in finalConfiguration[kTSKPinnedDomains])
     {
         if ([finalConfiguration[kTSKPinnedDomains][domainName][kTSKExcludeSubdomainFromParentPolicy] boolValue])
         {
             // To force the lookup of a parent domain, we append 'a' to this subdomain so we don't retrieve its policy
-            NSString *parentDomainConfigKey = getPinningConfigurationKeyForDomain([@"a" stringByAppendingString:domainName], finalConfiguration);
+            NSString *parentDomainConfigKey = getPinningConfigurationKeyForDomain([@"a" stringByAppendingString:domainName], finalConfiguration[kTSKPinnedDomains]);
             if (parentDomainConfigKey == nil)
             {
                 [NSException raise:@"TrustKit configuration invalid"
@@ -271,7 +316,5 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *TrustKitArguments)
         }
     }
 
-    return finalConfiguration;
+    return [finalConfiguration copy];
 }
-
-

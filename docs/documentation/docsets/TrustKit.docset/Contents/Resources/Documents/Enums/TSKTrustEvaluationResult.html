@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>TSKTrustEvaluationResult Enum Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/objc/Enum/TSKTrustEvaluationResult" class="dashAnchor"></a>
+
+    <a title="TSKTrustEvaluationResult Enum Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+          TrustKit Docs
+        </a>
+        
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/datatheorem/TrustKit">
+            <img class="header-icon" src="../img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html">TrustKit Reference</a>
+      <img class="carat" src="../img/carat.png" />
+      TSKTrustEvaluationResult Enum Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Initalizing TrustKit.html">Initalizing TrustKit</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TrustKit.html">TrustKit</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Implementing Pinning Validation.html">Implementing Pinning Validation</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TSKPinningValidator.html">TSKPinningValidator</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/TSKTrustDecision.html">TSKTrustDecision</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Setting up a Validation Callback.html">Setting up a Validation Callback</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Setting up a Validation Callback.html#/c:TSKPinningValidatorCallback.h@T@TSKPinningValidatorCallback">TSKPinningValidatorCallback</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TSKPinningValidatorResult.html">TSKPinningValidatorResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Setting up a Validation Callback.html#/c:TSKPinningValidatorCallback.h@T@TKSDomainPinningPolicy">TKSDomainPinningPolicy</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/TSKTrustEvaluationResult.html">TSKTrustEvaluationResult</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Global Configuration Keys.html">Global Configuration Keys</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Global Configuration Keys.html#/c:TSKTrustKitConfig.h@T@TSKGlobalConfigurationKey">TSKGlobalConfigurationKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Global Configuration Keys.html#/c:@kTSKSwizzleNetworkDelegates">kTSKSwizzleNetworkDelegates</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Global Configuration Keys.html#/c:@kTSKPinnedDomains">kTSKPinnedDomains</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Global Configuration Keys.html#/c:@kTSKIgnorePinningForUserDefinedTrustAnchors">kTSKIgnorePinningForUserDefinedTrustAnchors</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Domain Configuration Keys.html">Domain Configuration Keys</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Domain Configuration Keys.html#/c:TSKTrustKitConfig.h@T@TSKDomainConfigurationKey">TSKDomainConfigurationKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Domain Configuration Keys.html#/c:@kTSKPublicKeyHashes">kTSKPublicKeyHashes</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Domain Configuration Keys.html#/c:@kTSKPublicKeyAlgorithms">kTSKPublicKeyAlgorithms</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Domain Configuration Keys.html#/c:@kTSKEnforcePinning">kTSKEnforcePinning</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Domain Configuration Keys.html#/c:@kTSKIncludeSubdomains">kTSKIncludeSubdomains</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Domain Configuration Keys.html#/c:@kTSKExcludeSubdomainFromParentPolicy">kTSKExcludeSubdomainFromParentPolicy</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Domain Configuration Keys.html#/c:@kTSKReportUris">kTSKReportUris</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Domain Configuration Keys.html#/c:@kTSKDisableDefaultReportUri">kTSKDisableDefaultReportUri</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Domain Configuration Keys.html#/c:@kTSKExpirationDate">kTSKExpirationDate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Domain Configuration Keys.html#/c:@kTSKAdditionalTrustAnchors">kTSKAdditionalTrustAnchors</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Public Key Algorithm Keys.html">Public Key Algorithm Keys</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Public Key Algorithm Keys.html#/c:TSKTrustKitConfig.h@T@TSKSupportedAlgorithm">TSKSupportedAlgorithm</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Public Key Algorithm Keys.html#/c:@kTSKAlgorithmRsa2048">kTSKAlgorithmRsa2048</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Public Key Algorithm Keys.html#/c:@kTSKAlgorithmRsa4096">kTSKAlgorithmRsa4096</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Public Key Algorithm Keys.html#/c:@kTSKAlgorithmEcDsaSecp256r1">kTSKAlgorithmEcDsaSecp256r1</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Public Key Algorithm Keys.html#/c:@kTSKAlgorithmEcDsaSecp384r1">kTSKAlgorithmEcDsaSecp384r1</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Other Constants.html">Other Constants</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other Constants.html#/c:@TrustKitVersion">TrustKitVersion</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content">
+            <h1>TSKTrustEvaluationResult</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="k">enum</span> <span class="n">TSKTrustEvaluationResult</span> <span class="o">:</span> <span class="n">NSInteger</span> <span class="p">{}</span></code></pre>
+
+                </div>
+              </div>
+            <p>Possible return values when verifying a server&rsquo;s identity against a set of pins.</p>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@E@TSKTrustEvaluationResult@TSKTrustEvaluationSuccess"></a>
+                    <a name="//apple_ref/objc/Case/TSKTrustEvaluationSuccess" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@E@TSKTrustEvaluationResult@TSKTrustEvaluationSuccess">TSKTrustEvaluationSuccess</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The server trust was succesfully evaluated and contained at least one of the configured pins.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight"><code><span class="n">TSKTrustEvaluationSuccess</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">success</span> <span class="o">=</span> <span class="mi">0</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@E@TSKTrustEvaluationResult@TSKTrustEvaluationFailedNoMatchingPin"></a>
+                    <a name="//apple_ref/objc/Case/TSKTrustEvaluationFailedNoMatchingPin" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@E@TSKTrustEvaluationResult@TSKTrustEvaluationFailedNoMatchingPin">TSKTrustEvaluationFailedNoMatchingPin</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The server trust was succesfully evaluated but did not contain any of the configured pins.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight"><code><span class="n">TSKTrustEvaluationFailedNoMatchingPin</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">failedNoMatchingPin</span> <span class="o">=</span> <span class="mi">1</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@E@TSKTrustEvaluationResult@TSKTrustEvaluationFailedInvalidCertificateChain"></a>
+                    <a name="//apple_ref/objc/Case/TSKTrustEvaluationFailedInvalidCertificateChain" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@E@TSKTrustEvaluationResult@TSKTrustEvaluationFailedInvalidCertificateChain">TSKTrustEvaluationFailedInvalidCertificateChain</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The server trust&rsquo;s evaluation failed: the server&rsquo;s certificate chain is not trusted.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight"><code><span class="n">TSKTrustEvaluationFailedInvalidCertificateChain</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">failedInvalidCertificateChain</span> <span class="o">=</span> <span class="mi">2</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@E@TSKTrustEvaluationResult@TSKTrustEvaluationErrorInvalidParameters"></a>
+                    <a name="//apple_ref/objc/Case/TSKTrustEvaluationErrorInvalidParameters" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@E@TSKTrustEvaluationResult@TSKTrustEvaluationErrorInvalidParameters">TSKTrustEvaluationErrorInvalidParameters</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The server trust could not be evaluated due to invalid parameters.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight"><code><span class="n">TSKTrustEvaluationErrorInvalidParameters</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">errorInvalidParameters</span> <span class="o">=</span> <span class="mi">3</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@E@TSKTrustEvaluationResult@TSKTrustEvaluationFailedUserDefinedTrustAnchor"></a>
+                    <a name="//apple_ref/objc/Case/TSKTrustEvaluationFailedUserDefinedTrustAnchor" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@E@TSKTrustEvaluationResult@TSKTrustEvaluationFailedUserDefinedTrustAnchor">TSKTrustEvaluationFailedUserDefinedTrustAnchor</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The server trust was succesfully evaluated but did not contain any of the configured pins. However, the certificate chain terminates at a user-defined trust anchor (ie. a custom/private CA that was manually added to the macOS trust store). Only available on macOS.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight"><code><span class="n">TSKTrustEvaluationFailedUserDefinedTrustAnchor</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">failedUserDefinedTrustAnchor</span> <span class="o">=</span> <span class="mi">4</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:@E@TSKTrustEvaluationResult@TSKTrustEvaluationErrorCouldNotGenerateSpkiHash"></a>
+                    <a name="//apple_ref/objc/Case/TSKTrustEvaluationErrorCouldNotGenerateSpkiHash" class="dashAnchor"></a>
+                    <a class="token" href="#/c:@E@TSKTrustEvaluationResult@TSKTrustEvaluationErrorCouldNotGenerateSpkiHash">TSKTrustEvaluationErrorCouldNotGenerateSpkiHash</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The server trust could not be evaluated due to an error when trying to generate the certificate&rsquo;s subject public key info hash. On iOS 9 or below, this could be caused by a Keychain failure when trying to extract the certificate&rsquo;s public key bytes.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight"><code><span class="n">TSKTrustEvaluationErrorCouldNotGenerateSpkiHash</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">case</span> <span class="n">errorCouldNotGenerateSpkiHash</span> <span class="o">=</span> <span class="mi">5</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2017 <a class="link" href="https://datatheorem.github.io" target="_blank" rel="external">Data Theorem</a>. All rights reserved. (Last updated: 2017-07-13)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>

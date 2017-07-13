@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>TSKPinningValidatorResult Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+    <script src="../js/lunr.min.js" defer></script>
+    <script src="../js/typeahead.jquery.js" defer></script>
+    <script src="../js/jazzy.search.js" defer></script>
+  </head>
+  <body>
+
+    <a name="//apple_ref/objc/Class/TSKPinningValidatorResult" class="dashAnchor"></a>
+
+    <a title="TSKPinningValidatorResult Class Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+          TrustKit Docs
+        </a>
+        
+      </p>
+    
+      <p class="header-col--secondary">
+        <form role="search" action="../search.json">
+          <input type="text" placeholder="Search documentation" data-typeahead>
+        </form>
+      </p>
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/datatheorem/TrustKit">
+            <img class="header-icon" src="../img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html">TrustKit Reference</a>
+      <img class="carat" src="../img/carat.png" />
+      TSKPinningValidatorResult Class Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Initalizing TrustKit.html">Initalizing TrustKit</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TrustKit.html">TrustKit</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Implementing Pinning Validation.html">Implementing Pinning Validation</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TSKPinningValidator.html">TSKPinningValidator</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/TSKTrustDecision.html">TSKTrustDecision</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Setting up a Validation Callback.html">Setting up a Validation Callback</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Setting up a Validation Callback.html#/c:TSKPinningValidatorCallback.h@T@TSKPinningValidatorCallback">TSKPinningValidatorCallback</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Classes/TSKPinningValidatorResult.html">TSKPinningValidatorResult</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Setting up a Validation Callback.html#/c:TSKPinningValidatorCallback.h@T@TKSDomainPinningPolicy">TKSDomainPinningPolicy</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/TSKTrustEvaluationResult.html">TSKTrustEvaluationResult</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Global Configuration Keys.html">Global Configuration Keys</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Global Configuration Keys.html#/c:TSKTrustKitConfig.h@T@TSKGlobalConfigurationKey">TSKGlobalConfigurationKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Global Configuration Keys.html#/c:@kTSKSwizzleNetworkDelegates">kTSKSwizzleNetworkDelegates</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Global Configuration Keys.html#/c:@kTSKPinnedDomains">kTSKPinnedDomains</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Global Configuration Keys.html#/c:@kTSKIgnorePinningForUserDefinedTrustAnchors">kTSKIgnorePinningForUserDefinedTrustAnchors</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Domain Configuration Keys.html">Domain Configuration Keys</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Domain Configuration Keys.html#/c:TSKTrustKitConfig.h@T@TSKDomainConfigurationKey">TSKDomainConfigurationKey</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Domain Configuration Keys.html#/c:@kTSKPublicKeyHashes">kTSKPublicKeyHashes</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Domain Configuration Keys.html#/c:@kTSKPublicKeyAlgorithms">kTSKPublicKeyAlgorithms</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Domain Configuration Keys.html#/c:@kTSKEnforcePinning">kTSKEnforcePinning</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Domain Configuration Keys.html#/c:@kTSKIncludeSubdomains">kTSKIncludeSubdomains</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Domain Configuration Keys.html#/c:@kTSKExcludeSubdomainFromParentPolicy">kTSKExcludeSubdomainFromParentPolicy</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Domain Configuration Keys.html#/c:@kTSKReportUris">kTSKReportUris</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Domain Configuration Keys.html#/c:@kTSKDisableDefaultReportUri">kTSKDisableDefaultReportUri</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Domain Configuration Keys.html#/c:@kTSKExpirationDate">kTSKExpirationDate</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Domain Configuration Keys.html#/c:@kTSKAdditionalTrustAnchors">kTSKAdditionalTrustAnchors</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Public Key Algorithm Keys.html">Public Key Algorithm Keys</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Public Key Algorithm Keys.html#/c:TSKTrustKitConfig.h@T@TSKSupportedAlgorithm">TSKSupportedAlgorithm</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Public Key Algorithm Keys.html#/c:@kTSKAlgorithmRsa2048">kTSKAlgorithmRsa2048</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Public Key Algorithm Keys.html#/c:@kTSKAlgorithmRsa4096">kTSKAlgorithmRsa4096</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Public Key Algorithm Keys.html#/c:@kTSKAlgorithmEcDsaSecp256r1">kTSKAlgorithmEcDsaSecp256r1</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Public Key Algorithm Keys.html#/c:@kTSKAlgorithmEcDsaSecp384r1">kTSKAlgorithmEcDsaSecp384r1</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Other Constants.html">Other Constants</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other Constants.html#/c:@TrustKitVersion">TrustKitVersion</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content">
+            <h1>TSKPinningValidatorResult</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="k">@interface</span> <span class="nc">TSKPinningValidatorResult</span> <span class="p">:</span> <span class="nc">NSObject</span></code></pre>
+
+                </div>
+              </div>
+            <p>A <code>TSKPinningValidatorResult</code> instance contains all the details regarding a pinning validation
+performed against a specific server.</p>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)TSKPinningValidatorResult(py)serverHostname"></a>
+                    <a name="//apple_ref/objc/Property/serverHostname" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)TSKPinningValidatorResult(py)serverHostname">serverHostname</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The hostname of the server SSL pinning validation was performed against.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight"><code><span class="k">@property</span> <span class="p">(</span><span class="n">readonly</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">,</span> <span class="n">nonnull</span><span class="p">)</span> <span class="n">NSString</span> <span class="o">*</span><span class="n">serverHostname</span><span class="p">;</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">serverHostname</span><span class="p">:</span> <span class="kt">String</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)TSKPinningValidatorResult(py)serverTrust"></a>
+                    <a name="//apple_ref/objc/Property/serverTrust" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)TSKPinningValidatorResult(py)serverTrust">serverTrust</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The original <code>SecTrustRef</code> that validation was performed against.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight"><code><span class="k">@property</span> <span class="p">(</span><span class="n">readonly</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">,</span> <span class="n">nonnull</span><span class="p">)</span> <span class="n">SecTrustRef</span> <span class="n">serverTrust</span><span class="p">;</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">serverTrust</span><span class="p">:</span> <span class="kt">SecTrust</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)TSKPinningValidatorResult(py)evaluationResult"></a>
+                    <a name="//apple_ref/objc/Property/evaluationResult" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)TSKPinningValidatorResult(py)evaluationResult">evaluationResult</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The result of validating the server&rsquo;s certificate chain against the set of SSL pins configured for 
+the <code>notedHostname</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight"><code><span class="k">@property</span> <span class="p">(</span><span class="n">readonly</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="n"><a href="../Enums/TSKTrustEvaluationResult.html">TSKTrustEvaluationResult</a></span> <span class="n">evaluationResult</span><span class="p">;</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">evaluationResult</span><span class="p">:</span> <span class="kt"><a href="../Enums/TSKTrustEvaluationResult.html">TSKTrustEvaluationResult</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)TSKPinningValidatorResult(py)finalTrustDecision"></a>
+                    <a name="//apple_ref/objc/Property/finalTrustDecision" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)TSKPinningValidatorResult(py)finalTrustDecision">finalTrustDecision</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The trust decision returned for this connection, which describes whether the connection should be blocked 
+or allowed, based on the <code><a href="../Classes/TSKPinningValidatorResult.html#/c:objc(cs)TSKPinningValidatorResult(py)evaluationResult">evaluationResult</a></code> returned when evaluating the <code><a href="../Classes/TSKPinningValidatorResult.html#/c:objc(cs)TSKPinningValidatorResult(py)serverTrust">serverTrust</a></code> and the SSL pining 
+policy configured for this server.</p>
+
+<p>For example, the pinning validation could have failed (ie. validationResult being 
+<code>TSKTrustEvaluationFailedNoMatchingPin</code>) but the policy might be set to ignore pinning validation failures 
+for this server, thereby returning <code>TSKTrustDecisionShouldAllowConnection</code>.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight"><code><span class="k">@property</span> <span class="p">(</span><span class="n">readonly</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="n"><a href="../Enums/TSKTrustDecision.html">TSKTrustDecision</a></span> <span class="n">finalTrustDecision</span><span class="p">;</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">finalTrustDecision</span><span class="p">:</span> <span class="kt"><a href="../Enums/TSKTrustDecision.html">TSKTrustDecision</a></span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)TSKPinningValidatorResult(py)validationDuration"></a>
+                    <a name="//apple_ref/objc/Property/validationDuration" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)TSKPinningValidatorResult(py)validationDuration">validationDuration</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The time it took for the SSL pinning validation to be performed.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight"><code><span class="k">@property</span> <span class="p">(</span><span class="n">readonly</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span> <span class="n">NSTimeInterval</span> <span class="n">validationDuration</span><span class="p">;</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">validationDuration</span><span class="p">:</span> <span class="kt">TimeInterval</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/c:objc(cs)TSKPinningValidatorResult(py)certificateChain"></a>
+                    <a name="//apple_ref/objc/Property/certificateChain" class="dashAnchor"></a>
+                    <a class="token" href="#/c:objc(cs)TSKPinningValidatorResult(py)certificateChain">certificateChain</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>The certificate chain extracted from the <code><a href="../Classes/TSKPinningValidatorResult.html#/c:objc(cs)TSKPinningValidatorResult(py)serverTrust">serverTrust</a></code> as PEM-formatted certificates. This is the 
+certificate chain sent by the server when establishing the connection.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Objective-C</p>
+                          <pre class="highlight"><code><span class="k">@property</span> <span class="p">(</span><span class="n">readonly</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">,</span> <span class="n">nullable</span><span class="p">)</span> <span class="n">NSArray</span> <span class="o">*</span><span class="n">certificateChain</span><span class="p">;</span></code></pre>
+
+                        </div>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">certificateChain</span><span class="p">:</span> <span class="p">[</span><span class="kt">Any</span><span class="p">]?</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2017 <a class="link" href="https://datatheorem.github.io" target="_blank" rel="external">Data Theorem</a>. All rights reserved. (Last updated: 2017-07-13)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>

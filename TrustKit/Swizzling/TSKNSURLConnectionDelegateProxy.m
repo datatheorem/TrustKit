@@ -1,46 +1,33 @@
-//
-//  TSKNSURLConnectionDelegateProxy.m
-//  TrustKit
-//
-//  Created by Alban Diquet on 10/7/15.
-//  Copyright © 2015 TrustKit. All rights reserved.
-//
+/*
+ 
+ TSKNSURLConnectionDelegateProxy.h
+ TrustKit
+ 
+ Copyright 2015 The TrustKit Project Authors
+ Licensed under the MIT license, see associated LICENSE file for terms.
+ See AUTHORS file for the list of project authors.
+ 
+ */
 
 #import "TSKNSURLConnectionDelegateProxy.h"
-#import "../TrustKit+Private.h"
+#import "../TrustKit.h"
+#import "../TSKLog.h"
+#import "../TSKTrustDecision.h"
+#import "../TSKPinningValidator.h"
 #import "../Dependencies/RSSwizzle/RSSwizzle.h"
-
-
 
 typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NSError *connectionError);
 
-
-@interface TSKNSURLConnectionDelegateProxy(Private)
--(BOOL)forwardToOriginalDelegateAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge forConnection:(NSURLConnection *)connection;
+@interface TSKNSURLConnectionDelegateProxy ()
+@property (nonatomic) id<NSURLConnectionDelegate> originalDelegate; // The NSURLConnectionDelegate we're going to proxy
+@property (nonatomic) TrustKit *trustKit;
 @end
-
 
 @implementation TSKNSURLConnectionDelegateProxy
 
-
-#pragma mark Private methods used for tests
-
-static TSKTrustDecision _lastTrustDecision = (TSKTrustDecision)-1;
-
-+(void)resetLastTrustDecision
-{
-    _lastTrustDecision = (TSKTrustDecision)-1;
-}
-
-+(TSKTrustDecision)getLastTrustDecision
-{
-    return _lastTrustDecision;
-}
-
-
 #pragma mark Public methods
 
-+ (void)swizzleNSURLConnectionConstructors
++ (void)swizzleNSURLConnectionConstructors:(TrustKit *)trustKit
 {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wshadow"
@@ -61,7 +48,8 @@ static TSKTrustDecision _lastTrustDecision = (TSKTrustDecision)-1;
                                                 else
                                                 {
                                                     // Replace the delegate with our own so we can intercept and handle authentication challenges
-                                                    TSKNSURLConnectionDelegateProxy *swizzledDelegate = [[TSKNSURLConnectionDelegateProxy alloc]initWithDelegate:delegate];
+                                                    TSKNSURLConnectionDelegateProxy *swizzledDelegate = [[TSKNSURLConnectionDelegateProxy alloc] initWithTrustKit:trustKit
+                                                                                                                                               connectionDelegate:delegate];
                                                      connection = RSSWCallOriginal(request, swizzledDelegate);
                                                 }
                                                 return connection;
@@ -86,7 +74,8 @@ static TSKTrustDecision _lastTrustDecision = (TSKTrustDecision)-1;
                                                 else
                                                 {
                                                     // Replace the delegate with our own so we can intercept and handle authentication challenges
-                                                    TSKNSURLConnectionDelegateProxy *swizzledDelegate = [[TSKNSURLConnectionDelegateProxy alloc]initWithDelegate:delegate];
+                                                    TSKNSURLConnectionDelegateProxy *swizzledDelegate = [[TSKNSURLConnectionDelegateProxy alloc] initWithTrustKit:trustKit
+                                                                                                                                               connectionDelegate:delegate];
                                                     connection = RSSWCallOriginal(request, swizzledDelegate, startImmediately);
                                                 }
                                                 return connection;
@@ -126,19 +115,21 @@ static TSKTrustDecision _lastTrustDecision = (TSKTrustDecision)-1;
 }
 
 
-- (instancetype)initWithDelegate:(id)delegate
+#pragma mark Instance Constructors
+
+- (instancetype)initWithTrustKit:(TrustKit *)trustKit connectionDelegate:(id<NSURLConnectionDelegate>)delegate
 {
     self = [super init];
     if (self)
     {
-        originalDelegate = delegate;
+        _originalDelegate = delegate;
+        _trustKit = trustKit;
     }
     TSKLog(@"Proxy-ing NSURLConnectionDelegate: %@", NSStringFromClass([delegate class]));
     return self;
 }
 
-
-#pragma mark Delegate methods
+#pragma mark NSObject overrides
 
 - (BOOL)respondsToSelector:(SEL)aSelector
 {
@@ -150,80 +141,62 @@ static TSKTrustDecision _lastTrustDecision = (TSKTrustDecision)-1;
     else
     {
         // The delegate proxy should mirror the original delegate's methods so that it doesn't change the app flow
-        return [originalDelegate respondsToSelector:aSelector];
+        return [_originalDelegate respondsToSelector:aSelector];
     }
 }
 
+#pragma mark Instance methods
 
-- (id)forwardingTargetForSelector:(SEL)sel
-{
-    // Forward messages to the original delegate if the proxy doesn't implement the method
-    return originalDelegate;
-}
-
-
-// NSURLConnection is deprecated in iOS 9
 #pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
--(BOOL)forwardToOriginalDelegateAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge forConnection:(NSURLConnection *)connection
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations" // NSURLConnection is deprecated in iOS 9
+- (BOOL)forwardToOriginalDelegateAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge forConnection:(NSURLConnection *)connection
 {
-    BOOL wasChallengeHandled = NO;
-    
     // Can the original delegate handle this challenge ?
-    if  ([originalDelegate respondsToSelector:@selector(connection:willSendRequestForAuthenticationChallenge:)])
+    if  ([_originalDelegate respondsToSelector:@selector(connection:willSendRequestForAuthenticationChallenge:)])
     {
         // Yes - forward the challenge to the original delegate
-        wasChallengeHandled = YES;
-        [originalDelegate connection:connection willSendRequestForAuthenticationChallenge:challenge];
+        [_originalDelegate connection:connection willSendRequestForAuthenticationChallenge:challenge];
+        return YES;
     }
-    else if ([originalDelegate respondsToSelector:@selector(connection:canAuthenticateAgainstProtectionSpace:)])
+    
+    if ([_originalDelegate respondsToSelector:@selector(connection:canAuthenticateAgainstProtectionSpace:)]
+        && [_originalDelegate connection:connection canAuthenticateAgainstProtectionSpace:challenge.protectionSpace])
     {
-        if ([originalDelegate connection:connection canAuthenticateAgainstProtectionSpace:challenge.protectionSpace])
-        {
-            // Yes - forward the challenge to the original delegate
-            wasChallengeHandled = YES;
-            [originalDelegate connection:connection didReceiveAuthenticationChallenge:challenge];
-        }
+        // Yes - forward the challenge to the original delegate
+        [_originalDelegate connection:connection didReceiveAuthenticationChallenge:challenge];
+        return YES;
     }
 
-    return wasChallengeHandled;
+    return NO;
 }
-#pragma GCC diagnostic pop
-
 
 - (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
 {
-    BOOL wasChallengeHandled = NO;
-    
     // For SSL pinning we only care about server authentication
     if([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust])
     {
-        TSKTrustDecision trustDecision = TSKTrustDecisionShouldBlockConnection;
         SecTrustRef serverTrust = challenge.protectionSpace.serverTrust;
         NSString *serverHostname = challenge.protectionSpace.host;
     
         // Check the trust object against the pinning policy
-        trustDecision = [TSKPinningValidator evaluateTrust:serverTrust forHostname:serverHostname];
-        _lastTrustDecision = trustDecision;
+        TSKTrustDecision trustDecision = [self.trustKit.pinningValidator evaluateTrust:serverTrust
+                                                                           forHostname:serverHostname];
         if (trustDecision == TSKTrustDecisionShouldBlockConnection)
         {
             // Pinning validation failed - block the connection
-            wasChallengeHandled = YES;
             [challenge.sender cancelAuthenticationChallenge:challenge];
+            return;
         }
     }
     
     // Forward all challenges (including client auth challenges) to the original delegate
-    if (wasChallengeHandled == NO)
+    // We will also get here if the pinning validation succeeded or the domain was not pinned
+    if ([self forwardToOriginalDelegateAuthenticationChallenge:challenge forConnection:connection] == NO)
     {
-        // We will also get here if the pinning validation succeeded or the domain was not pinned
-        if ([self forwardToOriginalDelegateAuthenticationChallenge:challenge forConnection:connection] == NO)
-        {
-            // The original delegate could not handle the challenge; use the default handler
-            [challenge.sender performDefaultHandlingForAuthenticationChallenge:challenge];
-        }
+        // The original delegate could not handle the challenge; use the default handler
+        [challenge.sender performDefaultHandlingForAuthenticationChallenge:challenge];
     }
 }
-
+#pragma GCC diagnostic pop
 
 @end
