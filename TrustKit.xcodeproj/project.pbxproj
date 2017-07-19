@@ -432,7 +432,6 @@
 		FCD0CC031E96ADF00076D431 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		FCE7D62C1EE9F6610081EEEF /* TSKTrustKitConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKTrustKitConfig.m; sourceTree = "<group>"; };
 		FCE7D6381EEA04180081EEEF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FCE7D6391EEA04180081EEEF /* TrustKit-umbrella.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TrustKit-umbrella.h"; sourceTree = "<group>"; };
 		FCE7D63A1EEA04180081EEEF /* TrustKit.modulemap */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.module-map"; path = TrustKit.modulemap; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -821,7 +820,6 @@
 			isa = PBXGroup;
 			children = (
 				FCE7D6381EEA04180081EEEF /* Info.plist */,
-				FCE7D6391EEA04180081EEEF /* TrustKit-umbrella.h */,
 				FCE7D63A1EEA04180081EEEF /* TrustKit.modulemap */,
 			);
 			path = Framework;
