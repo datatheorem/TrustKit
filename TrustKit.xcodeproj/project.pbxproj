@@ -21,6 +21,9 @@
 		2DA52E201F1FCFEE0059246E /* TSKTrustKitConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = FC4CAC7E1E96917B00DAC41E /* TSKTrustKitConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2DA52E211F1FCFEF0059246E /* TSKTrustKitConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = FC4CAC7E1E96917B00DAC41E /* TSKTrustKitConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2DA52E221F1FCFF00059246E /* TSKTrustKitConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = FC4CAC7E1E96917B00DAC41E /* TSKTrustKitConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2DB0AA601F1FD34800AA07D9 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C84804C1A896EE30017C155 /* TrustKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2DB0AA611F1FD34900AA07D9 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C84804C1A896EE30017C155 /* TrustKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2DB0AA621F1FD34A00AA07D9 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C84804C1A896EE30017C155 /* TrustKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		401379A31F17F63100567137 /* TSKPinningValidatorResult.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1A08FF1E57A4BB0055B12C /* TSKPinningValidatorResult.m */; };
 		401379A41F17F63500567137 /* TSKSPKIHashCache.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1A09091E57AC450055B12C /* TSKSPKIHashCache.m */; };
 		6B032D401AF1AEC200EAFA69 /* TSKReporterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B032D3F1AF1AEB600EAFA69 /* TSKReporterTests.m */; };
@@ -881,6 +884,7 @@
 				8C84CCE51D6E5D5A009B3E7D /* trie_node.h in Headers */,
 				8C84CCE21D6E5D5A009B3E7D /* string_util.h in Headers */,
 				8C84CBA71D6E0981009B3E7D /* TSKNSURLConnectionDelegateProxy.h in Headers */,
+				2DB0AA611F1FD34900AA07D9 /* TrustKit.h in Headers */,
 				8C84CC0B1D6E3C67009B3E7D /* vendor_identifier.h in Headers */,
 				FC1A090C1E57AC450055B12C /* TSKSPKIHashCache.h in Headers */,
 				8C84CBA81D6E0981009B3E7D /* TSKReportsRateLimiter.h in Headers */,
@@ -907,6 +911,7 @@
 				8C84CCF21D6E5DE9009B3E7D /* registry_tables.h in Headers */,
 				8C84CCCF1D6E5D5A009B3E7D /* assert.h in Headers */,
 				8CA6CC141BAE2B6600BDA419 /* TSKReportsRateLimiter.h in Headers */,
+				2DB0AA601F1FD34800AA07D9 /* TrustKit.h in Headers */,
 				2DA52E201F1FCFEE0059246E /* TSKTrustKitConfig.h in Headers */,
 				8C84CCE41D6E5D5A009B3E7D /* trie_node.h in Headers */,
 				8C84CCE11D6E5D5A009B3E7D /* string_util.h in Headers */,
@@ -940,6 +945,7 @@
 				8CC5D23F1D6E64D10074F515 /* trie_node.h in Headers */,
 				8CC5D2401D6E64D10074F515 /* string_util.h in Headers */,
 				8CC5D2411D6E64D10074F515 /* TSKNSURLConnectionDelegateProxy.h in Headers */,
+				2DB0AA621F1FD34A00AA07D9 /* TrustKit.h in Headers */,
 				8CC5D2421D6E64D10074F515 /* vendor_identifier.h in Headers */,
 				FC1A090D1E57AC450055B12C /* TSKSPKIHashCache.h in Headers */,
 				8CC5D2431D6E64D10074F515 /* TSKReportsRateLimiter.h in Headers */,
