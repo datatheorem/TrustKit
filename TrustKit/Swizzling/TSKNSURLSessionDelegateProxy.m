@@ -18,7 +18,7 @@
 
 @interface TSKNSURLSessionDelegateProxy ()
 /* The NSURLSessionDelegate we're going to proxy */
-@property (nonatomic) id<NSURLSessionDelegate> originalDelegate;
+@property (nonatomic) id<NSURLSessionDelegate, NSURLSessionTaskDelegate> originalDelegate;
 @property (nonatomic) TrustKit *trustKit;
 @end
 
@@ -122,27 +122,13 @@
 }
 
 
-- (BOOL)forwardToOriginalDelegateAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
-                                       completionHandler:(TSKURLSessionAuthChallengeCallback)completionHandler
-                                              forSession:(NSURLSession * _Nonnull)session
-{
-    // Can the original delegate handle this challenge ?
-    if  ([_originalDelegate respondsToSelector:@selector(URLSession:didReceiveChallenge:completionHandler:)])
-    {
-        // Yes - forward the challenge to the original delegate
-        [_originalDelegate URLSession:session didReceiveChallenge:challenge completionHandler:completionHandler];
-        return YES;
-    }
-    return NO;
-}
-
-- (void)common_URLSession:(NSURLSession * _Nonnull)session
+- (BOOL)common_URLSession:(NSURLSession * _Nonnull)session
                 challenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
         completionHandler:(void (^ _Nonnull)(NSURLSessionAuthChallengeDisposition disposition,
                                              NSURLCredential * _Nullable credential))completionHandler
 {
     // For SSL pinning we only care about server authentication
-    if([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust])
+    if ([challenge.protectionSpace.authenticationMethod isEqualToString:NSURLAuthenticationMethodServerTrust])
     {
         // Check the trust object against the pinning policy
         TSKTrustDecision trustDecision = [self.trustKit.pinningValidator evaluateTrust:challenge.protectionSpace.serverTrust
@@ -151,24 +137,33 @@
         {
             // Pinning validation failed - block the connection
             completionHandler(NSURLSessionAuthChallengeCancelAuthenticationChallenge, NULL);
-            return; // Challenge handled (blocked), stop here!
+            return YES; // Challenge handled (blocked), stop here!
         }
     }
-    
-    // Forward all challenges (including client auth challenges) to the original delegate
-    // We will also get here if the pinning validation succeeded or the domain was not pinned
-    if ([self forwardToOriginalDelegateAuthenticationChallenge:challenge completionHandler:completionHandler forSession:session] == NO)
-    {
-        // The original delegate could not handle the challenge; use the default handler
-        completionHandler(NSURLSessionAuthChallengePerformDefaultHandling, NULL);
-    }
+    return NO;
 }
 
 - (void)URLSession:(NSURLSession * _Nonnull)session
 didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
  completionHandler:(TSKURLSessionAuthChallengeCallback)completionHandler
 {
-    [self common_URLSession:session challenge:challenge completionHandler:completionHandler];
+    if ([self common_URLSession:session challenge:challenge completionHandler:completionHandler])
+    {
+        // Challenge handled, stop here!
+        return;
+    }
+    
+    // Forward all challenges (including client auth challenges) to the original delegate
+    // We will also get here if the pinning validation succeeded or the domain was not pinned
+    if ([_originalDelegate respondsToSelector:@selector(URLSession:didReceiveChallenge:completionHandler:)])
+    {
+        [_originalDelegate URLSession:session didReceiveChallenge:challenge completionHandler:completionHandler];
+    }
+    else
+    {
+        // The original delegate could not handle the challenge; use the default handler
+        completionHandler(NSURLSessionAuthChallengePerformDefaultHandling, NULL);
+    }
 }
 
 - (void)URLSession:(NSURLSession * _Nonnull)session
@@ -177,7 +172,23 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
  completionHandler:(void (^ _Nonnull)(NSURLSessionAuthChallengeDisposition disposition,
                                       NSURLCredential * _Nullable credential))completionHandler
 {
-    [self common_URLSession:session challenge:challenge completionHandler:completionHandler];
+    if ([self common_URLSession:session challenge:challenge completionHandler:completionHandler])
+    {
+        // Challenge handled, stop here!
+        return;
+    }
+    
+    // Forward all challenges (including client auth challenges) to the original delegate
+    // We will also get here if the pinning validation succeeded or the domain was not pinned
+    if ([_originalDelegate respondsToSelector:@selector(URLSession:task:didReceiveChallenge:completionHandler:)])
+    {
+        [_originalDelegate URLSession:session task:task didReceiveChallenge:challenge completionHandler:completionHandler];
+    }
+    else
+    {
+        // The original delegate could not handle the challenge; use the default handler
+        completionHandler(NSURLSessionAuthChallengePerformDefaultHandling, NULL);
+    }
 }
 
 @end

@@ -158,43 +158,6 @@
     XCTAssertFalse([proxy respondsToSelector:NSSelectorFromString(@"unimplementedMethod")]);
 }
 
-#pragma mark forwardToOriginalDelegateAuthenticationChallenge
-
-// Test session delegate that implements @selector(URLSession:didReceiveChallenge:completionHandler:)
-- (void)test_forwardToOriginalDelegateAuthenticationChallenge_implements
-{
-    TSKNSURLSessionDelegateProxy *proxy = [[TSKNSURLSessionDelegateProxy alloc] initWithTrustKit:self.trustKit
-                                                                                 sessionDelegate:[SessionDelegate new]];
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]];
-    NSURLAuthenticationChallenge *challenge = [NSURLAuthenticationChallenge new];
-    
-    XCTestExpectation *expectation = [self expectationWithDescription:@"CallbackInvoked"];
-    
-    BOOL result = [proxy forwardToOriginalDelegateAuthenticationChallenge:challenge
-                                                        completionHandler:^(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential) {
-                                                            [expectation fulfill];
-                                                        } forSession:session];
-    
-    XCTAssertTrue(result);
-    
-    [self waitForExpectationsWithTimeout:5.0 handler:nil];
-}
-
-// Test task delegate that doesn't implement @selector(URLSession:didReceiveChallenge:completionHandler:)
-- (void)test_forwardToOriginalDelegateAuthenticationChallenge_doesNotImplement
-{
-    TSKNSURLSessionDelegateProxy *proxy = [[TSKNSURLSessionDelegateProxy alloc] initWithTrustKit:self.trustKit
-                                                                                 sessionDelegate:[TaskDelegate new]];
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]];
-    NSURLAuthenticationChallenge *challenge = [NSURLAuthenticationChallenge new];
-    
-    BOOL result = [proxy forwardToOriginalDelegateAuthenticationChallenge:challenge
-                                                        completionHandler:^(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential) {
-                                                            XCTFail(@"Should not be invoked");
-                                                        } forSession:session];
-    
-    XCTAssertFalse(result);
-}
 
 #pragma mark common_URLSession:challenge:challenge:completionHandler:
 
@@ -336,9 +299,9 @@
 
 - (void)test_urlSessionChallengeDelegate
 {
-    SessionDelegate *delegate = [SessionDelegate new];
-    TSKNSURLSessionDelegateProxy *proxy = OCMPartialMock([[TSKNSURLSessionDelegateProxy alloc] initWithTrustKit:self.trustKit
-                                                                                                sessionDelegate:delegate]);
+    SessionDelegate *delegate = OCMPartialMock([SessionDelegate new]);
+    TSKNSURLSessionDelegateProxy *proxy = [[TSKNSURLSessionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                                                 sessionDelegate:delegate];
     
     NSURLSession *session = [NSURLSession new];
     NSURLAuthenticationChallenge *challenge = ({
@@ -357,23 +320,24 @@
     
     TSKURLSessionAuthChallengeCallback completionHandler = ^(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential) {};
     
-    OCMExpect([proxy common_URLSession:session
-                             challenge:challenge
-                     completionHandler:completionHandler]).andDo(^(NSInvocation *i){});
+    // Ensure that the challenge is forwarded to the delegate to session-based handler
+    OCMExpect([delegate URLSession:session
+               didReceiveChallenge:challenge
+                 completionHandler:completionHandler]).andDo(^(NSInvocation *i){});
     
     [proxy URLSession:session didReceiveChallenge:challenge completionHandler:completionHandler];
     
-    OCMVerifyAll((id)proxy);
-    [(id)proxy stopMocking];
+    OCMVerifyAll((id)delegate);
+    [(id)delegate stopMocking];
 }
 
 #pragma mark URLSession:task:didReceiveChallenge:completionHandler:
 
-- (void)test_urlSessionTaskChallengeDelegate
+- (void)test_urlTaskAndSessionChallengeDelegate
 {
-    SessionDelegate *delegate = [SessionDelegate new];
-    TSKNSURLSessionDelegateProxy *proxy = OCMPartialMock([[TSKNSURLSessionDelegateProxy alloc] initWithTrustKit:self.trustKit
-                                                                                                sessionDelegate:delegate]);
+    TaskAndSessionDelegate *delegate = OCMPartialMock([TaskAndSessionDelegate new]);
+    TSKNSURLSessionDelegateProxy *proxy = [[TSKNSURLSessionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                                                 sessionDelegate:delegate];
     
     NSURLSession *session = [NSURLSession new];
     NSURLAuthenticationChallenge *challenge = ({
@@ -392,17 +356,20 @@
     
     TSKURLSessionAuthChallengeCallback completionHandler = ^(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential * _Nullable credential) {};
     
-    OCMExpect([proxy common_URLSession:session
-                             challenge:challenge
-                     completionHandler:completionHandler]).andDo(^(NSInvocation *i){});
+    // Ensure that the challenge is forwarded to the delegate to the task-based handler
+    NSURLSessionTask *task = [NSURLSessionTask new];
+    OCMExpect([delegate URLSession:session
+                              task:task
+               didReceiveChallenge:challenge
+                 completionHandler:completionHandler]).andDo(^(NSInvocation *i){});
     
     [proxy URLSession:session
-                 task:[NSURLSessionTask new]
+                 task:task
   didReceiveChallenge:challenge
     completionHandler:completionHandler];
     
-    OCMVerifyAll((id)proxy);
-    [(id)proxy stopMocking];
+    OCMVerifyAll((id)delegate);
+    [(id)delegate stopMocking];
 }
 
 @end
