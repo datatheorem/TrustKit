@@ -31,7 +31,7 @@
     // + sessionWithConfiguration:delegate:delegateQueue:
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wshadow"
-    RSSwizzleClassMethod(NSURLSession.class,
+    RSSwizzleClassMethod(NSClassFromString(@"NSURLSession"),
                          @selector(sessionWithConfiguration:delegate:delegateQueue:),
                          RSSWReturnType(NSURLSession *),
                          RSSWArguments(NSURLSessionConfiguration * _Nonnull configuration, id _Nullable delegate, NSOperationQueue * _Nullable queue),
@@ -114,6 +114,13 @@
         return [_originalDelegate respondsToSelector:aSelector];
     }
 }
+
+
+- (id)forwardingTargetForSelector:(SEL)sel
+{
+    return _originalDelegate;
+}
+
 
 - (BOOL)forwardToOriginalDelegateAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
                                        completionHandler:(TSKURLSessionAuthChallengeCallback)completionHandler

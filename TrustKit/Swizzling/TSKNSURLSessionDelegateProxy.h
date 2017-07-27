@@ -34,6 +34,9 @@ didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
 didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
  completionHandler:(TSKURLSessionAuthChallengeCallback)completionHandler;
 
+// Forward messages to the original delegate if the proxy doesn't implement the method
+- (id)forwardingTargetForSelector:(SEL)sel;
+
 @end
 
 NS_ASSUME_NONNULL_END

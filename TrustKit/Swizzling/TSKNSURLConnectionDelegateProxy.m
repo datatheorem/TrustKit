@@ -145,6 +145,13 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
     }
 }
 
+
+- (id)forwardingTargetForSelector:(SEL)sel
+{
+    return _originalDelegate;
+}
+
+
 #pragma mark Instance methods
 
 #pragma GCC diagnostic push

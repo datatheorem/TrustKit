@@ -26,6 +26,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
 
+// Forward messages to the original delegate if the proxy doesn't implement the method
+- (id)forwardingTargetForSelector:(SEL)sel;
+
 @end
 
 NS_ASSUME_NONNULL_END

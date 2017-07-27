@@ -173,6 +173,9 @@
 		8CBA05E51E294CC30045D8B3 /* GeoTrust_Primary_CA_G2_ECC.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05E41E294CC30045D8B3 /* GeoTrust_Primary_CA_G2_ECC.der */; };
 		8CBA05E61E294CC30045D8B3 /* GeoTrust_Primary_CA_G2_ECC.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05E41E294CC30045D8B3 /* GeoTrust_Primary_CA_G2_ECC.der */; };
 		8CBA05E71E294CC30045D8B3 /* GeoTrust_Primary_CA_G2_ECC.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05E41E294CC30045D8B3 /* GeoTrust_Primary_CA_G2_ECC.der */; };
+		8CBADAA91F2A850F00FCD7FB /* TSKEndToEndSwizzlingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CBADAA81F2A850F00FCD7FB /* TSKEndToEndSwizzlingTests.m */; };
+		8CBADAAA1F2A850F00FCD7FB /* TSKEndToEndSwizzlingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CBADAA81F2A850F00FCD7FB /* TSKEndToEndSwizzlingTests.m */; };
+		8CBADAAB1F2A850F00FCD7FB /* TSKEndToEndSwizzlingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CBADAA81F2A850F00FCD7FB /* TSKEndToEndSwizzlingTests.m */; };
 		8CC5D2241D6E64D10074F515 /* init_registry_tables.c in Sources */ = {isa = PBXBuildFile; fileRef = 8C84CCC11D6E5D5A009B3E7D /* init_registry_tables.c */; };
 		8CC5D2251D6E64D10074F515 /* ssl_pin_verifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE919211AEA077F002B29AE /* ssl_pin_verifier.m */; };
 		8CC5D2261D6E64D10074F515 /* vendor_identifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C84CC081D6E3C67009B3E7D /* vendor_identifier.m */; };
@@ -403,6 +406,7 @@
 		8CBA05D61E28AAA40045D8B3 /* www.good.com.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = www.good.com.der; path = Certificates/RSA_4096/www.good.com.der; sourceTree = "<group>"; };
 		8CBA05D71E28AAA40045D8B3 /* www.good.com.selfsigned.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = www.good.com.selfsigned.der; path = Certificates/RSA_4096/www.good.com.selfsigned.der; sourceTree = "<group>"; };
 		8CBA05E41E294CC30045D8B3 /* GeoTrust_Primary_CA_G2_ECC.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = GeoTrust_Primary_CA_G2_ECC.der; path = Certificates/ECDSA_sec384r1/GeoTrust_Primary_CA_G2_ECC.der; sourceTree = "<group>"; };
+		8CBADAA81F2A850F00FCD7FB /* TSKEndToEndSwizzlingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKEndToEndSwizzlingTests.m; sourceTree = "<group>"; };
 		8CC5D24E1D6E64D10074F515 /* TrustKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TrustKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CC78B1E1B1B586F00523A25 /* TSKCertificateUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSKCertificateUtils.h; sourceTree = "<group>"; };
 		8CC78B1F1B1B586F00523A25 /* TSKCertificateUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKCertificateUtils.m; sourceTree = "<group>"; };
@@ -624,6 +628,7 @@
 				8CF27A971F01B341009369B0 /* TSKSwizzlingTests.m */,
 				8CF27AA11F01BB7B009369B0 /* TSKLoggerTests.m */,
 				8CF27A931F01A0B8009369B0 /* TSKEndToEndNSURLSessionTests.m */,
+				8CBADAA81F2A850F00FCD7FB /* TSKEndToEndSwizzlingTests.m */,
 				8CD5F7561BCB7219005801D8 /* TSKNSURLSessionTests.m */,
 				2FA2868CAFECA46ADE0B6E3E /* TSKPinningValidatorTests.m */,
 				8C15F9A31B17564400F06C0E /* TSKPinConfigurationTests.m */,
@@ -1300,6 +1305,7 @@
 				8CD5F7571BCB7219005801D8 /* TSKNSURLSessionTests.m in Sources */,
 				FC4CAC7B1E958E0500DAC41E /* TSKReportsRateLimiterTests.m in Sources */,
 				8CF27A981F01B341009369B0 /* TSKSwizzlingTests.m in Sources */,
+				8CBADAA91F2A850F00FCD7FB /* TSKEndToEndSwizzlingTests.m in Sources */,
 				8CF27AA21F01BB7B009369B0 /* TSKLoggerTests.m in Sources */,
 				8CC78B201B1B586F00523A25 /* TSKCertificateUtils.m in Sources */,
 			);
@@ -1345,6 +1351,7 @@
 				8C84CBC71D6E1718009B3E7D /* TSKReporterTests.m in Sources */,
 				8C84CBC81D6E1718009B3E7D /* TSKNSURLSessionTests.m in Sources */,
 				8CF27A9A1F01B341009369B0 /* TSKSwizzlingTests.m in Sources */,
+				8CBADAAB1F2A850F00FCD7FB /* TSKEndToEndSwizzlingTests.m in Sources */,
 				8CF27AA41F01BB7B009369B0 /* TSKLoggerTests.m in Sources */,
 				8C84CBC91D6E1718009B3E7D /* TSKCertificateUtils.m in Sources */,
 			);
@@ -1417,6 +1424,7 @@
 				8CA6CC3B1BAE2C7E00BDA419 /* TSKPinConfigurationTests.m in Sources */,
 				8CD5F7581BCB7219005801D8 /* TSKNSURLSessionTests.m in Sources */,
 				8CF27A991F01B341009369B0 /* TSKSwizzlingTests.m in Sources */,
+				8CBADAAA1F2A850F00FCD7FB /* TSKEndToEndSwizzlingTests.m in Sources */,
 				8CF27AA31F01BB7B009369B0 /* TSKLoggerTests.m in Sources */,
 				8CA6CC3D1BAE2C8500BDA419 /* TSKCertificateUtils.m in Sources */,
 			);
