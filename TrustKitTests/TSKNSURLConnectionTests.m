@@ -220,23 +220,61 @@
                                                                                                       error:nil
                                                                                                      sender:delegate];
     
-    TSKNSURLConnectionDelegateProxy *proxy = OCMPartialMock([[TSKNSURLConnectionDelegateProxy alloc] initWithTrustKit:self.trustKit
-                                                                                                   connectionDelegate:delegate]);
+    TSKNSURLConnectionDelegateProxy *proxy = [[TSKNSURLConnectionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                                                    connectionDelegate:delegate];
+
+    // Ensure the proxy mirrors the methods of the delegate
+    XCTAssertTrue([proxy respondsToSelector:@selector(connection:willSendRequestForAuthenticationChallenge:)]);
     
+    // In this case the challenge was seen as valid by TrustKit and then gets forwarded to the original delegate
     OCMExpect([validator evaluateTrust:space.serverTrust forHostname:@"hostname"]).andReturn(TSKTrustDecisionShouldAllowConnection);
-    OCMExpect([proxy forwardToOriginalDelegateAuthenticationChallenge:challenge forConnection:cnxn]);
-    OCMStub([proxy connection:cnxn willSendRequestForAuthenticationChallenge:challenge]).andForwardToRealObject();
+    OCMExpect([delegate connection:cnxn willSendRequestForAuthenticationChallenge:challenge]);
+    
+    [proxy connection:cnxn willSendRequestForAuthenticationChallenge:challenge];
+    
+    OCMVerifyAll((id)delegate);
+    OCMVerifyAll((id)validator);
+    
+    [(id)validator stopMocking];
+    [(id)delegate stopMocking];
+}
+
+- (void)test_connectionWillSendRequestForAuthenticationChallenge_serverTrustB_allow_noDelegateMethod
+{
+    TestModeBDelegate *delegate = OCMPartialMock([TestModeBDelegate new]);
+    
+    TSKPinningValidator *validator = OCMStrictClassMock([TSKPinningValidator class]);
+    self.trustKit.pinningValidator = validator;
+    
+    NSURLConnection *cnxn = [[NSURLConnection alloc] init];
+    NSURLProtectionSpace *space = [[NSURLProtectionSpace alloc] initWithHost:@"hostname" port:0 protocol:nil realm:nil
+                                                        authenticationMethod:NSURLAuthenticationMethodServerTrust];
+    NSURLAuthenticationChallenge *challenge = [[NSURLAuthenticationChallenge alloc] initWithProtectionSpace:space
+                                                                                         proposedCredential:nil
+                                                                                       previousFailureCount:0
+                                                                                            failureResponse:nil
+                                                                                                      error:nil
+                                                                                                     sender:delegate];
+    
+    TSKNSURLConnectionDelegateProxy *proxy = [[TSKNSURLConnectionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                                                    connectionDelegate:delegate];
+    
+    // Ensure the proxy forces the usage of connection:willSendRequestForAuthenticationChallenge: VS the legacy connection:canAuthenticateAgainstProtectionSpace:
+    XCTAssertTrue([proxy respondsToSelector:@selector(connection:willSendRequestForAuthenticationChallenge:)]);
+    
+    // The delegate is NOT able to handle this challenge
+    delegate.shouldAuthenticate = NO;
+    // In this case the challenge was seen as valid by TrustKit and then the default handler gets called since the delegate has no method
+    OCMExpect([validator evaluateTrust:space.serverTrust forHostname:@"hostname"]).andReturn(TSKTrustDecisionShouldAllowConnection);
     OCMExpect([delegate performDefaultHandlingForAuthenticationChallenge:challenge]);
     
     [proxy connection:cnxn willSendRequestForAuthenticationChallenge:challenge];
     
     OCMVerifyAll((id)delegate);
     OCMVerifyAll((id)validator);
-    OCMVerifyAll((id)proxy);
     
     [(id)validator stopMocking];
     [(id)delegate stopMocking];
-    [(id)proxy stopMocking];
 }
 
 - (void)test_connectionWillSendRequestForAuthenticationChallenge_serverTrustB_allow
@@ -256,24 +294,25 @@
                                                                                                       error:nil
                                                                                                      sender:delegate];
     
-    TSKNSURLConnectionDelegateProxy *proxy = OCMPartialMock([[TSKNSURLConnectionDelegateProxy alloc] initWithTrustKit:self.trustKit
-                                                                                                   connectionDelegate:delegate]);
+    TSKNSURLConnectionDelegateProxy *proxy = [[TSKNSURLConnectionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                                                    connectionDelegate:delegate];
     
+    // Ensure the proxy forces the usage of connection:willSendRequestForAuthenticationChallenge: VS the legacy connection:canAuthenticateAgainstProtectionSpace:
+    XCTAssertTrue([proxy respondsToSelector:@selector(connection:willSendRequestForAuthenticationChallenge:)]);
+    
+    // The delegate is able to handle this challenge
+    delegate.shouldAuthenticate = YES;
+    // In this case the challenge was seen as valid by TrustKit and then gets forwarded to the original delegate's connection:didReceiveAuthenticationChallenge: method
     OCMExpect([validator evaluateTrust:space.serverTrust forHostname:@"hostname"]).andReturn(TSKTrustDecisionShouldAllowConnection);
-    OCMStub([proxy connection:cnxn willSendRequestForAuthenticationChallenge:challenge]).andForwardToRealObject();
-    // Test that the forward method was called – that method was tested in it's own unit tests.
-    OCMExpect([proxy forwardToOriginalDelegateAuthenticationChallenge:challenge forConnection:cnxn]).andReturn(NO);
-    OCMExpect([delegate performDefaultHandlingForAuthenticationChallenge:challenge]);
+    OCMExpect([delegate connection:cnxn didReceiveAuthenticationChallenge:challenge]);
     
     [proxy connection:cnxn willSendRequestForAuthenticationChallenge:challenge];
     
     OCMVerifyAll((id)delegate);
     OCMVerifyAll((id)validator);
-    OCMVerifyAll((id)proxy);
     
     [(id)validator stopMocking];
     [(id)delegate stopMocking];
-    [(id)proxy stopMocking];
 }
 
 // Test the block case: only need to test for one because the failure handling is identical
@@ -294,21 +333,21 @@
                                                                                                       error:nil
                                                                                                      sender:delegate];
     
-    TSKNSURLConnectionDelegateProxy *proxy = OCMPartialMock([[TSKNSURLConnectionDelegateProxy alloc] initWithTrustKit:self.trustKit
-                                                                                                   connectionDelegate:delegate]);
+    TSKNSURLConnectionDelegateProxy *proxy = [[TSKNSURLConnectionDelegateProxy alloc] initWithTrustKit:self.trustKit
+                                                                                    connectionDelegate:delegate];
     
     OCMExpect([validator evaluateTrust:space.serverTrust forHostname:@"hostname"]).andReturn(TSKTrustDecisionShouldBlockConnection);
+    
+    // In this case the challenge is directly handled by the proxy and should cancel the connection
     OCMExpect([delegate cancelAuthenticationChallenge:challenge]);
     
     [proxy connection:cnxn willSendRequestForAuthenticationChallenge:challenge];
     
     OCMVerifyAll((id)delegate);
     OCMVerifyAll((id)validator);
-    OCMVerifyAll((id)proxy);
     
     [(id)validator stopMocking];
     [(id)delegate stopMocking];
-    [(id)proxy stopMocking];
 }
 
 // TODO: add swizzling tests to ensure the above tested methods are properly invoked.

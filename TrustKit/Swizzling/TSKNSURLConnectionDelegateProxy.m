@@ -136,6 +136,7 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
     if (aSelector == @selector(connection:willSendRequestForAuthenticationChallenge:))
     {
         // The delegate proxy should always receive authentication challenges
+        // This will disrupt the delegate flow for (old) delegates that use the connection:didReceiveAuthenticationChallenge: method
         return YES;
     }
     else
