@@ -17,10 +17,17 @@
 
 static BOOL isSubdomain(NSString *domain, NSString *subdomain)
 {
+    // Ensure that the TLDs are the same; this can get tricky with TLDs like .co.uk so we take a cautious approach
     size_t domainRegistryLength = GetRegistryLength([domain UTF8String]);
-    if (GetRegistryLength([subdomain UTF8String]) != domainRegistryLength)
+    size_t subdomainRegistryLength = GetRegistryLength([subdomain UTF8String]);
+    if (subdomainRegistryLength != domainRegistryLength)
     {
-        // Different TLDs
+        return NO;
+    }
+    NSString *domainTld = [domain substringFromIndex: [domain length] - domainRegistryLength];
+    NSString *subdomainTld = [subdomain substringFromIndex: [subdomain length] - subdomainRegistryLength];
+    if (![domainTld isEqualToString:subdomainTld])
+    {
         return NO;
     }
     

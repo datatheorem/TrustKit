@@ -251,6 +251,23 @@
 }
 
 
+- (void)testIncludeSubdomainsEnabledNotSubdomainDifferentTld
+{
+    NSDictionary *trustKitConfig;
+    trustKitConfig = parseTrustKitConfiguration(@{kTSKPinnedDomains :
+                                                      @{@"good.net" : @{
+                                                                kTSKIncludeSubdomains : @YES,
+                                                                kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
+                                                                kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                                                                                        @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
+                                                                                        ]}}});
+    
+    // Corner case to ensure two different domains (because different TLD) with similar strings don't get returned as subdomains
+    NSString *serverConfigKey = getPinningConfigurationKeyForDomain(@"test.good.com", trustKitConfig[kTSKPinnedDomains]);
+    XCTAssertNil(serverConfigKey);
+}
+
+
 - (void)testIncludeSubdomainsEnabledForSuffix
 {
     XCTAssertThrows(parseTrustKitConfiguration(@{kTSKSwizzleNetworkDelegates: @NO,
