@@ -64,7 +64,7 @@ Then run:
 
 Add the following line to your Cartfile:
     
-    github "datatheorem/TrustKit" == 1.5.0
+    github "datatheorem/TrustKit"
 
 Then run:
 
