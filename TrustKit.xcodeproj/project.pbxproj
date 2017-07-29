@@ -285,10 +285,10 @@
 		FCE7D62F1EE9F6610081EEEF /* TSKTrustKitConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE7D62C1EE9F6610081EEEF /* TSKTrustKitConfig.m */; };
 		FCE7D6301EE9F6610081EEEF /* TSKTrustKitConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE7D62C1EE9F6610081EEEF /* TSKTrustKitConfig.m */; };
 		FCE7D6311EE9F66A0081EEEF /* TSKTrustKitConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE7D62C1EE9F6610081EEEF /* TSKTrustKitConfig.m */; };
-		FCE7D6321EE9FDFD0081EEEF /* TSKPublicKeyAlgorithm.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1A09121E57C6820055B12C /* TSKPublicKeyAlgorithm.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FCE7D6331EE9FE080081EEEF /* TSKPublicKeyAlgorithm.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1A09121E57C6820055B12C /* TSKPublicKeyAlgorithm.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FCE7D6341EE9FE260081EEEF /* TSKPublicKeyAlgorithm.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1A09121E57C6820055B12C /* TSKPublicKeyAlgorithm.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FCE7D6351EE9FE2F0081EEEF /* TSKPublicKeyAlgorithm.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1A09121E57C6820055B12C /* TSKPublicKeyAlgorithm.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FCE7D6321EE9FDFD0081EEEF /* TSKPublicKeyAlgorithm.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1A09121E57C6820055B12C /* TSKPublicKeyAlgorithm.h */; };
+		FCE7D6331EE9FE080081EEEF /* TSKPublicKeyAlgorithm.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1A09121E57C6820055B12C /* TSKPublicKeyAlgorithm.h */; };
+		FCE7D6341EE9FE260081EEEF /* TSKPublicKeyAlgorithm.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1A09121E57C6820055B12C /* TSKPublicKeyAlgorithm.h */; };
+		FCE7D6351EE9FE2F0081EEEF /* TSKPublicKeyAlgorithm.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1A09121E57C6820055B12C /* TSKPublicKeyAlgorithm.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
