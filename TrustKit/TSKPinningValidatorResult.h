@@ -25,11 +25,6 @@
 @property (nonatomic, readonly, nonnull) NSString *serverHostname;
 
 /**
- The original `SecTrustRef` that validation was performed against.
- */
-@property (nonatomic, readonly, nonnull) SecTrustRef serverTrust;
-
-/**
  The result of validating the server's certificate chain against the set of SSL pins configured for 
  the `notedHostname`.
  */
@@ -52,9 +47,8 @@
 @property (nonatomic, readonly) NSTimeInterval validationDuration;
 
 /**
- The certificate chain extracted from the `serverTrust` as PEM-formatted certificates. This is the 
- certificate chain sent by the server when establishing the connection.
+ The certificate chain sent by the server when establishing the connection as PEM-formatted certificates. 
  */
-@property (nonatomic, readonly, nullable) NSArray *certificateChain;
+@property (nonatomic, readonly, nonnull) NSArray *certificateChain;
 
 @end

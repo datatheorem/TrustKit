@@ -14,18 +14,6 @@
 
 @implementation TSKPinningValidatorResult
 
-@synthesize certificateChain = _certificateChain;
-
-- (NSArray * _Nullable)certificateChain
-{
-    if (!_certificateChain) {
-        // Convert the server trust to a certificate chain
-        // This cannot be done in the dispatch_async() block as sometimes the serverTrust seems to become invalid once the block gets scheduled, even tho its retain count is still positive
-        _certificateChain = convertTrustToPemArray(self.serverTrust);
-    }
-    return _certificateChain;
-}
-
 - (instancetype _Nullable)initWithServerHostname:(NSString * _Nonnull)serverHostname
                                      serverTrust:(SecTrustRef _Nonnull)serverTrust
                                 validationResult:(TSKTrustEvaluationResult)validationResult
@@ -38,10 +26,12 @@
     self = [super init];
     if (self) {
         _serverHostname = serverHostname;
-        _serverTrust = serverTrust;
         _evaluationResult = validationResult;
         _finalTrustDecision = finalTrustDecision;
         _validationDuration = validationDuration;
+        
+        // Convert the server trust to a certificate chain as soon as we get it, as the trust object sometimes gets freed right after the authentication challenge has been handled
+        _certificateChain = convertTrustToPemArray(serverTrust);
     }
     return self;
 }
