@@ -224,38 +224,6 @@ performed against a specific server.</p>
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:objc(cs)TSKPinningValidatorResult(py)serverTrust"></a>
-                    <a name="//apple_ref/objc/Property/serverTrust" class="dashAnchor"></a>
-                    <a class="token" href="#/c:objc(cs)TSKPinningValidatorResult(py)serverTrust">serverTrust</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>The original <code>SecTrustRef</code> that validation was performed against.</p>
-
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Objective-C</p>
-                          <pre class="highlight"><code><span class="k">@property</span> <span class="p">(</span><span class="n">readonly</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">,</span> <span class="n">nonnull</span><span class="p">)</span> <span class="n">SecTrustRef</span> <span class="n">serverTrust</span><span class="p">;</span></code></pre>
-
-                        </div>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">serverTrust</span><span class="p">:</span> <span class="kt">SecTrust</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
                     <a name="/c:objc(cs)TSKPinningValidatorResult(py)evaluationResult"></a>
                     <a name="//apple_ref/objc/Property/evaluationResult" class="dashAnchor"></a>
                     <a class="token" href="#/c:objc(cs)TSKPinningValidatorResult(py)evaluationResult">evaluationResult</a>
@@ -300,7 +268,7 @@ the <code>notedHostname</code>.</p>
                       <div class="pointer"></div>
                       <div class="abstract">
                         <p>The trust decision returned for this connection, which describes whether the connection should be blocked 
-or allowed, based on the <code><a href="../Classes/TSKPinningValidatorResult.html#/c:objc(cs)TSKPinningValidatorResult(py)evaluationResult">evaluationResult</a></code> returned when evaluating the <code><a href="../Classes/TSKPinningValidatorResult.html#/c:objc(cs)TSKPinningValidatorResult(py)serverTrust">serverTrust</a></code> and the SSL pining 
+or allowed, based on the <code><a href="../Classes/TSKPinningValidatorResult.html#/c:objc(cs)TSKPinningValidatorResult(py)evaluationResult">evaluationResult</a></code> returned when evaluating the <code>serverTrust</code> and the SSL pining 
 policy configured for this server.</p>
 
 <p>For example, the pinning validation could have failed (ie. validationResult being 
@@ -369,20 +337,19 @@ for this server, thereby returning <code>TSKTrustDecisionShouldAllowConnection</
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The certificate chain extracted from the <code><a href="../Classes/TSKPinningValidatorResult.html#/c:objc(cs)TSKPinningValidatorResult(py)serverTrust">serverTrust</a></code> as PEM-formatted certificates. This is the 
-certificate chain sent by the server when establishing the connection.</p>
+                        <p>The certificate chain sent by the server when establishing the connection as PEM-formatted certificates.</p>
 
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Objective-C</p>
-                          <pre class="highlight"><code><span class="k">@property</span> <span class="p">(</span><span class="n">readonly</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">,</span> <span class="n">nullable</span><span class="p">)</span> <span class="n">NSArray</span> <span class="o">*</span><span class="n">certificateChain</span><span class="p">;</span></code></pre>
+                          <pre class="highlight"><code><span class="k">@property</span> <span class="p">(</span><span class="n">readonly</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">,</span> <span class="n">nonnull</span><span class="p">)</span> <span class="n">NSArray</span> <span class="o">*</span><span class="n">certificateChain</span><span class="p">;</span></code></pre>
 
                         </div>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">certificateChain</span><span class="p">:</span> <span class="p">[</span><span class="kt">Any</span><span class="p">]?</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
+                          <pre class="highlight"><code><span class="k">var</span> <span class="nv">certificateChain</span><span class="p">:</span> <span class="p">[</span><span class="kt">Any</span><span class="p">]</span> <span class="p">{</span> <span class="k">get</span> <span class="p">}</span></code></pre>
 
                         </div>
                       </div>
@@ -397,7 +364,7 @@ certificate chain sent by the server when establishing the connection.</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2017 <a class="link" href="https://datatheorem.github.io" target="_blank" rel="external">Data Theorem</a>. All rights reserved. (Last updated: 2017-07-13)</p>
+      <p>&copy; 2017 <a class="link" href="https://datatheorem.github.io" target="_blank" rel="external">Data Theorem</a>. All rights reserved. (Last updated: 2017-07-28)</p>
       <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
