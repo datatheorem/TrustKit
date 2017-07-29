@@ -68,6 +68,7 @@ Add the following line to your Cartfile:
 
 Then run:
 
+    $ carthage update
     $ carthage build --platform iOS
 
 Lastly, on your application targets’ “General” settings tab, in the “Embedded Binaries” 
