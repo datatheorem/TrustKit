@@ -69,7 +69,7 @@ Add the following line to your Cartfile:
 Then run:
 
     $ carthage update
-    $ carthage build --platform iOS
+    $ carthage build --platform iOS --configuration Debug
 
 Lastly, on your application targets’ “General” settings tab, in the “Embedded Binaries” 
 section, drag and drop the TrustKit framework you want to use from the Carthage/Build
