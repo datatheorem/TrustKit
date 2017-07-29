@@ -67,7 +67,7 @@
 #pragma clang diagnostic pop
 }
 
-- (instancetype _Nullable)initWithTrustKit:(TrustKit *)trustKit sessionDelegate:(id<NSURLSessionDelegate>)delegate
+- (instancetype _Nullable)initWithTrustKit:(TrustKit *)trustKit sessionDelegate:(id<NSURLSessionDelegate, NSURLSessionTaskDelegate>)delegate
 {
     NSParameterAssert(delegate);
     
