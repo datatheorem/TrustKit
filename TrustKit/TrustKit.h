@@ -18,6 +18,7 @@
     #import "TSKPinningValidatorCallback.h"
     #import "TSKPinningValidator.h"
     #import "TSKTrustDecision.h"
+    #import "TSKPublicKeyAlgorithm.h"
 #endif /* _TRUSTKIT_ */
 
 NS_ASSUME_NONNULL_BEGIN
