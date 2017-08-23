@@ -42,9 +42,16 @@ To generate such values, a Python helper script is available within the project'
 repository; it can be used to generate the pin configuration from a PEM or DER 
 certificate:
 
-    $ python get_pin_from_certificate.py ca.pem
-    $ python get_pin_from_certificate.py --type DER ca.der
+    $ openssl s_client -servername www.example.com -connect www.example.com:443 | openssl x509 -pubkey -noout | openssl pkey -pubin -outform der | openssl dgst -sha256 -binary | openssl enc -base64
+   
+If the command above fails it might be because your openssl version is outdated. Here's one way to install a new one:
 
+    $ brew install openssl
+    $ brew info openssl | grep "echo 'export PATH=.*"
+    
+That last command gave some output. If you run that command you will make openssl available in terminal on a user level. 
+    
+    $ echo 'export PATH="/usr/local/opt/openssl/bin:$PATH"' >> ~/.zshrc
 
 ## Deploying TrustKit
 
