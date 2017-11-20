@@ -35,7 +35,7 @@
  or allowed, based on the `evaluationResult` returned when evaluating the `serverTrust` and the SSL pining 
  policy configured for this server.
 
- For example, the pinning validation could have failed (ie. validationResult being 
+ For example, the pinning validation could have failed (ie. evaluationResult being 
  `TSKTrustEvaluationFailedNoMatchingPin`) but the policy might be set to ignore pinning validation failures 
  for this server, thereby returning `TSKTrustDecisionShouldAllowConnection`.
  */
