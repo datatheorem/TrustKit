@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include "assert.h"
+#include "tsk_assert.h"
 
 #include "../domain_registry.h"
 #include <stdio.h>
