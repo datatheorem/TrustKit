@@ -215,7 +215,7 @@ static const NSString *kTSKKeychainPublicKeyTag = @"TSKKeychainPublicKeyTag"; //
 
 - (NSMutableDictionary<NSNumber *, SPKICacheDictionnary *> *)loadSPKICacheFromFileSystem
 {
-    NSMutableDictionary *spkiCache;
+    NSMutableDictionary *spkiCache = nil;
     NSData *serializedSpkiCache = [NSData dataWithContentsOfURL:[self SPKICachePath]];
     if (serializedSpkiCache) {
         spkiCache = [NSKeyedUnarchiver unarchiveObjectWithData:serializedSpkiCache];
@@ -278,7 +278,10 @@ static const NSString *kTSKKeychainPublicKeyTag = @"TSKKeychainPublicKeyTag"; //
 
 - (NSURL *)SPKICachePath
 {
-    NSAssert(self.spkiCacheFilename, @"SPKI filename should not be nil");
+    if (!self.spkiCacheFilename)
+    {
+        return nil;
+    }
     NSURL *cachesDirUrl = [NSFileManager.defaultManager URLsForDirectory:NSCachesDirectory
                                                                inDomains:NSUserDomainMask].firstObject;
     return [cachesDirUrl URLByAppendingPathComponent:self.spkiCacheFilename];
