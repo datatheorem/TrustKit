@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-#include "assert.h"
+#include "tsk_assert.h"
 #include "string_util.h"
 #include "trie_search.h"
 

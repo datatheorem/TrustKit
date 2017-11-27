@@ -116,7 +116,9 @@ static const NSString *kTSKKeychainPublicKeyTag = @"TSKKeychainPublicKeyTag"; //
         // Initialize our locks
         _lockQueue = dispatch_queue_create("TSKSPKIHashLock", DISPATCH_QUEUE_CONCURRENT);
 
-        _spkiCacheFilename = uniqueIdentifier; // if this value is nil, persistence will always fail.
+        // Ensure a non-nil identifier was provided
+        NSAssert(uniqueIdentifier, @"TSKSPKIHashCache initializer must be passed a unique identifier");
+        _spkiCacheFilename = uniqueIdentifier;
         
         // First try to load a cached version from the filesystem
         _subjectPublicKeyInfoHashesCache = [self loadSPKICacheFromFileSystem];
@@ -215,7 +217,7 @@ static const NSString *kTSKKeychainPublicKeyTag = @"TSKKeychainPublicKeyTag"; //
 
 - (NSMutableDictionary<NSNumber *, SPKICacheDictionnary *> *)loadSPKICacheFromFileSystem
 {
-    NSMutableDictionary *spkiCache;
+    NSMutableDictionary *spkiCache = nil;
     NSData *serializedSpkiCache = [NSData dataWithContentsOfURL:[self SPKICachePath]];
     if (serializedSpkiCache) {
         spkiCache = [NSKeyedUnarchiver unarchiveObjectWithData:serializedSpkiCache];
@@ -278,7 +280,6 @@ static const NSString *kTSKKeychainPublicKeyTag = @"TSKKeychainPublicKeyTag"; //
 
 - (NSURL *)SPKICachePath
 {
-    NSAssert(self.spkiCacheFilename, @"SPKI filename should not be nil");
     NSURL *cachesDirUrl = [NSFileManager.defaultManager URLsForDirectory:NSCachesDirectory
                                                                inDomains:NSUserDomainMask].firstObject;
     return [cachesDirUrl URLByAppendingPathComponent:self.spkiCacheFilename];
