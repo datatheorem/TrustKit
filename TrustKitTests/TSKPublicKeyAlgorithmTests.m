@@ -32,24 +32,19 @@
 @implementation TSKPublicKeyAlgorithmTests
 {
     TSKSPKIHashCache *spkiCache;
-    TSKSPKIHashCache *nonPersistentSpkiCache;
 }
 
 - (void)setUp
 {
     [super setUp];
     [spkiCache resetSubjectPublicKeyInfoDiskCache];
-    [nonPersistentSpkiCache resetSubjectPublicKeyInfoDiskCache];
     spkiCache = [[TSKSPKIHashCache alloc] initWithIdentifier:@"test"];
-    nonPersistentSpkiCache = [[TSKSPKIHashCache alloc] initWithIdentifier:nil];
 }
 
 - (void)tearDown
 {
     [spkiCache resetSubjectPublicKeyInfoDiskCache];
-    [nonPersistentSpkiCache resetSubjectPublicKeyInfoDiskCache];
     spkiCache = nil;
-    nonPersistentSpkiCache = nil;
     [super tearDown];
 }
 

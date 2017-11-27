@@ -30,13 +30,12 @@ typedef NSMutableDictionary<NSData *, NSData *> SPKICacheDictionnary;
 
 /**
  Create a new cache of SPKI hashes. The identifier is required to ensure that multiple cache
- instances do not attempt to use the same file on disk for persistence. If nil, persistence
- will be disabled (not recommended).
+ instances do not attempt to use the same file on disk for persistence.
 
  @param uniqueIdentifier A unique identifier that is stable across app launches/instance creation
  @return An initialized hash cache.
  */
-- (instancetype _Nullable)initWithIdentifier:(NSString * _Nullable)uniqueIdentifier NS_DESIGNATED_INITIALIZER;
+- (instancetype _Nullable)initWithIdentifier:(NSString*)uniqueIdentifier NS_DESIGNATED_INITIALIZER;
 
 /**
  Get a pin cache for the provided certificate and public key algorithm. The pins
