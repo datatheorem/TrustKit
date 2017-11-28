@@ -11,7 +11,7 @@
 
 #import "TSKTrustKitConfig.h"
 
-NSString * const TrustKitVersion = @"1.5.1";
+NSString * const TrustKitVersion = @"1.5.2";
 
 // General keys
 const TSKGlobalConfigurationKey kTSKSwizzleNetworkDelegates = @"TSKSwizzleNetworkDelegates";
