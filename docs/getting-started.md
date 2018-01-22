@@ -300,7 +300,7 @@ that you can pin your untrusted root debugging certificate from Charles, but not
 specifically add it to the OS trust store on your simulators/devices/computers.
 
 To use custom trust anchors, add the certificate strings to a list under the
-`kTSKAdditionalTrustAnchors` configuration key. Each entry should include ony one
+`kTSKAdditionalTrustAnchors` configuration key. Each entry should include only one
 certificate in PEM format, with no password, for example:
 
 ```
