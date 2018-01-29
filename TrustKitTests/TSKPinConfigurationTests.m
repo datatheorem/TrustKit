@@ -246,7 +246,7 @@
                                                                                     ]}}});
     
     // Corner case to ensure two different domains with similar strings don't get returned as subdomains
-    NSString *serverConfigKey = getPinningConfigurationKeyForDomain(@"good.com.otherdomain.com", trustKitConfig[kTSKPinnedDomains]);
+    NSString *serverConfigKey = getPinningConfigurationKeyForDomain(@"good.com.otherdomaingood.com", trustKitConfig[kTSKPinnedDomains]);
     XCTAssertNil(serverConfigKey);
 }
 
