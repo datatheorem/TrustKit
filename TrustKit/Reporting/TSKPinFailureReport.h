@@ -9,7 +9,7 @@
  
  */
 
-#import "../Pinning/ssl_pin_verifier.h"
+#import "TSKTrustDecision.h"
 @import Foundation;
 
 @interface TSKPinFailureReport : NSObject
@@ -51,6 +51,7 @@
                               expirationDate:(nullable NSDate *)knownPinsExpirationDate;
 
 // Return the report in JSON format for POSTing it
+- (nonnull NSDictionary *)requestData;
 - (nonnull NSData *)json;
 
 // Return a request ready to be sent with the report in JSON format in the response's body

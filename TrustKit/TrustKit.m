@@ -133,7 +133,7 @@ void TSKLog(NSString *format, ...)
         // We use a serial queue targetting the global default queue in order to ensure reports are sent one by one
         // even when a lot of pin failures are occuring, instead of spamming the global queue with events to process
         _pinFailureReporterQueue = dispatch_queue_create(kTSKPinFailureReporterQueueLabel, DISPATCH_QUEUE_SERIAL);
-        
+
         // Create our reporter for sending pin validation failures; do this before hooking NSURLSession so we don't hook ourselves
         _pinFailureReporter = [[TSKBackgroundReporter alloc] initAndRateLimitReports:YES];
         
@@ -200,6 +200,7 @@ void TSKLog(NSString *format, ...)
 // The block which receives pin validation results and turns them into pin validation reports
 - (void)sendValidationReport:(TSKPinningValidatorResult *)result notedHostname:(NSString *)notedHostname pinningPolicy:(NSDictionary<TSKDomainConfigurationKey, id> *)notedHostnamePinningPolicy
 {
+    Class failureReportClass = NSClassFromString(_configuration[kTSKPinFailureReportClassName]);
     TSKTrustEvaluationResult validationResult = result.evaluationResult;
     
     // Send a report only if the there was a pinning failure
@@ -230,7 +231,8 @@ void TSKLog(NSString *format, ...)
                                                          enforcePinning:[notedHostnamePinningPolicy[kTSKEnforcePinning] boolValue]
                                                               knownPins:notedHostnamePinningPolicy[kTSKPublicKeyHashes]
                                                        validationResult:validationResult
-                                                         expirationDate:notedHostnamePinningPolicy[kTSKExpirationDate]];
+                                                         expirationDate:notedHostnamePinningPolicy[kTSKExpirationDate]
+                                                     failureReportClass:failureReportClass];
             }
         }
     }

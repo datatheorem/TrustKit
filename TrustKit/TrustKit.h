@@ -18,6 +18,8 @@
     #import "TSKPinningValidatorCallback.h"
     #import "TSKPinningValidator.h"
     #import "TSKTrustDecision.h"
+    #import "TSKPinFailureReport.h"
+    #import "ssl_pin_verifier.h"
 #endif /* _TRUSTKIT_ */
 
 NS_ASSUME_NONNULL_BEGIN

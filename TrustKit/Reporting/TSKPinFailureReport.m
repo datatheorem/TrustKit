@@ -9,6 +9,7 @@
  
  */
 
+#import "../Pinning/ssl_pin_verifier.h"
 #import "TSKPinFailureReport.h"
 
 @implementation TSKPinFailureReport
@@ -53,8 +54,7 @@
     return self;
 }
 
-
-- (nonnull NSData *)json;
+- (nonnull NSDictionary *)requestData
 {
     // NSDateFormatter (and NSNumberFormatter) is extremely expensive to initialize, doesn't
     // change, and is listed as explicitely thread safe, so lets reuse the instance.
@@ -65,65 +65,68 @@
         /// Date AND time formatter for JSON
         DateTimeFormatter = ({
             NSDateFormatter *df = [[NSDateFormatter alloc] init];
-            
+
             // Explicitely set the locale to avoid an iOS 8 bug
             // http://stackoverflow.com/questions/29374181/nsdateformatter-hh-returning-am-pm-on-ios-8-device
             df.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
-            
+
             df.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss'Z'";
             df.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
             df;
         });
-        
+
         /// Date ONLY formatter
         DateFormatter = ({
             NSDateFormatter *df = [[NSDateFormatter alloc] init];
-            
+
             // Explicitely set the locale to avoid an iOS 8 bug
             // http://stackoverflow.com/questions/29374181/nsdateformatter-hh-returning-am-pm-on-ios-8-device
             df.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
-            
+
             df.dateFormat = @"yyyy-MM-dd";
             df.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
             df;
         });
     });
-    
+
     id dateStr = [NSNull null];
     if (self.dateTime)
     {
         dateStr = [DateTimeFormatter stringFromDate:self.dateTime] ?: [NSNull null];
     }
-    
+
     id expirationDateStr = [NSNull null];
     if (self.knownPinsExpirationDate)
     {
         // For the expiration date, only return the expiration day, as specified in the pinning policy
         expirationDateStr = [DateFormatter stringFromDate:self.knownPinsExpirationDate] ?: [NSNull null];
     }
-    
+
     // Create the dictionary
-    NSDictionary *requestData = @{
-        @"app-bundle-id":               self.appBundleId,
-        @"app-version":                 self.appVersion,
-        @"app-platform":                self.appPlatform,
-        @"app-platform-version":        self.appPlatformVersion,
-        @"app-vendor-id":               self.appVendorId,
-        @"trustkit-version":            self.trustkitVersion,
-        @"date-time":                   dateStr,
-        @"hostname":                    self.hostname,
-        @"port":                        self.port,
-        @"noted-hostname":              self.notedHostname,
-        @"include-subdomains":          @(self.includeSubdomains),
-        @"enforce-pinning":             @(self.enforcePinning),
-        @"validated-certificate-chain": self.validatedCertificateChain,
-        @"known-pins":                  self.knownPins,
-        @"validation-result":           @(self.validationResult),
-        @"known-pins-expiration-date":  expirationDateStr
-    };
-    
+    return @{
+             @"app-bundle-id":               self.appBundleId,
+             @"app-version":                 self.appVersion,
+             @"app-platform":                self.appPlatform,
+             @"app-platform-version":        self.appPlatformVersion,
+             @"app-vendor-id":               self.appVendorId,
+             @"trustkit-version":            self.trustkitVersion,
+             @"date-time":                   dateStr,
+             @"hostname":                    self.hostname,
+             @"port":                        self.port,
+             @"noted-hostname":              self.notedHostname,
+             @"include-subdomains":          @(self.includeSubdomains),
+             @"enforce-pinning":             @(self.enforcePinning),
+             @"validated-certificate-chain": self.validatedCertificateChain,
+             @"known-pins":                  self.knownPins,
+             @"validation-result":           @(self.validationResult),
+             @"known-pins-expiration-date":  expirationDateStr
+             };
+}
+
+- (nonnull NSData *)json;
+{
     NSError *error;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:requestData options:(NSJSONWritingOptions)0 error:&error];
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:[self requestData] options:(NSJSONWritingOptions)0 error:&error];
     // FIXME: error is unhandled.
     return jsonData;
 }

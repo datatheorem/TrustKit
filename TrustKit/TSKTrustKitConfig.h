@@ -180,6 +180,15 @@ FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKReportUris;
 
 
 /**
+ A composite implementation of TSKPinFailureReport.
+
+ Useful when the format of the report sent to report URLs should be different from the one
+ described in RFC 7469 for the HPKP specification.
+ */
+FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKPinFailureReportClassName;
+
+
+/**
  A boolean. If set to `YES`, the default report URL for sending pin failure reports will
  be disabled; default value is `NO`.
  

@@ -27,6 +27,7 @@ const TSKDomainConfigurationKey kTSKExcludeSubdomainFromParentPolicy = @"kSKExcl
 const TSKDomainConfigurationKey kTSKIncludeSubdomains = @"TSKIncludeSubdomains";
 const TSKDomainConfigurationKey kTSKPublicKeyAlgorithms = @"TSKPublicKeyAlgorithms";
 const TSKDomainConfigurationKey kTSKReportUris = @"TSKReportUris";
+const TSKDomainConfigurationKey kTSKPinFailureReportClassName = @"TSKPinFailureReportClassName";
 const TSKDomainConfigurationKey kTSKDisableDefaultReportUri = @"TSKDisableDefaultReportUri";
 const TSKDomainConfigurationKey kTSKExpirationDate = @"TSKExpirationDate";
 const TSKDomainConfigurationKey kTSKAdditionalTrustAnchors = @"TSKAdditionalTrustAnchors";

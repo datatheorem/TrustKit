@@ -154,6 +154,48 @@ didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
 }
 ```
 
+### Custom Pin Failure Reporting
+
+By default, TrustKit reports SSL pinning failures in a format similar to the one described in RFC 7469 for the HPKP specification.
+
+```json
+{
+  "app-bundle-id": "com.datatheorem.testtrustkit2",
+    "app-version": "1",
+    "app-vendor-id": "599F9C00-92DC-4B5C-9464-7971F01F8370",
+    "app-platform": "IOS",
+    "app-platform-version": "10.2.0",
+    "trustkit-version": "1.3.1",
+    "hostname": "www.datatheorem.com",
+    "port": 0,
+    "noted-hostname": "datatheorem.com",
+    "include-subdomains": true,
+    "enforce-pinning": true,
+    "validated-certificate-chain": [
+      pem1, ... pemN
+    ],
+    "known-pins": [
+      "pin-sha256=\"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM=\"",
+    "pin-sha256=\"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g=\""
+    ],
+    "validation-result":1
+}
+```
+
+If you wish to use a custom format for the report-uris specified in your configuration, simply include the name of the custom class you intend to use:
+
+```objc
+NSDictionary *trustKitConfig = @{
+  kTSKPinFailureReportClassName: @"MyCustomReport",
+  ...
+};
+[TrustKit initSharedInstanceWithConfiguration:trustKitConfig];
+```
+
+**Please note**: your custom reporter class **must** inherit from `TSKPinFailureReport` or an exception will be thrown at runtime.
+
+-------
+
 Some additional consideration in regards to the right pinning policy to deploy follow. 
 
 ### Additional Notes

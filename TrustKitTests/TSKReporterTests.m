@@ -26,6 +26,12 @@
 
 #pragma mark Test suite
 
+// Used for testing a custom kTSKReporterClassName.
+@interface CustomPinFailureReport: TSKPinFailureReport
+@end
+@implementation CustomPinFailureReport
+@end
+
 @interface TrustKit (TestSupport)
 @property (nonatomic) TSKBackgroundReporter *pinFailureReporter;
 @property (nonatomic, readonly, nullable) NSDictionary *configuration;
@@ -129,7 +135,8 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
                                                enforcePinning:YES
                                                     knownPins:knownPins
                                              validationResult:TSKTrustEvaluationErrorCouldNotGenerateSpkiHash
-                                               expirationDate:expirationDate]);
+                                               expirationDate:expirationDate
+                                           failureReportClass:nil]);
     
     res = [[TSKPinningValidatorResult alloc] initWithServerHostname:@"www.test.com"
                                                         serverTrust:_testTrust
@@ -200,7 +207,8 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
                                                                    [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g="
                                                                                                       options:(NSDataBase64DecodingOptions)0]]]
                             validationResult:TSKTrustEvaluationFailedNoMatchingPin
-                              expirationDate:[NSDate date]];
+                              expirationDate:[NSDate date]
+                          failureReportClass:nil];
     
     [NSThread sleepForTimeInterval:0.1];
 }
@@ -222,8 +230,72 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
                                                                    [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g="
                                                                                                       options:(NSDataBase64DecodingOptions)0]]]
                             validationResult:TSKTrustEvaluationFailedNoMatchingPin
-                              expirationDate:nil];
+                              expirationDate:nil
+                          failureReportClass:nil];
     
+    [NSThread sleepForTimeInterval:0.1];
+}
+
+- (void)testCustomReporter
+{
+    // Ensure that a custom pin failure reporter class is used in place of the default one.
+    NSString *customReporterClassName = @"CustomPinFailureReport";
+    NSDictionary *trustKitConfig =
+    @{kTSKSwizzleNetworkDelegates: @NO,
+      kTSKPinFailureReportClassName: customReporterClassName,
+      kTSKPinnedDomains :
+          @{
+              @"www.test.com" : @{
+                      kTSKEnforcePinning : @YES,
+                      kTSKExpirationDate : @"2019-01-01",
+                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
+                      kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
+                                              @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=" // Fake key 2
+                                              ]}}};
+
+    _trustKit = [[TrustKit alloc] initWithConfiguration:trustKitConfig];
+
+    Class customReporterClass = NSClassFromString(customReporterClassName);
+    id failureReportMock = OCMClassMock(customReporterClass);
+    OCMStub([failureReportMock alloc]).andReturn(failureReportMock);
+    OCMStub([failureReportMock initWithAppBundleId:OCMOCK_ANY
+                                        appVersion:OCMOCK_ANY
+                                       appPlatform:OCMOCK_ANY
+                                appPlatformVersion:OCMOCK_ANY
+                                       appVendorId:OCMOCK_ANY
+                                   trustkitVersion:OCMOCK_ANY
+                                          hostname:OCMOCK_ANY
+                                              port:OCMOCK_ANY
+                                          dateTime:OCMOCK_ANY
+                                     notedHostname:OCMOCK_ANY
+                                 includeSubdomains:YES
+                                    enforcePinning:YES
+                         validatedCertificateChain:OCMOCK_ANY
+                                         knownPins:OCMOCK_ANY
+                                  validationResult:TSKTrustEvaluationFailedNoMatchingPin
+                                    expirationDate:OCMOCK_ANY]).andReturn(failureReportMock);
+    OCMStub([failureReportMock requestData]).andReturn(@{@"test": @"value"});
+    OCMExpect([failureReportMock json]).andReturn([NSData new]);
+
+    TSKBackgroundReporter *reporter = [[TSKBackgroundReporter alloc] initAndRateLimitReports:NO];
+    [reporter pinValidationFailedForHostname:@"mail.example.com"
+                                        port:[NSNumber numberWithInt:443]
+                            certificateChain:_testCertificateChain
+                               notedHostname:@"example.com"
+                                  reportURIs:@[[NSURL URLWithString:kTSKDefaultReportUri]]
+                           includeSubdomains:YES
+                              enforcePinning:YES
+                                   knownPins:[NSSet setWithArray:@[
+                                                                   [[NSData alloc]initWithBase64EncodedString:@"d6qzRu9zOECb90Uez27xWltNsj0e1Md7GkYYkVoZWmM="
+                                                                                                      options:(NSDataBase64DecodingOptions)0],
+                                                                   [[NSData alloc]initWithBase64EncodedString:@"E9CZ9INDbd+2eRQozYqqbQ2yXLVKB9+xcprMF+44U1g="
+                                                                                                      options:(NSDataBase64DecodingOptions)0]]]
+                            validationResult:TSKTrustEvaluationFailedNoMatchingPin
+                              expirationDate:nil
+                          failureReportClass:failureReportMock];
+
+    [failureReportMock verify];
+
     [NSThread sleepForTimeInterval:0.1];
 }
 

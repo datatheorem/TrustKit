@@ -58,7 +58,7 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *trustKitArguments)
     
     NSMutableDictionary *finalConfiguration = [[NSMutableDictionary alloc]init];
     finalConfiguration[kTSKPinnedDomains] = [[NSMutableDictionary alloc]init];
-    
+    finalConfiguration[kTSKPinFailureReportClassName] = trustKitArguments[kTSKPinFailureReportClassName];
     
     // Retrieve global settings
     

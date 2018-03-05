@@ -38,7 +38,7 @@
 		8C0C904F1E3C4212003851A8 /* TSKPinningValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C0C90471E3C41F3003851A8 /* TSKPinningValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8C0C90501E3C4212003851A8 /* TSKPinningValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C0C90471E3C41F3003851A8 /* TSKPinningValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8C0C90511E3C4213003851A8 /* TSKPinningValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C0C90471E3C41F3003851A8 /* TSKPinningValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8C15F9A01B16094D00F06C0E /* TSKPinFailureReport.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C15F99E1B16094D00F06C0E /* TSKPinFailureReport.h */; };
+		8C15F9A01B16094D00F06C0E /* TSKPinFailureReport.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C15F99E1B16094D00F06C0E /* TSKPinFailureReport.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8C15F9A11B16094E00F06C0E /* TSKPinFailureReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F99F1B16094D00F06C0E /* TSKPinFailureReport.m */; };
 		8C15F9A41B17564400F06C0E /* TSKPinConfigurationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F9A31B17564400F06C0E /* TSKPinConfigurationTests.m */; };
 		8C4346D71E5B894A008023F9 /* configuration_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 8C4346D41E5B894A008023F9 /* configuration_utils.h */; };
@@ -232,7 +232,7 @@
 		8CDF246C1D71347E00CCA32A /* OCMock.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8CDF245C1D70DEBA00CCA32A /* OCMock.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8CDF246D1D71348C00CCA32A /* OCMock.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 8CDF245F1D70DED000CCA32A /* OCMock.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		8CE919221AEA077F002B29AE /* ssl_pin_verifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE919211AEA077F002B29AE /* ssl_pin_verifier.m */; };
-		8CE919251AEA07C5002B29AE /* ssl_pin_verifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE919241AEA07C5002B29AE /* ssl_pin_verifier.h */; };
+		8CE919251AEA07C5002B29AE /* ssl_pin_verifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE919241AEA07C5002B29AE /* ssl_pin_verifier.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8CE9192D1AEA0F7E002B29AE /* domain_registry.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CE919291AEA0F7E002B29AE /* domain_registry.h */; };
 		8CF27A941F01A0B8009369B0 /* TSKEndToEndNSURLSessionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF27A931F01A0B8009369B0 /* TSKEndToEndNSURLSessionTests.m */; };
 		8CF27A951F01A0B8009369B0 /* TSKEndToEndNSURLSessionTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF27A931F01A0B8009369B0 /* TSKEndToEndNSURLSessionTests.m */; };
@@ -850,6 +850,8 @@
 				FC1A09001E57A4BB0055B12C /* TSKPinningValidatorResult.h in Headers */,
 				FCE7D6321EE9FDFD0081EEEF /* TSKPublicKeyAlgorithm.h in Headers */,
 				8C0C904E1E3C4210003851A8 /* TSKPinningValidator.h in Headers */,
+				8CE919251AEA07C5002B29AE /* ssl_pin_verifier.h in Headers */,
+				8C15F9A01B16094D00F06C0E /* TSKPinFailureReport.h in Headers */,
 				8CE9192D1AEA0F7E002B29AE /* domain_registry.h in Headers */,
 				8CD5F7491BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.h in Headers */,
 				8C84CCF11D6E5DE9009B3E7D /* registry_tables.h in Headers */,
@@ -866,8 +868,6 @@
 				8CD5F7421BCB06F4005801D8 /* RSSwizzle.h in Headers */,
 				8C9492F61B2379A100F5DF38 /* reporting_utils.h in Headers */,
 				8C84804D1A896EE30017C155 /* TrustKit.h in Headers */,
-				8C15F9A01B16094D00F06C0E /* TSKPinFailureReport.h in Headers */,
-				8CE919251AEA07C5002B29AE /* ssl_pin_verifier.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

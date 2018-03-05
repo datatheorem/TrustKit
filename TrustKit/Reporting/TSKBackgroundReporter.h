@@ -47,7 +47,8 @@
                          enforcePinning:(BOOL) enforcePinning
                               knownPins:(nonnull NSSet<NSData *> *) knownPins
                        validationResult:(TSKTrustEvaluationResult) validationResult
-                         expirationDate:(nullable NSDate *)knownPinsExpirationDate;
+                         expirationDate:(nullable NSDate *)knownPinsExpirationDate
+                     failureReportClass:(nullable Class)failureReportClass;
 
 - (void)URLSession:(nonnull NSURLSession *)session task:(nonnull NSURLSessionTask *)task didCompleteWithError:(nullable NSError *)error;
 

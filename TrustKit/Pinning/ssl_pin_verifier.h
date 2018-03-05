@@ -9,7 +9,7 @@
  
  */
 
-#import "../TSKTrustDecision.h"
+#import "TSKTrustDecision.h"
 @import Foundation;
 
 @class TSKSPKIHashCache;

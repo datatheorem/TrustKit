@@ -132,6 +132,7 @@ static NSString * const kTSKBackgroundSessionIdentifierFormat = @"%@.TSKBackgrou
                               knownPins:(nonnull NSSet<NSData *> *)knownPins
                        validationResult:(TSKTrustEvaluationResult)validationResult
                          expirationDate:(nullable NSDate *)knownPinsExpirationDate
+                     failureReportClass:(nullable Class)failureReportClass
 {
     // Default port to 0 if not specified
     if (serverPort == nil)
@@ -148,22 +149,27 @@ static NSString * const kTSKBackgroundSessionIdentifierFormat = @"%@.TSKBackgrou
     
     // Create the pin validation failure report
     NSArray *formattedPins = convertPinsToHpkpPins(knownPins);
-    TSKPinFailureReport *report = [[TSKPinFailureReport alloc]initWithAppBundleId:_appBundleId
-                                                                       appVersion:_appVersion
-                                                                      appPlatform:_appPlatform
-                                                               appPlatformVersion:_appPlatformVersion
-                                                                      appVendorId:_appVendorId
-                                                                  trustkitVersion:TrustKitVersion
-                                                                         hostname:serverHostname
-                                                                             port:serverPort
-                                                                         dateTime:[NSDate date] // current date & time
-                                                                    notedHostname:notedHostname
-                                                                includeSubdomains:includeSubdomains
-                                                                   enforcePinning:enforcePinning
-                                                        validatedCertificateChain:certificateChain
-                                                                        knownPins:formattedPins
-                                                                 validationResult:validationResult
-                                                                   expirationDate:knownPinsExpirationDate];
+    if (failureReportClass && ![[failureReportClass class] isSubclassOfClass:[TSKPinFailureReport class]]) {
+        [NSException raise:@"Custom failureReportClass invalid"
+                    format:@"TSKBackgroundReporter class was given a failureReportClass (%@) that doesn't inherit from TSKPinFailureReport", failureReportClass];
+    }
+    Class reportClass = failureReportClass ? [failureReportClass class] : [TSKPinFailureReport class];
+    TSKPinFailureReport *report = [[reportClass alloc] initWithAppBundleId:_appBundleId
+                                                                appVersion:_appVersion
+                                                               appPlatform:_appPlatform
+                                                        appPlatformVersion:_appPlatformVersion
+                                                               appVendorId:_appVendorId
+                                                           trustkitVersion:TrustKitVersion
+                                                                  hostname:serverHostname
+                                                                      port:serverPort
+                                                                  dateTime:[NSDate date] // current date & time
+                                                             notedHostname:notedHostname
+                                                         includeSubdomains:includeSubdomains
+                                                            enforcePinning:enforcePinning
+                                                 validatedCertificateChain:certificateChain
+                                                                 knownPins:formattedPins
+                                                          validationResult:validationResult
+                                                            expirationDate:knownPinsExpirationDate];
     
     // Should we rate-limit this report?
     if (_shouldRateLimitReports && [self.rateLimiter shouldRateLimitReport:report])
@@ -185,7 +191,7 @@ static NSString * const kTSKBackgroundSessionIdentifierFormat = @"%@.TSKBackgrou
     // Ensure the report is accessible when locked on iOS, in case the App has the NSFileProtectionComplete entitlement
     writeOptions = writeOptions | NSDataWritingFileProtectionCompleteUntilFirstUserAuthentication;
 #endif
-    
+
     if (!([[report json] writeToURL:tmpFileURL options:writeOptions error:&error]))
     {
 #if DEBUG
