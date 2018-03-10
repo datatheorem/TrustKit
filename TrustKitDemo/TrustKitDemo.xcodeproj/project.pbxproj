@@ -18,9 +18,7 @@
 		1942311D1EF9658800029B04 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1942311C1EF9658800029B04 /* Assets.xcassets */; };
 		194231271EF9663F00029B04 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 194231261EF9663F00029B04 /* Main.storyboard */; };
 		5A8D1A59570DDDCEA069122F /* Pods_TrustKitDemo_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA439ED79C3CC872A6212881 /* Pods_TrustKitDemo_Swift.framework */; };
-		5C1DE70282AFDA569285EAC8 /* libPods-TrustKitDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ED236495884111AC895A025E /* libPods-TrustKitDemo.a */; };
 		E90DE1D752D726C6764F55E6 /* libPods-TrustKitDemo-ObjC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4594D1F801A2D85113A8D4A7 /* libPods-TrustKitDemo-ObjC.a */; };
-		F563B5060C50A25EA583DA9A /* Pods_TrustKitDemoInSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F77E736E3DC0DB307912893 /* Pods_TrustKitDemoInSwift.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,7 +35,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		03B1C8789B008BB8F706D702 /* Pods-TrustKitDemoInSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrustKitDemoInSwift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TrustKitDemoInSwift/Pods-TrustKitDemoInSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		1942309D1EF7C91A00029B04 /* TrustKitDemo-ObjC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TrustKitDemo-ObjC.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		194230A11EF7C91A00029B04 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		194230A31EF7C91A00029B04 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -53,16 +50,13 @@
 		194231171EF9658800029B04 /* DTViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTViewController.swift; sourceTree = "<group>"; };
 		1942311C1EF9658800029B04 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		194231261EF9663F00029B04 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		229FD9B70132921DEF151965 /* Pods-TrustKitDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrustKitDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TrustKitDemo/Pods-TrustKitDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		30535E1438B5A9A32F97C7F3 /* Pods-TrustKitDemo-ObjC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrustKitDemo-ObjC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TrustKitDemo-ObjC/Pods-TrustKitDemo-ObjC.debug.xcconfig"; sourceTree = "<group>"; };
 		4594D1F801A2D85113A8D4A7 /* libPods-TrustKitDemo-ObjC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TrustKitDemo-ObjC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		756D66A433A7A1257803FD3D /* Pods-TrustKitDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrustKitDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrustKitDemo/Pods-TrustKitDemo.release.xcconfig"; sourceTree = "<group>"; };
 		9F77E736E3DC0DB307912893 /* Pods_TrustKitDemoInSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrustKitDemoInSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FDCACA5A2721D9EF3F32921 /* Pods-TrustKitDemo-Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrustKitDemo-Swift.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrustKitDemo-Swift/Pods-TrustKitDemo-Swift.release.xcconfig"; sourceTree = "<group>"; };
 		BE18B1D51351C2F2618BD2F7 /* Pods-TrustKitDemo-Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrustKitDemo-Swift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TrustKitDemo-Swift/Pods-TrustKitDemo-Swift.debug.xcconfig"; sourceTree = "<group>"; };
 		D2731A50771388BDCC19542B /* Pods-TrustKitDemo-ObjC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrustKitDemo-ObjC.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrustKitDemo-ObjC/Pods-TrustKitDemo-ObjC.release.xcconfig"; sourceTree = "<group>"; };
 		DA439ED79C3CC872A6212881 /* Pods_TrustKitDemo_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrustKitDemo_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EC7EA2F77D7200BFD66DB095 /* Pods-TrustKitDemoInSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrustKitDemoInSwift.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrustKitDemoInSwift/Pods-TrustKitDemoInSwift.release.xcconfig"; sourceTree = "<group>"; };
 		ED236495884111AC895A025E /* libPods-TrustKitDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TrustKitDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCB0DD861F117CBE00741410 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCB0DD881F117D4C00741410 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -73,7 +67,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C1DE70282AFDA569285EAC8 /* libPods-TrustKitDemo.a in Frameworks */,
 				E90DE1D752D726C6764F55E6 /* libPods-TrustKitDemo-ObjC.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -82,7 +75,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F563B5060C50A25EA583DA9A /* Pods_TrustKitDemoInSwift.framework in Frameworks */,
 				5A8D1A59570DDDCEA069122F /* Pods_TrustKitDemo_Swift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -147,10 +139,6 @@
 		D967AF3E12D8D8B5235F2256 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				229FD9B70132921DEF151965 /* Pods-TrustKitDemo.debug.xcconfig */,
-				756D66A433A7A1257803FD3D /* Pods-TrustKitDemo.release.xcconfig */,
-				03B1C8789B008BB8F706D702 /* Pods-TrustKitDemoInSwift.debug.xcconfig */,
-				EC7EA2F77D7200BFD66DB095 /* Pods-TrustKitDemoInSwift.release.xcconfig */,
 				30535E1438B5A9A32F97C7F3 /* Pods-TrustKitDemo-ObjC.debug.xcconfig */,
 				D2731A50771388BDCC19542B /* Pods-TrustKitDemo-ObjC.release.xcconfig */,
 				BE18B1D51351C2F2618BD2F7 /* Pods-TrustKitDemo-Swift.debug.xcconfig */,
@@ -310,13 +298,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TrustKitDemo-Swift-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B0B8C588FDD7DE19BF5403D9 /* [CP] Copy Pods Resources */ = {
@@ -340,9 +331,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-TrustKitDemo-Swift/Pods-TrustKitDemo-Swift-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/TrustKit-framework/TrustKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TrustKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -370,13 +364,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TrustKitDemo-ObjC-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
