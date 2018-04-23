@@ -26,16 +26,6 @@
 @property (nonatomic) TSKSPKIHashCache *spkiHashCache;
 
 /**
- If this property returns YES, pinning may include any additional trust anchors
- provided in a domain configuration under the kTSKAdditionalTrustAnchors key.
- 
- This property is YES only when the preprocessor flag DEBUG is set to 1 (the
- default behavior for the "Debug" configuration of an Xcode project). Subclasses
- may override this method – with extreme caution – to alter this behavior.
- */
-@property (nonatomic, class, readonly) BOOL allowsAdditionalTrustAnchors;
-
-/**
  The dictionary of domains that were configured and their corresponding pinning policy.
  */
 @property (nonatomic, readonly, nonnull) NSDictionary<NSString *, TKSDomainPinningPolicy *> *domainPinningPolicies;
@@ -130,18 +120,7 @@
             finalTrustDecision = TSKTrustDecisionDomainNotPinned;
         }
         else
-        {
-            // Add bundled trust anchors if specified in the configuration
-            if (self.class.allowsAdditionalTrustAnchors) {
-                NSArray *additionalTrustAnchors = domainConfig[kTSKAdditionalTrustAnchors];
-                if (additionalTrustAnchors.count)
-                {
-                    TSKLog(@"Pin validation includes %ld potentially unsafe trust anchors", (long)additionalTrustAnchors.count);
-                    SecTrustSetAnchorCertificates(serverTrust, (__bridge CFArrayRef)additionalTrustAnchors);
-                    SecTrustSetAnchorCertificatesOnly(serverTrust, false); // trust union of OS and user anchor certificate sets
-                }
-            }
-            
+        {            
             // The domain has a pinning policy that has not expired
             // Look for one the configured public key pins in the server's evaluated certificate chain
             TSKTrustEvaluationResult validationResult = verifyPublicKeyPin(serverTrust,

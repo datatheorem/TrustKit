@@ -345,47 +345,6 @@
                    @"kTSKSwizzleNetworkDelegates was not saved in the configuration");
 }
 
-- (void)testAdditionalTrustAnchors
-{
-    // Load trust anchor
-    NSBundle *bundle = [NSBundle bundleForClass:self.class];
-    NSString *base64pem = [NSString stringWithContentsOfFile:[bundle pathForResource:@"anchor-ca.cert" ofType:@"pem"]
-                                                    encoding:NSUTF8StringEncoding
-                                                       error:nil];
-    XCTAssertNotNil(base64pem);
-    
-    NSDictionary *trustKitConfig;
-    trustKitConfig = parseTrustKitConfiguration(@{kTSKPinnedDomains : @{
-                                                        @"fake.yahoo.com": @{
-                                                                kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                                                                kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
-                                                                                        @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB="
-                                                                                        ],
-                                                                kTSKAdditionalTrustAnchors : @[ base64pem ]
-                                                                }}});
-    
-    NSArray *trustAnchors = trustKitConfig[kTSKPinnedDomains][@"fake.yahoo.com"][kTSKAdditionalTrustAnchors];
-    XCTAssertEqual(trustAnchors.count, (NSUInteger)1, @"Expected one trust anchor");
-    
-    // We'll check the data from the certificate. That data will be in DER format,
-    // so when we output it, we're getting a clean representation of the original
-    // PEM file contents.
-    // To get an appropriate comparison string, we'll have to parse the PEM into
-    // DER, essentially removing the header, footer, and base64-encoding. Then
-    // we'll re-output the fresh DER back into PEM to ensure the line breaks and
-    // other Foundation-specific formatting is applied.
-    SecCertificateRef expectCert = [TSKCertificateUtils createCertificateFromPem:@"anchor-ca.cert"];
-    NSData *expectCertData = (__bridge_transfer NSData *)SecCertificateCopyData(expectCert);
-    NSString *expectPem = [expectCertData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    CFRelease(expectCert);
-    
-    // Grab the certificate, extract the DER data and format as PEM (base64-encode
-    // with line breaks).
-    SecCertificateRef certificate = (__bridge SecCertificateRef)trustAnchors.firstObject;
-    NSData *certificateData = (__bridge_transfer NSData *)SecCertificateCopyData(certificate);
-    NSString *gotPem = [certificateData base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    XCTAssertEqualObjects(expectPem, gotPem);
-}
 
 - (void)testSwizzleNetworkDelegatesInLocalInstance
 {
