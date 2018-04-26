@@ -88,11 +88,19 @@ void TSKLog(NSString *format, ...)
 
 + (void)initSharedInstanceWithConfiguration:(NSDictionary<TSKGlobalConfigurationKey, id> *)trustKitConfig
 {
+    return [self initSharedInstanceWithConfiguration:trustKitConfig sharedContainerIdentifier:nil];
+}
+
++ (void)initSharedInstanceWithConfiguration:(NSDictionary<TSKGlobalConfigurationKey, id> *)trustKitConfig
+                  sharedContainerIdentifier:(NSString *)sharedContainerIdentifier
+{
     TSKLog(@"Configuration passed via explicit call to initSharedInstanceWithConfiguration:");
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedTrustKit = [[TrustKit alloc] initWithConfiguration:trustKitConfig isSingleton:YES];
+        sharedTrustKit = [[TrustKit alloc] initWithConfiguration:trustKitConfig
+                                       sharedContainerIdentifier:sharedContainerIdentifier
+                                                     isSingleton:YES];
         
         // Hook network APIs if needed
         if ([sharedTrustKit.configuration[kTSKSwizzleNetworkDelegates] boolValue]) {
@@ -111,11 +119,21 @@ void TSKLog(NSString *format, ...)
 
 - (instancetype)initWithConfiguration:(NSDictionary<TSKGlobalConfigurationKey, id> *)trustKitConfig
 {
-    return [self initWithConfiguration:trustKitConfig isSingleton:NO];
+    return [self initWithConfiguration:trustKitConfig sharedContainerIdentifier:nil];
+}
+
+- (instancetype)initWithConfiguration:(NSDictionary<TSKGlobalConfigurationKey, id> *)trustKitConfig
+            sharedContainerIdentifier:(NSString *)sharedContainerIdentifier
+{
+    return [self initWithConfiguration:trustKitConfig
+             sharedContainerIdentifier:sharedContainerIdentifier
+                           isSingleton:NO];
 }
 
 
-- (instancetype)initWithConfiguration:(NSDictionary<TSKGlobalConfigurationKey, id> *)trustKitConfig isSingleton:(BOOL)isSingleton
+- (instancetype)initWithConfiguration:(NSDictionary<TSKGlobalConfigurationKey, id> *)trustKitConfig
+            sharedContainerIdentifier:(NSString *)sharedContainerIdentifier
+                          isSingleton:(BOOL)isSingleton
 {
     NSParameterAssert(trustKitConfig);
     if (!trustKitConfig) {
@@ -135,7 +153,8 @@ void TSKLog(NSString *format, ...)
         _pinFailureReporterQueue = dispatch_queue_create(kTSKPinFailureReporterQueueLabel, DISPATCH_QUEUE_SERIAL);
         
         // Create our reporter for sending pin validation failures; do this before hooking NSURLSession so we don't hook ourselves
-        _pinFailureReporter = [[TSKBackgroundReporter alloc] initAndRateLimitReports:YES];
+        _pinFailureReporter = [[TSKBackgroundReporter alloc] initAndRateLimitReports:YES
+                                                           sharedContainerIdentifier:sharedContainerIdentifier];
         
         // Handle global configuration flags here
         // TSKIgnorePinningForUserDefinedTrustAnchors
