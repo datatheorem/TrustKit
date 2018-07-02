@@ -18,16 +18,14 @@ Overview
 * Reporting mechanism to notify a server about pinning validation failures happening within the App, when an unexpected certificate chain is detected. This is similar to the _report-uri_ directive described in the HPKP specification. The reporting mechanism can also be customized within the App by leveraging pin validation notifications sent by TrustKit.
 * Auto-pinning functionality by swizzling the App's _NSURLConnection_ and _NSURLSession_ delegates in order to automatically add pinning validation to the App's HTTPS connections; this allows deploying **TrustKit** without even modifying the App's source code.
 
-**TrustKit** was open-sourced at [Black Hat 2015 USA][bh2015-conf].
-
 
 Getting Started
 ---------------
 
 * Read the [Getting Started][getting-started] guide.
 * Check out the [API documentation][api-doc].
-* Have a look at the [Black Hat USA 2015 presentation][bh2015-pdf] and the [significant changes][ios9-post] that subsequently happened with iOS 9.
-* TrustKit was featured on [PayPal's engineering blog][paypal-post].
+* TrustKit was initially released at [Black Hat USA 2015][bh2015-pdf] and was also featured on [PayPal's engineering blog][paypal-post].
+* Data Theorem provides a free dashboard for displaying statistics about all the reports sent by your app due to TLS or pinning validation failures. Enable your dashboard at [https://analytics.datatheorem.com/](https://analytics.datatheorem.com/).
 
 
 Sample Usage
