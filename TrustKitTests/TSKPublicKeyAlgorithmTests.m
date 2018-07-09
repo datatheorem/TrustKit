@@ -54,7 +54,7 @@
     // Ensure a RSA 2048 key is properly extracted from its certificate
     SecCertificateRef certificate = [TSKCertificateUtils createCertificateFromDer:@"www.globalsign.com"];
 
-    NSData *spkiHash = [spkiCache hashSubjectPublicKeyInfoFromCertificate:certificate publicKeyAlgorithm:TSKPublicKeyAlgorithmRsa2048];
+    NSData *spkiHash = [spkiCache hashSubjectPublicKeyInfoFromCertificate:certificate];
     NSString *spkiPin = [spkiHash base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
 
     XCTAssertEqualObjects(spkiPin, @"NDCIt6TrQnfOk+lquunrmlPQB3K/7CLOCmSS5kW+KCc=");
@@ -67,7 +67,7 @@
     // Ensure a RSA 4096 key is properly extracted from its certificate
     SecCertificateRef certificate = [TSKCertificateUtils createCertificateFromDer:@"www.good.com"];
     
-    NSData *spkiHash = [spkiCache hashSubjectPublicKeyInfoFromCertificate:certificate publicKeyAlgorithm:TSKPublicKeyAlgorithmRsa4096];
+    NSData *spkiHash = [spkiCache hashSubjectPublicKeyInfoFromCertificate:certificate];
     NSString *spkiPin = [spkiHash base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     
     XCTAssertEqualObjects(spkiPin, @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=");
@@ -80,7 +80,7 @@
     // Ensure a secp256r1 key is properly extracted from its certificate
     SecCertificateRef certificate = [TSKCertificateUtils createCertificateFromDer:@"www.cloudflare.com"];
     
-    NSData *spkiHash = [spkiCache hashSubjectPublicKeyInfoFromCertificate:certificate publicKeyAlgorithm:TSKPublicKeyAlgorithmEcDsaSecp256r1];
+    NSData *spkiHash = [spkiCache hashSubjectPublicKeyInfoFromCertificate:certificate];
     NSString *spkiPin = [spkiHash base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     
     XCTAssertEqualObjects(spkiPin, @"Gc7EN2acfkbE0dUOAd34tr1XLr+JdkTiTrMAfhESQHI=");
@@ -93,60 +93,11 @@
     // Ensure a secp384r1 key is properly extracted from its certificate
     SecCertificateRef certificate = [TSKCertificateUtils createCertificateFromDer:@"GeoTrust_Primary_CA_G2_ECC"];
     
-    NSData *spkiHash = [spkiCache hashSubjectPublicKeyInfoFromCertificate:certificate publicKeyAlgorithm:TSKPublicKeyAlgorithmEcDsaSecp384r1];
+    NSData *spkiHash = [spkiCache hashSubjectPublicKeyInfoFromCertificate:certificate];
     NSString *spkiPin = [spkiHash base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
     
     XCTAssertEqualObjects(spkiPin, @"vPtEqrmtAhAVcGtBIep2HIHJ6IlnWQ9vlK50TciLePs=");
     CFRelease(certificate);
-}
-
-
-
-
-- (void)testVerifyMultipleAlgorithms
-{
-    // Create a valid server trust
-    SecCertificateRef rootCertificate = [TSKCertificateUtils createCertificateFromDer:@"GoodRootCA"];
-    SecCertificateRef intermediateCertificate = [TSKCertificateUtils createCertificateFromDer:@"GoodIntermediateCA"];
-    SecCertificateRef leafCertificate = [TSKCertificateUtils createCertificateFromDer:@"www.good.com"];
-    SecCertificateRef certChainArray[2] = {leafCertificate, intermediateCertificate};
-    
-    SecCertificateRef trustStoreArray[1] = {rootCertificate};
-    SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
-                                                             arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
-                                                      anchorCertificates:(const void **)trustStoreArray
-                                                             arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
-    
-    // Create a configuration and parse it so we get the right format
-    NSDictionary *trustKitConfig;
-    trustKitConfig = parseTrustKitConfiguration(@{kTSKSwizzleNetworkDelegates: @NO,
-                                                  kTSKPinnedDomains :
-                                                      @{@"www.good.com" : @{
-                                                                // Define multiple algorithms with the "wrong" one first to ensure the validation still succeeds
-                                                                kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048, kTSKAlgorithmRsa4096],
-                                                                kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=", // Server Key
-                                                                                        @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
-                                                                                        ]}}});
-    XCTAssertEqual([[spkiCache getSubjectPublicKeyInfoHashesCache][@0] count], 0UL, @"SPKI cache must be empty");
-    XCTAssertEqual([[spkiCache getSubjectPublicKeyInfoHashesCache][@1] count], 0UL, @"SPKI cache must be empty");
-    
-    TSKTrustEvaluationResult verificationResult = TSKTrustEvaluationFailedNoMatchingPin;
-    verificationResult = verifyPublicKeyPin(trust,
-                                            @"www.good.com",
-                                            trustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
-                                            trustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes],
-                                            spkiCache);
-    
-    // Ensure the SPKI cache was used; the full certificate chain is three certs and we have to go through all of them to get to the pinned leaf
-    XCTAssertEqual([[spkiCache getSubjectPublicKeyInfoHashesCache][@0] count], 3UL, @"SPKI cache must have been used");
-    XCTAssertEqual([[spkiCache getSubjectPublicKeyInfoHashesCache][@1] count], 3UL, @"SPKI cache must have been used");
-    
-    CFRelease(trust);
-    CFRelease(leafCertificate);
-    CFRelease(intermediateCertificate);
-    CFRelease(rootCertificate);
-    
-    XCTAssertEqual(verificationResult, TSKTrustEvaluationSuccess, @"Validation must pass against valid public key pins with multiple algorithms");
 }
 
 

@@ -95,7 +95,6 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
               @"www.test.com" : @{
                       kTSKEnforcePinning : @YES,
                       kTSKExpirationDate : expirationDateStr,
-                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                       kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                               @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=" // Fake key 2
                                               ]}}};

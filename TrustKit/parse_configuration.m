@@ -12,7 +12,6 @@
 #import "TSKTrustKitConfig.h"
 #import "Dependencies/domain_registry/domain_registry.h"
 #import "parse_configuration.h"
-#import "Pinning/TSKPublicKeyAlgorithm.h"
 #import <CommonCrypto/CommonDigest.h>
 #import "configuration_utils.h"
 
@@ -165,41 +164,6 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *trustKitArguments)
             // Default setting is NO
             domainFinalConfiguration[kTSKDisableDefaultReportUri] = @(NO);
         }
-        
-        // Extract the list of public key algorithms to support and convert them from string to the TSKPublicKeyAlgorithm type
-        NSArray<NSString *> *publicKeyAlgsStr = domainPinningPolicy[kTSKPublicKeyAlgorithms];
-        if (publicKeyAlgsStr == nil)
-        {
-            [NSException raise:@"TrustKit configuration invalid"
-                        format:@"TrustKit was initialized with an invalid value for %@ for domain %@", kTSKPublicKeyAlgorithms, domainName];
-        }
-        NSMutableArray *publicKeyAlgs = [NSMutableArray array];
-        for (NSString *algorithm in publicKeyAlgsStr)
-        {
-            if ([kTSKAlgorithmRsa2048 isEqualToString:algorithm])
-            {
-                [publicKeyAlgs addObject:@(TSKPublicKeyAlgorithmRsa2048)];
-            }
-            else if ([kTSKAlgorithmRsa4096 isEqualToString:algorithm])
-            {
-                [publicKeyAlgs addObject:@(TSKPublicKeyAlgorithmRsa4096)];
-            }
-            else if ([kTSKAlgorithmEcDsaSecp256r1 isEqualToString:algorithm])
-            {
-                [publicKeyAlgs addObject:@(TSKPublicKeyAlgorithmEcDsaSecp256r1)];
-            }
-            else if ([kTSKAlgorithmEcDsaSecp384r1 isEqualToString:algorithm])
-            {
-                [publicKeyAlgs addObject:@(TSKPublicKeyAlgorithmEcDsaSecp384r1)];
-            }
-            else
-            {
-                [NSException raise:@"TrustKit configuration invalid"
-                            format:@"TrustKit was initialized with an invalid value for %@ for domain %@", kTSKPublicKeyAlgorithms, domainName];
-            }
-        }
-        domainFinalConfiguration[kTSKPublicKeyAlgorithms] = [NSArray arrayWithArray:publicKeyAlgs];
-        
         
         // Extract and convert the report URIs if defined
         NSArray<NSString *> *reportUriList = domainPinningPolicy[kTSKReportUris];

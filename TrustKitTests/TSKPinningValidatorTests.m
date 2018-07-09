@@ -119,7 +119,6 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
                                      kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
-                                                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=", // Server key
                                                                            @"khKI6ae4micEvX74MB/BZ4u15WCWGXPD6Gjg6iIRVeE=", // Intermediate key
                                                                            @"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=" // CA key
@@ -135,7 +134,6 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     
     TSKTrustEvaluationResult verificationResult = verifyPublicKeyPin(trust,
                                                                      @"www.good.com",
-                                                                     domainConfig[kTSKPublicKeyAlgorithms],
                                                                      domainConfig[kTSKPublicKeyHashes],
                                                                      spkiCache);
     
@@ -169,7 +167,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     
     // Ensure the SPKI cache was persisted to the filesystem
     fsCache = [spkiCache loadSPKICacheFromFileSystem];
-    XCTAssertEqual([fsCache[@1] count], 1UL, @"SPKI cache for RSA 4096 must be persisted to the file system");
+    XCTAssertEqual([fsCache count], 1UL, @"SPKI cache for RSA 4096 must be persisted to the file system");
     
     CFRelease(trust);
 }
@@ -190,14 +188,13 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
                                      kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
-                                                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"khKI6ae4micEvX74MB/BZ4u15WCWGXPD6Gjg6iIRVeE=", // Intermediate Key
                                                                            @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                                                            ]}}};
     
     // Ensure the SPKI cache was on the filesystem is empty
     NSDictionary *fsCache = [spkiCache loadSPKICacheFromFileSystem];
-    XCTAssertEqual([fsCache[@1] count], 0UL, @"SPKI cache for RSA 4096 must be empty before the test");
+    XCTAssertEqual([fsCache count], 0UL, @"SPKI cache for RSA 4096 must be empty before the test");
     
     // First test the verifyPublicKeyPin() function
     NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
@@ -205,7 +202,6 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     TSKTrustEvaluationResult verificationResult = TSKTrustEvaluationFailedNoMatchingPin;
     verificationResult = verifyPublicKeyPin(trust,
                                             @"www.good.com",
-                                            parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
                                             parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes],
                                             spkiCache);
     
@@ -240,7 +236,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     
     // Ensure the SPKI cache was persisted to the filesystem
     fsCache = [spkiCache loadSPKICacheFromFileSystem];
-    XCTAssertEqual([fsCache[@1] count], 2UL, @"SPKI cache for RSA 4096 must be persisted to the file system");
+    XCTAssertEqual([fsCache count], 2UL, @"SPKI cache for RSA 4096 must be persisted to the file system");
     
     CFRelease(trust);
 }
@@ -261,7 +257,6 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
                                      kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
-                                                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA Key
                                                                            @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                                                            ]}}};
@@ -272,7 +267,6 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     TSKTrustEvaluationResult verificationResult = TSKTrustEvaluationFailedNoMatchingPin;
     verificationResult = verifyPublicKeyPin(trust,
                                             @"www.good.com",
-                                            parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
                                             parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes],
                                             spkiCache);
     
@@ -324,7 +318,6 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
                                      kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
-                                                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=", // Leaf Key
                                                                            @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                                                            ]}}};
@@ -335,7 +328,6 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     TSKTrustEvaluationResult verificationResult = TSKTrustEvaluationFailedNoMatchingPin;
     verificationResult = verifyPublicKeyPin(trust,
                                             @"www.good.com",
-                                            parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
                                             parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes],
                                             spkiCache);
     
@@ -387,7 +379,6 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
                                      kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
-                                                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Bad Key
                                                                            @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=" // Bad key 2
                                                                            ]}}};
@@ -398,7 +389,6 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     TSKTrustEvaluationResult verificationResult = TSKTrustEvaluationErrorInvalidParameters;
     verificationResult = verifyPublicKeyPin(trust,
                                             @"www.good.com",
-                                            parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
                                             parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes],
                                             spkiCache);
     
@@ -455,7 +445,6 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                                    // Totally expired
                                                    kTSKExpirationDate: @"2015-01-01",
                                                    kTSKEnforcePinning: @YES,
-                                                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Bad Key
                                                                            @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=" // Bad key 2
                                                                            ]}}};
@@ -495,7 +484,6 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                      kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
                                                    kTSKEnforcePinning: @NO,
-                                                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Bad Key
                                                                            @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=" // Bad key 2
                                                                            ]}}};
@@ -506,7 +494,6 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     TSKTrustEvaluationResult verificationResult = TSKTrustEvaluationErrorInvalidParameters;
     verificationResult = verifyPublicKeyPin(trust,
                                             @"www.good.com",
-                                            parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
                                             parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes],
                                             spkiCache);
     
@@ -557,7 +544,6 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
                                      kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
-                                                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Bad key
                                                                            @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY="  // Leaf key
                                                                            ]}}};
@@ -568,7 +554,6 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     TSKTrustEvaluationResult verificationResult = TSKTrustEvaluationErrorInvalidParameters;
     verificationResult = verifyPublicKeyPin(trust,
                                             @"www.good.com",
-                                            parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
                                             parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes],
                                             spkiCache);
     
@@ -622,7 +607,6 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                      kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
                                                    kTSKEnforcePinning: @NO,  // Should fail even if pinning is not enforced
-                                                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA key
                                                                            @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                                                            ]}}};
@@ -633,7 +617,6 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     TSKTrustEvaluationResult verificationResult = TSKTrustEvaluationErrorInvalidParameters;
     verificationResult = verifyPublicKeyPin(trust,
                                             @"www.good.com",
-                                            parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
                                             parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes],
                                             spkiCache);
     
@@ -688,7 +671,6 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
                                      kTSKPinnedDomains :
                                          @{@"www.bad.com" : @{
-                                                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA Key
                                                                            @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                                                            ]}}};
@@ -699,7 +681,6 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     TSKTrustEvaluationResult verificationResult = TSKTrustEvaluationErrorInvalidParameters;
     verificationResult = verifyPublicKeyPin(trust,
                                             @"www.bad.com",
-                                            parsedTrustKitConfig[kTSKPinnedDomains][@"www.bad.com"][kTSKPublicKeyAlgorithms],
                                             parsedTrustKitConfig[kTSKPinnedDomains][@"www.bad.com"][kTSKPublicKeyHashes],
                                             spkiCache);
     
@@ -753,7 +734,6 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
                                      kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
-                                                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                                                    kTSKPublicKeyHashes : @[@"cGuxAXyFXFkWm61cF4HPWX8S0srS9j0aSqN0k4AP+4A=", // Globalsign CA
                                                                            @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                                                            ]}}};
@@ -764,7 +744,6 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     TSKTrustEvaluationResult verificationResult = TSKTrustEvaluationErrorInvalidParameters;
     verificationResult = verifyPublicKeyPin(trust,
                                             @"www.good.com",
-                                            parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyAlgorithms],
                                             parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes],
                                             spkiCache);
     
@@ -817,7 +796,6 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
                                      kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
-                                                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA Key
                                                                            @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                                                            ]}}};
@@ -860,7 +838,6 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
                                      kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
-                                                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA Key
                                                                            @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                                                            ]}}};
@@ -910,7 +887,6 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                      kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
                                                    kTSKEnforcePinning: @YES,
-                                                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", //Fake Key
                                                                            @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=", // Fake key
                                                                            ]}}};
@@ -969,7 +945,6 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
                                      kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
-                                                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA Key
                                                                            @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=", // Fake key
                                                                            ]}}};
@@ -1036,7 +1011,6 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
                                      kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
-                                                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                    kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA Key
                                                                            @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=", // Fake key
                                                                            ]}}};
@@ -1083,7 +1057,6 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
                                      kTSKPinnedDomains : @{
                                              @"good.com" : @{
-                                                     kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                      kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA Key
                                                                              @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=", // Fake key
                                                                              ],
