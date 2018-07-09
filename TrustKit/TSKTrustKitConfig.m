@@ -29,7 +29,6 @@ const TSKDomainConfigurationKey kTSKPublicKeyAlgorithms = @"TSKPublicKeyAlgorith
 const TSKDomainConfigurationKey kTSKReportUris = @"TSKReportUris";
 const TSKDomainConfigurationKey kTSKDisableDefaultReportUri = @"TSKDisableDefaultReportUri";
 const TSKDomainConfigurationKey kTSKExpirationDate = @"TSKExpirationDate";
-const TSKDomainConfigurationKey kTSKAdditionalTrustAnchors = @"TSKAdditionalTrustAnchors";
 
 #pragma mark Public key Algorithms Constants
 const TSKSupportedAlgorithm kTSKAlgorithmRsa2048 = @"TSKAlgorithmRsa2048";
