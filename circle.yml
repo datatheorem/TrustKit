@@ -19,19 +19,19 @@ test:
       -sdk iphonesimulator11.2
       -scheme "TrustKit"
       
-    # macOS 10.12 platform with macOS 10.12 SDK
+    # macOS 10.13 platform with macOS 10.13 SDK
     - xcodebuild clean test
       CODE_SIGNING_REQUIRED=NO
       CODE_SIGN_IDENTITY=
       -destination 'platform=OS X'
-      -sdk macosx10.12
+      -sdk macosx10.13
       -scheme "TrustKit OS X"
 
     # tvOS 11.2 platform with tvOS 11.2 SDK
     - xcodebuild clean test
       CODE_SIGNING_REQUIRED=NO
       CODE_SIGN_IDENTITY=
-      -destination 'platform=tvOS Simulator,name=Apple TV 1080p,OS=11.2'
+      -destination 'platform=tvOS Simulator,name=Apple TV,OS=11.2'
       -sdk appletvsimulator11.2
       -scheme "TrustKit tvOS"
       
