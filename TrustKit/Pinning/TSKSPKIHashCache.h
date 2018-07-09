@@ -9,8 +9,6 @@
  
  */
 
-#import "TSKPublicKeyAlgorithm.h"
-
 @import Foundation;
 @import Security;
 
@@ -38,14 +36,13 @@ typedef NSMutableDictionary<NSData *, NSData *> SPKICacheDictionnary;
 - (instancetype _Nullable)initWithIdentifier:(NSString*)uniqueIdentifier NS_DESIGNATED_INITIALIZER;
 
 /**
- Get a pin cache for the provided certificate and public key algorithm. The pins
+ Get a pin cache for the provided certificate. The pins
  are cached so subsequent calls will be faster than the initial call.
 
  @param certificate The certificate containing the public key that will be hashed
- @param publicKeyAlgorithm The public algorithm to expect was used in this certificate
- @return The hash of the public key assuming it used the provided algorithm or nil if the hash could not be generated
+ @return The hash of the public key or nil if the hash could not be generated
  */
-- (NSData * _Nullable)hashSubjectPublicKeyInfoFromCertificate:(SecCertificateRef)certificate publicKeyAlgorithm:(TSKPublicKeyAlgorithm)publicKeyAlgorithm;
+- (NSData * _Nullable)hashSubjectPublicKeyInfoFromCertificate:(SecCertificateRef)certificate;
 
 @end
 

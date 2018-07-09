@@ -40,7 +40,6 @@
 {
     XCTAssertThrows(parseTrustKitConfiguration(@{kTSKPinnedDomains : @{
                                                          @"www.good.com" : @{
-                                                                 kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                                  kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
                                                                                          @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
                                                                                          ]}}}),
@@ -53,7 +52,6 @@
     NSDictionary *trustKitConfig;
     trustKitConfig = parseTrustKitConfiguration(@{kTSKPinnedDomains : @{
                                                           @"good.com" : @{
-                                                                  kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                                   kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
                                                                                           @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
                                                                                           ],
@@ -74,7 +72,6 @@
 {
     XCTAssertThrows(parseTrustKitConfiguration(@{kTSKPinnedDomains : @{
                                                          @"good.com" : @{
-                                                                 kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                                  kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
                                                                                          @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
                                                                                          ],
@@ -93,7 +90,6 @@
 {
     XCTAssertThrows(parseTrustKitConfiguration(@{kTSKPinnedDomains : @{
                                                          @"good.com" : @{
-                                                                 kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                                  kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
                                                                                          @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
                                                                                          ],
@@ -101,7 +97,6 @@
                                                          @"unsecured.good.com": @{
                                                                  // When using this option, TrustKit should reject additional keys for the domain
                                                                  kTSKExcludeSubdomainFromParentPolicy: @YES,
-                                                                 kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096]
                                                                  }
                                                          }
                                                  }),
@@ -113,7 +108,6 @@
 {
     XCTAssertThrows(parseTrustKitConfiguration(@{kTSKPinnedDomains : @{
                                                          @"www.good.com" : @{
-                                                                 kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                                  kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
                                                                                          @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
                                                                                          ]}}}),
@@ -126,7 +120,6 @@
     NSDictionary *trustKitConfig;
     trustKitConfig = parseTrustKitConfiguration(@{kTSKPinnedDomains : @{
                                                       @"www.good.com" : @{
-                                                              kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                               kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
                                                                                       @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                                                                       ]}}});
@@ -137,7 +130,6 @@
     // Validate the content of the config
     NSDictionary *serverConfig = trustKitConfig[kTSKPinnedDomains][serverConfigKey];
     XCTAssertNil(serverConfig[kTSKExpirationDate]);
-    XCTAssertEqual(serverConfig[kTSKPublicKeyAlgorithms][0], @(TSKPublicKeyAlgorithmRsa4096));
     XCTAssertEqual([serverConfig[kTSKPublicKeyHashes] count], (unsigned long) 2);
 }
 
@@ -149,7 +141,6 @@
     trustKitConfig = parseTrustKitConfiguration(@{kTSKPinnedDomains : @{
                                                           @"www.good.com" : @{
                                                                   kTSKExpirationDate: expirationDateStr,
-                                                                  kTSKPublicKeyAlgorithms : @[kTSKAlgorithmEcDsaSecp384r1],
                                                                   kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
                                                                                           @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                                                                           ]}}});
@@ -164,7 +155,6 @@
     
     NSDictionary *serverConfig = trustKitConfig[kTSKPinnedDomains][serverConfigKey];
     XCTAssertEqualObjects(expirationDate, serverConfig[kTSKExpirationDate]);
-    XCTAssertEqual(serverConfig[kTSKPublicKeyAlgorithms][0], @(TSKPublicKeyAlgorithmEcDsaSecp384r1));
     XCTAssertEqual([serverConfig[kTSKPublicKeyHashes] count], (unsigned long)2);
 }
 
@@ -174,7 +164,6 @@
     NSDictionary *trustKitConfig;
     trustKitConfig = parseTrustKitConfiguration(@{kTSKPinnedDomains : @{
                                                           @"good.com" : @{
-                                                                  kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                                   kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
                                                                                           @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                                                                           ]}}});
@@ -191,7 +180,6 @@
     trustKitConfig = parseTrustKitConfiguration(@{kTSKPinnedDomains : @{
                                                       @"good.com" : @{
                                                               kTSKIncludeSubdomains : @YES,
-                                                              kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                               kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
                                                                                       @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                                                                       ]}}});
@@ -207,7 +195,6 @@
     NSDictionary *trustKitConfig;
     trustKitConfig = parseTrustKitConfiguration(@{kTSKPinnedDomains : @{@"good.com" : @{
                                                                             kTSKIncludeSubdomains : @YES,
-                                                                            kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                                             kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
                                                                                                     @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                                                                                     ]}}});
@@ -224,7 +211,6 @@
     trustKitConfig = parseTrustKitConfiguration(@{kTSKPinnedDomains :
                                                   @{@"www.good.com" : @{
                                                             kTSKIncludeSubdomains : @YES,
-                                                            kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                             kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
                                                                                     @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                                                                     ]}}});
@@ -240,7 +226,6 @@
     trustKitConfig = parseTrustKitConfiguration(@{kTSKPinnedDomains :
                                                   @{@"good.com" : @{
                                                             kTSKIncludeSubdomains : @YES,
-                                                            kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                             kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
                                                                                     @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                                                                     ]}}});
@@ -257,7 +242,6 @@
     trustKitConfig = parseTrustKitConfiguration(@{kTSKPinnedDomains :
                                                       @{@"good.net" : @{
                                                                 kTSKIncludeSubdomains : @YES,
-                                                                kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                                 kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
                                                                                         @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                                                                         ]}}});
@@ -274,7 +258,6 @@
                                                  kTSKPinnedDomains :
                                                  @{@"com" : @{
                                                            kTSKIncludeSubdomains : @YES,
-                                                           kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                            kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
                                                                                    @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                                                                    ]}}}),
@@ -288,7 +271,6 @@
     trustKitConfig = parseTrustKitConfiguration(@{kTSKPinnedDomains :
                                                   @{@"good.com" : @{
                                                             kTSKIncludeSubdomains : @NO,
-                                                            kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                             kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
                                                                                     @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                                                                     ]}}});
@@ -305,12 +287,10 @@
     trustKitConfig = parseTrustKitConfiguration(@{kTSKPinnedDomains :
                                                   @{@"good.com" : @{
                                                             kTSKIncludeSubdomains : @YES,
-                                                            kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                             kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
                                                                                     @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                                                                     ]},
                                                     @"www.good.com": @{
-                                                            kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                                                             kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=",
                                                                                     @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                                                                     ]}}});
@@ -335,7 +315,6 @@
     trustKitConfig = parseTrustKitConfiguration(@{kTSKPinnedDomains :
                                                       @{@"good.com" : @{
                                                                 kTSKIncludeSubdomains : @YES,
-                                                                kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                                 kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
                                                                                         @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                                                                         ]}}});
@@ -354,7 +333,6 @@
                                                   kTSKPinnedDomains :
                                                       @{@"good.com" : @{
                                                                 kTSKIncludeSubdomains : @YES,
-                                                                kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                                                                 kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
                                                                                         @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                                                                         ]}}};
