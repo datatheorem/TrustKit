@@ -14,7 +14,6 @@
 #import "../TrustKit/TrustKit.h"
 #import "../TrustKit/TSKTrustKitConfig.h"
 #import "../TrustKit/Pinning/ssl_pin_verifier.h"
-#import "../TrustKit/Pinning/TSKPublicKeyAlgorithm.h"
 #import "../TrustKit/parse_configuration.h"
 #import "../TrustKit/configuration_utils.h"
 #import "TSKCertificateUtils.h"
@@ -97,6 +96,9 @@
                                                          @"unsecured.good.com": @{
                                                                  // When using this option, TrustKit should reject additional keys for the domain
                                                                  kTSKExcludeSubdomainFromParentPolicy: @YES,
+                                                                 kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                                                                                         @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+                                                                                         ],
                                                                  }
                                                          }
                                                  }),

@@ -194,7 +194,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     
     // Ensure the SPKI cache was on the filesystem is empty
     NSDictionary *fsCache = [spkiCache loadSPKICacheFromFileSystem];
-    XCTAssertEqual([fsCache[@1] count], 0UL, @"SPKI cache for RSA 4096 must be empty before the test");
+    XCTAssertEqual([fsCache count], 0UL, @"SPKI cache for RSA 4096 must be empty before the test");
     
     // First test the verifyPublicKeyPin() function
     NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
@@ -236,7 +236,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     
     // Ensure the SPKI cache was persisted to the filesystem
     fsCache = [spkiCache loadSPKICacheFromFileSystem];
-    XCTAssertEqual([fsCache[@1] count], 2UL, @"SPKI cache for RSA 4096 must be persisted to the file system");
+    XCTAssertEqual([fsCache count], 2UL, @"SPKI cache for RSA 4096 must be persisted to the file system");
     
     CFRelease(trust);
 }

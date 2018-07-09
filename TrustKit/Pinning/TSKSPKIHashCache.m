@@ -93,7 +93,6 @@ static unsigned int getAsn1HeaderSize(NSString *publicKeyType, NSNumber *publicK
 @interface TSKSPKIHashCache ()
 
 // Dictionnary to cache SPKI hashes instead of having to compute them on every connection
-// We store one cache dictionnary per TSKPublicKeyAlgorithm we support
 @property (nonatomic) SPKICacheDictionnary *spkiCache;
 @property (nonatomic) dispatch_queue_t lockQueue;
 @property (nonatomic) NSString *spkiCacheFilename;
