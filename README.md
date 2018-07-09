@@ -46,7 +46,6 @@ Alternatively, the pinning policy can be set programmatically:
     kTSKPinnedDomains : @{
             @"www.datatheorem.com" : @{
                     kTSKExpirationDate: @"2017-12-01",
-                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                     kTSKPublicKeyHashes : @[
                             @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=",
                             @"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8="
@@ -55,7 +54,6 @@ Alternatively, the pinning policy can be set programmatically:
                     kTSKReportUris : @[@"http://report.datatheorem.com/log_report"],
                     },
             @"yahoo.com" : @{
-                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                     kTSKPublicKeyHashes : @[
                             @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
                             @"rFjc3wG7lTZe43zeYTvPq8k4xdDEutCmIhI5dn4oCeE=",
@@ -75,7 +73,6 @@ The policy can also be set programmatically in Swift Apps:
             kTSKPinnedDomains: [
                 "yahoo.com": [
                     kTSKExpirationDate: "2017-12-01",
-                    kTSKPublicKeyAlgorithms: [kTSKAlgorithmRsa2048],
                     kTSKPublicKeyHashes: [
                         "JbQbUG5JMJUoI6brnx0x3vZF6jilxsapbXGVfjhN8Fg=",
                         "WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18="

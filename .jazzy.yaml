@@ -42,7 +42,6 @@ custom_categories:
     children:
     - TSKDomainConfigurationKey
     - kTSKPublicKeyHashes
-    - kTSKPublicKeyAlgorithms
     - kTSKEnforcePinning
     - kTSKIncludeSubdomains
     - kTSKExcludeSubdomainFromParentPolicy
@@ -50,13 +49,3 @@ custom_categories:
     - kTSKDisableDefaultReportUri 
     - kTSKExpirationDate
     - kTSKAdditionalTrustAnchors
-
-  - name: Public Key Algorithm Keys
-    children:
-    - TSKSupportedAlgorithm
-    - kTSKAlgorithmRsa2048
-    - kTSKAlgorithmRsa4096
-    - kTSKAlgorithmEcDsaSecp256r1
-    - kTSKAlgorithmEcDsaSecp384r1
-    
-

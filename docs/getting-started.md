@@ -82,8 +82,7 @@ initializing TrustKit by calling the `initSharedInstanceWithConfiguration:` meth
 pinning policy.
 
 A pinning policy is a dictionary of domain names and pinning configuration keys.
-At a minimum, the configuration should specify a list of SSL pins and the
-corresponding certificates' public key algorithms. For example:
+At a minimum, the configuration should specify a list of SSL pins. For example:
 
 ```objc
 #import <TrustKit/TrustKit.h>
@@ -103,9 +102,6 @@ NSDictionary *trustKitConfig =
                   // Send reports for pin validation failures so we can track them
                   kTSKReportUris: @[@"https://some-reporting-server.com/log_report"],
                   
-                  // The pinned public keys' algorithms
-                  kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                  
                   // The pinned public keys' Subject Public Key Info hashes
                   kTSKPublicKeyHashes : @[
                           @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
@@ -116,8 +112,6 @@ NSDictionary *trustKitConfig =
           @"www.datatheorem.com" : @{
                   // Block connections if pinning validation failed
                   kTSKEnforcePinning:@YES,
-                  
-                  kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                   
                   kTSKPublicKeyHashes : @[
                           @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=",
