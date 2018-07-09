@@ -109,7 +109,8 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
     
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+    dateFormat.dateFormat = @"yyyy-MM-dd";
+    dateFormat.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
     NSDate *expirationDate = [dateFormat dateFromString:expirationDateStr];
     
     TSKPinningValidatorResult *res;

@@ -132,9 +132,10 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *trustKitArguments)
         NSString *expirationDateStr = domainPinningPolicy[kTSKExpirationDate];
         if (expirationDateStr != nil)
         {
-            // Convert the string in the yyyy-MM-dd format into an actual date
+            // Convert the string in the yyyy-MM-dd format into an actual date in UTC
             NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-            [dateFormat setDateFormat:@"yyyy-MM-dd"];
+            dateFormat.dateFormat = @"yyyy-MM-dd";
+            dateFormat.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
             NSDate *expirationDate = [dateFormat dateFromString:expirationDateStr];
             domainFinalConfiguration[kTSKExpirationDate] = expirationDate;
         }
