@@ -1,22 +1,22 @@
 machine:
   xcode:
-    version: 8.3
+    version: 9.2.0
 test:
   override:
-    # iOS 9.0 platform with iOS 10.3 SDK
+    # iOS 10.0 platform with iOS 11.2 SDK
     - xcodebuild clean test
       CODE_SIGNING_REQUIRED=NO
       CODE_SIGN_IDENTITY=
-      -destination 'platform=iOS Simulator,name=iPhone 5,OS=9.0'
-      -sdk iphonesimulator10.3
+      -destination 'platform=iOS Simulator,name=iPhone 5,OS=10.0'
+      -sdk iphonesimulator11.2
       -scheme "TrustKit"
       
-    # iOS 10.3 platform with iOS 10.3 SDK
+    # iOS 11.2 platform with iOS 11.2 SDK
     - xcodebuild clean test
       CODE_SIGNING_REQUIRED=NO
       CODE_SIGN_IDENTITY=
-      -destination 'platform=iOS Simulator,name=iPhone 7,OS=10.3.1'
-      -sdk iphonesimulator10.3
+      -destination 'platform=iOS Simulator,name=iPhone 7,OS=11.2'
+      -sdk iphonesimulator11.2
       -scheme "TrustKit"
       
     # macOS 10.12 platform with macOS 10.12 SDK
@@ -27,11 +27,11 @@ test:
       -sdk macosx10.12
       -scheme "TrustKit OS X"
 
-    # tvOS 10.3 platform with tvOS 10.3 SDK
+    # tvOS 11.2 platform with tvOS 11.2 SDK
     - xcodebuild clean test
       CODE_SIGNING_REQUIRED=NO
       CODE_SIGN_IDENTITY=
-      -destination 'platform=tvOS Simulator,name=Apple TV 1080p,OS=10.2'
-      -sdk appletvsimulator10.2
+      -destination 'platform=tvOS Simulator,name=Apple TV 1080p,OS=11.2'
+      -sdk appletvsimulator11.2
       -scheme "TrustKit tvOS"
       
