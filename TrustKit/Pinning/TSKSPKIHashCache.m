@@ -163,7 +163,7 @@ static const NSString *kTSKKeychainPublicKeyTag = @"TSKKeychainPublicKeyTag"; //
     NSData *certificateData = (__bridge_transfer NSData *)(SecCertificateCopyData(certificate));
     
     dispatch_sync(_lockQueue, ^{
-        cachedSubjectPublicKeyInfo = _subjectPublicKeyInfoHashesCache[algorithmKey][certificateData];
+        cachedSubjectPublicKeyInfo = self->_subjectPublicKeyInfoHashesCache[algorithmKey][certificateData];
     });
     
     if (cachedSubjectPublicKeyInfo)
@@ -199,7 +199,7 @@ static const NSString *kTSKKeychainPublicKeyTag = @"TSKKeychainPublicKeyTag"; //
     
     // Store the hash in our memory cache
     dispatch_barrier_sync(_lockQueue, ^{
-        _subjectPublicKeyInfoHashesCache[algorithmKey][certificateData] = subjectPublicKeyInfoHash;
+        self->_subjectPublicKeyInfoHashesCache[algorithmKey][certificateData] = subjectPublicKeyInfoHash;
     });
     
     // Update the cache on the filesystem
