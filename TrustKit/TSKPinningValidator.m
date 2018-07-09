@@ -125,7 +125,6 @@
             // Look for one the configured public key pins in the server's evaluated certificate chain
             TSKTrustEvaluationResult validationResult = verifyPublicKeyPin(serverTrust,
                                                                            serverHostname,
-                                                                           domainConfig[kTSKPublicKeyAlgorithms],
                                                                            domainConfig[kTSKPublicKeyHashes],
                                                                            self.spkiHashCache);
             

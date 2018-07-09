@@ -18,12 +18,11 @@
 
 #pragma mark SSL Pin Verifier
 
-TSKTrustEvaluationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverHostname, NSArray<NSNumber *> *supportedAlgorithms, NSSet<NSData *> *knownPins, TSKSPKIHashCache *hashCache)
+TSKTrustEvaluationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverHostname, NSSet<NSData *> *knownPins, TSKSPKIHashCache *hashCache)
 {
     NSCParameterAssert(serverTrust);
-    NSCParameterAssert(supportedAlgorithms);
     NSCParameterAssert(knownPins);
-    if ((serverTrust == NULL) || (supportedAlgorithms == nil) || (knownPins == nil))
+    if ((serverTrust == NULL) || (knownPins == nil))
     {
         TSKLog(@"Invalid pinning parameters for %@", serverHostname);
         return TSKTrustEvaluationErrorInvalidParameters;
@@ -68,27 +67,22 @@ TSKTrustEvaluationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *s
         TSKLog(@"Checking certificate with CN: %@", certificateSubject);
         CFRelease(certificateSubject);
         
-        // For each public key algorithm flagged as supported in the config, generate the subject public key info hash
-        for (NSNumber *savedAlgorithm in supportedAlgorithms)
+        // Generate the subject public key info hash
+        NSData *subjectPublicKeyInfoHash = [hashCache hashSubjectPublicKeyInfoFromCertificate:certificate];
+        if (subjectPublicKeyInfoHash == nil)
         {
-            TSKPublicKeyAlgorithm algorithm = [savedAlgorithm integerValue];
-            NSData *subjectPublicKeyInfoHash = [hashCache hashSubjectPublicKeyInfoFromCertificate:certificate
-                                                                               publicKeyAlgorithm:algorithm];
-            if (subjectPublicKeyInfoHash == nil)
-            {
-                TSKLog(@"Error - could not generate the SPKI hash for %@", serverHostname);
-                CFRelease(serverTrust);
-                return TSKTrustEvaluationErrorCouldNotGenerateSpkiHash;
-            }
-            
-            // Is the generated hash in our set of pinned hashes ?
-            TSKLog(@"Testing SSL Pin %@", subjectPublicKeyInfoHash);
-            if ([knownPins containsObject:subjectPublicKeyInfoHash])
-            {
-                TSKLog(@"SSL Pin found for %@", serverHostname);
-                CFRelease(serverTrust);
-                return TSKTrustEvaluationSuccess;
-            }
+            TSKLog(@"Error - could not generate the SPKI hash for %@", serverHostname);
+            CFRelease(serverTrust);
+            return TSKTrustEvaluationErrorCouldNotGenerateSpkiHash;
+        }
+        
+        // Is the generated hash in our set of pinned hashes ?
+        TSKLog(@"Testing SSL Pin %@", subjectPublicKeyInfoHash);
+        if ([knownPins containsObject:subjectPublicKeyInfoHash])
+        {
+            TSKLog(@"SSL Pin found for %@", serverHostname);
+            CFRelease(serverTrust);
+            return TSKTrustEvaluationSuccess;
         }
     }
     
