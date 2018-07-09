@@ -24,6 +24,6 @@ typedef NS_ENUM(NSInteger, TSKPublicKeyAlgorithm)
     TSKPublicKeyAlgorithmEcDsaSecp384r1 = 3,
     
     TSKPublicKeyAlgorithmLast = TSKPublicKeyAlgorithmEcDsaSecp384r1
-};
+} __deprecated_msg("Starting with TrustKit 1.6.0, key algorithms no longer need to be specified; remove TSKPublicKeyAlgorithms from your configuration.");
 
 #endif /* TSKPublicKeyAlgorithm_h */
