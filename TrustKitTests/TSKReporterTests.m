@@ -186,7 +186,8 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
 - (void)testReporter
 {
     // Just try a simple valid case to see if we can post this to the default report URL
-    TSKBackgroundReporter *reporter = [[TSKBackgroundReporter alloc] initAndRateLimitReports:NO];
+    TSKBackgroundReporter *reporter = [[TSKBackgroundReporter alloc] initAndRateLimitReports:NO
+                                                                   sharedContainerIdentifier:nil];
     [reporter pinValidationFailedForHostname:@"mail.example.com"
                                         port:[NSNumber numberWithInt:443]
                             certificateChain:_testCertificateChain
@@ -208,7 +209,8 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
 - (void)testReporterNilExpirationDate
 {
     // Just try a simple valid case to see if we can post this to the default report URL
-    TSKBackgroundReporter *reporter = [[TSKBackgroundReporter alloc] initAndRateLimitReports:NO];
+    TSKBackgroundReporter *reporter = [[TSKBackgroundReporter alloc] initAndRateLimitReports:NO
+                                                                   sharedContainerIdentifier:nil];
     [reporter pinValidationFailedForHostname:@"mail.example.com"
                                         port:[NSNumber numberWithInt:443]
                             certificateChain:_testCertificateChain

@@ -115,7 +115,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark Usage in Singleton Mode
 
 /**
- Initialize the global TrustKit singleton with the supplied pinning policy.
+ See `+initSharedInstanceWithConfiguration:sharedContainerIdentifier:`
  
  @param trustKitConfig A dictionary containing various keys for configuring the SSL pinning policy.
  @exception NSException Thrown when the supplied configuration is invalid or TrustKit has
@@ -124,6 +124,19 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)initSharedInstanceWithConfiguration:(NSDictionary<TSKGlobalConfigurationKey, id> *)trustKitConfig;
 
+/**
+ Initialize the global TrustKit singleton with the supplied pinning policy.
+ 
+ @param trustKitConfig A dictionary containing various keys for configuring the SSL pinning policy.
+ @param sharedContainerIdentifier The container identifier for an app extension. This must be set in order
+ for reports to be sent from an app extension. See
+ https://developer.apple.com/documentation/foundation/nsurlsessionconfiguration/1409450-sharedcontaineridentifier
+ @exception NSException Thrown when the supplied configuration is invalid or TrustKit has
+ already been initialized.
+ 
+ */
++ (void)initSharedInstanceWithConfiguration:(NSDictionary<TSKGlobalConfigurationKey, id> *)trustKitConfig
+                  sharedContainerIdentifier:(nullable NSString *)sharedContainerIdentifier;
 
 /**
  Retrieve the global TrustKit singleton instance. Raises an exception if `+initSharedInstanceWithConfiguration:`
@@ -164,17 +177,27 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark Usage in Multi-Instance Mode
 
 /**
- Initialize a local TrustKit instance with the supplied SSL pinning policy configuration.
- 
- This method is useful in scenarios where the TrustKit singleton cannot be used, for example within
- larger Apps that have split some of their functionality into multiple framework/SDK. Each 
- framework can initialize its own instance of TrustKit and use it for pinning validation independently
- of the App's other components.
+ See `-initWithConfiguration:sharedContainerIdentifier:`
  
  @param trustKitConfig A dictionary containing various keys for configuring the SSL pinning policy.
  */
 - (instancetype)initWithConfiguration:(NSDictionary<TSKGlobalConfigurationKey, id> *)trustKitConfig;
 
+/**
+ Initialize a local TrustKit instance with the supplied SSL pinning policy configuration.
+ 
+ This method is useful in scenarios where the TrustKit singleton cannot be used, for example within
+ larger Apps that have split some of their functionality into multiple framework/SDK. Each
+ framework can initialize its own instance of TrustKit and use it for pinning validation independently
+ of the App's other components.
+ 
+ @param trustKitConfig A dictionary containing various keys for configuring the SSL pinning policy.
+ @param sharedContainerIdentifier The container identifier for an app extension. This must be set in order
+    for reports to be sent from an app extension. See
+    https://developer.apple.com/documentation/foundation/nsurlsessionconfiguration/1409450-sharedcontaineridentifier
+ */
+- (instancetype)initWithConfiguration:(NSDictionary<TSKGlobalConfigurationKey, id> *)trustKitConfig
+            sharedContainerIdentifier:(nullable NSString *)sharedContainerIdentifier;
 
 
 #pragma mark Other Settings
