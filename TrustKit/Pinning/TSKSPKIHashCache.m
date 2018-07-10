@@ -158,6 +158,7 @@ static unsigned int getAsn1HeaderSize(NSString *publicKeyType, NSNumber *publicK
     if (publicKeyData == nil)
     {
         TSKLog(@"Error - could not extract the public key bytes");
+        CFRelease(publicKey);
         return nil;
     }
     
