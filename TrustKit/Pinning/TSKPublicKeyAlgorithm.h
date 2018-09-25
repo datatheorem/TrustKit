@@ -12,7 +12,11 @@
 #ifndef TSKPublicKeyAlgorithm_h
 #define TSKPublicKeyAlgorithm_h
 
+#if __has_feature(modules)
 @import Foundation;
+#else
+#import <Foundation/Foundation.h>
+#endif
 
 // The internal enum we use for public key algorithms; not to be confused with the exported TSKSupportedAlgorithm
 typedef NS_ENUM(NSInteger, TSKPublicKeyAlgorithm)

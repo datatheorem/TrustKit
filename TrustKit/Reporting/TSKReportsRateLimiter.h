@@ -10,7 +10,13 @@
  */
 
 #import "TSKPinFailureReport.h"
+
+#if __has_feature(modules)
 @import Foundation;
+#else
+#import <Foundation/Foundation.h>
+#endif
+
 
 /*
  * Simple helper class which caches reports for 24 hours to prevent identical reports from being sent twice

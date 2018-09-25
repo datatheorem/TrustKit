@@ -12,7 +12,11 @@
 #ifndef parse_configuration_h
 #define parse_configuration_h
 
+#if __has_feature(modules)
 @import Foundation;
+#else
+#import <Foundation/Foundation.h>
+#endif
 
 NSDictionary *parseTrustKitConfiguration(NSDictionary *trustKitArguments);
 

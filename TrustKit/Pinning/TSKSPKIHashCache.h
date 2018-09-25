@@ -9,8 +9,17 @@
  
  */
 
+#if __has_feature(modules)
 @import Foundation;
+#else
+#import <Foundation/Foundation.h>
+#endif
+
+#if __has_feature(modules)
 @import Security;
+#else
+#import <Security/Security.h>
+#endif
 
 NS_ASSUME_NONNULL_BEGIN
 

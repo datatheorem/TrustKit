@@ -9,8 +9,11 @@
  
  */
 
+#if __has_feature(modules)
 @import Foundation;
-
+#else
+#import <Foundation/Foundation.h>
+#endif
 
 /**
  The version of TrustKit, such as "1.4.0".

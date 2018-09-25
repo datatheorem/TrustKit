@@ -10,8 +10,12 @@
  */
 
 #import "TSKTrustDecision.h"
-@import Foundation;
 
+#if __has_feature(modules)
+@import Foundation;
+#else
+#import <Foundation/Foundation.h>
+#endif
 
 /**
  A `TSKPinningValidatorResult` instance contains all the details regarding a pinning validation

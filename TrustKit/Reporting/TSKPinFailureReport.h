@@ -10,7 +10,12 @@
  */
 
 #import "../Pinning/ssl_pin_verifier.h"
+
+#if __has_feature(modules)
 @import Foundation;
+#else
+#import <Foundation/Foundation.h>
+#endif
 
 @interface TSKPinFailureReport : NSObject
 

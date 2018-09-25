@@ -9,7 +9,11 @@
  
  */
 
+#if __has_feature(modules)
 @import Foundation;
+#else
+#import <Foundation/Foundation.h>
+#endif
 
 #ifndef _TRUSTKIT_
 #define _TRUSTKIT_

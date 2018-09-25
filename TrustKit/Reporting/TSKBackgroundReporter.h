@@ -10,7 +10,12 @@
  */
 
 #import "../Pinning/ssl_pin_verifier.h"
+
+#if __has_feature(modules)
 @import Foundation;
+#else
+#import <Foundation/Foundation.h>
+#endif
 
 /**
  `TSKSimpleBackgroundReporter` is a class for uploading pin failure reports using the background transfer service.

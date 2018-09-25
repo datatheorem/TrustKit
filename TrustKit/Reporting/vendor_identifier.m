@@ -15,7 +15,12 @@
 
 #pragma mark Vendor identifier - iOS, tvOS
 
-@import UIKit; // for accessing the IDFV
+// for accessing the IDFV
+#if __has_feature(modules)
+@import UIKit;
+#else
+#import <UIKit/UIKit.h>
+#endif
 
 NSString *identifier_for_vendor(void)
 {
