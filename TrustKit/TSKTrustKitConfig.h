@@ -107,6 +107,8 @@ FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKPublicKeyHashes;
 
 
 /**
+ DEPRECATED since 1.6.0: this configuration key is no longer needed.
+ 
  An array of `TSKSupportedAlgorithm` constants to specify the public key algorithms for the
  keys to be pinned.
  
@@ -206,10 +208,12 @@ FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKDisableDefaultReportUri;
 FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKExpirationDate;
 
 
-#pragma mark Supported Public Key Algorithm Keys
+#pragma mark DEPRECATED - Supported Public Key Algorithm Keys
 
 
 /**
+ DEPRECATED since 1.6.0: this configuration key is no longer needed.
+ 
  A public key algorithm supported by TrustKit for generating the SSL pin for a certificate.
  */
 typedef NSString *TSKSupportedAlgorithm  __deprecated_msg("Starting with TrustKit 1.6.0, key algorithms no longer need to be specified; remove TSKSupportedAlgorithm from your configuration.");
