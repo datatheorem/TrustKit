@@ -14,6 +14,7 @@
   </head>
   <body>
 
+    <a name="//apple_ref/objc/Section/Initalizing TrustKit" class="dashAnchor"></a>
 
     <a title="Initalizing TrustKit  Reference"></a>
 
@@ -112,9 +113,6 @@
                 <a class="nav-group-task-link" href="Domain Configuration Keys.html#/c:@kTSKPublicKeyHashes">kTSKPublicKeyHashes</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Domain Configuration Keys.html#/c:@kTSKPublicKeyAlgorithms">kTSKPublicKeyAlgorithms</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Domain Configuration Keys.html#/c:@kTSKEnforcePinning">kTSKEnforcePinning</a>
               </li>
               <li class="nav-group-task">
@@ -132,29 +130,6 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Domain Configuration Keys.html#/c:@kTSKExpirationDate">kTSKExpirationDate</a>
               </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Domain Configuration Keys.html#/c:@kTSKAdditionalTrustAnchors">kTSKAdditionalTrustAnchors</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Public Key Algorithm Keys.html">Public Key Algorithm Keys</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Public Key Algorithm Keys.html#/c:TSKTrustKitConfig.h@T@TSKSupportedAlgorithm">TSKSupportedAlgorithm</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Public Key Algorithm Keys.html#/c:@kTSKAlgorithmRsa2048">kTSKAlgorithmRsa2048</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Public Key Algorithm Keys.html#/c:@kTSKAlgorithmRsa4096">kTSKAlgorithmRsa4096</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Public Key Algorithm Keys.html#/c:@kTSKAlgorithmEcDsaSecp256r1">kTSKAlgorithmEcDsaSecp256r1</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Public Key Algorithm Keys.html#/c:@kTSKAlgorithmEcDsaSecp384r1">kTSKAlgorithmEcDsaSecp384r1</a>
-              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -162,6 +137,29 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Other Constants.html#/c:@TrustKitVersion">TrustKitVersion</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Other Constants.html#/c:@kTSKAlgorithmEcDsaSecp256r1">kTSKAlgorithmEcDsaSecp256r1</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Other Constants.html#/c:@kTSKAlgorithmEcDsaSecp384r1">kTSKAlgorithmEcDsaSecp384r1</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Other Constants.html#/c:@kTSKAlgorithmRsa2048">kTSKAlgorithmRsa2048</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Other Constants.html#/c:@kTSKAlgorithmRsa4096">kTSKAlgorithmRsa4096</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Other Constants.html#/c:@kTSKPublicKeyAlgorithms">kTSKPublicKeyAlgorithms</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Other Type Definitions.html">Other Type Definitions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Other Type Definitions.html#/c:TSKTrustKitConfig.h@T@TSKSupportedAlgorithm">TSKSupportedAlgorithm</a>
               </li>
             </ul>
           </li>
@@ -215,65 +213,60 @@ by leveraging the <code><a href="Classes/TrustKit.html#/c:objc(cs)TrustKit(im)in
 (of type <code><a href="Domain Configuration Keys.html#/c:TSKTrustKitConfig.h@T@TSKDomainConfigurationKey">TSKDomainConfigurationKey</a></code>) to be defined under the <code><a href="Global Configuration Keys.html#/c:@kTSKPinnedDomains">kTSKPinnedDomains</a></code> entry. 
 The following table shows the keys and the types of the corresponding values, and uses
 indentation to indicate structure:</p>
-<pre class="highlight plaintext"><code>| Key                                          | Type       |
-|----------------------------------------------|------------|
-| TSKSwizzleNetworkDelegates                   | Boolean    |
-| TSKIgnorePinningForUserDefinedTrustAnchors   | Boolean    |
-| TSKPinnedDomains                             | Dictionary |
-| __ &lt;domain-name-to-pin-as-string&gt;            | Dictionary |
-| ____ TSKPublicKeyHashes                      | Array      |
-| ____ TSKPublicKeyAlgorithms                  | Array      |
-| ____ TSKIncludeSubdomains                    | Boolean    |
-| ____ TSKExcludeSubdomainFromParentPolicy     | Boolean    |
-| ____ TSKEnforcePinning                       | Boolean    |
-| ____ TSKReportUris                           | Array      |
-| ____ TSKDisableDefaultReportUri              | Boolean    |
-| ____ TSKAdditionalTrustAnchors               | Array      |
+<pre class="highlight objective_c"><code><span class="o">|</span> <span class="n">Key</span>                                          <span class="o">|</span> <span class="n">Type</span>       <span class="o">|</span>
+<span class="o">|----------------------------------------------|------------|</span>
+<span class="o">|</span> <span class="n">TSKSwizzleNetworkDelegates</span>                   <span class="o">|</span> <span class="n">Boolean</span>    <span class="o">|</span>
+<span class="o">|</span> <span class="n">TSKIgnorePinningForUserDefinedTrustAnchors</span>   <span class="o">|</span> <span class="n">Boolean</span>    <span class="o">|</span>
+<span class="o">|</span> <span class="n">TSKPinnedDomains</span>                             <span class="o">|</span> <span class="n">Dictionary</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">__</span> <span class="o">&lt;</span><span class="n">domain</span><span class="o">-</span><span class="n">name</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">pin</span><span class="o">-</span><span class="n">as</span><span class="o">-</span><span class="n">string</span><span class="o">&gt;</span>            <span class="o">|</span> <span class="n">Dictionary</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">____</span> <span class="n">TSKPublicKeyHashes</span>                      <span class="o">|</span> <span class="n">Array</span>      <span class="o">|</span>
+<span class="o">|</span> <span class="n">____</span> <span class="n">TSKIncludeSubdomains</span>                    <span class="o">|</span> <span class="n">Boolean</span>    <span class="o">|</span>
+<span class="o">|</span> <span class="n">____</span> <span class="n">TSKExcludeSubdomainFromParentPolicy</span>     <span class="o">|</span> <span class="n">Boolean</span>    <span class="o">|</span>
+<span class="o">|</span> <span class="n">____</span> <span class="n">TSKEnforcePinning</span>                       <span class="o">|</span> <span class="n">Boolean</span>    <span class="o">|</span>
+<span class="o">|</span> <span class="n">____</span> <span class="n">TSKReportUris</span>                           <span class="o">|</span> <span class="n">Array</span>      <span class="o">|</span>
+<span class="o">|</span> <span class="n">____</span> <span class="n">TSKDisableDefaultReportUri</span>              <span class="o">|</span> <span class="n">Boolean</span>    <span class="o">|</span>
 </code></pre>
 
 <p>When setting the pinning policy programmatically, it has to be supplied to the
 <code>initSharedInstanceWithConfiguration:</code> method as a dictionary in order to initialize 
 TrustKit. For example:</p>
-<pre class="highlight plaintext"><code>   NSDictionary *trustKitConfig =
- @{
-   kTSKPinnedDomains : @{
-           @"www.datatheorem.com" : @{
-                   kTSKExpirationDate: @"2017-12-01",
-                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
-                   kTSKPublicKeyHashes : @[
-                           @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=",
-                           @"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8="
-                           ],
-                   kTSKEnforcePinning : @NO,
-                   kTSKReportUris : @[@"http://report.datatheorem.com/log_report"],
-                   },
-           @"yahoo.com" : @{
-                   kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                   kTSKPublicKeyHashes : @[
-                           @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
-                           @"rFjc3wG7lTZe43zeYTvPq8k4xdDEutCmIhI5dn4oCeE=",
-                           ],
-                   kTSKIncludeSubdomains : @YES
-                   }
-           }};
+<pre class="highlight objective_c"><code>   <span class="n">NSDictionary</span> <span class="o">*</span><span class="n">trustKitConfig</span> <span class="o">=</span>
+ <span class="p">@{</span>
+   <span class="n">kTSKPinnedDomains</span> <span class="o">:</span> <span class="p">@{</span>
+           <span class="s">@"www.datatheorem.com"</span> <span class="o">:</span> <span class="p">@{</span>
+                   <span class="nl">kTSKExpirationDate:</span> <span class="s">@"2017-12-01"</span><span class="p">,</span>
+                   <span class="n">kTSKPublicKeyHashes</span> <span class="o">:</span> <span class="p">@[</span>
+                           <span class="s">@"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY="</span><span class="p">,</span>
+                           <span class="s">@"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8="</span>
+                           <span class="p">],</span>
+                   <span class="n">kTSKEnforcePinning</span> <span class="o">:</span> <span class="nb">@NO</span><span class="p">,</span>
+                   <span class="n">kTSKReportUris</span> <span class="o">:</span> <span class="p">@[</span><span class="s">@"http://report.datatheorem.com/log_report"</span><span class="p">],</span>
+                   <span class="p">},</span>
+           <span class="s">@"yahoo.com"</span> <span class="o">:</span> <span class="p">@{</span>
+                   <span class="n">kTSKPublicKeyHashes</span> <span class="o">:</span> <span class="p">@[</span>
+                           <span class="s">@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY="</span><span class="p">,</span>
+                           <span class="s">@"rFjc3wG7lTZe43zeYTvPq8k4xdDEutCmIhI5dn4oCeE="</span><span class="p">,</span>
+                           <span class="p">],</span>
+                   <span class="n">kTSKIncludeSubdomains</span> <span class="o">:</span> <span class="nb">@YES</span>
+                   <span class="p">}</span>
+           <span class="p">}};</span>
 
-   [TrustKit initSharedInstanceWithConfiguration:trustKitConfig];
-   trustKit = [TrustKit sharedInstance];
+   <span class="p">[</span><span class="n">TrustKit</span> <span class="nf">initSharedInstanceWithConfiguration</span><span class="p">:</span><span class="n">trustKitConfig</span><span class="p">];</span>
+   <span class="n">trustKit</span> <span class="o">=</span> <span class="p">[</span><span class="n">TrustKit</span> <span class="nf">sharedInstance</span><span class="p">];</span>
 </code></pre>
 
 <p>Similarly, the TrustKit singleton can be initialized in Swift:</p>
-<pre class="highlight plaintext"><code>       let trustKitConfig = [
-           kTSKSwizzleNetworkDelegates: false,
-           kTSKPinnedDomains: [
-               "yahoo.com": [
-                   kTSKExpirationDate: "2017-12-01",
-                   kTSKPublicKeyAlgorithms: [kTSKAlgorithmRsa2048],
-                   kTSKPublicKeyHashes: [
-                       "JbQbUG5JMJUoI6brnx0x3vZF6jilxsapbXGVfjhN8Fg=",
-                       "WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18="
-                   ],]]] as [String : Any]
+<pre class="highlight objective_c"><code>       <span class="n">let</span> <span class="n">trustKitConfig</span> <span class="o">=</span> <span class="p">[</span>
+           <span class="nf">kTSKSwizzleNetworkDelegates</span><span class="p">:</span> <span class="nb">false</span><span class="p">,</span>
+           <span class="nf">kTSKPinnedDomains</span><span class="p">:</span> <span class="p">[</span>
+               <span class="s">"yahoo.com"</span><span class="o">:</span> <span class="p">[</span>
+                   <span class="nf">kTSKExpirationDate</span><span class="p">:</span> <span class="s">"2017-12-01"</span><span class="p">,</span>
+                   <span class="nf">kTSKPublicKeyHashes</span><span class="p">:</span> <span class="p">[</span>
+                       <span class="s">"JbQbUG5JMJUoI6brnx0x3vZF6jilxsapbXGVfjhN8Fg="</span><span class="p">,</span>
+                       <span class="s">"WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18="</span>
+                   <span class="p">],]]]</span> <span class="n">as</span> <span class="p">[</span><span class="nf">String</span> <span class="p">:</span> <span class="n">Any</span><span class="p">]</span>
 
-       TrustKit.initSharedInstance(withConfiguration:trustKitConfig)
+       <span class="n">TrustKit</span><span class="p">.</span><span class="n">initSharedInstance</span><span class="p">(</span><span class="n">withConfiguration</span><span class="o">:</span><span class="n">trustKitConfig</span><span class="p">)</span>
 </code></pre>
 
 <p>After initialization, the <code>TrustKit</code> instance&rsquo;s <code>pinningValidator</code> should be used to implement
@@ -285,12 +278,12 @@ pinning validation within the App&rsquo;s network authentication handlers.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Objective-C</p>
-                          <pre class="highlight"><code><span class="k">@interface</span> <span class="nc">TrustKit</span> <span class="p">:</span> <span class="nc">NSObject</span></code></pre>
+                          <pre class="highlight objective_c"><code><span class="k">@interface</span> <span class="nc">TrustKit</span> <span class="p">:</span> <span class="nc">NSObject</span></code></pre>
 
                         </div>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">class</span> <span class="kt">TrustKit</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">TrustKit</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
 
                         </div>
                       </div>
@@ -305,8 +298,8 @@ pinning validation within the App&rsquo;s network authentication handlers.</p>
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2017 <a class="link" href="https://datatheorem.github.io" target="_blank" rel="external">Data Theorem</a>. All rights reserved. (Last updated: 2017-07-28)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2018 <a class="link" href="https://datatheorem.github.io" target="_blank" rel="external">Data Theorem</a>. All rights reserved. (Last updated: 2018-09-25)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>

@@ -14,6 +14,7 @@
   </head>
   <body>
 
+    <a name="//apple_ref/objc/Section/Global Configuration Keys" class="dashAnchor"></a>
 
     <a title="Global Configuration Keys  Reference"></a>
 
@@ -112,9 +113,6 @@
                 <a class="nav-group-task-link" href="Domain Configuration Keys.html#/c:@kTSKPublicKeyHashes">kTSKPublicKeyHashes</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Domain Configuration Keys.html#/c:@kTSKPublicKeyAlgorithms">kTSKPublicKeyAlgorithms</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Domain Configuration Keys.html#/c:@kTSKEnforcePinning">kTSKEnforcePinning</a>
               </li>
               <li class="nav-group-task">
@@ -132,29 +130,6 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Domain Configuration Keys.html#/c:@kTSKExpirationDate">kTSKExpirationDate</a>
               </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Domain Configuration Keys.html#/c:@kTSKAdditionalTrustAnchors">kTSKAdditionalTrustAnchors</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a class="nav-group-name-link" href="Public Key Algorithm Keys.html">Public Key Algorithm Keys</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Public Key Algorithm Keys.html#/c:TSKTrustKitConfig.h@T@TSKSupportedAlgorithm">TSKSupportedAlgorithm</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Public Key Algorithm Keys.html#/c:@kTSKAlgorithmRsa2048">kTSKAlgorithmRsa2048</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Public Key Algorithm Keys.html#/c:@kTSKAlgorithmRsa4096">kTSKAlgorithmRsa4096</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Public Key Algorithm Keys.html#/c:@kTSKAlgorithmEcDsaSecp256r1">kTSKAlgorithmEcDsaSecp256r1</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="Public Key Algorithm Keys.html#/c:@kTSKAlgorithmEcDsaSecp384r1">kTSKAlgorithmEcDsaSecp384r1</a>
-              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -162,6 +137,29 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Other Constants.html#/c:@TrustKitVersion">TrustKitVersion</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Other Constants.html#/c:@kTSKAlgorithmEcDsaSecp256r1">kTSKAlgorithmEcDsaSecp256r1</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Other Constants.html#/c:@kTSKAlgorithmEcDsaSecp384r1">kTSKAlgorithmEcDsaSecp384r1</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Other Constants.html#/c:@kTSKAlgorithmRsa2048">kTSKAlgorithmRsa2048</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Other Constants.html#/c:@kTSKAlgorithmRsa4096">kTSKAlgorithmRsa4096</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Other Constants.html#/c:@kTSKPublicKeyAlgorithms">kTSKPublicKeyAlgorithms</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Other Type Definitions.html">Other Type Definitions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Other Type Definitions.html#/c:TSKTrustKitConfig.h@T@TSKSupportedAlgorithm">TSKSupportedAlgorithm</a>
               </li>
             </ul>
           </li>
@@ -207,12 +205,12 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Objective-C</p>
-                          <pre class="highlight"><code><span class="k">typedef</span> <span class="n">NSString</span> <span class="o">*</span><span class="n">TSKGlobalConfigurationKey</span></code></pre>
+                          <pre class="highlight objective_c"><code><span class="k">typedef</span> <span class="n">NSString</span> <span class="o">*</span><span class="n">TSKGlobalConfigurationKey</span></code></pre>
 
                         </div>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">typealias</span> <span class="kt">TSKGlobalConfigurationKey</span> <span class="o">=</span> <span class="kt">NSString</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">typealias</span> <span class="kt">TSKGlobalConfigurationKey</span> <span class="o">=</span> <span class="kt">NSString</span></code></pre>
 
                         </div>
                       </div>
@@ -272,12 +270,12 @@ manually add pinning validation to the App&rsquo;s authentication handlers.</p>
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Objective-C</p>
-                          <pre class="highlight"><code><span class="k">extern</span> <span class="k">const</span> <span class="n"><a href="Global Configuration Keys.html#/c:TSKTrustKitConfig.h@T@TSKGlobalConfigurationKey">TSKGlobalConfigurationKey</a></span> <span class="n">kTSKSwizzleNetworkDelegates</span></code></pre>
+                          <pre class="highlight objective_c"><code><span class="k">extern</span> <span class="k">const</span> <span class="n"><a href="Global Configuration Keys.html#/c:TSKTrustKitConfig.h@T@TSKGlobalConfigurationKey">TSKGlobalConfigurationKey</a></span> <span class="n">kTSKSwizzleNetworkDelegates</span></code></pre>
 
                         </div>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">let</span> <span class="nv">kTSKSwizzleNetworkDelegates</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">kTSKSwizzleNetworkDelegates</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -308,12 +306,12 @@ all domain-specific keys is available in the <q>Domain-specific Keys</q> section
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Objective-C</p>
-                          <pre class="highlight"><code><span class="k">extern</span> <span class="k">const</span> <span class="n"><a href="Global Configuration Keys.html#/c:TSKTrustKitConfig.h@T@TSKGlobalConfigurationKey">TSKGlobalConfigurationKey</a></span> <span class="n">kTSKPinnedDomains</span></code></pre>
+                          <pre class="highlight objective_c"><code><span class="k">extern</span> <span class="k">const</span> <span class="n"><a href="Global Configuration Keys.html#/c:TSKTrustKitConfig.h@T@TSKGlobalConfigurationKey">TSKGlobalConfigurationKey</a></span> <span class="n">kTSKPinnedDomains</span></code></pre>
 
                         </div>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">let</span> <span class="nv">kTSKPinnedDomains</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">kTSKPinnedDomains</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -359,13 +357,13 @@ FAQ at <a href="https://www.chromium.org/Home/chromium-security/security-faq">ht
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Objective-C</p>
-                          <pre class="highlight"><code><span class="k">extern</span> <span class="k">const</span> <span class="n"><a href="Global Configuration Keys.html#/c:TSKTrustKitConfig.h@T@TSKGlobalConfigurationKey">TSKGlobalConfigurationKey</a></span>
+                          <pre class="highlight objective_c"><code><span class="k">extern</span> <span class="k">const</span> <span class="n"><a href="Global Configuration Keys.html#/c:TSKTrustKitConfig.h@T@TSKGlobalConfigurationKey">TSKGlobalConfigurationKey</a></span>
     <span class="n">kTSKIgnorePinningForUserDefinedTrustAnchors</span></code></pre>
 
                         </div>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="k">let</span> <span class="nv">kTSKIgnorePinningForUserDefinedTrustAnchors</span><span class="p">:</span> <span class="kt">String</span></code></pre>
+                          <pre class="highlight swift"><code><span class="k">let</span> <span class="nv">kTSKIgnorePinningForUserDefinedTrustAnchors</span><span class="p">:</span> <span class="kt">String</span></code></pre>
 
                         </div>
                       </div>
@@ -380,8 +378,8 @@ FAQ at <a href="https://www.chromium.org/Home/chromium-security/security-faq">ht
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2017 <a class="link" href="https://datatheorem.github.io" target="_blank" rel="external">Data Theorem</a>. All rights reserved. (Last updated: 2017-07-28)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2018 <a class="link" href="https://datatheorem.github.io" target="_blank" rel="external">Data Theorem</a>. All rights reserved. (Last updated: 2018-09-25)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>

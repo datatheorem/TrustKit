@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Implementing Pinning Validation  Reference</title>
+    <title>Other Type Definitions  Reference</title>
     <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
     <link rel="stylesheet" type="text/css" href="css/highlight.css" />
     <meta charset="utf-8">
@@ -14,9 +14,9 @@
   </head>
   <body>
 
-    <a name="//apple_ref/objc/Section/Implementing Pinning Validation" class="dashAnchor"></a>
+    <a name="//apple_ref/objc/Section/Other Type Definitions" class="dashAnchor"></a>
 
-    <a title="Implementing Pinning Validation  Reference"></a>
+    <a title="Other Type Definitions  Reference"></a>
 
     <header class="header">
       <p class="header-col header-col--primary">
@@ -44,7 +44,7 @@
     <p class="breadcrumbs">
       <a class="breadcrumb" href="index.html">TrustKit Reference</a>
       <img class="carat" src="img/carat.png" />
-      Implementing Pinning Validation  Reference
+      Other Type Definitions  Reference
     </p>
 
     <div class="content-wrapper">
@@ -169,21 +169,29 @@
 
         <section class="section">
           <div class="section-content">
-            <h1>Implementing Pinning Validation</h1>
-            
+            <h1>Other Type Definitions</h1>
+            <p>The following type definitions are available globally.</p>
+
           </div>
         </section>
 
         <section class="section">
           <div class="section-content">
             <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Supported%20Public%20Key%20Algorithm%20Keys"></a>
+                <a name="//apple_ref/objc/Section/Supported Public Key Algorithm Keys" class="dashAnchor"></a>
+                <a href="#/Supported%20Public%20Key%20Algorithm%20Keys">
+                  <h3 class="section-name">Supported Public Key Algorithm Keys</h3>
+                </a>
+              </div>
               <ul class="item-container">
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/c:objc(cs)TSKPinningValidator"></a>
-                    <a name="//apple_ref/objc/Class/TSKPinningValidator" class="dashAnchor"></a>
-                    <a class="token" href="#/c:objc(cs)TSKPinningValidator">TSKPinningValidator</a>
+                    <a name="/c:TSKTrustKitConfig.h@T@TSKSupportedAlgorithm"></a>
+                    <a name="//apple_ref/objc/Type/TSKSupportedAlgorithm" class="dashAnchor"></a>
+                    <a class="token" href="#/c:TSKTrustKitConfig.h@T@TSKSupportedAlgorithm">TSKSupportedAlgorithm</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -191,72 +199,19 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>A <code>TSKPinningValidator</code> instance can be used to verify a server&rsquo;s identity against an SSL pinning policy.</p>
+                        <p>A public key algorithm supported by TrustKit for generating the SSL pin for a certificate.</p>
 
-<p>In specific scenarios, TrustKit cannot intercept outgoing SSL connections and automatically validate the server&rsquo;s identity against the pinning policy:</p>
-
-<ul>
-<li>All connections within an App that disables TrustKit&rsquo;s network delegate swizzling by setting the <code><a href="Global Configuration Keys.html#/c:@kTSKSwizzleNetworkDelegates">kTSKSwizzleNetworkDelegates</a></code> configuration key to <code>NO</code>.</li>
-<li>Connections that do not rely on the <code>NSURLConnection</code> or <code>NSURLSession</code> APIs:
-
-<ul>
-<li><code>WKWebView</code> connections.</li>
-<li>Connections leveraging low-level network APIs (such as <code>NSStream</code>).</li>
-<li>Connections initiated using a third-party SSL library such as OpenSSL.</li>
-</ul></li>
-</ul>
-
-<p>For these connections, pin validation must be manually triggered using one of the two available methods within <code>TSKPinningValidator</code>.</p>
-
-                        <a href="Classes/TSKPinningValidator.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Objective-C</p>
-                          <pre class="highlight objective_c"><code><span class="k">@interface</span> <span class="nc">TSKPinningValidator</span> <span class="p">:</span> <span class="nc">NSObject</span></code></pre>
+                          <pre class="highlight objective_c"><code><span class="k">typedef</span> <span class="n">NSString</span> <span class="o">*</span><span class="n">TSKSupportedAlgorithm</span></code></pre>
 
                         </div>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">class</span> <span class="kt">TSKPinningValidator</span> <span class="p">:</span> <span class="kt">NSObject</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="task-group">
-              <ul class="item-container">
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/c:@E@TSKTrustDecision"></a>
-                    <a name="//apple_ref/objc/Enum/TSKTrustDecision" class="dashAnchor"></a>
-                    <a class="token" href="#/c:@E@TSKTrustDecision">TSKTrustDecision</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Possible return values when verifying a server&rsquo;s identity against an SSL pinning policy.</p>
-
-                        <a href="Enums/TSKTrustDecision.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Objective-C</p>
-                          <pre class="highlight objective_c"><code><span class="k">enum</span> <span class="n">TSKTrustDecision</span> <span class="p">{}</span></code></pre>
-
-                        </div>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight swift"><code><span class="kd">enum</span> <span class="kt">TSKTrustDecision</span> <span class="p">:</span> <span class="kt">Int</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">typealias</span> <span class="kt">TSKSupportedAlgorithm</span> <span class="o">=</span> <span class="kt">NSString</span></code></pre>
 
                         </div>
                       </div>

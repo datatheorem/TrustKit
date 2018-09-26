@@ -113,9 +113,6 @@
                 <a class="nav-group-task-link" href="../Domain Configuration Keys.html#/c:@kTSKPublicKeyHashes">kTSKPublicKeyHashes</a>
               </li>
               <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Domain Configuration Keys.html#/c:@kTSKPublicKeyAlgorithms">kTSKPublicKeyAlgorithms</a>
-              </li>
-              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Domain Configuration Keys.html#/c:@kTSKEnforcePinning">kTSKEnforcePinning</a>
               </li>
               <li class="nav-group-task">
@@ -133,29 +130,6 @@
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Domain Configuration Keys.html#/c:@kTSKExpirationDate">kTSKExpirationDate</a>
               </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Domain Configuration Keys.html#/c:@kTSKAdditionalTrustAnchors">kTSKAdditionalTrustAnchors</a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-group-name">
-            <a class="nav-group-name-link" href="../Public Key Algorithm Keys.html">Public Key Algorithm Keys</a>
-            <ul class="nav-group-tasks">
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Public Key Algorithm Keys.html#/c:TSKTrustKitConfig.h@T@TSKSupportedAlgorithm">TSKSupportedAlgorithm</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Public Key Algorithm Keys.html#/c:@kTSKAlgorithmRsa2048">kTSKAlgorithmRsa2048</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Public Key Algorithm Keys.html#/c:@kTSKAlgorithmRsa4096">kTSKAlgorithmRsa4096</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Public Key Algorithm Keys.html#/c:@kTSKAlgorithmEcDsaSecp256r1">kTSKAlgorithmEcDsaSecp256r1</a>
-              </li>
-              <li class="nav-group-task">
-                <a class="nav-group-task-link" href="../Public Key Algorithm Keys.html#/c:@kTSKAlgorithmEcDsaSecp384r1">kTSKAlgorithmEcDsaSecp384r1</a>
-              </li>
             </ul>
           </li>
           <li class="nav-group-name">
@@ -163,6 +137,29 @@
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a class="nav-group-task-link" href="../Other Constants.html#/c:@TrustKitVersion">TrustKitVersion</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other Constants.html#/c:@kTSKAlgorithmEcDsaSecp256r1">kTSKAlgorithmEcDsaSecp256r1</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other Constants.html#/c:@kTSKAlgorithmEcDsaSecp384r1">kTSKAlgorithmEcDsaSecp384r1</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other Constants.html#/c:@kTSKAlgorithmRsa2048">kTSKAlgorithmRsa2048</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other Constants.html#/c:@kTSKAlgorithmRsa4096">kTSKAlgorithmRsa4096</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other Constants.html#/c:@kTSKPublicKeyAlgorithms">kTSKPublicKeyAlgorithms</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Other Type Definitions.html">Other Type Definitions</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Other Type Definitions.html#/c:TSKTrustKitConfig.h@T@TSKSupportedAlgorithm">TSKSupportedAlgorithm</a>
               </li>
             </ul>
           </li>
@@ -175,7 +172,7 @@
             <h1>TSKPinningValidator</h1>
               <div class="declaration">
                 <div class="language">
-                  <pre class="highlight"><code><span class="k">@interface</span> <span class="nc">TSKPinningValidator</span> <span class="p">:</span> <span class="nc">NSObject</span></code></pre>
+                  <pre class="highlight objective_c"><code><span class="k">@interface</span> <span class="nc">TSKPinningValidator</span> <span class="p">:</span> <span class="nc">NSObject</span></code></pre>
 
                 </div>
               </div>
@@ -226,20 +223,20 @@
                         <p>Helper method for handling authentication challenges received within a <code>NSURLSessionDelegate</code>, <code>NSURLSessionTaskDelegate</code> or <code>WKNavigationDelegate</code>.</p>
 
 <p>This method will evaluate the server trust within the authentication challenge against the global SSL pinning policy previously configured, and then call the <code>completionHandler</code> with the corresponding <code>disposition</code> and <code>credential</code>. For example, this method can be leveraged in a NSURLSessionDelegate challenge handler method:</p>
-<pre class="highlight plaintext"><code>-  (void)URLSession:(NSURLSession *)session
-               task:(NSURLSessionTask *)task
-didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
-  completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler {
-{
-    TSKPinningValidator *pinningValidator = [[TrustKit sharedInstance] pinningValidator];
-    // Pass the authentication challenge to the validator; if the validation fails, the connection will be blocked
-    if (![pinningValidator handleChallenge:challenge completionHandler:completionHandler])
-    {
-        // TrustKit did not handle this challenge: perhaps it was not for server trust
-        // or the domain was not pinned. Fall back to the default behavior
-        completionHandler(NSURLSessionAuthChallengePerformDefaultHandling, nil);
-    }
-}
+<pre class="highlight objective_c"><code><span class="k">-</span>  <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">URLSession</span><span class="p">:(</span><span class="n">NSURLSession</span> <span class="o">*</span><span class="p">)</span><span class="nv">session</span>
+               <span class="nf">task</span><span class="p">:(</span><span class="n">NSURLSessionTask</span> <span class="o">*</span><span class="p">)</span><span class="nv">task</span>
+<span class="nf">didReceiveChallenge</span><span class="p">:(</span><span class="n">NSURLAuthenticationChallenge</span> <span class="o">*</span><span class="p">)</span><span class="nv">challenge</span>
+  <span class="nf">completionHandler</span><span class="p">:(</span><span class="kt">void</span> <span class="p">(</span><span class="o">^</span><span class="p">)(</span><span class="n">NSURLSessionAuthChallengeDisposition</span> <span class="n">disposition</span><span class="p">,</span> <span class="n">NSURLCredential</span> <span class="o">*</span><span class="n">credential</span><span class="p">))</span><span class="nv">completionHandler</span> <span class="p">{</span>
+<span class="p">{</span>
+    <span class="n">TSKPinningValidator</span> <span class="o">*</span><span class="n">pinningValidator</span> <span class="o">=</span> <span class="p">[[</span><span class="n">TrustKit</span> <span class="nf">sharedInstance</span><span class="p">]</span> <span class="nf">pinningValidator</span><span class="p">];</span>
+    <span class="c1">// Pass the authentication challenge to the validator; if the validation fails, the connection will be blocked</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">[</span><span class="n">pinningValidator</span> <span class="nf">handleChallenge</span><span class="p">:</span><span class="n">challenge</span> <span class="nf">completionHandler</span><span class="p">:</span><span class="n">completionHandler</span><span class="p">])</span>
+    <span class="p">{</span>
+        <span class="c1">// TrustKit did not handle this challenge: perhaps it was not for server trust</span>
+        <span class="c1">// or the domain was not pinned. Fall back to the default behavior</span>
+        <span class="n">completionHandler</span><span class="p">(</span><span class="n">NSURLSessionAuthChallengePerformDefaultHandling</span><span class="p">,</span> <span class="nb">nil</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre>
 
 <p>@exception NSException Thrown when TrustKit has not been initialized with a pinning policy.</p>
@@ -249,7 +246,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Objective-C</p>
-                          <pre class="highlight"><code><span class="k">-</span> <span class="p">(</span><span class="n">BOOL</span><span class="p">)</span><span class="nf">handleChallenge</span><span class="p">:(</span><span class="n">NSURLAuthenticationChallenge</span> <span class="o">*</span><span class="n">_Nonnull</span><span class="p">)</span><span class="nv">challenge</span>
+                          <pre class="highlight objective_c"><code><span class="k">-</span> <span class="p">(</span><span class="n">BOOL</span><span class="p">)</span><span class="nf">handleChallenge</span><span class="p">:(</span><span class="n">NSURLAuthenticationChallenge</span> <span class="o">*</span><span class="n">_Nonnull</span><span class="p">)</span><span class="nv">challenge</span>
       <span class="nf">completionHandler</span><span class="p">:</span>
           <span class="p">(</span><span class="kt">void</span> <span class="p">(</span><span class="o">^</span><span class="n">_Nonnull</span><span class="p">)(</span><span class="n">NSURLSessionAuthChallengeDisposition</span><span class="p">,</span>
                             <span class="n">NSURLCredential</span> <span class="o">*</span><span class="n">_Nullable</span><span class="p">))</span><span class="n">completionHandler</span><span class="p">;</span></code></pre>
@@ -257,7 +254,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
                         </div>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">handle</span><span class="p">(</span><span class="n">_</span> <span class="nv">challenge</span><span class="p">:</span> <span class="kt">URLAuthenticationChallenge</span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">URLSession</span><span class="o">.</span><span class="kt">AuthChallengeDisposition</span><span class="p">,</span> <span class="kt">URLCredential</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">handle</span><span class="p">(</span><span class="n">_</span> <span class="nv">challenge</span><span class="p">:</span> <span class="kt">URLAuthenticationChallenge</span><span class="p">,</span> <span class="nv">completionHandler</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="p">(</span><span class="kt">URLSession</span><span class="o">.</span><span class="kt">AuthChallengeDisposition</span><span class="p">,</span> <span class="kt">URLCredential</span><span class="p">?)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
 
                         </div>
                       </div>
@@ -341,13 +338,13 @@ didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Objective-C</p>
-                          <pre class="highlight"><code><span class="k">-</span> <span class="p">(</span><span class="n"><a href="../Enums/TSKTrustDecision.html">TSKTrustDecision</a></span><span class="p">)</span><span class="nf">evaluateTrust</span><span class="p">:(</span><span class="n">SecTrustRef</span> <span class="n">_Nonnull</span><span class="p">)</span><span class="nv">serverTrust</span>
+                          <pre class="highlight objective_c"><code><span class="k">-</span> <span class="p">(</span><span class="n"><a href="../Enums/TSKTrustDecision.html">TSKTrustDecision</a></span><span class="p">)</span><span class="nf">evaluateTrust</span><span class="p">:(</span><span class="n">SecTrustRef</span> <span class="n">_Nonnull</span><span class="p">)</span><span class="nv">serverTrust</span>
                       <span class="nf">forHostname</span><span class="p">:(</span><span class="n">NSString</span> <span class="o">*</span><span class="n">_Nonnull</span><span class="p">)</span><span class="nv">serverHostname</span><span class="p">;</span></code></pre>
 
                         </div>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">evaluateTrust</span><span class="p">(</span><span class="n">_</span> <span class="nv">serverTrust</span><span class="p">:</span> <span class="kt">SecTrust</span><span class="p">,</span> <span class="n">forHostname</span> <span class="nv">serverHostname</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Enums/TSKTrustDecision.html">TSKTrustDecision</a></span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">func</span> <span class="nf">evaluateTrust</span><span class="p">(</span><span class="n">_</span> <span class="nv">serverTrust</span><span class="p">:</span> <span class="kt">SecTrust</span><span class="p">,</span> <span class="n">forHostname</span> <span class="nv">serverHostname</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Enums/TSKTrustDecision.html">TSKTrustDecision</a></span></code></pre>
 
                         </div>
                       </div>
@@ -397,8 +394,8 @@ didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2017 <a class="link" href="https://datatheorem.github.io" target="_blank" rel="external">Data Theorem</a>. All rights reserved. (Last updated: 2017-07-28)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2018 <a class="link" href="https://datatheorem.github.io" target="_blank" rel="external">Data Theorem</a>. All rights reserved. (Last updated: 2018-09-25)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>
