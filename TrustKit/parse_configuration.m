@@ -12,39 +12,8 @@
 #import "TSKTrustKitConfig.h"
 #import "Dependencies/domain_registry/domain_registry.h"
 #import "parse_configuration.h"
-#import "Pinning/TSKPublicKeyAlgorithm.h"
 #import <CommonCrypto/CommonDigest.h>
 #import "configuration_utils.h"
-
-
-static SecCertificateRef certificateFromPEM(NSString *pem)
-{
-    // NOTE: multi-certificate PEM is not supported since this is for individual
-    // trust anchor certificates.
-    
-    // Strip PEM header and footers. We don't support multi-certificate PEM.
-    NSMutableString *pemMutable = [pem stringByTrimmingCharactersInSet:NSCharacterSet.whitespaceAndNewlineCharacterSet].mutableCopy;
-    
-    // Strip PEM header and footer
-    [pemMutable replaceOccurrencesOfString:@"-----BEGIN CERTIFICATE-----"
-                                withString:@""
-                                   options:(NSStringCompareOptions)(NSAnchoredSearch | NSLiteralSearch)
-                                     range:NSMakeRange(0, pemMutable.length)];
-    
-    [pemMutable replaceOccurrencesOfString:@"-----END CERTIFICATE-----"
-                                withString:@""
-                                   options:(NSStringCompareOptions)(NSAnchoredSearch | NSBackwardsSearch | NSLiteralSearch)
-                                     range:NSMakeRange(0, pemMutable.length)];
-    
-    NSData *pemData = [[NSData alloc] initWithBase64EncodedString:pemMutable
-                                                          options:NSDataBase64DecodingIgnoreUnknownCharacters];
-    SecCertificateRef cert = SecCertificateCreateWithData(NULL, (CFDataRef)pemData);
-    if (!cert)
-    {
-        [NSException raise:@"TrustKit configuration invalid" format:@"Failed to parse PEM certificate"];
-    }
-    return cert;
-}
 
 
 NSDictionary *parseTrustKitConfiguration(NSDictionary *trustKitArguments)
@@ -163,9 +132,10 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *trustKitArguments)
         NSString *expirationDateStr = domainPinningPolicy[kTSKExpirationDate];
         if (expirationDateStr != nil)
         {
-            // Convert the string in the yyyy-MM-dd format into an actual date
+            // Convert the string in the yyyy-MM-dd format into an actual date in UTC
             NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-            [dateFormat setDateFormat:@"yyyy-MM-dd"];
+            dateFormat.dateFormat = @"yyyy-MM-dd";
+            dateFormat.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
             NSDate *expirationDate = [dateFormat dateFromString:expirationDateStr];
             domainFinalConfiguration[kTSKExpirationDate] = expirationDate;
         }
@@ -195,59 +165,6 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *trustKitArguments)
             // Default setting is NO
             domainFinalConfiguration[kTSKDisableDefaultReportUri] = @(NO);
         }
-        
-        // Extract the optional additionalTrustAnchors setting
-        NSArray *additionalTrustAnchors = domainPinningPolicy[kTSKAdditionalTrustAnchors];
-        if (additionalTrustAnchors)
-        {
-            CFMutableArrayRef anchorCerts = CFArrayCreateMutable(NULL, (CFIndex)additionalTrustAnchors.count, &kCFTypeArrayCallBacks);
-            NSInteger certIndex = 0; // used for logging error messages
-            for (NSString *pem in additionalTrustAnchors) {
-                SecCertificateRef cert = certificateFromPEM(pem);
-                if (cert == nil) {
-                    [NSException raise:@"TrustKit configuration invalid"
-                                format:@"Failed to parse PEM-encoded certificate at index %ld for domain %@", (long)certIndex, domainName];
-                }
-                CFArrayAppendValue(anchorCerts, cert);
-                certIndex++;
-            }
-            domainFinalConfiguration[kTSKAdditionalTrustAnchors] = [(__bridge NSMutableArray *)anchorCerts copy];
-        }
-        
-        // Extract the list of public key algorithms to support and convert them from string to the TSKPublicKeyAlgorithm type
-        NSArray<NSString *> *publicKeyAlgsStr = domainPinningPolicy[kTSKPublicKeyAlgorithms];
-        if (publicKeyAlgsStr == nil)
-        {
-            [NSException raise:@"TrustKit configuration invalid"
-                        format:@"TrustKit was initialized with an invalid value for %@ for domain %@", kTSKPublicKeyAlgorithms, domainName];
-        }
-        NSMutableArray *publicKeyAlgs = [NSMutableArray array];
-        for (NSString *algorithm in publicKeyAlgsStr)
-        {
-            if ([kTSKAlgorithmRsa2048 isEqualToString:algorithm])
-            {
-                [publicKeyAlgs addObject:@(TSKPublicKeyAlgorithmRsa2048)];
-            }
-            else if ([kTSKAlgorithmRsa4096 isEqualToString:algorithm])
-            {
-                [publicKeyAlgs addObject:@(TSKPublicKeyAlgorithmRsa4096)];
-            }
-            else if ([kTSKAlgorithmEcDsaSecp256r1 isEqualToString:algorithm])
-            {
-                [publicKeyAlgs addObject:@(TSKPublicKeyAlgorithmEcDsaSecp256r1)];
-            }
-            else if ([kTSKAlgorithmEcDsaSecp384r1 isEqualToString:algorithm])
-            {
-                [publicKeyAlgs addObject:@(TSKPublicKeyAlgorithmEcDsaSecp384r1)];
-            }
-            else
-            {
-                [NSException raise:@"TrustKit configuration invalid"
-                            format:@"TrustKit was initialized with an invalid value for %@ for domain %@", kTSKPublicKeyAlgorithms, domainName];
-            }
-        }
-        domainFinalConfiguration[kTSKPublicKeyAlgorithms] = [NSArray arrayWithArray:publicKeyAlgs];
-        
         
         // Extract and convert the report URIs if defined
         NSArray<NSString *> *reportUriList = domainPinningPolicy[kTSKReportUris];

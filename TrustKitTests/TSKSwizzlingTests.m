@@ -36,7 +36,6 @@
           @{
               @"www.datatheorem.com" : @{
                       kTSKEnforcePinning : @YES,
-                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmEcDsaSecp384r1],
                       kTSKPublicKeyHashes : @[@"58qRu/uxh4gFezqAcERupSkRYBlBAvfcw7mEjGPLnNU=", // CA key
                                               @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                               ]}}};
@@ -56,7 +55,6 @@
           @{
               @"www.datatheorem.com" : @{
                       kTSKEnforcePinning : @YES,
-                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmEcDsaSecp384r1],
                       kTSKPublicKeyHashes : @[@"58qRu/uxh4gFezqAcERupSkRYBlBAvfcw7mEjGPLnNU=", // CA key
                                               @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                               ]}}};

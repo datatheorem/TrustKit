@@ -1,7 +1,7 @@
-/* Size of kStringTable 44345 */
-/* Size of kNodeTable 3715 */
-/* Size of kLeafNodeTable 4215 */
-/* Total size 75065 bytes */
+/* Size of kStringTable 46623 */
+/* Size of kNodeTable 3904 */
+/* Size of kLeafNodeTable 4435 */
+/* Total size 78917 bytes */
 
 static const char kStringTable[] =
 "aaa\0" "aarp\0" "abarth\0" "abb\0" "abbott\0" "abbvie\0" "abc\0"
@@ -11,7 +11,7 @@ static const char kStringTable[] =
 "afamilycompany\0" "afl\0" "eastafrica\0" "dvag\0" "agakhan\0" "agency\0"
 "aisai\0" "aig\0" "daigo\0" "airbus\0" "airforce\0" "airtel\0" "akdn\0"
 "coal\0" "alfaromeo\0" "alibaba\0" "alipay\0" "allfinanz\0" "allstate\0"
-"ally\0" "alsace\0" "alstom\0" "kvam\0" "americanexpress\0" "americanfamily\0"
+"ally\0" "alsace\0" "alstom\0" "guam\0" "americanexpress\0" "americanfamily\0"
 "banamex\0" "amfam\0" "amica\0" "amsterdam\0" "analytics\0" "android\0"
 "anquan\0" "vao\0" "aol\0" "apartments\0" "fhapp\0" "apple\0" "iraq\0"
 "aquarelle\0" "far\0" "arab\0" "aramco\0" "archi\0" "army\0" "arpa\0"
@@ -29,19 +29,19 @@ static const char kStringTable[] =
 "ebiz\0" "bj\0" "black\0" "blackfriday\0" "blanco\0" "blockbuster\0"
 "serveblog\0" "bloomberg\0" "blue\0" "ibm\0" "bms\0" "bmw\0" "cbn\0"
 "bnl\0" "bnpparibas\0" "abo\0" "boats\0" "boehringer\0" "bofa\0"
-"bom\0" "bond\0" "boo\0" "book\0" "booking\0" "boots\0" "bosch\0"
-"bostik\0" "boston\0" "bot\0" "boutique\0" "xbox\0" "abr\0" "bradesco\0"
-"bridgestone\0" "broadway\0" "broker\0" "brother\0" "brussels\0"
-"cbs\0" "budapest\0" "bugatti\0" "build\0" "builders\0" "business\0"
-"buzz\0" "bv\0" "bw\0" "bz\0" "bzh\0" "aca\0" "cab\0" "cafe\0" "medical\0"
-"call\0" "calvinklein\0" "webcam\0" "mysecuritycamera\0" "at-band-camp\0"
+"bom\0" "bond\0" "boo\0" "book\0" "booking\0" "bosch\0" "bostik\0"
+"boston\0" "bot\0" "boutique\0" "xbox\0" "abr\0" "bradesco\0" "bridgestone\0"
+"broadway\0" "broker\0" "brother\0" "brussels\0" "cbs\0" "budapest\0"
+"bugatti\0" "build\0" "builders\0" "business\0" "buzz\0" "bv\0"
+"bw\0" "bz\0" "bzh\0" "aca\0" "cab\0" "cafe\0" "medical\0" "call\0"
+"calvinklein\0" "hicam\0" "mysecuritycamera\0" "at-band-camp\0"
 "cancerresearch\0" "canon\0" "capetown\0" "capital\0" "capitalone\0"
 "car\0" "caravan\0" "cards\0" "healthcare\0" "career\0" "careers\0"
 "is-into-cars\0" "cartier\0" "casa\0" "case\0" "caseih\0" "cash\0"
 "casino\0" "avocat\0" "catering\0" "catholic\0" "xn--nmesjevuemie-tcba\0"
-"cbre\0" "xn--l1acc\0" "mcd\0" "ceb\0" "artcenter\0" "ceo\0" "cern\0"
-"sncf\0" "cfa\0" "cfd\0" "tech\0" "chanel\0" "travelchannel\0" "chase\0"
-"chat\0" "cheap\0" "chintai\0" "chloe\0" "christmas\0" "chrome\0"
+"cbre\0" "xn--l1acc\0" "mycd\0" "ceb\0" "artcenter\0" "ceo\0" "cern\0"
+"sncf\0" "cfa\0" "cfd\0" "tech\0" "chanel\0" "travelchannel\0" "charity\0"
+"chase\0" "chat\0" "cheap\0" "chintai\0" "christmas\0" "chrome\0"
 "chrysler\0" "church\0" "tci\0" "cipriani\0" "circle\0" "sanfrancisco\0"
 "citadel\0" "citi\0" "citic\0" "!city\0" "cityeats\0" "duck\0" "wlocl\0"
 "claims\0" "cleaning\0" "click\0" "clinic\0" "clinique\0" "clothing\0"
@@ -61,62 +61,62 @@ static const char kStringTable[] =
 "discover\0" "dish\0" "diy\0" "dj\0" "tdk\0" "adm\0" "dnp\0" "godo\0"
 "docs\0" "is-a-doctor\0" "dodge\0" "dog\0" "doha\0" "domains\0"
 "dot\0" "download\0" "drive\0" "dtv\0" "dubai\0" "dunlop\0" "duns\0"
-"dupont\0" "durban\0" "dvr\0" "czeladz\0" "earth\0" "seat\0" "nec\0"
-"iveco\0" "edeka\0" "edu\0" "arteducation\0" "tree\0" "leg\0" "email\0"
-"emerck\0" "energy\0" "is-an-engineer\0" "engineering\0" "enterprises\0"
-"epost\0" "epson\0" "farmequipment\0" "lier\0" "ericsson\0" "terni\0"
-"neues\0" "esq\0" "realestate\0" "esurance\0" "fet\0" "etisalat\0"
-"eu\0" "eurovision\0" "eus\0" "events\0" "everbank\0" "serveexchange\0"
-"geometre-expert\0" "exposed\0" "extraspace\0" "fage\0" "fail\0"
-"fairwinds\0" "faith\0" "tuxfamily\0" "mlbfan\0" "fans\0" "statefarm\0"
-"farmers\0" "fashion\0" "fast\0" "fedex\0" "feedback\0" "ferrari\0"
-"ferrero\0" "sanofi\0" "fiat\0" "fidelity\0" "fido\0" "film\0" "final\0"
-"finance\0" "lplfinancial\0" "fire\0" "firestone\0" "firmdale\0"
-"fish\0" "fishing\0" "fit\0" "fitness\0" "fj\0" "jfk\0" "flickr\0"
-"flights\0" "flir\0" "florist\0" "flowers\0" "fly\0" "ifm\0" "ortsinfo\0"
-"foo\0" "food\0" "foodnetwork\0" "football\0" "oxford\0" "forex\0"
-"forsale\0" "forum\0" "foundation\0" "fox\0" "sfr\0" "dyndns-free\0"
-"fresenius\0" "frl\0" "frogans\0" "frontdoor\0" "frontier\0" "ftr\0"
-"fujitsu\0" "fujixerox\0" "fun\0" "fund\0" "furniture\0" "futbol\0"
-"fyi\0" "saga\0" "legal\0" "artgallery\0" "gallo\0" "gallup\0" "marugame\0"
-"is-into-games\0" "gap\0" "usgarden\0" "xn--sandnessjen-ogb\0" "gbiz\0"
-"gd\0" "gdn\0" "koge\0" "gea\0" "gent\0" "genting\0" "george\0"
-"ggf\0" "gg\0" "ggee\0" "pittsburgh\0" "nogi\0" "gift\0" "gifts\0"
-"gives\0" "giving\0" "gl\0" "glade\0" "glass\0" "withgoogle\0" "global\0"
-"globo\0" "xn--fzys8d69uvgm\0" "gmail\0" "gmo\0" "gmx\0" "bjugn\0"
-"godaddy\0" "gold\0" "goldpoint\0" "golf\0" "goo\0" "goodhands\0"
-"goodyear\0" "goog\0" "gop\0" "forgot\0" "chernigov\0" "gp\0" "gq\0"
-"agr\0" "grainger\0" "graphics\0" "gratis\0" "is-a-green\0" "gripe\0"
-"grocery\0" "stcgroup\0" "vgs\0" "gt\0" "ivgu\0" "guardian\0" "gucci\0"
-"guge\0" "guide\0" "guitars\0" "is-a-guru\0" "rzgw\0" "hair\0" "hamburg\0"
-"hangout\0" "hbo\0" "hdfc\0" "hdfcbank\0" "health\0" "help\0" "helsinki\0"
-"thruhere\0" "hermes\0" "hgtv\0" "hiphop\0" "hisamitsu\0" "hitachi\0"
-"chernihiv\0" "nhk\0" "hkt\0" "hm\0" "stjohn\0" "hockey\0" "holdings\0"
-"holiday\0" "homedepot\0" "homegoods\0" "homes\0" "homesense\0"
-"honda\0" "honeywell\0" "horse\0" "hospital\0" "nfshost\0" "flynnhosting\0"
-"hot\0" "hoteles\0" "kerryhotels\0" "hotmail\0" "mulhouse\0" "show\0"
-"ruhr\0" "hsbc\0" "recht\0" "htc\0" "sohu\0" "hughes\0" "hyatt\0"
-"hyundai\0" "icbc\0" "venice\0" "fie\0" "ieee\0" "ikano\0" "mil\0"
-"cim\0" "imamat\0" "imdb\0" "immo\0" "immobilien\0" "fin\0" "industries\0"
-"infiniti\0" "sling\0" "pink\0" "institute\0" "lifeinsurance\0"
-"insure\0" "mint\0" "intel\0" "international\0" "intuit\0" "investments\0"
-"ipiranga\0" "iq\0" "bir\0" "irish\0" "iris\0" "iselect\0" "ismaili\0"
-"gist\0" "istanbul\0" "itv\0" "iwc\0" "jaguar\0" "java\0" "jcb\0"
-"jcp\0" "fedje\0" "jeep\0" "jetzt\0" "jewelry\0" "jio\0" "jlc\0"
-"jll\0" "jm\0" "jmp\0" "jnj\0" "gujo\0" "jobs\0" "joburg\0" "jot\0"
-"joy\0" "jp\0" "jpmorgan\0" "jprs\0" "juegos\0" "juniper\0" "kaufen\0"
-"kddi\0" "wake\0" "kerrylogistics\0" "kerryproperties\0" "kfh\0"
-"kg\0" "kh\0" "ski\0" "nokia\0" "askim\0" "kinder\0" "kindle\0"
+"dupont\0" "durban\0" "camdvr\0" "czeladz\0" "earth\0" "seat\0"
+"nec\0" "iveco\0" "edeka\0" "edu\0" "arteducation\0" "tree\0" "leg\0"
+"email\0" "emerck\0" "energy\0" "is-an-engineer\0" "engineering\0"
+"enterprises\0" "epost\0" "epson\0" "farmequipment\0" "lier\0" "ericsson\0"
+"terni\0" "neues\0" "esq\0" "realestate\0" "esurance\0" "fet\0"
+"etisalat\0" "eu\0" "eurovision\0" "eus\0" "events\0" "everbank\0"
+"serveexchange\0" "geometre-expert\0" "exposed\0" "extraspace\0"
+"fage\0" "fail\0" "fairwinds\0" "faith\0" "tuxfamily\0" "mlbfan\0"
+"fans\0" "statefarm\0" "farmers\0" "fashion\0" "fast\0" "fedex\0"
+"feedback\0" "ferrari\0" "ferrero\0" "sanofi\0" "fiat\0" "fidelity\0"
+"fido\0" "film\0" "final\0" "finance\0" "lplfinancial\0" "fire\0"
+"firestone\0" "firmdale\0" "fish\0" "fishing\0" "fit\0" "fitness\0"
+"fj\0" "jfk\0" "flickr\0" "flights\0" "flir\0" "florist\0" "flowers\0"
+"fly\0" "ifm\0" "v-info\0" "foo\0" "food\0" "foodnetwork\0" "football\0"
+"oxford\0" "forex\0" "forsale\0" "forum\0" "foundation\0" "fox\0"
+"sfr\0" "ddnsfree\0" "fresenius\0" "frl\0" "frogans\0" "frontdoor\0"
+"frontier\0" "ftr\0" "fujitsu\0" "fujixerox\0" "fun\0" "fund\0"
+"furniture\0" "futbol\0" "fyi\0" "saga\0" "legal\0" "artgallery\0"
+"gallo\0" "gallup\0" "marugame\0" "is-into-games\0" "gap\0" "usgarden\0"
+"xn--sandnessjen-ogb\0" "gbiz\0" "gd\0" "gdn\0" "koge\0" "gea\0"
+"gent\0" "genting\0" "george\0" "ggf\0" "gg\0" "ggee\0" "pittsburgh\0"
+"nogi\0" "gift\0" "gifts\0" "gives\0" "giving\0" "gl\0" "glade\0"
+"glass\0" "withgoogle\0" "global\0" "globo\0" "xn--fzys8d69uvgm\0"
+"gmail\0" "gmo\0" "gmx\0" "bjugn\0" "godaddy\0" "gold\0" "goldpoint\0"
+"golf\0" "goo\0" "goodhands\0" "goodyear\0" "goog\0" "gop\0" "forgot\0"
+"chernigov\0" "gp\0" "gq\0" "agr\0" "grainger\0" "graphics\0" "gratis\0"
+"is-a-green\0" "gripe\0" "grocery\0" "stcgroup\0" "vgs\0" "gt\0"
+"ivgu\0" "guardian\0" "gucci\0" "guge\0" "guide\0" "guitars\0" "is-a-guru\0"
+"rzgw\0" "hair\0" "hamburg\0" "hangout\0" "hbo\0" "hdfc\0" "hdfcbank\0"
+"health\0" "help\0" "helsinki\0" "thruhere\0" "hermes\0" "hgtv\0"
+"hiphop\0" "hisamitsu\0" "hitachi\0" "chernihiv\0" "nhk\0" "hkt\0"
+"hm\0" "stjohn\0" "hockey\0" "holdings\0" "holiday\0" "homedepot\0"
+"homegoods\0" "homes\0" "homesense\0" "honda\0" "honeywell\0" "horse\0"
+"hospital\0" "nohost\0" "webhosting\0" "hot\0" "hoteles\0" "kerryhotels\0"
+"hotmail\0" "mulhouse\0" "show\0" "ruhr\0" "hsbc\0" "recht\0" "sohu\0"
+"hughes\0" "hyatt\0" "hyundai\0" "icbc\0" "venice\0" "fie\0" "ieee\0"
+"ikano\0" "mil\0" "cim\0" "imamat\0" "imdb\0" "immo\0" "immobilien\0"
+"fin\0" "inc\0" "industries\0" "infiniti\0" "sling\0" "pink\0" "institute\0"
+"lifeinsurance\0" "insure\0" "mint\0" "intel\0" "international\0"
+"intuit\0" "investments\0" "ipiranga\0" "iq\0" "bir\0" "irish\0"
+"iris\0" "iselect\0" "ismaili\0" "istanbul\0" "itv\0" "iwc\0" "jaguar\0"
+"java\0" "jcb\0" "jcp\0" "fedje\0" "jeep\0" "jetzt\0" "jewelry\0"
+"jio\0" "jlc\0" "jll\0" "jm\0" "jmp\0" "jnj\0" "gujo\0" "jobs\0"
+"joburg\0" "jot\0" "joy\0" "jp\0" "jpmorgan\0" "jprs\0" "juegos\0"
+"juniper\0" "kaufen\0" "kddi\0" "wake\0" "kerrylogistics\0" "kerryproperties\0"
+"kfh\0" "kg\0" "kh\0" "ski\0" "nokia\0" "askim\0" "kinder\0" "kindle\0"
 "kitchen\0" "kiwi\0" "km\0" "bokn\0" "koeln\0" "komatsu\0" "kosher\0"
 "ostrowwlkp\0" "kpmg\0" "kpn\0" "wskr\0" "krd\0" "kred\0" "kuokgroup\0"
 "kw\0" "sky\0" "kyoto\0" "kz\0" "fla\0" "lacaixa\0" "ladbrokes\0"
 "lamborghini\0" "lamer\0" "lancaster\0" "lancia\0" "lancome\0" "orland\0"
 "landrover\0" "lanxess\0" "lasalle\0" "balat\0" "latino\0" "latrobe\0"
-"wroclaw\0" "is-a-lawyer\0" "mlb\0" "plc\0" "mcdonalds\0" "lease\0"
-"leclerc\0" "lefrak\0" "lego\0" "lexus\0" "lgbt\0" "suli\0" "liaison\0"
-"lidl\0" "metlife\0" "lifestyle\0" "lighting\0" "like\0" "lilly\0"
-"limited\0" "limo\0" "lincoln\0" "linde\0" "homelink\0" "lipsy\0"
-"live\0" "living\0" "lixil\0" "elk\0" "loan\0" "loans\0" "locker\0"
+"wroclaw\0" "is-a-lawyer\0" "mlb\0" "plc\0" "lds\0" "lease\0" "leclerc\0"
+"lefrak\0" "lego\0" "lexus\0" "lgbt\0" "suli\0" "liaison\0" "lidl\0"
+"metlife\0" "lifestyle\0" "lighting\0" "like\0" "lilly\0" "limited\0"
+"limo\0" "lincoln\0" "linde\0" "homelink\0" "lipsy\0" "ddnslive\0"
+"living\0" "lixil\0" "elk\0" "llc\0" "loan\0" "loans\0" "locker\0"
 "locus\0" "loft\0" "lol\0" "london\0" "lotte\0" "lotto\0" "love\0"
 "lpl\0" "lr\0" "mls\0" "alt\0" "ltd\0" "ltda\0" "lu\0" "lundbeck\0"
 "lupin\0" "luxe\0" "luxury\0" "malselv\0" "mma\0" "macys\0" "madrid\0"
@@ -127,116 +127,118 @@ static const char kStringTable[] =
 "memorial\0" "drammen\0" "menu\0" "merckmsd\0" "xn--j1amh\0" "miami\0"
 "microsoft\0" "rimini\0" "rmit\0" "mitsubishi\0" "mk\0" "ml\0" "0emm\0"
 "pmn\0" "mobi\0" "azure-mobile\0" "mobily\0" "shimoda\0" "moe\0"
-"moi\0" "mom\0" "monash\0" "money\0" "monster\0" "montblanc\0" "mopar\0"
-"mormon\0" "mortgage\0" "moscow\0" "kumamoto\0" "motorcycles\0"
-"mov\0" "movie\0" "movistar\0" "emp\0" "mq\0" "emr\0" "from-mt\0"
-"mtn\0" "mtpc\0" "mtr\0" "oumu\0" "naturalhistorymuseum\0" "northwesternmutual\0"
-"mv\0" "sumy\0" "mz\0" "arna\0" "xn--rdy-0nab\0" "nadex\0" "nagoya\0"
-"tokoname\0" "nationwide\0" "natura\0" "oldnavy\0" "pnc\0" "etne\0"
-"exnet\0" "netbank\0" "netflix\0" "neustar\0" "new\0" "newholland\0"
-"news\0" "next\0" "nexus\0" "inf\0" "nfl\0" "cng\0" "nango\0" "dni\0"
-"nico\0" "nike\0" "nikon\0" "ninja\0" "nissan\0" "nissay\0" "ueno\0"
-"norton\0" "now\0" "nowruz\0" "nowtv\0" "bnr\0" "kanra\0" "nrw\0"
-"ntt\0" "rnu\0" "nyc\0" "linz\0" "observer\0" "off\0" "homeoffice\0"
-"okinawa\0" "olayan\0" "olayangroup\0" "ollo\0" "nom\0" "omega\0"
-"phone\0" "song\0" "onion\0" "onl\0" "barsyonline\0" "onyourside\0"
-"ooo\0" "open\0" "oracle\0" "orange\0" "sarpsborg\0" "eating-organic\0"
-"origins\0" "kosaka\0" "morotsuka\0" "ovh\0" "page\0" "pamperedchef\0"
-"panasonic\0" "panerai\0" "paris\0" "pars\0" "partners\0" "parts\0"
-"party\0" "passagens\0" "pet\0" "pf\0" "pfizer\0" "ppg\0" "ph\0"
-"pharmacy\0" "phd\0" "philips\0" "photo\0" "photography\0" "myphotos\0"
-"physio\0" "piaget\0" "servepics\0" "pictet\0" "pictures\0" "pid\0"
-"shopping\0" "pioneer\0" "pizza\0" "pk\0" "birthplace\0" "play\0"
-"playstation\0" "ptplus\0" "pm\0" "pohl\0" "poker\0" "politie\0"
-"porn\0" "from-pr\0" "pramerica\0" "praxi\0" "prime\0" "pro\0" "prod\0"
-"productions\0" "prof\0" "progressive\0" "promo\0" "property\0"
-"protection\0" "pru\0" "prudential\0" "ups\0" "pt\0" "pub\0" "pw\0"
-"pwc\0" "spy\0" "xn--bievt-0qa\0" "qpon\0" "quebec\0" "quest\0"
-"qvc\0" "racing\0" "radio\0" "raid\0" "kure\0" "stufftoread\0" "realtor\0"
-"realty\0" "recipes\0" "redstone\0" "redumbrella\0" "rehab\0" "reise\0"
-"reisen\0" "reit\0" "reliance\0" "turen\0" "space-to-rent\0" "rentals\0"
-"repair\0" "report\0" "is-a-republican\0" "rest\0" "restaurant\0"
-"review\0" "reviews\0" "rexroth\0" "zuerich\0" "richardli\0" "ricoh\0"
-"rightathome\0" "ril\0" "sondrio\0" "ditchyourip\0" "rocher\0" "rocks\0"
-"rodeo\0" "rogers\0" "room\0" "rsvp\0" "rugby\0" "run\0" "rwe\0"
-"ryukyu\0" "wsa\0" "saarland\0" "safe\0" "safety\0" "sakura\0" "salon\0"
-"samsclub\0" "samsung\0" "sandvik\0" "sandvikcoromant\0" "sap\0"
-"sapo\0" "sarl\0" "sas\0" "save\0" "saxo\0" "sb\0" "sbs\0" "psc\0"
-"sca\0" "scb\0" "schaeffler\0" "schmidt\0" "scholarships\0" "school\0"
-"schule\0" "schwarz\0" "historyofscience\0" "scjohnson\0" "scor\0"
-"scot\0" "from-sd\0" "nose\0" "cdn77-secure\0" "security\0" "seek\0"
-"sener\0" "services\0" "seven\0" "sew\0" "essex\0" "sexy\0" "xn--5su34j936bgsg\0"
-"shangrila\0" "sharp\0" "shaw\0" "shell\0" "shia\0" "shiksha\0"
-"shoes\0" "workshop\0" "shouji\0" "showtime\0" "shriram\0" "psi\0"
-"silk\0" "messina\0" "singles\0" "freesite\0" "sj\0" "msk\0" "skin\0"
-"skype\0" "qsl\0" "gsm\0" "smile\0" "asn\0" "aso\0" "soccer\0" "social\0"
-"softbank\0" "software\0" "solar\0" "solutions\0" "sony\0" "masoy\0"
-"webspace\0" "spiegel\0" "appspot\0" "spreadbetting\0" "sr\0" "srl\0"
-"srt\0" "fst\0" "stada\0" "staples\0" "starhub\0" "statebank\0"
-"statoil\0" "stc\0" "stockholm\0" "storage\0" "store\0" "stream\0"
-"studio\0" "study\0" "kusu\0" "sucks\0" "supplies\0" "supply\0"
-"support\0" "surf\0" "surgery\0" "suzuki\0" "sv\0" "swatch\0" "swiftcover\0"
+"moi\0" "mom\0" "monash\0" "money\0" "monster\0" "mopar\0" "mormon\0"
+"mortgage\0" "moscow\0" "kumamoto\0" "motorcycles\0" "mov\0" "movie\0"
+"movistar\0" "emp\0" "mq\0" "emr\0" "from-mt\0" "mtn\0" "mtr\0"
+"oumu\0" "naturalhistorymuseum\0" "northwesternmutual\0" "mv\0"
+"sumy\0" "forumz\0" "arna\0" "xn--rdy-0nab\0" "nadex\0" "nagoya\0"
+"tokoname\0" "nationwide\0" "natura\0" "oldnavy\0" "etne\0" "exnet\0"
+"netbank\0" "netflix\0" "neustar\0" "new\0" "newholland\0" "news\0"
+"next\0" "nexus\0" "inf\0" "nfl\0" "cng\0" "nango\0" "dni\0" "nico\0"
+"nike\0" "nikon\0" "ninja\0" "nissan\0" "nissay\0" "ueno\0" "norton\0"
+"now\0" "nowruz\0" "nowtv\0" "bnr\0" "kanra\0" "nrw\0" "ntt\0" "rnu\0"
+"nyc\0" "linz\0" "observer\0" "off\0" "homeoffice\0" "okinawa\0"
+"olayan\0" "olayangroup\0" "ollo\0" "nom\0" "omega\0" "phone\0"
+"song\0" "onion\0" "onl\0" "barsyonline\0" "onyourside\0" "ooo\0"
+"open\0" "oracle\0" "orange\0" "sarpsborg\0" "eating-organic\0"
+"origins\0" "kosaka\0" "morotsuka\0" "ovh\0" "page\0" "panasonic\0"
+"panerai\0" "paris\0" "pars\0" "partners\0" "parts\0" "party\0"
+"passagens\0" "pet\0" "pf\0" "pfizer\0" "ppg\0" "ph\0" "pharmacy\0"
+"phd\0" "philips\0" "photo\0" "photography\0" "myphotos\0" "physio\0"
+"piaget\0" "servepics\0" "pictet\0" "pictures\0" "pid\0" "shopping\0"
+"pioneer\0" "pizza\0" "pk\0" "birthplace\0" "play\0" "playstation\0"
+"ptplus\0" "lmpm\0" "pnc\0" "pohl\0" "poker\0" "politie\0" "porn\0"
+"from-pr\0" "pramerica\0" "praxi\0" "prime\0" "pro\0" "prod\0" "productions\0"
+"prof\0" "progressive\0" "promo\0" "property\0" "protection\0" "pru\0"
+"prudential\0" "ups\0" "pt\0" "pub\0" "pw\0" "pwc\0" "spy\0" "xn--bievt-0qa\0"
+"qpon\0" "quebec\0" "quest\0" "qvc\0" "racing\0" "radio\0" "raid\0"
+"kure\0" "stufftoread\0" "realtor\0" "realty\0" "recipes\0" "redstone\0"
+"redumbrella\0" "rehab\0" "reise\0" "reisen\0" "reit\0" "reliance\0"
+"turen\0" "space-to-rent\0" "rentals\0" "repair\0" "report\0" "is-a-republican\0"
+"rest\0" "restaurant\0" "review\0" "reviews\0" "rexroth\0" "zuerich\0"
+"richardli\0" "ricoh\0" "rightathome\0" "ril\0" "sondrio\0" "loseyourip\0"
+"rocher\0" "rocks\0" "rodeo\0" "rogers\0" "room\0" "rsvp\0" "gru\0"
+"rugby\0" "run\0" "rwe\0" "ryukyu\0" "wsa\0" "saarland\0" "safe\0"
+"safety\0" "sakura\0" "salon\0" "samsclub\0" "samsung\0" "sandvik\0"
+"sandvikcoromant\0" "sap\0" "sapo\0" "sarl\0" "sas\0" "save\0" "saxo\0"
+"bsb\0" "sbs\0" "psc\0" "sca\0" "scb\0" "schaeffler\0" "schmidt\0"
+"scholarships\0" "school\0" "schule\0" "schwarz\0" "historyofscience\0"
+"scjohnson\0" "scor\0" "scot\0" "from-sd\0" "nose\0" "cdn77-secure\0"
+"security\0" "seek\0" "sener\0" "services\0" "seven\0" "sew\0" "essex\0"
+"sexy\0" "xn--5su34j936bgsg\0" "shangrila\0" "sharp\0" "shaw\0"
+"shell\0" "shia\0" "shiksha\0" "shoes\0" "workshop\0" "shouji\0"
+"showtime\0" "shriram\0" "psi\0" "silk\0" "messina\0" "singles\0"
+"freesite\0" "sj\0" "msk\0" "skin\0" "skype\0" "qsl\0" "gsm\0" "smile\0"
+"asn\0" "aso\0" "soccer\0" "social\0" "softbank\0" "software\0"
+"solar\0" "solutions\0" "sony\0" "masoy\0" "webspace\0" "spiegel\0"
+"transport\0" "appspot\0" "spreadbetting\0" "usr\0" "srl\0" "srt\0"
+"fst\0" "stada\0" "staples\0" "starhub\0" "statebank\0" "statoil\0"
+"stc\0" "stockholm\0" "storage\0" "store\0" "stream\0" "studio\0"
+"study\0" "kusu\0" "sucks\0" "supplies\0" "supply\0" "support\0"
+"surf\0" "surgery\0" "suzuki\0" "sv\0" "swatch\0" "swiftcover\0"
 "swiss\0" "mypsx\0" "sydney\0" "symantec\0" "systems\0" "pisz\0"
 "tab\0" "taipei\0" "elasticbeanstalk\0" "taobao\0" "target\0" "tatamotors\0"
 "tatar\0" "tattoo\0" "taxi\0" "etc\0" "steam\0" "technology\0" "hotel\0"
 "telecity\0" "telefonica\0" "temasek\0" "tennis\0" "teva\0" "wtf\0"
-"tg\0" "ath\0" "thd\0" "theater\0" "theatre\0" "tiaa\0" "tickets\0"
+"stg\0" "ath\0" "thd\0" "theater\0" "theatre\0" "tiaa\0" "tickets\0"
 "tienda\0" "tiffany\0" "tips\0" "tires\0" "trentinostirol\0" "tj\0"
 "tjmaxx\0" "tjx\0" "tk\0" "tkmaxx\0" "intl\0" "atm\0" "tmall\0"
-"mito\0" "tokyo\0" "tools\0" "top\0" "toray\0" "toshiba\0" "total\0"
-"tours\0" "toyota\0" "toys\0" "ntr\0" "trade\0" "trading\0" "training\0"
-"travel\0" "travelers\0" "travelersinsurance\0" "trust\0" "trv\0"
-"withyoutube\0" "tui\0" "tunes\0" "tushu\0" "tvs\0" "tw\0" "myfritz\0"
-"padua\0" "ubs\0" "uconnect\0" "pug\0" "jeonbuk\0" "unicom\0" "university\0"
-"kazuno\0" "uol\0" "jus\0" "vacations\0" "vana\0" "vanguard\0" "vegas\0"
-"ventures\0" "verisign\0" "versicherung\0" "skiptvet\0" "fvg\0"
-"vi\0" "viajes\0" "video\0" "vig\0" "viking\0" "villas\0" "granvin\0"
-"vip\0" "virgin\0" "visa\0" "television\0" "vista\0" "vistaprint\0"
-"viva\0" "vivo\0" "vlaanderen\0" "koebenhavn\0" "vodka\0" "volkswagen\0"
-"volvo\0" "vote\0" "voting\0" "voto\0" "voyage\0" "vu\0" "vuelos\0"
-"wales\0" "walmart\0" "walter\0" "wang\0" "wanggou\0" "warman\0"
-"watches\0" "weather\0" "weatherchannel\0" "weber\0" "s3-website\0"
-"wed\0" "wedding\0" "weibo\0" "weir\0" "wf\0" "whoswho\0" "wien\0"
-"dyndns-wiki\0" "williamhill\0" "win\0" "windows\0" "wine\0" "winners\0"
-"wolterskluwer\0" "woodside\0" "works\0" "world\0" "wow\0" "wtc\0"
-"xfinity\0" "xihuan\0" "xin\0" "xn--11b4c3d\0" "xn--1ck2e1b\0" "xn--1qqw23a\0"
+"mito\0" "tokyo\0" "linkitools\0" "freedesktop\0" "toray\0" "toshiba\0"
+"total\0" "tours\0" "toyota\0" "toys\0" "ntr\0" "trade\0" "trading\0"
+"training\0" "travel\0" "travelers\0" "travelersinsurance\0" "trust\0"
+"trv\0" "withyoutube\0" "tui\0" "tunes\0" "tushu\0" "tvs\0" "tw\0"
+"myfritz\0" "padua\0" "ubs\0" "uconnect\0" "pug\0" "jeonbuk\0" "unicom\0"
+"university\0" "kazuno\0" "uol\0" "jus\0" "ooguy\0" "vacations\0"
+"vana\0" "vanguard\0" "vegas\0" "ventures\0" "verisign\0" "versicherung\0"
+"skiptvet\0" "fvg\0" "vi\0" "viajes\0" "video\0" "vig\0" "viking\0"
+"villas\0" "granvin\0" "vip\0" "virgin\0" "visa\0" "television\0"
+"revista\0" "vistaprint\0" "viva\0" "vivo\0" "vlaanderen\0" "koebenhavn\0"
+"vodka\0" "volkswagen\0" "volvo\0" "vote\0" "voting\0" "voto\0"
+"voyage\0" "vu\0" "vuelos\0" "wales\0" "walmart\0" "walter\0" "wang\0"
+"wanggou\0" "warman\0" "watches\0" "weather\0" "weatherchannel\0"
+"webcam\0" "weber\0" "s3-website\0" "wed\0" "wedding\0" "weibo\0"
+"weir\0" "wf\0" "whoswho\0" "wien\0" "dyndns-wiki\0" "williamhill\0"
+"win\0" "windows\0" "wine\0" "winners\0" "wolterskluwer\0" "woodside\0"
+"works\0" "world\0" "wow\0" "wtc\0" "xfinity\0" "xihuan\0" "xin\0"
+"xn--11b4c3d\0" "xn--1ck2e1b\0" "xn--1qqw23a\0" "xn--2scrj9c\0"
 "xn--30rr7y\0" "xn--3bst00m\0" "xn--3ds443g\0" "xn--3e0b707e\0"
-"xn--3oq18vl8pn36a\0" "xn--3pxu8k\0" "xn--42c2d9a\0" "xn--45brj9c\0"
-"xn--45q11c\0" "xn--4gbrim\0" "xn--54b7fta0cc\0" "xn--55qw42g\0"
-"xn--55qx5d\0" "xn--5tzm5g\0" "xn--6frz82g\0" "xn--6qq986b3xl\0"
+"xn--3hcrj9c\0" "xn--3oq18vl8pn36a\0" "xn--3pxu8k\0" "xn--42c2d9a\0"
+"xn--45br5cyl\0" "xn--45brj9c\0" "xn--45q11c\0" "xn--4gbrim\0" "xn--54b7fta0cc\0"
+"xn--55qw42g\0" "xn--55qx5d\0" "xn--5tzm5g\0" "xn--6frz82g\0" "xn--6qq986b3xl\0"
 "xn--80adxhks\0" "xn--80ao21a\0" "xn--80aqecdr1a\0" "xn--80asehdb\0"
-"xn--80aswg\0" "xn--8y0a063a\0" "xn--90a3ac\0" "xn--90ais\0" "xn--9dbq2a\0"
-"xn--9et52u\0" "xn--9krt00a\0" "xn--b4w605ferd\0" "xn--bck1b9a5dre4c\0"
-"xn--c1avg\0" "xn--c2br7g\0" "xn--cck2b3b\0" "xn--cg4bki\0" "xn--clchc0ea0b2g2a9gcd\0"
-"xn--czr694b\0" "xn--czrs0t\0" "xn--czru2d\0" "xn--d1acj3b\0" "xn--d1alf\0"
-"xn--e1a4c\0" "xn--eckvdtc9d\0" "xn--efvy88h\0" "xn--estv75g\0"
-"xn--fct429k\0" "xn--fhbei\0" "xn--fiq228c5hs\0" "xn--fiq64b\0"
-"xn--fiqs8s\0" "xn--fiqz9s\0" "xn--fjq720a\0" "xn--flw351e\0" "xn--fpcrj9c3d\0"
-"xn--fzc2c9e2c\0" "xn--g2xx48c\0" "xn--gckr3f0f\0" "xn--gecrj9c\0"
-"xn--gk3at1e\0" "xn--h2brj9c\0" "xn--hxt814e\0" "xn--i1b6b1a6a2e\0"
-"xn--imr513n\0" "xn--io0a7i\0" "xn--j1aef\0" "xn--j6w193g\0" "xn--jlq61u9w7b\0"
+"xn--80aswg\0" "xn--8y0a063a\0" "xn--90a3ac\0" "xn--90ae\0" "xn--90ais\0"
+"xn--9dbq2a\0" "xn--9et52u\0" "xn--9krt00a\0" "xn--b4w605ferd\0"
+"xn--bck1b9a5dre4c\0" "xn--c1avg\0" "xn--c2br7g\0" "xn--cck2b3b\0"
+"xn--cg4bki\0" "xn--clchc0ea0b2g2a9gcd\0" "xn--czr694b\0" "xn--czrs0t\0"
+"xn--czru2d\0" "xn--d1acj3b\0" "xn--d1alf\0" "xn--e1a4c\0" "xn--eckvdtc9d\0"
+"xn--efvy88h\0" "xn--estv75g\0" "xn--fct429k\0" "xn--fhbei\0" "xn--fiq228c5hs\0"
+"xn--fiq64b\0" "xn--fiqs8s\0" "xn--fiqz9s\0" "xn--fjq720a\0" "xn--flw351e\0"
+"xn--fpcrj9c3d\0" "xn--fzc2c9e2c\0" "xn--g2xx48c\0" "xn--gckr3f0f\0"
+"xn--gecrj9c\0" "xn--gk3at1e\0" "xn--h2breg3eve\0" "xn--h2brj9c\0"
+"xn--h2brj9c8c\0" "xn--hxt814e\0" "xn--i1b6b1a6a2e\0" "xn--imr513n\0"
+"xn--io0a7i\0" "xn--j1aef\0" "xn--j6w193g\0" "xn--jlq61u9w7b\0"
 "xn--jvr189m\0" "xn--kcrx77d1x4a\0" "xn--kprw13d\0" "xn--kpry57d\0"
 "xn--kpu716f\0" "xn--kput3i\0" "xn--lgbbat1ad8j\0" "xn--mgb2ddes\0"
 "xn--mgba3a3ejt\0" "xn--mgba3a4f16a\0" "xn--mgba3a4fra\0" "xn--mgba7c0bbn0a\0"
 "xn--mgbaakc7dvf\0" "xn--mgbaam7a8h\0" "xn--mgbai9a5eva00b\0" "xn--mgbai9azgqp6j\0"
-"xn--mgbayh7gpa\0" "xn--mgbb9fbpob\0" "xn--mgbbh1a71e\0" "xn--mgbc0a9azcg\0"
-"xn--mgbca7dzdo\0" "xn--mgberp4a5d4a87g\0" "xn--mgberp4a5d4ar\0"
-"xn--mgbi4ecexp\0" "xn--mgbpl2fh\0" "xn--mgbqly7c0a67fbc\0" "xn--mgbqly7cvafr\0"
-"xn--mgbt3dhd\0" "xn--mgbtf8fl\0" "xn--mgbtx2b\0" "xn--mgbx4cd0ab\0"
-"xn--mix082f\0" "xn--mix891f\0" "xn--mk1bu44c\0" "xn--mxtq1m\0"
-"xn--ngbc5azd\0" "xn--ngbe9e0a\0" "xn--ngbrx\0" "xn--nnx388a\0"
+"xn--mgbayh7gpa\0" "xn--mgbb9fbpob\0" "xn--mgbbh1a\0" "xn--mgbbh1a71e\0"
+"xn--mgbc0a9azcg\0" "xn--mgbca7dzdo\0" "xn--mgberp4a5d4a87g\0" "xn--mgberp4a5d4ar\0"
+"xn--mgbgu82a\0" "xn--mgbi4ecexp\0" "xn--mgbpl2fh\0" "xn--mgbqly7c0a67fbc\0"
+"xn--mgbqly7cvafr\0" "xn--mgbt3dhd\0" "xn--mgbtf8fl\0" "xn--mgbtx2b\0"
+"xn--mgbx4cd0ab\0" "xn--mix082f\0" "xn--mix891f\0" "xn--mk1bu44c\0"
+"xn--mxtq1m\0" "xn--ngbc5azd\0" "xn--ngbe9e0a\0" "xn--ngbrx\0" "xn--nnx388a\0"
 "xn--node\0" "xn--nqv7f\0" "xn--nqv7fs00ema\0" "xn--nyqy26a\0" "xn--o3cw4h\0"
-"xn--ogbpf8fl\0" "xn--p1acf\0" "xn--p1ai\0" "xn--pbt977c\0" "xn--pgbs0dh\0"
-"xn--pssy2u\0" "xn--q9jyb4c\0" "xn--qxam\0" "xn--rhqv96g\0" "xn--rovu88b\0"
-"xn--s9brj9c\0" "xn--ses554g\0" "xn--t60b56a\0" "xn--tckwe\0" "xn--tiq49xqyj\0"
-"xn--unup4y\0" "xn--vermgensberater-ctb\0" "xn--vermgensberatung-pwb\0"
-"xn--vhquv\0" "xn--vuq861b\0" "xn--w4r85el8fhu5dnra\0" "xn--w4rs40l\0"
-"xn--wgbh1c\0" "xn--wgbl6a\0" "xn--xhq521b\0" "xn--xkc2al3hye2a\0"
+"xn--ogbpf8fl\0" "xn--otu796d\0" "xn--p1acf\0" "xn--p1ai\0" "xn--pbt977c\0"
+"xn--pgbs0dh\0" "xn--pssy2u\0" "xn--q9jyb4c\0" "xn--qxam\0" "xn--rhqv96g\0"
+"xn--rovu88b\0" "xn--rvc1e0am3e\0" "xn--s9brj9c\0" "xn--ses554g\0"
+"xn--t60b56a\0" "xn--tckwe\0" "xn--tiq49xqyj\0" "xn--unup4y\0" "xn--vermgensberater-ctb\0"
+"xn--vermgensberatung-pwb\0" "xn--vhquv\0" "xn--vuq861b\0" "xn--w4r85el8fhu5dnra\0"
+"xn--w4rs40l\0" "xn--wgbh1c\0" "xn--wgbl6a\0" "xn--xhq521b\0" "xn--xkc2al3hye2a\0"
 "xn--xkc2dl3a5ee0h\0" "xn--y9a3aq\0" "xn--yfro4i67o\0" "xn--ygbi2ammx\0"
 "xn--zfr164b\0" "xperia\0" "xxx\0" "xyz\0" "yachts\0" "yahoo\0"
 "yamaxun\0" "yandex\0" "ye\0" "yodobashi\0" "teaches-yoga\0" "yokohama\0"
 "yt\0" "yun\0" "koza\0" "zappos\0" "zara\0" "zero\0" "zip\0" "zippo\0"
-"zm\0" "podzone\0" "zw\0" "blogspot\0" "accident-investigation\0"
+"zm\0" "podzone\0" "zw\0" "official\0" "blogspot\0" "accident-investigation\0"
 "accident-prevention\0" "aerobatic\0" "aerodrome\0" "agents\0" "air-surveillance\0"
 "air-traffic-control\0" "aircraft\0" "airline\0" "airport\0" "airtraffic\0"
 "ambulance\0" "amusement\0" "passenger-association\0" "ballooning\0"
@@ -249,36 +251,52 @@ static const char kStringTable[] =
 "parachuting\0" "paragliding\0" "pilot\0" "production\0" "recreation\0"
 "repbody\0" "rotorcraft\0" "scientist\0" "skydiving\0" "is-a-student\0"
 "trader\0" "is-a-personaltrainer\0" "workinggroup\0" "fed\0" "gv\0"
-"spb\0" "gob\0" "musica\0" "karikatur\0" "e164\0" "in-addr\0" "ip6\0"
-"heguri\0" "urn\0" "cloudns\0" "12hp\0" "2ix\0" "4lima\0" "futurehosting\0"
-"futuremailing\0" "lima-city\0" "jor\0" "priv\0" "szex\0" "kunden\0"
-"*\0" "conf\0" "nsw\0" "cnt\0" "wuoz\0" "qld\0" "uvic\0" "sowa\0"
-"klepp\0" "transurl\0" "2000\0" "eu-1\0" "g12\0" "s3\0" "e4\0" "5\0"
-"1337\0" "8\0" "9\0" "hb\0" "barsy\0" "qc\0" "sf\0" "qh\0" "yk\0"
-"jl\0" "cq\0" "rr\0" "js\0" "gx\0" "dscloud\0" "dyndns\0" "for-better\0"
-"here-for-more\0" "for-some\0" "for-the\0" "mmafan\0" "myftp\0"
-"no-ip\0" "selfip\0" "webhop\0" "campobasso\0" "barreau\0" "gouv\0"
-"adv\0" "arq\0" "bato\0" "belem\0" "cri\0" "def\0" "eng\0" "esp\0"
-"rieti\0" "flog\0" "floripa\0" "fnd\0" "fot\0" "imb\0" "ind\0" "jampa\0"
-"lel\0" "mus\0" "not\0" "xn--rdal-poa\0" "disrec\0" "recife\0" "slg\0"
-"srv\0" "teo\0" "tmp\0" "trd\0" "vix\0" "vlog\0" "zlg\0" "lecce\0"
-"idf\0" "togo\0" "api\0" "storj\0" "gc\0" "winb\0" "rns\0" "toon\0"
-"fantasyleague\0" "ftpaccess\0" "game-server\0" "scrapping\0" "twmail\0"
-"gotdns\0" "square7\0" "presse\0" "xn--aroport-bya\0" "!www\0" "magentosite\0"
-"myfusion\0" "sensiosite\0" "statics\0" "trafficplex\0" "vapor\0"
-"utah\0" "gz\0" "naha\0" "marche\0" "ohi\0" "from-nm\0" "manx\0"
-"xj\0" "xn--od0alg\0" "xz\0" "stryn\0" "zj\0" "cn-north-1\0" "compute\0"
-"elb\0" "firm\0" "nodum\0" "on-web\0" "1kapp\0" "3utilities\0" "xn--8pvr4u\0"
-"alpha-myqnapcloud\0" "appchizi\0" "applinzi\0" "betainabox\0" "blogdns\0"
-"blogsyte\0" "bloxcms\0" "bounty-full\0" "bplaced\0" "cechire\0"
-"ciscofreak\0" "cloudcontrolapp\0" "cloudcontrolled\0" "codespot\0"
-"damnserver\0" "ddnsking\0" "dev-myqnapcloud\0" "dnsalias\0" "dnsdojo\0"
-"dnsiskinky\0" "doesntexist\0" "dontexist\0" "doomdns\0" "drayddns\0"
-"dreamhosters\0" "dsmynas\0" "dyn-o-saur\0" "dynalias\0" "dyndns-at-home\0"
-"dyndns-at-work\0" "dyndns-blog\0" "dyndns-home\0" "dyndns-ip\0"
-"dyndns-mail\0" "dyndns-office\0" "dyndns-pics\0" "dyndns-remote\0"
-"dyndns-server\0" "dyndns-web\0" "dyndns-work\0" "dynns\0" "est-a-la-masion\0"
-"est-le-patron\0" "est-mon-blogueur\0" "evennode\0" "familyds\0"
+"cog\0" "spb\0" "hasura\0" "gob\0" "musica\0" "karikatur\0" "e164\0"
+"in-addr\0" "ip6\0" "heguri\0" "urn\0" "cloudns\0" "12hp\0" "2ix\0"
+"4lima\0" "futurecms\0" "futurehosting\0" "futuremailing\0" "lima-city\0"
+"jor\0" "ortsinfo\0" "priv\0" "*\0" "szex\0" "kunden\0" "conf\0"
+"nsw\0" "cnt\0" "foz\0" "qld\0" "uvic\0" "sowa\0" "klepp\0" "transurl\0"
+"2000\0" "eu-1\0" "u2\0" "s3\0" "e4\0" "5\0" "1337\0" "2038\0" "9\0"
+"barsy\0" "qc\0" "sf\0" "qh\0" "yk\0" "jl\0" "cq\0" "rr\0" "js\0"
+"gx\0" "dscloud\0" "dyndns\0" "for-better\0" "here-for-more\0" "for-some\0"
+"for-the\0" "mmafan\0" "myftp\0" "no-ip\0" "selfip\0" "webhop\0"
+"campobasso\0" "barreau\0" "gouv\0" "academia\0" "agro\0" "bolivia\0"
+"ciencia\0" "cooperativa\0" "democracia\0" "deporte\0" "ecologia\0"
+"economia\0" "empresa\0" "indigena\0" "industria\0" "medicina\0"
+"movimiento\0" "natural\0" "nombre\0" "noticias\0" "patria\0" "plurinacional\0"
+"politica\0" "profesional\0" "pueblo\0" "salud\0" "tecnologia\0"
+"tksat\0" "transporte\0" "on-web\0" "9guacu\0" "adv\0" "aju\0" "anani\0"
+"aparecida\0" "arq\0" "bato\0" "barueri\0" "belem\0" "bhz\0" "boavista\0"
+"campinagrande\0" "campinas\0" "caxias\0" "contagem\0" "cri\0" "cuiaba\0"
+"curitiba\0" "def\0" "eng\0" "esp\0" "rieti\0" "feira\0" "flog\0"
+"floripa\0" "fnd\0" "fortal\0" "fot\0" "g12\0" "goiania\0" "imb\0"
+"ind\0" "jab\0" "jampa\0" "jdf\0" "joinville\0" "lel\0" "londrina\0"
+"macapa\0" "maceio\0" "manaus\0" "maringa\0" "morena\0" "mus\0"
+"natal\0" "niteroi\0" "not\0" "osasco\0" "palmas\0" "xn--rdal-poa\0"
+"pvh\0" "disrec\0" "recife\0" "ribeirao\0" "riobranco\0" "riopreto\0"
+"salvador\0" "sampa\0" "santamaria\0" "santoandre\0" "saobernardo\0"
+"saogonca\0" "sjc\0" "slg\0" "slz\0" "sorocaba\0" "srv\0" "teo\0"
+"tmp\0" "trd\0" "vix\0" "vlog\0" "zlg\0" "lecce\0" "togo\0" "mypi\0"
+"storj\0" "nym\0" "gc\0" "winb\0" "rns\0" "toon\0" "fantasyleague\0"
+"ftpaccess\0" "game-server\0" "scrapping\0" "twmail\0" "ddnsking\0"
+"gotdns\0" "linkyard-cloud\0" "square7\0" "presse\0" "xn--aroport-bya\0"
+"!www\0" "linkyard\0" "magentosite\0" "sensiosite\0" "statics\0"
+"trafficplex\0" "vapor\0" "utah\0" "gz\0" "naha\0" "xn--valle-d-aoste-ehb\0"
+"marche\0" "ohi\0" "from-nm\0" "manx\0" "xj\0" "xn--od0alg\0" "xz\0"
+"stryn\0" "zj\0" "cn-north-1\0" "compute\0" "elb\0" "firm\0" "n4t\0"
+"nodum\0" "otap\0" "001www\0" "1kapp\0" "3utilities\0" "xn--8pvr4u\0"
+"alpha-myqnapcloud\0" "appchizi\0" "applinzi\0" "barsycenter\0"
+"betainabox\0" "bitballoon\0" "blogdns\0" "blogsyte\0" "bloxcms\0"
+"bounty-full\0" "bplaced\0" "cechire\0" "ciscofreak\0" "cloudcontrolapp\0"
+"cloudcontrolled\0" "codespot\0" "damnserver\0" "dattolocal\0" "dattorelay\0"
+"dattoweb\0" "ddnsgeek\0" "dev-myqnapcloud\0" "ditchyourip\0" "dnsalias\0"
+"dnsdojo\0" "dnsiskinky\0" "doesntexist\0" "dontexist\0" "doomdns\0"
+"drayddns\0" "dreamhosters\0" "dsmynas\0" "dyn-o-saur\0" "dynalias\0"
+"dyndns-at-home\0" "dyndns-at-work\0" "dyndns-blog\0" "dyndns-free\0"
+"dyndns-home\0" "dyndns-ip\0" "dyndns-mail\0" "dyndns-office\0"
+"dyndns-pics\0" "dyndns-remote\0" "dyndns-server\0" "dyndns-web\0"
+"dyndns-work\0" "dynns\0" "est-a-la-masion\0" "est-le-patron\0"
+"est-mon-blogueur\0" "evennode\0" "familyds\0" "fastvps-server\0"
 "fbsbx\0" "firebaseapp\0" "firewall-gateway\0" "flynnhub\0" "freebox-os\0"
 "freeboxos\0" "from-ak\0" "from-al\0" "from-ar\0" "from-ca\0" "from-ct\0"
 "from-dc\0" "from-de\0" "from-fl\0" "from-ga\0" "from-hi\0" "from-ia\0"
@@ -287,85 +305,91 @@ static const char kStringTable[] =
 "from-nd\0" "from-ne\0" "from-nh\0" "from-nj\0" "from-nv\0" "from-oh\0"
 "from-ok\0" "from-or\0" "from-pa\0" "from-ri\0" "from-sc\0" "from-tn\0"
 "from-tx\0" "from-ut\0" "from-va\0" "from-vt\0" "from-wa\0" "from-wi\0"
-"from-wv\0" "from-wy\0" "geekgalaxy\0" "getmyip\0" "githubcloud\0"
-"githubcloudusercontent\0" "githubusercontent\0" "googleapis\0"
-"googlecode\0" "gotpantheon\0" "health-carereform\0" "herokuapp\0"
-"herokussl\0" "hobby-site\0" "homelinux\0" "homesecuritymac\0" "homesecuritypc\0"
-"homeunix\0" "iamallama\0" "is-a-anarchist\0" "is-a-blogger\0" "is-a-bookkeeper\0"
-"is-a-bulls-fan\0" "is-a-caterer\0" "is-a-chef\0" "is-a-conservative\0"
-"is-a-cpa\0" "is-a-cubicle-slave\0" "is-a-designer\0" "is-a-financialadvisor\0"
-"is-a-geek\0" "is-a-hard-worker\0" "is-a-hunter\0" "is-a-landscaper\0"
-"is-a-liberal\0" "is-a-libertarian\0" "is-a-llama\0" "is-a-musician\0"
-"is-a-nascarfan\0" "is-a-nurse\0" "is-a-painter\0" "is-a-photographer\0"
-"is-a-player\0" "is-a-rockstar\0" "is-a-socialist\0" "is-a-teacher\0"
-"is-a-techie\0" "is-a-therapist\0" "is-an-actress\0" "is-an-anarchist\0"
-"is-an-artist\0" "is-an-entertainer\0" "is-certified\0" "is-gone\0"
-"is-into-anime\0" "is-into-cartoons\0" "is-leet\0" "is-not-certified\0"
-"is-slick\0" "is-uberleet\0" "is-with-theband\0" "isa-geek\0" "isa-hockeynut\0"
-"issmarterthanyou\0" "jdevcloud\0" "joyent\0" "jpn\0" "likes-pie\0"
-"likescandy\0" "logoip\0" "meteorapp\0" "myasustor\0" "mydrobo\0"
-"myshopblocks\0" "mytuleap\0" "myvnc\0" "neat-url\0" "net-freaks\0"
-"on-aptible\0" "onthewifi\0" "operaunite\0" "outsystemscloud\0"
-"ownprovider\0" "pagefrontapp\0" "pagespeedmobilizer\0" "pgfog\0"
-"point2this\0" "prgmr\0" "publishproxy\0" "qa2\0" "quicksytes\0"
-"quipelements\0" "rackmaze\0" "remotewd\0" "saves-the-whales\0"
-"securitytactics\0" "sells-for-less\0" "sells-for-u\0" "servebbs\0"
-"servecounterstrike\0" "serveftp\0" "servegame\0" "servehalflife\0"
-"servehttp\0" "servehumour\0" "serveirc\0" "servemp3\0" "servep2p\0"
-"servequake\0" "servesarcasm\0" "simple-url\0" "vipsinaapp\0" "townnews-staging\0"
+"from-wv\0" "from-wy\0" "geekgalaxy\0" "getmyip\0" "giize\0" "githubusercontent\0"
+"gleeze\0" "googleapis\0" "googlecode\0" "gotpantheon\0" "health-carereform\0"
+"herokuapp\0" "herokussl\0" "hobby-site\0" "homelinux\0" "homesecuritymac\0"
+"homesecuritypc\0" "homeunix\0" "iamallama\0" "is-a-anarchist\0"
+"is-a-blogger\0" "is-a-bookkeeper\0" "is-a-bulls-fan\0" "is-a-caterer\0"
+"is-a-chef\0" "is-a-conservative\0" "is-a-cpa\0" "is-a-cubicle-slave\0"
+"is-a-designer\0" "is-a-financialadvisor\0" "is-a-geek\0" "is-a-hard-worker\0"
+"is-a-hunter\0" "is-a-landscaper\0" "is-a-liberal\0" "is-a-libertarian\0"
+"is-a-llama\0" "is-a-musician\0" "is-a-nascarfan\0" "is-a-nurse\0"
+"is-a-painter\0" "is-a-photographer\0" "is-a-player\0" "is-a-rockstar\0"
+"is-a-socialist\0" "is-a-teacher\0" "is-a-techie\0" "is-a-therapist\0"
+"is-an-actress\0" "is-an-anarchist\0" "is-an-artist\0" "is-an-entertainer\0"
+"is-certified\0" "is-gone\0" "is-into-anime\0" "is-into-cartoons\0"
+"is-leet\0" "is-not-certified\0" "is-slick\0" "is-uberleet\0" "is-with-theband\0"
+"isa-geek\0" "isa-hockeynut\0" "issmarterthanyou\0" "jdevcloud\0"
+"joyent\0" "jpn\0" "kozow\0" "likes-pie\0" "likescandy\0" "logoip\0"
+"meteorapp\0" "miniserver\0" "myasustor\0" "mydatto\0" "mydrobo\0"
+"myiphost\0" "myravendb\0" "myshopblocks\0" "mytuleap\0" "myvnc\0"
+"neat-url\0" "net-freaks\0" "netlify\0" "nfshost\0" "on-aptible\0"
+"onthewifi\0" "operaunite\0" "outsystemscloud\0" "ownprovider\0"
+"pagefrontapp\0" "pagespeedmobilizer\0" "pgfog\0" "pixolino\0" "point2this\0"
+"prgmr\0" "publishproxy\0" "qa2\0" "quicksytes\0" "quipelements\0"
+"rackmaze\0" "remotewd\0" "saves-the-whales\0" "scrysec\0" "securitytactics\0"
+"sells-for-less\0" "sells-for-u\0" "servebbs\0" "servecounterstrike\0"
+"serveftp\0" "servegame\0" "servehalflife\0" "servehttp\0" "servehumour\0"
+"serveirc\0" "servemp3\0" "servep2p\0" "servequake\0" "servesarcasm\0"
+"simple-url\0" "vipsinaapp\0" "temp-dns\0" "theworkpc\0" "townnews-staging\0"
 "unusualperson\0" "workisboring\0" "wpdevcloud\0" "writesthisblog\0"
-"yolasite\0" "s3-ap-northeast-1\0" "s3-ap-northeast-2\0" "s3-ap-south-1\0"
-"s3-ap-southeast-1\0" "s3-ap-southeast-2\0" "s3-ca-central-1\0"
+"xnbay\0" "yolasite\0" "s3-ap-northeast-1\0" "s3-ap-northeast-2\0"
+"s3-ap-south-1\0" "s3-ap-southeast-1\0" "s3-ap-southeast-2\0" "s3-ca-central-1\0"
 "compute-1\0" "s3-eu-central-1\0" "s3-eu-west-1\0" "s3-eu-west-2\0"
-"s3-external-1\0" "s3-fips-us-gov-west-1\0" "s3-sa-east-1\0" "s3-us-east-2\0"
-"s3-us-gov-west-1\0" "s3-us-west-1\0" "s3-us-west-2\0" "s3-website-ap-northeast-1\0"
-"s3-website-ap-southeast-1\0" "s3-website-ap-southeast-2\0" "s3-website-eu-west-1\0"
-"s3-website-sa-east-1\0" "s3-website-us-east-1\0" "s3-website-us-west-1\0"
-"s3-website-us-west-2\0" "dualstack\0" "alpha\0" "beta\0" "eu-2\0"
-"eu-3\0" "us-1\0" "us-2\0" "us-3\0" "apps\0" "cns\0" "xen\0" "ekloges\0"
-"parliament\0" "metacentrum\0" "realm\0" "custom\0" "cosidns\0"
-"dd-dns\0" "ddnss\0" "dnshome\0" "dnsupdater\0" "dray-dns\0" "draydns\0"
-"dyn-ip24\0" "dyn-vpn\0" "dynamisches-dns\0" "dyndns1\0" "dynvpn\0"
-"fuettertdasnetz\0" "git-repos\0" "home-webserver\0" "internet-dns\0"
-"isteingeek\0" "istmein\0" "keymachine\0" "l-o-g-i-n\0" "lcube-server\0"
-"lebtimnetz\0" "leitungsen\0" "mein-vigor\0" "my-gateway\0" "my-router\0"
-"my-vigor\0" "my-wan\0" "myhome-server\0" "spdns\0" "svn-repos\0"
-"syno-ds\0" "synology-diskstation\0" "synology-ds\0" "taifun-dns\0"
-"traeumtgerade\0" "dedyn\0" "reg\0" "sld\0" "nerdpol\0" "k12\0"
-"aip\0" "lib\0" "pri\0" "riik\0" "eun\0" "nieruchomosci\0" "mycd\0"
-"wellbeingzone\0" "is-a-linux-user\0" "ybo\0" "hordaland\0" "cody\0"
-"niki\0" "aeroport\0" "assedic\0" "avoues\0" "chambagri\0" "chirurgiens-dentistes\0"
-"chirurgiens-dentistes-en-france\0" "experts-comptables\0" "fbx-os\0"
-"fbxos\0" "greta\0" "huissier-justice\0" "medecin\0" "notaires\0"
-"pharmacien\0" "prd\0" "veterinaire\0" "pvt\0" "cya\0" "mod\0" "idv\0"
-"inc\0" "xn--ciqpn\0" "xn--gmq050i\0" "xn--gmqw5a\0" "xn--lcvr32d\0"
-"xn--mk0axi\0" "xn--od0aq3b\0" "xn--tn0ag\0" "xn--uc0atv\0" "xn--uc0ay4a\0"
-"xn--wcvs22d\0" "xn--zf0avx\0" "cloudaccess\0" "opencraft\0" "from\0"
-"perso\0" "rel\0" "agrar\0" "bolt\0" "erotica\0" "erotika\0" "ingatlan\0"
-"jogasz\0" "konyvelo\0" "lakas\0" "reklam\0" "transport\0" "tozsde\0"
-"utazas\0" "odesa\0" "muni\0" "bergen\0" "barrel-of-knowledge\0"
+"s3-eu-west-3\0" "s3-external-1\0" "s3-fips-us-gov-west-1\0" "s3-sa-east-1\0"
+"s3-us-east-2\0" "s3-us-gov-west-1\0" "s3-us-west-1\0" "s3-us-west-2\0"
+"s3-website-ap-northeast-1\0" "s3-website-ap-southeast-1\0" "s3-website-ap-southeast-2\0"
+"s3-website-eu-west-1\0" "s3-website-sa-east-1\0" "s3-website-us-east-1\0"
+"s3-website-us-west-1\0" "s3-website-us-west-2\0" "dualstack\0"
+"alpha\0" "beta\0" "ap-northeast-3\0" "eu-2\0" "eu-3\0" "eu-4\0"
+"us-1\0" "us-2\0" "us-3\0" "us-4\0" "cleverapps\0" "cns\0" "xen\0"
+"u2-local\0" "ekloges\0" "parliament\0" "metacentrum\0" "muni\0"
+"realm\0" "custom\0" "flt\0" "cosidns\0" "dd-dns\0" "ddnss\0" "dnshome\0"
+"dnsupdater\0" "dray-dns\0" "draydns\0" "dyn-ip24\0" "dyn-vpn\0"
+"dynamisches-dns\0" "dyndns1\0" "dynvpn\0" "fuettertdasnetz\0" "git-repos\0"
+"home-webserver\0" "internet-dns\0" "isteingeek\0" "istmein\0" "keymachine\0"
+"l-o-g-i-n\0" "lcube-server\0" "lebtimnetz\0" "leitungsen\0" "mein-iserv\0"
+"mein-vigor\0" "my-gateway\0" "my-router\0" "my-vigor\0" "my-wan\0"
+"myhome-server\0" "spdns\0" "speedpartner\0" "svn-repos\0" "syno-ds\0"
+"synology-diskstation\0" "synology-ds\0" "taifun-dns\0" "test-iserv\0"
+"traeumtgerade\0" "uberspace\0" "virtual-user\0" "virtualuser\0"
+"dedyn\0" "customer\0" "fastpanel\0" "reg\0" "sld\0" "nerdpol\0"
+"k12\0" "aip\0" "lib\0" "pri\0" "riik\0" "eun\0" "nieruchomosci\0"
+"wellbeingzone\0" "ybo\0" "hordaland\0" "cody\0" "niki\0" "aeroport\0"
+"assedic\0" "avoues\0" "chambagri\0" "chirurgiens-dentistes\0" "chirurgiens-dentistes-en-france\0"
+"experts-comptables\0" "fbx-os\0" "fbxos\0" "greta\0" "huissier-justice\0"
+"medecin\0" "notaires\0" "pharmacien\0" "prd\0" "veterinaire\0"
+"cnpy\0" "pvt\0" "cya\0" "mod\0" "idv\0" "xn--ciqpn\0" "xn--gmq050i\0"
+"xn--gmqw5a\0" "xn--lcvr32d\0" "xn--mk0axi\0" "xn--od0aq3b\0" "xn--tn0ag\0"
+"xn--uc0atv\0" "xn--uc0ay4a\0" "xn--wcvs22d\0" "xn--zf0avx\0" "cloudaccess\0"
+"half\0" "opencraft\0" "from\0" "perso\0" "rel\0" "agrar\0" "bolt\0"
+"erotica\0" "erotika\0" "ingatlan\0" "jogasz\0" "konyvelo\0" "lakas\0"
+"reklam\0" "tozsde\0" "utazas\0" "odesa\0" "idf\0" "bergen\0" "barrel-of-knowledge\0"
 "barrell-of-knowledge\0" "dvrcam\0" "dynamic-dns\0" "for-our\0"
-"groks-the\0" "groks-this\0" "knowsitall\0" "nsupdate\0" "backplaneapp\0"
-"boxfuse\0" "browsersafetymark\0" "definima\0" "drud\0" "enonic\0"
-"github\0" "gitlab\0" "hasura-app\0" "hzc\0" "lair\0" "ngrok\0"
-"nid\0" "pantheonsite\0" "protonet\0" "sandcats\0" "shiftedit\0"
-"spacekit\0" "stolos\0" "thingdust\0" "vaporcloud\0" "wedeploy\0"
-"customer\0" "testing\0" "cust\0" "cupcake\0" "abruzzo\0" "agrigento\0"
+"groks-the\0" "groks-this\0" "knowsitall\0" "mayfirst\0" "nsupdate\0"
+"azurecontainer\0" "backplaneapp\0" "boxfuse\0" "browsersafetymark\0"
+"definima\0" "drud\0" "enonic\0" "github\0" "gitlab\0" "hasura-app\0"
+"hzc\0" "lair\0" "ngrok\0" "nid\0" "nodeart\0" "pantheonsite\0"
+"protonet\0" "resindevice\0" "resinstaging\0" "s5y\0" "sandcats\0"
+"shiftedit\0" "spacekit\0" "stolos\0" "thingdust\0" "utwente\0"
+"vaporcloud\0" "wedeploy\0" "stage\0" "devices\0" "testing\0" "cust\0"
+"cupcake\0" "16-b\0" "32-b\0" "64-b\0" "abruzzo\0" "agrigento\0"
 "alessandria\0" "trentinoalto-adige\0" "trentinoaltoadige\0" "esan\0"
 "ancona\0" "andria-barletta-trani\0" "andria-trani-barletta\0" "andriabarlettatrani\0"
 "andriatranibarletta\0" "valdaosta\0" "aosta-valley\0" "aostavalley\0"
 "valleeaoste\0" "laquila\0" "arezzo\0" "ascoli-piceno\0" "ascolipiceno\0"
-"asti\0" "av\0" "avellino\0" "balsan\0" "nabari\0" "barletta-trani-andria\0"
-"barlettatraniandria\0" "basilicata\0" "belluno\0" "benevento\0"
-"bergamo\0" "biella\0" "publ\0" "bologna\0" "bolzano\0" "bozen\0"
-"brescia\0" "brindisi\0" "cagliari\0" "reggiocalabria\0" "caltanissetta\0"
-"campania\0" "campidano-medio\0" "campidanomedio\0" "carbonia-iglesias\0"
-"carboniaiglesias\0" "carrara-massa\0" "carraramassa\0" "caserta\0"
-"catania\0" "catanzaro\0" "cesena-forli\0" "cesenaforli\0" "chieti\0"
-"como\0" "cosenza\0" "cremona\0" "crotone\0" "acct\0" "cuneo\0"
-"dell-ogliastra\0" "dellogliastra\0" "emilia-romagna\0" "emiliaromagna\0"
-"ravenna\0" "fermo\0" "ferrara\0" "fg\0" "firenze\0" "florence\0"
-"foggia\0" "forli-cesena\0" "forlicesena\0" "friuli-v-giulia\0"
+"asti\0" "av\0" "avellino\0" "balsan\0" "balsan-sudtirol\0" "balsan-suedtirol\0"
+"nabari\0" "barletta-trani-andria\0" "barlettatraniandria\0" "basilicata\0"
+"belluno\0" "benevento\0" "bergamo\0" "biella\0" "publ\0" "bologna\0"
+"bolzano\0" "bolzano-altoadige\0" "bozen\0" "bozen-sudtirol\0" "bozen-suedtirol\0"
+"brescia\0" "brindisi\0" "bulsan\0" "bulsan-sudtirol\0" "bulsan-suedtirol\0"
+"cagliari\0" "reggiocalabria\0" "caltanissetta\0" "campania\0" "campidano-medio\0"
+"campidanomedio\0" "carbonia-iglesias\0" "carboniaiglesias\0" "carrara-massa\0"
+"carraramassa\0" "caserta\0" "catania\0" "catanzaro\0" "cesena-forli\0"
+"cesenaforli\0" "chieti\0" "como\0" "cosenza\0" "cremona\0" "crotone\0"
+"acct\0" "cuneo\0" "dell-ogliastra\0" "dellogliastra\0" "emilia-romagna\0"
+"emiliaromagna\0" "ravenna\0" "fermo\0" "ferrara\0" "fg\0" "firenze\0"
+"florence\0" "foggia\0" "forli-cesena\0" "forlicesena\0" "friuli-v-giulia\0"
 "friuli-ve-giulia\0" "friuli-vegiulia\0" "friuli-venezia-giulia\0"
 "friuli-veneziagiulia\0" "friuli-vgiulia\0" "friuliv-giulia\0" "friulive-giulia\0"
 "friulivegiulia\0" "friulivenezia-giulia\0" "friuliveneziagiulia\0"
@@ -386,75 +410,83 @@ static const char kStringTable[] =
 "reggio-calabria\0" "reggio-emilia\0" "reggioemilia\0" "elburg\0"
 "saroma\0" "rovigo\0" "salerno\0" "sar\0" "sardegna\0" "sardinia\0"
 "sassari\0" "savona\0" "music\0" "sicilia\0" "sicily\0" "siena\0"
-"siracusa\0" "moss\0" "trentinosuedtirol\0" "kota\0" "vantaa\0"
-"taranto\0" "tempio-olbia\0" "tempioolbia\0" "teramo\0" "torino\0"
-"toscana\0" "trani-andria-barletta\0" "trani-barletta-andria\0"
-"traniandriabarletta\0" "tranibarlettaandria\0" "trapani\0" "trentino\0"
-"trentino-a-adige\0" "trentino-aadige\0" "trentino-alto-adige\0"
-"trentino-altoadige\0" "trentino-s-tirol\0" "trentino-stirol\0"
-"trentino-sud-tirol\0" "trentino-sudtirol\0" "trentino-sued-tirol\0"
-"trentino-suedtirol\0" "trentinoa-adige\0" "trentinoaadige\0" "trentinos-tirol\0"
-"trentinosud-tirol\0" "trentinosudtirol\0" "trentinosued-tirol\0"
-"trento\0" "treviso\0" "trieste\0" "its\0" "turin\0" "tuscany\0"
-"udine\0" "umb\0" "umbria\0" "urbino-pesaro\0" "urbinopesaro\0"
-"val-d-aosta\0" "val-daosta\0" "vald-aosta\0" "valle-aosta\0" "valle-d-aosta\0"
+"siracusa\0" "moss\0" "kota\0" "vantaa\0" "taranto\0" "tempio-olbia\0"
+"tempioolbia\0" "teramo\0" "torino\0" "toscana\0" "trani-andria-barletta\0"
+"trani-barletta-andria\0" "traniandriabarletta\0" "tranibarlettaandria\0"
+"trapani\0" "trentin-sud-tirol\0" "trentin-sudtirol\0" "trentin-sued-tirol\0"
+"trentin-suedtirol\0" "trentino\0" "trentino-a-adige\0" "trentino-aadige\0"
+"trentino-alto-adige\0" "trentino-altoadige\0" "trentino-s-tirol\0"
+"trentino-stirol\0" "trentino-sud-tirol\0" "trentino-sudtirol\0"
+"trentino-sued-tirol\0" "trentino-suedtirol\0" "trentinoa-adige\0"
+"trentinoaadige\0" "trentinos-tirol\0" "trentinosud-tirol\0" "trentinosudtirol\0"
+"trentinosued-tirol\0" "trentinosuedtirol\0" "trentinsud-tirol\0"
+"trentinsudtirol\0" "trentinsued-tirol\0" "trentinsuedtirol\0" "trento\0"
+"treviso\0" "trieste\0" "its\0" "turin\0" "tuscany\0" "udine\0"
+"umb\0" "umbria\0" "urbino-pesaro\0" "urbinopesaro\0" "val-d-aosta\0"
+"val-daosta\0" "vald-aosta\0" "valle-aosta\0" "valle-d-aosta\0"
 "valle-daosta\0" "valleaosta\0" "valled-aosta\0" "valledaosta\0"
-"vallee-aoste\0" "varese\0" "vb\0" "vda\0" "veneto\0" "venezia\0"
-"verbania\0" "vercelli\0" "verona\0" "vibo-valentia\0" "vibovalentia\0"
-"vicenza\0" "viterbo\0" "vv\0" "yokkaichi\0" "kawakita\0" "aomori\0"
-"yokaichiba\0" "ehime\0" "fukui\0" "fukuoka\0" "kisofukushima\0"
-"gifu\0" "gunma\0" "kitahiroshima\0" "hokkaido\0" "hyogo\0" "ibaraki\0"
-"nishikawa\0" "iwate\0" "nakagawa\0" "kagoshima\0" "kanagawa\0"
-"kawasaki\0" "kitakyushu\0" "kochi\0" "namie\0" "miyagi\0" "miyazaki\0"
-"kawachinagano\0" "nagasaki\0" "niigata\0" "yoita\0" "okayama\0"
-"saitama\0" "sapporo\0" "satsumasendai\0" "shiga\0" "shimane\0"
-"shizuoka\0" "tochigi\0" "tokushima\0" "tottori\0" "motoyama\0"
-"wakayama\0" "xn--0trq7p7nn\0" "xn--1ctwo\0" "xn--1lqs03n\0" "xn--1lqs71d\0"
-"xn--2m4a15e\0" "xn--32vp30h\0" "xn--4it168d\0" "xn--4it797k\0"
-"xn--4pvxs\0" "xn--5js045d\0" "xn--5rtp49c\0" "xn--5rtq34k\0" "xn--6btw5a\0"
-"xn--6orx2r\0" "xn--7t0a264c\0" "xn--8ltr62k\0" "xn--c3s14m\0" "xn--d5qv7z876c\0"
-"xn--djrs72d6uy\0" "xn--djty4k\0" "xn--efvn9s\0" "xn--ehqz56n\0"
-"xn--elqq16h\0" "xn--f6qx53a\0" "xn--k7yn95e\0" "xn--kbrq7o\0" "xn--klt787d\0"
-"xn--kltp7d\0" "xn--kltx9a\0" "xn--klty5x\0" "xn--mkru45i\0" "xn--nit225k\0"
-"xn--ntso0iqx3a\0" "xn--ntsq17g\0" "xn--pssu33l\0" "xn--qqqt11m\0"
-"xn--rht27z\0" "xn--rht3d\0" "xn--rht61e\0" "xn--rny31h\0" "xn--tor131o\0"
-"xn--uist22h\0" "xn--uisz3g\0" "xn--uuwu58a\0" "xn--vgu402c\0" "xn--zbx025d\0"
-"yamagata\0" "yamaguchi\0" "yamanashi\0" "zama\0" "sanjo\0" "asuke\0"
-"chiryu\0" "chita\0" "fuso\0" "gamagori\0" "handa\0" "hazu\0" "hekinan\0"
-"higashiura\0" "ichinomiya\0" "inazawa\0" "inuyama\0" "isshiki\0"
-"iwakura\0" "kanie\0" "kariya\0" "kasugai\0" "kira\0" "kiyosu\0"
-"komaki\0" "konan\0" "mihama\0" "higashisumiyoshi\0" "nishio\0"
-"nisshin\0" "motobu\0" "oguchi\0" "oharu\0" "okazaki\0" "owariasahi\0"
-"oseto\0" "shikatsu\0" "shinshiro\0" "shitara\0" "tahara\0" "takahama\0"
-"tobishima\0" "toei\0" "tokai\0" "toyoake\0" "toyohashi\0" "toyokawa\0"
-"toyone\0" "komatsushima\0" "yatomi\0" "daisen\0" "fujisato\0" "gojome\0"
-"hachirogata\0" "happou\0" "higashinaruse\0" "yurihonjo\0" "honjyo\0"
-"aikawa\0" "kamikoani\0" "kamioka\0" "katagami\0" "kitaakita\0"
-"kyowa\0" "tomisato\0" "minamitane\0" "moriyoshi\0" "nikaho\0" "noshiro\0"
-"koga\0" "nogata\0" "semboku\0" "yokote\0" "gonohe\0" "hachinohe\0"
-"hashikami\0" "hiranai\0" "hirosaki\0" "itayanagi\0" "kuroishi\0"
-"misawa\0" "mutsu\0" "nakadomari\0" "noheji\0" "oirase\0" "owani\0"
-"rokunohe\0" "sannohe\0" "shichinohe\0" "shingo\0" "takko\0" "towada\0"
-"tsugaru\0" "tsuruta\0" "abiko\0" "chonan\0" "chosei\0" "choshi\0"
-"kibichuo\0" "funabashi\0" "futtsu\0" "hanamigawa\0" "ichihara\0"
-"ichikawa\0" "inzai\0" "kamagaya\0" "kamogawa\0" "kashiwa\0" "takatori\0"
-"nachikatsuura\0" "kimitsu\0" "kisarazu\0" "kozaki\0" "kujukuri\0"
-"kyonan\0" "matsudo\0" "midori\0" "minamiboso\0" "mobara\0" "mutsuzawa\0"
-"nagara\0" "nagareyama\0" "narashino\0" "narita\0" "noda\0" "oamishirasato\0"
-"omigawa\0" "onjuku\0" "kurotaki\0" "shimofusa\0" "shirako\0" "shiroi\0"
-"shisui\0" "sodegaura\0" "sosa\0" "itako\0" "tateyama\0" "togane\0"
-"tohnosho\0" "urayasu\0" "yachimata\0" "yachiyo\0" "yokoshibahikari\0"
-"yotsukaido\0" "kainan\0" "shonai\0" "namikata\0" "imabari\0" "seiyo\0"
-"osakikamijima\0" "kihoku\0" "kumakogen\0" "masaki\0" "matsuno\0"
-"higashimatsuyama\0" "niihama\0" "uozu\0" "saijo\0" "shikokuchuo\0"
-"otobe\0" "fujikawaguchiko\0" "uwajima\0" "yawatahama\0" "minamiechizen\0"
-"eiheiji\0" "ikeda\0" "katsuyama\0" "obama\0" "tono\0" "sabae\0"
-"sakai\0" "tsuruga\0" "wakasa\0" "ashiya\0" "buzen\0" "chikugo\0"
-"chikuho\0" "chikujo\0" "chikushino\0" "chikuzen\0" "dazaifu\0"
-"fukuchi\0" "hakata\0" "higashi\0" "hirokawa\0" "hisayama\0" "iizuka\0"
-"inatsuki\0" "kasuga\0" "kasuya\0" "kawara\0" "keisen\0" "kurate\0"
-"kurogi\0" "higashikurume\0" "asaminami\0" "miyako\0" "kumiyama\0"
-"miyawaka\0" "mizumaki\0" "munakata\0" "nakama\0" "seranishi\0"
+"vallee-aoste\0" "vallee-d-aoste\0" "valleedaoste\0" "varese\0"
+"xn--trentin-sdtirol-7vb\0" "vda\0" "veneto\0" "venezia\0" "verbania\0"
+"vercelli\0" "verona\0" "vibo-valentia\0" "vibovalentia\0" "vicenza\0"
+"viterbo\0" "vv\0" "xn--balsan-sdtirol-nsb\0" "xn--bozen-sdtirol-2ob\0"
+"xn--bulsan-sdtirol-nsb\0" "xn--cesena-forl-mcb\0" "xn--cesenaforl-i8a\0"
+"xn--forl-cesena-fcb\0" "xn--forlcesena-c8a\0" "xn--sdtirol-n2a\0"
+"xn--trentin-sd-tirol-rzb\0" "xn--trentino-sd-tirol-c3b\0" "xn--trentino-sdtirol-szb\0"
+"xn--trentinosd-tirol-rzb\0" "xn--trentinosdtirol-7vb\0" "xn--trentinsd-tirol-6vb\0"
+"xn--trentinsdtirol-nsb\0" "xn--valle-aoste-ebb\0" "xn--valleaoste-e7a\0"
+"xn--valledaoste-ebb\0" "yokkaichi\0" "kawakita\0" "aomori\0" "yokaichiba\0"
+"ehime\0" "fukui\0" "fukuoka\0" "kisofukushima\0" "gifu\0" "gunma\0"
+"kitahiroshima\0" "hokkaido\0" "hyogo\0" "ibaraki\0" "nishikawa\0"
+"iwate\0" "nakagawa\0" "kagoshima\0" "kanagawa\0" "kawasaki\0" "kitakyushu\0"
+"kochi\0" "namie\0" "miyagi\0" "miyazaki\0" "kawachinagano\0" "nagasaki\0"
+"niigata\0" "yoita\0" "okayama\0" "saitama\0" "sapporo\0" "satsumasendai\0"
+"shiga\0" "shimane\0" "shizuoka\0" "tochigi\0" "tokushima\0" "tottori\0"
+"motoyama\0" "wakayama\0" "xn--0trq7p7nn\0" "xn--1ctwo\0" "xn--1lqs03n\0"
+"xn--1lqs71d\0" "xn--2m4a15e\0" "xn--32vp30h\0" "xn--4it168d\0"
+"xn--4it797k\0" "xn--4pvxs\0" "xn--5js045d\0" "xn--5rtp49c\0" "xn--5rtq34k\0"
+"xn--6btw5a\0" "xn--6orx2r\0" "xn--7t0a264c\0" "xn--8ltr62k\0" "xn--c3s14m\0"
+"xn--d5qv7z876c\0" "xn--djrs72d6uy\0" "xn--djty4k\0" "xn--efvn9s\0"
+"xn--ehqz56n\0" "xn--elqq16h\0" "xn--f6qx53a\0" "xn--k7yn95e\0"
+"xn--kbrq7o\0" "xn--klt787d\0" "xn--kltp7d\0" "xn--kltx9a\0" "xn--klty5x\0"
+"xn--mkru45i\0" "xn--nit225k\0" "xn--ntso0iqx3a\0" "xn--ntsq17g\0"
+"xn--pssu33l\0" "xn--qqqt11m\0" "xn--rht27z\0" "xn--rht3d\0" "xn--rht61e\0"
+"xn--rny31h\0" "xn--tor131o\0" "xn--uist22h\0" "xn--uisz3g\0" "xn--uuwu58a\0"
+"xn--vgu402c\0" "xn--zbx025d\0" "yamagata\0" "yamaguchi\0" "yamanashi\0"
+"zama\0" "sanjo\0" "asuke\0" "chiryu\0" "chita\0" "fuso\0" "gamagori\0"
+"handa\0" "hazu\0" "hekinan\0" "higashiura\0" "ichinomiya\0" "inazawa\0"
+"inuyama\0" "isshiki\0" "iwakura\0" "kanie\0" "kariya\0" "kasugai\0"
+"kira\0" "kiyosu\0" "komaki\0" "konan\0" "mihama\0" "higashisumiyoshi\0"
+"nishio\0" "nisshin\0" "motobu\0" "oguchi\0" "oharu\0" "okazaki\0"
+"owariasahi\0" "oseto\0" "shikatsu\0" "shinshiro\0" "shitara\0"
+"tahara\0" "takahama\0" "tobishima\0" "toei\0" "tokai\0" "toyoake\0"
+"toyohashi\0" "toyokawa\0" "toyone\0" "komatsushima\0" "yatomi\0"
+"daisen\0" "fujisato\0" "gojome\0" "hachirogata\0" "happou\0" "higashinaruse\0"
+"yurihonjo\0" "honjyo\0" "aikawa\0" "kamikoani\0" "kamioka\0" "katagami\0"
+"kitaakita\0" "kyowa\0" "tomisato\0" "minamitane\0" "moriyoshi\0"
+"nikaho\0" "noshiro\0" "koga\0" "nogata\0" "semboku\0" "yokote\0"
+"gonohe\0" "hachinohe\0" "hashikami\0" "hiranai\0" "hirosaki\0"
+"itayanagi\0" "kuroishi\0" "misawa\0" "mutsu\0" "nakadomari\0" "noheji\0"
+"oirase\0" "owani\0" "rokunohe\0" "sannohe\0" "shichinohe\0" "shingo\0"
+"takko\0" "towada\0" "tsugaru\0" "tsuruta\0" "abiko\0" "chonan\0"
+"chosei\0" "choshi\0" "kibichuo\0" "funabashi\0" "futtsu\0" "hanamigawa\0"
+"ichihara\0" "ichikawa\0" "inzai\0" "kamagaya\0" "kamogawa\0" "kashiwa\0"
+"takatori\0" "nachikatsuura\0" "kimitsu\0" "kisarazu\0" "kozaki\0"
+"kujukuri\0" "kyonan\0" "matsudo\0" "midori\0" "minamiboso\0" "mobara\0"
+"mutsuzawa\0" "nagara\0" "nagareyama\0" "narashino\0" "narita\0"
+"noda\0" "oamishirasato\0" "omigawa\0" "onjuku\0" "kurotaki\0" "shimofusa\0"
+"shirako\0" "shiroi\0" "shisui\0" "sodegaura\0" "sosa\0" "itako\0"
+"tateyama\0" "togane\0" "tohnosho\0" "urayasu\0" "yachimata\0" "yachiyo\0"
+"yokoshibahikari\0" "yotsukaido\0" "kainan\0" "shonai\0" "namikata\0"
+"imabari\0" "seiyo\0" "osakikamijima\0" "kihoku\0" "kumakogen\0"
+"masaki\0" "matsuno\0" "higashimatsuyama\0" "niihama\0" "uozu\0"
+"saijo\0" "shikokuchuo\0" "otobe\0" "fujikawaguchiko\0" "uwajima\0"
+"yawatahama\0" "minamiechizen\0" "eiheiji\0" "ikeda\0" "katsuyama\0"
+"obama\0" "tono\0" "sabae\0" "sakai\0" "tsuruga\0" "wakasa\0" "ashiya\0"
+"buzen\0" "chikugo\0" "chikuho\0" "chikujo\0" "chikushino\0" "chikuzen\0"
+"dazaifu\0" "fukuchi\0" "hakata\0" "higashi\0" "hirokawa\0" "hisayama\0"
+"iizuka\0" "inatsuki\0" "kasuga\0" "kasuya\0" "kawara\0" "keisen\0"
+"kurate\0" "kurogi\0" "higashikurume\0" "asaminami\0" "miyako\0"
+"kumiyama\0" "miyawaka\0" "mizumaki\0" "munakata\0" "nakama\0" "seranishi\0"
 "ogori\0" "okagaki\0" "toki\0" "omuta\0" "onga\0" "miyakonojo\0"
 "koto\0" "saigawa\0" "sasaguri\0" "shingu\0" "shinyoshitomi\0" "soeda\0"
 "matsue\0" "tachiarai\0" "kitagawa\0" "kitakata\0" "toho\0" "toyotsu\0"
@@ -636,35 +668,36 @@ static const char kStringTable[] =
 "yamanakako\0" "pharmaciens\0" "rep\0" "hitra\0" "busan\0" "chungbuk\0"
 "chungnam\0" "daegu\0" "daejeon\0" "gangwon\0" "gwangju\0" "gyeongbuk\0"
 "gyeonggi\0" "gyeongnam\0" "fhs\0" "incheon\0" "jeju\0" "jeonnam\0"
-"seoul\0" "ulsan\0" "static\0" "azurewebsites\0" "cyon\0" "mypep\0"
-"assn\0" "grp\0" "soc\0" "brasilia\0" "c66\0" "daplie\0" "dnsfor\0"
-"filegear\0" "hopto\0" "i234\0" "loginto\0" "myds\0" "noip\0" "synology\0"
-"yombo\0" "localhost\0" "agriculture\0" "airguard\0" "alabama\0"
-"alaska\0" "amber\0" "nativeamerican\0" "americana\0" "americanantiques\0"
-"americanart\0" "brand\0" "annefrank\0" "anthro\0" "anthropology\0"
-"usantiques\0" "aquarium\0" "arboretum\0" "archaeological\0" "archaeology\0"
-"architecture\0" "artdeco\0" "artsandcrafts\0" "asmatart\0" "assassination\0"
-"assisi\0" "astronomy\0" "atlanta\0" "austin\0" "australia\0" "automotive\0"
-"axis\0" "badajoz\0" "eisenbahn\0" "baltimore\0" "basel\0" "baths\0"
-"bauern\0" "beauxarts\0" "beeldengeluid\0" "bellevue\0" "bergbau\0"
-"berkeley\0" "bern\0" "bilbao\0" "bill\0" "birdart\0" "bonn\0" "botanical\0"
-"botanicalgarden\0" "botanicgarden\0" "botany\0" "brandywinevalley\0"
-"brasil\0" "bristol\0" "british\0" "britishcolumbia\0" "broadcast\0"
-"brunel\0" "brussel\0" "bruxelles\0" "building\0" "burghof\0" "bushey\0"
-"cadaques\0" "california\0" "cambridge\0" "canada\0" "capebreton\0"
-"carrier\0" "cartoonart\0" "casadelamoneda\0" "castle\0" "castres\0"
-"celtic\0" "chattanooga\0" "cheltenham\0" "chesapeakebay\0" "chicago\0"
-"children\0" "childrens\0" "childrensgarden\0" "chiropractic\0"
-"chocolate\0" "christiansburg\0" "cincinnati\0" "cinema\0" "circus\0"
-"civilisation\0" "civilization\0" "civilwar\0" "clinton\0" "watchandclock\0"
-"coastaldefence\0" "coldwar\0" "collection\0" "colonialwilliamsburg\0"
-"coloradoplateau\0" "columbus\0" "communication\0" "posts-and-telecommunications\0"
-"computerhistory\0" "contemporary\0" "contemporaryart\0" "convent\0"
-"copenhagen\0" "corporation\0" "corvette\0" "costume\0" "uscountryestate\0"
-"county\0" "cranbrook\0" "cultural\0" "culturalcenter\0" "usculture\0"
-"cyber\0" "salvadordali\0" "dallas\0" "database\0" "usdecorativearts\0"
-"stateofdelaware\0" "delmenhorst\0" "denmark\0" "detroit\0" "dinosaur\0"
-"discovery\0" "dolls\0" "donostia\0" "durham\0" "eastcoast\0" "educational\0"
+"seoul\0" "static\0" "azurewebsites\0" "cyon\0" "mypep\0" "assn\0"
+"grp\0" "soc\0" "brasilia\0" "c66\0" "daplie\0" "myddns\0" "dnsfor\0"
+"filegear\0" "hopto\0" "i234\0" "loginto\0" "myds\0" "noip\0" "soundcast\0"
+"synology\0" "tcp4\0" "yombo\0" "localhost\0" "agriculture\0" "airguard\0"
+"alabama\0" "alaska\0" "amber\0" "nativeamerican\0" "americana\0"
+"americanantiques\0" "americanart\0" "brand\0" "annefrank\0" "anthro\0"
+"anthropology\0" "usantiques\0" "aquarium\0" "arboretum\0" "archaeological\0"
+"archaeology\0" "architecture\0" "artdeco\0" "artsandcrafts\0" "asmatart\0"
+"assassination\0" "assisi\0" "astronomy\0" "atlanta\0" "austin\0"
+"australia\0" "automotive\0" "axis\0" "badajoz\0" "eisenbahn\0"
+"baltimore\0" "basel\0" "baths\0" "bauern\0" "beauxarts\0" "beeldengeluid\0"
+"bellevue\0" "bergbau\0" "berkeley\0" "bern\0" "bilbao\0" "bill\0"
+"birdart\0" "bonn\0" "botanical\0" "botanicalgarden\0" "botanicgarden\0"
+"botany\0" "brandywinevalley\0" "brasil\0" "bristol\0" "british\0"
+"britishcolumbia\0" "broadcast\0" "brunel\0" "brussel\0" "bruxelles\0"
+"building\0" "burghof\0" "bushey\0" "cadaques\0" "california\0"
+"cambridge\0" "canada\0" "capebreton\0" "carrier\0" "cartoonart\0"
+"casadelamoneda\0" "castle\0" "castres\0" "celtic\0" "chattanooga\0"
+"cheltenham\0" "chesapeakebay\0" "chicago\0" "children\0" "childrens\0"
+"childrensgarden\0" "chiropractic\0" "chocolate\0" "christiansburg\0"
+"cincinnati\0" "cinema\0" "circus\0" "civilisation\0" "civilization\0"
+"civilwar\0" "clinton\0" "watchandclock\0" "coastaldefence\0" "coldwar\0"
+"collection\0" "colonialwilliamsburg\0" "coloradoplateau\0" "columbus\0"
+"communication\0" "posts-and-telecommunications\0" "computerhistory\0"
+"contemporary\0" "contemporaryart\0" "convent\0" "copenhagen\0"
+"corporation\0" "corvette\0" "costume\0" "uscountryestate\0" "county\0"
+"cranbrook\0" "cultural\0" "culturalcenter\0" "usculture\0" "cyber\0"
+"salvadordali\0" "dallas\0" "database\0" "usdecorativearts\0" "stateofdelaware\0"
+"delmenhorst\0" "denmark\0" "detroit\0" "dinosaur\0" "discovery\0"
+"dolls\0" "donostia\0" "durham\0" "eastcoast\0" "educational\0"
 "egyptian\0" "elvendrell\0" "embroidery\0" "encyclopedic\0" "england\0"
 "entomology\0" "environment\0" "environmentalconservation\0" "epilepsy\0"
 "ethnology\0" "exeter\0" "exhibition\0" "farmstead\0" "field\0"
@@ -718,17 +751,20 @@ static const char kStringTable[] =
 "watch-and-clock\0" "western\0" "westfalen\0" "whaling\0" "wildlife\0"
 "xn--9dbhblg6di\0" "xn--comunicaes-v6a2o\0" "xn--correios-e-telecomunicaes-ghc29a\0"
 "xn--h1aegh\0" "xn--lns-qla\0" "yorkshire\0" "yosemite\0" "youth\0"
-"zoological\0" "zoology\0" "bounceme\0" "broke-it\0" "buyshouses\0"
-"cdn77\0" "cdn77-ssl\0" "cloudapp\0" "cloudfront\0" "cloudfunctions\0"
-"cryptonomic\0" "does-it\0" "dynathome\0" "dynv6\0" "endofinternet\0"
-"fastly\0" "fastlylb\0" "feste-ip\0" "from-az\0" "from-co\0" "from-la\0"
+"zoological\0" "zoology\0" "blackbaudcdn\0" "boomla\0" "bounceme\0"
+"broke-it\0" "buyshouses\0" "casacam\0" "cdn77\0" "cdn77-ssl\0"
+"channelsdvr\0" "cloudapp\0" "cloudeity\0" "cloudfront\0" "cloudfunctions\0"
+"cloudycluster\0" "cryptonomic\0" "debian\0" "dnsup\0" "does-it\0"
+"dynathome\0" "dynu\0" "dynv6\0" "endofinternet\0" "fastly\0" "fastlylb\0"
+"feste-ip\0" "flynnhosting\0" "from-az\0" "from-co\0" "from-la\0"
 "from-ny\0" "gets-it\0" "ham-radio-op\0" "homeftp\0" "homeip\0"
-"ipifony\0" "kicks-ass\0" "knx-server\0" "moonscale\0" "mydissent\0"
-"myeffect\0" "mymediapc\0" "nhlfan\0" "office-on-the\0" "pgafan\0"
-"privatizehealthinsurance\0" "redirectme\0" "scrapper-site\0" "sells-it\0"
-"serveminecraft\0" "static-access\0" "t3l3p0rt\0" "freetls\0" "alces\0"
-"cistron\0" "demon\0" "virtueeldomein\0" "aarborte\0" "aejrie\0"
-"kafjord\0" "agdenes\0" "akershus\0" "aknoluokta\0" "akrehamn\0"
+"ipifony\0" "kicks-ass\0" "knx-server\0" "memset\0" "moonscale\0"
+"mydissent\0" "myeffect\0" "mymediapc\0" "nhlfan\0" "now-dns\0"
+"office-on-the\0" "ownip\0" "pgafan\0" "privatizehealthinsurance\0"
+"redirectme\0" "schokokeks\0" "scrapper-site\0" "sells-it\0" "serveminecraft\0"
+"static-access\0" "t3l3p0rt\0" "vpndns\0" "freetls\0" "alces\0"
+"cistron\0" "demon\0" "hosting-cluster\0" "virtueeldomein\0" "aarborte\0"
+"aejrie\0" "kafjord\0" "agdenes\0" "akershus\0" "aknoluokta\0" "akrehamn\0"
 "alaheadju\0" "alesund\0" "algard\0" "alstahaug\0" "yalta\0" "alvdal\0"
 "amli\0" "amot\0" "andasuolo\0" "andebu\0" "sandoy\0" "lardal\0"
 "aremark\0" "arendal\0" "aseral\0" "asker\0" "askoy\0" "askvoll\0"
@@ -765,17 +801,17 @@ static const char kStringTable[] =
 "karlsoy\0" "karmoy\0" "kautokeino\0" "kirkenes\0" "klabu\0" "kommune\0"
 "kongsberg\0" "kongsvinger\0" "kopervik\0" "kraanghke\0" "kragero\0"
 "kristiansand\0" "kristiansund\0" "krodsherad\0" "krokstadelva\0"
-"kvafjord\0" "kvalsund\0" "kvanangen\0" "kvinesdal\0" "kvinnherad\0"
+"kvafjord\0" "kvalsund\0" "kvam\0" "kvanangen\0" "kvinesdal\0" "kvinnherad\0"
 "kviteseid\0" "kvitsoy\0" "laakesvuemie\0" "lahppi\0" "langevag\0"
 "larvik\0" "lavagis\0" "lavangen\0" "leangaviika\0" "lebesby\0"
 "leikanger\0" "leirfjord\0" "leirvik\0" "dlugoleka\0" "leksvik\0"
 "lenvik\0" "lerdal\0" "lesja\0" "levanger\0" "lierne\0" "lillehammer\0"
 "lillesand\0" "lindas\0" "lindesnes\0" "loabat\0" "lodingen\0" "loppa\0"
-"lorenskog\0" "loten\0" "solund\0" "lunner\0" "luroy\0" "luster\0"
-"lyngdal\0" "lyngen\0" "malatvuopmi\0" "malvik\0" "mandal\0" "marker\0"
-"marnardal\0" "masfjorden\0" "matta-varjjat\0" "meldal\0" "melhus\0"
-"meloy\0" "meraker\0" "midsund\0" "midtre-gauldal\0" "mjondalen\0"
-"mo-i-rana\0" "moareke\0" "modalen\0" "modum\0" "molde\0" "more-og-romsdal\0"
+"lorenskog\0" "loten\0" "solund\0" "lunner\0" "luroy\0" "lyngdal\0"
+"lyngen\0" "malatvuopmi\0" "malvik\0" "mandal\0" "marker\0" "marnardal\0"
+"masfjorden\0" "matta-varjjat\0" "meldal\0" "melhus\0" "meloy\0"
+"meraker\0" "midsund\0" "midtre-gauldal\0" "mjondalen\0" "mo-i-rana\0"
+"moareke\0" "modalen\0" "modum\0" "molde\0" "more-og-romsdal\0"
 "mosjoen\0" "moskenes\0" "mosvik\0" "muosat\0" "naamesjevuemie\0"
 "namdalseid\0" "namsos\0" "namsskogan\0" "nannestad\0" "naroy\0"
 "narviika\0" "narvik\0" "naustdal\0" "navuotna\0" "nedre-eiker\0"
@@ -856,72 +892,76 @@ static const char kStringTable[] =
 "xn--vrggt-xqad\0" "xn--vry-yla5g\0" "xn--yer-zna\0" "xn--ygarden-p1a\0"
 "xn--ystre-slidre-ujb\0" "wios\0" "xn--vler-qoa\0" "heroy\0" "sande\0"
 "xn--b-5ga\0" "xn--hery-ira\0" "merseine\0" "shacknet\0" "govt\0"
-"maori\0" "xn--mori-qsa\0" "amune\0" "blogsite\0" "bmoattachments\0"
-"boldlygoingnowhere\0" "cable-modem\0" "certmgr\0" "collegefan\0"
-"couchpotatofries\0" "duckdns\0" "dvrdns\0" "endoftheinternet\0"
-"fedorainfracloud\0" "fedorapeople\0" "from-me\0" "game-host\0"
-"hepforge\0" "homedns\0" "is-a-bruinsfan\0" "is-a-candidate\0" "is-a-celticsfan\0"
-"is-a-knight\0" "is-a-patsfan\0" "is-a-soxfan\0" "is-found\0" "is-lost\0"
-"is-saved\0" "is-very-bad\0" "is-very-evil\0" "is-very-good\0" "is-very-nice\0"
-"is-very-sweet\0" "misconfused\0" "my-firewall\0" "myfirewall\0"
-"nflfan\0" "pimienta\0" "poivron\0" "potager\0" "read-books\0" "readmyblog\0"
-"sellsyourhome\0" "stuff-4-sale\0" "sweetpepper\0" "tunk\0" "ufcfan\0"
-"wmflabs\0" "zapto\0" "tele\0" "rsc\0" "origin\0" "q-a\0" "gok\0"
-"agro\0" "augustow\0" "babia-gora\0" "bedzin\0" "beep\0" "beskidy\0"
-"bialowieza\0" "bialystok\0" "bielawa\0" "bieszczady\0" "boleslawiec\0"
-"bydgoszcz\0" "bytom\0" "cieszyn\0" "czest\0" "elblag\0" "vologda\0"
-"gdansk\0" "gdynia\0" "gliwice\0" "glogow\0" "gmina\0" "gniezno\0"
-"gorlice\0" "grajewo\0" "ilawa\0" "jaworzno\0" "jelenia-gora\0"
-"jgora\0" "kalisz\0" "karpacz\0" "kartuzy\0" "kaszuby\0" "katowice\0"
-"kazimierz-dolny\0" "kepno\0" "ketrzyn\0" "klodzko\0" "kobierzyce\0"
-"kolobrzeg\0" "konin\0" "konskowola\0" "krakow\0" "kutno\0" "lapy\0"
-"lebork\0" "legnica\0" "lezajsk\0" "limanowa\0" "lomza\0" "lubin\0"
-"lukow\0" "malbork\0" "malopolska\0" "mazowsze\0" "mazury\0" "miasta\0"
-"mielec\0" "mielno\0" "mragowo\0" "naklo\0" "nowaruda\0" "nysa\0"
-"olawa\0" "olecko\0" "olkusz\0" "olsztyn\0" "opoczno\0" "opole\0"
-"ostroda\0" "ostroleka\0" "ostrowiec\0" "pila\0" "podhale\0" "podlasie\0"
-"polkowice\0" "pomorskie\0" "pomorze\0" "powiat\0" "poznan\0" "prochowice\0"
-"pruszkow\0" "przeworsk\0" "pulawy\0" "radom\0" "rawa-maz\0" "rybnik\0"
-"rzeszow\0" "sanok\0" "sejny\0" "sklep\0" "skoczow\0" "slask\0"
-"slupsk\0" "sopot\0" "sosnowiec\0" "stalowa-wola\0" "starachowice\0"
-"stargard\0" "suwalki\0" "swidnica\0" "swiebodzin\0" "swinoujscie\0"
-"szczecin\0" "szczytno\0" "szkola\0" "targi\0" "tarnobrzeg\0" "tgory\0"
-"tourism\0" "turek\0" "turystyka\0" "tychy\0" "ustka\0" "walbrzych\0"
-"warmia\0" "warszawa\0" "wegrow\0" "wielun\0" "wloclawek\0" "wodzislaw\0"
-"wolomin\0" "wroc\0" "zachpomor\0" "zagan\0" "zakopane\0" "zarow\0"
-"zgora\0" "zgorzelec\0" "griw\0" "kmpsp\0" "konsulat\0" "kppsp\0"
-"kwp\0" "kwpsp\0" "mup\0" "oirm\0" "oum\0" "pinb\0" "piw\0" "psse\0"
-"pup\0" "sdn\0" "starostwo\0" "ugim\0" "umig\0" "upow\0" "wzmiuw\0"
-"uzs\0" "wif\0" "wiih\0" "witd\0" "wiw\0" "zp\0" "test\0" "isla\0"
-"jur\0" "belau\0" "clan\0" "adygeya\0" "bashkiria\0" "cldmail\0"
+"maori\0" "xn--mori-qsa\0" "accesscam\0" "amune\0" "blogsite\0"
+"bmoattachments\0" "boldlygoingnowhere\0" "cable-modem\0" "certmgr\0"
+"collegefan\0" "couchpotatofries\0" "duckdns\0" "dvrdns\0" "dynserv\0"
+"endoftheinternet\0" "fedorainfracloud\0" "fedorapeople\0" "freeddns\0"
+"from-me\0" "game-host\0" "hepforge\0" "homedns\0" "is-a-bruinsfan\0"
+"is-a-candidate\0" "is-a-celticsfan\0" "is-a-knight\0" "is-a-linux-user\0"
+"is-a-patsfan\0" "is-a-soxfan\0" "is-found\0" "is-lost\0" "is-saved\0"
+"is-very-bad\0" "is-very-evil\0" "is-very-good\0" "is-very-nice\0"
+"is-very-sweet\0" "misconfused\0" "mozilla-iot\0" "my-firewall\0"
+"myfirewall\0" "mywire\0" "nflfan\0" "pimienta\0" "poivron\0" "potager\0"
+"read-books\0" "readmyblog\0" "sellsyourhome\0" "stuff-4-sale\0"
+"sweetpepper\0" "tunk\0" "ufcfan\0" "uklugs\0" "webredirect\0" "wmflabs\0"
+"zapto\0" "tele\0" "rsc\0" "origin\0" "q-a\0" "gok\0" "augustow\0"
+"babia-gora\0" "bedzin\0" "beep\0" "beskidy\0" "bialowieza\0" "bialystok\0"
+"bielawa\0" "bieszczady\0" "boleslawiec\0" "bydgoszcz\0" "bytom\0"
+"cieszyn\0" "czest\0" "elblag\0" "vologda\0" "gdansk\0" "gdynia\0"
+"gliwice\0" "glogow\0" "gmina\0" "gniezno\0" "gorlice\0" "grajewo\0"
+"ilawa\0" "jaworzno\0" "jelenia-gora\0" "jgora\0" "kalisz\0" "karpacz\0"
+"kartuzy\0" "kaszuby\0" "katowice\0" "kazimierz-dolny\0" "kepno\0"
+"ketrzyn\0" "klodzko\0" "kobierzyce\0" "kolobrzeg\0" "konin\0" "konskowola\0"
+"krakow\0" "kutno\0" "lapy\0" "lebork\0" "legnica\0" "lezajsk\0"
+"limanowa\0" "lomza\0" "lubin\0" "lukow\0" "malbork\0" "malopolska\0"
+"mazowsze\0" "mazury\0" "miasta\0" "mielec\0" "mielno\0" "mragowo\0"
+"naklo\0" "nowaruda\0" "nysa\0" "olawa\0" "olecko\0" "olkusz\0"
+"olsztyn\0" "opoczno\0" "opole\0" "ostroda\0" "ostroleka\0" "ostrowiec\0"
+"pila\0" "podhale\0" "podlasie\0" "polkowice\0" "pomorskie\0" "pomorze\0"
+"powiat\0" "poznan\0" "prochowice\0" "pruszkow\0" "przeworsk\0"
+"pulawy\0" "radom\0" "rawa-maz\0" "rybnik\0" "rzeszow\0" "sanok\0"
+"sejny\0" "sklep\0" "skoczow\0" "slask\0" "slupsk\0" "sopot\0" "sosnowiec\0"
+"stalowa-wola\0" "starachowice\0" "stargard\0" "suwalki\0" "swidnica\0"
+"swiebodzin\0" "swinoujscie\0" "szczecin\0" "szczytno\0" "szkola\0"
+"targi\0" "tarnobrzeg\0" "tgory\0" "tourism\0" "turek\0" "turystyka\0"
+"tychy\0" "ustka\0" "walbrzych\0" "warmia\0" "warszawa\0" "wegrow\0"
+"wielun\0" "wloclawek\0" "wodzislaw\0" "wolomin\0" "wroc\0" "zachpomor\0"
+"zagan\0" "zakopane\0" "zarow\0" "zgora\0" "zgorzelec\0" "griw\0"
+"kmpsp\0" "konsulat\0" "kppsp\0" "kwp\0" "kwpsp\0" "mup\0" "oirm\0"
+"oum\0" "pinb\0" "piw\0" "psse\0" "pup\0" "sdn\0" "starostwo\0"
+"ugim\0" "umig\0" "upow\0" "wzmiuw\0" "uzs\0" "wif\0" "wiih\0" "witd\0"
+"wiw\0" "wuoz\0" "zp\0" "test\0" "isla\0" "dnstrace\0" "jur\0" "bci\0"
+"belau\0" "x443\0" "clan\0" "adygeya\0" "bashkiria\0" "cldmail\0"
 "dagestan\0" "grozny\0" "kalmykia\0" "kustanai\0" "marine\0" "mordovia\0"
-"mytis\0" "nalchik\0" "nov\0" "pyatigorsk\0" "vladikavkaz\0" "vladimir\0"
+"myjino\0" "mytis\0" "nalchik\0" "nov\0" "pyatigorsk\0" "ras\0"
+"vladikavkaz\0" "vladimir\0" "landing\0" "spectrum\0" "vps\0" "development\0"
 "fhsk\0" "fhv\0" "komforb\0" "kommunalforbund\0" "komvux\0" "lanbib\0"
-"naturbruksgymn\0" "parti\0" "hashbang\0" "platform\0" "platformsh\0"
-"univ\0" "stackspace\0" "uber\0" "xs4all\0" "consulado\0" "embaixada\0"
-"principe\0" "abkhazia\0" "aktyubinsk\0" "arkhangelsk\0" "armenia\0"
-"ashgabad\0" "azerbaijan\0" "balashov\0" "bryansk\0" "bukhara\0"
-"chimkent\0" "east-kazakhstan\0" "ivanovo\0" "jambyl\0" "kaluga\0"
-"karacol\0" "karaganda\0" "karelia\0" "khakassia\0" "krasnodar\0"
-"kurgan\0" "lenug\0" "mangyshlak\0" "murmansk\0" "navoi\0" "north-kazakhstan\0"
-"obninsk\0" "penza\0" "pokrovsk\0" "sochi\0" "tashkent\0" "termez\0"
-"togliatti\0" "troitsk\0" "tselinograd\0" "tula\0" "tuva\0" "knightpoint\0"
-"agrinet\0" "defense\0" "edunet\0" "rnrt\0" "vpnplus\0" "bel\0"
-"kep\0" "better-than\0" "on-the-web\0" "worse-than\0" "xn--czrw28b\0"
-"xn--zf0ao64a\0" "mymailer\0" "cherkassy\0" "cherkasy\0" "chernivtsi\0"
-"chernovtsy\0" "crimea\0" "dnepropetrovsk\0" "dnipropetrovsk\0"
-"dominic\0" "donetsk\0" "dp\0" "ivano-frankivsk\0" "kharkiv\0" "kharkov\0"
-"kherson\0" "khmelnitskiy\0" "khmelnytskyi\0" "kiev\0" "kirovograd\0"
-"krym\0" "kv\0" "kyiv\0" "lugansk\0" "lutsk\0" "lviv\0" "mykolaiv\0"
-"nikolaev\0" "odessa\0" "poltava\0" "rivne\0" "rovno\0" "sebastopol\0"
-"sevastopol\0" "ternopil\0" "uzhgorod\0" "vinnica\0" "vinnytsia\0"
-"volyn\0" "zaporizhzhe\0" "zaporizhzhia\0" "zhitomir\0" "zhytomyr\0"
-"nhs\0" "police\0" "service\0" "golffan\0" "is-by\0" "land-4-sale\0"
-"nsn\0" "pointto\0" "chtr\0" "paroch\0" "gub\0" "e12\0" "mypets\0"
-"xn--80au\0" "xn--90azh\0" "xn--d1at\0" "xn--o1ac\0" "xn--o1ach\0"
-"xn--12c1fe0br\0" "xn--12cfi8ixb8l\0" "xn--12co0c3b4eva\0" "xn--h3cuzk1di\0"
-"xn--m3ch0j3a\0" "xn--o3cyx2a\0" "agric\0" "grondar\0" "triton\0"
-"";
+"naturbruksgymn\0" "parti\0" "hashbang\0" "platform\0" "byen\0"
+"platformsh\0" "univ\0" "stackspace\0" "uber\0" "xs4all\0" "consulado\0"
+"embaixada\0" "noho\0" "principe\0" "abkhazia\0" "aktyubinsk\0"
+"arkhangelsk\0" "armenia\0" "ashgabad\0" "azerbaijan\0" "balashov\0"
+"bryansk\0" "bukhara\0" "chimkent\0" "east-kazakhstan\0" "ivanovo\0"
+"jambyl\0" "kaluga\0" "karacol\0" "karaganda\0" "karelia\0" "khakassia\0"
+"krasnodar\0" "kurgan\0" "lenug\0" "mangyshlak\0" "murmansk\0" "navoi\0"
+"north-kazakhstan\0" "obninsk\0" "penza\0" "pokrovsk\0" "sochi\0"
+"tashkent\0" "termez\0" "togliatti\0" "troitsk\0" "tselinograd\0"
+"tula\0" "tuva\0" "knightpoint\0" "agrinet\0" "defense\0" "edunet\0"
+"rnrt\0" "vpnplus\0" "ntdll\0" "bel\0" "kep\0" "better-than\0" "on-the-web\0"
+"worse-than\0" "xn--czrw28b\0" "xn--zf0ao64a\0" "mymailer\0" "cherkassy\0"
+"cherkasy\0" "chernivtsi\0" "chernovtsy\0" "crimea\0" "dnepropetrovsk\0"
+"dnipropetrovsk\0" "dominic\0" "donetsk\0" "dp\0" "ivano-frankivsk\0"
+"kharkiv\0" "kharkov\0" "kherson\0" "khmelnitskiy\0" "khmelnytskyi\0"
+"kiev\0" "kirovograd\0" "krym\0" "kv\0" "kyiv\0" "lugansk\0" "lutsk\0"
+"lviv\0" "mykolaiv\0" "nikolaev\0" "odessa\0" "poltava\0" "rivne\0"
+"rovno\0" "sebastopol\0" "sevastopol\0" "ternopil\0" "uzhgorod\0"
+"vinnica\0" "vinnytsia\0" "volyn\0" "zaporizhzhe\0" "zaporizhzhia\0"
+"zhitomir\0" "zhytomyr\0" "nhs\0" "police\0" "gwiddle\0" "nh-serv\0"
+"service\0" "glug\0" "golffan\0" "is-by\0" "land-4-sale\0" "nsn\0"
+"pointto\0" "chtr\0" "paroch\0" "ann-arbor\0" "dst\0" "eaton\0"
+"washtenaw\0" "gub\0" "e12\0" "cloud66\0" "mypets\0" "xn--80au\0"
+"xn--90azh\0" "xn--d1at\0" "xn--o1ac\0" "xn--o1ach\0" "xn--12c1fe0br\0"
+"xn--12cfi8ixb8l\0" "xn--12co0c3b4eva\0" "xn--h3cuzk1di\0" "xn--m3ch0j3a\0"
+"xn--o3cyx2a\0" "crafting\0" "agric\0" "grondar\0" "triton\0" "";
 
 static const struct TrieNode kNodeTable[] = {
   {     0,     0,     0, 1 },  /* aaa */
@@ -934,37 +974,37 @@ static const struct TrieNode kNodeTable[] = {
   {    38,     0,     0, 1 },  /* able */
   {    43,     0,     0, 1 },  /* abogado */
   {    51,     0,     0, 1 },  /* abudhabi */
-  {    62,  3715,     6, 1 },  /* ac */
-  {    65,     0,     0, 1 },  /* academy */
+  {    62,  3904,     6, 1 },  /* ac */
+  {    65,  3910,     1, 1 },  /* academy */
   {    73,     0,     0, 1 },  /* accenture */
   {    89,     0,     0, 1 },  /* accountant */
   {   100,     0,     0, 1 },  /* accountants */
   {   112,     0,     0, 1 },  /* aco */
   {   121,     0,     0, 1 },  /* active */
   {   134,     0,     0, 1 },  /* actor */
-  {   141,  3721,     1, 1 },  /* ad */
+  {   141,  3911,     1, 1 },  /* ad */
   {    60,     0,     0, 1 },  /* adac */
   {   144,     0,     0, 1 },  /* ads */
   {   148,     0,     0, 1 },  /* adult */
-  {   157,  3722,     8, 1 },  /* ae */
+  {   157,  3912,     9, 1 },  /* ae */
   {   160,     0,     0, 1 },  /* aeg */
-  {   164,  3730,    87, 1 },  /* aero */
+  {   164,  3921,    87, 1 },  /* aero */
   {   169,     0,     0, 1 },  /* aetna */
-  {   191,  3817,     5, 1 },  /* af */
+  {   191,  4008,     6, 1 },  /* af */
   {   194,     0,     0, 1 },  /* afamilycompany */
   {   209,     0,     0, 1 },  /* afl */
   {   217,     0,     0, 1 },  /* africa */
-  {   226,  3822,     5, 1 },  /* ag */
+  {   226,  4014,     5, 1 },  /* ag */
   {   229,     0,     0, 1 },  /* agakhan */
   {   237,     0,     0, 1 },  /* agency */
-  {   247,  3827,     4, 1 },  /* ai */
+  {   247,  4019,     5, 1 },  /* ai */
   {   250,     0,     0, 1 },  /* aig */
   {   255,     0,     0, 1 },  /* aigo */
   {   260,     0,     0, 1 },  /* airbus */
   {   267,     0,     0, 1 },  /* airforce */
   {   276,     0,     0, 1 },  /* airtel */
   {   283,     0,     0, 1 },  /* akdn */
-  {   290,  3831,     7, 1 },  /* al */
+  {   290,  4024,     8, 1 },  /* al */
   {   293,     0,     0, 1 },  /* alfaromeo */
   {   303,     0,     0, 1 },  /* alibaba */
   {   311,     0,     0, 1 },  /* alipay */
@@ -973,7 +1013,7 @@ static const struct TrieNode kNodeTable[] = {
   {   337,     0,     0, 1 },  /* ally */
   {   342,     0,     0, 1 },  /* alsace */
   {   349,     0,     0, 1 },  /* alstom */
-  {   358,  3838,     1, 1 },  /* am */
+  {   358,  4032,     1, 1 },  /* am */
   {   361,     0,     0, 1 },  /* americanexpress */
   {   377,     0,     0, 1 },  /* americanfamily */
   {   395,     0,     0, 1 },  /* amex */
@@ -984,29 +1024,29 @@ static const struct TrieNode kNodeTable[] = {
   {   432,     0,     0, 1 },  /* android */
   {   440,     0,     0, 1 },  /* anquan */
   {   324,     0,     0, 1 },  /* anz */
-  {   448,  3839,     6, 1 },  /* ao */
+  {   448,  4033,     6, 1 },  /* ao */
   {   451,     0,     0, 1 },  /* aol */
   {   455,     0,     0, 1 },  /* apartments */
-  {   468,     0,     0, 1 },  /* app */
+  {   468,  4039,     1, 1 },  /* app */
   {   472,     0,     0, 1 },  /* apple */
   {   480,     0,     0, 1 },  /* aq */
   {   483,     0,     0, 1 },  /* aquarelle */
-  {   494,  1549,    10, 1 },  /* ar */
+  {   494,  1555,    10, 1 },  /* ar */
   {   497,     0,     0, 1 },  /* arab */
   {   502,     0,     0, 1 },  /* aramco */
   {   509,     0,     0, 1 },  /* archi */
   {   515,     0,     0, 1 },  /* army */
-  {   520,  3845,     6, 1 },  /* arpa */
+  {   520,  4040,     6, 1 },  /* arpa */
   {   527,     0,     0, 1 },  /* art */
   {   531,     0,     0, 1 },  /* arte */
-  {   537,  3851,     1, 1 },  /* as */
+  {   537,  4046,     1, 1 },  /* as */
   {   540,     0,     0, 1 },  /* asda */
-  {   545,  3852,     1, 1 },  /* asia */
+  {   545,  4047,     1, 1 },  /* asia */
   {   550,     0,     0, 1 },  /* associates */
-  {   562,  1559,    14, 1 },  /* at */
+  {   562,  1565,    15, 1 },  /* at */
   {   565,     0,     0, 1 },  /* athleta */
   {   573,     0,     0, 1 },  /* attorney */
-  {   584,  1575,    18, 1 },  /* au */
+  {   584,  1585,    18, 1 },  /* au */
   {   587,     0,     0, 1 },  /* auction */
   {   595,     0,     0, 1 },  /* audi */
   {   600,     0,     0, 1 },  /* audible */
@@ -1016,13 +1056,13 @@ static const struct TrieNode kNodeTable[] = {
   {   629,     0,     0, 1 },  /* auto */
   {   634,     0,     0, 1 },  /* autos */
   {   640,     0,     0, 1 },  /* avianca */
-  {   649,  3867,     1, 1 },  /* aw */
+  {   649,  4062,     1, 1 },  /* aw */
   {   658,     0,     0, 1 },  /* aws */
   {   663,     0,     0, 1 },  /* ax */
   {   666,     0,     0, 1 },  /* axa */
-  {   671,  3868,    12, 1 },  /* az */
+  {   671,  4063,    12, 1 },  /* az */
   {   682,     0,     0, 1 },  /* azure */
-  {   308,  3831,     7, 1 },  /* ba */
+  {   308,  4075,     7, 1 },  /* ba */
   {   692,     0,     0, 1 },  /* baby */
   {   697,     0,     0, 1 },  /* baidu */
   {   392,     0,     0, 1 },  /* banamex */
@@ -1039,14 +1079,14 @@ static const struct TrieNode kNodeTable[] = {
   {   798,     0,     0, 1 },  /* basketball */
   {   809,     0,     0, 1 },  /* bauhaus */
   {   817,     0,     0, 1 },  /* bayern */
-  {    17,  3880,    10, 1 },  /* bb */
+  {    17,  4082,    10, 1 },  /* bb */
   {   824,     0,     0, 1 },  /* bbc */
   {   828,     0,     0, 1 },  /* bbt */
   {   832,     0,     0, 1 },  /* bbva */
   {   837,     0,     0, 1 },  /* bcg */
   {   841,     0,     0, 1 },  /* bcn */
-  {   855,  3853,     1, 0 },  /* bd */
-  {   860,  1593,     3, 1 },  /* be */
+  {   855,  4048,     1, 0 },  /* bd */
+  {   860,  1603,     4, 1 },  /* be */
   {   863,     0,     0, 1 },  /* beats */
   {   869,     0,     0, 1 },  /* beauty */
   {   881,     0,     0, 1 },  /* beer */
@@ -1055,19 +1095,19 @@ static const struct TrieNode kNodeTable[] = {
   {   901,     0,     0, 1 },  /* best */
   {   906,     0,     0, 1 },  /* bestbuy */
   {   914,     0,     0, 1 },  /* bet */
-  {   928,  3851,     1, 1 },  /* bf */
-  {   932,  3890,    38, 1 },  /* bg */
-  {   937,  3817,     5, 1 },  /* bh */
+  {   928,  4046,     1, 1 },  /* bf */
+  {   932,  4092,    38, 1 },  /* bg */
+  {   937,  4130,     5, 1 },  /* bh */
   {   940,     0,     0, 1 },  /* bharti */
-  {    57,  3928,     5, 1 },  /* bi */
+  {    57,  4135,     5, 1 },  /* bi */
   {   951,     0,     0, 1 },  /* bible */
   {   957,     0,     0, 1 },  /* bid */
   {   961,     0,     0, 1 },  /* bike */
   {   970,     0,     0, 1 },  /* bing */
   {   975,     0,     0, 1 },  /* bingo */
   {   981,     0,     0, 1 },  /* bio */
-  {   986,  3933,    12, 1 },  /* biz */
-  {   990,  3945,     4, 1 },  /* bj */
+  {   986,  4140,    12, 1 },  /* biz */
+  {   990,  4152,     4, 1 },  /* bj */
   {   993,     0,     0, 1 },  /* black */
   {   999,     0,     0, 1 },  /* blackfriday */
   {  1011,     0,     0, 1 },  /* blanco */
@@ -1075,13 +1115,13 @@ static const struct TrieNode kNodeTable[] = {
   {  1035,     0,     0, 1 },  /* blog */
   {  1040,     0,     0, 1 },  /* bloomberg */
   {  1050,     0,     0, 1 },  /* blue */
-  {  1056,  3817,     5, 1 },  /* bm */
+  {  1056,  4130,     5, 1 },  /* bm */
   {  1059,     0,     0, 1 },  /* bms */
   {  1063,     0,     0, 1 },  /* bmw */
-  {  1068,  3853,     1, 0 },  /* bn */
+  {  1068,  4048,     1, 0 },  /* bn */
   {  1071,     0,     0, 1 },  /* bnl */
   {  1075,     0,     0, 1 },  /* bnpparibas */
-  {  1087,  3949,     9, 1 },  /* bo */
+  {  1087,  4156,    41, 1 },  /* bo */
   {  1090,     0,     0, 1 },  /* boats */
   {  1096,     0,     0, 1 },  /* boehringer */
   {  1107,     0,     0, 1 },  /* bofa */
@@ -1090,3747 +1130,3949 @@ static const struct TrieNode kNodeTable[] = {
   {  1121,     0,     0, 1 },  /* boo */
   {  1125,     0,     0, 1 },  /* book */
   {  1130,     0,     0, 1 },  /* booking */
-  {  1138,     0,     0, 1 },  /* boots */
-  {  1144,     0,     0, 1 },  /* bosch */
-  {  1150,     0,     0, 1 },  /* bostik */
-  {  1157,     0,     0, 1 },  /* boston */
-  {  1164,     0,     0, 1 },  /* bot */
-  {  1168,     0,     0, 1 },  /* boutique */
-  {  1178,     0,     0, 1 },  /* box */
-  {  1183,  1596,    78, 1 },  /* br */
-  {  1186,     0,     0, 1 },  /* bradesco */
-  {  1195,     0,     0, 1 },  /* bridgestone */
-  {  1207,     0,     0, 1 },  /* broadway */
-  {  1216,     0,     0, 1 },  /* broker */
-  {  1223,     0,     0, 1 },  /* brother */
-  {  1231,     0,     0, 1 },  /* brussels */
-  {  1241,  3817,     5, 1 },  /* bs */
-  {   829,  3817,     5, 1 },  /* bt */
-  {  1244,     0,     0, 1 },  /* budapest */
-  {  1253,     0,     0, 1 },  /* bugatti */
-  {  1261,     0,     0, 1 },  /* build */
-  {  1267,     0,     0, 1 },  /* builders */
-  {  1276,     0,     0, 1 },  /* business */
+  {  1138,     0,     0, 1 },  /* bosch */
+  {  1144,     0,     0, 1 },  /* bostik */
+  {  1151,     0,     0, 1 },  /* boston */
+  {  1158,     0,     0, 1 },  /* bot */
+  {  1162,     0,     0, 1 },  /* boutique */
+  {  1172,     0,     0, 1 },  /* box */
+  {  1177,  1607,   127, 1 },  /* br */
+  {  1180,     0,     0, 1 },  /* bradesco */
+  {  1189,     0,     0, 1 },  /* bridgestone */
+  {  1201,     0,     0, 1 },  /* broadway */
+  {  1210,     0,     0, 1 },  /* broker */
+  {  1217,     0,     0, 1 },  /* brother */
+  {  1225,     0,     0, 1 },  /* brussels */
+  {  1235,  4224,     6, 1 },  /* bs */
+  {   829,  4130,     5, 1 },  /* bt */
+  {  1238,     0,     0, 1 },  /* budapest */
+  {  1247,     0,     0, 1 },  /* bugatti */
+  {  1255,     0,     0, 1 },  /* build */
+  {  1261,     0,     0, 1 },  /* builders */
+  {  1270,     0,     0, 1 },  /* business */
   {   910,     0,     0, 1 },  /* buy */
-  {  1285,     0,     0, 1 },  /* buzz */
-  {  1290,     0,     0, 1 },  /* bv */
-  {  1293,  3985,     2, 1 },  /* bw */
-  {   694,  1674,     4, 1 },  /* by */
-  {  1296,  3987,     6, 1 },  /* bz */
-  {  1299,     0,     0, 1 },  /* bzh */
-  {   221,  1678,    19, 1 },  /* ca */
-  {  1307,     0,     0, 1 },  /* cab */
-  {  1311,     0,     0, 1 },  /* cafe */
-  {  1320,     0,     0, 1 },  /* cal */
-  {  1324,     0,     0, 1 },  /* call */
-  {  1329,     0,     0, 1 },  /* calvinklein */
-  {  1344,     0,     0, 1 },  /* cam */
-  {  1358,     0,     0, 1 },  /* camera */
-  {  1373,     0,     0, 1 },  /* camp */
-  {  1378,     0,     0, 1 },  /* cancerresearch */
-  {  1393,     0,     0, 1 },  /* canon */
-  {  1399,     0,     0, 1 },  /* capetown */
-  {  1408,     0,     0, 1 },  /* capital */
-  {  1416,     0,     0, 1 },  /* capitalone */
-  {  1427,     0,     0, 1 },  /* car */
-  {  1431,     0,     0, 1 },  /* caravan */
-  {  1439,     0,     0, 1 },  /* cards */
-  {  1451,     0,     0, 1 },  /* care */
-  {  1456,     0,     0, 1 },  /* career */
-  {  1463,     0,     0, 1 },  /* careers */
-  {  1479,     0,     0, 1 },  /* cars */
-  {  1484,     0,     0, 1 },  /* cartier */
-  {  1492,     0,     0, 1 },  /* casa */
-  {  1497,     0,     0, 1 },  /* case */
-  {  1502,     0,     0, 1 },  /* caseih */
-  {  1509,     0,     0, 1 },  /* cash */
-  {  1514,     0,     0, 1 },  /* casino */
-  {  1524,     0,     0, 1 },  /* cat */
-  {  1528,     0,     0, 1 },  /* catering */
-  {  1537,     0,     0, 1 },  /* catholic */
-  {  1564,     0,     0, 1 },  /* cba */
+  {  1279,     0,     0, 1 },  /* buzz */
+  {  1284,     0,     0, 1 },  /* bv */
+  {  1287,  4230,     2, 1 },  /* bw */
+  {   694,  1734,     5, 1 },  /* by */
+  {  1290,  4232,     7, 1 },  /* bz */
+  {  1293,     0,     0, 1 },  /* bzh */
+  {   221,  1739,    19, 1 },  /* ca */
+  {  1301,     0,     0, 1 },  /* cab */
+  {  1305,     0,     0, 1 },  /* cafe */
+  {  1314,     0,     0, 1 },  /* cal */
+  {  1318,     0,     0, 1 },  /* call */
+  {  1323,     0,     0, 1 },  /* calvinklein */
+  {  1337,     0,     0, 1 },  /* cam */
+  {  1351,     0,     0, 1 },  /* camera */
+  {  1366,     0,     0, 1 },  /* camp */
+  {  1371,     0,     0, 1 },  /* cancerresearch */
+  {  1386,     0,     0, 1 },  /* canon */
+  {  1392,     0,     0, 1 },  /* capetown */
+  {  1401,     0,     0, 1 },  /* capital */
+  {  1409,     0,     0, 1 },  /* capitalone */
+  {  1420,     0,     0, 1 },  /* car */
+  {  1424,     0,     0, 1 },  /* caravan */
+  {  1432,     0,     0, 1 },  /* cards */
+  {  1444,     0,     0, 1 },  /* care */
+  {  1449,     0,     0, 1 },  /* career */
+  {  1456,     0,     0, 1 },  /* careers */
+  {  1472,     0,     0, 1 },  /* cars */
+  {  1477,     0,     0, 1 },  /* cartier */
+  {  1485,     0,     0, 1 },  /* casa */
+  {  1490,     0,     0, 1 },  /* case */
+  {  1495,     0,     0, 1 },  /* caseih */
+  {  1502,     0,     0, 1 },  /* cash */
+  {  1507,     0,     0, 1 },  /* casino */
+  {  1517,     0,     0, 1 },  /* cat */
+  {  1521,     0,     0, 1 },  /* catering */
+  {  1530,     0,     0, 1 },  /* catholic */
+  {  1557,     0,     0, 1 },  /* cba */
   {  1067,     0,     0, 1 },  /* cbn */
-  {  1568,     0,     0, 1 },  /* cbre */
-  {  1240,     0,     0, 1 },  /* cbs */
-  {  1580,  3993,     7, 1 },  /* cc */
-  {  1584,  3851,     1, 1 },  /* cd */
-  {  1587,     0,     0, 1 },  /* ceb */
-  {  1594,     0,     0, 1 },  /* center */
-  {  1601,     0,     0, 1 },  /* ceo */
-  {  1605,     0,     0, 1 },  /* cern */
-  {  1612,  3838,     1, 1 },  /* cf */
-  {  1615,     0,     0, 1 },  /* cfa */
-  {  1619,     0,     0, 1 },  /* cfd */
+  {  1561,     0,     0, 1 },  /* cbre */
+  {  1234,     0,     0, 1 },  /* cbs */
+  {  1573,  4239,     7, 1 },  /* cc */
+  {  1578,  4046,     1, 1 },  /* cd */
+  {  1581,     0,     0, 1 },  /* ceb */
+  {  1588,     0,     0, 1 },  /* center */
+  {  1595,     0,     0, 1 },  /* ceo */
+  {  1599,     0,     0, 1 },  /* cern */
+  {  1606,  4032,     1, 1 },  /* cf */
+  {  1609,     0,     0, 1 },  /* cfa */
+  {  1613,     0,     0, 1 },  /* cfd */
   {   838,     0,     0, 1 },  /* cg */
-  {  1147,  4000,     7, 1 },  /* ch */
-  {  1628,     0,     0, 1 },  /* chanel */
-  {  1641,     0,     0, 1 },  /* channel */
-  {  1649,     0,     0, 1 },  /* chase */
-  {  1655,     0,     0, 1 },  /* chat */
-  {  1660,     0,     0, 1 },  /* cheap */
-  {  1666,     0,     0, 1 },  /* chintai */
-  {  1674,     0,     0, 1 },  /* chloe */
-  {  1680,     0,     0, 1 },  /* christmas */
-  {  1690,     0,     0, 1 },  /* chrome */
-  {  1697,     0,     0, 1 },  /* chrysler */
-  {  1706,     0,     0, 1 },  /* church */
-  {  1714,  4007,    15, 1 },  /* ci */
-  {  1717,     0,     0, 1 },  /* cipriani */
-  {  1726,     0,     0, 1 },  /* circle */
-  {  1740,     0,     0, 1 },  /* cisco */
-  {  1746,     0,     0, 1 },  /* citadel */
-  {  1754,     0,     0, 1 },  /* citi */
-  {  1759,     0,     0, 1 },  /* citic */
-  {  1766,     0,     0, 1 },  /* city */
-  {  1771,     0,     0, 1 },  /* cityeats */
-  {   996,  4022,     2, 0 },  /* ck */
-  {  1788,  4024,     5, 1 },  /* cl */
-  {  1791,     0,     0, 1 },  /* claims */
-  {  1798,     0,     0, 1 },  /* cleaning */
-  {  1807,     0,     0, 1 },  /* click */
-  {  1813,     0,     0, 1 },  /* clinic */
-  {  1820,     0,     0, 1 },  /* clinique */
-  {  1829,     0,     0, 1 },  /* clothing */
-  {  1840,  1697,     6, 1 },  /* cloud */
-  {  1850,  3852,     1, 1 },  /* club */
-  {  1855,     0,     0, 1 },  /* clubmed */
-  {  1864,  4029,     4, 1 },  /* cm */
-  {   842,  1703,    44, 1 },  /* cn */
-  {   113,  1751,    14, 1 },  /* co */
-  {  1871,     0,     0, 1 },  /* coach */
-  {  1877,     0,     0, 1 },  /* codes */
-  {  1883,     0,     0, 1 },  /* coffee */
-  {  1895,     0,     0, 1 },  /* college */
-  {  1903,     0,     0, 1 },  /* cologne */
-  {  1914,  1765,   280, 1 },  /* com */
-  {  1918,     0,     0, 1 },  /* comcast */
-  {  1926,     0,     0, 1 },  /* commbank */
-  {  1935,     0,     0, 1 },  /* community */
+  {  1141,  4246,     9, 1 },  /* ch */
+  {  1622,     0,     0, 1 },  /* chanel */
+  {  1635,     0,     0, 1 },  /* channel */
+  {  1643,     0,     0, 1 },  /* charity */
+  {  1651,     0,     0, 1 },  /* chase */
+  {  1657,     0,     0, 1 },  /* chat */
+  {  1662,     0,     0, 1 },  /* cheap */
+  {  1668,     0,     0, 1 },  /* chintai */
+  {  1676,     0,     0, 1 },  /* christmas */
+  {  1686,     0,     0, 1 },  /* chrome */
+  {  1693,     0,     0, 1 },  /* chrysler */
+  {  1702,     0,     0, 1 },  /* church */
+  {  1710,  4255,    15, 1 },  /* ci */
+  {  1713,     0,     0, 1 },  /* cipriani */
+  {  1722,     0,     0, 1 },  /* circle */
+  {  1736,     0,     0, 1 },  /* cisco */
+  {  1742,     0,     0, 1 },  /* citadel */
+  {  1750,     0,     0, 1 },  /* citi */
+  {  1755,     0,     0, 1 },  /* citic */
+  {  1762,     0,     0, 1 },  /* city */
+  {  1767,     0,     0, 1 },  /* cityeats */
+  {   996,  4270,     2, 0 },  /* ck */
+  {  1784,  4272,     6, 1 },  /* cl */
+  {  1787,     0,     0, 1 },  /* claims */
+  {  1794,     0,     0, 1 },  /* cleaning */
+  {  1803,     0,     0, 1 },  /* click */
+  {  1809,     0,     0, 1 },  /* clinic */
+  {  1816,     0,     0, 1 },  /* clinique */
+  {  1825,     0,     0, 1 },  /* clothing */
+  {  1836,  1758,     6, 1 },  /* cloud */
+  {  1846,  4278,     2, 1 },  /* club */
+  {  1851,     0,     0, 1 },  /* clubmed */
+  {  1860,  4280,     4, 1 },  /* cm */
+  {   842,  1764,    44, 1 },  /* cn */
+  {   113,  1813,    17, 1 },  /* co */
+  {  1867,     0,     0, 1 },  /* coach */
+  {  1873,     0,     0, 1 },  /* codes */
+  {  1879,     0,     0, 1 },  /* coffee */
+  {  1891,     0,     0, 1 },  /* college */
+  {  1899,     0,     0, 1 },  /* cologne */
+  {  1910,  1830,   303, 1 },  /* com */
+  {  1914,     0,     0, 1 },  /* comcast */
+  {  1922,     0,     0, 1 },  /* commbank */
+  {  1931,  4319,     1, 1 },  /* community */
   {   201,     0,     0, 1 },  /* company */
-  {  1945,     0,     0, 1 },  /* compare */
-  {  1953,     0,     0, 1 },  /* computer */
-  {  1962,     0,     0, 1 },  /* comsec */
-  {  1969,     0,     0, 1 },  /* condos */
-  {  1976,     0,     0, 1 },  /* construction */
-  {  1989,     0,     0, 1 },  /* consulting */
-  {  2000,     0,     0, 1 },  /* contact */
-  {  2008,     0,     0, 1 },  /* contractors */
-  {  2020,     0,     0, 1 },  /* cooking */
-  {  2028,     0,     0, 1 },  /* cookingchannel */
-  {  2043,  4047,     1, 1 },  /* cool */
-  {  2048,     0,     0, 1 },  /* coop */
-  {  2053,     0,     0, 1 },  /* corsica */
-  {  2061,     0,     0, 1 },  /* country */
-  {  2069,     0,     0, 1 },  /* coupon */
-  {  2076,     0,     0, 1 },  /* coupons */
-  {  2084,     0,     0, 1 },  /* courses */
-  {  2092,  4048,     7, 1 },  /* cr */
-  {  2095,     0,     0, 1 },  /* credit */
-  {  2102,     0,     0, 1 },  /* creditcard */
-  {  2113,     0,     0, 1 },  /* creditunion */
-  {  2125,     0,     0, 1 },  /* cricket */
-  {  2133,     0,     0, 1 },  /* crown */
-  {  2139,     0,     0, 1 },  /* crs */
-  {  2143,     0,     0, 1 },  /* cruise */
-  {  2150,     0,     0, 1 },  /* cruises */
-  {  2158,     0,     0, 1 },  /* csc */
-  {  2163,  4055,     6, 1 },  /* cu */
-  {  2166,     0,     0, 1 },  /* cuisinella */
-  {  2177,  3838,     1, 1 },  /* cv */
-  {  2182,  4061,     4, 1 },  /* cw */
-  {  2185,  4065,     3, 1 },  /* cx */
-  {   241,  2113,    13, 1 },  /* cy */
-  {  2188,     0,     0, 1 },  /* cymru */
-  {  2194,     0,     0, 1 },  /* cyou */
-  {  2203,  2126,     5, 1 },  /* cz */
-  {  2206,     0,     0, 1 },  /* dabur */
-  {  2216,     0,     0, 1 },  /* dad */
-  {  2220,     0,     0, 1 },  /* dance */
-  {  2232,     0,     0, 1 },  /* data */
-  {  2241,     0,     0, 1 },  /* date */
-  {  2246,     0,     0, 1 },  /* dating */
-  {  2253,     0,     0, 1 },  /* datsun */
+  {  1941,     0,     0, 1 },  /* compare */
+  {  1949,     0,     0, 1 },  /* computer */
+  {  1958,     0,     0, 1 },  /* comsec */
+  {  1965,     0,     0, 1 },  /* condos */
+  {  1972,     0,     0, 1 },  /* construction */
+  {  1985,     0,     0, 1 },  /* consulting */
+  {  1996,     0,     0, 1 },  /* contact */
+  {  2004,     0,     0, 1 },  /* contractors */
+  {  2016,     0,     0, 1 },  /* cooking */
+  {  2024,     0,     0, 1 },  /* cookingchannel */
+  {  2039,  4320,     1, 1 },  /* cool */
+  {  2044,     0,     0, 1 },  /* coop */
+  {  2049,     0,     0, 1 },  /* corsica */
+  {  2057,     0,     0, 1 },  /* country */
+  {  2065,     0,     0, 1 },  /* coupon */
+  {  2072,     0,     0, 1 },  /* coupons */
+  {  2080,     0,     0, 1 },  /* courses */
+  {  2088,  4321,     7, 1 },  /* cr */
+  {  2091,     0,     0, 1 },  /* credit */
+  {  2098,     0,     0, 1 },  /* creditcard */
+  {  2109,     0,     0, 1 },  /* creditunion */
+  {  2121,     0,     0, 1 },  /* cricket */
+  {  2129,     0,     0, 1 },  /* crown */
+  {  2135,     0,     0, 1 },  /* crs */
+  {  2139,     0,     0, 1 },  /* cruise */
+  {  2146,     0,     0, 1 },  /* cruises */
+  {  2154,     0,     0, 1 },  /* csc */
+  {  2159,  4328,     6, 1 },  /* cu */
+  {  2162,     0,     0, 1 },  /* cuisinella */
+  {  2173,  4032,     1, 1 },  /* cv */
+  {  2178,  4334,     4, 1 },  /* cw */
+  {  2181,  4338,     3, 1 },  /* cx */
+  {   241,  2203,    13, 1 },  /* cy */
+  {  2184,     0,     0, 1 },  /* cymru */
+  {  2190,     0,     0, 1 },  /* cyou */
+  {  2199,  2216,     6, 1 },  /* cz */
+  {  2202,     0,     0, 1 },  /* dabur */
+  {  2212,     0,     0, 1 },  /* dad */
+  {  2216,     0,     0, 1 },  /* dance */
+  {  2228,     0,     0, 1 },  /* data */
+  {  2237,     0,     0, 1 },  /* date */
+  {  2242,     0,     0, 1 },  /* dating */
+  {  2249,     0,     0, 1 },  /* datsun */
   {  1007,     0,     0, 1 },  /* day */
-  {  2266,     0,     0, 1 },  /* dclk */
-  {  2271,     0,     0, 1 },  /* dds */
-  {  2277,  2131,    48, 1 },  /* de */
-  {  2280,     0,     0, 1 },  /* deal */
-  {  2285,     0,     0, 1 },  /* dealer */
-  {  2292,     0,     0, 1 },  /* deals */
-  {  2298,     0,     0, 1 },  /* degree */
-  {  2305,     0,     0, 1 },  /* delivery */
-  {  2314,     0,     0, 1 },  /* dell */
-  {  2319,     0,     0, 1 },  /* deloitte */
-  {  2328,     0,     0, 1 },  /* delta */
-  {  2339,     0,     0, 1 },  /* democrat */
-  {  2348,     0,     0, 1 },  /* dental */
-  {  2355,     0,     0, 1 },  /* dentist */
-  {  2363,     0,     0, 1 },  /* desi */
-  {  2374,     0,     0, 1 },  /* design */
-  {  2383,     0,     0, 1 },  /* dev */
-  {  2387,     0,     0, 1 },  /* dhl */
-  {  2391,     0,     0, 1 },  /* diamonds */
-  {  2400,     0,     0, 1 },  /* diet */
-  {  2405,     0,     0, 1 },  /* digital */
-  {  2417,     0,     0, 1 },  /* direct */
-  {  2432,     0,     0, 1 },  /* directory */
-  {  2442,     0,     0, 1 },  /* discount */
-  {  2451,     0,     0, 1 },  /* discover */
-  {  2460,     0,     0, 1 },  /* dish */
-  {  2465,     0,     0, 1 },  /* diy */
-  {  2469,     0,     0, 1 },  /* dj */
-  {  2473,  4073,     6, 1 },  /* dk */
-  {  2477,  3817,     5, 1 },  /* dm */
-  {  2480,     0,     0, 1 },  /* dnp */
-  {    48,  4079,    10, 1 },  /* do */
-  {  2489,     0,     0, 1 },  /* docs */
-  {  2499,     0,     0, 1 },  /* doctor */
-  {  2506,     0,     0, 1 },  /* dodge */
-  {  2512,     0,     0, 1 },  /* dog */
-  {  2516,     0,     0, 1 },  /* doha */
-  {  2521,     0,     0, 1 },  /* domains */
-  {  2529,     0,     0, 1 },  /* dot */
-  {  2533,     0,     0, 1 },  /* download */
-  {  2542,     0,     0, 1 },  /* drive */
-  {  2548,     0,     0, 1 },  /* dtv */
-  {  2552,     0,     0, 1 },  /* dubai */
-  {  1780,     0,     0, 1 },  /* duck */
-  {  2558,     0,     0, 1 },  /* dunlop */
-  {  2565,     0,     0, 1 },  /* duns */
-  {  2570,     0,     0, 1 },  /* dupont */
-  {  2577,     0,     0, 1 },  /* durban */
+  {  2262,     0,     0, 1 },  /* dclk */
+  {  2267,     0,     0, 1 },  /* dds */
+  {  2273,  2223,    54, 1 },  /* de */
+  {  2276,     0,     0, 1 },  /* deal */
+  {  2281,     0,     0, 1 },  /* dealer */
+  {  2288,     0,     0, 1 },  /* deals */
+  {  2294,     0,     0, 1 },  /* degree */
+  {  2301,     0,     0, 1 },  /* delivery */
+  {  2310,     0,     0, 1 },  /* dell */
+  {  2315,     0,     0, 1 },  /* deloitte */
+  {  2324,     0,     0, 1 },  /* delta */
+  {  2335,     0,     0, 1 },  /* democrat */
+  {  2344,     0,     0, 1 },  /* dental */
+  {  2351,     0,     0, 1 },  /* dentist */
+  {  2359,     0,     0, 1 },  /* desi */
+  {  2370,     0,     0, 1 },  /* design */
+  {  2379,     0,     0, 1 },  /* dev */
+  {  2383,     0,     0, 1 },  /* dhl */
+  {  2387,     0,     0, 1 },  /* diamonds */
+  {  2396,     0,     0, 1 },  /* diet */
+  {  2401,     0,     0, 1 },  /* digital */
+  {  2413,  4349,     1, 1 },  /* direct */
+  {  2428,     0,     0, 1 },  /* directory */
+  {  2438,     0,     0, 1 },  /* discount */
+  {  2447,     0,     0, 1 },  /* discover */
+  {  2456,     0,     0, 1 },  /* dish */
+  {  2461,     0,     0, 1 },  /* diy */
+  {  2465,     0,     0, 1 },  /* dj */
+  {  2469,  4350,     6, 1 },  /* dk */
+  {  2473,  4130,     5, 1 },  /* dm */
+  {  2476,     0,     0, 1 },  /* dnp */
+  {    48,  4356,    10, 1 },  /* do */
+  {  2485,     0,     0, 1 },  /* docs */
+  {  2495,     0,     0, 1 },  /* doctor */
+  {  2502,     0,     0, 1 },  /* dodge */
+  {  2508,     0,     0, 1 },  /* dog */
+  {  2512,     0,     0, 1 },  /* doha */
+  {  2517,     0,     0, 1 },  /* domains */
+  {  2525,     0,     0, 1 },  /* dot */
+  {  2529,     0,     0, 1 },  /* download */
+  {  2538,     0,     0, 1 },  /* drive */
+  {  2544,     0,     0, 1 },  /* dtv */
+  {  2548,     0,     0, 1 },  /* dubai */
+  {  1776,     0,     0, 1 },  /* duck */
+  {  2554,     0,     0, 1 },  /* dunlop */
+  {  2561,     0,     0, 1 },  /* duns */
+  {  2566,     0,     0, 1 },  /* dupont */
+  {  2573,     0,     0, 1 },  /* durban */
   {   224,     0,     0, 1 },  /* dvag */
-  {  2584,     0,     0, 1 },  /* dvr */
-  {  2593,  4089,     8, 1 },  /* dz */
-  {  2596,     0,     0, 1 },  /* earth */
-  {  2603,     0,     0, 1 },  /* eat */
-  {  1966,  4097,    12, 1 },  /* ec */
-  {  2613,     0,     0, 1 },  /* eco */
-  {  2617,     0,     0, 1 },  /* edeka */
-  {  2623,     0,     0, 1 },  /* edu */
-  {  2630,     0,     0, 1 },  /* education */
-  {  1887,  2179,    10, 1 },  /* ee */
-  {   161,  2189,     9, 1 },  /* eg */
-  {  2649,     0,     0, 1 },  /* email */
-  {  2655,     0,     0, 1 },  /* emerck */
-  {  2662,     0,     0, 1 },  /* energy */
-  {  2675,     0,     0, 1 },  /* engineer */
-  {  2684,     0,     0, 1 },  /* engineering */
-  {  2696,     0,     0, 1 },  /* enterprises */
-  {  2708,     0,     0, 1 },  /* epost */
-  {  2714,     0,     0, 1 },  /* epson */
-  {  2724,     0,     0, 1 },  /* equipment */
-  {   883,  3853,     1, 0 },  /* er */
-  {  2739,     0,     0, 1 },  /* ericsson */
-  {  2749,     0,     0, 1 },  /* erni */
-  {   558,  2198,     5, 1 },  /* es */
-  {  2760,     0,     0, 1 },  /* esq */
-  {  2768,  2203,     1, 1 },  /* estate */
-  {  2775,     0,     0, 1 },  /* esurance */
-  {   915,  4109,     8, 1 },  /* et */
-  {  2788,     0,     0, 1 },  /* etisalat */
-  {  2797,  2204,     7, 1 },  /* eu */
-  {  2800,     0,     0, 1 },  /* eurovision */
-  {  2811,  2211,     1, 1 },  /* eus */
-  {  2815,     0,     0, 1 },  /* events */
-  {  2822,     0,     0, 1 },  /* everbank */
-  {  2836,     0,     0, 1 },  /* exchange */
-  {  2854,     0,     0, 1 },  /* expert */
-  {  2861,     0,     0, 1 },  /* exposed */
+  {  2583,     0,     0, 1 },  /* dvr */
+  {  2592,  4366,     8, 1 },  /* dz */
+  {  2595,     0,     0, 1 },  /* earth */
+  {  2602,     0,     0, 1 },  /* eat */
+  {  1962,  4374,    12, 1 },  /* ec */
+  {  2612,     0,     0, 1 },  /* eco */
+  {  2616,     0,     0, 1 },  /* edeka */
+  {  2622,     0,     0, 1 },  /* edu */
+  {  2629,     0,     0, 1 },  /* education */
+  {  1883,  2277,    10, 1 },  /* ee */
+  {   161,  2287,     9, 1 },  /* eg */
+  {  2648,     0,     0, 1 },  /* email */
+  {  2654,     0,     0, 1 },  /* emerck */
+  {  2661,     0,     0, 1 },  /* energy */
+  {  2674,     0,     0, 1 },  /* engineer */
+  {  2683,     0,     0, 1 },  /* engineering */
+  {  2695,     0,     0, 1 },  /* enterprises */
+  {  2707,     0,     0, 1 },  /* epost */
+  {  2713,     0,     0, 1 },  /* epson */
+  {  2723,     0,     0, 1 },  /* equipment */
+  {   883,  4048,     1, 0 },  /* er */
+  {  2738,     0,     0, 1 },  /* ericsson */
+  {  2748,     0,     0, 1 },  /* erni */
+  {   558,  2296,     5, 1 },  /* es */
+  {  2759,     0,     0, 1 },  /* esq */
+  {  2767,  2301,     1, 1 },  /* estate */
+  {  2774,     0,     0, 1 },  /* esurance */
+  {   915,  4386,     8, 1 },  /* et */
+  {  2787,     0,     0, 1 },  /* etisalat */
+  {  2796,  2302,     7, 1 },  /* eu */
+  {  2799,     0,     0, 1 },  /* eurovision */
+  {  2810,  2309,     1, 1 },  /* eus */
+  {  2814,     0,     0, 1 },  /* events */
+  {  2821,     0,     0, 1 },  /* everbank */
+  {  2835,     0,     0, 1 },  /* exchange */
+  {  2853,     0,     0, 1 },  /* expert */
+  {  2860,     0,     0, 1 },  /* exposed */
   {   369,     0,     0, 1 },  /* express */
-  {  2869,     0,     0, 1 },  /* extraspace */
-  {  2880,     0,     0, 1 },  /* fage */
-  {  2885,     0,     0, 1 },  /* fail */
-  {  2890,     0,     0, 1 },  /* fairwinds */
-  {  2900,  4118,     1, 1 },  /* faith */
+  {  2868,     0,     0, 1 },  /* extraspace */
+  {  2879,     0,     0, 1 },  /* fage */
+  {  2884,     0,     0, 1 },  /* fail */
+  {  2889,     0,     0, 1 },  /* fairwinds */
+  {  2899,  4395,     1, 1 },  /* faith */
   {   385,     0,     0, 1 },  /* family */
-  {  2919,     0,     0, 1 },  /* fan */
-  {  2923,     0,     0, 1 },  /* fans */
-  {  2933,  4119,     1, 1 },  /* farm */
-  {  2938,     0,     0, 1 },  /* farmers */
-  {  2946,     0,     0, 1 },  /* fashion */
-  {  2954,     0,     0, 1 },  /* fast */
-  {  2959,     0,     0, 1 },  /* fedex */
-  {  2965,     0,     0, 1 },  /* feedback */
-  {  2974,     0,     0, 1 },  /* ferrari */
-  {  2982,     0,     0, 1 },  /* ferrero */
-  {  2994,  4120,     4, 1 },  /* fi */
-  {  2997,     0,     0, 1 },  /* fiat */
-  {  3002,     0,     0, 1 },  /* fidelity */
-  {  3011,     0,     0, 1 },  /* fido */
-  {  3016,     0,     0, 1 },  /* film */
-  {  3021,     0,     0, 1 },  /* final */
-  {  3027,     0,     0, 1 },  /* finance */
-  {  3038,     0,     0, 1 },  /* financial */
-  {  3048,     0,     0, 1 },  /* fire */
-  {  3053,     0,     0, 1 },  /* firestone */
-  {  3063,     0,     0, 1 },  /* firmdale */
-  {  3072,     0,     0, 1 },  /* fish */
-  {  3077,     0,     0, 1 },  /* fishing */
-  {  3085,  4124,     1, 1 },  /* fit */
-  {  3089,     0,     0, 1 },  /* fitness */
-  {  3097,  3853,     1, 0 },  /* fj */
-  {  3101,  3853,     1, 0 },  /* fk */
-  {  3104,     0,     0, 1 },  /* flickr */
-  {  3111,     0,     0, 1 },  /* flights */
-  {  3119,     0,     0, 1 },  /* flir */
-  {  3124,     0,     0, 1 },  /* florist */
-  {  3132,     0,     0, 1 },  /* flowers */
-  {  3140,     0,     0, 1 },  /* fly */
-  {  3145,     0,     0, 1 },  /* fm */
-  {  3154,     0,     0, 1 },  /* fo */
-  {  3157,     0,     0, 1 },  /* foo */
-  {  3161,     0,     0, 1 },  /* food */
-  {  3166,     0,     0, 1 },  /* foodnetwork */
-  {  3178,     0,     0, 1 },  /* football */
-  {  3189,     0,     0, 1 },  /* ford */
-  {  3194,     0,     0, 1 },  /* forex */
-  {  3200,     0,     0, 1 },  /* forsale */
-  {  3208,     0,     0, 1 },  /* forum */
-  {  3214,     0,     0, 1 },  /* foundation */
-  {  3225,     0,     0, 1 },  /* fox */
-  {  3230,  4125,    30, 1 },  /* fr */
-  {  3240,     0,     0, 1 },  /* free */
-  {  3245,     0,     0, 1 },  /* fresenius */
-  {  3255,     0,     0, 1 },  /* frl */
-  {  3259,     0,     0, 1 },  /* frogans */
-  {  3267,     0,     0, 1 },  /* frontdoor */
-  {  3277,     0,     0, 1 },  /* frontier */
-  {  3286,     0,     0, 1 },  /* ftr */
-  {  3290,     0,     0, 1 },  /* fujitsu */
-  {  3298,     0,     0, 1 },  /* fujixerox */
-  {  3308,     0,     0, 1 },  /* fun */
-  {  3312,     0,     0, 1 },  /* fund */
-  {  3317,     0,     0, 1 },  /* furniture */
-  {  3327,     0,     0, 1 },  /* futbol */
-  {  3334,     0,     0, 1 },  /* fyi */
-  {  3340,     0,     0, 1 },  /* ga */
-  {  3345,     0,     0, 1 },  /* gal */
-  {  3352,     0,     0, 1 },  /* gallery */
-  {  3360,     0,     0, 1 },  /* gallo */
-  {  3366,     0,     0, 1 },  /* gallup */
-  {  3377,     0,     0, 1 },  /* game */
-  {  3390,     0,     0, 1 },  /* games */
-  {  3396,     0,     0, 1 },  /* gap */
-  {  3402,     0,     0, 1 },  /* garden */
-  {  3426,     0,     0, 1 },  /* gb */
-  {  3429,     0,     0, 1 },  /* gbiz */
-  {  3434,     0,     0, 1 },  /* gd */
-  {  3437,     0,     0, 1 },  /* gdn */
-  {  1900,  4155,     7, 1 },  /* ge */
-  {  3446,     0,     0, 1 },  /* gea */
-  {  3450,     0,     0, 1 },  /* gent */
-  {  3455,     0,     0, 1 },  /* genting */
-  {  3463,     0,     0, 1 },  /* george */
-  {  3471,     0,     0, 1 },  /* gf */
-  {  3474,  4162,     4, 1 },  /* gg */
-  {  3477,     0,     0, 1 },  /* ggee */
-  {  3490,  4166,     5, 1 },  /* gh */
-  {  3495,  4171,     6, 1 },  /* gi */
-  {  3498,     0,     0, 1 },  /* gift */
-  {  3503,     0,     0, 1 },  /* gifts */
-  {  3509,     0,     0, 1 },  /* gives */
-  {  3515,     0,     0, 1 },  /* giving */
-  {  3522,  4177,     5, 1 },  /* gl */
-  {  3525,     0,     0, 1 },  /* glade */
-  {  3531,     0,     0, 1 },  /* glass */
-  {  3544,     0,     0, 1 },  /* gle */
-  {  3548,     0,     0, 1 },  /* global */
-  {  3555,     0,     0, 1 },  /* globo */
-  {  3575,     0,     0, 1 },  /* gm */
-  {  3578,     0,     0, 1 },  /* gmail */
+  {  2918,     0,     0, 1 },  /* fan */
+  {  2922,     0,     0, 1 },  /* fans */
+  {  2932,  4396,     1, 1 },  /* farm */
+  {  2937,     0,     0, 1 },  /* farmers */
+  {  2945,     0,     0, 1 },  /* fashion */
+  {  2953,     0,     0, 1 },  /* fast */
+  {  2958,     0,     0, 1 },  /* fedex */
+  {  2964,     0,     0, 1 },  /* feedback */
+  {  2973,     0,     0, 1 },  /* ferrari */
+  {  2981,     0,     0, 1 },  /* ferrero */
+  {  2993,  4397,     4, 1 },  /* fi */
+  {  2996,     0,     0, 1 },  /* fiat */
+  {  3001,     0,     0, 1 },  /* fidelity */
+  {  3010,     0,     0, 1 },  /* fido */
+  {  3015,     0,     0, 1 },  /* film */
+  {  3020,     0,     0, 1 },  /* final */
+  {  3026,     0,     0, 1 },  /* finance */
+  {  3037,     0,     0, 1 },  /* financial */
+  {  3047,     0,     0, 1 },  /* fire */
+  {  3052,     0,     0, 1 },  /* firestone */
+  {  3062,     0,     0, 1 },  /* firmdale */
+  {  3071,     0,     0, 1 },  /* fish */
+  {  3076,     0,     0, 1 },  /* fishing */
+  {  3084,  4401,     1, 1 },  /* fit */
+  {  3088,     0,     0, 1 },  /* fitness */
+  {  3096,  4048,     1, 0 },  /* fj */
+  {  3100,  4048,     1, 0 },  /* fk */
+  {  3103,     0,     0, 1 },  /* flickr */
+  {  3110,     0,     0, 1 },  /* flights */
+  {  3118,     0,     0, 1 },  /* flir */
+  {  3123,     0,     0, 1 },  /* florist */
+  {  3131,     0,     0, 1 },  /* flowers */
+  {  3139,     0,     0, 1 },  /* fly */
+  {  3144,     0,     0, 1 },  /* fm */
+  {  3151,     0,     0, 1 },  /* fo */
+  {  3154,     0,     0, 1 },  /* foo */
+  {  3158,     0,     0, 1 },  /* food */
+  {  3163,     0,     0, 1 },  /* foodnetwork */
+  {  3175,     0,     0, 1 },  /* football */
+  {  3186,     0,     0, 1 },  /* ford */
+  {  3191,     0,     0, 1 },  /* forex */
+  {  3197,     0,     0, 1 },  /* forsale */
+  {  3205,     0,     0, 1 },  /* forum */
+  {  3211,     0,     0, 1 },  /* foundation */
+  {  3222,     0,     0, 1 },  /* fox */
+  {  3227,  4402,    30, 1 },  /* fr */
+  {  3234,     0,     0, 1 },  /* free */
+  {  3239,     0,     0, 1 },  /* fresenius */
+  {  3249,     0,     0, 1 },  /* frl */
+  {  3253,     0,     0, 1 },  /* frogans */
+  {  3261,     0,     0, 1 },  /* frontdoor */
+  {  3271,     0,     0, 1 },  /* frontier */
+  {  3280,     0,     0, 1 },  /* ftr */
+  {  3284,     0,     0, 1 },  /* fujitsu */
+  {  3292,     0,     0, 1 },  /* fujixerox */
+  {  3302,     0,     0, 1 },  /* fun */
+  {  3306,     0,     0, 1 },  /* fund */
+  {  3311,     0,     0, 1 },  /* furniture */
+  {  3321,     0,     0, 1 },  /* futbol */
+  {  3328,     0,     0, 1 },  /* fyi */
+  {  3334,     0,     0, 1 },  /* ga */
+  {  3339,     0,     0, 1 },  /* gal */
+  {  3346,     0,     0, 1 },  /* gallery */
+  {  3354,     0,     0, 1 },  /* gallo */
+  {  3360,     0,     0, 1 },  /* gallup */
+  {  3371,     0,     0, 1 },  /* game */
+  {  3384,     0,     0, 1 },  /* games */
+  {  3390,     0,     0, 1 },  /* gap */
+  {  3396,     0,     0, 1 },  /* garden */
+  {  3420,     0,     0, 1 },  /* gb */
+  {  3423,     0,     0, 1 },  /* gbiz */
+  {  3428,  3911,     1, 1 },  /* gd */
+  {  3431,  4432,     1, 1 },  /* gdn */
+  {  1896,  4433,     8, 1 },  /* ge */
+  {  3440,     0,     0, 1 },  /* gea */
+  {  3444,     0,     0, 1 },  /* gent */
+  {  3449,     0,     0, 1 },  /* genting */
+  {  3457,     0,     0, 1 },  /* george */
+  {  3465,     0,     0, 1 },  /* gf */
+  {  3468,  4441,     4, 1 },  /* gg */
+  {  3471,     0,     0, 1 },  /* ggee */
+  {  3484,  4445,     5, 1 },  /* gh */
+  {  3489,  4450,     6, 1 },  /* gi */
+  {  3492,     0,     0, 1 },  /* gift */
+  {  3497,     0,     0, 1 },  /* gifts */
+  {  3503,     0,     0, 1 },  /* gives */
+  {  3509,     0,     0, 1 },  /* giving */
+  {  3516,  4456,     6, 1 },  /* gl */
+  {  3519,     0,     0, 1 },  /* glade */
+  {  3525,     0,     0, 1 },  /* glass */
+  {  3538,     0,     0, 1 },  /* gle */
+  {  3542,     0,     0, 1 },  /* global */
+  {  3549,     0,     0, 1 },  /* globo */
+  {  3569,     0,     0, 1 },  /* gm */
+  {  3572,     0,     0, 1 },  /* gmail */
   {   935,     0,     0, 1 },  /* gmbh */
-  {  3584,     0,     0, 1 },  /* gmo */
-  {  3588,     0,     0, 1 },  /* gmx */
-  {  2378,  4182,     6, 1 },  /* gn */
-  {  3598,     0,     0, 1 },  /* godaddy */
-  {  3606,     0,     0, 1 },  /* gold */
-  {  3611,     0,     0, 1 },  /* goldpoint */
-  {  3621,     0,     0, 1 },  /* golf */
-  {  3626,     0,     0, 1 },  /* goo */
-  {  3630,     0,     0, 1 },  /* goodhands */
-  {  3640,     0,     0, 1 },  /* goodyear */
-  {  3649,  4188,     1, 1 },  /* goog */
-  {  3541,     0,     0, 1 },  /* google */
-  {  3654,     0,     0, 1 },  /* gop */
-  {  3661,     0,     0, 1 },  /* got */
-  {  3671,     0,     0, 1 },  /* gov */
-  {  3675,  4189,     6, 1 },  /* gp */
-  {  3678,     0,     0, 1 },  /* gq */
-  {  3682,  4195,     6, 1 },  /* gr */
-  {  3685,     0,     0, 1 },  /* grainger */
-  {  3694,     0,     0, 1 },  /* graphics */
-  {  3703,     0,     0, 1 },  /* gratis */
-  {  3715,     0,     0, 1 },  /* green */
-  {  3721,     0,     0, 1 },  /* gripe */
-  {  3727,     0,     0, 1 },  /* grocery */
-  {  3738,     0,     0, 1 },  /* group */
-  {  3745,     0,     0, 1 },  /* gs */
-  {  3748,  4201,     7, 1 },  /* gt */
-  {  3753,  3853,     1, 0 },  /* gu */
-  {  3756,     0,     0, 1 },  /* guardian */
-  {  3765,     0,     0, 1 },  /* gucci */
-  {  3771,     0,     0, 1 },  /* guge */
-  {  3776,     0,     0, 1 },  /* guide */
-  {  3782,     0,     0, 1 },  /* guitars */
-  {  3795,     0,     0, 1 },  /* guru */
-  {  3802,     0,     0, 1 },  /* gw */
-  {  2666,  4208,     6, 1 },  /* gy */
-  {  3805,     0,     0, 1 },  /* hair */
-  {  3810,     0,     0, 1 },  /* hamburg */
-  {  3818,     0,     0, 1 },  /* hangout */
+  {  3578,     0,     0, 1 },  /* gmo */
+  {  3582,     0,     0, 1 },  /* gmx */
+  {  2374,  4462,     6, 1 },  /* gn */
+  {  3592,     0,     0, 1 },  /* godaddy */
+  {  3600,     0,     0, 1 },  /* gold */
+  {  3605,     0,     0, 1 },  /* goldpoint */
+  {  3615,     0,     0, 1 },  /* golf */
+  {  3620,     0,     0, 1 },  /* goo */
+  {  3624,     0,     0, 1 },  /* goodhands */
+  {  3634,     0,     0, 1 },  /* goodyear */
+  {  3643,  4468,     1, 1 },  /* goog */
+  {  3535,     0,     0, 1 },  /* google */
+  {  3648,     0,     0, 1 },  /* gop */
+  {  3655,     0,     0, 1 },  /* got */
+  {  3665,     0,     0, 1 },  /* gov */
+  {  3669,  4469,     6, 1 },  /* gp */
+  {  3672,     0,     0, 1 },  /* gq */
+  {  3676,  4475,     7, 1 },  /* gr */
+  {  3679,     0,     0, 1 },  /* grainger */
+  {  3688,     0,     0, 1 },  /* graphics */
+  {  3697,     0,     0, 1 },  /* gratis */
+  {  3709,     0,     0, 1 },  /* green */
+  {  3715,     0,     0, 1 },  /* gripe */
+  {  3721,     0,     0, 1 },  /* grocery */
+  {  3732,     0,     0, 1 },  /* group */
+  {  3739,     0,     0, 1 },  /* gs */
+  {  3742,  4482,     8, 1 },  /* gt */
+  {  3747,  4490,     8, 1 },  /* gu */
+  {  3750,     0,     0, 1 },  /* guardian */
+  {  3759,     0,     0, 1 },  /* gucci */
+  {  3765,     0,     0, 1 },  /* guge */
+  {  3770,     0,     0, 1 },  /* guide */
+  {  3776,     0,     0, 1 },  /* guitars */
+  {  3789,     0,     0, 1 },  /* guru */
+  {  3796,     0,     0, 1 },  /* gw */
+  {  2665,  4498,     7, 1 },  /* gy */
+  {  3799,     0,     0, 1 },  /* hair */
+  {  3804,     0,     0, 1 },  /* hamburg */
+  {  3812,     0,     0, 1 },  /* hangout */
   {   812,     0,     0, 1 },  /* haus */
-  {  3826,     0,     0, 1 },  /* hbo */
-  {  3830,     0,     0, 1 },  /* hdfc */
-  {  3835,     0,     0, 1 },  /* hdfcbank */
-  {  3844,     0,     0, 1 },  /* health */
-  {  1445,     0,     0, 1 },  /* healthcare */
-  {  3851,     0,     0, 1 },  /* help */
-  {  3856,     0,     0, 1 },  /* helsinki */
-  {  3869,     0,     0, 1 },  /* here */
-  {  3874,     0,     0, 1 },  /* hermes */
-  {  3881,     0,     0, 1 },  /* hgtv */
-  {  3886,     0,     0, 1 },  /* hiphop */
-  {  3893,     0,     0, 1 },  /* hisamitsu */
-  {  3903,     0,     0, 1 },  /* hitachi */
-  {  3917,     0,     0, 1 },  /* hiv */
-  {  3922,  4214,    24, 1 },  /* hk */
-  {  3925,     0,     0, 1 },  /* hkt */
-  {  3929,     0,     0, 1 },  /* hm */
-  {  3936,  4238,     6, 1 },  /* hn */
-  {  3939,     0,     0, 1 },  /* hockey */
-  {  3946,     0,     0, 1 },  /* holdings */
-  {  3955,     0,     0, 1 },  /* holiday */
-  {  3963,     0,     0, 1 },  /* homedepot */
-  {  3973,     0,     0, 1 },  /* homegoods */
-  {  3983,     0,     0, 1 },  /* homes */
-  {  3989,     0,     0, 1 },  /* homesense */
-  {  3999,     0,     0, 1 },  /* honda */
-  {  4005,     0,     0, 1 },  /* honeywell */
-  {  4015,     0,     0, 1 },  /* horse */
-  {  4021,     0,     0, 1 },  /* hospital */
-  {  4033,  4244,     2, 1 },  /* host */
-  {  4043,  4246,     1, 1 },  /* hosting */
-  {  4051,     0,     0, 1 },  /* hot */
-  {  4055,     0,     0, 1 },  /* hoteles */
-  {  4068,     0,     0, 1 },  /* hotels */
-  {  4075,     0,     0, 1 },  /* hotmail */
-  {  4086,     0,     0, 1 },  /* house */
-  {  4093,     0,     0, 1 },  /* how */
-  {  4099,  4247,     5, 1 },  /* hr */
-  {  4102,     0,     0, 1 },  /* hsbc */
-  {  4110,  4252,    17, 1 },  /* ht */
-  {  4113,     0,     0, 1 },  /* htc */
-  {  4119,  4269,    32, 1 },  /* hu */
-  {  4122,     0,     0, 1 },  /* hughes */
-  {  4129,     0,     0, 1 },  /* hyatt */
-  {  4135,     0,     0, 1 },  /* hyundai */
+  {  3820,     0,     0, 1 },  /* hbo */
+  {  3824,     0,     0, 1 },  /* hdfc */
+  {  3829,     0,     0, 1 },  /* hdfcbank */
+  {  3838,     0,     0, 1 },  /* health */
+  {  1438,     0,     0, 1 },  /* healthcare */
+  {  3845,     0,     0, 1 },  /* help */
+  {  3850,     0,     0, 1 },  /* helsinki */
+  {  3863,     0,     0, 1 },  /* here */
+  {  3868,     0,     0, 1 },  /* hermes */
+  {  3875,     0,     0, 1 },  /* hgtv */
+  {  3880,     0,     0, 1 },  /* hiphop */
+  {  3887,     0,     0, 1 },  /* hisamitsu */
+  {  3897,     0,     0, 1 },  /* hitachi */
+  {  3911,     0,     0, 1 },  /* hiv */
+  {  3916,  4505,    24, 1 },  /* hk */
+  {  3919,     0,     0, 1 },  /* hkt */
+  {  3923,     0,     0, 1 },  /* hm */
+  {  3930,  4529,     7, 1 },  /* hn */
+  {  3933,     0,     0, 1 },  /* hockey */
+  {  3940,     0,     0, 1 },  /* holdings */
+  {  3949,     0,     0, 1 },  /* holiday */
+  {  3957,     0,     0, 1 },  /* homedepot */
+  {  3967,     0,     0, 1 },  /* homegoods */
+  {  3977,     0,     0, 1 },  /* homes */
+  {  3983,     0,     0, 1 },  /* homesense */
+  {  3993,     0,     0, 1 },  /* honda */
+  {  3999,     0,     0, 1 },  /* honeywell */
+  {  4009,     0,     0, 1 },  /* horse */
+  {  4015,     0,     0, 1 },  /* hospital */
+  {  4026,  4536,     4, 1 },  /* host */
+  {  4034,  4540,     1, 1 },  /* hosting */
+  {  4042,     0,     0, 1 },  /* hot */
+  {  4046,     0,     0, 1 },  /* hoteles */
+  {  4059,     0,     0, 1 },  /* hotels */
+  {  4066,     0,     0, 1 },  /* hotmail */
+  {  4077,     0,     0, 1 },  /* house */
+  {  4084,     0,     0, 1 },  /* how */
+  {  4090,  4541,     5, 1 },  /* hr */
+  {  4093,     0,     0, 1 },  /* hsbc */
+  {  4101,  4546,    17, 1 },  /* ht */
+  {  4106,  4563,    32, 1 },  /* hu */
+  {  4109,     0,     0, 1 },  /* hughes */
+  {  4116,     0,     0, 1 },  /* hyatt */
+  {  4122,     0,     0, 1 },  /* hyundai */
   {  1055,     0,     0, 1 },  /* ibm */
-  {  4143,     0,     0, 1 },  /* icbc */
-  {  4151,     0,     0, 1 },  /* ice */
-  {  2162,     0,     0, 1 },  /* icu */
-  {   437,  2212,    11, 1 },  /* id */
-  {    31,  4301,     2, 1 },  /* ie */
-  {  4159,     0,     0, 1 },  /* ieee */
-  {  3144,     0,     0, 1 },  /* ifm */
-  {  4164,     0,     0, 1 },  /* ikano */
-  {  2652,  2223,     8, 1 },  /* il */
-  {  4175,  2231,     8, 1 },  /* im */
-  {  4178,     0,     0, 1 },  /* imamat */
-  {  4185,     0,     0, 1 },  /* imdb */
-  {  4190,     0,     0, 1 },  /* immo */
-  {  4195,     0,     0, 1 },  /* immobilien */
-  {   898,  4305,    15, 1 },  /* in */
-  {  4210,     0,     0, 1 },  /* industries */
-  {  4221,     0,     0, 1 },  /* infiniti */
-  {  3152,  4320,    16, 1 },  /* info */
+  {  4130,     0,     0, 1 },  /* icbc */
+  {  4138,     0,     0, 1 },  /* ice */
+  {  2158,     0,     0, 1 },  /* icu */
+  {   437,  2310,    12, 1 },  /* id */
+  {    31,  4595,     3, 1 },  /* ie */
+  {  4146,     0,     0, 1 },  /* ieee */
+  {  3143,     0,     0, 1 },  /* ifm */
+  {  4151,     0,     0, 1 },  /* ikano */
+  {  2651,  2322,     8, 1 },  /* il */
+  {  4162,  2330,     9, 1 },  /* im */
+  {  4165,     0,     0, 1 },  /* imamat */
+  {  4172,     0,     0, 1 },  /* imdb */
+  {  4177,     0,     0, 1 },  /* immo */
+  {  4182,     0,     0, 1 },  /* immobilien */
+  {   898,  4600,    15, 1 },  /* in */
+  {  4197,     0,     0, 1 },  /* inc */
+  {  4201,     0,     0, 1 },  /* industries */
+  {  4212,     0,     0, 1 },  /* infiniti */
+  {  3149,  4615,    20, 1 },  /* info */
   {   971,     0,     0, 1 },  /* ing */
-  {  4237,     0,     0, 1 },  /* ink */
-  {  4241,     0,     0, 1 },  /* institute */
-  {  4255,     0,     0, 1 },  /* insurance */
-  {  4265,     0,     0, 1 },  /* insure */
-  {  3617,  4045,     1, 1 },  /* int */
-  {  4277,     0,     0, 1 },  /* intel */
-  {  4283,     0,     0, 1 },  /* international */
-  {  4297,     0,     0, 1 },  /* intuit */
-  {  4304,     0,     0, 1 },  /* investments */
-  {   611,  2239,    25, 1 },  /* io */
-  {  4316,     0,     0, 1 },  /* ipiranga */
-  {  4325,  3715,     6, 1 },  /* iq */
-  {  3121,  4338,     9, 1 },  /* ir */
-  {  4332,     0,     0, 1 },  /* irish */
-  {  3707,  4347,     8, 1 },  /* is */
-  {  4343,     0,     0, 1 },  /* iselect */
-  {  4351,     0,     0, 1 },  /* ismaili */
-  {  2359,     0,     0, 1 },  /* ist */
-  {  4364,     0,     0, 1 },  /* istanbul */
-  {  2099,  4355,   369, 1 },  /* it */
+  {  4228,     0,     0, 1 },  /* ink */
+  {  4232,     0,     0, 1 },  /* institute */
+  {  4246,     0,     0, 1 },  /* insurance */
+  {  4256,     0,     0, 1 },  /* insure */
+  {  3611,  4315,     1, 1 },  /* int */
+  {  4268,     0,     0, 1 },  /* intel */
+  {  4274,     0,     0, 1 },  /* international */
+  {  4288,     0,     0, 1 },  /* intuit */
+  {  4295,     0,     0, 1 },  /* investments */
+  {   611,  2339,    34, 1 },  /* io */
+  {  4307,     0,     0, 1 },  /* ipiranga */
+  {  4316,  3904,     6, 1 },  /* iq */
+  {  3120,  4638,     9, 1 },  /* ir */
+  {  4323,     0,     0, 1 },  /* irish */
+  {  3701,  4647,     8, 1 },  /* is */
+  {  4334,     0,     0, 1 },  /* iselect */
+  {  4342,     0,     0, 1 },  /* ismaili */
+  {  2355,     0,     0, 1 },  /* ist */
+  {  4350,     0,     0, 1 },  /* istanbul */
+  {  2095,  4655,   410, 1 },  /* it */
   {   582,     0,     0, 1 },  /* itau */
-  {  4373,     0,     0, 1 },  /* itv */
-  {  2611,     0,     0, 1 },  /* iveco */
-  {  4377,     0,     0, 1 },  /* iwc */
-  {  4381,     0,     0, 1 },  /* jaguar */
-  {  4388,     0,     0, 1 },  /* java */
-  {  4393,     0,     0, 1 },  /* jcb */
-  {  4397,     0,     0, 1 },  /* jcp */
-  {  4404,  4724,     3, 1 },  /* je */
-  {  4407,     0,     0, 1 },  /* jeep */
-  {  4412,     0,     0, 1 },  /* jetzt */
-  {  4418,     0,     0, 1 },  /* jewelry */
-  {  4426,     0,     0, 1 },  /* jio */
-  {  4430,     0,     0, 1 },  /* jlc */
-  {  4434,     0,     0, 1 },  /* jll */
-  {  4438,  3853,     1, 0 },  /* jm */
-  {  4441,     0,     0, 1 },  /* jmp */
-  {  4445,     0,     0, 1 },  /* jnj */
-  {  4451,  4727,     8, 1 },  /* jo */
-  {  4454,     0,     0, 1 },  /* jobs */
-  {  4459,     0,     0, 1 },  /* joburg */
-  {  4466,     0,     0, 1 },  /* jot */
-  {  4470,     0,     0, 1 },  /* joy */
-  {  4474,  2268,   111, 1 },  /* jp */
-  {  4477,     0,     0, 1 },  /* jpmorgan */
-  {  4486,     0,     0, 1 },  /* jprs */
-  {  4491,     0,     0, 1 },  /* juegos */
-  {  4498,     0,     0, 1 },  /* juniper */
-  {  4506,     0,     0, 1 },  /* kaufen */
-  {  4513,     0,     0, 1 },  /* kddi */
-  {   963,  2379,     2, 0 },  /* ke */
-  {  4063,     0,     0, 1 },  /* kerryhotels */
-  {  4523,     0,     0, 1 },  /* kerrylogistics */
-  {  4538,     0,     0, 1 },  /* kerryproperties */
-  {  4554,     0,     0, 1 },  /* kfh */
-  {  4558,  3715,     6, 1 },  /* kg */
-  {  4561,  3853,     1, 0 },  /* kh */
-  {  3862,  6410,     7, 1 },  /* ki */
-  {  4570,     0,     0, 1 },  /* kia */
-  {  4576,     0,     0, 1 },  /* kim */
-  {  4580,     0,     0, 1 },  /* kinder */
-  {  4587,     0,     0, 1 },  /* kindle */
-  {  4594,     0,     0, 1 },  /* kitchen */
-  {  4602,     0,     0, 1 },  /* kiwi */
-  {  4607,  6417,    17, 1 },  /* km */
-  {  4612,  6434,     4, 1 },  /* kn */
-  {  4615,     0,     0, 1 },  /* koeln */
-  {  4621,     0,     0, 1 },  /* komatsu */
-  {  4629,     0,     0, 1 },  /* kosher */
-  {  4644,  6438,     6, 1 },  /* kp */
-  {  4647,     0,     0, 1 },  /* kpmg */
-  {  4652,     0,     0, 1 },  /* kpn */
-  {  3108,  6444,    30, 1 },  /* kr */
-  {  4661,  6474,     2, 1 },  /* krd */
-  {  4665,     0,     0, 1 },  /* kred */
-  {  4670,     0,     0, 1 },  /* kuokgroup */
-  {  4680,  3853,     1, 0 },  /* kw */
-  {  4684,  3817,     5, 1 },  /* ky */
-  {  4687,     0,     0, 1 },  /* kyoto */
-  {  4693,  3715,     6, 1 },  /* kz */
-  {  2174,  6476,    10, 1 },  /* la */
-  {  4700,     0,     0, 1 },  /* lacaixa */
-  {  4708,     0,     0, 1 },  /* ladbrokes */
-  {  4718,     0,     0, 1 },  /* lamborghini */
-  {  4730,     0,     0, 1 },  /* lamer */
-  {  4736,     0,     0, 1 },  /* lancaster */
-  {  4746,     0,     0, 1 },  /* lancia */
-  {  4753,     0,     0, 1 },  /* lancome */
-  {  4763,  2381,     1, 1 },  /* land */
-  {  4768,     0,     0, 1 },  /* landrover */
-  {  4778,     0,     0, 1 },  /* lanxess */
-  {  4786,     0,     0, 1 },  /* lasalle */
-  {  2793,     0,     0, 1 },  /* lat */
-  {  4800,     0,     0, 1 },  /* latino */
-  {  4807,     0,     0, 1 },  /* latrobe */
-  {  4819,     0,     0, 1 },  /* law */
-  {  4828,     0,     0, 1 },  /* lawyer */
-  {  4836,  3817,     5, 1 },  /* lb */
-  {  4431,  6488,     7, 1 },  /* lc */
-  {  4849,     0,     0, 1 },  /* lds */
-  {  4853,     0,     0, 1 },  /* lease */
-  {  4859,     0,     0, 1 },  /* leclerc */
-  {  4867,     0,     0, 1 },  /* lefrak */
-  {  3343,     0,     0, 1 },  /* legal */
-  {  4874,     0,     0, 1 },  /* lego */
-  {  4879,     0,     0, 1 },  /* lexus */
-  {  4885,     0,     0, 1 },  /* lgbt */
-  {  4356,  3838,     1, 1 },  /* li */
-  {  4895,     0,     0, 1 },  /* liaison */
-  {  4903,     0,     0, 1 },  /* lidl */
-  {  4911,     0,     0, 1 },  /* life */
-  {  4251,     0,     0, 1 },  /* lifeinsurance */
-  {  4916,     0,     0, 1 },  /* lifestyle */
-  {  4926,     0,     0, 1 },  /* lighting */
-  {  4935,     0,     0, 1 },  /* like */
-  {  4940,     0,     0, 1 },  /* lilly */
-  {  4946,     0,     0, 1 },  /* limited */
-  {  4954,     0,     0, 1 },  /* limo */
-  {  4959,     0,     0, 1 },  /* lincoln */
-  {  4967,     0,     0, 1 },  /* linde */
-  {  4977,  6495,     2, 1 },  /* link */
-  {  4982,     0,     0, 1 },  /* lipsy */
-  {  4988,     0,     0, 1 },  /* live */
-  {  4993,     0,     0, 1 },  /* living */
-  {  5000,     0,     0, 1 },  /* lixil */
-  {  2268,  6497,    15, 1 },  /* lk */
-  {  5010,     0,     0, 1 },  /* loan */
-  {  5015,     0,     0, 1 },  /* loans */
-  {  5021,     0,     0, 1 },  /* locker */
-  {  5028,     0,     0, 1 },  /* locus */
-  {  5034,     0,     0, 1 },  /* loft */
-  {  5039,     0,     0, 1 },  /* lol */
-  {  5043,     0,     0, 1 },  /* london */
-  {  5050,     0,     0, 1 },  /* lotte */
-  {  5056,     0,     0, 1 },  /* lotto */
-  {  5062,     0,     0, 1 },  /* love */
-  {  5067,     0,     0, 1 },  /* lpl */
-  {  3035,     0,     0, 1 },  /* lplfinancial */
-  {  5071,  3817,     5, 1 },  /* lr */
-  {  1237,  3985,     2, 1 },  /* ls */
-  {   151,  4301,     2, 1 },  /* lt */
-  {  5082,     0,     0, 1 },  /* ltd */
-  {  5086,     0,     0, 1 },  /* ltda */
-  {  5091,  3838,     1, 1 },  /* lu */
-  {  5094,     0,     0, 1 },  /* lundbeck */
-  {  5103,     0,     0, 1 },  /* lupin */
-  {  5109,     0,     0, 1 },  /* luxe */
-  {  5114,     0,     0, 1 },  /* luxury */
-  {  5126,  6512,     9, 1 },  /* lv */
-  {   339,  6521,     9, 1 },  /* ly */
-  {  5130,  6530,     6, 1 },  /* ma */
-  {  5133,     0,     0, 1 },  /* macys */
-  {  5139,     0,     0, 1 },  /* madrid */
-  {  5146,     0,     0, 1 },  /* maif */
-  {  5160,     0,     0, 1 },  /* maison */
-  {  5167,     0,     0, 1 },  /* makeup */
-  {  5177,     0,     0, 1 },  /* man */
-  {  5181,  6536,     1, 1 },  /* management */
-  {  5192,     0,     0, 1 },  /* mango */
-  {  5198,     0,     0, 1 },  /* map */
-  {  5208,     0,     0, 1 },  /* market */
-  {  5215,     0,     0, 1 },  /* marketing */
-  {  5225,     0,     0, 1 },  /* markets */
-  {  5233,     0,     0, 1 },  /* marriott */
-  {  5242,     0,     0, 1 },  /* marshalls */
-  {  5252,     0,     0, 1 },  /* maserati */
-  {  5261,     0,     0, 1 },  /* mattel */
-  {  5272,     0,     0, 1 },  /* mba */
-  {  5286,  6537,     2, 1 },  /* mc */
-  {  1583,     0,     0, 1 },  /* mcd */
-  {  4843,     0,     0, 1 },  /* mcdonalds */
-  {  5289,     0,     0, 1 },  /* mckinsey */
-  {  5299,  3838,     1, 1 },  /* md */
-  {  1694,  2382,    25, 1 },  /* me */
-  {  1859,     0,     0, 1 },  /* med */
-  {  5306,     0,     0, 1 },  /* media */
-  {  5312,     0,     0, 1 },  /* meet */
-  {  5317,     0,     0, 1 },  /* melbourne */
-  {  5327,     0,     0, 1 },  /* meme */
-  {  5332,     0,     0, 1 },  /* memorial */
-  {  5345,     0,     0, 1 },  /* men */
-  {  5349,     0,     0, 1 },  /* menu */
+  {  4359,     0,     0, 1 },  /* itv */
+  {  2610,     0,     0, 1 },  /* iveco */
+  {  4363,     0,     0, 1 },  /* iwc */
+  {  4367,     0,     0, 1 },  /* jaguar */
+  {  4374,     0,     0, 1 },  /* java */
+  {  4379,     0,     0, 1 },  /* jcb */
+  {  4383,     0,     0, 1 },  /* jcp */
+  {  4390,  5065,     3, 1 },  /* je */
+  {  4393,     0,     0, 1 },  /* jeep */
+  {  4398,     0,     0, 1 },  /* jetzt */
+  {  4404,     0,     0, 1 },  /* jewelry */
+  {  4412,     0,     0, 1 },  /* jio */
+  {  4416,     0,     0, 1 },  /* jlc */
+  {  4420,     0,     0, 1 },  /* jll */
+  {  4424,  4048,     1, 0 },  /* jm */
+  {  4427,     0,     0, 1 },  /* jmp */
+  {  4431,     0,     0, 1 },  /* jnj */
+  {  4437,  5068,     8, 1 },  /* jo */
+  {  4440,     0,     0, 1 },  /* jobs */
+  {  4445,     0,     0, 1 },  /* joburg */
+  {  4452,     0,     0, 1 },  /* jot */
+  {  4456,     0,     0, 1 },  /* joy */
+  {  4460,  2377,   111, 1 },  /* jp */
+  {  4463,     0,     0, 1 },  /* jpmorgan */
+  {  4472,     0,     0, 1 },  /* jprs */
+  {  4477,     0,     0, 1 },  /* juegos */
+  {  4484,     0,     0, 1 },  /* juniper */
+  {  4492,     0,     0, 1 },  /* kaufen */
+  {  4499,     0,     0, 1 },  /* kddi */
+  {   963,  2488,    10, 1 },  /* ke */
+  {  4054,     0,     0, 1 },  /* kerryhotels */
+  {  4509,     0,     0, 1 },  /* kerrylogistics */
+  {  4524,     0,     0, 1 },  /* kerryproperties */
+  {  4540,     0,     0, 1 },  /* kfh */
+  {  4544,  3904,     6, 1 },  /* kg */
+  {  4547,  4048,     1, 0 },  /* kh */
+  {  3856,  6751,     7, 1 },  /* ki */
+  {  4556,     0,     0, 1 },  /* kia */
+  {  4562,     0,     0, 1 },  /* kim */
+  {  4566,     0,     0, 1 },  /* kinder */
+  {  4573,     0,     0, 1 },  /* kindle */
+  {  4580,     0,     0, 1 },  /* kitchen */
+  {  4588,     0,     0, 1 },  /* kiwi */
+  {  4593,  6758,    17, 1 },  /* km */
+  {  4598,  6775,     4, 1 },  /* kn */
+  {  4601,     0,     0, 1 },  /* koeln */
+  {  4607,     0,     0, 1 },  /* komatsu */
+  {  4615,     0,     0, 1 },  /* kosher */
+  {  4630,  6779,     6, 1 },  /* kp */
+  {  4633,     0,     0, 1 },  /* kpmg */
+  {  4638,     0,     0, 1 },  /* kpn */
+  {  3107,  6785,    30, 1 },  /* kr */
+  {  4647,  6815,     2, 1 },  /* krd */
+  {  4651,     0,     0, 1 },  /* kred */
+  {  4656,     0,     0, 1 },  /* kuokgroup */
+  {  4666,  4048,     1, 0 },  /* kw */
+  {  4670,  4130,     5, 1 },  /* ky */
+  {  4673,     0,     0, 1 },  /* kyoto */
+  {  4679,  6817,     7, 1 },  /* kz */
+  {  2170,  6824,    11, 1 },  /* la */
+  {  4686,     0,     0, 1 },  /* lacaixa */
+  {  4694,     0,     0, 1 },  /* ladbrokes */
+  {  4704,     0,     0, 1 },  /* lamborghini */
+  {  4716,     0,     0, 1 },  /* lamer */
+  {  4722,     0,     0, 1 },  /* lancaster */
+  {  4732,     0,     0, 1 },  /* lancia */
+  {  4739,     0,     0, 1 },  /* lancome */
+  {  4749,  2498,     1, 1 },  /* land */
+  {  4754,     0,     0, 1 },  /* landrover */
+  {  4764,     0,     0, 1 },  /* lanxess */
+  {  4772,     0,     0, 1 },  /* lasalle */
+  {  2792,     0,     0, 1 },  /* lat */
+  {  4786,     0,     0, 1 },  /* latino */
+  {  4793,     0,     0, 1 },  /* latrobe */
+  {  4805,     0,     0, 1 },  /* law */
+  {  4814,     0,     0, 1 },  /* lawyer */
+  {  4822,  4130,     5, 1 },  /* lb */
+  {  4417,  6837,     8, 1 },  /* lc */
+  {  4829,     0,     0, 1 },  /* lds */
+  {  4833,     0,     0, 1 },  /* lease */
+  {  4839,     0,     0, 1 },  /* leclerc */
+  {  4847,     0,     0, 1 },  /* lefrak */
+  {  3337,     0,     0, 1 },  /* legal */
+  {  4854,     0,     0, 1 },  /* lego */
+  {  4859,     0,     0, 1 },  /* lexus */
+  {  4865,     0,     0, 1 },  /* lgbt */
+  {  4347,  6845,     3, 1 },  /* li */
+  {  4875,     0,     0, 1 },  /* liaison */
+  {  4883,     0,     0, 1 },  /* lidl */
+  {  4891,     0,     0, 1 },  /* life */
+  {  4242,     0,     0, 1 },  /* lifeinsurance */
+  {  4896,     0,     0, 1 },  /* lifestyle */
+  {  4906,     0,     0, 1 },  /* lighting */
+  {  4915,     0,     0, 1 },  /* like */
+  {  4920,     0,     0, 1 },  /* lilly */
+  {  4926,     0,     0, 1 },  /* limited */
+  {  4934,     0,     0, 1 },  /* limo */
+  {  4939,     0,     0, 1 },  /* lincoln */
+  {  4947,     0,     0, 1 },  /* linde */
+  {  4957,  6848,     2, 1 },  /* link */
+  {  4962,     0,     0, 1 },  /* lipsy */
+  {  4972,     0,     0, 1 },  /* live */
+  {  4977,     0,     0, 1 },  /* living */
+  {  4984,     0,     0, 1 },  /* lixil */
+  {  2264,  6850,    15, 1 },  /* lk */
+  {  4994,     0,     0, 1 },  /* llc */
+  {  4998,     0,     0, 1 },  /* loan */
+  {  5003,     0,     0, 1 },  /* loans */
+  {  5009,     0,     0, 1 },  /* locker */
+  {  5016,     0,     0, 1 },  /* locus */
+  {  5022,     0,     0, 1 },  /* loft */
+  {  5027,     0,     0, 1 },  /* lol */
+  {  5031,     0,     0, 1 },  /* london */
+  {  5038,     0,     0, 1 },  /* lotte */
+  {  5044,     0,     0, 1 },  /* lotto */
+  {  5050,     0,     0, 1 },  /* love */
+  {  5055,     0,     0, 1 },  /* lpl */
+  {  3034,     0,     0, 1 },  /* lplfinancial */
+  {  5059,  4130,     5, 1 },  /* lr */
+  {  1231,  4230,     2, 1 },  /* ls */
+  {   151,  4595,     3, 1 },  /* lt */
+  {  5070,     0,     0, 1 },  /* ltd */
+  {  5074,     0,     0, 1 },  /* ltda */
+  {  5079,  6865,     2, 1 },  /* lu */
+  {  5082,     0,     0, 1 },  /* lundbeck */
+  {  5091,     0,     0, 1 },  /* lupin */
+  {  5097,     0,     0, 1 },  /* luxe */
+  {  5102,     0,     0, 1 },  /* luxury */
+  {  5114,  6867,     9, 1 },  /* lv */
+  {   339,  6876,     9, 1 },  /* ly */
+  {  5118,  6885,     6, 1 },  /* ma */
+  {  5121,     0,     0, 1 },  /* macys */
+  {  5127,     0,     0, 1 },  /* madrid */
+  {  5134,     0,     0, 1 },  /* maif */
+  {  5148,     0,     0, 1 },  /* maison */
+  {  5155,     0,     0, 1 },  /* makeup */
+  {  5165,     0,     0, 1 },  /* man */
+  {  5169,  6891,     1, 1 },  /* management */
+  {  5180,     0,     0, 1 },  /* mango */
+  {  5186,     0,     0, 1 },  /* map */
+  {  5196,     0,     0, 1 },  /* market */
+  {  5203,     0,     0, 1 },  /* marketing */
+  {  5213,     0,     0, 1 },  /* markets */
+  {  5221,     0,     0, 1 },  /* marriott */
+  {  5230,     0,     0, 1 },  /* marshalls */
+  {  5240,     0,     0, 1 },  /* maserati */
+  {  5249,     0,     0, 1 },  /* mattel */
+  {  5260,     0,     0, 1 },  /* mba */
+  {  5274,  6892,     2, 1 },  /* mc */
+  {  5277,     0,     0, 1 },  /* mckinsey */
+  {  5287,  4032,     1, 1 },  /* md */
+  {  1690,  2499,    31, 1 },  /* me */
+  {  1855,     0,     0, 1 },  /* med */
+  {  5294,     0,     0, 1 },  /* media */
+  {  5300,     0,     0, 1 },  /* meet */
+  {  5305,     0,     0, 1 },  /* melbourne */
+  {  5315,     0,     0, 1 },  /* meme */
+  {  5320,     0,     0, 1 },  /* memorial */
+  {  5333,     0,     0, 1 },  /* men */
+  {  5337,  6895,     1, 1 },  /* menu */
   {   299,     0,     0, 1 },  /* meo */
-  {  5354,     0,     0, 1 },  /* merckmsd */
-  {  4908,     0,     0, 1 },  /* metlife */
-  {  4649,  6540,     9, 1 },  /* mg */
-  {  5370,     0,     0, 1 },  /* mh */
-  {  5373,     0,     0, 1 },  /* miami */
-  {  5379,     0,     0, 1 },  /* microsoft */
-  {  4170,     0,     0, 1 },  /* mil */
-  {  5391,     0,     0, 1 },  /* mini */
-  {  4272,     0,     0, 1 },  /* mint */
-  {  5397,     0,     0, 1 },  /* mit */
-  {  5401,     0,     0, 1 },  /* mitsubishi */
-  {  5412,  6549,     8, 1 },  /* mk */
-  {  5415,  6557,     7, 1 },  /* ml */
-  {  4835,     0,     0, 1 },  /* mlb */
-  {  5074,     0,     0, 1 },  /* mls */
-  {  5420,  3853,     1, 0 },  /* mm */
-  {  5129,     0,     0, 1 },  /* mma */
-  {  5424,  6564,     4, 1 },  /* mn */
-  {  3585,  3817,     5, 1 },  /* mo */
-  {  5427,  6568,     1, 1 },  /* mobi */
-  {  5438,     0,     0, 1 },  /* mobile */
-  {  5445,     0,     0, 1 },  /* mobily */
-  {  5455,     0,     0, 1 },  /* moda */
-  {  5460,     0,     0, 1 },  /* moe */
-  {  5464,     0,     0, 1 },  /* moi */
-  {  5468,     0,     0, 1 },  /* mom */
-  {  5472,     0,     0, 1 },  /* monash */
-  {  5479,     0,     0, 1 },  /* money */
-  {  5485,     0,     0, 1 },  /* monster */
-  {  5493,     0,     0, 1 },  /* montblanc */
-  {  5503,     0,     0, 1 },  /* mopar */
-  {  5509,     0,     0, 1 },  /* mormon */
-  {  5516,     0,     0, 1 },  /* mortgage */
-  {  5525,     0,     0, 1 },  /* moscow */
-  {  5536,     0,     0, 1 },  /* moto */
-  {  5541,     0,     0, 1 },  /* motorcycles */
-  {  5553,     0,     0, 1 },  /* mov */
-  {  5557,     0,     0, 1 },  /* movie */
-  {  5563,     0,     0, 1 },  /* movistar */
-  {  1375,     0,     0, 1 },  /* mp */
-  {  5576,     0,     0, 1 },  /* mq */
-  {  5580,  4301,     2, 1 },  /* mr */
-  {  1060,  3817,     5, 1 },  /* ms */
-  {  5359,     0,     0, 1 },  /* msd */
-  {  5588,  2407,     4, 1 },  /* mt */
-  {  5591,     0,     0, 1 },  /* mtn */
-  {  5595,     0,     0, 1 },  /* mtpc */
-  {  5600,     0,     0, 1 },  /* mtr */
-  {  5606,  6569,     7, 1 },  /* mu */
-  {  5623,  6576,   548, 1 },  /* museum */
-  {  5642,     0,     0, 1 },  /* mutual */
-  {  5649,  7124,    14, 1 },  /* mv */
-  {  1064,  7138,    11, 1 },  /* mw */
-  {  3589,  7149,     6, 1 },  /* mx */
-  {    70,  7155,     8, 1 },  /* my */
-  {  5657,  7163,     8, 1 },  /* mz */
-  {   172,  7171,    17, 1 },  /* na */
-  {  5674,     0,     0, 1 },  /* nab */
-  {  5678,     0,     0, 1 },  /* nadex */
-  {  5684,     0,     0, 1 },  /* nagoya */
-  {  5695,  2411,     2, 1 },  /* name */
-  {  5700,     0,     0, 1 },  /* nationwide */
-  {  5711,     0,     0, 1 },  /* natura */
-  {  5721,     0,     0, 1 },  /* navy */
+  {  5342,     0,     0, 1 },  /* merckmsd */
+  {  4888,     0,     0, 1 },  /* metlife */
+  {  4635,  6896,     9, 1 },  /* mg */
+  {  5358,     0,     0, 1 },  /* mh */
+  {  5361,     0,     0, 1 },  /* miami */
+  {  5367,     0,     0, 1 },  /* microsoft */
+  {  4157,     0,     0, 1 },  /* mil */
+  {  5379,     0,     0, 1 },  /* mini */
+  {  4263,     0,     0, 1 },  /* mint */
+  {  5385,     0,     0, 1 },  /* mit */
+  {  5389,     0,     0, 1 },  /* mitsubishi */
+  {  5400,  6905,     9, 1 },  /* mk */
+  {  5403,  6914,     7, 1 },  /* ml */
+  {  4821,     0,     0, 1 },  /* mlb */
+  {  5062,     0,     0, 1 },  /* mls */
+  {  5408,  4048,     1, 0 },  /* mm */
+  {  5117,     0,     0, 1 },  /* mma */
+  {  5412,  6921,     5, 1 },  /* mn */
+  {  3579,  4130,     5, 1 },  /* mo */
+  {  5415,  6926,     2, 1 },  /* mobi */
+  {  5426,     0,     0, 1 },  /* mobile */
+  {  5433,     0,     0, 1 },  /* mobily */
+  {  5443,     0,     0, 1 },  /* moda */
+  {  5448,     0,     0, 1 },  /* moe */
+  {  5452,     0,     0, 1 },  /* moi */
+  {  5456,     0,     0, 1 },  /* mom */
+  {  5460,     0,     0, 1 },  /* monash */
+  {  5467,     0,     0, 1 },  /* money */
+  {  5473,     0,     0, 1 },  /* monster */
+  {  5481,     0,     0, 1 },  /* mopar */
+  {  5487,     0,     0, 1 },  /* mormon */
+  {  5494,     0,     0, 1 },  /* mortgage */
+  {  5503,     0,     0, 1 },  /* moscow */
+  {  5514,     0,     0, 1 },  /* moto */
+  {  5519,     0,     0, 1 },  /* motorcycles */
+  {  5531,     0,     0, 1 },  /* mov */
+  {  5535,     0,     0, 1 },  /* movie */
+  {  5541,     0,     0, 1 },  /* movistar */
+  {  1368,     0,     0, 1 },  /* mp */
+  {  5554,     0,     0, 1 },  /* mq */
+  {  5558,  6928,     2, 1 },  /* mr */
+  {  1060,  4130,     5, 1 },  /* ms */
+  {  5347,     0,     0, 1 },  /* msd */
+  {  5566,  2530,     4, 1 },  /* mt */
+  {  5569,     0,     0, 1 },  /* mtn */
+  {  5573,     0,     0, 1 },  /* mtr */
+  {  5579,  6930,     7, 1 },  /* mu */
+  {  5596,  6937,   548, 1 },  /* museum */
+  {  5615,     0,     0, 1 },  /* mutual */
+  {  5622,  7485,    14, 1 },  /* mv */
+  {  1064,  7499,    11, 1 },  /* mw */
+  {  3583,  7510,     7, 1 },  /* mx */
+  {    70,  7517,     8, 1 },  /* my */
+  {  5634,  7525,     8, 1 },  /* mz */
+  {   172,  7533,    17, 1 },  /* na */
+  {  5651,     0,     0, 1 },  /* nab */
+  {  5655,     0,     0, 1 },  /* nadex */
+  {  5661,     0,     0, 1 },  /* nagoya */
+  {  5672,  2534,     2, 1 },  /* name */
+  {  5677,     0,     0, 1 },  /* nationwide */
+  {  5688,     0,     0, 1 },  /* natura */
+  {  5698,     0,     0, 1 },  /* navy */
   {   688,     0,     0, 1 },  /* nba */
-  {  5500,  7189,     2, 1 },  /* nc */
-  {  1204,     0,     0, 1 },  /* ne */
-  {  2607,     0,     0, 1 },  /* nec */
-  {  5737,  2413,    89, 1 },  /* net */
-  {  5741,     0,     0, 1 },  /* netbank */
-  {  5749,     0,     0, 1 },  /* netflix */
-  {  3170,  2506,     1, 1 },  /* network */
-  {  5757,     0,     0, 1 },  /* neustar */
-  {  5765,     0,     0, 1 },  /* new */
-  {  5769,     0,     0, 1 },  /* newholland */
-  {  5780,     0,     0, 1 },  /* news */
-  {  5785,     0,     0, 1 },  /* next */
-  {  2413,     0,     0, 1 },  /* nextdirect */
-  {  5790,     0,     0, 1 },  /* nexus */
-  {  5797,  7198,    10, 1 },  /* nf */
-  {  5800,     0,     0, 1 },  /* nfl */
-  {   972,  2507,    10, 1 },  /* ng */
+  {  4198,  7551,     2, 1 },  /* nc */
+  {  1198,     0,     0, 1 },  /* ne */
+  {  2606,     0,     0, 1 },  /* nec */
+  {  5710,  2536,   106, 1 },  /* net */
+  {  5714,     0,     0, 1 },  /* netbank */
+  {  5722,     0,     0, 1 },  /* netflix */
+  {  3167,  2646,     1, 1 },  /* network */
+  {  5730,     0,     0, 1 },  /* neustar */
+  {  5738,     0,     0, 1 },  /* new */
+  {  5742,     0,     0, 1 },  /* newholland */
+  {  5753,     0,     0, 1 },  /* news */
+  {  5758,     0,     0, 1 },  /* next */
+  {  2409,     0,     0, 1 },  /* nextdirect */
+  {  5763,     0,     0, 1 },  /* nexus */
+  {  5770,  7560,    10, 1 },  /* nf */
+  {  5773,     0,     0, 1 },  /* nfl */
+  {   972,  2647,    10, 1 },  /* ng */
   {   977,     0,     0, 1 },  /* ngo */
-  {  3921,     0,     0, 1 },  /* nhk */
-  {  1723,  7208,    14, 1 },  /* ni */
-  {  5818,     0,     0, 1 },  /* nico */
-  {  5823,     0,     0, 1 },  /* nike */
-  {  5828,     0,     0, 1 },  /* nikon */
-  {  5834,     0,     0, 1 },  /* ninja */
-  {  5840,     0,     0, 1 },  /* nissan */
-  {  5847,     0,     0, 1 },  /* nissay */
-  {  1072,  2517,     7, 1 },  /* nl */
-  {  1518,  2524,   726, 1 },  /* no */
-  {  4568,     0,     0, 1 },  /* nokia */
-  {  5630,     0,     0, 1 },  /* northwesternmutual */
-  {  5859,     0,     0, 1 },  /* norton */
-  {  5866,     0,     0, 1 },  /* now */
-  {  5870,     0,     0, 1 },  /* nowruz */
-  {  5877,     0,     0, 1 },  /* nowtv */
-  {  2481,  3853,     1, 0 },  /* np */
-  {  5884,  6410,     7, 1 },  /* nr */
-  {  5889,     0,     0, 1 },  /* nra */
-  {  5893,     0,     0, 1 },  /* nrw */
-  {  5897,     0,     0, 1 },  /* ntt */
-  {  5351,  7241,     3, 1 },  /* nu */
-  {  5905,     0,     0, 1 },  /* nyc */
-  {   325,  3250,    16, 1 },  /* nz */
-  {  5428,     0,     0, 1 },  /* obi */
-  {  5914,     0,     0, 1 },  /* observer */
-  {  5923,     0,     0, 1 },  /* off */
-  {  5931,     0,     0, 1 },  /* office */
-  {  5938,     0,     0, 1 },  /* okinawa */
-  {  5946,     0,     0, 1 },  /* olayan */
-  {  5953,     0,     0, 1 },  /* olayangroup */
-  {  5718,     0,     0, 1 },  /* oldnavy */
-  {  5965,     0,     0, 1 },  /* ollo */
-  {   353,  7244,     9, 1 },  /* om */
-  {  5974,     0,     0, 1 },  /* omega */
-  {  1203,  7253,     1, 1 },  /* one */
-  {  5987,     0,     0, 1 },  /* ong */
-  {  5991,     0,     0, 1 },  /* onion */
-  {  5997,     0,     0, 1 },  /* onl */
-  {  6006,  7254,     1, 1 },  /* online */
-  {  6013,     0,     0, 1 },  /* onyourside */
-  {  6024,     0,     0, 1 },  /* ooo */
-  {  6028,     0,     0, 1 },  /* open */
-  {  6033,     0,     0, 1 },  /* oracle */
-  {  6040,     0,     0, 1 },  /* orange */
-  {  6053,  3266,    94, 1 },  /* org */
-  {  6064,     0,     0, 1 },  /* organic */
-  {  6072,     0,     0, 1 },  /* origins */
-  {  6081,     0,     0, 1 },  /* osaka */
-  {  6090,     0,     0, 1 },  /* otsuka */
+  {  3915,     0,     0, 1 },  /* nhk */
+  {  1719,  7570,    14, 1 },  /* ni */
+  {  5791,     0,     0, 1 },  /* nico */
+  {  5796,     0,     0, 1 },  /* nike */
+  {  5801,     0,     0, 1 },  /* nikon */
+  {  5807,     0,     0, 1 },  /* ninja */
+  {  5813,     0,     0, 1 },  /* nissan */
+  {  5820,     0,     0, 1 },  /* nissay */
+  {  1072,  2657,     8, 1 },  /* nl */
+  {  1511,  2665,   726, 1 },  /* no */
+  {  4554,     0,     0, 1 },  /* nokia */
+  {  5603,     0,     0, 1 },  /* northwesternmutual */
+  {  5832,     0,     0, 1 },  /* norton */
+  {  5839,     0,     0, 1 },  /* now */
+  {  5843,     0,     0, 1 },  /* nowruz */
+  {  5850,     0,     0, 1 },  /* nowtv */
+  {  2477,  4048,     1, 0 },  /* np */
+  {  5857,  6751,     7, 1 },  /* nr */
+  {  5862,     0,     0, 1 },  /* nra */
+  {  5866,     0,     0, 1 },  /* nrw */
+  {  5870,     0,     0, 1 },  /* ntt */
+  {  5339,  7603,     4, 1 },  /* nu */
+  {  5878,     0,     0, 1 },  /* nyc */
+  {   325,  3391,    17, 1 },  /* nz */
+  {  5416,     0,     0, 1 },  /* obi */
+  {  5887,     0,     0, 1 },  /* observer */
+  {  5896,     0,     0, 1 },  /* off */
+  {  5904,     0,     0, 1 },  /* office */
+  {  5911,     0,     0, 1 },  /* okinawa */
+  {  5919,     0,     0, 1 },  /* olayan */
+  {  5926,     0,     0, 1 },  /* olayangroup */
+  {  5695,     0,     0, 1 },  /* oldnavy */
+  {  5938,     0,     0, 1 },  /* ollo */
+  {   353,  7607,     9, 1 },  /* om */
+  {  5947,     0,     0, 1 },  /* omega */
+  {  1197,  7616,     1, 1 },  /* one */
+  {  5960,     0,     0, 1 },  /* ong */
+  {  5964,     0,     0, 1 },  /* onion */
+  {  5970,     0,     0, 1 },  /* onl */
+  {  5979,  6895,     1, 1 },  /* online */
+  {  5986,     0,     0, 1 },  /* onyourside */
+  {  5997,     0,     0, 1 },  /* ooo */
+  {  6001,     0,     0, 1 },  /* open */
+  {  6006,     0,     0, 1 },  /* oracle */
+  {  6013,     0,     0, 1 },  /* orange */
+  {  6026,  3408,   106, 1 },  /* org */
+  {  6037,     0,     0, 1 },  /* organic */
+  {  6045,     0,     0, 1 },  /* origins */
+  {  6054,     0,     0, 1 },  /* osaka */
+  {  6063,     0,     0, 1 },  /* otsuka */
   {    23,     0,     0, 1 },  /* ott */
-  {  6097,  7316,     1, 1 },  /* ovh */
-  {   522,  7317,    11, 1 },  /* pa */
-  {  6101,     0,     0, 1 },  /* page */
-  {  6106,     0,     0, 1 },  /* pamperedchef */
-  {  6119,     0,     0, 1 },  /* panasonic */
-  {  6129,     0,     0, 1 },  /* panerai */
-  {  6137,     0,     0, 1 },  /* paris */
-  {  6143,     0,     0, 1 },  /* pars */
-  {  6148,     0,     0, 1 },  /* partners */
-  {  6157,     0,     0, 1 },  /* parts */
-  {  6163,  4118,     1, 1 },  /* party */
-  {  6169,     0,     0, 1 },  /* passagens */
+  {  6070,  7678,     1, 1 },  /* ovh */
+  {   522,  7679,    11, 1 },  /* pa */
+  {  6074,     0,     0, 1 },  /* page */
+  {  6079,     0,     0, 1 },  /* panasonic */
+  {  6089,     0,     0, 1 },  /* panerai */
+  {  6097,     0,     0, 1 },  /* paris */
+  {  6103,     0,     0, 1 },  /* pars */
+  {  6108,     0,     0, 1 },  /* partners */
+  {  6117,     0,     0, 1 },  /* parts */
+  {  6123,  4395,     1, 1 },  /* party */
+  {  6129,     0,     0, 1 },  /* passagens */
   {   314,     0,     0, 1 },  /* pay */
-  {  2180,     0,     0, 1 },  /* pccw */
-  {  3724,  7328,     8, 1 },  /* pe */
-  {  6179,     0,     0, 1 },  /* pet */
-  {  6183,  7336,     3, 1 },  /* pf */
-  {  6186,     0,     0, 1 },  /* pfizer */
-  {  6194,  3853,     1, 0 },  /* pg */
-  {  6197,  7339,     8, 1 },  /* ph */
-  {  6200,     0,     0, 1 },  /* pharmacy */
-  {  6209,     0,     0, 1 },  /* phd */
-  {  6213,     0,     0, 1 },  /* philips */
-  {  5980,     0,     0, 1 },  /* phone */
-  {  6221,     0,     0, 1 },  /* photo */
-  {  6227,     0,     0, 1 },  /* photography */
-  {  6241,     0,     0, 1 },  /* photos */
-  {  6248,     0,     0, 1 },  /* physio */
-  {  6255,     0,     0, 1 },  /* piaget */
-  {  6267,     0,     0, 1 },  /* pics */
-  {  6272,     0,     0, 1 },  /* pictet */
-  {  6279,  7347,     1, 1 },  /* pictures */
-  {  6288,     0,     0, 1 },  /* pid */
-  {  5105,     0,     0, 1 },  /* pin */
-  {  6296,     0,     0, 1 },  /* ping */
-  {  4236,     0,     0, 1 },  /* pink */
-  {  6301,     0,     0, 1 },  /* pioneer */
-  {  6309,     0,     0, 1 },  /* pizza */
-  {  6315,  7348,    14, 1 },  /* pk */
-  {  5068,  3361,   166, 1 },  /* pl */
-  {  6323,     0,     0, 1 },  /* place */
-  {  6329,     0,     0, 1 },  /* play */
-  {  6334,     0,     0, 1 },  /* playstation */
+  {  2176,     0,     0, 1 },  /* pccw */
+  {  3718,  7690,     9, 1 },  /* pe */
+  {  6139,     0,     0, 1 },  /* pet */
+  {  6143,  7699,     3, 1 },  /* pf */
+  {  6146,     0,     0, 1 },  /* pfizer */
+  {  6154,  4048,     1, 0 },  /* pg */
+  {  6157,  7702,     8, 1 },  /* ph */
+  {  6160,     0,     0, 1 },  /* pharmacy */
+  {  6169,     0,     0, 1 },  /* phd */
+  {  6173,     0,     0, 1 },  /* philips */
+  {  5953,     0,     0, 1 },  /* phone */
+  {  6181,     0,     0, 1 },  /* photo */
+  {  6187,     0,     0, 1 },  /* photography */
+  {  6201,     0,     0, 1 },  /* photos */
+  {  6208,     0,     0, 1 },  /* physio */
+  {  6215,     0,     0, 1 },  /* piaget */
+  {  6227,     0,     0, 1 },  /* pics */
+  {  6232,     0,     0, 1 },  /* pictet */
+  {  6239,  7710,     1, 1 },  /* pictures */
+  {  6248,     0,     0, 1 },  /* pid */
+  {  5093,     0,     0, 1 },  /* pin */
+  {  6256,     0,     0, 1 },  /* ping */
+  {  4227,     0,     0, 1 },  /* pink */
+  {  6261,     0,     0, 1 },  /* pioneer */
+  {  6269,     0,     0, 1 },  /* pizza */
+  {  6275,  7711,    14, 1 },  /* pk */
+  {  5056,  3519,   166, 1 },  /* pl */
+  {  6283,     0,     0, 1 },  /* place */
+  {  6289,     0,     0, 1 },  /* play */
+  {  6294,     0,     0, 1 },  /* playstation */
   {   966,     0,     0, 1 },  /* plumbing */
-  {  6348,     0,     0, 1 },  /* plus */
-  {  6353,     0,     0, 1 },  /* pm */
-  {  4653,  7409,     5, 1 },  /* pn */
-  {  5726,     0,     0, 1 },  /* pnc */
-  {  6356,     0,     0, 1 },  /* pohl */
-  {  6361,     0,     0, 1 },  /* poker */
-  {  6367,     0,     0, 1 },  /* politie */
-  {  6375,     0,     0, 1 },  /* porn */
+  {  6308,     0,     0, 1 },  /* plus */
+  {  6315,  7772,     1, 1 },  /* pm */
+  {  4639,  7773,     5, 1 },  /* pn */
+  {  6318,     0,     0, 1 },  /* pnc */
+  {  6322,     0,     0, 1 },  /* pohl */
+  {  6327,     0,     0, 1 },  /* poker */
+  {  6333,     0,     0, 1 },  /* politie */
+  {  6341,     0,     0, 1 },  /* porn */
   {   617,     0,     0, 1 },  /* post */
-  {  6385,  7414,    13, 1 },  /* pr */
-  {  6388,     0,     0, 1 },  /* pramerica */
-  {  6398,     0,     0, 1 },  /* praxi */
+  {  6351,  7778,    13, 1 },  /* pr */
+  {  6354,     0,     0, 1 },  /* pramerica */
+  {  6364,     0,     0, 1 },  /* praxi */
   {   371,     0,     0, 1 },  /* press */
-  {  6404,     0,     0, 1 },  /* prime */
-  {  6410,  7427,    12, 1 },  /* pro */
-  {  6414,     0,     0, 1 },  /* prod */
-  {  6419,     0,     0, 1 },  /* productions */
-  {  6431,     0,     0, 1 },  /* prof */
-  {  6436,     0,     0, 1 },  /* progressive */
-  {  6448,     0,     0, 1 },  /* promo */
-  {  4543,     0,     0, 1 },  /* properties */
-  {  6454,     0,     0, 1 },  /* property */
-  {  6463,     0,     0, 1 },  /* protection */
-  {  6474,     0,     0, 1 },  /* pru */
-  {  6478,     0,     0, 1 },  /* prudential */
-  {  6218,  7439,     7, 1 },  /* ps */
-  {  6493,  7446,     9, 1 },  /* pt */
-  {  6496,     0,     0, 1 },  /* pub */
-  {  6500,  7455,     7, 1 },  /* pw */
-  {  6503,     0,     0, 1 },  /* pwc */
-  {  6508,  7462,     7, 1 },  /* py */
-  {  6522,  7469,     9, 1 },  /* qa */
-  {  6525,     0,     0, 1 },  /* qpon */
-  {  6530,     0,     0, 1 },  /* quebec */
-  {  6537,     0,     0, 1 },  /* quest */
-  {  6543,     0,     0, 1 },  /* qvc */
-  {  6547,     0,     0, 1 },  /* racing */
-  {  6554,     0,     0, 1 },  /* radio */
-  {  6560,     0,     0, 1 },  /* raid */
-  {    80,  7478,     4, 1 },  /* re */
-  {  6577,     0,     0, 1 },  /* read */
-  {  2764,     0,     0, 1 },  /* realestate */
-  {  6582,     0,     0, 1 },  /* realtor */
-  {  6590,     0,     0, 1 },  /* realty */
-  {  6597,     0,     0, 1 },  /* recipes */
-  {  4666,     0,     0, 1 },  /* red */
-  {  6605,     0,     0, 1 },  /* redstone */
-  {  6614,     0,     0, 1 },  /* redumbrella */
-  {  6626,     0,     0, 1 },  /* rehab */
-  {  6632,     0,     0, 1 },  /* reise */
-  {  6638,     0,     0, 1 },  /* reisen */
-  {  6645,     0,     0, 1 },  /* reit */
-  {  6650,     0,     0, 1 },  /* reliance */
-  {  6661,     0,     0, 1 },  /* ren */
-  {  6674,     0,     0, 1 },  /* rent */
-  {  6679,     0,     0, 1 },  /* rentals */
-  {  6687,     0,     0, 1 },  /* repair */
-  {  6694,     0,     0, 1 },  /* report */
-  {  6706,     0,     0, 1 },  /* republican */
-  {  6717,     0,     0, 1 },  /* rest */
-  {  6722,     0,     0, 1 },  /* restaurant */
-  {  6733,  4118,     1, 1 },  /* review */
-  {  6740,     0,     0, 1 },  /* reviews */
-  {  6748,     0,     0, 1 },  /* rexroth */
-  {  6759,     0,     0, 1 },  /* rich */
-  {  6764,     0,     0, 1 },  /* richardli */
-  {  6774,     0,     0, 1 },  /* ricoh */
-  {  6780,     0,     0, 1 },  /* rightathome */
-  {  6792,     0,     0, 1 },  /* ril */
-  {  6800,     0,     0, 1 },  /* rio */
-  {  6812,  7482,     1, 1 },  /* rip */
-  {  5396,     0,     0, 1 },  /* rmit */
-  {   166,  7483,    13, 1 },  /* ro */
-  {  6816,     0,     0, 1 },  /* rocher */
-  {  6823,  7496,     2, 1 },  /* rocks */
-  {  6829,     0,     0, 1 },  /* rodeo */
-  {  6835,     0,     0, 1 },  /* rogers */
-  {  6842,     0,     0, 1 },  /* room */
-  {  1273,  7498,     7, 1 },  /* rs */
-  {  6847,     0,     0, 1 },  /* rsvp */
-  {  2191,  3527,    27, 1 },  /* ru */
-  {  6852,     0,     0, 1 },  /* rugby */
-  {  4097,     0,     0, 1 },  /* ruhr */
-  {  6858,     0,     0, 1 },  /* run */
-  {  5894,  7506,     9, 1 },  /* rw */
-  {  6862,     0,     0, 1 },  /* rwe */
-  {  6866,     0,     0, 1 },  /* ryukyu */
-  {  1494,  7515,     8, 1 },  /* sa */
-  {  6877,     0,     0, 1 },  /* saarland */
-  {  6886,     0,     0, 1 },  /* safe */
-  {  6891,     0,     0, 1 },  /* safety */
-  {  6898,     0,     0, 1 },  /* sakura */
-  {  3203,     0,     0, 1 },  /* sale */
-  {  6905,     0,     0, 1 },  /* salon */
-  {  6911,     0,     0, 1 },  /* samsclub */
-  {  6920,     0,     0, 1 },  /* samsung */
-  {  6928,     0,     0, 1 },  /* sandvik */
-  {  6936,     0,     0, 1 },  /* sandvikcoromant */
-  {  2990,     0,     0, 1 },  /* sanofi */
-  {  6952,     0,     0, 1 },  /* sap */
-  {  6956,     0,     0, 1 },  /* sapo */
-  {  6961,     0,     0, 1 },  /* sarl */
-  {  6966,     0,     0, 1 },  /* sas */
-  {  6970,     0,     0, 1 },  /* save */
-  {  6975,     0,     0, 1 },  /* saxo */
-  {  6980,  3817,     5, 1 },  /* sb */
+  {  6370,     0,     0, 1 },  /* prime */
+  {  6376,  3685,    14, 1 },  /* pro */
+  {  6380,     0,     0, 1 },  /* prod */
+  {  6385,     0,     0, 1 },  /* productions */
+  {  6397,     0,     0, 1 },  /* prof */
+  {  6402,     0,     0, 1 },  /* progressive */
+  {  6414,     0,     0, 1 },  /* promo */
+  {  4529,     0,     0, 1 },  /* properties */
+  {  6420,     0,     0, 1 },  /* property */
+  {  6429,     0,     0, 1 },  /* protection */
+  {  6440,     0,     0, 1 },  /* pru */
+  {  6444,     0,     0, 1 },  /* prudential */
+  {  6178,  7792,     7, 1 },  /* ps */
+  {  6459,  7799,    10, 1 },  /* pt */
+  {  6462,  6895,     1, 1 },  /* pub */
+  {  6466,  7809,     9, 1 },  /* pw */
+  {  6469,     0,     0, 1 },  /* pwc */
+  {  6474,  7818,     7, 1 },  /* py */
+  {  6488,  7825,    10, 1 },  /* qa */
+  {  6491,     0,     0, 1 },  /* qpon */
+  {  6496,     0,     0, 1 },  /* quebec */
+  {  6503,     0,     0, 1 },  /* quest */
+  {  6509,     0,     0, 1 },  /* qvc */
+  {  6513,     0,     0, 1 },  /* racing */
+  {  6520,     0,     0, 1 },  /* radio */
+  {  6526,     0,     0, 1 },  /* raid */
+  {    80,  7835,     4, 1 },  /* re */
+  {  6543,     0,     0, 1 },  /* read */
+  {  2763,     0,     0, 1 },  /* realestate */
+  {  6548,     0,     0, 1 },  /* realtor */
+  {  6556,     0,     0, 1 },  /* realty */
+  {  6563,     0,     0, 1 },  /* recipes */
+  {  4652,     0,     0, 1 },  /* red */
+  {  6571,     0,     0, 1 },  /* redstone */
+  {  6580,     0,     0, 1 },  /* redumbrella */
+  {  6592,     0,     0, 1 },  /* rehab */
+  {  6598,     0,     0, 1 },  /* reise */
+  {  6604,     0,     0, 1 },  /* reisen */
+  {  6611,     0,     0, 1 },  /* reit */
+  {  6616,     0,     0, 1 },  /* reliance */
+  {  6627,     0,     0, 1 },  /* ren */
+  {  6640,     0,     0, 1 },  /* rent */
+  {  6645,     0,     0, 1 },  /* rentals */
+  {  6653,     0,     0, 1 },  /* repair */
+  {  6660,     0,     0, 1 },  /* report */
+  {  6672,     0,     0, 1 },  /* republican */
+  {  6683,     0,     0, 1 },  /* rest */
+  {  6688,     0,     0, 1 },  /* restaurant */
+  {  6699,  4395,     1, 1 },  /* review */
+  {  6706,     0,     0, 1 },  /* reviews */
+  {  6714,     0,     0, 1 },  /* rexroth */
+  {  6725,     0,     0, 1 },  /* rich */
+  {  6730,     0,     0, 1 },  /* richardli */
+  {  6740,     0,     0, 1 },  /* ricoh */
+  {  6746,     0,     0, 1 },  /* rightathome */
+  {  6758,     0,     0, 1 },  /* ril */
+  {  6766,     0,     0, 1 },  /* rio */
+  {  6777,  7839,     1, 1 },  /* rip */
+  {  5384,     0,     0, 1 },  /* rmit */
+  {   166,  7840,    14, 1 },  /* ro */
+  {  6781,     0,     0, 1 },  /* rocher */
+  {  6788,  7854,     3, 1 },  /* rocks */
+  {  6794,     0,     0, 1 },  /* rodeo */
+  {  6800,     0,     0, 1 },  /* rogers */
+  {  6807,     0,     0, 1 },  /* room */
+  {  1267,  7857,     9, 1 },  /* rs */
+  {  6812,     0,     0, 1 },  /* rsvp */
+  {  2187,  3699,    32, 1 },  /* ru */
+  {  6821,     0,     0, 1 },  /* rugby */
+  {  4088,     0,     0, 1 },  /* ruhr */
+  {  6827,  7867,     2, 1 },  /* run */
+  {  5867,  7869,     9, 1 },  /* rw */
+  {  6831,     0,     0, 1 },  /* rwe */
+  {  6835,     0,     0, 1 },  /* ryukyu */
+  {  1487,  7878,     8, 1 },  /* sa */
+  {  6846,     0,     0, 1 },  /* saarland */
+  {  6855,     0,     0, 1 },  /* safe */
+  {  6860,     0,     0, 1 },  /* safety */
+  {  6867,     0,     0, 1 },  /* sakura */
+  {  3200,     0,     0, 1 },  /* sale */
+  {  6874,     0,     0, 1 },  /* salon */
+  {  6880,     0,     0, 1 },  /* samsclub */
+  {  6889,     0,     0, 1 },  /* samsung */
+  {  6897,     0,     0, 1 },  /* sandvik */
+  {  6905,     0,     0, 1 },  /* sandvikcoromant */
+  {  2989,     0,     0, 1 },  /* sanofi */
+  {  6921,     0,     0, 1 },  /* sap */
+  {  6925,     0,     0, 1 },  /* sapo */
+  {  6930,     0,     0, 1 },  /* sarl */
+  {  6935,     0,     0, 1 },  /* sas */
+  {  6939,     0,     0, 1 },  /* save */
+  {  6944,     0,     0, 1 },  /* saxo */
+  {  6950,  4130,     5, 1 },  /* sb */
   {   947,     0,     0, 1 },  /* sbi */
-  {  6983,     0,     0, 1 },  /* sbs */
-  {  2159,  3817,     5, 1 },  /* sc */
-  {  6991,     0,     0, 1 },  /* sca */
-  {  6995,     0,     0, 1 },  /* scb */
-  {  6999,     0,     0, 1 },  /* schaeffler */
-  {  7010,     0,     0, 1 },  /* schmidt */
-  {  7018,     0,     0, 1 },  /* scholarships */
-  {  7031,     0,     0, 1 },  /* school */
-  {  7038,     0,     0, 1 },  /* schule */
-  {  7045,     0,     0, 1 },  /* schwarz */
-  {  7062,  4118,     1, 1 },  /* science */
-  {  7070,     0,     0, 1 },  /* scjohnson */
-  {  7080,     0,     0, 1 },  /* scor */
-  {  7085,     0,     0, 1 },  /* scot */
-  {  5360,  7523,     8, 1 },  /* sd */
-  {  1499,  7531,    41, 1 },  /* se */
-  {  1386,     0,     0, 1 },  /* search */
-  {  2602,     0,     0, 1 },  /* seat */
-  {  7109,     0,     0, 1 },  /* secure */
-  {  7116,     0,     0, 1 },  /* security */
-  {  7125,     0,     0, 1 },  /* seek */
-  {  4344,     0,     0, 1 },  /* select */
-  {  7130,     0,     0, 1 },  /* sener */
-  {  7136,     0,     0, 1 },  /* services */
-  {  2088,     0,     0, 1 },  /* ses */
-  {  7145,     0,     0, 1 },  /* seven */
-  {  7151,     0,     0, 1 },  /* sew */
-  {  7157,     0,     0, 1 },  /* sex */
-  {  7161,     0,     0, 1 },  /* sexy */
-  {  3229,     0,     0, 1 },  /* sfr */
-  {  7181,  7572,     7, 1 },  /* sg */
-  {  1511,  3554,     8, 1 },  /* sh */
-  {  7184,     0,     0, 1 },  /* shangrila */
-  {  7194,     0,     0, 1 },  /* sharp */
-  {  7200,     0,     0, 1 },  /* shaw */
-  {  7205,     0,     0, 1 },  /* shell */
-  {  7211,     0,     0, 1 },  /* shia */
-  {  7216,     0,     0, 1 },  /* shiksha */
-  {  7224,     0,     0, 1 },  /* shoes */
-  {  7234,     0,     0, 1 },  /* shop */
-  {  6292,     0,     0, 1 },  /* shopping */
-  {  7239,     0,     0, 1 },  /* shouji */
-  {  4092,     0,     0, 1 },  /* show */
-  {  7246,     0,     0, 1 },  /* showtime */
-  {  7255,     0,     0, 1 },  /* shriram */
-  {  2365,  3838,     1, 1 },  /* si */
-  {  7267,     0,     0, 1 },  /* silk */
-  {  7275,     0,     0, 1 },  /* sina */
-  {  7280,     0,     0, 1 },  /* singles */
-  {  7292,  3562,     2, 1 },  /* site */
-  {  7297,     0,     0, 1 },  /* sj */
-  {  7301,  3838,     1, 1 },  /* sk */
-  {  4564,     0,     0, 1 },  /* ski */
-  {  7304,     0,     0, 1 },  /* skin */
-  {  4683,     0,     0, 1 },  /* sky */
-  {  7309,     0,     0, 1 },  /* skype */
-  {  7316,  3817,     5, 1 },  /* sl */
-  {  4230,     0,     0, 1 },  /* sling */
-  {  7320,     0,     0, 1 },  /* sm */
+  {  6953,     0,     0, 1 },  /* sbs */
+  {  2155,  4130,     5, 1 },  /* sc */
+  {  6961,     0,     0, 1 },  /* sca */
+  {  6965,     0,     0, 1 },  /* scb */
+  {  6969,     0,     0, 1 },  /* schaeffler */
+  {  6980,     0,     0, 1 },  /* schmidt */
+  {  6988,     0,     0, 1 },  /* scholarships */
+  {  7001,     0,     0, 1 },  /* school */
+  {  7008,     0,     0, 1 },  /* schule */
+  {  7015,     0,     0, 1 },  /* schwarz */
+  {  7032,  4395,     1, 1 },  /* science */
+  {  7040,     0,     0, 1 },  /* scjohnson */
+  {  7050,     0,     0, 1 },  /* scor */
+  {  7055,     0,     0, 1 },  /* scot */
+  {  5348,  7886,     8, 1 },  /* sd */
+  {  1492,  7894,    41, 1 },  /* se */
+  {  1379,     0,     0, 1 },  /* search */
+  {  2601,     0,     0, 1 },  /* seat */
+  {  7079,     0,     0, 1 },  /* secure */
+  {  7086,     0,     0, 1 },  /* security */
+  {  7095,     0,     0, 1 },  /* seek */
+  {  4335,     0,     0, 1 },  /* select */
+  {  7100,     0,     0, 1 },  /* sener */
+  {  7106,     0,     0, 1 },  /* services */
+  {  2084,     0,     0, 1 },  /* ses */
+  {  7115,     0,     0, 1 },  /* seven */
+  {  7121,     0,     0, 1 },  /* sew */
+  {  7127,     0,     0, 1 },  /* sex */
+  {  7131,     0,     0, 1 },  /* sexy */
+  {  3226,     0,     0, 1 },  /* sfr */
+  {  7151,  7935,     7, 1 },  /* sg */
+  {  1504,  3735,     9, 1 },  /* sh */
+  {  7154,     0,     0, 1 },  /* shangrila */
+  {  7164,     0,     0, 1 },  /* sharp */
+  {  7170,     0,     0, 1 },  /* shaw */
+  {  7175,     0,     0, 1 },  /* shell */
+  {  7181,     0,     0, 1 },  /* shia */
+  {  7186,     0,     0, 1 },  /* shiksha */
+  {  7194,     0,     0, 1 },  /* shoes */
+  {  7204,  6895,     1, 1 },  /* shop */
+  {  6252,     0,     0, 1 },  /* shopping */
+  {  7209,     0,     0, 1 },  /* shouji */
+  {  4083,     0,     0, 1 },  /* show */
+  {  7216,     0,     0, 1 },  /* showtime */
+  {  7225,     0,     0, 1 },  /* shriram */
+  {  2361,  7942,     2, 1 },  /* si */
+  {  7237,     0,     0, 1 },  /* silk */
+  {  7245,     0,     0, 1 },  /* sina */
+  {  7250,     0,     0, 1 },  /* singles */
+  {  7262,  3744,     4, 1 },  /* site */
+  {  7267,     0,     0, 1 },  /* sj */
+  {  7271,  6865,     2, 1 },  /* sk */
+  {  4550,     0,     0, 1 },  /* ski */
+  {  7274,     0,     0, 1 },  /* skin */
+  {  4669,     0,     0, 1 },  /* sky */
+  {  7279,     0,     0, 1 },  /* skype */
+  {  7286,  4130,     5, 1 },  /* sl */
+  {  4221,     0,     0, 1 },  /* sling */
+  {  7290,     0,     0, 1 },  /* sm */
   {   525,     0,     0, 1 },  /* smart */
-  {  7323,     0,     0, 1 },  /* smile */
-  {  7330,  7579,     8, 1 },  /* sn */
-  {  1610,     0,     0, 1 },  /* sncf */
-  {  7334,  7587,     3, 1 },  /* so */
-  {  7337,     0,     0, 1 },  /* soccer */
-  {  7344,     0,     0, 1 },  /* social */
-  {  7351,     0,     0, 1 },  /* softbank */
-  {  7360,     0,     0, 1 },  /* software */
-  {  4117,     0,     0, 1 },  /* sohu */
-  {  7369,     0,     0, 1 },  /* solar */
-  {  7375,     0,     0, 1 },  /* solutions */
-  {  5986,     0,     0, 1 },  /* song */
-  {  7385,     0,     0, 1 },  /* sony */
-  {  7392,     0,     0, 1 },  /* soy */
-  {  2874,  7590,     3, 1 },  /* space */
-  {  7405,     0,     0, 1 },  /* spiegel */
-  {  7416,     0,     0, 1 },  /* spot */
-  {  7421,     0,     0, 1 },  /* spreadbetting */
-  {  7435,     0,     0, 1 },  /* sr */
-  {  7438,     0,     0, 1 },  /* srl */
-  {  7442,     0,     0, 1 },  /* srt */
-  {   619,  7593,    12, 1 },  /* st */
-  {  7450,     0,     0, 1 },  /* stada */
-  {  7456,     0,     0, 1 },  /* staples */
-  {  5567,     0,     0, 1 },  /* star */
-  {  7464,     0,     0, 1 },  /* starhub */
-  {  7472,     0,     0, 1 },  /* statebank */
-  {  2928,     0,     0, 1 },  /* statefarm */
-  {  7482,     0,     0, 1 },  /* statoil */
-  {  7490,     0,     0, 1 },  /* stc */
-  {  3735,     0,     0, 1 },  /* stcgroup */
-  {  7494,     0,     0, 1 },  /* stockholm */
-  {  7504,     0,     0, 1 },  /* storage */
-  {  7512,     0,     0, 1 },  /* store */
-  {  7518,     0,     0, 1 },  /* stream */
-  {  7525,     0,     0, 1 },  /* studio */
-  {  7532,     0,     0, 1 },  /* study */
-  {  4920,     0,     0, 1 },  /* style */
-  {  3295,  7605,    52, 1 },  /* su */
-  {  7543,     0,     0, 1 },  /* sucks */
-  {  7549,     0,     0, 1 },  /* supplies */
-  {  7558,     0,     0, 1 },  /* supply */
-  {  7565,  7254,     1, 1 },  /* support */
-  {  7573,     0,     0, 1 },  /* surf */
-  {  7578,     0,     0, 1 },  /* surgery */
-  {  7586,     0,     0, 1 },  /* suzuki */
-  {  7593,  7657,     5, 1 },  /* sv */
-  {  7596,     0,     0, 1 },  /* swatch */
-  {  7603,     0,     0, 1 },  /* swiftcover */
-  {  7614,     0,     0, 1 },  /* swiss */
-  {  7623,  3851,     1, 1 },  /* sx */
-  {  4985,  3715,     6, 1 },  /* sy */
-  {  7626,     0,     0, 1 },  /* sydney */
-  {  7633,     0,     0, 1 },  /* symantec */
-  {  7642,  7662,     1, 1 },  /* systems */
-  {  7652,  7663,     3, 1 },  /* sz */
-  {  7655,     0,     0, 1 },  /* tab */
-  {  7659,     0,     0, 1 },  /* taipei */
-  {  7678,     0,     0, 1 },  /* talk */
-  {  7683,     0,     0, 1 },  /* taobao */
-  {  7690,     0,     0, 1 },  /* target */
-  {  7697,     0,     0, 1 },  /* tatamotors */
-  {  7708,     0,     0, 1 },  /* tatar */
-  {  7714,     0,     0, 1 },  /* tattoo */
+  {  7293,     0,     0, 1 },  /* smile */
+  {  7300,  7944,     8, 1 },  /* sn */
+  {  1604,     0,     0, 1 },  /* sncf */
+  {  7304,  7952,     3, 1 },  /* so */
+  {  7307,     0,     0, 1 },  /* soccer */
+  {  7314,     0,     0, 1 },  /* social */
+  {  7321,     0,     0, 1 },  /* softbank */
+  {  7330,     0,     0, 1 },  /* software */
+  {  4104,     0,     0, 1 },  /* sohu */
+  {  7339,     0,     0, 1 },  /* solar */
+  {  7345,     0,     0, 1 },  /* solutions */
+  {  5959,     0,     0, 1 },  /* song */
+  {  7355,     0,     0, 1 },  /* sony */
+  {  7362,     0,     0, 1 },  /* soy */
+  {  2873,  7955,     4, 1 },  /* space */
+  {  7375,     0,     0, 1 },  /* spiegel */
+  {  7387,     0,     0, 1 },  /* sport */
+  {  7396,     0,     0, 1 },  /* spot */
+  {  7401,     0,     0, 1 },  /* spreadbetting */
+  {  7416,     0,     0, 1 },  /* sr */
+  {  7419,     0,     0, 1 },  /* srl */
+  {  7423,     0,     0, 1 },  /* srt */
+  {   619,  7959,    14, 1 },  /* st */
+  {  7431,     0,     0, 1 },  /* stada */
+  {  7437,     0,     0, 1 },  /* staples */
+  {  5545,     0,     0, 1 },  /* star */
+  {  7445,     0,     0, 1 },  /* starhub */
+  {  7453,     0,     0, 1 },  /* statebank */
+  {  2927,     0,     0, 1 },  /* statefarm */
+  {  7463,     0,     0, 1 },  /* statoil */
+  {  7471,     0,     0, 1 },  /* stc */
+  {  3729,     0,     0, 1 },  /* stcgroup */
+  {  7475,     0,     0, 1 },  /* stockholm */
+  {  7485,     0,     0, 1 },  /* storage */
+  {  7493,     0,     0, 1 },  /* store */
+  {  7499,     0,     0, 1 },  /* stream */
+  {  7506,     0,     0, 1 },  /* studio */
+  {  7513,     0,     0, 1 },  /* study */
+  {  4900,     0,     0, 1 },  /* style */
+  {  3289,  7973,    53, 1 },  /* su */
+  {  7524,     0,     0, 1 },  /* sucks */
+  {  7530,     0,     0, 1 },  /* supplies */
+  {  7539,     0,     0, 1 },  /* supply */
+  {  7546,  6895,     1, 1 },  /* support */
+  {  7554,     0,     0, 1 },  /* surf */
+  {  7559,     0,     0, 1 },  /* surgery */
+  {  7567,     0,     0, 1 },  /* suzuki */
+  {  7574,  8026,     5, 1 },  /* sv */
+  {  7577,     0,     0, 1 },  /* swatch */
+  {  7584,     0,     0, 1 },  /* swiftcover */
+  {  7595,     0,     0, 1 },  /* swiss */
+  {  7604,  8031,     2, 1 },  /* sx */
+  {  4965,  3904,     6, 1 },  /* sy */
+  {  7607,     0,     0, 1 },  /* sydney */
+  {  7614,     0,     0, 1 },  /* symantec */
+  {  7623,  8033,     1, 1 },  /* systems */
+  {  7633,  8034,     3, 1 },  /* sz */
+  {  7636,     0,     0, 1 },  /* tab */
+  {  7640,     0,     0, 1 },  /* taipei */
+  {  7659,     0,     0, 1 },  /* talk */
+  {  7664,     0,     0, 1 },  /* taobao */
+  {  7671,     0,     0, 1 },  /* target */
+  {  7678,     0,     0, 1 },  /* tatamotors */
+  {  7689,     0,     0, 1 },  /* tatar */
+  {  7695,     0,     0, 1 },  /* tattoo */
   {   662,     0,     0, 1 },  /* tax */
-  {  7721,     0,     0, 1 },  /* taxi */
-  {  4114,     0,     0, 1 },  /* tc */
-  {  1713,     0,     0, 1 },  /* tci */
-  {  5083,  3838,     1, 1 },  /* td */
-  {  2472,     0,     0, 1 },  /* tdk */
-  {  7731,     0,     0, 1 },  /* team */
-  {  1623,     0,     0, 1 },  /* tech */
-  {  7736,     0,     0, 1 },  /* technology */
+  {  7702,     0,     0, 1 },  /* taxi */
+  {  7472,     0,     0, 1 },  /* tc */
+  {  1709,     0,     0, 1 },  /* tci */
+  {  5071,  4032,     1, 1 },  /* td */
+  {  2468,     0,     0, 1 },  /* tdk */
+  {  7712,     0,     0, 1 },  /* team */
+  {  1617,     0,     0, 1 },  /* tech */
+  {  7717,     0,     0, 1 },  /* technology */
   {   279,     0,     0, 1 },  /* tel */
-  {  7753,     0,     0, 1 },  /* telecity */
-  {  7762,     0,     0, 1 },  /* telefonica */
-  {  7773,     0,     0, 1 },  /* temasek */
-  {  7781,     0,     0, 1 },  /* tennis */
-  {  7788,     0,     0, 1 },  /* teva */
-  {  7794,     0,     0, 1 },  /* tf */
-  {  7797,     0,     0, 1 },  /* tg */
-  {    13,  7666,     7, 1 },  /* th */
-  {  7804,     0,     0, 1 },  /* thd */
-  {  7808,     0,     0, 1 },  /* theater */
-  {  7816,     0,     0, 1 },  /* theatre */
-  {  7824,     0,     0, 1 },  /* tiaa */
-  {  7829,     0,     0, 1 },  /* tickets */
-  {  7837,     0,     0, 1 },  /* tienda */
-  {  7844,     0,     0, 1 },  /* tiffany */
-  {  7852,     0,     0, 1 },  /* tips */
-  {  7857,     0,     0, 1 },  /* tires */
-  {  7872,     0,     0, 1 },  /* tirol */
-  {  7878,  7673,    15, 1 },  /* tj */
-  {  7881,     0,     0, 1 },  /* tjmaxx */
-  {  7888,     0,     0, 1 },  /* tjx */
-  {  7892,     0,     0, 1 },  /* tk */
-  {  7895,     0,     0, 1 },  /* tkmaxx */
-  {  7904,  3851,     1, 1 },  /* tl */
-  {  7908,  7688,     8, 1 },  /* tm */
-  {  7911,     0,     0, 1 },  /* tmall */
-  {  5592,  7696,    20, 1 },  /* tn */
-  {   631,  7716,     7, 1 },  /* to */
-  {  2260,     0,     0, 1 },  /* today */
-  {  7922,     0,     0, 1 },  /* tokyo */
-  {  7928,     0,     0, 1 },  /* tools */
-  {  7934,     0,     0, 1 },  /* top */
-  {  7938,     0,     0, 1 },  /* toray */
-  {  7944,     0,     0, 1 },  /* toshiba */
-  {  7952,     0,     0, 1 },  /* total */
-  {  7958,     0,     0, 1 },  /* tours */
-  {  1403,     0,     0, 1 },  /* town */
-  {  7964,     0,     0, 1 },  /* toyota */
-  {  7971,     0,     0, 1 },  /* toys */
-  {  3287,  3564,    21, 1 },  /* tr */
-  {  7980,  4118,     1, 1 },  /* trade */
-  {  7986,     0,     0, 1 },  /* trading */
-  {  7994,     0,     0, 1 },  /* training */
-  {  8003,     0,     0, 1 },  /* travel */
-  {  1635,     0,     0, 1 },  /* travelchannel */
-  {  8010,     0,     0, 1 },  /* travelers */
-  {  8020,     0,     0, 1 },  /* travelersinsurance */
-  {  8039,     0,     0, 1 },  /* trust */
-  {  8045,     0,     0, 1 },  /* trv */
-  {    24,  7723,    17, 1 },  /* tt */
-  {  8056,     0,     0, 1 },  /* tube */
-  {  8061,     0,     0, 1 },  /* tui */
-  {  8065,     0,     0, 1 },  /* tunes */
-  {  8071,     0,     0, 1 },  /* tushu */
-  {  2549,  7740,     4, 1 },  /* tv */
-  {  8077,     0,     0, 1 },  /* tvs */
-  {  8081,  3585,    15, 1 },  /* tw */
-  {  8089,  7745,    12, 1 },  /* tz */
-  {  8095,  7757,    82, 1 },  /* ua */
+  {  7734,     0,     0, 1 },  /* telecity */
+  {  7743,     0,     0, 1 },  /* telefonica */
+  {  7754,     0,     0, 1 },  /* temasek */
+  {  7762,     0,     0, 1 },  /* tennis */
+  {  7769,     0,     0, 1 },  /* teva */
+  {  7775,     0,     0, 1 },  /* tf */
+  {  7779,     0,     0, 1 },  /* tg */
+  {    13,  8037,     7, 1 },  /* th */
+  {  7786,     0,     0, 1 },  /* thd */
+  {  7790,     0,     0, 1 },  /* theater */
+  {  7798,     0,     0, 1 },  /* theatre */
+  {  7806,     0,     0, 1 },  /* tiaa */
+  {  7811,     0,     0, 1 },  /* tickets */
+  {  7819,     0,     0, 1 },  /* tienda */
+  {  7826,     0,     0, 1 },  /* tiffany */
+  {  7834,     0,     0, 1 },  /* tips */
+  {  7839,     0,     0, 1 },  /* tires */
+  {  7854,     0,     0, 1 },  /* tirol */
+  {  7860,  8044,    16, 1 },  /* tj */
+  {  7863,     0,     0, 1 },  /* tjmaxx */
+  {  7870,     0,     0, 1 },  /* tjx */
+  {  7874,     0,     0, 1 },  /* tk */
+  {  7877,     0,     0, 1 },  /* tkmaxx */
+  {  7886,  4046,     1, 1 },  /* tl */
+  {  7890,  8060,     8, 1 },  /* tm */
+  {  7893,     0,     0, 1 },  /* tmall */
+  {  5570,  8068,    20, 1 },  /* tn */
+  {   631,  8088,     7, 1 },  /* to */
+  {  2256,     0,     0, 1 },  /* today */
+  {  7904,     0,     0, 1 },  /* tokyo */
+  {  7915,     0,     0, 1 },  /* tools */
+  {  7929,  8095,     2, 1 },  /* top */
+  {  7933,     0,     0, 1 },  /* toray */
+  {  7939,     0,     0, 1 },  /* toshiba */
+  {  7947,     0,     0, 1 },  /* total */
+  {  7953,     0,     0, 1 },  /* tours */
+  {  1396,     0,     0, 1 },  /* town */
+  {  7959,     0,     0, 1 },  /* toyota */
+  {  7966,     0,     0, 1 },  /* toys */
+  {  3281,  3748,    21, 1 },  /* tr */
+  {  7975,  4395,     1, 1 },  /* trade */
+  {  7981,     0,     0, 1 },  /* trading */
+  {  7989,     0,     0, 1 },  /* training */
+  {  7998,     0,     0, 1 },  /* travel */
+  {  1629,     0,     0, 1 },  /* travelchannel */
+  {  8005,     0,     0, 1 },  /* travelers */
+  {  8015,     0,     0, 1 },  /* travelersinsurance */
+  {  8034,     0,     0, 1 },  /* trust */
+  {  8040,     0,     0, 1 },  /* trv */
+  {    24,  8097,    17, 1 },  /* tt */
+  {  8051,     0,     0, 1 },  /* tube */
+  {  8056,     0,     0, 1 },  /* tui */
+  {  8060,     0,     0, 1 },  /* tunes */
+  {  8066,     0,     0, 1 },  /* tushu */
+  {  2545,  8114,     4, 1 },  /* tv */
+  {  8072,     0,     0, 1 },  /* tvs */
+  {  8076,  3769,    16, 1 },  /* tw */
+  {  8084,  8119,    12, 1 },  /* tz */
+  {  8090,  8131,    82, 1 },  /* ua */
   {   730,     0,     0, 1 },  /* ubank */
-  {  8098,     0,     0, 1 },  /* ubs */
-  {  8102,     0,     0, 1 },  /* uconnect */
-  {  8112,  7839,     9, 1 },  /* ug */
-  {  8120,  3600,    11, 1 },  /* uk */
-  {  8123,     0,     0, 1 },  /* unicom */
-  {  8130,     0,     0, 1 },  /* university */
-  {  8144,     0,     0, 1 },  /* uno */
-  {  8148,     0,     0, 1 },  /* uol */
-  {  6489,     0,     0, 1 },  /* ups */
-  {   264,  3611,    68, 1 },  /* us */
-  {   911,  3682,     6, 1 },  /* uy */
-  {  5874,  7862,     4, 1 },  /* uz */
+  {  8093,     0,     0, 1 },  /* ubs */
+  {  8097,     0,     0, 1 },  /* uconnect */
+  {  8107,  8213,    10, 1 },  /* ug */
+  {  8115,  3785,    12, 1 },  /* uk */
+  {  8118,     0,     0, 1 },  /* unicom */
+  {  8125,     0,     0, 1 },  /* university */
+  {  8139,     0,     0, 1 },  /* uno */
+  {  8143,     0,     0, 1 },  /* uol */
+  {  6455,     0,     0, 1 },  /* ups */
+  {   264,  3797,    69, 1 },  /* us */
+  {   911,  3869,     7, 1 },  /* uy */
+  {  5847,  8255,     4, 1 },  /* uz */
   {   834,     0,     0, 1 },  /* va */
-  {  8156,     0,     0, 1 },  /* vacations */
-  {  8166,     0,     0, 1 },  /* vana */
-  {  8171,     0,     0, 1 },  /* vanguard */
-  {  6544,  3715,     6, 1 },  /* vc */
-  {   125,  7866,    17, 1 },  /* ve */
-  {  8180,     0,     0, 1 },  /* vegas */
-  {  8186,     0,     0, 1 },  /* ventures */
-  {  8195,     0,     0, 1 },  /* verisign */
-  {  8204,     0,     0, 1 },  /* versicherung */
-  {  8222,     0,     0, 1 },  /* vet */
-  {  8227,     0,     0, 1 },  /* vg */
-  {  8230,  7883,     5, 1 },  /* vi */
-  {  8233,     0,     0, 1 },  /* viajes */
-  {  8240,     0,     0, 1 },  /* video */
-  {  8246,     0,     0, 1 },  /* vig */
-  {  8250,     0,     0, 1 },  /* viking */
-  {  8257,     0,     0, 1 },  /* villas */
-  {  8268,     0,     0, 1 },  /* vin */
-  {  8272,     0,     0, 1 },  /* vip */
-  {  8276,     0,     0, 1 },  /* virgin */
-  {  8283,     0,     0, 1 },  /* visa */
-  {  2804,     0,     0, 1 },  /* vision */
-  {  8299,     0,     0, 1 },  /* vista */
-  {  8305,     0,     0, 1 },  /* vistaprint */
-  {  8316,     0,     0, 1 },  /* viva */
-  {  8321,     0,     0, 1 },  /* vivo */
-  {  8326,     0,     0, 1 },  /* vlaanderen */
-  {  8345,  7888,    13, 1 },  /* vn */
-  {  8348,     0,     0, 1 },  /* vodka */
-  {  8354,     0,     0, 1 },  /* volkswagen */
-  {  8365,     0,     0, 1 },  /* volvo */
-  {  8371,     0,     0, 1 },  /* vote */
-  {  8376,     0,     0, 1 },  /* voting */
-  {  8383,     0,     0, 1 },  /* voto */
-  {  8388,     0,     0, 1 },  /* voyage */
-  {  8395,  4061,     4, 1 },  /* vu */
-  {  8398,     0,     0, 1 },  /* vuelos */
-  {  8405,     0,     0, 1 },  /* wales */
-  {  8411,     0,     0, 1 },  /* walmart */
-  {  8419,     0,     0, 1 },  /* walter */
-  {  8426,     0,     0, 1 },  /* wang */
-  {  8431,     0,     0, 1 },  /* wanggou */
-  {  8439,     0,     0, 1 },  /* warman */
-  {  7597,     0,     0, 1 },  /* watch */
-  {  8446,     0,     0, 1 },  /* watches */
-  {  8454,     0,     0, 1 },  /* weather */
-  {  8462,     0,     0, 1 },  /* weatherchannel */
-  {  1341,     0,     0, 1 },  /* webcam */
-  {  8477,     0,     0, 1 },  /* weber */
-  {  8486,     0,     0, 1 },  /* website */
-  {  8494,     0,     0, 1 },  /* wed */
-  {  8498,     0,     0, 1 },  /* wedding */
-  {  8506,     0,     0, 1 },  /* weibo */
-  {  8512,     0,     0, 1 },  /* weir */
-  {  8517,     0,     0, 1 },  /* wf */
-  {  8520,     0,     0, 1 },  /* whoswho */
-  {  8528,     0,     0, 1 },  /* wien */
-  {  8540,     0,     0, 1 },  /* wiki */
-  {  8545,     0,     0, 1 },  /* williamhill */
-  {  8557,     0,     0, 1 },  /* win */
-  {  8561,     0,     0, 1 },  /* windows */
-  {  8569,     0,     0, 1 },  /* wine */
-  {  8574,     0,     0, 1 },  /* winners */
-  {  5302,     0,     0, 1 },  /* wme */
-  {  8582,     0,     0, 1 },  /* wolterskluwer */
-  {  8596,     0,     0, 1 },  /* woodside */
-  {  3173,     0,     0, 1 },  /* work */
-  {  8605,     0,     0, 1 },  /* works */
-  {  8611,     0,     0, 1 },  /* world */
-  {  8617,     0,     0, 1 },  /* wow */
-  {   659,  3688,     8, 1 },  /* ws */
-  {  8621,     0,     0, 1 },  /* wtc */
-  {  7793,     0,     0, 1 },  /* wtf */
-  {  1177,     0,     0, 1 },  /* xbox */
-  {  3302,     0,     0, 1 },  /* xerox */
-  {  8625,     0,     0, 1 },  /* xfinity */
-  {  8633,     0,     0, 1 },  /* xihuan */
-  {  8640,     0,     0, 1 },  /* xin */
-  {  8644,     0,     0, 1 },  /* xn--11b4c3d */
-  {  8656,     0,     0, 1 },  /* xn--1ck2e1b */
-  {  8668,     0,     0, 1 },  /* xn--1qqw23a */
-  {  8680,     0,     0, 1 },  /* xn--30rr7y */
-  {  8691,     0,     0, 1 },  /* xn--3bst00m */
-  {  8703,     0,     0, 1 },  /* xn--3ds443g */
-  {  8715,     0,     0, 1 },  /* xn--3e0b707e */
-  {  8728,     0,     0, 1 },  /* xn--3oq18vl8pn36a */
-  {  8746,     0,     0, 1 },  /* xn--3pxu8k */
-  {  8757,     0,     0, 1 },  /* xn--42c2d9a */
-  {  8769,     0,     0, 1 },  /* xn--45brj9c */
-  {  8781,     0,     0, 1 },  /* xn--45q11c */
-  {  8792,     0,     0, 1 },  /* xn--4gbrim */
-  {  8803,     0,     0, 1 },  /* xn--54b7fta0cc */
-  {  8818,     0,     0, 1 },  /* xn--55qw42g */
-  {  8830,     0,     0, 1 },  /* xn--55qx5d */
-  {  7166,     0,     0, 1 },  /* xn--5su34j936bgsg */
-  {  8841,     0,     0, 1 },  /* xn--5tzm5g */
-  {  8852,     0,     0, 1 },  /* xn--6frz82g */
-  {  8864,     0,     0, 1 },  /* xn--6qq986b3xl */
-  {  8879,     0,     0, 1 },  /* xn--80adxhks */
-  {  8892,     0,     0, 1 },  /* xn--80ao21a */
-  {  8904,     0,     0, 1 },  /* xn--80aqecdr1a */
-  {  8919,     0,     0, 1 },  /* xn--80asehdb */
-  {  8932,     0,     0, 1 },  /* xn--80aswg */
-  {  8943,     0,     0, 1 },  /* xn--8y0a063a */
-  {  8956,  7901,     6, 1 },  /* xn--90a3ac */
-  {  8967,     0,     0, 1 },  /* xn--90ais */
-  {  8977,     0,     0, 1 },  /* xn--9dbq2a */
-  {  8988,     0,     0, 1 },  /* xn--9et52u */
-  {  8999,     0,     0, 1 },  /* xn--9krt00a */
-  {  9011,     0,     0, 1 },  /* xn--b4w605ferd */
-  {  9026,     0,     0, 1 },  /* xn--bck1b9a5dre4c */
-  {  9044,     0,     0, 1 },  /* xn--c1avg */
-  {  9054,     0,     0, 1 },  /* xn--c2br7g */
-  {  9065,     0,     0, 1 },  /* xn--cck2b3b */
-  {  9077,     0,     0, 1 },  /* xn--cg4bki */
-  {  9088,     0,     0, 1 },  /* xn--clchc0ea0b2g2a9gcd */
-  {  9111,     0,     0, 1 },  /* xn--czr694b */
-  {  9123,     0,     0, 1 },  /* xn--czrs0t */
-  {  9134,     0,     0, 1 },  /* xn--czru2d */
-  {  9145,     0,     0, 1 },  /* xn--d1acj3b */
-  {  9157,     0,     0, 1 },  /* xn--d1alf */
-  {  9167,     0,     0, 1 },  /* xn--e1a4c */
-  {  9177,     0,     0, 1 },  /* xn--eckvdtc9d */
-  {  9191,     0,     0, 1 },  /* xn--efvy88h */
-  {  9203,     0,     0, 1 },  /* xn--estv75g */
-  {  9215,     0,     0, 1 },  /* xn--fct429k */
-  {  9227,     0,     0, 1 },  /* xn--fhbei */
-  {  9237,     0,     0, 1 },  /* xn--fiq228c5hs */
-  {  9252,     0,     0, 1 },  /* xn--fiq64b */
-  {  9263,     0,     0, 1 },  /* xn--fiqs8s */
-  {  9274,     0,     0, 1 },  /* xn--fiqz9s */
-  {  9285,     0,     0, 1 },  /* xn--fjq720a */
-  {  9297,     0,     0, 1 },  /* xn--flw351e */
-  {  9309,     0,     0, 1 },  /* xn--fpcrj9c3d */
-  {  9323,     0,     0, 1 },  /* xn--fzc2c9e2c */
-  {  3561,     0,     0, 1 },  /* xn--fzys8d69uvgm */
-  {  9337,     0,     0, 1 },  /* xn--g2xx48c */
-  {  9349,     0,     0, 1 },  /* xn--gckr3f0f */
-  {  9362,     0,     0, 1 },  /* xn--gecrj9c */
-  {  9374,     0,     0, 1 },  /* xn--gk3at1e */
-  {  9386,     0,     0, 1 },  /* xn--h2brj9c */
-  {  9398,     0,     0, 1 },  /* xn--hxt814e */
-  {  9410,     0,     0, 1 },  /* xn--i1b6b1a6a2e */
-  {  9426,     0,     0, 1 },  /* xn--imr513n */
-  {  9438,     0,     0, 1 },  /* xn--io0a7i */
-  {  9449,     0,     0, 1 },  /* xn--j1aef */
-  {  5363,     0,     0, 1 },  /* xn--j1amh */
-  {  9459,     0,     0, 1 },  /* xn--j6w193g */
-  {  9471,     0,     0, 1 },  /* xn--jlq61u9w7b */
-  {  9486,     0,     0, 1 },  /* xn--jvr189m */
-  {  9498,     0,     0, 1 },  /* xn--kcrx77d1x4a */
-  {  9514,     0,     0, 1 },  /* xn--kprw13d */
-  {  9526,     0,     0, 1 },  /* xn--kpry57d */
-  {  9538,     0,     0, 1 },  /* xn--kpu716f */
-  {  9550,     0,     0, 1 },  /* xn--kput3i */
-  {  1573,     0,     0, 1 },  /* xn--l1acc */
-  {  9561,     0,     0, 1 },  /* xn--lgbbat1ad8j */
-  {  9577,     0,     0, 1 },  /* xn--mgb2ddes */
+  {  8157,     0,     0, 1 },  /* vacations */
+  {  8167,     0,     0, 1 },  /* vana */
+  {  8172,     0,     0, 1 },  /* vanguard */
+  {  6510,  8259,     7, 1 },  /* vc */
+  {   125,  8266,    17, 1 },  /* ve */
+  {  8181,     0,     0, 1 },  /* vegas */
+  {  8187,     0,     0, 1 },  /* ventures */
+  {  8196,     0,     0, 1 },  /* verisign */
+  {  8205,     0,     0, 1 },  /* versicherung */
+  {  8223,     0,     0, 1 },  /* vet */
+  {  8228,  3911,     1, 1 },  /* vg */
+  {  8231,  8283,     5, 1 },  /* vi */
+  {  8234,     0,     0, 1 },  /* viajes */
+  {  8241,     0,     0, 1 },  /* video */
+  {  8247,     0,     0, 1 },  /* vig */
+  {  8251,     0,     0, 1 },  /* viking */
+  {  8258,     0,     0, 1 },  /* villas */
+  {  8269,     0,     0, 1 },  /* vin */
+  {  8273,     0,     0, 1 },  /* vip */
+  {  8277,     0,     0, 1 },  /* virgin */
+  {  8284,     0,     0, 1 },  /* visa */
+  {  2803,     0,     0, 1 },  /* vision */
+  {  8302,     0,     0, 1 },  /* vista */
+  {  8308,     0,     0, 1 },  /* vistaprint */
+  {  8319,     0,     0, 1 },  /* viva */
+  {  8324,     0,     0, 1 },  /* vivo */
+  {  8329,     0,     0, 1 },  /* vlaanderen */
+  {  8348,  8288,    13, 1 },  /* vn */
+  {  8351,     0,     0, 1 },  /* vodka */
+  {  8357,     0,     0, 1 },  /* volkswagen */
+  {  8368,     0,     0, 1 },  /* volvo */
+  {  8374,     0,     0, 1 },  /* vote */
+  {  8379,     0,     0, 1 },  /* voting */
+  {  8386,     0,     0, 1 },  /* voto */
+  {  8391,     0,     0, 1 },  /* voyage */
+  {  8398,  4334,     4, 1 },  /* vu */
+  {  8401,     0,     0, 1 },  /* vuelos */
+  {  8408,     0,     0, 1 },  /* wales */
+  {  8414,     0,     0, 1 },  /* walmart */
+  {  8422,     0,     0, 1 },  /* walter */
+  {  8429,     0,     0, 1 },  /* wang */
+  {  8434,     0,     0, 1 },  /* wanggou */
+  {  8442,     0,     0, 1 },  /* warman */
+  {  7578,     0,     0, 1 },  /* watch */
+  {  8449,     0,     0, 1 },  /* watches */
+  {  8457,     0,     0, 1 },  /* weather */
+  {  8465,     0,     0, 1 },  /* weatherchannel */
+  {  8480,     0,     0, 1 },  /* webcam */
+  {  8487,     0,     0, 1 },  /* weber */
+  {  8496,     0,     0, 1 },  /* website */
+  {  8504,     0,     0, 1 },  /* wed */
+  {  8508,     0,     0, 1 },  /* wedding */
+  {  8516,     0,     0, 1 },  /* weibo */
+  {  8522,     0,     0, 1 },  /* weir */
+  {  8527,     0,     0, 1 },  /* wf */
+  {  8530,     0,     0, 1 },  /* whoswho */
+  {  8538,     0,     0, 1 },  /* wien */
+  {  8550,     0,     0, 1 },  /* wiki */
+  {  8555,     0,     0, 1 },  /* williamhill */
+  {  8567,     0,     0, 1 },  /* win */
+  {  8571,     0,     0, 1 },  /* windows */
+  {  8579,     0,     0, 1 },  /* wine */
+  {  8584,     0,     0, 1 },  /* winners */
+  {  5290,     0,     0, 1 },  /* wme */
+  {  8592,     0,     0, 1 },  /* wolterskluwer */
+  {  8606,     0,     0, 1 },  /* woodside */
+  {  3170,     0,     0, 1 },  /* work */
+  {  8615,     0,     0, 1 },  /* works */
+  {  8621,     0,     0, 1 },  /* world */
+  {  8627,     0,     0, 1 },  /* wow */
+  {   659,  3876,     9, 1 },  /* ws */
+  {  8631,     0,     0, 1 },  /* wtc */
+  {  7774,     0,     0, 1 },  /* wtf */
+  {  1171,     0,     0, 1 },  /* xbox */
+  {  3296,     0,     0, 1 },  /* xerox */
+  {  8635,     0,     0, 1 },  /* xfinity */
+  {  8643,     0,     0, 1 },  /* xihuan */
+  {  8650,     0,     0, 1 },  /* xin */
+  {  8654,     0,     0, 1 },  /* xn--11b4c3d */
+  {  8666,     0,     0, 1 },  /* xn--1ck2e1b */
+  {  8678,     0,     0, 1 },  /* xn--1qqw23a */
+  {  8690,     0,     0, 1 },  /* xn--2scrj9c */
+  {  8702,     0,     0, 1 },  /* xn--30rr7y */
+  {  8713,     0,     0, 1 },  /* xn--3bst00m */
+  {  8725,     0,     0, 1 },  /* xn--3ds443g */
+  {  8737,     0,     0, 1 },  /* xn--3e0b707e */
+  {  8750,     0,     0, 1 },  /* xn--3hcrj9c */
+  {  8762,     0,     0, 1 },  /* xn--3oq18vl8pn36a */
+  {  8780,     0,     0, 1 },  /* xn--3pxu8k */
+  {  8791,     0,     0, 1 },  /* xn--42c2d9a */
+  {  8803,     0,     0, 1 },  /* xn--45br5cyl */
+  {  8816,     0,     0, 1 },  /* xn--45brj9c */
+  {  8828,     0,     0, 1 },  /* xn--45q11c */
+  {  8839,     0,     0, 1 },  /* xn--4gbrim */
+  {  8850,     0,     0, 1 },  /* xn--54b7fta0cc */
+  {  8865,     0,     0, 1 },  /* xn--55qw42g */
+  {  8877,     0,     0, 1 },  /* xn--55qx5d */
+  {  7136,     0,     0, 1 },  /* xn--5su34j936bgsg */
+  {  8888,     0,     0, 1 },  /* xn--5tzm5g */
+  {  8899,     0,     0, 1 },  /* xn--6frz82g */
+  {  8911,     0,     0, 1 },  /* xn--6qq986b3xl */
+  {  8926,     0,     0, 1 },  /* xn--80adxhks */
+  {  8939,     0,     0, 1 },  /* xn--80ao21a */
+  {  8951,     0,     0, 1 },  /* xn--80aqecdr1a */
+  {  8966,     0,     0, 1 },  /* xn--80asehdb */
+  {  8979,     0,     0, 1 },  /* xn--80aswg */
+  {  8990,     0,     0, 1 },  /* xn--8y0a063a */
+  {  9003,  8301,     6, 1 },  /* xn--90a3ac */
+  {  9014,     0,     0, 1 },  /* xn--90ae */
+  {  9023,     0,     0, 1 },  /* xn--90ais */
+  {  9033,     0,     0, 1 },  /* xn--9dbq2a */
+  {  9044,     0,     0, 1 },  /* xn--9et52u */
+  {  9055,     0,     0, 1 },  /* xn--9krt00a */
+  {  9067,     0,     0, 1 },  /* xn--b4w605ferd */
+  {  9082,     0,     0, 1 },  /* xn--bck1b9a5dre4c */
+  {  9100,     0,     0, 1 },  /* xn--c1avg */
+  {  9110,     0,     0, 1 },  /* xn--c2br7g */
+  {  9121,     0,     0, 1 },  /* xn--cck2b3b */
+  {  9133,     0,     0, 1 },  /* xn--cg4bki */
+  {  9144,     0,     0, 1 },  /* xn--clchc0ea0b2g2a9gcd */
+  {  9167,     0,     0, 1 },  /* xn--czr694b */
+  {  9179,     0,     0, 1 },  /* xn--czrs0t */
+  {  9190,     0,     0, 1 },  /* xn--czru2d */
+  {  9201,     0,     0, 1 },  /* xn--d1acj3b */
+  {  9213,     0,     0, 1 },  /* xn--d1alf */
+  {  9223,     0,     0, 1 },  /* xn--e1a4c */
+  {  9233,     0,     0, 1 },  /* xn--eckvdtc9d */
+  {  9247,     0,     0, 1 },  /* xn--efvy88h */
+  {  9259,     0,     0, 1 },  /* xn--estv75g */
+  {  9271,     0,     0, 1 },  /* xn--fct429k */
+  {  9283,     0,     0, 1 },  /* xn--fhbei */
+  {  9293,     0,     0, 1 },  /* xn--fiq228c5hs */
+  {  9308,     0,     0, 1 },  /* xn--fiq64b */
+  {  9319,     0,     0, 1 },  /* xn--fiqs8s */
+  {  9330,     0,     0, 1 },  /* xn--fiqz9s */
+  {  9341,     0,     0, 1 },  /* xn--fjq720a */
+  {  9353,     0,     0, 1 },  /* xn--flw351e */
+  {  9365,     0,     0, 1 },  /* xn--fpcrj9c3d */
+  {  9379,     0,     0, 1 },  /* xn--fzc2c9e2c */
+  {  3555,     0,     0, 1 },  /* xn--fzys8d69uvgm */
+  {  9393,     0,     0, 1 },  /* xn--g2xx48c */
+  {  9405,     0,     0, 1 },  /* xn--gckr3f0f */
+  {  9418,     0,     0, 1 },  /* xn--gecrj9c */
+  {  9430,     0,     0, 1 },  /* xn--gk3at1e */
+  {  9442,     0,     0, 1 },  /* xn--h2breg3eve */
+  {  9457,     0,     0, 1 },  /* xn--h2brj9c */
+  {  9469,     0,     0, 1 },  /* xn--h2brj9c8c */
+  {  9483,     0,     0, 1 },  /* xn--hxt814e */
+  {  9495,     0,     0, 1 },  /* xn--i1b6b1a6a2e */
+  {  9511,     0,     0, 1 },  /* xn--imr513n */
+  {  9523,     0,     0, 1 },  /* xn--io0a7i */
+  {  9534,     0,     0, 1 },  /* xn--j1aef */
+  {  5351,     0,     0, 1 },  /* xn--j1amh */
+  {  9544,  8307,     6, 1 },  /* xn--j6w193g */
+  {  9556,     0,     0, 1 },  /* xn--jlq61u9w7b */
+  {  9571,     0,     0, 1 },  /* xn--jvr189m */
+  {  9583,     0,     0, 1 },  /* xn--kcrx77d1x4a */
+  {  9599,     0,     0, 1 },  /* xn--kprw13d */
+  {  9611,     0,     0, 1 },  /* xn--kpry57d */
+  {  9623,     0,     0, 1 },  /* xn--kpu716f */
+  {  9635,     0,     0, 1 },  /* xn--kput3i */
+  {  1566,     0,     0, 1 },  /* xn--l1acc */
+  {  9646,     0,     0, 1 },  /* xn--lgbbat1ad8j */
+  {  9662,     0,     0, 1 },  /* xn--mgb2ddes */
   {   918,     0,     0, 1 },  /* xn--mgb9awbf */
-  {  9590,     0,     0, 1 },  /* xn--mgba3a3ejt */
-  {  9605,     0,     0, 1 },  /* xn--mgba3a4f16a */
-  {  9621,     0,     0, 1 },  /* xn--mgba3a4fra */
-  {  9636,     0,     0, 1 },  /* xn--mgba7c0bbn0a */
-  {  9653,     0,     0, 1 },  /* xn--mgbaakc7dvf */
-  {  9669,     0,     0, 1 },  /* xn--mgbaam7a8h */
+  {  9675,     0,     0, 1 },  /* xn--mgba3a3ejt */
+  {  9690,     0,     0, 1 },  /* xn--mgba3a4f16a */
+  {  9706,     0,     0, 1 },  /* xn--mgba3a4fra */
+  {  9721,     0,     0, 1 },  /* xn--mgba7c0bbn0a */
+  {  9738,     0,     0, 1 },  /* xn--mgbaakc7dvf */
+  {  9754,     0,     0, 1 },  /* xn--mgbaam7a8h */
   {   845,     0,     0, 1 },  /* xn--mgbab2bd */
-  {  9684,     0,     0, 1 },  /* xn--mgbai9a5eva00b */
-  {  9703,     0,     0, 1 },  /* xn--mgbai9azgqp6j */
-  {  9721,     0,     0, 1 },  /* xn--mgbayh7gpa */
-  {  9736,     0,     0, 1 },  /* xn--mgbb9fbpob */
-  {  9751,     0,     0, 1 },  /* xn--mgbbh1a71e */
-  {  9766,     0,     0, 1 },  /* xn--mgbc0a9azcg */
-  {  9782,     0,     0, 1 },  /* xn--mgbca7dzdo */
-  {  9797,     0,     0, 1 },  /* xn--mgberp4a5d4a87g */
-  {  9817,     0,     0, 1 },  /* xn--mgberp4a5d4ar */
-  {  9835,     0,     0, 1 },  /* xn--mgbi4ecexp */
-  {  9850,     0,     0, 1 },  /* xn--mgbpl2fh */
-  {  9863,     0,     0, 1 },  /* xn--mgbqly7c0a67fbc */
-  {  9883,     0,     0, 1 },  /* xn--mgbqly7cvafr */
-  {  9900,     0,     0, 1 },  /* xn--mgbt3dhd */
-  {  9913,     0,     0, 1 },  /* xn--mgbtf8fl */
-  {  9926,     0,     0, 1 },  /* xn--mgbtx2b */
-  {  9938,     0,     0, 1 },  /* xn--mgbx4cd0ab */
-  {  9953,     0,     0, 1 },  /* xn--mix082f */
-  {  9965,     0,     0, 1 },  /* xn--mix891f */
-  {  9977,     0,     0, 1 },  /* xn--mk1bu44c */
-  {  9990,     0,     0, 1 },  /* xn--mxtq1m */
-  { 10001,     0,     0, 1 },  /* xn--ngbc5azd */
-  { 10014,     0,     0, 1 },  /* xn--ngbe9e0a */
-  { 10027,     0,     0, 1 },  /* xn--ngbrx */
-  { 10037,     0,     0, 1 },  /* xn--nnx388a */
-  { 10049,     0,     0, 1 },  /* xn--node */
-  { 10058,     0,     0, 1 },  /* xn--nqv7f */
-  { 10068,     0,     0, 1 },  /* xn--nqv7fs00ema */
-  { 10084,     0,     0, 1 },  /* xn--nyqy26a */
-  { 10096,  7907,     6, 1 },  /* xn--o3cw4h */
-  { 10107,     0,     0, 1 },  /* xn--ogbpf8fl */
-  { 10120,     0,     0, 1 },  /* xn--p1acf */
-  { 10130,     0,     0, 1 },  /* xn--p1ai */
-  { 10139,     0,     0, 1 },  /* xn--pbt977c */
-  { 10151,     0,     0, 1 },  /* xn--pgbs0dh */
-  { 10163,     0,     0, 1 },  /* xn--pssy2u */
-  { 10174,     0,     0, 1 },  /* xn--q9jyb4c */
-  {  5276,     0,     0, 1 },  /* xn--qcka1pmc */
-  { 10186,     0,     0, 1 },  /* xn--qxam */
-  { 10195,     0,     0, 1 },  /* xn--rhqv96g */
-  { 10207,     0,     0, 1 },  /* xn--rovu88b */
-  { 10219,     0,     0, 1 },  /* xn--s9brj9c */
-  { 10231,     0,     0, 1 },  /* xn--ses554g */
-  { 10243,     0,     0, 1 },  /* xn--t60b56a */
-  { 10255,     0,     0, 1 },  /* xn--tckwe */
-  { 10265,     0,     0, 1 },  /* xn--tiq49xqyj */
-  { 10279,     0,     0, 1 },  /* xn--unup4y */
-  { 10290,     0,     0, 1 },  /* xn--vermgensberater-ctb */
-  { 10314,     0,     0, 1 },  /* xn--vermgensberatung-pwb */
-  { 10339,     0,     0, 1 },  /* xn--vhquv */
-  { 10349,     0,     0, 1 },  /* xn--vuq861b */
-  { 10361,     0,     0, 1 },  /* xn--w4r85el8fhu5dnra */
-  { 10382,     0,     0, 1 },  /* xn--w4rs40l */
-  { 10394,     0,     0, 1 },  /* xn--wgbh1c */
-  { 10405,     0,     0, 1 },  /* xn--wgbl6a */
-  { 10416,     0,     0, 1 },  /* xn--xhq521b */
-  { 10428,     0,     0, 1 },  /* xn--xkc2al3hye2a */
-  { 10445,     0,     0, 1 },  /* xn--xkc2dl3a5ee0h */
-  { 10463,     0,     0, 1 },  /* xn--y9a3aq */
-  { 10474,     0,     0, 1 },  /* xn--yfro4i67o */
-  { 10488,     0,     0, 1 },  /* xn--ygbi2ammx */
-  { 10502,     0,     0, 1 },  /* xn--zfr164b */
-  { 10514,     0,     0, 1 },  /* xperia */
-  { 10521,     0,     0, 1 },  /* xxx */
-  { 10525,  7913,     1, 1 },  /* xyz */
-  { 10529,     0,     0, 1 },  /* yachts */
-  { 10536,     0,     0, 1 },  /* yahoo */
-  { 10542,     0,     0, 1 },  /* yamaxun */
-  { 10550,     0,     0, 1 },  /* yandex */
-  { 10557,  3853,     1, 0 },  /* ye */
-  { 10560,     0,     0, 1 },  /* yodobashi */
-  { 10578,     0,     0, 1 },  /* yoga */
-  { 10583,     0,     0, 1 },  /* yokohama */
-  {  2195,     0,     0, 1 },  /* you */
-  {  8053,     0,     0, 1 },  /* youtube */
-  { 10592,     0,     0, 1 },  /* yt */
-  { 10595,     0,     0, 1 },  /* yun */
-  {  6312,  3696,    17, 0 },  /* za */
-  { 10604,     0,     0, 1 },  /* zappos */
-  { 10611,     0,     0, 1 },  /* zara */
-  { 10616,     0,     0, 1 },  /* zero */
-  { 10621,     0,     0, 1 },  /* zip */
-  { 10625,     0,     0, 1 },  /* zippo */
-  { 10631,  7914,    11, 1 },  /* zm */
-  { 10637,  3713,     2, 1 },  /* zone */
-  {  6756,     0,     0, 1 },  /* zuerich */
-  { 10642,  7925,     5, 1 },  /* zw */
-  {  1914,  3838,     1, 1 },  /* com.ar */
-  {  2623,     0,     0, 1 },  /* edu.ar */
-  { 11304,     0,     0, 1 },  /* gob.ar */
-  {  3671,     0,     0, 1 },  /* gov.ar */
-  {  3617,     0,     0, 1 },  /* int.ar */
-  {  4170,     0,     0, 1 },  /* mil.ar */
-  { 11308,     0,     0, 1 },  /* musica.ar */
-  {  5737,     0,     0, 1 },  /* net.ar */
-  {  6053,     0,     0, 1 },  /* org.ar */
-  { 11321,     0,     0, 1 },  /* tur.ar */
-  { 11361,     0,     0, 1 },  /* 12hp.at */
-  { 11366,     0,     0, 1 },  /* 2ix.at */
-  { 11370,     0,     0, 1 },  /* 4lima.at */
+  {  9769,     0,     0, 1 },  /* xn--mgbai9a5eva00b */
+  {  9788,     0,     0, 1 },  /* xn--mgbai9azgqp6j */
+  {  9806,     0,     0, 1 },  /* xn--mgbayh7gpa */
+  {  9821,     0,     0, 1 },  /* xn--mgbb9fbpob */
+  {  9836,     0,     0, 1 },  /* xn--mgbbh1a */
+  {  9848,     0,     0, 1 },  /* xn--mgbbh1a71e */
+  {  9863,     0,     0, 1 },  /* xn--mgbc0a9azcg */
+  {  9879,     0,     0, 1 },  /* xn--mgbca7dzdo */
+  {  9894,     0,     0, 1 },  /* xn--mgberp4a5d4a87g */
+  {  9914,     0,     0, 1 },  /* xn--mgberp4a5d4ar */
+  {  9932,     0,     0, 1 },  /* xn--mgbgu82a */
+  {  9945,     0,     0, 1 },  /* xn--mgbi4ecexp */
+  {  9960,     0,     0, 1 },  /* xn--mgbpl2fh */
+  {  9973,     0,     0, 1 },  /* xn--mgbqly7c0a67fbc */
+  {  9993,     0,     0, 1 },  /* xn--mgbqly7cvafr */
+  { 10010,     0,     0, 1 },  /* xn--mgbt3dhd */
+  { 10023,     0,     0, 1 },  /* xn--mgbtf8fl */
+  { 10036,     0,     0, 1 },  /* xn--mgbtx2b */
+  { 10048,     0,     0, 1 },  /* xn--mgbx4cd0ab */
+  { 10063,     0,     0, 1 },  /* xn--mix082f */
+  { 10075,     0,     0, 1 },  /* xn--mix891f */
+  { 10087,     0,     0, 1 },  /* xn--mk1bu44c */
+  { 10100,     0,     0, 1 },  /* xn--mxtq1m */
+  { 10111,     0,     0, 1 },  /* xn--ngbc5azd */
+  { 10124,     0,     0, 1 },  /* xn--ngbe9e0a */
+  { 10137,     0,     0, 1 },  /* xn--ngbrx */
+  { 10147,     0,     0, 1 },  /* xn--nnx388a */
+  { 10159,     0,     0, 1 },  /* xn--node */
+  { 10168,     0,     0, 1 },  /* xn--nqv7f */
+  { 10178,     0,     0, 1 },  /* xn--nqv7fs00ema */
+  { 10194,     0,     0, 1 },  /* xn--nyqy26a */
+  { 10206,  8313,     6, 1 },  /* xn--o3cw4h */
+  { 10217,     0,     0, 1 },  /* xn--ogbpf8fl */
+  { 10230,     0,     0, 1 },  /* xn--otu796d */
+  { 10242,     0,     0, 1 },  /* xn--p1acf */
+  { 10252,     0,     0, 1 },  /* xn--p1ai */
+  { 10261,     0,     0, 1 },  /* xn--pbt977c */
+  { 10273,     0,     0, 1 },  /* xn--pgbs0dh */
+  { 10285,     0,     0, 1 },  /* xn--pssy2u */
+  { 10296,     0,     0, 1 },  /* xn--q9jyb4c */
+  {  5264,     0,     0, 1 },  /* xn--qcka1pmc */
+  { 10308,     0,     0, 1 },  /* xn--qxam */
+  { 10317,     0,     0, 1 },  /* xn--rhqv96g */
+  { 10329,     0,     0, 1 },  /* xn--rovu88b */
+  { 10341,     0,     0, 1 },  /* xn--rvc1e0am3e */
+  { 10356,     0,     0, 1 },  /* xn--s9brj9c */
+  { 10368,     0,     0, 1 },  /* xn--ses554g */
+  { 10380,     0,     0, 1 },  /* xn--t60b56a */
+  { 10392,     0,     0, 1 },  /* xn--tckwe */
+  { 10402,     0,     0, 1 },  /* xn--tiq49xqyj */
+  { 10416,     0,     0, 1 },  /* xn--unup4y */
+  { 10427,     0,     0, 1 },  /* xn--vermgensberater-ctb */
+  { 10451,     0,     0, 1 },  /* xn--vermgensberatung-pwb */
+  { 10476,     0,     0, 1 },  /* xn--vhquv */
+  { 10486,     0,     0, 1 },  /* xn--vuq861b */
+  { 10498,     0,     0, 1 },  /* xn--w4r85el8fhu5dnra */
+  { 10519,     0,     0, 1 },  /* xn--w4rs40l */
+  { 10531,     0,     0, 1 },  /* xn--wgbh1c */
+  { 10542,     0,     0, 1 },  /* xn--wgbl6a */
+  { 10553,     0,     0, 1 },  /* xn--xhq521b */
+  { 10565,     0,     0, 1 },  /* xn--xkc2al3hye2a */
+  { 10582,     0,     0, 1 },  /* xn--xkc2dl3a5ee0h */
+  { 10600,     0,     0, 1 },  /* xn--y9a3aq */
+  { 10611,     0,     0, 1 },  /* xn--yfro4i67o */
+  { 10625,     0,     0, 1 },  /* xn--ygbi2ammx */
+  { 10639,     0,     0, 1 },  /* xn--zfr164b */
+  { 10651,     0,     0, 1 },  /* xperia */
+  { 10658,     0,     0, 1 },  /* xxx */
+  { 10662,  8319,     4, 1 },  /* xyz */
+  { 10666,     0,     0, 1 },  /* yachts */
+  { 10673,     0,     0, 1 },  /* yahoo */
+  { 10679,     0,     0, 1 },  /* yamaxun */
+  { 10687,     0,     0, 1 },  /* yandex */
+  { 10694,  4048,     1, 0 },  /* ye */
+  { 10697,     0,     0, 1 },  /* yodobashi */
+  { 10715,     0,     0, 1 },  /* yoga */
+  { 10720,     0,     0, 1 },  /* yokohama */
+  {  2191,     0,     0, 1 },  /* you */
+  {  8048,     0,     0, 1 },  /* youtube */
+  { 10729,     0,     0, 1 },  /* yt */
+  { 10732,     0,     0, 1 },  /* yun */
+  {  6272,  3885,    17, 0 },  /* za */
+  { 10741,     0,     0, 1 },  /* zappos */
+  { 10748,     0,     0, 1 },  /* zara */
+  { 10753,     0,     0, 1 },  /* zero */
+  { 10758,     0,     0, 1 },  /* zip */
+  { 10762,     0,     0, 1 },  /* zippo */
+  { 10768,  8323,    11, 1 },  /* zm */
+  { 10774,  3902,     2, 1 },  /* zone */
+  {  6722,     0,     0, 1 },  /* zuerich */
+  { 10779,  8334,     5, 1 },  /* zw */
+  {  1910,  4032,     1, 1 },  /* com.ar */
+  {  2622,     0,     0, 1 },  /* edu.ar */
+  { 11461,     0,     0, 1 },  /* gob.ar */
+  {  3665,     0,     0, 1 },  /* gov.ar */
+  {  3611,     0,     0, 1 },  /* int.ar */
+  {  4157,     0,     0, 1 },  /* mil.ar */
+  { 11465,     0,     0, 1 },  /* musica.ar */
+  {  5710,     0,     0, 1 },  /* net.ar */
+  {  6026,     0,     0, 1 },  /* org.ar */
+  { 11478,     0,     0, 1 },  /* tur.ar */
+  { 11518,     0,     0, 1 },  /* 12hp.at */
+  { 11523,     0,     0, 1 },  /* 2ix.at */
+  { 11527,     0,     0, 1 },  /* 4lima.at */
   {    62,     0,     0, 1 },  /* ac.at */
   {   986,     0,     0, 1 },  /* biz.at */
-  {   113,  3838,     1, 1 },  /* co.at */
-  { 11376,     0,     0, 1 },  /* futurehosting.at */
-  { 11390,     0,     0, 1 },  /* futuremailing.at */
-  { 11297,     0,     0, 1 },  /* gv.at */
-  {  3152,     0,     0, 1 },  /* info.at */
-  { 11404,     0,     0, 1 },  /* lima-city.at */
+  {   113,  4032,     1, 1 },  /* co.at */
+  { 11533,  1580,     3, 0 },  /* futurecms.at */
+  { 11543,     0,     0, 1 },  /* futurehosting.at */
+  { 11557,     0,     0, 1 },  /* futuremailing.at */
+  { 11443,     0,     0, 1 },  /* gv.at */
+  {  3149,     0,     0, 1 },  /* info.at */
+  { 11571,     0,     0, 1 },  /* lima-city.at */
   {   137,     0,     0, 1 },  /* or.at */
-  {  3148,  1573,     2, 0 },  /* ortsinfo.at */
-  { 11418,     0,     0, 1 },  /* priv.at */
-  {   397,  3853,     1, 0 },  /* ex.ortsinfo.at */
-  { 11428,  3853,     1, 0 },  /* kunden.ortsinfo.at */
-  {  2004,     0,     0, 1 },  /* act.au */
-  {  7329,     0,     0, 1 },  /* asn.au */
-  {  1914,  3838,     1, 1 },  /* com.au */
-  { 11437,     0,     0, 1 },  /* conf.au */
-  {  2623,  3854,     8, 1 },  /* edu.au */
-  {  3671,  3862,     5, 1 },  /* gov.au */
+  { 11585,  1583,     2, 0 },  /* ortsinfo.at */
+  { 11594,     0,     0, 1 },  /* priv.at */
+  { 11599,     0,     0, 1 },  /* *.futurecms.at */
+  {   397,  4048,     1, 0 },  /* ex.futurecms.at */
+  {   898,  4048,     1, 0 },  /* in.futurecms.at */
+  {   397,  4048,     1, 0 },  /* ex.ortsinfo.at */
+  { 11606,  4048,     1, 0 },  /* kunden.ortsinfo.at */
+  {  2000,     0,     0, 1 },  /* act.au */
+  {  7299,     0,     0, 1 },  /* asn.au */
+  {  1910,  4032,     1, 1 },  /* com.au */
+  { 11613,     0,     0, 1 },  /* conf.au */
+  {  2622,  4049,     8, 1 },  /* edu.au */
+  {  3665,  4057,     5, 1 },  /* gov.au */
   {   437,     0,     0, 1 },  /* id.au */
-  {  3152,     0,     0, 1 },  /* info.au */
-  {  5737,     0,     0, 1 },  /* net.au */
-  { 11442,     0,     0, 1 },  /* nsw.au */
+  {  3149,     0,     0, 1 },  /* info.au */
+  {  5710,     0,     0, 1 },  /* net.au */
+  { 11618,     0,     0, 1 },  /* nsw.au */
   {    97,     0,     0, 1 },  /* nt.au */
-  {  6053,     0,     0, 1 },  /* org.au */
-  { 11452,     0,     0, 1 },  /* oz.au */
-  { 11455,     0,     0, 1 },  /* qld.au */
-  {  1494,     0,     0, 1 },  /* sa.au */
+  {  6026,     0,     0, 1 },  /* org.au */
+  { 11627,     0,     0, 1 },  /* oz.au */
+  { 11630,     0,     0, 1 },  /* qld.au */
+  {  1487,     0,     0, 1 },  /* sa.au */
   {   536,     0,     0, 1 },  /* tas.au */
-  { 11460,     0,     0, 1 },  /* vic.au */
-  {  5943,     0,     0, 1 },  /* wa.au */
+  { 11635,     0,     0, 1 },  /* vic.au */
+  {  5916,     0,     0, 1 },  /* wa.au */
   {    62,     0,     0, 1 },  /* ac.be */
-  { 10645,     0,     0, 1 },  /* blogspot.be */
-  { 11475,  3853,     1, 0 },  /* transurl.be */
-  {  2476,     0,     0, 1 },  /* adm.br */
-  { 11665,     0,     0, 1 },  /* adv.br */
-  {  3681,     0,     0, 1 },  /* agr.br */
+  { 10791,     0,     0, 1 },  /* blogspot.be */
+  { 11650,  4048,     1, 0 },  /* transurl.be */
+  {  4031,     0,     0, 1 },  /* webhosting.be */
+  { 12079,     0,     0, 1 },  /* 9guacu.br */
+  {    34,     0,     0, 1 },  /* abc.br */
+  {  2472,     0,     0, 1 },  /* adm.br */
+  { 12086,     0,     0, 1 },  /* adv.br */
+  {  3675,     0,     0, 1 },  /* agr.br */
+  { 12090,     0,     0, 1 },  /* aju.br */
   {   358,     0,     0, 1 },  /* am.br */
-  { 11669,     0,     0, 1 },  /* arq.br */
+  { 12094,     0,     0, 1 },  /* anani.br */
+  { 12100,     0,     0, 1 },  /* aparecida.br */
+  { 12110,     0,     0, 1 },  /* arq.br */
   {   527,     0,     0, 1 },  /* art.br */
-  { 11674,     0,     0, 1 },  /* ato.br */
+  { 12115,     0,     0, 1 },  /* ato.br */
   {    18,     0,     0, 1 },  /* b.br */
-  { 11678,     0,     0, 1 },  /* belem.br */
+  { 12119,     0,     0, 1 },  /* barueri.br */
+  { 12127,     0,     0, 1 },  /* belem.br */
+  { 12133,     0,     0, 1 },  /* bhz.br */
   {   981,     0,     0, 1 },  /* bio.br */
   {  1035,     0,     0, 1 },  /* blog.br */
-  {  5298,     0,     0, 1 },  /* bmd.br */
-  {  4174,     0,     0, 1 },  /* cim.br */
-  {  5804,     0,     0, 1 },  /* cng.br */
-  { 11446,     0,     0, 1 },  /* cnt.br */
-  {  1914,  3838,     1, 1 },  /* com.br */
-  {  2048,     0,     0, 1 },  /* coop.br */
-  { 11684,     0,     0, 1 },  /* cri.br */
-  { 11688,     0,     0, 1 },  /* def.br */
-  {  1867,     0,     0, 1 },  /* ecn.br */
-  {  2613,     0,     0, 1 },  /* eco.br */
-  {  2623,     0,     0, 1 },  /* edu.br */
-  {  5572,     0,     0, 1 },  /* emp.br */
-  { 11692,     0,     0, 1 },  /* eng.br */
-  { 11696,     0,     0, 1 },  /* esp.br */
-  {  7726,     0,     0, 1 },  /* etc.br */
-  { 11702,     0,     0, 1 },  /* eti.br */
+  {  5286,     0,     0, 1 },  /* bmd.br */
+  { 12137,     0,     0, 1 },  /* boavista.br */
+  {  6949,     0,     0, 1 },  /* bsb.br */
+  { 12146,     0,     0, 1 },  /* campinagrande.br */
+  { 12160,     0,     0, 1 },  /* campinas.br */
+  { 12169,     0,     0, 1 },  /* caxias.br */
+  {  4161,     0,     0, 1 },  /* cim.br */
+  {  5777,     0,     0, 1 },  /* cng.br */
+  { 11622,     0,     0, 1 },  /* cnt.br */
+  {  1910,  4032,     1, 1 },  /* com.br */
+  { 12176,     0,     0, 1 },  /* contagem.br */
+  {  2044,     0,     0, 1 },  /* coop.br */
+  { 12185,     0,     0, 1 },  /* cri.br */
+  { 12189,     0,     0, 1 },  /* cuiaba.br */
+  { 12196,     0,     0, 1 },  /* curitiba.br */
+  { 12205,     0,     0, 1 },  /* def.br */
+  {  1863,     0,     0, 1 },  /* ecn.br */
+  {  2612,     0,     0, 1 },  /* eco.br */
+  {  2622,     0,     0, 1 },  /* edu.br */
+  {  5550,     0,     0, 1 },  /* emp.br */
+  { 12209,     0,     0, 1 },  /* eng.br */
+  { 12213,     0,     0, 1 },  /* esp.br */
+  {  7707,     0,     0, 1 },  /* etc.br */
+  { 12219,     0,     0, 1 },  /* eti.br */
   {   493,     0,     0, 1 },  /* far.br */
-  { 11706,     0,     0, 1 },  /* flog.br */
-  { 11711,     0,     0, 1 },  /* floripa.br */
-  {  3145,     0,     0, 1 },  /* fm.br */
-  { 11719,     0,     0, 1 },  /* fnd.br */
-  { 11723,     0,     0, 1 },  /* fot.br */
-  {  7446,     0,     0, 1 },  /* fst.br */
-  { 11494,     0,     0, 1 },  /* g12.br */
-  {  3470,     0,     0, 1 },  /* ggf.br */
-  {  3671,  3958,    27, 1 },  /* gov.br */
-  { 11727,     0,     0, 1 },  /* imb.br */
-  { 11731,     0,     0, 1 },  /* ind.br */
-  {  5796,     0,     0, 1 },  /* inf.br */
-  { 11735,     0,     0, 1 },  /* jampa.br */
-  { 11414,     0,     0, 1 },  /* jor.br */
-  {  8152,     0,     0, 1 },  /* jus.br */
-  {  2645,  3958,    27, 1 },  /* leg.br */
-  { 11741,     0,     0, 1 },  /* lel.br */
-  {  4181,     0,     0, 1 },  /* mat.br */
-  {  1859,     0,     0, 1 },  /* med.br */
-  {  4170,     0,     0, 1 },  /* mil.br */
-  {  1375,     0,     0, 1 },  /* mp.br */
-  { 11745,     0,     0, 1 },  /* mus.br */
-  {  5737,     0,     0, 1 },  /* net.br */
-  {  5970,  3853,     1, 0 },  /* nom.br */
-  { 11749,     0,     0, 1 },  /* not.br */
-  {  7976,     0,     0, 1 },  /* ntr.br */
-  {  2485,     0,     0, 1 },  /* odo.br */
-  {  6053,     0,     0, 1 },  /* org.br */
-  { 11762,     0,     0, 1 },  /* poa.br */
-  {  6193,     0,     0, 1 },  /* ppg.br */
-  {  6410,     0,     0, 1 },  /* pro.br */
-  {  6987,     0,     0, 1 },  /* psc.br */
-  {  7263,     0,     0, 1 },  /* psi.br */
-  {  7315,     0,     0, 1 },  /* qsl.br */
-  {  6554,     0,     0, 1 },  /* radio.br */
-  { 11769,     0,     0, 1 },  /* rec.br */
-  { 11773,     0,     0, 1 },  /* recife.br */
-  { 11780,     0,     0, 1 },  /* slg.br */
-  { 11784,     0,     0, 1 },  /* srv.br */
-  {  7721,     0,     0, 1 },  /* taxi.br */
-  { 11788,     0,     0, 1 },  /* teo.br */
-  { 11792,     0,     0, 1 },  /* tmp.br */
-  { 11796,     0,     0, 1 },  /* trd.br */
-  { 11321,     0,     0, 1 },  /* tur.br */
-  {  2549,     0,     0, 1 },  /* tv.br */
-  {  8222,     0,     0, 1 },  /* vet.br */
-  { 11800,     0,     0, 1 },  /* vix.br */
-  { 11804,     0,     0, 1 },  /* vlog.br */
-  {  8540,     0,     0, 1 },  /* wiki.br */
-  { 11809,     0,     0, 1 },  /* zlg.br */
-  {  1914,  3838,     1, 1 },  /* com.by */
-  {  3671,     0,     0, 1 },  /* gov.by */
-  {  4170,     0,     0, 1 },  /* mil.by */
-  {  6433,     0,     0, 1 },  /* of.by */
+  { 12223,     0,     0, 1 },  /* feira.br */
+  { 12229,     0,     0, 1 },  /* flog.br */
+  { 12234,     0,     0, 1 },  /* floripa.br */
+  {  3144,     0,     0, 1 },  /* fm.br */
+  { 12242,     0,     0, 1 },  /* fnd.br */
+  { 12246,     0,     0, 1 },  /* fortal.br */
+  { 12253,     0,     0, 1 },  /* fot.br */
+  { 11626,     0,     0, 1 },  /* foz.br */
+  {  7427,     0,     0, 1 },  /* fst.br */
+  { 12257,     0,     0, 1 },  /* g12.br */
+  {  3464,     0,     0, 1 },  /* ggf.br */
+  { 12261,     0,     0, 1 },  /* goiania.br */
+  {  3665,  4197,    27, 1 },  /* gov.br */
+  {  6817,     0,     0, 1 },  /* gru.br */
+  { 12269,     0,     0, 1 },  /* imb.br */
+  { 12273,     0,     0, 1 },  /* ind.br */
+  {  5769,     0,     0, 1 },  /* inf.br */
+  { 12277,     0,     0, 1 },  /* jab.br */
+  { 12281,     0,     0, 1 },  /* jampa.br */
+  { 12287,     0,     0, 1 },  /* jdf.br */
+  { 12291,     0,     0, 1 },  /* joinville.br */
+  { 11581,     0,     0, 1 },  /* jor.br */
+  {  8147,     0,     0, 1 },  /* jus.br */
+  {  2644,  4197,    27, 1 },  /* leg.br */
+  { 12301,     0,     0, 1 },  /* lel.br */
+  { 12305,     0,     0, 1 },  /* londrina.br */
+  { 12314,     0,     0, 1 },  /* macapa.br */
+  { 12321,     0,     0, 1 },  /* maceio.br */
+  { 12328,     0,     0, 1 },  /* manaus.br */
+  { 12335,     0,     0, 1 },  /* maringa.br */
+  {  4168,     0,     0, 1 },  /* mat.br */
+  {  1855,     0,     0, 1 },  /* med.br */
+  {  4157,     0,     0, 1 },  /* mil.br */
+  { 12343,     0,     0, 1 },  /* morena.br */
+  {  1368,     0,     0, 1 },  /* mp.br */
+  { 12350,     0,     0, 1 },  /* mus.br */
+  { 12354,     0,     0, 1 },  /* natal.br */
+  {  5710,     0,     0, 1 },  /* net.br */
+  { 12360,     0,     0, 1 },  /* niteroi.br */
+  {  5943,  4048,     1, 0 },  /* nom.br */
+  { 12368,     0,     0, 1 },  /* not.br */
+  {  7971,     0,     0, 1 },  /* ntr.br */
+  {  2481,     0,     0, 1 },  /* odo.br */
+  {  6026,     0,     0, 1 },  /* org.br */
+  { 12372,     0,     0, 1 },  /* osasco.br */
+  { 12379,     0,     0, 1 },  /* palmas.br */
+  { 12395,     0,     0, 1 },  /* poa.br */
+  {  6153,     0,     0, 1 },  /* ppg.br */
+  {  6376,     0,     0, 1 },  /* pro.br */
+  {  6957,     0,     0, 1 },  /* psc.br */
+  {  7233,     0,     0, 1 },  /* psi.br */
+  { 12399,     0,     0, 1 },  /* pvh.br */
+  {  7285,     0,     0, 1 },  /* qsl.br */
+  {  6520,     0,     0, 1 },  /* radio.br */
+  { 12406,     0,     0, 1 },  /* rec.br */
+  { 12410,     0,     0, 1 },  /* recife.br */
+  { 12417,     0,     0, 1 },  /* ribeirao.br */
+  {  6766,     0,     0, 1 },  /* rio.br */
+  { 12426,     0,     0, 1 },  /* riobranco.br */
+  { 12436,     0,     0, 1 },  /* riopreto.br */
+  { 12445,     0,     0, 1 },  /* salvador.br */
+  { 12454,     0,     0, 1 },  /* sampa.br */
+  { 12460,     0,     0, 1 },  /* santamaria.br */
+  { 12471,     0,     0, 1 },  /* santoandre.br */
+  { 12482,     0,     0, 1 },  /* saobernardo.br */
+  { 12494,     0,     0, 1 },  /* saogonca.br */
+  { 12503,     0,     0, 1 },  /* sjc.br */
+  { 12507,     0,     0, 1 },  /* slg.br */
+  { 12511,     0,     0, 1 },  /* slz.br */
+  { 12515,     0,     0, 1 },  /* sorocaba.br */
+  { 12524,     0,     0, 1 },  /* srv.br */
+  {  7702,     0,     0, 1 },  /* taxi.br */
+  { 12528,     0,     0, 1 },  /* teo.br */
+  { 11778,     0,     0, 1 },  /* the.br */
+  { 12532,     0,     0, 1 },  /* tmp.br */
+  { 12536,     0,     0, 1 },  /* trd.br */
+  { 11478,     0,     0, 1 },  /* tur.br */
+  {  2545,     0,     0, 1 },  /* tv.br */
+  {   596,     0,     0, 1 },  /* udi.br */
+  {  8223,     0,     0, 1 },  /* vet.br */
+  { 12540,     0,     0, 1 },  /* vix.br */
+  { 12544,     0,     0, 1 },  /* vlog.br */
+  {  8550,     0,     0, 1 },  /* wiki.br */
+  { 12549,     0,     0, 1 },  /* zlg.br */
+  {  1910,  4032,     1, 1 },  /* com.by */
+  {  3665,     0,     0, 1 },  /* gov.by */
+  {  4157,     0,     0, 1 },  /* mil.by */
+  { 12575,     0,     0, 1 },  /* nym.by */
+  {  6399,     0,     0, 1 },  /* of.by */
   {   499,     0,     0, 1 },  /* ab.ca */
-  {  2381,  3853,     1, 0 },  /* awdev.ca */
+  {  2377,  4048,     1, 0 },  /* awdev.ca */
   {    35,     0,     0, 1 },  /* bc.ca */
-  { 10645,     0,     0, 1 },  /* blogspot.ca */
+  { 10791,     0,     0, 1 },  /* blogspot.ca */
   {   113,     0,     0, 1 },  /* co.ca */
-  { 11838,     0,     0, 1 },  /* gc.ca */
-  { 11728,     0,     0, 1 },  /* mb.ca */
-  { 11843,     0,     0, 1 },  /* nb.ca */
-  {  5797,     0,     0, 1 },  /* nf.ca */
+  { 12579,     0,     0, 1 },  /* gc.ca */
+  { 12270,     0,     0, 1 },  /* mb.ca */
+  { 12584,     0,     0, 1 },  /* nb.ca */
+  {  5770,     0,     0, 1 },  /* nf.ca */
   {  1072,     0,     0, 1 },  /* nl.ca */
-  { 11621,     0,     0, 1 },  /* no-ip.ca */
+  { 11795,     0,     0, 1 },  /* no-ip.ca */
   {   786,     0,     0, 1 },  /* ns.ca */
   {    97,     0,     0, 1 },  /* nt.ca */
-  {  5351,     0,     0, 1 },  /* nu.ca */
+  {  5339,     0,     0, 1 },  /* nu.ca */
   {   592,     0,     0, 1 },  /* on.ca */
-  {  3724,     0,     0, 1 },  /* pe.ca */
-  { 11524,     0,     0, 1 },  /* qc.ca */
-  {  7301,     0,     0, 1 },  /* sk.ca */
-  { 11533,     0,     0, 1 },  /* yk.ca */
-  { 11951,  3853,     1, 0 },  /* magentosite.cloud */
-  { 11963,     0,     0, 1 },  /* myfusion.cloud */
-  { 11972,  3853,     1, 0 },  /* sensiosite.cloud */
-  { 11983,  3853,     1, 0 },  /* statics.cloud */
-  { 11991,     0,     0, 1 },  /* trafficplex.cloud */
-  { 12003,     0,     0, 1 },  /* vapor.cloud */
+  {  3718,     0,     0, 1 },  /* pe.ca */
+  { 11698,     0,     0, 1 },  /* qc.ca */
+  {  7271,     0,     0, 1 },  /* sk.ca */
+  { 11707,     0,     0, 1 },  /* yk.ca */
+  { 12716,     0,     0, 1 },  /* linkyard.cloud */
+  { 12725,  4048,     1, 0 },  /* magentosite.cloud */
+  { 12737,  4048,     1, 0 },  /* sensiosite.cloud */
+  { 12748,  4048,     1, 0 },  /* statics.cloud */
+  { 12756,     0,     0, 1 },  /* trafficplex.cloud */
+  { 12768,     0,     0, 1 },  /* vapor.cloud */
   {    62,     0,     0, 1 },  /* ac.cn */
-  { 12011,     0,     0, 1 },  /* ah.cn */
+  { 12776,     0,     0, 1 },  /* ah.cn */
   {   990,     0,     0, 1 },  /* bj.cn */
-  {  1914,  1747,     1, 1 },  /* com.cn */
-  { 11539,     0,     0, 1 },  /* cq.cn */
-  {  2623,     0,     0, 1 },  /* edu.cn */
-  {  3097,     0,     0, 1 },  /* fj.cn */
-  {  3434,     0,     0, 1 },  /* gd.cn */
-  {  3671,     0,     0, 1 },  /* gov.cn */
-  {  3745,     0,     0, 1 },  /* gs.cn */
-  { 11548,     0,     0, 1 },  /* gx.cn */
-  { 12014,     0,     0, 1 },  /* gz.cn */
-  {  2518,     0,     0, 1 },  /* ha.cn */
-  { 11515,     0,     0, 1 },  /* hb.cn */
-  { 11605,     0,     0, 1 },  /* he.cn */
+  {  1910,  1808,     1, 1 },  /* com.cn */
+  { 11713,     0,     0, 1 },  /* cq.cn */
+  {  2622,     0,     0, 1 },  /* edu.cn */
+  {  3096,     0,     0, 1 },  /* fj.cn */
+  {  3428,     0,     0, 1 },  /* gd.cn */
+  {  3665,     0,     0, 1 },  /* gov.cn */
+  {  3739,     0,     0, 1 },  /* gs.cn */
+  { 11722,     0,     0, 1 },  /* gx.cn */
+  { 12779,     0,     0, 1 },  /* gz.cn */
+  {  2514,     0,     0, 1 },  /* ha.cn */
+  { 12806,     0,     0, 1 },  /* hb.cn */
+  { 11779,     0,     0, 1 },  /* he.cn */
   {   512,     0,     0, 1 },  /* hi.cn */
-  {  3922,     0,     0, 1 },  /* hk.cn */
-  {  2388,     0,     0, 1 },  /* hl.cn */
-  {  3936,     0,     0, 1 },  /* hn.cn */
-  { 11536,     0,     0, 1 },  /* jl.cn */
-  { 11545,     0,     0, 1 },  /* js.cn */
-  {  7889,     0,     0, 1 },  /* jx.cn */
-  {  4618,     0,     0, 1 },  /* ln.cn */
-  {  4170,     0,     0, 1 },  /* mil.cn */
-  {  3585,     0,     0, 1 },  /* mo.cn */
-  {  5737,     0,     0, 1 },  /* net.cn */
-  { 12038,     0,     0, 1 },  /* nm.cn */
-  { 12043,     0,     0, 1 },  /* nx.cn */
-  {  6053,     0,     0, 1 },  /* org.cn */
-  { 11530,     0,     0, 1 },  /* qh.cn */
-  {  2159,     0,     0, 1 },  /* sc.cn */
-  {  5360,     0,     0, 1 },  /* sd.cn */
-  {  1511,     0,     0, 1 },  /* sh.cn */
-  {  7330,     0,     0, 1 },  /* sn.cn */
-  {  7623,     0,     0, 1 },  /* sx.cn */
-  {  7878,     0,     0, 1 },  /* tj.cn */
-  {  8081,     0,     0, 1 },  /* tw.cn */
-  { 12046,     0,     0, 1 },  /* xj.cn */
-  {  8830,     0,     0, 1 },  /* xn--55qx5d.cn */
-  {  9438,     0,     0, 1 },  /* xn--io0a7i.cn */
-  { 12049,     0,     0, 1 },  /* xn--od0alg.cn */
-  { 12060,     0,     0, 1 },  /* xz.cn */
-  { 12066,     0,     0, 1 },  /* yn.cn */
-  { 12069,     0,     0, 1 },  /* zj.cn */
-  {   652,  1748,     3, 0 },  /* amazonaws.com.cn */
-  { 12072,  4033,     2, 0 },  /* cn-north-1.amazonaws.com.cn */
-  { 12083,  3853,     1, 0 },  /* compute.amazonaws.com.cn */
-  { 12091,  3853,     1, 0 },  /* elb.amazonaws.com.cn */
-  {  6158,     0,     0, 1 },  /* arts.co */
-  {  1914,  3838,     1, 1 },  /* com.co */
-  {  2623,     0,     0, 1 },  /* edu.co */
-  { 12095,     0,     0, 1 },  /* firm.co */
-  {  3671,     0,     0, 1 },  /* gov.co */
-  {  3152,     0,     0, 1 },  /* info.co */
-  {  3617,     0,     0, 1 },  /* int.co */
-  {  4170,     0,     0, 1 },  /* mil.co */
-  {  5737,     0,     0, 1 },  /* net.co */
-  { 12100,     0,     0, 1 },  /* nodum.co */
-  {  5970,     0,     0, 1 },  /* nom.co */
-  {  6053,     0,     0, 1 },  /* org.co */
-  { 11769,     0,     0, 1 },  /* rec.co */
-  { 12109,     0,     0, 1 },  /* web.co */
-  {  5418,  3853,     1, 0 },  /* 0emm.com */
-  { 12113,     0,     0, 1 },  /* 1kapp.com */
-  { 12119,     0,     0, 1 },  /* 3utilities.com */
-  { 12138,     0,     0, 1 },  /* 4u.com */
+  {  3916,     0,     0, 1 },  /* hk.cn */
+  {  2384,     0,     0, 1 },  /* hl.cn */
+  {  3930,     0,     0, 1 },  /* hn.cn */
+  { 11710,     0,     0, 1 },  /* jl.cn */
+  { 11719,     0,     0, 1 },  /* js.cn */
+  {  7871,     0,     0, 1 },  /* jx.cn */
+  {  4604,     0,     0, 1 },  /* ln.cn */
+  {  4157,     0,     0, 1 },  /* mil.cn */
+  {  3579,     0,     0, 1 },  /* mo.cn */
+  {  5710,     0,     0, 1 },  /* net.cn */
+  { 12825,     0,     0, 1 },  /* nm.cn */
+  { 12830,     0,     0, 1 },  /* nx.cn */
+  {  6026,     0,     0, 1 },  /* org.cn */
+  { 11704,     0,     0, 1 },  /* qh.cn */
+  {  2155,     0,     0, 1 },  /* sc.cn */
+  {  5348,     0,     0, 1 },  /* sd.cn */
+  {  1504,     0,     0, 1 },  /* sh.cn */
+  {  7300,     0,     0, 1 },  /* sn.cn */
+  {  7604,     0,     0, 1 },  /* sx.cn */
+  {  7860,     0,     0, 1 },  /* tj.cn */
+  {  8076,     0,     0, 1 },  /* tw.cn */
+  { 12833,     0,     0, 1 },  /* xj.cn */
+  {  8877,     0,     0, 1 },  /* xn--55qx5d.cn */
+  {  9523,     0,     0, 1 },  /* xn--io0a7i.cn */
+  { 12836,     0,     0, 1 },  /* xn--od0alg.cn */
+  { 12847,     0,     0, 1 },  /* xz.cn */
+  { 12853,     0,     0, 1 },  /* yn.cn */
+  { 12856,     0,     0, 1 },  /* zj.cn */
+  {   652,  1809,     4, 0 },  /* amazonaws.com.cn */
+  { 12859,  4284,     1, 0 },  /* cn-north-1.amazonaws.com.cn */
+  { 12870,  4048,     1, 0 },  /* compute.amazonaws.com.cn */
+  {  1582,  4285,     1, 0 },  /* eb.amazonaws.com.cn */
+  { 12878,  4048,     1, 0 },  /* elb.amazonaws.com.cn */
+  {  6118,     0,     0, 1 },  /* arts.co */
+  {  1910,  4032,     1, 1 },  /* com.co */
+  {  2622,     0,     0, 1 },  /* edu.co */
+  { 12882,     0,     0, 1 },  /* firm.co */
+  {  3665,     0,     0, 1 },  /* gov.co */
+  {  3149,     0,     0, 1 },  /* info.co */
+  {  3611,     0,     0, 1 },  /* int.co */
+  {  4157,     0,     0, 1 },  /* mil.co */
+  { 12564,     0,     0, 1 },  /* mypi.co */
+  { 12887,     0,     0, 1 },  /* n4t.co */
+  {  5710,     0,     0, 1 },  /* net.co */
+  { 12891,     0,     0, 1 },  /* nodum.co */
+  {  5943,     0,     0, 1 },  /* nom.co */
+  {  6026,     0,     0, 1 },  /* org.co */
+  { 12897,  4048,     1, 0 },  /* otap.co */
+  { 12406,     0,     0, 1 },  /* rec.co */
+  { 12075,     0,     0, 1 },  /* web.co */
+  { 12902,     0,     0, 1 },  /* 001www.com */
+  {  5406,  4048,     1, 0 },  /* 0emm.com */
+  { 12909,     0,     0, 1 },  /* 1kapp.com */
+  { 12915,     0,     0, 1 },  /* 3utilities.com */
+  { 12934,     0,     0, 1 },  /* 4u.com */
   {   217,     0,     0, 1 },  /* africa.com */
-  { 12141,     0,     0, 1 },  /* alpha-myqnapcloud.com */
-  {   652,  2045,    40, 0 },  /* amazonaws.com */
-  { 12159,     0,     0, 1 },  /* appchizi.com */
-  { 12168,     0,     0, 1 },  /* applinzi.com */
-  {  7413,     0,     0, 1 },  /* appspot.com */
+  { 12937,     0,     0, 1 },  /* alpha-myqnapcloud.com */
+  {   652,  2133,    42, 0 },  /* amazonaws.com */
+  { 12955,     0,     0, 1 },  /* appchizi.com */
+  { 12964,     0,     0, 1 },  /* applinzi.com */
+  {  7393,     0,     0, 1 },  /* appspot.com */
   {   494,     0,     0, 1 },  /* ar.com */
-  {  6001,     0,     0, 1 },  /* barsyonline.com */
-  { 12177,     0,     0, 1 },  /* betainabox.com */
-  { 12188,     0,     0, 1 },  /* blogdns.com */
-  { 10645,     0,     0, 1 },  /* blogspot.com */
-  { 12196,     0,     0, 1 },  /* blogsyte.com */
-  { 12205,     0,     0, 1 },  /* bloxcms.com */
-  { 12213,  4036,     2, 1 },  /* bounty-full.com */
-  { 12225,     0,     0, 1 },  /* bplaced.com */
-  {  1183,     0,     0, 1 },  /* br.com */
-  { 12233,     0,     0, 1 },  /* cechire.com */
-  { 12241,     0,     0, 1 },  /* ciscofreak.com */
-  { 12252,     0,     0, 1 },  /* cloudcontrolapp.com */
-  { 12268,     0,     0, 1 },  /* cloudcontrolled.com */
+  { 12973,     0,     0, 1 },  /* barsycenter.com */
+  {  5974,     0,     0, 1 },  /* barsyonline.com */
+  { 12985,     0,     0, 1 },  /* betainabox.com */
+  { 12996,     0,     0, 1 },  /* bitballoon.com */
+  { 13007,     0,     0, 1 },  /* blogdns.com */
+  { 10791,     0,     0, 1 },  /* blogspot.com */
+  { 13015,     0,     0, 1 },  /* blogsyte.com */
+  { 13024,     0,     0, 1 },  /* bloxcms.com */
+  { 13032,  4286,     2, 1 },  /* bounty-full.com */
+  { 13044,     0,     0, 1 },  /* bplaced.com */
+  {  1177,     0,     0, 1 },  /* br.com */
+  { 13052,     0,     0, 1 },  /* cechire.com */
+  { 13060,     0,     0, 1 },  /* ciscofreak.com */
+  { 13071,     0,     0, 1 },  /* cloudcontrolapp.com */
+  { 13087,     0,     0, 1 },  /* cloudcontrolled.com */
   {   842,     0,     0, 1 },  /* cn.com */
   {   113,     0,     0, 1 },  /* co.com */
-  { 12284,     0,     0, 1 },  /* codespot.com */
-  { 12293,     0,     0, 1 },  /* damnserver.com */
-  { 12304,     0,     0, 1 },  /* ddnsking.com */
-  {  2277,     0,     0, 1 },  /* de.com */
-  { 12313,     0,     0, 1 },  /* dev-myqnapcloud.com */
-  {  6804,     0,     0, 1 },  /* ditchyourip.com */
-  { 12329,     0,     0, 1 },  /* dnsalias.com */
-  { 12338,     0,     0, 1 },  /* dnsdojo.com */
-  { 12346,     0,     0, 1 },  /* dnsiskinky.com */
-  { 12357,     0,     0, 1 },  /* doesntexist.com */
-  { 12369,     0,     0, 1 },  /* dontexist.com */
-  { 12379,     0,     0, 1 },  /* doomdns.com */
-  { 12387,     0,     0, 1 },  /* drayddns.com */
-  { 12396,     0,     0, 1 },  /* dreamhosters.com */
-  { 12409,     0,     0, 1 },  /* dsmynas.com */
-  { 12417,     0,     0, 1 },  /* dyn-o-saur.com */
-  { 12428,     0,     0, 1 },  /* dynalias.com */
-  { 12437,     0,     0, 1 },  /* dyndns-at-home.com */
-  { 12452,     0,     0, 1 },  /* dyndns-at-work.com */
-  { 12467,     0,     0, 1 },  /* dyndns-blog.com */
-  {  3233,     0,     0, 1 },  /* dyndns-free.com */
-  { 12479,     0,     0, 1 },  /* dyndns-home.com */
-  { 12491,     0,     0, 1 },  /* dyndns-ip.com */
-  { 12501,     0,     0, 1 },  /* dyndns-mail.com */
-  { 12513,     0,     0, 1 },  /* dyndns-office.com */
-  { 12527,     0,     0, 1 },  /* dyndns-pics.com */
-  { 12539,     0,     0, 1 },  /* dyndns-remote.com */
-  { 12553,     0,     0, 1 },  /* dyndns-server.com */
-  { 12567,     0,     0, 1 },  /* dyndns-web.com */
-  {  8533,     0,     0, 1 },  /* dyndns-wiki.com */
-  { 12578,     0,     0, 1 },  /* dyndns-work.com */
-  { 12590,     0,     0, 1 },  /* dynns.com */
-  {  7666,  3853,     1, 0 },  /* elasticbeanstalk.com */
-  {  5151,     0,     0, 1 },  /* est-a-la-maison.com */
-  { 12596,     0,     0, 1 },  /* est-a-la-masion.com */
-  { 12612,     0,     0, 1 },  /* est-le-patron.com */
-  { 12626,     0,     0, 1 },  /* est-mon-blogueur.com */
-  {  2797,     0,     0, 1 },  /* eu.com */
-  { 12643,  4038,     6, 0 },  /* evennode.com */
-  { 12652,     0,     0, 1 },  /* familyds.com */
-  { 12661,  4044,     1, 0 },  /* fbsbx.com */
-  { 12667,     0,     0, 1 },  /* firebaseapp.com */
-  { 12679,     0,     0, 1 },  /* firewall-gateway.com */
-  { 12696,     0,     0, 1 },  /* flynnhub.com */
-  { 12705,     0,     0, 1 },  /* freebox-os.com */
-  { 12716,     0,     0, 1 },  /* freeboxos.com */
-  { 12726,     0,     0, 1 },  /* from-ak.com */
-  { 12734,     0,     0, 1 },  /* from-al.com */
-  { 12742,     0,     0, 1 },  /* from-ar.com */
-  { 12750,     0,     0, 1 },  /* from-ca.com */
-  { 12758,     0,     0, 1 },  /* from-ct.com */
-  { 12766,     0,     0, 1 },  /* from-dc.com */
-  { 12774,     0,     0, 1 },  /* from-de.com */
-  { 12782,     0,     0, 1 },  /* from-fl.com */
-  { 12790,     0,     0, 1 },  /* from-ga.com */
-  { 12798,     0,     0, 1 },  /* from-hi.com */
-  { 12806,     0,     0, 1 },  /* from-ia.com */
-  { 12814,     0,     0, 1 },  /* from-id.com */
-  { 12822,     0,     0, 1 },  /* from-il.com */
-  { 12830,     0,     0, 1 },  /* from-in.com */
-  { 12838,     0,     0, 1 },  /* from-ks.com */
-  { 12846,     0,     0, 1 },  /* from-ky.com */
-  { 12854,     0,     0, 1 },  /* from-ma.com */
-  { 12862,     0,     0, 1 },  /* from-md.com */
-  { 12870,     0,     0, 1 },  /* from-mi.com */
-  { 12878,     0,     0, 1 },  /* from-mn.com */
-  { 12886,     0,     0, 1 },  /* from-mo.com */
-  { 12894,     0,     0, 1 },  /* from-ms.com */
-  {  5583,     0,     0, 1 },  /* from-mt.com */
-  { 12902,     0,     0, 1 },  /* from-nc.com */
-  { 12910,     0,     0, 1 },  /* from-nd.com */
-  { 12918,     0,     0, 1 },  /* from-ne.com */
-  { 12926,     0,     0, 1 },  /* from-nh.com */
-  { 12934,     0,     0, 1 },  /* from-nj.com */
-  { 12033,     0,     0, 1 },  /* from-nm.com */
-  { 12942,     0,     0, 1 },  /* from-nv.com */
-  { 12950,     0,     0, 1 },  /* from-oh.com */
-  { 12958,     0,     0, 1 },  /* from-ok.com */
-  { 12966,     0,     0, 1 },  /* from-or.com */
-  { 12974,     0,     0, 1 },  /* from-pa.com */
-  {  6380,     0,     0, 1 },  /* from-pr.com */
-  { 12982,     0,     0, 1 },  /* from-ri.com */
-  { 12990,     0,     0, 1 },  /* from-sc.com */
-  {  7090,     0,     0, 1 },  /* from-sd.com */
-  { 12998,     0,     0, 1 },  /* from-tn.com */
-  { 13006,     0,     0, 1 },  /* from-tx.com */
-  { 13014,     0,     0, 1 },  /* from-ut.com */
-  { 13022,     0,     0, 1 },  /* from-va.com */
-  { 13030,     0,     0, 1 },  /* from-vt.com */
-  { 13038,     0,     0, 1 },  /* from-wa.com */
-  { 13046,     0,     0, 1 },  /* from-wi.com */
-  { 13054,     0,     0, 1 },  /* from-wv.com */
-  { 13062,     0,     0, 1 },  /* from-wy.com */
-  {  3426,     0,     0, 1 },  /* gb.com */
-  { 13070,     0,     0, 1 },  /* geekgalaxy.com */
-  { 13081,     0,     0, 1 },  /* getmyip.com */
-  { 13089,  2109,     3, 1 },  /* githubcloud.com */
-  { 13101,  3853,     1, 0 },  /* githubcloudusercontent.com */
-  { 13124,     0,     0, 1 },  /* githubusercontent.com */
-  { 13142,     0,     0, 1 },  /* googleapis.com */
-  { 13153,     0,     0, 1 },  /* googlecode.com */
-  { 11908,     0,     0, 1 },  /* gotdns.com */
-  { 13164,     0,     0, 1 },  /* gotpantheon.com */
-  {  3682,     0,     0, 1 },  /* gr.com */
-  { 13176,     0,     0, 1 },  /* health-carereform.com */
-  { 13194,     0,     0, 1 },  /* herokuapp.com */
-  { 13204,     0,     0, 1 },  /* herokussl.com */
-  {  3922,     0,     0, 1 },  /* hk.com */
-  { 13214,     0,     0, 1 },  /* hobby-site.com */
-  { 13225,     0,     0, 1 },  /* homelinux.com */
-  { 13235,     0,     0, 1 },  /* homesecuritymac.com */
-  { 13251,     0,     0, 1 },  /* homesecuritypc.com */
-  { 13266,     0,     0, 1 },  /* homeunix.com */
-  {  4119,     0,     0, 1 },  /* hu.com */
-  { 13275,     0,     0, 1 },  /* iamallama.com */
-  { 13285,     0,     0, 1 },  /* is-a-anarchist.com */
-  { 13300,     0,     0, 1 },  /* is-a-blogger.com */
-  { 13313,     0,     0, 1 },  /* is-a-bookkeeper.com */
-  { 13329,     0,     0, 1 },  /* is-a-bulls-fan.com */
-  { 13344,     0,     0, 1 },  /* is-a-caterer.com */
-  { 13357,     0,     0, 1 },  /* is-a-chef.com */
-  { 13367,     0,     0, 1 },  /* is-a-conservative.com */
-  { 13385,     0,     0, 1 },  /* is-a-cpa.com */
-  { 13394,     0,     0, 1 },  /* is-a-cubicle-slave.com */
-  {  2334,     0,     0, 1 },  /* is-a-democrat.com */
-  { 13413,     0,     0, 1 },  /* is-a-designer.com */
-  {  2494,     0,     0, 1 },  /* is-a-doctor.com */
-  { 13427,     0,     0, 1 },  /* is-a-financialadvisor.com */
-  { 13449,     0,     0, 1 },  /* is-a-geek.com */
-  {  3710,     0,     0, 1 },  /* is-a-green.com */
-  {  3790,     0,     0, 1 },  /* is-a-guru.com */
-  { 13459,     0,     0, 1 },  /* is-a-hard-worker.com */
-  { 13476,     0,     0, 1 },  /* is-a-hunter.com */
-  { 13488,     0,     0, 1 },  /* is-a-landscaper.com */
-  {  4823,     0,     0, 1 },  /* is-a-lawyer.com */
-  { 13504,     0,     0, 1 },  /* is-a-liberal.com */
-  { 13517,     0,     0, 1 },  /* is-a-libertarian.com */
-  { 13534,     0,     0, 1 },  /* is-a-llama.com */
-  { 13545,     0,     0, 1 },  /* is-a-musician.com */
-  { 13559,     0,     0, 1 },  /* is-a-nascarfan.com */
-  { 13574,     0,     0, 1 },  /* is-a-nurse.com */
-  { 13585,     0,     0, 1 },  /* is-a-painter.com */
-  { 11259,     0,     0, 1 },  /* is-a-personaltrainer.com */
-  { 13598,     0,     0, 1 },  /* is-a-photographer.com */
-  { 13616,     0,     0, 1 },  /* is-a-player.com */
-  {  6701,     0,     0, 1 },  /* is-a-republican.com */
-  { 13628,     0,     0, 1 },  /* is-a-rockstar.com */
-  { 13642,     0,     0, 1 },  /* is-a-socialist.com */
-  { 11239,     0,     0, 1 },  /* is-a-student.com */
-  { 13657,     0,     0, 1 },  /* is-a-teacher.com */
-  { 13670,     0,     0, 1 },  /* is-a-techie.com */
-  { 13682,     0,     0, 1 },  /* is-a-therapist.com */
+  { 13103,     0,     0, 1 },  /* codespot.com */
+  { 13112,     0,     0, 1 },  /* damnserver.com */
+  { 13123,     0,     0, 1 },  /* dattolocal.com */
+  { 13134,     0,     0, 1 },  /* dattorelay.com */
+  { 13145,     0,     0, 1 },  /* dattoweb.com */
+  {  3230,     0,     0, 1 },  /* ddnsfree.com */
+  { 13154,     0,     0, 1 },  /* ddnsgeek.com */
+  { 12649,     0,     0, 1 },  /* ddnsking.com */
+  {  4968,     0,     0, 1 },  /* ddnslive.com */
+  {  2273,     0,     0, 1 },  /* de.com */
+  { 13163,     0,     0, 1 },  /* dev-myqnapcloud.com */
+  { 13179,     0,     0, 1 },  /* ditchyourip.com */
+  { 13191,     0,     0, 1 },  /* dnsalias.com */
+  { 13200,     0,     0, 1 },  /* dnsdojo.com */
+  { 13208,     0,     0, 1 },  /* dnsiskinky.com */
+  { 13219,     0,     0, 1 },  /* doesntexist.com */
+  { 13231,     0,     0, 1 },  /* dontexist.com */
+  { 13241,     0,     0, 1 },  /* doomdns.com */
+  { 13249,     0,     0, 1 },  /* drayddns.com */
+  { 13258,     0,     0, 1 },  /* dreamhosters.com */
+  { 13271,     0,     0, 1 },  /* dsmynas.com */
+  { 13279,     0,     0, 1 },  /* dyn-o-saur.com */
+  { 13290,     0,     0, 1 },  /* dynalias.com */
+  { 13299,     0,     0, 1 },  /* dyndns-at-home.com */
+  { 13314,     0,     0, 1 },  /* dyndns-at-work.com */
+  { 13329,     0,     0, 1 },  /* dyndns-blog.com */
+  { 13341,     0,     0, 1 },  /* dyndns-free.com */
+  { 13353,     0,     0, 1 },  /* dyndns-home.com */
+  { 13365,     0,     0, 1 },  /* dyndns-ip.com */
+  { 13375,     0,     0, 1 },  /* dyndns-mail.com */
+  { 13387,     0,     0, 1 },  /* dyndns-office.com */
+  { 13401,     0,     0, 1 },  /* dyndns-pics.com */
+  { 13413,     0,     0, 1 },  /* dyndns-remote.com */
+  { 13427,     0,     0, 1 },  /* dyndns-server.com */
+  { 13441,     0,     0, 1 },  /* dyndns-web.com */
+  {  8543,     0,     0, 1 },  /* dyndns-wiki.com */
+  { 13452,     0,     0, 1 },  /* dyndns-work.com */
+  { 13464,     0,     0, 1 },  /* dynns.com */
+  {  7647,  4288,    17, 1 },  /* elasticbeanstalk.com */
+  {  5139,     0,     0, 1 },  /* est-a-la-maison.com */
+  { 13470,     0,     0, 1 },  /* est-a-la-masion.com */
+  { 13486,     0,     0, 1 },  /* est-le-patron.com */
+  { 13500,     0,     0, 1 },  /* est-mon-blogueur.com */
+  {  2796,     0,     0, 1 },  /* eu.com */
+  { 13517,  4305,     8, 0 },  /* evennode.com */
+  { 13526,     0,     0, 1 },  /* familyds.com */
+  { 13535,     0,     0, 1 },  /* fastvps-server.com */
+  { 13550,  4313,     1, 0 },  /* fbsbx.com */
+  { 13556,     0,     0, 1 },  /* firebaseapp.com */
+  { 13568,     0,     0, 1 },  /* firewall-gateway.com */
+  { 13585,     0,     0, 1 },  /* flynnhub.com */
+  { 13594,     0,     0, 1 },  /* freebox-os.com */
+  { 13605,     0,     0, 1 },  /* freeboxos.com */
+  { 13615,     0,     0, 1 },  /* from-ak.com */
+  { 13623,     0,     0, 1 },  /* from-al.com */
+  { 13631,     0,     0, 1 },  /* from-ar.com */
+  { 13639,     0,     0, 1 },  /* from-ca.com */
+  { 13647,     0,     0, 1 },  /* from-ct.com */
+  { 13655,     0,     0, 1 },  /* from-dc.com */
+  { 13663,     0,     0, 1 },  /* from-de.com */
+  { 13671,     0,     0, 1 },  /* from-fl.com */
+  { 13679,     0,     0, 1 },  /* from-ga.com */
+  { 13687,     0,     0, 1 },  /* from-hi.com */
+  { 13695,     0,     0, 1 },  /* from-ia.com */
+  { 13703,     0,     0, 1 },  /* from-id.com */
+  { 13711,     0,     0, 1 },  /* from-il.com */
+  { 13719,     0,     0, 1 },  /* from-in.com */
+  { 13727,     0,     0, 1 },  /* from-ks.com */
+  { 13735,     0,     0, 1 },  /* from-ky.com */
+  { 13743,     0,     0, 1 },  /* from-ma.com */
+  { 13751,     0,     0, 1 },  /* from-md.com */
+  { 13759,     0,     0, 1 },  /* from-mi.com */
+  { 13767,     0,     0, 1 },  /* from-mn.com */
+  { 13775,     0,     0, 1 },  /* from-mo.com */
+  { 13783,     0,     0, 1 },  /* from-ms.com */
+  {  5561,     0,     0, 1 },  /* from-mt.com */
+  { 13791,     0,     0, 1 },  /* from-nc.com */
+  { 13799,     0,     0, 1 },  /* from-nd.com */
+  { 13807,     0,     0, 1 },  /* from-ne.com */
+  { 13815,     0,     0, 1 },  /* from-nh.com */
+  { 13823,     0,     0, 1 },  /* from-nj.com */
+  { 12820,     0,     0, 1 },  /* from-nm.com */
+  { 13831,     0,     0, 1 },  /* from-nv.com */
+  { 13839,     0,     0, 1 },  /* from-oh.com */
+  { 13847,     0,     0, 1 },  /* from-ok.com */
+  { 13855,     0,     0, 1 },  /* from-or.com */
+  { 13863,     0,     0, 1 },  /* from-pa.com */
+  {  6346,     0,     0, 1 },  /* from-pr.com */
+  { 13871,     0,     0, 1 },  /* from-ri.com */
+  { 13879,     0,     0, 1 },  /* from-sc.com */
+  {  7060,     0,     0, 1 },  /* from-sd.com */
+  { 13887,     0,     0, 1 },  /* from-tn.com */
+  { 13895,     0,     0, 1 },  /* from-tx.com */
+  { 13903,     0,     0, 1 },  /* from-ut.com */
+  { 13911,     0,     0, 1 },  /* from-va.com */
+  { 13919,     0,     0, 1 },  /* from-vt.com */
+  { 13927,     0,     0, 1 },  /* from-wa.com */
+  { 13935,     0,     0, 1 },  /* from-wi.com */
+  { 13943,     0,     0, 1 },  /* from-wv.com */
+  { 13951,     0,     0, 1 },  /* from-wy.com */
+  {  3420,     0,     0, 1 },  /* gb.com */
+  { 13959,     0,     0, 1 },  /* geekgalaxy.com */
+  { 13970,     0,     0, 1 },  /* getmyip.com */
+  { 13978,     0,     0, 1 },  /* giize.com */
+  { 13984,     0,     0, 1 },  /* githubusercontent.com */
+  { 14002,     0,     0, 1 },  /* gleeze.com */
+  { 14009,     0,     0, 1 },  /* googleapis.com */
+  { 14020,     0,     0, 1 },  /* googlecode.com */
+  { 12658,     0,     0, 1 },  /* gotdns.com */
+  { 14031,     0,     0, 1 },  /* gotpantheon.com */
+  {  3676,     0,     0, 1 },  /* gr.com */
+  { 14043,     0,     0, 1 },  /* health-carereform.com */
+  { 14061,     0,     0, 1 },  /* herokuapp.com */
+  { 14071,     0,     0, 1 },  /* herokussl.com */
+  {  3916,     0,     0, 1 },  /* hk.com */
+  { 14081,     0,     0, 1 },  /* hobby-site.com */
+  { 14092,     0,     0, 1 },  /* homelinux.com */
+  { 14102,     0,     0, 1 },  /* homesecuritymac.com */
+  { 14118,     0,     0, 1 },  /* homesecuritypc.com */
+  { 14133,     0,     0, 1 },  /* homeunix.com */
+  {  4106,     0,     0, 1 },  /* hu.com */
+  { 14142,     0,     0, 1 },  /* iamallama.com */
+  { 14152,     0,     0, 1 },  /* is-a-anarchist.com */
+  { 14167,     0,     0, 1 },  /* is-a-blogger.com */
+  { 14180,     0,     0, 1 },  /* is-a-bookkeeper.com */
+  { 14196,     0,     0, 1 },  /* is-a-bulls-fan.com */
+  { 14211,     0,     0, 1 },  /* is-a-caterer.com */
+  { 14224,     0,     0, 1 },  /* is-a-chef.com */
+  { 14234,     0,     0, 1 },  /* is-a-conservative.com */
+  { 14252,     0,     0, 1 },  /* is-a-cpa.com */
+  { 14261,     0,     0, 1 },  /* is-a-cubicle-slave.com */
+  {  2330,     0,     0, 1 },  /* is-a-democrat.com */
+  { 14280,     0,     0, 1 },  /* is-a-designer.com */
+  {  2490,     0,     0, 1 },  /* is-a-doctor.com */
+  { 14294,     0,     0, 1 },  /* is-a-financialadvisor.com */
+  { 14316,     0,     0, 1 },  /* is-a-geek.com */
+  {  3704,     0,     0, 1 },  /* is-a-green.com */
+  {  3784,     0,     0, 1 },  /* is-a-guru.com */
+  { 14326,     0,     0, 1 },  /* is-a-hard-worker.com */
+  { 14343,     0,     0, 1 },  /* is-a-hunter.com */
+  { 14355,     0,     0, 1 },  /* is-a-landscaper.com */
+  {  4809,     0,     0, 1 },  /* is-a-lawyer.com */
+  { 14371,     0,     0, 1 },  /* is-a-liberal.com */
+  { 14384,     0,     0, 1 },  /* is-a-libertarian.com */
+  { 14401,     0,     0, 1 },  /* is-a-llama.com */
+  { 14412,     0,     0, 1 },  /* is-a-musician.com */
+  { 14426,     0,     0, 1 },  /* is-a-nascarfan.com */
+  { 14441,     0,     0, 1 },  /* is-a-nurse.com */
+  { 14452,     0,     0, 1 },  /* is-a-painter.com */
+  { 11405,     0,     0, 1 },  /* is-a-personaltrainer.com */
+  { 14465,     0,     0, 1 },  /* is-a-photographer.com */
+  { 14483,     0,     0, 1 },  /* is-a-player.com */
+  {  6667,     0,     0, 1 },  /* is-a-republican.com */
+  { 14495,     0,     0, 1 },  /* is-a-rockstar.com */
+  { 14509,     0,     0, 1 },  /* is-a-socialist.com */
+  { 11385,     0,     0, 1 },  /* is-a-student.com */
+  { 14524,     0,     0, 1 },  /* is-a-teacher.com */
+  { 14537,     0,     0, 1 },  /* is-a-techie.com */
+  { 14549,     0,     0, 1 },  /* is-a-therapist.com */
   {    83,     0,     0, 1 },  /* is-an-accountant.com */
   {   128,     0,     0, 1 },  /* is-an-actor.com */
-  { 13697,     0,     0, 1 },  /* is-an-actress.com */
-  { 13711,     0,     0, 1 },  /* is-an-anarchist.com */
-  { 13727,     0,     0, 1 },  /* is-an-artist.com */
-  {  2669,     0,     0, 1 },  /* is-an-engineer.com */
-  { 13740,     0,     0, 1 },  /* is-an-entertainer.com */
-  { 13758,     0,     0, 1 },  /* is-certified.com */
-  { 13771,     0,     0, 1 },  /* is-gone.com */
-  { 13779,     0,     0, 1 },  /* is-into-anime.com */
-  {  1471,     0,     0, 1 },  /* is-into-cars.com */
-  { 13793,     0,     0, 1 },  /* is-into-cartoons.com */
-  {  3382,     0,     0, 1 },  /* is-into-games.com */
-  { 13810,     0,     0, 1 },  /* is-leet.com */
-  { 13818,     0,     0, 1 },  /* is-not-certified.com */
-  { 13835,     0,     0, 1 },  /* is-slick.com */
-  { 13844,     0,     0, 1 },  /* is-uberleet.com */
-  { 13856,     0,     0, 1 },  /* is-with-theband.com */
-  { 13872,     0,     0, 1 },  /* isa-geek.com */
-  { 13881,     0,     0, 1 },  /* isa-hockeynut.com */
-  { 13895,     0,     0, 1 },  /* issmarterthanyou.com */
-  { 13912,     0,     0, 1 },  /* jdevcloud.com */
-  { 13922,  2112,     1, 0 },  /* joyent.com */
-  { 13929,     0,     0, 1 },  /* jpn.com */
-  {  3108,     0,     0, 1 },  /* kr.com */
-  { 13933,     0,     0, 1 },  /* likes-pie.com */
-  { 13943,     0,     0, 1 },  /* likescandy.com */
-  { 13954,     0,     0, 1 },  /* logoip.com */
-  { 13961,  4045,     1, 1 },  /* meteorapp.com */
+  { 14564,     0,     0, 1 },  /* is-an-actress.com */
+  { 14578,     0,     0, 1 },  /* is-an-anarchist.com */
+  { 14594,     0,     0, 1 },  /* is-an-artist.com */
+  {  2668,     0,     0, 1 },  /* is-an-engineer.com */
+  { 14607,     0,     0, 1 },  /* is-an-entertainer.com */
+  { 14625,     0,     0, 1 },  /* is-certified.com */
+  { 14638,     0,     0, 1 },  /* is-gone.com */
+  { 14646,     0,     0, 1 },  /* is-into-anime.com */
+  {  1464,     0,     0, 1 },  /* is-into-cars.com */
+  { 14660,     0,     0, 1 },  /* is-into-cartoons.com */
+  {  3376,     0,     0, 1 },  /* is-into-games.com */
+  { 14677,     0,     0, 1 },  /* is-leet.com */
+  { 14685,     0,     0, 1 },  /* is-not-certified.com */
+  { 14702,     0,     0, 1 },  /* is-slick.com */
+  { 14711,     0,     0, 1 },  /* is-uberleet.com */
+  { 14723,     0,     0, 1 },  /* is-with-theband.com */
+  { 14739,     0,     0, 1 },  /* isa-geek.com */
+  { 14748,     0,     0, 1 },  /* isa-hockeynut.com */
+  { 14762,     0,     0, 1 },  /* issmarterthanyou.com */
+  { 14779,     0,     0, 1 },  /* jdevcloud.com */
+  { 14789,  2202,     1, 0 },  /* joyent.com */
+  { 14796,     0,     0, 1 },  /* jpn.com */
+  { 14800,     0,     0, 1 },  /* kozow.com */
+  {  3107,     0,     0, 1 },  /* kr.com */
+  { 14806,     0,     0, 1 },  /* likes-pie.com */
+  { 14816,     0,     0, 1 },  /* likescandy.com */
+  {  6313,  4314,     1, 0 },  /* lmpm.com */
+  { 14827,     0,     0, 1 },  /* logoip.com */
+  {  6770,     0,     0, 1 },  /* loseyourip.com */
+  { 14834,  4315,     1, 1 },  /* meteorapp.com */
   {   396,     0,     0, 1 },  /* mex.com */
-  {  2424,     0,     0, 1 },  /* myactivedirectory.com */
-  { 13971,     0,     0, 1 },  /* myasustor.com */
-  { 13981,     0,     0, 1 },  /* mydrobo.com */
-  { 12147,     0,     0, 1 },  /* myqnapcloud.com */
-  {  1348,     0,     0, 1 },  /* mysecuritycamera.com */
-  { 13989,     0,     0, 1 },  /* myshopblocks.com */
-  { 14002,     0,     0, 1 },  /* mytuleap.com */
-  { 14011,     0,     0, 1 },  /* myvnc.com */
-  { 14017,     0,     0, 1 },  /* neat-url.com */
-  { 14026,     0,     0, 1 },  /* net-freaks.com */
-  {  4030,     0,     0, 1 },  /* nfshost.com */
-  {  1518,     0,     0, 1 },  /* no.com */
-  { 14037,     0,     0, 1 },  /* on-aptible.com */
-  { 14048,     0,     0, 1 },  /* onthewifi.com */
-  { 14058,     0,     0, 1 },  /* operaunite.com */
-  { 14069,     0,     0, 1 },  /* outsystemscloud.com */
-  { 14085,     0,     0, 1 },  /* ownprovider.com */
-  { 14097,     0,     0, 1 },  /* pagefrontapp.com */
-  { 14110,     0,     0, 1 },  /* pagespeedmobilizer.com */
-  { 14129,     0,     0, 1 },  /* pgfog.com */
-  { 14135,     0,     0, 1 },  /* point2this.com */
-  { 14146,  4046,     1, 0 },  /* prgmr.com */
-  { 14152,     0,     0, 1 },  /* publishproxy.com */
-  { 14165,     0,     0, 1 },  /* qa2.com */
-  { 11524,     0,     0, 1 },  /* qc.com */
-  { 14169,     0,     0, 1 },  /* quicksytes.com */
-  { 14180,  3853,     1, 0 },  /* quipelements.com */
-  { 14193,     0,     0, 1 },  /* rackmaze.com */
-  { 14202,     0,     0, 1 },  /* remotewd.com */
-  {  1838,     0,     0, 1 },  /* rhcloud.com */
-  {  2191,     0,     0, 1 },  /* ru.com */
-  {  1494,     0,     0, 1 },  /* sa.com */
-  { 14211,     0,     0, 1 },  /* saves-the-whales.com */
-  {  1499,     0,     0, 1 },  /* se.com */
-  { 14228,     0,     0, 1 },  /* securitytactics.com */
-  { 11627,     0,     0, 1 },  /* selfip.com */
-  { 14244,     0,     0, 1 },  /* sells-for-less.com */
-  { 14259,     0,     0, 1 },  /* sells-for-u.com */
-  { 14271,     0,     0, 1 },  /* servebbs.com */
+  { 14844,     0,     0, 1 },  /* miniserver.com */
+  {  2420,     0,     0, 1 },  /* myactivedirectory.com */
+  { 14855,     0,     0, 1 },  /* myasustor.com */
+  { 14865,     0,     0, 1 },  /* mydatto.com */
+  { 14873,     0,     0, 1 },  /* mydrobo.com */
+  { 14881,     0,     0, 1 },  /* myiphost.com */
+  { 12943,     0,     0, 1 },  /* myqnapcloud.com */
+  { 14890,     0,     0, 1 },  /* myravendb.com */
+  {  1341,     0,     0, 1 },  /* mysecuritycamera.com */
+  { 14900,     0,     0, 1 },  /* myshopblocks.com */
+  { 14913,     0,     0, 1 },  /* mytuleap.com */
+  { 14922,     0,     0, 1 },  /* myvnc.com */
+  { 14928,     0,     0, 1 },  /* neat-url.com */
+  { 14937,     0,     0, 1 },  /* net-freaks.com */
+  { 14948,     0,     0, 1 },  /* netlify.com */
+  { 14956,     0,     0, 1 },  /* nfshost.com */
+  {  1511,     0,     0, 1 },  /* no.com */
+  { 14964,     0,     0, 1 },  /* on-aptible.com */
+  { 14975,     0,     0, 1 },  /* onthewifi.com */
+  {  8151,     0,     0, 1 },  /* ooguy.com */
+  { 14985,     0,     0, 1 },  /* operaunite.com */
+  { 14996,     0,     0, 1 },  /* outsystemscloud.com */
+  { 15012,     0,     0, 1 },  /* ownprovider.com */
+  { 15024,     0,     0, 1 },  /* pagefrontapp.com */
+  { 15037,     0,     0, 1 },  /* pagespeedmobilizer.com */
+  { 15056,     0,     0, 1 },  /* pgfog.com */
+  { 15062,     0,     0, 1 },  /* pixolino.com */
+  { 15071,     0,     0, 1 },  /* point2this.com */
+  { 15082,  4316,     1, 0 },  /* prgmr.com */
+  { 15088,     0,     0, 1 },  /* publishproxy.com */
+  { 15101,     0,     0, 1 },  /* qa2.com */
+  { 11698,     0,     0, 1 },  /* qc.com */
+  { 15105,     0,     0, 1 },  /* quicksytes.com */
+  { 15116,  4048,     1, 0 },  /* quipelements.com */
+  { 15129,     0,     0, 1 },  /* rackmaze.com */
+  { 15138,     0,     0, 1 },  /* remotewd.com */
+  {  1834,     0,     0, 1 },  /* rhcloud.com */
+  {  2187,     0,     0, 1 },  /* ru.com */
+  {  1487,     0,     0, 1 },  /* sa.com */
+  { 15147,     0,     0, 1 },  /* saves-the-whales.com */
+  { 15164,     0,     0, 1 },  /* scrysec.com */
+  { 15172,     0,     0, 1 },  /* securitytactics.com */
+  { 11801,     0,     0, 1 },  /* selfip.com */
+  { 15188,     0,     0, 1 },  /* sells-for-less.com */
+  { 15203,     0,     0, 1 },  /* sells-for-u.com */
+  { 15215,     0,     0, 1 },  /* servebbs.com */
   {   876,     0,     0, 1 },  /* servebeer.com */
-  { 14280,     0,     0, 1 },  /* servecounterstrike.com */
-  {  2831,     0,     0, 1 },  /* serveexchange.com */
-  { 14299,     0,     0, 1 },  /* serveftp.com */
-  { 14308,     0,     0, 1 },  /* servegame.com */
-  { 14318,     0,     0, 1 },  /* servehalflife.com */
-  { 14332,     0,     0, 1 },  /* servehttp.com */
-  { 14342,     0,     0, 1 },  /* servehumour.com */
-  { 14354,     0,     0, 1 },  /* serveirc.com */
-  { 14363,     0,     0, 1 },  /* servemp3.com */
-  { 14372,     0,     0, 1 },  /* servep2p.com */
-  {  6262,     0,     0, 1 },  /* servepics.com */
-  { 14381,     0,     0, 1 },  /* servequake.com */
-  { 14392,     0,     0, 1 },  /* servesarcasm.com */
-  { 14405,     0,     0, 1 },  /* simple-url.com */
-  { 14419,     0,     0, 1 },  /* sinaapp.com */
-  {  6665,     0,     0, 1 },  /* space-to-rent.com */
-  {  6570,     0,     0, 1 },  /* stufftoread.com */
-  { 10570,     0,     0, 1 },  /* teaches-yoga.com */
-  { 14427,     0,     0, 1 },  /* townnews-staging.com */
-  {  8120,     0,     0, 1 },  /* uk.com */
-  { 14444,     0,     0, 1 },  /* unusualperson.com */
+  { 15224,     0,     0, 1 },  /* servecounterstrike.com */
+  {  2830,     0,     0, 1 },  /* serveexchange.com */
+  { 15243,     0,     0, 1 },  /* serveftp.com */
+  { 15252,     0,     0, 1 },  /* servegame.com */
+  { 15262,     0,     0, 1 },  /* servehalflife.com */
+  { 15276,     0,     0, 1 },  /* servehttp.com */
+  { 15286,     0,     0, 1 },  /* servehumour.com */
+  { 15298,     0,     0, 1 },  /* serveirc.com */
+  { 15307,     0,     0, 1 },  /* servemp3.com */
+  { 15316,     0,     0, 1 },  /* servep2p.com */
+  {  6222,     0,     0, 1 },  /* servepics.com */
+  { 15325,     0,     0, 1 },  /* servequake.com */
+  { 15336,     0,     0, 1 },  /* servesarcasm.com */
+  { 15349,     0,     0, 1 },  /* simple-url.com */
+  { 15363,     0,     0, 1 },  /* sinaapp.com */
+  {  6631,     0,     0, 1 },  /* space-to-rent.com */
+  {  6536,     0,     0, 1 },  /* stufftoread.com */
+  { 10707,     0,     0, 1 },  /* teaches-yoga.com */
+  { 15371,     0,     0, 1 },  /* temp-dns.com */
+  { 15380,     0,     0, 1 },  /* theworkpc.com */
+  { 15390,     0,     0, 1 },  /* townnews-staging.com */
+  {  8115,     0,     0, 1 },  /* uk.com */
+  { 15407,     0,     0, 1 },  /* unusualperson.com */
   {   264,     0,     0, 1 },  /* us.com */
   {   911,     0,     0, 1 },  /* uy.com */
-  { 14416,     0,     0, 1 },  /* vipsinaapp.com */
-  {  3537,     0,     0, 1 },  /* withgoogle.com */
-  {  8049,     0,     0, 1 },  /* withyoutube.com */
-  { 14458,     0,     0, 1 },  /* workisboring.com */
-  { 14471,     0,     0, 1 },  /* wpdevcloud.com */
-  { 14482,     0,     0, 1 },  /* writesthisblog.com */
+  { 15360,     0,     0, 1 },  /* vipsinaapp.com */
+  {  3531,     0,     0, 1 },  /* withgoogle.com */
+  {  8044,     0,     0, 1 },  /* withyoutube.com */
+  { 15421,     0,     0, 1 },  /* workisboring.com */
+  { 15434,     0,     0, 1 },  /* wpdevcloud.com */
+  { 15445,     0,     0, 1 },  /* writesthisblog.com */
   {   674,     0,     0, 1 },  /* xenapponazure.com */
-  { 14497,     0,     0, 1 },  /* yolasite.com */
-  {  6312,     0,     0, 1 },  /* za.com */
-  { 14509,  2085,     1, 0 },  /* ap-northeast-1.amazonaws.com */
-  { 14527,  2086,     3, 0 },  /* ap-northeast-2.amazonaws.com */
-  { 14545,  2089,     3, 0 },  /* ap-south-1.amazonaws.com */
-  { 14559,  2092,     1, 0 },  /* ap-southeast-1.amazonaws.com */
-  { 14577,  2093,     1, 0 },  /* ap-southeast-2.amazonaws.com */
-  { 14595,  2094,     3, 0 },  /* ca-central-1.amazonaws.com */
-  { 12083,  3853,     1, 0 },  /* compute.amazonaws.com */
-  { 14608,  3853,     1, 0 },  /* compute-1.amazonaws.com */
-  { 12091,  3853,     1, 0 },  /* elb.amazonaws.com */
-  { 14621,  2097,     3, 0 },  /* eu-central-1.amazonaws.com */
-  { 14637,  2100,     1, 0 },  /* eu-west-1.amazonaws.com */
-  { 14650,  2101,     3, 0 },  /* eu-west-2.amazonaws.com */
-  { 11498,     0,     0, 1 },  /* s3.amazonaws.com */
-  { 14506,     0,     0, 1 },  /* s3-ap-northeast-1.amazonaws.com */
-  { 14524,     0,     0, 1 },  /* s3-ap-northeast-2.amazonaws.com */
-  { 14542,     0,     0, 1 },  /* s3-ap-south-1.amazonaws.com */
-  { 14556,     0,     0, 1 },  /* s3-ap-southeast-1.amazonaws.com */
-  { 14574,     0,     0, 1 },  /* s3-ap-southeast-2.amazonaws.com */
-  { 14592,     0,     0, 1 },  /* s3-ca-central-1.amazonaws.com */
-  { 14618,     0,     0, 1 },  /* s3-eu-central-1.amazonaws.com */
-  { 14634,     0,     0, 1 },  /* s3-eu-west-1.amazonaws.com */
-  { 14647,     0,     0, 1 },  /* s3-eu-west-2.amazonaws.com */
-  { 14660,     0,     0, 1 },  /* s3-external-1.amazonaws.com */
-  { 14674,     0,     0, 1 },  /* s3-fips-us-gov-west-1.amazonaws.com */
-  { 14696,     0,     0, 1 },  /* s3-sa-east-1.amazonaws.com */
-  { 14709,     0,     0, 1 },  /* s3-us-east-2.amazonaws.com */
-  { 14722,     0,     0, 1 },  /* s3-us-gov-west-1.amazonaws.com */
-  { 14739,     0,     0, 1 },  /* s3-us-west-1.amazonaws.com */
-  { 14752,     0,     0, 1 },  /* s3-us-west-2.amazonaws.com */
-  { 14765,     0,     0, 1 },  /* s3-website-ap-northeast-1.amazonaws.com */
-  { 14791,     0,     0, 1 },  /* s3-website-ap-southeast-1.amazonaws.com */
-  { 14817,     0,     0, 1 },  /* s3-website-ap-southeast-2.amazonaws.com */
-  { 14843,     0,     0, 1 },  /* s3-website-eu-west-1.amazonaws.com */
-  { 14864,     0,     0, 1 },  /* s3-website-sa-east-1.amazonaws.com */
-  { 14885,     0,     0, 1 },  /* s3-website-us-east-1.amazonaws.com */
-  { 14906,     0,     0, 1 },  /* s3-website-us-west-1.amazonaws.com */
-  { 14927,     0,     0, 1 },  /* s3-website-us-west-2.amazonaws.com */
-  { 14699,  2104,     1, 0 },  /* sa-east-1.amazonaws.com */
-  { 14896,  2105,     1, 1 },  /* us-east-1.amazonaws.com */
-  { 14712,  2106,     3, 0 },  /* us-east-2.amazonaws.com */
-  { 14948,  4035,     1, 0 },  /* dualstack.ap-northeast-1.amazonaws.com */
-  { 14948,  4035,     1, 0 },  /* dualstack.ap-northeast-2.amazonaws.com */
-  { 11498,     0,     0, 1 },  /* s3.ap-northeast-2.amazonaws.com */
-  {  8483,     0,     0, 1 },  /* s3-website.ap-northeast-2.amazonaws.com */
-  { 14948,  4035,     1, 0 },  /* dualstack.ap-south-1.amazonaws.com */
-  { 11498,     0,     0, 1 },  /* s3.ap-south-1.amazonaws.com */
-  {  8483,     0,     0, 1 },  /* s3-website.ap-south-1.amazonaws.com */
-  { 14948,  4035,     1, 0 },  /* dualstack.ap-southeast-1.amazonaws.com */
-  { 14948,  4035,     1, 0 },  /* dualstack.ap-southeast-2.amazonaws.com */
-  { 14948,  4035,     1, 0 },  /* dualstack.ca-central-1.amazonaws.com */
-  { 11498,     0,     0, 1 },  /* s3.ca-central-1.amazonaws.com */
-  {  8483,     0,     0, 1 },  /* s3-website.ca-central-1.amazonaws.com */
-  { 14948,  4035,     1, 0 },  /* dualstack.eu-central-1.amazonaws.com */
-  { 11498,     0,     0, 1 },  /* s3.eu-central-1.amazonaws.com */
-  {  8483,     0,     0, 1 },  /* s3-website.eu-central-1.amazonaws.com */
-  { 14948,  4035,     1, 0 },  /* dualstack.eu-west-1.amazonaws.com */
-  { 14948,  4035,     1, 0 },  /* dualstack.eu-west-2.amazonaws.com */
-  { 11498,     0,     0, 1 },  /* s3.eu-west-2.amazonaws.com */
-  {  8483,     0,     0, 1 },  /* s3-website.eu-west-2.amazonaws.com */
-  { 14948,  4035,     1, 0 },  /* dualstack.sa-east-1.amazonaws.com */
-  { 14948,  4035,     1, 0 },  /* dualstack.us-east-1.amazonaws.com */
-  { 14948,  4035,     1, 0 },  /* dualstack.us-east-2.amazonaws.com */
-  { 11498,     0,     0, 1 },  /* s3.us-east-2.amazonaws.com */
-  {  8483,     0,     0, 1 },  /* s3-website.us-east-2.amazonaws.com */
-  { 11828,  3853,     1, 0 },  /* api.githubcloud.com */
-  {  5786,  3853,     1, 0 },  /* ext.githubcloud.com */
-  {  4359,     0,     0, 1 },  /* gist.githubcloud.com */
-  { 14999,  3853,     1, 0 },  /* cns.joyent.com */
+  { 15460,  4317,     2, 1 },  /* xnbay.com */
+  { 15466,     0,     0, 1 },  /* yolasite.com */
+  {  6272,     0,     0, 1 },  /* za.com */
+  { 15478,  2175,     1, 0 },  /* ap-northeast-1.amazonaws.com */
+  { 15496,  2176,     3, 0 },  /* ap-northeast-2.amazonaws.com */
+  { 15514,  2179,     3, 0 },  /* ap-south-1.amazonaws.com */
+  { 15528,  2182,     1, 0 },  /* ap-southeast-1.amazonaws.com */
+  { 15546,  2183,     1, 0 },  /* ap-southeast-2.amazonaws.com */
+  { 15564,  2184,     3, 0 },  /* ca-central-1.amazonaws.com */
+  { 12870,  4048,     1, 0 },  /* compute.amazonaws.com */
+  { 15577,  4048,     1, 0 },  /* compute-1.amazonaws.com */
+  { 12878,  4048,     1, 0 },  /* elb.amazonaws.com */
+  { 15590,  2187,     3, 0 },  /* eu-central-1.amazonaws.com */
+  { 15606,  2190,     1, 0 },  /* eu-west-1.amazonaws.com */
+  { 15619,  2191,     3, 0 },  /* eu-west-2.amazonaws.com */
+  { 15632,  2194,     3, 0 },  /* eu-west-3.amazonaws.com */
+  { 11672,     0,     0, 1 },  /* s3.amazonaws.com */
+  { 15475,     0,     0, 1 },  /* s3-ap-northeast-1.amazonaws.com */
+  { 15493,     0,     0, 1 },  /* s3-ap-northeast-2.amazonaws.com */
+  { 15511,     0,     0, 1 },  /* s3-ap-south-1.amazonaws.com */
+  { 15525,     0,     0, 1 },  /* s3-ap-southeast-1.amazonaws.com */
+  { 15543,     0,     0, 1 },  /* s3-ap-southeast-2.amazonaws.com */
+  { 15561,     0,     0, 1 },  /* s3-ca-central-1.amazonaws.com */
+  { 15587,     0,     0, 1 },  /* s3-eu-central-1.amazonaws.com */
+  { 15603,     0,     0, 1 },  /* s3-eu-west-1.amazonaws.com */
+  { 15616,     0,     0, 1 },  /* s3-eu-west-2.amazonaws.com */
+  { 15629,     0,     0, 1 },  /* s3-eu-west-3.amazonaws.com */
+  { 15642,     0,     0, 1 },  /* s3-external-1.amazonaws.com */
+  { 15656,     0,     0, 1 },  /* s3-fips-us-gov-west-1.amazonaws.com */
+  { 15678,     0,     0, 1 },  /* s3-sa-east-1.amazonaws.com */
+  { 15691,     0,     0, 1 },  /* s3-us-east-2.amazonaws.com */
+  { 15704,     0,     0, 1 },  /* s3-us-gov-west-1.amazonaws.com */
+  { 15721,     0,     0, 1 },  /* s3-us-west-1.amazonaws.com */
+  { 15734,     0,     0, 1 },  /* s3-us-west-2.amazonaws.com */
+  { 15747,     0,     0, 1 },  /* s3-website-ap-northeast-1.amazonaws.com */
+  { 15773,     0,     0, 1 },  /* s3-website-ap-southeast-1.amazonaws.com */
+  { 15799,     0,     0, 1 },  /* s3-website-ap-southeast-2.amazonaws.com */
+  { 15825,     0,     0, 1 },  /* s3-website-eu-west-1.amazonaws.com */
+  { 15846,     0,     0, 1 },  /* s3-website-sa-east-1.amazonaws.com */
+  { 15867,     0,     0, 1 },  /* s3-website-us-east-1.amazonaws.com */
+  { 15888,     0,     0, 1 },  /* s3-website-us-west-1.amazonaws.com */
+  { 15909,     0,     0, 1 },  /* s3-website-us-west-2.amazonaws.com */
+  { 15681,  2197,     1, 0 },  /* sa-east-1.amazonaws.com */
+  { 15878,  2198,     1, 1 },  /* us-east-1.amazonaws.com */
+  { 15694,  2199,     3, 0 },  /* us-east-2.amazonaws.com */
+  { 15930,  4284,     1, 0 },  /* dualstack.ap-northeast-1.amazonaws.com */
+  { 15930,  4284,     1, 0 },  /* dualstack.ap-northeast-2.amazonaws.com */
+  { 11672,     0,     0, 1 },  /* s3.ap-northeast-2.amazonaws.com */
+  {  8493,     0,     0, 1 },  /* s3-website.ap-northeast-2.amazonaws.com */
+  { 15930,  4284,     1, 0 },  /* dualstack.ap-south-1.amazonaws.com */
+  { 11672,     0,     0, 1 },  /* s3.ap-south-1.amazonaws.com */
+  {  8493,     0,     0, 1 },  /* s3-website.ap-south-1.amazonaws.com */
+  { 15930,  4284,     1, 0 },  /* dualstack.ap-southeast-1.amazonaws.com */
+  { 15930,  4284,     1, 0 },  /* dualstack.ap-southeast-2.amazonaws.com */
+  { 15930,  4284,     1, 0 },  /* dualstack.ca-central-1.amazonaws.com */
+  { 11672,     0,     0, 1 },  /* s3.ca-central-1.amazonaws.com */
+  {  8493,     0,     0, 1 },  /* s3-website.ca-central-1.amazonaws.com */
+  { 15930,  4284,     1, 0 },  /* dualstack.eu-central-1.amazonaws.com */
+  { 11672,     0,     0, 1 },  /* s3.eu-central-1.amazonaws.com */
+  {  8493,     0,     0, 1 },  /* s3-website.eu-central-1.amazonaws.com */
+  { 15930,  4284,     1, 0 },  /* dualstack.eu-west-1.amazonaws.com */
+  { 15930,  4284,     1, 0 },  /* dualstack.eu-west-2.amazonaws.com */
+  { 11672,     0,     0, 1 },  /* s3.eu-west-2.amazonaws.com */
+  {  8493,     0,     0, 1 },  /* s3-website.eu-west-2.amazonaws.com */
+  { 15930,  4284,     1, 0 },  /* dualstack.eu-west-3.amazonaws.com */
+  { 11672,     0,     0, 1 },  /* s3.eu-west-3.amazonaws.com */
+  {  8493,     0,     0, 1 },  /* s3-website.eu-west-3.amazonaws.com */
+  { 15930,  4284,     1, 0 },  /* dualstack.sa-east-1.amazonaws.com */
+  { 15930,  4284,     1, 0 },  /* dualstack.us-east-1.amazonaws.com */
+  { 15930,  4284,     1, 0 },  /* dualstack.us-east-2.amazonaws.com */
+  { 11672,     0,     0, 1 },  /* s3.us-east-2.amazonaws.com */
+  {  8493,     0,     0, 1 },  /* s3-website.us-east-2.amazonaws.com */
+  { 16012,  4048,     1, 0 },  /* cns.joyent.com */
   {    62,     0,     0, 1 },  /* ac.cy */
   {   986,     0,     0, 1 },  /* biz.cy */
-  {  1914,  3838,     1, 1 },  /* com.cy */
-  { 15007,     0,     0, 1 },  /* ekloges.cy */
-  {  3671,     0,     0, 1 },  /* gov.cy */
-  {  5082,     0,     0, 1 },  /* ltd.cy */
-  {  5695,     0,     0, 1 },  /* name.cy */
-  {  5737,     0,     0, 1 },  /* net.cy */
-  {  6053,     0,     0, 1 },  /* org.cy */
-  { 15015,     0,     0, 1 },  /* parliament.cy */
+  {  1910,  4032,     1, 1 },  /* com.cy */
+  { 16029,     0,     0, 1 },  /* ekloges.cy */
+  {  3665,     0,     0, 1 },  /* gov.cy */
+  {  5070,     0,     0, 1 },  /* ltd.cy */
+  {  5672,     0,     0, 1 },  /* name.cy */
+  {  5710,     0,     0, 1 },  /* net.cy */
+  {  6026,     0,     0, 1 },  /* org.cy */
+  { 16037,     0,     0, 1 },  /* parliament.cy */
   {   371,     0,     0, 1 },  /* press.cy */
-  {  6410,     0,     0, 1 },  /* pro.cy */
-  {  7908,     0,     0, 1 },  /* tm.cy */
-  { 10645,     0,     0, 1 },  /* blogspot.cz */
+  {  6376,     0,     0, 1 },  /* pro.cy */
+  {  7890,     0,     0, 1 },  /* tm.cy */
+  { 10791,     0,     0, 1 },  /* blogspot.cz */
   {   113,     0,     0, 1 },  /* co.cz */
-  { 11501,     0,     0, 1 },  /* e4.cz */
-  { 15026,  4068,     2, 0 },  /* metacentrum.cz */
-  { 15038,     0,     0, 1 },  /* realm.cz */
-  { 11361,     0,     0, 1 },  /* 12hp.de */
-  { 11366,     0,     0, 1 },  /* 2ix.de */
-  { 11370,     0,     0, 1 },  /* 4lima.de */
-  { 11518,     0,     0, 1 },  /* barsy.de */
-  { 10645,     0,     0, 1 },  /* blogspot.de */
-  { 12225,     0,     0, 1 },  /* bplaced.de */
-  {  1914,     0,     0, 1 },  /* com.de */
-  { 15051,  4070,     1, 0 },  /* cosidns.de */
-  { 15059,     0,     0, 1 },  /* dd-dns.de */
-  { 15066,  4071,     2, 1 },  /* ddnss.de */
-  { 15072,     0,     0, 1 },  /* dnshome.de */
-  { 15080,     0,     0, 1 },  /* dnsupdater.de */
-  { 15091,     0,     0, 1 },  /* dray-dns.de */
-  { 15100,     0,     0, 1 },  /* draydns.de */
-  { 15108,     0,     0, 1 },  /* dyn-ip24.de */
-  { 15117,     0,     0, 1 },  /* dyn-vpn.de */
-  { 15125,     0,     0, 1 },  /* dynamisches-dns.de */
-  { 15141,     0,     0, 1 },  /* dyndns1.de */
-  { 15149,     0,     0, 1 },  /* dynvpn.de */
-  { 12679,     0,     0, 1 },  /* firewall-gateway.de */
-  { 15156,     0,     0, 1 },  /* fuettertdasnetz.de */
-  { 15172,     0,     0, 1 },  /* git-repos.de */
-  { 13956,     0,     0, 1 },  /* goip.de */
-  { 15182,  4070,     1, 1 },  /* home-webserver.de */
-  { 15197,     0,     0, 1 },  /* internet-dns.de */
-  { 15210,     0,     0, 1 },  /* isteingeek.de */
-  { 15221,     0,     0, 1 },  /* istmein.de */
-  { 15229,     0,     0, 1 },  /* keymachine.de */
-  { 15240,     0,     0, 1 },  /* l-o-g-i-n.de */
-  { 15250,     0,     0, 1 },  /* lcube-server.de */
-  { 15263,     0,     0, 1 },  /* lebtimnetz.de */
-  { 15274,     0,     0, 1 },  /* leitungsen.de */
-  { 11404,     0,     0, 1 },  /* lima-city.de */
-  { 13954,     0,     0, 1 },  /* logoip.de */
-  { 15285,     0,     0, 1 },  /* mein-vigor.de */
-  { 15296,     0,     0, 1 },  /* my-gateway.de */
-  { 15307,     0,     0, 1 },  /* my-router.de */
-  { 15317,     0,     0, 1 },  /* my-vigor.de */
-  { 15326,     0,     0, 1 },  /* my-wan.de */
-  { 15333,     0,     0, 1 },  /* myhome-server.de */
-  { 15347,     0,     0, 1 },  /* spdns.de */
-  { 11915,     0,     0, 1 },  /* square7.de */
-  { 15353,     0,     0, 1 },  /* svn-repos.de */
-  { 15363,     0,     0, 1 },  /* syno-ds.de */
-  { 15371,     0,     0, 1 },  /* synology-diskstation.de */
-  { 15392,     0,     0, 1 },  /* synology-ds.de */
-  { 15404,     0,     0, 1 },  /* taifun-dns.de */
-  { 15415,     0,     0, 1 },  /* traeumtgerade.de */
-  { 15455,     0,     0, 1 },  /* aip.ee */
-  {  1914,  3838,     1, 1 },  /* com.ee */
-  {  2623,     0,     0, 1 },  /* edu.ee */
-  {  4155,     0,     0, 1 },  /* fie.ee */
-  {  3671,     0,     0, 1 },  /* gov.ee */
-  { 15459,     0,     0, 1 },  /* lib.ee */
-  {  1859,     0,     0, 1 },  /* med.ee */
-  {  6053,     0,     0, 1 },  /* org.ee */
-  { 15463,     0,     0, 1 },  /* pri.ee */
-  { 15467,     0,     0, 1 },  /* riik.ee */
-  {  1914,  3838,     1, 1 },  /* com.eg */
-  {  2623,     0,     0, 1 },  /* edu.eg */
-  { 15472,     0,     0, 1 },  /* eun.eg */
-  {  3671,     0,     0, 1 },  /* gov.eg */
-  {  4170,     0,     0, 1 },  /* mil.eg */
-  {  5695,     0,     0, 1 },  /* name.eg */
-  {  5737,     0,     0, 1 },  /* net.eg */
-  {  6053,     0,     0, 1 },  /* org.eg */
-  { 15486,     0,     0, 1 },  /* sci.eg */
-  {  1914,  3838,     1, 1 },  /* com.es */
-  {  2623,     0,     0, 1 },  /* edu.es */
-  { 11304,     0,     0, 1 },  /* gob.es */
-  {  5970,     0,     0, 1 },  /* nom.es */
-  {  6053,     0,     0, 1 },  /* org.es */
-  { 12083,  3853,     1, 0 },  /* compute.estate */
-  { 11518,     0,     0, 1 },  /* barsy.eu */
-  { 11353,     0,     0, 1 },  /* cloudns.eu */
-  { 15380,     0,     0, 1 },  /* diskstation.eu */
-  { 15490,     0,     0, 1 },  /* mycd.eu */
-  { 15347,     0,     0, 1 },  /* spdns.eu */
-  { 11475,  3853,     1, 0 },  /* transurl.eu */
-  { 15495,     0,     0, 1 },  /* wellbeingzone.eu */
-  {  6163,  4117,     1, 0 },  /* party.eus */
+  { 11675,     0,     0, 1 },  /* e4.cz */
+  { 16048,  4341,     2, 0 },  /* metacentrum.cz */
+  { 16060,  2222,     1, 0 },  /* muni.cz */
+  { 16065,     0,     0, 1 },  /* realm.cz */
+  {  1836,  4343,     2, 0 },  /* cloud.muni.cz */
+  { 11518,     0,     0, 1 },  /* 12hp.de */
+  { 11523,     0,     0, 1 },  /* 2ix.de */
+  { 11527,     0,     0, 1 },  /* 4lima.de */
+  { 11692,     0,     0, 1 },  /* barsy.de */
+  { 10791,     0,     0, 1 },  /* blogspot.de */
+  { 13044,     0,     0, 1 },  /* bplaced.de */
+  {  1910,     0,     0, 1 },  /* com.de */
+  { 16082,  4345,     1, 0 },  /* cosidns.de */
+  { 16090,     0,     0, 1 },  /* dd-dns.de */
+  { 16097,  4346,     2, 1 },  /* ddnss.de */
+  { 16103,     0,     0, 1 },  /* dnshome.de */
+  { 16111,     0,     0, 1 },  /* dnsupdater.de */
+  { 16122,     0,     0, 1 },  /* dray-dns.de */
+  { 16131,     0,     0, 1 },  /* draydns.de */
+  { 16139,     0,     0, 1 },  /* dyn-ip24.de */
+  { 16148,     0,     0, 1 },  /* dyn-vpn.de */
+  { 16156,     0,     0, 1 },  /* dynamisches-dns.de */
+  { 16172,     0,     0, 1 },  /* dyndns1.de */
+  { 16180,     0,     0, 1 },  /* dynvpn.de */
+  { 13568,     0,     0, 1 },  /* firewall-gateway.de */
+  { 16187,     0,     0, 1 },  /* fuettertdasnetz.de */
+  { 16203,     0,     0, 1 },  /* git-repos.de */
+  { 14829,     0,     0, 1 },  /* goip.de */
+  { 16213,  4345,     1, 1 },  /* home-webserver.de */
+  { 16228,     0,     0, 1 },  /* internet-dns.de */
+  { 16241,     0,     0, 1 },  /* isteingeek.de */
+  { 16252,     0,     0, 1 },  /* istmein.de */
+  { 16260,     0,     0, 1 },  /* keymachine.de */
+  { 16271,     0,     0, 1 },  /* l-o-g-i-n.de */
+  { 16281,     0,     0, 1 },  /* lcube-server.de */
+  { 16294,     0,     0, 1 },  /* lebtimnetz.de */
+  { 16305,     0,     0, 1 },  /* leitungsen.de */
+  { 11571,     0,     0, 1 },  /* lima-city.de */
+  { 14827,     0,     0, 1 },  /* logoip.de */
+  { 16316,     0,     0, 1 },  /* mein-iserv.de */
+  { 16327,     0,     0, 1 },  /* mein-vigor.de */
+  { 16338,     0,     0, 1 },  /* my-gateway.de */
+  { 16349,     0,     0, 1 },  /* my-router.de */
+  { 16359,     0,     0, 1 },  /* my-vigor.de */
+  { 16368,     0,     0, 1 },  /* my-wan.de */
+  { 16375,     0,     0, 1 },  /* myhome-server.de */
+  { 16389,     0,     0, 1 },  /* spdns.de */
+  { 16395,  4348,     1, 0 },  /* speedpartner.de */
+  { 12680,     0,     0, 1 },  /* square7.de */
+  { 16408,     0,     0, 1 },  /* svn-repos.de */
+  { 16418,     0,     0, 1 },  /* syno-ds.de */
+  { 16426,     0,     0, 1 },  /* synology-diskstation.de */
+  { 16447,     0,     0, 1 },  /* synology-ds.de */
+  { 16459,     0,     0, 1 },  /* taifun-dns.de */
+  { 16470,     0,     0, 1 },  /* test-iserv.de */
+  { 16481,     0,     0, 1 },  /* traeumtgerade.de */
+  { 16495,  4048,     1, 0 },  /* uberspace.de */
+  { 16505,     0,     0, 1 },  /* virtual-user.de */
+  { 16518,     0,     0, 1 },  /* virtualuser.de */
+  { 16575,     0,     0, 1 },  /* aip.ee */
+  {  1910,  4032,     1, 1 },  /* com.ee */
+  {  2622,     0,     0, 1 },  /* edu.ee */
+  {  4142,     0,     0, 1 },  /* fie.ee */
+  {  3665,     0,     0, 1 },  /* gov.ee */
+  { 16579,     0,     0, 1 },  /* lib.ee */
+  {  1855,     0,     0, 1 },  /* med.ee */
+  {  6026,     0,     0, 1 },  /* org.ee */
+  { 16583,     0,     0, 1 },  /* pri.ee */
+  { 16587,     0,     0, 1 },  /* riik.ee */
+  {  1910,  4032,     1, 1 },  /* com.eg */
+  {  2622,     0,     0, 1 },  /* edu.eg */
+  { 16592,     0,     0, 1 },  /* eun.eg */
+  {  3665,     0,     0, 1 },  /* gov.eg */
+  {  4157,     0,     0, 1 },  /* mil.eg */
+  {  5672,     0,     0, 1 },  /* name.eg */
+  {  5710,     0,     0, 1 },  /* net.eg */
+  {  6026,     0,     0, 1 },  /* org.eg */
+  { 16606,     0,     0, 1 },  /* sci.eg */
+  {  1910,  4032,     1, 1 },  /* com.es */
+  {  2622,     0,     0, 1 },  /* edu.es */
+  { 11461,     0,     0, 1 },  /* gob.es */
+  {  5943,     0,     0, 1 },  /* nom.es */
+  {  6026,     0,     0, 1 },  /* org.es */
+  { 12870,  4048,     1, 0 },  /* compute.estate */
+  { 11692,     0,     0, 1 },  /* barsy.eu */
+  { 11510,     0,     0, 1 },  /* cloudns.eu */
+  { 16435,     0,     0, 1 },  /* diskstation.eu */
+  {  1576,     0,     0, 1 },  /* mycd.eu */
+  { 16389,     0,     0, 1 },  /* spdns.eu */
+  { 11650,  4048,     1, 0 },  /* transurl.eu */
+  { 16610,     0,     0, 1 },  /* wellbeingzone.eu */
+  {  6123,  4394,     1, 0 },  /* party.eus */
   {    62,     0,     0, 1 },  /* ac.id */
   {   986,     0,     0, 1 },  /* biz.id */
-  {   113,  3838,     1, 1 },  /* co.id */
-  { 16007,     0,     0, 1 },  /* desa.id */
+  {   113,  4032,     1, 1 },  /* co.id */
+  { 17102,     0,     0, 1 },  /* desa.id */
   {   257,     0,     0, 1 },  /* go.id */
-  {  4170,     0,     0, 1 },  /* mil.id */
+  {  4157,     0,     0, 1 },  /* mil.id */
   {    70,     0,     0, 1 },  /* my.id */
-  {  5737,     0,     0, 1 },  /* net.id */
+  {  5710,     0,     0, 1 },  /* net.id */
   {   137,     0,     0, 1 },  /* or.id */
-  {  1146,     0,     0, 1 },  /* sch.id */
-  { 12109,     0,     0, 1 },  /* web.id */
+  {  1140,     0,     0, 1 },  /* sch.id */
+  { 12075,     0,     0, 1 },  /* web.id */
+  { 10774,     0,     0, 1 },  /* zone.id */
   {    62,     0,     0, 1 },  /* ac.il */
-  {   113,  3838,     1, 1 },  /* co.il */
-  {  3671,     0,     0, 1 },  /* gov.il */
-  { 11819,     0,     0, 1 },  /* idf.il */
-  { 15451,     0,     0, 1 },  /* k12.il */
-  { 16012,     0,     0, 1 },  /* muni.il */
-  {  5737,     0,     0, 1 },  /* net.il */
-  {  6053,     0,     0, 1 },  /* org.il */
+  {   113,  4032,     1, 1 },  /* co.il */
+  {  3665,     0,     0, 1 },  /* gov.il */
+  { 17107,     0,     0, 1 },  /* idf.il */
+  { 16571,     0,     0, 1 },  /* k12.il */
+  { 16060,     0,     0, 1 },  /* muni.il */
+  {  5710,     0,     0, 1 },  /* net.il */
+  {  6026,     0,     0, 1 },  /* org.il */
   {    62,     0,     0, 1 },  /* ac.im */
-  {   113,  4303,     2, 1 },  /* co.im */
-  {  1914,     0,     0, 1 },  /* com.im */
-  {  5737,     0,     0, 1 },  /* net.im */
-  {  6053,     0,     0, 1 },  /* org.im */
+  {   113,  4598,     2, 1 },  /* co.im */
+  {  1910,     0,     0, 1 },  /* com.im */
+  {  5710,     0,     0, 1 },  /* net.im */
+  {  5943,     0,     0, 1 },  /* nom.im */
+  {  6026,     0,     0, 1 },  /* org.im */
   {   166,     0,     0, 1 },  /* ro.im */
   {    24,     0,     0, 1 },  /* tt.im */
-  {  2549,     0,     0, 1 },  /* tv.im */
-  { 16133,     0,     0, 1 },  /* backplaneapp.io */
-  { 16146,     0,     0, 1 },  /* boxfuse.io */
-  { 16154,     0,     0, 1 },  /* browsersafetymark.io */
-  {  1914,     0,     0, 1 },  /* com.io */
-  { 15429,     0,     0, 1 },  /* dedyn.io */
-  { 16172,     0,     0, 1 },  /* definima.io */
-  { 16181,     0,     0, 1 },  /* drud.io */
-  { 16186,  4336,     1, 1 },  /* enonic.io */
-  { 16193,     0,     0, 1 },  /* github.io */
-  { 16200,     0,     0, 1 },  /* gitlab.io */
-  { 16207,     0,     0, 1 },  /* hasura-app.io */
-  { 16218,     0,     0, 1 },  /* hzc.io */
-  { 16222,  4044,     1, 0 },  /* lair.io */
-  { 16227,     0,     0, 1 },  /* ngrok.io */
-  { 16233,     0,     0, 1 },  /* nid.io */
-  { 12100,     0,     0, 1 },  /* nodum.io */
-  { 16237,     0,     0, 1 },  /* pantheonsite.io */
-  { 16250,     0,     0, 1 },  /* protonet.io */
-  { 16259,     0,     0, 1 },  /* sandcats.io */
-  { 16268,     0,     0, 1 },  /* shiftedit.io */
-  { 16278,     0,     0, 1 },  /* spacekit.io */
-  { 16287,  3853,     1, 0 },  /* stolos.io */
-  { 16294,  2264,     4, 0 },  /* thingdust.io */
-  { 16304,     0,     0, 1 },  /* vaporcloud.io */
-  { 16315,     0,     0, 1 },  /* wedeploy.io */
-  {  2383,  4337,     1, 0 },  /* dev.thingdust.io */
-  { 11766,  4337,     1, 0 },  /* disrec.thingdust.io */
-  {  6414,  4337,     1, 0 },  /* prod.thingdust.io */
-  { 16333,  4337,     1, 0 },  /* testing.thingdust.io */
+  {  2545,     0,     0, 1 },  /* tv.im */
+  { 11685,     0,     0, 1 },  /* 2038.io */
+  { 17236,     0,     0, 1 },  /* azurecontainer.io */
+  { 17251,     0,     0, 1 },  /* backplaneapp.io */
+  { 11692,     0,     0, 1 },  /* barsy.io */
+  { 17264,     0,     0, 1 },  /* boxfuse.io */
+  { 17272,     0,     0, 1 },  /* browsersafetymark.io */
+  { 16001,     0,     0, 1 },  /* cleverapps.io */
+  {  1910,     0,     0, 1 },  /* com.io */
+  { 16530,     0,     0, 1 },  /* dedyn.io */
+  { 17290,     0,     0, 1 },  /* definima.io */
+  { 17299,     0,     0, 1 },  /* drud.io */
+  { 17304,  4348,     1, 1 },  /* enonic.io */
+  { 17311,     0,     0, 1 },  /* github.io */
+  { 17318,     0,     0, 1 },  /* gitlab.io */
+  { 17325,     0,     0, 1 },  /* hasura-app.io */
+  { 17336,     0,     0, 1 },  /* hzc.io */
+  { 17340,  4313,     1, 0 },  /* lair.io */
+  { 17345,     0,     0, 1 },  /* ngrok.io */
+  { 17351,     0,     0, 1 },  /* nid.io */
+  { 17355,  4635,     1, 0 },  /* nodeart.io */
+  { 12891,     0,     0, 1 },  /* nodum.io */
+  { 17363,     0,     0, 1 },  /* pantheonsite.io */
+  { 17376,     0,     0, 1 },  /* protonet.io */
+  { 17385,     0,     0, 1 },  /* resindevice.io */
+  { 17397,  4636,     1, 0 },  /* resinstaging.io */
+  { 17410,  4048,     1, 0 },  /* s5y.io */
+  { 17414,     0,     0, 1 },  /* sandcats.io */
+  { 17423,     0,     0, 1 },  /* shiftedit.io */
+  { 17433,     0,     0, 1 },  /* spacekit.io */
+  { 17442,  4048,     1, 0 },  /* stolos.io */
+  { 17449,  2373,     4, 0 },  /* thingdust.io */
+  { 17459,     0,     0, 1 },  /* utwente.io */
+  { 17467,     0,     0, 1 },  /* vaporcloud.io */
+  { 17478,     0,     0, 1 },  /* wedeploy.io */
+  {  2379,  4637,     1, 0 },  /* dev.thingdust.io */
+  { 12403,  4637,     1, 0 },  /* disrec.thingdust.io */
+  {  6380,  4637,     1, 0 },  /* prod.thingdust.io */
+  { 17501,  4637,     1, 0 },  /* testing.thingdust.io */
   {    62,     0,     0, 1 },  /* ac.jp */
   {   141,     0,     0, 1 },  /* ad.jp */
-  { 18921,  4735,    52, 1 },  /* aichi.jp */
-  { 18930,  4787,    28, 1 },  /* akita.jp */
-  { 18936,  4815,    22, 1 },  /* aomori.jp */
-  { 10645,     0,     0, 1 },  /* blogspot.jp */
-  { 18948,  4837,    58, 1 },  /* chiba.jp */
+  { 20808,  5076,    52, 1 },  /* aichi.jp */
+  { 20817,  5128,    28, 1 },  /* akita.jp */
+  { 20823,  5156,    22, 1 },  /* aomori.jp */
+  { 10791,     0,     0, 1 },  /* blogspot.jp */
+  { 20835,  5178,    58, 1 },  /* chiba.jp */
   {   113,     0,     0, 1 },  /* co.jp */
-  {  1860,     0,     0, 1 },  /* ed.jp */
-  { 18954,  4895,    22, 1 },  /* ehime.jp */
-  { 18960,  4917,    15, 1 },  /* fukui.jp */
-  { 18966,  4932,    63, 1 },  /* fukuoka.jp */
-  { 18978,  4995,    51, 1 },  /* fukushima.jp */
-  { 18988,  5046,    38, 1 },  /* gifu.jp */
+  {  1856,     0,     0, 1 },  /* ed.jp */
+  { 20841,  5236,    22, 1 },  /* ehime.jp */
+  { 20847,  5258,    15, 1 },  /* fukui.jp */
+  { 20853,  5273,    63, 1 },  /* fukuoka.jp */
+  { 20865,  5336,    51, 1 },  /* fukushima.jp */
+  { 20875,  5387,    38, 1 },  /* gifu.jp */
   {   257,     0,     0, 1 },  /* go.jp */
-  {  3682,     0,     0, 1 },  /* gr.jp */
-  { 18993,  5084,    36, 1 },  /* gunma.jp */
-  { 19003,  5120,    25, 1 },  /* hiroshima.jp */
-  { 19013,  5145,   142, 1 },  /* hokkaido.jp */
-  { 19022,  5287,    46, 1 },  /* hyogo.jp */
-  { 19028,  5333,    51, 1 },  /* ibaraki.jp */
-  { 19037,  5384,    19, 1 },  /* ishikawa.jp */
-  { 19046,  5403,    34, 1 },  /* iwate.jp */
-  { 19054,  5437,    15, 1 },  /* kagawa.jp */
-  { 19061,  5452,    20, 1 },  /* kagoshima.jp */
-  { 19071,  5472,    30, 1 },  /* kanagawa.jp */
-  { 19080,  5502,     2, 0 },  /* kawasaki.jp */
-  { 19089,  5502,     2, 0 },  /* kitakyushu.jp */
-  {   858,  5502,     2, 0 },  /* kobe.jp */
-  { 19100,  5504,    31, 1 },  /* kochi.jp */
-  {  5532,  5535,    23, 1 },  /* kumamoto.jp */
-  {  4687,  5558,    31, 1 },  /* kyoto.jp */
-  { 11781,     0,     0, 1 },  /* lg.jp */
-  { 19108,  5589,    30, 1 },  /* mie.jp */
-  { 19112,  5619,    32, 1 },  /* miyagi.jp */
-  { 19119,  5651,    27, 1 },  /* miyazaki.jp */
-  { 19135,  5678,    75, 1 },  /* nagano.jp */
-  { 19142,  5753,    22, 1 },  /* nagasaki.jp */
-  {  5684,  5502,     2, 0 },  /* nagoya.jp */
-  { 17980,  5775,    38, 1 },  /* nara.jp */
-  {  1204,     0,     0, 1 },  /* ne.jp */
-  { 19151,  5813,    34, 1 },  /* niigata.jp */
-  { 19160,  5847,    19, 1 },  /* oita.jp */
-  { 19165,  5866,    26, 1 },  /* okayama.jp */
-  {  5938,  5892,    42, 1 },  /* okinawa.jp */
+  {  3676,     0,     0, 1 },  /* gr.jp */
+  { 20880,  5425,    36, 1 },  /* gunma.jp */
+  { 20890,  5461,    25, 1 },  /* hiroshima.jp */
+  { 20900,  5486,   142, 1 },  /* hokkaido.jp */
+  { 20909,  5628,    46, 1 },  /* hyogo.jp */
+  { 20915,  5674,    51, 1 },  /* ibaraki.jp */
+  { 20924,  5725,    19, 1 },  /* ishikawa.jp */
+  { 20933,  5744,    34, 1 },  /* iwate.jp */
+  { 20941,  5778,    15, 1 },  /* kagawa.jp */
+  { 20948,  5793,    20, 1 },  /* kagoshima.jp */
+  { 20958,  5813,    30, 1 },  /* kanagawa.jp */
+  { 20967,  5843,     2, 0 },  /* kawasaki.jp */
+  { 20976,  5843,     2, 0 },  /* kitakyushu.jp */
+  {   858,  5843,     2, 0 },  /* kobe.jp */
+  { 20987,  5845,    31, 1 },  /* kochi.jp */
+  {  5510,  5876,    23, 1 },  /* kumamoto.jp */
+  {  4673,  5899,    31, 1 },  /* kyoto.jp */
+  { 12508,     0,     0, 1 },  /* lg.jp */
+  { 20995,  5930,    30, 1 },  /* mie.jp */
+  { 20999,  5960,    32, 1 },  /* miyagi.jp */
+  { 21006,  5992,    27, 1 },  /* miyazaki.jp */
+  { 21022,  6019,    75, 1 },  /* nagano.jp */
+  { 21029,  6094,    22, 1 },  /* nagasaki.jp */
+  {  5661,  5843,     2, 0 },  /* nagoya.jp */
+  { 19285,  6116,    38, 1 },  /* nara.jp */
+  {  1198,     0,     0, 1 },  /* ne.jp */
+  { 21038,  6154,    34, 1 },  /* niigata.jp */
+  { 21047,  6188,    19, 1 },  /* oita.jp */
+  { 21052,  6207,    26, 1 },  /* okayama.jp */
+  {  5911,  6233,    42, 1 },  /* okinawa.jp */
   {   137,     0,     0, 1 },  /* or.jp */
-  {  6081,  5934,    50, 1 },  /* osaka.jp */
-  {  3338,  5984,    26, 1 },  /* saga.jp */
-  { 19173,  6010,    69, 1 },  /* saitama.jp */
-  { 19181,  5502,     2, 0 },  /* sapporo.jp */
-  { 19196,  5502,     2, 0 },  /* sendai.jp */
-  { 19203,  6079,    23, 1 },  /* shiga.jp */
-  { 19209,  6102,    23, 1 },  /* shimane.jp */
-  { 19217,  6125,    36, 1 },  /* shizuoka.jp */
-  { 19226,  6161,    31, 1 },  /* tochigi.jp */
-  { 19234,  6192,    17, 1 },  /* tokushima.jp */
-  {  7922,  6209,    57, 1 },  /* tokyo.jp */
-  { 19244,  6266,    13, 1 },  /* tottori.jp */
-  { 19254,  6279,    24, 1 },  /* toyama.jp */
-  { 19261,  6303,    29, 1 },  /* wakayama.jp */
-  { 19270,     0,     0, 1 },  /* xn--0trq7p7nn.jp */
-  { 19284,     0,     0, 1 },  /* xn--1ctwo.jp */
-  { 19294,     0,     0, 1 },  /* xn--1lqs03n.jp */
-  { 19306,     0,     0, 1 },  /* xn--1lqs71d.jp */
-  { 19318,     0,     0, 1 },  /* xn--2m4a15e.jp */
-  { 19330,     0,     0, 1 },  /* xn--32vp30h.jp */
-  { 19342,     0,     0, 1 },  /* xn--4it168d.jp */
-  { 19354,     0,     0, 1 },  /* xn--4it797k.jp */
-  { 19366,     0,     0, 1 },  /* xn--4pvxs.jp */
-  { 19376,     0,     0, 1 },  /* xn--5js045d.jp */
-  { 19388,     0,     0, 1 },  /* xn--5rtp49c.jp */
-  { 19400,     0,     0, 1 },  /* xn--5rtq34k.jp */
-  { 19412,     0,     0, 1 },  /* xn--6btw5a.jp */
-  { 19423,     0,     0, 1 },  /* xn--6orx2r.jp */
-  { 19434,     0,     0, 1 },  /* xn--7t0a264c.jp */
-  { 19447,     0,     0, 1 },  /* xn--8ltr62k.jp */
-  { 12130,     0,     0, 1 },  /* xn--8pvr4u.jp */
-  { 19459,     0,     0, 1 },  /* xn--c3s14m.jp */
-  { 19470,     0,     0, 1 },  /* xn--d5qv7z876c.jp */
-  { 19485,     0,     0, 1 },  /* xn--djrs72d6uy.jp */
-  { 19500,     0,     0, 1 },  /* xn--djty4k.jp */
-  { 19511,     0,     0, 1 },  /* xn--efvn9s.jp */
-  { 19522,     0,     0, 1 },  /* xn--ehqz56n.jp */
-  { 19534,     0,     0, 1 },  /* xn--elqq16h.jp */
-  { 19546,     0,     0, 1 },  /* xn--f6qx53a.jp */
-  { 19558,     0,     0, 1 },  /* xn--k7yn95e.jp */
-  { 19570,     0,     0, 1 },  /* xn--kbrq7o.jp */
-  { 19581,     0,     0, 1 },  /* xn--klt787d.jp */
-  { 19593,     0,     0, 1 },  /* xn--kltp7d.jp */
-  { 19604,     0,     0, 1 },  /* xn--kltx9a.jp */
-  { 19615,     0,     0, 1 },  /* xn--klty5x.jp */
-  { 19626,     0,     0, 1 },  /* xn--mkru45i.jp */
-  { 19638,     0,     0, 1 },  /* xn--nit225k.jp */
-  { 19650,     0,     0, 1 },  /* xn--ntso0iqx3a.jp */
-  { 19665,     0,     0, 1 },  /* xn--ntsq17g.jp */
-  { 19677,     0,     0, 1 },  /* xn--pssu33l.jp */
-  { 19689,     0,     0, 1 },  /* xn--qqqt11m.jp */
-  { 19701,     0,     0, 1 },  /* xn--rht27z.jp */
-  { 19712,     0,     0, 1 },  /* xn--rht3d.jp */
-  { 19722,     0,     0, 1 },  /* xn--rht61e.jp */
-  { 19733,     0,     0, 1 },  /* xn--rny31h.jp */
-  { 19744,     0,     0, 1 },  /* xn--tor131o.jp */
-  { 19756,     0,     0, 1 },  /* xn--uist22h.jp */
-  { 19768,     0,     0, 1 },  /* xn--uisz3g.jp */
-  { 19779,     0,     0, 1 },  /* xn--uuwu58a.jp */
-  { 19791,     0,     0, 1 },  /* xn--vgu402c.jp */
-  { 19803,     0,     0, 1 },  /* xn--zbx025d.jp */
-  { 19815,  6332,    34, 1 },  /* yamagata.jp */
-  { 19824,  6366,    16, 1 },  /* yamaguchi.jp */
-  { 19834,  6382,    28, 1 },  /* yamanashi.jp */
-  { 10583,  5502,     2, 0 },  /* yokohama.jp */
-  { 11435,     0,     0, 1 },  /* *.ke */
-  {   113,  3838,     1, 0 },  /* co.ke */
-  { 30086,  6486,     2, 1 },  /* static.land */
+  {  6054,  6275,    50, 1 },  /* osaka.jp */
+  {  3332,  6325,    26, 1 },  /* saga.jp */
+  { 21060,  6351,    69, 1 },  /* saitama.jp */
+  { 21068,  5843,     2, 0 },  /* sapporo.jp */
+  { 21083,  5843,     2, 0 },  /* sendai.jp */
+  { 21090,  6420,    23, 1 },  /* shiga.jp */
+  { 21096,  6443,    23, 1 },  /* shimane.jp */
+  { 21104,  6466,    36, 1 },  /* shizuoka.jp */
+  { 21113,  6502,    31, 1 },  /* tochigi.jp */
+  { 21121,  6533,    17, 1 },  /* tokushima.jp */
+  {  7904,  6550,    57, 1 },  /* tokyo.jp */
+  { 21131,  6607,    13, 1 },  /* tottori.jp */
+  { 21141,  6620,    24, 1 },  /* toyama.jp */
+  { 21148,  6644,    29, 1 },  /* wakayama.jp */
+  { 21157,     0,     0, 1 },  /* xn--0trq7p7nn.jp */
+  { 21171,     0,     0, 1 },  /* xn--1ctwo.jp */
+  { 21181,     0,     0, 1 },  /* xn--1lqs03n.jp */
+  { 21193,     0,     0, 1 },  /* xn--1lqs71d.jp */
+  { 21205,     0,     0, 1 },  /* xn--2m4a15e.jp */
+  { 21217,     0,     0, 1 },  /* xn--32vp30h.jp */
+  { 21229,     0,     0, 1 },  /* xn--4it168d.jp */
+  { 21241,     0,     0, 1 },  /* xn--4it797k.jp */
+  { 21253,     0,     0, 1 },  /* xn--4pvxs.jp */
+  { 21263,     0,     0, 1 },  /* xn--5js045d.jp */
+  { 21275,     0,     0, 1 },  /* xn--5rtp49c.jp */
+  { 21287,     0,     0, 1 },  /* xn--5rtq34k.jp */
+  { 21299,     0,     0, 1 },  /* xn--6btw5a.jp */
+  { 21310,     0,     0, 1 },  /* xn--6orx2r.jp */
+  { 21321,     0,     0, 1 },  /* xn--7t0a264c.jp */
+  { 21334,     0,     0, 1 },  /* xn--8ltr62k.jp */
+  { 12926,     0,     0, 1 },  /* xn--8pvr4u.jp */
+  { 21346,     0,     0, 1 },  /* xn--c3s14m.jp */
+  { 21357,     0,     0, 1 },  /* xn--d5qv7z876c.jp */
+  { 21372,     0,     0, 1 },  /* xn--djrs72d6uy.jp */
+  { 21387,     0,     0, 1 },  /* xn--djty4k.jp */
+  { 21398,     0,     0, 1 },  /* xn--efvn9s.jp */
+  { 21409,     0,     0, 1 },  /* xn--ehqz56n.jp */
+  { 21421,     0,     0, 1 },  /* xn--elqq16h.jp */
+  { 21433,     0,     0, 1 },  /* xn--f6qx53a.jp */
+  { 21445,     0,     0, 1 },  /* xn--k7yn95e.jp */
+  { 21457,     0,     0, 1 },  /* xn--kbrq7o.jp */
+  { 21468,     0,     0, 1 },  /* xn--klt787d.jp */
+  { 21480,     0,     0, 1 },  /* xn--kltp7d.jp */
+  { 21491,     0,     0, 1 },  /* xn--kltx9a.jp */
+  { 21502,     0,     0, 1 },  /* xn--klty5x.jp */
+  { 21513,     0,     0, 1 },  /* xn--mkru45i.jp */
+  { 21525,     0,     0, 1 },  /* xn--nit225k.jp */
+  { 21537,     0,     0, 1 },  /* xn--ntso0iqx3a.jp */
+  { 21552,     0,     0, 1 },  /* xn--ntsq17g.jp */
+  { 21564,     0,     0, 1 },  /* xn--pssu33l.jp */
+  { 21576,     0,     0, 1 },  /* xn--qqqt11m.jp */
+  { 21588,     0,     0, 1 },  /* xn--rht27z.jp */
+  { 21599,     0,     0, 1 },  /* xn--rht3d.jp */
+  { 21609,     0,     0, 1 },  /* xn--rht61e.jp */
+  { 21620,     0,     0, 1 },  /* xn--rny31h.jp */
+  { 21631,     0,     0, 1 },  /* xn--tor131o.jp */
+  { 21643,     0,     0, 1 },  /* xn--uist22h.jp */
+  { 21655,     0,     0, 1 },  /* xn--uisz3g.jp */
+  { 21666,     0,     0, 1 },  /* xn--uuwu58a.jp */
+  { 21678,     0,     0, 1 },  /* xn--vgu402c.jp */
+  { 21690,     0,     0, 1 },  /* xn--zbx025d.jp */
+  { 21702,  6673,    34, 1 },  /* yamagata.jp */
+  { 21711,  6707,    16, 1 },  /* yamaguchi.jp */
+  { 21721,  6723,    28, 1 },  /* yamanashi.jp */
+  { 10720,  5843,     2, 0 },  /* yokohama.jp */
+  {    62,     0,     0, 1 },  /* ac.ke */
+  {   113,  4032,     1, 1 },  /* co.ke */
+  {   257,     0,     0, 1 },  /* go.ke */
+  {  3149,     0,     0, 1 },  /* info.ke */
+  {  1690,     0,     0, 1 },  /* me.ke */
+  {  5415,     0,     0, 1 },  /* mobi.ke */
+  {  1198,     0,     0, 1 },  /* ne.ke */
+  {  5943,     0,     0, 1 },  /* nom.ke */
+  {   137,     0,     0, 1 },  /* or.ke */
+  {  2155,     0,     0, 1 },  /* sc.ke */
+  { 31967,  6835,     2, 1 },  /* static.land */
   {    62,     0,     0, 1 },  /* ac.me */
-  { 30131,     0,     0, 1 },  /* brasilia.me */
-  { 30140,     0,     0, 1 },  /* c66.me */
+  { 11692,     0,     0, 1 },  /* barsy.me */
+  { 32012,     0,     0, 1 },  /* brasilia.me */
+  { 32021,     0,     0, 1 },  /* c66.me */
   {   113,     0,     0, 1 },  /* co.me */
-  { 30144,  6539,     1, 1 },  /* daplie.me */
-  { 12391,     0,     0, 1 },  /* ddns.me */
-  { 15380,     0,     0, 1 },  /* diskstation.me */
-  { 30151,     0,     0, 1 },  /* dnsfor.me */
-  { 11551,     0,     0, 1 },  /* dscloud.me */
-  {  2623,     0,     0, 1 },  /* edu.me */
-  { 30158,     0,     0, 1 },  /* filegear.me */
-  {  3671,     0,     0, 1 },  /* gov.me */
-  { 30167,     0,     0, 1 },  /* hopto.me */
-  { 30173,     0,     0, 1 },  /* i234.me */
-  { 18633,     0,     0, 1 },  /* its.me */
-  { 30178,     0,     0, 1 },  /* loginto.me */
-  { 30186,     0,     0, 1 },  /* myds.me */
-  {  5737,     0,     0, 1 },  /* net.me */
-  { 30191,     0,     0, 1 },  /* noip.me */
-  {  6053,     0,     0, 1 },  /* org.me */
-  { 11418,     0,     0, 1 },  /* priv.me */
-  { 30196,     0,     0, 1 },  /* synology.me */
-  { 11634,     0,     0, 1 },  /* webhop.me */
-  { 16315,     0,     0, 1 },  /* wedeploy.me */
-  { 30205,     0,     0, 1 },  /* yombo.me */
-  {  1914,  3838,     1, 1 },  /* com.mt */
-  {  2623,     0,     0, 1 },  /* edu.mt */
-  {  5737,     0,     0, 1 },  /* net.mt */
-  {  6053,     0,     0, 1 },  /* org.mt */
-  {  1227,  7188,     1, 0 },  /* her.name */
-  { 14142,  7188,     1, 0 },  /* his.name */
-  {  2226,  3853,     1, 0 },  /* alwaysdata.net */
-  {  1365,     0,     0, 1 },  /* at-band-camp.net */
-  {  5432,     0,     0, 1 },  /* azure-mobile.net */
-  { 30093,     0,     0, 1 },  /* azurewebsites.net */
-  { 11518,     0,     0, 1 },  /* barsy.net */
-  { 12188,     0,     0, 1 },  /* blogdns.net */
-  { 34255,     0,     0, 1 },  /* bounceme.net */
-  { 12225,     0,     0, 1 },  /* bplaced.net */
-  { 34264,     0,     0, 1 },  /* broke-it.net */
-  { 34273,     0,     0, 1 },  /* buyshouses.net */
-  { 34284,  7191,     1, 0 },  /* cdn77.net */
-  { 34290,     0,     0, 1 },  /* cdn77-ssl.net */
-  { 15880,     0,     0, 1 },  /* cloudaccess.net */
-  { 34300,     0,     0, 1 },  /* cloudapp.net */
-  { 34309,     0,     0, 1 },  /* cloudfront.net */
-  { 34320,     0,     0, 1 },  /* cloudfunctions.net */
-  { 34335,  3853,     1, 0 },  /* cryptonomic.net */
-  { 12391,     0,     0, 1 },  /* ddns.net */
-  { 16172,     0,     0, 1 },  /* definima.net */
-  { 12329,     0,     0, 1 },  /* dnsalias.net */
-  { 12338,     0,     0, 1 },  /* dnsdojo.net */
-  { 34347,     0,     0, 1 },  /* does-it.net */
-  { 12369,     0,     0, 1 },  /* dontexist.net */
-  { 12409,     0,     0, 1 },  /* dsmynas.net */
-  { 12428,     0,     0, 1 },  /* dynalias.net */
-  { 34355,     0,     0, 1 },  /* dynathome.net */
-  { 34365,     0,     0, 1 },  /* dynv6.net */
-  {  6057,     0,     0, 1 },  /* eating-organic.net */
-  { 34371,     0,     0, 1 },  /* endofinternet.net */
-  { 12652,     0,     0, 1 },  /* familyds.net */
-  { 34385,  2502,     4, 0 },  /* fastly.net */
-  { 34392,  7197,     1, 1 },  /* fastlylb.net */
-  { 34401,     0,     0, 1 },  /* feste-ip.net */
-  { 12679,     0,     0, 1 },  /* firewall-gateway.net */
-  {  4038,     0,     0, 1 },  /* flynnhosting.net */
-  { 34410,     0,     0, 1 },  /* from-az.net */
-  { 34418,     0,     0, 1 },  /* from-co.net */
-  { 34426,     0,     0, 1 },  /* from-la.net */
-  { 34434,     0,     0, 1 },  /* from-ny.net */
-  {  3426,     0,     0, 1 },  /* gb.net */
-  { 34442,     0,     0, 1 },  /* gets-it.net */
-  { 34450,     0,     0, 1 },  /* ham-radio-op.net */
-  { 34463,     0,     0, 1 },  /* homeftp.net */
-  { 34471,     0,     0, 1 },  /* homeip.net */
-  { 13225,     0,     0, 1 },  /* homelinux.net */
-  { 13266,     0,     0, 1 },  /* homeunix.net */
-  {  4119,     0,     0, 1 },  /* hu.net */
+  { 32025,  6894,     1, 1 },  /* daplie.me */
+  { 13253,     0,     0, 1 },  /* ddns.me */
+  { 16435,     0,     0, 1 },  /* diskstation.me */
+  { 32039,     0,     0, 1 },  /* dnsfor.me */
+  { 11725,     0,     0, 1 },  /* dscloud.me */
+  {  2622,     0,     0, 1 },  /* edu.me */
+  { 32046,     0,     0, 1 },  /* filegear.me */
+  {  3665,     0,     0, 1 },  /* gov.me */
+  { 32055,     0,     0, 1 },  /* hopto.me */
+  { 32061,     0,     0, 1 },  /* i234.me */
+  { 20078,     0,     0, 1 },  /* its.me */
+  { 32066,     0,     0, 1 },  /* loginto.me */
+  { 32074,     0,     0, 1 },  /* myds.me */
+  {  5710,     0,     0, 1 },  /* net.me */
+  {  4024,     0,     0, 1 },  /* nohost.me */
+  { 32079,     0,     0, 1 },  /* noip.me */
+  { 12575,     0,     0, 1 },  /* nym.me */
+  {  6026,     0,     0, 1 },  /* org.me */
+  { 11594,     0,     0, 1 },  /* priv.me */
+  { 14892,     0,     0, 1 },  /* ravendb.me */
+  { 32084,     0,     0, 1 },  /* soundcast.me */
+  { 32094,     0,     0, 1 },  /* synology.me */
+  { 32103,     0,     0, 1 },  /* tcp4.me */
+  { 11808,     0,     0, 1 },  /* webhop.me */
+  { 17478,     0,     0, 1 },  /* wedeploy.me */
+  { 32108,     0,     0, 1 },  /* yombo.me */
+  {  1910,  4032,     1, 1 },  /* com.mt */
+  {  2622,     0,     0, 1 },  /* edu.mt */
+  {  5710,     0,     0, 1 },  /* net.mt */
+  {  6026,     0,     0, 1 },  /* org.mt */
+  {  1221,  7550,     1, 0 },  /* her.name */
+  { 15078,  7550,     1, 0 },  /* his.name */
+  {  2222,     0,     0, 1 },  /* alwaysdata.net */
+  {  1358,     0,     0, 1 },  /* at-band-camp.net */
+  {  5420,     0,     0, 1 },  /* azure-mobile.net */
+  { 31974,     0,     0, 1 },  /* azurewebsites.net */
+  { 11692,     0,     0, 1 },  /* barsy.net */
+  { 36158,     0,     0, 1 },  /* blackbaudcdn.net */
+  { 13007,     0,     0, 1 },  /* blogdns.net */
+  { 36171,     0,     0, 1 },  /* boomla.net */
+  { 36178,     0,     0, 1 },  /* bounceme.net */
+  { 13044,     0,     0, 1 },  /* bplaced.net */
+  { 36187,     0,     0, 1 },  /* broke-it.net */
+  { 36196,     0,     0, 1 },  /* buyshouses.net */
+  { 36207,     0,     0, 1 },  /* casacam.net */
+  { 36215,  7553,     1, 0 },  /* cdn77.net */
+  { 36221,     0,     0, 1 },  /* cdn77-ssl.net */
+  { 36231,     0,     0, 1 },  /* channelsdvr.net */
+  { 16980,     0,     0, 1 },  /* cloudaccess.net */
+  { 36243,     0,     0, 1 },  /* cloudapp.net */
+  { 36252,     0,     0, 1 },  /* cloudeity.net */
+  { 36262,     0,     0, 1 },  /* cloudfront.net */
+  { 36273,     0,     0, 1 },  /* cloudfunctions.net */
+  { 36288,     0,     0, 1 },  /* cloudycluster.net */
+  { 36302,  4048,     1, 0 },  /* cryptonomic.net */
+  { 13123,     0,     0, 1 },  /* dattolocal.net */
+  { 13253,     0,     0, 1 },  /* ddns.net */
+  { 36314,     0,     0, 1 },  /* debian.net */
+  { 17290,     0,     0, 1 },  /* definima.net */
+  { 13191,     0,     0, 1 },  /* dnsalias.net */
+  { 13200,     0,     0, 1 },  /* dnsdojo.net */
+  { 36321,     0,     0, 1 },  /* dnsup.net */
+  { 36327,     0,     0, 1 },  /* does-it.net */
+  { 13231,     0,     0, 1 },  /* dontexist.net */
+  { 13271,     0,     0, 1 },  /* dsmynas.net */
+  { 13290,     0,     0, 1 },  /* dynalias.net */
+  { 36335,     0,     0, 1 },  /* dynathome.net */
+  { 36345,     0,     0, 1 },  /* dynu.net */
+  { 36350,     0,     0, 1 },  /* dynv6.net */
+  {  6030,     0,     0, 1 },  /* eating-organic.net */
+  { 36356,     0,     0, 1 },  /* endofinternet.net */
+  { 13526,     0,     0, 1 },  /* familyds.net */
+  { 36370,  2642,     4, 0 },  /* fastly.net */
+  { 36377,  7559,     1, 1 },  /* fastlylb.net */
+  { 36386,     0,     0, 1 },  /* feste-ip.net */
+  { 13568,     0,     0, 1 },  /* firewall-gateway.net */
+  { 36395,     0,     0, 1 },  /* flynnhosting.net */
+  { 36408,     0,     0, 1 },  /* from-az.net */
+  { 36416,     0,     0, 1 },  /* from-co.net */
+  { 36424,     0,     0, 1 },  /* from-la.net */
+  { 36432,     0,     0, 1 },  /* from-ny.net */
+  {  3420,     0,     0, 1 },  /* gb.net */
+  { 36440,     0,     0, 1 },  /* gets-it.net */
+  { 36448,     0,     0, 1 },  /* ham-radio-op.net */
+  {  1335,     0,     0, 1 },  /* hicam.net */
+  { 36461,     0,     0, 1 },  /* homeftp.net */
+  { 36469,     0,     0, 1 },  /* homeip.net */
+  { 14092,     0,     0, 1 },  /* homelinux.net */
+  { 14133,     0,     0, 1 },  /* homeunix.net */
+  {  4106,     0,     0, 1 },  /* hu.net */
   {   898,     0,     0, 1 },  /* in.net */
   {   718,     0,     0, 1 },  /* in-the-band.net */
-  { 34478,     0,     0, 1 },  /* ipifony.net */
-  { 13357,     0,     0, 1 },  /* is-a-chef.net */
-  { 13449,     0,     0, 1 },  /* is-a-geek.net */
-  { 13872,     0,     0, 1 },  /* isa-geek.net */
-  {  4474,     0,     0, 1 },  /* jp.net */
-  { 34486,     0,     0, 1 },  /* kicks-ass.net */
-  { 34496,     0,     0, 1 },  /* knx-server.net */
-  { 34507,     0,     0, 1 },  /* moonscale.net */
-  { 34517,     0,     0, 1 },  /* mydissent.net */
-  { 34527,     0,     0, 1 },  /* myeffect.net */
-  {  8084,     0,     0, 1 },  /* myfritz.net */
-  { 34536,     0,     0, 1 },  /* mymediapc.net */
-  {  7620,     0,     0, 1 },  /* mypsx.net */
-  {  1348,     0,     0, 1 },  /* mysecuritycamera.net */
-  { 34546,     0,     0, 1 },  /* nhlfan.net */
-  { 11621,     0,     0, 1 },  /* no-ip.net */
-  { 34553,     0,     0, 1 },  /* office-on-the.net */
-  { 34567,     0,     0, 1 },  /* pgafan.net */
-  { 10634,     0,     0, 1 },  /* podzone.net */
-  { 34574,     0,     0, 1 },  /* privatizehealthinsurance.net */
-  { 14193,     0,     0, 1 },  /* rackmaze.net */
-  { 34599,     0,     0, 1 },  /* redirectme.net */
-  {  2191,     0,     0, 1 },  /* ru.net */
-  { 34610,     0,     0, 1 },  /* scrapper-site.net */
-  {  1499,     0,     0, 1 },  /* se.net */
-  { 11627,     0,     0, 1 },  /* selfip.net */
-  { 34624,     0,     0, 1 },  /* sells-it.net */
-  { 14271,     0,     0, 1 },  /* servebbs.net */
+  { 36476,     0,     0, 1 },  /* ipifony.net */
+  { 14224,     0,     0, 1 },  /* is-a-chef.net */
+  { 14316,     0,     0, 1 },  /* is-a-geek.net */
+  { 14739,     0,     0, 1 },  /* isa-geek.net */
+  {  4460,     0,     0, 1 },  /* jp.net */
+  { 36484,     0,     0, 1 },  /* kicks-ass.net */
+  { 36494,     0,     0, 1 },  /* knx-server.net */
+  { 36505,     0,     0, 1 },  /* memset.net */
+  { 36512,     0,     0, 1 },  /* moonscale.net */
+  { 14865,     0,     0, 1 },  /* mydatto.net */
+  { 36522,     0,     0, 1 },  /* mydissent.net */
+  { 36532,     0,     0, 1 },  /* myeffect.net */
+  {  8079,     0,     0, 1 },  /* myfritz.net */
+  { 36541,     0,     0, 1 },  /* mymediapc.net */
+  {  7601,     0,     0, 1 },  /* mypsx.net */
+  {  1341,     0,     0, 1 },  /* mysecuritycamera.net */
+  { 36551,     0,     0, 1 },  /* nhlfan.net */
+  { 11795,     0,     0, 1 },  /* no-ip.net */
+  { 36558,     0,     0, 1 },  /* now-dns.net */
+  { 36566,     0,     0, 1 },  /* office-on-the.net */
+  { 36580,     0,     0, 1 },  /* ownip.net */
+  { 36586,     0,     0, 1 },  /* pgafan.net */
+  { 10771,     0,     0, 1 },  /* podzone.net */
+  { 36593,     0,     0, 1 },  /* privatizehealthinsurance.net */
+  { 15129,     0,     0, 1 },  /* rackmaze.net */
+  { 36618,     0,     0, 1 },  /* redirectme.net */
+  {  2187,     0,     0, 1 },  /* ru.net */
+  { 36629,     0,     0, 1 },  /* schokokeks.net */
+  { 36640,     0,     0, 1 },  /* scrapper-site.net */
+  {  1492,     0,     0, 1 },  /* se.net */
+  { 11801,     0,     0, 1 },  /* selfip.net */
+  { 36654,     0,     0, 1 },  /* sells-it.net */
+  { 15215,     0,     0, 1 },  /* servebbs.net */
   {  1030,     0,     0, 1 },  /* serveblog.net */
-  { 14299,     0,     0, 1 },  /* serveftp.net */
-  { 34633,     0,     0, 1 },  /* serveminecraft.net */
-  { 11915,     0,     0, 1 },  /* square7.net */
-  { 34648,     0,     0, 1 },  /* static-access.net */
-  { 14174,     0,     0, 1 },  /* sytes.net */
-  { 34662,     0,     0, 1 },  /* t3l3p0rt.net */
-  {  3865,     0,     0, 1 },  /* thruhere.net */
-  { 11901,     0,     0, 1 },  /* twmail.net */
-  {  8120,     0,     0, 1 },  /* uk.net */
-  { 11634,     0,     0, 1 },  /* webhop.net */
-  {  6312,     0,     0, 1 },  /* za.net */
-  { 34671,     0,     0, 1 },  /* freetls.fastly.net */
-  {  5198,     0,     0, 1 },  /* map.fastly.net */
-  {  6414,  7192,     2, 0 },  /* prod.fastly.net */
-  { 13210,  7194,     3, 0 },  /* ssl.fastly.net */
-  { 34679,  3853,     1, 0 },  /* alces.network */
-  {  1914,  3838,     1, 1 },  /* com.ng */
-  {  2623,     0,     0, 1 },  /* edu.ng */
-  {  3671,     0,     0, 1 },  /* gov.ng */
+  { 15243,     0,     0, 1 },  /* serveftp.net */
+  { 36663,     0,     0, 1 },  /* serveminecraft.net */
+  { 12680,     0,     0, 1 },  /* square7.net */
+  { 36678,     0,     0, 1 },  /* static-access.net */
+  { 15110,     0,     0, 1 },  /* sytes.net */
+  { 36692,     0,     0, 1 },  /* t3l3p0rt.net */
+  {  3859,     0,     0, 1 },  /* thruhere.net */
+  { 12642,     0,     0, 1 },  /* twmail.net */
+  {  8115,     0,     0, 1 },  /* uk.net */
+  { 36701,     0,     0, 1 },  /* vpndns.net */
+  { 11808,     0,     0, 1 },  /* webhop.net */
+  {  6272,     0,     0, 1 },  /* za.net */
+  { 36708,     0,     0, 1 },  /* freetls.fastly.net */
+  {  5186,     0,     0, 1 },  /* map.fastly.net */
+  {  6380,  7554,     2, 0 },  /* prod.fastly.net */
+  { 14077,  7556,     3, 0 },  /* ssl.fastly.net */
+  { 36716,  4048,     1, 0 },  /* alces.network */
+  {  1910,  4032,     1, 1 },  /* com.ng */
+  {  2622,     0,     0, 1 },  /* edu.ng */
+  {  3665,     0,     0, 1 },  /* gov.ng */
   {    58,     0,     0, 1 },  /* i.ng */
-  {  4170,     0,     0, 1 },  /* mil.ng */
-  {  5427,     0,     0, 1 },  /* mobi.ng */
-  {  5695,     0,     0, 1 },  /* name.ng */
-  {  5737,     0,     0, 1 },  /* net.ng */
-  {  6053,     0,     0, 1 },  /* org.ng */
-  {  1146,     0,     0, 1 },  /* sch.ng */
-  { 10645,     0,     0, 1 },  /* blogspot.nl */
-  {  1290,     0,     0, 1 },  /* bv.nl */
-  { 34685,     0,     0, 1 },  /* cistron.nl */
+  {  4157,     0,     0, 1 },  /* mil.ng */
+  {  5415,     0,     0, 1 },  /* mobi.ng */
+  {  5672,     0,     0, 1 },  /* name.ng */
+  {  5710,     0,     0, 1 },  /* net.ng */
+  {  6026,     0,     0, 1 },  /* org.ng */
+  {  1140,     0,     0, 1 },  /* sch.ng */
+  { 10791,     0,     0, 1 },  /* blogspot.nl */
+  {  1284,     0,     0, 1 },  /* bv.nl */
+  { 36722,     0,     0, 1 },  /* cistron.nl */
   {   113,     0,     0, 1 },  /* co.nl */
-  { 34693,     0,     0, 1 },  /* demon.nl */
-  { 11475,  3853,     1, 0 },  /* transurl.nl */
-  { 34699,     0,     0, 1 },  /* virtueeldomein.nl */
-  {     1,  7222,     1, 1 },  /* aa.no */
-  { 34714,     0,     0, 1 },  /* aarborte.no */
-  { 34723,     0,     0, 1 },  /* aejrie.no */
-  { 34731,     0,     0, 1 },  /* afjord.no */
-  { 34738,     0,     0, 1 },  /* agdenes.no */
-  { 12011,  7222,     1, 1 },  /* ah.no */
-  { 34746,  7223,     1, 0 },  /* akershus.no */
-  { 34755,     0,     0, 1 },  /* aknoluokta.no */
-  { 34766,     0,     0, 1 },  /* akrehamn.no */
+  { 36730,     0,     0, 1 },  /* demon.nl */
+  { 36736,     0,     0, 1 },  /* hosting-cluster.nl */
+  { 11650,  4048,     1, 0 },  /* transurl.nl */
+  { 36752,     0,     0, 1 },  /* virtueeldomein.nl */
+  {     1,  7584,     1, 1 },  /* aa.no */
+  { 36767,     0,     0, 1 },  /* aarborte.no */
+  { 36776,     0,     0, 1 },  /* aejrie.no */
+  { 36784,     0,     0, 1 },  /* afjord.no */
+  { 36791,     0,     0, 1 },  /* agdenes.no */
+  { 12776,  7584,     1, 1 },  /* ah.no */
+  { 36799,  7585,     1, 0 },  /* akershus.no */
+  { 36808,     0,     0, 1 },  /* aknoluokta.no */
+  { 36819,     0,     0, 1 },  /* akrehamn.no */
   {   290,     0,     0, 1 },  /* al.no */
-  { 34775,     0,     0, 1 },  /* alaheadju.no */
-  { 34785,     0,     0, 1 },  /* alesund.no */
-  { 34793,     0,     0, 1 },  /* algard.no */
-  { 34800,     0,     0, 1 },  /* alstahaug.no */
-  { 34811,     0,     0, 1 },  /* alta.no */
-  { 34816,     0,     0, 1 },  /* alvdal.no */
-  { 34823,     0,     0, 1 },  /* amli.no */
-  { 34828,     0,     0, 1 },  /* amot.no */
-  { 34833,     0,     0, 1 },  /* andasuolo.no */
-  { 34843,     0,     0, 1 },  /* andebu.no */
-  { 34851,     0,     0, 1 },  /* andoy.no */
-  { 34858,     0,     0, 1 },  /* ardal.no */
-  { 34864,     0,     0, 1 },  /* aremark.no */
-  { 34872,     0,     0, 1 },  /* arendal.no */
-  {  5660,     0,     0, 1 },  /* arna.no */
-  { 34880,     0,     0, 1 },  /* aseral.no */
-  { 34887,     0,     0, 1 },  /* asker.no */
-  {  4574,     0,     0, 1 },  /* askim.no */
-  { 34893,     0,     0, 1 },  /* askoy.no */
-  { 34899,     0,     0, 1 },  /* askvoll.no */
-  { 34907,     0,     0, 1 },  /* asnes.no */
-  { 34913,     0,     0, 1 },  /* audnedaln.no */
-  { 34923,     0,     0, 1 },  /* aukra.no */
-  { 34929,     0,     0, 1 },  /* aure.no */
-  { 34934,     0,     0, 1 },  /* aurland.no */
-  { 34942,     0,     0, 1 },  /* aurskog-holand.no */
-  { 34957,     0,     0, 1 },  /* austevoll.no */
-  { 34967,     0,     0, 1 },  /* austrheim.no */
-  { 34977,     0,     0, 1 },  /* averoy.no */
-  { 34984,     0,     0, 1 },  /* badaddja.no */
-  { 34993,     0,     0, 1 },  /* bahcavuotna.no */
-  { 35005,     0,     0, 1 },  /* bahccavuotna.no */
-  { 35018,     0,     0, 1 },  /* baidar.no */
-  { 35025,     0,     0, 1 },  /* bajddar.no */
-  {  4794,     0,     0, 1 },  /* balat.no */
-  { 35033,     0,     0, 1 },  /* balestrand.no */
-  { 35044,     0,     0, 1 },  /* ballangen.no */
-  { 35054,     0,     0, 1 },  /* balsfjord.no */
-  { 35064,     0,     0, 1 },  /* bamble.no */
-  { 35071,     0,     0, 1 },  /* bardu.no */
-  { 35077,     0,     0, 1 },  /* barum.no */
-  { 35083,     0,     0, 1 },  /* batsfjord.no */
-  { 35093,     0,     0, 1 },  /* bearalvahki.no */
-  { 35105,     0,     0, 1 },  /* beardu.no */
-  { 35112,     0,     0, 1 },  /* beiarn.no */
+  { 36828,     0,     0, 1 },  /* alaheadju.no */
+  { 36838,     0,     0, 1 },  /* alesund.no */
+  { 36846,     0,     0, 1 },  /* algard.no */
+  { 36853,     0,     0, 1 },  /* alstahaug.no */
+  { 36864,     0,     0, 1 },  /* alta.no */
+  { 36869,     0,     0, 1 },  /* alvdal.no */
+  { 36876,     0,     0, 1 },  /* amli.no */
+  { 36881,     0,     0, 1 },  /* amot.no */
+  { 36886,     0,     0, 1 },  /* andasuolo.no */
+  { 36896,     0,     0, 1 },  /* andebu.no */
+  { 36904,     0,     0, 1 },  /* andoy.no */
+  { 36911,     0,     0, 1 },  /* ardal.no */
+  { 36917,     0,     0, 1 },  /* aremark.no */
+  { 36925,     0,     0, 1 },  /* arendal.no */
+  {  5637,     0,     0, 1 },  /* arna.no */
+  { 36933,     0,     0, 1 },  /* aseral.no */
+  { 36940,     0,     0, 1 },  /* asker.no */
+  {  4560,     0,     0, 1 },  /* askim.no */
+  { 36946,     0,     0, 1 },  /* askoy.no */
+  { 36952,     0,     0, 1 },  /* askvoll.no */
+  { 36960,     0,     0, 1 },  /* asnes.no */
+  { 36966,     0,     0, 1 },  /* audnedaln.no */
+  { 36976,     0,     0, 1 },  /* aukra.no */
+  { 36982,     0,     0, 1 },  /* aure.no */
+  { 36987,     0,     0, 1 },  /* aurland.no */
+  { 36995,     0,     0, 1 },  /* aurskog-holand.no */
+  { 37010,     0,     0, 1 },  /* austevoll.no */
+  { 37020,     0,     0, 1 },  /* austrheim.no */
+  { 37030,     0,     0, 1 },  /* averoy.no */
+  { 37037,     0,     0, 1 },  /* badaddja.no */
+  { 37046,     0,     0, 1 },  /* bahcavuotna.no */
+  { 37058,     0,     0, 1 },  /* bahccavuotna.no */
+  { 37071,     0,     0, 1 },  /* baidar.no */
+  { 37078,     0,     0, 1 },  /* bajddar.no */
+  {  4780,     0,     0, 1 },  /* balat.no */
+  { 37086,     0,     0, 1 },  /* balestrand.no */
+  { 37097,     0,     0, 1 },  /* ballangen.no */
+  { 37107,     0,     0, 1 },  /* balsfjord.no */
+  { 37117,     0,     0, 1 },  /* bamble.no */
+  { 37124,     0,     0, 1 },  /* bardu.no */
+  { 37130,     0,     0, 1 },  /* barum.no */
+  { 37136,     0,     0, 1 },  /* batsfjord.no */
+  { 37146,     0,     0, 1 },  /* bearalvahki.no */
+  { 37158,     0,     0, 1 },  /* beardu.no */
+  { 37165,     0,     0, 1 },  /* beiarn.no */
   {  1045,     0,     0, 1 },  /* berg.no */
-  { 16017,     0,     0, 1 },  /* bergen.no */
-  { 35128,     0,     0, 1 },  /* berlevag.no */
-  { 35137,     0,     0, 1 },  /* bievat.no */
-  { 35144,     0,     0, 1 },  /* bindal.no */
-  { 35151,     0,     0, 1 },  /* birkenes.no */
-  { 35160,     0,     0, 1 },  /* bjarkoy.no */
-  { 35168,     0,     0, 1 },  /* bjerkreim.no */
-  {  3592,     0,     0, 1 },  /* bjugn.no */
-  { 10645,     0,     0, 1 },  /* blogspot.no */
-  { 35178,     0,     0, 1 },  /* bodo.no */
-  {  4610,     0,     0, 1 },  /* bokn.no */
-  { 35183,     0,     0, 1 },  /* bomlo.no */
-  { 35189,     0,     0, 1 },  /* bremanger.no */
-  { 35199,     0,     0, 1 },  /* bronnoy.no */
-  { 35207,     0,     0, 1 },  /* bronnoysund.no */
-  { 35219,     0,     0, 1 },  /* brumunddal.no */
-  { 35230,     0,     0, 1 },  /* bryne.no */
-  { 20050,  7222,     1, 1 },  /* bu.no */
-  { 35236,     0,     0, 1 },  /* budejju.no */
-  { 35244,  7223,     1, 0 },  /* buskerud.no */
-  { 35253,     0,     0, 1 },  /* bygland.no */
-  { 35261,     0,     0, 1 },  /* bykle.no */
-  { 35267,     0,     0, 1 },  /* cahcesuolo.no */
+  { 17111,     0,     0, 1 },  /* bergen.no */
+  { 37181,     0,     0, 1 },  /* berlevag.no */
+  { 37190,     0,     0, 1 },  /* bievat.no */
+  { 37197,     0,     0, 1 },  /* bindal.no */
+  { 37204,     0,     0, 1 },  /* birkenes.no */
+  { 37213,     0,     0, 1 },  /* bjarkoy.no */
+  { 37221,     0,     0, 1 },  /* bjerkreim.no */
+  {  3586,     0,     0, 1 },  /* bjugn.no */
+  { 10791,     0,     0, 1 },  /* blogspot.no */
+  { 37231,     0,     0, 1 },  /* bodo.no */
+  {  4596,     0,     0, 1 },  /* bokn.no */
+  { 37236,     0,     0, 1 },  /* bomlo.no */
+  { 37242,     0,     0, 1 },  /* bremanger.no */
+  { 37252,     0,     0, 1 },  /* bronnoy.no */
+  { 37260,     0,     0, 1 },  /* bronnoysund.no */
+  { 37272,     0,     0, 1 },  /* brumunddal.no */
+  { 37283,     0,     0, 1 },  /* bryne.no */
+  { 21937,  7584,     1, 1 },  /* bu.no */
+  { 37289,     0,     0, 1 },  /* budejju.no */
+  { 37297,  7585,     1, 0 },  /* buskerud.no */
+  { 37306,     0,     0, 1 },  /* bygland.no */
+  { 37314,     0,     0, 1 },  /* bykle.no */
+  { 37320,     0,     0, 1 },  /* cahcesuolo.no */
   {   113,     0,     0, 1 },  /* co.no */
-  { 35278,     0,     0, 1 },  /* davvenjarga.no */
-  { 26044,     0,     0, 1 },  /* davvesiida.no */
-  { 35290,     0,     0, 1 },  /* deatnu.no */
-  { 35297,     0,     0, 1 },  /* dep.no */
-  { 35301,     0,     0, 1 },  /* dielddanuorri.no */
-  { 35315,     0,     0, 1 },  /* divtasvuodna.no */
-  { 35328,     0,     0, 1 },  /* divttasvuotna.no */
-  { 27334,     0,     0, 1 },  /* donna.no */
-  { 35342,     0,     0, 1 },  /* dovre.no */
-  {  5341,     0,     0, 1 },  /* drammen.no */
-  { 35348,     0,     0, 1 },  /* drangedal.no */
-  { 35358,     0,     0, 1 },  /* drobak.no */
-  { 35365,     0,     0, 1 },  /* dyroy.no */
-  { 35371,     0,     0, 1 },  /* egersund.no */
-  { 35383,     0,     0, 1 },  /* eid.no */
-  { 35387,     0,     0, 1 },  /* eidfjord.no */
-  { 35119,     0,     0, 1 },  /* eidsberg.no */
-  { 35396,     0,     0, 1 },  /* eidskog.no */
-  { 35404,     0,     0, 1 },  /* eidsvoll.no */
-  { 35413,     0,     0, 1 },  /* eigersund.no */
-  { 35423,     0,     0, 1 },  /* elverum.no */
-  { 35431,     0,     0, 1 },  /* enebakk.no */
-  { 35439,     0,     0, 1 },  /* engerdal.no */
-  {  5730,     0,     0, 1 },  /* etne.no */
-  { 35448,     0,     0, 1 },  /* etnedal.no */
-  { 35456,     0,     0, 1 },  /* evenassi.no */
-  { 35465,     0,     0, 1 },  /* evenes.no */
-  { 35472,     0,     0, 1 },  /* evje-og-hornnes.no */
-  { 35488,     0,     0, 1 },  /* farsund.no */
-  { 35496,     0,     0, 1 },  /* fauske.no */
-  {  4401,     0,     0, 1 },  /* fedje.no */
-  {  2784,     0,     0, 1 },  /* fet.no */
-  { 35503,     0,     0, 1 },  /* fetsund.no */
-  { 30049,     0,     0, 1 },  /* fhs.no */
-  { 35511,     0,     0, 1 },  /* finnoy.no */
-  { 35518,     0,     0, 1 },  /* fitjar.no */
-  { 35525,     0,     0, 1 },  /* fjaler.no */
-  { 35532,     0,     0, 1 },  /* fjell.no */
-  {  4696,     0,     0, 1 },  /* fla.no */
-  { 35538,     0,     0, 1 },  /* flakstad.no */
-  { 35547,     0,     0, 1 },  /* flatanger.no */
-  { 35557,     0,     0, 1 },  /* flekkefjord.no */
-  { 35569,     0,     0, 1 },  /* flesberg.no */
-  { 35578,     0,     0, 1 },  /* flora.no */
-  { 35584,     0,     0, 1 },  /* floro.no */
-  {  3145,  7222,     1, 1 },  /* fm.no */
-  { 35590,     0,     0, 1 },  /* folkebibl.no */
-  { 35600,     0,     0, 1 },  /* folldal.no */
-  { 35608,     0,     0, 1 },  /* forde.no */
-  { 35614,     0,     0, 1 },  /* forsand.no */
-  { 35622,     0,     0, 1 },  /* fosnes.no */
-  { 35629,     0,     0, 1 },  /* frana.no */
-  { 35635,     0,     0, 1 },  /* fredrikstad.no */
-  { 35647,     0,     0, 1 },  /* frei.no */
-  { 35652,     0,     0, 1 },  /* frogn.no */
-  { 35658,     0,     0, 1 },  /* froland.no */
-  { 35666,     0,     0, 1 },  /* frosta.no */
-  { 35673,     0,     0, 1 },  /* froya.no */
-  { 35679,     0,     0, 1 },  /* fuoisku.no */
-  { 35687,     0,     0, 1 },  /* fuossko.no */
-  { 20878,     0,     0, 1 },  /* fusa.no */
-  { 35695,     0,     0, 1 },  /* fylkesbibl.no */
-  { 35706,     0,     0, 1 },  /* fyresdal.no */
-  { 35715,     0,     0, 1 },  /* gaivuotna.no */
-  { 35725,     0,     0, 1 },  /* galsa.no */
-  { 35731,     0,     0, 1 },  /* gamvik.no */
-  { 35738,     0,     0, 1 },  /* gangaviika.no */
-  { 35749,     0,     0, 1 },  /* gaular.no */
-  { 35756,     0,     0, 1 },  /* gausdal.no */
-  { 35764,     0,     0, 1 },  /* giehtavuoatna.no */
-  { 35778,     0,     0, 1 },  /* gildeskal.no */
-  { 35788,     0,     0, 1 },  /* giske.no */
-  { 35794,     0,     0, 1 },  /* gjemnes.no */
-  { 35802,     0,     0, 1 },  /* gjerdrum.no */
-  { 35811,     0,     0, 1 },  /* gjerstad.no */
-  { 35820,     0,     0, 1 },  /* gjesdal.no */
-  { 35828,     0,     0, 1 },  /* gjovik.no */
-  { 35835,     0,     0, 1 },  /* gloppen.no */
-  { 35843,     0,     0, 1 },  /* gol.no */
-  { 35847,     0,     0, 1 },  /* gran.no */
-  { 35852,     0,     0, 1 },  /* grane.no */
-  {  8264,     0,     0, 1 },  /* granvin.no */
-  { 35858,     0,     0, 1 },  /* gratangen.no */
-  { 35868,     0,     0, 1 },  /* grimstad.no */
-  { 35877,     0,     0, 1 },  /* grong.no */
-  { 35883,     0,     0, 1 },  /* grue.no */
-  { 35888,     0,     0, 1 },  /* gulen.no */
-  { 35894,     0,     0, 1 },  /* guovdageaidnu.no */
-  {  2518,     0,     0, 1 },  /* ha.no */
-  { 35908,     0,     0, 1 },  /* habmer.no */
-  { 35915,     0,     0, 1 },  /* hadsel.no */
-  { 35922,     0,     0, 1 },  /* hagebostad.no */
-  { 35933,     0,     0, 1 },  /* halden.no */
-  { 35940,     0,     0, 1 },  /* halsa.no */
-  { 17562,     0,     0, 1 },  /* hamar.no */
-  { 35946,     0,     0, 1 },  /* hamaroy.no */
-  { 35954,     0,     0, 1 },  /* hammarfeasta.no */
-  { 35967,     0,     0, 1 },  /* hammerfest.no */
-  { 35978,     0,     0, 1 },  /* hapmir.no */
-  { 35985,     0,     0, 1 },  /* haram.no */
-  { 35380,     0,     0, 1 },  /* hareid.no */
-  { 35991,     0,     0, 1 },  /* harstad.no */
-  { 35999,     0,     0, 1 },  /* hasvik.no */
-  { 36006,     0,     0, 1 },  /* hattfjelldal.no */
-  { 36019,     0,     0, 1 },  /* haugesund.no */
-  { 36029,  7224,     3, 0 },  /* hedmark.no */
-  { 36037,     0,     0, 1 },  /* hemne.no */
-  { 36043,     0,     0, 1 },  /* hemnes.no */
-  { 36050,     0,     0, 1 },  /* hemsedal.no */
-  { 36062,     0,     0, 1 },  /* herad.no */
-  { 29960,     0,     0, 1 },  /* hitra.no */
-  { 36068,     0,     0, 1 },  /* hjartdal.no */
-  { 36077,     0,     0, 1 },  /* hjelmeland.no */
-  {  2388,  7222,     1, 1 },  /* hl.no */
-  {  3929,  7222,     1, 1 },  /* hm.no */
-  { 36088,     0,     0, 1 },  /* hobol.no */
-  { 30804,     0,     0, 1 },  /* hof.no */
-  { 36094,     0,     0, 1 },  /* hokksund.no */
-  { 36103,     0,     0, 1 },  /* hol.no */
-  { 36107,     0,     0, 1 },  /* hole.no */
-  { 36112,     0,     0, 1 },  /* holmestrand.no */
-  { 36124,     0,     0, 1 },  /* holtalen.no */
-  { 36133,     0,     0, 1 },  /* honefoss.no */
-  { 15529,  7227,     1, 0 },  /* hordaland.no */
-  { 36142,     0,     0, 1 },  /* hornindal.no */
-  { 36152,     0,     0, 1 },  /* horten.no */
-  { 36159,     0,     0, 1 },  /* hoyanger.no */
-  { 36168,     0,     0, 1 },  /* hoylandet.no */
-  { 36178,     0,     0, 1 },  /* hurdal.no */
-  { 36185,     0,     0, 1 },  /* hurum.no */
-  { 36191,     0,     0, 1 },  /* hvaler.no */
-  { 36198,     0,     0, 1 },  /* hyllestad.no */
-  { 36208,     0,     0, 1 },  /* ibestad.no */
-  { 36216,     0,     0, 1 },  /* idrett.no */
-  { 36223,     0,     0, 1 },  /* inderoy.no */
-  { 36231,     0,     0, 1 },  /* iveland.no */
-  {  3751,     0,     0, 1 },  /* ivgu.no */
-  { 36239,  7222,     1, 1 },  /* jan-mayen.no */
-  { 36249,     0,     0, 1 },  /* jessheim.no */
-  { 36258,     0,     0, 1 },  /* jevnaker.no */
-  { 36267,     0,     0, 1 },  /* jolster.no */
-  { 36275,     0,     0, 1 },  /* jondal.no */
-  { 36282,     0,     0, 1 },  /* jorpeland.no */
-  { 34730,     0,     0, 1 },  /* kafjord.no */
-  { 36292,     0,     0, 1 },  /* karasjohka.no */
-  { 36303,     0,     0, 1 },  /* karasjok.no */
-  { 36312,     0,     0, 1 },  /* karlsoy.no */
-  { 36320,     0,     0, 1 },  /* karmoy.no */
-  { 36327,     0,     0, 1 },  /* kautokeino.no */
-  { 36338,     0,     0, 1 },  /* kirkenes.no */
-  { 36347,     0,     0, 1 },  /* klabu.no */
-  { 11469,     0,     0, 1 },  /* klepp.no */
-  { 36353,     0,     0, 1 },  /* kommune.no */
-  { 36361,     0,     0, 1 },  /* kongsberg.no */
-  { 36371,     0,     0, 1 },  /* kongsvinger.no */
-  { 36383,     0,     0, 1 },  /* kopervik.no */
-  { 36392,     0,     0, 1 },  /* kraanghke.no */
-  { 36402,     0,     0, 1 },  /* kragero.no */
-  { 36410,     0,     0, 1 },  /* kristiansand.no */
-  { 36423,     0,     0, 1 },  /* kristiansund.no */
-  { 36436,     0,     0, 1 },  /* krodsherad.no */
-  { 36447,     0,     0, 1 },  /* krokstadelva.no */
-  { 36460,     0,     0, 1 },  /* kvafjord.no */
-  { 36469,     0,     0, 1 },  /* kvalsund.no */
-  {   356,     0,     0, 1 },  /* kvam.no */
-  { 36478,     0,     0, 1 },  /* kvanangen.no */
-  { 36488,     0,     0, 1 },  /* kvinesdal.no */
-  { 36498,     0,     0, 1 },  /* kvinnherad.no */
-  { 36509,     0,     0, 1 },  /* kviteseid.no */
-  { 36519,     0,     0, 1 },  /* kvitsoy.no */
-  { 36527,     0,     0, 1 },  /* laakesvuemie.no */
-  { 36540,     0,     0, 1 },  /* lahppi.no */
-  { 36547,     0,     0, 1 },  /* langevag.no */
-  { 34857,     0,     0, 1 },  /* lardal.no */
-  { 36556,     0,     0, 1 },  /* larvik.no */
-  { 36563,     0,     0, 1 },  /* lavagis.no */
-  { 36571,     0,     0, 1 },  /* lavangen.no */
-  { 36580,     0,     0, 1 },  /* leangaviika.no */
-  { 36592,     0,     0, 1 },  /* lebesby.no */
-  { 36600,     0,     0, 1 },  /* leikanger.no */
-  { 36610,     0,     0, 1 },  /* leirfjord.no */
-  { 36620,     0,     0, 1 },  /* leirvik.no */
-  { 36633,     0,     0, 1 },  /* leka.no */
-  { 36638,     0,     0, 1 },  /* leksvik.no */
-  { 36646,     0,     0, 1 },  /* lenvik.no */
-  { 36653,     0,     0, 1 },  /* lerdal.no */
-  { 36660,     0,     0, 1 },  /* lesja.no */
-  { 36666,     0,     0, 1 },  /* levanger.no */
-  {  2734,     0,     0, 1 },  /* lier.no */
-  { 36675,     0,     0, 1 },  /* lierne.no */
-  { 36682,     0,     0, 1 },  /* lillehammer.no */
-  { 36694,     0,     0, 1 },  /* lillesand.no */
-  { 36704,     0,     0, 1 },  /* lindas.no */
-  { 36711,     0,     0, 1 },  /* lindesnes.no */
-  { 36721,     0,     0, 1 },  /* loabat.no */
-  { 36728,     0,     0, 1 },  /* lodingen.no */
-  { 17508,     0,     0, 1 },  /* lom.no */
-  { 36737,     0,     0, 1 },  /* loppa.no */
-  { 36743,     0,     0, 1 },  /* lorenskog.no */
-  { 36753,     0,     0, 1 },  /* loten.no */
-  { 36761,     0,     0, 1 },  /* lund.no */
-  { 36766,     0,     0, 1 },  /* lunner.no */
-  { 36773,     0,     0, 1 },  /* luroy.no */
-  { 36779,     0,     0, 1 },  /* luster.no */
-  { 36786,     0,     0, 1 },  /* lyngdal.no */
-  { 36794,     0,     0, 1 },  /* lyngen.no */
-  { 36801,     0,     0, 1 },  /* malatvuopmi.no */
-  {  5121,     0,     0, 1 },  /* malselv.no */
-  { 36813,     0,     0, 1 },  /* malvik.no */
-  { 36820,     0,     0, 1 },  /* mandal.no */
-  { 36827,     0,     0, 1 },  /* marker.no */
-  { 36834,     0,     0, 1 },  /* marnardal.no */
-  { 36844,     0,     0, 1 },  /* masfjorden.no */
-  {  7390,     0,     0, 1 },  /* masoy.no */
-  { 36855,     0,     0, 1 },  /* matta-varjjat.no */
-  { 36081,     0,     0, 1 },  /* meland.no */
-  { 36869,     0,     0, 1 },  /* meldal.no */
-  { 36876,     0,     0, 1 },  /* melhus.no */
-  { 36883,     0,     0, 1 },  /* meloy.no */
-  { 36889,     0,     0, 1 },  /* meraker.no */
-  { 36897,     0,     0, 1 },  /* midsund.no */
-  { 36905,     0,     0, 1 },  /* midtre-gauldal.no */
-  {  4170,     0,     0, 1 },  /* mil.no */
-  { 36920,     0,     0, 1 },  /* mjondalen.no */
-  { 36930,     0,     0, 1 },  /* mo-i-rana.no */
-  { 36940,     0,     0, 1 },  /* moareke.no */
-  { 36948,     0,     0, 1 },  /* modalen.no */
-  { 36956,     0,     0, 1 },  /* modum.no */
-  { 36962,     0,     0, 1 },  /* molde.no */
-  { 36968,  7228,     2, 0 },  /* more-og-romsdal.no */
-  { 36984,     0,     0, 1 },  /* mosjoen.no */
-  { 36992,     0,     0, 1 },  /* moskenes.no */
-  { 18137,     0,     0, 1 },  /* moss.no */
-  { 37001,     0,     0, 1 },  /* mosvik.no */
-  {  5580,  7222,     1, 1 },  /* mr.no */
-  { 37008,     0,     0, 1 },  /* muosat.no */
-  {  5623,     0,     0, 1 },  /* museum.no */
-  { 37015,     0,     0, 1 },  /* naamesjevuemie.no */
-  { 37030,     0,     0, 1 },  /* namdalseid.no */
-  { 37041,     0,     0, 1 },  /* namsos.no */
-  { 37048,     0,     0, 1 },  /* namsskogan.no */
-  { 37059,     0,     0, 1 },  /* nannestad.no */
-  { 37069,     0,     0, 1 },  /* naroy.no */
-  { 37075,     0,     0, 1 },  /* narviika.no */
-  { 37084,     0,     0, 1 },  /* narvik.no */
-  { 37091,     0,     0, 1 },  /* naustdal.no */
-  { 37100,     0,     0, 1 },  /* navuotna.no */
-  { 37109,     0,     0, 1 },  /* nedre-eiker.no */
-  { 37121,     0,     0, 1 },  /* nesna.no */
-  { 37127,     0,     0, 1 },  /* nesodden.no */
-  { 37136,     0,     0, 1 },  /* nesoddtangen.no */
-  { 37149,     0,     0, 1 },  /* nesseby.no */
-  { 37157,     0,     0, 1 },  /* nesset.no */
-  { 37164,     0,     0, 1 },  /* nissedal.no */
-  { 37173,     0,     0, 1 },  /* nittedal.no */
-  {  1072,  7222,     1, 1 },  /* nl.no */
-  { 37182,     0,     0, 1 },  /* nord-aurdal.no */
-  { 37194,     0,     0, 1 },  /* nord-fron.no */
-  { 37204,     0,     0, 1 },  /* nord-odal.no */
-  { 37214,     0,     0, 1 },  /* norddal.no */
-  { 37222,     0,     0, 1 },  /* nordkapp.no */
-  { 37231,  7230,     4, 0 },  /* nordland.no */
-  { 37240,     0,     0, 1 },  /* nordre-land.no */
-  { 37252,     0,     0, 1 },  /* nordreisa.no */
-  { 37262,     0,     0, 1 },  /* nore-og-uvdal.no */
-  { 37276,     0,     0, 1 },  /* notodden.no */
-  { 37285,     0,     0, 1 },  /* notteroy.no */
-  {    97,  7222,     1, 1 },  /* nt.no */
-  { 37294,     0,     0, 1 },  /* odda.no */
-  {  6433,  7222,     1, 1 },  /* of.no */
-  { 37299,     0,     0, 1 },  /* oksnes.no */
-  {   452,  7222,     1, 1 },  /* ol.no */
-  { 37306,     0,     0, 1 },  /* omasvuotna.no */
-  { 37317,     0,     0, 1 },  /* oppdal.no */
-  { 37324,     0,     0, 1 },  /* oppegard.no */
-  { 37333,     0,     0, 1 },  /* orkanger.no */
-  { 37342,     0,     0, 1 },  /* orkdal.no */
-  {  4761,     0,     0, 1 },  /* orland.no */
-  { 37349,     0,     0, 1 },  /* orskog.no */
-  { 37356,     0,     0, 1 },  /* orsta.no */
-  { 26721,     0,     0, 1 },  /* osen.no */
-  { 37362,  7222,     1, 1 },  /* oslo.no */
-  { 37367,     0,     0, 1 },  /* osoyro.no */
-  { 37374,     0,     0, 1 },  /* osteroy.no */
-  { 37382,  7234,     1, 0 },  /* ostfold.no */
-  { 37390,     0,     0, 1 },  /* ostre-toten.no */
-  { 37402,     0,     0, 1 },  /* overhalla.no */
-  { 37412,     0,     0, 1 },  /* ovre-eiker.no */
-  { 37423,     0,     0, 1 },  /* oyer.no */
-  { 37428,     0,     0, 1 },  /* oygarden.no */
-  { 37437,     0,     0, 1 },  /* oystre-slidre.no */
-  { 37451,     0,     0, 1 },  /* porsanger.no */
-  { 37461,     0,     0, 1 },  /* porsangu.no */
-  { 37470,     0,     0, 1 },  /* porsgrunn.no */
-  { 11418,     0,     0, 1 },  /* priv.no */
-  {  7981,     0,     0, 1 },  /* rade.no */
-  { 37480,     0,     0, 1 },  /* radoy.no */
-  { 37486,     0,     0, 1 },  /* rahkkeravju.no */
-  { 37498,     0,     0, 1 },  /* raholt.no */
-  { 37505,     0,     0, 1 },  /* raisa.no */
-  { 37511,     0,     0, 1 },  /* rakkestad.no */
-  { 37521,     0,     0, 1 },  /* ralingen.no */
-  { 35630,     0,     0, 1 },  /* rana.no */
-  { 37530,     0,     0, 1 },  /* randaberg.no */
-  { 37540,     0,     0, 1 },  /* rauma.no */
-  { 37546,     0,     0, 1 },  /* rendalen.no */
-  { 37555,     0,     0, 1 },  /* rennebu.no */
-  { 37563,     0,     0, 1 },  /* rennesoy.no */
-  { 37572,     0,     0, 1 },  /* rindal.no */
-  { 37579,     0,     0, 1 },  /* ringebu.no */
-  { 37587,     0,     0, 1 },  /* ringerike.no */
-  { 37597,     0,     0, 1 },  /* ringsaker.no */
-  { 37607,     0,     0, 1 },  /* risor.no */
-  { 37613,     0,     0, 1 },  /* rissa.no */
-  {  3256,  7222,     1, 1 },  /* rl.no */
-  { 37619,     0,     0, 1 },  /* roan.no */
-  { 37624,     0,     0, 1 },  /* rodoy.no */
-  { 37630,     0,     0, 1 },  /* rollag.no */
-  { 37638,     0,     0, 1 },  /* romsa.no */
-  { 37644,     0,     0, 1 },  /* romskog.no */
-  { 37652,     0,     0, 1 },  /* roros.no */
-  { 37658,     0,     0, 1 },  /* rost.no */
-  { 37663,     0,     0, 1 },  /* royken.no */
-  { 37670,     0,     0, 1 },  /* royrvik.no */
-  { 37678,     0,     0, 1 },  /* ruovat.no */
-  { 37685,     0,     0, 1 },  /* rygge.no */
-  { 37691,     0,     0, 1 },  /* salangen.no */
-  {  2791,     0,     0, 1 },  /* salat.no */
-  { 37700,     0,     0, 1 },  /* saltdal.no */
-  { 37708,     0,     0, 1 },  /* samnanger.no */
-  { 37718,     0,     0, 1 },  /* sandefjord.no */
-  { 37729,     0,     0, 1 },  /* sandnes.no */
-  { 37737,     0,     0, 1 },  /* sandnessjoen.no */
-  { 34850,     0,     0, 1 },  /* sandoy.no */
-  {  6047,     0,     0, 1 },  /* sarpsborg.no */
-  { 37750,     0,     0, 1 },  /* sauda.no */
-  { 36059,     0,     0, 1 },  /* sauherad.no */
-  { 30556,     0,     0, 1 },  /* sel.no */
-  { 37756,     0,     0, 1 },  /* selbu.no */
-  { 37762,     0,     0, 1 },  /* selje.no */
-  { 37768,     0,     0, 1 },  /* seljord.no */
-  { 11527,  7222,     1, 1 },  /* sf.no */
-  { 37776,     0,     0, 1 },  /* siellak.no */
-  { 37784,     0,     0, 1 },  /* sigdal.no */
-  { 37791,     0,     0, 1 },  /* siljan.no */
-  { 37798,     0,     0, 1 },  /* sirdal.no */
-  { 37805,     0,     0, 1 },  /* skanit.no */
-  { 37812,     0,     0, 1 },  /* skanland.no */
-  { 37821,     0,     0, 1 },  /* skaun.no */
-  { 37827,     0,     0, 1 },  /* skedsmo.no */
-  { 37835,     0,     0, 1 },  /* skedsmokorset.no */
-  {  4564,     0,     0, 1 },  /* ski.no */
-  { 37849,     0,     0, 1 },  /* skien.no */
-  { 37855,     0,     0, 1 },  /* skierva.no */
-  {  8217,     0,     0, 1 },  /* skiptvet.no */
-  { 37863,     0,     0, 1 },  /* skjak.no */
-  { 37869,     0,     0, 1 },  /* skjervoy.no */
-  { 37878,     0,     0, 1 },  /* skodje.no */
-  { 37885,     0,     0, 1 },  /* slattum.no */
-  { 37893,     0,     0, 1 },  /* smola.no */
-  { 37899,     0,     0, 1 },  /* snaase.no */
-  { 37906,     0,     0, 1 },  /* snasa.no */
-  { 37912,     0,     0, 1 },  /* snillfjord.no */
-  { 37923,     0,     0, 1 },  /* snoasa.no */
-  { 37930,     0,     0, 1 },  /* sogndal.no */
-  { 37938,     0,     0, 1 },  /* sogne.no */
-  { 37944,     0,     0, 1 },  /* sokndal.no */
-  { 37952,     0,     0, 1 },  /* sola.no */
-  { 36759,     0,     0, 1 },  /* solund.no */
-  { 37957,     0,     0, 1 },  /* somna.no */
-  { 37963,     0,     0, 1 },  /* sondre-land.no */
-  { 37975,     0,     0, 1 },  /* songdalen.no */
-  { 37985,     0,     0, 1 },  /* sor-aurdal.no */
-  { 37996,     0,     0, 1 },  /* sor-fron.no */
-  { 38005,     0,     0, 1 },  /* sor-odal.no */
-  { 38014,     0,     0, 1 },  /* sor-varanger.no */
-  { 38027,     0,     0, 1 },  /* sorfold.no */
-  { 38035,     0,     0, 1 },  /* sorreisa.no */
-  { 38044,     0,     0, 1 },  /* sortland.no */
-  { 38053,     0,     0, 1 },  /* sorum.no */
-  { 38059,     0,     0, 1 },  /* spjelkavik.no */
-  { 38070,     0,     0, 1 },  /* spydeberg.no */
-  {   619,  7222,     1, 1 },  /* st.no */
-  { 38080,     0,     0, 1 },  /* stange.no */
-  { 38087,     0,     0, 1 },  /* stat.no */
-  { 38092,     0,     0, 1 },  /* stathelle.no */
-  { 38102,     0,     0, 1 },  /* stavanger.no */
-  { 38112,     0,     0, 1 },  /* stavern.no */
-  { 38120,     0,     0, 1 },  /* steigen.no */
-  { 38128,     0,     0, 1 },  /* steinkjer.no */
-  { 38138,     0,     0, 1 },  /* stjordal.no */
-  { 38147,     0,     0, 1 },  /* stjordalshalsen.no */
-  { 38163,     0,     0, 1 },  /* stokke.no */
-  { 38170,     0,     0, 1 },  /* stor-elvdal.no */
-  { 38182,     0,     0, 1 },  /* stord.no */
-  { 38188,     0,     0, 1 },  /* stordal.no */
-  { 38196,     0,     0, 1 },  /* storfjord.no */
-  { 35037,     0,     0, 1 },  /* strand.no */
-  { 38206,     0,     0, 1 },  /* stranda.no */
-  { 12063,     0,     0, 1 },  /* stryn.no */
-  { 38214,     0,     0, 1 },  /* sula.no */
-  { 38219,     0,     0, 1 },  /* suldal.no */
-  { 34788,     0,     0, 1 },  /* sund.no */
-  { 38226,     0,     0, 1 },  /* sunndal.no */
-  { 38234,     0,     0, 1 },  /* surnadal.no */
-  { 38243,  7222,     1, 1 },  /* svalbard.no */
-  { 38252,     0,     0, 1 },  /* sveio.no */
-  { 38258,     0,     0, 1 },  /* svelvik.no */
-  { 38266,     0,     0, 1 },  /* sykkylven.no */
-  { 26423,     0,     0, 1 },  /* tana.no */
-  { 38276,     0,     0, 1 },  /* tananger.no */
-  { 38285,  7235,     2, 0 },  /* telemark.no */
-  {  7250,     0,     0, 1 },  /* time.no */
-  { 38294,     0,     0, 1 },  /* tingvoll.no */
-  { 38303,     0,     0, 1 },  /* tinn.no */
-  { 38308,     0,     0, 1 },  /* tjeldsund.no */
-  { 38318,     0,     0, 1 },  /* tjome.no */
-  {  7908,  7222,     1, 1 },  /* tm.no */
-  { 38164,     0,     0, 1 },  /* tokke.no */
-  { 38324,     0,     0, 1 },  /* tolga.no */
-  { 38330,     0,     0, 1 },  /* tonsberg.no */
-  { 38339,     0,     0, 1 },  /* torsken.no */
-  {  3287,  7222,     1, 1 },  /* tr.no */
-  { 38347,     0,     0, 1 },  /* trana.no */
-  { 38353,     0,     0, 1 },  /* tranby.no */
-  { 38360,     0,     0, 1 },  /* tranoy.no */
-  { 38367,     0,     0, 1 },  /* troandin.no */
-  { 38376,     0,     0, 1 },  /* trogstad.no */
-  { 37637,     0,     0, 1 },  /* tromsa.no */
-  { 38385,     0,     0, 1 },  /* tromso.no */
-  { 38392,     0,     0, 1 },  /* trondheim.no */
-  { 38402,     0,     0, 1 },  /* trysil.no */
-  { 38409,     0,     0, 1 },  /* tvedestrand.no */
-  { 38421,     0,     0, 1 },  /* tydal.no */
-  { 38427,     0,     0, 1 },  /* tynset.no */
-  { 38434,     0,     0, 1 },  /* tysfjord.no */
-  { 38443,     0,     0, 1 },  /* tysnes.no */
-  { 38450,     0,     0, 1 },  /* tysvar.no */
-  { 38457,     0,     0, 1 },  /* ullensaker.no */
-  { 38468,     0,     0, 1 },  /* ullensvang.no */
-  { 38479,     0,     0, 1 },  /* ulvik.no */
-  { 38485,     0,     0, 1 },  /* unjarga.no */
-  { 38493,     0,     0, 1 },  /* utsira.no */
-  {   834,  7222,     1, 1 },  /* va.no */
-  { 38500,     0,     0, 1 },  /* vaapste.no */
-  { 38508,     0,     0, 1 },  /* vadso.no */
-  { 38514,     0,     0, 1 },  /* vaga.no */
-  { 38519,     0,     0, 1 },  /* vagan.no */
-  { 38525,     0,     0, 1 },  /* vagsoy.no */
-  { 38532,     0,     0, 1 },  /* vaksdal.no */
-  { 38540,     0,     0, 1 },  /* valle.no */
-  { 38474,     0,     0, 1 },  /* vang.no */
-  { 38546,     0,     0, 1 },  /* vanylven.no */
-  { 38555,     0,     0, 1 },  /* vardo.no */
-  { 38561,     0,     0, 1 },  /* varggat.no */
-  { 38569,     0,     0, 1 },  /* varoy.no */
-  { 38575,     0,     0, 1 },  /* vefsn.no */
-  { 38581,     0,     0, 1 },  /* vega.no */
-  { 38586,     0,     0, 1 },  /* vegarshei.no */
-  { 38596,     0,     0, 1 },  /* vennesla.no */
-  { 38605,     0,     0, 1 },  /* verdal.no */
-  { 38612,     0,     0, 1 },  /* verran.no */
-  { 38619,     0,     0, 1 },  /* vestby.no */
-  { 38626,  7237,     1, 0 },  /* vestfold.no */
-  { 38635,     0,     0, 1 },  /* vestnes.no */
-  { 38643,     0,     0, 1 },  /* vestre-slidre.no */
-  { 38657,     0,     0, 1 },  /* vestre-toten.no */
-  { 38670,     0,     0, 1 },  /* vestvagoy.no */
-  { 38680,     0,     0, 1 },  /* vevelstad.no */
-  {  9666,  7222,     1, 1 },  /* vf.no */
-  {  3744,     0,     0, 1 },  /* vgs.no */
-  {  6932,     0,     0, 1 },  /* vik.no */
-  { 38690,     0,     0, 1 },  /* vikna.no */
-  { 38696,     0,     0, 1 },  /* vindafjord.no */
-  { 38707,     0,     0, 1 },  /* voagat.no */
-  { 38714,     0,     0, 1 },  /* volda.no */
-  { 38720,     0,     0, 1 },  /* voss.no */
-  { 38725,     0,     0, 1 },  /* vossevangen.no */
-  { 38737,     0,     0, 1 },  /* xn--andy-ira.no */
-  { 38750,     0,     0, 1 },  /* xn--asky-ira.no */
-  { 38763,     0,     0, 1 },  /* xn--aurskog-hland-jnb.no */
-  { 38785,     0,     0, 1 },  /* xn--avery-yua.no */
-  { 38799,     0,     0, 1 },  /* xn--bdddj-mrabd.no */
-  { 38815,     0,     0, 1 },  /* xn--bearalvhki-y4a.no */
-  { 38834,     0,     0, 1 },  /* xn--berlevg-jxa.no */
-  { 38850,     0,     0, 1 },  /* xn--bhcavuotna-s4a.no */
-  { 38869,     0,     0, 1 },  /* xn--bhccavuotna-k7a.no */
-  { 38889,     0,     0, 1 },  /* xn--bidr-5nac.no */
-  {  6511,     0,     0, 1 },  /* xn--bievt-0qa.no */
-  { 38903,     0,     0, 1 },  /* xn--bjarky-fya.no */
-  { 38918,     0,     0, 1 },  /* xn--bjddar-pta.no */
-  { 38933,     0,     0, 1 },  /* xn--blt-elab.no */
-  { 38946,     0,     0, 1 },  /* xn--bmlo-gra.no */
-  { 38959,     0,     0, 1 },  /* xn--bod-2na.no */
-  { 38971,     0,     0, 1 },  /* xn--brnny-wuac.no */
-  { 38986,     0,     0, 1 },  /* xn--brnnysund-m8ac.no */
-  { 39005,     0,     0, 1 },  /* xn--brum-voa.no */
-  { 39018,     0,     0, 1 },  /* xn--btsfjord-9za.no */
-  { 39035,     0,     0, 1 },  /* xn--davvenjrga-y4a.no */
-  { 39054,     0,     0, 1 },  /* xn--dnna-gra.no */
-  { 39067,     0,     0, 1 },  /* xn--drbak-wua.no */
-  { 39081,     0,     0, 1 },  /* xn--dyry-ira.no */
-  { 39094,     0,     0, 1 },  /* xn--eveni-0qa01ga.no */
-  { 39112,     0,     0, 1 },  /* xn--finny-yua.no */
-  { 39126,     0,     0, 1 },  /* xn--fjord-lra.no */
-  { 39140,     0,     0, 1 },  /* xn--fl-zia.no */
-  { 39151,     0,     0, 1 },  /* xn--flor-jra.no */
-  { 39164,     0,     0, 1 },  /* xn--frde-gra.no */
-  { 39177,     0,     0, 1 },  /* xn--frna-woa.no */
-  { 39190,     0,     0, 1 },  /* xn--frya-hra.no */
-  { 39203,     0,     0, 1 },  /* xn--ggaviika-8ya47h.no */
-  { 39223,     0,     0, 1 },  /* xn--gildeskl-g0a.no */
-  { 39240,     0,     0, 1 },  /* xn--givuotna-8ya.no */
-  { 39257,     0,     0, 1 },  /* xn--gjvik-wua.no */
-  { 39271,     0,     0, 1 },  /* xn--gls-elac.no */
-  { 39284,     0,     0, 1 },  /* xn--h-2fa.no */
-  { 39294,     0,     0, 1 },  /* xn--hbmer-xqa.no */
-  { 39308,     0,     0, 1 },  /* xn--hcesuolo-7ya35b.no */
-  { 39328,     0,     0, 1 },  /* xn--hgebostad-g3a.no */
-  { 39346,     0,     0, 1 },  /* xn--hmmrfeasta-s4ac.no */
-  { 39366,     0,     0, 1 },  /* xn--hnefoss-q1a.no */
-  { 39382,     0,     0, 1 },  /* xn--hobl-ira.no */
-  { 39395,     0,     0, 1 },  /* xn--holtlen-hxa.no */
-  { 39411,     0,     0, 1 },  /* xn--hpmir-xqa.no */
-  { 39425,     0,     0, 1 },  /* xn--hyanger-q1a.no */
-  { 39441,     0,     0, 1 },  /* xn--hylandet-54a.no */
-  { 39458,     0,     0, 1 },  /* xn--indery-fya.no */
-  { 39473,     0,     0, 1 },  /* xn--jlster-bya.no */
-  { 39488,     0,     0, 1 },  /* xn--jrpeland-54a.no */
-  { 39505,     0,     0, 1 },  /* xn--karmy-yua.no */
-  { 39519,     0,     0, 1 },  /* xn--kfjord-iua.no */
-  { 39534,     0,     0, 1 },  /* xn--klbu-woa.no */
-  { 39547,     0,     0, 1 },  /* xn--koluokta-7ya57h.no */
-  { 39567,     0,     0, 1 },  /* xn--krager-gya.no */
-  { 39582,     0,     0, 1 },  /* xn--kranghke-b0a.no */
-  { 39599,     0,     0, 1 },  /* xn--krdsherad-m8a.no */
-  { 39617,     0,     0, 1 },  /* xn--krehamn-dxa.no */
-  { 39633,     0,     0, 1 },  /* xn--krjohka-hwab49j.no */
-  { 39653,     0,     0, 1 },  /* xn--ksnes-uua.no */
-  { 39667,     0,     0, 1 },  /* xn--kvfjord-nxa.no */
-  { 39683,     0,     0, 1 },  /* xn--kvitsy-fya.no */
-  { 39698,     0,     0, 1 },  /* xn--kvnangen-k0a.no */
-  { 39715,     0,     0, 1 },  /* xn--l-1fa.no */
-  { 39725,     0,     0, 1 },  /* xn--laheadju-7ya.no */
-  { 39742,     0,     0, 1 },  /* xn--langevg-jxa.no */
-  { 39758,     0,     0, 1 },  /* xn--ldingen-q1a.no */
-  { 39774,     0,     0, 1 },  /* xn--leagaviika-52b.no */
-  { 39793,     0,     0, 1 },  /* xn--lesund-hua.no */
-  { 39808,     0,     0, 1 },  /* xn--lgrd-poac.no */
-  { 39822,     0,     0, 1 },  /* xn--lhppi-xqa.no */
-  { 39836,     0,     0, 1 },  /* xn--linds-pra.no */
-  { 39850,     0,     0, 1 },  /* xn--loabt-0qa.no */
-  { 39864,     0,     0, 1 },  /* xn--lrdal-sra.no */
-  { 39878,     0,     0, 1 },  /* xn--lrenskog-54a.no */
-  { 39895,     0,     0, 1 },  /* xn--lt-liac.no */
-  { 39907,     0,     0, 1 },  /* xn--lten-gra.no */
-  { 39920,     0,     0, 1 },  /* xn--lury-ira.no */
-  { 39933,     0,     0, 1 },  /* xn--mely-ira.no */
-  { 39946,     0,     0, 1 },  /* xn--merker-kua.no */
-  { 39961,     0,     0, 1 },  /* xn--mjndalen-64a.no */
-  { 39978,     0,     0, 1 },  /* xn--mlatvuopmi-s4a.no */
-  { 39997,     0,     0, 1 },  /* xn--mli-tla.no */
-  { 40009,     0,     0, 1 },  /* xn--mlselv-iua.no */
-  { 40024,     0,     0, 1 },  /* xn--moreke-jua.no */
-  { 40039,     0,     0, 1 },  /* xn--mosjen-eya.no */
-  { 40054,     0,     0, 1 },  /* xn--mot-tla.no */
-  { 40066,  7238,     2, 0 },  /* xn--mre-og-romsdal-qqb.no */
-  { 40089,     0,     0, 1 },  /* xn--msy-ula0h.no */
-  { 40103,     0,     0, 1 },  /* xn--mtta-vrjjat-k7af.no */
-  { 40124,     0,     0, 1 },  /* xn--muost-0qa.no */
-  {  1546,     0,     0, 1 },  /* xn--nmesjevuemie-tcba.no */
-  { 40138,     0,     0, 1 },  /* xn--nry-yla5g.no */
-  { 40152,     0,     0, 1 },  /* xn--nttery-byae.no */
-  { 40168,     0,     0, 1 },  /* xn--nvuotna-hwa.no */
-  { 40184,     0,     0, 1 },  /* xn--oppegrd-ixa.no */
-  { 40200,     0,     0, 1 },  /* xn--ostery-fya.no */
-  { 40215,     0,     0, 1 },  /* xn--osyro-wua.no */
-  { 40229,     0,     0, 1 },  /* xn--porsgu-sta26f.no */
-  { 40247,     0,     0, 1 },  /* xn--rady-ira.no */
-  { 11753,     0,     0, 1 },  /* xn--rdal-poa.no */
-  { 40260,     0,     0, 1 },  /* xn--rde-ula.no */
-  {  5665,     0,     0, 1 },  /* xn--rdy-0nab.no */
-  { 40272,     0,     0, 1 },  /* xn--rennesy-v1a.no */
+  { 37331,     0,     0, 1 },  /* davvenjarga.no */
+  { 27931,     0,     0, 1 },  /* davvesiida.no */
+  { 37343,     0,     0, 1 },  /* deatnu.no */
+  { 37350,     0,     0, 1 },  /* dep.no */
+  { 37354,     0,     0, 1 },  /* dielddanuorri.no */
+  { 37368,     0,     0, 1 },  /* divtasvuodna.no */
+  { 37381,     0,     0, 1 },  /* divttasvuotna.no */
+  { 29221,     0,     0, 1 },  /* donna.no */
+  { 37395,     0,     0, 1 },  /* dovre.no */
+  {  5329,     0,     0, 1 },  /* drammen.no */
+  { 37401,     0,     0, 1 },  /* drangedal.no */
+  { 37411,     0,     0, 1 },  /* drobak.no */
+  { 37418,     0,     0, 1 },  /* dyroy.no */
+  { 37424,     0,     0, 1 },  /* egersund.no */
+  { 37436,     0,     0, 1 },  /* eid.no */
+  { 37440,     0,     0, 1 },  /* eidfjord.no */
+  { 37172,     0,     0, 1 },  /* eidsberg.no */
+  { 37449,     0,     0, 1 },  /* eidskog.no */
+  { 37457,     0,     0, 1 },  /* eidsvoll.no */
+  { 37466,     0,     0, 1 },  /* eigersund.no */
+  { 37476,     0,     0, 1 },  /* elverum.no */
+  { 37484,     0,     0, 1 },  /* enebakk.no */
+  { 37492,     0,     0, 1 },  /* engerdal.no */
+  {  5703,     0,     0, 1 },  /* etne.no */
+  { 37501,     0,     0, 1 },  /* etnedal.no */
+  { 37509,     0,     0, 1 },  /* evenassi.no */
+  { 37518,     0,     0, 1 },  /* evenes.no */
+  { 37525,     0,     0, 1 },  /* evje-og-hornnes.no */
+  { 37541,     0,     0, 1 },  /* farsund.no */
+  { 37549,     0,     0, 1 },  /* fauske.no */
+  {  4387,     0,     0, 1 },  /* fedje.no */
+  {  2783,     0,     0, 1 },  /* fet.no */
+  { 37556,     0,     0, 1 },  /* fetsund.no */
+  { 31936,     0,     0, 1 },  /* fhs.no */
+  { 37564,     0,     0, 1 },  /* finnoy.no */
+  { 37571,     0,     0, 1 },  /* fitjar.no */
+  { 37578,     0,     0, 1 },  /* fjaler.no */
+  { 37585,     0,     0, 1 },  /* fjell.no */
+  {  4682,     0,     0, 1 },  /* fla.no */
+  { 37591,     0,     0, 1 },  /* flakstad.no */
+  { 37600,     0,     0, 1 },  /* flatanger.no */
+  { 37610,     0,     0, 1 },  /* flekkefjord.no */
+  { 37622,     0,     0, 1 },  /* flesberg.no */
+  { 37631,     0,     0, 1 },  /* flora.no */
+  { 37637,     0,     0, 1 },  /* floro.no */
+  {  3144,  7584,     1, 1 },  /* fm.no */
+  { 37643,     0,     0, 1 },  /* folkebibl.no */
+  { 37653,     0,     0, 1 },  /* folldal.no */
+  { 37661,     0,     0, 1 },  /* forde.no */
+  { 37667,     0,     0, 1 },  /* forsand.no */
+  { 37675,     0,     0, 1 },  /* fosnes.no */
+  { 37682,     0,     0, 1 },  /* frana.no */
+  { 37688,     0,     0, 1 },  /* fredrikstad.no */
+  { 37700,     0,     0, 1 },  /* frei.no */
+  { 37705,     0,     0, 1 },  /* frogn.no */
+  { 37711,     0,     0, 1 },  /* froland.no */
+  { 37719,     0,     0, 1 },  /* frosta.no */
+  { 37726,     0,     0, 1 },  /* froya.no */
+  { 37732,     0,     0, 1 },  /* fuoisku.no */
+  { 37740,     0,     0, 1 },  /* fuossko.no */
+  { 22765,     0,     0, 1 },  /* fusa.no */
+  { 37748,     0,     0, 1 },  /* fylkesbibl.no */
+  { 37759,     0,     0, 1 },  /* fyresdal.no */
+  { 37768,     0,     0, 1 },  /* gaivuotna.no */
+  { 37778,     0,     0, 1 },  /* galsa.no */
+  { 37784,     0,     0, 1 },  /* gamvik.no */
+  { 37791,     0,     0, 1 },  /* gangaviika.no */
+  { 37802,     0,     0, 1 },  /* gaular.no */
+  { 37809,     0,     0, 1 },  /* gausdal.no */
+  { 37817,     0,     0, 1 },  /* giehtavuoatna.no */
+  { 37831,     0,     0, 1 },  /* gildeskal.no */
+  { 37841,     0,     0, 1 },  /* giske.no */
+  { 37847,     0,     0, 1 },  /* gjemnes.no */
+  { 37855,     0,     0, 1 },  /* gjerdrum.no */
+  { 37864,     0,     0, 1 },  /* gjerstad.no */
+  { 37873,     0,     0, 1 },  /* gjesdal.no */
+  { 37881,     0,     0, 1 },  /* gjovik.no */
+  { 37888,     0,     0, 1 },  /* gloppen.no */
+  { 37896,     0,     0, 1 },  /* gol.no */
+  { 37900,     0,     0, 1 },  /* gran.no */
+  { 37905,     0,     0, 1 },  /* grane.no */
+  {  8265,     0,     0, 1 },  /* granvin.no */
+  { 37911,     0,     0, 1 },  /* gratangen.no */
+  { 37921,     0,     0, 1 },  /* grimstad.no */
+  { 37930,     0,     0, 1 },  /* grong.no */
+  { 37936,     0,     0, 1 },  /* grue.no */
+  { 37941,     0,     0, 1 },  /* gulen.no */
+  { 37947,     0,     0, 1 },  /* guovdageaidnu.no */
+  {  2514,     0,     0, 1 },  /* ha.no */
+  { 37961,     0,     0, 1 },  /* habmer.no */
+  { 37968,     0,     0, 1 },  /* hadsel.no */
+  { 37975,     0,     0, 1 },  /* hagebostad.no */
+  { 37986,     0,     0, 1 },  /* halden.no */
+  { 37993,     0,     0, 1 },  /* halsa.no */
+  { 18867,     0,     0, 1 },  /* hamar.no */
+  { 37999,     0,     0, 1 },  /* hamaroy.no */
+  { 38007,     0,     0, 1 },  /* hammarfeasta.no */
+  { 38020,     0,     0, 1 },  /* hammerfest.no */
+  { 38031,     0,     0, 1 },  /* hapmir.no */
+  { 38038,     0,     0, 1 },  /* haram.no */
+  { 37433,     0,     0, 1 },  /* hareid.no */
+  { 38044,     0,     0, 1 },  /* harstad.no */
+  { 38052,     0,     0, 1 },  /* hasvik.no */
+  { 38059,     0,     0, 1 },  /* hattfjelldal.no */
+  { 38072,     0,     0, 1 },  /* haugesund.no */
+  { 38082,  7586,     3, 0 },  /* hedmark.no */
+  { 38090,     0,     0, 1 },  /* hemne.no */
+  { 38096,     0,     0, 1 },  /* hemnes.no */
+  { 38103,     0,     0, 1 },  /* hemsedal.no */
+  { 38115,     0,     0, 1 },  /* herad.no */
+  { 31847,     0,     0, 1 },  /* hitra.no */
+  { 38121,     0,     0, 1 },  /* hjartdal.no */
+  { 38130,     0,     0, 1 },  /* hjelmeland.no */
+  {  2384,  7584,     1, 1 },  /* hl.no */
+  {  3923,  7584,     1, 1 },  /* hm.no */
+  { 38141,     0,     0, 1 },  /* hobol.no */
+  { 32707,     0,     0, 1 },  /* hof.no */
+  { 38147,     0,     0, 1 },  /* hokksund.no */
+  { 38156,     0,     0, 1 },  /* hol.no */
+  { 38160,     0,     0, 1 },  /* hole.no */
+  { 38165,     0,     0, 1 },  /* holmestrand.no */
+  { 38177,     0,     0, 1 },  /* holtalen.no */
+  { 38186,     0,     0, 1 },  /* honefoss.no */
+  { 16628,  7589,     1, 0 },  /* hordaland.no */
+  { 38195,     0,     0, 1 },  /* hornindal.no */
+  { 38205,     0,     0, 1 },  /* horten.no */
+  { 38212,     0,     0, 1 },  /* hoyanger.no */
+  { 38221,     0,     0, 1 },  /* hoylandet.no */
+  { 38231,     0,     0, 1 },  /* hurdal.no */
+  { 38238,     0,     0, 1 },  /* hurum.no */
+  { 38244,     0,     0, 1 },  /* hvaler.no */
+  { 38251,     0,     0, 1 },  /* hyllestad.no */
+  { 38261,     0,     0, 1 },  /* ibestad.no */
+  { 38269,     0,     0, 1 },  /* idrett.no */
+  { 38276,     0,     0, 1 },  /* inderoy.no */
+  { 38284,     0,     0, 1 },  /* iveland.no */
+  {  3745,     0,     0, 1 },  /* ivgu.no */
+  { 38292,  7584,     1, 1 },  /* jan-mayen.no */
+  { 38302,     0,     0, 1 },  /* jessheim.no */
+  { 38311,     0,     0, 1 },  /* jevnaker.no */
+  { 38320,     0,     0, 1 },  /* jolster.no */
+  { 38328,     0,     0, 1 },  /* jondal.no */
+  { 38335,     0,     0, 1 },  /* jorpeland.no */
+  { 36783,     0,     0, 1 },  /* kafjord.no */
+  { 38345,     0,     0, 1 },  /* karasjohka.no */
+  { 38356,     0,     0, 1 },  /* karasjok.no */
+  { 38365,     0,     0, 1 },  /* karlsoy.no */
+  { 38373,     0,     0, 1 },  /* karmoy.no */
+  { 38380,     0,     0, 1 },  /* kautokeino.no */
+  { 38391,     0,     0, 1 },  /* kirkenes.no */
+  { 38400,     0,     0, 1 },  /* klabu.no */
+  { 11644,     0,     0, 1 },  /* klepp.no */
+  { 38406,     0,     0, 1 },  /* kommune.no */
+  { 38414,     0,     0, 1 },  /* kongsberg.no */
+  { 38424,     0,     0, 1 },  /* kongsvinger.no */
+  { 38436,     0,     0, 1 },  /* kopervik.no */
+  { 38445,     0,     0, 1 },  /* kraanghke.no */
+  { 38455,     0,     0, 1 },  /* kragero.no */
+  { 38463,     0,     0, 1 },  /* kristiansand.no */
+  { 38476,     0,     0, 1 },  /* kristiansund.no */
+  { 38489,     0,     0, 1 },  /* krodsherad.no */
+  { 38500,     0,     0, 1 },  /* krokstadelva.no */
+  { 38513,     0,     0, 1 },  /* kvafjord.no */
+  { 38522,     0,     0, 1 },  /* kvalsund.no */
+  { 38531,     0,     0, 1 },  /* kvam.no */
+  { 38536,     0,     0, 1 },  /* kvanangen.no */
+  { 38546,     0,     0, 1 },  /* kvinesdal.no */
+  { 38556,     0,     0, 1 },  /* kvinnherad.no */
+  { 38567,     0,     0, 1 },  /* kviteseid.no */
+  { 38577,     0,     0, 1 },  /* kvitsoy.no */
+  { 38585,     0,     0, 1 },  /* laakesvuemie.no */
+  { 38598,     0,     0, 1 },  /* lahppi.no */
+  { 38605,     0,     0, 1 },  /* langevag.no */
+  { 36910,     0,     0, 1 },  /* lardal.no */
+  { 38614,     0,     0, 1 },  /* larvik.no */
+  { 38621,     0,     0, 1 },  /* lavagis.no */
+  { 38629,     0,     0, 1 },  /* lavangen.no */
+  { 38638,     0,     0, 1 },  /* leangaviika.no */
+  { 38650,     0,     0, 1 },  /* lebesby.no */
+  { 38658,     0,     0, 1 },  /* leikanger.no */
+  { 38668,     0,     0, 1 },  /* leirfjord.no */
+  { 38678,     0,     0, 1 },  /* leirvik.no */
+  { 38691,     0,     0, 1 },  /* leka.no */
+  { 38696,     0,     0, 1 },  /* leksvik.no */
+  { 38704,     0,     0, 1 },  /* lenvik.no */
+  { 38711,     0,     0, 1 },  /* lerdal.no */
+  { 38718,     0,     0, 1 },  /* lesja.no */
+  { 38724,     0,     0, 1 },  /* levanger.no */
+  {  2733,     0,     0, 1 },  /* lier.no */
+  { 38733,     0,     0, 1 },  /* lierne.no */
+  { 38740,     0,     0, 1 },  /* lillehammer.no */
+  { 38752,     0,     0, 1 },  /* lillesand.no */
+  { 38762,     0,     0, 1 },  /* lindas.no */
+  { 38769,     0,     0, 1 },  /* lindesnes.no */
+  { 38779,     0,     0, 1 },  /* loabat.no */
+  { 38786,     0,     0, 1 },  /* lodingen.no */
+  { 18813,     0,     0, 1 },  /* lom.no */
+  { 38795,     0,     0, 1 },  /* loppa.no */
+  { 38801,     0,     0, 1 },  /* lorenskog.no */
+  { 38811,     0,     0, 1 },  /* loten.no */
+  { 38819,     0,     0, 1 },  /* lund.no */
+  { 38824,     0,     0, 1 },  /* lunner.no */
+  { 38831,     0,     0, 1 },  /* luroy.no */
+  { 36295,     0,     0, 1 },  /* luster.no */
+  { 38837,     0,     0, 1 },  /* lyngdal.no */
+  { 38845,     0,     0, 1 },  /* lyngen.no */
+  { 38852,     0,     0, 1 },  /* malatvuopmi.no */
+  {  5109,     0,     0, 1 },  /* malselv.no */
+  { 38864,     0,     0, 1 },  /* malvik.no */
+  { 38871,     0,     0, 1 },  /* mandal.no */
+  { 38878,     0,     0, 1 },  /* marker.no */
+  { 38885,     0,     0, 1 },  /* marnardal.no */
+  { 38895,     0,     0, 1 },  /* masfjorden.no */
+  {  7360,     0,     0, 1 },  /* masoy.no */
+  { 38906,     0,     0, 1 },  /* matta-varjjat.no */
+  { 38134,     0,     0, 1 },  /* meland.no */
+  { 38920,     0,     0, 1 },  /* meldal.no */
+  { 38927,     0,     0, 1 },  /* melhus.no */
+  { 38934,     0,     0, 1 },  /* meloy.no */
+  { 38940,     0,     0, 1 },  /* meraker.no */
+  { 38948,     0,     0, 1 },  /* midsund.no */
+  { 38956,     0,     0, 1 },  /* midtre-gauldal.no */
+  {  4157,     0,     0, 1 },  /* mil.no */
+  { 38971,     0,     0, 1 },  /* mjondalen.no */
+  { 38981,     0,     0, 1 },  /* mo-i-rana.no */
+  { 38991,     0,     0, 1 },  /* moareke.no */
+  { 38999,     0,     0, 1 },  /* modalen.no */
+  { 39007,     0,     0, 1 },  /* modum.no */
+  { 39013,     0,     0, 1 },  /* molde.no */
+  { 39019,  7590,     2, 0 },  /* more-og-romsdal.no */
+  { 39035,     0,     0, 1 },  /* mosjoen.no */
+  { 39043,     0,     0, 1 },  /* moskenes.no */
+  { 19442,     0,     0, 1 },  /* moss.no */
+  { 39052,     0,     0, 1 },  /* mosvik.no */
+  {  5558,  7584,     1, 1 },  /* mr.no */
+  { 39059,     0,     0, 1 },  /* muosat.no */
+  {  5596,     0,     0, 1 },  /* museum.no */
+  { 39066,     0,     0, 1 },  /* naamesjevuemie.no */
+  { 39081,     0,     0, 1 },  /* namdalseid.no */
+  { 39092,     0,     0, 1 },  /* namsos.no */
+  { 39099,     0,     0, 1 },  /* namsskogan.no */
+  { 39110,     0,     0, 1 },  /* nannestad.no */
+  { 39120,     0,     0, 1 },  /* naroy.no */
+  { 39126,     0,     0, 1 },  /* narviika.no */
+  { 39135,     0,     0, 1 },  /* narvik.no */
+  { 39142,     0,     0, 1 },  /* naustdal.no */
+  { 39151,     0,     0, 1 },  /* navuotna.no */
+  { 39160,     0,     0, 1 },  /* nedre-eiker.no */
+  { 39172,     0,     0, 1 },  /* nesna.no */
+  { 39178,     0,     0, 1 },  /* nesodden.no */
+  { 39187,     0,     0, 1 },  /* nesoddtangen.no */
+  { 39200,     0,     0, 1 },  /* nesseby.no */
+  { 39208,     0,     0, 1 },  /* nesset.no */
+  { 39215,     0,     0, 1 },  /* nissedal.no */
+  { 39224,     0,     0, 1 },  /* nittedal.no */
+  {  1072,  7584,     1, 1 },  /* nl.no */
+  { 39233,     0,     0, 1 },  /* nord-aurdal.no */
+  { 39245,     0,     0, 1 },  /* nord-fron.no */
+  { 39255,     0,     0, 1 },  /* nord-odal.no */
+  { 39265,     0,     0, 1 },  /* norddal.no */
+  { 39273,     0,     0, 1 },  /* nordkapp.no */
+  { 39282,  7592,     4, 0 },  /* nordland.no */
+  { 39291,     0,     0, 1 },  /* nordre-land.no */
+  { 39303,     0,     0, 1 },  /* nordreisa.no */
+  { 39313,     0,     0, 1 },  /* nore-og-uvdal.no */
+  { 39327,     0,     0, 1 },  /* notodden.no */
+  { 39336,     0,     0, 1 },  /* notteroy.no */
+  {    97,  7584,     1, 1 },  /* nt.no */
+  { 39345,     0,     0, 1 },  /* odda.no */
+  {  6399,  7584,     1, 1 },  /* of.no */
+  { 39350,     0,     0, 1 },  /* oksnes.no */
+  {   452,  7584,     1, 1 },  /* ol.no */
+  { 39357,     0,     0, 1 },  /* omasvuotna.no */
+  { 39368,     0,     0, 1 },  /* oppdal.no */
+  { 39375,     0,     0, 1 },  /* oppegard.no */
+  { 39384,     0,     0, 1 },  /* orkanger.no */
+  { 39393,     0,     0, 1 },  /* orkdal.no */
+  {  4747,     0,     0, 1 },  /* orland.no */
+  { 39400,     0,     0, 1 },  /* orskog.no */
+  { 39407,     0,     0, 1 },  /* orsta.no */
+  { 28608,     0,     0, 1 },  /* osen.no */
+  { 39413,  7584,     1, 1 },  /* oslo.no */
+  { 39418,     0,     0, 1 },  /* osoyro.no */
+  { 39425,     0,     0, 1 },  /* osteroy.no */
+  { 39433,  7596,     1, 0 },  /* ostfold.no */
+  { 39441,     0,     0, 1 },  /* ostre-toten.no */
+  { 39453,     0,     0, 1 },  /* overhalla.no */
+  { 39463,     0,     0, 1 },  /* ovre-eiker.no */
+  { 39474,     0,     0, 1 },  /* oyer.no */
+  { 39479,     0,     0, 1 },  /* oygarden.no */
+  { 39488,     0,     0, 1 },  /* oystre-slidre.no */
+  { 39502,     0,     0, 1 },  /* porsanger.no */
+  { 39512,     0,     0, 1 },  /* porsangu.no */
+  { 39521,     0,     0, 1 },  /* porsgrunn.no */
+  { 11594,     0,     0, 1 },  /* priv.no */
+  {  7976,     0,     0, 1 },  /* rade.no */
+  { 39531,     0,     0, 1 },  /* radoy.no */
+  { 39537,     0,     0, 1 },  /* rahkkeravju.no */
+  { 39549,     0,     0, 1 },  /* raholt.no */
+  { 39556,     0,     0, 1 },  /* raisa.no */
+  { 39562,     0,     0, 1 },  /* rakkestad.no */
+  { 39572,     0,     0, 1 },  /* ralingen.no */
+  { 37683,     0,     0, 1 },  /* rana.no */
+  { 39581,     0,     0, 1 },  /* randaberg.no */
+  { 39591,     0,     0, 1 },  /* rauma.no */
+  { 39597,     0,     0, 1 },  /* rendalen.no */
+  { 39606,     0,     0, 1 },  /* rennebu.no */
+  { 39614,     0,     0, 1 },  /* rennesoy.no */
+  { 39623,     0,     0, 1 },  /* rindal.no */
+  { 39630,     0,     0, 1 },  /* ringebu.no */
+  { 39638,     0,     0, 1 },  /* ringerike.no */
+  { 39648,     0,     0, 1 },  /* ringsaker.no */
+  { 39658,     0,     0, 1 },  /* risor.no */
+  { 39664,     0,     0, 1 },  /* rissa.no */
+  {  3250,  7584,     1, 1 },  /* rl.no */
+  { 39670,     0,     0, 1 },  /* roan.no */
+  { 39675,     0,     0, 1 },  /* rodoy.no */
+  { 39681,     0,     0, 1 },  /* rollag.no */
+  { 39689,     0,     0, 1 },  /* romsa.no */
+  { 39695,     0,     0, 1 },  /* romskog.no */
+  { 39703,     0,     0, 1 },  /* roros.no */
+  { 39709,     0,     0, 1 },  /* rost.no */
+  { 39714,     0,     0, 1 },  /* royken.no */
+  { 39721,     0,     0, 1 },  /* royrvik.no */
+  { 39729,     0,     0, 1 },  /* ruovat.no */
+  { 39736,     0,     0, 1 },  /* rygge.no */
+  { 39742,     0,     0, 1 },  /* salangen.no */
+  {  2790,     0,     0, 1 },  /* salat.no */
+  { 39751,     0,     0, 1 },  /* saltdal.no */
+  { 39759,     0,     0, 1 },  /* samnanger.no */
+  { 39769,     0,     0, 1 },  /* sandefjord.no */
+  { 39780,     0,     0, 1 },  /* sandnes.no */
+  { 39788,     0,     0, 1 },  /* sandnessjoen.no */
+  { 36903,     0,     0, 1 },  /* sandoy.no */
+  {  6020,     0,     0, 1 },  /* sarpsborg.no */
+  { 39801,     0,     0, 1 },  /* sauda.no */
+  { 38112,     0,     0, 1 },  /* sauherad.no */
+  { 32459,     0,     0, 1 },  /* sel.no */
+  { 39807,     0,     0, 1 },  /* selbu.no */
+  { 39813,     0,     0, 1 },  /* selje.no */
+  { 39819,     0,     0, 1 },  /* seljord.no */
+  { 11701,  7584,     1, 1 },  /* sf.no */
+  { 39827,     0,     0, 1 },  /* siellak.no */
+  { 39835,     0,     0, 1 },  /* sigdal.no */
+  { 39842,     0,     0, 1 },  /* siljan.no */
+  { 39849,     0,     0, 1 },  /* sirdal.no */
+  { 39856,     0,     0, 1 },  /* skanit.no */
+  { 39863,     0,     0, 1 },  /* skanland.no */
+  { 39872,     0,     0, 1 },  /* skaun.no */
+  { 39878,     0,     0, 1 },  /* skedsmo.no */
+  { 39886,     0,     0, 1 },  /* skedsmokorset.no */
+  {  4550,     0,     0, 1 },  /* ski.no */
+  { 39900,     0,     0, 1 },  /* skien.no */
+  { 39906,     0,     0, 1 },  /* skierva.no */
+  {  8218,     0,     0, 1 },  /* skiptvet.no */
+  { 39914,     0,     0, 1 },  /* skjak.no */
+  { 39920,     0,     0, 1 },  /* skjervoy.no */
+  { 39929,     0,     0, 1 },  /* skodje.no */
+  { 39936,     0,     0, 1 },  /* slattum.no */
+  { 39944,     0,     0, 1 },  /* smola.no */
+  { 39950,     0,     0, 1 },  /* snaase.no */
+  { 39957,     0,     0, 1 },  /* snasa.no */
+  { 39963,     0,     0, 1 },  /* snillfjord.no */
+  { 39974,     0,     0, 1 },  /* snoasa.no */
+  { 39981,     0,     0, 1 },  /* sogndal.no */
+  { 39989,     0,     0, 1 },  /* sogne.no */
+  { 39995,     0,     0, 1 },  /* sokndal.no */
+  { 40003,     0,     0, 1 },  /* sola.no */
+  { 38817,     0,     0, 1 },  /* solund.no */
+  { 40008,     0,     0, 1 },  /* somna.no */
+  { 40014,     0,     0, 1 },  /* sondre-land.no */
+  { 40026,     0,     0, 1 },  /* songdalen.no */
+  { 40036,     0,     0, 1 },  /* sor-aurdal.no */
+  { 40047,     0,     0, 1 },  /* sor-fron.no */
+  { 40056,     0,     0, 1 },  /* sor-odal.no */
+  { 40065,     0,     0, 1 },  /* sor-varanger.no */
+  { 40078,     0,     0, 1 },  /* sorfold.no */
+  { 40086,     0,     0, 1 },  /* sorreisa.no */
+  { 40095,     0,     0, 1 },  /* sortland.no */
+  { 40104,     0,     0, 1 },  /* sorum.no */
+  { 40110,     0,     0, 1 },  /* spjelkavik.no */
+  { 40121,     0,     0, 1 },  /* spydeberg.no */
+  {   619,  7584,     1, 1 },  /* st.no */
+  { 40131,     0,     0, 1 },  /* stange.no */
+  { 40138,     0,     0, 1 },  /* stat.no */
+  { 40143,     0,     0, 1 },  /* stathelle.no */
+  { 40153,     0,     0, 1 },  /* stavanger.no */
+  { 40163,     0,     0, 1 },  /* stavern.no */
+  { 40171,     0,     0, 1 },  /* steigen.no */
+  { 40179,     0,     0, 1 },  /* steinkjer.no */
+  { 40189,     0,     0, 1 },  /* stjordal.no */
+  { 40198,     0,     0, 1 },  /* stjordalshalsen.no */
+  { 40214,     0,     0, 1 },  /* stokke.no */
+  { 40221,     0,     0, 1 },  /* stor-elvdal.no */
+  { 40233,     0,     0, 1 },  /* stord.no */
+  { 40239,     0,     0, 1 },  /* stordal.no */
+  { 40247,     0,     0, 1 },  /* storfjord.no */
+  { 37090,     0,     0, 1 },  /* strand.no */
+  { 40257,     0,     0, 1 },  /* stranda.no */
+  { 12850,     0,     0, 1 },  /* stryn.no */
+  { 40265,     0,     0, 1 },  /* sula.no */
+  { 40270,     0,     0, 1 },  /* suldal.no */
+  { 36841,     0,     0, 1 },  /* sund.no */
+  { 40277,     0,     0, 1 },  /* sunndal.no */
+  { 40285,     0,     0, 1 },  /* surnadal.no */
+  { 40294,  7584,     1, 1 },  /* svalbard.no */
+  { 40303,     0,     0, 1 },  /* sveio.no */
+  { 40309,     0,     0, 1 },  /* svelvik.no */
+  { 40317,     0,     0, 1 },  /* sykkylven.no */
+  { 28310,     0,     0, 1 },  /* tana.no */
+  { 40327,     0,     0, 1 },  /* tananger.no */
+  { 40336,  7597,     2, 0 },  /* telemark.no */
+  {  7220,     0,     0, 1 },  /* time.no */
+  { 40345,     0,     0, 1 },  /* tingvoll.no */
+  { 40354,     0,     0, 1 },  /* tinn.no */
+  { 40359,     0,     0, 1 },  /* tjeldsund.no */
+  { 40369,     0,     0, 1 },  /* tjome.no */
+  {  7890,  7584,     1, 1 },  /* tm.no */
+  { 40215,     0,     0, 1 },  /* tokke.no */
+  { 40375,     0,     0, 1 },  /* tolga.no */
+  { 40381,     0,     0, 1 },  /* tonsberg.no */
+  { 40390,     0,     0, 1 },  /* torsken.no */
+  {  3281,  7584,     1, 1 },  /* tr.no */
+  { 40398,     0,     0, 1 },  /* trana.no */
+  { 40404,     0,     0, 1 },  /* tranby.no */
+  { 40411,     0,     0, 1 },  /* tranoy.no */
+  { 40418,     0,     0, 1 },  /* troandin.no */
+  { 40427,     0,     0, 1 },  /* trogstad.no */
+  { 39688,     0,     0, 1 },  /* tromsa.no */
+  { 40436,     0,     0, 1 },  /* tromso.no */
+  { 40443,     0,     0, 1 },  /* trondheim.no */
+  { 40453,     0,     0, 1 },  /* trysil.no */
+  { 40460,     0,     0, 1 },  /* tvedestrand.no */
+  { 40472,     0,     0, 1 },  /* tydal.no */
+  { 40478,     0,     0, 1 },  /* tynset.no */
+  { 40485,     0,     0, 1 },  /* tysfjord.no */
+  { 40494,     0,     0, 1 },  /* tysnes.no */
+  { 40501,     0,     0, 1 },  /* tysvar.no */
+  { 40508,     0,     0, 1 },  /* ullensaker.no */
+  { 40519,     0,     0, 1 },  /* ullensvang.no */
+  { 40530,     0,     0, 1 },  /* ulvik.no */
+  { 40536,     0,     0, 1 },  /* unjarga.no */
+  { 40544,     0,     0, 1 },  /* utsira.no */
+  {   834,  7584,     1, 1 },  /* va.no */
+  { 40551,     0,     0, 1 },  /* vaapste.no */
+  { 40559,     0,     0, 1 },  /* vadso.no */
+  { 40565,     0,     0, 1 },  /* vaga.no */
+  { 40570,     0,     0, 1 },  /* vagan.no */
+  { 40576,     0,     0, 1 },  /* vagsoy.no */
+  { 40583,     0,     0, 1 },  /* vaksdal.no */
+  { 40591,     0,     0, 1 },  /* valle.no */
+  { 40525,     0,     0, 1 },  /* vang.no */
+  { 40597,     0,     0, 1 },  /* vanylven.no */
+  { 40606,     0,     0, 1 },  /* vardo.no */
+  { 40612,     0,     0, 1 },  /* varggat.no */
+  { 40620,     0,     0, 1 },  /* varoy.no */
+  { 40626,     0,     0, 1 },  /* vefsn.no */
+  { 40632,     0,     0, 1 },  /* vega.no */
+  { 40637,     0,     0, 1 },  /* vegarshei.no */
+  { 40647,     0,     0, 1 },  /* vennesla.no */
+  { 40656,     0,     0, 1 },  /* verdal.no */
+  { 40663,     0,     0, 1 },  /* verran.no */
+  { 40670,     0,     0, 1 },  /* vestby.no */
+  { 40677,  7599,     1, 0 },  /* vestfold.no */
+  { 40686,     0,     0, 1 },  /* vestnes.no */
+  { 40694,     0,     0, 1 },  /* vestre-slidre.no */
+  { 40708,     0,     0, 1 },  /* vestre-toten.no */
+  { 40721,     0,     0, 1 },  /* vestvagoy.no */
+  { 40731,     0,     0, 1 },  /* vevelstad.no */
+  {  9751,  7584,     1, 1 },  /* vf.no */
+  {  3738,     0,     0, 1 },  /* vgs.no */
+  {  6901,     0,     0, 1 },  /* vik.no */
+  { 40741,     0,     0, 1 },  /* vikna.no */
+  { 40747,     0,     0, 1 },  /* vindafjord.no */
+  { 40758,     0,     0, 1 },  /* voagat.no */
+  { 40765,     0,     0, 1 },  /* volda.no */
+  { 40771,     0,     0, 1 },  /* voss.no */
+  { 40776,     0,     0, 1 },  /* vossevangen.no */
+  { 40788,     0,     0, 1 },  /* xn--andy-ira.no */
+  { 40801,     0,     0, 1 },  /* xn--asky-ira.no */
+  { 40814,     0,     0, 1 },  /* xn--aurskog-hland-jnb.no */
+  { 40836,     0,     0, 1 },  /* xn--avery-yua.no */
+  { 40850,     0,     0, 1 },  /* xn--bdddj-mrabd.no */
+  { 40866,     0,     0, 1 },  /* xn--bearalvhki-y4a.no */
+  { 40885,     0,     0, 1 },  /* xn--berlevg-jxa.no */
+  { 40901,     0,     0, 1 },  /* xn--bhcavuotna-s4a.no */
+  { 40920,     0,     0, 1 },  /* xn--bhccavuotna-k7a.no */
+  { 40940,     0,     0, 1 },  /* xn--bidr-5nac.no */
+  {  6477,     0,     0, 1 },  /* xn--bievt-0qa.no */
+  { 40954,     0,     0, 1 },  /* xn--bjarky-fya.no */
+  { 40969,     0,     0, 1 },  /* xn--bjddar-pta.no */
+  { 40984,     0,     0, 1 },  /* xn--blt-elab.no */
+  { 40997,     0,     0, 1 },  /* xn--bmlo-gra.no */
+  { 41010,     0,     0, 1 },  /* xn--bod-2na.no */
+  { 41022,     0,     0, 1 },  /* xn--brnny-wuac.no */
+  { 41037,     0,     0, 1 },  /* xn--brnnysund-m8ac.no */
+  { 41056,     0,     0, 1 },  /* xn--brum-voa.no */
+  { 41069,     0,     0, 1 },  /* xn--btsfjord-9za.no */
+  { 41086,     0,     0, 1 },  /* xn--davvenjrga-y4a.no */
+  { 41105,     0,     0, 1 },  /* xn--dnna-gra.no */
+  { 41118,     0,     0, 1 },  /* xn--drbak-wua.no */
+  { 41132,     0,     0, 1 },  /* xn--dyry-ira.no */
+  { 41145,     0,     0, 1 },  /* xn--eveni-0qa01ga.no */
+  { 41163,     0,     0, 1 },  /* xn--finny-yua.no */
+  { 41177,     0,     0, 1 },  /* xn--fjord-lra.no */
+  { 41191,     0,     0, 1 },  /* xn--fl-zia.no */
+  { 41202,     0,     0, 1 },  /* xn--flor-jra.no */
+  { 41215,     0,     0, 1 },  /* xn--frde-gra.no */
+  { 41228,     0,     0, 1 },  /* xn--frna-woa.no */
+  { 41241,     0,     0, 1 },  /* xn--frya-hra.no */
+  { 41254,     0,     0, 1 },  /* xn--ggaviika-8ya47h.no */
+  { 41274,     0,     0, 1 },  /* xn--gildeskl-g0a.no */
+  { 41291,     0,     0, 1 },  /* xn--givuotna-8ya.no */
+  { 41308,     0,     0, 1 },  /* xn--gjvik-wua.no */
+  { 41322,     0,     0, 1 },  /* xn--gls-elac.no */
+  { 41335,     0,     0, 1 },  /* xn--h-2fa.no */
+  { 41345,     0,     0, 1 },  /* xn--hbmer-xqa.no */
+  { 41359,     0,     0, 1 },  /* xn--hcesuolo-7ya35b.no */
+  { 41379,     0,     0, 1 },  /* xn--hgebostad-g3a.no */
+  { 41397,     0,     0, 1 },  /* xn--hmmrfeasta-s4ac.no */
+  { 41417,     0,     0, 1 },  /* xn--hnefoss-q1a.no */
+  { 41433,     0,     0, 1 },  /* xn--hobl-ira.no */
+  { 41446,     0,     0, 1 },  /* xn--holtlen-hxa.no */
+  { 41462,     0,     0, 1 },  /* xn--hpmir-xqa.no */
+  { 41476,     0,     0, 1 },  /* xn--hyanger-q1a.no */
+  { 41492,     0,     0, 1 },  /* xn--hylandet-54a.no */
+  { 41509,     0,     0, 1 },  /* xn--indery-fya.no */
+  { 41524,     0,     0, 1 },  /* xn--jlster-bya.no */
+  { 41539,     0,     0, 1 },  /* xn--jrpeland-54a.no */
+  { 41556,     0,     0, 1 },  /* xn--karmy-yua.no */
+  { 41570,     0,     0, 1 },  /* xn--kfjord-iua.no */
+  { 41585,     0,     0, 1 },  /* xn--klbu-woa.no */
+  { 41598,     0,     0, 1 },  /* xn--koluokta-7ya57h.no */
+  { 41618,     0,     0, 1 },  /* xn--krager-gya.no */
+  { 41633,     0,     0, 1 },  /* xn--kranghke-b0a.no */
+  { 41650,     0,     0, 1 },  /* xn--krdsherad-m8a.no */
+  { 41668,     0,     0, 1 },  /* xn--krehamn-dxa.no */
+  { 41684,     0,     0, 1 },  /* xn--krjohka-hwab49j.no */
+  { 41704,     0,     0, 1 },  /* xn--ksnes-uua.no */
+  { 41718,     0,     0, 1 },  /* xn--kvfjord-nxa.no */
+  { 41734,     0,     0, 1 },  /* xn--kvitsy-fya.no */
+  { 41749,     0,     0, 1 },  /* xn--kvnangen-k0a.no */
+  { 41766,     0,     0, 1 },  /* xn--l-1fa.no */
+  { 41776,     0,     0, 1 },  /* xn--laheadju-7ya.no */
+  { 41793,     0,     0, 1 },  /* xn--langevg-jxa.no */
+  { 41809,     0,     0, 1 },  /* xn--ldingen-q1a.no */
+  { 41825,     0,     0, 1 },  /* xn--leagaviika-52b.no */
+  { 41844,     0,     0, 1 },  /* xn--lesund-hua.no */
+  { 41859,     0,     0, 1 },  /* xn--lgrd-poac.no */
+  { 41873,     0,     0, 1 },  /* xn--lhppi-xqa.no */
+  { 41887,     0,     0, 1 },  /* xn--linds-pra.no */
+  { 41901,     0,     0, 1 },  /* xn--loabt-0qa.no */
+  { 41915,     0,     0, 1 },  /* xn--lrdal-sra.no */
+  { 41929,     0,     0, 1 },  /* xn--lrenskog-54a.no */
+  { 41946,     0,     0, 1 },  /* xn--lt-liac.no */
+  { 41958,     0,     0, 1 },  /* xn--lten-gra.no */
+  { 41971,     0,     0, 1 },  /* xn--lury-ira.no */
+  { 41984,     0,     0, 1 },  /* xn--mely-ira.no */
+  { 41997,     0,     0, 1 },  /* xn--merker-kua.no */
+  { 42012,     0,     0, 1 },  /* xn--mjndalen-64a.no */
+  { 42029,     0,     0, 1 },  /* xn--mlatvuopmi-s4a.no */
+  { 42048,     0,     0, 1 },  /* xn--mli-tla.no */
+  { 42060,     0,     0, 1 },  /* xn--mlselv-iua.no */
+  { 42075,     0,     0, 1 },  /* xn--moreke-jua.no */
+  { 42090,     0,     0, 1 },  /* xn--mosjen-eya.no */
+  { 42105,     0,     0, 1 },  /* xn--mot-tla.no */
+  { 42117,  7600,     2, 0 },  /* xn--mre-og-romsdal-qqb.no */
+  { 42140,     0,     0, 1 },  /* xn--msy-ula0h.no */
+  { 42154,     0,     0, 1 },  /* xn--mtta-vrjjat-k7af.no */
+  { 42175,     0,     0, 1 },  /* xn--muost-0qa.no */
+  {  1539,     0,     0, 1 },  /* xn--nmesjevuemie-tcba.no */
+  { 42189,     0,     0, 1 },  /* xn--nry-yla5g.no */
+  { 42203,     0,     0, 1 },  /* xn--nttery-byae.no */
+  { 42219,     0,     0, 1 },  /* xn--nvuotna-hwa.no */
+  { 42235,     0,     0, 1 },  /* xn--oppegrd-ixa.no */
+  { 42251,     0,     0, 1 },  /* xn--ostery-fya.no */
+  { 42266,     0,     0, 1 },  /* xn--osyro-wua.no */
+  { 42280,     0,     0, 1 },  /* xn--porsgu-sta26f.no */
+  { 42298,     0,     0, 1 },  /* xn--rady-ira.no */
+  { 12386,     0,     0, 1 },  /* xn--rdal-poa.no */
+  { 42311,     0,     0, 1 },  /* xn--rde-ula.no */
+  {  5642,     0,     0, 1 },  /* xn--rdy-0nab.no */
+  { 42323,     0,     0, 1 },  /* xn--rennesy-v1a.no */
   {   175,     0,     0, 1 },  /* xn--rhkkervju-01af.no */
-  { 40288,     0,     0, 1 },  /* xn--rholt-mra.no */
-  { 40302,     0,     0, 1 },  /* xn--risa-5na.no */
-  { 40315,     0,     0, 1 },  /* xn--risr-ira.no */
-  { 40328,     0,     0, 1 },  /* xn--rland-uua.no */
-  { 40342,     0,     0, 1 },  /* xn--rlingen-mxa.no */
-  { 40358,     0,     0, 1 },  /* xn--rmskog-bya.no */
-  { 40373,     0,     0, 1 },  /* xn--rros-gra.no */
-  { 40386,     0,     0, 1 },  /* xn--rskog-uua.no */
-  { 40400,     0,     0, 1 },  /* xn--rst-0na.no */
-  { 40412,     0,     0, 1 },  /* xn--rsta-fra.no */
-  { 40425,     0,     0, 1 },  /* xn--ryken-vua.no */
-  { 40439,     0,     0, 1 },  /* xn--ryrvik-bya.no */
-  { 40454,     0,     0, 1 },  /* xn--s-1fa.no */
-  {  3409,     0,     0, 1 },  /* xn--sandnessjen-ogb.no */
-  { 40464,     0,     0, 1 },  /* xn--sandy-yua.no */
-  { 40478,     0,     0, 1 },  /* xn--seral-lra.no */
-  { 40492,     0,     0, 1 },  /* xn--sgne-gra.no */
-  { 40505,     0,     0, 1 },  /* xn--skierv-uta.no */
-  { 40520,     0,     0, 1 },  /* xn--skjervy-v1a.no */
-  { 40536,     0,     0, 1 },  /* xn--skjk-soa.no */
-  { 40549,     0,     0, 1 },  /* xn--sknit-yqa.no */
-  { 40563,     0,     0, 1 },  /* xn--sknland-fxa.no */
-  { 40579,     0,     0, 1 },  /* xn--slat-5na.no */
-  { 40592,     0,     0, 1 },  /* xn--slt-elab.no */
-  { 40605,     0,     0, 1 },  /* xn--smla-hra.no */
-  { 40618,     0,     0, 1 },  /* xn--smna-gra.no */
-  { 40631,     0,     0, 1 },  /* xn--snase-nra.no */
-  { 40645,     0,     0, 1 },  /* xn--sndre-land-0cb.no */
-  { 40664,     0,     0, 1 },  /* xn--snes-poa.no */
-  { 40677,     0,     0, 1 },  /* xn--snsa-roa.no */
-  { 40690,     0,     0, 1 },  /* xn--sr-aurdal-l8a.no */
-  { 40708,     0,     0, 1 },  /* xn--sr-fron-q1a.no */
-  { 40724,     0,     0, 1 },  /* xn--sr-odal-q1a.no */
-  { 40740,     0,     0, 1 },  /* xn--sr-varanger-ggb.no */
-  { 40760,     0,     0, 1 },  /* xn--srfold-bya.no */
-  { 40775,     0,     0, 1 },  /* xn--srreisa-q1a.no */
-  { 40791,     0,     0, 1 },  /* xn--srum-gra.no */
-  { 40804,  7240,     1, 0 },  /* xn--stfold-9xa.no */
-  { 40819,     0,     0, 1 },  /* xn--stjrdal-s1a.no */
-  { 40835,     0,     0, 1 },  /* xn--stjrdalshalsen-sqb.no */
-  { 40858,     0,     0, 1 },  /* xn--stre-toten-zcb.no */
-  { 40877,     0,     0, 1 },  /* xn--tjme-hra.no */
-  { 40890,     0,     0, 1 },  /* xn--tnsberg-q1a.no */
-  { 40906,     0,     0, 1 },  /* xn--trany-yua.no */
-  { 40920,     0,     0, 1 },  /* xn--trgstad-r1a.no */
-  { 40936,     0,     0, 1 },  /* xn--trna-woa.no */
-  { 40949,     0,     0, 1 },  /* xn--troms-zua.no */
-  { 40963,     0,     0, 1 },  /* xn--tysvr-vra.no */
-  { 40977,     0,     0, 1 },  /* xn--unjrga-rta.no */
-  { 40992,     0,     0, 1 },  /* xn--vads-jra.no */
-  { 41005,     0,     0, 1 },  /* xn--vard-jra.no */
-  { 41018,     0,     0, 1 },  /* xn--vegrshei-c0a.no */
-  { 41035,     0,     0, 1 },  /* xn--vestvgy-ixa6o.no */
-  { 41053,     0,     0, 1 },  /* xn--vg-yiab.no */
-  { 41065,     0,     0, 1 },  /* xn--vgan-qoa.no */
-  { 41078,     0,     0, 1 },  /* xn--vgsy-qoa0j.no */
-  { 41093,     0,     0, 1 },  /* xn--vre-eiker-k8a.no */
-  { 41111,     0,     0, 1 },  /* xn--vrggt-xqad.no */
-  { 41126,     0,     0, 1 },  /* xn--vry-yla5g.no */
-  { 41140,     0,     0, 1 },  /* xn--yer-zna.no */
-  { 41152,     0,     0, 1 },  /* xn--ygarden-p1a.no */
-  { 41168,     0,     0, 1 },  /* xn--ystre-slidre-ujb.no */
+  { 42339,     0,     0, 1 },  /* xn--rholt-mra.no */
+  { 42353,     0,     0, 1 },  /* xn--risa-5na.no */
+  { 42366,     0,     0, 1 },  /* xn--risr-ira.no */
+  { 42379,     0,     0, 1 },  /* xn--rland-uua.no */
+  { 42393,     0,     0, 1 },  /* xn--rlingen-mxa.no */
+  { 42409,     0,     0, 1 },  /* xn--rmskog-bya.no */
+  { 42424,     0,     0, 1 },  /* xn--rros-gra.no */
+  { 42437,     0,     0, 1 },  /* xn--rskog-uua.no */
+  { 42451,     0,     0, 1 },  /* xn--rst-0na.no */
+  { 42463,     0,     0, 1 },  /* xn--rsta-fra.no */
+  { 42476,     0,     0, 1 },  /* xn--ryken-vua.no */
+  { 42490,     0,     0, 1 },  /* xn--ryrvik-bya.no */
+  { 42505,     0,     0, 1 },  /* xn--s-1fa.no */
+  {  3403,     0,     0, 1 },  /* xn--sandnessjen-ogb.no */
+  { 42515,     0,     0, 1 },  /* xn--sandy-yua.no */
+  { 42529,     0,     0, 1 },  /* xn--seral-lra.no */
+  { 42543,     0,     0, 1 },  /* xn--sgne-gra.no */
+  { 42556,     0,     0, 1 },  /* xn--skierv-uta.no */
+  { 42571,     0,     0, 1 },  /* xn--skjervy-v1a.no */
+  { 42587,     0,     0, 1 },  /* xn--skjk-soa.no */
+  { 42600,     0,     0, 1 },  /* xn--sknit-yqa.no */
+  { 42614,     0,     0, 1 },  /* xn--sknland-fxa.no */
+  { 42630,     0,     0, 1 },  /* xn--slat-5na.no */
+  { 42643,     0,     0, 1 },  /* xn--slt-elab.no */
+  { 42656,     0,     0, 1 },  /* xn--smla-hra.no */
+  { 42669,     0,     0, 1 },  /* xn--smna-gra.no */
+  { 42682,     0,     0, 1 },  /* xn--snase-nra.no */
+  { 42696,     0,     0, 1 },  /* xn--sndre-land-0cb.no */
+  { 42715,     0,     0, 1 },  /* xn--snes-poa.no */
+  { 42728,     0,     0, 1 },  /* xn--snsa-roa.no */
+  { 42741,     0,     0, 1 },  /* xn--sr-aurdal-l8a.no */
+  { 42759,     0,     0, 1 },  /* xn--sr-fron-q1a.no */
+  { 42775,     0,     0, 1 },  /* xn--sr-odal-q1a.no */
+  { 42791,     0,     0, 1 },  /* xn--sr-varanger-ggb.no */
+  { 42811,     0,     0, 1 },  /* xn--srfold-bya.no */
+  { 42826,     0,     0, 1 },  /* xn--srreisa-q1a.no */
+  { 42842,     0,     0, 1 },  /* xn--srum-gra.no */
+  { 42855,  7602,     1, 0 },  /* xn--stfold-9xa.no */
+  { 42870,     0,     0, 1 },  /* xn--stjrdal-s1a.no */
+  { 42886,     0,     0, 1 },  /* xn--stjrdalshalsen-sqb.no */
+  { 42909,     0,     0, 1 },  /* xn--stre-toten-zcb.no */
+  { 42928,     0,     0, 1 },  /* xn--tjme-hra.no */
+  { 42941,     0,     0, 1 },  /* xn--tnsberg-q1a.no */
+  { 42957,     0,     0, 1 },  /* xn--trany-yua.no */
+  { 42971,     0,     0, 1 },  /* xn--trgstad-r1a.no */
+  { 42987,     0,     0, 1 },  /* xn--trna-woa.no */
+  { 43000,     0,     0, 1 },  /* xn--troms-zua.no */
+  { 43014,     0,     0, 1 },  /* xn--tysvr-vra.no */
+  { 43028,     0,     0, 1 },  /* xn--unjrga-rta.no */
+  { 43043,     0,     0, 1 },  /* xn--vads-jra.no */
+  { 43056,     0,     0, 1 },  /* xn--vard-jra.no */
+  { 43069,     0,     0, 1 },  /* xn--vegrshei-c0a.no */
+  { 43086,     0,     0, 1 },  /* xn--vestvgy-ixa6o.no */
+  { 43104,     0,     0, 1 },  /* xn--vg-yiab.no */
+  { 43116,     0,     0, 1 },  /* xn--vgan-qoa.no */
+  { 43129,     0,     0, 1 },  /* xn--vgsy-qoa0j.no */
+  { 43144,     0,     0, 1 },  /* xn--vre-eiker-k8a.no */
+  { 43162,     0,     0, 1 },  /* xn--vrggt-xqad.no */
+  { 43177,     0,     0, 1 },  /* xn--vry-yla5g.no */
+  { 43191,     0,     0, 1 },  /* xn--yer-zna.no */
+  { 43203,     0,     0, 1 },  /* xn--ygarden-p1a.no */
+  { 43219,     0,     0, 1 },  /* xn--ystre-slidre-ujb.no */
   {    62,     0,     0, 1 },  /* ac.nz */
-  {   113,  3838,     1, 1 },  /* co.nz */
-  { 11684,     0,     0, 1 },  /* cri.nz */
-  { 13454,     0,     0, 1 },  /* geek.nz */
-  {  8361,     0,     0, 1 },  /* gen.nz */
-  { 41260,     0,     0, 1 },  /* govt.nz */
-  {  3844,     0,     0, 1 },  /* health.nz */
-  {  4603,     0,     0, 1 },  /* iwi.nz */
-  {  4602,     0,     0, 1 },  /* kiwi.nz */
-  { 41265,     0,     0, 1 },  /* maori.nz */
-  {  4170,     0,     0, 1 },  /* mil.nz */
-  {  5737,     0,     0, 1 },  /* net.nz */
-  {  6053,     0,     0, 1 },  /* org.nz */
-  { 15015,     0,     0, 1 },  /* parliament.nz */
-  {  7031,     0,     0, 1 },  /* school.nz */
-  { 41271,     0,     0, 1 },  /* xn--mori-qsa.nz */
+  {   113,  4032,     1, 1 },  /* co.nz */
+  { 12185,     0,     0, 1 },  /* cri.nz */
+  { 13158,     0,     0, 1 },  /* geek.nz */
+  {  8364,     0,     0, 1 },  /* gen.nz */
+  { 43311,     0,     0, 1 },  /* govt.nz */
+  {  3838,     0,     0, 1 },  /* health.nz */
+  {  4589,     0,     0, 1 },  /* iwi.nz */
+  {  4588,     0,     0, 1 },  /* kiwi.nz */
+  { 43316,     0,     0, 1 },  /* maori.nz */
+  {  4157,     0,     0, 1 },  /* mil.nz */
+  {  5710,     0,     0, 1 },  /* net.nz */
+  { 12575,     0,     0, 1 },  /* nym.nz */
+  {  6026,     0,     0, 1 },  /* org.nz */
+  { 16037,     0,     0, 1 },  /* parliament.nz */
+  {  7001,     0,     0, 1 },  /* school.nz */
+  { 43322,     0,     0, 1 },  /* xn--mori-qsa.nz */
+  { 43335,     0,     0, 1 },  /* accesscam.org */
   {   157,     0,     0, 1 },  /* ae.org */
-  { 41284,  7255,     1, 0 },  /* amune.org */
-  { 12188,     0,     0, 1 },  /* blogdns.org */
-  { 41290,     0,     0, 1 },  /* blogsite.org */
-  { 41299,     0,     0, 1 },  /* bmoattachments.org */
-  { 41314,     0,     0, 1 },  /* boldlygoingnowhere.org */
-  { 41333,     0,     0, 1 },  /* cable-modem.org */
-  { 34284,  7256,     2, 0 },  /* cdn77.org */
-  {  7103,  3360,     1, 0 },  /* cdn77-secure.org */
-  { 41345,     0,     0, 1 },  /* certmgr.org */
-  { 11353,     0,     0, 1 },  /* cloudns.org */
-  { 41353,     0,     0, 1 },  /* collegefan.org */
-  { 41364,     0,     0, 1 },  /* couchpotatofries.org */
-  { 15066,     0,     0, 1 },  /* ddnss.org */
-  { 15380,     0,     0, 1 },  /* diskstation.org */
-  { 12329,     0,     0, 1 },  /* dnsalias.org */
-  { 12338,     0,     0, 1 },  /* dnsdojo.org */
-  { 12357,     0,     0, 1 },  /* doesntexist.org */
-  { 12369,     0,     0, 1 },  /* dontexist.org */
-  { 12379,     0,     0, 1 },  /* doomdns.org */
-  { 12409,     0,     0, 1 },  /* dsmynas.org */
-  { 41381,     0,     0, 1 },  /* duckdns.org */
-  { 41389,     0,     0, 1 },  /* dvrdns.org */
-  { 12428,     0,     0, 1 },  /* dynalias.org */
-  { 11559,  7259,     2, 1 },  /* dyndns.org */
-  { 34371,     0,     0, 1 },  /* endofinternet.org */
-  { 41396,     0,     0, 1 },  /* endoftheinternet.org */
-  {  2797,  7261,    55, 1 },  /* eu.org */
-  { 12652,     0,     0, 1 },  /* familyds.org */
-  { 41413,     0,     0, 1 },  /* fedorainfracloud.org */
-  { 41430,     0,     0, 1 },  /* fedorapeople.org */
-  { 33324,  4188,     1, 0 },  /* fedoraproject.org */
-  { 41443,     0,     0, 1 },  /* from-me.org */
-  { 41451,     0,     0, 1 },  /* game-host.org */
-  { 11908,     0,     0, 1 },  /* gotdns.org */
-  { 41461,     0,     0, 1 },  /* hepforge.org */
-  {  3922,     0,     0, 1 },  /* hk.org */
-  { 13214,     0,     0, 1 },  /* hobby-site.org */
-  { 41470,     0,     0, 1 },  /* homedns.org */
-  { 34463,     0,     0, 1 },  /* homeftp.org */
-  { 13225,     0,     0, 1 },  /* homelinux.org */
-  { 13266,     0,     0, 1 },  /* homeunix.org */
-  { 30167,     0,     0, 1 },  /* hopto.org */
-  { 41478,     0,     0, 1 },  /* is-a-bruinsfan.org */
-  { 41493,     0,     0, 1 },  /* is-a-candidate.org */
-  { 41508,     0,     0, 1 },  /* is-a-celticsfan.org */
-  { 13357,     0,     0, 1 },  /* is-a-chef.org */
-  { 13449,     0,     0, 1 },  /* is-a-geek.org */
-  { 41524,     0,     0, 1 },  /* is-a-knight.org */
-  { 15509,     0,     0, 1 },  /* is-a-linux-user.org */
-  { 41536,     0,     0, 1 },  /* is-a-patsfan.org */
-  { 41549,     0,     0, 1 },  /* is-a-soxfan.org */
-  { 41561,     0,     0, 1 },  /* is-found.org */
-  { 41570,     0,     0, 1 },  /* is-lost.org */
-  { 41578,     0,     0, 1 },  /* is-saved.org */
-  { 41587,     0,     0, 1 },  /* is-very-bad.org */
-  { 41599,     0,     0, 1 },  /* is-very-evil.org */
-  { 41612,     0,     0, 1 },  /* is-very-good.org */
-  { 41625,     0,     0, 1 },  /* is-very-nice.org */
-  { 41638,     0,     0, 1 },  /* is-very-sweet.org */
-  { 13872,     0,     0, 1 },  /* isa-geek.org */
-  { 11545,     0,     0, 1 },  /* js.org */
-  { 34486,     0,     0, 1 },  /* kicks-ass.org */
-  { 41652,     0,     0, 1 },  /* misconfused.org */
-  {  2916,     0,     0, 1 },  /* mlbfan.org */
-  { 41664,     0,     0, 1 },  /* my-firewall.org */
-  { 41676,     0,     0, 1 },  /* myfirewall.org */
-  { 11615,     0,     0, 1 },  /* myftp.org */
-  {  1348,     0,     0, 1 },  /* mysecuritycamera.org */
-  { 41687,     0,     0, 1 },  /* nflfan.org */
-  { 11621,     0,     0, 1 },  /* no-ip.org */
-  { 41694,     0,     0, 1 },  /* pimienta.org */
-  { 10634,     0,     0, 1 },  /* podzone.org */
-  { 41703,     0,     0, 1 },  /* poivron.org */
-  { 41711,     0,     0, 1 },  /* potager.org */
-  { 41719,     0,     0, 1 },  /* read-books.org */
-  { 41730,     0,     0, 1 },  /* readmyblog.org */
-  { 11627,     0,     0, 1 },  /* selfip.org */
-  { 41741,     0,     0, 1 },  /* sellsyourhome.org */
-  { 14271,     0,     0, 1 },  /* servebbs.org */
-  { 14299,     0,     0, 1 },  /* serveftp.org */
-  { 14308,     0,     0, 1 },  /* servegame.org */
-  { 15347,     0,     0, 1 },  /* spdns.org */
-  { 41755,     0,     0, 1 },  /* stuff-4-sale.org */
-  { 41768,     0,     0, 1 },  /* sweetpepper.org */
-  { 41780,     0,     0, 1 },  /* tunk.org */
-  {  2906,     0,     0, 1 },  /* tuxfamily.org */
-  { 11901,     0,     0, 1 },  /* twmail.org */
-  { 41785,     0,     0, 1 },  /* ufcfan.org */
+  { 43345,  7617,     1, 0 },  /* amune.org */
+  { 11692,     0,     0, 1 },  /* barsy.org */
+  { 13007,     0,     0, 1 },  /* blogdns.org */
+  { 43351,     0,     0, 1 },  /* blogsite.org */
+  { 43360,     0,     0, 1 },  /* bmoattachments.org */
+  { 43375,     0,     0, 1 },  /* boldlygoingnowhere.org */
+  { 43394,     0,     0, 1 },  /* cable-modem.org */
+  {  2580,     0,     0, 1 },  /* camdvr.org */
+  { 36215,  7618,     2, 0 },  /* cdn77.org */
+  {  7073,  3514,     1, 0 },  /* cdn77-secure.org */
+  { 43406,     0,     0, 1 },  /* certmgr.org */
+  { 11510,     0,     0, 1 },  /* cloudns.org */
+  { 43414,     0,     0, 1 },  /* collegefan.org */
+  { 43425,     0,     0, 1 },  /* couchpotatofries.org */
+  { 16097,     0,     0, 1 },  /* ddnss.org */
+  { 16435,     0,     0, 1 },  /* diskstation.org */
+  { 13191,     0,     0, 1 },  /* dnsalias.org */
+  { 13200,     0,     0, 1 },  /* dnsdojo.org */
+  { 13219,     0,     0, 1 },  /* doesntexist.org */
+  { 13231,     0,     0, 1 },  /* dontexist.org */
+  { 13241,     0,     0, 1 },  /* doomdns.org */
+  { 13271,     0,     0, 1 },  /* dsmynas.org */
+  { 43442,     0,     0, 1 },  /* duckdns.org */
+  { 43450,     0,     0, 1 },  /* dvrdns.org */
+  { 13290,     0,     0, 1 },  /* dynalias.org */
+  { 11733,  7621,     2, 1 },  /* dyndns.org */
+  { 43457,     0,     0, 1 },  /* dynserv.org */
+  { 36356,     0,     0, 1 },  /* endofinternet.org */
+  { 43465,     0,     0, 1 },  /* endoftheinternet.org */
+  {  2796,  7623,    55, 1 },  /* eu.org */
+  { 13526,     0,     0, 1 },  /* familyds.org */
+  { 43482,     0,     0, 1 },  /* fedorainfracloud.org */
+  { 43499,     0,     0, 1 },  /* fedorapeople.org */
+  { 35227,  3515,     3, 0 },  /* fedoraproject.org */
+  { 43512,     0,     0, 1 },  /* freeddns.org */
+  {  7921,     0,     0, 1 },  /* freedesktop.org */
+  { 43521,     0,     0, 1 },  /* from-me.org */
+  { 43529,     0,     0, 1 },  /* game-host.org */
+  { 12658,     0,     0, 1 },  /* gotdns.org */
+  { 43539,     0,     0, 1 },  /* hepforge.org */
+  {  3916,     0,     0, 1 },  /* hk.org */
+  { 14081,     0,     0, 1 },  /* hobby-site.org */
+  { 43548,     0,     0, 1 },  /* homedns.org */
+  { 36461,     0,     0, 1 },  /* homeftp.org */
+  { 14092,     0,     0, 1 },  /* homelinux.org */
+  { 14133,     0,     0, 1 },  /* homeunix.org */
+  { 32055,     0,     0, 1 },  /* hopto.org */
+  { 43556,     0,     0, 1 },  /* is-a-bruinsfan.org */
+  { 43571,     0,     0, 1 },  /* is-a-candidate.org */
+  { 43586,     0,     0, 1 },  /* is-a-celticsfan.org */
+  { 14224,     0,     0, 1 },  /* is-a-chef.org */
+  { 14316,     0,     0, 1 },  /* is-a-geek.org */
+  { 43602,     0,     0, 1 },  /* is-a-knight.org */
+  { 43614,     0,     0, 1 },  /* is-a-linux-user.org */
+  { 43630,     0,     0, 1 },  /* is-a-patsfan.org */
+  { 43643,     0,     0, 1 },  /* is-a-soxfan.org */
+  { 43655,     0,     0, 1 },  /* is-found.org */
+  { 43664,     0,     0, 1 },  /* is-lost.org */
+  { 43672,     0,     0, 1 },  /* is-saved.org */
+  { 43681,     0,     0, 1 },  /* is-very-bad.org */
+  { 43693,     0,     0, 1 },  /* is-very-evil.org */
+  { 43706,     0,     0, 1 },  /* is-very-good.org */
+  { 43719,     0,     0, 1 },  /* is-very-nice.org */
+  { 43732,     0,     0, 1 },  /* is-very-sweet.org */
+  { 14739,     0,     0, 1 },  /* isa-geek.org */
+  { 11719,     0,     0, 1 },  /* js.org */
+  { 36484,     0,     0, 1 },  /* kicks-ass.org */
+  { 17218,     0,     0, 1 },  /* mayfirst.org */
+  { 43746,     0,     0, 1 },  /* misconfused.org */
+  {  2915,     0,     0, 1 },  /* mlbfan.org */
+  { 43758,     0,     0, 1 },  /* mozilla-iot.org */
+  { 43770,     0,     0, 1 },  /* my-firewall.org */
+  { 43782,     0,     0, 1 },  /* myfirewall.org */
+  { 11789,     0,     0, 1 },  /* myftp.org */
+  {  1341,     0,     0, 1 },  /* mysecuritycamera.org */
+  { 43793,     0,     0, 1 },  /* mywire.org */
+  { 43800,     0,     0, 1 },  /* nflfan.org */
+  { 11795,     0,     0, 1 },  /* no-ip.org */
+  { 36558,     0,     0, 1 },  /* now-dns.org */
+  { 43807,     0,     0, 1 },  /* pimienta.org */
+  { 10771,     0,     0, 1 },  /* podzone.org */
+  { 43816,     0,     0, 1 },  /* poivron.org */
+  { 43824,     0,     0, 1 },  /* potager.org */
+  { 43832,     0,     0, 1 },  /* read-books.org */
+  { 43843,     0,     0, 1 },  /* readmyblog.org */
+  { 11801,     0,     0, 1 },  /* selfip.org */
+  { 43854,     0,     0, 1 },  /* sellsyourhome.org */
+  { 15215,     0,     0, 1 },  /* servebbs.org */
+  { 15243,     0,     0, 1 },  /* serveftp.org */
+  { 15252,     0,     0, 1 },  /* servegame.org */
+  { 16389,     0,     0, 1 },  /* spdns.org */
+  { 43868,     0,     0, 1 },  /* stuff-4-sale.org */
+  { 43881,     0,     0, 1 },  /* sweetpepper.org */
+  { 43893,     0,     0, 1 },  /* tunk.org */
+  {  2905,     0,     0, 1 },  /* tuxfamily.org */
+  { 12642,     0,     0, 1 },  /* twmail.org */
+  { 43898,     0,     0, 1 },  /* ufcfan.org */
+  { 43905,     0,     0, 1 },  /* uklugs.org */
   {   264,     0,     0, 1 },  /* us.org */
-  { 11634,     0,     0, 1 },  /* webhop.org */
-  { 41792,     0,     0, 1 },  /* wmflabs.org */
-  {  6312,     0,     0, 1 },  /* za.org */
-  { 41800,     0,     0, 1 },  /* zapto.org */
-  { 41815,  7258,     1, 0 },  /* origin.cdn77-secure.org */
-  { 41830,     0,     0, 1 },  /* agro.pl */
-  {  6561,     0,     0, 1 },  /* aid.pl */
+  { 11808,     0,     0, 1 },  /* webhop.org */
+  { 43912,     0,     0, 1 },  /* webredirect.org */
+  { 43924,     0,     0, 1 },  /* wmflabs.org */
+  {  6272,     0,     0, 1 },  /* za.org */
+  { 43932,     0,     0, 1 },  /* zapto.org */
+  { 43947,  7620,     1, 0 },  /* origin.cdn77-secure.org */
+  {  1836,     0,     0, 1 },  /* cloud.fedoraproject.org */
+  {   637,  4314,     1, 0 },  /* os.fedoraproject.org */
+  {  7778,  3518,     1, 0 },  /* stg.fedoraproject.org */
+  {   637,  4314,     1, 0 },  /* os.stg.fedoraproject.org */
+  { 11848,     0,     0, 1 },  /* agro.pl */
+  {  6527,     0,     0, 1 },  /* aid.pl */
   {   527,     0,     0, 1 },  /* art.pl */
-  {  7907,     0,     0, 1 },  /* atm.pl */
-  { 41835,     0,     0, 1 },  /* augustow.pl */
+  {  7889,     0,     0, 1 },  /* atm.pl */
+  { 43962,     0,     0, 1 },  /* augustow.pl */
   {   629,     0,     0, 1 },  /* auto.pl */
-  { 41844,     0,     0, 1 },  /* babia-gora.pl */
-  { 41855,     0,     0, 1 },  /* bedzin.pl */
-  { 41862,     0,     0, 1 },  /* beep.pl */
-  { 41867,     0,     0, 1 },  /* beskidy.pl */
-  { 41875,     0,     0, 1 },  /* bialowieza.pl */
-  { 41886,     0,     0, 1 },  /* bialystok.pl */
-  { 41896,     0,     0, 1 },  /* bielawa.pl */
-  { 41904,     0,     0, 1 },  /* bieszczady.pl */
+  { 43971,     0,     0, 1 },  /* babia-gora.pl */
+  { 43982,     0,     0, 1 },  /* bedzin.pl */
+  { 43989,     0,     0, 1 },  /* beep.pl */
+  { 43994,     0,     0, 1 },  /* beskidy.pl */
+  { 44002,     0,     0, 1 },  /* bialowieza.pl */
+  { 44013,     0,     0, 1 },  /* bialystok.pl */
+  { 44023,     0,     0, 1 },  /* bielawa.pl */
+  { 44031,     0,     0, 1 },  /* bieszczady.pl */
   {   986,     0,     0, 1 },  /* biz.pl */
-  { 41915,     0,     0, 1 },  /* boleslawiec.pl */
-  { 41927,     0,     0, 1 },  /* bydgoszcz.pl */
-  { 41937,     0,     0, 1 },  /* bytom.pl */
-  { 41943,     0,     0, 1 },  /* cieszyn.pl */
+  { 44042,     0,     0, 1 },  /* boleslawiec.pl */
+  { 44054,     0,     0, 1 },  /* bydgoszcz.pl */
+  { 44064,     0,     0, 1 },  /* bytom.pl */
+  { 44070,     0,     0, 1 },  /* cieszyn.pl */
   {   113,     0,     0, 1 },  /* co.pl */
-  {  1914,     0,     0, 1 },  /* com.pl */
-  {  2588,     0,     0, 1 },  /* czeladz.pl */
-  { 41951,     0,     0, 1 },  /* czest.pl */
-  { 36628,     0,     0, 1 },  /* dlugoleka.pl */
-  {  2623,     0,     0, 1 },  /* edu.pl */
-  { 41957,     0,     0, 1 },  /* elblag.pl */
-  {  5006,     0,     0, 1 },  /* elk.pl */
-  { 41968,     0,     0, 1 },  /* gda.pl */
-  { 41972,     0,     0, 1 },  /* gdansk.pl */
-  { 41979,     0,     0, 1 },  /* gdynia.pl */
-  { 41986,     0,     0, 1 },  /* gliwice.pl */
-  { 41994,     0,     0, 1 },  /* glogow.pl */
-  { 42001,     0,     0, 1 },  /* gmina.pl */
-  { 42007,     0,     0, 1 },  /* gniezno.pl */
-  { 42015,     0,     0, 1 },  /* gorlice.pl */
-  {  3671,  7362,    47, 1 },  /* gov.pl */
-  { 42023,     0,     0, 1 },  /* grajewo.pl */
-  {  7319,     0,     0, 1 },  /* gsm.pl */
-  { 42031,     0,     0, 1 },  /* ilawa.pl */
-  {  3152,     0,     0, 1 },  /* info.pl */
-  { 42037,     0,     0, 1 },  /* jaworzno.pl */
-  { 42046,     0,     0, 1 },  /* jelenia-gora.pl */
-  { 42059,     0,     0, 1 },  /* jgora.pl */
-  { 42065,     0,     0, 1 },  /* kalisz.pl */
-  { 42072,     0,     0, 1 },  /* karpacz.pl */
-  { 42080,     0,     0, 1 },  /* kartuzy.pl */
-  { 42088,     0,     0, 1 },  /* kaszuby.pl */
-  { 42096,     0,     0, 1 },  /* katowice.pl */
-  { 42105,     0,     0, 1 },  /* kazimierz-dolny.pl */
-  { 42121,     0,     0, 1 },  /* kepno.pl */
-  { 42127,     0,     0, 1 },  /* ketrzyn.pl */
-  { 42135,     0,     0, 1 },  /* klodzko.pl */
-  { 42143,     0,     0, 1 },  /* kobierzyce.pl */
-  { 42154,     0,     0, 1 },  /* kolobrzeg.pl */
-  { 42164,     0,     0, 1 },  /* konin.pl */
-  { 42170,     0,     0, 1 },  /* konskowola.pl */
-  { 42181,     0,     0, 1 },  /* krakow.pl */
-  { 42188,     0,     0, 1 },  /* kutno.pl */
-  { 42194,     0,     0, 1 },  /* lapy.pl */
-  { 42199,     0,     0, 1 },  /* lebork.pl */
-  { 42206,     0,     0, 1 },  /* legnica.pl */
-  { 42214,     0,     0, 1 },  /* lezajsk.pl */
-  { 42222,     0,     0, 1 },  /* limanowa.pl */
-  { 42231,     0,     0, 1 },  /* lomza.pl */
-  {  2199,     0,     0, 1 },  /* lowicz.pl */
-  { 42237,     0,     0, 1 },  /* lubin.pl */
-  { 42243,     0,     0, 1 },  /* lukow.pl */
-  {  2650,     0,     0, 1 },  /* mail.pl */
-  { 42249,     0,     0, 1 },  /* malbork.pl */
-  { 42257,     0,     0, 1 },  /* malopolska.pl */
-  { 42268,     0,     0, 1 },  /* mazowsze.pl */
-  { 42277,     0,     0, 1 },  /* mazury.pl */
-  {  1859,     0,     0, 1 },  /* med.pl */
-  {  5306,     0,     0, 1 },  /* media.pl */
-  { 42284,     0,     0, 1 },  /* miasta.pl */
-  { 42291,     0,     0, 1 },  /* mielec.pl */
-  { 42298,     0,     0, 1 },  /* mielno.pl */
-  {  4170,     0,     0, 1 },  /* mil.pl */
-  { 42305,     0,     0, 1 },  /* mragowo.pl */
-  { 42313,     0,     0, 1 },  /* naklo.pl */
-  {  5737,     0,     0, 1 },  /* net.pl */
-  { 15476,     0,     0, 1 },  /* nieruchomosci.pl */
-  {  5970,     0,     0, 1 },  /* nom.pl */
-  { 42319,     0,     0, 1 },  /* nowaruda.pl */
-  { 42328,     0,     0, 1 },  /* nysa.pl */
-  { 42333,     0,     0, 1 },  /* olawa.pl */
-  { 42339,     0,     0, 1 },  /* olecko.pl */
-  { 42346,     0,     0, 1 },  /* olkusz.pl */
-  { 42353,     0,     0, 1 },  /* olsztyn.pl */
-  { 42361,     0,     0, 1 },  /* opoczno.pl */
-  { 42369,     0,     0, 1 },  /* opole.pl */
-  {  6053,     0,     0, 1 },  /* org.pl */
-  { 42375,     0,     0, 1 },  /* ostroda.pl */
-  { 42383,     0,     0, 1 },  /* ostroleka.pl */
-  { 42393,     0,     0, 1 },  /* ostrowiec.pl */
-  {  4636,     0,     0, 1 },  /* ostrowwlkp.pl */
-  {  5597,     0,     0, 1 },  /* pc.pl */
-  { 42403,     0,     0, 1 },  /* pila.pl */
-  {  7650,     0,     0, 1 },  /* pisz.pl */
-  { 42408,     0,     0, 1 },  /* podhale.pl */
-  { 42416,     0,     0, 1 },  /* podlasie.pl */
-  { 42425,     0,     0, 1 },  /* polkowice.pl */
-  { 42435,     0,     0, 1 },  /* pomorskie.pl */
-  { 42445,     0,     0, 1 },  /* pomorze.pl */
-  { 42453,     0,     0, 1 },  /* powiat.pl */
-  { 42460,     0,     0, 1 },  /* poznan.pl */
-  { 11418,     0,     0, 1 },  /* priv.pl */
-  { 42467,     0,     0, 1 },  /* prochowice.pl */
-  { 42478,     0,     0, 1 },  /* pruszkow.pl */
-  { 42487,     0,     0, 1 },  /* przeworsk.pl */
-  { 42497,     0,     0, 1 },  /* pulawy.pl */
-  { 42504,     0,     0, 1 },  /* radom.pl */
-  { 42510,     0,     0, 1 },  /* rawa-maz.pl */
-  {  2764,     0,     0, 1 },  /* realestate.pl */
-  { 15913,     0,     0, 1 },  /* rel.pl */
-  { 42519,     0,     0, 1 },  /* rybnik.pl */
-  { 42526,     0,     0, 1 },  /* rzeszow.pl */
-  { 42534,     0,     0, 1 },  /* sanok.pl */
-  { 42540,     0,     0, 1 },  /* sejny.pl */
-  {  7157,     0,     0, 1 },  /* sex.pl */
-  {  7234,     0,     0, 1 },  /* shop.pl */
-  { 42546,     0,     0, 1 },  /* sklep.pl */
-  { 42552,     0,     0, 1 },  /* skoczow.pl */
-  { 42560,     0,     0, 1 },  /* slask.pl */
-  { 42566,     0,     0, 1 },  /* slupsk.pl */
-  { 42573,     0,     0, 1 },  /* sopot.pl */
-  { 37044,     0,     0, 1 },  /* sos.pl */
-  { 42579,     0,     0, 1 },  /* sosnowiec.pl */
-  { 42589,     0,     0, 1 },  /* stalowa-wola.pl */
-  { 42602,     0,     0, 1 },  /* starachowice.pl */
-  { 42615,     0,     0, 1 },  /* stargard.pl */
-  { 42624,     0,     0, 1 },  /* suwalki.pl */
-  { 42632,     0,     0, 1 },  /* swidnica.pl */
-  { 42641,     0,     0, 1 },  /* swiebodzin.pl */
-  { 42652,     0,     0, 1 },  /* swinoujscie.pl */
-  { 42664,     0,     0, 1 },  /* szczecin.pl */
-  { 42673,     0,     0, 1 },  /* szczytno.pl */
-  { 42682,     0,     0, 1 },  /* szkola.pl */
-  { 42689,     0,     0, 1 },  /* targi.pl */
-  { 42695,     0,     0, 1 },  /* tarnobrzeg.pl */
-  { 42706,     0,     0, 1 },  /* tgory.pl */
-  {  7908,     0,     0, 1 },  /* tm.pl */
-  { 42712,     0,     0, 1 },  /* tourism.pl */
-  {  8003,     0,     0, 1 },  /* travel.pl */
-  { 42720,     0,     0, 1 },  /* turek.pl */
-  { 42726,     0,     0, 1 },  /* turystyka.pl */
-  { 42736,     0,     0, 1 },  /* tychy.pl */
-  { 42742,     0,     0, 1 },  /* ustka.pl */
-  { 42748,     0,     0, 1 },  /* walbrzych.pl */
-  { 42758,     0,     0, 1 },  /* warmia.pl */
-  { 42765,     0,     0, 1 },  /* warszawa.pl */
+  {  1910,     0,     0, 1 },  /* com.pl */
+  {  2587,     0,     0, 1 },  /* czeladz.pl */
+  { 44078,     0,     0, 1 },  /* czest.pl */
+  { 38686,     0,     0, 1 },  /* dlugoleka.pl */
+  {  2622,     0,     0, 1 },  /* edu.pl */
+  { 44084,     0,     0, 1 },  /* elblag.pl */
+  {  4990,     0,     0, 1 },  /* elk.pl */
+  { 44095,     0,     0, 1 },  /* gda.pl */
+  { 44099,     0,     0, 1 },  /* gdansk.pl */
+  { 44106,     0,     0, 1 },  /* gdynia.pl */
+  { 44113,     0,     0, 1 },  /* gliwice.pl */
+  { 44121,     0,     0, 1 },  /* glogow.pl */
+  { 44128,     0,     0, 1 },  /* gmina.pl */
+  { 44134,     0,     0, 1 },  /* gniezno.pl */
+  { 44142,     0,     0, 1 },  /* gorlice.pl */
+  {  3665,  7725,    47, 1 },  /* gov.pl */
+  { 44150,     0,     0, 1 },  /* grajewo.pl */
+  {  7289,     0,     0, 1 },  /* gsm.pl */
+  { 44158,     0,     0, 1 },  /* ilawa.pl */
+  {  3149,     0,     0, 1 },  /* info.pl */
+  { 44164,     0,     0, 1 },  /* jaworzno.pl */
+  { 44173,     0,     0, 1 },  /* jelenia-gora.pl */
+  { 44186,     0,     0, 1 },  /* jgora.pl */
+  { 44192,     0,     0, 1 },  /* kalisz.pl */
+  { 44199,     0,     0, 1 },  /* karpacz.pl */
+  { 44207,     0,     0, 1 },  /* kartuzy.pl */
+  { 44215,     0,     0, 1 },  /* kaszuby.pl */
+  { 44223,     0,     0, 1 },  /* katowice.pl */
+  { 44232,     0,     0, 1 },  /* kazimierz-dolny.pl */
+  { 44248,     0,     0, 1 },  /* kepno.pl */
+  { 44254,     0,     0, 1 },  /* ketrzyn.pl */
+  { 44262,     0,     0, 1 },  /* klodzko.pl */
+  { 44270,     0,     0, 1 },  /* kobierzyce.pl */
+  { 44281,     0,     0, 1 },  /* kolobrzeg.pl */
+  { 44291,     0,     0, 1 },  /* konin.pl */
+  { 44297,     0,     0, 1 },  /* konskowola.pl */
+  { 44308,     0,     0, 1 },  /* krakow.pl */
+  { 44315,     0,     0, 1 },  /* kutno.pl */
+  { 44321,     0,     0, 1 },  /* lapy.pl */
+  { 44326,     0,     0, 1 },  /* lebork.pl */
+  { 44333,     0,     0, 1 },  /* legnica.pl */
+  { 44341,     0,     0, 1 },  /* lezajsk.pl */
+  { 44349,     0,     0, 1 },  /* limanowa.pl */
+  { 44358,     0,     0, 1 },  /* lomza.pl */
+  {  2195,     0,     0, 1 },  /* lowicz.pl */
+  { 44364,     0,     0, 1 },  /* lubin.pl */
+  { 44370,     0,     0, 1 },  /* lukow.pl */
+  {  2649,     0,     0, 1 },  /* mail.pl */
+  { 44376,     0,     0, 1 },  /* malbork.pl */
+  { 44384,     0,     0, 1 },  /* malopolska.pl */
+  { 44395,     0,     0, 1 },  /* mazowsze.pl */
+  { 44404,     0,     0, 1 },  /* mazury.pl */
+  {  1855,     0,     0, 1 },  /* med.pl */
+  {  5294,     0,     0, 1 },  /* media.pl */
+  { 44411,     0,     0, 1 },  /* miasta.pl */
+  { 44418,     0,     0, 1 },  /* mielec.pl */
+  { 44425,     0,     0, 1 },  /* mielno.pl */
+  {  4157,     0,     0, 1 },  /* mil.pl */
+  { 44432,     0,     0, 1 },  /* mragowo.pl */
+  { 44440,     0,     0, 1 },  /* naklo.pl */
+  {  5710,     0,     0, 1 },  /* net.pl */
+  { 16596,     0,     0, 1 },  /* nieruchomosci.pl */
+  {  5943,     0,     0, 1 },  /* nom.pl */
+  { 44446,     0,     0, 1 },  /* nowaruda.pl */
+  { 44455,     0,     0, 1 },  /* nysa.pl */
+  { 44460,     0,     0, 1 },  /* olawa.pl */
+  { 44466,     0,     0, 1 },  /* olecko.pl */
+  { 44473,     0,     0, 1 },  /* olkusz.pl */
+  { 44480,     0,     0, 1 },  /* olsztyn.pl */
+  { 44488,     0,     0, 1 },  /* opoczno.pl */
+  { 44496,     0,     0, 1 },  /* opole.pl */
+  {  6026,     0,     0, 1 },  /* org.pl */
+  { 44502,     0,     0, 1 },  /* ostroda.pl */
+  { 44510,     0,     0, 1 },  /* ostroleka.pl */
+  { 44520,     0,     0, 1 },  /* ostrowiec.pl */
+  {  4622,     0,     0, 1 },  /* ostrowwlkp.pl */
+  { 14130,     0,     0, 1 },  /* pc.pl */
+  { 44530,     0,     0, 1 },  /* pila.pl */
+  {  7631,     0,     0, 1 },  /* pisz.pl */
+  { 44535,     0,     0, 1 },  /* podhale.pl */
+  { 44543,     0,     0, 1 },  /* podlasie.pl */
+  { 44552,     0,     0, 1 },  /* polkowice.pl */
+  { 44562,     0,     0, 1 },  /* pomorskie.pl */
+  { 44572,     0,     0, 1 },  /* pomorze.pl */
+  { 44580,     0,     0, 1 },  /* powiat.pl */
+  { 44587,     0,     0, 1 },  /* poznan.pl */
+  { 11594,     0,     0, 1 },  /* priv.pl */
+  { 44594,     0,     0, 1 },  /* prochowice.pl */
+  { 44605,     0,     0, 1 },  /* pruszkow.pl */
+  { 44614,     0,     0, 1 },  /* przeworsk.pl */
+  { 44624,     0,     0, 1 },  /* pulawy.pl */
+  { 44631,     0,     0, 1 },  /* radom.pl */
+  { 44637,     0,     0, 1 },  /* rawa-maz.pl */
+  {  2763,     0,     0, 1 },  /* realestate.pl */
+  { 17018,     0,     0, 1 },  /* rel.pl */
+  { 44646,     0,     0, 1 },  /* rybnik.pl */
+  { 44653,     0,     0, 1 },  /* rzeszow.pl */
+  { 44661,     0,     0, 1 },  /* sanok.pl */
+  { 44667,     0,     0, 1 },  /* sejny.pl */
+  {  7127,     0,     0, 1 },  /* sex.pl */
+  {  7204,     0,     0, 1 },  /* shop.pl */
+  { 44673,     0,     0, 1 },  /* sklep.pl */
+  { 44679,     0,     0, 1 },  /* skoczow.pl */
+  { 44687,     0,     0, 1 },  /* slask.pl */
+  { 44693,     0,     0, 1 },  /* slupsk.pl */
+  { 44700,     0,     0, 1 },  /* sopot.pl */
+  { 39095,     0,     0, 1 },  /* sos.pl */
+  { 44706,     0,     0, 1 },  /* sosnowiec.pl */
+  { 44716,     0,     0, 1 },  /* stalowa-wola.pl */
+  { 44729,     0,     0, 1 },  /* starachowice.pl */
+  { 44742,     0,     0, 1 },  /* stargard.pl */
+  { 44751,     0,     0, 1 },  /* suwalki.pl */
+  { 44759,     0,     0, 1 },  /* swidnica.pl */
+  { 44768,     0,     0, 1 },  /* swiebodzin.pl */
+  { 44779,     0,     0, 1 },  /* swinoujscie.pl */
+  { 44791,     0,     0, 1 },  /* szczecin.pl */
+  { 44800,     0,     0, 1 },  /* szczytno.pl */
+  { 44809,     0,     0, 1 },  /* szkola.pl */
+  { 44816,     0,     0, 1 },  /* targi.pl */
+  { 44822,     0,     0, 1 },  /* tarnobrzeg.pl */
+  { 44833,     0,     0, 1 },  /* tgory.pl */
+  {  7890,     0,     0, 1 },  /* tm.pl */
+  { 44839,     0,     0, 1 },  /* tourism.pl */
+  {  7998,     0,     0, 1 },  /* travel.pl */
+  { 44847,     0,     0, 1 },  /* turek.pl */
+  { 44853,     0,     0, 1 },  /* turystyka.pl */
+  { 44863,     0,     0, 1 },  /* tychy.pl */
+  { 44869,     0,     0, 1 },  /* ustka.pl */
+  { 44875,     0,     0, 1 },  /* walbrzych.pl */
+  { 44885,     0,     0, 1 },  /* warmia.pl */
+  { 44892,     0,     0, 1 },  /* warszawa.pl */
   {   648,     0,     0, 1 },  /* waw.pl */
-  { 42774,     0,     0, 1 },  /* wegrow.pl */
-  { 42781,     0,     0, 1 },  /* wielun.pl */
-  {  1785,     0,     0, 1 },  /* wlocl.pl */
-  { 42788,     0,     0, 1 },  /* wloclawek.pl */
-  { 42798,     0,     0, 1 },  /* wodzislaw.pl */
-  { 42808,     0,     0, 1 },  /* wolomin.pl */
-  { 42816,     0,     0, 1 },  /* wroc.pl */
-  {  4815,     0,     0, 1 },  /* wroclaw.pl */
-  { 42821,     0,     0, 1 },  /* zachpomor.pl */
-  { 42831,     0,     0, 1 },  /* zagan.pl */
-  { 42837,     0,     0, 1 },  /* zakopane.pl */
-  { 42846,     0,     0, 1 },  /* zarow.pl */
-  { 42852,     0,     0, 1 },  /* zgora.pl */
-  { 42858,     0,     0, 1 },  /* zgorzelec.pl */
+  { 44901,     0,     0, 1 },  /* wegrow.pl */
+  { 44908,     0,     0, 1 },  /* wielun.pl */
+  {  1781,     0,     0, 1 },  /* wlocl.pl */
+  { 44915,     0,     0, 1 },  /* wloclawek.pl */
+  { 44925,     0,     0, 1 },  /* wodzislaw.pl */
+  { 44935,     0,     0, 1 },  /* wolomin.pl */
+  { 44943,     0,     0, 1 },  /* wroc.pl */
+  {  4801,     0,     0, 1 },  /* wroclaw.pl */
+  { 44948,     0,     0, 1 },  /* zachpomor.pl */
+  { 44958,     0,     0, 1 },  /* zagan.pl */
+  { 44964,     0,     0, 1 },  /* zakopane.pl */
+  { 44973,     0,     0, 1 },  /* zarow.pl */
+  { 44979,     0,     0, 1 },  /* zgora.pl */
+  { 44985,     0,     0, 1 },  /* zgorzelec.pl */
+  {     0,     0,     0, 1 },  /* aaa.pro */
+  {  1297,     0,     0, 1 },  /* aca.pro */
+  { 18299,     0,     0, 1 },  /* acct.pro */
+  {  1514,     0,     0, 1 },  /* avocat.pro */
+  {   736,     0,     0, 1 },  /* bar.pro */
+  { 11692,     0,     0, 1 },  /* barsy.pro */
+  { 11510,     0,     0, 1 },  /* cloudns.pro */
+  { 14257,     0,     0, 1 },  /* cpa.pro */
+  { 45138,  7791,     1, 0 },  /* dnstrace.pro */
+  { 12209,     0,     0, 1 },  /* eng.pro */
+  { 45147,     0,     0, 1 },  /* jur.pro */
+  {  4805,     0,     0, 1 },  /* law.pro */
+  {  1855,     0,     0, 1 },  /* med.pro */
+  {  4098,     0,     0, 1 },  /* recht.pro */
   {    62,     0,     0, 1 },  /* ac.ru */
-  { 43021,     0,     0, 1 },  /* adygeya.ru */
-  { 43029,     0,     0, 1 },  /* bashkiria.ru */
-  {  4328,     0,     0, 1 },  /* bir.ru */
-  { 10645,     0,     0, 1 },  /* blogspot.ru */
+  { 45171,     0,     0, 1 },  /* adygeya.ru */
+  { 45179,     0,     0, 1 },  /* bashkiria.ru */
+  {  4319,     0,     0, 1 },  /* bir.ru */
+  { 10791,     0,     0, 1 },  /* blogspot.ru */
   {   931,     0,     0, 1 },  /* cbg.ru */
-  { 43039,  7505,     1, 0 },  /* cldmail.ru */
-  {  1914,     0,     0, 1 },  /* com.ru */
-  { 43047,     0,     0, 1 },  /* dagestan.ru */
-  {  2623,     0,     0, 1 },  /* edu.ru */
-  {  3671,     0,     0, 1 },  /* gov.ru */
-  { 43056,     0,     0, 1 },  /* grozny.ru */
-  {  3617,     0,     0, 1 },  /* int.ru */
-  { 43063,     0,     0, 1 },  /* kalmykia.ru */
-  { 43072,     0,     0, 1 },  /* kustanai.ru */
-  { 43081,     0,     0, 1 },  /* marine.ru */
-  {  4170,     0,     0, 1 },  /* mil.ru */
-  { 43088,     0,     0, 1 },  /* mordovia.ru */
-  {  7300,     0,     0, 1 },  /* msk.ru */
-  { 43097,     0,     0, 1 },  /* mytis.ru */
-  { 43103,     0,     0, 1 },  /* nalchik.ru */
-  { 43111,     0,     0, 1 },  /* nov.ru */
-  { 43115,     0,     0, 1 },  /* pyatigorsk.ru */
-  { 11300,     0,     0, 1 },  /* spb.ru */
-  { 42996,     0,     0, 1 },  /* test.ru */
-  { 43126,     0,     0, 1 },  /* vladikavkaz.ru */
-  { 43138,     0,     0, 1 },  /* vladimir.ru */
-  {  1914,     0,     0, 1 },  /* com.sh */
-  {  3671,     0,     0, 1 },  /* gov.sh */
-  { 43215,     0,     0, 1 },  /* hashbang.sh */
-  {  4170,     0,     0, 1 },  /* mil.sh */
-  {  5737,     0,     0, 1 },  /* net.sh */
-  {  5866,     0,     0, 1 },  /* now.sh */
-  {  6053,     0,     0, 1 },  /* org.sh */
-  { 43224,  3853,     1, 0 },  /* platform.sh */
-  { 30107,     0,     0, 1 },  /* cyon.site */
-  { 43233,  3853,     1, 0 },  /* platformsh.site */
-  { 16611,     0,     0, 1 },  /* av.tr */
-  { 14276,     0,     0, 1 },  /* bbs.tr */
-  { 43668,     0,     0, 1 },  /* bel.tr */
+  { 45189,  7866,     1, 0 },  /* cldmail.ru */
+  {  1910,     0,     0, 1 },  /* com.ru */
+  { 45197,     0,     0, 1 },  /* dagestan.ru */
+  {  2622,     0,     0, 1 },  /* edu.ru */
+  {  3665,     0,     0, 1 },  /* gov.ru */
+  { 45206,     0,     0, 1 },  /* grozny.ru */
+  {  3611,     0,     0, 1 },  /* int.ru */
+  { 45213,     0,     0, 1 },  /* kalmykia.ru */
+  { 45222,     0,     0, 1 },  /* kustanai.ru */
+  { 45231,     0,     0, 1 },  /* marine.ru */
+  {  4157,     0,     0, 1 },  /* mil.ru */
+  { 45238,     0,     0, 1 },  /* mordovia.ru */
+  {  7270,     0,     0, 1 },  /* msk.ru */
+  { 45247,  3731,     4, 1 },  /* myjino.ru */
+  { 45254,     0,     0, 1 },  /* mytis.ru */
+  { 45260,     0,     0, 1 },  /* nalchik.ru */
+  {  5710,     0,     0, 1 },  /* net.ru */
+  { 45268,     0,     0, 1 },  /* nov.ru */
+  {  6026,     0,     0, 1 },  /* org.ru */
+  {   469,     0,     0, 1 },  /* pp.ru */
+  { 45272,     0,     0, 1 },  /* pyatigorsk.ru */
+  { 45283,     0,     0, 1 },  /* ras.ru */
+  { 11450,     0,     0, 1 },  /* spb.ru */
+  { 45128,     0,     0, 1 },  /* test.ru */
+  { 45287,     0,     0, 1 },  /* vladikavkaz.ru */
+  { 45299,     0,     0, 1 },  /* vladimir.ru */
+  {  4034,  4048,     1, 0 },  /* hosting.myjino.ru */
+  { 45308,  4048,     1, 0 },  /* landing.myjino.ru */
+  { 45316,  4048,     1, 0 },  /* spectrum.myjino.ru */
+  { 45325,  4048,     1, 0 },  /* vps.myjino.ru */
+  {  1910,     0,     0, 1 },  /* com.sh */
+  {  3665,     0,     0, 1 },  /* gov.sh */
+  { 45409,     0,     0, 1 },  /* hashbang.sh */
+  {  4157,     0,     0, 1 },  /* mil.sh */
+  {  5710,     0,     0, 1 },  /* net.sh */
+  {  5839,     0,     0, 1 },  /* now.sh */
+  {  6026,     0,     0, 1 },  /* org.sh */
+  { 45418,  4048,     1, 0 },  /* platform.sh */
+  { 17478,     0,     0, 1 },  /* wedeploy.sh */
+  { 11692,     0,     0, 1 },  /* barsy.site */
+  { 45427,     0,     0, 1 },  /* byen.site */
+  { 31988,     0,     0, 1 },  /* cyon.site */
+  { 45432,  4048,     1, 0 },  /* platformsh.site */
+  { 17794,     0,     0, 1 },  /* av.tr */
+  { 15220,     0,     0, 1 },  /* bbs.tr */
+  { 45878,     0,     0, 1 },  /* bel.tr */
   {   986,     0,     0, 1 },  /* biz.tr */
-  {  1914,  3838,     1, 1 },  /* com.tr */
-  { 11335,     0,     0, 1 },  /* dr.tr */
-  {  2623,     0,     0, 1 },  /* edu.tr */
-  {  8361,     0,     0, 1 },  /* gen.tr */
-  {  3671,     0,     0, 1 },  /* gov.tr */
-  {  3152,     0,     0, 1 },  /* info.tr */
-  { 15451,     0,     0, 1 },  /* k12.tr */
-  { 43672,     0,     0, 1 },  /* kep.tr */
-  {  4170,     0,     0, 1 },  /* mil.tr */
-  {  5695,     0,     0, 1 },  /* name.tr */
-  {  5500,  3851,     1, 1 },  /* nc.tr */
-  {  5737,     0,     0, 1 },  /* net.tr */
-  {  6053,     0,     0, 1 },  /* org.tr */
-  { 15447,     0,     0, 1 },  /* pol.tr */
+  {  1910,  4032,     1, 1 },  /* com.tr */
+  { 11492,     0,     0, 1 },  /* dr.tr */
+  {  2622,     0,     0, 1 },  /* edu.tr */
+  {  8364,     0,     0, 1 },  /* gen.tr */
+  {  3665,     0,     0, 1 },  /* gov.tr */
+  {  3149,     0,     0, 1 },  /* info.tr */
+  { 16571,     0,     0, 1 },  /* k12.tr */
+  { 45882,     0,     0, 1 },  /* kep.tr */
+  {  4157,     0,     0, 1 },  /* mil.tr */
+  {  5672,     0,     0, 1 },  /* name.tr */
+  {  4198,  4046,     1, 1 },  /* nc.tr */
+  {  5710,     0,     0, 1 },  /* net.tr */
+  {  6026,     0,     0, 1 },  /* org.tr */
+  { 16567,     0,     0, 1 },  /* pol.tr */
   {   279,     0,     0, 1 },  /* tel.tr */
-  {  2549,     0,     0, 1 },  /* tv.tr */
-  { 12109,     0,     0, 1 },  /* web.tr */
-  { 10645,     0,     0, 1 },  /* blogspot.tw */
-  {  1850,     0,     0, 1 },  /* club.tw */
-  {  1914,  7744,     1, 1 },  /* com.tw */
+  {  2545,     0,     0, 1 },  /* tv.tr */
+  { 12075,     0,     0, 1 },  /* web.tr */
+  { 10791,     0,     0, 1 },  /* blogspot.tw */
+  {  1846,     0,     0, 1 },  /* club.tw */
+  {  1910,  8118,     1, 1 },  /* com.tw */
   {   985,     0,     0, 1 },  /* ebiz.tw */
-  {  2623,     0,     0, 1 },  /* edu.tw */
-  {  3377,     0,     0, 1 },  /* game.tw */
-  {  3671,     0,     0, 1 },  /* gov.tw */
-  { 15748,     0,     0, 1 },  /* idv.tw */
-  {  4170,     0,     0, 1 },  /* mil.tw */
-  {  5737,     0,     0, 1 },  /* net.tw */
-  {  6053,     0,     0, 1 },  /* org.tw */
-  { 11480,     0,     0, 1 },  /* url.tw */
-  { 43710,     0,     0, 1 },  /* xn--czrw28b.tw */
-  { 15834,     0,     0, 1 },  /* xn--uc0atv.tw */
-  { 43722,     0,     0, 1 },  /* xn--zf0ao64a.tw */
+  {  2622,     0,     0, 1 },  /* edu.tw */
+  {  3371,     0,     0, 1 },  /* game.tw */
+  {  3665,     0,     0, 1 },  /* gov.tw */
+  { 16852,     0,     0, 1 },  /* idv.tw */
+  {  4157,     0,     0, 1 },  /* mil.tw */
+  {  5710,     0,     0, 1 },  /* net.tw */
+  { 12575,     0,     0, 1 },  /* nym.tw */
+  {  6026,     0,     0, 1 },  /* org.tw */
+  { 11655,     0,     0, 1 },  /* url.tw */
+  { 45920,     0,     0, 1 },  /* xn--czrw28b.tw */
+  { 16934,     0,     0, 1 },  /* xn--uc0atv.tw */
+  { 45932,     0,     0, 1 },  /* xn--zf0ao64a.tw */
   {    62,     0,     0, 1 },  /* ac.uk */
-  {   113,  7848,     3, 1 },  /* co.uk */
-  {  3671,  7851,     2, 1 },  /* gov.uk */
-  {  5082,     0,     0, 1 },  /* ltd.uk */
-  {  1694,     0,     0, 1 },  /* me.uk */
-  {  5737,     0,     0, 1 },  /* net.uk */
-  { 44107,     0,     0, 1 },  /* nhs.uk */
-  {  6053,     0,     0, 1 },  /* org.uk */
-  {  4839,     0,     0, 1 },  /* plc.uk */
-  { 44111,     0,     0, 1 },  /* police.uk */
-  {  1146,  3853,     1, 0 },  /* sch.uk */
-  {  4871,  7853,     3, 1 },  /* ak.us */
-  {   290,  7853,     3, 1 },  /* al.us */
-  {   494,  7853,     3, 1 },  /* ar.us */
-  {   537,  7853,     3, 1 },  /* as.us */
-  {   671,  7853,     3, 1 },  /* az.us */
-  {   221,  7853,     3, 1 },  /* ca.us */
-  { 11353,     0,     0, 1 },  /* cloudns.us */
-  {   113,  7853,     3, 1 },  /* co.us */
-  {  2005,  7853,     3, 1 },  /* ct.us */
-  { 12771,  7853,     3, 1 },  /* dc.us */
-  {  2277,  7853,     3, 1 },  /* de.us */
-  {  5814,     0,     0, 1 },  /* dni.us */
-  { 16181,     0,     0, 1 },  /* drud.us */
-  { 11293,     0,     0, 1 },  /* fed.us */
-  {   210,  7853,     3, 1 },  /* fl.us */
-  {  3340,  7853,     3, 1 },  /* ga.us */
-  { 44126,     0,     0, 1 },  /* golffan.us */
-  {  3753,  7853,     3, 1 },  /* gu.us */
-  {   512,  7856,     2, 1 },  /* hi.us */
-  {   547,  7853,     3, 1 },  /* ia.us */
-  {   437,  7853,     3, 1 },  /* id.us */
-  {  2652,  7853,     3, 1 },  /* il.us */
-  {   898,  7853,     3, 1 },  /* in.us */
-  { 44134,     0,     0, 1 },  /* is-by.us */
-  {  8284,     0,     0, 1 },  /* isa.us */
-  { 32353,     0,     0, 1 },  /* kids.us */
-  {  6826,  7853,     3, 1 },  /* ks.us */
-  {  4684,  7853,     3, 1 },  /* ky.us */
-  {  2174,  7853,     3, 1 },  /* la.us */
-  { 44140,     0,     0, 1 },  /* land-4-sale.us */
-  {  5130,  3679,     3, 1 },  /* ma.us */
-  {  5299,  7853,     3, 1 },  /* md.us */
-  {  1694,  7853,     3, 1 },  /* me.us */
-  {  5376,  7853,     3, 1 },  /* mi.us */
-  {  5424,  7853,     3, 1 },  /* mn.us */
-  {  3585,  7853,     3, 1 },  /* mo.us */
-  {  1060,  7853,     3, 1 },  /* ms.us */
-  {  5588,  7853,     3, 1 },  /* mt.us */
-  {  5500,  7853,     3, 1 },  /* nc.us */
-  {   727,  7856,     2, 1 },  /* nd.us */
-  {  1204,  7853,     3, 1 },  /* ne.us */
-  { 12931,  7853,     3, 1 },  /* nh.us */
-  {  4446,  7853,     3, 1 },  /* nj.us */
-  { 12038,  7853,     3, 1 },  /* nm.us */
-  { 30191,     0,     0, 1 },  /* noip.us */
-  { 44152,     0,     0, 1 },  /* nsn.us */
-  { 12947,  7853,     3, 1 },  /* nv.us */
-  {   206,  7853,     3, 1 },  /* ny.us */
-  {  6777,  7853,     3, 1 },  /* oh.us */
-  {  1127,  7853,     3, 1 },  /* ok.us */
-  {   137,  7853,     3, 1 },  /* or.us */
-  {   522,  7853,     3, 1 },  /* pa.us */
-  { 44156,     0,     0, 1 },  /* pointto.us */
-  {  6385,  7853,     3, 1 },  /* pr.us */
-  {  2979,  7853,     3, 1 },  /* ri.us */
-  {  2159,  7853,     3, 1 },  /* sc.us */
-  {  5360,  7856,     2, 1 },  /* sd.us */
-  { 41755,     0,     0, 1 },  /* stuff-4-sale.us */
-  {  5592,  7853,     3, 1 },  /* tn.us */
-  { 13011,  7853,     3, 1 },  /* tx.us */
-  {  3823,  7853,     3, 1 },  /* ut.us */
-  {   834,  7853,     3, 1 },  /* va.us */
-  {  8230,  7853,     3, 1 },  /* vi.us */
-  { 13035,  7853,     3, 1 },  /* vt.us */
-  {  5943,  7853,     3, 1 },  /* wa.us */
-  {  4604,  7853,     3, 1 },  /* wi.us */
-  { 13059,  7861,     1, 1 },  /* wv.us */
-  { 13067,  7853,     3, 1 },  /* wy.us */
-  {  1580,     0,     0, 1 },  /* cc.ma.us */
-  { 15451,  7858,     3, 1 },  /* k12.ma.us */
-  { 15459,     0,     0, 1 },  /* lib.ma.us */
-  {  1914,  3838,     1, 1 },  /* com.uy */
-  {  2623,     0,     0, 1 },  /* edu.uy */
-  { 44176,     0,     0, 1 },  /* gub.uy */
-  {  4170,     0,     0, 1 },  /* mil.uy */
-  {  5737,     0,     0, 1 },  /* net.uy */
-  {  6053,     0,     0, 1 },  /* org.uy */
-  { 13441,  3853,     1, 0 },  /* advisor.ws */
-  {  1914,     0,     0, 1 },  /* com.ws */
-  { 11559,     0,     0, 1 },  /* dyndns.ws */
-  {  2623,     0,     0, 1 },  /* edu.ws */
-  {  3671,     0,     0, 1 },  /* gov.ws */
-  { 44184,     0,     0, 1 },  /* mypets.ws */
-  {  5737,     0,     0, 1 },  /* net.ws */
-  {  6053,     0,     0, 1 },  /* org.ws */
+  { 11692,     0,     0, 1 },  /* barsy.uk */
+  {   113,  8223,     7, 1 },  /* co.uk */
+  {  3665,  8230,     2, 1 },  /* gov.uk */
+  {  5070,     0,     0, 1 },  /* ltd.uk */
+  {  1690,     0,     0, 1 },  /* me.uk */
+  {  5710,     0,     0, 1 },  /* net.uk */
+  { 46317,     0,     0, 1 },  /* nhs.uk */
+  {  6026,  8232,     3, 1 },  /* org.uk */
+  {  4825,     0,     0, 1 },  /* plc.uk */
+  { 46321,     0,     0, 1 },  /* police.uk */
+  {  1140,  4048,     1, 0 },  /* sch.uk */
+  {  4851,  8235,     3, 1 },  /* ak.us */
+  {   290,  8235,     3, 1 },  /* al.us */
+  {   494,  8235,     3, 1 },  /* ar.us */
+  {   537,  8235,     3, 1 },  /* as.us */
+  {   671,  8235,     3, 1 },  /* az.us */
+  {   221,  8235,     3, 1 },  /* ca.us */
+  { 11510,     0,     0, 1 },  /* cloudns.us */
+  {   113,  8235,     3, 1 },  /* co.us */
+  {  2001,  8235,     3, 1 },  /* ct.us */
+  { 13660,  8235,     3, 1 },  /* dc.us */
+  {  2273,  8235,     3, 1 },  /* de.us */
+  {  5787,     0,     0, 1 },  /* dni.us */
+  { 17299,     0,     0, 1 },  /* drud.us */
+  { 11439,     0,     0, 1 },  /* fed.us */
+  {   210,  8235,     3, 1 },  /* fl.us */
+  { 43512,     0,     0, 1 },  /* freeddns.us */
+  {  3334,  8235,     3, 1 },  /* ga.us */
+  { 46357,     0,     0, 1 },  /* golffan.us */
+  {  3747,  8235,     3, 1 },  /* gu.us */
+  {   512,  8238,     2, 1 },  /* hi.us */
+  {   547,  8235,     3, 1 },  /* ia.us */
+  {   437,  8235,     3, 1 },  /* id.us */
+  {  2651,  8235,     3, 1 },  /* il.us */
+  {   898,  8235,     3, 1 },  /* in.us */
+  { 46365,     0,     0, 1 },  /* is-by.us */
+  {  8285,     0,     0, 1 },  /* isa.us */
+  { 34256,     0,     0, 1 },  /* kids.us */
+  {  6791,  8235,     3, 1 },  /* ks.us */
+  {  4670,  8235,     3, 1 },  /* ky.us */
+  {  2170,  8235,     3, 1 },  /* la.us */
+  { 46371,     0,     0, 1 },  /* land-4-sale.us */
+  {  5118,  3866,     3, 1 },  /* ma.us */
+  {  5287,  8235,     3, 1 },  /* md.us */
+  {  1690,  8235,     3, 1 },  /* me.us */
+  {  5364,  8243,    11, 1 },  /* mi.us */
+  {  5412,  8235,     3, 1 },  /* mn.us */
+  {  3579,  8235,     3, 1 },  /* mo.us */
+  {  1060,  8235,     3, 1 },  /* ms.us */
+  {  5566,  8235,     3, 1 },  /* mt.us */
+  {  4198,  8235,     3, 1 },  /* nc.us */
+  {   727,  8238,     2, 1 },  /* nd.us */
+  {  1198,  8235,     3, 1 },  /* ne.us */
+  { 13820,  8235,     3, 1 },  /* nh.us */
+  {  4432,  8235,     3, 1 },  /* nj.us */
+  { 12825,  8235,     3, 1 },  /* nm.us */
+  { 32079,     0,     0, 1 },  /* noip.us */
+  { 46383,     0,     0, 1 },  /* nsn.us */
+  { 13836,  8235,     3, 1 },  /* nv.us */
+  {   206,  8235,     3, 1 },  /* ny.us */
+  {  6743,  8235,     3, 1 },  /* oh.us */
+  {  1127,  8235,     3, 1 },  /* ok.us */
+  {   137,  8235,     3, 1 },  /* or.us */
+  {   522,  8235,     3, 1 },  /* pa.us */
+  { 46387,     0,     0, 1 },  /* pointto.us */
+  {  6351,  8235,     3, 1 },  /* pr.us */
+  {  2978,  8235,     3, 1 },  /* ri.us */
+  {  2155,  8235,     3, 1 },  /* sc.us */
+  {  5348,  8238,     2, 1 },  /* sd.us */
+  { 43868,     0,     0, 1 },  /* stuff-4-sale.us */
+  {  5570,  8235,     3, 1 },  /* tn.us */
+  { 13900,  8235,     3, 1 },  /* tx.us */
+  {  3817,  8235,     3, 1 },  /* ut.us */
+  {   834,  8235,     3, 1 },  /* va.us */
+  {  8231,  8235,     3, 1 },  /* vi.us */
+  { 13924,  8235,     3, 1 },  /* vt.us */
+  {  5916,  8235,     3, 1 },  /* wa.us */
+  {  4590,  8235,     3, 1 },  /* wi.us */
+  { 13948,  8254,     1, 1 },  /* wv.us */
+  { 13956,  8235,     3, 1 },  /* wy.us */
+  {  1573,     0,     0, 1 },  /* cc.ma.us */
+  { 16571,  8240,     3, 1 },  /* k12.ma.us */
+  { 16579,     0,     0, 1 },  /* lib.ma.us */
+  {  1910,  4032,     1, 1 },  /* com.uy */
+  {  2622,     0,     0, 1 },  /* edu.uy */
+  { 46437,     0,     0, 1 },  /* gub.uy */
+  {  4157,     0,     0, 1 },  /* mil.uy */
+  {  5710,     0,     0, 1 },  /* net.uy */
+  {  5943,     0,     0, 1 },  /* nom.uy */
+  {  6026,     0,     0, 1 },  /* org.uy */
+  { 14308,  4048,     1, 0 },  /* advisor.ws */
+  { 46445,     0,     0, 1 },  /* cloud66.ws */
+  {  1910,     0,     0, 1 },  /* com.ws */
+  { 11733,     0,     0, 1 },  /* dyndns.ws */
+  {  2622,     0,     0, 1 },  /* edu.ws */
+  {  3665,     0,     0, 1 },  /* gov.ws */
+  { 46453,     0,     0, 1 },  /* mypets.ws */
+  {  5710,     0,     0, 1 },  /* net.ws */
+  {  6026,     0,     0, 1 },  /* org.ws */
   {    62,     0,     0, 1 },  /* ac.za */
-  { 44324,     0,     0, 1 },  /* agric.za */
-  {  5078,     0,     0, 1 },  /* alt.za */
-  {   113,  3838,     1, 1 },  /* co.za */
-  {  2623,     0,     0, 1 },  /* edu.za */
-  {  3671,     0,     0, 1 },  /* gov.za */
-  { 44330,     0,     0, 1 },  /* grondar.za */
-  {  4819,     0,     0, 1 },  /* law.za */
-  {  4170,     0,     0, 1 },  /* mil.za */
-  {  5737,     0,     0, 1 },  /* net.za */
+  { 46602,     0,     0, 1 },  /* agric.za */
+  {  5066,     0,     0, 1 },  /* alt.za */
+  {   113,  4032,     1, 1 },  /* co.za */
+  {  2622,     0,     0, 1 },  /* edu.za */
+  {  3665,     0,     0, 1 },  /* gov.za */
+  { 46608,     0,     0, 1 },  /* grondar.za */
+  {  4805,     0,     0, 1 },  /* law.za */
+  {  4157,     0,     0, 1 },  /* mil.za */
+  {  5710,     0,     0, 1 },  /* net.za */
   {   977,     0,     0, 1 },  /* ngo.za */
-  {  7784,     0,     0, 1 },  /* nis.za */
-  {  5970,     0,     0, 1 },  /* nom.za */
-  {  6053,     0,     0, 1 },  /* org.za */
-  {  7031,     0,     0, 1 },  /* school.za */
-  {  7908,     0,     0, 1 },  /* tm.za */
-  { 12109,     0,     0, 1 },  /* web.za */
-  { 11371,     0,     0, 1 },  /* lima.zone */
-  { 44338,  3853,     1, 0 },  /* triton.zone */
+  {  7765,     0,     0, 1 },  /* nis.za */
+  {  5943,     0,     0, 1 },  /* nom.za */
+  {  6026,     0,     0, 1 },  /* org.za */
+  {  7001,     0,     0, 1 },  /* school.za */
+  {  7890,     0,     0, 1 },  /* tm.za */
+  { 12075,     0,     0, 1 },  /* web.za */
+  { 11528,     0,     0, 1 },  /* lima.zone */
+  { 46616,  4048,     1, 0 },  /* triton.zone */
 };
 
 static const REGISTRY_U16 kLeafNodeTable[] = {
- 1914,  /* com.ac */
- 2623,  /* edu.ac */
- 3671,  /* gov.ac */
- 4170,  /* mil.ac */
- 5737,  /* net.ac */
- 6053,  /* org.ac */
- 5970,  /* nom.ad */
+ 1910,  /* com.ac */
+ 2622,  /* edu.ac */
+ 3665,  /* gov.ac */
+ 4157,  /* mil.ac */
+ 5710,  /* net.ac */
+ 6026,  /* org.ac */
+10782,  /* official.academy */
+ 5943,  /* nom.ad */
    62,  /* ac.ae */
-10645,  /* blogspot.ae */
+10791,  /* blogspot.ae */
   113,  /* co.ae */
- 3671,  /* gov.ae */
- 4170,  /* mil.ae */
- 5737,  /* net.ae */
- 6053,  /* org.ae */
- 1146,  /* sch.ae */
-10654,  /* accident-investigation.aero */
-10677,  /* accident-prevention.aero */
-10697,  /* aerobatic.aero */
- 1846,  /* aeroclub.aero */
-10707,  /* aerodrome.aero */
-10717,  /* agents.aero */
-10724,  /* air-surveillance.aero */
-10741,  /* air-traffic-control.aero */
-10761,  /* aircraft.aero */
-10770,  /* airline.aero */
-10778,  /* airport.aero */
-10786,  /* airtraffic.aero */
-10797,  /* ambulance.aero */
-10807,  /* amusement.aero */
-10827,  /* association.aero */
+ 3665,  /* gov.ae */
+ 4157,  /* mil.ae */
+ 5710,  /* net.ae */
+ 5943,  /* nom.ae */
+ 6026,  /* org.ae */
+ 1140,  /* sch.ae */
+10800,  /* accident-investigation.aero */
+10823,  /* accident-prevention.aero */
+10843,  /* aerobatic.aero */
+ 1842,  /* aeroclub.aero */
+10853,  /* aerodrome.aero */
+10863,  /* agents.aero */
+10870,  /* air-surveillance.aero */
+10887,  /* air-traffic-control.aero */
+10907,  /* aircraft.aero */
+10916,  /* airline.aero */
+10924,  /* airport.aero */
+10932,  /* airtraffic.aero */
+10943,  /* ambulance.aero */
+10953,  /* amusement.aero */
+10973,  /* association.aero */
   622,  /* author.aero */
-10839,  /* ballooning.aero */
- 1216,  /* broker.aero */
-10850,  /* caa.aero */
-10854,  /* cargo.aero */
- 1528,  /* catering.aero */
-10860,  /* certification.aero */
-10874,  /* championship.aero */
-10887,  /* charter.aero */
-10895,  /* civilaviation.aero */
- 1850,  /* club.aero */
-10909,  /* conference.aero */
-10920,  /* consultant.aero */
- 1989,  /* consulting.aero */
-10753,  /* control.aero */
-10931,  /* council.aero */
-10939,  /* crew.aero */
- 2374,  /* design.aero */
-10944,  /* dgca.aero */
-10949,  /* educator.aero */
-10958,  /* emergency.aero */
-10968,  /* engine.aero */
- 2675,  /* engineer.aero */
-10975,  /* entertainment.aero */
- 2724,  /* equipment.aero */
- 2836,  /* exchange.aero */
+10985,  /* ballooning.aero */
+ 1210,  /* broker.aero */
+10996,  /* caa.aero */
+11000,  /* cargo.aero */
+ 1521,  /* catering.aero */
+11006,  /* certification.aero */
+11020,  /* championship.aero */
+11033,  /* charter.aero */
+11041,  /* civilaviation.aero */
+ 1846,  /* club.aero */
+11055,  /* conference.aero */
+11066,  /* consultant.aero */
+ 1985,  /* consulting.aero */
+10899,  /* control.aero */
+11077,  /* council.aero */
+11085,  /* crew.aero */
+ 2370,  /* design.aero */
+11090,  /* dgca.aero */
+11095,  /* educator.aero */
+11104,  /* emergency.aero */
+11114,  /* engine.aero */
+ 2674,  /* engineer.aero */
+11121,  /* entertainment.aero */
+ 2723,  /* equipment.aero */
+ 2835,  /* exchange.aero */
   369,  /* express.aero */
-10989,  /* federation.aero */
-11000,  /* flight.aero */
-11007,  /* freight.aero */
-11015,  /* fuel.aero */
-11024,  /* gliding.aero */
-11032,  /* government.aero */
-11043,  /* groundhandling.aero */
- 3738,  /* group.aero */
-11020,  /* hanggliding.aero */
-11058,  /* homebuilt.aero */
- 4255,  /* insurance.aero */
-11068,  /* journal.aero */
-11076,  /* journalist.aero */
-11087,  /* leasing.aero */
- 4528,  /* logistics.aero */
-11095,  /* magazine.aero */
-11104,  /* maintenance.aero */
- 5306,  /* media.aero */
-11116,  /* microlight.aero */
-11127,  /* modelling.aero */
-11137,  /* navigation.aero */
-11148,  /* parachuting.aero */
-11160,  /* paragliding.aero */
-10817,  /* passenger-association.aero */
-11172,  /* pilot.aero */
+11135,  /* federation.aero */
+11146,  /* flight.aero */
+11153,  /* freight.aero */
+11161,  /* fuel.aero */
+11170,  /* gliding.aero */
+11178,  /* government.aero */
+11189,  /* groundhandling.aero */
+ 3732,  /* group.aero */
+11166,  /* hanggliding.aero */
+11204,  /* homebuilt.aero */
+ 4246,  /* insurance.aero */
+11214,  /* journal.aero */
+11222,  /* journalist.aero */
+11233,  /* leasing.aero */
+ 4514,  /* logistics.aero */
+11241,  /* magazine.aero */
+11250,  /* maintenance.aero */
+ 5294,  /* media.aero */
+11262,  /* microlight.aero */
+11273,  /* modelling.aero */
+11283,  /* navigation.aero */
+11294,  /* parachuting.aero */
+11306,  /* paragliding.aero */
+10963,  /* passenger-association.aero */
+11318,  /* pilot.aero */
   371,  /* press.aero */
-11178,  /* production.aero */
-11189,  /* recreation.aero */
-11200,  /* repbody.aero */
- 6284,  /* res.aero */
- 1384,  /* research.aero */
-11208,  /* rotorcraft.aero */
- 6891,  /* safety.aero */
-11219,  /* scientist.aero */
- 7136,  /* services.aero */
- 4092,  /* show.aero */
-11229,  /* skydiving.aero */
- 7360,  /* software.aero */
-11244,  /* student.aero */
-11252,  /* trader.aero */
- 7986,  /* trading.aero */
-11272,  /* trainer.aero */
- 2119,  /* union.aero */
-11280,  /* workinggroup.aero */
- 8605,  /* works.aero */
- 1914,  /* com.af */
- 2623,  /* edu.af */
- 3671,  /* gov.af */
- 5737,  /* net.af */
- 6053,  /* org.af */
+11324,  /* production.aero */
+11335,  /* recreation.aero */
+11346,  /* repbody.aero */
+ 6244,  /* res.aero */
+ 1377,  /* research.aero */
+11354,  /* rotorcraft.aero */
+ 6860,  /* safety.aero */
+11365,  /* scientist.aero */
+ 7106,  /* services.aero */
+ 4083,  /* show.aero */
+11375,  /* skydiving.aero */
+ 7330,  /* software.aero */
+11390,  /* student.aero */
+11398,  /* trader.aero */
+ 7981,  /* trading.aero */
+11418,  /* trainer.aero */
+ 2115,  /* union.aero */
+11426,  /* workinggroup.aero */
+ 8615,  /* works.aero */
+ 1910,  /* com.af */
+ 2622,  /* edu.af */
+ 3665,  /* gov.af */
+ 5710,  /* net.af */
+ 5943,  /* nom.af */
+ 6026,  /* org.af */
   113,  /* co.ag */
- 1914,  /* com.ag */
- 5737,  /* net.ag */
- 5970,  /* nom.ag */
- 6053,  /* org.ag */
- 1914,  /* com.ai */
- 5737,  /* net.ai */
- 5923,  /* off.ai */
- 6053,  /* org.ai */
-10645,  /* blogspot.al */
- 1914,  /* com.al */
- 2623,  /* edu.al */
- 3671,  /* gov.al */
- 4170,  /* mil.al */
- 5737,  /* net.al */
- 6053,  /* org.al */
-10645,  /* blogspot.am */
+ 1910,  /* com.ag */
+ 5710,  /* net.ag */
+ 5943,  /* nom.ag */
+ 6026,  /* org.ag */
+ 1910,  /* com.ai */
+ 5710,  /* net.ai */
+ 5943,  /* nom.ai */
+ 5896,  /* off.ai */
+ 6026,  /* org.ai */
+10791,  /* blogspot.al */
+ 1910,  /* com.al */
+ 2622,  /* edu.al */
+ 3665,  /* gov.al */
+ 4157,  /* mil.al */
+ 5710,  /* net.al */
+ 5943,  /* nom.al */
+ 6026,  /* org.al */
+10791,  /* blogspot.am */
   113,  /* co.ao */
- 1860,  /* ed.ao */
-11297,  /* gv.ao */
- 2099,  /* it.ao */
+ 1856,  /* ed.ao */
+11443,  /* gv.ao */
+ 2095,  /* it.ao */
  1037,  /* og.ao */
-11301,  /* pb.ao */
-11325,  /* e164.arpa */
-11330,  /* in-addr.arpa */
-11338,  /* ip6.arpa */
- 4338,  /* iris.arpa */
-11345,  /* uri.arpa */
-11349,  /* urn.arpa */
- 3671,  /* gov.as */
-11353,  /* cloudns.asia */
-11435,  /* *.ex.ortsinfo.at */
- 2004,  /* act.edu.au */
-11442,  /* nsw.edu.au */
+11451,  /* pb.ao */
+11454,  /* hasura.app */
+11482,  /* e164.arpa */
+11487,  /* in-addr.arpa */
+11495,  /* ip6.arpa */
+ 4329,  /* iris.arpa */
+11502,  /* uri.arpa */
+11506,  /* urn.arpa */
+ 3665,  /* gov.as */
+11510,  /* cloudns.asia */
+11599,  /* *.ex.futurecms.at */
+ 2000,  /* act.edu.au */
+11618,  /* nsw.edu.au */
    97,  /* nt.edu.au */
-11455,  /* qld.edu.au */
- 1494,  /* sa.edu.au */
+11630,  /* qld.edu.au */
+ 1487,  /* sa.edu.au */
   536,  /* tas.edu.au */
-11460,  /* vic.edu.au */
- 5943,  /* wa.edu.au */
-11455,  /* qld.gov.au */
- 1494,  /* sa.gov.au */
+11635,  /* vic.edu.au */
+ 5916,  /* wa.edu.au */
+11630,  /* qld.gov.au */
+ 1487,  /* sa.gov.au */
   536,  /* tas.gov.au */
-11460,  /* vic.gov.au */
- 5943,  /* wa.gov.au */
- 1914,  /* com.aw */
+11635,  /* vic.gov.au */
+ 5916,  /* wa.gov.au */
+ 1910,  /* com.aw */
   986,  /* biz.az */
- 1914,  /* com.az */
- 2623,  /* edu.az */
- 3671,  /* gov.az */
- 3152,  /* info.az */
- 3617,  /* int.az */
- 4170,  /* mil.az */
- 5695,  /* name.az */
- 5737,  /* net.az */
- 6053,  /* org.az */
+ 1910,  /* com.az */
+ 2622,  /* edu.az */
+ 3665,  /* gov.az */
+ 3149,  /* info.az */
+ 3611,  /* int.az */
+ 4157,  /* mil.az */
+ 5672,  /* name.az */
+ 5710,  /* net.az */
+ 6026,  /* org.az */
   469,  /* pp.az */
- 6410,  /* pro.az */
+ 6376,  /* pro.az */
+10791,  /* blogspot.ba */
+ 1910,  /* com.ba */
+ 2622,  /* edu.ba */
+ 3665,  /* gov.ba */
+ 4157,  /* mil.ba */
+ 5710,  /* net.ba */
+ 6026,  /* org.ba */
   986,  /* biz.bb */
   113,  /* co.bb */
- 1914,  /* com.bb */
- 2623,  /* edu.bb */
- 3671,  /* gov.bb */
- 3152,  /* info.bb */
- 5737,  /* net.bb */
- 6053,  /* org.bb */
- 7512,  /* store.bb */
- 2549,  /* tv.bb */
-11487,  /* 0.bg */
-11492,  /* 1.bg */
-11496,  /* 2.bg */
-11499,  /* 3.bg */
-11328,  /* 4.bg */
-11504,  /* 5.bg */
-11340,  /* 6.bg */
-11509,  /* 7.bg */
-11511,  /* 8.bg */
-11513,  /* 9.bg */
+ 1910,  /* com.bb */
+ 2622,  /* edu.bb */
+ 3665,  /* gov.bb */
+ 3149,  /* info.bb */
+ 5710,  /* net.bb */
+ 6026,  /* org.bb */
+ 7493,  /* store.bb */
+ 2545,  /* tv.bb */
+11662,  /* 0.bg */
+11667,  /* 1.bg */
+11670,  /* 2.bg */
+11673,  /* 3.bg */
+11485,  /* 4.bg */
+11678,  /* 5.bg */
+11497,  /* 6.bg */
+11683,  /* 7.bg */
+11688,  /* 8.bg */
+11690,  /* 9.bg */
     2,  /* a.bg */
    18,  /* b.bg */
-11518,  /* barsy.bg */
-10645,  /* blogspot.bg */
+11692,  /* barsy.bg */
+10791,  /* blogspot.bg */
    36,  /* c.bg */
   142,  /* d.bg */
    32,  /* e.bg */
@@ -4850,4014 +5092,4221 @@ static const REGISTRY_U16 kLeafNodeTable[] = {
   110,  /* s.bg */
    25,  /* t.bg */
   585,  /* u.bg */
- 1291,  /* v.bg */
+ 1285,  /* v.bg */
   650,  /* w.bg */
   398,  /* x.bg */
    71,  /* y.bg */
   326,  /* z.bg */
+ 1910,  /* com.bh */
+ 2622,  /* edu.bh */
+ 3665,  /* gov.bh */
+ 5710,  /* net.bh */
+ 6026,  /* org.bh */
   113,  /* co.bi */
- 1914,  /* com.bi */
- 2623,  /* edu.bi */
+ 1910,  /* com.bi */
+ 2622,  /* edu.bi */
   137,  /* or.bi */
- 6053,  /* org.bi */
-11353,  /* cloudns.biz */
-11551,  /* dscloud.biz */
-11559,  /* dyndns.biz */
-11566,  /* for-better.biz */
-11582,  /* for-more.biz */
-11591,  /* for-some.biz */
-11600,  /* for-the.biz */
-11608,  /* mmafan.biz */
-11615,  /* myftp.biz */
-11621,  /* no-ip.biz */
-11627,  /* selfip.biz */
-11634,  /* webhop.biz */
-11647,  /* asso.bj */
-11652,  /* barreau.bj */
-10645,  /* blogspot.bj */
-11660,  /* gouv.bj */
- 1914,  /* com.bo */
- 2623,  /* edu.bo */
-11304,  /* gob.bo */
- 3671,  /* gov.bo */
- 3617,  /* int.bo */
- 4170,  /* mil.bo */
- 5737,  /* net.bo */
- 6053,  /* org.bo */
- 2549,  /* tv.bo */
+ 6026,  /* org.bi */
+11510,  /* cloudns.biz */
+11725,  /* dscloud.biz */
+11733,  /* dyndns.biz */
+11740,  /* for-better.biz */
+11756,  /* for-more.biz */
+11765,  /* for-some.biz */
+11774,  /* for-the.biz */
+11782,  /* mmafan.biz */
+11789,  /* myftp.biz */
+11795,  /* no-ip.biz */
+11801,  /* selfip.biz */
+11808,  /* webhop.biz */
+11821,  /* asso.bj */
+11826,  /* barreau.bj */
+10791,  /* blogspot.bj */
+11834,  /* gouv.bj */
+11839,  /* academia.bo */
+11848,  /* agro.bo */
+  531,  /* arte.bo */
+ 1035,  /* blog.bo */
+11853,  /* bolivia.bo */
+11861,  /* ciencia.bo */
+ 1910,  /* com.bo */
+11869,  /* cooperativa.bo */
+11881,  /* democracia.bo */
+11892,  /* deporte.bo */
+11900,  /* ecologia.bo */
+11909,  /* economia.bo */
+ 2622,  /* edu.bo */
+11918,  /* empresa.bo */
+11461,  /* gob.bo */
+11926,  /* indigena.bo */
+11935,  /* industria.bo */
+ 3149,  /* info.bo */
+ 3611,  /* int.bo */
+11945,  /* medicina.bo */
+ 4157,  /* mil.bo */
+11954,  /* movimiento.bo */
+11465,  /* musica.bo */
+11965,  /* natural.bo */
+ 5710,  /* net.bo */
+11973,  /* nombre.bo */
+11980,  /* noticias.bo */
+ 6026,  /* org.bo */
+11989,  /* patria.bo */
+11996,  /* plurinacional.bo */
+12010,  /* politica.bo */
+12019,  /* profesional.bo */
+12031,  /* pueblo.bo */
+ 8300,  /* revista.bo */
+12038,  /* salud.bo */
+12044,  /* tecnologia.bo */
+12055,  /* tksat.bo */
+12061,  /* transporte.bo */
+ 2545,  /* tv.bo */
+12075,  /* web.bo */
+ 8550,  /* wiki.bo */
    62,  /* ac.gov.br */
   290,  /* al.gov.br */
   358,  /* am.gov.br */
- 1663,  /* ap.gov.br */
+ 1665,  /* ap.gov.br */
   308,  /* ba.gov.br */
   273,  /* ce.gov.br */
-11820,  /* df.gov.br */
+12288,  /* df.gov.br */
   558,  /* es.gov.br */
   257,  /* go.gov.br */
- 5130,  /* ma.gov.br */
- 4649,  /* mg.gov.br */
+ 5118,  /* ma.gov.br */
+ 4635,  /* mg.gov.br */
  1060,  /* ms.gov.br */
- 5588,  /* mt.gov.br */
+ 5566,  /* mt.gov.br */
   522,  /* pa.gov.br */
-11301,  /* pb.gov.br */
- 3724,  /* pe.gov.br */
-11829,  /* pi.gov.br */
- 6385,  /* pr.gov.br */
-11835,  /* rj.gov.br */
+11451,  /* pb.gov.br */
+ 3718,  /* pe.gov.br */
+12566,  /* pi.gov.br */
+ 6351,  /* pr.gov.br */
+12572,  /* rj.gov.br */
   821,  /* rn.gov.br */
   166,  /* ro.gov.br */
-11542,  /* rr.gov.br */
- 1273,  /* rs.gov.br */
- 2159,  /* sc.gov.br */
- 1499,  /* se.gov.br */
-11697,  /* sp.gov.br */
+11716,  /* rr.gov.br */
+ 1267,  /* rs.gov.br */
+ 2155,  /* sc.gov.br */
+ 1492,  /* se.gov.br */
+12214,  /* sp.gov.br */
   631,  /* to.gov.br */
+ 1910,  /* com.bs */
+ 2622,  /* edu.bs */
+ 3665,  /* gov.bs */
+ 5710,  /* net.bs */
+ 6026,  /* org.bs */
+ 6832,  /* we.bs */
   113,  /* co.bw */
- 6053,  /* org.bw */
- 1914,  /* com.bz */
- 2623,  /* edu.bz */
- 3671,  /* gov.bz */
- 5737,  /* net.bz */
- 6053,  /* org.bz */
- 6312,  /* za.bz */
-11353,  /* cloudns.cc */
-11855,  /* fantasyleague.cc */
-11869,  /* ftpaccess.cc */
-11879,  /* game-server.cc */
- 6239,  /* myphotos.cc */
-11891,  /* scrapping.cc */
-11901,  /* twmail.cc */
-11361,  /* 12hp.ch */
-11366,  /* 2ix.ch */
-11370,  /* 4lima.ch */
-10645,  /* blogspot.ch */
-11908,  /* gotdns.ch */
-11404,  /* lima-city.ch */
-11915,  /* square7.ch */
+ 6026,  /* org.bw */
+ 1910,  /* com.bz */
+ 2622,  /* edu.bz */
+ 3665,  /* gov.bz */
+ 5710,  /* net.bz */
+12575,  /* nym.bz */
+ 6026,  /* org.bz */
+ 6272,  /* za.bz */
+11510,  /* cloudns.cc */
+12596,  /* fantasyleague.cc */
+12610,  /* ftpaccess.cc */
+12620,  /* game-server.cc */
+ 6199,  /* myphotos.cc */
+12632,  /* scrapping.cc */
+12642,  /* twmail.cc */
+11518,  /* 12hp.ch */
+11523,  /* 2ix.ch */
+11527,  /* 4lima.ch */
+10791,  /* blogspot.ch */
+12650,  /* dnsking.ch */
+12658,  /* gotdns.ch */
+11571,  /* lima-city.ch */
+12665,  /* linkyard-cloud.ch */
+12680,  /* square7.ch */
    62,  /* ac.ci */
-11647,  /* asso.ci */
+11821,  /* asso.ci */
   113,  /* co.ci */
- 1914,  /* com.ci */
- 1860,  /* ed.ci */
- 2623,  /* edu.ci */
+ 1910,  /* com.ci */
+ 1856,  /* ed.ci */
+ 2622,  /* edu.ci */
   257,  /* go.ci */
-11660,  /* gouv.ci */
- 3617,  /* int.ci */
- 5299,  /* md.ci */
- 5737,  /* net.ci */
+11834,  /* gouv.ci */
+ 3611,  /* int.ci */
+ 5287,  /* md.ci */
+ 5710,  /* net.ci */
   137,  /* or.ci */
- 6053,  /* org.ci */
-11923,  /* presse.ci */
-11930,  /* xn--aroport-bya.ci */
-11946,  /* !www.ck */
-11435,  /* *.ck */
-10645,  /* blogspot.cl */
+ 6026,  /* org.ci */
+12688,  /* presse.ci */
+12695,  /* xn--aroport-bya.ci */
+12711,  /* !www.ck */
+11599,  /* *.ck */
+10791,  /* blogspot.cl */
   113,  /* co.cl */
-11304,  /* gob.cl */
- 3671,  /* gov.cl */
- 4170,  /* mil.cl */
+11461,  /* gob.cl */
+ 3665,  /* gov.cl */
+ 4157,  /* mil.cl */
+ 5943,  /* nom.cl */
+11692,  /* barsy.club */
+11510,  /* cloudns.club */
   113,  /* co.cm */
- 1914,  /* com.cm */
- 3671,  /* gov.cm */
- 5737,  /* net.cm */
- 7666,  /* elasticbeanstalk.cn-north-1.amazonaws.com.cn */
-11498,  /* s3.cn-north-1.amazonaws.com.cn */
-11498,  /* s3.dualstack.ap-northeast-1.amazonaws.com */
-14958,  /* alpha.bounty-full.com */
-14964,  /* beta.bounty-full.com */
-11489,  /* eu-1.evennode.com */
-14969,  /* eu-2.evennode.com */
-14974,  /* eu-3.evennode.com */
-14979,  /* us-1.evennode.com */
-14984,  /* us-2.evennode.com */
-14989,  /* us-3.evennode.com */
-14994,  /* apps.fbsbx.com */
- 2797,  /* eu.meteorapp.com */
-15003,  /* xen.prgmr.com */
- 2277,  /* de.cool */
+ 1910,  /* com.cm */
+ 3665,  /* gov.cm */
+ 5710,  /* net.cm */
+11672,  /* s3.cn-north-1.amazonaws.com.cn */
+12859,  /* cn-north-1.eb.amazonaws.com.cn */
+15940,  /* alpha.bounty-full.com */
+15946,  /* beta.bounty-full.com */
+15478,  /* ap-northeast-1.elasticbeanstalk.com */
+15496,  /* ap-northeast-2.elasticbeanstalk.com */
+15951,  /* ap-northeast-3.elasticbeanstalk.com */
+15514,  /* ap-south-1.elasticbeanstalk.com */
+15528,  /* ap-southeast-1.elasticbeanstalk.com */
+15546,  /* ap-southeast-2.elasticbeanstalk.com */
+15564,  /* ca-central-1.elasticbeanstalk.com */
+15590,  /* eu-central-1.elasticbeanstalk.com */
+15606,  /* eu-west-1.elasticbeanstalk.com */
+15619,  /* eu-west-2.elasticbeanstalk.com */
+15632,  /* eu-west-3.elasticbeanstalk.com */
+15681,  /* sa-east-1.elasticbeanstalk.com */
+15878,  /* us-east-1.elasticbeanstalk.com */
+15694,  /* us-east-2.elasticbeanstalk.com */
+15664,  /* us-gov-west-1.elasticbeanstalk.com */
+15724,  /* us-west-1.elasticbeanstalk.com */
+15737,  /* us-west-2.elasticbeanstalk.com */
+11664,  /* eu-1.evennode.com */
+15966,  /* eu-2.evennode.com */
+15971,  /* eu-3.evennode.com */
+15976,  /* eu-4.evennode.com */
+15981,  /* us-1.evennode.com */
+15986,  /* us-2.evennode.com */
+15991,  /* us-3.evennode.com */
+15996,  /* us-4.evennode.com */
+16007,  /* apps.fbsbx.com */
+  468,  /* app.lmpm.com */
+ 2796,  /* eu.meteorapp.com */
+16016,  /* xen.prgmr.com */
+11669,  /* u2.xnbay.com */
+16020,  /* u2-local.xnbay.com */
+14892,  /* ravendb.community */
+ 2273,  /* de.cool */
    62,  /* ac.cr */
   113,  /* co.cr */
- 1860,  /* ed.cr */
- 2994,  /* fi.cr */
+ 1856,  /* ed.cr */
+ 2993,  /* fi.cr */
   257,  /* go.cr */
   137,  /* or.cr */
- 1494,  /* sa.cr */
- 1914,  /* com.cu */
- 2623,  /* edu.cu */
- 3671,  /* gov.cu */
- 5796,  /* inf.cu */
- 5737,  /* net.cu */
- 6053,  /* org.cu */
- 1914,  /* com.cw */
- 2623,  /* edu.cw */
- 5737,  /* net.cw */
- 6053,  /* org.cw */
- 7800,  /* ath.cx */
- 3671,  /* gov.cx */
- 3152,  /* info.cx */
- 1840,  /* cloud.metacentrum.cz */
-15044,  /* custom.metacentrum.cz */
-15431,  /* dyn.cosidns.de */
-15431,  /* dyn.ddnss.de */
-11559,  /* dyndns.ddnss.de */
+ 1487,  /* sa.cr */
+ 1910,  /* com.cu */
+ 2622,  /* edu.cu */
+ 3665,  /* gov.cu */
+ 5769,  /* inf.cu */
+ 5710,  /* net.cu */
+ 6026,  /* org.cu */
+ 1910,  /* com.cw */
+ 2622,  /* edu.cw */
+ 5710,  /* net.cw */
+ 6026,  /* org.cw */
+ 7782,  /* ath.cx */
+ 3665,  /* gov.cx */
+ 3149,  /* info.cx */
+ 1836,  /* cloud.metacentrum.cz */
+16071,  /* custom.metacentrum.cz */
+16078,  /* flt.cloud.muni.cz */
+ 7415,  /* usr.cloud.muni.cz */
+16532,  /* dyn.cosidns.de */
+16532,  /* dyn.ddnss.de */
+11733,  /* dyndns.ddnss.de */
+16536,  /* customer.speedpartner.de */
+16545,  /* fastpanel.direct */
   986,  /* biz.dk */
-10645,  /* blogspot.dk */
+10791,  /* blogspot.dk */
   113,  /* co.dk */
-12095,  /* firm.dk */
-15435,  /* reg.dk */
- 7512,  /* store.dk */
+12882,  /* firm.dk */
+16555,  /* reg.dk */
+ 7493,  /* store.dk */
   527,  /* art.do */
- 1914,  /* com.do */
- 2623,  /* edu.do */
-11304,  /* gob.do */
- 3671,  /* gov.do */
- 4170,  /* mil.do */
- 5737,  /* net.do */
- 6053,  /* org.do */
-15439,  /* sld.do */
-12109,  /* web.do */
+ 1910,  /* com.do */
+ 2622,  /* edu.do */
+11461,  /* gob.do */
+ 3665,  /* gov.do */
+ 4157,  /* mil.do */
+ 5710,  /* net.do */
+ 6026,  /* org.do */
+16559,  /* sld.do */
+12075,  /* web.do */
   527,  /* art.dz */
-11647,  /* asso.dz */
- 1914,  /* com.dz */
- 2623,  /* edu.dz */
- 3671,  /* gov.dz */
- 5737,  /* net.dz */
- 6053,  /* org.dz */
-15447,  /* pol.dz */
- 1914,  /* com.ec */
- 2623,  /* edu.ec */
- 4206,  /* fin.ec */
-11304,  /* gob.ec */
- 3671,  /* gov.ec */
- 3152,  /* info.ec */
-15451,  /* k12.ec */
- 1859,  /* med.ec */
- 4170,  /* mil.ec */
- 5737,  /* net.ec */
- 6053,  /* org.ec */
- 6410,  /* pro.ec */
+11821,  /* asso.dz */
+ 1910,  /* com.dz */
+ 2622,  /* edu.dz */
+ 3665,  /* gov.dz */
+ 5710,  /* net.dz */
+ 6026,  /* org.dz */
+16567,  /* pol.dz */
+ 1910,  /* com.ec */
+ 2622,  /* edu.ec */
+ 4193,  /* fin.ec */
+11461,  /* gob.ec */
+ 3665,  /* gov.ec */
+ 3149,  /* info.ec */
+16571,  /* k12.ec */
+ 1855,  /* med.ec */
+ 4157,  /* mil.ec */
+ 5710,  /* net.ec */
+ 6026,  /* org.ec */
+ 6376,  /* pro.ec */
   986,  /* biz.et */
- 1914,  /* com.et */
- 2623,  /* edu.et */
- 3671,  /* gov.et */
- 3152,  /* info.et */
- 5695,  /* name.et */
- 5737,  /* net.et */
- 6053,  /* org.et */
-15520,  /* user.party.eus */
-15525,  /* ybo.faith */
-11832,  /* storj.farm */
-15533,  /* aland.fi */
-10645,  /* blogspot.fi */
- 3603,  /* dy.fi */
- 8541,  /* iki.fi */
- 6346,  /* ptplus.fit */
-15549,  /* aeroport.fr */
-15558,  /* assedic.fr */
-11647,  /* asso.fr */
- 1521,  /* avocat.fr */
-15566,  /* avoues.fr */
-10645,  /* blogspot.fr */
- 3767,  /* cci.fr */
-15573,  /* chambagri.fr */
-15583,  /* chirurgiens-dentistes.fr */
-15605,  /* chirurgiens-dentistes-en-france.fr */
- 1914,  /* com.fr */
-15637,  /* experts-comptables.fr */
-15656,  /* fbx-os.fr */
-15663,  /* fbxos.fr */
-12705,  /* freebox-os.fr */
-12716,  /* freeboxos.fr */
- 2845,  /* geometre-expert.fr */
-11660,  /* gouv.fr */
-15669,  /* greta.fr */
-15675,  /* huissier-justice.fr */
-15692,  /* medecin.fr */
- 5970,  /* nom.fr */
-15700,  /* notaires.fr */
-12106,  /* on-web.fr */
-15709,  /* pharmacien.fr */
- 6696,  /* port.fr */
-15720,  /* prd.fr */
-11923,  /* presse.fr */
- 7908,  /* tm.fr */
-15724,  /* veterinaire.fr */
- 1914,  /* com.ge */
- 2623,  /* edu.ge */
- 3671,  /* gov.ge */
- 4170,  /* mil.ge */
- 5737,  /* net.ge */
- 6053,  /* org.ge */
-15736,  /* pvt.ge */
+ 1910,  /* com.et */
+ 2622,  /* edu.et */
+ 3665,  /* gov.et */
+ 3149,  /* info.et */
+ 5672,  /* name.et */
+ 5710,  /* net.et */
+ 6026,  /* org.et */
+16513,  /* user.party.eus */
+16624,  /* ybo.faith */
+12569,  /* storj.farm */
+16632,  /* aland.fi */
+10791,  /* blogspot.fi */
+ 3597,  /* dy.fi */
+ 8551,  /* iki.fi */
+ 6306,  /* ptplus.fit */
+16648,  /* aeroport.fr */
+16657,  /* assedic.fr */
+11821,  /* asso.fr */
+ 1514,  /* avocat.fr */
+16665,  /* avoues.fr */
+10791,  /* blogspot.fr */
+ 3761,  /* cci.fr */
+16672,  /* chambagri.fr */
+16682,  /* chirurgiens-dentistes.fr */
+16704,  /* chirurgiens-dentistes-en-france.fr */
+ 1910,  /* com.fr */
+16736,  /* experts-comptables.fr */
+16755,  /* fbx-os.fr */
+16762,  /* fbxos.fr */
+13594,  /* freebox-os.fr */
+13605,  /* freeboxos.fr */
+ 2844,  /* geometre-expert.fr */
+11834,  /* gouv.fr */
+16768,  /* greta.fr */
+16774,  /* huissier-justice.fr */
+16791,  /* medecin.fr */
+ 5943,  /* nom.fr */
+16799,  /* notaires.fr */
+12072,  /* on-web.fr */
+16808,  /* pharmacien.fr */
+ 6662,  /* port.fr */
+16819,  /* prd.fr */
+12688,  /* presse.fr */
+ 7890,  /* tm.fr */
+16823,  /* veterinaire.fr */
+16835,  /* cnpy.gdn */
+ 1910,  /* com.ge */
+ 2622,  /* edu.ge */
+ 3665,  /* gov.ge */
+ 4157,  /* mil.ge */
+ 5710,  /* net.ge */
+ 5943,  /* nom.ge */
+ 6026,  /* org.ge */
+16840,  /* pvt.ge */
   113,  /* co.gg */
-15740,  /* cya.gg */
- 5737,  /* net.gg */
- 6053,  /* org.gg */
- 1914,  /* com.gh */
- 2623,  /* edu.gh */
- 3671,  /* gov.gh */
- 4170,  /* mil.gh */
- 6053,  /* org.gh */
- 1914,  /* com.gi */
- 2623,  /* edu.gi */
- 3671,  /* gov.gi */
- 5082,  /* ltd.gi */
-15744,  /* mod.gi */
- 6053,  /* org.gi */
+16844,  /* cya.gg */
+ 5710,  /* net.gg */
+ 6026,  /* org.gg */
+ 1910,  /* com.gh */
+ 2622,  /* edu.gh */
+ 3665,  /* gov.gh */
+ 4157,  /* mil.gh */
+ 6026,  /* org.gh */
+ 1910,  /* com.gi */
+ 2622,  /* edu.gi */
+ 3665,  /* gov.gi */
+ 5070,  /* ltd.gi */
+16848,  /* mod.gi */
+ 6026,  /* org.gi */
   113,  /* co.gl */
- 1914,  /* com.gl */
- 2623,  /* edu.gl */
- 5737,  /* net.gl */
- 6053,  /* org.gl */
+ 1910,  /* com.gl */
+ 2622,  /* edu.gl */
+ 5710,  /* net.gl */
+ 5943,  /* nom.gl */
+ 6026,  /* org.gl */
    62,  /* ac.gn */
- 1914,  /* com.gn */
- 2623,  /* edu.gn */
- 3671,  /* gov.gn */
- 5737,  /* net.gn */
- 6053,  /* org.gn */
- 1840,  /* cloud.goog */
-11647,  /* asso.gp */
- 1914,  /* com.gp */
- 2623,  /* edu.gp */
- 5427,  /* mobi.gp */
- 5737,  /* net.gp */
- 6053,  /* org.gp */
-10645,  /* blogspot.gr */
- 1914,  /* com.gr */
- 2623,  /* edu.gr */
- 3671,  /* gov.gr */
- 5737,  /* net.gr */
- 6053,  /* org.gr */
- 1914,  /* com.gt */
- 2623,  /* edu.gt */
-11304,  /* gob.gt */
-11731,  /* ind.gt */
- 4170,  /* mil.gt */
- 5737,  /* net.gt */
- 6053,  /* org.gt */
+ 1910,  /* com.gn */
+ 2622,  /* edu.gn */
+ 3665,  /* gov.gn */
+ 5710,  /* net.gn */
+ 6026,  /* org.gn */
+ 1836,  /* cloud.goog */
+11821,  /* asso.gp */
+ 1910,  /* com.gp */
+ 2622,  /* edu.gp */
+ 5415,  /* mobi.gp */
+ 5710,  /* net.gp */
+ 6026,  /* org.gp */
+10791,  /* blogspot.gr */
+ 1910,  /* com.gr */
+ 2622,  /* edu.gr */
+ 3665,  /* gov.gr */
+ 5710,  /* net.gr */
+12575,  /* nym.gr */
+ 6026,  /* org.gr */
+ 1910,  /* com.gt */
+ 2622,  /* edu.gt */
+11461,  /* gob.gt */
+12273,  /* ind.gt */
+ 4157,  /* mil.gt */
+ 5710,  /* net.gt */
+ 5943,  /* nom.gt */
+ 6026,  /* org.gt */
+ 1910,  /* com.gu */
+ 2622,  /* edu.gu */
+ 3665,  /* gov.gu */
+  356,  /* guam.gu */
+ 3149,  /* info.gu */
+ 5710,  /* net.gu */
+ 6026,  /* org.gu */
+12075,  /* web.gu */
   113,  /* co.gy */
- 1914,  /* com.gy */
- 2623,  /* edu.gy */
- 3671,  /* gov.gy */
- 5737,  /* net.gy */
- 6053,  /* org.gy */
-10645,  /* blogspot.hk */
- 1914,  /* com.hk */
- 2623,  /* edu.hk */
- 3671,  /* gov.hk */
-15748,  /* idv.hk */
-15752,  /* inc.hk */
- 5082,  /* ltd.hk */
- 5737,  /* net.hk */
- 6053,  /* org.hk */
- 8830,  /* xn--55qx5d.hk */
-15756,  /* xn--ciqpn.hk */
-15766,  /* xn--gmq050i.hk */
-15778,  /* xn--gmqw5a.hk */
- 9438,  /* xn--io0a7i.hk */
-15789,  /* xn--lcvr32d.hk */
-15801,  /* xn--mk0axi.hk */
- 9990,  /* xn--mxtq1m.hk */
-12049,  /* xn--od0alg.hk */
-15812,  /* xn--od0aq3b.hk */
-15824,  /* xn--tn0ag.hk */
-15834,  /* xn--uc0atv.hk */
-15845,  /* xn--uc0ay4a.hk */
-15857,  /* xn--wcvs22d.hk */
-15869,  /* xn--zf0avx.hk */
- 1914,  /* com.hn */
- 2623,  /* edu.hn */
-11304,  /* gob.hn */
- 4170,  /* mil.hn */
- 5737,  /* net.hn */
- 6053,  /* org.hn */
-15880,  /* cloudaccess.host */
- 7288,  /* freesite.host */
-15892,  /* opencraft.hosting */
-10645,  /* blogspot.hr */
- 1914,  /* com.hr */
-15902,  /* from.hr */
+ 1910,  /* com.gy */
+ 2622,  /* edu.gy */
+ 3665,  /* gov.gy */
+ 5710,  /* net.gy */
+12575,  /* nym.gy */
+ 6026,  /* org.gy */
+10791,  /* blogspot.hk */
+ 1910,  /* com.hk */
+ 2622,  /* edu.hk */
+ 3665,  /* gov.hk */
+16852,  /* idv.hk */
+ 4197,  /* inc.hk */
+ 5070,  /* ltd.hk */
+ 5710,  /* net.hk */
+ 6026,  /* org.hk */
+ 8877,  /* xn--55qx5d.hk */
+16856,  /* xn--ciqpn.hk */
+16866,  /* xn--gmq050i.hk */
+16878,  /* xn--gmqw5a.hk */
+ 9523,  /* xn--io0a7i.hk */
+16889,  /* xn--lcvr32d.hk */
+16901,  /* xn--mk0axi.hk */
+10100,  /* xn--mxtq1m.hk */
+12836,  /* xn--od0alg.hk */
+16912,  /* xn--od0aq3b.hk */
+16924,  /* xn--tn0ag.hk */
+16934,  /* xn--uc0atv.hk */
+16945,  /* xn--uc0ay4a.hk */
+16957,  /* xn--wcvs22d.hk */
+16969,  /* xn--zf0avx.hk */
+ 1910,  /* com.hn */
+ 2622,  /* edu.hn */
+11461,  /* gob.hn */
+ 4157,  /* mil.hn */
+ 5710,  /* net.hn */
+ 5943,  /* nom.hn */
+ 6026,  /* org.hn */
+16980,  /* cloudaccess.host */
+ 7258,  /* freesite.host */
+16992,  /* half.host */
+12948,  /* pcloud.host */
+16997,  /* opencraft.hosting */
+10791,  /* blogspot.hr */
+ 1910,  /* com.hr */
+17007,  /* from.hr */
   987,  /* iz.hr */
- 5695,  /* name.hr */
+ 5672,  /* name.hr */
   148,  /* adult.ht */
   527,  /* art.ht */
-11647,  /* asso.ht */
- 1914,  /* com.ht */
- 2048,  /* coop.ht */
- 2623,  /* edu.ht */
-12095,  /* firm.ht */
-11660,  /* gouv.ht */
- 3152,  /* info.ht */
- 1859,  /* med.ht */
- 5737,  /* net.ht */
- 6053,  /* org.ht */
-15907,  /* perso.ht */
-15447,  /* pol.ht */
- 6410,  /* pro.ht */
-15913,  /* rel.ht */
- 7234,  /* shop.ht */
-11484,  /* 2000.hu */
-15917,  /* agrar.hu */
-10645,  /* blogspot.hu */
-15923,  /* bolt.hu */
- 1514,  /* casino.hu */
- 1766,  /* city.hu */
+11821,  /* asso.ht */
+ 1910,  /* com.ht */
+ 2044,  /* coop.ht */
+ 2622,  /* edu.ht */
+12882,  /* firm.ht */
+11834,  /* gouv.ht */
+ 3149,  /* info.ht */
+ 1855,  /* med.ht */
+ 5710,  /* net.ht */
+ 6026,  /* org.ht */
+17012,  /* perso.ht */
+16567,  /* pol.ht */
+ 6376,  /* pro.ht */
+17018,  /* rel.ht */
+ 7204,  /* shop.ht */
+11659,  /* 2000.hu */
+17022,  /* agrar.hu */
+10791,  /* blogspot.hu */
+17028,  /* bolt.hu */
+ 1507,  /* casino.hu */
+ 1762,  /* city.hu */
   113,  /* co.hu */
-15928,  /* erotica.hu */
-15936,  /* erotika.hu */
- 3016,  /* film.hu */
- 3208,  /* forum.hu */
- 3390,  /* games.hu */
- 7747,  /* hotel.hu */
- 3152,  /* info.hu */
-15944,  /* ingatlan.hu */
-15953,  /* jogasz.hu */
-15960,  /* konyvelo.hu */
-15969,  /* lakas.hu */
- 5306,  /* media.hu */
- 5780,  /* news.hu */
- 6053,  /* org.hu */
-11418,  /* priv.hu */
-15975,  /* reklam.hu */
- 7157,  /* sex.hu */
- 7234,  /* shop.hu */
-15986,  /* sport.hu */
- 4890,  /* suli.hu */
-11423,  /* szex.hu */
- 7908,  /* tm.hu */
-15992,  /* tozsde.hu */
-15999,  /* utazas.hu */
- 8240,  /* video.hu */
-10645,  /* blogspot.ie */
- 3671,  /* gov.ie */
- 5082,  /* ltd.co.im */
- 4839,  /* plc.co.im */
+17033,  /* erotica.hu */
+17041,  /* erotika.hu */
+ 3015,  /* film.hu */
+ 3205,  /* forum.hu */
+ 3384,  /* games.hu */
+ 7728,  /* hotel.hu */
+ 3149,  /* info.hu */
+17049,  /* ingatlan.hu */
+17058,  /* jogasz.hu */
+17065,  /* konyvelo.hu */
+17074,  /* lakas.hu */
+ 5294,  /* media.hu */
+ 5753,  /* news.hu */
+ 6026,  /* org.hu */
+11594,  /* priv.hu */
+17080,  /* reklam.hu */
+ 7127,  /* sex.hu */
+ 7204,  /* shop.hu */
+ 7387,  /* sport.hu */
+ 4870,  /* suli.hu */
+11601,  /* szex.hu */
+ 7890,  /* tm.hu */
+17087,  /* tozsde.hu */
+17094,  /* utazas.hu */
+ 8241,  /* video.hu */
+10791,  /* blogspot.ie */
+ 3665,  /* gov.ie */
+12575,  /* nym.ie */
+ 5070,  /* ltd.co.im */
+ 4825,  /* plc.co.im */
    62,  /* ac.in */
-11518,  /* barsy.in */
-10645,  /* blogspot.in */
-11353,  /* cloudns.in */
+11692,  /* barsy.in */
+10791,  /* blogspot.in */
+11510,  /* cloudns.in */
   113,  /* co.in */
- 2623,  /* edu.in */
-12095,  /* firm.in */
- 8361,  /* gen.in */
- 3671,  /* gov.in */
-11731,  /* ind.in */
- 4170,  /* mil.in */
- 5737,  /* net.in */
- 1816,  /* nic.in */
- 6053,  /* org.in */
- 6284,  /* res.in */
-16024,  /* barrel-of-knowledge.info */
-16044,  /* barrell-of-knowledge.info */
-11353,  /* cloudns.info */
-16065,  /* dvrcam.info */
-16072,  /* dynamic-dns.info */
-11559,  /* dyndns.info */
-16084,  /* for-our.info */
-16092,  /* groks-the.info */
-16102,  /* groks-this.info */
-11577,  /* here-for-more.info */
- 1890,  /* ilovecollege.info */
-16113,  /* knowsitall.info */
-11621,  /* no-ip.info */
-16124,  /* nsupdate.info */
-11627,  /* selfip.info */
-11634,  /* webhop.info */
-16324,  /* customer.enonic.io */
-16341,  /* cust.dev.thingdust.io */
+ 2622,  /* edu.in */
+12882,  /* firm.in */
+ 8364,  /* gen.in */
+ 3665,  /* gov.in */
+12273,  /* ind.in */
+ 4157,  /* mil.in */
+ 5710,  /* net.in */
+ 1812,  /* nic.in */
+ 6026,  /* org.in */
+ 6244,  /* res.in */
+17118,  /* barrel-of-knowledge.info */
+17138,  /* barrell-of-knowledge.info */
+11692,  /* barsy.info */
+11510,  /* cloudns.info */
+17159,  /* dvrcam.info */
+17166,  /* dynamic-dns.info */
+11733,  /* dyndns.info */
+17178,  /* for-our.info */
+ 5630,  /* forumz.info */
+17186,  /* groks-the.info */
+17196,  /* groks-this.info */
+11751,  /* here-for-more.info */
+ 1886,  /* ilovecollege.info */
+17207,  /* knowsitall.info */
+17218,  /* mayfirst.info */
+11795,  /* no-ip.info */
+17227,  /* nsupdate.info */
+11801,  /* selfip.info */
+ 3147,  /* v-info.info */
+11808,  /* webhop.info */
+17487,  /* stage.nodeart.io */
+17493,  /* devices.resinstaging.io */
+17509,  /* cust.dev.thingdust.io */
    62,  /* ac.ir */
   113,  /* co.ir */
- 3671,  /* gov.ir */
+ 3665,  /* gov.ir */
   437,  /* id.ir */
- 5737,  /* net.ir */
- 6053,  /* org.ir */
- 1146,  /* sch.ir */
- 9605,  /* xn--mgba3a4f16a.ir */
- 9621,  /* xn--mgba3a4fra.ir */
-10645,  /* blogspot.is */
- 1914,  /* com.is */
-16346,  /* cupcake.is */
- 2623,  /* edu.is */
- 3671,  /* gov.is */
- 3617,  /* int.is */
- 5737,  /* net.is */
- 6053,  /* org.is */
- 1182,  /* abr.it */
-16354,  /* abruzzo.it */
+ 5710,  /* net.ir */
+ 6026,  /* org.ir */
+ 1140,  /* sch.ir */
+ 9690,  /* xn--mgba3a4f16a.ir */
+ 9706,  /* xn--mgba3a4fra.ir */
+10791,  /* blogspot.is */
+ 1910,  /* com.is */
+17514,  /* cupcake.is */
+ 2622,  /* edu.is */
+ 3665,  /* gov.is */
+ 3611,  /* int.is */
+ 5710,  /* net.is */
+ 6026,  /* org.is */
+17522,  /* 16-b.it */
+17527,  /* 32-b.it */
+17532,  /* 64-b.it */
+ 1176,  /* abr.it */
+17537,  /* abruzzo.it */
   226,  /* ag.it */
-16362,  /* agrigento.it */
+17545,  /* agrigento.it */
   290,  /* al.it */
-16372,  /* alessandria.it */
-16392,  /* alto-adige.it */
-16411,  /* altoadige.it */
+17555,  /* alessandria.it */
+17575,  /* alto-adige.it */
+17594,  /* altoadige.it */
   234,  /* an.it */
-16426,  /* ancona.it */
-16433,  /* andria-barletta-trani.it */
-16455,  /* andria-trani-barletta.it */
-16477,  /* andriabarlettatrani.it */
-16497,  /* andriatranibarletta.it */
+17609,  /* ancona.it */
+17616,  /* andria-barletta-trani.it */
+17638,  /* andria-trani-barletta.it */
+17660,  /* andriabarlettatrani.it */
+17680,  /* andriatranibarletta.it */
   448,  /* ao.it */
-16521,  /* aosta.it */
-16527,  /* aosta-valley.it */
-16540,  /* aostavalley.it */
-16558,  /* aoste.it */
- 1663,  /* ap.it */
+17704,  /* aosta.it */
+17710,  /* aosta-valley.it */
+17723,  /* aostavalley.it */
+17741,  /* aoste.it */
+ 1665,  /* ap.it */
   480,  /* aq.it */
-16565,  /* aquila.it */
+17748,  /* aquila.it */
   494,  /* ar.it */
-16572,  /* arezzo.it */
-16579,  /* ascoli-piceno.it */
-16593,  /* ascolipiceno.it */
-16606,  /* asti.it */
+17755,  /* arezzo.it */
+17762,  /* ascoli-piceno.it */
+17776,  /* ascolipiceno.it */
+17789,  /* asti.it */
   562,  /* at.it */
-16611,  /* av.it */
-16614,  /* avellino.it */
+17794,  /* av.it */
+17797,  /* avellino.it */
   308,  /* ba.it */
-16623,  /* balsan.it */
-16632,  /* bari.it */
-16637,  /* barletta-trani-andria.it */
-16659,  /* barlettatraniandria.it */
+17806,  /* balsan.it */
+17813,  /* balsan-sudtirol.it */
+17829,  /* balsan-suedtirol.it */
+17848,  /* bari.it */
+17853,  /* barletta-trani-andria.it */
+17875,  /* barlettatraniandria.it */
  1082,  /* bas.it */
-16679,  /* basilicata.it */
-16690,  /* belluno.it */
-16698,  /* benevento.it */
-16708,  /* bergamo.it */
+17895,  /* basilicata.it */
+17906,  /* belluno.it */
+17914,  /* benevento.it */
+17924,  /* bergamo.it */
   932,  /* bg.it */
    57,  /* bi.it */
-16716,  /* biella.it */
-16725,  /* bl.it */
-10645,  /* blogspot.it */
+17932,  /* biella.it */
+17941,  /* bl.it */
+10791,  /* blogspot.it */
  1068,  /* bn.it */
  1087,  /* bo.it */
-16728,  /* bologna.it */
-16736,  /* bolzano.it */
-16744,  /* bozen.it */
- 1183,  /* br.it */
-16750,  /* brescia.it */
-16758,  /* brindisi.it */
- 1241,  /* bs.it */
+17944,  /* bologna.it */
+17952,  /* bolzano.it */
+17960,  /* bolzano-altoadige.it */
+17978,  /* bozen.it */
+17984,  /* bozen-sudtirol.it */
+17999,  /* bozen-suedtirol.it */
+ 1177,  /* br.it */
+18015,  /* brescia.it */
+18023,  /* brindisi.it */
+ 1235,  /* bs.it */
   829,  /* bt.it */
- 1296,  /* bz.it */
+18032,  /* bulsan.it */
+18039,  /* bulsan-sudtirol.it */
+18055,  /* bulsan-suedtirol.it */
+ 1290,  /* bz.it */
   221,  /* ca.it */
-16767,  /* cagliari.it */
- 1320,  /* cal.it */
-16782,  /* calabria.it */
-16791,  /* caltanissetta.it */
- 1344,  /* cam.it */
-16805,  /* campania.it */
-16814,  /* campidano-medio.it */
-16830,  /* campidanomedio.it */
-11641,  /* campobasso.it */
-16845,  /* carbonia-iglesias.it */
-16863,  /* carboniaiglesias.it */
-16880,  /* carrara-massa.it */
-16894,  /* carraramassa.it */
-16907,  /* caserta.it */
-16915,  /* catania.it */
-16923,  /* catanzaro.it */
- 4394,  /* cb.it */
+18072,  /* cagliari.it */
+ 1314,  /* cal.it */
+18087,  /* calabria.it */
+18096,  /* caltanissetta.it */
+ 1337,  /* cam.it */
+18110,  /* campania.it */
+18119,  /* campidano-medio.it */
+18135,  /* campidanomedio.it */
+11815,  /* campobasso.it */
+18150,  /* carbonia-iglesias.it */
+18168,  /* carboniaiglesias.it */
+18185,  /* carrara-massa.it */
+18199,  /* carraramassa.it */
+18212,  /* caserta.it */
+18220,  /* catania.it */
+18228,  /* catanzaro.it */
+ 4380,  /* cb.it */
   273,  /* ce.it */
-16933,  /* cesena-forli.it */
-16946,  /* cesenaforli.it */
- 1147,  /* ch.it */
-16958,  /* chieti.it */
- 1714,  /* ci.it */
- 1788,  /* cl.it */
+18238,  /* cesena-forli.it */
+18251,  /* cesenaforli.it */
+ 1141,  /* ch.it */
+18263,  /* chieti.it */
+ 1710,  /* ci.it */
+ 1784,  /* cl.it */
   842,  /* cn.it */
   113,  /* co.it */
-16965,  /* como.it */
-16970,  /* cosenza.it */
- 2092,  /* cr.it */
-16978,  /* cremona.it */
-16986,  /* crotone.it */
+18270,  /* como.it */
+18275,  /* cosenza.it */
+ 2088,  /* cr.it */
+18283,  /* cremona.it */
+18291,  /* crotone.it */
   429,  /* cs.it */
- 2005,  /* ct.it */
-16999,  /* cuneo.it */
- 2203,  /* cz.it */
-17005,  /* dell-ogliastra.it */
-17020,  /* dellogliastra.it */
- 2623,  /* edu.it */
-17034,  /* emilia-romagna.it */
-17049,  /* emiliaromagna.it */
- 5579,  /* emr.it */
- 3406,  /* en.it */
-17066,  /* enna.it */
- 3832,  /* fc.it */
- 1313,  /* fe.it */
-17071,  /* fermo.it */
-17077,  /* ferrara.it */
-17085,  /* fg.it */
- 2994,  /* fi.it */
-17088,  /* firenze.it */
-17096,  /* florence.it */
- 3145,  /* fm.it */
-17105,  /* foggia.it */
-17112,  /* forli-cesena.it */
-17125,  /* forlicesena.it */
- 3230,  /* fr.it */
-17137,  /* friuli-v-giulia.it */
-17153,  /* friuli-ve-giulia.it */
-17170,  /* friuli-vegiulia.it */
-17186,  /* friuli-venezia-giulia.it */
-17208,  /* friuli-veneziagiulia.it */
-17229,  /* friuli-vgiulia.it */
-17244,  /* friuliv-giulia.it */
-17259,  /* friulive-giulia.it */
-17275,  /* friulivegiulia.it */
-17290,  /* friulivenezia-giulia.it */
-17311,  /* friuliveneziagiulia.it */
-17331,  /* friulivgiulia.it */
-17345,  /* frosinone.it */
- 8226,  /* fvg.it */
- 1900,  /* ge.it */
-17355,  /* genoa.it */
-17361,  /* genova.it */
+ 2001,  /* ct.it */
+18304,  /* cuneo.it */
+ 2199,  /* cz.it */
+18310,  /* dell-ogliastra.it */
+18325,  /* dellogliastra.it */
+ 2622,  /* edu.it */
+18339,  /* emilia-romagna.it */
+18354,  /* emiliaromagna.it */
+ 5557,  /* emr.it */
+ 3400,  /* en.it */
+18371,  /* enna.it */
+ 3826,  /* fc.it */
+ 1307,  /* fe.it */
+18376,  /* fermo.it */
+18382,  /* ferrara.it */
+18390,  /* fg.it */
+ 2993,  /* fi.it */
+18393,  /* firenze.it */
+18401,  /* florence.it */
+ 3144,  /* fm.it */
+18410,  /* foggia.it */
+18417,  /* forli-cesena.it */
+18430,  /* forlicesena.it */
+ 3227,  /* fr.it */
+18442,  /* friuli-v-giulia.it */
+18458,  /* friuli-ve-giulia.it */
+18475,  /* friuli-vegiulia.it */
+18491,  /* friuli-venezia-giulia.it */
+18513,  /* friuli-veneziagiulia.it */
+18534,  /* friuli-vgiulia.it */
+18549,  /* friuliv-giulia.it */
+18564,  /* friulive-giulia.it */
+18580,  /* friulivegiulia.it */
+18595,  /* friulivenezia-giulia.it */
+18616,  /* friuliveneziagiulia.it */
+18636,  /* friulivgiulia.it */
+18650,  /* frosinone.it */
+ 8227,  /* fvg.it */
+ 1896,  /* ge.it */
+18660,  /* genoa.it */
+18666,  /* genova.it */
   257,  /* go.it */
-17368,  /* gorizia.it */
- 3671,  /* gov.it */
- 3682,  /* gr.it */
-17376,  /* grosseto.it */
-17385,  /* iglesias-carbonia.it */
-17403,  /* iglesiascarbonia.it */
- 4175,  /* im.it */
-17420,  /* imperia.it */
- 3707,  /* is.it */
-17428,  /* isernia.it */
- 3108,  /* kr.it */
-17436,  /* la-spezia.it */
-16564,  /* laquila.it */
-17446,  /* laspezia.it */
-17455,  /* latina.it */
+18673,  /* gorizia.it */
+ 3665,  /* gov.it */
+ 3676,  /* gr.it */
+18681,  /* grosseto.it */
+18690,  /* iglesias-carbonia.it */
+18708,  /* iglesiascarbonia.it */
+ 4162,  /* im.it */
+18725,  /* imperia.it */
+ 3701,  /* is.it */
+18733,  /* isernia.it */
+ 3107,  /* kr.it */
+18741,  /* la-spezia.it */
+17747,  /* laquila.it */
+18751,  /* laspezia.it */
+18760,  /* latina.it */
   670,  /* laz.it */
-17462,  /* lazio.it */
- 4431,  /* lc.it */
+18767,  /* lazio.it */
+ 4417,  /* lc.it */
    40,  /* le.it */
-11813,  /* lecce.it */
-17473,  /* lecco.it */
- 4356,  /* li.it */
-17479,  /* lig.it */
-17483,  /* liguria.it */
-17491,  /* livorno.it */
- 3363,  /* lo.it */
-17503,  /* lodi.it */
-17508,  /* lom.it */
-17512,  /* lombardia.it */
-17522,  /* lombardy.it */
+12553,  /* lecce.it */
+18778,  /* lecco.it */
+ 4347,  /* li.it */
+18784,  /* lig.it */
+18788,  /* liguria.it */
+18796,  /* livorno.it */
+ 3357,  /* lo.it */
+18808,  /* lodi.it */
+18813,  /* lom.it */
+18817,  /* lombardia.it */
+18827,  /* lombardy.it */
   151,  /* lt.it */
- 5091,  /* lu.it */
-17531,  /* lucania.it */
-17539,  /* lucca.it */
-17545,  /* macerata.it */
-17554,  /* mantova.it */
-17564,  /* mar.it */
-12022,  /* marche.it */
-17568,  /* massa-carrara.it */
-17582,  /* massacarrara.it */
-17595,  /* matera.it */
-11728,  /* mb.it */
- 5286,  /* mc.it */
- 1694,  /* me.it */
-17602,  /* medio-campidano.it */
-17618,  /* mediocampidano.it */
- 7272,  /* messina.it */
- 5376,  /* mi.it */
-17639,  /* milan.it */
-17645,  /* milano.it */
- 5424,  /* mn.it */
- 3585,  /* mo.it */
-17652,  /* modena.it */
-17659,  /* mol.it */
-17663,  /* molise.it */
-17670,  /* monza.it */
-17676,  /* monza-brianza.it */
-17690,  /* monza-e-della-brianza.it */
-17712,  /* monzabrianza.it */
-17725,  /* monzaebrianza.it */
-17739,  /* monzaedellabrianza.it */
+ 5079,  /* lu.it */
+18836,  /* lucania.it */
+18844,  /* lucca.it */
+18850,  /* macerata.it */
+18859,  /* mantova.it */
+18869,  /* mar.it */
+12809,  /* marche.it */
+18873,  /* massa-carrara.it */
+18887,  /* massacarrara.it */
+18900,  /* matera.it */
+12270,  /* mb.it */
+ 5274,  /* mc.it */
+ 1690,  /* me.it */
+18907,  /* medio-campidano.it */
+18923,  /* mediocampidano.it */
+ 7242,  /* messina.it */
+ 5364,  /* mi.it */
+18944,  /* milan.it */
+18950,  /* milano.it */
+ 5412,  /* mn.it */
+ 3579,  /* mo.it */
+18957,  /* modena.it */
+18964,  /* mol.it */
+18968,  /* molise.it */
+18975,  /* monza.it */
+18981,  /* monza-brianza.it */
+18995,  /* monza-e-della-brianza.it */
+19017,  /* monzabrianza.it */
+19030,  /* monzaebrianza.it */
+19044,  /* monzaedellabrianza.it */
  1060,  /* ms.it */
- 5588,  /* mt.it */
+ 5566,  /* mt.it */
   172,  /* na.it */
-17758,  /* naples.it */
-17765,  /* napoli.it */
- 1518,  /* no.it */
-17772,  /* novara.it */
- 5351,  /* nu.it */
-17779,  /* nuoro.it */
+19063,  /* naples.it */
+19070,  /* napoli.it */
+ 1511,  /* no.it */
+19077,  /* novara.it */
+ 5339,  /* nu.it */
+19084,  /* nuoro.it */
  1037,  /* og.it */
-17010,  /* ogliastra.it */
-17785,  /* olbia-tempio.it */
-17798,  /* olbiatempio.it */
+18315,  /* ogliastra.it */
+19090,  /* olbia-tempio.it */
+19103,  /* olbiatempio.it */
   137,  /* or.it */
-17810,  /* oristano.it */
+19115,  /* oristano.it */
   777,  /* ot.it */
   522,  /* pa.it */
-17819,  /* padova.it */
- 8092,  /* padua.it */
-17826,  /* palermo.it */
-17834,  /* parma.it */
-17840,  /* pavia.it */
- 5597,  /* pc.it */
-17846,  /* pd.it */
- 3724,  /* pe.it */
-17849,  /* perugia.it */
-17857,  /* pesaro-urbino.it */
-17871,  /* pesarourbino.it */
-17884,  /* pescara.it */
- 6194,  /* pg.it */
-11829,  /* pi.it */
-17892,  /* piacenza.it */
-17901,  /* piedmont.it */
-17910,  /* piemonte.it */
-17919,  /* pisa.it */
-17924,  /* pistoia.it */
- 5423,  /* pmn.it */
- 4653,  /* pn.it */
- 6958,  /* po.it */
-17937,  /* pordenone.it */
-17947,  /* potenza.it */
- 6385,  /* pr.it */
-17955,  /* prato.it */
- 6493,  /* pt.it */
-17964,  /* pu.it */
- 8111,  /* pug.it */
-17967,  /* puglia.it */
-17974,  /* pv.it */
-17977,  /* pz.it */
- 1362,  /* ra.it */
-17985,  /* ragusa.it */
-17063,  /* ravenna.it */
- 4864,  /* rc.it */
+19124,  /* padova.it */
+ 8087,  /* padua.it */
+19131,  /* palermo.it */
+19139,  /* parma.it */
+19145,  /* pavia.it */
+14130,  /* pc.it */
+19151,  /* pd.it */
+ 3718,  /* pe.it */
+19154,  /* perugia.it */
+19162,  /* pesaro-urbino.it */
+19176,  /* pesarourbino.it */
+19189,  /* pescara.it */
+ 6154,  /* pg.it */
+12566,  /* pi.it */
+19197,  /* piacenza.it */
+19206,  /* piedmont.it */
+19215,  /* piemonte.it */
+19224,  /* pisa.it */
+19229,  /* pistoia.it */
+ 5411,  /* pmn.it */
+ 4639,  /* pn.it */
+ 6927,  /* po.it */
+19242,  /* pordenone.it */
+19252,  /* potenza.it */
+ 6351,  /* pr.it */
+19260,  /* prato.it */
+ 6459,  /* pt.it */
+19269,  /* pu.it */
+ 8106,  /* pug.it */
+19272,  /* puglia.it */
+19279,  /* pv.it */
+19282,  /* pz.it */
+ 1355,  /* ra.it */
+19290,  /* ragusa.it */
+18368,  /* ravenna.it */
+ 4844,  /* rc.it */
    80,  /* re.it */
-17992,  /* reggio-calabria.it */
-18008,  /* reggio-emilia.it */
-16776,  /* reggiocalabria.it */
-18022,  /* reggioemilia.it */
+19297,  /* reggio-calabria.it */
+19313,  /* reggio-emilia.it */
+18081,  /* reggiocalabria.it */
+19327,  /* reggioemilia.it */
  1047,  /* rg.it */
- 2979,  /* ri.it */
-11700,  /* rieti.it */
- 5389,  /* rimini.it */
- 2935,  /* rm.it */
+ 2978,  /* ri.it */
+12217,  /* rieti.it */
+ 5377,  /* rimini.it */
+ 2934,  /* rm.it */
   821,  /* rn.it */
   166,  /* ro.it */
-18044,  /* roma.it */
- 1692,  /* rome.it */
-18049,  /* rovigo.it */
- 1494,  /* sa.it */
-18056,  /* salerno.it */
-18064,  /* sar.it */
-18068,  /* sardegna.it */
-18077,  /* sardinia.it */
-18086,  /* sassari.it */
-18094,  /* savona.it */
- 2365,  /* si.it */
-18103,  /* sic.it */
-18107,  /* sicilia.it */
-18115,  /* sicily.it */
-18122,  /* siena.it */
-18128,  /* siracusa.it */
- 7334,  /* so.it */
- 6796,  /* sondrio.it */
-11697,  /* sp.it */
- 7435,  /* sr.it */
+19349,  /* roma.it */
+ 1688,  /* rome.it */
+19354,  /* rovigo.it */
+ 1487,  /* sa.it */
+19361,  /* salerno.it */
+19369,  /* sar.it */
+19373,  /* sardegna.it */
+19382,  /* sardinia.it */
+19391,  /* sassari.it */
+19399,  /* savona.it */
+ 2361,  /* si.it */
+19408,  /* sic.it */
+19412,  /* sicilia.it */
+19420,  /* sicily.it */
+19427,  /* siena.it */
+19433,  /* siracusa.it */
+ 7304,  /* so.it */
+ 6762,  /* sondrio.it */
+12214,  /* sp.it */
+ 7416,  /* sr.it */
   374,  /* ss.it */
-18150,  /* suedtirol.it */
- 7593,  /* sv.it */
+17836,  /* suedtirol.it */
+ 7574,  /* sv.it */
   570,  /* ta.it */
-18168,  /* taa.it */
-18172,  /* taranto.it */
+19455,  /* taa.it */
+19459,  /* taranto.it */
   334,  /* te.it */
-18180,  /* tempio-olbia.it */
-18193,  /* tempioolbia.it */
-18205,  /* teramo.it */
- 2748,  /* terni.it */
- 5592,  /* tn.it */
+19467,  /* tempio-olbia.it */
+19480,  /* tempioolbia.it */
+19492,  /* teramo.it */
+ 2747,  /* terni.it */
+ 5570,  /* tn.it */
   631,  /* to.it */
-18212,  /* torino.it */
+19499,  /* torino.it */
   636,  /* tos.it */
-18219,  /* toscana.it */
-11618,  /* tp.it */
- 3287,  /* tr.it */
-18227,  /* trani-andria-barletta.it */
-18249,  /* trani-barletta-andria.it */
-18271,  /* traniandriabarletta.it */
-18291,  /* tranibarlettaandria.it */
-18311,  /* trapani.it */
-18319,  /* trentino.it */
-18328,  /* trentino-a-adige.it */
-18345,  /* trentino-aadige.it */
-18361,  /* trentino-alto-adige.it */
-18381,  /* trentino-altoadige.it */
-18400,  /* trentino-s-tirol.it */
-18417,  /* trentino-stirol.it */
-18433,  /* trentino-sud-tirol.it */
-18452,  /* trentino-sudtirol.it */
-18470,  /* trentino-sued-tirol.it */
-18490,  /* trentino-suedtirol.it */
-18509,  /* trentinoa-adige.it */
-18525,  /* trentinoaadige.it */
-16384,  /* trentinoalto-adige.it */
-16403,  /* trentinoaltoadige.it */
-18540,  /* trentinos-tirol.it */
- 7863,  /* trentinostirol.it */
-18556,  /* trentinosud-tirol.it */
-18574,  /* trentinosudtirol.it */
-18591,  /* trentinosued-tirol.it */
-18142,  /* trentinosuedtirol.it */
-18610,  /* trento.it */
-18617,  /* treviso.it */
-18625,  /* trieste.it */
+19506,  /* toscana.it */
+11792,  /* tp.it */
+ 3281,  /* tr.it */
+19514,  /* trani-andria-barletta.it */
+19536,  /* trani-barletta-andria.it */
+19558,  /* traniandriabarletta.it */
+19578,  /* tranibarlettaandria.it */
+19598,  /* trapani.it */
+19606,  /* trentin-sud-tirol.it */
+19624,  /* trentin-sudtirol.it */
+19641,  /* trentin-sued-tirol.it */
+19660,  /* trentin-suedtirol.it */
+19678,  /* trentino.it */
+19687,  /* trentino-a-adige.it */
+19704,  /* trentino-aadige.it */
+19720,  /* trentino-alto-adige.it */
+19740,  /* trentino-altoadige.it */
+19759,  /* trentino-s-tirol.it */
+19776,  /* trentino-stirol.it */
+19792,  /* trentino-sud-tirol.it */
+19811,  /* trentino-sudtirol.it */
+19829,  /* trentino-sued-tirol.it */
+19849,  /* trentino-suedtirol.it */
+19868,  /* trentinoa-adige.it */
+19884,  /* trentinoaadige.it */
+17567,  /* trentinoalto-adige.it */
+17586,  /* trentinoaltoadige.it */
+19899,  /* trentinos-tirol.it */
+ 7845,  /* trentinostirol.it */
+19915,  /* trentinosud-tirol.it */
+19933,  /* trentinosudtirol.it */
+19950,  /* trentinosued-tirol.it */
+19969,  /* trentinosuedtirol.it */
+19987,  /* trentinsud-tirol.it */
+20004,  /* trentinsudtirol.it */
+20020,  /* trentinsued-tirol.it */
+20038,  /* trentinsuedtirol.it */
+20055,  /* trento.it */
+20062,  /* treviso.it */
+20070,  /* trieste.it */
   109,  /* ts.it */
-18637,  /* turin.it */
-18643,  /* tuscany.it */
- 2549,  /* tv.it */
- 1843,  /* ud.it */
-18651,  /* udine.it */
-18657,  /* umb.it */
-18661,  /* umbria.it */
-18668,  /* urbino-pesaro.it */
-18682,  /* urbinopesaro.it */
+20082,  /* turin.it */
+20088,  /* tuscany.it */
+ 2545,  /* tv.it */
+ 1839,  /* ud.it */
+20096,  /* udine.it */
+20102,  /* umb.it */
+20106,  /* umbria.it */
+20113,  /* urbino-pesaro.it */
+20127,  /* urbinopesaro.it */
   834,  /* va.it */
-18695,  /* val-d-aosta.it */
-18707,  /* val-daosta.it */
-18718,  /* vald-aosta.it */
-16517,  /* valdaosta.it */
-18729,  /* valle-aosta.it */
-18741,  /* valle-d-aosta.it */
-18755,  /* valle-daosta.it */
-18768,  /* valleaosta.it */
-18779,  /* valled-aosta.it */
-18792,  /* valledaosta.it */
-18804,  /* vallee-aoste.it */
-16552,  /* valleeaoste.it */
+20140,  /* val-d-aosta.it */
+20152,  /* val-daosta.it */
+20163,  /* vald-aosta.it */
+17700,  /* valdaosta.it */
+20174,  /* valle-aosta.it */
+20186,  /* valle-d-aosta.it */
+20200,  /* valle-daosta.it */
+20213,  /* valleaosta.it */
+20224,  /* valled-aosta.it */
+20237,  /* valledaosta.it */
+20249,  /* vallee-aoste.it */
+20262,  /* vallee-d-aoste.it */
+17735,  /* valleeaoste.it */
+20277,  /* valleedaoste.it */
   447,  /* vao.it */
-18817,  /* varese.it */
-18824,  /* vb.it */
- 6544,  /* vc.it */
-18827,  /* vda.it */
+20290,  /* varese.it */
+20318,  /* vb.it */
+ 6510,  /* vc.it */
+20321,  /* vda.it */
   125,  /* ve.it */
- 7147,  /* ven.it */
-18831,  /* veneto.it */
-18838,  /* venezia.it */
- 4148,  /* venice.it */
-18846,  /* verbania.it */
-18855,  /* vercelli.it */
-18864,  /* verona.it */
- 8230,  /* vi.it */
-18871,  /* vibo-valentia.it */
-18885,  /* vibovalentia.it */
-18898,  /* vicenza.it */
-18906,  /* viterbo.it */
- 2585,  /* vr.it */
- 8078,  /* vs.it */
-13035,  /* vt.it */
-18914,  /* vv.it */
+ 7117,  /* ven.it */
+20325,  /* veneto.it */
+20332,  /* venezia.it */
+ 4135,  /* venice.it */
+20340,  /* verbania.it */
+20349,  /* vercelli.it */
+20358,  /* verona.it */
+ 8231,  /* vi.it */
+20365,  /* vibo-valentia.it */
+20379,  /* vibovalentia.it */
+20392,  /* vicenza.it */
+20400,  /* viterbo.it */
+ 2584,  /* vr.it */
+ 8073,  /* vs.it */
+13924,  /* vt.it */
+20408,  /* vv.it */
+20411,  /* xn--balsan-sdtirol-nsb.it */
+20434,  /* xn--bozen-sdtirol-2ob.it */
+20456,  /* xn--bulsan-sdtirol-nsb.it */
+20479,  /* xn--cesena-forl-mcb.it */
+20499,  /* xn--cesenaforl-i8a.it */
+20518,  /* xn--forl-cesena-fcb.it */
+20538,  /* xn--forlcesena-c8a.it */
+20557,  /* xn--sdtirol-n2a.it */
+20573,  /* xn--trentin-sd-tirol-rzb.it */
+20297,  /* xn--trentin-sdtirol-7vb.it */
+20598,  /* xn--trentino-sd-tirol-c3b.it */
+20624,  /* xn--trentino-sdtirol-szb.it */
+20649,  /* xn--trentinosd-tirol-rzb.it */
+20674,  /* xn--trentinosdtirol-7vb.it */
+20698,  /* xn--trentinsd-tirol-6vb.it */
+20722,  /* xn--trentinsdtirol-nsb.it */
+20745,  /* xn--valle-aoste-ebb.it */
+12787,  /* xn--valle-d-aoste-ehb.it */
+20765,  /* xn--valleaoste-e7a.it */
+20784,  /* xn--valledaoste-ebb.it */
   113,  /* co.je */
- 5737,  /* net.je */
- 6053,  /* org.je */
- 1914,  /* com.jo */
- 2623,  /* edu.jo */
- 3671,  /* gov.jo */
- 4170,  /* mil.jo */
- 5695,  /* name.jo */
- 5737,  /* net.jo */
- 6053,  /* org.jo */
- 1146,  /* sch.jo */
+ 5710,  /* net.je */
+ 6026,  /* org.je */
+ 1910,  /* com.jo */
+ 2622,  /* edu.jo */
+ 3665,  /* gov.jo */
+ 4157,  /* mil.jo */
+ 5672,  /* name.jo */
+ 5710,  /* net.jo */
+ 6026,  /* org.jo */
+ 1140,  /* sch.jo */
   244,  /* aisai.aichi.jp */
-10588,  /* ama.aichi.jp */
-19850,  /* anjo.aichi.jp */
-19855,  /* asuke.aichi.jp */
-19861,  /* chiryu.aichi.jp */
-19868,  /* chita.aichi.jp */
-19874,  /* fuso.aichi.jp */
-19879,  /* gamagori.aichi.jp */
-19888,  /* handa.aichi.jp */
-19894,  /* hazu.aichi.jp */
-19899,  /* hekinan.aichi.jp */
-19907,  /* higashiura.aichi.jp */
-19918,  /* ichinomiya.aichi.jp */
-19929,  /* inazawa.aichi.jp */
-19937,  /* inuyama.aichi.jp */
-19945,  /* isshiki.aichi.jp */
-19953,  /* iwakura.aichi.jp */
-19961,  /* kanie.aichi.jp */
-19967,  /* kariya.aichi.jp */
-19974,  /* kasugai.aichi.jp */
-19982,  /* kira.aichi.jp */
-19987,  /* kiyosu.aichi.jp */
-19994,  /* komaki.aichi.jp */
-20001,  /* konan.aichi.jp */
-18160,  /* kota.aichi.jp */
-20007,  /* mihama.aichi.jp */
-20023,  /* miyoshi.aichi.jp */
-20031,  /* nishio.aichi.jp */
-20038,  /* nisshin.aichi.jp */
-20049,  /* obu.aichi.jp */
-20053,  /* oguchi.aichi.jp */
-20060,  /* oharu.aichi.jp */
-20066,  /* okazaki.aichi.jp */
-20074,  /* owariasahi.aichi.jp */
-17380,  /* seto.aichi.jp */
-20091,  /* shikatsu.aichi.jp */
-20100,  /* shinshiro.aichi.jp */
-20110,  /* shitara.aichi.jp */
-20118,  /* tahara.aichi.jp */
-20125,  /* takahama.aichi.jp */
-20134,  /* tobishima.aichi.jp */
-20144,  /* toei.aichi.jp */
-11823,  /* togo.aichi.jp */
-20149,  /* tokai.aichi.jp */
- 5691,  /* tokoname.aichi.jp */
-20155,  /* toyoake.aichi.jp */
-20163,  /* toyohashi.aichi.jp */
-20173,  /* toyokawa.aichi.jp */
-20182,  /* toyone.aichi.jp */
- 7964,  /* toyota.aichi.jp */
-20193,  /* tsushima.aichi.jp */
-20202,  /* yatomi.aichi.jp */
-18930,  /* akita.akita.jp */
-20209,  /* daisen.akita.jp */
-20216,  /* fujisato.akita.jp */
-20225,  /* gojome.akita.jp */
-20232,  /* hachirogata.akita.jp */
-20244,  /* happou.akita.jp */
-20251,  /* higashinaruse.akita.jp */
-20269,  /* honjo.akita.jp */
-20275,  /* honjyo.akita.jp */
-19040,  /* ikawa.akita.jp */
-20289,  /* kamikoani.akita.jp */
-20299,  /* kamioka.akita.jp */
-20307,  /* katagami.akita.jp */
- 8141,  /* kazuno.akita.jp */
-20316,  /* kitaakita.akita.jp */
- 6080,  /* kosaka.akita.jp */
-20326,  /* kyowa.akita.jp */
-20334,  /* misato.akita.jp */
-20345,  /* mitane.akita.jp */
-20352,  /* moriyoshi.akita.jp */
-20362,  /* nikaho.akita.jp */
-20369,  /* noshiro.akita.jp */
- 2240,  /* odate.akita.jp */
-10579,  /* oga.akita.jp */
-20238,  /* ogata.akita.jp */
-20389,  /* semboku.akita.jp */
-20397,  /* yokote.akita.jp */
-20265,  /* yurihonjo.akita.jp */
-18936,  /* aomori.aomori.jp */
-20404,  /* gonohe.aomori.jp */
-20411,  /* hachinohe.aomori.jp */
-20421,  /* hashikami.aomori.jp */
-20431,  /* hiranai.aomori.jp */
-20439,  /* hirosaki.aomori.jp */
-20448,  /* itayanagi.aomori.jp */
-20458,  /* kuroishi.aomori.jp */
-20467,  /* misawa.aomori.jp */
-20474,  /* mutsu.aomori.jp */
-20480,  /* nakadomari.aomori.jp */
-20491,  /* noheji.aomori.jp */
-20498,  /* oirase.aomori.jp */
-20505,  /* owani.aomori.jp */
-20511,  /* rokunohe.aomori.jp */
-20520,  /* sannohe.aomori.jp */
-20528,  /* shichinohe.aomori.jp */
-20539,  /* shingo.aomori.jp */
-20546,  /* takko.aomori.jp */
-20552,  /* towada.aomori.jp */
-20559,  /* tsugaru.aomori.jp */
-20567,  /* tsuruta.aomori.jp */
-20575,  /* abiko.chiba.jp */
-20079,  /* asahi.chiba.jp */
-20581,  /* chonan.chiba.jp */
-20588,  /* chosei.chiba.jp */
-20595,  /* choshi.chiba.jp */
-20606,  /* chuo.chiba.jp */
-20611,  /* funabashi.chiba.jp */
-20621,  /* futtsu.chiba.jp */
-20628,  /* hanamigawa.chiba.jp */
-20639,  /* ichihara.chiba.jp */
-20648,  /* ichikawa.chiba.jp */
-19918,  /* ichinomiya.chiba.jp */
-20657,  /* inzai.chiba.jp */
-17633,  /* isumi.chiba.jp */
-20663,  /* kamagaya.chiba.jp */
-20672,  /* kamogawa.chiba.jp */
-20681,  /* kashiwa.chiba.jp */
-20691,  /* katori.chiba.jp */
-20703,  /* katsuura.chiba.jp */
-20712,  /* kimitsu.chiba.jp */
-20720,  /* kisarazu.chiba.jp */
-20729,  /* kozaki.chiba.jp */
-20736,  /* kujukuri.chiba.jp */
-20745,  /* kyonan.chiba.jp */
-20752,  /* matsudo.chiba.jp */
-20760,  /* midori.chiba.jp */
-20007,  /* mihama.chiba.jp */
-20767,  /* minamiboso.chiba.jp */
-20778,  /* mobara.chiba.jp */
-20785,  /* mutsuzawa.chiba.jp */
-20795,  /* nagara.chiba.jp */
-20802,  /* nagareyama.chiba.jp */
-20813,  /* narashino.chiba.jp */
-20823,  /* narita.chiba.jp */
-20830,  /* noda.chiba.jp */
-20835,  /* oamishirasato.chiba.jp */
-20849,  /* omigawa.chiba.jp */
-20857,  /* onjuku.chiba.jp */
-20867,  /* otaki.chiba.jp */
+10725,  /* ama.aichi.jp */
+21737,  /* anjo.aichi.jp */
+21742,  /* asuke.aichi.jp */
+21748,  /* chiryu.aichi.jp */
+21755,  /* chita.aichi.jp */
+21761,  /* fuso.aichi.jp */
+21766,  /* gamagori.aichi.jp */
+21775,  /* handa.aichi.jp */
+21781,  /* hazu.aichi.jp */
+21786,  /* hekinan.aichi.jp */
+21794,  /* higashiura.aichi.jp */
+21805,  /* ichinomiya.aichi.jp */
+21816,  /* inazawa.aichi.jp */
+21824,  /* inuyama.aichi.jp */
+21832,  /* isshiki.aichi.jp */
+21840,  /* iwakura.aichi.jp */
+21848,  /* kanie.aichi.jp */
+21854,  /* kariya.aichi.jp */
+21861,  /* kasugai.aichi.jp */
+21869,  /* kira.aichi.jp */
+21874,  /* kiyosu.aichi.jp */
+21881,  /* komaki.aichi.jp */
+21888,  /* konan.aichi.jp */
+19447,  /* kota.aichi.jp */
+21894,  /* mihama.aichi.jp */
+21910,  /* miyoshi.aichi.jp */
+21918,  /* nishio.aichi.jp */
+21925,  /* nisshin.aichi.jp */
+21936,  /* obu.aichi.jp */
+21940,  /* oguchi.aichi.jp */
+21947,  /* oharu.aichi.jp */
+21953,  /* okazaki.aichi.jp */
+21961,  /* owariasahi.aichi.jp */
+18685,  /* seto.aichi.jp */
+21978,  /* shikatsu.aichi.jp */
+21987,  /* shinshiro.aichi.jp */
+21997,  /* shitara.aichi.jp */
+22005,  /* tahara.aichi.jp */
+22012,  /* takahama.aichi.jp */
+22021,  /* tobishima.aichi.jp */
+22031,  /* toei.aichi.jp */
+12559,  /* togo.aichi.jp */
+22036,  /* tokai.aichi.jp */
+ 5668,  /* tokoname.aichi.jp */
+22042,  /* toyoake.aichi.jp */
+22050,  /* toyohashi.aichi.jp */
+22060,  /* toyokawa.aichi.jp */
+22069,  /* toyone.aichi.jp */
+ 7959,  /* toyota.aichi.jp */
+22080,  /* tsushima.aichi.jp */
+22089,  /* yatomi.aichi.jp */
+20817,  /* akita.akita.jp */
+22096,  /* daisen.akita.jp */
+22103,  /* fujisato.akita.jp */
+22112,  /* gojome.akita.jp */
+22119,  /* hachirogata.akita.jp */
+22131,  /* happou.akita.jp */
+22138,  /* higashinaruse.akita.jp */
+22156,  /* honjo.akita.jp */
+22162,  /* honjyo.akita.jp */
+20927,  /* ikawa.akita.jp */
+22176,  /* kamikoani.akita.jp */
+22186,  /* kamioka.akita.jp */
+22194,  /* katagami.akita.jp */
+ 8136,  /* kazuno.akita.jp */
+22203,  /* kitaakita.akita.jp */
+ 6053,  /* kosaka.akita.jp */
+22213,  /* kyowa.akita.jp */
+22221,  /* misato.akita.jp */
+22232,  /* mitane.akita.jp */
+22239,  /* moriyoshi.akita.jp */
+22249,  /* nikaho.akita.jp */
+22256,  /* noshiro.akita.jp */
+ 2236,  /* odate.akita.jp */
+10716,  /* oga.akita.jp */
+22125,  /* ogata.akita.jp */
+22276,  /* semboku.akita.jp */
+22284,  /* yokote.akita.jp */
+22152,  /* yurihonjo.akita.jp */
+20823,  /* aomori.aomori.jp */
+22291,  /* gonohe.aomori.jp */
+22298,  /* hachinohe.aomori.jp */
+22308,  /* hashikami.aomori.jp */
+22318,  /* hiranai.aomori.jp */
+22326,  /* hirosaki.aomori.jp */
+22335,  /* itayanagi.aomori.jp */
+22345,  /* kuroishi.aomori.jp */
+22354,  /* misawa.aomori.jp */
+22361,  /* mutsu.aomori.jp */
+22367,  /* nakadomari.aomori.jp */
+22378,  /* noheji.aomori.jp */
+22385,  /* oirase.aomori.jp */
+22392,  /* owani.aomori.jp */
+22398,  /* rokunohe.aomori.jp */
+22407,  /* sannohe.aomori.jp */
+22415,  /* shichinohe.aomori.jp */
+22426,  /* shingo.aomori.jp */
+22433,  /* takko.aomori.jp */
+22439,  /* towada.aomori.jp */
+22446,  /* tsugaru.aomori.jp */
+22454,  /* tsuruta.aomori.jp */
+22462,  /* abiko.chiba.jp */
+21966,  /* asahi.chiba.jp */
+22468,  /* chonan.chiba.jp */
+22475,  /* chosei.chiba.jp */
+22482,  /* choshi.chiba.jp */
+22493,  /* chuo.chiba.jp */
+22498,  /* funabashi.chiba.jp */
+22508,  /* futtsu.chiba.jp */
+22515,  /* hanamigawa.chiba.jp */
+22526,  /* ichihara.chiba.jp */
+22535,  /* ichikawa.chiba.jp */
+21805,  /* ichinomiya.chiba.jp */
+22544,  /* inzai.chiba.jp */
+18938,  /* isumi.chiba.jp */
+22550,  /* kamagaya.chiba.jp */
+22559,  /* kamogawa.chiba.jp */
+22568,  /* kashiwa.chiba.jp */
+22578,  /* katori.chiba.jp */
+22590,  /* katsuura.chiba.jp */
+22599,  /* kimitsu.chiba.jp */
+22607,  /* kisarazu.chiba.jp */
+22616,  /* kozaki.chiba.jp */
+22623,  /* kujukuri.chiba.jp */
+22632,  /* kyonan.chiba.jp */
+22639,  /* matsudo.chiba.jp */
+22647,  /* midori.chiba.jp */
+21894,  /* mihama.chiba.jp */
+22654,  /* minamiboso.chiba.jp */
+22665,  /* mobara.chiba.jp */
+22672,  /* mutsuzawa.chiba.jp */
+22682,  /* nagara.chiba.jp */
+22689,  /* nagareyama.chiba.jp */
+22700,  /* narashino.chiba.jp */
+22710,  /* narita.chiba.jp */
+22717,  /* noda.chiba.jp */
+22722,  /* oamishirasato.chiba.jp */
+22736,  /* omigawa.chiba.jp */
+22744,  /* onjuku.chiba.jp */
+22754,  /* otaki.chiba.jp */
   154,  /* sakae.chiba.jp */
- 6898,  /* sakura.chiba.jp */
-20873,  /* shimofusa.chiba.jp */
-20883,  /* shirako.chiba.jp */
-20891,  /* shiroi.chiba.jp */
-20898,  /* shisui.chiba.jp */
-20905,  /* sodegaura.chiba.jp */
-20915,  /* sosa.chiba.jp */
-20921,  /* tako.chiba.jp */
-20926,  /* tateyama.chiba.jp */
-20935,  /* togane.chiba.jp */
-20942,  /* tohnosho.chiba.jp */
-20332,  /* tomisato.chiba.jp */
-20951,  /* urayasu.chiba.jp */
-20959,  /* yachimata.chiba.jp */
-20969,  /* yachiyo.chiba.jp */
-18943,  /* yokaichiba.chiba.jp */
-20977,  /* yokoshibahikari.chiba.jp */
-20993,  /* yotsukaido.chiba.jp */
-21005,  /* ainan.ehime.jp */
-21012,  /* honai.ehime.jp */
-21021,  /* ikata.ehime.jp */
-21027,  /* imabari.ehime.jp */
-20973,  /* iyo.ehime.jp */
-21046,  /* kamijima.ehime.jp */
-21055,  /* kihoku.ehime.jp */
-21062,  /* kumakogen.ehime.jp */
-21072,  /* masaki.ehime.jp */
-21079,  /* matsuno.ehime.jp */
-21094,  /* matsuyama.ehime.jp */
-21018,  /* namikata.ehime.jp */
-21104,  /* niihama.ehime.jp */
-21113,  /* ozu.ehime.jp */
-21117,  /* saijo.ehime.jp */
-21035,  /* seiyo.ehime.jp */
-21123,  /* shikokuchuo.ehime.jp */
-21136,  /* tobe.ehime.jp */
-11850,  /* toon.ehime.jp */
-21150,  /* uchiko.ehime.jp */
-21157,  /* uwajima.ehime.jp */
-21165,  /* yawatahama.ehime.jp */
-21182,  /* echizen.fukui.jp */
-21190,  /* eiheiji.fukui.jp */
-18960,  /* fukui.fukui.jp */
-21198,  /* ikeda.fukui.jp */
-21204,  /* katsuyama.fukui.jp */
-20007,  /* mihama.fukui.jp */
-21176,  /* minamiechizen.fukui.jp */
-21214,  /* obama.fukui.jp */
-12029,  /* ohi.fukui.jp */
-21221,  /* ono.fukui.jp */
-21225,  /* sabae.fukui.jp */
-21231,  /* sakai.fukui.jp */
-20125,  /* takahama.fukui.jp */
-21237,  /* tsuruga.fukui.jp */
-21245,  /* wakasa.fukui.jp */
-21252,  /* ashiya.fukuoka.jp */
-21259,  /* buzen.fukuoka.jp */
-21265,  /* chikugo.fukuoka.jp */
-21273,  /* chikuho.fukuoka.jp */
-21281,  /* chikujo.fukuoka.jp */
-21289,  /* chikushino.fukuoka.jp */
-21300,  /* chikuzen.fukuoka.jp */
-20606,  /* chuo.fukuoka.jp */
-21309,  /* dazaifu.fukuoka.jp */
-21317,  /* fukuchi.fukuoka.jp */
-21325,  /* hakata.fukuoka.jp */
-21332,  /* higashi.fukuoka.jp */
-21340,  /* hirokawa.fukuoka.jp */
-21349,  /* hisayama.fukuoka.jp */
-21358,  /* iizuka.fukuoka.jp */
-21365,  /* inatsuki.fukuoka.jp */
-20364,  /* kaho.fukuoka.jp */
-21374,  /* kasuga.fukuoka.jp */
-21381,  /* kasuya.fukuoka.jp */
-21388,  /* kawara.fukuoka.jp */
-21395,  /* keisen.fukuoka.jp */
-20377,  /* koga.fukuoka.jp */
-21402,  /* kurate.fukuoka.jp */
-21409,  /* kurogi.fukuoka.jp */
-21423,  /* kurume.fukuoka.jp */
-21433,  /* minami.fukuoka.jp */
-21440,  /* miyako.fukuoka.jp */
-21449,  /* miyama.fukuoka.jp */
-21456,  /* miyawaka.fukuoka.jp */
-21465,  /* mizumaki.fukuoka.jp */
-21474,  /* munakata.fukuoka.jp */
-19052,  /* nakagawa.fukuoka.jp */
-21483,  /* nakama.fukuoka.jp */
-21494,  /* nishi.fukuoka.jp */
-20382,  /* nogata.fukuoka.jp */
-21500,  /* ogori.fukuoka.jp */
-21506,  /* okagaki.fukuoka.jp */
-20176,  /* okawa.fukuoka.jp */
-21515,  /* oki.fukuoka.jp */
-21519,  /* omuta.fukuoka.jp */
-21525,  /* onga.fukuoka.jp */
-21535,  /* onojo.fukuoka.jp */
- 4689,  /* oto.fukuoka.jp */
-21546,  /* saigawa.fukuoka.jp */
-21554,  /* sasaguri.fukuoka.jp */
-21563,  /* shingu.fukuoka.jp */
-21570,  /* shinyoshitomi.fukuoka.jp */
-21011,  /* shonai.fukuoka.jp */
-21584,  /* soeda.fukuoka.jp */
-21593,  /* sue.fukuoka.jp */
-21597,  /* tachiarai.fukuoka.jp */
-21609,  /* tagawa.fukuoka.jp */
-21618,  /* takata.fukuoka.jp */
-21625,  /* toho.fukuoka.jp */
-21630,  /* toyotsu.fukuoka.jp */
-21638,  /* tsuiki.fukuoka.jp */
-21645,  /* ukiha.fukuoka.jp */
-17635,  /* umi.fukuoka.jp */
-21652,  /* usui.fukuoka.jp */
-21657,  /* yamada.fukuoka.jp */
-21664,  /* yame.fukuoka.jp */
-21669,  /* yanagawa.fukuoka.jp */
-21678,  /* yukuhashi.fukuoka.jp */
-21688,  /* aizubange.fukushima.jp */
-21698,  /* aizumisato.fukushima.jp */
-21709,  /* aizuwakamatsu.fukushima.jp */
-21723,  /* asakawa.fukushima.jp */
-21731,  /* bandai.fukushima.jp */
- 2241,  /* date.fukushima.jp */
-18978,  /* fukushima.fukushima.jp */
-21738,  /* furudono.fukushima.jp */
-21747,  /* futaba.fukushima.jp */
-21754,  /* hanawa.fukushima.jp */
-21332,  /* higashi.fukushima.jp */
-21761,  /* hirata.fukushima.jp */
-21768,  /* hirono.fukushima.jp */
-21775,  /* iitate.fukushima.jp */
-21782,  /* inawashiro.fukushima.jp */
-19037,  /* ishikawa.fukushima.jp */
-21797,  /* iwaki.fukushima.jp */
-21803,  /* izumizaki.fukushima.jp */
-21813,  /* kagamiishi.fukushima.jp */
-21824,  /* kaneyama.fukushima.jp */
-21833,  /* kawamata.fukushima.jp */
-21616,  /* kitakata.fukushima.jp */
-21842,  /* kitashiobara.fukushima.jp */
-21855,  /* koori.fukushima.jp */
-21867,  /* koriyama.fukushima.jp */
-21876,  /* kunimi.fukushima.jp */
-21883,  /* miharu.fukushima.jp */
-21890,  /* mishima.fukushima.jp */
-19106,  /* namie.fukushima.jp */
- 5808,  /* nango.fukushima.jp */
-21898,  /* nishiaizu.fukushima.jp */
-21908,  /* nishigo.fukushima.jp */
-21916,  /* okuma.fukushima.jp */
-21922,  /* omotego.fukushima.jp */
-21221,  /* ono.fukushima.jp */
-21930,  /* otama.fukushima.jp */
-21936,  /* samegawa.fukushima.jp */
-21945,  /* shimogo.fukushima.jp */
-21960,  /* shirakawa.fukushima.jp */
-21970,  /* showa.fukushima.jp */
-21976,  /* soma.fukushima.jp */
-21981,  /* sukagawa.fukushima.jp */
-21990,  /* taishin.fukushima.jp */
-21998,  /* tamakawa.fukushima.jp */
-22007,  /* tanagura.fukushima.jp */
-22016,  /* tenei.fukushima.jp */
-22022,  /* yabuki.fukushima.jp */
-22036,  /* yamato.fukushima.jp */
-22043,  /* yamatsuri.fukushima.jp */
-22053,  /* yanaizu.fukushima.jp */
-22061,  /* yugawa.fukushima.jp */
-22068,  /* anpachi.gifu.jp */
-17121,  /* ena.gifu.jp */
-18988,  /* gifu.gifu.jp */
-22076,  /* ginan.gifu.jp */
- 2484,  /* godo.gifu.jp */
- 4449,  /* gujo.gifu.jp */
-22082,  /* hashima.gifu.jp */
-22090,  /* hichiso.gifu.jp */
-22101,  /* hida.gifu.jp */
-21953,  /* higashishirakawa.gifu.jp */
-22106,  /* ibigawa.gifu.jp */
-21198,  /* ikeda.gifu.jp */
-22114,  /* kakamigahara.gifu.jp */
-22127,  /* kani.gifu.jp */
-22132,  /* kasahara.gifu.jp */
-22141,  /* kasamatsu.gifu.jp */
-22151,  /* kawaue.gifu.jp */
-22158,  /* kitagata.gifu.jp */
-22169,  /* mino.gifu.jp */
-22174,  /* minokamo.gifu.jp */
-22183,  /* mitake.gifu.jp */
-22190,  /* mizunami.gifu.jp */
-22199,  /* motosu.gifu.jp */
-22206,  /* nakatsugawa.gifu.jp */
-22219,  /* ogaki.gifu.jp */
-22225,  /* sakahogi.gifu.jp */
-22240,  /* seki.gifu.jp */
-22245,  /* sekigahara.gifu.jp */
-21960,  /* shirakawa.gifu.jp */
-22256,  /* tajimi.gifu.jp */
-22263,  /* takayama.gifu.jp */
-22272,  /* tarui.gifu.jp */
-21514,  /* toki.gifu.jp */
-22278,  /* tomika.gifu.jp */
-22285,  /* wanouchi.gifu.jp */
-19815,  /* yamagata.gifu.jp */
-22294,  /* yaotsu.gifu.jp */
-22303,  /* yoro.gifu.jp */
-22308,  /* annaka.gunma.jp */
-22315,  /* chiyoda.gunma.jp */
-22323,  /* fujioka.gunma.jp */
-22331,  /* higashiagatsuma.gunma.jp */
-22347,  /* isesaki.gunma.jp */
-22355,  /* itakura.gunma.jp */
-22363,  /* kanna.gunma.jp */
- 5887,  /* kanra.gunma.jp */
-22369,  /* katashina.gunma.jp */
-22379,  /* kawaba.gunma.jp */
-22386,  /* kiryu.gunma.jp */
-22392,  /* kusatsu.gunma.jp */
-22400,  /* maebashi.gunma.jp */
-22409,  /* meiwa.gunma.jp */
-20760,  /* midori.gunma.jp */
-22415,  /* minakami.gunma.jp */
-22424,  /* naganohara.gunma.jp */
-22435,  /* nakanojo.gunma.jp */
-22444,  /* nanmoku.gunma.jp */
-22452,  /* numata.gunma.jp */
-22459,  /* oizumi.gunma.jp */
-22468,  /* ora.gunma.jp */
- 7967,  /* ota.gunma.jp */
-22472,  /* shibukawa.gunma.jp */
-22482,  /* shimonita.gunma.jp */
-22492,  /* shinto.gunma.jp */
-21970,  /* showa.gunma.jp */
-22499,  /* takasaki.gunma.jp */
-22263,  /* takayama.gunma.jp */
-22508,  /* tamamura.gunma.jp */
-22517,  /* tatebayashi.gunma.jp */
-22529,  /* tomioka.gunma.jp */
-22537,  /* tsukiyono.gunma.jp */
-22547,  /* tsumagoi.gunma.jp */
- 5854,  /* ueno.gunma.jp */
-22556,  /* yoshioka.gunma.jp */
-21430,  /* asaminami.hiroshima.jp */
-22565,  /* daiwa.hiroshima.jp */
-22571,  /* etajima.hiroshima.jp */
-22579,  /* fuchu.hiroshima.jp */
-22585,  /* fukuyama.hiroshima.jp */
-22594,  /* hatsukaichi.hiroshima.jp */
-22606,  /* higashihiroshima.hiroshima.jp */
-22623,  /* hongo.hiroshima.jp */
-22629,  /* jinsekikogen.hiroshima.jp */
-22642,  /* kaita.hiroshima.jp */
-18962,  /* kui.hiroshima.jp */
-22648,  /* kumano.hiroshima.jp */
- 6565,  /* kure.hiroshima.jp */
-22659,  /* mihara.hiroshima.jp */
-20023,  /* miyoshi.hiroshima.jp */
-22310,  /* naka.hiroshima.jp */
-22666,  /* onomichi.hiroshima.jp */
-21041,  /* osakikamijima.hiroshima.jp */
-22675,  /* otake.hiroshima.jp */
- 6082,  /* saka.hiroshima.jp */
-22681,  /* sera.hiroshima.jp */
-21490,  /* seranishi.hiroshima.jp */
-22686,  /* shinichi.hiroshima.jp */
-22695,  /* shobara.hiroshima.jp */
-22703,  /* takehara.hiroshima.jp */
-22712,  /* abashiri.hokkaido.jp */
-22723,  /* abira.hokkaido.jp */
-22729,  /* aibetsu.hokkaido.jp */
-22721,  /* akabira.hokkaido.jp */
-22737,  /* akkeshi.hokkaido.jp */
-22745,  /* asahikawa.hokkaido.jp */
-22755,  /* ashibetsu.hokkaido.jp */
-22765,  /* ashoro.hokkaido.jp */
-22772,  /* assabu.hokkaido.jp */
-22340,  /* atsuma.hokkaido.jp */
-22779,  /* bibai.hokkaido.jp */
-22785,  /* biei.hokkaido.jp */
-22790,  /* bifuka.hokkaido.jp */
-22797,  /* bihoro.hokkaido.jp */
-22804,  /* biratori.hokkaido.jp */
-22813,  /* chippubetsu.hokkaido.jp */
-22825,  /* chitose.hokkaido.jp */
- 2241,  /* date.hokkaido.jp */
-22833,  /* ebetsu.hokkaido.jp */
-22840,  /* embetsu.hokkaido.jp */
-22848,  /* eniwa.hokkaido.jp */
-22854,  /* erimo.hokkaido.jp */
-16421,  /* esan.hokkaido.jp */
-22860,  /* esashi.hokkaido.jp */
-22867,  /* fukagawa.hokkaido.jp */
-18978,  /* fukushima.hokkaido.jp */
-22880,  /* furano.hokkaido.jp */
-22887,  /* furubira.hokkaido.jp */
-22896,  /* haboro.hokkaido.jp */
- 2237,  /* hakodate.hokkaido.jp */
-22903,  /* hamatonbetsu.hokkaido.jp */
-22916,  /* hidaka.hokkaido.jp */
-22923,  /* higashikagura.hokkaido.jp */
-22937,  /* higashikawa.hokkaido.jp */
-22949,  /* hiroo.hokkaido.jp */
-22955,  /* hokuryu.hokkaido.jp */
-22963,  /* hokuto.hokkaido.jp */
-22970,  /* honbetsu.hokkaido.jp */
-22979,  /* horokanai.hokkaido.jp */
-22989,  /* horonobe.hokkaido.jp */
-21198,  /* ikeda.hokkaido.jp */
-22998,  /* imakane.hokkaido.jp */
-23006,  /* ishikari.hokkaido.jp */
-23015,  /* iwamizawa.hokkaido.jp */
-23025,  /* iwanai.hokkaido.jp */
-22876,  /* kamifurano.hokkaido.jp */
-23032,  /* kamikawa.hokkaido.jp */
-23041,  /* kamishihoro.hokkaido.jp */
-23053,  /* kamisunagawa.hokkaido.jp */
-23066,  /* kamoenai.hokkaido.jp */
-23075,  /* kayabe.hokkaido.jp */
-23082,  /* kembuchi.hokkaido.jp */
-23091,  /* kikonai.hokkaido.jp */
-23099,  /* kimobetsu.hokkaido.jp */
-18999,  /* kitahiroshima.hokkaido.jp */
-23109,  /* kitami.hokkaido.jp */
-23116,  /* kiyosato.hokkaido.jp */
-23125,  /* koshimizu.hokkaido.jp */
-23135,  /* kunneppu.hokkaido.jp */
-23144,  /* kuriyama.hokkaido.jp */
-23153,  /* kuromatsunai.hokkaido.jp */
-23166,  /* kushiro.hokkaido.jp */
-23174,  /* kutchan.hokkaido.jp */
-20326,  /* kyowa.hokkaido.jp */
-23182,  /* mashike.hokkaido.jp */
-23190,  /* matsumae.hokkaido.jp */
-23199,  /* mikasa.hokkaido.jp */
-23206,  /* minamifurano.hokkaido.jp */
-23219,  /* mombetsu.hokkaido.jp */
-23228,  /* moseushi.hokkaido.jp */
-23239,  /* mukawa.hokkaido.jp */
-23246,  /* muroran.hokkaido.jp */
-23254,  /* naie.hokkaido.jp */
-19052,  /* nakagawa.hokkaido.jp */
-23259,  /* nakasatsunai.hokkaido.jp */
-23272,  /* nakatombetsu.hokkaido.jp */
-23285,  /* nanae.hokkaido.jp */
-23291,  /* nanporo.hokkaido.jp */
-22301,  /* nayoro.hokkaido.jp */
-23299,  /* nemuro.hokkaido.jp */
-23306,  /* niikappu.hokkaido.jp */
-15544,  /* niki.hokkaido.jp */
-23315,  /* nishiokoppe.hokkaido.jp */
-23327,  /* noboribetsu.hokkaido.jp */
-22452,  /* numata.hokkaido.jp */
-23339,  /* obihiro.hokkaido.jp */
-23347,  /* obira.hokkaido.jp */
-23353,  /* oketo.hokkaido.jp */
-23320,  /* okoppe.hokkaido.jp */
-23359,  /* otaru.hokkaido.jp */
-21135,  /* otobe.hokkaido.jp */
-23365,  /* otofuke.hokkaido.jp */
-23373,  /* otoineppu.hokkaido.jp */
- 5604,  /* oumu.hokkaido.jp */
-22466,  /* ozora.hokkaido.jp */
-17961,  /* pippu.hokkaido.jp */
-23383,  /* rankoshi.hokkaido.jp */
-23392,  /* rebun.hokkaido.jp */
-23398,  /* rikubetsu.hokkaido.jp */
-23408,  /* rishiri.hokkaido.jp */
-23416,  /* rishirifuji.hokkaido.jp */
-18042,  /* saroma.hokkaido.jp */
-23428,  /* sarufutsu.hokkaido.jp */
-23438,  /* shakotan.hokkaido.jp */
-23447,  /* shari.hokkaido.jp */
-23453,  /* shibecha.hokkaido.jp */
-22756,  /* shibetsu.hokkaido.jp */
-23462,  /* shikabe.hokkaido.jp */
-23470,  /* shikaoi.hokkaido.jp */
-23478,  /* shimamaki.hokkaido.jp */
-23127,  /* shimizu.hokkaido.jp */
-23488,  /* shimokawa.hokkaido.jp */
-23498,  /* shinshinotsu.hokkaido.jp */
-23511,  /* shintoku.hokkaido.jp */
-23520,  /* shiranuka.hokkaido.jp */
-23530,  /* shiraoi.hokkaido.jp */
-23538,  /* shiriuchi.hokkaido.jp */
-23548,  /* sobetsu.hokkaido.jp */
-23057,  /* sunagawa.hokkaido.jp */
-23556,  /* taiki.hokkaido.jp */
-23562,  /* takasu.hokkaido.jp */
-23569,  /* takikawa.hokkaido.jp */
-23578,  /* takinoue.hokkaido.jp */
-23587,  /* teshikaga.hokkaido.jp */
-23597,  /* tobetsu.hokkaido.jp */
-23605,  /* tohma.hokkaido.jp */
-23611,  /* tomakomai.hokkaido.jp */
-23621,  /* tomari.hokkaido.jp */
-23628,  /* toya.hokkaido.jp */
-23633,  /* toyako.hokkaido.jp */
-23640,  /* toyotomi.hokkaido.jp */
-23649,  /* toyoura.hokkaido.jp */
-23657,  /* tsubetsu.hokkaido.jp */
-23666,  /* tsukigata.hokkaido.jp */
-23676,  /* urakawa.hokkaido.jp */
-23684,  /* urausu.hokkaido.jp */
-22958,  /* uryu.hokkaido.jp */
-23691,  /* utashinai.hokkaido.jp */
-23701,  /* wakkanai.hokkaido.jp */
-23710,  /* wassamu.hokkaido.jp */
-23718,  /* yakumo.hokkaido.jp */
-23725,  /* yoichi.hokkaido.jp */
-23732,  /* aioi.hyogo.jp */
-23737,  /* akashi.hyogo.jp */
-20887,  /* ako.hyogo.jp */
-23744,  /* amagasaki.hyogo.jp */
-22218,  /* aogaki.hyogo.jp */
-23757,  /* asago.hyogo.jp */
-21252,  /* ashiya.hyogo.jp */
-23769,  /* awaji.hyogo.jp */
-23775,  /* fukusaki.hyogo.jp */
-23784,  /* goshiki.hyogo.jp */
-23792,  /* harima.hyogo.jp */
-23799,  /* himeji.hyogo.jp */
-20648,  /* ichikawa.hyogo.jp */
-23808,  /* inagawa.hyogo.jp */
-23110,  /* itami.hyogo.jp */
-23816,  /* kakogawa.hyogo.jp */
-23825,  /* kamigori.hyogo.jp */
-23032,  /* kamikawa.hyogo.jp */
-23834,  /* kasai.hyogo.jp */
-21374,  /* kasuga.hyogo.jp */
-23840,  /* kawanishi.hyogo.jp */
-23850,  /* miki.hyogo.jp */
-23763,  /* minamiawaji.hyogo.jp */
-23855,  /* nishinomiya.hyogo.jp */
-21793,  /* nishiwaki.hyogo.jp */
-21221,  /* ono.hyogo.jp */
-23867,  /* sanda.hyogo.jp */
-23873,  /* sannan.hyogo.jp */
-23880,  /* sasayama.hyogo.jp */
-23889,  /* sayo.hyogo.jp */
-21563,  /* shingu.hyogo.jp */
-23894,  /* shinonsen.hyogo.jp */
-23904,  /* shiso.hyogo.jp */
-23913,  /* sumoto.hyogo.jp */
-23920,  /* taishi.hyogo.jp */
-23929,  /* taka.hyogo.jp */
-23934,  /* takarazuka.hyogo.jp */
-23754,  /* takasago.hyogo.jp */
-23945,  /* takino.hyogo.jp */
-23955,  /* tamba.hyogo.jp */
-23961,  /* tatsuno.hyogo.jp */
-23969,  /* toyooka.hyogo.jp */
-23977,  /* yabu.hyogo.jp */
-23984,  /* yashiro.hyogo.jp */
-23992,  /* yoka.hyogo.jp */
-20175,  /* yokawa.hyogo.jp */
- 5375,  /* ami.ibaraki.jp */
-20079,  /* asahi.ibaraki.jp */
-24003,  /* bando.ibaraki.jp */
-24009,  /* chikusei.ibaraki.jp */
+ 6867,  /* sakura.chiba.jp */
+22760,  /* shimofusa.chiba.jp */
+22770,  /* shirako.chiba.jp */
+22778,  /* shiroi.chiba.jp */
+22785,  /* shisui.chiba.jp */
+22792,  /* sodegaura.chiba.jp */
+22802,  /* sosa.chiba.jp */
+22808,  /* tako.chiba.jp */
+22813,  /* tateyama.chiba.jp */
+22822,  /* togane.chiba.jp */
+22829,  /* tohnosho.chiba.jp */
+22219,  /* tomisato.chiba.jp */
+22838,  /* urayasu.chiba.jp */
+22846,  /* yachimata.chiba.jp */
+22856,  /* yachiyo.chiba.jp */
+20830,  /* yokaichiba.chiba.jp */
+22864,  /* yokoshibahikari.chiba.jp */
+22880,  /* yotsukaido.chiba.jp */
+22892,  /* ainan.ehime.jp */
+22899,  /* honai.ehime.jp */
+22908,  /* ikata.ehime.jp */
+22914,  /* imabari.ehime.jp */
+22860,  /* iyo.ehime.jp */
+22933,  /* kamijima.ehime.jp */
+22942,  /* kihoku.ehime.jp */
+22949,  /* kumakogen.ehime.jp */
+22959,  /* masaki.ehime.jp */
+22966,  /* matsuno.ehime.jp */
+22981,  /* matsuyama.ehime.jp */
+22905,  /* namikata.ehime.jp */
+22991,  /* niihama.ehime.jp */
+23000,  /* ozu.ehime.jp */
+23004,  /* saijo.ehime.jp */
+22922,  /* seiyo.ehime.jp */
+23010,  /* shikokuchuo.ehime.jp */
+23023,  /* tobe.ehime.jp */
+12591,  /* toon.ehime.jp */
+23037,  /* uchiko.ehime.jp */
+23044,  /* uwajima.ehime.jp */
+23052,  /* yawatahama.ehime.jp */
+23069,  /* echizen.fukui.jp */
+23077,  /* eiheiji.fukui.jp */
+20847,  /* fukui.fukui.jp */
+23085,  /* ikeda.fukui.jp */
+23091,  /* katsuyama.fukui.jp */
+21894,  /* mihama.fukui.jp */
+23063,  /* minamiechizen.fukui.jp */
+23101,  /* obama.fukui.jp */
+12816,  /* ohi.fukui.jp */
+23108,  /* ono.fukui.jp */
+23112,  /* sabae.fukui.jp */
+23118,  /* sakai.fukui.jp */
+22012,  /* takahama.fukui.jp */
+23124,  /* tsuruga.fukui.jp */
+23132,  /* wakasa.fukui.jp */
+23139,  /* ashiya.fukuoka.jp */
+23146,  /* buzen.fukuoka.jp */
+23152,  /* chikugo.fukuoka.jp */
+23160,  /* chikuho.fukuoka.jp */
+23168,  /* chikujo.fukuoka.jp */
+23176,  /* chikushino.fukuoka.jp */
+23187,  /* chikuzen.fukuoka.jp */
+22493,  /* chuo.fukuoka.jp */
+23196,  /* dazaifu.fukuoka.jp */
+23204,  /* fukuchi.fukuoka.jp */
+23212,  /* hakata.fukuoka.jp */
+23219,  /* higashi.fukuoka.jp */
+23227,  /* hirokawa.fukuoka.jp */
+23236,  /* hisayama.fukuoka.jp */
+23245,  /* iizuka.fukuoka.jp */
+23252,  /* inatsuki.fukuoka.jp */
+22251,  /* kaho.fukuoka.jp */
+23261,  /* kasuga.fukuoka.jp */
+23268,  /* kasuya.fukuoka.jp */
+23275,  /* kawara.fukuoka.jp */
+23282,  /* keisen.fukuoka.jp */
+22264,  /* koga.fukuoka.jp */
+23289,  /* kurate.fukuoka.jp */
+23296,  /* kurogi.fukuoka.jp */
+23310,  /* kurume.fukuoka.jp */
+23320,  /* minami.fukuoka.jp */
+23327,  /* miyako.fukuoka.jp */
+23336,  /* miyama.fukuoka.jp */
+23343,  /* miyawaka.fukuoka.jp */
+23352,  /* mizumaki.fukuoka.jp */
+23361,  /* munakata.fukuoka.jp */
+20939,  /* nakagawa.fukuoka.jp */
+23370,  /* nakama.fukuoka.jp */
+23381,  /* nishi.fukuoka.jp */
+22269,  /* nogata.fukuoka.jp */
+23387,  /* ogori.fukuoka.jp */
+23393,  /* okagaki.fukuoka.jp */
+22063,  /* okawa.fukuoka.jp */
+23402,  /* oki.fukuoka.jp */
+23406,  /* omuta.fukuoka.jp */
+23412,  /* onga.fukuoka.jp */
+23422,  /* onojo.fukuoka.jp */
+ 4675,  /* oto.fukuoka.jp */
+23433,  /* saigawa.fukuoka.jp */
+23441,  /* sasaguri.fukuoka.jp */
+23450,  /* shingu.fukuoka.jp */
+23457,  /* shinyoshitomi.fukuoka.jp */
+22898,  /* shonai.fukuoka.jp */
+23471,  /* soeda.fukuoka.jp */
+23480,  /* sue.fukuoka.jp */
+23484,  /* tachiarai.fukuoka.jp */
+23496,  /* tagawa.fukuoka.jp */
+23505,  /* takata.fukuoka.jp */
+23512,  /* toho.fukuoka.jp */
+23517,  /* toyotsu.fukuoka.jp */
+23525,  /* tsuiki.fukuoka.jp */
+23532,  /* ukiha.fukuoka.jp */
+18940,  /* umi.fukuoka.jp */
+23539,  /* usui.fukuoka.jp */
+23544,  /* yamada.fukuoka.jp */
+23551,  /* yame.fukuoka.jp */
+23556,  /* yanagawa.fukuoka.jp */
+23565,  /* yukuhashi.fukuoka.jp */
+23575,  /* aizubange.fukushima.jp */
+23585,  /* aizumisato.fukushima.jp */
+23596,  /* aizuwakamatsu.fukushima.jp */
+23610,  /* asakawa.fukushima.jp */
+23618,  /* bandai.fukushima.jp */
+ 2237,  /* date.fukushima.jp */
+20865,  /* fukushima.fukushima.jp */
+23625,  /* furudono.fukushima.jp */
+23634,  /* futaba.fukushima.jp */
+23641,  /* hanawa.fukushima.jp */
+23219,  /* higashi.fukushima.jp */
+23648,  /* hirata.fukushima.jp */
+23655,  /* hirono.fukushima.jp */
+23662,  /* iitate.fukushima.jp */
+23669,  /* inawashiro.fukushima.jp */
+20924,  /* ishikawa.fukushima.jp */
+23684,  /* iwaki.fukushima.jp */
+23690,  /* izumizaki.fukushima.jp */
+23700,  /* kagamiishi.fukushima.jp */
+23711,  /* kaneyama.fukushima.jp */
+23720,  /* kawamata.fukushima.jp */
+23503,  /* kitakata.fukushima.jp */
+23729,  /* kitashiobara.fukushima.jp */
+23742,  /* koori.fukushima.jp */
+23754,  /* koriyama.fukushima.jp */
+23763,  /* kunimi.fukushima.jp */
+23770,  /* miharu.fukushima.jp */
+23777,  /* mishima.fukushima.jp */
+20993,  /* namie.fukushima.jp */
+ 5781,  /* nango.fukushima.jp */
+23785,  /* nishiaizu.fukushima.jp */
+23795,  /* nishigo.fukushima.jp */
+23803,  /* okuma.fukushima.jp */
+23809,  /* omotego.fukushima.jp */
+23108,  /* ono.fukushima.jp */
+23817,  /* otama.fukushima.jp */
+23823,  /* samegawa.fukushima.jp */
+23832,  /* shimogo.fukushima.jp */
+23847,  /* shirakawa.fukushima.jp */
+23857,  /* showa.fukushima.jp */
+23863,  /* soma.fukushima.jp */
+23868,  /* sukagawa.fukushima.jp */
+23877,  /* taishin.fukushima.jp */
+23885,  /* tamakawa.fukushima.jp */
+23894,  /* tanagura.fukushima.jp */
+23903,  /* tenei.fukushima.jp */
+23909,  /* yabuki.fukushima.jp */
+23923,  /* yamato.fukushima.jp */
+23930,  /* yamatsuri.fukushima.jp */
+23940,  /* yanaizu.fukushima.jp */
+23948,  /* yugawa.fukushima.jp */
+23955,  /* anpachi.gifu.jp */
+11931,  /* ena.gifu.jp */
+20875,  /* gifu.gifu.jp */
+23963,  /* ginan.gifu.jp */
+ 2480,  /* godo.gifu.jp */
+ 4435,  /* gujo.gifu.jp */
+23969,  /* hashima.gifu.jp */
+23977,  /* hichiso.gifu.jp */
+23988,  /* hida.gifu.jp */
+23840,  /* higashishirakawa.gifu.jp */
+23993,  /* ibigawa.gifu.jp */
+23085,  /* ikeda.gifu.jp */
+24001,  /* kakamigahara.gifu.jp */
+24014,  /* kani.gifu.jp */
+24019,  /* kasahara.gifu.jp */
+24028,  /* kasamatsu.gifu.jp */
+24038,  /* kawaue.gifu.jp */
+24045,  /* kitagata.gifu.jp */
+24056,  /* mino.gifu.jp */
+24061,  /* minokamo.gifu.jp */
+24070,  /* mitake.gifu.jp */
+24077,  /* mizunami.gifu.jp */
+24086,  /* motosu.gifu.jp */
+24093,  /* nakatsugawa.gifu.jp */
+24106,  /* ogaki.gifu.jp */
+24112,  /* sakahogi.gifu.jp */
+24127,  /* seki.gifu.jp */
+24132,  /* sekigahara.gifu.jp */
+23847,  /* shirakawa.gifu.jp */
+24143,  /* tajimi.gifu.jp */
+24150,  /* takayama.gifu.jp */
+24159,  /* tarui.gifu.jp */
+23401,  /* toki.gifu.jp */
+24165,  /* tomika.gifu.jp */
+24172,  /* wanouchi.gifu.jp */
+21702,  /* yamagata.gifu.jp */
+24181,  /* yaotsu.gifu.jp */
+24190,  /* yoro.gifu.jp */
+24195,  /* annaka.gunma.jp */
+24202,  /* chiyoda.gunma.jp */
+24210,  /* fujioka.gunma.jp */
+24218,  /* higashiagatsuma.gunma.jp */
+24234,  /* isesaki.gunma.jp */
+24242,  /* itakura.gunma.jp */
+24250,  /* kanna.gunma.jp */
+ 5860,  /* kanra.gunma.jp */
+24256,  /* katashina.gunma.jp */
+24266,  /* kawaba.gunma.jp */
+24273,  /* kiryu.gunma.jp */
+24279,  /* kusatsu.gunma.jp */
+24287,  /* maebashi.gunma.jp */
+24296,  /* meiwa.gunma.jp */
+22647,  /* midori.gunma.jp */
+24302,  /* minakami.gunma.jp */
+24311,  /* naganohara.gunma.jp */
+24322,  /* nakanojo.gunma.jp */
+24331,  /* nanmoku.gunma.jp */
+24339,  /* numata.gunma.jp */
+24346,  /* oizumi.gunma.jp */
+24355,  /* ora.gunma.jp */
+ 7962,  /* ota.gunma.jp */
+24359,  /* shibukawa.gunma.jp */
+24369,  /* shimonita.gunma.jp */
+24379,  /* shinto.gunma.jp */
+23857,  /* showa.gunma.jp */
+24386,  /* takasaki.gunma.jp */
+24150,  /* takayama.gunma.jp */
+24395,  /* tamamura.gunma.jp */
+24404,  /* tatebayashi.gunma.jp */
+24416,  /* tomioka.gunma.jp */
+24424,  /* tsukiyono.gunma.jp */
+24434,  /* tsumagoi.gunma.jp */
+ 5827,  /* ueno.gunma.jp */
+24443,  /* yoshioka.gunma.jp */
+23317,  /* asaminami.hiroshima.jp */
+24452,  /* daiwa.hiroshima.jp */
+24458,  /* etajima.hiroshima.jp */
+24466,  /* fuchu.hiroshima.jp */
+24472,  /* fukuyama.hiroshima.jp */
+24481,  /* hatsukaichi.hiroshima.jp */
+24493,  /* higashihiroshima.hiroshima.jp */
+24510,  /* hongo.hiroshima.jp */
+24516,  /* jinsekikogen.hiroshima.jp */
+24529,  /* kaita.hiroshima.jp */
+20849,  /* kui.hiroshima.jp */
+24535,  /* kumano.hiroshima.jp */
+ 6531,  /* kure.hiroshima.jp */
+24546,  /* mihara.hiroshima.jp */
+21910,  /* miyoshi.hiroshima.jp */
+24197,  /* naka.hiroshima.jp */
+24553,  /* onomichi.hiroshima.jp */
+22928,  /* osakikamijima.hiroshima.jp */
+24562,  /* otake.hiroshima.jp */
+ 6055,  /* saka.hiroshima.jp */
+24568,  /* sera.hiroshima.jp */
+23377,  /* seranishi.hiroshima.jp */
+24573,  /* shinichi.hiroshima.jp */
+24582,  /* shobara.hiroshima.jp */
+24590,  /* takehara.hiroshima.jp */
+24599,  /* abashiri.hokkaido.jp */
+24610,  /* abira.hokkaido.jp */
+24616,  /* aibetsu.hokkaido.jp */
+24608,  /* akabira.hokkaido.jp */
+24624,  /* akkeshi.hokkaido.jp */
+24632,  /* asahikawa.hokkaido.jp */
+24642,  /* ashibetsu.hokkaido.jp */
+24652,  /* ashoro.hokkaido.jp */
+24659,  /* assabu.hokkaido.jp */
+24227,  /* atsuma.hokkaido.jp */
+24666,  /* bibai.hokkaido.jp */
+24672,  /* biei.hokkaido.jp */
+24677,  /* bifuka.hokkaido.jp */
+24684,  /* bihoro.hokkaido.jp */
+24691,  /* biratori.hokkaido.jp */
+24700,  /* chippubetsu.hokkaido.jp */
+24712,  /* chitose.hokkaido.jp */
+ 2237,  /* date.hokkaido.jp */
+24720,  /* ebetsu.hokkaido.jp */
+24727,  /* embetsu.hokkaido.jp */
+24735,  /* eniwa.hokkaido.jp */
+24741,  /* erimo.hokkaido.jp */
+17604,  /* esan.hokkaido.jp */
+24747,  /* esashi.hokkaido.jp */
+24754,  /* fukagawa.hokkaido.jp */
+20865,  /* fukushima.hokkaido.jp */
+24767,  /* furano.hokkaido.jp */
+24774,  /* furubira.hokkaido.jp */
+24783,  /* haboro.hokkaido.jp */
+ 2233,  /* hakodate.hokkaido.jp */
+24790,  /* hamatonbetsu.hokkaido.jp */
+24803,  /* hidaka.hokkaido.jp */
+24810,  /* higashikagura.hokkaido.jp */
+24824,  /* higashikawa.hokkaido.jp */
+24836,  /* hiroo.hokkaido.jp */
+24842,  /* hokuryu.hokkaido.jp */
+24850,  /* hokuto.hokkaido.jp */
+24857,  /* honbetsu.hokkaido.jp */
+24866,  /* horokanai.hokkaido.jp */
+24876,  /* horonobe.hokkaido.jp */
+23085,  /* ikeda.hokkaido.jp */
+24885,  /* imakane.hokkaido.jp */
+24893,  /* ishikari.hokkaido.jp */
+24902,  /* iwamizawa.hokkaido.jp */
+24912,  /* iwanai.hokkaido.jp */
+24763,  /* kamifurano.hokkaido.jp */
+24919,  /* kamikawa.hokkaido.jp */
+24928,  /* kamishihoro.hokkaido.jp */
+24940,  /* kamisunagawa.hokkaido.jp */
+24953,  /* kamoenai.hokkaido.jp */
+24962,  /* kayabe.hokkaido.jp */
+24969,  /* kembuchi.hokkaido.jp */
+24978,  /* kikonai.hokkaido.jp */
+24986,  /* kimobetsu.hokkaido.jp */
+20886,  /* kitahiroshima.hokkaido.jp */
+24996,  /* kitami.hokkaido.jp */
+25003,  /* kiyosato.hokkaido.jp */
+25012,  /* koshimizu.hokkaido.jp */
+25022,  /* kunneppu.hokkaido.jp */
+25031,  /* kuriyama.hokkaido.jp */
+25040,  /* kuromatsunai.hokkaido.jp */
+25053,  /* kushiro.hokkaido.jp */
+25061,  /* kutchan.hokkaido.jp */
+22213,  /* kyowa.hokkaido.jp */
+25069,  /* mashike.hokkaido.jp */
+25077,  /* matsumae.hokkaido.jp */
+25086,  /* mikasa.hokkaido.jp */
+25093,  /* minamifurano.hokkaido.jp */
+25106,  /* mombetsu.hokkaido.jp */
+25115,  /* moseushi.hokkaido.jp */
+25126,  /* mukawa.hokkaido.jp */
+25133,  /* muroran.hokkaido.jp */
+25141,  /* naie.hokkaido.jp */
+20939,  /* nakagawa.hokkaido.jp */
+25146,  /* nakasatsunai.hokkaido.jp */
+25159,  /* nakatombetsu.hokkaido.jp */
+25172,  /* nanae.hokkaido.jp */
+25178,  /* nanporo.hokkaido.jp */
+24188,  /* nayoro.hokkaido.jp */
+25186,  /* nemuro.hokkaido.jp */
+25193,  /* niikappu.hokkaido.jp */
+16643,  /* niki.hokkaido.jp */
+25202,  /* nishiokoppe.hokkaido.jp */
+25214,  /* noboribetsu.hokkaido.jp */
+24339,  /* numata.hokkaido.jp */
+25226,  /* obihiro.hokkaido.jp */
+25234,  /* obira.hokkaido.jp */
+25240,  /* oketo.hokkaido.jp */
+25207,  /* okoppe.hokkaido.jp */
+25246,  /* otaru.hokkaido.jp */
+23022,  /* otobe.hokkaido.jp */
+25252,  /* otofuke.hokkaido.jp */
+25260,  /* otoineppu.hokkaido.jp */
+ 5577,  /* oumu.hokkaido.jp */
+24353,  /* ozora.hokkaido.jp */
+19266,  /* pippu.hokkaido.jp */
+25270,  /* rankoshi.hokkaido.jp */
+25279,  /* rebun.hokkaido.jp */
+25285,  /* rikubetsu.hokkaido.jp */
+25295,  /* rishiri.hokkaido.jp */
+25303,  /* rishirifuji.hokkaido.jp */
+19347,  /* saroma.hokkaido.jp */
+25315,  /* sarufutsu.hokkaido.jp */
+25325,  /* shakotan.hokkaido.jp */
+25334,  /* shari.hokkaido.jp */
+25340,  /* shibecha.hokkaido.jp */
+24643,  /* shibetsu.hokkaido.jp */
+25349,  /* shikabe.hokkaido.jp */
+25357,  /* shikaoi.hokkaido.jp */
+25365,  /* shimamaki.hokkaido.jp */
+25014,  /* shimizu.hokkaido.jp */
+25375,  /* shimokawa.hokkaido.jp */
+25385,  /* shinshinotsu.hokkaido.jp */
+25398,  /* shintoku.hokkaido.jp */
+25407,  /* shiranuka.hokkaido.jp */
+25417,  /* shiraoi.hokkaido.jp */
+25425,  /* shiriuchi.hokkaido.jp */
+25435,  /* sobetsu.hokkaido.jp */
+24944,  /* sunagawa.hokkaido.jp */
+25443,  /* taiki.hokkaido.jp */
+25449,  /* takasu.hokkaido.jp */
+25456,  /* takikawa.hokkaido.jp */
+25465,  /* takinoue.hokkaido.jp */
+25474,  /* teshikaga.hokkaido.jp */
+25484,  /* tobetsu.hokkaido.jp */
+25492,  /* tohma.hokkaido.jp */
+25498,  /* tomakomai.hokkaido.jp */
+25508,  /* tomari.hokkaido.jp */
+25515,  /* toya.hokkaido.jp */
+25520,  /* toyako.hokkaido.jp */
+25527,  /* toyotomi.hokkaido.jp */
+25536,  /* toyoura.hokkaido.jp */
+25544,  /* tsubetsu.hokkaido.jp */
+25553,  /* tsukigata.hokkaido.jp */
+25563,  /* urakawa.hokkaido.jp */
+25571,  /* urausu.hokkaido.jp */
+24845,  /* uryu.hokkaido.jp */
+25578,  /* utashinai.hokkaido.jp */
+25588,  /* wakkanai.hokkaido.jp */
+25597,  /* wassamu.hokkaido.jp */
+25605,  /* yakumo.hokkaido.jp */
+25612,  /* yoichi.hokkaido.jp */
+25619,  /* aioi.hyogo.jp */
+25624,  /* akashi.hyogo.jp */
+22774,  /* ako.hyogo.jp */
+25631,  /* amagasaki.hyogo.jp */
+24105,  /* aogaki.hyogo.jp */
+25644,  /* asago.hyogo.jp */
+23139,  /* ashiya.hyogo.jp */
+25656,  /* awaji.hyogo.jp */
+25662,  /* fukusaki.hyogo.jp */
+25671,  /* goshiki.hyogo.jp */
+25679,  /* harima.hyogo.jp */
+25686,  /* himeji.hyogo.jp */
+22535,  /* ichikawa.hyogo.jp */
+25695,  /* inagawa.hyogo.jp */
+24997,  /* itami.hyogo.jp */
+25703,  /* kakogawa.hyogo.jp */
+25712,  /* kamigori.hyogo.jp */
+24919,  /* kamikawa.hyogo.jp */
+25721,  /* kasai.hyogo.jp */
+23261,  /* kasuga.hyogo.jp */
+25727,  /* kawanishi.hyogo.jp */
+25737,  /* miki.hyogo.jp */
+25650,  /* minamiawaji.hyogo.jp */
+25742,  /* nishinomiya.hyogo.jp */
+23680,  /* nishiwaki.hyogo.jp */
+23108,  /* ono.hyogo.jp */
+25754,  /* sanda.hyogo.jp */
+25760,  /* sannan.hyogo.jp */
+25767,  /* sasayama.hyogo.jp */
+25776,  /* sayo.hyogo.jp */
+23450,  /* shingu.hyogo.jp */
+25781,  /* shinonsen.hyogo.jp */
+25791,  /* shiso.hyogo.jp */
+25800,  /* sumoto.hyogo.jp */
+25807,  /* taishi.hyogo.jp */
+25816,  /* taka.hyogo.jp */
+25821,  /* takarazuka.hyogo.jp */
+25641,  /* takasago.hyogo.jp */
+25832,  /* takino.hyogo.jp */
+25842,  /* tamba.hyogo.jp */
+25848,  /* tatsuno.hyogo.jp */
+25856,  /* toyooka.hyogo.jp */
+25864,  /* yabu.hyogo.jp */
+25871,  /* yashiro.hyogo.jp */
+25879,  /* yoka.hyogo.jp */
+22062,  /* yokawa.hyogo.jp */
+ 5363,  /* ami.ibaraki.jp */
+21966,  /* asahi.ibaraki.jp */
+25890,  /* bando.ibaraki.jp */
+25896,  /* chikusei.ibaraki.jp */
   254,  /* daigo.ibaraki.jp */
-24018,  /* fujishiro.ibaraki.jp */
- 3903,  /* hitachi.ibaraki.jp */
-24028,  /* hitachinaka.ibaraki.jp */
-24040,  /* hitachiomiya.ibaraki.jp */
-24053,  /* hitachiota.ibaraki.jp */
-19028,  /* ibaraki.ibaraki.jp */
- 7276,  /* ina.ibaraki.jp */
-24070,  /* inashiki.ibaraki.jp */
-20920,  /* itako.ibaraki.jp */
-24079,  /* iwama.ibaraki.jp */
-24085,  /* joso.ibaraki.jp */
-24090,  /* kamisu.ibaraki.jp */
-24097,  /* kasama.ibaraki.jp */
-24106,  /* kashima.ibaraki.jp */
-24114,  /* kasumigaura.ibaraki.jp */
-20377,  /* koga.ibaraki.jp */
-24126,  /* miho.ibaraki.jp */
- 7917,  /* mito.ibaraki.jp */
-24131,  /* moriya.ibaraki.jp */
-22310,  /* naka.ibaraki.jp */
-24138,  /* namegata.ibaraki.jp */
-24147,  /* oarai.ibaraki.jp */
-20675,  /* ogawa.ibaraki.jp */
-24161,  /* omitama.ibaraki.jp */
-24169,  /* ryugasaki.ibaraki.jp */
-21231,  /* sakai.ibaraki.jp */
-24179,  /* sakuragawa.ibaraki.jp */
-24190,  /* shimodate.ibaraki.jp */
-24200,  /* shimotsuma.ibaraki.jp */
-24211,  /* shirosato.ibaraki.jp */
-11464,  /* sowa.ibaraki.jp */
-24221,  /* suifu.ibaraki.jp */
-24227,  /* takahagi.ibaraki.jp */
-24236,  /* tamatsukuri.ibaraki.jp */
-20149,  /* tokai.ibaraki.jp */
-24248,  /* tomobe.ibaraki.jp */
- 1202,  /* tone.ibaraki.jp */
-24255,  /* toride.ibaraki.jp */
-24262,  /* tsuchiura.ibaraki.jp */
-24272,  /* tsukuba.ibaraki.jp */
-24280,  /* uchihara.ibaraki.jp */
-24289,  /* ushiku.ibaraki.jp */
-20969,  /* yachiyo.ibaraki.jp */
-19815,  /* yamagata.ibaraki.jp */
-24296,  /* yawara.ibaraki.jp */
-24303,  /* yuki.ibaraki.jp */
-24308,  /* anamizu.ishikawa.jp */
-24316,  /* hakui.ishikawa.jp */
-24322,  /* hakusan.ishikawa.jp */
-23592,  /* kaga.ishikawa.jp */
-24339,  /* kahoku.ishikawa.jp */
-24346,  /* kanazawa.ishikawa.jp */
-18927,  /* kawakita.ishikawa.jp */
- 4621,  /* komatsu.ishikawa.jp */
-24355,  /* nakanoto.ishikawa.jp */
-24364,  /* nanao.ishikawa.jp */
-24374,  /* nomi.ishikawa.jp */
-24379,  /* nonoichi.ishikawa.jp */
-24359,  /* noto.ishikawa.jp */
-24390,  /* shika.ishikawa.jp */
-24396,  /* suzu.ishikawa.jp */
-24401,  /* tsubata.ishikawa.jp */
-24409,  /* tsurugi.ishikawa.jp */
-24417,  /* uchinada.ishikawa.jp */
-21158,  /* wajima.ishikawa.jp */
-24426,  /* fudai.iwate.jp */
-24432,  /* fujisawa.iwate.jp */
-24441,  /* hanamaki.iwate.jp */
-24450,  /* hiraizumi.iwate.jp */
-21768,  /* hirono.iwate.jp */
-20530,  /* ichinohe.iwate.jp */
-22234,  /* ichinoseki.iwate.jp */
-24460,  /* iwaizumi.iwate.jp */
-19046,  /* iwate.iwate.jp */
-24469,  /* joboji.iwate.jp */
-24476,  /* kamaishi.iwate.jp */
-24485,  /* kanegasaki.iwate.jp */
-24496,  /* karumai.iwate.jp */
-24504,  /* kawai.iwate.jp */
-24510,  /* kitakami.iwate.jp */
-24519,  /* kuji.iwate.jp */
-20513,  /* kunohe.iwate.jp */
-24524,  /* kuzumaki.iwate.jp */
-21440,  /* miyako.iwate.jp */
-24533,  /* mizusawa.iwate.jp */
-24542,  /* morioka.iwate.jp */
-24550,  /* ninohe.iwate.jp */
-20830,  /* noda.iwate.jp */
-24557,  /* ofunato.iwate.jp */
-24566,  /* oshu.iwate.jp */
-24571,  /* otsuchi.iwate.jp */
-24579,  /* rikuzentakata.iwate.jp */
-20683,  /* shiwa.iwate.jp */
-24593,  /* shizukuishi.iwate.jp */
-24605,  /* sumita.iwate.jp */
-24612,  /* tanohata.iwate.jp */
-21220,  /* tono.iwate.jp */
-24621,  /* yahaba.iwate.jp */
-21657,  /* yamada.iwate.jp */
-24628,  /* ayagawa.kagawa.jp */
-24636,  /* higashikagawa.kagawa.jp */
-24650,  /* kanonji.kagawa.jp */
-24658,  /* kotohira.kagawa.jp */
-24667,  /* manno.kagawa.jp */
- 3373,  /* marugame.kagawa.jp */
-24673,  /* mitoyo.kagawa.jp */
-24680,  /* naoshima.kagawa.jp */
-24689,  /* sanuki.kagawa.jp */
-24696,  /* tadotsu.kagawa.jp */
-24704,  /* takamatsu.kagawa.jp */
-24714,  /* tonosho.kagawa.jp */
-24370,  /* uchinomi.kagawa.jp */
-24722,  /* utazu.kagawa.jp */
-24728,  /* zentsuji.kagawa.jp */
-24737,  /* akune.kagoshima.jp */
-24744,  /* amami.kagoshima.jp */
-24750,  /* hioki.kagoshima.jp */
- 8284,  /* isa.kagoshima.jp */
- 6640,  /* isen.kagoshima.jp */
-22460,  /* izumi.kagoshima.jp */
-19061,  /* kagoshima.kagoshima.jp */
-24756,  /* kanoya.kagoshima.jp */
-24763,  /* kawanabe.kagoshima.jp */
-24772,  /* kinko.kagoshima.jp */
-24778,  /* kouyama.kagoshima.jp */
-24786,  /* makurazaki.kagoshima.jp */
-23910,  /* matsumoto.kagoshima.jp */
-20341,  /* minamitane.kagoshima.jp */
-24797,  /* nakatane.kagoshima.jp */
-24806,  /* nishinoomote.kagoshima.jp */
-19189,  /* satsumasendai.kagoshima.jp */
-24819,  /* soo.kagoshima.jp */
-24823,  /* tarumizu.kagoshima.jp */
-21651,  /* yusui.kagoshima.jp */
-20282,  /* aikawa.kanagawa.jp */
-24832,  /* atsugi.kanagawa.jp */
-24839,  /* ayase.kanagawa.jp */
-24845,  /* chigasaki.kanagawa.jp */
-24064,  /* ebina.kanagawa.jp */
-24432,  /* fujisawa.kanagawa.jp */
-24855,  /* hadano.kanagawa.jp */
-24862,  /* hakone.kanagawa.jp */
-24869,  /* hiratsuka.kanagawa.jp */
-24879,  /* isehara.kanagawa.jp */
-24887,  /* kaisei.kanagawa.jp */
-24894,  /* kamakura.kanagawa.jp */
-24903,  /* kiyokawa.kanagawa.jp */
-24912,  /* matsuda.kanagawa.jp */
-24920,  /* minamiashigara.kanagawa.jp */
-24935,  /* miura.kanagawa.jp */
-24941,  /* nakai.kanagawa.jp */
-24947,  /* ninomiya.kanagawa.jp */
-24956,  /* odawara.kanagawa.jp */
- 5465,  /* oi.kanagawa.jp */
-24967,  /* oiso.kanagawa.jp */
-22655,  /* sagamihara.kanagawa.jp */
-23237,  /* samukawa.kanagawa.jp */
-24972,  /* tsukui.kanagawa.jp */
-24979,  /* yamakita.kanagawa.jp */
-22036,  /* yamato.kanagawa.jp */
-24988,  /* yokosuka.kanagawa.jp */
-24997,  /* yugawara.kanagawa.jp */
-19844,  /* zama.kanagawa.jp */
-25006,  /* zushi.kanagawa.jp */
- 1765,  /* !city.kawasaki.jp */
-11435,  /* *.kawasaki.jp */
-19032,  /* aki.kochi.jp */
-25012,  /* geisei.kochi.jp */
-22916,  /* hidaka.kochi.jp */
-25019,  /* higashitsuno.kochi.jp */
- 1517,  /* ino.kochi.jp */
-25038,  /* kagami.kochi.jp */
-20426,  /* kami.kochi.jp */
-21607,  /* kitagawa.kochi.jp */
-19100,  /* kochi.kochi.jp */
-22659,  /* mihara.kochi.jp */
-19252,  /* motoyama.kochi.jp */
-25053,  /* muroto.kochi.jp */
-25060,  /* nahari.kochi.jp */
-25067,  /* nakamura.kochi.jp */
-25076,  /* nankoku.kochi.jp */
-25084,  /* nishitosa.kochi.jp */
-25094,  /* niyodogawa.kochi.jp */
-19101,  /* ochi.kochi.jp */
-20176,  /* okawa.kochi.jp */
-25105,  /* otoyo.kochi.jp */
-25111,  /* otsuki.kochi.jp */
-21724,  /* sakawa.kochi.jp */
-25118,  /* sukumo.kochi.jp */
-25125,  /* susaki.kochi.jp */
-25089,  /* tosa.kochi.jp */
-25132,  /* tosashimizu.kochi.jp */
-24675,  /* toyo.kochi.jp */
-21081,  /* tsuno.kochi.jp */
-25144,  /* umaji.kochi.jp */
-25150,  /* yasuda.kochi.jp */
-25157,  /* yusuhara.kochi.jp */
-25170,  /* amakusa.kumamoto.jp */
-25178,  /* arao.kumamoto.jp */
- 7333,  /* aso.kumamoto.jp */
-25183,  /* choyo.kumamoto.jp */
-25189,  /* gyokuto.kumamoto.jp */
-25166,  /* kamiamakusa.kumamoto.jp */
-25197,  /* kikuchi.kumamoto.jp */
- 5532,  /* kumamoto.kumamoto.jp */
-25205,  /* mashiki.kumamoto.jp */
-25213,  /* mifune.kumamoto.jp */
-25220,  /* minamata.kumamoto.jp */
-25229,  /* minamioguni.kumamoto.jp */
-25241,  /* nagasu.kumamoto.jp */
-25248,  /* nishihara.kumamoto.jp */
-25235,  /* oguni.kumamoto.jp */
-21113,  /* ozu.kumamoto.jp */
-23913,  /* sumoto.kumamoto.jp */
-25258,  /* takamori.kumamoto.jp */
- 7589,  /* uki.kumamoto.jp */
+25905,  /* fujishiro.ibaraki.jp */
+ 3897,  /* hitachi.ibaraki.jp */
+25915,  /* hitachinaka.ibaraki.jp */
+25927,  /* hitachiomiya.ibaraki.jp */
+25940,  /* hitachiota.ibaraki.jp */
+20915,  /* ibaraki.ibaraki.jp */
+ 7246,  /* ina.ibaraki.jp */
+25957,  /* inashiki.ibaraki.jp */
+22807,  /* itako.ibaraki.jp */
+25966,  /* iwama.ibaraki.jp */
+25972,  /* joso.ibaraki.jp */
+25977,  /* kamisu.ibaraki.jp */
+25984,  /* kasama.ibaraki.jp */
+25993,  /* kashima.ibaraki.jp */
+26001,  /* kasumigaura.ibaraki.jp */
+22264,  /* koga.ibaraki.jp */
+26013,  /* miho.ibaraki.jp */
+ 7899,  /* mito.ibaraki.jp */
+26018,  /* moriya.ibaraki.jp */
+24197,  /* naka.ibaraki.jp */
+26025,  /* namegata.ibaraki.jp */
+26034,  /* oarai.ibaraki.jp */
+22562,  /* ogawa.ibaraki.jp */
+26048,  /* omitama.ibaraki.jp */
+26056,  /* ryugasaki.ibaraki.jp */
+23118,  /* sakai.ibaraki.jp */
+26066,  /* sakuragawa.ibaraki.jp */
+26077,  /* shimodate.ibaraki.jp */
+26087,  /* shimotsuma.ibaraki.jp */
+26098,  /* shirosato.ibaraki.jp */
+11639,  /* sowa.ibaraki.jp */
+26108,  /* suifu.ibaraki.jp */
+26114,  /* takahagi.ibaraki.jp */
+26123,  /* tamatsukuri.ibaraki.jp */
+22036,  /* tokai.ibaraki.jp */
+26135,  /* tomobe.ibaraki.jp */
+ 1196,  /* tone.ibaraki.jp */
+26142,  /* toride.ibaraki.jp */
+26149,  /* tsuchiura.ibaraki.jp */
+26159,  /* tsukuba.ibaraki.jp */
+26167,  /* uchihara.ibaraki.jp */
+26176,  /* ushiku.ibaraki.jp */
+22856,  /* yachiyo.ibaraki.jp */
+21702,  /* yamagata.ibaraki.jp */
+26183,  /* yawara.ibaraki.jp */
+26190,  /* yuki.ibaraki.jp */
+26195,  /* anamizu.ishikawa.jp */
+26203,  /* hakui.ishikawa.jp */
+26209,  /* hakusan.ishikawa.jp */
+25479,  /* kaga.ishikawa.jp */
+26226,  /* kahoku.ishikawa.jp */
+26233,  /* kanazawa.ishikawa.jp */
+20814,  /* kawakita.ishikawa.jp */
+ 4607,  /* komatsu.ishikawa.jp */
+26242,  /* nakanoto.ishikawa.jp */
+26251,  /* nanao.ishikawa.jp */
+26261,  /* nomi.ishikawa.jp */
+26266,  /* nonoichi.ishikawa.jp */
+26246,  /* noto.ishikawa.jp */
+26277,  /* shika.ishikawa.jp */
+26283,  /* suzu.ishikawa.jp */
+26288,  /* tsubata.ishikawa.jp */
+26296,  /* tsurugi.ishikawa.jp */
+26304,  /* uchinada.ishikawa.jp */
+23045,  /* wajima.ishikawa.jp */
+26313,  /* fudai.iwate.jp */
+26319,  /* fujisawa.iwate.jp */
+26328,  /* hanamaki.iwate.jp */
+26337,  /* hiraizumi.iwate.jp */
+23655,  /* hirono.iwate.jp */
+22417,  /* ichinohe.iwate.jp */
+24121,  /* ichinoseki.iwate.jp */
+26347,  /* iwaizumi.iwate.jp */
+20933,  /* iwate.iwate.jp */
+26356,  /* joboji.iwate.jp */
+26363,  /* kamaishi.iwate.jp */
+26372,  /* kanegasaki.iwate.jp */
+26383,  /* karumai.iwate.jp */
+26391,  /* kawai.iwate.jp */
+26397,  /* kitakami.iwate.jp */
+26406,  /* kuji.iwate.jp */
+22400,  /* kunohe.iwate.jp */
+26411,  /* kuzumaki.iwate.jp */
+23327,  /* miyako.iwate.jp */
+26420,  /* mizusawa.iwate.jp */
+26429,  /* morioka.iwate.jp */
+26437,  /* ninohe.iwate.jp */
+22717,  /* noda.iwate.jp */
+26444,  /* ofunato.iwate.jp */
+26453,  /* oshu.iwate.jp */
+26458,  /* otsuchi.iwate.jp */
+26466,  /* rikuzentakata.iwate.jp */
+22570,  /* shiwa.iwate.jp */
+26480,  /* shizukuishi.iwate.jp */
+26492,  /* sumita.iwate.jp */
+26499,  /* tanohata.iwate.jp */
+23107,  /* tono.iwate.jp */
+26508,  /* yahaba.iwate.jp */
+23544,  /* yamada.iwate.jp */
+26515,  /* ayagawa.kagawa.jp */
+26523,  /* higashikagawa.kagawa.jp */
+26537,  /* kanonji.kagawa.jp */
+26545,  /* kotohira.kagawa.jp */
+26554,  /* manno.kagawa.jp */
+ 3367,  /* marugame.kagawa.jp */
+26560,  /* mitoyo.kagawa.jp */
+26567,  /* naoshima.kagawa.jp */
+26576,  /* sanuki.kagawa.jp */
+26583,  /* tadotsu.kagawa.jp */
+26591,  /* takamatsu.kagawa.jp */
+26601,  /* tonosho.kagawa.jp */
+26257,  /* uchinomi.kagawa.jp */
+26609,  /* utazu.kagawa.jp */
+26615,  /* zentsuji.kagawa.jp */
+26624,  /* akune.kagoshima.jp */
+26631,  /* amami.kagoshima.jp */
+26637,  /* hioki.kagoshima.jp */
+ 8285,  /* isa.kagoshima.jp */
+ 6606,  /* isen.kagoshima.jp */
+24347,  /* izumi.kagoshima.jp */
+20948,  /* kagoshima.kagoshima.jp */
+26643,  /* kanoya.kagoshima.jp */
+26650,  /* kawanabe.kagoshima.jp */
+26659,  /* kinko.kagoshima.jp */
+26665,  /* kouyama.kagoshima.jp */
+26673,  /* makurazaki.kagoshima.jp */
+25797,  /* matsumoto.kagoshima.jp */
+22228,  /* minamitane.kagoshima.jp */
+26684,  /* nakatane.kagoshima.jp */
+26693,  /* nishinoomote.kagoshima.jp */
+21076,  /* satsumasendai.kagoshima.jp */
+26706,  /* soo.kagoshima.jp */
+26710,  /* tarumizu.kagoshima.jp */
+23538,  /* yusui.kagoshima.jp */
+22169,  /* aikawa.kanagawa.jp */
+26719,  /* atsugi.kanagawa.jp */
+26726,  /* ayase.kanagawa.jp */
+26732,  /* chigasaki.kanagawa.jp */
+25951,  /* ebina.kanagawa.jp */
+26319,  /* fujisawa.kanagawa.jp */
+26742,  /* hadano.kanagawa.jp */
+26749,  /* hakone.kanagawa.jp */
+26756,  /* hiratsuka.kanagawa.jp */
+26766,  /* isehara.kanagawa.jp */
+26774,  /* kaisei.kanagawa.jp */
+26781,  /* kamakura.kanagawa.jp */
+26790,  /* kiyokawa.kanagawa.jp */
+26799,  /* matsuda.kanagawa.jp */
+26807,  /* minamiashigara.kanagawa.jp */
+26822,  /* miura.kanagawa.jp */
+26828,  /* nakai.kanagawa.jp */
+26834,  /* ninomiya.kanagawa.jp */
+26843,  /* odawara.kanagawa.jp */
+ 5453,  /* oi.kanagawa.jp */
+26854,  /* oiso.kanagawa.jp */
+24542,  /* sagamihara.kanagawa.jp */
+25124,  /* samukawa.kanagawa.jp */
+26859,  /* tsukui.kanagawa.jp */
+26866,  /* yamakita.kanagawa.jp */
+23923,  /* yamato.kanagawa.jp */
+26875,  /* yokosuka.kanagawa.jp */
+26884,  /* yugawara.kanagawa.jp */
+21731,  /* zama.kanagawa.jp */
+26893,  /* zushi.kanagawa.jp */
+ 1761,  /* !city.kawasaki.jp */
+11599,  /* *.kawasaki.jp */
+20919,  /* aki.kochi.jp */
+26899,  /* geisei.kochi.jp */
+24803,  /* hidaka.kochi.jp */
+26906,  /* higashitsuno.kochi.jp */
+ 1510,  /* ino.kochi.jp */
+26925,  /* kagami.kochi.jp */
+22313,  /* kami.kochi.jp */
+23494,  /* kitagawa.kochi.jp */
+20987,  /* kochi.kochi.jp */
+24546,  /* mihara.kochi.jp */
+21139,  /* motoyama.kochi.jp */
+26940,  /* muroto.kochi.jp */
+26947,  /* nahari.kochi.jp */
+26954,  /* nakamura.kochi.jp */
+26963,  /* nankoku.kochi.jp */
+26971,  /* nishitosa.kochi.jp */
+26981,  /* niyodogawa.kochi.jp */
+20988,  /* ochi.kochi.jp */
+22063,  /* okawa.kochi.jp */
+26992,  /* otoyo.kochi.jp */
+26998,  /* otsuki.kochi.jp */
+23611,  /* sakawa.kochi.jp */
+27005,  /* sukumo.kochi.jp */
+27012,  /* susaki.kochi.jp */
+26976,  /* tosa.kochi.jp */
+27019,  /* tosashimizu.kochi.jp */
+26562,  /* toyo.kochi.jp */
+22968,  /* tsuno.kochi.jp */
+27031,  /* umaji.kochi.jp */
+27037,  /* yasuda.kochi.jp */
+27044,  /* yusuhara.kochi.jp */
+27057,  /* amakusa.kumamoto.jp */
+27065,  /* arao.kumamoto.jp */
+ 7303,  /* aso.kumamoto.jp */
+27070,  /* choyo.kumamoto.jp */
+27076,  /* gyokuto.kumamoto.jp */
+27053,  /* kamiamakusa.kumamoto.jp */
+27084,  /* kikuchi.kumamoto.jp */
+ 5510,  /* kumamoto.kumamoto.jp */
+27092,  /* mashiki.kumamoto.jp */
+27100,  /* mifune.kumamoto.jp */
+27107,  /* minamata.kumamoto.jp */
+27116,  /* minamioguni.kumamoto.jp */
+27128,  /* nagasu.kumamoto.jp */
+27135,  /* nishihara.kumamoto.jp */
+27122,  /* oguni.kumamoto.jp */
+23000,  /* ozu.kumamoto.jp */
+25800,  /* sumoto.kumamoto.jp */
+27145,  /* takamori.kumamoto.jp */
+ 7570,  /* uki.kumamoto.jp */
   630,  /* uto.kumamoto.jp */
-25267,  /* yamaga.kumamoto.jp */
-22036,  /* yamato.kumamoto.jp */
-25274,  /* yatsushiro.kumamoto.jp */
-23076,  /* ayabe.kyoto.jp */
-25285,  /* fukuchiyama.kyoto.jp */
-25297,  /* higashiyama.kyoto.jp */
- 2276,  /* ide.kyoto.jp */
- 6009,  /* ine.kyoto.jp */
-25309,  /* joyo.kyoto.jp */
-25314,  /* kameoka.kyoto.jp */
-22178,  /* kamo.kyoto.jp */
-18931,  /* kita.kyoto.jp */
-25322,  /* kizu.kyoto.jp */
-21447,  /* kumiyama.kyoto.jp */
-23952,  /* kyotamba.kyoto.jp */
-25327,  /* kyotanabe.kyoto.jp */
-25337,  /* kyotango.kyoto.jp */
-25346,  /* maizuru.kyoto.jp */
-21433,  /* minami.kyoto.jp */
-25354,  /* minamiyamashiro.kyoto.jp */
-25370,  /* miyazu.kyoto.jp */
-25377,  /* muko.kyoto.jp */
-25382,  /* nagaokakyo.kyoto.jp */
-25393,  /* nakagyo.kyoto.jp */
-25401,  /* nantan.kyoto.jp */
-25408,  /* oyamazaki.kyoto.jp */
-25418,  /* sakyo.kyoto.jp */
-25424,  /* seika.kyoto.jp */
-25330,  /* tanabe.kyoto.jp */
- 7242,  /* uji.kyoto.jp */
-25430,  /* ujitawara.kyoto.jp */
-25440,  /* wazuka.kyoto.jp */
-25447,  /* yamashina.kyoto.jp */
-25457,  /* yawata.kyoto.jp */
-20079,  /* asahi.mie.jp */
-25464,  /* inabe.mie.jp */
- 2146,  /* ise.mie.jp */
-25470,  /* kameyama.mie.jp */
-25479,  /* kawagoe.mie.jp */
-25487,  /* kiho.mie.jp */
-25492,  /* kisosaki.mie.jp */
-25501,  /* kiwa.mie.jp */
-25506,  /* komono.mie.jp */
-22648,  /* kumano.mie.jp */
-25513,  /* kuwana.mie.jp */
-25520,  /* matsusaka.mie.jp */
-22409,  /* meiwa.mie.jp */
-20007,  /* mihama.mie.jp */
-25530,  /* minamiise.mie.jp */
-25540,  /* misugi.mie.jp */
-21449,  /* miyama.mie.jp */
-16630,  /* nabari.mie.jp */
-18982,  /* shima.mie.jp */
-25547,  /* suzuka.mie.jp */
-25554,  /* tado.mie.jp */
-23556,  /* taiki.mie.jp */
-20868,  /* taki.mie.jp */
-25559,  /* tamaki.mie.jp */
-25566,  /* toba.mie.jp */
- 3294,  /* tsu.mie.jp */
-21741,  /* udono.mie.jp */
-25571,  /* ureshino.mie.jp */
-25580,  /* watarai.mie.jp */
-18917,  /* yokkaichi.mie.jp */
-25588,  /* furukawa.miyagi.jp */
-25597,  /* higashimatsushima.miyagi.jp */
-25615,  /* ishinomaki.miyagi.jp */
-25626,  /* iwanuma.miyagi.jp */
-25634,  /* kakuda.miyagi.jp */
-20426,  /* kami.miyagi.jp */
-19080,  /* kawasaki.miyagi.jp */
-25641,  /* marumori.miyagi.jp */
-20191,  /* matsushima.miyagi.jp */
-25650,  /* minamisanriku.miyagi.jp */
-20334,  /* misato.miyagi.jp */
-25664,  /* murata.miyagi.jp */
-25671,  /* natori.miyagi.jp */
-25678,  /* ogawara.miyagi.jp */
-24661,  /* ohira.miyagi.jp */
-25686,  /* onagawa.miyagi.jp */
-20442,  /* osaki.miyagi.jp */
-25694,  /* rifu.miyagi.jp */
-25699,  /* semine.miyagi.jp */
-25706,  /* shibata.miyagi.jp */
-25714,  /* shichikashuku.miyagi.jp */
-25728,  /* shikama.miyagi.jp */
-25736,  /* shiogama.miyagi.jp */
-25745,  /* shiroishi.miyagi.jp */
-25755,  /* tagajo.miyagi.jp */
-25762,  /* taiwa.miyagi.jp */
-25771,  /* tome.miyagi.jp */
-25776,  /* tomiya.miyagi.jp */
-25783,  /* wakuya.miyagi.jp */
-25790,  /* watari.miyagi.jp */
-25797,  /* yamamoto.miyagi.jp */
-25806,  /* zao.miyagi.jp */
-20668,  /* aya.miyazaki.jp */
-25032,  /* ebino.miyazaki.jp */
-25816,  /* gokase.miyazaki.jp */
-25823,  /* hyuga.miyazaki.jp */
-25829,  /* kadogawa.miyazaki.jp */
-25838,  /* kawaminami.miyazaki.jp */
-25849,  /* kijo.miyazaki.jp */
-21607,  /* kitagawa.miyazaki.jp */
-21616,  /* kitakata.miyazaki.jp */
-25854,  /* kitaura.miyazaki.jp */
-25862,  /* kobayashi.miyazaki.jp */
-25872,  /* kunitomi.miyazaki.jp */
-18980,  /* kushima.miyazaki.jp */
-25881,  /* mimata.miyazaki.jp */
-21530,  /* miyakonojo.miyazaki.jp */
-19119,  /* miyazaki.miyazaki.jp */
- 6087,  /* morotsuka.miyazaki.jp */
-25888,  /* nichinan.miyazaki.jp */
-25897,  /* nishimera.miyazaki.jp */
-25907,  /* nobeoka.miyazaki.jp */
-25915,  /* saito.miyazaki.jp */
-25921,  /* shiiba.miyazaki.jp */
-25928,  /* shintomi.miyazaki.jp */
-25937,  /* takaharu.miyazaki.jp */
-25946,  /* takanabe.miyazaki.jp */
-25955,  /* takazaki.miyazaki.jp */
-21081,  /* tsuno.miyazaki.jp */
- 3906,  /* achi.nagano.jp */
-25971,  /* agematsu.nagano.jp */
-25981,  /* anan.nagano.jp */
-25986,  /* aoki.nagano.jp */
-20079,  /* asahi.nagano.jp */
-25991,  /* azumino.nagano.jp */
-25999,  /* chikuhoku.nagano.jp */
-26009,  /* chikuma.nagano.jp */
-26017,  /* chino.nagano.jp */
-26023,  /* fujimi.nagano.jp */
-26030,  /* hakuba.nagano.jp */
-20120,  /* hara.nagano.jp */
-26037,  /* hiraya.nagano.jp */
-26050,  /* iida.nagano.jp */
-26055,  /* iijima.nagano.jp */
-26062,  /* iiyama.nagano.jp */
-26069,  /* iizuna.nagano.jp */
-21198,  /* ikeda.nagano.jp */
-26076,  /* ikusaka.nagano.jp */
- 7276,  /* ina.nagano.jp */
-26084,  /* karuizawa.nagano.jp */
-26094,  /* kawakami.nagano.jp */
-26103,  /* kiso.nagano.jp */
-18974,  /* kisofukushima.nagano.jp */
-26108,  /* kitaaiki.nagano.jp */
-26117,  /* komagane.nagano.jp */
-26126,  /* komoro.nagano.jp */
-26133,  /* matsukawa.nagano.jp */
-23910,  /* matsumoto.nagano.jp */
-26143,  /* miasa.nagano.jp */
-26149,  /* minamiaiki.nagano.jp */
-26160,  /* minamimaki.nagano.jp */
-26171,  /* minamiminowa.nagano.jp */
-26177,  /* minowa.nagano.jp */
-26184,  /* miyada.nagano.jp */
-26191,  /* miyota.nagano.jp */
-26198,  /* mochizuki.nagano.jp */
-19135,  /* nagano.nagano.jp */
-19073,  /* nagawa.nagano.jp */
-26208,  /* nagiso.nagano.jp */
-19052,  /* nakagawa.nagano.jp */
-26215,  /* nakano.nagano.jp */
-26222,  /* nozawaonsen.nagano.jp */
-26234,  /* obuse.nagano.jp */
-20675,  /* ogawa.nagano.jp */
-25810,  /* okaya.nagano.jp */
-26246,  /* omachi.nagano.jp */
-20205,  /* omi.nagano.jp */
-26253,  /* ookuwa.nagano.jp */
-24388,  /* ooshika.nagano.jp */
-20867,  /* otaki.nagano.jp */
-26260,  /* otari.nagano.jp */
+27154,  /* yamaga.kumamoto.jp */
+23923,  /* yamato.kumamoto.jp */
+27161,  /* yatsushiro.kumamoto.jp */
+24963,  /* ayabe.kyoto.jp */
+27172,  /* fukuchiyama.kyoto.jp */
+27184,  /* higashiyama.kyoto.jp */
+ 2272,  /* ide.kyoto.jp */
+ 5982,  /* ine.kyoto.jp */
+27196,  /* joyo.kyoto.jp */
+27201,  /* kameoka.kyoto.jp */
+24065,  /* kamo.kyoto.jp */
+20818,  /* kita.kyoto.jp */
+27209,  /* kizu.kyoto.jp */
+23334,  /* kumiyama.kyoto.jp */
+25839,  /* kyotamba.kyoto.jp */
+27214,  /* kyotanabe.kyoto.jp */
+27224,  /* kyotango.kyoto.jp */
+27233,  /* maizuru.kyoto.jp */
+23320,  /* minami.kyoto.jp */
+27241,  /* minamiyamashiro.kyoto.jp */
+27257,  /* miyazu.kyoto.jp */
+27264,  /* muko.kyoto.jp */
+27269,  /* nagaokakyo.kyoto.jp */
+27280,  /* nakagyo.kyoto.jp */
+27288,  /* nantan.kyoto.jp */
+27295,  /* oyamazaki.kyoto.jp */
+27305,  /* sakyo.kyoto.jp */
+27311,  /* seika.kyoto.jp */
+27217,  /* tanabe.kyoto.jp */
+ 7212,  /* uji.kyoto.jp */
+27317,  /* ujitawara.kyoto.jp */
+27327,  /* wazuka.kyoto.jp */
+27334,  /* yamashina.kyoto.jp */
+27344,  /* yawata.kyoto.jp */
+21966,  /* asahi.mie.jp */
+27351,  /* inabe.mie.jp */
+ 2142,  /* ise.mie.jp */
+27357,  /* kameyama.mie.jp */
+27366,  /* kawagoe.mie.jp */
+27374,  /* kiho.mie.jp */
+27379,  /* kisosaki.mie.jp */
+27388,  /* kiwa.mie.jp */
+27393,  /* komono.mie.jp */
+24535,  /* kumano.mie.jp */
+27400,  /* kuwana.mie.jp */
+27407,  /* matsusaka.mie.jp */
+24296,  /* meiwa.mie.jp */
+21894,  /* mihama.mie.jp */
+27417,  /* minamiise.mie.jp */
+27427,  /* misugi.mie.jp */
+23336,  /* miyama.mie.jp */
+17846,  /* nabari.mie.jp */
+20869,  /* shima.mie.jp */
+27434,  /* suzuka.mie.jp */
+27441,  /* tado.mie.jp */
+25443,  /* taiki.mie.jp */
+22755,  /* taki.mie.jp */
+27446,  /* tamaki.mie.jp */
+27453,  /* toba.mie.jp */
+ 3288,  /* tsu.mie.jp */
+23628,  /* udono.mie.jp */
+27458,  /* ureshino.mie.jp */
+27467,  /* watarai.mie.jp */
+20804,  /* yokkaichi.mie.jp */
+27475,  /* furukawa.miyagi.jp */
+27484,  /* higashimatsushima.miyagi.jp */
+27502,  /* ishinomaki.miyagi.jp */
+27513,  /* iwanuma.miyagi.jp */
+27521,  /* kakuda.miyagi.jp */
+22313,  /* kami.miyagi.jp */
+20967,  /* kawasaki.miyagi.jp */
+27528,  /* marumori.miyagi.jp */
+22078,  /* matsushima.miyagi.jp */
+27537,  /* minamisanriku.miyagi.jp */
+22221,  /* misato.miyagi.jp */
+27551,  /* murata.miyagi.jp */
+27558,  /* natori.miyagi.jp */
+27565,  /* ogawara.miyagi.jp */
+26548,  /* ohira.miyagi.jp */
+27573,  /* onagawa.miyagi.jp */
+22329,  /* osaki.miyagi.jp */
+27581,  /* rifu.miyagi.jp */
+27586,  /* semine.miyagi.jp */
+27593,  /* shibata.miyagi.jp */
+27601,  /* shichikashuku.miyagi.jp */
+27615,  /* shikama.miyagi.jp */
+27623,  /* shiogama.miyagi.jp */
+27632,  /* shiroishi.miyagi.jp */
+27642,  /* tagajo.miyagi.jp */
+27649,  /* taiwa.miyagi.jp */
+27658,  /* tome.miyagi.jp */
+27663,  /* tomiya.miyagi.jp */
+27670,  /* wakuya.miyagi.jp */
+27677,  /* watari.miyagi.jp */
+27684,  /* yamamoto.miyagi.jp */
+27693,  /* zao.miyagi.jp */
+22555,  /* aya.miyazaki.jp */
+26919,  /* ebino.miyazaki.jp */
+27703,  /* gokase.miyazaki.jp */
+27710,  /* hyuga.miyazaki.jp */
+27716,  /* kadogawa.miyazaki.jp */
+27725,  /* kawaminami.miyazaki.jp */
+27736,  /* kijo.miyazaki.jp */
+23494,  /* kitagawa.miyazaki.jp */
+23503,  /* kitakata.miyazaki.jp */
+27741,  /* kitaura.miyazaki.jp */
+27749,  /* kobayashi.miyazaki.jp */
+27759,  /* kunitomi.miyazaki.jp */
+20867,  /* kushima.miyazaki.jp */
+27768,  /* mimata.miyazaki.jp */
+23417,  /* miyakonojo.miyazaki.jp */
+21006,  /* miyazaki.miyazaki.jp */
+ 6060,  /* morotsuka.miyazaki.jp */
+27775,  /* nichinan.miyazaki.jp */
+27784,  /* nishimera.miyazaki.jp */
+27794,  /* nobeoka.miyazaki.jp */
+27802,  /* saito.miyazaki.jp */
+27808,  /* shiiba.miyazaki.jp */
+27815,  /* shintomi.miyazaki.jp */
+27824,  /* takaharu.miyazaki.jp */
+27833,  /* takanabe.miyazaki.jp */
+27842,  /* takazaki.miyazaki.jp */
+22968,  /* tsuno.miyazaki.jp */
+ 3900,  /* achi.nagano.jp */
+27858,  /* agematsu.nagano.jp */
+27868,  /* anan.nagano.jp */
+27873,  /* aoki.nagano.jp */
+21966,  /* asahi.nagano.jp */
+27878,  /* azumino.nagano.jp */
+27886,  /* chikuhoku.nagano.jp */
+27896,  /* chikuma.nagano.jp */
+27904,  /* chino.nagano.jp */
+27910,  /* fujimi.nagano.jp */
+27917,  /* hakuba.nagano.jp */
+22007,  /* hara.nagano.jp */
+27924,  /* hiraya.nagano.jp */
+27937,  /* iida.nagano.jp */
+27942,  /* iijima.nagano.jp */
+27949,  /* iiyama.nagano.jp */
+27956,  /* iizuna.nagano.jp */
+23085,  /* ikeda.nagano.jp */
+27963,  /* ikusaka.nagano.jp */
+ 7246,  /* ina.nagano.jp */
+27971,  /* karuizawa.nagano.jp */
+27981,  /* kawakami.nagano.jp */
+27990,  /* kiso.nagano.jp */
+20861,  /* kisofukushima.nagano.jp */
+27995,  /* kitaaiki.nagano.jp */
+28004,  /* komagane.nagano.jp */
+28013,  /* komoro.nagano.jp */
+28020,  /* matsukawa.nagano.jp */
+25797,  /* matsumoto.nagano.jp */
+28030,  /* miasa.nagano.jp */
+28036,  /* minamiaiki.nagano.jp */
+28047,  /* minamimaki.nagano.jp */
+28058,  /* minamiminowa.nagano.jp */
+28064,  /* minowa.nagano.jp */
+28071,  /* miyada.nagano.jp */
+28078,  /* miyota.nagano.jp */
+28085,  /* mochizuki.nagano.jp */
+21022,  /* nagano.nagano.jp */
+20960,  /* nagawa.nagano.jp */
+28095,  /* nagiso.nagano.jp */
+20939,  /* nakagawa.nagano.jp */
+28102,  /* nakano.nagano.jp */
+28109,  /* nozawaonsen.nagano.jp */
+28121,  /* obuse.nagano.jp */
+22562,  /* ogawa.nagano.jp */
+27697,  /* okaya.nagano.jp */
+28133,  /* omachi.nagano.jp */
+22092,  /* omi.nagano.jp */
+28140,  /* ookuwa.nagano.jp */
+26275,  /* ooshika.nagano.jp */
+22754,  /* otaki.nagano.jp */
+28147,  /* otari.nagano.jp */
   154,  /* sakae.nagano.jp */
-26266,  /* sakaki.nagano.jp */
-26273,  /* saku.nagano.jp */
-26278,  /* sakuho.nagano.jp */
-26285,  /* shimosuwa.nagano.jp */
-26240,  /* shinanomachi.nagano.jp */
-26295,  /* shiojiri.nagano.jp */
-26290,  /* suwa.nagano.jp */
-26304,  /* suzaka.nagano.jp */
-26311,  /* takagi.nagano.jp */
-25258,  /* takamori.nagano.jp */
-22263,  /* takayama.nagano.jp */
-26318,  /* tateshina.nagano.jp */
-23961,  /* tatsuno.nagano.jp */
-26328,  /* togakushi.nagano.jp */
-26338,  /* togura.nagano.jp */
-20204,  /* tomi.nagano.jp */
-26345,  /* ueda.nagano.jp */
-20554,  /* wada.nagano.jp */
-19815,  /* yamagata.nagano.jp */
-26350,  /* yamanouchi.nagano.jp */
-26361,  /* yasaka.nagano.jp */
-26368,  /* yasuoka.nagano.jp */
-26376,  /* chijiwa.nagasaki.jp */
-23432,  /* futsu.nagasaki.jp */
-26392,  /* goto.nagasaki.jp */
-26397,  /* hasami.nagasaki.jp */
-26404,  /* hirado.nagasaki.jp */
- 8541,  /* iki.nagasaki.jp */
-26411,  /* isahaya.nagasaki.jp */
-26419,  /* kawatana.nagasaki.jp */
-26428,  /* kuchinotsu.nagasaki.jp */
-26439,  /* matsuura.nagasaki.jp */
-19142,  /* nagasaki.nagasaki.jp */
-21214,  /* obama.nagasaki.jp */
-26448,  /* omura.nagasaki.jp */
-20085,  /* oseto.nagasaki.jp */
-26454,  /* saikai.nagasaki.jp */
-26461,  /* sasebo.nagasaki.jp */
-26468,  /* seihi.nagasaki.jp */
-26474,  /* shimabara.nagasaki.jp */
-26384,  /* shinkamigoto.nagasaki.jp */
-26484,  /* togitsu.nagasaki.jp */
-20193,  /* tsushima.nagasaki.jp */
-26492,  /* unzen.nagasaki.jp */
-24004,  /* ando.nara.jp */
-26499,  /* gose.nara.jp */
-11342,  /* heguri.nara.jp */
-26504,  /* higashiyoshino.nara.jp */
-26519,  /* ikaruga.nara.jp */
-26527,  /* ikoma.nara.jp */
-26533,  /* kamikitayama.nara.jp */
-26546,  /* kanmaki.nara.jp */
-26554,  /* kashiba.nara.jp */
-26562,  /* kashihara.nara.jp */
-26572,  /* katsuragi.nara.jp */
-24504,  /* kawai.nara.jp */
-26094,  /* kawakami.nara.jp */
-23840,  /* kawanishi.nara.jp */
-26582,  /* koryo.nara.jp */
-20864,  /* kurotaki.nara.jp */
-26590,  /* mitsue.nara.jp */
-26597,  /* miyake.nara.jp */
-17980,  /* nara.nara.jp */
-26604,  /* nosegawa.nara.jp */
-24472,  /* oji.nara.jp */
-26613,  /* ouda.nara.jp */
-26618,  /* oyodo.nara.jp */
-26624,  /* sakurai.nara.jp */
-26632,  /* sango.nara.jp */
-26638,  /* shimoichi.nara.jp */
-26648,  /* shimokitayama.nara.jp */
-26662,  /* shinjo.nara.jp */
-26669,  /* soni.nara.jp */
-20689,  /* takatori.nara.jp */
-26674,  /* tawaramoto.nara.jp */
-26685,  /* tenkawa.nara.jp */
-26693,  /* tenri.nara.jp */
-24916,  /* uda.nara.jp */
-21861,  /* yamatokoriyama.nara.jp */
-26699,  /* yamatotakada.nara.jp */
-26712,  /* yamazoe.nara.jp */
-26511,  /* yoshino.nara.jp */
- 3339,  /* aga.niigata.jp */
-19136,  /* agano.niigata.jp */
-26720,  /* gosen.niigata.jp */
-26726,  /* itoigawa.niigata.jp */
-26735,  /* izumozaki.niigata.jp */
-26745,  /* joetsu.niigata.jp */
-22178,  /* kamo.niigata.jp */
-26752,  /* kariwa.niigata.jp */
-26759,  /* kashiwazaki.niigata.jp */
-26771,  /* minamiuonuma.niigata.jp */
-26784,  /* mitsuke.niigata.jp */
-26792,  /* muika.niigata.jp */
-26798,  /* murakami.niigata.jp */
-26807,  /* myoko.niigata.jp */
-26813,  /* nagaoka.niigata.jp */
-19151,  /* niigata.niigata.jp */
-26821,  /* ojiya.niigata.jp */
-20205,  /* omi.niigata.jp */
-26827,  /* sado.niigata.jp */
-19849,  /* sanjo.niigata.jp */
-26832,  /* seiro.niigata.jp */
-26838,  /* seirou.niigata.jp */
-26845,  /* sekikawa.niigata.jp */
-25706,  /* shibata.niigata.jp */
-20309,  /* tagami.niigata.jp */
-26854,  /* tainai.niigata.jp */
-26861,  /* tochio.niigata.jp */
-26868,  /* tokamachi.niigata.jp */
-26878,  /* tsubame.niigata.jp */
-26886,  /* tsunan.niigata.jp */
-26777,  /* uonuma.niigata.jp */
-26893,  /* yahiko.niigata.jp */
-19159,  /* yoita.niigata.jp */
-26900,  /* yuzawa.niigata.jp */
-26907,  /* beppu.oita.jp */
-26913,  /* bungoono.oita.jp */
-26922,  /* bungotakada.oita.jp */
-26934,  /* hasama.oita.jp */
-26941,  /* hiji.oita.jp */
-26946,  /* himeshima.oita.jp */
-19869,  /* hita.oita.jp */
-26588,  /* kamitsue.oita.jp */
-26956,  /* kokonoe.oita.jp */
-26964,  /* kuju.oita.jp */
-26969,  /* kunisaki.oita.jp */
- 7538,  /* kusu.oita.jp */
-19160,  /* oita.oita.jp */
-26978,  /* saiki.oita.jp */
-26984,  /* taketa.oita.jp */
-26991,  /* tsukumi.oita.jp */
-17988,  /* usa.oita.jp */
-26999,  /* usuki.oita.jp */
-27005,  /* yufu.oita.jp */
-27010,  /* akaiwa.okayama.jp */
-27017,  /* asakuchi.okayama.jp */
-27026,  /* bizen.okayama.jp */
-27032,  /* hayashima.okayama.jp */
-27044,  /* ibara.okayama.jp */
-27050,  /* kagamino.okayama.jp */
-27059,  /* kasaoka.okayama.jp */
-20602,  /* kibichuo.okayama.jp */
-27067,  /* kumenan.okayama.jp */
-27075,  /* kurashiki.okayama.jp */
-27085,  /* maniwa.okayama.jp */
-27092,  /* misaki.okayama.jp */
-20453,  /* nagi.okayama.jp */
-27105,  /* niimi.okayama.jp */
-27111,  /* nishiawakura.okayama.jp */
-19165,  /* okayama.okayama.jp */
-27124,  /* satosho.okayama.jp */
-27132,  /* setouchi.okayama.jp */
-26662,  /* shinjo.okayama.jp */
-27141,  /* shoo.okayama.jp */
-27146,  /* soja.okayama.jp */
-27151,  /* takahashi.okayama.jp */
-27161,  /* tamano.okayama.jp */
-21096,  /* tsuyama.okayama.jp */
- 4518,  /* wake.okayama.jp */
-27168,  /* yakage.okayama.jp */
-27178,  /* aguni.okinawa.jp */
-27184,  /* ginowan.okinawa.jp */
-27192,  /* ginoza.okinawa.jp */
-27199,  /* gushikami.okinawa.jp */
-27209,  /* haebaru.okinawa.jp */
-21332,  /* higashi.okinawa.jp */
-27217,  /* hirara.okinawa.jp */
-27224,  /* iheya.okinawa.jp */
-27230,  /* ishigaki.okinawa.jp */
-19037,  /* ishikawa.okinawa.jp */
- 5174,  /* itoman.okinawa.jp */
-27239,  /* izena.okinawa.jp */
-27245,  /* kadena.okinawa.jp */
- 7305,  /* kin.okinawa.jp */
-27252,  /* kitadaito.okinawa.jp */
-27262,  /* kitanakagusuku.okinawa.jp */
-27277,  /* kumejima.okinawa.jp */
-27286,  /* kunigami.okinawa.jp */
-27295,  /* minamidaito.okinawa.jp */
-20046,  /* motobu.okinawa.jp */
-27309,  /* nago.okinawa.jp */
-12017,  /* naha.okinawa.jp */
-27266,  /* nakagusuku.okinawa.jp */
-27314,  /* nakijin.okinawa.jp */
-27322,  /* nanjo.okinawa.jp */
-25248,  /* nishihara.okinawa.jp */
-27328,  /* ogimi.okinawa.jp */
- 5938,  /* okinawa.okinawa.jp */
-27335,  /* onna.okinawa.jp */
-27340,  /* shimoji.okinawa.jp */
-27348,  /* taketomi.okinawa.jp */
-27357,  /* tarama.okinawa.jp */
-27364,  /* tokashiki.okinawa.jp */
-27374,  /* tomigusuku.okinawa.jp */
-27385,  /* tonaki.okinawa.jp */
-27392,  /* urasoe.okinawa.jp */
-27399,  /* uruma.okinawa.jp */
-27405,  /* yaese.okinawa.jp */
-27411,  /* yomitan.okinawa.jp */
-27419,  /* yonabaru.okinawa.jp */
-27175,  /* yonaguni.okinawa.jp */
-24743,  /* zamami.okinawa.jp */
-27428,  /* abeno.osaka.jp */
-27434,  /* chihayaakasaka.osaka.jp */
-20606,  /* chuo.osaka.jp */
-27256,  /* daito.osaka.jp */
-27449,  /* fujiidera.osaka.jp */
-27459,  /* habikino.osaka.jp */
-27468,  /* hannan.osaka.jp */
-27475,  /* higashiosaka.osaka.jp */
-20014,  /* higashisumiyoshi.osaka.jp */
-27488,  /* higashiyodogawa.osaka.jp */
-27504,  /* hirakata.osaka.jp */
-19028,  /* ibaraki.osaka.jp */
-21198,  /* ikeda.osaka.jp */
-22460,  /* izumi.osaka.jp */
-27513,  /* izumiotsu.osaka.jp */
-27523,  /* izumisano.osaka.jp */
-27533,  /* kadoma.osaka.jp */
-27540,  /* kaizuka.osaka.jp */
-25980,  /* kanan.osaka.jp */
-27548,  /* kashiwara.osaka.jp */
-27558,  /* katano.osaka.jp */
-19128,  /* kawachinagano.osaka.jp */
-27565,  /* kishiwada.osaka.jp */
-18931,  /* kita.osaka.jp */
-27575,  /* kumatori.osaka.jp */
-27584,  /* matsubara.osaka.jp */
-27599,  /* minato.osaka.jp */
-27606,  /* minoh.osaka.jp */
-27092,  /* misaki.osaka.jp */
-27612,  /* moriguchi.osaka.jp */
-27622,  /* neyagawa.osaka.jp */
-21494,  /* nishi.osaka.jp */
- 7098,  /* nose.osaka.jp */
-27631,  /* osakasayama.osaka.jp */
-21231,  /* sakai.osaka.jp */
-21351,  /* sayama.osaka.jp */
-27643,  /* sennan.osaka.jp */
-27650,  /* settsu.osaka.jp */
-27657,  /* shijonawate.osaka.jp */
-27669,  /* shimamoto.osaka.jp */
-27679,  /* suita.osaka.jp */
-27685,  /* tadaoka.osaka.jp */
-23920,  /* taishi.osaka.jp */
-27693,  /* tajiri.osaka.jp */
-27700,  /* takaishi.osaka.jp */
-27709,  /* takatsuki.osaka.jp */
-27719,  /* tondabayashi.osaka.jp */
-27732,  /* toyonaka.osaka.jp */
-27741,  /* toyono.osaka.jp */
-27748,  /* yao.osaka.jp */
-27752,  /* ariake.saga.jp */
-20824,  /* arita.saga.jp */
-27759,  /* fukudomi.saga.jp */
-27768,  /* genkai.saga.jp */
-27775,  /* hamatama.saga.jp */
-21184,  /* hizen.saga.jp */
-27784,  /* imari.saga.jp */
-27790,  /* kamimine.saga.jp */
-27799,  /* kanzaki.saga.jp */
-27807,  /* karatsu.saga.jp */
-24106,  /* kashima.saga.jp */
-22158,  /* kitagata.saga.jp */
-27815,  /* kitahata.saga.jp */
-27824,  /* kiyama.saga.jp */
-27831,  /* kouhoku.saga.jp */
-27839,  /* kyuragi.saga.jp */
-27847,  /* nishiarita.saga.jp */
- 3494,  /* ogi.saga.jp */
-26246,  /* omachi.saga.jp */
-22288,  /* ouchi.saga.jp */
- 3338,  /* saga.saga.jp */
-25745,  /* shiroishi.saga.jp */
-27858,  /* taku.saga.jp */
-20113,  /* tara.saga.jp */
-22201,  /* tosu.saga.jp */
-27863,  /* yoshinogari.saga.jp */
-27875,  /* arakawa.saitama.jp */
-26362,  /* asaka.saitama.jp */
-27890,  /* chichibu.saitama.jp */
-26023,  /* fujimi.saitama.jp */
-27899,  /* fujimino.saitama.jp */
-27908,  /* fukaya.saitama.jp */
-27915,  /* hanno.saitama.jp */
-27921,  /* hanyu.saitama.jp */
-27927,  /* hasuda.saitama.jp */
-27934,  /* hatogaya.saitama.jp */
-27943,  /* hatoyama.saitama.jp */
-22916,  /* hidaka.saitama.jp */
-27883,  /* higashichichibu.saitama.jp */
-21087,  /* higashimatsuyama.saitama.jp */
-20269,  /* honjo.saitama.jp */
- 7276,  /* ina.saitama.jp */
-27952,  /* iruma.saitama.jp */
-27958,  /* iwatsuki.saitama.jp */
-27967,  /* kamiizumi.saitama.jp */
-23032,  /* kamikawa.saitama.jp */
-27977,  /* kamisato.saitama.jp */
-27986,  /* kasukabe.saitama.jp */
-25479,  /* kawagoe.saitama.jp */
-27995,  /* kawaguchi.saitama.jp */
-28005,  /* kawajima.saitama.jp */
-28014,  /* kazo.saitama.jp */
-28019,  /* kitamoto.saitama.jp */
-28028,  /* koshigaya.saitama.jp */
-28038,  /* kounosu.saitama.jp */
-28046,  /* kuki.saitama.jp */
-28051,  /* kumagaya.saitama.jp */
-28060,  /* matsubushi.saitama.jp */
-28071,  /* minano.saitama.jp */
-20334,  /* misato.saitama.jp */
-23982,  /* miyashiro.saitama.jp */
-20023,  /* miyoshi.saitama.jp */
-28078,  /* moroyama.saitama.jp */
-28087,  /* nagatoro.saitama.jp */
-28096,  /* namegawa.saitama.jp */
-28105,  /* niiza.saitama.jp */
-28111,  /* ogano.saitama.jp */
-20675,  /* ogawa.saitama.jp */
-26498,  /* ogose.saitama.jp */
-28117,  /* okegawa.saitama.jp */
-19923,  /* omiya.saitama.jp */
-20867,  /* otaki.saitama.jp */
-28125,  /* ranzan.saitama.jp */
-25045,  /* ryokami.saitama.jp */
-19173,  /* saitama.saitama.jp */
-28132,  /* sakado.saitama.jp */
-28139,  /* satte.saitama.jp */
-21351,  /* sayama.saitama.jp */
-19947,  /* shiki.saitama.jp */
-28145,  /* shiraoka.saitama.jp */
-28154,  /* soka.saitama.jp */
-28159,  /* sugito.saitama.jp */
-28166,  /* toda.saitama.jp */
-28171,  /* tokigawa.saitama.jp */
-28180,  /* tokorozawa.saitama.jp */
-28191,  /* tsurugashima.saitama.jp */
-28204,  /* urawa.saitama.jp */
-28210,  /* warabi.saitama.jp */
-28217,  /* yashio.saitama.jp */
-28224,  /* yokoze.saitama.jp */
-22542,  /* yono.saitama.jp */
-28231,  /* yorii.saitama.jp */
-28241,  /* yoshida.saitama.jp */
-28249,  /* yoshikawa.saitama.jp */
-28259,  /* yoshimi.saitama.jp */
-28267,  /* aisho.shiga.jp */
-16711,  /* gamo.shiga.jp */
-28273,  /* higashiomi.shiga.jp */
-28284,  /* hikone.shiga.jp */
-28291,  /* koka.shiga.jp */
-20001,  /* konan.shiga.jp */
-28296,  /* kosei.shiga.jp */
-21541,  /* koto.shiga.jp */
-22392,  /* kusatsu.shiga.jp */
-27042,  /* maibara.shiga.jp */
-28302,  /* moriyama.shiga.jp */
-28311,  /* nagahama.shiga.jp */
-28320,  /* nishiazai.shiga.jp */
-28330,  /* notogawa.shiga.jp */
-28339,  /* omihachiman.shiga.jp */
-21633,  /* otsu.shiga.jp */
-28357,  /* ritto.shiga.jp */
-28363,  /* ryuoh.shiga.jp */
-24104,  /* takashima.shiga.jp */
-27709,  /* takatsuki.shiga.jp */
-28369,  /* torahime.shiga.jp */
-28378,  /* toyosato.shiga.jp */
-20954,  /* yasu.shiga.jp */
-26312,  /* akagi.shimane.jp */
-10588,  /* ama.shimane.jp */
-28351,  /* gotsu.shimane.jp */
-28387,  /* hamada.shimane.jp */
-28394,  /* higashiizumo.shimane.jp */
-19039,  /* hikawa.shimane.jp */
-28407,  /* hikimi.shimane.jp */
-28401,  /* izumo.shimane.jp */
-28423,  /* kakinoki.shimane.jp */
-28432,  /* masuda.shimane.jp */
-21590,  /* matsue.shimane.jp */
-20334,  /* misato.shimane.jp */
-28439,  /* nishinoshima.shimane.jp */
-28452,  /* ohda.shimane.jp */
-28457,  /* okinoshima.shimane.jp */
-28414,  /* okuizumo.shimane.jp */
-19209,  /* shimane.shimane.jp */
-28468,  /* tamayu.shimane.jp */
-28475,  /* tsuwano.shimane.jp */
-28483,  /* unnan.shimane.jp */
-23718,  /* yakumo.shimane.jp */
-28489,  /* yasugi.shimane.jp */
-28496,  /* yatsuka.shimane.jp */
-21602,  /* arai.shizuoka.jp */
-23997,  /* atami.shizuoka.jp */
-23423,  /* fuji.shizuoka.jp */
-28504,  /* fujieda.shizuoka.jp */
-28512,  /* fujikawa.shizuoka.jp */
-28521,  /* fujinomiya.shizuoka.jp */
-28532,  /* fukuroi.shizuoka.jp */
- 5268,  /* gotemba.shizuoka.jp */
-28540,  /* haibara.shizuoka.jp */
-28548,  /* hamamatsu.shizuoka.jp */
-28558,  /* higashiizu.shizuoka.jp */
- 7918,  /* ito.shizuoka.jp */
-28569,  /* iwata.shizuoka.jp */
-21904,  /* izu.shizuoka.jp */
-28575,  /* izunokuni.shizuoka.jp */
-28585,  /* kakegawa.shizuoka.jp */
-28594,  /* kannami.shizuoka.jp */
-28602,  /* kawanehon.shizuoka.jp */
-28612,  /* kawazu.shizuoka.jp */
-28619,  /* kikugawa.shizuoka.jp */
-28628,  /* kosai.shizuoka.jp */
-28634,  /* makinohara.shizuoka.jp */
-28645,  /* matsuzaki.shizuoka.jp */
-28655,  /* minamiizu.shizuoka.jp */
-21890,  /* mishima.shizuoka.jp */
-28665,  /* morimachi.shizuoka.jp */
-28675,  /* nishiizu.shizuoka.jp */
-28684,  /* numazu.shizuoka.jp */
-28691,  /* omaezaki.shizuoka.jp */
-28700,  /* shimada.shizuoka.jp */
-23127,  /* shimizu.shizuoka.jp */
- 5452,  /* shimoda.shizuoka.jp */
-19217,  /* shizuoka.shizuoka.jp */
-28708,  /* susono.shizuoka.jp */
-28715,  /* yaizu.shizuoka.jp */
-28241,  /* yoshida.shizuoka.jp */
-24330,  /* ashikaga.tochigi.jp */
-11673,  /* bato.tochigi.jp */
-28721,  /* haga.tochigi.jp */
-28726,  /* ichikai.tochigi.jp */
-28734,  /* iwafune.tochigi.jp */
-28742,  /* kaminokawa.tochigi.jp */
-28753,  /* kanuma.tochigi.jp */
-28760,  /* karasuyama.tochigi.jp */
-24964,  /* kuroiso.tochigi.jp */
-28771,  /* mashiko.tochigi.jp */
-28779,  /* mibu.tochigi.jp */
-28784,  /* moka.tochigi.jp */
-28789,  /* motegi.tochigi.jp */
-28796,  /* nasu.tochigi.jp */
-28801,  /* nasushiobara.tochigi.jp */
-28814,  /* nikko.tochigi.jp */
-28820,  /* nishikata.tochigi.jp */
- 3493,  /* nogi.tochigi.jp */
-24661,  /* ohira.tochigi.jp */
-28830,  /* ohtawara.tochigi.jp */
-19255,  /* oyama.tochigi.jp */
- 6898,  /* sakura.tochigi.jp */
-27528,  /* sano.tochigi.jp */
-28839,  /* shimotsuke.tochigi.jp */
-28850,  /* shioya.tochigi.jp */
-28857,  /* takanezawa.tochigi.jp */
-19226,  /* tochigi.tochigi.jp */
-28868,  /* tsuga.tochigi.jp */
-28874,  /* ujiie.tochigi.jp */
-28880,  /* utsunomiya.tochigi.jp */
-28891,  /* yaita.tochigi.jp */
-24453,  /* aizumi.tokushima.jp */
-25981,  /* anan.tokushima.jp */
-18947,  /* ichiba.tokushima.jp */
-28897,  /* itano.tokushima.jp */
-21004,  /* kainan.tokushima.jp */
-20189,  /* komatsushima.tokushima.jp */
-28903,  /* matsushige.tokushima.jp */
-28914,  /* mima.tokushima.jp */
-21433,  /* minami.tokushima.jp */
-20023,  /* miyoshi.tokushima.jp */
-28919,  /* mugi.tokushima.jp */
-19052,  /* nakagawa.tokushima.jp */
-28924,  /* naruto.tokushima.jp */
-28931,  /* sanagochi.tokushima.jp */
-28941,  /* shishikui.tokushima.jp */
-19234,  /* tokushima.tokushima.jp */
-28951,  /* wajiki.tokushima.jp */
-25964,  /* adachi.tokyo.jp */
-28958,  /* akiruno.tokyo.jp */
-28966,  /* akishima.tokyo.jp */
-28975,  /* aogashima.tokyo.jp */
-27875,  /* arakawa.tokyo.jp */
-28985,  /* bunkyo.tokyo.jp */
-22315,  /* chiyoda.tokyo.jp */
-28992,  /* chofu.tokyo.jp */
-20606,  /* chuo.tokyo.jp */
-24153,  /* edogawa.tokyo.jp */
-22579,  /* fuchu.tokyo.jp */
-28998,  /* fussa.tokyo.jp */
-29004,  /* hachijo.tokyo.jp */
-29012,  /* hachioji.tokyo.jp */
-29021,  /* hamura.tokyo.jp */
-21416,  /* higashikurume.tokyo.jp */
-29028,  /* higashimurayama.tokyo.jp */
-22029,  /* higashiyamato.tokyo.jp */
-20818,  /* hino.tokyo.jp */
-29044,  /* hinode.tokyo.jp */
-29051,  /* hinohara.tokyo.jp */
-27099,  /* inagi.tokyo.jp */
-29060,  /* itabashi.tokyo.jp */
-29069,  /* katsushika.tokyo.jp */
-18931,  /* kita.tokyo.jp */
-29080,  /* kiyose.tokyo.jp */
-29087,  /* kodaira.tokyo.jp */
-29095,  /* koganei.tokyo.jp */
-29103,  /* kokubunji.tokyo.jp */
-29113,  /* komae.tokyo.jp */
-21541,  /* koto.tokyo.jp */
-29119,  /* kouzushima.tokyo.jp */
-29130,  /* kunitachi.tokyo.jp */
-22098,  /* machida.tokyo.jp */
-29140,  /* meguro.tokyo.jp */
-27599,  /* minato.tokyo.jp */
-23927,  /* mitaka.tokyo.jp */
-29147,  /* mizuho.tokyo.jp */
-29154,  /* musashimurayama.tokyo.jp */
-29170,  /* musashino.tokyo.jp */
-26215,  /* nakano.tokyo.jp */
-29180,  /* nerima.tokyo.jp */
-29187,  /* ogasawara.tokyo.jp */
-29197,  /* okutama.tokyo.jp */
- 1693,  /* ome.tokyo.jp */
-19006,  /* oshima.tokyo.jp */
- 7967,  /* ota.tokyo.jp */
-29218,  /* setagaya.tokyo.jp */
-29227,  /* shibuya.tokyo.jp */
-23806,  /* shinagawa.tokyo.jp */
-29235,  /* shinjuku.tokyo.jp */
-29244,  /* suginami.tokyo.jp */
-29253,  /* sumida.tokyo.jp */
-29260,  /* tachikawa.tokyo.jp */
-29270,  /* taito.tokyo.jp */
-19176,  /* tama.tokyo.jp */
-29210,  /* toshima.tokyo.jp */
-29276,  /* chizu.tottori.jp */
-20818,  /* hino.tottori.jp */
-29282,  /* kawahara.tottori.jp */
- 3441,  /* koge.tottori.jp */
-29291,  /* kotoura.tottori.jp */
-29299,  /* misasa.tottori.jp */
-29306,  /* nanbu.tottori.jp */
-25888,  /* nichinan.tottori.jp */
-27594,  /* sakaiminato.tottori.jp */
-19244,  /* tottori.tottori.jp */
-21245,  /* wakasa.tottori.jp */
-25372,  /* yazu.tottori.jp */
-27307,  /* yonago.tottori.jp */
-20079,  /* asahi.toyama.jp */
-22579,  /* fuchu.toyama.jp */
-29312,  /* fukumitsu.toyama.jp */
-29322,  /* funahashi.toyama.jp */
-28262,  /* himi.toyama.jp */
-23129,  /* imizu.toyama.jp */
-21434,  /* inami.toyama.jp */
-29332,  /* johana.toyama.jp */
-29339,  /* kamiichi.toyama.jp */
-29348,  /* kurobe.toyama.jp */
-29355,  /* nakaniikawa.toyama.jp */
-29367,  /* namerikawa.toyama.jp */
-29378,  /* nanto.toyama.jp */
-29384,  /* nyuzen.toyama.jp */
-29391,  /* oyabe.toyama.jp */
-29397,  /* taira.toyama.jp */
-29403,  /* takaoka.toyama.jp */
-20926,  /* tateyama.toyama.jp */
-29411,  /* toga.toyama.jp */
-29416,  /* tonami.toyama.jp */
-19254,  /* toyama.toyama.jp */
-29423,  /* unazuki.toyama.jp */
-21112,  /* uozu.toyama.jp */
-21657,  /* yamada.toyama.jp */
-29431,  /* arida.wakayama.jp */
-29437,  /* aridagawa.wakayama.jp */
-29447,  /* gobo.wakayama.jp */
-29452,  /* hashimoto.wakayama.jp */
-22916,  /* hidaka.wakayama.jp */
-29462,  /* hirogawa.wakayama.jp */
-21434,  /* inami.wakayama.jp */
-29471,  /* iwade.wakayama.jp */
-21004,  /* kainan.wakayama.jp */
-29477,  /* kamitonda.wakayama.jp */
-26572,  /* katsuragi.wakayama.jp */
-22167,  /* kimino.wakayama.jp */
-29487,  /* kinokawa.wakayama.jp */
-26537,  /* kitayama.wakayama.jp */
-29496,  /* koya.wakayama.jp */
-10599,  /* koza.wakayama.jp */
-29501,  /* kozagawa.wakayama.jp */
-29510,  /* kudoyama.wakayama.jp */
-29519,  /* kushimoto.wakayama.jp */
-20007,  /* mihama.wakayama.jp */
-20334,  /* misato.wakayama.jp */
-20698,  /* nachikatsuura.wakayama.jp */
-21563,  /* shingu.wakayama.jp */
-29529,  /* shirahama.wakayama.jp */
-29539,  /* taiji.wakayama.jp */
-25330,  /* tanabe.wakayama.jp */
-19261,  /* wakayama.wakayama.jp */
-29545,  /* yuasa.wakayama.jp */
-29551,  /* yura.wakayama.jp */
-20079,  /* asahi.yamagata.jp */
-29556,  /* funagata.yamagata.jp */
-29565,  /* higashine.yamagata.jp */
- 2275,  /* iide.yamagata.jp */
-24339,  /* kahoku.yamagata.jp */
-29575,  /* kaminoyama.yamagata.jp */
-21824,  /* kaneyama.yamagata.jp */
-23840,  /* kawanishi.yamagata.jp */
-29586,  /* mamurogawa.yamagata.jp */
-23034,  /* mikawa.yamagata.jp */
-29035,  /* murayama.yamagata.jp */
-29597,  /* nagai.yamagata.jp */
-29603,  /* nakayama.yamagata.jp */
-29612,  /* nanyo.yamagata.jp */
-19036,  /* nishikawa.yamagata.jp */
-29618,  /* obanazawa.yamagata.jp */
- 1677,  /* oe.yamagata.jp */
-25235,  /* oguni.yamagata.jp */
-29628,  /* ohkura.yamagata.jp */
-29635,  /* oishida.yamagata.jp */
-29643,  /* sagae.yamagata.jp */
-29649,  /* sakata.yamagata.jp */
-29656,  /* sakegawa.yamagata.jp */
-26662,  /* shinjo.yamagata.jp */
-29665,  /* shirataka.yamagata.jp */
-21011,  /* shonai.yamagata.jp */
-29675,  /* takahata.yamagata.jp */
-29684,  /* tendo.yamagata.jp */
-29690,  /* tozawa.yamagata.jp */
-29697,  /* tsuruoka.yamagata.jp */
-19815,  /* yamagata.yamagata.jp */
-29706,  /* yamanobe.yamagata.jp */
-29715,  /* yonezawa.yamagata.jp */
-29724,  /* yuza.yamagata.jp */
-22775,  /* abu.yamaguchi.jp */
-24231,  /* hagi.yamaguchi.jp */
-20986,  /* hikari.yamaguchi.jp */
-28993,  /* hofu.yamaguchi.jp */
-29729,  /* iwakuni.yamaguchi.jp */
-29737,  /* kudamatsu.yamaguchi.jp */
-29747,  /* mitou.yamaguchi.jp */
-29753,  /* nagato.yamaguchi.jp */
-19006,  /* oshima.yamaguchi.jp */
-29760,  /* shimonoseki.yamaguchi.jp */
-29772,  /* shunan.yamaguchi.jp */
-29779,  /* tabuse.yamaguchi.jp */
-29786,  /* tokuyama.yamaguchi.jp */
- 7964,  /* toyota.yamaguchi.jp */
- 8057,  /* ube.yamaguchi.jp */
-29795,  /* yuu.yamaguchi.jp */
-20606,  /* chuo.yamanashi.jp */
-29799,  /* doshi.yamanashi.jp */
-29805,  /* fuefuki.yamanashi.jp */
-28512,  /* fujikawa.yamanashi.jp */
-21141,  /* fujikawaguchiko.yamanashi.jp */
-28237,  /* fujiyoshida.yamanashi.jp */
-29813,  /* hayakawa.yamanashi.jp */
-22963,  /* hokuto.yamanashi.jp */
-29822,  /* ichikawamisato.yamanashi.jp */
-20151,  /* kai.yamanashi.jp */
-29837,  /* kofu.yamanashi.jp */
-24565,  /* koshu.yamanashi.jp */
-29842,  /* kosuge.yamanashi.jp */
-29849,  /* minami-alps.yamanashi.jp */
-29861,  /* minobu.yamanashi.jp */
-29868,  /* nakamichi.yamanashi.jp */
-29306,  /* nanbu.yamanashi.jp */
-29878,  /* narusawa.yamanashi.jp */
-29887,  /* nirasaki.yamanashi.jp */
-29896,  /* nishikatsura.yamanashi.jp */
-26512,  /* oshino.yamanashi.jp */
-25111,  /* otsuki.yamanashi.jp */
-21970,  /* showa.yamanashi.jp */
-29909,  /* tabayama.yamanashi.jp */
-29918,  /* tsuru.yamanashi.jp */
-29924,  /* uenohara.yamanashi.jp */
-29933,  /* yamanakako.yamanashi.jp */
-19834,  /* yamanashi.yamanashi.jp */
+28153,  /* sakaki.nagano.jp */
+28160,  /* saku.nagano.jp */
+28165,  /* sakuho.nagano.jp */
+28172,  /* shimosuwa.nagano.jp */
+28127,  /* shinanomachi.nagano.jp */
+28182,  /* shiojiri.nagano.jp */
+28177,  /* suwa.nagano.jp */
+28191,  /* suzaka.nagano.jp */
+28198,  /* takagi.nagano.jp */
+27145,  /* takamori.nagano.jp */
+24150,  /* takayama.nagano.jp */
+28205,  /* tateshina.nagano.jp */
+25848,  /* tatsuno.nagano.jp */
+28215,  /* togakushi.nagano.jp */
+28225,  /* togura.nagano.jp */
+22091,  /* tomi.nagano.jp */
+28232,  /* ueda.nagano.jp */
+22441,  /* wada.nagano.jp */
+21702,  /* yamagata.nagano.jp */
+28237,  /* yamanouchi.nagano.jp */
+28248,  /* yasaka.nagano.jp */
+28255,  /* yasuoka.nagano.jp */
+28263,  /* chijiwa.nagasaki.jp */
+25319,  /* futsu.nagasaki.jp */
+28279,  /* goto.nagasaki.jp */
+28284,  /* hasami.nagasaki.jp */
+28291,  /* hirado.nagasaki.jp */
+ 8551,  /* iki.nagasaki.jp */
+28298,  /* isahaya.nagasaki.jp */
+28306,  /* kawatana.nagasaki.jp */
+28315,  /* kuchinotsu.nagasaki.jp */
+28326,  /* matsuura.nagasaki.jp */
+21029,  /* nagasaki.nagasaki.jp */
+23101,  /* obama.nagasaki.jp */
+28335,  /* omura.nagasaki.jp */
+21972,  /* oseto.nagasaki.jp */
+28341,  /* saikai.nagasaki.jp */
+28348,  /* sasebo.nagasaki.jp */
+28355,  /* seihi.nagasaki.jp */
+28361,  /* shimabara.nagasaki.jp */
+28271,  /* shinkamigoto.nagasaki.jp */
+28371,  /* togitsu.nagasaki.jp */
+22080,  /* tsushima.nagasaki.jp */
+28379,  /* unzen.nagasaki.jp */
+25891,  /* ando.nara.jp */
+28386,  /* gose.nara.jp */
+11499,  /* heguri.nara.jp */
+28391,  /* higashiyoshino.nara.jp */
+28406,  /* ikaruga.nara.jp */
+28414,  /* ikoma.nara.jp */
+28420,  /* kamikitayama.nara.jp */
+28433,  /* kanmaki.nara.jp */
+28441,  /* kashiba.nara.jp */
+28449,  /* kashihara.nara.jp */
+28459,  /* katsuragi.nara.jp */
+26391,  /* kawai.nara.jp */
+27981,  /* kawakami.nara.jp */
+25727,  /* kawanishi.nara.jp */
+28469,  /* koryo.nara.jp */
+22751,  /* kurotaki.nara.jp */
+28477,  /* mitsue.nara.jp */
+28484,  /* miyake.nara.jp */
+19285,  /* nara.nara.jp */
+28491,  /* nosegawa.nara.jp */
+26359,  /* oji.nara.jp */
+28500,  /* ouda.nara.jp */
+28505,  /* oyodo.nara.jp */
+28511,  /* sakurai.nara.jp */
+28519,  /* sango.nara.jp */
+28525,  /* shimoichi.nara.jp */
+28535,  /* shimokitayama.nara.jp */
+28549,  /* shinjo.nara.jp */
+28556,  /* soni.nara.jp */
+22576,  /* takatori.nara.jp */
+28561,  /* tawaramoto.nara.jp */
+28572,  /* tenkawa.nara.jp */
+28580,  /* tenri.nara.jp */
+26803,  /* uda.nara.jp */
+23748,  /* yamatokoriyama.nara.jp */
+28586,  /* yamatotakada.nara.jp */
+28599,  /* yamazoe.nara.jp */
+28398,  /* yoshino.nara.jp */
+ 3333,  /* aga.niigata.jp */
+21023,  /* agano.niigata.jp */
+28607,  /* gosen.niigata.jp */
+28613,  /* itoigawa.niigata.jp */
+28622,  /* izumozaki.niigata.jp */
+28632,  /* joetsu.niigata.jp */
+24065,  /* kamo.niigata.jp */
+28639,  /* kariwa.niigata.jp */
+28646,  /* kashiwazaki.niigata.jp */
+28658,  /* minamiuonuma.niigata.jp */
+28671,  /* mitsuke.niigata.jp */
+28679,  /* muika.niigata.jp */
+28685,  /* murakami.niigata.jp */
+28694,  /* myoko.niigata.jp */
+28700,  /* nagaoka.niigata.jp */
+21038,  /* niigata.niigata.jp */
+28708,  /* ojiya.niigata.jp */
+22092,  /* omi.niigata.jp */
+28714,  /* sado.niigata.jp */
+21736,  /* sanjo.niigata.jp */
+28719,  /* seiro.niigata.jp */
+28725,  /* seirou.niigata.jp */
+28732,  /* sekikawa.niigata.jp */
+27593,  /* shibata.niigata.jp */
+22196,  /* tagami.niigata.jp */
+28741,  /* tainai.niigata.jp */
+28748,  /* tochio.niigata.jp */
+28755,  /* tokamachi.niigata.jp */
+28765,  /* tsubame.niigata.jp */
+28773,  /* tsunan.niigata.jp */
+28664,  /* uonuma.niigata.jp */
+28780,  /* yahiko.niigata.jp */
+21046,  /* yoita.niigata.jp */
+28787,  /* yuzawa.niigata.jp */
+28794,  /* beppu.oita.jp */
+28800,  /* bungoono.oita.jp */
+28809,  /* bungotakada.oita.jp */
+28821,  /* hasama.oita.jp */
+28828,  /* hiji.oita.jp */
+28833,  /* himeshima.oita.jp */
+21756,  /* hita.oita.jp */
+28475,  /* kamitsue.oita.jp */
+28843,  /* kokonoe.oita.jp */
+28851,  /* kuju.oita.jp */
+28856,  /* kunisaki.oita.jp */
+ 7519,  /* kusu.oita.jp */
+21047,  /* oita.oita.jp */
+28865,  /* saiki.oita.jp */
+28871,  /* taketa.oita.jp */
+28878,  /* tsukumi.oita.jp */
+19293,  /* usa.oita.jp */
+28886,  /* usuki.oita.jp */
+28892,  /* yufu.oita.jp */
+28897,  /* akaiwa.okayama.jp */
+28904,  /* asakuchi.okayama.jp */
+28913,  /* bizen.okayama.jp */
+28919,  /* hayashima.okayama.jp */
+28931,  /* ibara.okayama.jp */
+28937,  /* kagamino.okayama.jp */
+28946,  /* kasaoka.okayama.jp */
+22489,  /* kibichuo.okayama.jp */
+28954,  /* kumenan.okayama.jp */
+28962,  /* kurashiki.okayama.jp */
+28972,  /* maniwa.okayama.jp */
+28979,  /* misaki.okayama.jp */
+22340,  /* nagi.okayama.jp */
+28992,  /* niimi.okayama.jp */
+28998,  /* nishiawakura.okayama.jp */
+21052,  /* okayama.okayama.jp */
+29011,  /* satosho.okayama.jp */
+29019,  /* setouchi.okayama.jp */
+28549,  /* shinjo.okayama.jp */
+29028,  /* shoo.okayama.jp */
+29033,  /* soja.okayama.jp */
+29038,  /* takahashi.okayama.jp */
+29048,  /* tamano.okayama.jp */
+22983,  /* tsuyama.okayama.jp */
+ 4504,  /* wake.okayama.jp */
+29055,  /* yakage.okayama.jp */
+29065,  /* aguni.okinawa.jp */
+29071,  /* ginowan.okinawa.jp */
+29079,  /* ginoza.okinawa.jp */
+29086,  /* gushikami.okinawa.jp */
+29096,  /* haebaru.okinawa.jp */
+23219,  /* higashi.okinawa.jp */
+29104,  /* hirara.okinawa.jp */
+29111,  /* iheya.okinawa.jp */
+29117,  /* ishigaki.okinawa.jp */
+20924,  /* ishikawa.okinawa.jp */
+ 5162,  /* itoman.okinawa.jp */
+29126,  /* izena.okinawa.jp */
+29132,  /* kadena.okinawa.jp */
+ 7275,  /* kin.okinawa.jp */
+29139,  /* kitadaito.okinawa.jp */
+29149,  /* kitanakagusuku.okinawa.jp */
+29164,  /* kumejima.okinawa.jp */
+29173,  /* kunigami.okinawa.jp */
+29182,  /* minamidaito.okinawa.jp */
+21933,  /* motobu.okinawa.jp */
+29196,  /* nago.okinawa.jp */
+12782,  /* naha.okinawa.jp */
+29153,  /* nakagusuku.okinawa.jp */
+29201,  /* nakijin.okinawa.jp */
+29209,  /* nanjo.okinawa.jp */
+27135,  /* nishihara.okinawa.jp */
+29215,  /* ogimi.okinawa.jp */
+ 5911,  /* okinawa.okinawa.jp */
+29222,  /* onna.okinawa.jp */
+29227,  /* shimoji.okinawa.jp */
+29235,  /* taketomi.okinawa.jp */
+29244,  /* tarama.okinawa.jp */
+29251,  /* tokashiki.okinawa.jp */
+29261,  /* tomigusuku.okinawa.jp */
+29272,  /* tonaki.okinawa.jp */
+29279,  /* urasoe.okinawa.jp */
+29286,  /* uruma.okinawa.jp */
+29292,  /* yaese.okinawa.jp */
+29298,  /* yomitan.okinawa.jp */
+29306,  /* yonabaru.okinawa.jp */
+29062,  /* yonaguni.okinawa.jp */
+26630,  /* zamami.okinawa.jp */
+29315,  /* abeno.osaka.jp */
+29321,  /* chihayaakasaka.osaka.jp */
+22493,  /* chuo.osaka.jp */
+29143,  /* daito.osaka.jp */
+29336,  /* fujiidera.osaka.jp */
+29346,  /* habikino.osaka.jp */
+29355,  /* hannan.osaka.jp */
+29362,  /* higashiosaka.osaka.jp */
+21901,  /* higashisumiyoshi.osaka.jp */
+29375,  /* higashiyodogawa.osaka.jp */
+29391,  /* hirakata.osaka.jp */
+20915,  /* ibaraki.osaka.jp */
+23085,  /* ikeda.osaka.jp */
+24347,  /* izumi.osaka.jp */
+29400,  /* izumiotsu.osaka.jp */
+29410,  /* izumisano.osaka.jp */
+29420,  /* kadoma.osaka.jp */
+29427,  /* kaizuka.osaka.jp */
+27867,  /* kanan.osaka.jp */
+29435,  /* kashiwara.osaka.jp */
+29445,  /* katano.osaka.jp */
+21015,  /* kawachinagano.osaka.jp */
+29452,  /* kishiwada.osaka.jp */
+20818,  /* kita.osaka.jp */
+29462,  /* kumatori.osaka.jp */
+29471,  /* matsubara.osaka.jp */
+29486,  /* minato.osaka.jp */
+29493,  /* minoh.osaka.jp */
+28979,  /* misaki.osaka.jp */
+29499,  /* moriguchi.osaka.jp */
+29509,  /* neyagawa.osaka.jp */
+23381,  /* nishi.osaka.jp */
+ 7068,  /* nose.osaka.jp */
+29518,  /* osakasayama.osaka.jp */
+23118,  /* sakai.osaka.jp */
+23238,  /* sayama.osaka.jp */
+29530,  /* sennan.osaka.jp */
+29537,  /* settsu.osaka.jp */
+29544,  /* shijonawate.osaka.jp */
+29556,  /* shimamoto.osaka.jp */
+29566,  /* suita.osaka.jp */
+29572,  /* tadaoka.osaka.jp */
+25807,  /* taishi.osaka.jp */
+29580,  /* tajiri.osaka.jp */
+29587,  /* takaishi.osaka.jp */
+29596,  /* takatsuki.osaka.jp */
+29606,  /* tondabayashi.osaka.jp */
+29619,  /* toyonaka.osaka.jp */
+29628,  /* toyono.osaka.jp */
+29635,  /* yao.osaka.jp */
+29639,  /* ariake.saga.jp */
+22711,  /* arita.saga.jp */
+29646,  /* fukudomi.saga.jp */
+29655,  /* genkai.saga.jp */
+29662,  /* hamatama.saga.jp */
+23071,  /* hizen.saga.jp */
+29671,  /* imari.saga.jp */
+29677,  /* kamimine.saga.jp */
+29686,  /* kanzaki.saga.jp */
+29694,  /* karatsu.saga.jp */
+25993,  /* kashima.saga.jp */
+24045,  /* kitagata.saga.jp */
+29702,  /* kitahata.saga.jp */
+29711,  /* kiyama.saga.jp */
+29718,  /* kouhoku.saga.jp */
+29726,  /* kyuragi.saga.jp */
+29734,  /* nishiarita.saga.jp */
+ 3488,  /* ogi.saga.jp */
+28133,  /* omachi.saga.jp */
+24175,  /* ouchi.saga.jp */
+ 3332,  /* saga.saga.jp */
+27632,  /* shiroishi.saga.jp */
+29745,  /* taku.saga.jp */
+22000,  /* tara.saga.jp */
+24088,  /* tosu.saga.jp */
+29750,  /* yoshinogari.saga.jp */
+29762,  /* arakawa.saitama.jp */
+28249,  /* asaka.saitama.jp */
+29777,  /* chichibu.saitama.jp */
+27910,  /* fujimi.saitama.jp */
+29786,  /* fujimino.saitama.jp */
+29795,  /* fukaya.saitama.jp */
+29802,  /* hanno.saitama.jp */
+29808,  /* hanyu.saitama.jp */
+29814,  /* hasuda.saitama.jp */
+29821,  /* hatogaya.saitama.jp */
+29830,  /* hatoyama.saitama.jp */
+24803,  /* hidaka.saitama.jp */
+29770,  /* higashichichibu.saitama.jp */
+22974,  /* higashimatsuyama.saitama.jp */
+22156,  /* honjo.saitama.jp */
+ 7246,  /* ina.saitama.jp */
+29839,  /* iruma.saitama.jp */
+29845,  /* iwatsuki.saitama.jp */
+29854,  /* kamiizumi.saitama.jp */
+24919,  /* kamikawa.saitama.jp */
+29864,  /* kamisato.saitama.jp */
+29873,  /* kasukabe.saitama.jp */
+27366,  /* kawagoe.saitama.jp */
+29882,  /* kawaguchi.saitama.jp */
+29892,  /* kawajima.saitama.jp */
+29901,  /* kazo.saitama.jp */
+29906,  /* kitamoto.saitama.jp */
+29915,  /* koshigaya.saitama.jp */
+29925,  /* kounosu.saitama.jp */
+29933,  /* kuki.saitama.jp */
+29938,  /* kumagaya.saitama.jp */
+29947,  /* matsubushi.saitama.jp */
+29958,  /* minano.saitama.jp */
+22221,  /* misato.saitama.jp */
+25869,  /* miyashiro.saitama.jp */
+21910,  /* miyoshi.saitama.jp */
+29965,  /* moroyama.saitama.jp */
+29974,  /* nagatoro.saitama.jp */
+29983,  /* namegawa.saitama.jp */
+29992,  /* niiza.saitama.jp */
+29998,  /* ogano.saitama.jp */
+22562,  /* ogawa.saitama.jp */
+28385,  /* ogose.saitama.jp */
+30004,  /* okegawa.saitama.jp */
+21810,  /* omiya.saitama.jp */
+22754,  /* otaki.saitama.jp */
+30012,  /* ranzan.saitama.jp */
+26932,  /* ryokami.saitama.jp */
+21060,  /* saitama.saitama.jp */
+30019,  /* sakado.saitama.jp */
+30026,  /* satte.saitama.jp */
+23238,  /* sayama.saitama.jp */
+21834,  /* shiki.saitama.jp */
+30032,  /* shiraoka.saitama.jp */
+30041,  /* soka.saitama.jp */
+30046,  /* sugito.saitama.jp */
+30053,  /* toda.saitama.jp */
+30058,  /* tokigawa.saitama.jp */
+30067,  /* tokorozawa.saitama.jp */
+30078,  /* tsurugashima.saitama.jp */
+30091,  /* urawa.saitama.jp */
+30097,  /* warabi.saitama.jp */
+30104,  /* yashio.saitama.jp */
+30111,  /* yokoze.saitama.jp */
+24429,  /* yono.saitama.jp */
+30118,  /* yorii.saitama.jp */
+30128,  /* yoshida.saitama.jp */
+30136,  /* yoshikawa.saitama.jp */
+30146,  /* yoshimi.saitama.jp */
+30154,  /* aisho.shiga.jp */
+17927,  /* gamo.shiga.jp */
+30160,  /* higashiomi.shiga.jp */
+30171,  /* hikone.shiga.jp */
+30178,  /* koka.shiga.jp */
+21888,  /* konan.shiga.jp */
+30183,  /* kosei.shiga.jp */
+23428,  /* koto.shiga.jp */
+24279,  /* kusatsu.shiga.jp */
+28929,  /* maibara.shiga.jp */
+30189,  /* moriyama.shiga.jp */
+30198,  /* nagahama.shiga.jp */
+30207,  /* nishiazai.shiga.jp */
+30217,  /* notogawa.shiga.jp */
+30226,  /* omihachiman.shiga.jp */
+23520,  /* otsu.shiga.jp */
+30244,  /* ritto.shiga.jp */
+30250,  /* ryuoh.shiga.jp */
+25991,  /* takashima.shiga.jp */
+29596,  /* takatsuki.shiga.jp */
+30256,  /* torahime.shiga.jp */
+30265,  /* toyosato.shiga.jp */
+22841,  /* yasu.shiga.jp */
+28199,  /* akagi.shimane.jp */
+10725,  /* ama.shimane.jp */
+30238,  /* gotsu.shimane.jp */
+30274,  /* hamada.shimane.jp */
+30281,  /* higashiizumo.shimane.jp */
+20926,  /* hikawa.shimane.jp */
+30294,  /* hikimi.shimane.jp */
+30288,  /* izumo.shimane.jp */
+30310,  /* kakinoki.shimane.jp */
+30319,  /* masuda.shimane.jp */
+23477,  /* matsue.shimane.jp */
+22221,  /* misato.shimane.jp */
+30326,  /* nishinoshima.shimane.jp */
+30339,  /* ohda.shimane.jp */
+30344,  /* okinoshima.shimane.jp */
+30301,  /* okuizumo.shimane.jp */
+21096,  /* shimane.shimane.jp */
+30355,  /* tamayu.shimane.jp */
+30362,  /* tsuwano.shimane.jp */
+30370,  /* unnan.shimane.jp */
+25605,  /* yakumo.shimane.jp */
+30376,  /* yasugi.shimane.jp */
+30383,  /* yatsuka.shimane.jp */
+23489,  /* arai.shizuoka.jp */
+25884,  /* atami.shizuoka.jp */
+25310,  /* fuji.shizuoka.jp */
+30391,  /* fujieda.shizuoka.jp */
+30399,  /* fujikawa.shizuoka.jp */
+30408,  /* fujinomiya.shizuoka.jp */
+30419,  /* fukuroi.shizuoka.jp */
+ 5256,  /* gotemba.shizuoka.jp */
+30427,  /* haibara.shizuoka.jp */
+30435,  /* hamamatsu.shizuoka.jp */
+30445,  /* higashiizu.shizuoka.jp */
+ 7900,  /* ito.shizuoka.jp */
+30456,  /* iwata.shizuoka.jp */
+23791,  /* izu.shizuoka.jp */
+30462,  /* izunokuni.shizuoka.jp */
+30472,  /* kakegawa.shizuoka.jp */
+30481,  /* kannami.shizuoka.jp */
+30489,  /* kawanehon.shizuoka.jp */
+30499,  /* kawazu.shizuoka.jp */
+30506,  /* kikugawa.shizuoka.jp */
+30515,  /* kosai.shizuoka.jp */
+30521,  /* makinohara.shizuoka.jp */
+30532,  /* matsuzaki.shizuoka.jp */
+30542,  /* minamiizu.shizuoka.jp */
+23777,  /* mishima.shizuoka.jp */
+30552,  /* morimachi.shizuoka.jp */
+30562,  /* nishiizu.shizuoka.jp */
+30571,  /* numazu.shizuoka.jp */
+30578,  /* omaezaki.shizuoka.jp */
+30587,  /* shimada.shizuoka.jp */
+25014,  /* shimizu.shizuoka.jp */
+ 5440,  /* shimoda.shizuoka.jp */
+21104,  /* shizuoka.shizuoka.jp */
+30595,  /* susono.shizuoka.jp */
+30602,  /* yaizu.shizuoka.jp */
+30128,  /* yoshida.shizuoka.jp */
+26217,  /* ashikaga.tochigi.jp */
+12114,  /* bato.tochigi.jp */
+30608,  /* haga.tochigi.jp */
+30613,  /* ichikai.tochigi.jp */
+30621,  /* iwafune.tochigi.jp */
+30629,  /* kaminokawa.tochigi.jp */
+30640,  /* kanuma.tochigi.jp */
+30647,  /* karasuyama.tochigi.jp */
+26851,  /* kuroiso.tochigi.jp */
+30658,  /* mashiko.tochigi.jp */
+30666,  /* mibu.tochigi.jp */
+30671,  /* moka.tochigi.jp */
+30676,  /* motegi.tochigi.jp */
+30683,  /* nasu.tochigi.jp */
+30688,  /* nasushiobara.tochigi.jp */
+30701,  /* nikko.tochigi.jp */
+30707,  /* nishikata.tochigi.jp */
+ 3487,  /* nogi.tochigi.jp */
+26548,  /* ohira.tochigi.jp */
+30717,  /* ohtawara.tochigi.jp */
+21142,  /* oyama.tochigi.jp */
+ 6867,  /* sakura.tochigi.jp */
+29415,  /* sano.tochigi.jp */
+30726,  /* shimotsuke.tochigi.jp */
+30737,  /* shioya.tochigi.jp */
+30744,  /* takanezawa.tochigi.jp */
+21113,  /* tochigi.tochigi.jp */
+30755,  /* tsuga.tochigi.jp */
+30761,  /* ujiie.tochigi.jp */
+30767,  /* utsunomiya.tochigi.jp */
+30778,  /* yaita.tochigi.jp */
+26340,  /* aizumi.tokushima.jp */
+27868,  /* anan.tokushima.jp */
+20834,  /* ichiba.tokushima.jp */
+30784,  /* itano.tokushima.jp */
+22891,  /* kainan.tokushima.jp */
+22076,  /* komatsushima.tokushima.jp */
+30790,  /* matsushige.tokushima.jp */
+30801,  /* mima.tokushima.jp */
+23320,  /* minami.tokushima.jp */
+21910,  /* miyoshi.tokushima.jp */
+30806,  /* mugi.tokushima.jp */
+20939,  /* nakagawa.tokushima.jp */
+30811,  /* naruto.tokushima.jp */
+30818,  /* sanagochi.tokushima.jp */
+30828,  /* shishikui.tokushima.jp */
+21121,  /* tokushima.tokushima.jp */
+30838,  /* wajiki.tokushima.jp */
+27851,  /* adachi.tokyo.jp */
+30845,  /* akiruno.tokyo.jp */
+30853,  /* akishima.tokyo.jp */
+30862,  /* aogashima.tokyo.jp */
+29762,  /* arakawa.tokyo.jp */
+30872,  /* bunkyo.tokyo.jp */
+24202,  /* chiyoda.tokyo.jp */
+30879,  /* chofu.tokyo.jp */
+22493,  /* chuo.tokyo.jp */
+26040,  /* edogawa.tokyo.jp */
+24466,  /* fuchu.tokyo.jp */
+30885,  /* fussa.tokyo.jp */
+30891,  /* hachijo.tokyo.jp */
+30899,  /* hachioji.tokyo.jp */
+30908,  /* hamura.tokyo.jp */
+23303,  /* higashikurume.tokyo.jp */
+30915,  /* higashimurayama.tokyo.jp */
+23916,  /* higashiyamato.tokyo.jp */
+22705,  /* hino.tokyo.jp */
+30931,  /* hinode.tokyo.jp */
+30938,  /* hinohara.tokyo.jp */
+28986,  /* inagi.tokyo.jp */
+30947,  /* itabashi.tokyo.jp */
+30956,  /* katsushika.tokyo.jp */
+20818,  /* kita.tokyo.jp */
+30967,  /* kiyose.tokyo.jp */
+30974,  /* kodaira.tokyo.jp */
+30982,  /* koganei.tokyo.jp */
+30990,  /* kokubunji.tokyo.jp */
+31000,  /* komae.tokyo.jp */
+23428,  /* koto.tokyo.jp */
+31006,  /* kouzushima.tokyo.jp */
+31017,  /* kunitachi.tokyo.jp */
+23985,  /* machida.tokyo.jp */
+31027,  /* meguro.tokyo.jp */
+29486,  /* minato.tokyo.jp */
+25814,  /* mitaka.tokyo.jp */
+31034,  /* mizuho.tokyo.jp */
+31041,  /* musashimurayama.tokyo.jp */
+31057,  /* musashino.tokyo.jp */
+28102,  /* nakano.tokyo.jp */
+31067,  /* nerima.tokyo.jp */
+31074,  /* ogasawara.tokyo.jp */
+31084,  /* okutama.tokyo.jp */
+ 1689,  /* ome.tokyo.jp */
+20893,  /* oshima.tokyo.jp */
+ 7962,  /* ota.tokyo.jp */
+31105,  /* setagaya.tokyo.jp */
+31114,  /* shibuya.tokyo.jp */
+25693,  /* shinagawa.tokyo.jp */
+31122,  /* shinjuku.tokyo.jp */
+31131,  /* suginami.tokyo.jp */
+31140,  /* sumida.tokyo.jp */
+31147,  /* tachikawa.tokyo.jp */
+31157,  /* taito.tokyo.jp */
+21063,  /* tama.tokyo.jp */
+31097,  /* toshima.tokyo.jp */
+31163,  /* chizu.tottori.jp */
+22705,  /* hino.tottori.jp */
+31169,  /* kawahara.tottori.jp */
+ 3435,  /* koge.tottori.jp */
+31178,  /* kotoura.tottori.jp */
+31186,  /* misasa.tottori.jp */
+31193,  /* nanbu.tottori.jp */
+27775,  /* nichinan.tottori.jp */
+29481,  /* sakaiminato.tottori.jp */
+21131,  /* tottori.tottori.jp */
+23132,  /* wakasa.tottori.jp */
+27259,  /* yazu.tottori.jp */
+29194,  /* yonago.tottori.jp */
+21966,  /* asahi.toyama.jp */
+24466,  /* fuchu.toyama.jp */
+31199,  /* fukumitsu.toyama.jp */
+31209,  /* funahashi.toyama.jp */
+30149,  /* himi.toyama.jp */
+25016,  /* imizu.toyama.jp */
+23321,  /* inami.toyama.jp */
+31219,  /* johana.toyama.jp */
+31226,  /* kamiichi.toyama.jp */
+31235,  /* kurobe.toyama.jp */
+31242,  /* nakaniikawa.toyama.jp */
+31254,  /* namerikawa.toyama.jp */
+31265,  /* nanto.toyama.jp */
+31271,  /* nyuzen.toyama.jp */
+31278,  /* oyabe.toyama.jp */
+31284,  /* taira.toyama.jp */
+31290,  /* takaoka.toyama.jp */
+22813,  /* tateyama.toyama.jp */
+31298,  /* toga.toyama.jp */
+31303,  /* tonami.toyama.jp */
+21141,  /* toyama.toyama.jp */
+31310,  /* unazuki.toyama.jp */
+22999,  /* uozu.toyama.jp */
+23544,  /* yamada.toyama.jp */
+31318,  /* arida.wakayama.jp */
+31324,  /* aridagawa.wakayama.jp */
+31334,  /* gobo.wakayama.jp */
+31339,  /* hashimoto.wakayama.jp */
+24803,  /* hidaka.wakayama.jp */
+31349,  /* hirogawa.wakayama.jp */
+23321,  /* inami.wakayama.jp */
+31358,  /* iwade.wakayama.jp */
+22891,  /* kainan.wakayama.jp */
+31364,  /* kamitonda.wakayama.jp */
+28459,  /* katsuragi.wakayama.jp */
+24054,  /* kimino.wakayama.jp */
+31374,  /* kinokawa.wakayama.jp */
+28424,  /* kitayama.wakayama.jp */
+31383,  /* koya.wakayama.jp */
+10736,  /* koza.wakayama.jp */
+31388,  /* kozagawa.wakayama.jp */
+31397,  /* kudoyama.wakayama.jp */
+31406,  /* kushimoto.wakayama.jp */
+21894,  /* mihama.wakayama.jp */
+22221,  /* misato.wakayama.jp */
+22585,  /* nachikatsuura.wakayama.jp */
+23450,  /* shingu.wakayama.jp */
+31416,  /* shirahama.wakayama.jp */
+31426,  /* taiji.wakayama.jp */
+27217,  /* tanabe.wakayama.jp */
+21148,  /* wakayama.wakayama.jp */
+31432,  /* yuasa.wakayama.jp */
+31438,  /* yura.wakayama.jp */
+21966,  /* asahi.yamagata.jp */
+31443,  /* funagata.yamagata.jp */
+31452,  /* higashine.yamagata.jp */
+ 2271,  /* iide.yamagata.jp */
+26226,  /* kahoku.yamagata.jp */
+31462,  /* kaminoyama.yamagata.jp */
+23711,  /* kaneyama.yamagata.jp */
+25727,  /* kawanishi.yamagata.jp */
+31473,  /* mamurogawa.yamagata.jp */
+24921,  /* mikawa.yamagata.jp */
+30922,  /* murayama.yamagata.jp */
+31484,  /* nagai.yamagata.jp */
+31490,  /* nakayama.yamagata.jp */
+31499,  /* nanyo.yamagata.jp */
+20923,  /* nishikawa.yamagata.jp */
+31505,  /* obanazawa.yamagata.jp */
+ 5449,  /* oe.yamagata.jp */
+27122,  /* oguni.yamagata.jp */
+31515,  /* ohkura.yamagata.jp */
+31522,  /* oishida.yamagata.jp */
+31530,  /* sagae.yamagata.jp */
+31536,  /* sakata.yamagata.jp */
+31543,  /* sakegawa.yamagata.jp */
+28549,  /* shinjo.yamagata.jp */
+31552,  /* shirataka.yamagata.jp */
+22898,  /* shonai.yamagata.jp */
+31562,  /* takahata.yamagata.jp */
+31571,  /* tendo.yamagata.jp */
+31577,  /* tozawa.yamagata.jp */
+31584,  /* tsuruoka.yamagata.jp */
+21702,  /* yamagata.yamagata.jp */
+31593,  /* yamanobe.yamagata.jp */
+31602,  /* yonezawa.yamagata.jp */
+31611,  /* yuza.yamagata.jp */
+24662,  /* abu.yamaguchi.jp */
+26118,  /* hagi.yamaguchi.jp */
+22873,  /* hikari.yamaguchi.jp */
+30880,  /* hofu.yamaguchi.jp */
+31616,  /* iwakuni.yamaguchi.jp */
+31624,  /* kudamatsu.yamaguchi.jp */
+31634,  /* mitou.yamaguchi.jp */
+31640,  /* nagato.yamaguchi.jp */
+20893,  /* oshima.yamaguchi.jp */
+31647,  /* shimonoseki.yamaguchi.jp */
+31659,  /* shunan.yamaguchi.jp */
+31666,  /* tabuse.yamaguchi.jp */
+31673,  /* tokuyama.yamaguchi.jp */
+ 7959,  /* toyota.yamaguchi.jp */
+ 8052,  /* ube.yamaguchi.jp */
+31682,  /* yuu.yamaguchi.jp */
+22493,  /* chuo.yamanashi.jp */
+31686,  /* doshi.yamanashi.jp */
+31692,  /* fuefuki.yamanashi.jp */
+30399,  /* fujikawa.yamanashi.jp */
+23028,  /* fujikawaguchiko.yamanashi.jp */
+30124,  /* fujiyoshida.yamanashi.jp */
+31700,  /* hayakawa.yamanashi.jp */
+24850,  /* hokuto.yamanashi.jp */
+31709,  /* ichikawamisato.yamanashi.jp */
+22038,  /* kai.yamanashi.jp */
+31724,  /* kofu.yamanashi.jp */
+26452,  /* koshu.yamanashi.jp */
+31729,  /* kosuge.yamanashi.jp */
+31736,  /* minami-alps.yamanashi.jp */
+31748,  /* minobu.yamanashi.jp */
+31755,  /* nakamichi.yamanashi.jp */
+31193,  /* nanbu.yamanashi.jp */
+31765,  /* narusawa.yamanashi.jp */
+31774,  /* nirasaki.yamanashi.jp */
+31783,  /* nishikatsura.yamanashi.jp */
+28399,  /* oshino.yamanashi.jp */
+26998,  /* otsuki.yamanashi.jp */
+23857,  /* showa.yamanashi.jp */
+31796,  /* tabayama.yamanashi.jp */
+31805,  /* tsuru.yamanashi.jp */
+31811,  /* uenohara.yamanashi.jp */
+31820,  /* yamanakako.yamanashi.jp */
+21721,  /* yamanashi.yamanashi.jp */
   986,  /* biz.ki */
- 1914,  /* com.ki */
- 2623,  /* edu.ki */
- 3671,  /* gov.ki */
- 3152,  /* info.ki */
- 5737,  /* net.ki */
- 6053,  /* org.ki */
- 3533,  /* ass.km */
-11647,  /* asso.km */
- 1914,  /* com.km */
- 2048,  /* coop.km */
- 2623,  /* edu.km */
-11660,  /* gouv.km */
- 3671,  /* gov.km */
-15692,  /* medecin.km */
- 4170,  /* mil.km */
- 5970,  /* nom.km */
-15700,  /* notaires.km */
- 6053,  /* org.km */
-29944,  /* pharmaciens.km */
-15720,  /* prd.km */
-11923,  /* presse.km */
- 7908,  /* tm.km */
-15724,  /* veterinaire.km */
- 2623,  /* edu.kn */
- 3671,  /* gov.kn */
- 5737,  /* net.kn */
- 6053,  /* org.kn */
- 1914,  /* com.kp */
- 2623,  /* edu.kp */
- 3671,  /* gov.kp */
- 6053,  /* org.kp */
-29956,  /* rep.kp */
-17016,  /* tra.kp */
+ 1910,  /* com.ki */
+ 2622,  /* edu.ki */
+ 3665,  /* gov.ki */
+ 3149,  /* info.ki */
+ 5710,  /* net.ki */
+ 6026,  /* org.ki */
+ 3527,  /* ass.km */
+11821,  /* asso.km */
+ 1910,  /* com.km */
+ 2044,  /* coop.km */
+ 2622,  /* edu.km */
+11834,  /* gouv.km */
+ 3665,  /* gov.km */
+16791,  /* medecin.km */
+ 4157,  /* mil.km */
+ 5943,  /* nom.km */
+16799,  /* notaires.km */
+ 6026,  /* org.km */
+31831,  /* pharmaciens.km */
+16819,  /* prd.km */
+12688,  /* presse.km */
+ 7890,  /* tm.km */
+16823,  /* veterinaire.km */
+ 2622,  /* edu.kn */
+ 3665,  /* gov.kn */
+ 5710,  /* net.kn */
+ 6026,  /* org.kn */
+ 1910,  /* com.kp */
+ 2622,  /* edu.kp */
+ 3665,  /* gov.kp */
+ 6026,  /* org.kp */
+31843,  /* rep.kp */
+18321,  /* tra.kp */
    62,  /* ac.kr */
-10645,  /* blogspot.kr */
-29966,  /* busan.kr */
-29972,  /* chungbuk.kr */
-29981,  /* chungnam.kr */
+10791,  /* blogspot.kr */
+31853,  /* busan.kr */
+31859,  /* chungbuk.kr */
+31868,  /* chungnam.kr */
   113,  /* co.kr */
-29990,  /* daegu.kr */
-29996,  /* daejeon.kr */
+31877,  /* daegu.kr */
+31883,  /* daejeon.kr */
   558,  /* es.kr */
-30004,  /* gangwon.kr */
+31891,  /* gangwon.kr */
   257,  /* go.kr */
-30012,  /* gwangju.kr */
-30020,  /* gyeongbuk.kr */
-30030,  /* gyeonggi.kr */
-30039,  /* gyeongnam.kr */
- 9249,  /* hs.kr */
-30053,  /* incheon.kr */
-30061,  /* jeju.kr */
- 8115,  /* jeonbuk.kr */
-30066,  /* jeonnam.kr */
- 4558,  /* kg.kr */
- 4170,  /* mil.kr */
+31899,  /* gwangju.kr */
+31907,  /* gyeongbuk.kr */
+31917,  /* gyeonggi.kr */
+31926,  /* gyeongnam.kr */
+ 9305,  /* hs.kr */
+31940,  /* incheon.kr */
+31948,  /* jeju.kr */
+ 8110,  /* jeonbuk.kr */
+31953,  /* jeonnam.kr */
+ 4544,  /* kg.kr */
+ 4157,  /* mil.kr */
  1060,  /* ms.kr */
- 1204,  /* ne.kr */
+ 1198,  /* ne.kr */
   137,  /* or.kr */
- 3724,  /* pe.kr */
+ 3718,  /* pe.kr */
    80,  /* re.kr */
- 2159,  /* sc.kr */
-30074,  /* seoul.kr */
-30080,  /* ulsan.kr */
+ 2155,  /* sc.kr */
+31961,  /* seoul.kr */
+18033,  /* ulsan.kr */
   113,  /* co.krd */
- 2623,  /* edu.krd */
- 5883,  /* bnr.la */
+ 2622,  /* edu.krd */
+ 1910,  /* com.kz */
+ 2622,  /* edu.kz */
+ 3665,  /* gov.kz */
+ 4157,  /* mil.kz */
+ 5710,  /* net.kz */
+12575,  /* nym.kz */
+ 6026,  /* org.kz */
+ 5856,  /* bnr.la */
    36,  /* c.la */
- 1914,  /* com.la */
- 2623,  /* edu.la */
- 3671,  /* gov.la */
- 3152,  /* info.la */
- 3617,  /* int.la */
- 5737,  /* net.la */
- 6053,  /* org.la */
- 4502,  /* per.la */
- 2383,  /* dev.static.land */
-30101,  /* sites.static.land */
+ 1910,  /* com.la */
+ 2622,  /* edu.la */
+ 3665,  /* gov.la */
+ 3149,  /* info.la */
+ 3611,  /* int.la */
+ 5710,  /* net.la */
+12575,  /* nym.la */
+ 6026,  /* org.la */
+ 4488,  /* per.la */
+ 2379,  /* dev.static.land */
+31982,  /* sites.static.land */
   113,  /* co.lc */
- 1914,  /* com.lc */
- 2623,  /* edu.lc */
- 3671,  /* gov.lc */
- 5737,  /* net.lc */
- 6053,  /* org.lc */
- 4471,  /* oy.lc */
-30107,  /* cyon.link */
-30112,  /* mypep.link */
+ 1910,  /* com.lc */
+ 2622,  /* edu.lc */
+ 3665,  /* gov.lc */
+ 5710,  /* net.lc */
+12575,  /* nym.lc */
+ 6026,  /* org.lc */
+ 4457,  /* oy.lc */
+10791,  /* blogspot.li */
+ 5943,  /* nom.li */
+12575,  /* nym.li */
+31988,  /* cyon.link */
+31993,  /* mypep.link */
    62,  /* ac.lk */
-30118,  /* assn.lk */
- 1914,  /* com.lk */
- 2623,  /* edu.lk */
- 3671,  /* gov.lk */
-30123,  /* grp.lk */
- 7747,  /* hotel.lk */
- 3617,  /* int.lk */
- 5082,  /* ltd.lk */
- 5737,  /* net.lk */
+31999,  /* assn.lk */
+ 1910,  /* com.lk */
+ 2622,  /* edu.lk */
+ 3665,  /* gov.lk */
+32004,  /* grp.lk */
+ 7728,  /* hotel.lk */
+ 3611,  /* int.lk */
+ 5070,  /* ltd.lk */
+ 5710,  /* net.lk */
   977,  /* ngo.lk */
- 6053,  /* org.lk */
- 1146,  /* sch.lk */
-30127,  /* soc.lk */
-12109,  /* web.lk */
- 7329,  /* asn.lv */
- 1914,  /* com.lv */
-11437,  /* conf.lv */
- 2623,  /* edu.lv */
- 3671,  /* gov.lv */
+ 6026,  /* org.lk */
+ 1140,  /* sch.lk */
+32008,  /* soc.lk */
+12075,  /* web.lk */
+10791,  /* blogspot.lu */
+12575,  /* nym.lu */
+ 7299,  /* asn.lv */
+ 1910,  /* com.lv */
+11613,  /* conf.lv */
+ 2622,  /* edu.lv */
+ 3665,  /* gov.lv */
   437,  /* id.lv */
- 4170,  /* mil.lv */
- 5737,  /* net.lv */
- 6053,  /* org.lv */
- 1914,  /* com.ly */
- 2623,  /* edu.ly */
- 3671,  /* gov.ly */
+ 4157,  /* mil.lv */
+ 5710,  /* net.lv */
+ 6026,  /* org.lv */
+ 1910,  /* com.ly */
+ 2622,  /* edu.ly */
+ 3665,  /* gov.ly */
   437,  /* id.ly */
- 1859,  /* med.ly */
- 5737,  /* net.ly */
- 6053,  /* org.ly */
- 4839,  /* plc.ly */
- 1146,  /* sch.ly */
+ 1855,  /* med.ly */
+ 5710,  /* net.ly */
+ 6026,  /* org.ly */
+ 4825,  /* plc.ly */
+ 1140,  /* sch.ly */
    62,  /* ac.ma */
   113,  /* co.ma */
- 3671,  /* gov.ma */
- 5737,  /* net.ma */
- 6053,  /* org.ma */
+ 3665,  /* gov.ma */
+ 5710,  /* net.ma */
+ 6026,  /* org.ma */
   371,  /* press.ma */
-15310,  /* router.management */
-11647,  /* asso.mc */
- 7908,  /* tm.mc */
-30211,  /* localhost.daplie.me */
+16352,  /* router.management */
+11821,  /* asso.mc */
+ 7890,  /* tm.mc */
+32114,  /* localhost.daplie.me */
+11692,  /* barsy.menu */
   113,  /* co.mg */
- 1914,  /* com.mg */
- 2623,  /* edu.mg */
- 3671,  /* gov.mg */
- 4170,  /* mil.mg */
- 5970,  /* nom.mg */
- 6053,  /* org.mg */
-15720,  /* prd.mg */
- 7908,  /* tm.mg */
-10645,  /* blogspot.mk */
- 1914,  /* com.mk */
- 2623,  /* edu.mk */
- 3671,  /* gov.mk */
- 5796,  /* inf.mk */
- 5695,  /* name.mk */
- 5737,  /* net.mk */
- 6053,  /* org.mk */
- 1914,  /* com.ml */
- 2623,  /* edu.ml */
-11660,  /* gouv.ml */
- 3671,  /* gov.ml */
- 5737,  /* net.ml */
- 6053,  /* org.ml */
-11923,  /* presse.ml */
- 2623,  /* edu.mn */
- 3671,  /* gov.mn */
- 5905,  /* nyc.mn */
- 6053,  /* org.mn */
-11551,  /* dscloud.mobi */
+ 1910,  /* com.mg */
+ 2622,  /* edu.mg */
+ 3665,  /* gov.mg */
+ 4157,  /* mil.mg */
+ 5943,  /* nom.mg */
+ 6026,  /* org.mg */
+16819,  /* prd.mg */
+ 7890,  /* tm.mg */
+10791,  /* blogspot.mk */
+ 1910,  /* com.mk */
+ 2622,  /* edu.mk */
+ 3665,  /* gov.mk */
+ 5769,  /* inf.mk */
+ 5672,  /* name.mk */
+ 5710,  /* net.mk */
+ 5943,  /* nom.mk */
+ 6026,  /* org.mk */
+ 1910,  /* com.ml */
+ 2622,  /* edu.ml */
+11834,  /* gouv.ml */
+ 3665,  /* gov.ml */
+ 5710,  /* net.ml */
+ 6026,  /* org.ml */
+12688,  /* presse.ml */
+ 2622,  /* edu.mn */
+ 3665,  /* gov.mn */
+ 5878,  /* nyc.mn */
+12575,  /* nym.mn */
+ 6026,  /* org.mn */
+11692,  /* barsy.mobi */
+11725,  /* dscloud.mobi */
+10791,  /* blogspot.mr */
+ 3665,  /* gov.mr */
    62,  /* ac.mu */
   113,  /* co.mu */
- 1914,  /* com.mu */
- 3671,  /* gov.mu */
- 5737,  /* net.mu */
+ 1910,  /* com.mu */
+ 3665,  /* gov.mu */
+ 5710,  /* net.mu */
   137,  /* or.mu */
- 6053,  /* org.mu */
+ 6026,  /* org.mu */
    65,  /* academy.museum */
-30221,  /* agriculture.museum */
- 3806,  /* air.museum */
-30233,  /* airguard.museum */
-30242,  /* alabama.museum */
-30250,  /* alaska.museum */
-30257,  /* amber.museum */
-10797,  /* ambulance.museum */
-30269,  /* american.museum */
-30278,  /* americana.museum */
-30288,  /* americanantiques.museum */
-30305,  /* americanart.museum */
+32124,  /* agriculture.museum */
+ 3800,  /* air.museum */
+32136,  /* airguard.museum */
+32145,  /* alabama.museum */
+32153,  /* alaska.museum */
+32160,  /* amber.museum */
+10943,  /* ambulance.museum */
+32172,  /* american.museum */
+32181,  /* americana.museum */
+32191,  /* americanantiques.museum */
+32208,  /* americanart.museum */
   412,  /* amsterdam.museum */
   726,  /* and.museum */
-30323,  /* annefrank.museum */
-30333,  /* anthro.museum */
-30340,  /* anthropology.museum */
-30296,  /* antiques.museum */
-30364,  /* aquarium.museum */
-30373,  /* arboretum.museum */
-30383,  /* archaeological.museum */
-30398,  /* archaeology.museum */
-30410,  /* architecture.museum */
+32226,  /* annefrank.museum */
+32236,  /* anthro.museum */
+32243,  /* anthropology.museum */
+32199,  /* antiques.museum */
+32267,  /* aquarium.museum */
+32276,  /* arboretum.museum */
+32286,  /* archaeological.museum */
+32301,  /* archaeology.museum */
+32313,  /* architecture.museum */
   527,  /* art.museum */
- 2368,  /* artanddesign.museum */
- 1591,  /* artcenter.museum */
-30423,  /* artdeco.museum */
- 2627,  /* arteducation.museum */
- 3349,  /* artgallery.museum */
- 6158,  /* arts.museum */
-30431,  /* artsandcrafts.museum */
-30445,  /* asmatart.museum */
-30454,  /* assassination.museum */
-30468,  /* assisi.museum */
-10827,  /* association.museum */
-30475,  /* astronomy.museum */
-30485,  /* atlanta.museum */
-30493,  /* austin.museum */
-30500,  /* australia.museum */
-30510,  /* automotive.museum */
-10900,  /* aviation.museum */
-30521,  /* axis.museum */
-30526,  /* badajoz.museum */
- 2212,  /* baghdad.museum */
-30539,  /* bahn.museum */
-17468,  /* bale.museum */
-30544,  /* baltimore.museum */
+ 2364,  /* artanddesign.museum */
+ 1585,  /* artcenter.museum */
+32326,  /* artdeco.museum */
+ 2626,  /* arteducation.museum */
+ 3343,  /* artgallery.museum */
+ 6118,  /* arts.museum */
+32334,  /* artsandcrafts.museum */
+32348,  /* asmatart.museum */
+32357,  /* assassination.museum */
+32371,  /* assisi.museum */
+10973,  /* association.museum */
+32378,  /* astronomy.museum */
+32388,  /* atlanta.museum */
+32396,  /* austin.museum */
+32403,  /* australia.museum */
+32413,  /* automotive.museum */
+11046,  /* aviation.museum */
+32424,  /* axis.museum */
+32429,  /* badajoz.museum */
+ 2208,  /* baghdad.museum */
+32442,  /* bahn.museum */
+18773,  /* bale.museum */
+32447,  /* baltimore.museum */
   740,  /* barcelona.museum */
   789,  /* baseball.museum */
-30554,  /* basel.museum */
-30560,  /* baths.museum */
-30566,  /* bauern.museum */
-30573,  /* beauxarts.museum */
-30583,  /* beeldengeluid.museum */
-30597,  /* bellevue.museum */
-30606,  /* bergbau.museum */
-30614,  /* berkeley.museum */
+32457,  /* basel.museum */
+32463,  /* baths.museum */
+32469,  /* bauern.museum */
+32476,  /* beauxarts.museum */
+32486,  /* beeldengeluid.museum */
+32500,  /* bellevue.museum */
+32509,  /* bergbau.museum */
+32517,  /* berkeley.museum */
   894,  /* berlin.museum */
-30623,  /* bern.museum */
+32526,  /* bern.museum */
   951,  /* bible.museum */
-30628,  /* bilbao.museum */
-30635,  /* bill.museum */
-30640,  /* birdart.museum */
- 6318,  /* birthplace.museum */
-30648,  /* bonn.museum */
- 1157,  /* boston.museum */
-30653,  /* botanical.museum */
-30663,  /* botanicalgarden.museum */
-30679,  /* botanicgarden.museum */
-30693,  /* botany.museum */
-30700,  /* brandywinevalley.museum */
-30717,  /* brasil.museum */
-30724,  /* bristol.museum */
-30732,  /* british.museum */
-30740,  /* britishcolumbia.museum */
-30756,  /* broadcast.museum */
-30766,  /* brunel.museum */
-30773,  /* brussel.museum */
- 1231,  /* brussels.museum */
-30781,  /* bruxelles.museum */
-30791,  /* building.museum */
-30800,  /* burghof.museum */
+32531,  /* bilbao.museum */
+32538,  /* bill.museum */
+32543,  /* birdart.museum */
+ 6278,  /* birthplace.museum */
+32551,  /* bonn.museum */
+ 1151,  /* boston.museum */
+32556,  /* botanical.museum */
+32566,  /* botanicalgarden.museum */
+32582,  /* botanicgarden.museum */
+32596,  /* botany.museum */
+32603,  /* brandywinevalley.museum */
+32620,  /* brasil.museum */
+32627,  /* bristol.museum */
+32635,  /* british.museum */
+32643,  /* britishcolumbia.museum */
+32659,  /* broadcast.museum */
+32669,  /* brunel.museum */
+32676,  /* brussel.museum */
+ 1225,  /* brussels.museum */
+32684,  /* bruxelles.museum */
+32694,  /* building.museum */
+32703,  /* burghof.museum */
   263,  /* bus.museum */
-30808,  /* bushey.museum */
-30815,  /* cadaques.museum */
-30824,  /* california.museum */
-30835,  /* cambridge.museum */
- 6713,  /* can.museum */
-30845,  /* canada.museum */
-30852,  /* capebreton.museum */
-30863,  /* carrier.museum */
-30871,  /* cartoonart.museum */
-30882,  /* casadelamoneda.museum */
-30897,  /* castle.museum */
-30904,  /* castres.museum */
-30912,  /* celtic.museum */
- 1594,  /* center.museum */
-30919,  /* chattanooga.museum */
-30931,  /* cheltenham.museum */
-30942,  /* chesapeakebay.museum */
-30956,  /* chicago.museum */
-30964,  /* children.museum */
-30973,  /* childrens.museum */
-30983,  /* childrensgarden.museum */
-30999,  /* chiropractic.museum */
-31012,  /* chocolate.museum */
-31022,  /* christiansburg.museum */
-31037,  /* cincinnati.museum */
-31048,  /* cinema.museum */
-31055,  /* circus.museum */
-31062,  /* civilisation.museum */
-31075,  /* civilization.museum */
-31088,  /* civilwar.museum */
-31097,  /* clinton.museum */
-31113,  /* clock.museum */
+32711,  /* bushey.museum */
+32718,  /* cadaques.museum */
+32727,  /* california.museum */
+32738,  /* cambridge.museum */
+ 6679,  /* can.museum */
+32748,  /* canada.museum */
+32755,  /* capebreton.museum */
+32766,  /* carrier.museum */
+32774,  /* cartoonart.museum */
+32785,  /* casadelamoneda.museum */
+32800,  /* castle.museum */
+32807,  /* castres.museum */
+32815,  /* celtic.museum */
+ 1588,  /* center.museum */
+32822,  /* chattanooga.museum */
+32834,  /* cheltenham.museum */
+32845,  /* chesapeakebay.museum */
+32859,  /* chicago.museum */
+32867,  /* children.museum */
+32876,  /* childrens.museum */
+32886,  /* childrensgarden.museum */
+32902,  /* chiropractic.museum */
+32915,  /* chocolate.museum */
+32925,  /* christiansburg.museum */
+32940,  /* cincinnati.museum */
+32951,  /* cinema.museum */
+32958,  /* circus.museum */
+32965,  /* civilisation.museum */
+32978,  /* civilization.museum */
+32991,  /* civilwar.museum */
+33000,  /* clinton.museum */
+33016,  /* clock.museum */
   288,  /* coal.museum */
-31119,  /* coastaldefence.museum */
-15539,  /* cody.museum */
-31134,  /* coldwar.museum */
-31142,  /* collection.museum */
-31153,  /* colonialwilliamsburg.museum */
-31174,  /* coloradoplateau.museum */
-30747,  /* columbia.museum */
-31190,  /* columbus.museum */
-31199,  /* communication.museum */
-31227,  /* communications.museum */
- 1935,  /* community.museum */
- 1953,  /* computer.museum */
-31242,  /* computerhistory.museum */
-31258,  /* contemporary.museum */
-31271,  /* contemporaryart.museum */
-31287,  /* convent.museum */
-31295,  /* copenhagen.museum */
-31306,  /* corporation.museum */
-31318,  /* corvette.museum */
-31327,  /* costume.museum */
-31337,  /* countryestate.museum */
-31351,  /* county.museum */
-30438,  /* crafts.museum */
-31358,  /* cranbrook.museum */
-11191,  /* creation.museum */
-31368,  /* cultural.museum */
-31377,  /* culturalcenter.museum */
-30225,  /* culture.museum */
-31402,  /* cyber.museum */
- 2188,  /* cymru.museum */
-31416,  /* dali.museum */
-31421,  /* dallas.museum */
-31428,  /* database.museum */
-11334,  /* ddr.museum */
-31439,  /* decorativearts.museum */
-31461,  /* delaware.museum */
-31470,  /* delmenhorst.museum */
-31482,  /* denmark.museum */
- 3967,  /* depot.museum */
- 2374,  /* design.museum */
-31490,  /* detroit.museum */
-31498,  /* dinosaur.museum */
-31507,  /* discovery.museum */
-31517,  /* dolls.museum */
-31523,  /* donostia.museum */
-31532,  /* durham.museum */
+33022,  /* coastaldefence.museum */
+16638,  /* cody.museum */
+33037,  /* coldwar.museum */
+33045,  /* collection.museum */
+33056,  /* colonialwilliamsburg.museum */
+33077,  /* coloradoplateau.museum */
+32650,  /* columbia.museum */
+33093,  /* columbus.museum */
+33102,  /* communication.museum */
+33130,  /* communications.museum */
+ 1931,  /* community.museum */
+ 1949,  /* computer.museum */
+33145,  /* computerhistory.museum */
+33161,  /* contemporary.museum */
+33174,  /* contemporaryart.museum */
+33190,  /* convent.museum */
+33198,  /* copenhagen.museum */
+33209,  /* corporation.museum */
+33221,  /* corvette.museum */
+33230,  /* costume.museum */
+33240,  /* countryestate.museum */
+33254,  /* county.museum */
+32341,  /* crafts.museum */
+33261,  /* cranbrook.museum */
+11337,  /* creation.museum */
+33271,  /* cultural.museum */
+33280,  /* culturalcenter.museum */
+32128,  /* culture.museum */
+33305,  /* cyber.museum */
+ 2184,  /* cymru.museum */
+33319,  /* dali.museum */
+33324,  /* dallas.museum */
+33331,  /* database.museum */
+11491,  /* ddr.museum */
+33342,  /* decorativearts.museum */
+33364,  /* delaware.museum */
+33373,  /* delmenhorst.museum */
+33385,  /* denmark.museum */
+ 3961,  /* depot.museum */
+ 2370,  /* design.museum */
+33393,  /* detroit.museum */
+33401,  /* dinosaur.museum */
+33410,  /* discovery.museum */
+33420,  /* dolls.museum */
+33426,  /* donostia.museum */
+33435,  /* durham.museum */
   213,  /* eastafrica.museum */
-31539,  /* eastcoast.museum */
- 2630,  /* education.museum */
-31549,  /* educational.museum */
-31561,  /* egyptian.museum */
-30534,  /* eisenbahn.museum */
-18035,  /* elburg.museum */
-31570,  /* elvendrell.museum */
-31581,  /* embroidery.museum */
-31592,  /* encyclopedic.museum */
-31605,  /* england.museum */
-31613,  /* entomology.museum */
-31624,  /* environment.museum */
-31636,  /* environmentalconservation.museum */
-31662,  /* epilepsy.museum */
- 7155,  /* essex.museum */
- 2768,  /* estate.museum */
-31671,  /* ethnology.museum */
-31681,  /* exeter.museum */
-31688,  /* exhibition.museum */
+33442,  /* eastcoast.museum */
+ 2629,  /* education.museum */
+33452,  /* educational.museum */
+33464,  /* egyptian.museum */
+32437,  /* eisenbahn.museum */
+19340,  /* elburg.museum */
+33473,  /* elvendrell.museum */
+33484,  /* embroidery.museum */
+33495,  /* encyclopedic.museum */
+33508,  /* england.museum */
+33516,  /* entomology.museum */
+33527,  /* environment.museum */
+33539,  /* environmentalconservation.museum */
+33565,  /* epilepsy.museum */
+ 7125,  /* essex.museum */
+ 2767,  /* estate.museum */
+33574,  /* ethnology.museum */
+33584,  /* exeter.museum */
+33591,  /* exhibition.museum */
   385,  /* family.museum */
- 2933,  /* farm.museum */
- 2720,  /* farmequipment.museum */
- 2938,  /* farmers.museum */
-31699,  /* farmstead.museum */
-31709,  /* field.museum */
-31715,  /* figueres.museum */
-31724,  /* filatelia.museum */
- 3016,  /* film.museum */
-31734,  /* fineart.museum */
-31742,  /* finearts.museum */
-31751,  /* finland.museum */
-31759,  /* flanders.museum */
-31768,  /* florida.museum */
+ 2932,  /* farm.museum */
+ 2719,  /* farmequipment.museum */
+ 2937,  /* farmers.museum */
+33602,  /* farmstead.museum */
+33612,  /* field.museum */
+33618,  /* figueres.museum */
+33627,  /* filatelia.museum */
+ 3015,  /* film.museum */
+33637,  /* fineart.museum */
+33645,  /* finearts.museum */
+33654,  /* finland.museum */
+33662,  /* flanders.museum */
+33671,  /* florida.museum */
   270,  /* force.museum */
-31776,  /* fortmissoula.museum */
-31789,  /* fortworth.museum */
- 3214,  /* foundation.museum */
-31799,  /* francaise.museum */
-31809,  /* frankfurt.museum */
-31819,  /* franziskaner.museum */
-31832,  /* freemasonry.museum */
-31844,  /* freiburg.museum */
-31853,  /* fribourg.museum */
-31862,  /* frog.museum */
-31867,  /* fundacio.museum */
- 3317,  /* furniture.museum */
- 3352,  /* gallery.museum */
- 3402,  /* garden.museum */
-12688,  /* gateway.museum */
-31876,  /* geelvinck.museum */
-31886,  /* gemological.museum */
-31898,  /* geology.museum */
-31906,  /* georgia.museum */
-31914,  /* giessen.museum */
-31922,  /* glas.museum */
- 3531,  /* glass.museum */
-31927,  /* gorge.museum */
-31933,  /* grandrapids.museum */
-31945,  /* graz.museum */
-31950,  /* guernsey.museum */
-31959,  /* halloffame.museum */
- 3810,  /* hamburg.museum */
-31970,  /* handson.museum */
-31978,  /* harvestcelebration.museum */
-31997,  /* hawaii.museum */
- 3844,  /* health.museum */
-32004,  /* heimatunduhren.museum */
-32019,  /* hellas.museum */
- 3856,  /* helsinki.museum */
-32026,  /* hembygdsforbund.museum */
-32050,  /* heritage.museum */
-32059,  /* histoire.museum */
-32068,  /* historical.museum */
-32079,  /* historicalsociety.museum */
-32097,  /* historichouses.museum */
-32112,  /* historisch.museum */
-32128,  /* historisches.museum */
-31250,  /* history.museum */
- 7053,  /* historyofscience.museum */
-32151,  /* horology.museum */
- 4086,  /* house.museum */
-32160,  /* humanities.museum */
-32171,  /* illustration.museum */
-32184,  /* imageandsound.museum */
-32198,  /* indian.museum */
-32205,  /* indiana.museum */
-32213,  /* indianapolis.museum */
- 5202,  /* indianmarket.museum */
-32226,  /* intelligence.museum */
+33679,  /* fortmissoula.museum */
+33692,  /* fortworth.museum */
+ 3211,  /* foundation.museum */
+33702,  /* francaise.museum */
+33712,  /* frankfurt.museum */
+33722,  /* franziskaner.museum */
+33735,  /* freemasonry.museum */
+33747,  /* freiburg.museum */
+33756,  /* fribourg.museum */
+33765,  /* frog.museum */
+33770,  /* fundacio.museum */
+ 3311,  /* furniture.museum */
+ 3346,  /* gallery.museum */
+ 3396,  /* garden.museum */
+13577,  /* gateway.museum */
+33779,  /* geelvinck.museum */
+33789,  /* gemological.museum */
+33801,  /* geology.museum */
+33809,  /* georgia.museum */
+33817,  /* giessen.museum */
+33825,  /* glas.museum */
+ 3525,  /* glass.museum */
+33830,  /* gorge.museum */
+33836,  /* grandrapids.museum */
+33848,  /* graz.museum */
+33853,  /* guernsey.museum */
+33862,  /* halloffame.museum */
+ 3804,  /* hamburg.museum */
+33873,  /* handson.museum */
+33881,  /* harvestcelebration.museum */
+33900,  /* hawaii.museum */
+ 3838,  /* health.museum */
+33907,  /* heimatunduhren.museum */
+33922,  /* hellas.museum */
+ 3850,  /* helsinki.museum */
+33929,  /* hembygdsforbund.museum */
+33953,  /* heritage.museum */
+33962,  /* histoire.museum */
+33971,  /* historical.museum */
+33982,  /* historicalsociety.museum */
+34000,  /* historichouses.museum */
+34015,  /* historisch.museum */
+34031,  /* historisches.museum */
+33153,  /* history.museum */
+ 7023,  /* historyofscience.museum */
+34054,  /* horology.museum */
+ 4077,  /* house.museum */
+34063,  /* humanities.museum */
+34074,  /* illustration.museum */
+34087,  /* imageandsound.museum */
+34101,  /* indian.museum */
+34108,  /* indiana.museum */
+34116,  /* indianapolis.museum */
+ 5190,  /* indianmarket.museum */
+34129,  /* intelligence.museum */
   116,  /* interactive.museum */
   478,  /* iraq.museum */
-32239,  /* iron.museum */
-32244,  /* isleofman.museum */
-32254,  /* jamison.museum */
-32262,  /* jefferson.museum */
-32272,  /* jerusalem.museum */
- 4418,  /* jewelry.museum */
-32282,  /* jewish.museum */
-32289,  /* jewishart.museum */
- 3100,  /* jfk.museum */
-32299,  /* journalism.museum */
-32310,  /* judaica.museum */
-32318,  /* judygarland.museum */
-32330,  /* juedisches.museum */
-32341,  /* juif.museum */
-32346,  /* karate.museum */
-11315,  /* karikatur.museum */
-32353,  /* kids.museum */
- 8337,  /* koebenhavn.museum */
- 4615,  /* koeln.museum */
-32358,  /* kunst.museum */
-32364,  /* kunstsammlung.museum */
-32378,  /* kunstunddesign.museum */
-32393,  /* labor.museum */
-32399,  /* labour.museum */
-32406,  /* lajolla.museum */
-32414,  /* lancashire.museum */
-32425,  /* landes.museum */
-32432,  /* lans.museum */
-32437,  /* larsson.museum */
-32445,  /* lewismiller.museum */
- 4959,  /* lincoln.museum */
- 5909,  /* linz.museum */
- 4993,  /* living.museum */
-32459,  /* livinghistory.museum */
-32473,  /* localhistory.museum */
- 5043,  /* london.museum */
-32486,  /* losangeles.museum */
-32497,  /* louvre.museum */
-32504,  /* loyalist.museum */
-32513,  /* lucerne.museum */
-32521,  /* luxembourg.museum */
-32532,  /* luzern.museum */
+34142,  /* iron.museum */
+34147,  /* isleofman.museum */
+34157,  /* jamison.museum */
+34165,  /* jefferson.museum */
+34175,  /* jerusalem.museum */
+ 4404,  /* jewelry.museum */
+34185,  /* jewish.museum */
+34192,  /* jewishart.museum */
+ 3099,  /* jfk.museum */
+34202,  /* journalism.museum */
+34213,  /* judaica.museum */
+34221,  /* judygarland.museum */
+34233,  /* juedisches.museum */
+34244,  /* juif.museum */
+34249,  /* karate.museum */
+11472,  /* karikatur.museum */
+34256,  /* kids.museum */
+ 8340,  /* koebenhavn.museum */
+ 4601,  /* koeln.museum */
+34261,  /* kunst.museum */
+34267,  /* kunstsammlung.museum */
+34281,  /* kunstunddesign.museum */
+34296,  /* labor.museum */
+34302,  /* labour.museum */
+34309,  /* lajolla.museum */
+34317,  /* lancashire.museum */
+34328,  /* landes.museum */
+34335,  /* lans.museum */
+34340,  /* larsson.museum */
+34348,  /* lewismiller.museum */
+ 4939,  /* lincoln.museum */
+ 5882,  /* linz.museum */
+ 4977,  /* living.museum */
+34362,  /* livinghistory.museum */
+34376,  /* localhistory.museum */
+ 5031,  /* london.museum */
+34389,  /* losangeles.museum */
+34400,  /* louvre.museum */
+34407,  /* loyalist.museum */
+34416,  /* lucerne.museum */
+34424,  /* luxembourg.museum */
+34435,  /* luzern.museum */
   140,  /* mad.museum */
- 5139,  /* madrid.museum */
-32539,  /* mallorca.museum */
-32548,  /* manchester.museum */
-32559,  /* mansion.museum */
-32567,  /* mansions.museum */
-12041,  /* manx.museum */
-32576,  /* marburg.museum */
-32584,  /* maritime.museum */
-32593,  /* maritimo.museum */
-32602,  /* maryland.museum */
-32611,  /* marylhurst.museum */
- 5306,  /* media.museum */
- 1316,  /* medical.museum */
-32622,  /* medizinhistorisches.museum */
-32642,  /* meeres.museum */
- 5332,  /* memorial.museum */
-32649,  /* mesaverde.museum */
-32659,  /* michigan.museum */
-32668,  /* midatlantic.museum */
-32680,  /* military.museum */
-32693,  /* mill.museum */
-32698,  /* miners.museum */
-32705,  /* mining.museum */
-32712,  /* minnesota.museum */
-32722,  /* missile.museum */
-31780,  /* missoula.museum */
-32730,  /* modern.museum */
-32737,  /* moma.museum */
- 5479,  /* money.museum */
-32742,  /* monmouth.museum */
-32751,  /* monticello.museum */
-32762,  /* montreal.museum */
- 5525,  /* moscow.museum */
-32771,  /* motorcycle.museum */
-32782,  /* muenchen.museum */
-32791,  /* muenster.museum */
- 4083,  /* mulhouse.museum */
-32800,  /* muncie.museum */
-32807,  /* museet.museum */
-32814,  /* museumcenter.museum */
-32827,  /* museumvereniging.museum */
-18101,  /* music.museum */
- 4288,  /* national.museum */
-32844,  /* nationalfirearms.museum */
-32042,  /* nationalheritage.museum */
-30263,  /* nativeamerican.museum */
-32861,  /* naturalhistory.museum */
- 5609,  /* naturalhistorymuseum.museum */
-32876,  /* naturalsciences.museum */
-32892,  /* nature.museum */
-32123,  /* naturhistorisches.museum */
-32899,  /* natuurwetenschappen.museum */
-32919,  /* naumburg.museum */
-32928,  /* naval.museum */
-32934,  /* nebraska.museum */
- 2754,  /* neues.museum */
-32943,  /* newhampshire.museum */
-32956,  /* newjersey.museum */
-32966,  /* newmexico.museum */
-32976,  /* newport.museum */
-32984,  /* newspaper.museum */
-32994,  /* newyork.museum */
-33002,  /* niepce.museum */
-33009,  /* norfolk.museum */
-33017,  /* north.museum */
- 5893,  /* nrw.museum */
-33023,  /* nuernberg.museum */
-33033,  /* nuremberg.museum */
- 5905,  /* nyc.museum */
-33043,  /* nyny.museum */
-33048,  /* oceanographic.museum */
-33062,  /* oceanographique.museum */
-33078,  /* omaha.museum */
- 6006,  /* online.museum */
-33084,  /* ontario.museum */
-33092,  /* openair.museum */
-33100,  /* oregon.museum */
-33107,  /* oregontrail.museum */
-33119,  /* otago.museum */
- 3187,  /* oxford.museum */
-33125,  /* pacific.museum */
-33133,  /* paderborn.museum */
-33143,  /* palace.museum */
-33150,  /* paleo.museum */
-33156,  /* palmsprings.museum */
-33168,  /* panama.museum */
- 6137,  /* paris.museum */
-33175,  /* pasadena.museum */
- 6200,  /* pharmacy.museum */
-33184,  /* philadelphia.museum */
-33197,  /* philadelphiaarea.museum */
-33214,  /* philately.museum */
-33224,  /* phoenix.museum */
- 6227,  /* photography.museum */
-33232,  /* pilots.museum */
- 3482,  /* pittsburgh.museum */
-33239,  /* planetarium.museum */
-33251,  /* plantation.museum */
-33262,  /* plants.museum */
-33269,  /* plaza.museum */
-33275,  /* portal.museum */
-33282,  /* portland.museum */
-33291,  /* portlligat.museum */
-31213,  /* posts-and-telecommunications.museum */
-33302,  /* preservation.museum */
-33315,  /* presidio.museum */
+ 5127,  /* madrid.museum */
+34442,  /* mallorca.museum */
+34451,  /* manchester.museum */
+34462,  /* mansion.museum */
+34470,  /* mansions.museum */
+12828,  /* manx.museum */
+34479,  /* marburg.museum */
+34487,  /* maritime.museum */
+34496,  /* maritimo.museum */
+34505,  /* maryland.museum */
+34514,  /* marylhurst.museum */
+ 5294,  /* media.museum */
+ 1310,  /* medical.museum */
+34525,  /* medizinhistorisches.museum */
+34545,  /* meeres.museum */
+ 5320,  /* memorial.museum */
+34552,  /* mesaverde.museum */
+34562,  /* michigan.museum */
+34571,  /* midatlantic.museum */
+34583,  /* military.museum */
+34596,  /* mill.museum */
+34601,  /* miners.museum */
+34608,  /* mining.museum */
+34615,  /* minnesota.museum */
+34625,  /* missile.museum */
+33683,  /* missoula.museum */
+34633,  /* modern.museum */
+34640,  /* moma.museum */
+ 5467,  /* money.museum */
+34645,  /* monmouth.museum */
+34654,  /* monticello.museum */
+34665,  /* montreal.museum */
+ 5503,  /* moscow.museum */
+34674,  /* motorcycle.museum */
+34685,  /* muenchen.museum */
+34694,  /* muenster.museum */
+ 4074,  /* mulhouse.museum */
+34703,  /* muncie.museum */
+34710,  /* museet.museum */
+34717,  /* museumcenter.museum */
+34730,  /* museumvereniging.museum */
+19406,  /* music.museum */
+ 4279,  /* national.museum */
+34747,  /* nationalfirearms.museum */
+33945,  /* nationalheritage.museum */
+32166,  /* nativeamerican.museum */
+34764,  /* naturalhistory.museum */
+ 5582,  /* naturalhistorymuseum.museum */
+34779,  /* naturalsciences.museum */
+34795,  /* nature.museum */
+34026,  /* naturhistorisches.museum */
+34802,  /* natuurwetenschappen.museum */
+34822,  /* naumburg.museum */
+34831,  /* naval.museum */
+34837,  /* nebraska.museum */
+ 2753,  /* neues.museum */
+34846,  /* newhampshire.museum */
+34859,  /* newjersey.museum */
+34869,  /* newmexico.museum */
+34879,  /* newport.museum */
+34887,  /* newspaper.museum */
+34897,  /* newyork.museum */
+34905,  /* niepce.museum */
+34912,  /* norfolk.museum */
+34920,  /* north.museum */
+ 5866,  /* nrw.museum */
+34926,  /* nuernberg.museum */
+34936,  /* nuremberg.museum */
+ 5878,  /* nyc.museum */
+34946,  /* nyny.museum */
+34951,  /* oceanographic.museum */
+34965,  /* oceanographique.museum */
+34981,  /* omaha.museum */
+ 5979,  /* online.museum */
+34987,  /* ontario.museum */
+34995,  /* openair.museum */
+35003,  /* oregon.museum */
+35010,  /* oregontrail.museum */
+35022,  /* otago.museum */
+ 3184,  /* oxford.museum */
+35028,  /* pacific.museum */
+35036,  /* paderborn.museum */
+35046,  /* palace.museum */
+35053,  /* paleo.museum */
+35059,  /* palmsprings.museum */
+35071,  /* panama.museum */
+ 6097,  /* paris.museum */
+35078,  /* pasadena.museum */
+ 6160,  /* pharmacy.museum */
+35087,  /* philadelphia.museum */
+35100,  /* philadelphiaarea.museum */
+35117,  /* philately.museum */
+35127,  /* phoenix.museum */
+ 6187,  /* photography.museum */
+35135,  /* pilots.museum */
+ 3476,  /* pittsburgh.museum */
+35142,  /* planetarium.museum */
+35154,  /* plantation.museum */
+35165,  /* plants.museum */
+35172,  /* plaza.museum */
+35178,  /* portal.museum */
+35185,  /* portland.museum */
+35194,  /* portlligat.museum */
+33116,  /* posts-and-telecommunications.museum */
+35205,  /* preservation.museum */
+35218,  /* presidio.museum */
   371,  /* press.museum */
-33330,  /* project.museum */
+35233,  /* project.museum */
   711,  /* public.museum */
-33338,  /* pubol.museum */
- 6530,  /* quebec.museum */
-33344,  /* railroad.museum */
-33353,  /* railway.museum */
- 1384,  /* research.museum */
-33361,  /* resistance.museum */
-33372,  /* riodejaneiro.museum */
-33385,  /* rochester.museum */
-33395,  /* rockart.museum */
-18044,  /* roma.museum */
-33403,  /* russia.museum */
-33410,  /* saintlouis.museum */
-32276,  /* salem.museum */
-31408,  /* salvadordali.museum */
-33421,  /* salzburg.museum */
-33430,  /* sandiego.museum */
- 1733,  /* sanfrancisco.museum */
-33439,  /* santabarbara.museum */
-33452,  /* santacruz.museum */
-33462,  /* santafe.museum */
-33470,  /* saskatchewan.museum */
-33483,  /* satx.museum */
-33488,  /* savannahga.museum */
-33499,  /* schlesisches.museum */
-33512,  /* schoenbrunn.museum */
-33524,  /* schokoladen.museum */
- 7031,  /* school.museum */
-33536,  /* schweiz.museum */
- 7062,  /* science.museum */
-33544,  /* science-fiction.museum */
-33560,  /* scienceandhistory.museum */
-33578,  /* scienceandindustry.museum */
-33597,  /* sciencecenter.museum */
-33611,  /* sciencecenters.museum */
-33626,  /* sciencehistory.museum */
-32883,  /* sciences.museum */
-33641,  /* sciencesnaturelles.museum */
-33660,  /* scotland.museum */
-33669,  /* seaport.museum */
-33677,  /* settlement.museum */
-33688,  /* settlers.museum */
- 7205,  /* shell.museum */
-33697,  /* sherbrooke.museum */
-33708,  /* sibenik.museum */
- 7267,  /* silk.museum */
- 4564,  /* ski.museum */
-33716,  /* skole.museum */
-32089,  /* society.museum */
-33722,  /* sologne.museum */
-33730,  /* soundandvision.museum */
-33745,  /* southcarolina.museum */
-33759,  /* southwest.museum */
- 2874,  /* space.museum */
- 6507,  /* spy.museum */
-33769,  /* square.museum */
-33776,  /* stadt.museum */
-33782,  /* stalbans.museum */
-33791,  /* starnberg.museum */
+35241,  /* pubol.museum */
+ 6496,  /* quebec.museum */
+35247,  /* railroad.museum */
+35256,  /* railway.museum */
+ 1377,  /* research.museum */
+35264,  /* resistance.museum */
+35275,  /* riodejaneiro.museum */
+35288,  /* rochester.museum */
+35298,  /* rockart.museum */
+19349,  /* roma.museum */
+35306,  /* russia.museum */
+35313,  /* saintlouis.museum */
+34179,  /* salem.museum */
+33311,  /* salvadordali.museum */
+35324,  /* salzburg.museum */
+35333,  /* sandiego.museum */
+ 1729,  /* sanfrancisco.museum */
+35342,  /* santabarbara.museum */
+35355,  /* santacruz.museum */
+35365,  /* santafe.museum */
+35373,  /* saskatchewan.museum */
+35386,  /* satx.museum */
+35391,  /* savannahga.museum */
+35402,  /* schlesisches.museum */
+35415,  /* schoenbrunn.museum */
+35427,  /* schokoladen.museum */
+ 7001,  /* school.museum */
+35439,  /* schweiz.museum */
+ 7032,  /* science.museum */
+35447,  /* science-fiction.museum */
+35463,  /* scienceandhistory.museum */
+35481,  /* scienceandindustry.museum */
+35500,  /* sciencecenter.museum */
+35514,  /* sciencecenters.museum */
+35529,  /* sciencehistory.museum */
+34786,  /* sciences.museum */
+35544,  /* sciencesnaturelles.museum */
+35563,  /* scotland.museum */
+35572,  /* seaport.museum */
+35580,  /* settlement.museum */
+35591,  /* settlers.museum */
+ 7175,  /* shell.museum */
+35600,  /* sherbrooke.museum */
+35611,  /* sibenik.museum */
+ 7237,  /* silk.museum */
+ 4550,  /* ski.museum */
+35619,  /* skole.museum */
+33992,  /* society.museum */
+35625,  /* sologne.museum */
+35633,  /* soundandvision.museum */
+35648,  /* southcarolina.museum */
+35662,  /* southwest.museum */
+ 2873,  /* space.museum */
+ 6473,  /* spy.museum */
+35672,  /* square.museum */
+35679,  /* stadt.museum */
+35685,  /* stalbans.museum */
+35694,  /* starnberg.museum */
   331,  /* state.museum */
-31454,  /* stateofdelaware.museum */
- 6338,  /* station.museum */
- 7730,  /* steam.museum */
-33801,  /* steiermark.museum */
- 3932,  /* stjohn.museum */
- 7494,  /* stockholm.museum */
-33812,  /* stpetersburg.museum */
-33825,  /* stuttgart.museum */
-33835,  /* suisse.museum */
-33842,  /* surgeonshall.museum */
-33855,  /* surrey.museum */
-33862,  /* svizzera.museum */
-33871,  /* sweden.museum */
- 7626,  /* sydney.museum */
-33878,  /* tank.museum */
- 1863,  /* tcm.museum */
- 7736,  /* technology.museum */
-33883,  /* telekommunikation.museum */
- 8288,  /* television.museum */
-33901,  /* texas.museum */
-33907,  /* textile.museum */
- 7808,  /* theater.museum */
- 7250,  /* time.museum */
-33915,  /* timekeeping.museum */
-33927,  /* topology.museum */
-18212,  /* torino.museum */
-33936,  /* touch.museum */
- 1403,  /* town.museum */
-15982,  /* transport.museum */
- 2640,  /* tree.museum */
-33942,  /* trolley.museum */
- 8039,  /* trust.museum */
-33950,  /* trustee.museum */
-32013,  /* uhren.museum */
-33958,  /* ulm.museum */
-33962,  /* undersea.museum */
- 8130,  /* university.museum */
-17988,  /* usa.museum */
-30353,  /* usantiques.museum */
-33971,  /* usarts.museum */
-31335,  /* uscountryestate.museum */
-31392,  /* usculture.museum */
-31437,  /* usdecorativearts.museum */
- 3400,  /* usgarden.museum */
-32141,  /* ushistory.museum */
-33978,  /* ushuaia.museum */
-32457,  /* uslivinghistory.museum */
-12009,  /* utah.museum */
-11459,  /* uvic.museum */
-16533,  /* valley.museum */
-18165,  /* vantaa.museum */
-33986,  /* versailles.museum */
- 8250,  /* viking.museum */
-33997,  /* village.museum */
-34005,  /* virginia.museum */
-34014,  /* virtual.museum */
-34022,  /* virtuel.museum */
- 8326,  /* vlaanderen.museum */
-34030,  /* volkenkunde.museum */
- 8405,  /* wales.museum */
-34042,  /* wallonie.museum */
-31093,  /* war.museum */
-34051,  /* washingtondc.museum */
-34064,  /* watch-and-clock.museum */
-31105,  /* watchandclock.museum */
-34080,  /* western.museum */
-34088,  /* westfalen.museum */
-34098,  /* whaling.museum */
-34106,  /* wildlife.museum */
-31161,  /* williamsburg.museum */
-32689,  /* windmill.museum */
- 7230,  /* workshop.museum */
-34115,  /* xn--9dbhblg6di.museum */
-34130,  /* xn--comunicaes-v6a2o.museum */
-34151,  /* xn--correios-e-telecomunicaes-ghc29a.museum */
-34188,  /* xn--h1aegh.museum */
-34199,  /* xn--lns-qla.museum */
-32997,  /* york.museum */
-34211,  /* yorkshire.museum */
-34221,  /* yosemite.museum */
-34230,  /* youth.museum */
-34236,  /* zoological.museum */
-34247,  /* zoology.museum */
+33357,  /* stateofdelaware.museum */
+ 6298,  /* station.museum */
+ 7711,  /* steam.museum */
+35704,  /* steiermark.museum */
+ 3926,  /* stjohn.museum */
+ 7475,  /* stockholm.museum */
+35715,  /* stpetersburg.museum */
+35728,  /* stuttgart.museum */
+35738,  /* suisse.museum */
+35745,  /* surgeonshall.museum */
+35758,  /* surrey.museum */
+35765,  /* svizzera.museum */
+35774,  /* sweden.museum */
+ 7607,  /* sydney.museum */
+35781,  /* tank.museum */
+ 1859,  /* tcm.museum */
+ 7717,  /* technology.museum */
+35786,  /* telekommunikation.museum */
+ 8289,  /* television.museum */
+35804,  /* texas.museum */
+35810,  /* textile.museum */
+ 7790,  /* theater.museum */
+ 7220,  /* time.museum */
+35818,  /* timekeeping.museum */
+35830,  /* topology.museum */
+19499,  /* torino.museum */
+35839,  /* touch.museum */
+ 1396,  /* town.museum */
+ 7383,  /* transport.museum */
+ 2639,  /* tree.museum */
+35845,  /* trolley.museum */
+ 8034,  /* trust.museum */
+35853,  /* trustee.museum */
+33916,  /* uhren.museum */
+35861,  /* ulm.museum */
+35865,  /* undersea.museum */
+ 8125,  /* university.museum */
+19293,  /* usa.museum */
+32256,  /* usantiques.museum */
+35874,  /* usarts.museum */
+33238,  /* uscountryestate.museum */
+33295,  /* usculture.museum */
+33340,  /* usdecorativearts.museum */
+ 3394,  /* usgarden.museum */
+34044,  /* ushistory.museum */
+35881,  /* ushuaia.museum */
+34360,  /* uslivinghistory.museum */
+12774,  /* utah.museum */
+11634,  /* uvic.museum */
+17716,  /* valley.museum */
+19452,  /* vantaa.museum */
+35889,  /* versailles.museum */
+ 8251,  /* viking.museum */
+35900,  /* village.museum */
+35908,  /* virginia.museum */
+35917,  /* virtual.museum */
+35925,  /* virtuel.museum */
+ 8329,  /* vlaanderen.museum */
+35933,  /* volkenkunde.museum */
+ 8408,  /* wales.museum */
+35945,  /* wallonie.museum */
+32996,  /* war.museum */
+35954,  /* washingtondc.museum */
+35967,  /* watch-and-clock.museum */
+33008,  /* watchandclock.museum */
+35983,  /* western.museum */
+35991,  /* westfalen.museum */
+36001,  /* whaling.museum */
+36009,  /* wildlife.museum */
+33064,  /* williamsburg.museum */
+34592,  /* windmill.museum */
+ 7200,  /* workshop.museum */
+36018,  /* xn--9dbhblg6di.museum */
+36033,  /* xn--comunicaes-v6a2o.museum */
+36054,  /* xn--correios-e-telecomunicaes-ghc29a.museum */
+36091,  /* xn--h1aegh.museum */
+36102,  /* xn--lns-qla.museum */
+34900,  /* york.museum */
+36114,  /* yorkshire.museum */
+36124,  /* yosemite.museum */
+36133,  /* youth.museum */
+36139,  /* zoological.museum */
+36150,  /* zoology.museum */
   164,  /* aero.mv */
   986,  /* biz.mv */
- 1914,  /* com.mv */
- 2048,  /* coop.mv */
- 2623,  /* edu.mv */
- 3671,  /* gov.mv */
- 3152,  /* info.mv */
- 3617,  /* int.mv */
- 4170,  /* mil.mv */
- 5623,  /* museum.mv */
- 5695,  /* name.mv */
- 5737,  /* net.mv */
- 6053,  /* org.mv */
- 6410,  /* pro.mv */
+ 1910,  /* com.mv */
+ 2044,  /* coop.mv */
+ 2622,  /* edu.mv */
+ 3665,  /* gov.mv */
+ 3149,  /* info.mv */
+ 3611,  /* int.mv */
+ 4157,  /* mil.mv */
+ 5596,  /* museum.mv */
+ 5672,  /* name.mv */
+ 5710,  /* net.mv */
+ 6026,  /* org.mv */
+ 6376,  /* pro.mv */
    62,  /* ac.mw */
   986,  /* biz.mw */
   113,  /* co.mw */
- 1914,  /* com.mw */
- 2048,  /* coop.mw */
- 2623,  /* edu.mw */
- 3671,  /* gov.mw */
- 3617,  /* int.mw */
- 5623,  /* museum.mw */
- 5737,  /* net.mw */
- 6053,  /* org.mw */
-10645,  /* blogspot.mx */
- 1914,  /* com.mx */
- 2623,  /* edu.mx */
-11304,  /* gob.mx */
- 5737,  /* net.mx */
- 6053,  /* org.mx */
-10645,  /* blogspot.my */
- 1914,  /* com.my */
- 2623,  /* edu.my */
- 3671,  /* gov.my */
- 4170,  /* mil.my */
- 5695,  /* name.my */
- 5737,  /* net.my */
- 6053,  /* org.my */
+ 1910,  /* com.mw */
+ 2044,  /* coop.mw */
+ 2622,  /* edu.mw */
+ 3665,  /* gov.mw */
+ 3611,  /* int.mw */
+ 5596,  /* museum.mw */
+ 5710,  /* net.mw */
+ 6026,  /* org.mw */
+10791,  /* blogspot.mx */
+ 1910,  /* com.mx */
+ 2622,  /* edu.mx */
+11461,  /* gob.mx */
+ 5710,  /* net.mx */
+12575,  /* nym.mx */
+ 6026,  /* org.mx */
+10791,  /* blogspot.my */
+ 1910,  /* com.my */
+ 2622,  /* edu.my */
+ 3665,  /* gov.my */
+ 4157,  /* mil.my */
+ 5672,  /* name.my */
+ 5710,  /* net.my */
+ 6026,  /* org.my */
    62,  /* ac.mz */
-11665,  /* adv.mz */
+12086,  /* adv.mz */
   113,  /* co.mz */
- 2623,  /* edu.mz */
- 3671,  /* gov.mz */
- 4170,  /* mil.mz */
- 5737,  /* net.mz */
- 6053,  /* org.mz */
+ 2622,  /* edu.mz */
+ 3665,  /* gov.mz */
+ 4157,  /* mil.mz */
+ 5710,  /* net.mz */
+ 6026,  /* org.mz */
   221,  /* ca.na */
- 1580,  /* cc.na */
+ 1573,  /* cc.na */
   113,  /* co.na */
- 1914,  /* com.na */
-11335,  /* dr.na */
+ 1910,  /* com.na */
+11492,  /* dr.na */
   898,  /* in.na */
- 3152,  /* info.na */
- 5427,  /* mobi.na */
- 3589,  /* mx.na */
- 5695,  /* name.na */
+ 3149,  /* info.na */
+ 5415,  /* mobi.na */
+ 3583,  /* mx.na */
+ 5672,  /* name.na */
   137,  /* or.na */
- 6053,  /* org.na */
- 6410,  /* pro.na */
- 7031,  /* school.na */
- 2549,  /* tv.na */
+ 6026,  /* org.na */
+ 6376,  /* pro.na */
+ 7001,  /* school.na */
+ 2545,  /* tv.na */
   264,  /* us.na */
   659,  /* ws.na */
- 3658,  /* forgot.her.name */
-11647,  /* asso.nc */
- 5970,  /* nom.nc */
+ 3652,  /* forgot.her.name */
+11821,  /* asso.nc */
+ 5943,  /* nom.nc */
   138,  /* r.cdn77.net */
     2,  /* a.prod.fastly.net */
- 3548,  /* global.prod.fastly.net */
+ 3542,  /* global.prod.fastly.net */
     2,  /* a.ssl.fastly.net */
    18,  /* b.ssl.fastly.net */
- 3548,  /* global.ssl.fastly.net */
- 5198,  /* map.fastlylb.net */
- 6158,  /* arts.nf */
- 1914,  /* com.nf */
-12095,  /* firm.nf */
- 3152,  /* info.nf */
- 5737,  /* net.nf */
- 1225,  /* other.nf */
- 4502,  /* per.nf */
-11769,  /* rec.nf */
- 7512,  /* store.nf */
-12109,  /* web.nf */
+ 3542,  /* global.ssl.fastly.net */
+ 5186,  /* map.fastlylb.net */
+ 6118,  /* arts.nf */
+ 1910,  /* com.nf */
+12882,  /* firm.nf */
+ 3149,  /* info.nf */
+ 5710,  /* net.nf */
+ 1219,  /* other.nf */
+ 4488,  /* per.nf */
+12406,  /* rec.nf */
+ 7493,  /* store.nf */
+12075,  /* web.nf */
    62,  /* ac.ni */
   986,  /* biz.ni */
   113,  /* co.ni */
- 1914,  /* com.ni */
- 2623,  /* edu.ni */
-11304,  /* gob.ni */
+ 1910,  /* com.ni */
+ 2622,  /* edu.ni */
+11461,  /* gob.ni */
   898,  /* in.ni */
- 3152,  /* info.ni */
- 3617,  /* int.ni */
- 4170,  /* mil.ni */
- 5737,  /* net.ni */
- 5970,  /* nom.ni */
- 6053,  /* org.ni */
-12109,  /* web.ni */
- 3745,  /* gs.aa.no */
- 8067,  /* nes.akershus.no */
+ 3149,  /* info.ni */
+ 3611,  /* int.ni */
+ 4157,  /* mil.ni */
+ 5710,  /* net.ni */
+ 5943,  /* nom.ni */
+ 6026,  /* org.ni */
+12075,  /* web.ni */
+ 3739,  /* gs.aa.no */
+ 8062,  /* nes.akershus.no */
   637,  /* os.hedmark.no */
-36192,  /* valer.hedmark.no */
-41194,  /* xn--vler-qoa.hedmark.no */
+38245,  /* valer.hedmark.no */
+43245,  /* xn--vler-qoa.hedmark.no */
   637,  /* os.hordaland.no */
-41207,  /* heroy.more-og-romsdal.no */
-41213,  /* sande.more-og-romsdal.no */
+43258,  /* heroy.more-og-romsdal.no */
+43264,  /* sande.more-og-romsdal.no */
  1087,  /* bo.nordland.no */
-41207,  /* heroy.nordland.no */
-41219,  /* xn--b-5ga.nordland.no */
-41229,  /* xn--hery-ira.nordland.no */
-36192,  /* valer.ostfold.no */
+43258,  /* heroy.nordland.no */
+43270,  /* xn--b-5ga.nordland.no */
+43280,  /* xn--hery-ira.nordland.no */
+38245,  /* valer.ostfold.no */
  1087,  /* bo.telemark.no */
-41219,  /* xn--b-5ga.telemark.no */
-41213,  /* sande.vestfold.no */
-41213,  /* sande.xn--mre-og-romsdal-qqb.no */
-41229,  /* xn--hery-ira.xn--mre-og-romsdal-qqb.no */
-41194,  /* xn--vler-qoa.xn--stfold-9xa.no */
-41242,  /* merseine.nu */
-25701,  /* mine.nu */
-41251,  /* shacknet.nu */
+43270,  /* xn--b-5ga.telemark.no */
+43264,  /* sande.vestfold.no */
+43264,  /* sande.xn--mre-og-romsdal-qqb.no */
+43280,  /* xn--hery-ira.xn--mre-og-romsdal-qqb.no */
+43245,  /* xn--vler-qoa.xn--stfold-9xa.no */
+43293,  /* merseine.nu */
+27588,  /* mine.nu */
+ 5943,  /* nom.nu */
+43302,  /* shacknet.nu */
   113,  /* co.om */
- 1914,  /* com.om */
- 2623,  /* edu.om */
- 3671,  /* gov.om */
- 1859,  /* med.om */
- 5623,  /* museum.om */
- 5737,  /* net.om */
- 6053,  /* org.om */
- 6410,  /* pro.om */
- 4973,  /* homelink.one */
-11518,  /* barsy.online */
-41806,  /* tele.amune.org */
+ 1910,  /* com.om */
+ 2622,  /* edu.om */
+ 3665,  /* gov.om */
+ 1855,  /* med.om */
+ 5596,  /* museum.om */
+ 5710,  /* net.om */
+ 6026,  /* org.om */
+ 6376,  /* pro.om */
+ 4953,  /* homelink.one */
+43938,  /* tele.amune.org */
    36,  /* c.cdn77.org */
-41811,  /* rsc.cdn77.org */
-13210,  /* ssl.origin.cdn77-secure.org */
+43943,  /* rsc.cdn77.org */
+14077,  /* ssl.origin.cdn77-secure.org */
   257,  /* go.dyndns.org */
- 6787,  /* home.dyndns.org */
+ 6753,  /* home.dyndns.org */
   290,  /* al.eu.org */
-11647,  /* asso.eu.org */
+11821,  /* asso.eu.org */
   562,  /* at.eu.org */
   584,  /* au.eu.org */
   860,  /* be.eu.org */
   932,  /* bg.eu.org */
   221,  /* ca.eu.org */
- 1584,  /* cd.eu.org */
- 1147,  /* ch.eu.org */
+ 1578,  /* cd.eu.org */
+ 1141,  /* ch.eu.org */
   842,  /* cn.eu.org */
   241,  /* cy.eu.org */
- 2203,  /* cz.eu.org */
- 2277,  /* de.eu.org */
- 2473,  /* dk.eu.org */
- 2623,  /* edu.eu.org */
- 1887,  /* ee.eu.org */
+ 2199,  /* cz.eu.org */
+ 2273,  /* de.eu.org */
+ 2469,  /* dk.eu.org */
+ 2622,  /* edu.eu.org */
+ 1883,  /* ee.eu.org */
   558,  /* es.eu.org */
- 2994,  /* fi.eu.org */
- 3230,  /* fr.eu.org */
- 3682,  /* gr.eu.org */
- 4099,  /* hr.eu.org */
- 4119,  /* hu.eu.org */
+ 2993,  /* fi.eu.org */
+ 3227,  /* fr.eu.org */
+ 3676,  /* gr.eu.org */
+ 4090,  /* hr.eu.org */
+ 4106,  /* hu.eu.org */
    31,  /* ie.eu.org */
- 2652,  /* il.eu.org */
+ 2651,  /* il.eu.org */
   898,  /* in.eu.org */
- 3617,  /* int.eu.org */
- 3707,  /* is.eu.org */
- 2099,  /* it.eu.org */
- 4474,  /* jp.eu.org */
- 3108,  /* kr.eu.org */
+ 3611,  /* int.eu.org */
+ 3701,  /* is.eu.org */
+ 2095,  /* it.eu.org */
+ 4460,  /* jp.eu.org */
+ 3107,  /* kr.eu.org */
   151,  /* lt.eu.org */
- 5091,  /* lu.eu.org */
- 5126,  /* lv.eu.org */
- 5286,  /* mc.eu.org */
- 1694,  /* me.eu.org */
- 5412,  /* mk.eu.org */
- 5588,  /* mt.eu.org */
+ 5079,  /* lu.eu.org */
+ 5114,  /* lv.eu.org */
+ 5274,  /* mc.eu.org */
+ 1690,  /* me.eu.org */
+ 5400,  /* mk.eu.org */
+ 5566,  /* mt.eu.org */
    70,  /* my.eu.org */
- 5737,  /* net.eu.org */
+ 5710,  /* net.eu.org */
   972,  /* ng.eu.org */
  1072,  /* nl.eu.org */
- 1518,  /* no.eu.org */
+ 1511,  /* no.eu.org */
   325,  /* nz.eu.org */
- 6137,  /* paris.eu.org */
- 5068,  /* pl.eu.org */
- 6493,  /* pt.eu.org */
-41822,  /* q-a.eu.org */
+ 6097,  /* paris.eu.org */
+ 5056,  /* pl.eu.org */
+ 6459,  /* pt.eu.org */
+43954,  /* q-a.eu.org */
   166,  /* ro.eu.org */
- 2191,  /* ru.eu.org */
- 1499,  /* se.eu.org */
- 2365,  /* si.eu.org */
- 7301,  /* sk.eu.org */
- 3287,  /* tr.eu.org */
- 8120,  /* uk.eu.org */
+ 2187,  /* ru.eu.org */
+ 1492,  /* se.eu.org */
+ 2361,  /* si.eu.org */
+ 7271,  /* sk.eu.org */
+ 3281,  /* tr.eu.org */
+ 8115,  /* uk.eu.org */
   264,  /* us.eu.org */
-15443,  /* nerdpol.ovh */
+16563,  /* nerdpol.ovh */
  1086,  /* abo.pa */
    62,  /* ac.pa */
- 1914,  /* com.pa */
- 2623,  /* edu.pa */
-11304,  /* gob.pa */
+ 1910,  /* com.pa */
+ 2622,  /* edu.pa */
+11461,  /* gob.pa */
   971,  /* ing.pa */
- 1859,  /* med.pa */
- 5737,  /* net.pa */
- 5970,  /* nom.pa */
- 6053,  /* org.pa */
-15439,  /* sld.pa */
-10645,  /* blogspot.pe */
- 1914,  /* com.pe */
- 2623,  /* edu.pe */
-11304,  /* gob.pe */
- 4170,  /* mil.pe */
- 5737,  /* net.pe */
- 5970,  /* nom.pe */
- 6053,  /* org.pe */
- 1914,  /* com.pf */
- 2623,  /* edu.pf */
- 6053,  /* org.pf */
- 1914,  /* com.ph */
- 2623,  /* edu.ph */
- 3671,  /* gov.ph */
+ 1855,  /* med.pa */
+ 5710,  /* net.pa */
+ 5943,  /* nom.pa */
+ 6026,  /* org.pa */
+16559,  /* sld.pa */
+10791,  /* blogspot.pe */
+ 1910,  /* com.pe */
+ 2622,  /* edu.pe */
+11461,  /* gob.pe */
+ 4157,  /* mil.pe */
+ 5710,  /* net.pe */
+ 5943,  /* nom.pe */
+12575,  /* nym.pe */
+ 6026,  /* org.pe */
+ 1910,  /* com.pf */
+ 2622,  /* edu.pf */
+ 6026,  /* org.pf */
+ 1910,  /* com.ph */
+ 2622,  /* edu.ph */
+ 3665,  /* gov.ph */
    58,  /* i.ph */
- 4170,  /* mil.ph */
- 5737,  /* net.ph */
+ 4157,  /* mil.ph */
+ 5710,  /* net.ph */
   977,  /* ngo.ph */
- 6053,  /* org.ph */
-11506,  /* 1337.pictures */
+ 6026,  /* org.ph */
+11680,  /* 1337.pictures */
   986,  /* biz.pk */
- 1914,  /* com.pk */
- 2623,  /* edu.pk */
+ 1910,  /* com.pk */
+ 2622,  /* edu.pk */
   402,  /* fam.pk */
-11304,  /* gob.pk */
-41826,  /* gok.pk */
-33103,  /* gon.pk */
- 3654,  /* gop.pk */
- 4494,  /* gos.pk */
- 3671,  /* gov.pk */
- 3152,  /* info.pk */
- 5737,  /* net.pk */
- 6053,  /* org.pk */
-12109,  /* web.pk */
- 1663,  /* ap.gov.pl */
-42868,  /* griw.gov.pl */
+11461,  /* gob.pk */
+43958,  /* gok.pk */
+35006,  /* gon.pk */
+ 3648,  /* gop.pk */
+ 4480,  /* gos.pk */
+ 3665,  /* gov.pk */
+ 3149,  /* info.pk */
+ 5710,  /* net.pk */
+ 6026,  /* org.pk */
+12075,  /* web.pk */
+ 1665,  /* ap.gov.pl */
+44995,  /* griw.gov.pl */
   715,  /* ic.gov.pl */
- 3707,  /* is.gov.pl */
-42873,  /* kmpsp.gov.pl */
-42879,  /* konsulat.gov.pl */
-42888,  /* kppsp.gov.pl */
-42894,  /* kwp.gov.pl */
-42898,  /* kwpsp.gov.pl */
-42904,  /* mup.gov.pl */
+ 3701,  /* is.gov.pl */
+45000,  /* kmpsp.gov.pl */
+45006,  /* konsulat.gov.pl */
+45015,  /* kppsp.gov.pl */
+45021,  /* kwp.gov.pl */
+45025,  /* kwpsp.gov.pl */
+45031,  /* mup.gov.pl */
  1064,  /* mw.gov.pl */
-42908,  /* oirm.gov.pl */
-42913,  /* oum.gov.pl */
+45035,  /* oirm.gov.pl */
+45040,  /* oum.gov.pl */
   522,  /* pa.gov.pl */
-42917,  /* pinb.gov.pl */
-42922,  /* piw.gov.pl */
- 6958,  /* po.gov.pl */
-42875,  /* psp.gov.pl */
-42926,  /* psse.gov.pl */
-42931,  /* pup.gov.pl */
- 3800,  /* rzgw.gov.pl */
- 1494,  /* sa.gov.pl */
-42935,  /* sdn.gov.pl */
-35691,  /* sko.gov.pl */
- 7334,  /* so.gov.pl */
- 7435,  /* sr.gov.pl */
-42939,  /* starostwo.gov.pl */
- 8112,  /* ug.gov.pl */
-42949,  /* ugim.gov.pl */
- 3211,  /* um.gov.pl */
-42954,  /* umig.gov.pl */
-42959,  /* upow.gov.pl */
-17932,  /* uppo.gov.pl */
+45044,  /* pinb.gov.pl */
+45049,  /* piw.gov.pl */
+ 6927,  /* po.gov.pl */
+45002,  /* psp.gov.pl */
+45053,  /* psse.gov.pl */
+45058,  /* pup.gov.pl */
+ 3794,  /* rzgw.gov.pl */
+ 1487,  /* sa.gov.pl */
+45062,  /* sdn.gov.pl */
+37744,  /* sko.gov.pl */
+ 7304,  /* so.gov.pl */
+ 7416,  /* sr.gov.pl */
+45066,  /* starostwo.gov.pl */
+ 8107,  /* ug.gov.pl */
+45076,  /* ugim.gov.pl */
+ 3208,  /* um.gov.pl */
+45081,  /* umig.gov.pl */
+45086,  /* upow.gov.pl */
+19237,  /* uppo.gov.pl */
   264,  /* us.gov.pl */
-42968,  /* uw.gov.pl */
-42971,  /* uzs.gov.pl */
-42975,  /* wif.gov.pl */
-42979,  /* wiih.gov.pl */
-11841,  /* winb.gov.pl */
-41189,  /* wios.gov.pl */
-42984,  /* witd.gov.pl */
-42989,  /* wiw.gov.pl */
- 6873,  /* wsa.gov.pl */
- 4656,  /* wskr.gov.pl */
-11450,  /* wuoz.gov.pl */
-42964,  /* wzmiuw.gov.pl */
-42993,  /* zp.gov.pl */
+45095,  /* uw.gov.pl */
+45098,  /* uzs.gov.pl */
+45102,  /* wif.gov.pl */
+45106,  /* wiih.gov.pl */
+12582,  /* winb.gov.pl */
+43240,  /* wios.gov.pl */
+45111,  /* witd.gov.pl */
+45116,  /* wiw.gov.pl */
+ 6842,  /* wsa.gov.pl */
+ 4642,  /* wskr.gov.pl */
+45120,  /* wuoz.gov.pl */
+45091,  /* wzmiuw.gov.pl */
+45125,  /* zp.gov.pl */
+ 1397,  /* own.pm */
   113,  /* co.pn */
- 2623,  /* edu.pn */
- 3671,  /* gov.pn */
- 5737,  /* net.pn */
- 6053,  /* org.pn */
+ 2622,  /* edu.pn */
+ 3665,  /* gov.pn */
+ 5710,  /* net.pn */
+ 6026,  /* org.pn */
    62,  /* ac.pr */
   986,  /* biz.pr */
- 1914,  /* com.pr */
- 2623,  /* edu.pr */
+ 1910,  /* com.pr */
+ 2622,  /* edu.pr */
   902,  /* est.pr */
- 3671,  /* gov.pr */
- 3152,  /* info.pr */
-43001,  /* isla.pr */
- 5695,  /* name.pr */
- 5737,  /* net.pr */
- 6053,  /* org.pr */
- 6410,  /* pro.pr */
- 6431,  /* prof.pr */
-    0,  /* aaa.pro */
- 1303,  /* aca.pro */
-16994,  /* acct.pro */
- 1521,  /* avocat.pro */
-  736,  /* bar.pro */
-11353,  /* cloudns.pro */
-13390,  /* cpa.pro */
-11692,  /* eng.pro */
-43006,  /* jur.pro */
- 4819,  /* law.pro */
- 1859,  /* med.pro */
- 4107,  /* recht.pro */
- 1914,  /* com.ps */
- 2623,  /* edu.ps */
- 3671,  /* gov.ps */
- 5737,  /* net.ps */
- 6053,  /* org.ps */
-17499,  /* plo.ps */
- 1965,  /* sec.ps */
-10645,  /* blogspot.pt */
- 1914,  /* com.pt */
- 2623,  /* edu.pt */
- 3671,  /* gov.pt */
- 3617,  /* int.pt */
- 5737,  /* net.pt */
-29205,  /* nome.pt */
- 6053,  /* org.pt */
-16723,  /* publ.pt */
-43010,  /* belau.pw */
-11353,  /* cloudns.pw */
+ 3665,  /* gov.pr */
+ 3149,  /* info.pr */
+45133,  /* isla.pr */
+ 5672,  /* name.pr */
+ 5710,  /* net.pr */
+ 6026,  /* org.pr */
+ 6376,  /* pro.pr */
+ 6397,  /* prof.pr */
+45151,  /* bci.dnstrace.pro */
+ 1910,  /* com.ps */
+ 2622,  /* edu.ps */
+ 3665,  /* gov.ps */
+ 5710,  /* net.ps */
+ 6026,  /* org.ps */
+18804,  /* plo.ps */
+ 1961,  /* sec.ps */
+10791,  /* blogspot.pt */
+ 1910,  /* com.pt */
+ 2622,  /* edu.pt */
+ 3665,  /* gov.pt */
+ 3611,  /* int.pt */
+ 5710,  /* net.pt */
+31092,  /* nome.pt */
+12575,  /* nym.pt */
+ 6026,  /* org.pt */
+17939,  /* publ.pt */
+45155,  /* belau.pw */
+11510,  /* cloudns.pw */
   113,  /* co.pw */
- 1860,  /* ed.pw */
+ 1856,  /* ed.pw */
   257,  /* go.pw */
- 1204,  /* ne.pw */
+ 1198,  /* ne.pw */
+ 5943,  /* nom.pw */
   137,  /* or.pw */
- 1914,  /* com.py */
- 2048,  /* coop.py */
- 2623,  /* edu.py */
- 3671,  /* gov.py */
- 4170,  /* mil.py */
- 5737,  /* net.py */
- 6053,  /* org.py */
-10645,  /* blogspot.qa */
- 1914,  /* com.qa */
- 2623,  /* edu.qa */
- 3671,  /* gov.qa */
- 4170,  /* mil.qa */
- 5695,  /* name.qa */
- 5737,  /* net.qa */
- 6053,  /* org.qa */
- 1146,  /* sch.qa */
-11647,  /* asso.re */
-10645,  /* blogspot.re */
- 1914,  /* com.re */
- 5970,  /* nom.re */
-43016,  /* clan.rip */
- 6158,  /* arts.ro */
-10645,  /* blogspot.ro */
- 1914,  /* com.ro */
-12095,  /* firm.ro */
- 3152,  /* info.ro */
- 5970,  /* nom.ro */
+45161,  /* x443.pw */
+ 1910,  /* com.py */
+ 2044,  /* coop.py */
+ 2622,  /* edu.py */
+ 3665,  /* gov.py */
+ 4157,  /* mil.py */
+ 5710,  /* net.py */
+ 6026,  /* org.py */
+10791,  /* blogspot.qa */
+ 1910,  /* com.qa */
+ 2622,  /* edu.qa */
+ 3665,  /* gov.qa */
+ 4157,  /* mil.qa */
+ 5672,  /* name.qa */
+ 5710,  /* net.qa */
+ 5943,  /* nom.qa */
+ 6026,  /* org.qa */
+ 1140,  /* sch.qa */
+11821,  /* asso.re */
+10791,  /* blogspot.re */
+ 1910,  /* com.re */
+ 5943,  /* nom.re */
+45166,  /* clan.rip */
+ 6118,  /* arts.ro */
+10791,  /* blogspot.ro */
+ 1910,  /* com.ro */
+12882,  /* firm.ro */
+ 3149,  /* info.ro */
+ 5943,  /* nom.ro */
    97,  /* nt.ro */
- 6053,  /* org.ro */
-11769,  /* rec.ro */
- 7234,  /* shop.ro */
- 7512,  /* store.ro */
- 7908,  /* tm.ro */
-11947,  /* www.ro */
-11404,  /* lima-city.rocks */
- 7396,  /* webspace.rocks */
+12575,  /* nym.ro */
+ 6026,  /* org.ro */
+12406,  /* rec.ro */
+ 7204,  /* shop.ro */
+ 7493,  /* store.ro */
+ 7890,  /* tm.ro */
+12712,  /* www.ro */
+11571,  /* lima-city.rocks */
+32032,  /* myddns.rocks */
+ 7366,  /* webspace.rocks */
    62,  /* ac.rs */
-10645,  /* blogspot.rs */
+10791,  /* blogspot.rs */
   113,  /* co.rs */
- 2623,  /* edu.rs */
- 3671,  /* gov.rs */
+ 2622,  /* edu.rs */
+ 3665,  /* gov.rs */
   898,  /* in.rs */
- 6053,  /* org.rs */
-11515,  /* hb.cldmail.ru */
+ 5943,  /* nom.rs */
+ 6026,  /* org.rs */
+ 1173,  /* ox.rs */
+12806,  /* hb.cldmail.ru */
+45329,  /* development.run */
+14892,  /* ravendb.run */
    62,  /* ac.rw */
   113,  /* co.rw */
- 1914,  /* com.rw */
- 2623,  /* edu.rw */
-11660,  /* gouv.rw */
- 3671,  /* gov.rw */
- 3617,  /* int.rw */
- 4170,  /* mil.rw */
- 5737,  /* net.rw */
- 1914,  /* com.sa */
- 2623,  /* edu.sa */
- 3671,  /* gov.sa */
- 1859,  /* med.sa */
- 5737,  /* net.sa */
- 6053,  /* org.sa */
- 6496,  /* pub.sa */
- 1146,  /* sch.sa */
- 1914,  /* com.sd */
- 2623,  /* edu.sd */
- 3671,  /* gov.sd */
- 3152,  /* info.sd */
- 1859,  /* med.sd */
- 5737,  /* net.sd */
- 6053,  /* org.sd */
- 2549,  /* tv.sd */
+ 1910,  /* com.rw */
+ 2622,  /* edu.rw */
+11834,  /* gouv.rw */
+ 3665,  /* gov.rw */
+ 3611,  /* int.rw */
+ 4157,  /* mil.rw */
+ 5710,  /* net.rw */
+ 1910,  /* com.sa */
+ 2622,  /* edu.sa */
+ 3665,  /* gov.sa */
+ 1855,  /* med.sa */
+ 5710,  /* net.sa */
+ 6026,  /* org.sa */
+ 6462,  /* pub.sa */
+ 1140,  /* sch.sa */
+ 1910,  /* com.sd */
+ 2622,  /* edu.sd */
+ 3665,  /* gov.sd */
+ 3149,  /* info.sd */
+ 1855,  /* med.sd */
+ 5710,  /* net.sd */
+ 6026,  /* org.sd */
+ 2545,  /* tv.sd */
     2,  /* a.se */
    62,  /* ac.se */
    18,  /* b.se */
   855,  /* bd.se */
-10645,  /* blogspot.se */
-30317,  /* brand.se */
+10791,  /* blogspot.se */
+32220,  /* brand.se */
    36,  /* c.se */
- 1914,  /* com.se */
+ 1910,  /* com.se */
   142,  /* d.se */
    32,  /* e.se */
   192,  /* f.se */
- 4555,  /* fh.se */
-43147,  /* fhsk.se */
-43152,  /* fhv.se */
+ 4541,  /* fh.se */
+45341,  /* fhsk.se */
+45346,  /* fhv.se */
   162,  /* g.se */
    14,  /* h.se */
    58,  /* i.se */
   734,  /* k.se */
-43156,  /* komforb.se */
-43164,  /* kommunalforbund.se */
-43180,  /* komvux.se */
+45350,  /* komforb.se */
+45358,  /* kommunalforbund.se */
+45374,  /* komvux.se */
   211,  /* l.se */
-43187,  /* lanbib.se */
+45381,  /* lanbib.se */
   354,  /* m.se */
   235,  /* n.se */
-43194,  /* naturbruksgymn.se */
+45388,  /* naturbruksgymn.se */
    49,  /* o.se */
- 6053,  /* org.se */
+ 6026,  /* org.se */
     7,  /* p.se */
-43209,  /* parti.se */
+45403,  /* parti.se */
   469,  /* pp.se */
   371,  /* press.se */
   138,  /* r.se */
   110,  /* s.se */
    25,  /* t.se */
- 7908,  /* tm.se */
+ 7890,  /* tm.se */
   585,  /* u.se */
   650,  /* w.se */
   398,  /* x.se */
    71,  /* y.se */
   326,  /* z.se */
-10645,  /* blogspot.sg */
- 1914,  /* com.sg */
- 2623,  /* edu.sg */
- 3671,  /* gov.sg */
- 5737,  /* net.sg */
- 6053,  /* org.sg */
- 4502,  /* per.sg */
+10791,  /* blogspot.sg */
+ 1910,  /* com.sg */
+ 2622,  /* edu.sg */
+ 3665,  /* gov.sg */
+ 5710,  /* net.sg */
+ 6026,  /* org.sg */
+ 4488,  /* per.sg */
+10791,  /* blogspot.si */
+ 5943,  /* nom.si */
   527,  /* art.sn */
-10645,  /* blogspot.sn */
- 1914,  /* com.sn */
- 2623,  /* edu.sn */
-11660,  /* gouv.sn */
- 6053,  /* org.sn */
-15907,  /* perso.sn */
-43244,  /* univ.sn */
- 1914,  /* com.so */
- 5737,  /* net.so */
- 6053,  /* org.so */
-43249,  /* stackspace.space */
-43260,  /* uber.space */
-43265,  /* xs4all.space */
+10791,  /* blogspot.sn */
+ 1910,  /* com.sn */
+ 2622,  /* edu.sn */
+11834,  /* gouv.sn */
+ 6026,  /* org.sn */
+17012,  /* perso.sn */
+45443,  /* univ.sn */
+ 1910,  /* com.so */
+ 5710,  /* net.so */
+ 6026,  /* org.so */
+ 7910,  /* linkitools.space */
+45448,  /* stackspace.space */
+45459,  /* uber.space */
+45464,  /* xs4all.space */
   113,  /* co.st */
- 1914,  /* com.st */
-43272,  /* consulado.st */
- 2623,  /* edu.st */
-43282,  /* embaixada.st */
- 3671,  /* gov.st */
- 4170,  /* mil.st */
- 5737,  /* net.st */
- 6053,  /* org.st */
-43292,  /* principe.st */
-25768,  /* saotome.st */
- 7512,  /* store.st */
-43301,  /* abkhazia.su */
-43021,  /* adygeya.su */
-43310,  /* aktyubinsk.su */
-43321,  /* arkhangelsk.su */
-43333,  /* armenia.su */
-43341,  /* ashgabad.su */
-43350,  /* azerbaijan.su */
-43361,  /* balashov.su */
-43029,  /* bashkiria.su */
-43370,  /* bryansk.su */
-43378,  /* bukhara.su */
-43386,  /* chimkent.su */
-43047,  /* dagestan.su */
-43395,  /* east-kazakhstan.su */
- 5735,  /* exnet.su */
-31906,  /* georgia.su */
-43056,  /* grozny.su */
-43411,  /* ivanovo.su */
-43419,  /* jambyl.su */
-43063,  /* kalmykia.su */
-43426,  /* kaluga.su */
-43433,  /* karacol.su */
-43441,  /* karaganda.su */
-43451,  /* karelia.su */
-43459,  /* khakassia.su */
-43469,  /* krasnodar.su */
-43479,  /* kurgan.su */
-43072,  /* kustanai.su */
-43486,  /* lenug.su */
-43492,  /* mangyshlak.su */
-43088,  /* mordovia.su */
- 7300,  /* msk.su */
-43503,  /* murmansk.su */
-43103,  /* nalchik.su */
-43512,  /* navoi.su */
-43518,  /* north-kazakhstan.su */
-43111,  /* nov.su */
-43535,  /* obninsk.su */
-43543,  /* penza.su */
-43549,  /* pokrovsk.su */
-43558,  /* sochi.su */
-11300,  /* spb.su */
-43564,  /* tashkent.su */
-43573,  /* termez.su */
-43580,  /* togliatti.su */
-43590,  /* troitsk.su */
-43598,  /* tselinograd.su */
-43610,  /* tula.su */
-43615,  /* tuva.su */
-43126,  /* vladikavkaz.su */
-43138,  /* vladimir.su */
-41964,  /* vologda.su */
- 1914,  /* com.sv */
- 2623,  /* edu.sv */
-11304,  /* gob.sv */
- 6053,  /* org.sv */
- 4666,  /* red.sv */
-43620,  /* knightpoint.systems */
+ 1910,  /* com.st */
+45471,  /* consulado.st */
+ 2622,  /* edu.st */
+45481,  /* embaixada.st */
+ 3665,  /* gov.st */
+ 4157,  /* mil.st */
+ 5710,  /* net.st */
+45491,  /* noho.st */
+ 5943,  /* nom.st */
+ 6026,  /* org.st */
+45496,  /* principe.st */
+27655,  /* saotome.st */
+ 7493,  /* store.st */
+45505,  /* abkhazia.su */
+45171,  /* adygeya.su */
+45514,  /* aktyubinsk.su */
+45525,  /* arkhangelsk.su */
+45537,  /* armenia.su */
+45545,  /* ashgabad.su */
+45554,  /* azerbaijan.su */
+45565,  /* balashov.su */
+45179,  /* bashkiria.su */
+45574,  /* bryansk.su */
+45582,  /* bukhara.su */
+45590,  /* chimkent.su */
+45197,  /* dagestan.su */
+45599,  /* east-kazakhstan.su */
+ 5708,  /* exnet.su */
+33809,  /* georgia.su */
+45206,  /* grozny.su */
+45615,  /* ivanovo.su */
+45623,  /* jambyl.su */
+45213,  /* kalmykia.su */
+45630,  /* kaluga.su */
+45637,  /* karacol.su */
+45645,  /* karaganda.su */
+45655,  /* karelia.su */
+45663,  /* khakassia.su */
+45673,  /* krasnodar.su */
+45683,  /* kurgan.su */
+45222,  /* kustanai.su */
+45690,  /* lenug.su */
+45696,  /* mangyshlak.su */
+45238,  /* mordovia.su */
+ 7270,  /* msk.su */
+45707,  /* murmansk.su */
+45260,  /* nalchik.su */
+45716,  /* navoi.su */
+45722,  /* north-kazakhstan.su */
+45268,  /* nov.su */
+12575,  /* nym.su */
+45739,  /* obninsk.su */
+45747,  /* penza.su */
+45753,  /* pokrovsk.su */
+45762,  /* sochi.su */
+11450,  /* spb.su */
+45768,  /* tashkent.su */
+45777,  /* termez.su */
+45784,  /* togliatti.su */
+45794,  /* troitsk.su */
+45802,  /* tselinograd.su */
+45814,  /* tula.su */
+45819,  /* tuva.su */
+45287,  /* vladikavkaz.su */
+45299,  /* vladimir.su */
+44091,  /* vologda.su */
+ 1910,  /* com.sv */
+ 2622,  /* edu.sv */
+11461,  /* gob.sv */
+ 6026,  /* org.sv */
+ 4652,  /* red.sv */
+ 3665,  /* gov.sx */
+12575,  /* nym.sx */
+45824,  /* knightpoint.systems */
    62,  /* ac.sz */
   113,  /* co.sz */
- 6053,  /* org.sz */
+ 6026,  /* org.sz */
    62,  /* ac.th */
   113,  /* co.th */
   257,  /* go.th */
   898,  /* in.th */
- 5376,  /* mi.th */
- 5737,  /* net.th */
+ 5364,  /* mi.th */
+ 5710,  /* net.th */
   137,  /* or.th */
    62,  /* ac.tj */
   986,  /* biz.tj */
   113,  /* co.tj */
- 1914,  /* com.tj */
- 2623,  /* edu.tj */
+ 1910,  /* com.tj */
+ 2622,  /* edu.tj */
   257,  /* go.tj */
- 3671,  /* gov.tj */
- 3617,  /* int.tj */
- 4170,  /* mil.tj */
- 5695,  /* name.tj */
- 5737,  /* net.tj */
- 1816,  /* nic.tj */
- 6053,  /* org.tj */
-42996,  /* test.tj */
-12109,  /* web.tj */
+ 3665,  /* gov.tj */
+ 3611,  /* int.tj */
+ 4157,  /* mil.tj */
+ 5672,  /* name.tj */
+ 5710,  /* net.tj */
+ 1812,  /* nic.tj */
+ 5943,  /* nom.tj */
+ 6026,  /* org.tj */
+45128,  /* test.tj */
+12075,  /* web.tj */
   113,  /* co.tm */
- 1914,  /* com.tm */
- 2623,  /* edu.tm */
- 3671,  /* gov.tm */
- 4170,  /* mil.tm */
- 5737,  /* net.tm */
- 5970,  /* nom.tm */
- 6053,  /* org.tm */
-43632,  /* agrinet.tn */
- 1914,  /* com.tn */
-43640,  /* defense.tn */
-43648,  /* edunet.tn */
- 6175,  /* ens.tn */
- 4206,  /* fin.tn */
- 3671,  /* gov.tn */
-11731,  /* ind.tn */
- 3152,  /* info.tn */
- 7902,  /* intl.tn */
- 1911,  /* mincom.tn */
+ 1910,  /* com.tm */
+ 2622,  /* edu.tm */
+ 3665,  /* gov.tm */
+ 4157,  /* mil.tm */
+ 5710,  /* net.tm */
+ 5943,  /* nom.tm */
+ 6026,  /* org.tm */
+45836,  /* agrinet.tn */
+ 1910,  /* com.tn */
+45844,  /* defense.tn */
+45852,  /* edunet.tn */
+ 6135,  /* ens.tn */
+ 4193,  /* fin.tn */
+ 3665,  /* gov.tn */
+12273,  /* ind.tn */
+ 3149,  /* info.tn */
+ 7884,  /* intl.tn */
+ 1907,  /* mincom.tn */
   561,  /* nat.tn */
- 5737,  /* net.tn */
- 6053,  /* org.tn */
-15907,  /* perso.tn */
-43655,  /* rnrt.tn */
-11846,  /* rns.tn */
- 5901,  /* rnu.tn */
-42712,  /* tourism.tn */
- 6659,  /* turen.tn */
- 1914,  /* com.to */
- 2623,  /* edu.to */
- 3671,  /* gov.to */
- 4170,  /* mil.to */
- 5737,  /* net.to */
- 6053,  /* org.to */
-43660,  /* vpnplus.to */
+ 5710,  /* net.tn */
+ 6026,  /* org.tn */
+17012,  /* perso.tn */
+45859,  /* rnrt.tn */
+12587,  /* rns.tn */
+ 5874,  /* rnu.tn */
+44839,  /* tourism.tn */
+ 6625,  /* turen.tn */
+ 1910,  /* com.to */
+ 2622,  /* edu.to */
+ 3665,  /* gov.to */
+ 4157,  /* mil.to */
+ 5710,  /* net.to */
+ 6026,  /* org.to */
+45864,  /* vpnplus.to */
+36558,  /* now-dns.top */
+45872,  /* ntdll.top */
   164,  /* aero.tt */
   986,  /* biz.tt */
   113,  /* co.tt */
- 1914,  /* com.tt */
- 2048,  /* coop.tt */
- 2623,  /* edu.tt */
- 3671,  /* gov.tt */
- 3152,  /* info.tt */
- 3617,  /* int.tt */
- 4454,  /* jobs.tt */
- 5427,  /* mobi.tt */
- 5623,  /* museum.tt */
- 5695,  /* name.tt */
- 5737,  /* net.tt */
- 6053,  /* org.tt */
- 6410,  /* pro.tt */
- 8003,  /* travel.tt */
-43676,  /* better-than.tv */
-11559,  /* dyndns.tv */
-43688,  /* on-the-web.tv */
-43699,  /* worse-than.tv */
-43735,  /* mymailer.com.tw */
+ 1910,  /* com.tt */
+ 2044,  /* coop.tt */
+ 2622,  /* edu.tt */
+ 3665,  /* gov.tt */
+ 3149,  /* info.tt */
+ 3611,  /* int.tt */
+ 4440,  /* jobs.tt */
+ 5415,  /* mobi.tt */
+ 5596,  /* museum.tt */
+ 5672,  /* name.tt */
+ 5710,  /* net.tt */
+ 6026,  /* org.tt */
+ 6376,  /* pro.tt */
+ 7998,  /* travel.tt */
+45886,  /* better-than.tv */
+11733,  /* dyndns.tv */
+45898,  /* on-the-web.tv */
+45909,  /* worse-than.tv */
+45945,  /* mymailer.com.tw */
    62,  /* ac.tz */
   113,  /* co.tz */
   257,  /* go.tz */
- 7747,  /* hotel.tz */
- 3152,  /* info.tz */
- 1694,  /* me.tz */
- 4170,  /* mil.tz */
- 5427,  /* mobi.tz */
- 1204,  /* ne.tz */
+ 7728,  /* hotel.tz */
+ 3149,  /* info.tz */
+ 1690,  /* me.tz */
+ 4157,  /* mil.tz */
+ 5415,  /* mobi.tz */
+ 1198,  /* ne.tz */
   137,  /* or.tz */
- 2159,  /* sc.tz */
- 2549,  /* tv.tz */
+ 2155,  /* sc.tz */
+ 2545,  /* tv.tz */
   986,  /* biz.ua */
- 1580,  /* cc.ua */
-43744,  /* cherkassy.ua */
-43754,  /* cherkasy.ua */
- 3665,  /* chernigov.ua */
- 3911,  /* chernihiv.ua */
-43763,  /* chernivtsi.ua */
-43774,  /* chernovtsy.ua */
+ 1573,  /* cc.ua */
+45954,  /* cherkassy.ua */
+45964,  /* cherkasy.ua */
+ 3659,  /* chernigov.ua */
+ 3905,  /* chernihiv.ua */
+45973,  /* chernivtsi.ua */
+45984,  /* chernovtsy.ua */
   996,  /* ck.ua */
   842,  /* cn.ua */
   113,  /* co.ua */
- 1914,  /* com.ua */
- 2092,  /* cr.ua */
-43785,  /* crimea.ua */
- 2177,  /* cv.ua */
+ 1910,  /* com.ua */
+ 2088,  /* cr.ua */
+45995,  /* crimea.ua */
+ 2173,  /* cv.ua */
   285,  /* dn.ua */
-43792,  /* dnepropetrovsk.ua */
-43807,  /* dnipropetrovsk.ua */
-43822,  /* dominic.ua */
-43830,  /* donetsk.ua */
-43838,  /* dp.ua */
- 2623,  /* edu.ua */
- 3671,  /* gov.ua */
- 5148,  /* if.ua */
+46002,  /* dnepropetrovsk.ua */
+46017,  /* dnipropetrovsk.ua */
+46032,  /* dominic.ua */
+46040,  /* donetsk.ua */
+46048,  /* dp.ua */
+ 2622,  /* edu.ua */
+ 3665,  /* gov.ua */
+ 5136,  /* if.ua */
   898,  /* in.ua */
- 5796,  /* inf.ua */
-43841,  /* ivano-frankivsk.ua */
- 4561,  /* kh.ua */
-43857,  /* kharkiv.ua */
-43865,  /* kharkov.ua */
-43873,  /* kherson.ua */
-43881,  /* khmelnitskiy.ua */
-43894,  /* khmelnytskyi.ua */
-43907,  /* kiev.ua */
-43912,  /* kirovograd.ua */
- 4607,  /* km.ua */
- 3108,  /* kr.ua */
-43923,  /* krym.ua */
- 6826,  /* ks.ua */
-43928,  /* kv.ua */
-43931,  /* kyiv.ua */
-11781,  /* lg.ua */
+ 5769,  /* inf.ua */
+46051,  /* ivano-frankivsk.ua */
+ 4547,  /* kh.ua */
+46067,  /* kharkiv.ua */
+46075,  /* kharkov.ua */
+46083,  /* kherson.ua */
+46091,  /* khmelnitskiy.ua */
+46104,  /* khmelnytskyi.ua */
+46117,  /* kiev.ua */
+46122,  /* kirovograd.ua */
+ 4593,  /* km.ua */
+ 3107,  /* kr.ua */
+46133,  /* krym.ua */
+ 6791,  /* ks.ua */
+46138,  /* kv.ua */
+46141,  /* kyiv.ua */
+12508,  /* lg.ua */
   151,  /* lt.ua */
- 5082,  /* ltd.ua */
-43936,  /* lugansk.ua */
-43944,  /* lutsk.ua */
- 5126,  /* lv.ua */
-43950,  /* lviv.ua */
- 5412,  /* mk.ua */
-43955,  /* mykolaiv.ua */
- 5737,  /* net.ua */
-43964,  /* nikolaev.ua */
- 3163,  /* od.ua */
-16006,  /* odesa.ua */
-43973,  /* odessa.ua */
- 6053,  /* org.ua */
- 5068,  /* pl.ua */
-43980,  /* poltava.ua */
+ 5070,  /* ltd.ua */
+46146,  /* lugansk.ua */
+46154,  /* lutsk.ua */
+ 5114,  /* lv.ua */
+46160,  /* lviv.ua */
+ 5400,  /* mk.ua */
+46165,  /* mykolaiv.ua */
+ 5710,  /* net.ua */
+46174,  /* nikolaev.ua */
+ 3160,  /* od.ua */
+17101,  /* odesa.ua */
+46183,  /* odessa.ua */
+ 6026,  /* org.ua */
+ 5056,  /* pl.ua */
+46190,  /* poltava.ua */
   469,  /* pp.ua */
-43988,  /* rivne.ua */
-43994,  /* rovno.ua */
- 8046,  /* rv.ua */
- 6980,  /* sb.ua */
-44000,  /* sebastopol.ua */
-44011,  /* sevastopol.ua */
- 7320,  /* sm.ua */
- 5652,  /* sumy.ua */
+46198,  /* rivne.ua */
+46204,  /* rovno.ua */
+ 8041,  /* rv.ua */
+ 6950,  /* sb.ua */
+46210,  /* sebastopol.ua */
+46221,  /* sevastopol.ua */
+ 7290,  /* sm.ua */
+ 5625,  /* sumy.ua */
   334,  /* te.ua */
-44022,  /* ternopil.ua */
- 5874,  /* uz.ua */
-44031,  /* uzhgorod.ua */
-44040,  /* vinnica.ua */
-44048,  /* vinnytsia.ua */
- 8345,  /* vn.ua */
-44058,  /* volyn.ua */
-34810,  /* yalta.ua */
-44064,  /* zaporizhzhe.ua */
-44076,  /* zaporizhzhia.ua */
-44089,  /* zhitomir.ua */
-44098,  /* zhytomyr.ua */
-42993,  /* zp.ua */
- 4415,  /* zt.ua */
+46232,  /* ternopil.ua */
+ 5847,  /* uz.ua */
+46241,  /* uzhgorod.ua */
+46250,  /* vinnica.ua */
+46258,  /* vinnytsia.ua */
+ 8348,  /* vn.ua */
+46268,  /* volyn.ua */
+36863,  /* yalta.ua */
+46274,  /* zaporizhzhe.ua */
+46286,  /* zaporizhzhia.ua */
+46299,  /* zhitomir.ua */
+46308,  /* zhytomyr.ua */
+45125,  /* zp.ua */
+ 4401,  /* zt.ua */
    62,  /* ac.ug */
-10645,  /* blogspot.ug */
+10791,  /* blogspot.ug */
   113,  /* co.ug */
- 1914,  /* com.ug */
+ 1910,  /* com.ug */
   257,  /* go.ug */
- 1204,  /* ne.ug */
+ 1198,  /* ne.ug */
+ 5943,  /* nom.ug */
   137,  /* or.ug */
- 6053,  /* org.ug */
- 2159,  /* sc.ug */
-10645,  /* blogspot.co.uk */
-11621,  /* no-ip.co.uk */
-15495,  /* wellbeingzone.co.uk */
- 5927,  /* homeoffice.gov.uk */
-44118,  /* service.gov.uk */
- 1580,  /* cc.ak.us */
-15451,  /* k12.ak.us */
-15459,  /* lib.ak.us */
- 1580,  /* cc.hi.us */
-15459,  /* lib.hi.us */
-44164,  /* chtr.k12.ma.us */
-44169,  /* paroch.k12.ma.us */
-15736,  /* pvt.k12.ma.us */
- 1580,  /* cc.wv.us */
+ 6026,  /* org.ug */
+ 2155,  /* sc.ug */
+11692,  /* barsy.co.uk */
+ 5974,  /* barsyonline.co.uk */
+10791,  /* blogspot.co.uk */
+46328,  /* gwiddle.co.uk */
+46336,  /* nh-serv.co.uk */
+11795,  /* no-ip.co.uk */
+16610,  /* wellbeingzone.co.uk */
+ 5900,  /* homeoffice.gov.uk */
+46344,  /* service.gov.uk */
+46352,  /* glug.org.uk */
+46353,  /* lug.org.uk */
+43907,  /* lugs.org.uk */
+ 1573,  /* cc.ak.us */
+16571,  /* k12.ak.us */
+16579,  /* lib.ak.us */
+ 1573,  /* cc.hi.us */
+16579,  /* lib.hi.us */
+46395,  /* chtr.k12.ma.us */
+46400,  /* paroch.k12.ma.us */
+16840,  /* pvt.k12.ma.us */
+46407,  /* ann-arbor.mi.us */
+ 1573,  /* cc.mi.us */
+11446,  /* cog.mi.us */
+46417,  /* dst.mi.us */
+46421,  /* eaton.mi.us */
+ 8364,  /* gen.mi.us */
+16571,  /* k12.mi.us */
+16579,  /* lib.mi.us */
+12350,  /* mus.mi.us */
+ 7619,  /* tec.mi.us */
+46427,  /* washtenaw.mi.us */
+ 1573,  /* cc.wv.us */
   113,  /* co.uz */
- 1914,  /* com.uz */
- 5737,  /* net.uz */
- 6053,  /* org.uz */
- 6158,  /* arts.ve */
+ 1910,  /* com.uz */
+ 5710,  /* net.uz */
+ 6026,  /* org.uz */
+ 1910,  /* com.vc */
+ 2622,  /* edu.vc */
+ 3665,  /* gov.vc */
+ 4157,  /* mil.vc */
+ 5710,  /* net.vc */
+ 5943,  /* nom.vc */
+ 6026,  /* org.vc */
+ 6118,  /* arts.ve */
   113,  /* co.ve */
- 1914,  /* com.ve */
-44180,  /* e12.ve */
- 2623,  /* edu.ve */
-12095,  /* firm.ve */
-11304,  /* gob.ve */
- 3671,  /* gov.ve */
- 3152,  /* info.ve */
- 3617,  /* int.ve */
- 4170,  /* mil.ve */
- 5737,  /* net.ve */
- 6053,  /* org.ve */
-11769,  /* rec.ve */
- 7512,  /* store.ve */
- 7638,  /* tec.ve */
-12109,  /* web.ve */
+ 1910,  /* com.ve */
+46441,  /* e12.ve */
+ 2622,  /* edu.ve */
+12882,  /* firm.ve */
+11461,  /* gob.ve */
+ 3665,  /* gov.ve */
+ 3149,  /* info.ve */
+ 3611,  /* int.ve */
+ 4157,  /* mil.ve */
+ 5710,  /* net.ve */
+ 6026,  /* org.ve */
+12406,  /* rec.ve */
+ 7493,  /* store.ve */
+ 7619,  /* tec.ve */
+12075,  /* web.ve */
   113,  /* co.vi */
- 1914,  /* com.vi */
-15451,  /* k12.vi */
- 5737,  /* net.vi */
- 6053,  /* org.vi */
+ 1910,  /* com.vi */
+16571,  /* k12.vi */
+ 5710,  /* net.vi */
+ 6026,  /* org.vi */
    62,  /* ac.vn */
   986,  /* biz.vn */
-10645,  /* blogspot.vn */
- 1914,  /* com.vn */
- 2623,  /* edu.vn */
- 3671,  /* gov.vn */
- 3844,  /* health.vn */
- 3152,  /* info.vn */
- 3617,  /* int.vn */
- 5695,  /* name.vn */
- 5737,  /* net.vn */
- 6053,  /* org.vn */
- 6410,  /* pro.vn */
-44191,  /* xn--80au.xn--90a3ac */
-44200,  /* xn--90azh.xn--90a3ac */
- 9044,  /* xn--c1avg.xn--90a3ac */
-44210,  /* xn--d1at.xn--90a3ac */
-44219,  /* xn--o1ac.xn--90a3ac */
-44228,  /* xn--o1ach.xn--90a3ac */
-44238,  /* xn--12c1fe0br.xn--o3cw4h */
-44252,  /* xn--12cfi8ixb8l.xn--o3cw4h */
-44268,  /* xn--12co0c3b4eva.xn--o3cw4h */
-44285,  /* xn--h3cuzk1di.xn--o3cw4h */
-44299,  /* xn--m3ch0j3a.xn--o3cw4h */
-44312,  /* xn--o3cyx2a.xn--o3cw4h */
+10791,  /* blogspot.vn */
+ 1910,  /* com.vn */
+ 2622,  /* edu.vn */
+ 3665,  /* gov.vn */
+ 3838,  /* health.vn */
+ 3149,  /* info.vn */
+ 3611,  /* int.vn */
+ 5672,  /* name.vn */
+ 5710,  /* net.vn */
+ 6026,  /* org.vn */
+ 6376,  /* pro.vn */
+46460,  /* xn--80au.xn--90a3ac */
+46469,  /* xn--90azh.xn--90a3ac */
+ 9100,  /* xn--c1avg.xn--90a3ac */
+46479,  /* xn--d1at.xn--90a3ac */
+46488,  /* xn--o1ac.xn--90a3ac */
+46497,  /* xn--o1ach.xn--90a3ac */
+ 8877,  /* xn--55qx5d.xn--j6w193g */
+16878,  /* xn--gmqw5a.xn--j6w193g */
+10100,  /* xn--mxtq1m.xn--j6w193g */
+12836,  /* xn--od0alg.xn--j6w193g */
+16934,  /* xn--uc0atv.xn--j6w193g */
+16957,  /* xn--wcvs22d.xn--j6w193g */
+46507,  /* xn--12c1fe0br.xn--o3cw4h */
+46521,  /* xn--12cfi8ixb8l.xn--o3cw4h */
+46537,  /* xn--12co0c3b4eva.xn--o3cw4h */
+46554,  /* xn--h3cuzk1di.xn--o3cw4h */
+46568,  /* xn--m3ch0j3a.xn--o3cw4h */
+46581,  /* xn--o3cyx2a.xn--o3cw4h */
+43351,  /* blogsite.xyz */
+46593,  /* crafting.xyz */
   466,  /* fhapp.xyz */
+43932,  /* zapto.xyz */
    62,  /* ac.zm */
   986,  /* biz.zm */
   113,  /* co.zm */
- 1914,  /* com.zm */
- 2623,  /* edu.zm */
- 3671,  /* gov.zm */
- 3152,  /* info.zm */
- 4170,  /* mil.zm */
- 5737,  /* net.zm */
- 6053,  /* org.zm */
- 1146,  /* sch.zm */
+ 1910,  /* com.zm */
+ 2622,  /* edu.zm */
+ 3665,  /* gov.zm */
+ 3149,  /* info.zm */
+ 4157,  /* mil.zm */
+ 5710,  /* net.zm */
+ 6026,  /* org.zm */
+ 1140,  /* sch.zm */
    62,  /* ac.zw */
   113,  /* co.zw */
- 3671,  /* gov.zw */
- 4170,  /* mil.zw */
- 6053,  /* org.zw */
+ 3665,  /* gov.zw */
+ 4157,  /* mil.zw */
+ 6026,  /* org.zw */
 };
 
-static const size_t kLeafChildOffset = 3715;
-static const size_t kNumRootChildren = 1549;
+static const size_t kLeafChildOffset = 3904;
+static const size_t kNumRootChildren = 1555;

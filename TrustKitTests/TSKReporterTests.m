@@ -101,7 +101,6 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
               @"www.test.com" : @{
                       kTSKEnforcePinning : @YES,
                       kTSKExpirationDate : expirationDateStr,
-                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                       kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                               @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=" // Fake key 2
                                               ]}}};
@@ -116,7 +115,8 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
     
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+    dateFormat.dateFormat = @"yyyy-MM-dd";
+    dateFormat.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
     NSDate *expirationDate = [dateFormat dateFromString:expirationDateStr];
     
     TSKPinningValidatorResult *res;
@@ -193,7 +193,8 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
 - (void)testReporter
 {
     // Just try a simple valid case to see if we can post this to the default report URL
-    TSKBackgroundReporter *reporter = [[TSKBackgroundReporter alloc] initAndRateLimitReports:NO];
+    TSKBackgroundReporter *reporter = [[TSKBackgroundReporter alloc] initAndRateLimitReports:NO
+                                                                   sharedContainerIdentifier:nil];
     [reporter pinValidationFailedForHostname:@"mail.example.com"
                                         port:[NSNumber numberWithInt:443]
                             certificateChain:_testCertificateChain
@@ -216,7 +217,8 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
 - (void)testReporterNilExpirationDate
 {
     // Just try a simple valid case to see if we can post this to the default report URL
-    TSKBackgroundReporter *reporter = [[TSKBackgroundReporter alloc] initAndRateLimitReports:NO];
+    TSKBackgroundReporter *reporter = [[TSKBackgroundReporter alloc] initAndRateLimitReports:NO
+                                                                   sharedContainerIdentifier:nil];
     [reporter pinValidationFailedForHostname:@"mail.example.com"
                                         port:[NSNumber numberWithInt:443]
                             certificateChain:_testCertificateChain

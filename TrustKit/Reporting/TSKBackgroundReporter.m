@@ -38,7 +38,8 @@ static NSString * const kTSKBackgroundSessionIdentifierFormat = @"%@.TSKBackgrou
 
 #pragma mark Public methods
 
-- (nonnull instancetype)initAndRateLimitReports:(BOOL)shouldRateLimitReports;
+- (nonnull instancetype)initAndRateLimitReports:(BOOL)shouldRateLimitReports
+                      sharedContainerIdentifier:(NSString *)sharedContainerIdentifier
 {
     self = [super init];
     if (self)
@@ -105,6 +106,7 @@ static NSString * const kTSKBackgroundSessionIdentifierFormat = @"%@.TSKBackgrou
             
             NSURLSessionConfiguration *backgroundConfiguration = [NSURLSessionConfiguration backgroundSessionConfigurationWithIdentifier:backgroundSessionId];
             backgroundConfiguration.discretionary = YES;
+            backgroundConfiguration.sharedContainerIdentifier = sharedContainerIdentifier;
             
 #if TARGET_OS_IPHONE
             // iOS-only settings

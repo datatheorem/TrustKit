@@ -1,6 +1,7 @@
-#!/usr/bin/env python2.7
+#!/usr/bin/env python
 """Helper script to generate a TrustKit or HPKP pin from a PEM/DER certificate file.
 """
+from __future__ import print_function
 from subprocess import Popen, PIPE
 from sys import stdin
 import os.path
@@ -8,6 +9,8 @@ import argparse
 import hashlib
 import base64
 import platform
+import io
+
 
 class SupportedKeyAlgorithmsEnum(object):
     RSA_2048 = 1
@@ -27,7 +30,7 @@ if __name__ == '__main__':
     if not args.certificate:
         certificate = stdin.read()
     elif os.path.isfile(args.certificate):
-        with open(args.certificate, 'r') as certFile:
+        with io.open(args.certificate, 'rb') as certFile:
             certificate = certFile.read()
     else:
         raise ValueError('Could not open certificate file {}'.format(args.certificate))
@@ -37,12 +40,12 @@ if __name__ == '__main__':
 
     # Parse the certificate and print its information
     p1 = Popen('openssl x509 -inform {} -text -noout'.format(args.type), shell=True, stdin=PIPE, stdout=PIPE)
-    certificate_txt = p1.communicate(input=certificate)[0]
+    certificate_txt = p1.communicate(input=certificate)[0].decode('utf-8')
 
-    print '\nCERTIFICATE INFO\n----------------'
+    print('\nCERTIFICATE INFO\n----------------')
     p1 = Popen('openssl x509 -subject -issuer -fingerprint -sha1 -noout -inform {}'.format(
         args.type), shell=True, stdin=PIPE, stdout=PIPE)
-    print p1.communicate(input=certificate)[0]
+    print(p1.communicate(input=certificate)[0])
 
     # Extract the certificate key's algorithm
     # Tested on the output of OpenSSL 0.9.8zh and OpenSSL 1.0.2i
@@ -67,17 +70,13 @@ if __name__ == '__main__':
     if key_algorithm == SupportedKeyAlgorithmsEnum.ECDSA_SECP256R1:
         # The OpenSSL command is different for ECDSA secp256
         openssl_alg = 'ec'
-        trustkit_alg = 'kTSKAlgorithmEcDsaSecp256r1'
     elif key_algorithm == SupportedKeyAlgorithmsEnum.ECDSA_SECP384R1:
         # The OpenSSL command is different for ECDSA secp384
         openssl_alg = 'ec'
-        trustkit_alg = 'kTSKAlgorithmEcDsaSecp384r1'
     elif key_algorithm == SupportedKeyAlgorithmsEnum.RSA_2048:
         openssl_alg = 'rsa'
-        trustkit_alg = 'kTSKAlgorithmRsa2048'
     elif key_algorithm == SupportedKeyAlgorithmsEnum.RSA_4096:
         openssl_alg = 'rsa'
-        trustkit_alg = 'kTSKAlgorithmRsa4096'
     else:
         raise ValueError('Unexpected key algorithm')
 
@@ -94,7 +93,5 @@ if __name__ == '__main__':
     spki_hash = hashlib.sha256(spki).digest()
     hpkp_pin = base64.b64encode(spki_hash)
 
-    print 'TRUSTKIT CONFIGURATION\n----------------------'
-    print 'kTSKPublicKeyHashes: @[@"{}"] // You will also need to configure a backup pin'.format(hpkp_pin)
-    print 'kTSKPublicKeyAlgorithms: @[{}]\n'.format(trustkit_alg)
-    
+    print('\nTRUSTKIT CONFIGURATION\n----------------------')
+    print('kTSKPublicKeyHashes: @[@"{}"] // You will also need to configure a backup pin'.format(hpkp_pin))

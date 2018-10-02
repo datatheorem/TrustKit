@@ -9,8 +9,11 @@
  
  */
 
+#if __has_feature(modules)
 @import Foundation;
-
+#else
+#import <Foundation/Foundation.h>
+#endif
 
 /**
  The version of TrustKit, such as "1.4.0".
@@ -104,6 +107,8 @@ FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKPublicKeyHashes;
 
 
 /**
+ DEPRECATED since 1.6.0: this configuration key is no longer needed.
+ 
  An array of `TSKSupportedAlgorithm` constants to specify the public key algorithms for the
  keys to be pinned.
  
@@ -112,7 +117,7 @@ FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKPublicKeyHashes;
  key's algorithm from an SSL certificate. To minimize the performance impact of Trustkit,
  only one algorithm should be enabled.
  */
-FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKPublicKeyAlgorithms;
+FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKPublicKeyAlgorithms __deprecated_msg("Starting with TrustKit 1.6.0, key algorithms no longer need to be specified; remove TSKPublicKeyAlgorithms from your configuration.");
 
 
 #pragma mark Domain-Specific Configuration Keys - Optional
@@ -211,55 +216,37 @@ FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKDisableDefaultReportUri;
  */
 FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKExpirationDate;
 
-/**
- An array of strings representing additional trust anchors usable for validating
- the trust chain of pinned certificates that do not end in an OS trust anchor.
- 
- The default behavior of TrustKit is to ignore these trust anchors unless compiled
- in debug mode (pass -DDEBUG=1 to the preprocessor). This behavior can be modified
- by subclassing TSKPinningValidator and overriding +allowsAdditionalTrustAnchors.
- 
- The entries in the array should each be a single PEM-encoded public certificate.
- Standard RFC-7468 PEM format is supported (see https://tools.ietf.org/html/rfc7468#section-2 ).
- Note that the header, footer and any newlines are optional, but aid in readability.
- 
- __SECURITY WARNING:__
- Misuse of this configuration option could potentially render your application
- vulnerable to exploits since it bypasses the normal operating system trust store.
- It is intended for enterprise scenarios where a company might be running their
- own internal production-grade certificate authority for debugging purposes.
- */
-FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKAdditionalTrustAnchors;
 
-
-#pragma mark Supported Public Key Algorithm Keys
+#pragma mark DEPRECATED - Supported Public Key Algorithm Keys
 
 
 /**
+ DEPRECATED since 1.6.0: this configuration key is no longer needed.
+ 
  A public key algorithm supported by TrustKit for generating the SSL pin for a certificate.
  */
-typedef NSString *TSKSupportedAlgorithm;
+typedef NSString *TSKSupportedAlgorithm  __deprecated_msg("Starting with TrustKit 1.6.0, key algorithms no longer need to be specified; remove TSKSupportedAlgorithm from your configuration.");
 
 
 /**
  RSA 2048.
  */
-FOUNDATION_EXPORT const TSKSupportedAlgorithm kTSKAlgorithmRsa2048;
+FOUNDATION_EXPORT const TSKSupportedAlgorithm kTSKAlgorithmRsa2048 __deprecated_msg("Starting with TrustKit 1.6.0, key algorithms no longer need to be specified; remove TSKPublicKeyAlgorithms from your configuration.");
 
 
 /**
  RSA 4096.
  */
-FOUNDATION_EXPORT const TSKSupportedAlgorithm kTSKAlgorithmRsa4096;
+FOUNDATION_EXPORT const TSKSupportedAlgorithm kTSKAlgorithmRsa4096 __deprecated_msg("Starting with TrustKit 1.6.0, key algorithms no longer need to be specified; remove TSKPublicKeyAlgorithms from your configuration.");
 
 
 /**
  ECDSA with secp256r1 curve.
  */
-FOUNDATION_EXPORT const TSKSupportedAlgorithm kTSKAlgorithmEcDsaSecp256r1;
+FOUNDATION_EXPORT const TSKSupportedAlgorithm kTSKAlgorithmEcDsaSecp256r1 __deprecated_msg("Starting with TrustKit 1.6.0, key algorithms no longer need to be specified; remove TSKPublicKeyAlgorithms from your configuration.");
 
 
 /**
  ECDSA with secp384r1 curve.
  */
-FOUNDATION_EXPORT const TSKSupportedAlgorithm kTSKAlgorithmEcDsaSecp384r1;
+FOUNDATION_EXPORT const TSKSupportedAlgorithm kTSKAlgorithmEcDsaSecp384r1 __deprecated_msg("Starting with TrustKit 1.6.0, key algorithms no longer need to be specified; remove TSKPublicKeyAlgorithms from your configuration.");

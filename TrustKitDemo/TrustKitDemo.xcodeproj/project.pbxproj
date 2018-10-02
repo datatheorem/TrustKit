@@ -18,9 +18,7 @@
 		1942311D1EF9658800029B04 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1942311C1EF9658800029B04 /* Assets.xcassets */; };
 		194231271EF9663F00029B04 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 194231261EF9663F00029B04 /* Main.storyboard */; };
 		5A8D1A59570DDDCEA069122F /* Pods_TrustKitDemo_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA439ED79C3CC872A6212881 /* Pods_TrustKitDemo_Swift.framework */; };
-		5C1DE70282AFDA569285EAC8 /* libPods-TrustKitDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ED236495884111AC895A025E /* libPods-TrustKitDemo.a */; };
 		E90DE1D752D726C6764F55E6 /* libPods-TrustKitDemo-ObjC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4594D1F801A2D85113A8D4A7 /* libPods-TrustKitDemo-ObjC.a */; };
-		F563B5060C50A25EA583DA9A /* Pods_TrustKitDemoInSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9F77E736E3DC0DB307912893 /* Pods_TrustKitDemoInSwift.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -37,7 +35,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		03B1C8789B008BB8F706D702 /* Pods-TrustKitDemoInSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrustKitDemoInSwift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TrustKitDemoInSwift/Pods-TrustKitDemoInSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		1942309D1EF7C91A00029B04 /* TrustKitDemo-ObjC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TrustKitDemo-ObjC.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		194230A11EF7C91A00029B04 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		194230A31EF7C91A00029B04 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -53,16 +50,13 @@
 		194231171EF9658800029B04 /* DTViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTViewController.swift; sourceTree = "<group>"; };
 		1942311C1EF9658800029B04 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		194231261EF9663F00029B04 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		229FD9B70132921DEF151965 /* Pods-TrustKitDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrustKitDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TrustKitDemo/Pods-TrustKitDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		30535E1438B5A9A32F97C7F3 /* Pods-TrustKitDemo-ObjC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrustKitDemo-ObjC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TrustKitDemo-ObjC/Pods-TrustKitDemo-ObjC.debug.xcconfig"; sourceTree = "<group>"; };
 		4594D1F801A2D85113A8D4A7 /* libPods-TrustKitDemo-ObjC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TrustKitDemo-ObjC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		756D66A433A7A1257803FD3D /* Pods-TrustKitDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrustKitDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrustKitDemo/Pods-TrustKitDemo.release.xcconfig"; sourceTree = "<group>"; };
 		9F77E736E3DC0DB307912893 /* Pods_TrustKitDemoInSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrustKitDemoInSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FDCACA5A2721D9EF3F32921 /* Pods-TrustKitDemo-Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrustKitDemo-Swift.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrustKitDemo-Swift/Pods-TrustKitDemo-Swift.release.xcconfig"; sourceTree = "<group>"; };
 		BE18B1D51351C2F2618BD2F7 /* Pods-TrustKitDemo-Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrustKitDemo-Swift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TrustKitDemo-Swift/Pods-TrustKitDemo-Swift.debug.xcconfig"; sourceTree = "<group>"; };
 		D2731A50771388BDCC19542B /* Pods-TrustKitDemo-ObjC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrustKitDemo-ObjC.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrustKitDemo-ObjC/Pods-TrustKitDemo-ObjC.release.xcconfig"; sourceTree = "<group>"; };
 		DA439ED79C3CC872A6212881 /* Pods_TrustKitDemo_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrustKitDemo_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EC7EA2F77D7200BFD66DB095 /* Pods-TrustKitDemoInSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrustKitDemoInSwift.release.xcconfig"; path = "Pods/Target Support Files/Pods-TrustKitDemoInSwift/Pods-TrustKitDemoInSwift.release.xcconfig"; sourceTree = "<group>"; };
 		ED236495884111AC895A025E /* libPods-TrustKitDemo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TrustKitDemo.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCB0DD861F117CBE00741410 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCB0DD881F117D4C00741410 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -73,7 +67,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C1DE70282AFDA569285EAC8 /* libPods-TrustKitDemo.a in Frameworks */,
 				E90DE1D752D726C6764F55E6 /* libPods-TrustKitDemo-ObjC.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -82,7 +75,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F563B5060C50A25EA583DA9A /* Pods_TrustKitDemoInSwift.framework in Frameworks */,
 				5A8D1A59570DDDCEA069122F /* Pods_TrustKitDemo_Swift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -147,10 +139,6 @@
 		D967AF3E12D8D8B5235F2256 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				229FD9B70132921DEF151965 /* Pods-TrustKitDemo.debug.xcconfig */,
-				756D66A433A7A1257803FD3D /* Pods-TrustKitDemo.release.xcconfig */,
-				03B1C8789B008BB8F706D702 /* Pods-TrustKitDemoInSwift.debug.xcconfig */,
-				EC7EA2F77D7200BFD66DB095 /* Pods-TrustKitDemoInSwift.release.xcconfig */,
 				30535E1438B5A9A32F97C7F3 /* Pods-TrustKitDemo-ObjC.debug.xcconfig */,
 				D2731A50771388BDCC19542B /* Pods-TrustKitDemo-ObjC.release.xcconfig */,
 				BE18B1D51351C2F2618BD2F7 /* Pods-TrustKitDemo-Swift.debug.xcconfig */,
@@ -193,8 +181,6 @@
 				1942309A1EF7C91A00029B04 /* Frameworks */,
 				1942309B1EF7C91A00029B04 /* Resources */,
 				1942310A1EF8431400029B04 /* Embed Frameworks */,
-				F3519FE17357D96DE9D6DC8F /* [CP] Embed Pods Frameworks */,
-				B0B8C588FDD7DE19BF5403D9 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -214,7 +200,6 @@
 				194231101EF9658800029B04 /* Frameworks */,
 				194231111EF9658800029B04 /* Resources */,
 				BBC1A58CA4B22D26E361B87D /* [CP] Embed Pods Frameworks */,
-				4103682D359FAAA8C92466D1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -232,17 +217,18 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = DataTheorem;
 				TargetAttributes = {
 					1942309C1EF7C91A00029B04 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = B2EWK89Q2H;
+						DevelopmentTeam = D94Z5227S5;
 						ProvisioningStyle = Automatic;
 					};
 					194231121EF9658800029B04 = {
 						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = B2EWK89Q2H;
+						DevelopmentTeam = D94Z5227S5;
+						LastSwiftMigration = 1000;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -289,49 +275,22 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		4103682D359FAAA8C92466D1 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TrustKitDemo-Swift/Pods-TrustKitDemo-Swift-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		8CA07DBE8A9BC5BDBC638FC6 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TrustKitDemo-Swift-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		B0B8C588FDD7DE19BF5403D9 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TrustKitDemo-ObjC/Pods-TrustKitDemo-ObjC-resources.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BBC1A58CA4B22D26E361B87D /* [CP] Embed Pods Frameworks */ = {
@@ -340,28 +299,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-TrustKitDemo-Swift/Pods-TrustKitDemo-Swift-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/TrustKit-framework/TrustKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TrustKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TrustKitDemo-Swift/Pods-TrustKitDemo-Swift-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F3519FE17357D96DE9D6DC8F /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TrustKitDemo-ObjC/Pods-TrustKitDemo-ObjC-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FE484BC2D3DE5A98FB396530 /* [CP] Check Pods Manifest.lock */ = {
@@ -370,13 +317,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TrustKitDemo-ObjC-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -433,15 +383,23 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -464,7 +422,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -481,15 +439,23 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -506,9 +472,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -518,9 +485,8 @@
 			baseConfigurationReference = 30535E1438B5A9A32F97C7F3 /* Pods-TrustKitDemo-ObjC.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = B2EWK89Q2H;
+				DEVELOPMENT_TEAM = D94Z5227S5;
 				INFOPLIST_FILE = "TrustKitDemo-ObjC/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.TrustKitDemo-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -533,9 +499,8 @@
 			baseConfigurationReference = D2731A50771388BDCC19542B /* Pods-TrustKitDemo-ObjC.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = B2EWK89Q2H;
+				DEVELOPMENT_TEAM = D94Z5227S5;
 				INFOPLIST_FILE = "TrustKitDemo-ObjC/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.TrustKitDemo-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -548,15 +513,15 @@
 			baseConfigurationReference = BE18B1D51351C2F2618BD2F7 /* Pods-TrustKitDemo-Swift.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = B2EWK89Q2H;
+				DEVELOPMENT_TEAM = D94Z5227S5;
 				INFOPLIST_FILE = "TrustKitDemo-Swift/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.TrustKitDemo-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -566,14 +531,14 @@
 			baseConfigurationReference = 9FDCACA5A2721D9EF3F32921 /* Pods-TrustKitDemo-Swift.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = B2EWK89Q2H;
+				DEVELOPMENT_TEAM = D94Z5227S5;
 				INFOPLIST_FILE = "TrustKitDemo-Swift/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.TrustKitDemo-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
-				SWIFT_VERSION = 3.0;
+				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

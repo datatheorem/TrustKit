@@ -142,7 +142,6 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
           @{
               @"www.yahoo.com" : @{
                       kTSKEnforcePinning : @YES,
-                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                       kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                               @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=" // Fake key 2
                                               ]}}};
@@ -197,7 +196,6 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
           @{
               @"www.datatheorem.com" : @{
                       kTSKEnforcePinning : @YES,
-                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmEcDsaSecp384r1],
                       kTSKPublicKeyHashes : @[@"58qRu/uxh4gFezqAcERupSkRYBlBAvfcw7mEjGPLnNU=", // CA key
                                               @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                               ]}}};
@@ -255,7 +253,6 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
           @{
               @"self-signed.badssl.com" : @{
                       kTSKEnforcePinning : @NO,  // Do not enforce pinning to only test default SSL validation
-                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                       kTSKPublicKeyHashes : @[@"9SLklscvzMYj8f+52lp5ze/hY0CFHyLSPQzSpYYIBm8=", // Leaf key
                                               @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                               ]}}};
@@ -312,7 +309,6 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
           @{
               @"www.yahoo.com" : @{
                       kTSKEnforcePinning : @NO,  // Do not enforce pinning to only test default SSL validation
-                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                       kTSKPublicKeyHashes : @[@"9SLklscvzMYj8f+52lp5ze/hY0CFHyLSPQzSpYYIBm8=", // Leaf key
                                               @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                               ]}}};

@@ -11,7 +11,11 @@
 
 #import "TSKPinningValidatorCallback.h"
 
+#if __has_feature(modules)
 @import Foundation;
+#else
+#import <Foundation/Foundation.h>
+#endif
 
 // Figure out if a specific domain is pinned and retrieve this domain's configuration key; returns nil if no configuration was found
 NSString * _Nullable getPinningConfigurationKeyForDomain(NSString * _Nonnull hostname , NSDictionary<NSString *, TKSDomainPinningPolicy *> * _Nonnull domainPinningPolicies);

@@ -82,8 +82,7 @@ initializing TrustKit by calling the `initSharedInstanceWithConfiguration:` meth
 pinning policy.
 
 A pinning policy is a dictionary of domain names and pinning configuration keys.
-At a minimum, the configuration should specify a list of SSL pins and the
-corresponding certificates' public key algorithms. For example:
+At a minimum, the configuration should specify a list of SSL pins. For example:
 
 ```objc
 #import <TrustKit/TrustKit.h>
@@ -103,9 +102,6 @@ NSDictionary *trustKitConfig =
                   // Send reports for pin validation failures so we can track them
                   kTSKReportUris: @[@"https://some-reporting-server.com/log_report"],
                   
-                  // The pinned public keys' algorithms
-                  kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
-                  
                   // The pinned public keys' Subject Public Key Info hashes
                   kTSKPublicKeyHashes : @[
                           @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
@@ -116,8 +112,6 @@ NSDictionary *trustKitConfig =
           @"www.datatheorem.com" : @{
                   // Block connections if pinning validation failed
                   kTSKEnforcePinning:@YES,
-                  
-                  kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                   
                   kTSKPublicKeyHashes : @[
                           @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=",
@@ -306,7 +300,7 @@ There are several options available to mitigate this issue.
 
 #### For small development teams
 
-Create a self-signed SSL certificate authority for Charles to use instead of it's
+Create a self-signed SSL certificate authority for Charles to use instead of its
 default randomly generated CA. This team CA cert & private key can be shared among
 teammates and set as the custom root CA in each instance of Charles. The root CA
 certificate must be installed and trusted in each iOS Simulator and Device used
@@ -331,93 +325,3 @@ window (short expiration) and include a personal identifier for the employee tha
 requested the certificate (i.e. employee email in intermediate CA email field). This
 way, if a rogue employee were to issue an intermediate CA certificate and bypass
 protections in TrustKit, you'd be able to trace any attacks back to a person.
-
-#### Leveraging additional trust anchors
-
-Tired of adding the Charles certificate to dozens of iOS Simulators and devices on
-a daily basis?
-
-TrustKit supports custom trust anchors which bypass the OS trust store. This means
-that you can pin your untrusted root debugging certificate from Charles, but not
-specifically add it to the OS trust store on your simulators/devices/computers.
-
-To use custom trust anchors, add the certificate strings to a list under the
-`kTSKAdditionalTrustAnchors` configuration key. Each entry should include only one
-certificate in PEM format, with no password, for example:
-
-```
-    NSDictionary *trustKitConfig =
-    @{
-      // The list of domains we want to pin and their configuration
-      kTSKPinnedDomains: @{
-
-              @"yahoo.com" : @{
-                      // The custom trust anchors to use. If a certificate trust chain
-                      // ends in a certificate in this list, the OS trust store is not
-                      // consulted if compiled with DEBUG=1.
-                      // WARNING: potentially unsafe. See "Debugging with TrustKit" section
-                      kTSKAdditionalTrustAnchors : @[
-                          @"-----BEGIN CERTIFICATE-----\
-                          MIIGQDCCBCigAwIBAgIJAKDVSMZou8YPMA0GCSqGSIb3DQEBCwUAMIGsMQswCQYD\
-                          VQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTESMBAGA1UEBwwJU3Vubnl2YWxl\
-                          MRMwEQYDVQQKDApZYWhvbywgSW5jMRswGQYDVQQLDBJQdWJsaXNoZXIgUHJvZHVj\
-                          dHMxGTAXBgNVBAMMEFBpbmN1c2hpb24gRGVidWcxJzAlBgkqhkiG9w0BCQEWGGFk\
-                          YW1rYXBsYW5AeWFob28taW5jLmNvbTAeFw0xNzA1MzEwMjM4MzFaFw0zNzA1MjYw\
-                          MjM4MzFaMIGsMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTESMBAG\
-                          A1UEBwwJU3Vubnl2YWxlMRMwEQYDVQQKDApZYWhvbywgSW5jMRswGQYDVQQLDBJQ\
-                          dWJsaXNoZXIgUHJvZHVjdHMxGTAXBgNVBAMMEFBpbmN1c2hpb24gRGVidWcxJzAl\
-                          BgkqhkiG9w0BCQEWGGFkYW1rYXBsYW5AeWFob28taW5jLmNvbTCCAiIwDQYJKoZI\
-                          hvcNAQEBBQADggIPADCCAgoCggIBAMeMDecA/otarMBHfMYEfa42KeM0lsx4LVVM\
-                          DhwTJUMBbU55DevPAksPnS1gIvzVGeFQ8VzS+2rCK3Dn96vyjcevRUFJRXh4p7FW\
-                          aNCCya73inKHMBDNyIJaYxZbfww8uafyzpSssJLkx6PR29c/t6VlA2tRBfxdAOWI\
-                          rUggP09IG65yWhvS8If3pNJ579iuKi+RTpN3Nakgktz0Vhp+BDpKpoC9TstlGJQV\
-                          CCwSxxtUIRl9Eq6rymgHOU3f7SS12siQwibRq2Bp7Lgv034MCDQHRwkSCAvFw9c1\
-                          DaxvE7CvAX69RyHbyZg2/TMjRWTleNkc3TnZrMoTdUrQ8CjHVAyp+j08hiK3MuIZ\
-                          8nJfaORTxZkerj9Qe921lmC5CB9d8xYoArdU1JZ8guiRi1ZqXQjE9/IwTS3jvG2k\
-                          W7HpaSLIVOPMbSGXG9XjEoDh3A7lCTQhwvBrITd1fyjvJaudVqcow1t1hySZshmU\
-                          K1PO4FdpUd2w1SnZuE+c60P7Rcm3vXJ0DLEN02Zlogxw8VSoKNCKWGTfqEAcVP8d\
-                          ICkDBvkbB5WTxesQ4KSO2A20qTpsMq8nkyc0aQIKsiOYflw58zT47hbJ2oqHjfFU\
-                          R6jL1qPAbbTX+1y9XwtV6+7bOLMwqeOCg7+rv8Op89Oiv/eOGaMZaA41akwjl4fk\
-                          an8ROv5pAgMBAAGjYzBhMB0GA1UdDgQWBBQef5GmV1R6agSIcUC+lLyIoJFhHDAf\
-                          BgNVHSMEGDAWgBQef5GmV1R6agSIcUC+lLyIoJFhHDAPBgNVHRMBAf8EBTADAQH/\
-                          MA4GA1UdDwEB/wQEAwIBhjANBgkqhkiG9w0BAQsFAAOCAgEAM0dWgQ478nzQLG/x\
-                          BJYk5CB8tYa3DTS5c896OQwig6yX4M1aokx+k8p5Zi9YE8YUXb6v0mcwDk072rUm\
-                          xy68gTLSCrcfPPLAuI6mceg4t7re9HxLDF7/q3t6rdQGIxNJyVqU3e3AStckEjm6\
-                          FaFQEVSaz3yNmcVix4MI5HoQ5q5dKyfDm1MQeW7MZCqDdD5vr40YExjNw2CX+0NQ\
-                          kaJgfZFTo2+D9/uks2IeCUwhX0/nro4uafurshoBmfs82ZXLDHZQJZl3T7fo60aD\
-                          N2aoZLOA1peXVhX/fbSXKfuuA7zHDMhShiqNmCOxpkWR8LaAdP4vnG94cMNnADcY\
-                          xlEUVQXHjzTIDM+D703q54uogr2KLt0BC0u2yI4ePaumPAKRY7bSN4oq8uDPVAwV\
-                          GhzAFrSP7rLsbQi+TQP9HoOpaf7evx32FRXH57NuAqRPDMbUo8sdQhiyzDLbDSzS\
-                          nwMDtog294UGIcXS1ZjLq+4qzwsp18ip3iXrKj0Mf96rUa4vKRcLujtZUUCM0zlP\
-                          5UNY1rDesuHsb2ziDjEXtxh0UsdoDaKa7gXPfNqtumW96v6hh0OkNWCX/x9GUIGe\
-                          WsYtZBTD1+uqy4JHP4gEGewOU93Dhw6TWqqUcP516s67r59WBSxWSQnVA22wJLYc\
-                          WcqquNULAx3uOWA5ZeO0yiOGgqc=\
-                          -----END CERTIFICATE-----"
-                    ];
-
-```
-
-#### Production exploit safeguards (and how to bypass them)
-
-By default TrustKit is hard-coded to ignore the custom trust anchors created using
-the above processes in a production build. TrustKit does this by checking a define
-in `TSKPinningValidator`: custom anchors are ignored unless `#if DEBUG == 1`.
-
-The idea is that `kTSKAdditionalTrustAnchors` configuration is primarily intended for
-use during development. It simplifies your workflow by not requiring the iOS Simulator
-or iOS device to manually add a custom OS trust anchor (or added to Keychain for macOS).
-
-There may be practical applications for supporting untrusted trust anchors in production.
-For example:
-* if your team is skilled in running secure CAs, this would allow very easy
-debugging.
-* Supporting select instituational proxies would be possible with additional trust anchors.
-
-##### Bypassing Custom Trust Anchor Safeguards In Production
-
-- Add DEBUG=1 to "Preprocessor Macros" in the Xcode target build settings for your
-distribution configuration (named "Release" by default). This will probably cause
-issues in your app.
-- Subclass `TSKPinningValidator` and override `+allowsAdditionalTrustAnchors` to return
-`true`.
-

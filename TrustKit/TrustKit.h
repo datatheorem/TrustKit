@@ -9,7 +9,11 @@
  
  */
 
+#if __has_feature(modules)
 @import Foundation;
+#else
+#import <Foundation/Foundation.h>
+#endif
 
 #ifndef _TRUSTKIT_
 #define _TRUSTKIT_
@@ -55,13 +59,11 @@ NS_ASSUME_NONNULL_BEGIN
  | TSKPinnedDomains                             | Dictionary |
  | __ <domain-name-to-pin-as-string>            | Dictionary |
  | ____ TSKPublicKeyHashes                      | Array      |
- | ____ TSKPublicKeyAlgorithms                  | Array      |
  | ____ TSKIncludeSubdomains                    | Boolean    |
  | ____ TSKExcludeSubdomainFromParentPolicy     | Boolean    |
  | ____ TSKEnforcePinning                       | Boolean    |
  | ____ TSKReportUris                           | Array      |
  | ____ TSKDisableDefaultReportUri              | Boolean    |
- | ____ TSKAdditionalTrustAnchors               | Array      |
  ```
  
  When setting the pinning policy programmatically, it has to be supplied to the
@@ -74,7 +76,6 @@ NS_ASSUME_NONNULL_BEGIN
     kTSKPinnedDomains : @{
             @"www.datatheorem.com" : @{
                     kTSKExpirationDate: @"2017-12-01",
-                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                     kTSKPublicKeyHashes : @[
                             @"HXXQgxueCIU5TTLHob/bPbwcKOKw6DkfsTWYHbxbqTY=",
                             @"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8="
@@ -83,7 +84,6 @@ NS_ASSUME_NONNULL_BEGIN
                     kTSKReportUris : @[@"http://report.datatheorem.com/log_report"],
                     },
             @"yahoo.com" : @{
-                    kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa4096],
                     kTSKPublicKeyHashes : @[
                             @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
                             @"rFjc3wG7lTZe43zeYTvPq8k4xdDEutCmIhI5dn4oCeE=",
@@ -104,7 +104,6 @@ NS_ASSUME_NONNULL_BEGIN
             kTSKPinnedDomains: [
                 "yahoo.com": [
                     kTSKExpirationDate: "2017-12-01",
-                    kTSKPublicKeyAlgorithms: [kTSKAlgorithmRsa2048],
                     kTSKPublicKeyHashes: [
                         "JbQbUG5JMJUoI6brnx0x3vZF6jilxsapbXGVfjhN8Fg=",
                         "WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18="
@@ -122,7 +121,7 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark Usage in Singleton Mode
 
 /**
- Initialize the global TrustKit singleton with the supplied pinning policy.
+ See `+initSharedInstanceWithConfiguration:sharedContainerIdentifier:`
  
  @param trustKitConfig A dictionary containing various keys for configuring the SSL pinning policy.
  @exception NSException Thrown when the supplied configuration is invalid or TrustKit has
@@ -131,6 +130,19 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)initSharedInstanceWithConfiguration:(NSDictionary<TSKGlobalConfigurationKey, id> *)trustKitConfig;
 
+/**
+ Initialize the global TrustKit singleton with the supplied pinning policy.
+ 
+ @param trustKitConfig A dictionary containing various keys for configuring the SSL pinning policy.
+ @param sharedContainerIdentifier The container identifier for an app extension. This must be set in order
+ for reports to be sent from an app extension. See
+ https://developer.apple.com/documentation/foundation/nsurlsessionconfiguration/1409450-sharedcontaineridentifier
+ @exception NSException Thrown when the supplied configuration is invalid or TrustKit has
+ already been initialized.
+ 
+ */
++ (void)initSharedInstanceWithConfiguration:(NSDictionary<TSKGlobalConfigurationKey, id> *)trustKitConfig
+                  sharedContainerIdentifier:(nullable NSString *)sharedContainerIdentifier;
 
 /**
  Retrieve the global TrustKit singleton instance. Raises an exception if `+initSharedInstanceWithConfiguration:`
@@ -171,17 +183,27 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark Usage in Multi-Instance Mode
 
 /**
- Initialize a local TrustKit instance with the supplied SSL pinning policy configuration.
- 
- This method is useful in scenarios where the TrustKit singleton cannot be used, for example within
- larger Apps that have split some of their functionality into multiple framework/SDK. Each 
- framework can initialize its own instance of TrustKit and use it for pinning validation independently
- of the App's other components.
+ See `-initWithConfiguration:sharedContainerIdentifier:`
  
  @param trustKitConfig A dictionary containing various keys for configuring the SSL pinning policy.
  */
 - (instancetype)initWithConfiguration:(NSDictionary<TSKGlobalConfigurationKey, id> *)trustKitConfig;
 
+/**
+ Initialize a local TrustKit instance with the supplied SSL pinning policy configuration.
+ 
+ This method is useful in scenarios where the TrustKit singleton cannot be used, for example within
+ larger Apps that have split some of their functionality into multiple framework/SDK. Each
+ framework can initialize its own instance of TrustKit and use it for pinning validation independently
+ of the App's other components.
+ 
+ @param trustKitConfig A dictionary containing various keys for configuring the SSL pinning policy.
+ @param sharedContainerIdentifier The container identifier for an app extension. This must be set in order
+    for reports to be sent from an app extension. See
+    https://developer.apple.com/documentation/foundation/nsurlsessionconfiguration/1409450-sharedcontaineridentifier
+ */
+- (instancetype)initWithConfiguration:(NSDictionary<TSKGlobalConfigurationKey, id> *)trustKitConfig
+            sharedContainerIdentifier:(nullable NSString *)sharedContainerIdentifier;
 
 
 #pragma mark Other Settings

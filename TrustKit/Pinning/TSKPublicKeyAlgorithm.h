@@ -12,7 +12,11 @@
 #ifndef TSKPublicKeyAlgorithm_h
 #define TSKPublicKeyAlgorithm_h
 
+#if __has_feature(modules)
 @import Foundation;
+#else
+#import <Foundation/Foundation.h>
+#endif
 
 // The internal enum we use for public key algorithms; not to be confused with the exported TSKSupportedAlgorithm
 typedef NS_ENUM(NSInteger, TSKPublicKeyAlgorithm)
@@ -24,6 +28,6 @@ typedef NS_ENUM(NSInteger, TSKPublicKeyAlgorithm)
     TSKPublicKeyAlgorithmEcDsaSecp384r1 = 3,
     
     TSKPublicKeyAlgorithmLast = TSKPublicKeyAlgorithmEcDsaSecp384r1
-};
+} __deprecated_msg("Starting with TrustKit 1.6.0, key algorithms no longer need to be specified; remove TSKPublicKeyAlgorithms from your configuration.");
 
 #endif /* TSKPublicKeyAlgorithm_h */

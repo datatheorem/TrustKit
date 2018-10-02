@@ -166,14 +166,12 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
               // Valid pinning configuration
               @"www.cloudflare.com" : @{
                       kTSKEnforcePinning : @YES,
-                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                       kTSKPublicKeyHashes : @[@"WoiWRyIOVNa9ihaBciRSC7XHjliYS9VwUGOIud4PB18=", // CA key
                                               @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                               ]},
               // Invalid pinning configuration
               @"www.facebook.com" : @{
                       kTSKEnforcePinning : @YES,
-                      kTSKPublicKeyAlgorithms : @[kTSKAlgorithmRsa2048],
                       kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                               @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=" // Fake key 2
                                               ]}}};

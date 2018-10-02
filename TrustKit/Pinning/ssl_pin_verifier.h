@@ -9,14 +9,17 @@
  
  */
 
-#import "TSKTrustDecision.h"
+#import "../TSKTrustDecision.h"
+#if __has_feature(modules)
 @import Foundation;
+#else
+#import <Foundation/Foundation.h>
+#endif
 
 @class TSKSPKIHashCache;
 
 // Validate that the server trust contains at least one of the know/expected pins
 TSKTrustEvaluationResult verifyPublicKeyPin(SecTrustRef _Nonnull serverTrust,
                                             NSString * _Nonnull serverHostname,
-                                            NSArray<NSNumber *> * _Nonnull supportedAlgorithms,
                                             NSSet<NSData *> * _Nonnull knownPins,
                                             TSKSPKIHashCache * _Nullable hashCache);
