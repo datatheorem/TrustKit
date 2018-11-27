@@ -83,7 +83,7 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *trustKitArguments)
         
         // Always start with the optional excludeSubDomain setting; if it set, no other TSKDomainConfigurationKey can be set for this domain
         NSNumber *shouldExcludeSubdomain = domainPinningPolicy[kTSKExcludeSubdomainFromParentPolicy];
-        if (shouldExcludeSubdomain)
+        if (shouldExcludeSubdomain != nil && [shouldExcludeSubdomain boolValue])
         {
             // Confirm that no other TSKDomainConfigurationKeys were set for this domain
             if ([[domainPinningPolicy allKeys] count] > 1)
@@ -143,7 +143,7 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *trustKitArguments)
         
         // Extract the optional enforcePinning setting
         NSNumber *shouldEnforcePinning = domainPinningPolicy[kTSKEnforcePinning];
-        if (shouldEnforcePinning)
+        if (shouldEnforcePinning != nil)
         {
             domainFinalConfiguration[kTSKEnforcePinning] = shouldEnforcePinning;
         }
@@ -156,7 +156,7 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *trustKitArguments)
         
         // Extract the optional disableDefaultReportUri setting
         NSNumber *shouldDisableDefaultReportUri = domainPinningPolicy[kTSKDisableDefaultReportUri];
-        if (shouldDisableDefaultReportUri)
+        if (shouldDisableDefaultReportUri != nil)
         {
             domainFinalConfiguration[kTSKDisableDefaultReportUri] = shouldDisableDefaultReportUri;
         }
