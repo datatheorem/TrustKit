@@ -168,8 +168,23 @@ static unsigned int getAsn1HeaderSize(NSString *publicKeyType, NSNumber *publicK
     NSNumber *publicKeysize = CFDictionaryGetValue(publicKeyAttributes, kSecAttrKeySizeInBits);
     CFRelease(publicKeyAttributes);
     
-    char *asn1HeaderBytes = getAsn1HeaderBytes(publicKeyType, publicKeysize);
-    unsigned int asn1HeaderSize = getAsn1HeaderSize(publicKeyType, publicKeysize);
+    char *asn1HeaderBytes;
+    
+    @try {
+        asn1HeaderBytes = getAsn1HeaderBytes(publicKeyType, publicKeysize);
+    } @catch(NSException *exception) {
+        TSKLog(@"Error - could not extract the Asn1 header bytes - %@, %@", exception.name, exception.reason);
+        return nil;
+    }
+    
+    unsigned int asn1HeaderSize;
+    
+    @try {
+        asn1HeaderSize = getAsn1HeaderSize(publicKeyType, publicKeysize);
+    } @catch(NSException *exception) {
+        TSKLog(@"Error - could not extract the Asn1 header size - %@, %@", exception.name, exception.reason);
+        return nil;
+    }
     
     CFRelease(publicKey);
     
