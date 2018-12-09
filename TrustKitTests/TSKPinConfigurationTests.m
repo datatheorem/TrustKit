@@ -66,6 +66,28 @@
     XCTAssertEqualObjects(serverConfigKey, @"unsecured.good.com", @"Did not receive a configuration for pinned subdomain");
 }
 
+- (void)testExplicitNotDisablePinningForSubdomainAdditionalDomainKeys
+{
+    NSDictionary *trustKitConfig;
+    trustKitConfig = parseTrustKitConfiguration(@{kTSKPinnedDomains : @{
+                                                          @"good.com" : @{
+                                                                  kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                                                                                          @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+                                                                                          ],
+                                                                  kTSKIncludeSubdomains: @YES},
+                                                          @"unsecured.good.com": @{
+                                                                  // When using this option, TrustKit should allow/require a policy for the subdomain
+                                                                  kTSKExcludeSubdomainFromParentPolicy: @NO,
+                                                                  kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                                                                                          @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+                                                                                          ],
+                                                                  }
+                                                          }
+                                                  });
+
+    NSString *serverConfigKey = getPinningConfigurationKeyForDomain(@"unsecured.good.com", trustKitConfig[kTSKPinnedDomains]);
+    XCTAssertEqualObjects(serverConfigKey, @"unsecured.good.com", @"Did not receive a configuration for pinned subdomain");
+}
 
 - (void)testDisablePinningForSubdomainWithoutParentAndNoPublicKey
 {
@@ -104,7 +126,6 @@
                                                  }),
                     @"Configuration with kTSKExcludeSubdomainFromParentPolicy must reject additional domain keys");
 }
-
 
 - (void)testNokTSKSwizzleNetworkDelegates
 {
