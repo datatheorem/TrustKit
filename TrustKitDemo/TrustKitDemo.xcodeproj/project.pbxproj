@@ -299,7 +299,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TrustKitDemo-Swift/Pods-TrustKitDemo-Swift-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-TrustKitDemo-Swift/Pods-TrustKitDemo-Swift-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/TrustKit-framework/TrustKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -308,7 +308,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TrustKitDemo-Swift/Pods-TrustKitDemo-Swift-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TrustKitDemo-Swift/Pods-TrustKitDemo-Swift-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FE484BC2D3DE5A98FB396530 /* [CP] Check Pods Manifest.lock */ = {

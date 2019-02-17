@@ -1,5 +1,5 @@
 PODS:
-  - TrustKit (1.6.0)
+  - TrustKit (1.6.1)
 
 DEPENDENCIES:
   - TrustKit (from `../`)
@@ -9,8 +9,8 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  TrustKit: 2fab92287af1faf0f9e09a3a66810dbf01b108f0
+  TrustKit: 0660dd1ce827ae7c8f553f35502a8542e248188f
 
 PODFILE CHECKSUM: f2d8731ad91e4728bb9cb0fe7026ace9680b82c8
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.0
