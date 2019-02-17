@@ -10,10 +10,7 @@ jobs:
     steps:
       - run:
           name: Build and run tests
-          command: fastlane scan
-          environment:
-            SCAN_DEVICE: iPhone 8
-            SCAN_SCHEME: WebTests
+          command: fastlane tests
       - store_test_results:
           path: output/scan
       - store_artifacts:
