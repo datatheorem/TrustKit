@@ -50,7 +50,7 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
                                                     // Replace the delegate with our own so we can intercept and handle authentication challenges
                                                     TSKNSURLConnectionDelegateProxy *swizzledDelegate = [[TSKNSURLConnectionDelegateProxy alloc] initWithTrustKit:trustKit
                                                                                                                                                connectionDelegate:delegate];
-                                                     connection = RSSWCallOriginal(request, swizzledDelegate);
+                                                    connection = RSSWCallOriginal(request, swizzledDelegate);
                                                 }
                                                 return connection;
                                             }), RSSwizzleModeAlways, NULL);
