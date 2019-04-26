@@ -196,7 +196,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
           @{
               @"www.datatheorem.com" : @{
                       kTSKEnforcePinning : @YES,
-                      kTSKPublicKeyHashes : @[@"58qRu/uxh4gFezqAcERupSkRYBlBAvfcw7mEjGPLnNU=", // CA key
+                      kTSKPublicKeyHashes : @[@"YLh1dUR9y6Kja30RrAn7JKnbQG/uEtLMkBgFF2Fuihg=", // CA key for Let's Encrypt Authority X3 (cert valid until 17 Mar 2021)
                                               @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                               ]}}};
     
