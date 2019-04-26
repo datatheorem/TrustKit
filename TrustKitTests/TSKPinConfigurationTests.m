@@ -326,6 +326,28 @@
 }
 
 
+- (void)testIncludeSubdomainsEnabledAndOverlap
+{
+    NSDictionary *trustKitConfig;
+    trustKitConfig = parseTrustKitConfiguration(@{kTSKPinnedDomains :
+                                                      @{@"good.com" : @{
+                                                                kTSKIncludeSubdomains : @YES,
+                                                                kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                                                                                        @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
+                                                                                        ]},
+                                                        @"www.good.com": @{
+                                                                kTSKIncludeSubdomains : @YES,
+                                                                kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=",
+                                                                                        @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
+                                                                                        ]}}});
+
+    // Ensure the configuration of www.good.com with a longer match takes precedence over the more general config for good.com
+    NSString *serverConfigKey = getPinningConfigurationKeyForDomain(@"foo.www.good.com", trustKitConfig[kTSKPinnedDomains]);
+    XCTAssertEqualObjects(serverConfigKey, @"www.good.com",
+                          @"Overlapping configurations with IncludeSubdomains did not use the most specific (longest) matching configuration");
+}
+
+
 - (void)testNoPinnedDomains
 {
     XCTAssertThrows(parseTrustKitConfiguration(@{kTSKSwizzleNetworkDelegates : @YES}),
