@@ -83,7 +83,8 @@ static BOOL blockIsCompatibleWithMethodType(id block, const char *methodType){
         char *quotePtr = strchr(blockType+2, '"');
         if (NULL != quotePtr) {
             ++quotePtr;
-            char filteredType[strlen(quotePtr) + 2];
+            NSCAssert(strlen(quotePtr) + 2 < 1024, @"Method signatures over 1KB are not supported");
+            char filteredType[1024];
             memset(filteredType, 0, sizeof(filteredType));
             *filteredType = '@';
             strncpy(filteredType + 1, quotePtr, sizeof(filteredType) - 2);
