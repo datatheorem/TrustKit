@@ -83,7 +83,12 @@ static BOOL blockIsCompatibleWithMethodType(id block, const char *methodType){
         char *quotePtr = strchr(blockType+2, '"');
         if (NULL != quotePtr) {
             ++quotePtr;
-            char filteredType[strlen(quotePtr) + 2];
+            size_t filterTypeLen = strlen(quotePtr) + 2;
+            if (strlen(quotePtr) > filterTypeLen) { // integer overflow check
+                NSCAssert(false, @"Method signature is too long to swizzle");
+                return NO;
+            }
+            char filteredType[filterTypeLen];
             memset(filteredType, 0, sizeof(filteredType));
             *filteredType = '@';
             strncpy(filteredType + 1, quotePtr, sizeof(filteredType) - 2);
