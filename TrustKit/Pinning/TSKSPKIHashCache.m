@@ -194,7 +194,13 @@ static unsigned int getAsn1HeaderSize(NSString *publicKeyType, NSNumber *publicK
     
     // Update the cache on the filesystem
     if (self.spkiCacheFilename.length > 0) {
-        NSData *serializedSpkiCache = [NSKeyedArchiver archivedDataWithRootObject:_spkiCache];
+        NSData *serializedSpkiCache = nil;
+        if (@available(iOS 11.0, *)) { // prefer NSSecureCoding API when available
+            serializedSpkiCache = [NSKeyedArchiver archivedDataWithRootObject:_spkiCache requiringSecureCoding:YES error:nil];
+        } else {
+            serializedSpkiCache = [NSKeyedArchiver archivedDataWithRootObject:_spkiCache];
+        }
+
         if ([serializedSpkiCache writeToURL:[self SPKICachePath] atomically:YES] == NO)
         {
             NSAssert(false, @"Failed to write cache");
@@ -210,7 +216,11 @@ static unsigned int getAsn1HeaderSize(NSString *publicKeyType, NSNumber *publicK
     NSMutableDictionary *spkiCache = nil;
     NSData *serializedSpkiCache = [NSData dataWithContentsOfURL:[self SPKICachePath]];
     if (serializedSpkiCache) {
-        spkiCache = [NSKeyedUnarchiver unarchiveObjectWithData:serializedSpkiCache];
+        if (@available(iOS 11.0, *)) { // prefer NSSecureCoding API when available
+            spkiCache = [NSKeyedUnarchiver unarchivedObjectOfClass:[SPKICacheDictionnary class] fromData:serializedSpkiCache error:nil];
+        } else {
+            spkiCache = [NSKeyedUnarchiver unarchiveObjectWithData:serializedSpkiCache];
+        }
     }
     return spkiCache;
 }
