@@ -57,7 +57,6 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
 @implementation TSKPinningValidatorTests
 {
     SecCertificateRef _rootCertificate;
-    SecCertificateRef _intermediateCertificate;
     SecCertificateRef _selfSignedCertificate;
     SecCertificateRef _leafCertificate;
     SecCertificateRef _globalsignRootCertificate;
@@ -72,7 +71,6 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     
     // Create our certificate objects
     _rootCertificate = [TSKCertificateUtils createCertificateFromDer:@"GoodRootCA"];
-    _intermediateCertificate = [TSKCertificateUtils createCertificateFromDer:@"GoodIntermediateCA"];
     _leafCertificate = [TSKCertificateUtils createCertificateFromDer:@"www.good.com"];
     _selfSignedCertificate = [TSKCertificateUtils createCertificateFromDer:@"www.good.com.selfsigned"];
     _globalsignRootCertificate = [TSKCertificateUtils createCertificateFromDer:@"GlobalSignRootCA"];
@@ -85,13 +83,11 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
 - (void)tearDown
 {
     CFRelease(_rootCertificate);
-    CFRelease(_intermediateCertificate);
     CFRelease(_selfSignedCertificate);
     CFRelease(_leafCertificate);
     CFRelease(_globalsignRootCertificate);
     
     _rootCertificate = nil;
-    _intermediateCertificate = nil;
     _leafCertificate = nil;
     _selfSignedCertificate = nil;
     _globalsignRootCertificate = nil;
@@ -108,7 +104,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
 - (void)testVerifyAgainstAnyPublicKey
 {
     // Create a valid server trust
-    SecCertificateRef certChainArray[2] = {_leafCertificate, _intermediateCertificate};
+    SecCertificateRef certChainArray[1] = {_leafCertificate};
     SecCertificateRef trustStoreArray[1] = {_rootCertificate};
     SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
                                                              arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
@@ -119,9 +115,8 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
                                      kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
-                                                   kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=", // Server key
-                                                                           @"khKI6ae4micEvX74MB/BZ4u15WCWGXPD6Gjg6iIRVeE=", // Intermediate key
-                                                                           @"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=" // CA key
+                                                   kTSKPublicKeyHashes : @[@"TwyNzy19zZi7cKfPsucs1E+h8ODOCPMrT8681sFWJvw=", // Leaf key
+                                                                           @"S5z3Fz5ZfZAGJOBZjK6TYBquyLLKO+BndKXBlL3nPjo=" // CA key
                                                                            ]}}};
     
     // Ensure the SPKI cache was on the filesystem is empty
@@ -173,80 +168,11 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
 }
 
 
-// Pin only to the Intermediate CA certificate public key and ensure it succeeds
-- (void)testVerifyAgainstIntermediateCAPublicKey
-{
-    // Create a valid server trust
-    SecCertificateRef certChainArray[2] = {_leafCertificate, _intermediateCertificate};
-    SecCertificateRef trustStoreArray[1] = {_rootCertificate};
-    SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
-                                                             arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
-                                                      anchorCertificates:(const void **)trustStoreArray
-                                                             arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
-    
-    // Create a configuration
-    NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
-                                     kTSKPinnedDomains :
-                                         @{@"www.good.com" : @{
-                                                   kTSKPublicKeyHashes : @[@"khKI6ae4micEvX74MB/BZ4u15WCWGXPD6Gjg6iIRVeE=", // Intermediate Key
-                                                                           @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
-                                                                           ]}}};
-    
-    // Ensure the SPKI cache was on the filesystem is empty
-    NSDictionary *fsCache = [spkiCache loadSPKICacheFromFileSystem];
-    XCTAssertEqual([fsCache count], 0UL, @"SPKI cache for RSA 4096 must be empty before the test");
-    
-    // First test the verifyPublicKeyPin() function
-    NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
-    
-    TSKTrustEvaluationResult verificationResult = TSKTrustEvaluationFailedNoMatchingPin;
-    verificationResult = verifyPublicKeyPin(trust,
-                                            @"www.good.com",
-                                            parsedTrustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKPublicKeyHashes],
-                                            spkiCache);
-    
-    
-    XCTAssertEqual(verificationResult, TSKTrustEvaluationSuccess,
-                   @"Validation must pass against valid public key pins");
-    
-    
-    // Then test TSKPinningValidator
-    XCTestExpectation *expectation = [self expectationWithDescription:@"ValidationResultHandler"];
-    TSKPinningValidator *validator;
-    validator = [[TSKPinningValidator alloc] initWithDomainPinningPolicies:parsedTrustKitConfig[kTSKPinnedDomains]
-                                                              hashCache:spkiCache
-                                          ignorePinsForUserTrustAnchors:NO
-                                                validationCallbackQueue:dispatch_get_main_queue()
-                                                     validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {
-                                                    XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldAllowConnection);
-                                                    
-                                                    XCTAssertEqual(result.evaluationResult, TSKTrustEvaluationSuccess);
-                                                    
-                                                    XCTAssertEqualObjects(result.certificateChain, convertTrustToPemArray(trust));
-                                                    
-                                                    XCTAssertEqualObjects(notedHostname, @"www.good.com");
-                                                    
-                                                    [expectation fulfill];
-                                                }];
-    
-    TSKTrustDecision result = [validator evaluateTrust:trust forHostname:@"www.good.com"];
-    XCTAssertEqual(result, TSKTrustDecisionShouldAllowConnection);
-    
-    [self waitForExpectationsWithTimeout:2.0 handler:nil];
-    
-    // Ensure the SPKI cache was persisted to the filesystem
-    fsCache = [spkiCache loadSPKICacheFromFileSystem];
-    XCTAssertEqual([fsCache count], 2UL, @"SPKI cache for RSA 4096 must be persisted to the file system");
-    
-    CFRelease(trust);
-}
-
-
 // Pin only to the CA certificate public key and ensure it succeeds
 - (void)testVerifyAgainstCAPublicKey
 {
     // Create a valid server trust
-    SecCertificateRef certChainArray[2] = {_leafCertificate, _intermediateCertificate};
+    SecCertificateRef certChainArray[1] = {_leafCertificate};
     SecCertificateRef trustStoreArray[1] = {_rootCertificate};
     SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
                                                              arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
@@ -257,7 +183,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
                                      kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
-                                                   kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA Key
+                                                   kTSKPublicKeyHashes : @[@"S5z3Fz5ZfZAGJOBZjK6TYBquyLLKO+BndKXBlL3nPjo=", // CA Key
                                                                            @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                                                            ]}}};
     
@@ -307,7 +233,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
 - (void)testVerifyAgainstLeafPublicKey
 {
     // Create a valid server trust
-    SecCertificateRef certChainArray[2] = {_leafCertificate, _intermediateCertificate};
+    SecCertificateRef certChainArray[1] = {_leafCertificate};
     SecCertificateRef trustStoreArray[1] = {_rootCertificate};
     SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
                                                              arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
@@ -318,7 +244,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
                                      kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
-                                                   kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=", // Leaf Key
+                                                   kTSKPublicKeyHashes : @[@"TwyNzy19zZi7cKfPsucs1E+h8ODOCPMrT8681sFWJvw=", // Leaf Key
                                                                            @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
                                                                            ]}}};
     
@@ -368,7 +294,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
 - (void)testVerifyAgainstBadPublicKey
 {
     // Create a valid server trust
-    SecCertificateRef certChainArray[2] = {_leafCertificate, _intermediateCertificate};
+    SecCertificateRef certChainArray[1] = {_leafCertificate};
     SecCertificateRef trustStoreArray[1] = {_rootCertificate};
     SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
                                                              arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
@@ -431,7 +357,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
 - (void)testVerifyAgainstBadPublicKeyPinsExpired
 {
     // Create a valid server trust
-    SecCertificateRef certChainArray[2] = {_leafCertificate, _intermediateCertificate};
+    SecCertificateRef certChainArray[1] = {_leafCertificate};
     SecCertificateRef trustStoreArray[1] = {_rootCertificate};
     SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
                                                              arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
@@ -472,7 +398,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
 - (void)testVerifyAgainstBadPublicKeyPinningNotEnforced
 {
     // Create a valid server trust
-    SecCertificateRef certChainArray[2] = {_leafCertificate, _intermediateCertificate};
+    SecCertificateRef certChainArray[1] = {_leafCertificate};
     SecCertificateRef trustStoreArray[1] = {_rootCertificate};
     SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
                                                              arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
@@ -533,7 +459,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
 - (void)testVerifyAgainstLeafPublicKeyAndBadPublicKey
 {
     // Create a valid server trust
-    SecCertificateRef certChainArray[2] = {_leafCertificate, _intermediateCertificate};
+    SecCertificateRef certChainArray[1] = {_leafCertificate};
     SecCertificateRef trustStoreArray[1] = {_rootCertificate};
     SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
                                                              arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
@@ -545,7 +471,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
                                      kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
                                                    kTSKPublicKeyHashes : @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Bad key
-                                                                           @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY="  // Leaf key
+                                                                           @"TwyNzy19zZi7cKfPsucs1E+h8ODOCPMrT8681sFWJvw="  // Leaf key
                                                                            ]}}};
     
     // First test the verifyPublicKeyPin() function
@@ -595,7 +521,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
 - (void)testVerifyAgainstCaPublicKeyAndBadCertificateChain
 {
     // The leaf certificate is self-signed
-    SecCertificateRef certChainArray[2] = {_selfSignedCertificate, _intermediateCertificate};
+    SecCertificateRef certChainArray[1] = {_selfSignedCertificate};
     SecCertificateRef trustStoreArray[1] = {_rootCertificate};
     SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
                                                              arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
@@ -659,7 +585,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
 - (void)testVerifyAgainstCaPublicKeyAndBadHostname
 {
     // The certificate chain is valid for www.good.com but we are connecting to www.bad.com
-    SecCertificateRef certChainArray[2] = {_leafCertificate, _intermediateCertificate};
+    SecCertificateRef certChainArray[1] = {_leafCertificate};
     SecCertificateRef trustStoreArray[1] = {_rootCertificate};
     SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
                                                              arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
@@ -722,7 +648,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
 - (void)testVerifyAgainstInjectedCaPublicKey
 {
     // The certificate chain is valid for www.good.com but does not contain the pinned CA certificate, which we inject as an additional certificate
-    SecCertificateRef certChainArray[3] = {_leafCertificate, _globalsignRootCertificate, _intermediateCertificate};
+    SecCertificateRef certChainArray[2] = {_leafCertificate, _globalsignRootCertificate};
     SecCertificateRef trustStoreArray[1] = {_rootCertificate};
     SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
                                                              arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
@@ -784,7 +710,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
 - (void)testDomainNotPinned
 {
     // The certificate chain is valid for www.good.com but we are connecting to www.nonpinned.com
-    SecCertificateRef certChainArray[2] = {_leafCertificate, _intermediateCertificate};
+    SecCertificateRef certChainArray[1] = {_leafCertificate};
     SecCertificateRef trustStoreArray[1] = {_rootCertificate};
     SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
                                                              arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
@@ -826,7 +752,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
 -(void) testHandleChallengeCompletionHandlerDomainNotPinned
 {
     // The certificate chain is valid for www.good.com but we are connecting to www.nonpinned.com
-    SecCertificateRef certChainArray[2] = {_leafCertificate, _intermediateCertificate};
+    SecCertificateRef certChainArray[1] = {_leafCertificate};
     SecCertificateRef trustStoreArray[1] = {_rootCertificate};
     SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
                                                              arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
@@ -874,7 +800,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
 
 -(void) testHandleChallengeCompletionHandlerPinningFailed
 {
-    SecCertificateRef certChainArray[2] = {_leafCertificate, _intermediateCertificate};
+    SecCertificateRef certChainArray[1] = {_leafCertificate};
     SecCertificateRef trustStoreArray[1] = {_rootCertificate};
     SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
                                                              arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
@@ -933,7 +859,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
 
 -(void) testHandleChallengeCompletionHandlerPinningSuccessful
 {
-    SecCertificateRef certChainArray[2] = {_leafCertificate, _intermediateCertificate};
+    SecCertificateRef certChainArray[1] = {_leafCertificate};
     SecCertificateRef trustStoreArray[1] = {_rootCertificate};
     SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
                                                              arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
@@ -945,7 +871,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
                                      kTSKPinnedDomains :
                                          @{@"www.good.com" : @{
-                                                   kTSKPublicKeyHashes : @[@"iQMk4onrJJz/nwW1wCUR0Ycsh3omhbM+PqMEwNof/K0=", // CA Key
+                                                   kTSKPublicKeyHashes : @[@"TwyNzy19zZi7cKfPsucs1E+h8ODOCPMrT8681sFWJvw=", // CA Key
                                                                            @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=", // Fake key
                                                                            ]}}};
     
@@ -999,7 +925,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
 
 -(void) testHandleChallengeCompletionHandlerNotServerTrustAuthenticationMethod
 {
-    SecCertificateRef certChainArray[2] = {_leafCertificate, _intermediateCertificate};
+    SecCertificateRef certChainArray[1] = {_leafCertificate};
     SecCertificateRef trustStoreArray[1] = {_rootCertificate};
     SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
                                                              arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
@@ -1046,7 +972,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
 - (void)testExcludedSubdomain
 {
     // Create a valid server trust
-    SecCertificateRef certChainArray[2] = {_leafCertificate, _intermediateCertificate};
+    SecCertificateRef certChainArray[1] = {_leafCertificate};
     SecCertificateRef trustStoreArray[1] = {_rootCertificate};
     SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
                                                              arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])

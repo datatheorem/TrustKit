@@ -155,9 +155,6 @@
 		8CBA05D11E28AA7B0045D8B3 /* www.cloudflare.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05D01E28AA7B0045D8B3 /* www.cloudflare.com.der */; };
 		8CBA05D21E28AA7B0045D8B3 /* www.cloudflare.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05D01E28AA7B0045D8B3 /* www.cloudflare.com.der */; };
 		8CBA05D31E28AA7B0045D8B3 /* www.cloudflare.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05D01E28AA7B0045D8B3 /* www.cloudflare.com.der */; };
-		8CBA05D81E28AAA40045D8B3 /* GoodIntermediateCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05D41E28AAA40045D8B3 /* GoodIntermediateCA.der */; };
-		8CBA05D91E28AAA40045D8B3 /* GoodIntermediateCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05D41E28AAA40045D8B3 /* GoodIntermediateCA.der */; };
-		8CBA05DA1E28AAA40045D8B3 /* GoodIntermediateCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05D41E28AAA40045D8B3 /* GoodIntermediateCA.der */; };
 		8CBA05DB1E28AAA40045D8B3 /* GoodRootCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05D51E28AAA40045D8B3 /* GoodRootCA.der */; };
 		8CBA05DC1E28AAA40045D8B3 /* GoodRootCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05D51E28AAA40045D8B3 /* GoodRootCA.der */; };
 		8CBA05DD1E28AAA40045D8B3 /* GoodRootCA.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05D51E28AAA40045D8B3 /* GoodRootCA.der */; };
@@ -396,7 +393,6 @@
 		8CBA05C51E28AA6C0045D8B3 /* GlobalSignRootCA.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = GlobalSignRootCA.der; path = Certificates/RSA_2048/GlobalSignRootCA.der; sourceTree = "<group>"; };
 		8CBA05C61E28AA6C0045D8B3 /* www.globalsign.com.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = www.globalsign.com.der; path = Certificates/RSA_2048/www.globalsign.com.der; sourceTree = "<group>"; };
 		8CBA05D01E28AA7B0045D8B3 /* www.cloudflare.com.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = www.cloudflare.com.der; path = Certificates/ECDSA_sec256r1/www.cloudflare.com.der; sourceTree = "<group>"; };
-		8CBA05D41E28AAA40045D8B3 /* GoodIntermediateCA.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = GoodIntermediateCA.der; path = Certificates/RSA_4096/GoodIntermediateCA.der; sourceTree = "<group>"; };
 		8CBA05D51E28AAA40045D8B3 /* GoodRootCA.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = GoodRootCA.der; path = Certificates/RSA_4096/GoodRootCA.der; sourceTree = "<group>"; };
 		8CBA05D61E28AAA40045D8B3 /* www.good.com.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = www.good.com.der; path = Certificates/RSA_4096/www.good.com.der; sourceTree = "<group>"; };
 		8CBA05D71E28AAA40045D8B3 /* www.good.com.selfsigned.der */ = {isa = PBXFileReference; lastKnownFileType = file; name = www.good.com.selfsigned.der; path = Certificates/RSA_4096/www.good.com.selfsigned.der; sourceTree = "<group>"; };
@@ -706,7 +702,6 @@
 		8CC78B1B1B1B552100523A25 /* RSA 4096 */ = {
 			isa = PBXGroup;
 			children = (
-				8CBA05D41E28AAA40045D8B3 /* GoodIntermediateCA.der */,
 				8CBA05D51E28AAA40045D8B3 /* GoodRootCA.der */,
 				8CBA05D61E28AAA40045D8B3 /* www.good.com.der */,
 				8CBA05D71E28AAA40045D8B3 /* www.good.com.selfsigned.der */,
@@ -1147,6 +1142,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 8C84803D1A896EE30017C155;
@@ -1178,7 +1174,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CBA05D81E28AAA40045D8B3 /* GoodIntermediateCA.der in Resources */,
 				FCC1DD091EECD19E00AB3D81 /* anchor-fake.yahoo.com.cert.pem in Resources */,
 				8CBA05E51E294CC30045D8B3 /* GeoTrust_Primary_CA_G2_ECC.der in Resources */,
 				FCC1DD0A1EECD19E00AB3D81 /* anchor-intermediate.cert.pem in Resources */,
@@ -1204,7 +1199,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CBA05DA1E28AAA40045D8B3 /* GoodIntermediateCA.der in Resources */,
 				FC049B3E1EECD1B100FDC5F4 /* anchor-fake.yahoo.com.cert.pem in Resources */,
 				8CBA05E71E294CC30045D8B3 /* GeoTrust_Primary_CA_G2_ECC.der in Resources */,
 				FC049B3F1EECD1B100FDC5F4 /* anchor-intermediate.cert.pem in Resources */,
@@ -1230,7 +1224,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CBA05D91E28AAA40045D8B3 /* GoodIntermediateCA.der in Resources */,
 				FC049B3B1EECD1B000FDC5F4 /* anchor-fake.yahoo.com.cert.pem in Resources */,
 				8CBA05E61E294CC30045D8B3 /* GeoTrust_Primary_CA_G2_ECC.der in Resources */,
 				FC049B3C1EECD1B000FDC5F4 /* anchor-intermediate.cert.pem in Resources */,
