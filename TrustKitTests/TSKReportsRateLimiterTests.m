@@ -33,10 +33,9 @@
     _rateLimiter = [TSKReportsRateLimiter new];
     
     SecCertificateRef rootCertificate = [TSKCertificateUtils createCertificateFromDer:@"GoodRootCA"];
-    SecCertificateRef intermediateCertificate = [TSKCertificateUtils createCertificateFromDer:@"GoodIntermediateCA"];
     SecCertificateRef leafCertificate = [TSKCertificateUtils createCertificateFromDer:@"www.good.com"];
     
-    SecCertificateRef certChainArray[2] = { leafCertificate, intermediateCertificate };
+    SecCertificateRef certChainArray[1] = { leafCertificate };
     SecCertificateRef trustStoreArray[1] = { rootCertificate };
     
     _testTrust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray

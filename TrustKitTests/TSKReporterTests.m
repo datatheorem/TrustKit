@@ -47,7 +47,6 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
     //TSKPinFailureReport *_testReporter;
     SecTrustRef _testTrust;
     SecCertificateRef _rootCertificate;
-    SecCertificateRef _intermediateCertificate;
     SecCertificateRef _leafCertificate;
     NSArray<NSString *> *_testCertificateChain;
 }
@@ -57,10 +56,9 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
     [super setUp];
     
     _rootCertificate = [TSKCertificateUtils createCertificateFromDer:@"GoodRootCA"];
-    _intermediateCertificate = [TSKCertificateUtils createCertificateFromDer:@"GoodIntermediateCA"];
     _leafCertificate = [TSKCertificateUtils createCertificateFromDer:@"www.good.com"];
     
-    SecCertificateRef certChainArray[2] = { _leafCertificate, _intermediateCertificate };
+    SecCertificateRef certChainArray[1] = { _leafCertificate };
     SecCertificateRef trustStoreArray[1] = { _rootCertificate };
     
     _testTrust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
@@ -73,7 +71,6 @@ static NSString * const kTSKDefaultReportUri = @"https://overmind.datatheorem.co
 - (void)tearDown
 {
     CFRelease(_rootCertificate);
-    CFRelease(_intermediateCertificate);
     CFRelease(_leafCertificate);
     CFRelease(_testTrust);
     _trustKit = nil;
