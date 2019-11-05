@@ -217,7 +217,11 @@ static unsigned int getAsn1HeaderSize(NSString *publicKeyType, NSNumber *publicK
     NSData *serializedSpkiCache = [NSData dataWithContentsOfURL:[self SPKICachePath]];
     if (serializedSpkiCache) {
         if (@available(iOS 11.0, *)) { // prefer NSSecureCoding API when available
-            spkiCache = [NSKeyedUnarchiver unarchivedObjectOfClass:[SPKICacheDictionnary class] fromData:serializedSpkiCache error:nil];
+            NSError *decodingError = nil;
+            spkiCache = [NSKeyedUnarchiver unarchivedObjectOfClass:[SPKICacheDictionnary class] fromData:serializedSpkiCache error:&decodingError];
+            if (decodingError) {
+                TSKLog(@"Could not retrieve SPKI cache from the filesystem: %@", decodingError);
+            }
         } else {
             spkiCache = [NSKeyedUnarchiver unarchiveObjectWithData:serializedSpkiCache];
         }
