@@ -1139,11 +1139,11 @@
 			};
 			buildConfigurationList = 8C8480411A896EE30017C155 /* Build configuration list for PBXProject "TrustKit" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
+				Base,
 			);
 			mainGroup = 8C84803D1A896EE30017C155;
 			productRefGroup = 8C8480481A896EE30017C155 /* Products */;
