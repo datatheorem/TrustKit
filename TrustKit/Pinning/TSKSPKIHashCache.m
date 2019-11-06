@@ -195,7 +195,7 @@ static unsigned int getAsn1HeaderSize(NSString *publicKeyType, NSNumber *publicK
     // Update the cache on the filesystem
     if (self.spkiCacheFilename.length > 0) {
         NSData *serializedSpkiCache = nil;
-        if (@available(iOS 11.0, *)) { // prefer NSSecureCoding API when available
+        if (@available(iOS 11.0, tvOS 11.0, watchOS 4.0, macOS 10.13, *)) { // prefer NSSecureCoding API when available
             serializedSpkiCache = [NSKeyedArchiver archivedDataWithRootObject:_spkiCache requiringSecureCoding:YES error:nil];
         } else {
             serializedSpkiCache = [NSKeyedArchiver archivedDataWithRootObject:_spkiCache];
@@ -216,7 +216,7 @@ static unsigned int getAsn1HeaderSize(NSString *publicKeyType, NSNumber *publicK
     NSMutableDictionary *spkiCache = nil;
     NSData *serializedSpkiCache = [NSData dataWithContentsOfURL:[self SPKICachePath]];
     if (serializedSpkiCache) {
-        if (@available(iOS 11.0, *)) { // prefer NSSecureCoding API when available
+        if (@available(iOS 11.0, tvOS 11.0, watchOS 4.0, macOS 10.13, *)) { // prefer NSSecureCoding API when available
             NSError *decodingError = nil;
             spkiCache = [NSKeyedUnarchiver unarchivedObjectOfClasses:[NSSet setWithArray:@[[SPKICacheDictionnary class], [NSData class]]] fromData:serializedSpkiCache error:&decodingError];
             if (decodingError) {
