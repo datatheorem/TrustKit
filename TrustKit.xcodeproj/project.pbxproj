@@ -239,10 +239,10 @@
 		A14B72321F264A7600D1A6E5 /* TSKTrustDecision.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1A08FD1E579F630055B12C /* TSKTrustDecision.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A14B72331F264A7900D1A6E5 /* TSKTrustDecision.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1A08FD1E579F630055B12C /* TSKTrustDecision.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A14B72341F264A7C00D1A6E5 /* TSKTrustDecision.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1A08FD1E579F630055B12C /* TSKTrustDecision.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D0D9926523980A94000A57C2 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = D0D9926423980A94000A57C2 /* TrustKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D0D9926623980A94000A57C2 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = D0D9926423980A94000A57C2 /* TrustKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D0D9926723980A94000A57C2 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = D0D9926423980A94000A57C2 /* TrustKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D0D9926823980A94000A57C2 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = D0D9926423980A94000A57C2 /* TrustKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D0D9927523980F77000A57C2 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = D0D9927423980F77000A57C2 /* TrustKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D0D9927623980F77000A57C2 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = D0D9927423980F77000A57C2 /* TrustKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D0D9927723980F77000A57C2 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = D0D9927423980F77000A57C2 /* TrustKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D0D9927823980F77000A57C2 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = D0D9927423980F77000A57C2 /* TrustKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FC049B3A1EECD1B000FDC5F4 /* anchor-ca.cert.pem in Resources */ = {isa = PBXBuildFile; fileRef = FCC1DD051EECD19E00AB3D81 /* anchor-ca.cert.pem */; };
 		FC049B3B1EECD1B000FDC5F4 /* anchor-fake.yahoo.com.cert.pem in Resources */ = {isa = PBXBuildFile; fileRef = FCC1DD061EECD19E00AB3D81 /* anchor-fake.yahoo.com.cert.pem */; };
 		FC049B3C1EECD1B000FDC5F4 /* anchor-intermediate.cert.pem in Resources */ = {isa = PBXBuildFile; fileRef = FCC1DD071EECD19E00AB3D81 /* anchor-intermediate.cert.pem */; };
@@ -420,7 +420,7 @@
 		8CF27A931F01A0B8009369B0 /* TSKEndToEndNSURLSessionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKEndToEndNSURLSessionTests.m; sourceTree = "<group>"; };
 		8CF27A971F01B341009369B0 /* TSKSwizzlingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKSwizzlingTests.m; sourceTree = "<group>"; };
 		8CF27AA11F01BB7B009369B0 /* TSKLoggerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKLoggerTests.m; sourceTree = "<group>"; };
-		D0D9926423980A94000A57C2 /* TrustKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrustKit.h; sourceTree = "<group>"; };
+		D0D9927423980F77000A57C2 /* TrustKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrustKit.h; sourceTree = "<group>"; };
 		FC1A08FD1E579F630055B12C /* TSKTrustDecision.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSKTrustDecision.h; sourceTree = "<group>"; };
 		FC1A08FE1E57A4BB0055B12C /* TSKPinningValidatorResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSKPinningValidatorResult.h; sourceTree = "<group>"; };
 		FC1A08FF1E57A4BB0055B12C /* TSKPinningValidatorResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKPinningValidatorResult.m; sourceTree = "<group>"; };
@@ -585,7 +585,7 @@
 		8C8480491A896EE30017C155 /* TrustKit */ = {
 			isa = PBXGroup;
 			children = (
-				D0D9926323980A94000A57C2 /* include */,
+				D0D9927323980F77000A57C2 /* include */,
 				FC23F6721EE72F2A00397646 /* Project Metadata */,
 				8CE919281AEA0F61002B29AE /* Dependencies */,
 				8CA6CC571BAF60DA00BDA419 /* Swizzling */,
@@ -772,13 +772,12 @@
 			name = Dependencies;
 			sourceTree = "<group>";
 		};
-		D0D9926323980A94000A57C2 /* include */ = {
+		D0D9927323980F77000A57C2 /* include */ = {
 			isa = PBXGroup;
 			children = (
-				D0D9926423980A94000A57C2 /* TrustKit.h */,
+				D0D9927423980F77000A57C2 /* TrustKit.h */,
 			);
-			name = include;
-			path = ../../../../Downloads/TrustKit/Sources/TrustKit/include;
+			path = include;
 			sourceTree = "<group>";
 		};
 		FC23F6721EE72F2A00397646 /* Project Metadata */ = {
@@ -858,7 +857,7 @@
 				8CD5F7491BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.h in Headers */,
 				8C84CCF11D6E5DE9009B3E7D /* registry_tables.h in Headers */,
 				8C84CCCE1D6E5D5A009B3E7D /* tsk_assert.h in Headers */,
-				D0D9926523980A94000A57C2 /* TrustKit.h in Headers */,
+				D0D9927523980F77000A57C2 /* TrustKit.h in Headers */,
 				2D4BF20D1F1FCC9600FB75AC /* TSKTrustKitConfig.h in Headers */,
 				6B2B06AD1B05154A00FC749E /* TSKBackgroundReporter.h in Headers */,
 				8C84CCE31D6E5D5A009B3E7D /* trie_node.h in Headers */,
@@ -889,7 +888,7 @@
 				8C84CBA41D6E0981009B3E7D /* TSKNSURLSessionDelegateProxy.h in Headers */,
 				8C84CCF31D6E5DE9009B3E7D /* registry_tables.h in Headers */,
 				8C84CCD01D6E5D5A009B3E7D /* tsk_assert.h in Headers */,
-				D0D9926723980A94000A57C2 /* TrustKit.h in Headers */,
+				D0D9927723980F77000A57C2 /* TrustKit.h in Headers */,
 				8C84CBA61D6E0981009B3E7D /* TSKBackgroundReporter.h in Headers */,
 				2DA52E211F1FCFEF0059246E /* TSKTrustKitConfig.h in Headers */,
 				8C84CCE51D6E5D5A009B3E7D /* trie_node.h in Headers */,
@@ -924,7 +923,7 @@
 				2D8A76C51F1FD51F003A0750 /* TSKPinningValidatorCallback.h in Headers */,
 				2DA52E201F1FCFEE0059246E /* TSKTrustKitConfig.h in Headers */,
 				8C84CCE41D6E5D5A009B3E7D /* trie_node.h in Headers */,
-				D0D9926623980A94000A57C2 /* TrustKit.h in Headers */,
+				D0D9927623980F77000A57C2 /* TrustKit.h in Headers */,
 				8C84CCE11D6E5D5A009B3E7D /* string_util.h in Headers */,
 				8CD5F7321BC5ED4A005801D8 /* TSKNSURLConnectionDelegateProxy.h in Headers */,
 				8C84CC0A1D6E3C67009B3E7D /* vendor_identifier.h in Headers */,
@@ -952,7 +951,7 @@
 				8CC5D23A1D6E64D10074F515 /* TSKNSURLSessionDelegateProxy.h in Headers */,
 				8CC5D23C1D6E64D10074F515 /* registry_tables.h in Headers */,
 				8CC5D23D1D6E64D10074F515 /* tsk_assert.h in Headers */,
-				D0D9926823980A94000A57C2 /* TrustKit.h in Headers */,
+				D0D9927823980F77000A57C2 /* TrustKit.h in Headers */,
 				8CC5D23E1D6E64D10074F515 /* TSKBackgroundReporter.h in Headers */,
 				2DA52E221F1FCFF00059246E /* TSKTrustKitConfig.h in Headers */,
 				8CC5D23F1D6E64D10074F515 /* trie_node.h in Headers */,
