@@ -16,7 +16,7 @@
 #import "Pinning/TSKSPKIHashCache.h"
 #import "Pinning/ssl_pin_verifier.h"
 #import "configuration_utils.h"
-#import "TrustKit.h"
+#import "include/TrustKit.h"
 #import "TSKLog.h"
 #import "TSKPinningValidator_Private.h"
 

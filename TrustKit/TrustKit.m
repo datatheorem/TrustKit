@@ -10,15 +10,15 @@
  */
 
 #import "TrustKit.h"
-#import "Reporting/TSKBackgroundReporter.h"
-#import "Pinning/TSKSPKIHashCache.h"
-#import "Swizzling/TSKNSURLConnectionDelegateProxy.h"
-#import "Swizzling/TSKNSURLSessionDelegateProxy.h"
-#import "Pinning/TSKSPKIHashCache.h"
-#import "parse_configuration.h"
-#import "TSKPinningValidatorResult.h"
-#import "TSKLog.h"
-#import "TSKPinningValidator_Private.h"
+#import "../Reporting/TSKBackgroundReporter.h"
+#import "../Pinning/TSKSPKIHashCache.h"
+#import "../Swizzling/TSKNSURLConnectionDelegateProxy.h"
+#import "../Swizzling/TSKNSURLSessionDelegateProxy.h"
+#import "../Pinning/TSKSPKIHashCache.h"
+#import "../parse_configuration.h"
+#import "../TSKPinningValidatorResult.h"
+#import "../TSKLog.h"
+#import "../TSKPinningValidator_Private.h"
 
 
 // Info.plist key we read the public key hashes from
