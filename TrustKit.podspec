@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
   s.source_files = ['TrustKit', 'TrustKit/**/*.{h,m,c}']
   s.public_header_files = [
-    'TrustKit/include/TrustKit.h',
+    'TrustKit/TrustKit.h',
     'TrustKit/TSKTrustKitConfig.h',
     'TrustKit/TSKPinningValidator.h',
     'TrustKit/TSKPinningValidatorCallback.h',

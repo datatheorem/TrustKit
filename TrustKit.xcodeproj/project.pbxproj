@@ -585,7 +585,7 @@
 		8C8480491A896EE30017C155 /* TrustKit */ = {
 			isa = PBXGroup;
 			children = (
-				D0D9927323980F77000A57C2 /* include */,
+				D0D9927423980F77000A57C2 /* TrustKit.h */,
 				FC23F6721EE72F2A00397646 /* Project Metadata */,
 				8CE919281AEA0F61002B29AE /* Dependencies */,
 				8CA6CC571BAF60DA00BDA419 /* Swizzling */,
@@ -770,14 +770,6 @@
 				8C3492901ADCA059001849FD /* domain_registry */,
 			);
 			name = Dependencies;
-			sourceTree = "<group>";
-		};
-		D0D9927323980F77000A57C2 /* include */ = {
-			isa = PBXGroup;
-			children = (
-				D0D9927423980F77000A57C2 /* TrustKit.h */,
-			);
-			path = include;
 			sourceTree = "<group>";
 		};
 		FC23F6721EE72F2A00397646 /* Project Metadata */ = {

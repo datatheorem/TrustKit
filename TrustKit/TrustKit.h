@@ -17,11 +17,11 @@
 
 #ifndef _TRUSTKIT_
 #define _TRUSTKIT_
-    #import "../TSKTrustKitConfig.h"
-    #import "../TSKPinningValidatorResult.h"
-    #import "../TSKPinningValidatorCallback.h"
-    #import "../TSKPinningValidator.h"
-    #import "../TSKTrustDecision.h"
+    #import "TSKTrustKitConfig.h"
+    #import "TSKPinningValidatorResult.h"
+    #import "TSKPinningValidatorCallback.h"
+    #import "TSKPinningValidator.h"
+    #import "TSKTrustDecision.h"
 #endif /* _TRUSTKIT_ */
 
 NS_ASSUME_NONNULL_BEGIN

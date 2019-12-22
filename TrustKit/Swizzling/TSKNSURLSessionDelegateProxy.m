@@ -10,7 +10,7 @@
  */
 
 #import "TSKNSURLSessionDelegateProxy.h"
-#import "../include/TrustKit.h"
+#import "../TrustKit.h"
 #import "../TSKLog.h"
 #import "../TSKTrustDecision.h"
 #import "../TSKPinningValidator.h"
