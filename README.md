@@ -26,7 +26,6 @@ Getting Started
 * Read the [Getting Started][getting-started] guide.
 * Check out the [API documentation][api-doc].
 * TrustKit was initially released at [Black Hat USA 2015][bh2015-pdf] and was also featured on [PayPal's engineering blog][paypal-post].
-* Data Theorem provides a free dashboard for displaying statistics about all the reports sent by your app due to TLS or pinning validation failures. Enable your dashboard at [https://analytics.datatheorem.com/](https://analytics.datatheorem.com/).
 
 
 Sample Usage
