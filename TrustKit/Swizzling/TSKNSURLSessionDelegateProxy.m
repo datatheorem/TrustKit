@@ -10,10 +10,10 @@
  */
 
 #import "TSKNSURLSessionDelegateProxy.h"
-#import "../TrustKit.h"
+#import "../public/TrustKit.h"
 #import "../TSKLog.h"
-#import "../TSKTrustDecision.h"
-#import "../TSKPinningValidator.h"
+#import "../public/TSKTrustDecision.h"
+#import "../public/TSKPinningValidator.h"
 #import "../Dependencies/RSSwizzle/RSSwizzle.h"
 
 @interface TSKNSURLSessionDelegateProxy ()
