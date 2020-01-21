@@ -7,7 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "../TrustKit/TrustKit.h"
+#import "../TrustKit/public/TrustKit.h"
 #import "../TrustKit/TSKLog.h"
 
 
