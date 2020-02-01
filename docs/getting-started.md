@@ -135,7 +135,7 @@ in the App's network delegates. For example in an NSURLSessionDelegate:
 - (void)URLSession:(NSURLSession *)session 
               task:(NSURLSessionTask *)task 
 didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge 
- completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler {
+ completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler
 {
     TSKPinningValidator *pinningValidator = [[TrustKit sharedInstance] pinningValidator];
     // Pass the authentication challenge to the validator; if the validation fails, the connection will be blocked
