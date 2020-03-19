@@ -9,7 +9,7 @@
  
  */
 
-#import "../TSKTrustDecision.h"
+#import "../public/TSKTrustDecision.h"
 #if __has_feature(modules)
 @import Foundation;
 #else

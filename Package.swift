@@ -21,7 +21,8 @@ let package = Package(
         .target(
             name: "TrustKit",
             dependencies: [],
-            path: "TrustKit"
+            path: "TrustKit",            
+            publicHeadersPath: "public"
         ),
     ]
 )
