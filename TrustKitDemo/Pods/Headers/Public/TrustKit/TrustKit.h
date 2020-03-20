@@ -1,1 +1,1 @@
-../../../../../TrustKit/TrustKit.h
+../../../../../TrustKit/public/TrustKit.h

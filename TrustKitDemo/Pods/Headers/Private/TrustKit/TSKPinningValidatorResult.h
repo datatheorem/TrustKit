@@ -1,1 +1,1 @@
-../../../../../TrustKit/TSKPinningValidatorResult.h
+../../../../../TrustKit/public/TSKPinningValidatorResult.h

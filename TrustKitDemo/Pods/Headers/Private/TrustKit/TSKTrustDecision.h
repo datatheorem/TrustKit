@@ -1,1 +1,1 @@
-../../../../../TrustKit/TSKTrustDecision.h
+../../../../../TrustKit/public/TSKTrustDecision.h
