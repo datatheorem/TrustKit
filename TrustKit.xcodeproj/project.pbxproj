@@ -18,7 +18,30 @@
 		6B032D401AF1AEC200EAFA69 /* TSKReporterTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B032D3F1AF1AEB600EAFA69 /* TSKReporterTests.m */; };
 		6B2B06AD1B05154A00FC749E /* TSKBackgroundReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B2B06AC1B05154A00FC749E /* TSKBackgroundReporter.h */; };
 		6B2B06AF1B05157400FC749E /* TSKBackgroundReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B2B06AE1B05157400FC749E /* TSKBackgroundReporter.m */; };
-		84E5278F23D6C8BB00E74C2B /* public in Resources */ = {isa = PBXBuildFile; fileRef = 84E5278E23D6C8BB00E74C2B /* public */; };
+		7033D35E248FE84100BDFF50 /* TSKTrustKitConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 7033D358248FE84100BDFF50 /* TSKTrustKitConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7033D35F248FE84100BDFF50 /* TSKTrustKitConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 7033D358248FE84100BDFF50 /* TSKTrustKitConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7033D360248FE84100BDFF50 /* TSKTrustKitConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 7033D358248FE84100BDFF50 /* TSKTrustKitConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7033D361248FE84100BDFF50 /* TSKTrustKitConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 7033D358248FE84100BDFF50 /* TSKTrustKitConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7033D362248FE84100BDFF50 /* TSKTrustDecision.h in Headers */ = {isa = PBXBuildFile; fileRef = 7033D359248FE84100BDFF50 /* TSKTrustDecision.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7033D363248FE84100BDFF50 /* TSKTrustDecision.h in Headers */ = {isa = PBXBuildFile; fileRef = 7033D359248FE84100BDFF50 /* TSKTrustDecision.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7033D364248FE84100BDFF50 /* TSKTrustDecision.h in Headers */ = {isa = PBXBuildFile; fileRef = 7033D359248FE84100BDFF50 /* TSKTrustDecision.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7033D365248FE84100BDFF50 /* TSKTrustDecision.h in Headers */ = {isa = PBXBuildFile; fileRef = 7033D359248FE84100BDFF50 /* TSKTrustDecision.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7033D366248FE84100BDFF50 /* TSKPinningValidatorResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 7033D35A248FE84100BDFF50 /* TSKPinningValidatorResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7033D367248FE84100BDFF50 /* TSKPinningValidatorResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 7033D35A248FE84100BDFF50 /* TSKPinningValidatorResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7033D368248FE84100BDFF50 /* TSKPinningValidatorResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 7033D35A248FE84100BDFF50 /* TSKPinningValidatorResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7033D369248FE84100BDFF50 /* TSKPinningValidatorResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 7033D35A248FE84100BDFF50 /* TSKPinningValidatorResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7033D36A248FE84100BDFF50 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 7033D35B248FE84100BDFF50 /* TrustKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7033D36B248FE84100BDFF50 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 7033D35B248FE84100BDFF50 /* TrustKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7033D36C248FE84100BDFF50 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 7033D35B248FE84100BDFF50 /* TrustKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7033D36D248FE84100BDFF50 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 7033D35B248FE84100BDFF50 /* TrustKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7033D36E248FE84100BDFF50 /* TSKPinningValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 7033D35C248FE84100BDFF50 /* TSKPinningValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7033D36F248FE84100BDFF50 /* TSKPinningValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 7033D35C248FE84100BDFF50 /* TSKPinningValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7033D370248FE84100BDFF50 /* TSKPinningValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 7033D35C248FE84100BDFF50 /* TSKPinningValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7033D371248FE84100BDFF50 /* TSKPinningValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 7033D35C248FE84100BDFF50 /* TSKPinningValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7033D372248FE84100BDFF50 /* TSKPinningValidatorCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = 7033D35D248FE84100BDFF50 /* TSKPinningValidatorCallback.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7033D373248FE84100BDFF50 /* TSKPinningValidatorCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = 7033D35D248FE84100BDFF50 /* TSKPinningValidatorCallback.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7033D374248FE84100BDFF50 /* TSKPinningValidatorCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = 7033D35D248FE84100BDFF50 /* TSKPinningValidatorCallback.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7033D375248FE84100BDFF50 /* TSKPinningValidatorCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = 7033D35D248FE84100BDFF50 /* TSKPinningValidatorCallback.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		8C0C90491E3C41F9003851A8 /* TSKPinningValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C0C90481E3C41F3003851A8 /* TSKPinningValidator.m */; };
 		8C0C904A1E3C41FA003851A8 /* TSKPinningValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C0C90481E3C41F3003851A8 /* TSKPinningValidator.m */; };
 		8C0C904B1E3C41FB003851A8 /* TSKPinningValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C0C90481E3C41F3003851A8 /* TSKPinningValidator.m */; };
@@ -331,7 +354,12 @@
 		6B032D3F1AF1AEB600EAFA69 /* TSKReporterTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TSKReporterTests.m; sourceTree = "<group>"; };
 		6B2B06AC1B05154A00FC749E /* TSKBackgroundReporter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKBackgroundReporter.h; path = Reporting/TSKBackgroundReporter.h; sourceTree = "<group>"; };
 		6B2B06AE1B05157400FC749E /* TSKBackgroundReporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKBackgroundReporter.m; path = Reporting/TSKBackgroundReporter.m; sourceTree = "<group>"; };
-		84E5278E23D6C8BB00E74C2B /* public */ = {isa = PBXFileReference; lastKnownFileType = folder; name = public; path = TrustKit/public; sourceTree = "<group>"; };
+		7033D358248FE84100BDFF50 /* TSKTrustKitConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSKTrustKitConfig.h; sourceTree = "<group>"; };
+		7033D359248FE84100BDFF50 /* TSKTrustDecision.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSKTrustDecision.h; sourceTree = "<group>"; };
+		7033D35A248FE84100BDFF50 /* TSKPinningValidatorResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSKPinningValidatorResult.h; sourceTree = "<group>"; };
+		7033D35B248FE84100BDFF50 /* TrustKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrustKit.h; sourceTree = "<group>"; };
+		7033D35C248FE84100BDFF50 /* TSKPinningValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSKPinningValidator.h; sourceTree = "<group>"; };
+		7033D35D248FE84100BDFF50 /* TSKPinningValidatorCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TSKPinningValidatorCallback.h; sourceTree = "<group>"; };
 		8C0C90481E3C41F3003851A8 /* TSKPinningValidator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = TSKPinningValidator.m; sourceTree = "<group>"; };
 		8C15F99E1B16094D00F06C0E /* TSKPinFailureReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKPinFailureReport.h; path = Reporting/TSKPinFailureReport.h; sourceTree = "<group>"; };
 		8C15F99F1B16094D00F06C0E /* TSKPinFailureReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKPinFailureReport.m; path = Reporting/TSKPinFailureReport.m; sourceTree = "<group>"; };
@@ -493,6 +521,19 @@
 			name = Certificates;
 			sourceTree = "<group>";
 		};
+		7033D357248FE84100BDFF50 /* public */ = {
+			isa = PBXGroup;
+			children = (
+				7033D358248FE84100BDFF50 /* TSKTrustKitConfig.h */,
+				7033D359248FE84100BDFF50 /* TSKTrustDecision.h */,
+				7033D35A248FE84100BDFF50 /* TSKPinningValidatorResult.h */,
+				7033D35B248FE84100BDFF50 /* TrustKit.h */,
+				7033D35C248FE84100BDFF50 /* TSKPinningValidator.h */,
+				7033D35D248FE84100BDFF50 /* TSKPinningValidatorCallback.h */,
+			);
+			path = public;
+			sourceTree = "<group>";
+		};
 		8C3492901ADCA059001849FD /* domain_registry */ = {
 			isa = PBXGroup;
 			children = (
@@ -532,7 +573,6 @@
 		8C84803D1A896EE30017C155 = {
 			isa = PBXGroup;
 			children = (
-				84E5278E23D6C8BB00E74C2B /* public */,
 				8C8480491A896EE30017C155 /* TrustKit */,
 				8C8480561A896EE30017C155 /* TrustKitTests */,
 				8C8480481A896EE30017C155 /* Products */,
@@ -558,6 +598,7 @@
 		8C8480491A896EE30017C155 /* TrustKit */ = {
 			isa = PBXGroup;
 			children = (
+				7033D357248FE84100BDFF50 /* public */,
 				FC23F6721EE72F2A00397646 /* Project Metadata */,
 				8CE919281AEA0F61002B29AE /* Dependencies */,
 				8CA6CC571BAF60DA00BDA419 /* Swizzling */,
@@ -807,16 +848,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C84CCDA1D6E5D5A009B3E7D /* registry_types.h in Headers */,
+				7033D366248FE84100BDFF50 /* TSKPinningValidatorResult.h in Headers */,
 				FCE7D6321EE9FDFD0081EEEF /* TSKPublicKeyAlgorithm.h in Headers */,
+				7033D372248FE84100BDFF50 /* TSKPinningValidatorCallback.h in Headers */,
 				8CE9192D1AEA0F7E002B29AE /* domain_registry.h in Headers */,
 				8CD5F7491BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.h in Headers */,
 				8C84CCF11D6E5DE9009B3E7D /* registry_tables.h in Headers */,
 				8C84CCCE1D6E5D5A009B3E7D /* tsk_assert.h in Headers */,
+				7033D362248FE84100BDFF50 /* TSKTrustDecision.h in Headers */,
 				6B2B06AD1B05154A00FC749E /* TSKBackgroundReporter.h in Headers */,
 				8C84CCE31D6E5D5A009B3E7D /* trie_node.h in Headers */,
+				7033D35E248FE84100BDFF50 /* TSKTrustKitConfig.h in Headers */,
 				8C84CCE01D6E5D5A009B3E7D /* string_util.h in Headers */,
+				7033D36E248FE84100BDFF50 /* TSKPinningValidator.h in Headers */,
 				8CD5F7311BC5ED4A005801D8 /* TSKNSURLConnectionDelegateProxy.h in Headers */,
 				8C84CC091D6E3C67009B3E7D /* vendor_identifier.h in Headers */,
+				7033D36A248FE84100BDFF50 /* TrustKit.h in Headers */,
 				FC1A090A1E57AC450055B12C /* TSKSPKIHashCache.h in Headers */,
 				8C9EBE021B619BBE00CA7EE0 /* TSKReportsRateLimiter.h in Headers */,
 				8C84CCEC1D6E5D5A009B3E7D /* trie_search.h in Headers */,
@@ -832,16 +879,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C84CCDC1D6E5D5A009B3E7D /* registry_types.h in Headers */,
+				7033D368248FE84100BDFF50 /* TSKPinningValidatorResult.h in Headers */,
 				FCE7D6341EE9FE260081EEEF /* TSKPublicKeyAlgorithm.h in Headers */,
+				7033D374248FE84100BDFF50 /* TSKPinningValidatorCallback.h in Headers */,
 				8C84CBA21D6E0981009B3E7D /* domain_registry.h in Headers */,
 				8C84CBA41D6E0981009B3E7D /* TSKNSURLSessionDelegateProxy.h in Headers */,
 				8C84CCF31D6E5DE9009B3E7D /* registry_tables.h in Headers */,
 				8C84CCD01D6E5D5A009B3E7D /* tsk_assert.h in Headers */,
+				7033D364248FE84100BDFF50 /* TSKTrustDecision.h in Headers */,
 				8C84CBA61D6E0981009B3E7D /* TSKBackgroundReporter.h in Headers */,
 				8C84CCE51D6E5D5A009B3E7D /* trie_node.h in Headers */,
+				7033D360248FE84100BDFF50 /* TSKTrustKitConfig.h in Headers */,
 				8C84CCE21D6E5D5A009B3E7D /* string_util.h in Headers */,
+				7033D370248FE84100BDFF50 /* TSKPinningValidator.h in Headers */,
 				8C84CBA71D6E0981009B3E7D /* TSKNSURLConnectionDelegateProxy.h in Headers */,
 				8C84CC0B1D6E3C67009B3E7D /* vendor_identifier.h in Headers */,
+				7033D36C248FE84100BDFF50 /* TrustKit.h in Headers */,
 				FC1A090C1E57AC450055B12C /* TSKSPKIHashCache.h in Headers */,
 				8C84CBA81D6E0981009B3E7D /* TSKReportsRateLimiter.h in Headers */,
 				8C84CCEE1D6E5D5A009B3E7D /* trie_search.h in Headers */,
@@ -862,19 +915,25 @@
 				8C4346D71E5B894A008023F9 /* configuration_utils.h in Headers */,
 				8CA6CC1B1BAE2B6600BDA419 /* TSKPinFailureReport.h in Headers */,
 				8C84CCF21D6E5DE9009B3E7D /* registry_tables.h in Headers */,
+				7033D36F248FE84100BDFF50 /* TSKPinningValidator.h in Headers */,
 				8C84CCCF1D6E5D5A009B3E7D /* tsk_assert.h in Headers */,
 				8CA6CC141BAE2B6600BDA419 /* TSKReportsRateLimiter.h in Headers */,
 				8C84CCE41D6E5D5A009B3E7D /* trie_node.h in Headers */,
 				8C84CCE11D6E5D5A009B3E7D /* string_util.h in Headers */,
+				7033D373248FE84100BDFF50 /* TSKPinningValidatorCallback.h in Headers */,
 				8CD5F7321BC5ED4A005801D8 /* TSKNSURLConnectionDelegateProxy.h in Headers */,
 				8C84CC0A1D6E3C67009B3E7D /* vendor_identifier.h in Headers */,
 				FC1A090B1E57AC450055B12C /* TSKSPKIHashCache.h in Headers */,
+				7033D36B248FE84100BDFF50 /* TrustKit.h in Headers */,
+				7033D367248FE84100BDFF50 /* TSKPinningValidatorResult.h in Headers */,
 				8CA6CC211BAE2B6A00BDA419 /* ssl_pin_verifier.h in Headers */,
 				8C84CCED1D6E5D5A009B3E7D /* trie_search.h in Headers */,
+				7033D35F248FE84100BDFF50 /* TSKTrustKitConfig.h in Headers */,
 				8CD5F7431BCB06F4005801D8 /* RSSwizzle.h in Headers */,
 				8CA6CC191BAE2B6600BDA419 /* TSKBackgroundReporter.h in Headers */,
 				8CA6CC271BAE2B7000BDA419 /* domain_registry.h in Headers */,
 				8CA6CC1D1BAE2B6600BDA419 /* reporting_utils.h in Headers */,
+				7033D363248FE84100BDFF50 /* TSKTrustDecision.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -883,16 +942,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CC5D2371D6E64D10074F515 /* registry_types.h in Headers */,
+				7033D369248FE84100BDFF50 /* TSKPinningValidatorResult.h in Headers */,
 				FCE7D6351EE9FE2F0081EEEF /* TSKPublicKeyAlgorithm.h in Headers */,
+				7033D375248FE84100BDFF50 /* TSKPinningValidatorCallback.h in Headers */,
 				8CC5D2381D6E64D10074F515 /* domain_registry.h in Headers */,
 				8CC5D23A1D6E64D10074F515 /* TSKNSURLSessionDelegateProxy.h in Headers */,
 				8CC5D23C1D6E64D10074F515 /* registry_tables.h in Headers */,
 				8CC5D23D1D6E64D10074F515 /* tsk_assert.h in Headers */,
+				7033D365248FE84100BDFF50 /* TSKTrustDecision.h in Headers */,
 				8CC5D23E1D6E64D10074F515 /* TSKBackgroundReporter.h in Headers */,
 				8CC5D23F1D6E64D10074F515 /* trie_node.h in Headers */,
+				7033D361248FE84100BDFF50 /* TSKTrustKitConfig.h in Headers */,
 				8CC5D2401D6E64D10074F515 /* string_util.h in Headers */,
+				7033D371248FE84100BDFF50 /* TSKPinningValidator.h in Headers */,
 				8CC5D2411D6E64D10074F515 /* TSKNSURLConnectionDelegateProxy.h in Headers */,
 				8CC5D2421D6E64D10074F515 /* vendor_identifier.h in Headers */,
+				7033D36D248FE84100BDFF50 /* TrustKit.h in Headers */,
 				FC1A090D1E57AC450055B12C /* TSKSPKIHashCache.h in Headers */,
 				8CC5D2431D6E64D10074F515 /* TSKReportsRateLimiter.h in Headers */,
 				8CC5D2441D6E64D10074F515 /* trie_search.h in Headers */,
@@ -1110,7 +1175,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84E5278F23D6C8BB00E74C2B /* public in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
