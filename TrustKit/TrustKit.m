@@ -42,7 +42,7 @@ static TSKSPKIHashCache *sharedHashCache;
 
 // Default logger block: only log in debug builds and add TrustKit at the beginning of the line
 #if DEBUG
-void (^_loggerBlock)(NSString *) = ^void(NSString *message) { NSLog(@"=== TrustKit: %@", message); };
+void (^_loggerBlock)(NSString *) = NULL;
 #else
 void (^_loggerBlock)(NSString *) = NULL;
 #endif
