@@ -12,6 +12,7 @@ let package = Package(
     products: [
         .library(
             name: "TrustKit",
+            type: .dynamic,
             targets: ["TrustKit"]
         ),
     ],
