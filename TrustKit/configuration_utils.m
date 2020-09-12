@@ -17,6 +17,13 @@
 
 static NSUInteger isSubdomain(NSString *domain, NSString *subdomain)
 {
+    // Corner case: the supplied subdomain is actually a parent domain
+    // Should never happen but https://github.com/datatheorem/TrustKit/issues/210
+    if ([subdomain length] <= [domain length])
+    {
+        return 0;
+    }
+    
     // Ensure that the TLDs are the same; this can get tricky with TLDs like .co.uk so we take a cautious approach
     size_t domainRegistryLength = GetRegistryLength([domain UTF8String]);
     size_t subdomainRegistryLength = GetRegistryLength([subdomain UTF8String]);

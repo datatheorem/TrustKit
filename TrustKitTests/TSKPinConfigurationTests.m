@@ -388,4 +388,24 @@
 }
 
 
+- (void)testDomainTldAndParentFromServerConfigDoesNotCrash
+{
+    // For https://github.com/datatheorem/TrustKit/issues/210
+    // Given a TrustKit config for a domain
+    NSDictionary *trustKitConfig;
+    trustKitConfig = parseTrustKitConfiguration(@{kTSKPinnedDomains : @{
+                                                          @"good.com" : @{
+                                                                  kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                                                                                          @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+                                                                                          ],
+                                                                  kTSKIncludeSubdomains: @YES},
+                                                          }
+                                                  });
+    
+    // When trying to connect to an invalid domain that is a TLD and also a parent domain of the configured domain
+    // TrustKit does not crash and does not return the subdomain's configuration
+    NSString *serverConfigKey = getPinningConfigurationKeyForDomain(@"com", trustKitConfig[kTSKPinnedDomains]);
+    XCTAssertNil(serverConfigKey, @"IncludeSubdomains did not work");
+}
+
 @end
