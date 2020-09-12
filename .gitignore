@@ -37,4 +37,7 @@ _site
 # Jazzy
 *.tgz
 
+# Swift Package Manager
+.build
+
 .DS_Store
