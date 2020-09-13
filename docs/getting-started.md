@@ -65,15 +65,17 @@ Then run:
 Add the following line to your Cartfile:
     
     github "datatheorem/TrustKit"
+    
+Then, follow the instructions from the 
+[Carthage README](https://github.com/Carthage/Carthage#adding-frameworks-to-an-application).
 
-Then run:
+#### Swift Package Manager
 
-    $ carthage update
-    $ carthage build --platform iOS --configuration Debug
+Follow the instructions from the 
+[Apple documentation](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app)
+using TrustKit's Git URL:
 
-Lastly, on your application targets’ “General” settings tab, in the “Embedded Binaries” 
-section, drag and drop the TrustKit framework you want to use from the Carthage/Build
-folder on disk.
+    git@github.com:datatheorem/TrustKit.git
 
 ### Configuring a Pinning Policy
 
