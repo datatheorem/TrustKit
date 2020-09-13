@@ -4,10 +4,10 @@ import PackageDescription
 let package = Package(
     name: "TrustKit",
     platforms: [
-        .iOS(.v10),
-        .macOS(.v10_12),
-        .tvOS(.v10),
-        .watchOS(.v3)
+        .iOS(.v11),
+        .macOS(.v10_13),
+        .tvOS(.v11),
+        .watchOS(.v4)
     ],
     products: [
         .library(
