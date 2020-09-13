@@ -14,6 +14,16 @@ let package = Package(
             name: "TrustKit",
             targets: ["TrustKit"]
         ),
+        .library(
+            name: "TrustKitDynamic",
+            type: .dynamic,
+            targets: ["TrustKit"]
+        ),
+        .library(
+            name: "TrustKitStatic",
+            type: .static,
+            targets: ["TrustKit"]
+        ),
     ],
     dependencies: [
     ],
