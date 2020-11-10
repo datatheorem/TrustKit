@@ -51,7 +51,6 @@ Alternatively, the pinning policy can be set programmatically:
                             @"0SDf3cRToyZJaMsoS17oF72VMavLxj/N7WBNasNuiR8="
                             ],
                     kTSKEnforcePinning : @NO,
-                    kTSKReportUris : @[@"http://report.datatheorem.com/log_report"],
                     },
             @"yahoo.com" : @{
                     kTSKPublicKeyHashes : @[
