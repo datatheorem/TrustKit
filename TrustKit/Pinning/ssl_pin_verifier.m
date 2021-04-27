@@ -65,9 +65,14 @@ TSKTrustEvaluationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *s
         SecCertificateRef certificate = SecTrustGetCertificateAtIndex(serverTrust, i);
         
         CFStringRef certificateSubject = SecCertificateCopySubjectSummary(certificate);
-        if (certificateSubject != nil) {
+        if (certificateSubject != nil)
+        {
             TSKLog(@"Checking certificate with CN: %@", certificateSubject);
             CFRelease(certificateSubject);
+        }
+        else
+        {
+            TSKLog(@"Could not parse certificate subject");
         }
         
         // Generate the subject public key info hash
