@@ -173,6 +173,11 @@ static unsigned int getAsn1HeaderSize(NSString *publicKeyType, NSNumber *publicK
     
     // First extract the public key
     SecKeyRef publicKey = [self copyPublicKeyFromCertificate:certificate];
+    if (publicKey == nil)
+    {
+        TSKLog(@"Error - could not copy the public key from the certificate");
+        return nil;
+    }
     
     // Obtain the public key bytes from the key reference
     NSData *publicKeyData = (__bridge_transfer NSData *)SecKeyCopyExternalRepresentation(publicKey, NULL);
@@ -254,16 +259,31 @@ static unsigned int getAsn1HeaderSize(NSString *publicKeyType, NSNumber *publicK
 
 - (SecKeyRef)copyPublicKeyFromCertificate:(SecCertificateRef)certificate
 {
+    OSStatus status;
+    
     // Create an X509 trust using the using the certificate
     SecTrustRef trust;
     SecPolicyRef policy = SecPolicyCreateBasicX509();
-    SecTrustCreateWithCertificates(certificate, policy, &trust);
+    status = SecTrustCreateWithCertificates(certificate, policy, &trust);
+    CFRelease(policy);
+    
+    if (status != errSecSuccess)
+    {
+        TSKLog(@"Could not create trust from certificate, got status %d", status);
+        return nil;
+    }
     
     // Get a public key reference for the certificate from the trust
     SecTrustResultType result;
-    SecTrustEvaluate(trust, &result);
+    status = SecTrustEvaluate(trust, &result);
+    if (status != errSecSuccess)
+    {
+        TSKLog(@"Could not evaluate trust for the certificate, got status %d", status);
+        CFRelease(trust);
+        return nil;
+    }
+    
     SecKeyRef publicKey = SecTrustCopyPublicKey(trust);
-    CFRelease(policy);
     CFRelease(trust);
     return publicKey;
 }
