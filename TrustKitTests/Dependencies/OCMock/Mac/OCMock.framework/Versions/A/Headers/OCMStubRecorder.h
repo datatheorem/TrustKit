@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2004-2016 Erik Doernenburg and contributors
+ *  Copyright (c) 2004-2020 Erik Doernenburg and contributors
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
  *  not use these files except in compliance with the License. You may obtain
@@ -16,7 +16,12 @@
 
 #import <OCMock/OCMRecorder.h>
 #import <OCMock/OCMFunctions.h>
+
 #import <objc/runtime.h>
+
+#if !TARGET_OS_WATCH
+@class XCTestExpectation;
+#endif
 
 @interface OCMStubRecorder : OCMRecorder
 
@@ -27,6 +32,10 @@
 - (id)andCall:(SEL)selector onObject:(id)anObject;
 - (id)andDo:(void (^)(NSInvocation *invocation))block;
 - (id)andForwardToRealObject;
+
+#if !TARGET_OS_WATCH
+- (id)andFulfill:(XCTestExpectation *)expectation;
+#endif
 
 @end
 
@@ -57,6 +66,23 @@
 
 #define andForwardToRealObject() _andForwardToRealObject()
 @property (nonatomic, readonly) OCMStubRecorder *(^ _andForwardToRealObject)(void);
+
+#if !TARGET_OS_WATCH
+#define andFulfill(anExpectation) _andFulfill(anExpectation)
+@property (nonatomic, readonly) OCMStubRecorder *(^ _andFulfill)(XCTestExpectation *);
+#endif
+
+@property (nonatomic, readonly) OCMStubRecorder *(^ _ignoringNonObjectArgs)(void);
+
+#define andBreak() _andDo(^(NSInvocation *_invocation)                \
+{                                                                     \
+  __builtin_debugtrap();                                              \
+})                                                                    \
+
+#define andLog(_format, ...) _andDo(^(NSInvocation *_invocation)      \
+{                                                                     \
+  NSLog(_format, ##__VA_ARGS__);                                      \
+})                                                                    \
 
 @end
 

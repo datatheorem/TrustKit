@@ -4,65 +4,9 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>Headers/NSNotificationCenter+OCMAdditions.h</key>
+		<key>Resources/Info.plist</key>
 		<data>
-		+dV/+LFSP/wgYqVhTndAcL7TD24=
-		</data>
-		<key>Headers/OCMArg.h</key>
-		<data>
-		8kMOu6mPvZqomUJVkfEhk55dyrk=
-		</data>
-		<key>Headers/OCMConstraint.h</key>
-		<data>
-		TmawFHyej3vUv2vyKF3fXUoWRz0=
-		</data>
-		<key>Headers/OCMFunctions.h</key>
-		<data>
-		lXfvjjZ9GPeq7weE2GOcK60b5Eo=
-		</data>
-		<key>Headers/OCMLocation.h</key>
-		<data>
-		b5f8I3fGIvfiRhY7sEEwjAwyLCg=
-		</data>
-		<key>Headers/OCMMacroState.h</key>
-		<data>
-		ldIYpo08htCIYbdkC5/cgGsgzuc=
-		</data>
-		<key>Headers/OCMQuantifier.h</key>
-		<data>
-		k5KiAhQtULHAViAEhsqglY/yeRU=
-		</data>
-		<key>Headers/OCMRecorder.h</key>
-		<data>
-		AIPBciApN89ALCvOniqKwUqHXqE=
-		</data>
-		<key>Headers/OCMStubRecorder.h</key>
-		<data>
-		Wf+ziUqilHYHVzPJQ+DRqgGbExg=
-		</data>
-		<key>Headers/OCMVerifier.h</key>
-		<data>
-		6nCkdjii1WT4vnaH/oUAb0TPgD4=
-		</data>
-		<key>Headers/OCMock.h</key>
-		<data>
-		JGi6O1PKd4/GRssPCH7q32UukNw=
-		</data>
-		<key>Headers/OCMockMacros.h</key>
-		<data>
-		EDtxxyjpfRfos2yAip69uway8KE=
-		</data>
-		<key>Headers/OCMockObject.h</key>
-		<data>
-		5QuEiw6aF33WzIsJa60IBxBstLs=
-		</data>
-		<key>Info.plist</key>
-		<data>
-		7L74OSFM6DA1Ko69z2kEofBIctY=
-		</data>
-		<key>Modules/module.modulemap</key>
-		<data>
-		C/zv4wGd+b+kg7T2q31cWmGbPX0=
+		wWDi+1MbcgnK9U+GF/aq0hwkrwE=
 		</data>
 	</dict>
 	<key>files2</key>
@@ -221,26 +165,37 @@
 			B5k13RUp+z7jVfSrgRPFafuYH6CF8A6V1qosS2Lm+1k=
 			</data>
 		</dict>
+		<key>Resources/Info.plist</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			wWDi+1MbcgnK9U+GF/aq0hwkrwE=
+			</data>
+			<key>hash2</key>
+			<data>
+			NwjYm2aepC37hJ6hu6PXHpO1WHlpkMevGdgL7V/FCdc=
+			</data>
+		</dict>
 	</dict>
 	<key>rules</key>
 	<dict>
-		<key>^.*</key>
+		<key>^Resources/</key>
 		<true/>
-		<key>^.*\.lproj/</key>
+		<key>^Resources/.*\.lproj/</key>
 		<dict>
 			<key>optional</key>
 			<true/>
 			<key>weight</key>
 			<real>1000</real>
 		</dict>
-		<key>^.*\.lproj/locversion.plist$</key>
+		<key>^Resources/.*\.lproj/locversion.plist$</key>
 		<dict>
 			<key>omit</key>
 			<true/>
 			<key>weight</key>
 			<real>1100</real>
 		</dict>
-		<key>^Base\.lproj/</key>
+		<key>^Resources/Base\.lproj/</key>
 		<dict>
 			<key>weight</key>
 			<real>1010</real>
@@ -262,27 +217,15 @@
 			<key>weight</key>
 			<real>2000</real>
 		</dict>
+		<key>^(Frameworks|SharedFrameworks|PlugIns|Plug-ins|XPCServices|Helpers|MacOS|Library/(Automator|Spotlight|LoginItems))/</key>
+		<dict>
+			<key>nested</key>
+			<true/>
+			<key>weight</key>
+			<real>10</real>
+		</dict>
 		<key>^.*</key>
 		<true/>
-		<key>^.*\.lproj/</key>
-		<dict>
-			<key>optional</key>
-			<true/>
-			<key>weight</key>
-			<real>1000</real>
-		</dict>
-		<key>^.*\.lproj/locversion.plist$</key>
-		<dict>
-			<key>omit</key>
-			<true/>
-			<key>weight</key>
-			<real>1100</real>
-		</dict>
-		<key>^Base\.lproj/</key>
-		<dict>
-			<key>weight</key>
-			<real>1010</real>
-		</dict>
 		<key>^Info\.plist$</key>
 		<dict>
 			<key>omit</key>
@@ -296,6 +239,37 @@
 			<true/>
 			<key>weight</key>
 			<real>20</real>
+		</dict>
+		<key>^Resources/</key>
+		<dict>
+			<key>weight</key>
+			<real>20</real>
+		</dict>
+		<key>^Resources/.*\.lproj/</key>
+		<dict>
+			<key>optional</key>
+			<true/>
+			<key>weight</key>
+			<real>1000</real>
+		</dict>
+		<key>^Resources/.*\.lproj/locversion.plist$</key>
+		<dict>
+			<key>omit</key>
+			<true/>
+			<key>weight</key>
+			<real>1100</real>
+		</dict>
+		<key>^Resources/Base\.lproj/</key>
+		<dict>
+			<key>weight</key>
+			<real>1010</real>
+		</dict>
+		<key>^[^/]+$</key>
+		<dict>
+			<key>nested</key>
+			<true/>
+			<key>weight</key>
+			<real>10</real>
 		</dict>
 		<key>^embedded\.provisionprofile$</key>
 		<dict>

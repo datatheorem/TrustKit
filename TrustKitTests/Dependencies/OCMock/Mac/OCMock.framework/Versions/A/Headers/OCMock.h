@@ -1,5 +1,5 @@
 /*
- *  Copyright (c) 2004-2016 Erik Doernenburg and contributors
+ *  Copyright (c) 2004-2020 Erik Doernenburg and contributors
  *
  *  Licensed under the Apache License, Version 2.0 (the "License"); you may
  *  not use these files except in compliance with the License. You may obtain
@@ -15,99 +15,14 @@
  */
 
 #import <OCMock/OCMockObject.h>
+#import <OCMock/OCMockMacros.h>
 #import <OCMock/OCMRecorder.h>
+#import <OCMock/OCMVerifier.h>
 #import <OCMock/OCMStubRecorder.h>
 #import <OCMock/OCMConstraint.h>
 #import <OCMock/OCMArg.h>
 #import <OCMock/OCMLocation.h>
+#import <OCMock/OCMQuantifier.h>
 #import <OCMock/OCMMacroState.h>
 #import <OCMock/NSNotificationCenter+OCMAdditions.h>
 #import <OCMock/OCMFunctions.h>
-
-
-#define OCMClassMock(cls) [OCMockObject niceMockForClass:cls]
-
-#define OCMStrictClassMock(cls) [OCMockObject mockForClass:cls]
-
-#define OCMProtocolMock(protocol) [OCMockObject niceMockForProtocol:protocol]
-
-#define OCMStrictProtocolMock(protocol) [OCMockObject mockForProtocol:protocol]
-
-#define OCMPartialMock(obj) [OCMockObject partialMockForObject:obj]
-
-#define OCMObserverMock() [OCMockObject observerMock]
-
-
-#define OCMStub(invocation) \
-({ \
-    _OCMSilenceWarnings( \
-        [OCMMacroState beginStubMacro]; \
-        OCMStubRecorder *recorder = nil; \
-        @try{ \
-            invocation; \
-        }@finally{ \
-            recorder = [OCMMacroState endStubMacro]; \
-        } \
-        recorder; \
-    ); \
-})
-
-#define OCMExpect(invocation) \
-({ \
-    _OCMSilenceWarnings( \
-        [OCMMacroState beginExpectMacro]; \
-        OCMStubRecorder *recorder = nil; \
-        @try{ \
-            invocation; \
-        }@finally{ \
-            recorder = [OCMMacroState endExpectMacro]; \
-        } \
-        recorder; \
-    ); \
-})
-
-#define OCMReject(invocation) \
-({ \
-    _OCMSilenceWarnings( \
-        [OCMMacroState beginRejectMacro]; \
-        OCMStubRecorder *recorder = nil; \
-        @try{ \
-            invocation; \
-        }@finally{ \
-            recorder = [OCMMacroState endRejectMacro]; \
-        } \
-        recorder; \
-    ); \
-})
-
-#define ClassMethod(invocation) \
-    _OCMSilenceWarnings( \
-        [[OCMMacroState globalState] switchToClassMethod]; \
-        invocation; \
-    );
-
-
-#define OCMVerifyAll(mock) [mock verifyAtLocation:OCMMakeLocation(self, __FILE__, __LINE__)]
-
-#define OCMVerifyAllWithDelay(mock, delay) [mock verifyWithDelay:delay atLocation:OCMMakeLocation(self, __FILE__, __LINE__)]
-
-#define OCMVerify(invocation) \
-({ \
-    _OCMSilenceWarnings( \
-        [OCMMacroState beginVerifyMacroAtLocation:OCMMakeLocation(self, __FILE__, __LINE__)]; \
-        @try{ \
-            invocation; \
-        }@finally{ \
-            [OCMMacroState endVerifyMacro]; \
-        } \
-    ); \
-})
-
-#define _OCMSilenceWarnings(macro) \
-({ \
-    _Pragma("clang diagnostic push") \
-    _Pragma("clang diagnostic ignored \"-Wunused-value\"") \
-    _Pragma("clang diagnostic ignored \"-Wunused-getter-return-value\"") \
-    macro \
-    _Pragma("clang diagnostic pop") \
-})
