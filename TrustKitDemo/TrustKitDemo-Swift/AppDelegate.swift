@@ -42,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                     // Valid pin and backup pin
                     kTSKPublicKeyHashes: [
-                        "YLh1dUR9y6Kja30RrAn7JKnbQG/uEtLMkBgFF2Fuihg=",
+                        "hxqRlPTu1bMS/0DITB1SSu0vd4u/8l8TjPgfaAp63Gc=",
                         "BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB="
                     ],
                     kTSKReportUris:["https://overmind.datatheorem.com/trustkit/report"],

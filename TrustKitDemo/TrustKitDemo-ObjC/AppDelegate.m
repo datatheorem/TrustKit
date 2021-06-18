@@ -62,7 +62,7 @@
                       
                       // Valid SPKI hashes to demonstrate success
                       kTSKPublicKeyHashes : @[
-                              @"YLh1dUR9y6Kja30RrAn7JKnbQG/uEtLMkBgFF2Fuihg=", // Let's Encrypt
+                              @"hxqRlPTu1bMS/0DITB1SSu0vd4u/8l8TjPgfaAp63Gc=", // GTS Root R1
                               @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key but 2 pins need to be provided
                               ]
                       }}};
