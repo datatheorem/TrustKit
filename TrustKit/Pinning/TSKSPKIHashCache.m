@@ -231,7 +231,6 @@ static unsigned int getAsn1HeaderSize(NSString *publicKeyType, NSNumber *publicK
         NSData *serializedSpkiCache = [NSKeyedArchiver archivedDataWithRootObject:_spkiCache requiringSecureCoding:YES error:nil];
         if ([serializedSpkiCache writeToURL:[self SPKICachePath] atomically:YES] == NO)
         {
-            NSAssert(false, @"Failed to write cache");
             TSKLog(@"Could not persist SPKI cache to the filesystem");
         }
     }
