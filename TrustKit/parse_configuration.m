@@ -204,7 +204,7 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *trustKitArguments)
         }
         
         
-        NSUInteger requiredNumberOfPins = [domainFinalConfiguration[kTSKEnforcePinning] boolValue] ? 2 : 1;
+        NSUInteger requiredNumberOfPins = 1;
         if([serverSslPinsSet count] < requiredNumberOfPins)
         {
             [NSException raise:@"TrustKit configuration invalid"
