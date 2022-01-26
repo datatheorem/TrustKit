@@ -95,17 +95,6 @@ void TSKLog(NSString *format, ...)
                   sharedContainerIdentifier:(NSString *)sharedContainerIdentifier
 {
     TSKLog(@"Configuration passed via explicit call to initSharedInstanceWithConfiguration:");
-
-		// TrustKit just got started in the App
-    CFBundleRef appBundle = CFBundleGetMainBundle();
-    
-    // Retrieve the configuration from the App's Info.plist file
-    NSDictionary *trustKitConfigFromInfoPlist = (__bridge NSDictionary *)CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)kTSKConfiguration);
-    if (trustKitConfigFromInfoPlist)
-    {
-        TSKLog(@"Configuration supplied via the App's Info.plist");
-        // [TrustKit initSharedInstanceWithConfiguration:trustKitConfigFromInfoPlist];
-    }
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -127,6 +116,18 @@ void TSKLog(NSString *format, ...)
 
 #pragma mark Instance Initialization
 
+- (instancetype)initFromPlistConfiguration {
+	// TrustKit just got started in the App
+    CFBundleRef appBundle = CFBundleGetMainBundle();
+    
+    // Retrieve the configuration from the App's Info.plist file
+    NSDictionary *trustKitConfigFromInfoPlist = (__bridge NSDictionary *)CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)kTSKConfiguration);
+    if (trustKitConfigFromInfoPlist)
+    {
+        TSKLog(@"Configuration supplied via the App's Info.plist");
+        [TrustKit initSharedInstanceWithConfiguration:trustKitConfigFromInfoPlist];
+    }
+}
 
 - (instancetype)initWithConfiguration:(NSDictionary<TSKGlobalConfigurationKey, id> *)trustKitConfig
 {
@@ -281,21 +282,3 @@ void TSKLog(NSString *format, ...)
 }
 
 @end
-
-
-#pragma mark TrustKit Implicit Initialization via Library Constructor
-
-
-// __attribute__((constructor)) static void initializeWithInfoPlist(int argc, const char **argv)
-// {
-//     // TrustKit just got started in the App
-//     CFBundleRef appBundle = CFBundleGetMainBundle();
-    
-//     // Retrieve the configuration from the App's Info.plist file
-//     NSDictionary *trustKitConfigFromInfoPlist = (__bridge NSDictionary *)CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)kTSKConfiguration);
-//     if (trustKitConfigFromInfoPlist)
-//     {
-//         TSKLog(@"Configuration supplied via the App's Info.plist");
-//         [TrustKit initSharedInstanceWithConfiguration:trustKitConfigFromInfoPlist];
-//     }
-// }
