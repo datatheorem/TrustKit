@@ -181,6 +181,12 @@ NS_ASSUME_NONNULL_BEGIN
 #pragma mark Usage in Multi-Instance Mode
 
 /**
+ * Initialize a local TrustKit instance with configuration from PList.
+ **/
+- (instancetype)initFromPlistConfiguration;
+
+
+/**
  See `-initWithConfiguration:sharedContainerIdentifier:`
  
  @param trustKitConfig A dictionary containing various keys for configuring the SSL pinning policy.
