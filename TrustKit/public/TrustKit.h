@@ -183,7 +183,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * Initialize a local TrustKit instance with configuration from PList.
  **/
-- (instancetype)initFromPlistConfiguration;
+- (instancetype)initConfigurationFromPlist;
 
 
 /**

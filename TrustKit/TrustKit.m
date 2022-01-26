@@ -116,7 +116,7 @@ void TSKLog(NSString *format, ...)
 
 #pragma mark Instance Initialization
 
-- (instancetype)initFromPlistConfiguration {
+- (instancetype)initConfigurationFromPlist {
 	// TrustKit just got started in the App
     CFBundleRef appBundle = CFBundleGetMainBundle();
     
@@ -125,8 +125,13 @@ void TSKLog(NSString *format, ...)
     if (trustKitConfigFromInfoPlist)
     {
         TSKLog(@"Configuration supplied via the App's Info.plist");
-        [TrustKit initSharedInstanceWithConfiguration:trustKitConfigFromInfoPlist];
+        return [self initWithConfiguration:trustKitConfigFromInfoPlist
+                 sharedContainerIdentifier:nil];
     }
+		
+    @throw([NSException exceptionWithName:@"Cannot find the plist TrustKit key configuration"
+                                   reason:@"Tried to fill with `TSKConfiguration` as configuration"
+                                 userInfo:nil]);
 }
 
 - (instancetype)initWithConfiguration:(NSDictionary<TSKGlobalConfigurationKey, id> *)trustKitConfig
