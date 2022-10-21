@@ -40,7 +40,13 @@ TSKTrustEvaluationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *s
     CFRelease(SslPolicy);
     
     SecTrustResultType trustResult = 0;
-    if (SecTrustEvaluate(serverTrust, &trustResult) != errSecSuccess)
+    CFErrorRef error;
+    bool isServerTrusted = SecTrustEvaluateWithError(serverTrust, &error);
+    if (isServerTrusted) {
+        trustResult = 1;
+    }
+    
+    if (!isServerTrusted)
     {
         TSKLog(@"SecTrustEvaluate error for %@", serverHostname);
         CFRelease(serverTrust);

@@ -275,8 +275,14 @@ static unsigned int getAsn1HeaderSize(NSString *publicKeyType, NSNumber *publicK
     
     // Get a public key reference for the certificate from the trust
     SecTrustResultType result;
-    status = SecTrustEvaluate(trust, &result);
-    if (status != errSecSuccess)
+    CFErrorRef error;
+    status = SecTrustEvaluateWithError(trust, &error);
+    
+    if (status) {
+        result = 1;
+    }
+    
+    if (!status)
     {
         TSKLog(@"Could not evaluate trust for the certificate, got status %d", status);
         CFRelease(trust);
