@@ -248,6 +248,15 @@
 		8CF27AA21F01BB7B009369B0 /* TSKLoggerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF27AA11F01BB7B009369B0 /* TSKLoggerTests.m */; };
 		8CF27AA31F01BB7B009369B0 /* TSKLoggerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF27AA11F01BB7B009369B0 /* TSKLoggerTests.m */; };
 		8CF27AA41F01BB7B009369B0 /* TSKLoggerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF27AA11F01BB7B009369B0 /* TSKLoggerTests.m */; };
+		B005E3E829B85EBA007C3D84 /* pinning_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = B005E3E729B85EBA007C3D84 /* pinning_utils.m */; };
+		B005E3E929B85EBA007C3D84 /* pinning_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = B005E3E729B85EBA007C3D84 /* pinning_utils.m */; };
+		B005E3EB29B85EBA007C3D84 /* pinning_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = B005E3E729B85EBA007C3D84 /* pinning_utils.m */; };
+		B005E3ED29B85EBA007C3D84 /* pinning_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = B005E3E729B85EBA007C3D84 /* pinning_utils.m */; };
+		B005E3EF29B85EBA007C3D84 /* pinning_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = B005E3E729B85EBA007C3D84 /* pinning_utils.m */; };
+		B005E3F129B8C2F8007C3D84 /* pinning_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = B005E3F029B85ED0007C3D84 /* pinning_utils.h */; };
+		B005E3F229B8C2F8007C3D84 /* pinning_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = B005E3F029B85ED0007C3D84 /* pinning_utils.h */; };
+		B005E3F329B8C2F9007C3D84 /* pinning_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = B005E3F029B85ED0007C3D84 /* pinning_utils.h */; };
+		B005E3F429B8C2FA007C3D84 /* pinning_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = B005E3F029B85ED0007C3D84 /* pinning_utils.h */; };
 		FC049B3A1EECD1B000FDC5F4 /* anchor-ca.cert.pem in Resources */ = {isa = PBXBuildFile; fileRef = FCC1DD051EECD19E00AB3D81 /* anchor-ca.cert.pem */; };
 		FC049B3B1EECD1B000FDC5F4 /* anchor-fake.yahoo.com.cert.pem in Resources */ = {isa = PBXBuildFile; fileRef = FCC1DD061EECD19E00AB3D81 /* anchor-fake.yahoo.com.cert.pem */; };
 		FC049B3C1EECD1B000FDC5F4 /* anchor-intermediate.cert.pem in Resources */ = {isa = PBXBuildFile; fileRef = FCC1DD071EECD19E00AB3D81 /* anchor-intermediate.cert.pem */; };
@@ -424,6 +433,8 @@
 		8CF27A931F01A0B8009369B0 /* TSKEndToEndNSURLSessionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKEndToEndNSURLSessionTests.m; sourceTree = "<group>"; };
 		8CF27A971F01B341009369B0 /* TSKSwizzlingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKSwizzlingTests.m; sourceTree = "<group>"; };
 		8CF27AA11F01BB7B009369B0 /* TSKLoggerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKLoggerTests.m; sourceTree = "<group>"; };
+		B005E3E729B85EBA007C3D84 /* pinning_utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = pinning_utils.m; path = Pinning/pinning_utils.m; sourceTree = "<group>"; };
+		B005E3F029B85ED0007C3D84 /* pinning_utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = pinning_utils.h; path = Pinning/pinning_utils.h; sourceTree = "<group>"; };
 		FC1A08FF1E57A4BB0055B12C /* TSKPinningValidatorResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKPinningValidatorResult.m; sourceTree = "<group>"; };
 		FC1A09081E57AC450055B12C /* TSKSPKIHashCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKSPKIHashCache.h; path = Pinning/TSKSPKIHashCache.h; sourceTree = "<group>"; };
 		FC1A09091E57AC450055B12C /* TSKSPKIHashCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKSPKIHashCache.m; path = Pinning/TSKSPKIHashCache.m; sourceTree = "<group>"; };
@@ -750,6 +761,8 @@
 				FC1A09081E57AC450055B12C /* TSKSPKIHashCache.h */,
 				FC1A09091E57AC450055B12C /* TSKSPKIHashCache.m */,
 				FC1A09121E57C6820055B12C /* TSKPublicKeyAlgorithm.h */,
+				B005E3E729B85EBA007C3D84 /* pinning_utils.m */,
+				B005E3F029B85ED0007C3D84 /* pinning_utils.h */,
 			);
 			name = Pinning;
 			sourceTree = "<group>";
@@ -859,6 +872,7 @@
 				6B2B06AD1B05154A00FC749E /* TSKBackgroundReporter.h in Headers */,
 				8C84CCE31D6E5D5A009B3E7D /* trie_node.h in Headers */,
 				7033D35E248FE84100BDFF50 /* TSKTrustKitConfig.h in Headers */,
+				B005E3F429B8C2FA007C3D84 /* pinning_utils.h in Headers */,
 				8C84CCE01D6E5D5A009B3E7D /* string_util.h in Headers */,
 				7033D36E248FE84100BDFF50 /* TSKPinningValidator.h in Headers */,
 				8CD5F7311BC5ED4A005801D8 /* TSKNSURLConnectionDelegateProxy.h in Headers */,
@@ -890,6 +904,7 @@
 				8C84CBA61D6E0981009B3E7D /* TSKBackgroundReporter.h in Headers */,
 				8C84CCE51D6E5D5A009B3E7D /* trie_node.h in Headers */,
 				7033D360248FE84100BDFF50 /* TSKTrustKitConfig.h in Headers */,
+				B005E3F229B8C2F8007C3D84 /* pinning_utils.h in Headers */,
 				8C84CCE21D6E5D5A009B3E7D /* string_util.h in Headers */,
 				7033D370248FE84100BDFF50 /* TSKPinningValidator.h in Headers */,
 				8C84CBA71D6E0981009B3E7D /* TSKNSURLConnectionDelegateProxy.h in Headers */,
@@ -919,6 +934,7 @@
 				8C84CCCF1D6E5D5A009B3E7D /* tsk_assert.h in Headers */,
 				8CA6CC141BAE2B6600BDA419 /* TSKReportsRateLimiter.h in Headers */,
 				8C84CCE41D6E5D5A009B3E7D /* trie_node.h in Headers */,
+				B005E3F329B8C2F9007C3D84 /* pinning_utils.h in Headers */,
 				8C84CCE11D6E5D5A009B3E7D /* string_util.h in Headers */,
 				7033D373248FE84100BDFF50 /* TSKPinningValidatorCallback.h in Headers */,
 				8CD5F7321BC5ED4A005801D8 /* TSKNSURLConnectionDelegateProxy.h in Headers */,
@@ -953,6 +969,7 @@
 				8CC5D23E1D6E64D10074F515 /* TSKBackgroundReporter.h in Headers */,
 				8CC5D23F1D6E64D10074F515 /* trie_node.h in Headers */,
 				7033D361248FE84100BDFF50 /* TSKTrustKitConfig.h in Headers */,
+				B005E3F129B8C2F8007C3D84 /* pinning_utils.h in Headers */,
 				8CC5D2401D6E64D10074F515 /* string_util.h in Headers */,
 				7033D371248FE84100BDFF50 /* TSKPinningValidator.h in Headers */,
 				8CC5D2411D6E64D10074F515 /* TSKNSURLConnectionDelegateProxy.h in Headers */,
@@ -1267,6 +1284,7 @@
 				FC1A090E1E57AC450055B12C /* TSKSPKIHashCache.m in Sources */,
 				8C9EBE031B619BBE00CA7EE0 /* TSKReportsRateLimiter.m in Sources */,
 				8C5D98B31CEFF079008E654B /* parse_configuration.m in Sources */,
+				B005E3E829B85EBA007C3D84 /* pinning_utils.m in Sources */,
 				8C84CCE91D6E5D5A009B3E7D /* trie_search.c in Sources */,
 				6B2B06AF1B05157400FC749E /* TSKBackgroundReporter.m in Sources */,
 				8CD5F74B1BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.m in Sources */,
@@ -1313,6 +1331,7 @@
 				FC1A09101E57AC450055B12C /* TSKSPKIHashCache.m in Sources */,
 				8C84CB921D6E0981009B3E7D /* TSKReportsRateLimiter.m in Sources */,
 				8C84CB931D6E0981009B3E7D /* parse_configuration.m in Sources */,
+				B005E3ED29B85EBA007C3D84 /* pinning_utils.m in Sources */,
 				8C84CCEB1D6E5D5A009B3E7D /* trie_search.c in Sources */,
 				8C84CB941D6E0981009B3E7D /* TSKBackgroundReporter.m in Sources */,
 				8C84CB951D6E0981009B3E7D /* TSKNSURLSessionDelegateProxy.m in Sources */,
@@ -1359,6 +1378,7 @@
 				0DB3B67C1DA3B24100DA730D /* init_registry_tables.c in Sources */,
 				8C84CC0D1D6E3C67009B3E7D /* vendor_identifier.m in Sources */,
 				8C5D98B41CEFF079008E654B /* parse_configuration.m in Sources */,
+				B005E3E929B85EBA007C3D84 /* pinning_utils.m in Sources */,
 				8C8716B31B23A9F700267E1D /* TSKPinFailureReport.m in Sources */,
 				8C8716B41B23A9FA00267E1D /* reporting_utils.m in Sources */,
 				8C8716B81B23AA0D00267E1D /* TrustKit.m in Sources */,
@@ -1386,6 +1406,7 @@
 				8CA6CC1A1BAE2B6600BDA419 /* TSKBackgroundReporter.m in Sources */,
 				8CA6CC1C1BAE2B6600BDA419 /* TSKPinFailureReport.m in Sources */,
 				8C84CCEA1D6E5D5A009B3E7D /* trie_search.c in Sources */,
+				B005E3EB29B85EBA007C3D84 /* pinning_utils.m in Sources */,
 				8CD5F74D1BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.m in Sources */,
 				8C5D98B51CEFF079008E654B /* parse_configuration.m in Sources */,
 				8C84CCD81D6E5D5A009B3E7D /* registry_search.c in Sources */,
@@ -1432,6 +1453,7 @@
 				FC1A09111E57AC450055B12C /* TSKSPKIHashCache.m in Sources */,
 				8CC5D2271D6E64D10074F515 /* TSKReportsRateLimiter.m in Sources */,
 				8CC5D2281D6E64D10074F515 /* parse_configuration.m in Sources */,
+				B005E3EF29B85EBA007C3D84 /* pinning_utils.m in Sources */,
 				8CC5D2291D6E64D10074F515 /* trie_search.c in Sources */,
 				8CC5D22A1D6E64D10074F515 /* TSKBackgroundReporter.m in Sources */,
 				8CC5D22B1D6E64D10074F515 /* TSKNSURLSessionDelegateProxy.m in Sources */,
