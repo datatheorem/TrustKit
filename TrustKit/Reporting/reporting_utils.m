@@ -10,7 +10,7 @@
  */
 
 #import "reporting_utils.h"
-
+#import "../Pinning/pinning_utils.h"
 
 NSArray<NSString *> *convertTrustToPemArray(SecTrustRef serverTrust)
 {
@@ -20,7 +20,7 @@ NSArray<NSString *> *convertTrustToPemArray(SecTrustRef serverTrust)
     CFIndex chainLen = SecTrustGetCertificateCount(serverTrust);
     for (CFIndex i=0;i<chainLen;i++)
     {
-        SecCertificateRef certificate = SecTrustGetCertificateAtIndex(serverTrust, i);
+        SecCertificateRef certificate = getCertificateAtIndex(serverTrust, i);
         CFDataRef certificateData = SecCertificateCopyData(certificate);
         
         // Craft the PEM certificate
