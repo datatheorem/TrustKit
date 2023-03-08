@@ -9,7 +9,6 @@
 
  */
 
-#import <Foundation/Foundation.h>
 #import "pinning_utils.h"
 
 bool evaluateTrust(SecTrustRef serverTrust, SecTrustResultType *trustResult, NSError **error) {
