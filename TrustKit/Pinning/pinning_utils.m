@@ -16,7 +16,7 @@
 bool evaluateTrust(SecTrustRef serverTrust, SecTrustResultType *trustResult, NSError **error) {
     bool isTrusted = false;
 
-    if (@available(iOS 12.0, macOS 14.0, *)) {
+    if (@available(iOS 12.0, macOS 14.0, tvOS 12.0, watchOS 5.0, *)) {
         CFErrorRef errorRef;
         isTrusted = SecTrustEvaluateWithError(serverTrust, &errorRef);
         OSStatus status = SecTrustGetTrustResult(serverTrust, trustResult);
@@ -77,7 +77,7 @@ SecCertificateRef getCertificateAtIndex(SecTrustRef serverTrust, CFIndex index) 
 }
 
 SecKeyRef copyKey(SecTrustRef serverTrust) {
-    if (@available(iOS 14.0, macOS 11.0, *)) {
+    if (@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)) {
         return SecTrustCopyKey(serverTrust);
     } else {
 #pragma clang diagnostic push
