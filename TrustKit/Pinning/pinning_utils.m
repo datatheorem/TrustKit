@@ -10,6 +10,8 @@
  */
 
 #import "pinning_utils.h"
+#include <dlfcn.h>
+#include "TargetConditionals.h"
 
 bool evaluateTrust(SecTrustRef serverTrust, SecTrustResultType *trustResult, NSError **error) {
     bool isTrusted = false;
@@ -49,25 +51,33 @@ bool evaluateTrust(SecTrustRef serverTrust, SecTrustResultType *trustResult, NSE
 }
 
 SecCertificateRef getCertificateAtIndex(SecTrustRef serverTrust, CFIndex index) {
-    // Extract the certificate
-    SecCertificateRef certificate;
-    if (@available(macOS 12.0, iOS 15.0, *)) {
-        CFArrayRef certs = SecTrustCopyCertificateChain(serverTrust);
+    NSInteger majorVersion = [[NSProcessInfo processInfo] operatingSystemVersion].majorVersion;
+#if TARGET_OS_WATCH
+    int osVersionThreshold = 8; // watchOS 8+
+#elif TARGET_OS_IPHONE || TARGET_OS_SIMULATOR || TARGET_OS_IOS
+    int osVersionThreshold = 15; // iOS 15+, tvOS 15+
+#else
+    int osVersionThreshold = 12; // macOS 12+
+#endif
+    SecCertificateRef certificate = NULL;
+    void *_Security = dlopen("Security.framework/Security", RTLD_NOW);
+    if (majorVersion >= osVersionThreshold)
+    {
+        CFArrayRef (*_SecTrustCopyCertificateChain)(SecTrustRef) = dlsym(_Security, "SecTrustCopyCertificateChain");
+        CFArrayRef certs = _SecTrustCopyCertificateChain(serverTrust);
         certificate = (SecCertificateRef)CFArrayGetValueAtIndex(certs, index);
         CFRelease(certs);
     }
     else
     {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-        certificate = SecTrustGetCertificateAtIndex(serverTrust, index);
-#pragma clang diagnostic pop
+        SecCertificateRef (*_SecTrustGetCertificateAtIndex)(SecTrustRef, CFIndex) = dlsym(_Security, "SecTrustGetCertificateAtIndex");
+        certificate = _SecTrustGetCertificateAtIndex(serverTrust, index);
     }
     return certificate;
 }
 
 SecKeyRef copyKey(SecTrustRef serverTrust) {
-    if (@available(iOS 14.0, *)) {
+    if (@available(iOS 14.0, macOS 11.0, *)) {
         return SecTrustCopyKey(serverTrust);
     } else {
 #pragma clang diagnostic push
