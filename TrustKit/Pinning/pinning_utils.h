@@ -25,17 +25,19 @@
 #ifndef TrustKit_pinning_utils_h
 #define TrustKit_pinning_utils_h
 
+
 /**
- Evaluate trust for the specified certificate and policies
+ Evaluate the certificate chain for the specified trust management object
  
- This function invokes SecTrustEvaluateWithError() on iOS12+, macOS14+ and SecTrustEvaluate() otherwise.
+ This function invokes SecTrustEvaluateWithError().
  
  @param trust The trust management object to evaluate
- @param trsustResult On return, points to a result type reflecting the result of this evaluation.
- @param error An error pointer the method uses to return an error when trust evaluation fails. Set to nil to ignore the error.
- @return A boolean value indicating whether the certificate is trusted
+ @param error An error pointer the method uses to return an error when trust evaluation fails with the certificate chain. Set to nil to ignore the error.
+ @return A boolean value indicating whether the certificate is trusted according to the certificate chain of the trust object
  */
-bool evaluateTrust(SecTrustRef serverTrust, SecTrustResultType *trustResult, NSError **error);
+
+bool evaluateCertificateChainTrust(SecTrustRef serverTrust, NSError **error);
+
 
 /**
  Returns a specific certificate from the certificate chain used to evaluate trust.

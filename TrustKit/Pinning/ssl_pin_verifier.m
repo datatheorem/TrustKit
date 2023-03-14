@@ -40,15 +40,19 @@ TSKTrustEvaluationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *s
     SecTrustSetPolicies(serverTrust, SslPolicy);
     CFRelease(SslPolicy);
     
-    NSError *error;
+    NSError *error = NULL;
     SecTrustResultType trustResult = 0;
-    if (!evaluateTrust(serverTrust, &trustResult, &error) && (trustResult == kSecTrustResultInvalid))
+    bool isChainTrusted = evaluateCertificateChainTrust(serverTrust, &error);
+    OSStatus status = SecTrustGetTrustResult(serverTrust, &trustResult);
+    bool trustResultInvalid = !isChainTrusted && (trustResult == kSecTrustResultInvalid);
+    bool getResultFailed = status != errSecSuccess;
+    if (trustResultInvalid || getResultFailed)
     {
         TSKLog(@"SecTrustEvaluate error for %@: %@", serverHostname, [error localizedDescription]);
         CFRelease(serverTrust);
         return TSKTrustEvaluationErrorInvalidParameters;
     }
-    
+
     if ((trustResult != kSecTrustResultUnspecified) && (trustResult != kSecTrustResultProceed))
     {
         // Default SSL validation failed
@@ -102,7 +106,7 @@ TSKTrustEvaluationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *s
     
     // Retrieve the OS X host's list of user-defined CA certificates
     CFArrayRef userRootCerts;
-    OSStatus status = SecTrustSettingsCopyCertificates(kSecTrustSettingsDomainUser, &userRootCerts);
+    status = SecTrustSettingsCopyCertificates(kSecTrustSettingsDomainUser, &userRootCerts);
     if (status == errSecSuccess)
     {
         [customRootCerts addObjectsFromArray:(__bridge NSArray *)(userRootCerts)];

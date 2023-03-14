@@ -13,23 +13,17 @@
 #include <dlfcn.h>
 #include "TargetConditionals.h"
 
-bool evaluateTrust(SecTrustRef serverTrust, SecTrustResultType *trustResult, NSError **error) {
+
+bool evaluateCertificateChainTrust(SecTrustRef serverTrust, NSError **error) {
     CFErrorRef errorRef;
-    bool isTrusted = SecTrustEvaluateWithError(serverTrust, &errorRef);
-    OSStatus status = SecTrustGetTrustResult(serverTrust, trustResult);
-    if (status != errSecSuccess)
-    {
-        isTrusted = false;
-        NSString *errDescription = [NSString stringWithFormat:@"got status %d", status];
+    bool chainTrusted = SecTrustEvaluateWithError(serverTrust, &errorRef);
+    if (errorRef != NULL) {
+        chainTrusted = false;
         if (error != NULL) {
-            *error = [[NSError alloc] initWithDomain:@"com.datatheorem.trustkit" code:1 userInfo:@{NSLocalizedDescriptionKey:errDescription}];
+            *error = (__bridge_transfer NSError *)errorRef;
         }
     }
-    else if (!isTrusted && (error != NULL))
-    {
-        *error = (__bridge_transfer NSError *)errorRef;
-    }
-    return isTrusted;
+    return chainTrusted;
 }
 
 SecCertificateRef getCertificateAtIndex(SecTrustRef serverTrust, CFIndex index) {
