@@ -14,41 +14,21 @@
 #include "TargetConditionals.h"
 
 bool evaluateTrust(SecTrustRef serverTrust, SecTrustResultType *trustResult, NSError **error) {
-    bool isTrusted = false;
-
-    if (@available(iOS 12.0, macOS 14.0, tvOS 12.0, watchOS 5.0, *)) {
-        CFErrorRef errorRef;
-        isTrusted = SecTrustEvaluateWithError(serverTrust, &errorRef);
-        OSStatus status = SecTrustGetTrustResult(serverTrust, trustResult);
-        if (status != errSecSuccess)
-        {
-            isTrusted = false;
-            NSString *errDescription = [NSString stringWithFormat:@"got status %d", status];
-            if (error != NULL) {
-                *error = [[NSError alloc] initWithDomain:@"com.datatheorem.trustkit" code:1 userInfo:@{NSLocalizedDescriptionKey:errDescription}];
-            }
-        }
-        else if (!isTrusted && (error != NULL))
-        {
-            *error = (__bridge_transfer NSError *)errorRef;
-        }
-    }
-    else
+    CFErrorRef errorRef;
+    bool isTrusted = SecTrustEvaluateWithError(serverTrust, &errorRef);
+    OSStatus status = SecTrustGetTrustResult(serverTrust, trustResult);
+    if (status != errSecSuccess)
     {
-        // Use pragmas to supress deprecated warnings
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-        OSStatus status = SecTrustEvaluate(serverTrust, trustResult);
-#pragma clang diagnostic pop
-        if (status == errSecSuccess) {
-            isTrusted = true;
-        }
-        else if (error != NULL){
-            NSString *errDescription = [NSString stringWithFormat:@"got status %d", status];
-            *error = [[NSError alloc] initWithDomain:@"com.datatheorem.trustkit" code:2 userInfo:@{NSLocalizedDescriptionKey:errDescription}];
+        isTrusted = false;
+        NSString *errDescription = [NSString stringWithFormat:@"got status %d", status];
+        if (error != NULL) {
+            *error = [[NSError alloc] initWithDomain:@"com.datatheorem.trustkit" code:1 userInfo:@{NSLocalizedDescriptionKey:errDescription}];
         }
     }
-
+    else if (!isTrusted && (error != NULL))
+    {
+        *error = (__bridge_transfer NSError *)errorRef;
+    }
     return isTrusted;
 }
 
