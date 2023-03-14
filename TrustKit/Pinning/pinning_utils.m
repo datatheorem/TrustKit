@@ -24,7 +24,9 @@ bool evaluateTrust(SecTrustRef serverTrust, SecTrustResultType *trustResult, NSE
         {
             isTrusted = false;
             NSString *errDescription = [NSString stringWithFormat:@"got status %d", status];
-            *error = [[NSError alloc] initWithDomain:@"com.datatheorem.trustkit" code:1 userInfo:@{NSLocalizedDescriptionKey:errDescription}];
+            if (error != NULL) {
+                *error = [[NSError alloc] initWithDomain:@"com.datatheorem.trustkit" code:1 userInfo:@{NSLocalizedDescriptionKey:errDescription}];
+            }
         }
         else if (!isTrusted && (error != NULL))
         {
