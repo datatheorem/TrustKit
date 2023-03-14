@@ -57,14 +57,3 @@ SecCertificateRef getCertificateAtIndex(SecTrustRef serverTrust, CFIndex index) 
     }
     return certificate;
 }
-
-SecKeyRef copyKey(SecTrustRef serverTrust) {
-    if (@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)) {
-        return SecTrustCopyKey(serverTrust);
-    } else {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-        return SecTrustCopyPublicKey(serverTrust);
-#pragma clang diagnostic pop
-    }
-}

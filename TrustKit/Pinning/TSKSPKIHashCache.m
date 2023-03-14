@@ -283,7 +283,7 @@ static unsigned int getAsn1HeaderSize(NSString *publicKeyType, NSNumber *publicK
         return nil;
     }
     
-    SecKeyRef publicKey = copyKey(trust);
+    SecKeyRef publicKey = SecTrustCopyKey(trust);
     CFRelease(trust);
     return publicKey;
 }

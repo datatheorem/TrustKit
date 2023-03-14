@@ -47,13 +47,4 @@ bool evaluateTrust(SecTrustRef serverTrust, SecTrustResultType *trustResult, NSE
  */
 SecCertificateRef getCertificateAtIndex(SecTrustRef serverTrust, CFIndex index);
 
-/**
- Returns the public key for a leaf certificate after it has been evaluated.
- 
- This function invokes SecTrustCopyKey() on iOS 14+ and SecTrustCopyPublicKey otherwise
- @param trust The trust management object to evaluate
- @return The leaf certificate's public key, or nil if it the public key could not be extracted
- */
-SecKeyRef copyKey(SecTrustRef serverTrust);
-
 #endif
