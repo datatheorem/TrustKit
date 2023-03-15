@@ -7,125 +7,129 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		02EC8FB63AE0BB3B82DF4255DAE9D831 /* ssl_pin_verifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DEC34F081175D430CB1BAFE6CB9472 /* ssl_pin_verifier.m */; };
-		06B6E82A632A72B04EB5F2AB2D2DA377 /* TSKPinningValidatorResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 8120ADDF82D8983141A3A9FB631BF9B4 /* TSKPinningValidatorResult.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		07741FD96AACCC4C10C9309F77127361 /* reporting_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6769B15D2AED29A909E434AB9DC9DDCA /* reporting_utils.m */; };
-		09458F3556822CDC66E13A917C28B4CB /* TSKPinFailureReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 22068DAB9E88FD17A4A11CE816E11784 /* TSKPinFailureReport.m */; };
-		0A90201C8546D1F8B81DBCA75BA0C439 /* string_util.h in Headers */ = {isa = PBXBuildFile; fileRef = A7ECFC1EB23AF4A11C98062D57F4FF4C /* string_util.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		05EF6D1F9F530008DAD9E6607874D46C /* configuration_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = DC864557B6A017F98C44DB984F0ABCBE /* configuration_utils.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		0A9A545C087FFF43F7221042625EA922 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 952925E838A0DE4D7BDC4EE54022633D /* Foundation.framework */; };
-		1865ECD64E1DF6EFF3C832CC36E9AA71 /* TSKNSURLSessionDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D217C2E661A2E9657C40D8663B03 /* TSKNSURLSessionDelegateProxy.m */; };
-		197C482A4D2407B3986B2328693CB9A7 /* TSKPublicKeyAlgorithm.h in Headers */ = {isa = PBXBuildFile; fileRef = 0BDA57F4151968508D3A853304BF745C /* TSKPublicKeyAlgorithm.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		1C1F2015AE2B23FBAD725D42FDC61B61 /* TSKNSURLConnectionDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BC0733CBBB938A3219273F5152589A /* TSKNSURLConnectionDelegateProxy.m */; };
-		1FDD4BEFF3704E882780982D569CCE0F /* TrustKit.m in Sources */ = {isa = PBXBuildFile; fileRef = AF239E4A0C84C58417851939EECCF064 /* TrustKit.m */; };
-		20B922A45370705941DC3C5DB4255F84 /* registry_types.h in Headers */ = {isa = PBXBuildFile; fileRef = AABD036852EAAB6A3416E3391383D7B4 /* registry_types.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		21743F2ABD8D1C9FD79CB6F9A8D8A647 /* reporting_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 72A92CF385503795D84B5790C7CB9F63 /* reporting_utils.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		22DE05AFC5A7CA69CE7E3CFAACE790FB /* TrustKit-library-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 605A22F67A88268EC7A380D9EFB69D65 /* TrustKit-library-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		2752A38EFDB2FA6440F2764367E7995F /* TSKPinningValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = AF61577F765F5E6860420D77EAF371E2 /* TSKPinningValidator.m */; };
-		27704E789CB1DCF9054AD41074C1CF7A /* TSKPinningValidatorResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 7372E7BE9DF888DEE33D9055D701AB0F /* TSKPinningValidatorResult.m */; };
-		27FBD818E593E4233056C00152E8B982 /* TSKLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 16F43C9D6D6C19146D37DA4C6B1557CC /* TSKLog.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		28F3C944A8B064B25975DB699A1D1DC5 /* TSKPinningValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 440369D834028ACFF05DB1456887CE1F /* TSKPinningValidator.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		2A0064474DD5142AA0B303BF40B327EE /* registry_search.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E1BCEA3944EE482D8B99A2E3B19CB44 /* registry_search.c */; };
-		2E6B6806A2B512D815D0F7A820A700E9 /* TSKBackgroundReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 19710647ECF3A61C0D22BB1571558069 /* TSKBackgroundReporter.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		309467841BF41C3F6F4D99F032779D83 /* TSKBackgroundReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EEB286B838DE6B973E18B9A6AF3081 /* TSKBackgroundReporter.m */; };
-		34F8DA993BC1CE49B3097D105770B2EB /* registry_tables.h in Headers */ = {isa = PBXBuildFile; fileRef = 3177F6935C7A2B22BC0AAA0A5738BEBE /* registry_tables.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		3C9882FC030EC921A3BD2FF2B4D83571 /* parse_configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = DECBB879FD21B57C5D5D9C3C3945BD8B /* parse_configuration.m */; };
-		3D7FD6CA4C020C65B7D9A1C116FD206E /* TSKPinningValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = AF61577F765F5E6860420D77EAF371E2 /* TSKPinningValidator.m */; };
-		414501E0D556FF47C77279801585B36A /* TSKNSURLConnectionDelegateProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 68609B24A6BEAD384A5DE0A4C49A12DC /* TSKNSURLConnectionDelegateProxy.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		429C2AD58E7709E356ED4133E550BC23 /* trie_search.h in Headers */ = {isa = PBXBuildFile; fileRef = 49FB1947B06D37C70348AA4A39820448 /* trie_search.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		47596AD5FE108870CD81D8B2B46B7D98 /* TSKTrustKitConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = C5F9C64D945A36933C5EF47F9E745878 /* TSKTrustKitConfig.m */; };
-		48AA56BDE9F70A76BBEAE694D7075544 /* RSSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = AF6C241E925B422FA6DE1DDE153D9323 /* RSSwizzle.m */; };
-		4EC2DE95462A9861687E7190C31ED9DD /* vendor_identifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 0FF6277EF3A39218D37A86DAB771CF2D /* vendor_identifier.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		5694A8D102EB3EC2180733A9C21A775D /* TSKNSURLConnectionDelegateProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 68609B24A6BEAD384A5DE0A4C49A12DC /* TSKNSURLConnectionDelegateProxy.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		0CCE50CFE5AB18DAA7193DD53190AD36 /* TSKPinningValidatorResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 63F207DED9563F5A283F744CE2E49364 /* TSKPinningValidatorResult.m */; };
+		0F9E0C5FEA8868D92546A97AD92FFE39 /* TSKSPKIHashCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 8765B6F6001102B03D3DF15ED56B7CEB /* TSKSPKIHashCache.m */; };
+		14EA8A6FC995C46A824A26A45F1F96CE /* TSKPinningValidatorResult.h in Headers */ = {isa = PBXBuildFile; fileRef = FFF63B8A826A14217249708081574D0A /* TSKPinningValidatorResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		150361AA80D1CFDDEAAC5125E9DECA85 /* TSKReportsRateLimiter.m in Sources */ = {isa = PBXBuildFile; fileRef = FE7F333A3418AD33FB2BBAFFA815ED9B /* TSKReportsRateLimiter.m */; };
+		154F55397BBD2B5E2173B904A2BD7500 /* pinning_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 962BAD45657403B8C26C9D886C567816 /* pinning_utils.m */; };
+		16B9ECBA70AD3DE4FFF4C84FBA702187 /* RSSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = A9EBA37E53A047D5456C5B72C6F9CC03 /* RSSwizzle.m */; };
+		231178363C2F4FD53C342734EB960068 /* vendor_identifier.m in Sources */ = {isa = PBXBuildFile; fileRef = B032581A3D2ED6A4888EF3FF670B5C96 /* vendor_identifier.m */; };
+		25CF6CED5FCAC99C428A219A11971FFB /* TSKReportsRateLimiter.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A8E537B2031C5A4EB9191A33A3B439A /* TSKReportsRateLimiter.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		261F601672D08AD8E48616DCDB50FCC8 /* reporting_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = BBC622863D57973AE572D6E01C99C58A /* reporting_utils.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		28FB231D2685267CAA40970A17961726 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8860120390AD58734B53F2630A63CFB9 /* TrustKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		2C4BD7921E45A9687564195DC4EC1357 /* TSKSPKIHashCache.h in Headers */ = {isa = PBXBuildFile; fileRef = E856C22EBF87F9433142E082758513E1 /* TSKSPKIHashCache.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		2E775C39EA458962807364AC9BB6B2D1 /* TSKPinFailureReport.h in Headers */ = {isa = PBXBuildFile; fileRef = FA0D15B0FBAE13CF97A1BCDFAF6A4DD0 /* TSKPinFailureReport.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		2F075E0E615BB03A36393EAE0EE477BF /* TSKPinningValidator_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 061572B9A26B6AB85E99CC755D74461A /* TSKPinningValidator_Private.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		3056EEF6184845EDA372D19EF544B3F9 /* TSKPinFailureReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A27E33C0BE54975454210F8751EE1C7 /* TSKPinFailureReport.m */; };
+		32EC009402CE346BD49B4200632BE95E /* tsk_assert.h in Headers */ = {isa = PBXBuildFile; fileRef = BAA277EFFA96106144227F7BFB18824E /* tsk_assert.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		33E025C2FCECE0ECD708559789F71BA2 /* TSKSPKIHashCache.h in Headers */ = {isa = PBXBuildFile; fileRef = E856C22EBF87F9433142E082758513E1 /* TSKSPKIHashCache.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		38F525F6A3C813DE39F5B283AEE76683 /* TSKPinningValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = AF9AB76037C7FACC221F748C70644765 /* TSKPinningValidator.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		3B6C8AD71B072EC7324138C213333CAF /* TrustKit.m in Sources */ = {isa = PBXBuildFile; fileRef = FE10BF35766133FEA92D45B1B18239E2 /* TrustKit.m */; };
+		405DF65B4F9B7E98F1C87E13B0155D5D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 952925E838A0DE4D7BDC4EE54022633D /* Foundation.framework */; };
+		42B519F967F7513E806C633A1E020CC3 /* RSSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = A9EBA37E53A047D5456C5B72C6F9CC03 /* RSSwizzle.m */; };
+		459404B012605EA359AD8980F093855E /* pinning_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 962BAD45657403B8C26C9D886C567816 /* pinning_utils.m */; };
+		49C6E08AE00CD9D068F82FB382223C8C /* reporting_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D57F0BB2B3F532421960A19054C203F /* reporting_utils.m */; };
+		4A098352E743C732B557154DDAF414D0 /* configuration_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CAE89BC9EFD539B909489DF0A229627 /* configuration_utils.m */; };
+		4DC50AC2A653D62729B9B16C8392C48C /* TSKPublicKeyAlgorithm.h in Headers */ = {isa = PBXBuildFile; fileRef = 06DB37C9D0EB07C98149F0165970B207 /* TSKPublicKeyAlgorithm.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		4EE03FFD9D02DE052A3B1B82B9F660C5 /* registry_tables.h in Headers */ = {isa = PBXBuildFile; fileRef = 15D008F1E74C33D05AA0E2E57EF4ADD8 /* registry_tables.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		54BE1EE3EF53343E76540044AFFA4BE5 /* vendor_identifier.m in Sources */ = {isa = PBXBuildFile; fileRef = B032581A3D2ED6A4888EF3FF670B5C96 /* vendor_identifier.m */; };
+		55AFB1C0ACFFB7702BEB1AC6AEC35003 /* vendor_identifier.h in Headers */ = {isa = PBXBuildFile; fileRef = C8B25D057BC9C4873CB27CE04870BF17 /* vendor_identifier.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		581ACE79A47401B9107FFF43D3C5C61B /* TSKPinningValidatorResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 63F207DED9563F5A283F744CE2E49364 /* TSKPinningValidatorResult.m */; };
 		589D0ECBFCC9F5E034323639E62AA6ED /* Pods-TrustKitDemo-Swift-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 970FF9D7BECE1C530A3112EC3512A9F0 /* Pods-TrustKitDemo-Swift-dummy.m */; };
-		5C39044B65A9540AE16C020ED75310D8 /* TSKPinFailureReport.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FF79548F527403E8E8E9119AAF33C94 /* TSKPinFailureReport.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		624AF64FB43E2862A4BB872E3F04CA59 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 952925E838A0DE4D7BDC4EE54022633D /* Foundation.framework */; };
-		64B1B85F1C15F7A8566D4FF3DCF73018 /* TSKReportsRateLimiter.h in Headers */ = {isa = PBXBuildFile; fileRef = A6B934A3B770C8EAA5E6FA8BECDDF3C0 /* TSKReportsRateLimiter.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		5922C40C90CB7E32C8448B690E851FE4 /* TSKSPKIHashCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 8765B6F6001102B03D3DF15ED56B7CEB /* TSKSPKIHashCache.m */; };
+		5AFA073A2C91EEC2879158D98E220488 /* reporting_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D57F0BB2B3F532421960A19054C203F /* reporting_utils.m */; };
+		5F33329B9C2E39D561544BA793C4ED4A /* pinning_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 048AA9D686D38C8BAD4C0BD1436800BC /* pinning_utils.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		5F6C871754A68BA4A38E3CB5C15D0A0E /* trie_node.h in Headers */ = {isa = PBXBuildFile; fileRef = B9B8B8480C00597A01F41CC814D5F7F8 /* trie_node.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		5F81ABE935475D199B00036BC18C1808 /* TSKTrustKitConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 197639F98231BAC11A5E5F3A124E3B7F /* TSKTrustKitConfig.m */; };
+		61BE5B6DBF88A058CA322E62BC4DDFA2 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 8860120390AD58734B53F2630A63CFB9 /* TrustKit.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		63612A06817E3377B8F1F1744D550C6A /* init_registry_tables.c in Sources */ = {isa = PBXBuildFile; fileRef = A79377FED8268E50C0C0037814261984 /* init_registry_tables.c */; };
 		64F3F16E1E3C6E626C0B9F02630D2E60 /* Pods-TrustKitDemo-ObjC-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 22BE8D07C022E68D120FD9301962C07E /* Pods-TrustKitDemo-ObjC-dummy.m */; };
-		696A0335A7B08B124448FD3AEAC73B70 /* tsk_assert.c in Sources */ = {isa = PBXBuildFile; fileRef = CF70FE45A96267DB5C7D04886E3720CB /* tsk_assert.c */; };
-		69AD929459F70827B5B329B07D7F63EA /* init_registry_tables.c in Sources */ = {isa = PBXBuildFile; fileRef = 69E5FA76B4FF1E23A860CF8DAA78CAFB /* init_registry_tables.c */; };
-		6A51392663B261C9A4C96EA166874714 /* TSKPinningValidator_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 4616A2849166BB0D64C1D70E172C14BB /* TSKPinningValidator_Private.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		6B018C00ABFA15C0CD4C907DD8DF3915 /* TSKPinningValidator_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 4616A2849166BB0D64C1D70E172C14BB /* TSKPinningValidator_Private.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		6BE467F647CB803A753A8CDB97EDAB19 /* vendor_identifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E11FA84B22F847274F2A78662C46DE7 /* vendor_identifier.m */; };
-		7236DF519F791C1AB447F3289549B33F /* TSKTrustKitConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B896DC6718A96882DA6D923BA414AF4 /* TSKTrustKitConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		736C5F98AEB9F0A5488072811695C89D /* TSKPinningValidatorCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = AD2B8ED25889D3670D70CE0CAAB9135F /* TSKPinningValidatorCallback.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		74E58D67AA8476A57E52E59260B61715 /* trie_node.h in Headers */ = {isa = PBXBuildFile; fileRef = FDA13ACD031E2C93F25F8E63D1055FF2 /* trie_node.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		75EBC869ED1F5C0696D0A1F1A7088D96 /* TSKPinningValidatorCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = AD2B8ED25889D3670D70CE0CAAB9135F /* TSKPinningValidatorCallback.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		761B34452C9086B7FE75C68EF07A211F /* TrustKit-framework-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 91FE8D5E48E4923A2D9FFF2296D169C8 /* TrustKit-framework-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		77E808FAA7AC09754CD77B79A727FB1A /* trie_search.h in Headers */ = {isa = PBXBuildFile; fileRef = 49FB1947B06D37C70348AA4A39820448 /* trie_search.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		7CBBECC8324EC00E642201C7847EA25E /* trie_search.c in Sources */ = {isa = PBXBuildFile; fileRef = 2AB9D4CB5B88C1970424BB60E09EB8D3 /* trie_search.c */; };
-		7CC69EA05D8ADA9B35C3BD028CBA26A5 /* RSSwizzle.h in Headers */ = {isa = PBXBuildFile; fileRef = 7CE7544E6243B8AA3751B0156AA5F3B8 /* RSSwizzle.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		7DD0E0CD2715FAF8A6D0385CDBE3B832 /* tsk_assert.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B3D7D387499DF956EF939EE48CDCF84 /* tsk_assert.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		7E7FF72EB6365D336626F701E5B51E39 /* configuration_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = B20F3D8319D7397C339313D6BEF7A77D /* configuration_utils.m */; };
-		7FA935A1D0D22F3123E415F753DC6BD8 /* trie_node.h in Headers */ = {isa = PBXBuildFile; fileRef = FDA13ACD031E2C93F25F8E63D1055FF2 /* trie_node.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		801542A165EA6357AE369549C5A61C78 /* parse_configuration.h in Headers */ = {isa = PBXBuildFile; fileRef = 9333546AC6BDF3562C797604B2E51906 /* parse_configuration.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		84A1CE08FAF4AB958D0DA896E8B1C417 /* configuration_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = B20F3D8319D7397C339313D6BEF7A77D /* configuration_utils.m */; };
-		85ED010E69091C825A6A97999D4710C6 /* tsk_assert.c in Sources */ = {isa = PBXBuildFile; fileRef = CF70FE45A96267DB5C7D04886E3720CB /* tsk_assert.c */; };
-		89B150CB35E6C37B9407DDACDEC033D5 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = C0F35F1865B5EB98C5EB6DD81A164B30 /* TrustKit.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		8C25AE7EF7614B686D26AE1FECF32E74 /* TSKNSURLSessionDelegateProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 043B12DC1E972E45D4B0C17196FD6F80 /* TSKNSURLSessionDelegateProxy.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		8E96C53BDA50A65B9A9C289196ADA18F /* ssl_pin_verifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 4DC11EC22F2103A12097A0FF058A00A6 /* ssl_pin_verifier.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		983E9491C1BF07A6AF697DEE679C4B09 /* TSKSPKIHashCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E658122713E49682E05A1CADFE55606 /* TSKSPKIHashCache.m */; };
-		984D042275BCB9528A8637ED70D8D2BC /* domain_registry.h in Headers */ = {isa = PBXBuildFile; fileRef = 02CD6401904F3BF832C49D8B2095237A /* domain_registry.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		99503FF0DD07B858EAEC33E2B91C4422 /* TSKBackgroundReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 19710647ECF3A61C0D22BB1571558069 /* TSKBackgroundReporter.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		9A25A93AD0209B1FFBD86410C2B3816B /* TSKReportsRateLimiter.m in Sources */ = {isa = PBXBuildFile; fileRef = EB203B101E117218A5A50E91C9428F95 /* TSKReportsRateLimiter.m */; };
-		9D1EFE4CE1365822568B9E537BC6A447 /* TrustKit-library-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C82BC7BCF3E8A2B8B525D68547662C47 /* TrustKit-library-dummy.m */; };
-		A143337E401FA6978DD3183D6941222D /* ssl_pin_verifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 01DEC34F081175D430CB1BAFE6CB9472 /* ssl_pin_verifier.m */; };
-		A2A419FDECA61EBC5F860A49C78583C5 /* TSKSPKIHashCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E658122713E49682E05A1CADFE55606 /* TSKSPKIHashCache.m */; };
-		A2EAC406077CFA4D80B82988500A1505 /* registry_tables.h in Headers */ = {isa = PBXBuildFile; fileRef = 3177F6935C7A2B22BC0AAA0A5738BEBE /* registry_tables.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		A40A1D009D51956E04C68BD1F5549674 /* string_util.h in Headers */ = {isa = PBXBuildFile; fileRef = A7ECFC1EB23AF4A11C98062D57F4FF4C /* string_util.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		A5B5C9BCDC940C7B6FDDA958AE39E141 /* TSKLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 16F43C9D6D6C19146D37DA4C6B1557CC /* TSKLog.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		A71357265A0002110B2368D43D8A167D /* TSKTrustKitConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = 7B896DC6718A96882DA6D923BA414AF4 /* TSKTrustKitConfig.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		A8F8A5393B19560628FA6AA4F652044F /* RSSwizzle.m in Sources */ = {isa = PBXBuildFile; fileRef = AF6C241E925B422FA6DE1DDE153D9323 /* RSSwizzle.m */; };
-		B04F1739982657E48D164F9BA6783E49 /* TrustKit-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 300458191E50B7064A136BFA4AC78B7E /* TrustKit-Bridging-Header.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		693730D13E819A9AFA33040E3A96649D /* registry_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 678522FB09A4294D2153CCFDF518F963 /* registry_types.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		6ADC295BC68BFC21CBEBAE72D3034500 /* string_util.h in Headers */ = {isa = PBXBuildFile; fileRef = B8714314CF30CE7FC92BA23D508F1DD3 /* string_util.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		6CDFD4AE2D81D5D2B74B4C6D3A4AF710 /* TSKReportsRateLimiter.m in Sources */ = {isa = PBXBuildFile; fileRef = FE7F333A3418AD33FB2BBAFFA815ED9B /* TSKReportsRateLimiter.m */; };
+		6D289029C8B00FDC2D5587D694DC54D0 /* TSKNSURLConnectionDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 630E995AD7D50F5D16B8FDFC27E77231 /* TSKNSURLConnectionDelegateProxy.m */; };
+		724354B3AF935949000D33AA6192431E /* registry_search.c in Sources */ = {isa = PBXBuildFile; fileRef = 484B532E914FDE246D7E77DC75D8EEE8 /* registry_search.c */; };
+		728A90178062131444FEF115F230155E /* configuration_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 5CAE89BC9EFD539B909489DF0A229627 /* configuration_utils.m */; };
+		72A9924327F58492DF98758BA4FD6B73 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3B2A0B779CE31153B2C0D8A7F8DC7FE /* Security.framework */; };
+		76186CFA02FD5C2B3942E4EDBE34FF32 /* ssl_pin_verifier.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE4E00BE6F4D40050BAD65D4035AA2D /* ssl_pin_verifier.m */; };
+		7A76C5043624DF750AD54976A7C29C4F /* trie_search.c in Sources */ = {isa = PBXBuildFile; fileRef = 8603FB58E8DE76D0DB6C9532AFC77F31 /* trie_search.c */; };
+		7BEA569DFFEDF530387F42D985385C15 /* domain_registry.h in Headers */ = {isa = PBXBuildFile; fileRef = B105F1349AEFFACF1DB8305C5152CFEC /* domain_registry.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		7C24CC29BA6C749C3CA5D153002FB253 /* ssl_pin_verifier.h in Headers */ = {isa = PBXBuildFile; fileRef = CA77AC0BF5C804C0AE4A0901D27DBDC2 /* ssl_pin_verifier.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		7D772A073E42BC2E6F274BFA4C2488D9 /* pinning_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 048AA9D686D38C8BAD4C0BD1436800BC /* pinning_utils.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		7E944C5C82C3E817D77609AE3463C901 /* TrustKit-library-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = ADD1A5AC75AA0FB2DA1DBB0F6C3838D7 /* TrustKit-library-dummy.m */; };
+		7ED03C0B62D70D6C58A48D26EEB1B26E /* parse_configuration.h in Headers */ = {isa = PBXBuildFile; fileRef = FF7694698BB70015E2D2EE8A3432CD5B /* parse_configuration.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		83C8E8881F636275473D588DF67F8B85 /* domain_registry.h in Headers */ = {isa = PBXBuildFile; fileRef = B105F1349AEFFACF1DB8305C5152CFEC /* domain_registry.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		84EB298214E81145CD62A8C676A8F072 /* init_registry_tables.c in Sources */ = {isa = PBXBuildFile; fileRef = A79377FED8268E50C0C0037814261984 /* init_registry_tables.c */; };
+		85D355F5771C7DA10EA9C47466E74000 /* TSKPinningValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = AF9AB76037C7FACC221F748C70644765 /* TSKPinningValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		87EBC78B3D6BCD69A5ECF566BDA39AE8 /* TSKPinningValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F67E565EB4CD79D72D8FA135BFEA54 /* TSKPinningValidator.m */; };
+		8D1DB29199B8C134AF312611ECBE9420 /* TSKPinFailureReport.h in Headers */ = {isa = PBXBuildFile; fileRef = FA0D15B0FBAE13CF97A1BCDFAF6A4DD0 /* TSKPinFailureReport.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		8EDB7467499D64E7EB87B39308327094 /* TSKPinningValidatorCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = 2028F9927030AE04B66B9C0027E2179E /* TSKPinningValidatorCallback.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		90D16C7B0C56A9BD4CCDA2CFC3247FCA /* tsk_assert.h in Headers */ = {isa = PBXBuildFile; fileRef = BAA277EFFA96106144227F7BFB18824E /* tsk_assert.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		91B32D91EB98D8CBC3CDDCD514533297 /* TSKPinFailureReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A27E33C0BE54975454210F8751EE1C7 /* TSKPinFailureReport.m */; };
+		92018371269F28D23385E58CBDBEAD15 /* tsk_assert.c in Sources */ = {isa = PBXBuildFile; fileRef = C2702B60E7FF57703B6B5E140F4D7926 /* tsk_assert.c */; };
+		9A3707EF7C460EBB6E4267F0AABF9598 /* registry_types.h in Headers */ = {isa = PBXBuildFile; fileRef = 678522FB09A4294D2153CCFDF518F963 /* registry_types.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		9D9643FA4852F7101C07BC7F1FE90D0F /* TrustKit-library-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 76FAD7021C6D89400DA4F7CB652F16F2 /* TrustKit-library-umbrella.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		A21357AC134778FEE1911B8F549924AA /* TrustKit-framework-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C48080D46FB06D28B672879C1A214141 /* TrustKit-framework-dummy.m */; };
+		A4320918069596FC215A66E989E5D70A /* TSKTrustKitConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 197639F98231BAC11A5E5F3A124E3B7F /* TSKTrustKitConfig.m */; };
+		A627D10A9BAF81CF354A677EB33D88A7 /* TSKTrustDecision.h in Headers */ = {isa = PBXBuildFile; fileRef = A6267EFCA1686AB7B73731DDFC5B0694 /* TSKTrustDecision.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		A9915513A8D84A612481D980BEDCC203 /* TSKNSURLConnectionDelegateProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = D480E8DAE5328C02E2FF0AC2B2608610 /* TSKNSURLConnectionDelegateProxy.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		A999CC03A98B80BED61AC4B05334DBFE /* TSKBackgroundReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F0DFC2BCACE3D2625A70609CEF3E8D5 /* TSKBackgroundReporter.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		AB85D02A7D644EFD13132C6570623669 /* string_util.h in Headers */ = {isa = PBXBuildFile; fileRef = B8714314CF30CE7FC92BA23D508F1DD3 /* string_util.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		AC1DCA618943129FC60622ACE899D489 /* registry_tables.h in Headers */ = {isa = PBXBuildFile; fileRef = 15D008F1E74C33D05AA0E2E57EF4ADD8 /* registry_tables.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		AEBCDCD4EBD642EAF779C66DB2EA3570 /* TrustKit.m in Sources */ = {isa = PBXBuildFile; fileRef = FE10BF35766133FEA92D45B1B18239E2 /* TrustKit.m */; };
+		AF9C0F8BCE6239C585AD7A427AA398AC /* TrustKit-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E21D9D595913353E9E5965676A33537 /* TrustKit-Bridging-Header.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		B1A12BD316DF6BAC16777A3FC42DAA77 /* ssl_pin_verifier.h in Headers */ = {isa = PBXBuildFile; fileRef = CA77AC0BF5C804C0AE4A0901D27DBDC2 /* ssl_pin_verifier.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		B25971DC380F3F24EDE12D556945BCBB /* TSKBackgroundReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DB5C1B56AE974A402AC078F2F8AD0C /* TSKBackgroundReporter.m */; };
+		B2D177C56AB24827E965F38FBD236510 /* TSKPinningValidatorCallback.h in Headers */ = {isa = PBXBuildFile; fileRef = 2028F9927030AE04B66B9C0027E2179E /* TSKPinningValidatorCallback.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		B57A2C2A81D8E70C8BC957ACFE904BBB /* TSKPublicKeyAlgorithm.h in Headers */ = {isa = PBXBuildFile; fileRef = 06DB37C9D0EB07C98149F0165970B207 /* TSKPublicKeyAlgorithm.h */; settings = {ATTRIBUTES = (Project, ); }; };
 		B61E2C4184498B6E78692ABB5B256E07 /* Pods-TrustKitDemo-Swift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 3526585F64883D83847F059C934EDBFF /* Pods-TrustKitDemo-Swift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B8BFF009DF77B0E6E048CD153A1131E9 /* domain_registry.h in Headers */ = {isa = PBXBuildFile; fileRef = 02CD6401904F3BF832C49D8B2095237A /* domain_registry.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		B9A922A464CF18BF882A13E1115E8105 /* TrustKit-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 300458191E50B7064A136BFA4AC78B7E /* TrustKit-Bridging-Header.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		BD2911385D85DC310C641E38E958D734 /* TSKTrustKitConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = C5F9C64D945A36933C5EF47F9E745878 /* TSKTrustKitConfig.m */; };
-		C2F0221ADF3043E53276F3C5D845A397 /* vendor_identifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 0FF6277EF3A39218D37A86DAB771CF2D /* vendor_identifier.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		C541F28B710B96E588AD713909A1D413 /* registry_search.c in Sources */ = {isa = PBXBuildFile; fileRef = 3E1BCEA3944EE482D8B99A2E3B19CB44 /* registry_search.c */; };
-		C6ED687673525FF1107C8F2F59E60D86 /* TSKPinFailureReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 22068DAB9E88FD17A4A11CE816E11784 /* TSKPinFailureReport.m */; };
-		C7B73CE5A88DB0A7D7E919A8197A4AF4 /* TSKNSURLConnectionDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 88BC0733CBBB938A3219273F5152589A /* TSKNSURLConnectionDelegateProxy.m */; };
-		C7B794F841B2ACF85AB0A83ACD3EFC05 /* TrustKit.h in Headers */ = {isa = PBXBuildFile; fileRef = C0F35F1865B5EB98C5EB6DD81A164B30 /* TrustKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C7DDD1562267B2F4D233F39D12D5ADB6 /* TSKSPKIHashCache.h in Headers */ = {isa = PBXBuildFile; fileRef = A71D131FE4A83982BC14771D9F3E9554 /* TSKSPKIHashCache.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		C9A606D19C9EB1497F3555D3C167720A /* TSKTrustDecision.h in Headers */ = {isa = PBXBuildFile; fileRef = 68511D74D56BAEA1CD656CCF3557EA08 /* TSKTrustDecision.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		CC863BB741B05B89E255A5EC55800D5B /* TSKNSURLSessionDelegateProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 043B12DC1E972E45D4B0C17196FD6F80 /* TSKNSURLSessionDelegateProxy.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		CC9EBA27F4522CA37EE76D0249DD13FD /* TrustKit.m in Sources */ = {isa = PBXBuildFile; fileRef = AF239E4A0C84C58417851939EECCF064 /* TrustKit.m */; };
-		CD68C0F1B018956100537ED5B3B1A7B8 /* TSKPublicKeyAlgorithm.h in Headers */ = {isa = PBXBuildFile; fileRef = 0BDA57F4151968508D3A853304BF745C /* TSKPublicKeyAlgorithm.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		CE5CFCD3A2B823669A86B0A7F14BBE9D /* init_registry_tables.c in Sources */ = {isa = PBXBuildFile; fileRef = 69E5FA76B4FF1E23A860CF8DAA78CAFB /* init_registry_tables.c */; };
-		CE7A03C1DCEE8780598C87D21B296B21 /* trie_search.c in Sources */ = {isa = PBXBuildFile; fileRef = 2AB9D4CB5B88C1970424BB60E09EB8D3 /* trie_search.c */; };
-		CEE67EC1995B20BF942CC7556A8F9B67 /* TSKBackgroundReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EEB286B838DE6B973E18B9A6AF3081 /* TSKBackgroundReporter.m */; };
-		D119F0C991937AEDB2530983FF70A07E /* TSKReportsRateLimiter.m in Sources */ = {isa = PBXBuildFile; fileRef = EB203B101E117218A5A50E91C9428F95 /* TSKReportsRateLimiter.m */; };
-		D497425C9FCB4CA85714514AD4EAFC2C /* registry_types.h in Headers */ = {isa = PBXBuildFile; fileRef = AABD036852EAAB6A3416E3391383D7B4 /* registry_types.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		D4C907A3822CE29577D8D60CBC5900A5 /* TSKTrustDecision.h in Headers */ = {isa = PBXBuildFile; fileRef = 68511D74D56BAEA1CD656CCF3557EA08 /* TSKTrustDecision.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D9246826CF6AD272377661E4D1E52D1E /* TSKNSURLSessionDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CA9D217C2E661A2E9657C40D8663B03 /* TSKNSURLSessionDelegateProxy.m */; };
-		DB8EA3E604CC14213E228A13705C7290 /* tsk_assert.h in Headers */ = {isa = PBXBuildFile; fileRef = 0B3D7D387499DF956EF939EE48CDCF84 /* tsk_assert.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		E008F6F3DC03ABCDD424D28A513BCFC1 /* TSKPinFailureReport.h in Headers */ = {isa = PBXBuildFile; fileRef = 6FF79548F527403E8E8E9119AAF33C94 /* TSKPinFailureReport.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		E07DD147393076012D25C3B61048F417 /* reporting_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 72A92CF385503795D84B5790C7CB9F63 /* reporting_utils.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		E144DE0C3D9E206937859C7F3B8A05BA /* vendor_identifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E11FA84B22F847274F2A78662C46DE7 /* vendor_identifier.m */; };
-		E5785C1C6D22DAE8CA4F49B010C691FC /* RSSwizzle.h in Headers */ = {isa = PBXBuildFile; fileRef = 7CE7544E6243B8AA3751B0156AA5F3B8 /* RSSwizzle.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		E98CEED99A854D98A3997C2206B2B603 /* TSKSPKIHashCache.h in Headers */ = {isa = PBXBuildFile; fileRef = A71D131FE4A83982BC14771D9F3E9554 /* TSKSPKIHashCache.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		EC0762BBA271DABD7EE35DC12F8B3878 /* TSKPinningValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 440369D834028ACFF05DB1456887CE1F /* TSKPinningValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EED57E8428FE21562C81755AA46D1DD5 /* reporting_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 6769B15D2AED29A909E434AB9DC9DDCA /* reporting_utils.m */; };
-		EFB18C535997EE5C594E83F7F4863AA4 /* configuration_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CBB2A6176A71D27B4E37F7E5A26335F /* configuration_utils.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		F0F8206D1FCD2BD14483EFEBB9D06EA6 /* TrustKit-framework-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 14972B5E8B2B929682D69B6023CBEC4E /* TrustKit-framework-dummy.m */; };
-		F2841E76A81F02C9EEE162692DB89CFC /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3B2A0B779CE31153B2C0D8A7F8DC7FE /* Security.framework */; };
-		F3838503E12FA081BAF2B35A721AEF84 /* configuration_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = 8CBB2A6176A71D27B4E37F7E5A26335F /* configuration_utils.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		F5390289431BAEE5BCB3E01B746D8F7B /* parse_configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = DECBB879FD21B57C5D5D9C3C3945BD8B /* parse_configuration.m */; };
-		F6B2423B265BF7CA43076A8DF92E0255 /* ssl_pin_verifier.h in Headers */ = {isa = PBXBuildFile; fileRef = 4DC11EC22F2103A12097A0FF058A00A6 /* ssl_pin_verifier.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		F886F214FB714334FE73AE83CC1E1C91 /* parse_configuration.h in Headers */ = {isa = PBXBuildFile; fileRef = 9333546AC6BDF3562C797604B2E51906 /* parse_configuration.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		FC1C4EA6AD6178848F9F00C94B03A516 /* TSKReportsRateLimiter.h in Headers */ = {isa = PBXBuildFile; fileRef = A6B934A3B770C8EAA5E6FA8BECDDF3C0 /* TSKReportsRateLimiter.h */; settings = {ATTRIBUTES = (Project, ); }; };
-		FDE2553E75B1E66D7979599B94AE977F /* TSKPinningValidatorResult.h in Headers */ = {isa = PBXBuildFile; fileRef = 8120ADDF82D8983141A3A9FB631BF9B4 /* TSKPinningValidatorResult.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FE61B5B60812F5908D557FF6244F2833 /* TSKPinningValidatorResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 7372E7BE9DF888DEE33D9055D701AB0F /* TSKPinningValidatorResult.m */; };
+		B80623F7BAE29F628D0F27E3945AC98C /* trie_node.h in Headers */ = {isa = PBXBuildFile; fileRef = B9B8B8480C00597A01F41CC814D5F7F8 /* trie_node.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		BBDF91A09C08D11037268F483AF9D928 /* parse_configuration.h in Headers */ = {isa = PBXBuildFile; fileRef = FF7694698BB70015E2D2EE8A3432CD5B /* parse_configuration.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		BECC07C730B1D1AF9A1B41B1FF4D0937 /* registry_search.c in Sources */ = {isa = PBXBuildFile; fileRef = 484B532E914FDE246D7E77DC75D8EEE8 /* registry_search.c */; };
+		C09AB7A9F5746FDE5E724C8EAFD32EAF /* TSKBackgroundReporter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F0DFC2BCACE3D2625A70609CEF3E8D5 /* TSKBackgroundReporter.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		C13987F17788B05D548E586A9852ACE3 /* TSKNSURLSessionDelegateProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 601BE1D9404A7D90FED7928B59B291D4 /* TSKNSURLSessionDelegateProxy.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		C2CAA4265520ECD39E77021DA96EED46 /* reporting_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = BBC622863D57973AE572D6E01C99C58A /* reporting_utils.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		C52A5536B0FFFAF4F0A38401B5FD2DA2 /* TSKTrustKitConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = F75B579562230BE4BD32F11C2FA48B93 /* TSKTrustKitConfig.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C598E83616895339F7DE60E2763D38EF /* ssl_pin_verifier.m in Sources */ = {isa = PBXBuildFile; fileRef = BFE4E00BE6F4D40050BAD65D4035AA2D /* ssl_pin_verifier.m */; };
+		C64BA28802B0D6C5D13B4E496C2E96D6 /* TSKTrustKitConfig.h in Headers */ = {isa = PBXBuildFile; fileRef = F75B579562230BE4BD32F11C2FA48B93 /* TSKTrustKitConfig.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		C6B08D97D145E0D4A0E2525068EA6B53 /* RSSwizzle.h in Headers */ = {isa = PBXBuildFile; fileRef = DFF7B83B122A24AE721F4E087990357F /* RSSwizzle.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		C73D81AA8E3F2245BC31D6F08DF78B15 /* TSKBackgroundReporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 22DB5C1B56AE974A402AC078F2F8AD0C /* TSKBackgroundReporter.m */; };
+		CAD2005190A015C2B306651C078937A9 /* TrustKit-Bridging-Header.h in Headers */ = {isa = PBXBuildFile; fileRef = 3E21D9D595913353E9E5965676A33537 /* TrustKit-Bridging-Header.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		CEB593D80CDFB28F013D2BAE8011A887 /* TSKNSURLConnectionDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 630E995AD7D50F5D16B8FDFC27E77231 /* TSKNSURLConnectionDelegateProxy.m */; };
+		D12BBC61D975DB02338C1D10992BFDEE /* parse_configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D19BDEB0E8C1E7E0250E8418C8FBBE8 /* parse_configuration.m */; };
+		D363C566A5532BA9238C472F4FCA6C55 /* TSKPinningValidator_Private.h in Headers */ = {isa = PBXBuildFile; fileRef = 061572B9A26B6AB85E99CC755D74461A /* TSKPinningValidator_Private.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		D3FDBAE24E7CA6F1F722A0514AD6EBBB /* parse_configuration.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D19BDEB0E8C1E7E0250E8418C8FBBE8 /* parse_configuration.m */; };
+		D8666B959608DA31074996AC7EDA0110 /* trie_search.h in Headers */ = {isa = PBXBuildFile; fileRef = 5803BB6874098367819C7DBEEB091722 /* trie_search.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		D9534F6B925DDA826ADE21E36F190774 /* tsk_assert.c in Sources */ = {isa = PBXBuildFile; fileRef = C2702B60E7FF57703B6B5E140F4D7926 /* tsk_assert.c */; };
+		D98953B6B6815BC87D483FF5604577CC /* configuration_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = DC864557B6A017F98C44DB984F0ABCBE /* configuration_utils.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		DBF718F17F987EDE2D5157FA0D22D076 /* TSKNSURLSessionDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 344340B3A46AB35F5B4A5660CEA5BC40 /* TSKNSURLSessionDelegateProxy.m */; };
+		DCDFA41802CED412F011B0FCD80921E8 /* TSKTrustDecision.h in Headers */ = {isa = PBXBuildFile; fileRef = A6267EFCA1686AB7B73731DDFC5B0694 /* TSKTrustDecision.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E2D05381D28FBF66252D871A3F52437C /* TrustKit-framework-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 86DEF4A42CCA45521F61BFB773B25566 /* TrustKit-framework-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E31FC1BC4DEE3C2206400C65036046C8 /* trie_search.c in Sources */ = {isa = PBXBuildFile; fileRef = 8603FB58E8DE76D0DB6C9532AFC77F31 /* trie_search.c */; };
+		E536B5FD24DFB56CE9DB7A2A4F748ABA /* trie_search.h in Headers */ = {isa = PBXBuildFile; fileRef = 5803BB6874098367819C7DBEEB091722 /* trie_search.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		E659B692418ED452022E72EEAB50C3D3 /* TSKLog.h in Headers */ = {isa = PBXBuildFile; fileRef = E7558BDEE3146D00D02DC1AEE5D26475 /* TSKLog.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		E7EAA8C4365B238D8F8C8C4BA0A16B68 /* vendor_identifier.h in Headers */ = {isa = PBXBuildFile; fileRef = C8B25D057BC9C4873CB27CE04870BF17 /* vendor_identifier.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		E94860F5E49F616D92BB24704905A410 /* TSKPinningValidatorResult.h in Headers */ = {isa = PBXBuildFile; fileRef = FFF63B8A826A14217249708081574D0A /* TSKPinningValidatorResult.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		EB29C6311751DCD3D1B177B422D80FC3 /* RSSwizzle.h in Headers */ = {isa = PBXBuildFile; fileRef = DFF7B83B122A24AE721F4E087990357F /* RSSwizzle.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		F193A749F1C9955D9BE6D5961D19EA3F /* TSKNSURLSessionDelegateProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = 344340B3A46AB35F5B4A5660CEA5BC40 /* TSKNSURLSessionDelegateProxy.m */; };
+		F831A688C1E87281C7B6C869D30698EC /* TSKNSURLSessionDelegateProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = 601BE1D9404A7D90FED7928B59B291D4 /* TSKNSURLSessionDelegateProxy.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		FCF6E9E58654C2D324A2025DB073376D /* TSKPinningValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = C0F67E565EB4CD79D72D8FA135BFEA54 /* TSKPinningValidator.m */; };
+		FDE0C7A1B468D91704F5CA2D0EDE7597 /* TSKNSURLConnectionDelegateProxy.h in Headers */ = {isa = PBXBuildFile; fileRef = D480E8DAE5328C02E2FF0AC2B2608610 /* TSKNSURLConnectionDelegateProxy.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		FF5651CD35F079BB3E31A88B8AA21B4C /* TSKReportsRateLimiter.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A8E537B2031C5A4EB9191A33A3B439A /* TSKReportsRateLimiter.h */; settings = {ATTRIBUTES = (Project, ); }; };
+		FFE9BA3A29183FC44BB8E5C5F0D0DAA4 /* TSKLog.h in Headers */ = {isa = PBXBuildFile; fileRef = E7558BDEE3146D00D02DC1AEE5D26475 /* TSKLog.h */; settings = {ATTRIBUTES = (Project, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		1B7D54F2FAF0DE7DB3675F384948F403 /* PBXContainerItemProxy */ = {
+		72C2F76118946681184D4A0ABF16A9E9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = CED2493CA3D2AB34BE473481BE25D2ED;
 			remoteInfo = "TrustKit-framework";
 		};
-		56D445A7C627B9C9BC533CF29039B2BF /* PBXContainerItemProxy */ = {
+		A71D7B6787706EB735C074BC46F0913F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
@@ -135,166 +139,168 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		01DEC34F081175D430CB1BAFE6CB9472 /* ssl_pin_verifier.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = ssl_pin_verifier.m; sourceTree = "<group>"; };
-		02CD6401904F3BF832C49D8B2095237A /* domain_registry.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = domain_registry.h; sourceTree = "<group>"; };
-		02E641920E871FF8C4D47C940D2CBD64 /* typeahead.jquery.js */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.javascript; name = typeahead.jquery.js; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/js/typeahead.jquery.js; sourceTree = "<group>"; };
-		03228DF08AE6D05E9F37644606041FEE /* highlight.css */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.css; name = highlight.css; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/css/highlight.css; sourceTree = "<group>"; };
-		03FD634D8F32F4BD707907F1A4CED791 /* undocumented.json */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json; name = undocumented.json; path = docs/documentation/undocumented.json; sourceTree = "<group>"; };
-		043B12DC1E972E45D4B0C17196FD6F80 /* TSKNSURLSessionDelegateProxy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TSKNSURLSessionDelegateProxy.h; sourceTree = "<group>"; };
-		05E99740D5985DE9A01CA7E0EAD27EAD /* linking3_dynamic.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = linking3_dynamic.png; path = docs/images/linking3_dynamic.png; sourceTree = "<group>"; };
-		064102541B2CDD4D220AE936F12FBE6C /* search.json */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json; name = search.json; path = docs/documentation/search.json; sourceTree = "<group>"; };
-		0A88D0D1D6E148FF6B9A77A818744C18 /* jazzy.js */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.javascript; name = jazzy.js; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/js/jazzy.js; sourceTree = "<group>"; };
-		0B3D7D387499DF956EF939EE48CDCF84 /* tsk_assert.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = tsk_assert.h; sourceTree = "<group>"; };
-		0BDA57F4151968508D3A853304BF745C /* TSKPublicKeyAlgorithm.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TSKPublicKeyAlgorithm.h; sourceTree = "<group>"; };
-		0D0B0F18E7AF9F0A579363803D60B02B /* getting-started.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = "getting-started.md"; path = "docs/getting-started.md"; sourceTree = "<group>"; };
-		0FF6277EF3A39218D37A86DAB771CF2D /* vendor_identifier.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = vendor_identifier.h; sourceTree = "<group>"; };
+		01A8554BF468890992EAC3B5050C4F60 /* lunr.min.js */ = {isa = PBXFileReference; includeInIndex = 1; name = lunr.min.js; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/js/lunr.min.js; sourceTree = "<group>"; };
+		026806A7082C0824A578A0A37CB97F73 /* index.html */ = {isa = PBXFileReference; includeInIndex = 1; name = index.html; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/index.html; sourceTree = "<group>"; };
+		0315900C94EF22F7627B455144C1D49B /* Domain Configuration Keys.html */ = {isa = PBXFileReference; includeInIndex = 1; name = "Domain Configuration Keys.html"; path = "docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/Domain Configuration Keys.html"; sourceTree = "<group>"; };
+		035FFABE751815B17E4D7D494CCBFD35 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = docs/documentation/docsets/TrustKit.docset/Contents/Info.plist; sourceTree = "<group>"; };
+		046D874167F88F9520E4BCA74D82B0C5 /* TrustKit-framework.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "TrustKit-framework.modulemap"; sourceTree = "<group>"; };
+		048AA9D686D38C8BAD4C0BD1436800BC /* pinning_utils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = pinning_utils.h; sourceTree = "<group>"; };
+		05BCF5B3E092A17DC888A05C72A7E5F1 /* jazzy.css */ = {isa = PBXFileReference; includeInIndex = 1; name = jazzy.css; path = docs/documentation/css/jazzy.css; sourceTree = "<group>"; };
+		061572B9A26B6AB85E99CC755D74461A /* TSKPinningValidator_Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TSKPinningValidator_Private.h; path = TrustKit/TSKPinningValidator_Private.h; sourceTree = "<group>"; };
+		06DB37C9D0EB07C98149F0165970B207 /* TSKPublicKeyAlgorithm.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TSKPublicKeyAlgorithm.h; sourceTree = "<group>"; };
+		09DEE2E265A60D78D39CD57B6A261F3D /* TrustKit.html */ = {isa = PBXFileReference; includeInIndex = 1; name = TrustKit.html; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/Classes/TrustKit.html; sourceTree = "<group>"; };
 		11F3B291AA42E8C5ECBBBE640C49C0AB /* Pods-TrustKitDemo-ObjC-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TrustKitDemo-ObjC-acknowledgements.markdown"; sourceTree = "<group>"; };
-		14972B5E8B2B929682D69B6023CBEC4E /* TrustKit-framework-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "TrustKit-framework-dummy.m"; sourceTree = "<group>"; };
-		16F43C9D6D6C19146D37DA4C6B1557CC /* TSKLog.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TSKLog.h; path = TrustKit/TSKLog.h; sourceTree = "<group>"; };
-		19710647ECF3A61C0D22BB1571558069 /* TSKBackgroundReporter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TSKBackgroundReporter.h; sourceTree = "<group>"; };
-		19DCBC8B115019B11F3A318CBAC4D376 /* TSKPinningValidator.html */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.html.documentation; name = TSKPinningValidator.html; path = docs/documentation/Classes/TSKPinningValidator.html; sourceTree = "<group>"; };
+		1203F7A2FF3C58C926AAFA168113CDFC /* carat.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = carat.png; path = docs/documentation/img/carat.png; sourceTree = "<group>"; };
+		12C5FC1DDC18EB4AED4C4C5E6DBDA62A /* TrustKit-library-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "TrustKit-library-prefix.pch"; path = "../TrustKit-library/TrustKit-library-prefix.pch"; sourceTree = "<group>"; };
+		133B1E2BB77E94CAFD0526DC57D2E520 /* Setting up a Validation Callback.html */ = {isa = PBXFileReference; includeInIndex = 1; name = "Setting up a Validation Callback.html"; path = "docs/documentation/Setting up a Validation Callback.html"; sourceTree = "<group>"; };
+		15C90AFCBC99C487C15AB68F8FB1307A /* docSet.dsidx */ = {isa = PBXFileReference; includeInIndex = 1; name = docSet.dsidx; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/docSet.dsidx; sourceTree = "<group>"; };
+		15D008F1E74C33D05AA0E2E57EF4ADD8 /* registry_tables.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = registry_tables.h; sourceTree = "<group>"; };
+		16EF7A52B94195B0F3322388C620FF2D /* dash.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = dash.png; path = docs/documentation/img/dash.png; sourceTree = "<group>"; };
+		197639F98231BAC11A5E5F3A124E3B7F /* TSKTrustKitConfig.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TSKTrustKitConfig.m; path = TrustKit/TSKTrustKitConfig.m; sourceTree = "<group>"; };
 		1A3AA3CFE19DD19B8FD3FB1B7E47EE15 /* Pods-TrustKitDemo-Swift-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-TrustKitDemo-Swift-frameworks.sh"; sourceTree = "<group>"; };
-		1BD389B82A162F62F08BB3229AFE275D /* Other Type Definitions.html */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.html.documentation; name = "Other Type Definitions.html"; path = "docs/documentation/Other Type Definitions.html"; sourceTree = "<group>"; };
+		1BDCD8C9E49B05B87FFEEF7B654EDE45 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
+		1C4B07892ACA1795CEEE4D68F628BA01 /* TrustKit-framework-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TrustKit-framework-prefix.pch"; sourceTree = "<group>"; };
 		1CCA0C4F99C3BA24165363BF2207E0EA /* Pods-TrustKitDemo-Swift-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TrustKitDemo-Swift-Info.plist"; sourceTree = "<group>"; };
-		20252CD42259BFC9CAD9862BA5FD0831 /* Implementing Pinning Validation.html */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.html.documentation; name = "Implementing Pinning Validation.html"; path = "docs/documentation/Implementing Pinning Validation.html"; sourceTree = "<group>"; };
-		22068DAB9E88FD17A4A11CE816E11784 /* TSKPinFailureReport.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = TSKPinFailureReport.m; sourceTree = "<group>"; };
+		1D37E17EFF48E2E5E927384D9B3B76EC /* dash.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = dash.png; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/img/dash.png; sourceTree = "<group>"; };
+		2028F9927030AE04B66B9C0027E2179E /* TSKPinningValidatorCallback.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TSKPinningValidatorCallback.h; sourceTree = "<group>"; };
 		22BE8D07C022E68D120FD9301962C07E /* Pods-TrustKitDemo-ObjC-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-TrustKitDemo-ObjC-dummy.m"; sourceTree = "<group>"; };
-		23A301A0E4B6C7D6D1DDD70CB3C67681 /* Pods_TrustKitDemo_Swift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrustKitDemo_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		22DB5C1B56AE974A402AC078F2F8AD0C /* TSKBackgroundReporter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = TSKBackgroundReporter.m; sourceTree = "<group>"; };
+		232CC643D823E56CE24B4540AFF93D98 /* index.html */ = {isa = PBXFileReference; includeInIndex = 1; name = index.html; path = docs/index.html; sourceTree = "<group>"; };
+		23A301A0E4B6C7D6D1DDD70CB3C67681 /* Pods-TrustKitDemo-Swift */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-TrustKitDemo-Swift"; path = Pods_TrustKitDemo_Swift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2520E0851537FE8E71AC8917156AE550 /* undocumented.json */ = {isa = PBXFileReference; includeInIndex = 1; name = undocumented.json; path = docs/documentation/undocumented.json; sourceTree = "<group>"; };
 		25E9F7D269D6ECFDA1F65BAE0171E230 /* Pods-TrustKitDemo-ObjC-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TrustKitDemo-ObjC-acknowledgements.plist"; sourceTree = "<group>"; };
-		26586F98ACD1A9089EC0650897D3F902 /* jquery.min.js */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.javascript; name = jquery.min.js; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/js/jquery.min.js; sourceTree = "<group>"; };
-		298BCE76FCC60A2F035EE730C0A5433D /* TSKTrustDecision.html */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.html.documentation; name = TSKTrustDecision.html; path = docs/documentation/Enums/TSKTrustDecision.html; sourceTree = "<group>"; };
-		2A4C1FFEB500CF7654F962A1732D9A55 /* Setting up a Validation Callback.html */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.html.documentation; name = "Setting up a Validation Callback.html"; path = "docs/documentation/Setting up a Validation Callback.html"; sourceTree = "<group>"; };
-		2AB9D4CB5B88C1970424BB60E09EB8D3 /* trie_search.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; path = trie_search.c; sourceTree = "<group>"; };
-		2CA9D217C2E661A2E9657C40D8663B03 /* TSKNSURLSessionDelegateProxy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = TSKNSURLSessionDelegateProxy.m; sourceTree = "<group>"; };
-		300458191E50B7064A136BFA4AC78B7E /* TrustKit-Bridging-Header.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "TrustKit-Bridging-Header.h"; path = "TrustKit/TrustKit-Bridging-Header.h"; sourceTree = "<group>"; };
-		3177F6935C7A2B22BC0AAA0A5738BEBE /* registry_tables.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = registry_tables.h; sourceTree = "<group>"; };
-		3194710820B32DA2ED0FE1DAAD394D68 /* search.json */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json; name = search.json; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/search.json; sourceTree = "<group>"; };
+		261BE7944CF60BF4EA883E0CEBAF08E4 /* jazzy.css */ = {isa = PBXFileReference; includeInIndex = 1; name = jazzy.css; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/css/jazzy.css; sourceTree = "<group>"; };
+		296E3DCD08448460A12FF367CD5306AD /* TrustKit.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = TrustKit.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		2FEE8B53098D78E5B095456D8533A748 /* jazzy.search.js */ = {isa = PBXFileReference; includeInIndex = 1; name = jazzy.search.js; path = docs/documentation/js/jazzy.search.js; sourceTree = "<group>"; };
+		344340B3A46AB35F5B4A5660CEA5BC40 /* TSKNSURLSessionDelegateProxy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = TSKNSURLSessionDelegateProxy.m; sourceTree = "<group>"; };
 		3526585F64883D83847F059C934EDBFF /* Pods-TrustKitDemo-Swift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-TrustKitDemo-Swift-umbrella.h"; sourceTree = "<group>"; };
-		3E1BCEA3944EE482D8B99A2E3B19CB44 /* registry_search.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; path = registry_search.c; sourceTree = "<group>"; };
-		440369D834028ACFF05DB1456887CE1F /* TSKPinningValidator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TSKPinningValidator.h; sourceTree = "<group>"; };
-		443BA37B20FF231FD0FF55F2BB3D95EF /* gh.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = gh.png; path = docs/documentation/img/gh.png; sourceTree = "<group>"; };
-		45C6E0333AA66649C5917F955CFFF830 /* TSKTrustEvaluationResult.html */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.html.documentation; name = TSKTrustEvaluationResult.html; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/Enums/TSKTrustEvaluationResult.html; sourceTree = "<group>"; };
-		4616A2849166BB0D64C1D70E172C14BB /* TSKPinningValidator_Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TSKPinningValidator_Private.h; path = TrustKit/TSKPinningValidator_Private.h; sourceTree = "<group>"; };
-		49FB1947B06D37C70348AA4A39820448 /* trie_search.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = trie_search.h; sourceTree = "<group>"; };
-		4D4E90DAFFB4065BD1D5F28EB8ECD132 /* Other Constants.html */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.html.documentation; name = "Other Constants.html"; path = "docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/Other Constants.html"; sourceTree = "<group>"; };
-		4DC11EC22F2103A12097A0FF058A00A6 /* ssl_pin_verifier.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = ssl_pin_verifier.h; sourceTree = "<group>"; };
-		4FF95F7E878C5178C094BAAFA3A09816 /* TrustKit.html */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.html.documentation; name = TrustKit.html; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/Classes/TrustKit.html; sourceTree = "<group>"; };
-		5058EC0A1F3FCE189D2E507A89C6AAAE /* typeahead.jquery.js */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.javascript; name = typeahead.jquery.js; path = docs/documentation/js/typeahead.jquery.js; sourceTree = "<group>"; };
-		51BC06BEE2861FA704952CD46FC7D737 /* dash.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = dash.png; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/img/dash.png; sourceTree = "<group>"; };
-		51F396D12349478A665BD54CDA0B03A5 /* jquery.min.js */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.javascript; name = jquery.min.js; path = docs/documentation/js/jquery.min.js; sourceTree = "<group>"; };
-		5201EA9274414C8E29FE4463743A55B8 /* gh.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = gh.png; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/img/gh.png; sourceTree = "<group>"; };
-		5276B53E43B39AA3CA2D69476C242F5C /* TrustKit.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = TrustKit.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		53C4012533E501BFB63C6A1E4C1F4A2F /* TrustKit-library.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "TrustKit-library.debug.xcconfig"; path = "../TrustKit-library/TrustKit-library.debug.xcconfig"; sourceTree = "<group>"; };
-		54F91EDE09EAFC82C2C2046AEAB8C63F /* carat.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = carat.png; path = docs/documentation/img/carat.png; sourceTree = "<group>"; };
+		3589EF7920B0A297A0078A834CDA89AF /* sample_report.json */ = {isa = PBXFileReference; includeInIndex = 1; name = sample_report.json; path = docs/sample_report.json; sourceTree = "<group>"; };
+		3B87807313DA1E4E1EC9CFEC562338DA /* spinner.gif */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.gif; name = spinner.gif; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/img/spinner.gif; sourceTree = "<group>"; };
+		3E21D9D595913353E9E5965676A33537 /* TrustKit-Bridging-Header.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "TrustKit-Bridging-Header.h"; path = "TrustKit/TrustKit-Bridging-Header.h"; sourceTree = "<group>"; };
+		40E7204FA25BC4FCD16A11372C7507D7 /* jazzy.js */ = {isa = PBXFileReference; includeInIndex = 1; name = jazzy.js; path = docs/documentation/js/jazzy.js; sourceTree = "<group>"; };
+		46AFD55757E243042E4CBD4681AA26B1 /* TrustKit-library.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "TrustKit-library.release.xcconfig"; path = "../TrustKit-library/TrustKit-library.release.xcconfig"; sourceTree = "<group>"; };
+		475F1613F674E8DC208485EF340775D4 /* TSKPinningValidatorResult.html */ = {isa = PBXFileReference; includeInIndex = 1; name = TSKPinningValidatorResult.html; path = docs/documentation/Classes/TSKPinningValidatorResult.html; sourceTree = "<group>"; };
+		484B532E914FDE246D7E77DC75D8EEE8 /* registry_search.c */ = {isa = PBXFileReference; includeInIndex = 1; path = registry_search.c; sourceTree = "<group>"; };
+		49BEEED3053CD3F2C22D8D1698A5A327 /* Setting up a Validation Callback.html */ = {isa = PBXFileReference; includeInIndex = 1; name = "Setting up a Validation Callback.html"; path = "docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/Setting up a Validation Callback.html"; sourceTree = "<group>"; };
+		4B3357AE0E6FD065EC4EF0CB68065BC0 /* TSKPinningValidatorResult.html */ = {isa = PBXFileReference; includeInIndex = 1; name = TSKPinningValidatorResult.html; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/Classes/TSKPinningValidatorResult.html; sourceTree = "<group>"; };
+		4D19BDEB0E8C1E7E0250E8418C8FBBE8 /* parse_configuration.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = parse_configuration.m; path = TrustKit/parse_configuration.m; sourceTree = "<group>"; };
+		4E16B891CA54D9C37C7DFEA19006F3B7 /* TrustKit-library.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "TrustKit-library.debug.xcconfig"; path = "../TrustKit-library/TrustKit-library.debug.xcconfig"; sourceTree = "<group>"; };
+		4F0DFC2BCACE3D2625A70609CEF3E8D5 /* TSKBackgroundReporter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TSKBackgroundReporter.h; sourceTree = "<group>"; };
+		55138A41165189E874A30B322C23ABF8 /* TSKPinningValidator.html */ = {isa = PBXFileReference; includeInIndex = 1; name = TSKPinningValidator.html; path = docs/documentation/Classes/TSKPinningValidator.html; sourceTree = "<group>"; };
+		5803BB6874098367819C7DBEEB091722 /* trie_search.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = trie_search.h; sourceTree = "<group>"; };
 		58B0C7E541145A56FDADD5E685794CAC /* Pods-TrustKitDemo-Swift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-TrustKitDemo-Swift.modulemap"; sourceTree = "<group>"; };
-		594829054047E2666B2C5D6F15C87CD3 /* documentation-readme.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = "documentation-readme.md"; path = "docs/documentation-readme.md"; sourceTree = "<group>"; };
-		59D39E3F5C7D73DE98A96A3083E9178D /* Domain Configuration Keys.html */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.html.documentation; name = "Domain Configuration Keys.html"; path = "docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/Domain Configuration Keys.html"; sourceTree = "<group>"; };
-		5E0D8C3BB746B5E7B18D7C759EAB4637 /* dash.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = dash.png; path = docs/documentation/img/dash.png; sourceTree = "<group>"; };
-		5E658122713E49682E05A1CADFE55606 /* TSKSPKIHashCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = TSKSPKIHashCache.m; sourceTree = "<group>"; };
-		605A22F67A88268EC7A380D9EFB69D65 /* TrustKit-library-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "TrustKit-library-umbrella.h"; path = "../TrustKit-library/TrustKit-library-umbrella.h"; sourceTree = "<group>"; };
-		631951ECDB65DCDEBEE6759D990D4EF0 /* index.html */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.html.documentation; name = index.html; path = docs/documentation/index.html; sourceTree = "<group>"; };
-		632DEA67AFB4037E144993260F0157F3 /* Other Constants.html */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.html.documentation; name = "Other Constants.html"; path = "docs/documentation/Other Constants.html"; sourceTree = "<group>"; };
-		639E66AA43B65E5BC9CA540ACAAD1229 /* lunr.min.js */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.javascript; name = lunr.min.js; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/js/lunr.min.js; sourceTree = "<group>"; };
-		64B30E9B10309588E9530DA053E63505 /* jazzy.css */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.css; name = jazzy.css; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/css/jazzy.css; sourceTree = "<group>"; };
-		6769B15D2AED29A909E434AB9DC9DDCA /* reporting_utils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = reporting_utils.m; sourceTree = "<group>"; };
-		68182670F4D7A4C957D60ABC6674BE76 /* Setting up a Validation Callback.html */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.html.documentation; name = "Setting up a Validation Callback.html"; path = "docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/Setting up a Validation Callback.html"; sourceTree = "<group>"; };
-		68511D74D56BAEA1CD656CCF3557EA08 /* TSKTrustDecision.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TSKTrustDecision.h; sourceTree = "<group>"; };
-		68609B24A6BEAD384A5DE0A4C49A12DC /* TSKNSURLConnectionDelegateProxy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TSKNSURLConnectionDelegateProxy.h; sourceTree = "<group>"; };
-		687349D8B5F2BC7B76EBC4CD5FA32D68 /* TSKTrustEvaluationResult.html */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.html.documentation; name = TSKTrustEvaluationResult.html; path = docs/documentation/Enums/TSKTrustEvaluationResult.html; sourceTree = "<group>"; };
-		68A992F9C9FB523808B0AC122A9E66A3 /* libTrustKit-library.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libTrustKit-library.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		69E5FA76B4FF1E23A860CF8DAA78CAFB /* init_registry_tables.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; path = init_registry_tables.c; sourceTree = "<group>"; };
-		6A6B5E03F45C637A8A2784AE6BDBBF4D /* TSKPinningValidatorResult.html */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.html.documentation; name = TSKPinningValidatorResult.html; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/Classes/TSKPinningValidatorResult.html; sourceTree = "<group>"; };
-		6A97ADF72A299CE39578A1FFD39B0921 /* TrustKit-framework.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "TrustKit-framework.debug.xcconfig"; sourceTree = "<group>"; };
-		6C5C99CDD1B9B26DAF7A78BB5B9EED36 /* libPods-TrustKitDemo-ObjC.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-TrustKitDemo-ObjC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		6E99DC4571D063040950D53526D6B591 /* highlight.css */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.css; name = highlight.css; path = docs/documentation/css/highlight.css; sourceTree = "<group>"; };
-		6FF79548F527403E8E8E9119AAF33C94 /* TSKPinFailureReport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TSKPinFailureReport.h; sourceTree = "<group>"; };
+		5CAE89BC9EFD539B909489DF0A229627 /* configuration_utils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = configuration_utils.m; path = TrustKit/configuration_utils.m; sourceTree = "<group>"; };
+		5E220085DE0310ACEBFF1D63CC068219 /* Initalizing TrustKit.html */ = {isa = PBXFileReference; includeInIndex = 1; name = "Initalizing TrustKit.html"; path = "docs/documentation/Initalizing TrustKit.html"; sourceTree = "<group>"; };
+		5FB0A72FA5512E5AD19BFB50B3A5FB31 /* jquery.min.js */ = {isa = PBXFileReference; includeInIndex = 1; name = jquery.min.js; path = docs/documentation/js/jquery.min.js; sourceTree = "<group>"; };
+		601BE1D9404A7D90FED7928B59B291D4 /* TSKNSURLSessionDelegateProxy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TSKNSURLSessionDelegateProxy.h; sourceTree = "<group>"; };
+		630E995AD7D50F5D16B8FDFC27E77231 /* TSKNSURLConnectionDelegateProxy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = TSKNSURLConnectionDelegateProxy.m; sourceTree = "<group>"; };
+		63F207DED9563F5A283F744CE2E49364 /* TSKPinningValidatorResult.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TSKPinningValidatorResult.m; path = TrustKit/TSKPinningValidatorResult.m; sourceTree = "<group>"; };
+		65C5643F1A7EE01730D59CAE47CFF566 /* Implementing Pinning Validation.html */ = {isa = PBXFileReference; includeInIndex = 1; name = "Implementing Pinning Validation.html"; path = "docs/documentation/Implementing Pinning Validation.html"; sourceTree = "<group>"; };
+		662B90B709A5CDBBDDC83B408B540B06 /* search.json */ = {isa = PBXFileReference; includeInIndex = 1; name = search.json; path = docs/documentation/search.json; sourceTree = "<group>"; };
+		678522FB09A4294D2153CCFDF518F963 /* registry_types.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = registry_types.h; sourceTree = "<group>"; };
+		68A992F9C9FB523808B0AC122A9E66A3 /* TrustKit-library */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "TrustKit-library"; path = "libTrustKit-library.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		69E663BB977903ED8F8A3140A106F6D0 /* TrustKit-framework.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "TrustKit-framework.release.xcconfig"; sourceTree = "<group>"; };
+		6AAEF0972F8B83A4C5E3BF17F9D46A5A /* TSKPinningValidator.html */ = {isa = PBXFileReference; includeInIndex = 1; name = TSKPinningValidator.html; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/Classes/TSKPinningValidator.html; sourceTree = "<group>"; };
+		6B904C9E8ED622993359785DF6847C78 /* spinner.gif */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.gif; name = spinner.gif; path = docs/documentation/img/spinner.gif; sourceTree = "<group>"; };
+		6B97DD735407BDE96C397632BE9C1CC0 /* Implementing Pinning Validation.html */ = {isa = PBXFileReference; includeInIndex = 1; name = "Implementing Pinning Validation.html"; path = "docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/Implementing Pinning Validation.html"; sourceTree = "<group>"; };
+		6C1E169C982BE222687F15C945AF5FC9 /* getting-started.md */ = {isa = PBXFileReference; includeInIndex = 1; name = "getting-started.md"; path = "docs/getting-started.md"; sourceTree = "<group>"; };
+		6C5C99CDD1B9B26DAF7A78BB5B9EED36 /* Pods-TrustKitDemo-ObjC */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; name = "Pods-TrustKitDemo-ObjC"; path = "libPods-TrustKitDemo-ObjC.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D57F0BB2B3F532421960A19054C203F /* reporting_utils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = reporting_utils.m; sourceTree = "<group>"; };
+		7033FD2B7989D4D841BF53E3F46F423F /* Domain Configuration Keys.html */ = {isa = PBXFileReference; includeInIndex = 1; name = "Domain Configuration Keys.html"; path = "docs/documentation/Domain Configuration Keys.html"; sourceTree = "<group>"; };
 		70DF388A54E25216AE54B213A6A58CE9 /* Pods-TrustKitDemo-ObjC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TrustKitDemo-ObjC.release.xcconfig"; sourceTree = "<group>"; };
-		72A92CF385503795D84B5790C7CB9F63 /* reporting_utils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = reporting_utils.h; sourceTree = "<group>"; };
 		72C4B289C7157156C83DA0096A8AA6BD /* Pods-TrustKitDemo-Swift-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-TrustKitDemo-Swift-acknowledgements.plist"; sourceTree = "<group>"; };
-		7372E7BE9DF888DEE33D9055D701AB0F /* TSKPinningValidatorResult.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TSKPinningValidatorResult.m; path = TrustKit/TSKPinningValidatorResult.m; sourceTree = "<group>"; };
-		7B896DC6718A96882DA6D923BA414AF4 /* TSKTrustKitConfig.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TSKTrustKitConfig.h; sourceTree = "<group>"; };
-		7CE7544E6243B8AA3751B0156AA5F3B8 /* RSSwizzle.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RSSwizzle.h; sourceTree = "<group>"; };
-		7D48B02AD69DB8AADA77C29DDF5EEC33 /* TSKTrustDecision.html */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.html.documentation; name = TSKTrustDecision.html; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/Enums/TSKTrustDecision.html; sourceTree = "<group>"; };
-		7E11FA84B22F847274F2A78662C46DE7 /* vendor_identifier.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = vendor_identifier.m; sourceTree = "<group>"; };
-		7EDC7E47D842A13F3A61F79861E60AD2 /* Initalizing TrustKit.html */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.html.documentation; name = "Initalizing TrustKit.html"; path = "docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/Initalizing TrustKit.html"; sourceTree = "<group>"; };
-		8120ADDF82D8983141A3A9FB631BF9B4 /* TSKPinningValidatorResult.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TSKPinningValidatorResult.h; sourceTree = "<group>"; };
-		82AFDADCC4E40ACDF28F5C55717E9CF5 /* jazzy.css */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.css; name = jazzy.css; path = docs/documentation/css/jazzy.css; sourceTree = "<group>"; };
-		83ED6FE77461662DC0207AC438C84535 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = Info.plist; path = docs/documentation/docsets/TrustKit.docset/Contents/Info.plist; sourceTree = "<group>"; };
-		8504DA8158D08E0F7D83EEB226393583 /* jazzy.search.js */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.javascript; name = jazzy.search.js; path = docs/documentation/js/jazzy.search.js; sourceTree = "<group>"; };
-		85B5648D4AA1D443DB3270D40A362114 /* TrustKit-framework.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "TrustKit-framework.release.xcconfig"; sourceTree = "<group>"; };
-		874643E8DE3E948C10CEF3A89281B3E9 /* TrustKit-BH2015.pdf */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.pdf; name = "TrustKit-BH2015.pdf"; path = "docs/TrustKit-BH2015.pdf"; sourceTree = "<group>"; };
-		88BC0733CBBB938A3219273F5152589A /* TSKNSURLConnectionDelegateProxy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = TSKNSURLConnectionDelegateProxy.m; sourceTree = "<group>"; };
-		89DCCD5D9EE73243C23BA532CBF149C2 /* TrustKit-library-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "TrustKit-library-prefix.pch"; path = "../TrustKit-library/TrustKit-library-prefix.pch"; sourceTree = "<group>"; };
-		8CBB2A6176A71D27B4E37F7E5A26335F /* configuration_utils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = configuration_utils.h; path = TrustKit/configuration_utils.h; sourceTree = "<group>"; };
-		8E91C2548408465866D9F5D2029EB286 /* Domain Configuration Keys.html */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.html.documentation; name = "Domain Configuration Keys.html"; path = "docs/documentation/Domain Configuration Keys.html"; sourceTree = "<group>"; };
-		90C6F3DB5B64F543DDCC6991599C39EE /* index.html */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.html; name = index.html; path = docs/index.html; sourceTree = "<group>"; };
-		91FE8D5E48E4923A2D9FFF2296D169C8 /* TrustKit-framework-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TrustKit-framework-umbrella.h"; sourceTree = "<group>"; };
-		9333546AC6BDF3562C797604B2E51906 /* parse_configuration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = parse_configuration.h; path = TrustKit/parse_configuration.h; sourceTree = "<group>"; };
+		76F67B8A3E592AB87E9E3111E25E8211 /* Other Constants.html */ = {isa = PBXFileReference; includeInIndex = 1; name = "Other Constants.html"; path = "docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/Other Constants.html"; sourceTree = "<group>"; };
+		76FAD7021C6D89400DA4F7CB652F16F2 /* TrustKit-library-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "TrustKit-library-umbrella.h"; path = "../TrustKit-library/TrustKit-library-umbrella.h"; sourceTree = "<group>"; };
+		7E7C3EC420075847E77776B527075459 /* TrustKit-framework.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "TrustKit-framework.debug.xcconfig"; sourceTree = "<group>"; };
+		81AEC80A433963BA22B3954323F96963 /* Global Configuration Keys.html */ = {isa = PBXFileReference; includeInIndex = 1; name = "Global Configuration Keys.html"; path = "docs/documentation/Global Configuration Keys.html"; sourceTree = "<group>"; };
+		81F8EEF374D1D4E37C903B96F81C6A60 /* TSKTrustDecision.html */ = {isa = PBXFileReference; includeInIndex = 1; name = TSKTrustDecision.html; path = docs/documentation/Enums/TSKTrustDecision.html; sourceTree = "<group>"; };
+		83E99AED9498AA87D6C39387D6BCC27C /* Other Constants.html */ = {isa = PBXFileReference; includeInIndex = 1; name = "Other Constants.html"; path = "docs/documentation/Other Constants.html"; sourceTree = "<group>"; };
+		84976FF0E7D554DFBE582647A7DB51CD /* typeahead.jquery.js */ = {isa = PBXFileReference; includeInIndex = 1; name = typeahead.jquery.js; path = docs/documentation/js/typeahead.jquery.js; sourceTree = "<group>"; };
+		8603FB58E8DE76D0DB6C9532AFC77F31 /* trie_search.c */ = {isa = PBXFileReference; includeInIndex = 1; path = trie_search.c; sourceTree = "<group>"; };
+		86DEF4A42CCA45521F61BFB773B25566 /* TrustKit-framework-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TrustKit-framework-umbrella.h"; sourceTree = "<group>"; };
+		8765B6F6001102B03D3DF15ED56B7CEB /* TSKSPKIHashCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = TSKSPKIHashCache.m; sourceTree = "<group>"; };
+		8860120390AD58734B53F2630A63CFB9 /* TrustKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TrustKit.h; sourceTree = "<group>"; };
+		8937AEEDEE14FAF3BFC32EBD46B9A078 /* search.json */ = {isa = PBXFileReference; includeInIndex = 1; name = search.json; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/search.json; sourceTree = "<group>"; };
+		8A27E33C0BE54975454210F8751EE1C7 /* TSKPinFailureReport.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = TSKPinFailureReport.m; sourceTree = "<group>"; };
+		8BEF4E6F4F9BEEEE473746EF056776D0 /* TSKTrustEvaluationResult.html */ = {isa = PBXFileReference; includeInIndex = 1; name = TSKTrustEvaluationResult.html; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/Enums/TSKTrustEvaluationResult.html; sourceTree = "<group>"; };
+		8C885A33E40F43CD8E01CA8B0E5FC21A /* TrustKit-library.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; name = "TrustKit-library.modulemap"; path = "../TrustKit-library/TrustKit-library.modulemap"; sourceTree = "<group>"; };
+		913C1ADE6424EFBAA4A88085E552A91D /* TrustKit-framework-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "TrustKit-framework-Info.plist"; sourceTree = "<group>"; };
+		93FB01A8F3EA46ECE645CF29D10CEA75 /* index.html */ = {isa = PBXFileReference; includeInIndex = 1; name = index.html; path = docs/documentation/index.html; sourceTree = "<group>"; };
 		952925E838A0DE4D7BDC4EE54022633D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		95DE3E58C9736F9DF81DFA978CFE8D62 /* highlight.css */ = {isa = PBXFileReference; includeInIndex = 1; name = highlight.css; path = docs/documentation/css/highlight.css; sourceTree = "<group>"; };
+		962BAD45657403B8C26C9D886C567816 /* pinning_utils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = pinning_utils.m; sourceTree = "<group>"; };
 		970FF9D7BECE1C530A3112EC3512A9F0 /* Pods-TrustKitDemo-Swift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-TrustKitDemo-Swift-dummy.m"; sourceTree = "<group>"; };
-		9B6469E605E40E2B1FE7C837A3467C50 /* TrustKit-framework.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "TrustKit-framework.modulemap"; sourceTree = "<group>"; };
-		9C4E2D1C149162B9F215DABC961C3D37 /* TrustKit.html */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.html.documentation; name = TrustKit.html; path = docs/documentation/Classes/TrustKit.html; sourceTree = "<group>"; };
-		9CA340E63CE096720903B73AD064F0B9 /* TrustKit-library.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; name = "TrustKit-library.modulemap"; path = "../TrustKit-library/TrustKit-library.modulemap"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9F2AB63619585AC4736F167D2C80E160 /* Global Configuration Keys.html */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.html.documentation; name = "Global Configuration Keys.html"; path = "docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/Global Configuration Keys.html"; sourceTree = "<group>"; };
-		A3F12A8F68470D1077CC65A6CC1D1427 /* jazzy.search.js */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.javascript; name = jazzy.search.js; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/js/jazzy.search.js; sourceTree = "<group>"; };
-		A4C4180AC5E934EEB6FDCCC5B40C101A /* TrustKit-framework-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "TrustKit-framework-Info.plist"; sourceTree = "<group>"; };
-		A5B08C7CEF21CE238EC6970999E8FFE4 /* spinner.gif */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.gif; name = spinner.gif; path = docs/documentation/img/spinner.gif; sourceTree = "<group>"; };
-		A6B934A3B770C8EAA5E6FA8BECDDF3C0 /* TSKReportsRateLimiter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TSKReportsRateLimiter.h; sourceTree = "<group>"; };
-		A71D131FE4A83982BC14771D9F3E9554 /* TSKSPKIHashCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TSKSPKIHashCache.h; sourceTree = "<group>"; };
-		A77D8FF45079EF274A78701C7EAFBACC /* index.html */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.html.documentation; name = index.html; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/index.html; sourceTree = "<group>"; };
-		A7ECFC1EB23AF4A11C98062D57F4FF4C /* string_util.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = string_util.h; sourceTree = "<group>"; };
-		A909474FEDA2BC25062657A567D8159B /* TSKPinningValidatorResult.html */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.html.documentation; name = TSKPinningValidatorResult.html; path = docs/documentation/Classes/TSKPinningValidatorResult.html; sourceTree = "<group>"; };
-		AABD036852EAAB6A3416E3391383D7B4 /* registry_types.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = registry_types.h; sourceTree = "<group>"; };
-		ABEF87A2E0EF18D33E2A15627FBDAF6E /* TrustKit-framework-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "TrustKit-framework-prefix.pch"; sourceTree = "<group>"; };
-		AD2B8ED25889D3670D70CE0CAAB9135F /* TSKPinningValidatorCallback.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TSKPinningValidatorCallback.h; sourceTree = "<group>"; };
-		AF239E4A0C84C58417851939EECCF064 /* TrustKit.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TrustKit.m; path = TrustKit/TrustKit.m; sourceTree = "<group>"; };
-		AF61577F765F5E6860420D77EAF371E2 /* TSKPinningValidator.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TSKPinningValidator.m; path = TrustKit/TSKPinningValidator.m; sourceTree = "<group>"; };
-		AF6C241E925B422FA6DE1DDE153D9323 /* RSSwizzle.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RSSwizzle.m; sourceTree = "<group>"; };
+		9A8E537B2031C5A4EB9191A33A3B439A /* TSKReportsRateLimiter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TSKReportsRateLimiter.h; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9E3DD4C6EF71E7AD965072E90A517A0D /* lunr.min.js */ = {isa = PBXFileReference; includeInIndex = 1; name = lunr.min.js; path = docs/documentation/js/lunr.min.js; sourceTree = "<group>"; };
+		A6267EFCA1686AB7B73731DDFC5B0694 /* TSKTrustDecision.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TSKTrustDecision.h; sourceTree = "<group>"; };
+		A79377FED8268E50C0C0037814261984 /* init_registry_tables.c */ = {isa = PBXFileReference; includeInIndex = 1; path = init_registry_tables.c; sourceTree = "<group>"; };
+		A893DDE368B4FBCC6B6758019EBB3B72 /* jquery.min.js */ = {isa = PBXFileReference; includeInIndex = 1; name = jquery.min.js; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/js/jquery.min.js; sourceTree = "<group>"; };
+		A9EBA37E53A047D5456C5B72C6F9CC03 /* RSSwizzle.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = RSSwizzle.m; sourceTree = "<group>"; };
+		AA2BB7EA76D8C887DE8736A7CBF34061 /* gh.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = gh.png; path = docs/documentation/img/gh.png; sourceTree = "<group>"; };
+		AAC8284BB1AB9887CDE3B88B10BD9D87 /* Global Configuration Keys.html */ = {isa = PBXFileReference; includeInIndex = 1; name = "Global Configuration Keys.html"; path = "docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/Global Configuration Keys.html"; sourceTree = "<group>"; };
+		ABDE6541CB0860175318BF6F6F1B1B62 /* jazzy.js */ = {isa = PBXFileReference; includeInIndex = 1; name = jazzy.js; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/js/jazzy.js; sourceTree = "<group>"; };
+		AD289FFEC2AC4C034667E44D6345A650 /* TSKTrustEvaluationResult.html */ = {isa = PBXFileReference; includeInIndex = 1; name = TSKTrustEvaluationResult.html; path = docs/documentation/Enums/TSKTrustEvaluationResult.html; sourceTree = "<group>"; };
+		AD4187774D4910271BEACD4290A4E332 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		ADD1A5AC75AA0FB2DA1DBB0F6C3838D7 /* TrustKit-library-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "TrustKit-library-dummy.m"; path = "../TrustKit-library/TrustKit-library-dummy.m"; sourceTree = "<group>"; };
+		AF9AB76037C7FACC221F748C70644765 /* TSKPinningValidator.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TSKPinningValidator.h; sourceTree = "<group>"; };
+		B032581A3D2ED6A4888EF3FF670B5C96 /* vendor_identifier.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = vendor_identifier.m; sourceTree = "<group>"; };
 		B0D943520C1263524B0744631DC47FA9 /* Pods-TrustKitDemo-Swift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TrustKitDemo-Swift.release.xcconfig"; sourceTree = "<group>"; };
-		B20F3D8319D7397C339313D6BEF7A77D /* configuration_utils.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = configuration_utils.m; path = TrustKit/configuration_utils.m; sourceTree = "<group>"; };
-		B4AF60FEC8C195D05EAAF1BDB29B1B0F /* TrustKit-library.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "TrustKit-library.release.xcconfig"; path = "../TrustKit-library/TrustKit-library.release.xcconfig"; sourceTree = "<group>"; };
-		B4EEB286B838DE6B973E18B9A6AF3081 /* TSKBackgroundReporter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = TSKBackgroundReporter.m; sourceTree = "<group>"; };
-		B9E1DC50BF515CD9C98986EA1ABDBE6B /* docSet.dsidx */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file; name = docSet.dsidx; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/docSet.dsidx; sourceTree = "<group>"; };
-		BADA0F2A021544AEE8A764F7899189FF /* spinner.gif */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.gif; name = spinner.gif; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/img/spinner.gif; sourceTree = "<group>"; };
-		BDD7797E740C760D674FD29B361936BA /* TSKPinningValidator.html */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.html.documentation; name = TSKPinningValidator.html; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/Classes/TSKPinningValidator.html; sourceTree = "<group>"; };
+		B105F1349AEFFACF1DB8305C5152CFEC /* domain_registry.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = domain_registry.h; sourceTree = "<group>"; };
+		B8714314CF30CE7FC92BA23D508F1DD3 /* string_util.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = string_util.h; sourceTree = "<group>"; };
+		B9B8B8480C00597A01F41CC814D5F7F8 /* trie_node.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = trie_node.h; sourceTree = "<group>"; };
+		BAA277EFFA96106144227F7BFB18824E /* tsk_assert.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = tsk_assert.h; sourceTree = "<group>"; };
+		BBC622863D57973AE572D6E01C99C58A /* reporting_utils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = reporting_utils.h; sourceTree = "<group>"; };
 		BF5B0C86F7CE1D3AD3DF15511594F883 /* Pods-TrustKitDemo-ObjC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TrustKitDemo-ObjC.debug.xcconfig"; sourceTree = "<group>"; };
-		C0F35F1865B5EB98C5EB6DD81A164B30 /* TrustKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TrustKit.h; sourceTree = "<group>"; };
-		C360792CC29235BC00323AA063DE9B83 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		BFE4E00BE6F4D40050BAD65D4035AA2D /* ssl_pin_verifier.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = ssl_pin_verifier.m; sourceTree = "<group>"; };
+		C0F3EC8B4A9B58D45B78B5FC3376E6A9 /* Other Type Definitions.html */ = {isa = PBXFileReference; includeInIndex = 1; name = "Other Type Definitions.html"; path = "docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/Other Type Definitions.html"; sourceTree = "<group>"; };
+		C0F67E565EB4CD79D72D8FA135BFEA54 /* TSKPinningValidator.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TSKPinningValidator.m; path = TrustKit/TSKPinningValidator.m; sourceTree = "<group>"; };
+		C2702B60E7FF57703B6B5E140F4D7926 /* tsk_assert.c */ = {isa = PBXFileReference; includeInIndex = 1; path = tsk_assert.c; sourceTree = "<group>"; };
 		C3B2A0B779CE31153B2C0D8A7F8DC7FE /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
-		C420096F3D7824C3B3E3E3DA8D2A04C6 /* Initalizing TrustKit.html */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.html.documentation; name = "Initalizing TrustKit.html"; path = "docs/documentation/Initalizing TrustKit.html"; sourceTree = "<group>"; };
-		C5F9C64D945A36933C5EF47F9E745878 /* TSKTrustKitConfig.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TSKTrustKitConfig.m; path = TrustKit/TSKTrustKitConfig.m; sourceTree = "<group>"; };
-		C82BC7BCF3E8A2B8B525D68547662C47 /* TrustKit-library-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "TrustKit-library-dummy.m"; path = "../TrustKit-library/TrustKit-library-dummy.m"; sourceTree = "<group>"; };
-		CD45A88EF481BD9D57677AEF0847102E /* jazzy.js */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.javascript; name = jazzy.js; path = docs/documentation/js/jazzy.js; sourceTree = "<group>"; };
-		CF70FE45A96267DB5C7D04886E3720CB /* tsk_assert.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; path = tsk_assert.c; sourceTree = "<group>"; };
-		CF7FF426015B60EA7AA13871A0A3C837 /* Other Type Definitions.html */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.html.documentation; name = "Other Type Definitions.html"; path = "docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/Other Type Definitions.html"; sourceTree = "<group>"; };
-		DA22A566885057F2047C9256181A0A70 /* Global Configuration Keys.html */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.html.documentation; name = "Global Configuration Keys.html"; path = "docs/documentation/Global Configuration Keys.html"; sourceTree = "<group>"; };
-		DA353AB15FD1B2554C3B356F1A112C8B /* lunr.min.js */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.javascript; name = lunr.min.js; path = docs/documentation/js/lunr.min.js; sourceTree = "<group>"; };
-		DAEF7EEDB81F525E08FA20D0280ED609 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
-		DECBB879FD21B57C5D5D9C3C3945BD8B /* parse_configuration.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = parse_configuration.m; path = TrustKit/parse_configuration.m; sourceTree = "<group>"; };
-		E37FCA03F2E87D71AE1457636AFA183D /* TrustKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TrustKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C48080D46FB06D28B672879C1A214141 /* TrustKit-framework-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "TrustKit-framework-dummy.m"; sourceTree = "<group>"; };
+		C8B25D057BC9C4873CB27CE04870BF17 /* vendor_identifier.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = vendor_identifier.h; sourceTree = "<group>"; };
+		CA77AC0BF5C804C0AE4A0901D27DBDC2 /* ssl_pin_verifier.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = ssl_pin_verifier.h; sourceTree = "<group>"; };
+		CEDF57A855D220EDD8304E93F6690D00 /* documentation-readme.md */ = {isa = PBXFileReference; includeInIndex = 1; name = "documentation-readme.md"; path = "docs/documentation-readme.md"; sourceTree = "<group>"; };
+		D00E25998756E951A55C770E203E7069 /* TrustKit-BH2015.pdf */ = {isa = PBXFileReference; includeInIndex = 1; name = "TrustKit-BH2015.pdf"; path = "docs/TrustKit-BH2015.pdf"; sourceTree = "<group>"; };
+		D3FD784711198AE230F81A67BE692E7E /* typeahead.jquery.js */ = {isa = PBXFileReference; includeInIndex = 1; name = typeahead.jquery.js; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/js/typeahead.jquery.js; sourceTree = "<group>"; };
+		D480E8DAE5328C02E2FF0AC2B2608610 /* TSKNSURLConnectionDelegateProxy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TSKNSURLConnectionDelegateProxy.h; sourceTree = "<group>"; };
+		DB7A7439FA50B607E8EB4A07F1B32A70 /* gh.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = gh.png; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/img/gh.png; sourceTree = "<group>"; };
+		DC864557B6A017F98C44DB984F0ABCBE /* configuration_utils.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = configuration_utils.h; path = TrustKit/configuration_utils.h; sourceTree = "<group>"; };
+		DD29A078D6C022196CA89E5B81456E34 /* highlight.css */ = {isa = PBXFileReference; includeInIndex = 1; name = highlight.css; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/css/highlight.css; sourceTree = "<group>"; };
+		DEA355D25B2E118348BC0BF1DDE521C3 /* jazzy.search.js */ = {isa = PBXFileReference; includeInIndex = 1; name = jazzy.search.js; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/js/jazzy.search.js; sourceTree = "<group>"; };
+		DFF7B83B122A24AE721F4E087990357F /* RSSwizzle.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = RSSwizzle.h; sourceTree = "<group>"; };
+		E37FCA03F2E87D71AE1457636AFA183D /* TrustKit-framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "TrustKit-framework"; path = TrustKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E5230B1E4888F7D269C06F09D92676C6 /* TrustKit.html */ = {isa = PBXFileReference; includeInIndex = 1; name = TrustKit.html; path = docs/documentation/Classes/TrustKit.html; sourceTree = "<group>"; };
+		E5B5239D7FD27D3FFB1FE55F796DE91D /* linking3_dynamic.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = linking3_dynamic.png; path = docs/images/linking3_dynamic.png; sourceTree = "<group>"; };
+		E7558BDEE3146D00D02DC1AEE5D26475 /* TSKLog.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = TSKLog.h; path = TrustKit/TSKLog.h; sourceTree = "<group>"; };
+		E856C22EBF87F9433142E082758513E1 /* TSKSPKIHashCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TSKSPKIHashCache.h; sourceTree = "<group>"; };
+		E96ABFE842504DD5FC13E24BEB519743 /* TSKTrustDecision.html */ = {isa = PBXFileReference; includeInIndex = 1; name = TSKTrustDecision.html; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/Enums/TSKTrustDecision.html; sourceTree = "<group>"; };
 		EAC352A47D416D805B9C81AC8EA6055F /* Pods-TrustKitDemo-Swift-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-TrustKitDemo-Swift-acknowledgements.markdown"; sourceTree = "<group>"; };
-		EB203B101E117218A5A50E91C9428F95 /* TSKReportsRateLimiter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = TSKReportsRateLimiter.m; sourceTree = "<group>"; };
-		EDD9EE5D4FE297AA1FFB7281E18057D3 /* Implementing Pinning Validation.html */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.html.documentation; name = "Implementing Pinning Validation.html"; path = "docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/Implementing Pinning Validation.html"; sourceTree = "<group>"; };
 		F40B844FF5089427ABF73A45BBD034EE /* Pods-TrustKitDemo-Swift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-TrustKitDemo-Swift.debug.xcconfig"; sourceTree = "<group>"; };
-		FC4C7C59A4E5F48734C88DE969DD9616 /* carat.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = carat.png; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/img/carat.png; sourceTree = "<group>"; };
-		FDA13ACD031E2C93F25F8E63D1055FF2 /* trie_node.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = trie_node.h; sourceTree = "<group>"; };
-		FE51B3C7A3753A118A4CE56BF8BC4DA3 /* sample_report.json */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.json; name = sample_report.json; path = docs/sample_report.json; sourceTree = "<group>"; };
+		F45EA6A9C7D84E533F9C78B63495DF86 /* Initalizing TrustKit.html */ = {isa = PBXFileReference; includeInIndex = 1; name = "Initalizing TrustKit.html"; path = "docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/Initalizing TrustKit.html"; sourceTree = "<group>"; };
+		F75B579562230BE4BD32F11C2FA48B93 /* TSKTrustKitConfig.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TSKTrustKitConfig.h; sourceTree = "<group>"; };
+		F9D80BE8990C1E8409D925A2F5A96F6D /* Other Type Definitions.html */ = {isa = PBXFileReference; includeInIndex = 1; name = "Other Type Definitions.html"; path = "docs/documentation/Other Type Definitions.html"; sourceTree = "<group>"; };
+		F9DAEA5F3B97BA2B8D48705D18709071 /* carat.png */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = image.png; name = carat.png; path = docs/documentation/docsets/TrustKit.docset/Contents/Resources/Documents/img/carat.png; sourceTree = "<group>"; };
+		FA0D15B0FBAE13CF97A1BCDFAF6A4DD0 /* TSKPinFailureReport.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TSKPinFailureReport.h; sourceTree = "<group>"; };
+		FE10BF35766133FEA92D45B1B18239E2 /* TrustKit.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = TrustKit.m; path = TrustKit/TrustKit.m; sourceTree = "<group>"; };
+		FE7F333A3418AD33FB2BBAFFA815ED9B /* TSKReportsRateLimiter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = TSKReportsRateLimiter.m; sourceTree = "<group>"; };
+		FF7694698BB70015E2D2EE8A3432CD5B /* parse_configuration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = parse_configuration.h; path = TrustKit/parse_configuration.h; sourceTree = "<group>"; };
+		FFF63B8A826A14217249708081574D0A /* TSKPinningValidatorResult.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = TSKPinningValidatorResult.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0A6C922A2C57047E529056D2CC139B49 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		14B1264BF14157C3DA6CD9D6E213C8D5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				0A9A545C087FFF43F7221042625EA922 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		640532C9D2E065BED7AF5B48B49063FD /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,30 +311,42 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E8C529ED61EFABA1FB40625034F6F04B /* Frameworks */ = {
+		CFF9490C6E7984B2A53483F329229683 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				624AF64FB43E2862A4BB872E3F04CA59 /* Foundation.framework in Frameworks */,
-				F2841E76A81F02C9EEE162692DB89CFC /* Security.framework in Frameworks */,
+				405DF65B4F9B7E98F1C87E13B0155D5D /* Foundation.framework in Frameworks */,
+				72A9924327F58492DF98758BA4FD6B73 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		05490746B72AF475CB70D1A1E54082BB /* public */ = {
+		0042CF4E915822C8A3154A56DAC14D34 /* TrustKit */ = {
 			isa = PBXGroup;
 			children = (
-				C0F35F1865B5EB98C5EB6DD81A164B30 /* TrustKit.h */,
-				440369D834028ACFF05DB1456887CE1F /* TSKPinningValidator.h */,
-				AD2B8ED25889D3670D70CE0CAAB9135F /* TSKPinningValidatorCallback.h */,
-				8120ADDF82D8983141A3A9FB631BF9B4 /* TSKPinningValidatorResult.h */,
-				68511D74D56BAEA1CD656CCF3557EA08 /* TSKTrustDecision.h */,
-				7B896DC6718A96882DA6D923BA414AF4 /* TSKTrustKitConfig.h */,
+				DC864557B6A017F98C44DB984F0ABCBE /* configuration_utils.h */,
+				5CAE89BC9EFD539B909489DF0A229627 /* configuration_utils.m */,
+				FF7694698BB70015E2D2EE8A3432CD5B /* parse_configuration.h */,
+				4D19BDEB0E8C1E7E0250E8418C8FBBE8 /* parse_configuration.m */,
+				FE10BF35766133FEA92D45B1B18239E2 /* TrustKit.m */,
+				3E21D9D595913353E9E5965676A33537 /* TrustKit-Bridging-Header.h */,
+				E7558BDEE3146D00D02DC1AEE5D26475 /* TSKLog.h */,
+				C0F67E565EB4CD79D72D8FA135BFEA54 /* TSKPinningValidator.m */,
+				061572B9A26B6AB85E99CC755D74461A /* TSKPinningValidator_Private.h */,
+				63F207DED9563F5A283F744CE2E49364 /* TSKPinningValidatorResult.m */,
+				197639F98231BAC11A5E5F3A124E3B7F /* TSKTrustKitConfig.m */,
+				F6DD8C8FDFB49557CF10AEC404D774EB /* Dependencies */,
+				92585DEE6AFDE5ABA26A54A1D0333900 /* Pinning */,
+				9667AF94A7DC16982017B8C3695E0270 /* Pod */,
+				566386008C07B0B4864DCB25ACE9C23A /* public */,
+				A852A1E0127386DF395FC7FA18907ABD /* Reporting */,
+				2A7D7CA53FEE85D56E2EA14E71D37B15 /* Support Files */,
+				295E05297ED868BD13DE8B2F21509476 /* Swizzling */,
 			);
-			name = public;
-			path = TrustKit/public;
+			name = TrustKit;
+			path = ../..;
 			sourceTree = "<group>";
 		};
 		1628BF05B4CAFDCC3549A101F5A10A17 /* Frameworks */ = {
@@ -339,43 +357,57 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		295993A2A039EBBB8C1C59972741BF86 /* Pinning */ = {
+		295E05297ED868BD13DE8B2F21509476 /* Swizzling */ = {
 			isa = PBXGroup;
 			children = (
-				4DC11EC22F2103A12097A0FF058A00A6 /* ssl_pin_verifier.h */,
-				01DEC34F081175D430CB1BAFE6CB9472 /* ssl_pin_verifier.m */,
-				0BDA57F4151968508D3A853304BF745C /* TSKPublicKeyAlgorithm.h */,
-				A71D131FE4A83982BC14771D9F3E9554 /* TSKSPKIHashCache.h */,
-				5E658122713E49682E05A1CADFE55606 /* TSKSPKIHashCache.m */,
+				D480E8DAE5328C02E2FF0AC2B2608610 /* TSKNSURLConnectionDelegateProxy.h */,
+				630E995AD7D50F5D16B8FDFC27E77231 /* TSKNSURLConnectionDelegateProxy.m */,
+				601BE1D9404A7D90FED7928B59B291D4 /* TSKNSURLSessionDelegateProxy.h */,
+				344340B3A46AB35F5B4A5660CEA5BC40 /* TSKNSURLSessionDelegateProxy.m */,
 			);
-			name = Pinning;
-			path = TrustKit/Pinning;
+			name = Swizzling;
+			path = TrustKit/Swizzling;
 			sourceTree = "<group>";
 		};
-		46EF61B0300F395469F652260A26BF29 /* Dependencies */ = {
+		2A7D7CA53FEE85D56E2EA14E71D37B15 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				50A18D48D82BB603A73F7470D5EAD712 /* domain_registry */,
-				FD6438950075A0912EC6FB6C3F9E1041 /* RSSwizzle */,
+				046D874167F88F9520E4BCA74D82B0C5 /* TrustKit-framework.modulemap */,
+				C48080D46FB06D28B672879C1A214141 /* TrustKit-framework-dummy.m */,
+				913C1ADE6424EFBAA4A88085E552A91D /* TrustKit-framework-Info.plist */,
+				1C4B07892ACA1795CEEE4D68F628BA01 /* TrustKit-framework-prefix.pch */,
+				86DEF4A42CCA45521F61BFB773B25566 /* TrustKit-framework-umbrella.h */,
+				7E7C3EC420075847E77776B527075459 /* TrustKit-framework.debug.xcconfig */,
+				69E663BB977903ED8F8A3140A106F6D0 /* TrustKit-framework.release.xcconfig */,
+				8C885A33E40F43CD8E01CA8B0E5FC21A /* TrustKit-library.modulemap */,
+				ADD1A5AC75AA0FB2DA1DBB0F6C3838D7 /* TrustKit-library-dummy.m */,
+				12C5FC1DDC18EB4AED4C4C5E6DBDA62A /* TrustKit-library-prefix.pch */,
+				76FAD7021C6D89400DA4F7CB652F16F2 /* TrustKit-library-umbrella.h */,
+				4E16B891CA54D9C37C7DFEA19006F3B7 /* TrustKit-library.debug.xcconfig */,
+				46AFD55757E243042E4CBD4681AA26B1 /* TrustKit-library.release.xcconfig */,
 			);
-			name = Dependencies;
-			path = TrustKit/Dependencies;
+			name = "Support Files";
+			path = "TrustKitDemo/Pods/Target Support Files/TrustKit-framework";
 			sourceTree = "<group>";
 		};
-		50A18D48D82BB603A73F7470D5EAD712 /* domain_registry */ = {
+		566386008C07B0B4864DCB25ACE9C23A /* public */ = {
 			isa = PBXGroup;
 			children = (
-				02CD6401904F3BF832C49D8B2095237A /* domain_registry.h */,
-				E85B60DDDCCB01F2E2DE3B5345ED8B95 /* private */,
-				DC48332B5F70582567B9DDEB35546756 /* registry_tables_genfiles */,
+				8860120390AD58734B53F2630A63CFB9 /* TrustKit.h */,
+				AF9AB76037C7FACC221F748C70644765 /* TSKPinningValidator.h */,
+				2028F9927030AE04B66B9C0027E2179E /* TSKPinningValidatorCallback.h */,
+				FFF63B8A826A14217249708081574D0A /* TSKPinningValidatorResult.h */,
+				A6267EFCA1686AB7B73731DDFC5B0694 /* TSKTrustDecision.h */,
+				F75B579562230BE4BD32F11C2FA48B93 /* TSKTrustKitConfig.h */,
 			);
-			path = domain_registry;
+			name = public;
+			path = TrustKit/public;
 			sourceTree = "<group>";
 		};
 		5C92F2CB7F707B3AFFB066B77CF45D4A /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				9F91ACE3F39AD3C036AED44C20D67585 /* TrustKit */,
+				0042CF4E915822C8A3154A56DAC14D34 /* TrustKit */,
 			);
 			name = "Development Pods";
 			sourceTree = "<group>";
@@ -383,81 +415,12 @@
 		5F7B99220EE25B97FD5862408BCC95C9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6C5C99CDD1B9B26DAF7A78BB5B9EED36 /* libPods-TrustKitDemo-ObjC.a */,
-				23A301A0E4B6C7D6D1DDD70CB3C67681 /* Pods_TrustKitDemo_Swift.framework */,
-				E37FCA03F2E87D71AE1457636AFA183D /* TrustKit.framework */,
-				68A992F9C9FB523808B0AC122A9E66A3 /* libTrustKit-library.a */,
+				6C5C99CDD1B9B26DAF7A78BB5B9EED36 /* Pods-TrustKitDemo-ObjC */,
+				23A301A0E4B6C7D6D1DDD70CB3C67681 /* Pods-TrustKitDemo-Swift */,
+				E37FCA03F2E87D71AE1457636AFA183D /* TrustKit-framework */,
+				68A992F9C9FB523808B0AC122A9E66A3 /* TrustKit-library */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		62AE9E2054E620891E4C889222DD8F8D /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				FC4C7C59A4E5F48734C88DE969DD9616 /* carat.png */,
-				54F91EDE09EAFC82C2C2046AEAB8C63F /* carat.png */,
-				51BC06BEE2861FA704952CD46FC7D737 /* dash.png */,
-				5E0D8C3BB746B5E7B18D7C759EAB4637 /* dash.png */,
-				B9E1DC50BF515CD9C98986EA1ABDBE6B /* docSet.dsidx */,
-				594829054047E2666B2C5D6F15C87CD3 /* documentation-readme.md */,
-				59D39E3F5C7D73DE98A96A3083E9178D /* Domain Configuration Keys.html */,
-				8E91C2548408465866D9F5D2029EB286 /* Domain Configuration Keys.html */,
-				0D0B0F18E7AF9F0A579363803D60B02B /* getting-started.md */,
-				5201EA9274414C8E29FE4463743A55B8 /* gh.png */,
-				443BA37B20FF231FD0FF55F2BB3D95EF /* gh.png */,
-				9F2AB63619585AC4736F167D2C80E160 /* Global Configuration Keys.html */,
-				DA22A566885057F2047C9256181A0A70 /* Global Configuration Keys.html */,
-				6E99DC4571D063040950D53526D6B591 /* highlight.css */,
-				03228DF08AE6D05E9F37644606041FEE /* highlight.css */,
-				EDD9EE5D4FE297AA1FFB7281E18057D3 /* Implementing Pinning Validation.html */,
-				20252CD42259BFC9CAD9862BA5FD0831 /* Implementing Pinning Validation.html */,
-				A77D8FF45079EF274A78701C7EAFBACC /* index.html */,
-				631951ECDB65DCDEBEE6759D990D4EF0 /* index.html */,
-				90C6F3DB5B64F543DDCC6991599C39EE /* index.html */,
-				83ED6FE77461662DC0207AC438C84535 /* Info.plist */,
-				7EDC7E47D842A13F3A61F79861E60AD2 /* Initalizing TrustKit.html */,
-				C420096F3D7824C3B3E3E3DA8D2A04C6 /* Initalizing TrustKit.html */,
-				82AFDADCC4E40ACDF28F5C55717E9CF5 /* jazzy.css */,
-				64B30E9B10309588E9530DA053E63505 /* jazzy.css */,
-				0A88D0D1D6E148FF6B9A77A818744C18 /* jazzy.js */,
-				CD45A88EF481BD9D57677AEF0847102E /* jazzy.js */,
-				A3F12A8F68470D1077CC65A6CC1D1427 /* jazzy.search.js */,
-				8504DA8158D08E0F7D83EEB226393583 /* jazzy.search.js */,
-				26586F98ACD1A9089EC0650897D3F902 /* jquery.min.js */,
-				51F396D12349478A665BD54CDA0B03A5 /* jquery.min.js */,
-				DAEF7EEDB81F525E08FA20D0280ED609 /* LICENSE */,
-				05E99740D5985DE9A01CA7E0EAD27EAD /* linking3_dynamic.png */,
-				639E66AA43B65E5BC9CA540ACAAD1229 /* lunr.min.js */,
-				DA353AB15FD1B2554C3B356F1A112C8B /* lunr.min.js */,
-				4D4E90DAFFB4065BD1D5F28EB8ECD132 /* Other Constants.html */,
-				632DEA67AFB4037E144993260F0157F3 /* Other Constants.html */,
-				CF7FF426015B60EA7AA13871A0A3C837 /* Other Type Definitions.html */,
-				1BD389B82A162F62F08BB3229AFE275D /* Other Type Definitions.html */,
-				C360792CC29235BC00323AA063DE9B83 /* README.md */,
-				FE51B3C7A3753A118A4CE56BF8BC4DA3 /* sample_report.json */,
-				3194710820B32DA2ED0FE1DAAD394D68 /* search.json */,
-				064102541B2CDD4D220AE936F12FBE6C /* search.json */,
-				68182670F4D7A4C957D60ABC6674BE76 /* Setting up a Validation Callback.html */,
-				2A4C1FFEB500CF7654F962A1732D9A55 /* Setting up a Validation Callback.html */,
-				BADA0F2A021544AEE8A764F7899189FF /* spinner.gif */,
-				A5B08C7CEF21CE238EC6970999E8FFE4 /* spinner.gif */,
-				9C4E2D1C149162B9F215DABC961C3D37 /* TrustKit.html */,
-				4FF95F7E878C5178C094BAAFA3A09816 /* TrustKit.html */,
-				5276B53E43B39AA3CA2D69476C242F5C /* TrustKit.podspec */,
-				874643E8DE3E948C10CEF3A89281B3E9 /* TrustKit-BH2015.pdf */,
-				19DCBC8B115019B11F3A318CBAC4D376 /* TSKPinningValidator.html */,
-				BDD7797E740C760D674FD29B361936BA /* TSKPinningValidator.html */,
-				A909474FEDA2BC25062657A567D8159B /* TSKPinningValidatorResult.html */,
-				6A6B5E03F45C637A8A2784AE6BDBBF4D /* TSKPinningValidatorResult.html */,
-				7D48B02AD69DB8AADA77C29DDF5EEC33 /* TSKTrustDecision.html */,
-				298BCE76FCC60A2F035EE730C0A5433D /* TSKTrustDecision.html */,
-				45C6E0333AA66649C5917F955CFFF830 /* TSKTrustEvaluationResult.html */,
-				687349D8B5F2BC7B76EBC4CD5FA32D68 /* TSKTrustEvaluationResult.html */,
-				02E641920E871FF8C4D47C940D2CBD64 /* typeahead.jquery.js */,
-				5058EC0A1F3FCE189D2E507A89C6AAAE /* typeahead.jquery.js */,
-				03FD634D8F32F4BD707907F1A4CED791 /* undocumented.json */,
-			);
-			name = Pod;
 			sourceTree = "<group>";
 		};
 		7CE426AC267333500FABE7BA0A5A42A0 /* iOS */ = {
@@ -469,27 +432,6 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		81E35722A1C9992C501B8BC189659853 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				9B6469E605E40E2B1FE7C837A3467C50 /* TrustKit-framework.modulemap */,
-				14972B5E8B2B929682D69B6023CBEC4E /* TrustKit-framework-dummy.m */,
-				A4C4180AC5E934EEB6FDCCC5B40C101A /* TrustKit-framework-Info.plist */,
-				ABEF87A2E0EF18D33E2A15627FBDAF6E /* TrustKit-framework-prefix.pch */,
-				91FE8D5E48E4923A2D9FFF2296D169C8 /* TrustKit-framework-umbrella.h */,
-				6A97ADF72A299CE39578A1FFD39B0921 /* TrustKit-framework.debug.xcconfig */,
-				85B5648D4AA1D443DB3270D40A362114 /* TrustKit-framework.release.xcconfig */,
-				9CA340E63CE096720903B73AD064F0B9 /* TrustKit-library.modulemap */,
-				C82BC7BCF3E8A2B8B525D68547662C47 /* TrustKit-library-dummy.m */,
-				89DCCD5D9EE73243C23BA532CBF149C2 /* TrustKit-library-prefix.pch */,
-				605A22F67A88268EC7A380D9EFB69D65 /* TrustKit-library-umbrella.h */,
-				53C4012533E501BFB63C6A1E4C1F4A2F /* TrustKit-library.debug.xcconfig */,
-				B4AF60FEC8C195D05EAAF1BDB29B1B0F /* TrustKit-library.release.xcconfig */,
-			);
-			name = "Support Files";
-			path = "TrustKitDemo/Pods/Target Support Files/TrustKit-framework";
-			sourceTree = "<group>";
-		};
 		88A981468E22793995125C8A91256B0E /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -499,60 +441,116 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		9F91ACE3F39AD3C036AED44C20D67585 /* TrustKit */ = {
+		92585DEE6AFDE5ABA26A54A1D0333900 /* Pinning */ = {
 			isa = PBXGroup;
 			children = (
-				8CBB2A6176A71D27B4E37F7E5A26335F /* configuration_utils.h */,
-				B20F3D8319D7397C339313D6BEF7A77D /* configuration_utils.m */,
-				9333546AC6BDF3562C797604B2E51906 /* parse_configuration.h */,
-				DECBB879FD21B57C5D5D9C3C3945BD8B /* parse_configuration.m */,
-				AF239E4A0C84C58417851939EECCF064 /* TrustKit.m */,
-				300458191E50B7064A136BFA4AC78B7E /* TrustKit-Bridging-Header.h */,
-				16F43C9D6D6C19146D37DA4C6B1557CC /* TSKLog.h */,
-				AF61577F765F5E6860420D77EAF371E2 /* TSKPinningValidator.m */,
-				4616A2849166BB0D64C1D70E172C14BB /* TSKPinningValidator_Private.h */,
-				7372E7BE9DF888DEE33D9055D701AB0F /* TSKPinningValidatorResult.m */,
-				C5F9C64D945A36933C5EF47F9E745878 /* TSKTrustKitConfig.m */,
-				46EF61B0300F395469F652260A26BF29 /* Dependencies */,
-				295993A2A039EBBB8C1C59972741BF86 /* Pinning */,
-				62AE9E2054E620891E4C889222DD8F8D /* Pod */,
-				05490746B72AF475CB70D1A1E54082BB /* public */,
-				BE8C4D8ADBE52D8B83ABDE079B1271C7 /* Reporting */,
-				81E35722A1C9992C501B8BC189659853 /* Support Files */,
-				C925E66800E7CFA52545AC78E28AF0F2 /* Swizzling */,
+				048AA9D686D38C8BAD4C0BD1436800BC /* pinning_utils.h */,
+				962BAD45657403B8C26C9D886C567816 /* pinning_utils.m */,
+				CA77AC0BF5C804C0AE4A0901D27DBDC2 /* ssl_pin_verifier.h */,
+				BFE4E00BE6F4D40050BAD65D4035AA2D /* ssl_pin_verifier.m */,
+				06DB37C9D0EB07C98149F0165970B207 /* TSKPublicKeyAlgorithm.h */,
+				E856C22EBF87F9433142E082758513E1 /* TSKSPKIHashCache.h */,
+				8765B6F6001102B03D3DF15ED56B7CEB /* TSKSPKIHashCache.m */,
 			);
-			name = TrustKit;
-			path = ../..;
+			name = Pinning;
+			path = TrustKit/Pinning;
 			sourceTree = "<group>";
 		};
-		BE8C4D8ADBE52D8B83ABDE079B1271C7 /* Reporting */ = {
+		9667AF94A7DC16982017B8C3695E0270 /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-				72A92CF385503795D84B5790C7CB9F63 /* reporting_utils.h */,
-				6769B15D2AED29A909E434AB9DC9DDCA /* reporting_utils.m */,
-				19710647ECF3A61C0D22BB1571558069 /* TSKBackgroundReporter.h */,
-				B4EEB286B838DE6B973E18B9A6AF3081 /* TSKBackgroundReporter.m */,
-				6FF79548F527403E8E8E9119AAF33C94 /* TSKPinFailureReport.h */,
-				22068DAB9E88FD17A4A11CE816E11784 /* TSKPinFailureReport.m */,
-				A6B934A3B770C8EAA5E6FA8BECDDF3C0 /* TSKReportsRateLimiter.h */,
-				EB203B101E117218A5A50E91C9428F95 /* TSKReportsRateLimiter.m */,
-				0FF6277EF3A39218D37A86DAB771CF2D /* vendor_identifier.h */,
-				7E11FA84B22F847274F2A78662C46DE7 /* vendor_identifier.m */,
+				F9DAEA5F3B97BA2B8D48705D18709071 /* carat.png */,
+				1203F7A2FF3C58C926AAFA168113CDFC /* carat.png */,
+				1D37E17EFF48E2E5E927384D9B3B76EC /* dash.png */,
+				16EF7A52B94195B0F3322388C620FF2D /* dash.png */,
+				15C90AFCBC99C487C15AB68F8FB1307A /* docSet.dsidx */,
+				CEDF57A855D220EDD8304E93F6690D00 /* documentation-readme.md */,
+				0315900C94EF22F7627B455144C1D49B /* Domain Configuration Keys.html */,
+				7033FD2B7989D4D841BF53E3F46F423F /* Domain Configuration Keys.html */,
+				6C1E169C982BE222687F15C945AF5FC9 /* getting-started.md */,
+				DB7A7439FA50B607E8EB4A07F1B32A70 /* gh.png */,
+				AA2BB7EA76D8C887DE8736A7CBF34061 /* gh.png */,
+				AAC8284BB1AB9887CDE3B88B10BD9D87 /* Global Configuration Keys.html */,
+				81AEC80A433963BA22B3954323F96963 /* Global Configuration Keys.html */,
+				95DE3E58C9736F9DF81DFA978CFE8D62 /* highlight.css */,
+				DD29A078D6C022196CA89E5B81456E34 /* highlight.css */,
+				6B97DD735407BDE96C397632BE9C1CC0 /* Implementing Pinning Validation.html */,
+				65C5643F1A7EE01730D59CAE47CFF566 /* Implementing Pinning Validation.html */,
+				026806A7082C0824A578A0A37CB97F73 /* index.html */,
+				93FB01A8F3EA46ECE645CF29D10CEA75 /* index.html */,
+				232CC643D823E56CE24B4540AFF93D98 /* index.html */,
+				035FFABE751815B17E4D7D494CCBFD35 /* Info.plist */,
+				F45EA6A9C7D84E533F9C78B63495DF86 /* Initalizing TrustKit.html */,
+				5E220085DE0310ACEBFF1D63CC068219 /* Initalizing TrustKit.html */,
+				05BCF5B3E092A17DC888A05C72A7E5F1 /* jazzy.css */,
+				261BE7944CF60BF4EA883E0CEBAF08E4 /* jazzy.css */,
+				ABDE6541CB0860175318BF6F6F1B1B62 /* jazzy.js */,
+				40E7204FA25BC4FCD16A11372C7507D7 /* jazzy.js */,
+				DEA355D25B2E118348BC0BF1DDE521C3 /* jazzy.search.js */,
+				2FEE8B53098D78E5B095456D8533A748 /* jazzy.search.js */,
+				A893DDE368B4FBCC6B6758019EBB3B72 /* jquery.min.js */,
+				5FB0A72FA5512E5AD19BFB50B3A5FB31 /* jquery.min.js */,
+				AD4187774D4910271BEACD4290A4E332 /* LICENSE */,
+				E5B5239D7FD27D3FFB1FE55F796DE91D /* linking3_dynamic.png */,
+				01A8554BF468890992EAC3B5050C4F60 /* lunr.min.js */,
+				9E3DD4C6EF71E7AD965072E90A517A0D /* lunr.min.js */,
+				76F67B8A3E592AB87E9E3111E25E8211 /* Other Constants.html */,
+				83E99AED9498AA87D6C39387D6BCC27C /* Other Constants.html */,
+				C0F3EC8B4A9B58D45B78B5FC3376E6A9 /* Other Type Definitions.html */,
+				F9D80BE8990C1E8409D925A2F5A96F6D /* Other Type Definitions.html */,
+				1BDCD8C9E49B05B87FFEEF7B654EDE45 /* README.md */,
+				3589EF7920B0A297A0078A834CDA89AF /* sample_report.json */,
+				8937AEEDEE14FAF3BFC32EBD46B9A078 /* search.json */,
+				662B90B709A5CDBBDDC83B408B540B06 /* search.json */,
+				49BEEED3053CD3F2C22D8D1698A5A327 /* Setting up a Validation Callback.html */,
+				133B1E2BB77E94CAFD0526DC57D2E520 /* Setting up a Validation Callback.html */,
+				3B87807313DA1E4E1EC9CFEC562338DA /* spinner.gif */,
+				6B904C9E8ED622993359785DF6847C78 /* spinner.gif */,
+				E5230B1E4888F7D269C06F09D92676C6 /* TrustKit.html */,
+				09DEE2E265A60D78D39CD57B6A261F3D /* TrustKit.html */,
+				296E3DCD08448460A12FF367CD5306AD /* TrustKit.podspec */,
+				D00E25998756E951A55C770E203E7069 /* TrustKit-BH2015.pdf */,
+				55138A41165189E874A30B322C23ABF8 /* TSKPinningValidator.html */,
+				6AAEF0972F8B83A4C5E3BF17F9D46A5A /* TSKPinningValidator.html */,
+				475F1613F674E8DC208485EF340775D4 /* TSKPinningValidatorResult.html */,
+				4B3357AE0E6FD065EC4EF0CB68065BC0 /* TSKPinningValidatorResult.html */,
+				E96ABFE842504DD5FC13E24BEB519743 /* TSKTrustDecision.html */,
+				81F8EEF374D1D4E37C903B96F81C6A60 /* TSKTrustDecision.html */,
+				8BEF4E6F4F9BEEEE473746EF056776D0 /* TSKTrustEvaluationResult.html */,
+				AD289FFEC2AC4C034667E44D6345A650 /* TSKTrustEvaluationResult.html */,
+				D3FD784711198AE230F81A67BE692E7E /* typeahead.jquery.js */,
+				84976FF0E7D554DFBE582647A7DB51CD /* typeahead.jquery.js */,
+				2520E0851537FE8E71AC8917156AE550 /* undocumented.json */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		A852A1E0127386DF395FC7FA18907ABD /* Reporting */ = {
+			isa = PBXGroup;
+			children = (
+				BBC622863D57973AE572D6E01C99C58A /* reporting_utils.h */,
+				6D57F0BB2B3F532421960A19054C203F /* reporting_utils.m */,
+				4F0DFC2BCACE3D2625A70609CEF3E8D5 /* TSKBackgroundReporter.h */,
+				22DB5C1B56AE974A402AC078F2F8AD0C /* TSKBackgroundReporter.m */,
+				FA0D15B0FBAE13CF97A1BCDFAF6A4DD0 /* TSKPinFailureReport.h */,
+				8A27E33C0BE54975454210F8751EE1C7 /* TSKPinFailureReport.m */,
+				9A8E537B2031C5A4EB9191A33A3B439A /* TSKReportsRateLimiter.h */,
+				FE7F333A3418AD33FB2BBAFFA815ED9B /* TSKReportsRateLimiter.m */,
+				C8B25D057BC9C4873CB27CE04870BF17 /* vendor_identifier.h */,
+				B032581A3D2ED6A4888EF3FF670B5C96 /* vendor_identifier.m */,
 			);
 			name = Reporting;
 			path = TrustKit/Reporting;
 			sourceTree = "<group>";
 		};
-		C925E66800E7CFA52545AC78E28AF0F2 /* Swizzling */ = {
+		C4A23CD07371DFBF86543307CC0EB467 /* RSSwizzle */ = {
 			isa = PBXGroup;
 			children = (
-				68609B24A6BEAD384A5DE0A4C49A12DC /* TSKNSURLConnectionDelegateProxy.h */,
-				88BC0733CBBB938A3219273F5152589A /* TSKNSURLConnectionDelegateProxy.m */,
-				043B12DC1E972E45D4B0C17196FD6F80 /* TSKNSURLSessionDelegateProxy.h */,
-				2CA9D217C2E661A2E9657C40D8663B03 /* TSKNSURLSessionDelegateProxy.m */,
+				DFF7B83B122A24AE721F4E087990357F /* RSSwizzle.h */,
+				A9EBA37E53A047D5456C5B72C6F9CC03 /* RSSwizzle.m */,
 			);
-			name = Swizzling;
-			path = TrustKit/Swizzling;
+			name = RSSwizzle;
+			path = RSSwizzle;
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
@@ -564,30 +562,6 @@
 				5F7B99220EE25B97FD5862408BCC95C9 /* Products */,
 				88A981468E22793995125C8A91256B0E /* Targets Support Files */,
 			);
-			sourceTree = "<group>";
-		};
-		DC48332B5F70582567B9DDEB35546756 /* registry_tables_genfiles */ = {
-			isa = PBXGroup;
-			children = (
-				3177F6935C7A2B22BC0AAA0A5738BEBE /* registry_tables.h */,
-			);
-			path = registry_tables_genfiles;
-			sourceTree = "<group>";
-		};
-		E85B60DDDCCB01F2E2DE3B5345ED8B95 /* private */ = {
-			isa = PBXGroup;
-			children = (
-				69E5FA76B4FF1E23A860CF8DAA78CAFB /* init_registry_tables.c */,
-				3E1BCEA3944EE482D8B99A2E3B19CB44 /* registry_search.c */,
-				AABD036852EAAB6A3416E3391383D7B4 /* registry_types.h */,
-				A7ECFC1EB23AF4A11C98062D57F4FF4C /* string_util.h */,
-				FDA13ACD031E2C93F25F8E63D1055FF2 /* trie_node.h */,
-				2AB9D4CB5B88C1970424BB60E09EB8D3 /* trie_search.c */,
-				49FB1947B06D37C70348AA4A39820448 /* trie_search.h */,
-				CF70FE45A96267DB5C7D04886E3720CB /* tsk_assert.c */,
-				0B3D7D387499DF956EF939EE48CDCF84 /* tsk_assert.h */,
-			);
-			path = private;
 			sourceTree = "<group>";
 		};
 		EC086C09B859AF08D5FD9046C0CCF348 /* Pods-TrustKitDemo-Swift */ = {
@@ -607,6 +581,42 @@
 			path = "Target Support Files/Pods-TrustKitDemo-Swift";
 			sourceTree = "<group>";
 		};
+		EC70FD577C35288F0F61AEE185FFDB72 /* registry_tables_genfiles */ = {
+			isa = PBXGroup;
+			children = (
+				15D008F1E74C33D05AA0E2E57EF4ADD8 /* registry_tables.h */,
+			);
+			name = registry_tables_genfiles;
+			path = registry_tables_genfiles;
+			sourceTree = "<group>";
+		};
+		F6DD8C8FDFB49557CF10AEC404D774EB /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				FF8D847AB03C128A9B9929AB7CCDB850 /* domain_registry */,
+				C4A23CD07371DFBF86543307CC0EB467 /* RSSwizzle */,
+			);
+			name = Dependencies;
+			path = TrustKit/Dependencies;
+			sourceTree = "<group>";
+		};
+		F94F7FE3DA00C0B86C536B9BCE9E4968 /* private */ = {
+			isa = PBXGroup;
+			children = (
+				A79377FED8268E50C0C0037814261984 /* init_registry_tables.c */,
+				484B532E914FDE246D7E77DC75D8EEE8 /* registry_search.c */,
+				678522FB09A4294D2153CCFDF518F963 /* registry_types.h */,
+				B8714314CF30CE7FC92BA23D508F1DD3 /* string_util.h */,
+				B9B8B8480C00597A01F41CC814D5F7F8 /* trie_node.h */,
+				8603FB58E8DE76D0DB6C9532AFC77F31 /* trie_search.c */,
+				5803BB6874098367819C7DBEEB091722 /* trie_search.h */,
+				C2702B60E7FF57703B6B5E140F4D7926 /* tsk_assert.c */,
+				BAA277EFFA96106144227F7BFB18824E /* tsk_assert.h */,
+			);
+			name = private;
+			path = private;
+			sourceTree = "<group>";
+		};
 		FB18226173E9F94DA999E4A006080E2B /* Pods-TrustKitDemo-ObjC */ = {
 			isa = PBXGroup;
 			children = (
@@ -620,18 +630,58 @@
 			path = "Target Support Files/Pods-TrustKitDemo-ObjC";
 			sourceTree = "<group>";
 		};
-		FD6438950075A0912EC6FB6C3F9E1041 /* RSSwizzle */ = {
+		FF8D847AB03C128A9B9929AB7CCDB850 /* domain_registry */ = {
 			isa = PBXGroup;
 			children = (
-				7CE7544E6243B8AA3751B0156AA5F3B8 /* RSSwizzle.h */,
-				AF6C241E925B422FA6DE1DDE153D9323 /* RSSwizzle.m */,
+				B105F1349AEFFACF1DB8305C5152CFEC /* domain_registry.h */,
+				F94F7FE3DA00C0B86C536B9BCE9E4968 /* private */,
+				EC70FD577C35288F0F61AEE185FFDB72 /* registry_tables_genfiles */,
 			);
-			path = RSSwizzle;
+			name = domain_registry;
+			path = domain_registry;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		3FC65370D2F1B47E61735B0B546F8004 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05EF6D1F9F530008DAD9E6607874D46C /* configuration_utils.h in Headers */,
+				83C8E8881F636275473D588DF67F8B85 /* domain_registry.h in Headers */,
+				BBDF91A09C08D11037268F483AF9D928 /* parse_configuration.h in Headers */,
+				7D772A073E42BC2E6F274BFA4C2488D9 /* pinning_utils.h in Headers */,
+				AC1DCA618943129FC60622ACE899D489 /* registry_tables.h in Headers */,
+				693730D13E819A9AFA33040E3A96649D /* registry_types.h in Headers */,
+				C2CAA4265520ECD39E77021DA96EED46 /* reporting_utils.h in Headers */,
+				C6B08D97D145E0D4A0E2525068EA6B53 /* RSSwizzle.h in Headers */,
+				7C24CC29BA6C749C3CA5D153002FB253 /* ssl_pin_verifier.h in Headers */,
+				6ADC295BC68BFC21CBEBAE72D3034500 /* string_util.h in Headers */,
+				B80623F7BAE29F628D0F27E3945AC98C /* trie_node.h in Headers */,
+				D8666B959608DA31074996AC7EDA0110 /* trie_search.h in Headers */,
+				61BE5B6DBF88A058CA322E62BC4DDFA2 /* TrustKit.h in Headers */,
+				CAD2005190A015C2B306651C078937A9 /* TrustKit-Bridging-Header.h in Headers */,
+				9D9643FA4852F7101C07BC7F1FE90D0F /* TrustKit-library-umbrella.h in Headers */,
+				32EC009402CE346BD49B4200632BE95E /* tsk_assert.h in Headers */,
+				C09AB7A9F5746FDE5E724C8EAFD32EAF /* TSKBackgroundReporter.h in Headers */,
+				FFE9BA3A29183FC44BB8E5C5F0D0DAA4 /* TSKLog.h in Headers */,
+				A9915513A8D84A612481D980BEDCC203 /* TSKNSURLConnectionDelegateProxy.h in Headers */,
+				C13987F17788B05D548E586A9852ACE3 /* TSKNSURLSessionDelegateProxy.h in Headers */,
+				8D1DB29199B8C134AF312611ECBE9420 /* TSKPinFailureReport.h in Headers */,
+				38F525F6A3C813DE39F5B283AEE76683 /* TSKPinningValidator.h in Headers */,
+				D363C566A5532BA9238C472F4FCA6C55 /* TSKPinningValidator_Private.h in Headers */,
+				B2D177C56AB24827E965F38FBD236510 /* TSKPinningValidatorCallback.h in Headers */,
+				E94860F5E49F616D92BB24704905A410 /* TSKPinningValidatorResult.h in Headers */,
+				4DC50AC2A653D62729B9B16C8392C48C /* TSKPublicKeyAlgorithm.h in Headers */,
+				25CF6CED5FCAC99C428A219A11971FFB /* TSKReportsRateLimiter.h in Headers */,
+				33E025C2FCECE0ECD708559789F71BA2 /* TSKSPKIHashCache.h in Headers */,
+				A627D10A9BAF81CF354A677EB33D88A7 /* TSKTrustDecision.h in Headers */,
+				C64BA28802B0D6C5D13B4E496C2E96D6 /* TSKTrustKitConfig.h in Headers */,
+				E7EAA8C4365B238D8F8C8C4BA0A16B68 /* vendor_identifier.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		408C134EB1E0E0D4E44DDD20919BF6F5 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -647,77 +697,41 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		685066DFEDD57CAD35F6141495FC1548 /* Headers */ = {
+		E74A08818AB6997783D398BF9A539837 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F3838503E12FA081BAF2B35A721AEF84 /* configuration_utils.h in Headers */,
-				B8BFF009DF77B0E6E048CD153A1131E9 /* domain_registry.h in Headers */,
-				801542A165EA6357AE369549C5A61C78 /* parse_configuration.h in Headers */,
-				34F8DA993BC1CE49B3097D105770B2EB /* registry_tables.h in Headers */,
-				D497425C9FCB4CA85714514AD4EAFC2C /* registry_types.h in Headers */,
-				E07DD147393076012D25C3B61048F417 /* reporting_utils.h in Headers */,
-				7CC69EA05D8ADA9B35C3BD028CBA26A5 /* RSSwizzle.h in Headers */,
-				8E96C53BDA50A65B9A9C289196ADA18F /* ssl_pin_verifier.h in Headers */,
-				0A90201C8546D1F8B81DBCA75BA0C439 /* string_util.h in Headers */,
-				74E58D67AA8476A57E52E59260B61715 /* trie_node.h in Headers */,
-				77E808FAA7AC09754CD77B79A727FB1A /* trie_search.h in Headers */,
-				C7B794F841B2ACF85AB0A83ACD3EFC05 /* TrustKit.h in Headers */,
-				B04F1739982657E48D164F9BA6783E49 /* TrustKit-Bridging-Header.h in Headers */,
-				761B34452C9086B7FE75C68EF07A211F /* TrustKit-framework-umbrella.h in Headers */,
-				7DD0E0CD2715FAF8A6D0385CDBE3B832 /* tsk_assert.h in Headers */,
-				99503FF0DD07B858EAEC33E2B91C4422 /* TSKBackgroundReporter.h in Headers */,
-				27FBD818E593E4233056C00152E8B982 /* TSKLog.h in Headers */,
-				414501E0D556FF47C77279801585B36A /* TSKNSURLConnectionDelegateProxy.h in Headers */,
-				CC863BB741B05B89E255A5EC55800D5B /* TSKNSURLSessionDelegateProxy.h in Headers */,
-				5C39044B65A9540AE16C020ED75310D8 /* TSKPinFailureReport.h in Headers */,
-				EC0762BBA271DABD7EE35DC12F8B3878 /* TSKPinningValidator.h in Headers */,
-				6B018C00ABFA15C0CD4C907DD8DF3915 /* TSKPinningValidator_Private.h in Headers */,
-				75EBC869ED1F5C0696D0A1F1A7088D96 /* TSKPinningValidatorCallback.h in Headers */,
-				FDE2553E75B1E66D7979599B94AE977F /* TSKPinningValidatorResult.h in Headers */,
-				CD68C0F1B018956100537ED5B3B1A7B8 /* TSKPublicKeyAlgorithm.h in Headers */,
-				FC1C4EA6AD6178848F9F00C94B03A516 /* TSKReportsRateLimiter.h in Headers */,
-				C7DDD1562267B2F4D233F39D12D5ADB6 /* TSKSPKIHashCache.h in Headers */,
-				D4C907A3822CE29577D8D60CBC5900A5 /* TSKTrustDecision.h in Headers */,
-				7236DF519F791C1AB447F3289549B33F /* TSKTrustKitConfig.h in Headers */,
-				4EC2DE95462A9861687E7190C31ED9DD /* vendor_identifier.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		88B2FB5F1FD0382EAC617B6EBFC58A6E /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				EFB18C535997EE5C594E83F7F4863AA4 /* configuration_utils.h in Headers */,
-				984D042275BCB9528A8637ED70D8D2BC /* domain_registry.h in Headers */,
-				F886F214FB714334FE73AE83CC1E1C91 /* parse_configuration.h in Headers */,
-				A2EAC406077CFA4D80B82988500A1505 /* registry_tables.h in Headers */,
-				20B922A45370705941DC3C5DB4255F84 /* registry_types.h in Headers */,
-				21743F2ABD8D1C9FD79CB6F9A8D8A647 /* reporting_utils.h in Headers */,
-				E5785C1C6D22DAE8CA4F49B010C691FC /* RSSwizzle.h in Headers */,
-				F6B2423B265BF7CA43076A8DF92E0255 /* ssl_pin_verifier.h in Headers */,
-				A40A1D009D51956E04C68BD1F5549674 /* string_util.h in Headers */,
-				7FA935A1D0D22F3123E415F753DC6BD8 /* trie_node.h in Headers */,
-				429C2AD58E7709E356ED4133E550BC23 /* trie_search.h in Headers */,
-				89B150CB35E6C37B9407DDACDEC033D5 /* TrustKit.h in Headers */,
-				B9A922A464CF18BF882A13E1115E8105 /* TrustKit-Bridging-Header.h in Headers */,
-				22DE05AFC5A7CA69CE7E3CFAACE790FB /* TrustKit-library-umbrella.h in Headers */,
-				DB8EA3E604CC14213E228A13705C7290 /* tsk_assert.h in Headers */,
-				2E6B6806A2B512D815D0F7A820A700E9 /* TSKBackgroundReporter.h in Headers */,
-				A5B5C9BCDC940C7B6FDDA958AE39E141 /* TSKLog.h in Headers */,
-				5694A8D102EB3EC2180733A9C21A775D /* TSKNSURLConnectionDelegateProxy.h in Headers */,
-				8C25AE7EF7614B686D26AE1FECF32E74 /* TSKNSURLSessionDelegateProxy.h in Headers */,
-				E008F6F3DC03ABCDD424D28A513BCFC1 /* TSKPinFailureReport.h in Headers */,
-				28F3C944A8B064B25975DB699A1D1DC5 /* TSKPinningValidator.h in Headers */,
-				6A51392663B261C9A4C96EA166874714 /* TSKPinningValidator_Private.h in Headers */,
-				736C5F98AEB9F0A5488072811695C89D /* TSKPinningValidatorCallback.h in Headers */,
-				06B6E82A632A72B04EB5F2AB2D2DA377 /* TSKPinningValidatorResult.h in Headers */,
-				197C482A4D2407B3986B2328693CB9A7 /* TSKPublicKeyAlgorithm.h in Headers */,
-				64B1B85F1C15F7A8566D4FF3DCF73018 /* TSKReportsRateLimiter.h in Headers */,
-				E98CEED99A854D98A3997C2206B2B603 /* TSKSPKIHashCache.h in Headers */,
-				C9A606D19C9EB1497F3555D3C167720A /* TSKTrustDecision.h in Headers */,
-				A71357265A0002110B2368D43D8A167D /* TSKTrustKitConfig.h in Headers */,
-				C2F0221ADF3043E53276F3C5D845A397 /* vendor_identifier.h in Headers */,
+				D98953B6B6815BC87D483FF5604577CC /* configuration_utils.h in Headers */,
+				7BEA569DFFEDF530387F42D985385C15 /* domain_registry.h in Headers */,
+				7ED03C0B62D70D6C58A48D26EEB1B26E /* parse_configuration.h in Headers */,
+				5F33329B9C2E39D561544BA793C4ED4A /* pinning_utils.h in Headers */,
+				4EE03FFD9D02DE052A3B1B82B9F660C5 /* registry_tables.h in Headers */,
+				9A3707EF7C460EBB6E4267F0AABF9598 /* registry_types.h in Headers */,
+				261F601672D08AD8E48616DCDB50FCC8 /* reporting_utils.h in Headers */,
+				EB29C6311751DCD3D1B177B422D80FC3 /* RSSwizzle.h in Headers */,
+				B1A12BD316DF6BAC16777A3FC42DAA77 /* ssl_pin_verifier.h in Headers */,
+				AB85D02A7D644EFD13132C6570623669 /* string_util.h in Headers */,
+				5F6C871754A68BA4A38E3CB5C15D0A0E /* trie_node.h in Headers */,
+				E536B5FD24DFB56CE9DB7A2A4F748ABA /* trie_search.h in Headers */,
+				28FB231D2685267CAA40970A17961726 /* TrustKit.h in Headers */,
+				AF9C0F8BCE6239C585AD7A427AA398AC /* TrustKit-Bridging-Header.h in Headers */,
+				E2D05381D28FBF66252D871A3F52437C /* TrustKit-framework-umbrella.h in Headers */,
+				90D16C7B0C56A9BD4CCDA2CFC3247FCA /* tsk_assert.h in Headers */,
+				A999CC03A98B80BED61AC4B05334DBFE /* TSKBackgroundReporter.h in Headers */,
+				E659B692418ED452022E72EEAB50C3D3 /* TSKLog.h in Headers */,
+				FDE0C7A1B468D91704F5CA2D0EDE7597 /* TSKNSURLConnectionDelegateProxy.h in Headers */,
+				F831A688C1E87281C7B6C869D30698EC /* TSKNSURLSessionDelegateProxy.h in Headers */,
+				2E775C39EA458962807364AC9BB6B2D1 /* TSKPinFailureReport.h in Headers */,
+				85D355F5771C7DA10EA9C47466E74000 /* TSKPinningValidator.h in Headers */,
+				2F075E0E615BB03A36393EAE0EE477BF /* TSKPinningValidator_Private.h in Headers */,
+				8EDB7467499D64E7EB87B39308327094 /* TSKPinningValidatorCallback.h in Headers */,
+				14EA8A6FC995C46A824A26A45F1F96CE /* TSKPinningValidatorResult.h in Headers */,
+				B57A2C2A81D8E70C8BC957ACFE904BBB /* TSKPublicKeyAlgorithm.h in Headers */,
+				FF5651CD35F079BB3E31A88B8AA21B4C /* TSKReportsRateLimiter.h in Headers */,
+				2C4BD7921E45A9687564195DC4EC1357 /* TSKSPKIHashCache.h in Headers */,
+				DCDFA41802CED412F011B0FCD80921E8 /* TSKTrustDecision.h in Headers */,
+				C52A5536B0FFFAF4F0A38401B5FD2DA2 /* TSKTrustKitConfig.h in Headers */,
+				55AFB1C0ACFFB7702BEB1AC6AEC35003 /* vendor_identifier.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -735,11 +749,11 @@
 			buildRules = (
 			);
 			dependencies = (
-				FC24639630474527BE4A3FA7C6191848 /* PBXTargetDependency */,
+				C7A2710B773AC3286654523E298EB5F4 /* PBXTargetDependency */,
 			);
 			name = "Pods-TrustKitDemo-ObjC";
 			productName = "Pods-TrustKitDemo-ObjC";
-			productReference = 6C5C99CDD1B9B26DAF7A78BB5B9EED36 /* libPods-TrustKitDemo-ObjC.a */;
+			productReference = 6C5C99CDD1B9B26DAF7A78BB5B9EED36 /* Pods-TrustKitDemo-ObjC */;
 			productType = "com.apple.product-type.library.static";
 		};
 		B92B725FBC69F64C5D14A05DEC5B7BC1 /* Pods-TrustKitDemo-Swift */ = {
@@ -754,21 +768,21 @@
 			buildRules = (
 			);
 			dependencies = (
-				2F873F18F17E1889DA4CB04B86FE7D7A /* PBXTargetDependency */,
+				4C72CCBAC4BA1AD303E5C15EB8D62440 /* PBXTargetDependency */,
 			);
 			name = "Pods-TrustKitDemo-Swift";
 			productName = Pods_TrustKitDemo_Swift;
-			productReference = 23A301A0E4B6C7D6D1DDD70CB3C67681 /* Pods_TrustKitDemo_Swift.framework */;
+			productReference = 23A301A0E4B6C7D6D1DDD70CB3C67681 /* Pods-TrustKitDemo-Swift */;
 			productType = "com.apple.product-type.framework";
 		};
 		CED2493CA3D2AB34BE473481BE25D2ED /* TrustKit-framework */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F1CE47C16092A40C4EC6596EE0610D85 /* Build configuration list for PBXNativeTarget "TrustKit-framework" */;
+			buildConfigurationList = 49F94C658DD559DFDAF1FB24F852E1E6 /* Build configuration list for PBXNativeTarget "TrustKit-framework" */;
 			buildPhases = (
-				685066DFEDD57CAD35F6141495FC1548 /* Headers */,
-				4F908D8AE5748EA5B02E1960CE33304D /* Sources */,
-				E8C529ED61EFABA1FB40625034F6F04B /* Frameworks */,
-				C6151C8FD809F2203F403BB404D6702A /* Resources */,
+				E74A08818AB6997783D398BF9A539837 /* Headers */,
+				D63BE3009DAC0D7D50F5825AC99A6310 /* Sources */,
+				CFF9490C6E7984B2A53483F329229683 /* Frameworks */,
+				19F91921E296CFBC865D19C08D0E064C /* Resources */,
 			);
 			buildRules = (
 			);
@@ -776,16 +790,16 @@
 			);
 			name = "TrustKit-framework";
 			productName = TrustKit;
-			productReference = E37FCA03F2E87D71AE1457636AFA183D /* TrustKit.framework */;
+			productReference = E37FCA03F2E87D71AE1457636AFA183D /* TrustKit-framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		D806590D73A28CCE08164D7851510E47 /* TrustKit-library */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5FDFE8D6980F1AF86B846614842B10C0 /* Build configuration list for PBXNativeTarget "TrustKit-library" */;
+			buildConfigurationList = E1465998B1D136A9614628D725B4306B /* Build configuration list for PBXNativeTarget "TrustKit-library" */;
 			buildPhases = (
-				88B2FB5F1FD0382EAC617B6EBFC58A6E /* Headers */,
-				0C42DE5064CFB71E22ED6954C890309F /* Sources */,
-				640532C9D2E065BED7AF5B48B49063FD /* Frameworks */,
+				3FC65370D2F1B47E61735B0B546F8004 /* Headers */,
+				34F1E302DD1ACCE76B2B98E48506B2F1 /* Sources */,
+				0A6C922A2C57047E529056D2CC139B49 /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -793,7 +807,7 @@
 			);
 			name = "TrustKit-library";
 			productName = "TrustKit-library";
-			productReference = 68A992F9C9FB523808B0AC122A9E66A3 /* libTrustKit-library.a */;
+			productReference = 68A992F9C9FB523808B0AC122A9E66A3 /* TrustKit-library */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -802,8 +816,8 @@
 		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1240;
-				LastUpgradeCheck = 1340;
+				LastSwiftUpdateCheck = 1300;
+				LastUpgradeCheck = 1300;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -827,14 +841,14 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		89B87EFFB6C0386BF93950BAE60F3A85 /* Resources */ = {
+		19F91921E296CFBC865D19C08D0E064C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C6151C8FD809F2203F403BB404D6702A /* Resources */ = {
+		89B87EFFB6C0386BF93950BAE60F3A85 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -844,59 +858,32 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		0C42DE5064CFB71E22ED6954C890309F /* Sources */ = {
+		34F1E302DD1ACCE76B2B98E48506B2F1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				84A1CE08FAF4AB958D0DA896E8B1C417 /* configuration_utils.m in Sources */,
-				69AD929459F70827B5B329B07D7F63EA /* init_registry_tables.c in Sources */,
-				F5390289431BAEE5BCB3E01B746D8F7B /* parse_configuration.m in Sources */,
-				C541F28B710B96E588AD713909A1D413 /* registry_search.c in Sources */,
-				07741FD96AACCC4C10C9309F77127361 /* reporting_utils.m in Sources */,
-				A8F8A5393B19560628FA6AA4F652044F /* RSSwizzle.m in Sources */,
-				A143337E401FA6978DD3183D6941222D /* ssl_pin_verifier.m in Sources */,
-				7CBBECC8324EC00E642201C7847EA25E /* trie_search.c in Sources */,
-				1FDD4BEFF3704E882780982D569CCE0F /* TrustKit.m in Sources */,
-				9D1EFE4CE1365822568B9E537BC6A447 /* TrustKit-library-dummy.m in Sources */,
-				85ED010E69091C825A6A97999D4710C6 /* tsk_assert.c in Sources */,
-				CEE67EC1995B20BF942CC7556A8F9B67 /* TSKBackgroundReporter.m in Sources */,
-				C7B73CE5A88DB0A7D7E919A8197A4AF4 /* TSKNSURLConnectionDelegateProxy.m in Sources */,
-				D9246826CF6AD272377661E4D1E52D1E /* TSKNSURLSessionDelegateProxy.m in Sources */,
-				C6ED687673525FF1107C8F2F59E60D86 /* TSKPinFailureReport.m in Sources */,
-				2752A38EFDB2FA6440F2764367E7995F /* TSKPinningValidator.m in Sources */,
-				27704E789CB1DCF9054AD41074C1CF7A /* TSKPinningValidatorResult.m in Sources */,
-				D119F0C991937AEDB2530983FF70A07E /* TSKReportsRateLimiter.m in Sources */,
-				983E9491C1BF07A6AF697DEE679C4B09 /* TSKSPKIHashCache.m in Sources */,
-				BD2911385D85DC310C641E38E958D734 /* TSKTrustKitConfig.m in Sources */,
-				6BE467F647CB803A753A8CDB97EDAB19 /* vendor_identifier.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4F908D8AE5748EA5B02E1960CE33304D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7E7FF72EB6365D336626F701E5B51E39 /* configuration_utils.m in Sources */,
-				CE5CFCD3A2B823669A86B0A7F14BBE9D /* init_registry_tables.c in Sources */,
-				3C9882FC030EC921A3BD2FF2B4D83571 /* parse_configuration.m in Sources */,
-				2A0064474DD5142AA0B303BF40B327EE /* registry_search.c in Sources */,
-				EED57E8428FE21562C81755AA46D1DD5 /* reporting_utils.m in Sources */,
-				48AA56BDE9F70A76BBEAE694D7075544 /* RSSwizzle.m in Sources */,
-				02EC8FB63AE0BB3B82DF4255DAE9D831 /* ssl_pin_verifier.m in Sources */,
-				CE7A03C1DCEE8780598C87D21B296B21 /* trie_search.c in Sources */,
-				CC9EBA27F4522CA37EE76D0249DD13FD /* TrustKit.m in Sources */,
-				F0F8206D1FCD2BD14483EFEBB9D06EA6 /* TrustKit-framework-dummy.m in Sources */,
-				696A0335A7B08B124448FD3AEAC73B70 /* tsk_assert.c in Sources */,
-				309467841BF41C3F6F4D99F032779D83 /* TSKBackgroundReporter.m in Sources */,
-				1C1F2015AE2B23FBAD725D42FDC61B61 /* TSKNSURLConnectionDelegateProxy.m in Sources */,
-				1865ECD64E1DF6EFF3C832CC36E9AA71 /* TSKNSURLSessionDelegateProxy.m in Sources */,
-				09458F3556822CDC66E13A917C28B4CB /* TSKPinFailureReport.m in Sources */,
-				3D7FD6CA4C020C65B7D9A1C116FD206E /* TSKPinningValidator.m in Sources */,
-				FE61B5B60812F5908D557FF6244F2833 /* TSKPinningValidatorResult.m in Sources */,
-				9A25A93AD0209B1FFBD86410C2B3816B /* TSKReportsRateLimiter.m in Sources */,
-				A2A419FDECA61EBC5F860A49C78583C5 /* TSKSPKIHashCache.m in Sources */,
-				47596AD5FE108870CD81D8B2B46B7D98 /* TSKTrustKitConfig.m in Sources */,
-				E144DE0C3D9E206937859C7F3B8A05BA /* vendor_identifier.m in Sources */,
+				728A90178062131444FEF115F230155E /* configuration_utils.m in Sources */,
+				63612A06817E3377B8F1F1744D550C6A /* init_registry_tables.c in Sources */,
+				D12BBC61D975DB02338C1D10992BFDEE /* parse_configuration.m in Sources */,
+				459404B012605EA359AD8980F093855E /* pinning_utils.m in Sources */,
+				BECC07C730B1D1AF9A1B41B1FF4D0937 /* registry_search.c in Sources */,
+				5AFA073A2C91EEC2879158D98E220488 /* reporting_utils.m in Sources */,
+				16B9ECBA70AD3DE4FFF4C84FBA702187 /* RSSwizzle.m in Sources */,
+				C598E83616895339F7DE60E2763D38EF /* ssl_pin_verifier.m in Sources */,
+				E31FC1BC4DEE3C2206400C65036046C8 /* trie_search.c in Sources */,
+				3B6C8AD71B072EC7324138C213333CAF /* TrustKit.m in Sources */,
+				7E944C5C82C3E817D77609AE3463C901 /* TrustKit-library-dummy.m in Sources */,
+				92018371269F28D23385E58CBDBEAD15 /* tsk_assert.c in Sources */,
+				B25971DC380F3F24EDE12D556945BCBB /* TSKBackgroundReporter.m in Sources */,
+				CEB593D80CDFB28F013D2BAE8011A887 /* TSKNSURLConnectionDelegateProxy.m in Sources */,
+				F193A749F1C9955D9BE6D5961D19EA3F /* TSKNSURLSessionDelegateProxy.m in Sources */,
+				91B32D91EB98D8CBC3CDDCD514533297 /* TSKPinFailureReport.m in Sources */,
+				87EBC78B3D6BCD69A5ECF566BDA39AE8 /* TSKPinningValidator.m in Sources */,
+				0CCE50CFE5AB18DAA7193DD53190AD36 /* TSKPinningValidatorResult.m in Sources */,
+				6CDFD4AE2D81D5D2B74B4C6D3A4AF710 /* TSKReportsRateLimiter.m in Sources */,
+				0F9E0C5FEA8868D92546A97AD92FFE39 /* TSKSPKIHashCache.m in Sources */,
+				5F81ABE935475D199B00036BC18C1808 /* TSKTrustKitConfig.m in Sources */,
+				54BE1EE3EF53343E76540044AFFA4BE5 /* vendor_identifier.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -916,25 +903,86 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		D63BE3009DAC0D7D50F5825AC99A6310 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4A098352E743C732B557154DDAF414D0 /* configuration_utils.m in Sources */,
+				84EB298214E81145CD62A8C676A8F072 /* init_registry_tables.c in Sources */,
+				D3FDBAE24E7CA6F1F722A0514AD6EBBB /* parse_configuration.m in Sources */,
+				154F55397BBD2B5E2173B904A2BD7500 /* pinning_utils.m in Sources */,
+				724354B3AF935949000D33AA6192431E /* registry_search.c in Sources */,
+				49C6E08AE00CD9D068F82FB382223C8C /* reporting_utils.m in Sources */,
+				42B519F967F7513E806C633A1E020CC3 /* RSSwizzle.m in Sources */,
+				76186CFA02FD5C2B3942E4EDBE34FF32 /* ssl_pin_verifier.m in Sources */,
+				7A76C5043624DF750AD54976A7C29C4F /* trie_search.c in Sources */,
+				AEBCDCD4EBD642EAF779C66DB2EA3570 /* TrustKit.m in Sources */,
+				A21357AC134778FEE1911B8F549924AA /* TrustKit-framework-dummy.m in Sources */,
+				D9534F6B925DDA826ADE21E36F190774 /* tsk_assert.c in Sources */,
+				C73D81AA8E3F2245BC31D6F08DF78B15 /* TSKBackgroundReporter.m in Sources */,
+				6D289029C8B00FDC2D5587D694DC54D0 /* TSKNSURLConnectionDelegateProxy.m in Sources */,
+				DBF718F17F987EDE2D5157FA0D22D076 /* TSKNSURLSessionDelegateProxy.m in Sources */,
+				3056EEF6184845EDA372D19EF544B3F9 /* TSKPinFailureReport.m in Sources */,
+				FCF6E9E58654C2D324A2025DB073376D /* TSKPinningValidator.m in Sources */,
+				581ACE79A47401B9107FFF43D3C5C61B /* TSKPinningValidatorResult.m in Sources */,
+				150361AA80D1CFDDEAAC5125E9DECA85 /* TSKReportsRateLimiter.m in Sources */,
+				5922C40C90CB7E32C8448B690E851FE4 /* TSKSPKIHashCache.m in Sources */,
+				A4320918069596FC215A66E989E5D70A /* TSKTrustKitConfig.m in Sources */,
+				231178363C2F4FD53C342734EB960068 /* vendor_identifier.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		2F873F18F17E1889DA4CB04B86FE7D7A /* PBXTargetDependency */ = {
+		4C72CCBAC4BA1AD303E5C15EB8D62440 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "TrustKit-framework";
 			target = CED2493CA3D2AB34BE473481BE25D2ED /* TrustKit-framework */;
-			targetProxy = 1B7D54F2FAF0DE7DB3675F384948F403 /* PBXContainerItemProxy */;
+			targetProxy = 72C2F76118946681184D4A0ABF16A9E9 /* PBXContainerItemProxy */;
 		};
-		FC24639630474527BE4A3FA7C6191848 /* PBXTargetDependency */ = {
+		C7A2710B773AC3286654523E298EB5F4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = "TrustKit-library";
 			target = D806590D73A28CCE08164D7851510E47 /* TrustKit-library */;
-			targetProxy = 56D445A7C627B9C9BC533CF29039B2BF /* PBXContainerItemProxy */;
+			targetProxy = A71D7B6787706EB735C074BC46F0913F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		2B9E26EAE2CD392AD762421F663075A1 /* Debug */ = {
+		3C775F7EB9EFC7DED720D26BCC675363 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 69E663BB977903ED8F8A3140A106F6D0 /* TrustKit-framework.release.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/TrustKit-framework/TrustKit-framework-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/TrustKit-framework/TrustKit-framework-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/TrustKit-framework/TrustKit-framework.modulemap";
+				PRODUCT_MODULE_NAME = TrustKit;
+				PRODUCT_NAME = TrustKit;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		4BC7450F9457737EE3E637BA155B56F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -987,7 +1035,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1000,31 +1048,87 @@
 			};
 			name = Debug;
 		};
-		5E772C26BEE5898E047AAF9B6960AEDC /* Debug */ = {
+		5B2CABB1DC1D43551D89DA2544F8331F /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 53C4012533E501BFB63C6A1E4C1F4A2F /* TrustKit-library.debug.xcconfig */;
+			baseConfigurationReference = B0D943520C1263524B0744631DC47FA9 /* Pods-TrustKitDemo-Swift.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				GCC_PREFIX_HEADER = "Target Support Files/TrustKit-library/TrustKit-library-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				MODULEMAP_FILE = "Headers/Public/TrustKit/TrustKit-library.modulemap";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-TrustKitDemo-Swift/Pods-TrustKitDemo-Swift-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-TrustKitDemo-Swift/Pods-TrustKitDemo-Swift.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_MODULE_NAME = TrustKit;
-				PRODUCT_NAME = "TrustKit-library";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		70787969EEA7D5DF9DB3BFF11DD9E17A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BF5B0C86F7CE1D3AD3DF15511594F883 /* Pods-TrustKitDemo-ObjC.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		63FAF33E1C55B71A5F5A8B3CC8749F99 /* Release */ = {
+		75E9FEBCF7B5E425C553102D633C17EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 70DF388A54E25216AE54B213A6A58CE9 /* Pods-TrustKitDemo-ObjC.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MACH_O_TYPE = staticlib;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8B5A46FF8D3C1289CDEE3BAFACABCD2A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1074,27 +1178,29 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Release;
 		};
-		67F8BBE657E6F357AEF14C18B2469646 /* Release */ = {
+		8B8D03C848C0086128F1B908839B4F28 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B4AF60FEC8C195D05EAAF1BDB29B1B0F /* TrustKit-library.release.xcconfig */;
+			baseConfigurationReference = 46AFD55757E243042E4CBD4681AA26B1 /* TrustKit-library.release.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				GCC_PREFIX_HEADER = "Target Support Files/TrustKit-library/TrustKit-library-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MODULEMAP_FILE = "Headers/Public/TrustKit/TrustKit-library.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
@@ -1110,66 +1216,11 @@
 			};
 			name = Release;
 		};
-		8622682BAF57278AE9FA30CAFBAE9661 /* Release */ = {
+		B54A27CE335084241234CA72E88BC328 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 70DF388A54E25216AE54B213A6A58CE9 /* Pods-TrustKitDemo-ObjC.release.xcconfig */;
+			baseConfigurationReference = 7E7C3EC420075847E77776B527075459 /* TrustKit-framework.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				MACH_O_TYPE = staticlib;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		9F41123F46AFA9546894AD22315569F0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B0D943520C1263524B0744631DC47FA9 /* Pods-TrustKitDemo-Swift.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-TrustKitDemo-Swift/Pods-TrustKitDemo-Swift-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-TrustKitDemo-Swift/Pods-TrustKitDemo-Swift.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		A4C68B8928BBD0A09BA60F28996B675B /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 85B5648D4AA1D443DB3270D40A362114 /* TrustKit-framework.release.xcconfig */;
-			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -1181,7 +1232,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/TrustKit-framework/TrustKit-framework-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/TrustKit-framework/TrustKit-framework-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/TrustKit-framework/TrustKit-framework.modulemap";
 				PRODUCT_MODULE_NAME = TrustKit;
@@ -1191,38 +1242,42 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
-		AAE8431257E5D9D31B3DD7298E045753 /* Debug */ = {
+		D1B14B045FE15071EAEA6B31693E9883 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BF5B0C86F7CE1D3AD3DF15511594F883 /* Pods-TrustKitDemo-ObjC.debug.xcconfig */;
+			baseConfigurationReference = 4E16B891CA54D9C37C7DFEA19006F3B7 /* TrustKit-library.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				MACH_O_TYPE = staticlib;
+				GCC_PREFIX_HEADER = "Target Support Files/TrustKit-library/TrustKit-library-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MODULEMAP_FILE = "Headers/Public/TrustKit/TrustKit-library.modulemap";
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_MODULE_NAME = TrustKit;
+				PRODUCT_NAME = "TrustKit-library";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		D0CCC379382E331B01A9708608AF0669 /* Debug */ = {
+		F3F770F24F5F8A189D051CF829E96D43 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = F40B844FF5089427ABF73A45BBD034EE /* Pods-TrustKitDemo-Swift.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ARCHS = "$(ARCHS_STANDARD_64_BIT)";
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -1234,7 +1289,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "Target Support Files/Pods-TrustKitDemo-Swift/Pods-TrustKitDemo-Swift-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-TrustKitDemo-Swift/Pods-TrustKitDemo-Swift.modulemap";
@@ -1245,36 +1300,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		ED14E8EF9623BF593F5FBF4C475791A8 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6A97ADF72A299CE39578A1FFD39B0921 /* TrustKit-framework.debug.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/TrustKit-framework/TrustKit-framework-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/TrustKit-framework/TrustKit-framework-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/TrustKit-framework/TrustKit-framework.modulemap";
-				PRODUCT_MODULE_NAME = TrustKit;
-				PRODUCT_NAME = TrustKit;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1287,8 +1312,17 @@
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2B9E26EAE2CD392AD762421F663075A1 /* Debug */,
-				63FAF33E1C55B71A5F5A8B3CC8749F99 /* Release */,
+				4BC7450F9457737EE3E637BA155B56F7 /* Debug */,
+				8B5A46FF8D3C1289CDEE3BAFACABCD2A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		49F94C658DD559DFDAF1FB24F852E1E6 /* Build configuration list for PBXNativeTarget "TrustKit-framework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B54A27CE335084241234CA72E88BC328 /* Debug */,
+				3C775F7EB9EFC7DED720D26BCC675363 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1296,17 +1330,8 @@
 		4FE4DF1F559B1D772D78B781661A4C6A /* Build configuration list for PBXNativeTarget "Pods-TrustKitDemo-ObjC" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AAE8431257E5D9D31B3DD7298E045753 /* Debug */,
-				8622682BAF57278AE9FA30CAFBAE9661 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		5FDFE8D6980F1AF86B846614842B10C0 /* Build configuration list for PBXNativeTarget "TrustKit-library" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5E772C26BEE5898E047AAF9B6960AEDC /* Debug */,
-				67F8BBE657E6F357AEF14C18B2469646 /* Release */,
+				70787969EEA7D5DF9DB3BFF11DD9E17A /* Debug */,
+				75E9FEBCF7B5E425C553102D633C17EC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1314,17 +1339,17 @@
 		C3FB9435597BDD63F044AFD33576405E /* Build configuration list for PBXNativeTarget "Pods-TrustKitDemo-Swift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D0CCC379382E331B01A9708608AF0669 /* Debug */,
-				9F41123F46AFA9546894AD22315569F0 /* Release */,
+				F3F770F24F5F8A189D051CF829E96D43 /* Debug */,
+				5B2CABB1DC1D43551D89DA2544F8331F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F1CE47C16092A40C4EC6596EE0610D85 /* Build configuration list for PBXNativeTarget "TrustKit-framework" */ = {
+		E1465998B1D136A9614628D725B4306B /* Build configuration list for PBXNativeTarget "TrustKit-library" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				ED14E8EF9623BF593F5FBF4C475791A8 /* Debug */,
-				A4C68B8928BBD0A09BA60F28996B675B /* Release */,
+				D1B14B045FE15071EAEA6B31693E9883 /* Debug */,
+				8B8D03C848C0086128F1B908839B4F28 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

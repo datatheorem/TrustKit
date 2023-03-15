@@ -31,7 +31,7 @@
  
  This function invokes SecTrustEvaluateWithError().
  
- @param trust The trust management object to evaluate
+ @param serverTrust The trust management object to evaluate
  @param error An error pointer the method uses to return an error when trust evaluation fails with the certificate chain. Set to nil to ignore the error.
  @return A boolean value indicating whether the certificate is trusted according to the certificate chain of the trust object
  */

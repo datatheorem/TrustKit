@@ -1,6 +1,6 @@
 {
   "name": "TrustKit",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "summary": "TrustKit is an open source framework that makes it easy to deploy SSL pinning in any iOS, macOS, tvOS or watchOS App.",
   "homepage": "https://datatheorem.github.io/TrustKit",
   "documentation_url": "https://datatheorem.github.io/TrustKit/documentation/",
@@ -15,13 +15,13 @@
   ],
   "source": {
     "git": "https://github.com/datatheorem/TrustKit.git",
-    "tag": "2.0.1"
+    "tag": "3.0.0"
   },
   "platforms": {
-    "ios": "12.0",
-    "osx": "10.13",
-    "tvos": "12.0",
-    "watchos": "4.0"
+    "ios": "14.0",
+    "osx": "11.0",
+    "tvos": "14.0",
+    "watchos": "7.0"
   },
   "pod_target_xcconfig": {
     "DEFINES_MODULE": "YES"
