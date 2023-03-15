@@ -1,13 +1,13 @@
-// swift-tools-version:5.1
+// swift-tools-version:5.3
 import PackageDescription
 
 let package = Package(
     name: "TrustKit",
     platforms: [
-        .iOS(.v12),
-        .macOS(.v10_13),
-        .tvOS(.v12),
-        .watchOS(.v4)
+        .iOS(.v14),
+        .macOS(.v11),
+        .tvOS(.v14),
+        .watchOS(.v7)
     ],
     products: [
         .library(
