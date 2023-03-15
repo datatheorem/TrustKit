@@ -282,14 +282,11 @@ static unsigned int getAsn1HeaderSize(NSString *publicKeyType, NSNumber *publicK
     bool isChainTrusted = evaluateCertificateChainTrust(trust, &error);
     (void)isChainTrusted; // Discard the chain trust result, not relevant for copying the public key
     status = SecTrustGetTrustResult(trust, &trustResult);
-    if (error != NULL)
+    if ((error != NULL) && (status != errSecSuccess))
     {
-        if (trustResult != kSecTrustResultRecoverableTrustFailure)
-        {
-            TSKLog(@"Could not evaluate trust for the certificate: %@", [error localizedDescription]);
-            CFRelease(trust);
-            return nil;
-        }
+        TSKLog(@"Could not evaluate trust for the certificate: %@", [error localizedDescription]);
+        CFRelease(trust);
+        return nil;
     }
     
     SecKeyRef publicKey = SecTrustCopyKey(trust);
