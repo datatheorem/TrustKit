@@ -167,8 +167,9 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
     
     XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLSessionTaskDelegate"];
     TestNSURLSessionDelegate* delegate = [[TestNSURLSessionDelegate alloc] initWithValidator:trustKit.pinningValidator expectation:expectation];
-    
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]
+
+
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:ephemeralNSURLSessionConfiguration()
                                                           delegate:delegate
                                                      delegateQueue:nil];
     
@@ -222,7 +223,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
     XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLSessionTaskDelegate"];
     TestNSURLSessionDelegate* delegate = [[TestNSURLSessionDelegate alloc] initWithValidator:trustKit.pinningValidator expectation:expectation];
     
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:ephemeralNSURLSessionConfiguration()
                                                           delegate:delegate
                                                      delegateQueue:nil];
     
@@ -279,7 +280,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
     XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLSessionTaskDelegate"];
     TestNSURLSessionDelegate* delegate = [[TestNSURLSessionDelegate alloc] initWithValidator:trustKit.pinningValidator expectation:expectation];
     
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:ephemeralNSURLSessionConfiguration()
                                                           delegate:delegate
                                                      delegateQueue:nil];
     
@@ -324,7 +325,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
     XCTestExpectation *expectation = [self expectationWithDescription:@"TestNSURLSessionTaskDelegate"];
     TestNSURLSessionDelegate* delegate = [[TestNSURLSessionDelegate alloc] initWithValidator:trustKit.pinningValidator expectation:expectation];
     
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:ephemeralNSURLSessionConfiguration()
                                                           delegate:delegate
                                                      delegateQueue:nil];
     

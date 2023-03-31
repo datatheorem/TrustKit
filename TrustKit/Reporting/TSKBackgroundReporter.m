@@ -11,6 +11,7 @@
 
 #import "TSKBackgroundReporter.h"
 #import "../public/TSKTrustKitConfig.h"
+#import "../configuration_utils.h"
 #import "../TSKLog.h"
 #import "TSKPinFailureReport.h"
 #import "reporting_utils.h"
@@ -87,7 +88,8 @@ static NSString * const kTSKBackgroundSessionIdentifierFormat = @"%@.TSKBackgrou
             _appBundleId = @"N/A";
             _appVendorId = @"unit-tests";
             
-            _backgroundSession = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]
+
+            _backgroundSession = [NSURLSession sessionWithConfiguration:ephemeralNSURLSessionConfiguration()
                                                                delegate:self
                                                           delegateQueue:nil];
         }
@@ -112,6 +114,10 @@ static NSString * const kTSKBackgroundSessionIdentifierFormat = @"%@.TSKBackgrou
             // iOS-only settings
             // Do not wake up the App after completing the upload
             backgroundConfiguration.sessionSendsLaunchEvents = NO;
+#if !TARGET_OS_TV && !TARGET_OS_WATCH
+            // on iOS (but not tvOS or watchOS), enable multipath
+            backgroundConfiguration.multipathServiceType = NSURLSessionMultipathServiceTypeHandover;
+#endif
 #endif
             
             // We have to use a delegate as background sessions can't use completion handlers

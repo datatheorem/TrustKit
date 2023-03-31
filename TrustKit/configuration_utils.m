@@ -98,3 +98,11 @@ NSString * _Nullable getPinningConfigurationKeyForDomain(NSString * _Nonnull hos
     }
     return notedHostname;
 }
+
+NSURLSessionConfiguration *ephemeralNSURLSessionConfiguration() {
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
+#if TARGET_OS_IPHONE && !TARGET_OS_TV && !TARGET_OS_WATCH
+    configuration.multipathServiceType = NSURLSessionMultipathServiceTypeHandover;
+#endif
+    return configuration;
+}

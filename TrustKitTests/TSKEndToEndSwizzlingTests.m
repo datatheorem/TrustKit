@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "../TrustKit/public/TrustKit.h"
+#import "../TrustKit/configuration_utils.h"
 
 
 
@@ -219,7 +220,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
     TestNSURLSessionDelegateSwizzling* delegate = [[TestNSURLSessionDelegateSwizzling alloc] initWithValidator:TrustKit.sharedInstance.pinningValidator
                                                                                                    expectation:expectation];
     
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:ephemeralNSURLSessionConfiguration()
                                                           delegate:delegate
                                                      delegateQueue:nil];
     
