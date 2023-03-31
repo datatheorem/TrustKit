@@ -19,3 +19,7 @@
 
 // Figure out if a specific domain is pinned and retrieve this domain's configuration key; returns nil if no configuration was found
 NSString * _Nullable getPinningConfigurationKeyForDomain(NSString * _Nonnull hostname , NSDictionary<NSString *, TKSDomainPinningPolicy *> * _Nonnull domainPinningPolicies);
+
+// Create an ephemeral NSURLSessionConfiguration, with best practices defaults
+// for the current platform
+NSURLSessionConfiguration * _Nonnull ephemeralNSURLSessionConfiguration(void);
