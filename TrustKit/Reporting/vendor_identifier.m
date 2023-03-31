@@ -11,29 +11,7 @@
 
 #import "vendor_identifier.h"
 
-#if TARGET_OS_IPHONE && !TARGET_OS_WATCH
-
-#pragma mark Vendor identifier - iOS, tvOS
-
-// for accessing the IDFV
-#if __has_feature(modules)
-@import UIKit;
-#else
-#import <UIKit/UIKit.h>
-#endif
-
-NSString *identifier_for_vendor(void)
-{
-    return UIDevice.currentDevice.identifierForVendor.UUIDString;
-}
-
-#else
-
-#pragma mark Vendor identifier - macOS, watchOS
-
-
 static NSString * const kTSKVendorIdentifierKey = @"TSKVendorIdentifier";
-
 
 NSString *identifier_for_vendor(void)
 {
@@ -50,6 +28,4 @@ NSString *identifier_for_vendor(void)
     return vendorId;
 }
 
-
-#endif
 
