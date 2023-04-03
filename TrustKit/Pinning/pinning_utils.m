@@ -13,17 +13,41 @@
 #include <dlfcn.h>
 #include "TargetConditionals.h"
 
+bool evaluateCertificateChainTrust(SecTrustRef serverTrust, SecTrustResultType *trustResult, NSError **error) {
+    bool certificateEvaluationSucceeded = false;
 
-bool evaluateCertificateChainTrust(SecTrustRef serverTrust, NSError **error) {
-    CFErrorRef errorRef;
-    bool chainTrusted = SecTrustEvaluateWithError(serverTrust, &errorRef);
-    if (errorRef != NULL) {
-        chainTrusted = false;
-        if (error != NULL) {
+    if (@available(iOS 12.0, macOS 14.0, tvOS 12.0, watchOS 5.0, *)) {
+        CFErrorRef errorRef;
+        certificateEvaluationSucceeded = SecTrustEvaluateWithError(serverTrust, &errorRef);
+        OSStatus status = SecTrustGetTrustResult(serverTrust, trustResult);
+        if (status != errSecSuccess)
+        {
+            certificateEvaluationSucceeded = false;
+            NSString *errDescription = [NSString stringWithFormat:@"got status %d", status];
+            *error = [[NSError alloc] initWithDomain:@"com.datatheorem.trustkit" code:1 userInfo:@{NSLocalizedDescriptionKey:errDescription}];
+        }
+        else if (!certificateEvaluationSucceeded && (error != NULL))
+        {
             *error = (__bridge_transfer NSError *)errorRef;
         }
     }
-    return chainTrusted;
+    else
+    {
+        // Use pragmas to supress deprecated warnings
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        OSStatus status = SecTrustEvaluate(serverTrust, trustResult);
+#pragma clang diagnostic pop
+        if (status == errSecSuccess) {
+            certificateEvaluationSucceeded = true;
+        }
+        else if (error != NULL){
+            NSString *errDescription = [NSString stringWithFormat:@"got status %d", status];
+            *error = [[NSError alloc] initWithDomain:@"com.datatheorem.trustkit" code:2 userInfo:@{NSLocalizedDescriptionKey:errDescription}];
+        }
+    }
+
+    return certificateEvaluationSucceeded;
 }
 
 SecCertificateRef getCertificateAtIndex(SecTrustRef serverTrust, CFIndex index) {
@@ -50,4 +74,15 @@ SecCertificateRef getCertificateAtIndex(SecTrustRef serverTrust, CFIndex index) 
         certificate = _SecTrustGetCertificateAtIndex(serverTrust, index);
     }
     return certificate;
+}
+
+SecKeyRef copyKey(SecTrustRef serverTrust) {
+    if (@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)) {
+        return SecTrustCopyKey(serverTrust);
+    } else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        return SecTrustCopyPublicKey(serverTrust);
+#pragma clang diagnostic pop
+    }
 }
