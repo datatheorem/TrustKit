@@ -43,8 +43,8 @@ TSKTrustEvaluationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *s
     NSError *error = NULL;
     SecTrustResultType trustResult = 0;
     
-    bool chainEvaluationSucceeded = evaluateCertificateChainTrust(serverTrust, &trustResult, &error);
-    if (!chainEvaluationSucceeded && (trustResult == kSecTrustResultInvalid))
+    evaluateCertificateChainTrust(serverTrust, &trustResult, &error);
+    if ((error != NULL) && (trustResult == kSecTrustResultInvalid))
     {
         TSKLog(@"SecTrustEvaluate error for %@: %@", serverHostname, [error localizedDescription]);
         CFRelease(serverTrust);

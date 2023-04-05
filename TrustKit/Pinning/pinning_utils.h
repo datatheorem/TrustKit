@@ -32,10 +32,10 @@
  
  @param trust The trust management object to evaluate
  @param trsustResult On return, points to a result type reflecting the result of this evaluation.
- @param error An error pointer the method uses to return an error when trust evaluation fails. Set to nil to ignore the error.
- @return A boolean value indicating whether evaluating the trust certificate chain succeeded (note: this does not mean the certificate is trusted, only that evaluation succeeded)
+ @param error An error pointer the method uses to return an error when trust evaluation fails. Set to nil to ignore the error (this is not recommended!)
+
  */
-bool evaluateCertificateChainTrust(SecTrustRef serverTrust, SecTrustResultType *trustResult, NSError **error);
+void evaluateCertificateChainTrust(SecTrustRef serverTrust, SecTrustResultType *trustResult, NSError **error);
 
 /**
  Returns a specific certificate from the certificate chain used to evaluate trust.

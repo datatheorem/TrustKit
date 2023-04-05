@@ -279,8 +279,8 @@ static unsigned int getAsn1HeaderSize(NSString *publicKeyType, NSNumber *publicK
     // then SecTrustCopyKey can be called
     NSError *error = NULL;
     SecTrustResultType trustResult = 0;
-    bool chainEvaluationSucceeded = evaluateCertificateChainTrust(trust, &trustResult, &error);
-    if (!chainEvaluationSucceeded && (trustResult != kSecTrustResultRecoverableTrustFailure))
+    evaluateCertificateChainTrust(trust, &trustResult, &error);
+    if ((error != NULL) && (trustResult != kSecTrustResultRecoverableTrustFailure))
     {
         TSKLog(@"Could not evaluate trust for the certificate: %@", [error localizedDescription]);
         CFRelease(trust);
