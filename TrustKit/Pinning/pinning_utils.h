@@ -30,8 +30,8 @@
  
  This function invokes SecTrustEvaluateWithError() on iOS12+, macOS14+ and SecTrustEvaluate() otherwise.
  
- @param trust The trust management object to evaluate
- @param trsustResult On return, points to a result type reflecting the result of this evaluation.
+ @param serverTrust The trust management object to evaluate
+ @param trustResult On return, points to a result type reflecting the result of this evaluation.
  @param error An error pointer the method uses to return an error when trust evaluation fails. Set to nil to ignore the error (this is not recommended!)
 
  */
@@ -51,7 +51,7 @@ SecCertificateRef getCertificateAtIndex(SecTrustRef serverTrust, CFIndex index);
  Returns the public key for a leaf certificate after it has been evaluated.
  
  This function invokes SecTrustCopyKey() on iOS 14+ and SecTrustCopyPublicKey otherwise
- @param trust The trust management object to evaluate
+ @param serverTrust The trust management object to evaluate
  @return The leaf certificate's public key, or nil if it the public key could not be extracted
  */
 SecKeyRef copyKey(SecTrustRef serverTrust);
