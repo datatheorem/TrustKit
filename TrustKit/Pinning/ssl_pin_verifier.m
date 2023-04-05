@@ -42,11 +42,9 @@ TSKTrustEvaluationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *s
     
     NSError *error = NULL;
     SecTrustResultType trustResult = 0;
-    bool isChainTrusted = evaluateCertificateChainTrust(serverTrust, &error);
-    OSStatus status = SecTrustGetTrustResult(serverTrust, &trustResult);
-    bool trustResultInvalid = !isChainTrusted && (trustResult == kSecTrustResultInvalid);
-    bool getResultFailed = status != errSecSuccess;
-    if (trustResultInvalid || getResultFailed)
+    
+    evaluateCertificateChainTrust(serverTrust, &trustResult, &error);
+    if ((error != NULL) && (trustResult == kSecTrustResultInvalid))
     {
         TSKLog(@"SecTrustEvaluate error for %@: %@", serverHostname, [error localizedDescription]);
         CFRelease(serverTrust);
@@ -106,7 +104,7 @@ TSKTrustEvaluationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *s
     
     // Retrieve the OS X host's list of user-defined CA certificates
     CFArrayRef userRootCerts;
-    status = SecTrustSettingsCopyCertificates(kSecTrustSettingsDomainUser, &userRootCerts);
+    OSStatus status = SecTrustSettingsCopyCertificates(kSecTrustSettingsDomainUser, &userRootCerts);
     if (status == errSecSuccess)
     {
         [customRootCerts addObjectsFromArray:(__bridge NSArray *)(userRootCerts)];
