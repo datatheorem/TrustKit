@@ -18,15 +18,17 @@ void evaluateCertificateChainTrust(SecTrustRef serverTrust, SecTrustResultType *
         CFErrorRef errorRef;
         bool certificateEvaluationSucceeded = SecTrustEvaluateWithError(serverTrust, &errorRef);
         OSStatus status = SecTrustGetTrustResult(serverTrust, trustResult);
-        if (status != errSecSuccess)
-        {
-            certificateEvaluationSucceeded = false;
-            NSString *errDescription = [NSString stringWithFormat:@"got status %d", status];
-            *error = [[NSError alloc] initWithDomain:@"com.datatheorem.trustkit" code:1 userInfo:@{NSLocalizedDescriptionKey:errDescription}];
-        }
-        else if (!certificateEvaluationSucceeded && (error != NULL))
-        {
-            *error = (__bridge_transfer NSError *)errorRef;
+        if (error != NULL) {
+            if (status != errSecSuccess)
+            {
+                certificateEvaluationSucceeded = false;
+                NSString *errDescription = [NSString stringWithFormat:@"got status %d", (int)status];
+                *error = [[NSError alloc] initWithDomain:@"com.datatheorem.trustkit" code:1 userInfo:@{NSLocalizedDescriptionKey:errDescription}];
+            }
+            else if (!certificateEvaluationSucceeded)
+            {
+                *error = (__bridge_transfer NSError *)errorRef;
+            }
         }
     }
     else
@@ -37,7 +39,7 @@ void evaluateCertificateChainTrust(SecTrustRef serverTrust, SecTrustResultType *
         OSStatus status = SecTrustEvaluate(serverTrust, trustResult);
 #pragma clang diagnostic pop
         if (status != errSecSuccess && (error != NULL)) {
-            NSString *errDescription = [NSString stringWithFormat:@"got status %d", status];
+            NSString *errDescription = [NSString stringWithFormat:@"got status %d", (int)status];
             *error = [[NSError alloc] initWithDomain:@"com.datatheorem.trustkit" code:2 userInfo:@{NSLocalizedDescriptionKey:errDescription}];
         }
     }
