@@ -56,6 +56,10 @@ SecCertificateRef getCertificateAtIndex(SecTrustRef serverTrust, CFIndex index) 
 #endif
     SecCertificateRef certificate = NULL;
     void *_Security = dlopen("Security.framework/Security", RTLD_NOW);
+    if (_Security == NULL) {
+        _Security = dlopen("/System/Library/Frameworks/Security.framework/Security", RTLD_NOW);
+    }
+
     if (majorVersion >= osVersionThreshold)
     {
         CFArrayRef (*_SecTrustCopyCertificateChain)(SecTrustRef) = dlsym(_Security, "SecTrustCopyCertificateChain");
