@@ -1,0 +1,34 @@
+name: iOS
+
+on:
+  push:
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
+      - 'extras/images/**'
+
+jobs:
+  build:
+    name: ${{ matrix.config.name }}
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+        - { name: "macOS Latest", os: macos-12 }
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build
+        run: ./build.sh
+
+      - name: Upload
+        uses: hkusu/s3-upload-action@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: 'us-east-1'
+          aws-bucket: ${{ secrets.AWS_BUCKET }}
+          file-path: './TrustKit.tar.gz'
+          destination-dir: '/TrustKit/'
