@@ -1,6 +1,0 @@
-framework module TrustKit {
-  umbrella header "TrustKit.h"
-
-  export *
-  module * { export * }
-}
