@@ -39,5 +39,8 @@ _site
 
 # Swift Package Manager
 .build
-
 .DS_Store
+
+# XCFramework
+*.xcframework
+*.tar.gz
