@@ -55,10 +55,7 @@ SecCertificateRef getCertificateAtIndex(SecTrustRef serverTrust, CFIndex index) 
     int osVersionThreshold = 12; // macOS 12+
 #endif
     SecCertificateRef certificate = NULL;
-    void *_Security = dlopen("Security.framework/Security", RTLD_NOW);
-    if (_Security == NULL) {
-        _Security = dlopen("/System/Library/Frameworks/Security.framework/Security", RTLD_NOW);
-    }
+    void *_Security = dlopen("/System/Library/Frameworks/Security.framework/Security", RTLD_NOW);
 
     if (majorVersion >= osVersionThreshold)
     {
