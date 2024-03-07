@@ -167,7 +167,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
               // Valid pinning configuration
               @"www.cloudflare.com" : @{
                       kTSKEnforcePinning : @YES,
-                      kTSKPublicKeyHashes : @[@"FEzVOUp4dF3gI0ZVPRJhFbSJVXR+uQmMH65xhs1glH4=", // CA key
+                      kTSKPublicKeyHashes : @[@"81Wf12bcLlFHQAfJluxnzZ6Frg+oJ9PWY/Wrwur8viQ=", // CA key
                                               @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                               ]},
               // Invalid pinning configuration
