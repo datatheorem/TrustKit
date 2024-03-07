@@ -61,6 +61,17 @@
     CFRelease(certificate);
 }
 
+- (void)testExtractRsa3072
+{
+    // Ensure a RSA 2048 key is properly extracted from its certificate
+    SecCertificateRef certificate = [TSKCertificateUtils createCertificateFromDer:@"Corporation Service Company RSA OV SSL CA"];
+
+    NSData *spkiHash = [spkiCache hashSubjectPublicKeyInfoFromCertificate:certificate];
+    NSString *spkiPin = [spkiHash base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+
+    XCTAssertEqualObjects(spkiPin, @"eJFNz94QPdv8RexRcSa3nwty3nRqFlR7YXqKA5RGUGE=");
+    CFRelease(certificate);
+}
 
 - (void)testExtractRsa4096
 {
