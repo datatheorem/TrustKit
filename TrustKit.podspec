@@ -25,4 +25,5 @@ Pod::Spec.new do |s|
   ]
   s.frameworks = ['Foundation', 'Security']
   s.requires_arc = true
+  s.resource_bundles = {'TrustKit' => ['TrustKit/Framework/PrivacyInfo.xcprivacy']}
 end
