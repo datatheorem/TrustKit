@@ -21,7 +21,6 @@ void evaluateCertificateChainTrust(SecTrustRef serverTrust, SecTrustResultType *
         if (error != NULL) {
             if (status != errSecSuccess)
             {
-                certificateEvaluationSucceeded = false;
                 NSString *errDescription = [NSString stringWithFormat:@"got status %d", (int)status];
                 *error = [[NSError alloc] initWithDomain:@"com.datatheorem.trustkit" code:1 userInfo:@{NSLocalizedDescriptionKey:errDescription}];
             }
