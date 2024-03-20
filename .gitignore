@@ -39,5 +39,6 @@ _site
 
 # Swift Package Manager
 .build
+.swiftpm/
 
 .DS_Store

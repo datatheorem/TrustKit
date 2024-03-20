@@ -15,14 +15,8 @@ Pod::Spec.new do |s|
 
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
   s.source_files = ['TrustKit', 'TrustKit/**/*.{h,m,c}']
-  s.public_header_files = [
-    'TrustKit/public/TrustKit.h',
-    'TrustKit/public/TSKTrustKitConfig.h',
-    'TrustKit/public/TSKPinningValidator.h',
-    'TrustKit/public/TSKPinningValidatorCallback.h',
-    'TrustKit/public/TSKPinningValidatorResult.h',
-    'TrustKit/public/TSKTrustDecision.h',
-  ]
+  s.public_header_files = 'TrustKit/public/*.h'
+  s.resource_bundles = {"TrustKit" => "TrustKit/PrivacyInfo.xcprivacy"}
   s.frameworks = ['Foundation', 'Security']
   s.requires_arc = true
 end
