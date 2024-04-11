@@ -52,8 +52,6 @@ static const unsigned char ecDsaSecp384r1Asn1Header[] =
 
 static BOOL isKeySupported(NSString *publicKeyType, NSNumber *publicKeySize)
 {
-    NSString *key = [NSString stringWithFormat:@"%@", kSecAttrKeyTypeRSA];
-    
     if (([publicKeyType isEqualToString:(NSString *)kSecAttrKeyTypeRSA]) && ([publicKeySize integerValue] == 2048))
     {
         return YES;
