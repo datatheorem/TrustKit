@@ -260,6 +260,10 @@
 		B005E3F229B8C2F8007C3D84 /* pinning_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = B005E3F029B85ED0007C3D84 /* pinning_utils.h */; };
 		B005E3F329B8C2F9007C3D84 /* pinning_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = B005E3F029B85ED0007C3D84 /* pinning_utils.h */; };
 		B005E3F429B8C2FA007C3D84 /* pinning_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = B005E3F029B85ED0007C3D84 /* pinning_utils.h */; };
+		DC6F28772BAB30A8001B604A /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = DC6F28762BAB30A8001B604A /* PrivacyInfo.xcprivacy */; };
+		DC6F28782BAB30A8001B604A /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = DC6F28762BAB30A8001B604A /* PrivacyInfo.xcprivacy */; };
+		DC6F28792BAB30A8001B604A /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = DC6F28762BAB30A8001B604A /* PrivacyInfo.xcprivacy */; };
+		DC6F287A2BAB30A8001B604A /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = DC6F28762BAB30A8001B604A /* PrivacyInfo.xcprivacy */; };
 		FC049B3A1EECD1B000FDC5F4 /* anchor-ca.cert.pem in Resources */ = {isa = PBXBuildFile; fileRef = FCC1DD051EECD19E00AB3D81 /* anchor-ca.cert.pem */; };
 		FC049B3B1EECD1B000FDC5F4 /* anchor-fake.yahoo.com.cert.pem in Resources */ = {isa = PBXBuildFile; fileRef = FCC1DD061EECD19E00AB3D81 /* anchor-fake.yahoo.com.cert.pem */; };
 		FC049B3C1EECD1B000FDC5F4 /* anchor-intermediate.cert.pem in Resources */ = {isa = PBXBuildFile; fileRef = FCC1DD071EECD19E00AB3D81 /* anchor-intermediate.cert.pem */; };
@@ -439,6 +443,7 @@
 		91B276432B9A463E004B41A7 /* Corporation Service Company RSA OV SSL CA.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Corporation Service Company RSA OV SSL CA.der"; sourceTree = "<group>"; };
 		B005E3E729B85EBA007C3D84 /* pinning_utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = pinning_utils.m; path = Pinning/pinning_utils.m; sourceTree = "<group>"; };
 		B005E3F029B85ED0007C3D84 /* pinning_utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = pinning_utils.h; path = Pinning/pinning_utils.h; sourceTree = "<group>"; };
+		DC6F28762BAB30A8001B604A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		FC1A08FF1E57A4BB0055B12C /* TSKPinningValidatorResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKPinningValidatorResult.m; sourceTree = "<group>"; };
 		FC1A09081E57AC450055B12C /* TSKSPKIHashCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKSPKIHashCache.h; path = Pinning/TSKSPKIHashCache.h; sourceTree = "<group>"; };
 		FC1A09091E57AC450055B12C /* TSKSPKIHashCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKSPKIHashCache.m; path = Pinning/TSKSPKIHashCache.m; sourceTree = "<group>"; };
@@ -810,6 +815,7 @@
 			isa = PBXGroup;
 			children = (
 				FC23F68C1EE73BE600397646 /* TrustKit.podspec */,
+				DC6F28762BAB30A8001B604A /* PrivacyInfo.xcprivacy */,
 				FC23F68E1EE73BE600397646 /* README.md */,
 				FC23F68F1EE73BE600397646 /* ATTRIBUTIONS */,
 				FC23F6901EE73BE600397646 /* AUTHORS */,
@@ -1205,6 +1211,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC6F28772BAB30A8001B604A /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1231,6 +1238,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC6F28792BAB30A8001B604A /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1257,6 +1265,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC6F28782BAB30A8001B604A /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1283,6 +1292,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC6F287A2BAB30A8001B604A /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

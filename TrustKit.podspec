@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "TrustKit"
-  s.version      = "3.0.3"
+  s.version      = "3.0.4"
   s.summary      = 'TrustKit is an open source framework that makes it easy to deploy SSL pinning in any iOS, macOS, tvOS or watchOS App.'
   s.homepage     = "https://datatheorem.github.io/TrustKit"
   s.documentation_url = 'https://datatheorem.github.io/TrustKit/documentation/'
@@ -15,14 +15,8 @@ Pod::Spec.new do |s|
 
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
   s.source_files = ['TrustKit', 'TrustKit/**/*.{h,m,c}']
-  s.public_header_files = [
-    'TrustKit/public/TrustKit.h',
-    'TrustKit/public/TSKTrustKitConfig.h',
-    'TrustKit/public/TSKPinningValidator.h',
-    'TrustKit/public/TSKPinningValidatorCallback.h',
-    'TrustKit/public/TSKPinningValidatorResult.h',
-    'TrustKit/public/TSKTrustDecision.h',
-  ]
+  s.public_header_files = 'TrustKit/public/*.h'
+  s.resource_bundles = {"TrustKit" => "TrustKit/PrivacyInfo.xcprivacy"}
   s.frameworks = ['Foundation', 'Security']
   s.requires_arc = true
 end
