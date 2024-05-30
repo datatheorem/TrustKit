@@ -1681,6 +1681,7 @@
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = "$(inherited)";
 				BITCODE_GENERATION_MODE = bitcode;
+                                CLANG_WARN_STRICT_PROTOTYPES = NO;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COMBINE_HIDPI_IMAGES = YES;
