@@ -248,6 +248,9 @@
 		8CF27AA21F01BB7B009369B0 /* TSKLoggerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF27AA11F01BB7B009369B0 /* TSKLoggerTests.m */; };
 		8CF27AA31F01BB7B009369B0 /* TSKLoggerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF27AA11F01BB7B009369B0 /* TSKLoggerTests.m */; };
 		8CF27AA41F01BB7B009369B0 /* TSKLoggerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CF27AA11F01BB7B009369B0 /* TSKLoggerTests.m */; };
+		91B276442B9A463E004B41A7 /* Corporation Service Company RSA OV SSL CA.der in Resources */ = {isa = PBXBuildFile; fileRef = 91B276432B9A463E004B41A7 /* Corporation Service Company RSA OV SSL CA.der */; };
+		91B276452B9A54E4004B41A7 /* Corporation Service Company RSA OV SSL CA.der in Resources */ = {isa = PBXBuildFile; fileRef = 91B276432B9A463E004B41A7 /* Corporation Service Company RSA OV SSL CA.der */; };
+		91B276462B9A54E6004B41A7 /* Corporation Service Company RSA OV SSL CA.der in Resources */ = {isa = PBXBuildFile; fileRef = 91B276432B9A463E004B41A7 /* Corporation Service Company RSA OV SSL CA.der */; };
 		B005E3E829B85EBA007C3D84 /* pinning_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = B005E3E729B85EBA007C3D84 /* pinning_utils.m */; };
 		B005E3E929B85EBA007C3D84 /* pinning_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = B005E3E729B85EBA007C3D84 /* pinning_utils.m */; };
 		B005E3EB29B85EBA007C3D84 /* pinning_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = B005E3E729B85EBA007C3D84 /* pinning_utils.m */; };
@@ -437,6 +440,7 @@
 		8CF27A931F01A0B8009369B0 /* TSKEndToEndNSURLSessionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKEndToEndNSURLSessionTests.m; sourceTree = "<group>"; };
 		8CF27A971F01B341009369B0 /* TSKSwizzlingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKSwizzlingTests.m; sourceTree = "<group>"; };
 		8CF27AA11F01BB7B009369B0 /* TSKLoggerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKLoggerTests.m; sourceTree = "<group>"; };
+		91B276432B9A463E004B41A7 /* Corporation Service Company RSA OV SSL CA.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Corporation Service Company RSA OV SSL CA.der"; sourceTree = "<group>"; };
 		B005E3E729B85EBA007C3D84 /* pinning_utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = pinning_utils.m; path = Pinning/pinning_utils.m; sourceTree = "<group>"; };
 		B005E3F029B85ED0007C3D84 /* pinning_utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = pinning_utils.h; path = Pinning/pinning_utils.h; sourceTree = "<group>"; };
 		DC6F28762BAB30A8001B604A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
@@ -528,6 +532,7 @@
 		070868B31ADFF68200E5AFDC /* Certificates */ = {
 			isa = PBXGroup;
 			children = (
+				91B276422B9A45BC004B41A7 /* RSA 3072 */,
 				FCC1DD041EECD19E00AB3D81 /* TrustAnchor */,
 				8CBA05B31E28739D0045D8B3 /* ECDSA sec384r1 */,
 				8CC78B1B1B1B552100523A25 /* RSA 4096 */,
@@ -796,6 +801,14 @@
 				8C3492901ADCA059001849FD /* domain_registry */,
 			);
 			name = Dependencies;
+			sourceTree = "<group>";
+		};
+		91B276422B9A45BC004B41A7 /* RSA 3072 */ = {
+			isa = PBXGroup;
+			children = (
+				91B276432B9A463E004B41A7 /* Corporation Service Company RSA OV SSL CA.der */,
+			);
+			name = "RSA 3072";
 			sourceTree = "<group>";
 		};
 		FC23F6721EE72F2A00397646 /* Project Metadata */ = {
@@ -1217,6 +1230,7 @@
 				8CBA05D11E28AA7B0045D8B3 /* www.cloudflare.com.der in Resources */,
 				8CBA05CA1E28AA6C0045D8B3 /* GlobalSignRootCA.der in Resources */,
 				8CBA05DE1E28AAA40045D8B3 /* www.good.com.der in Resources */,
+				91B276442B9A463E004B41A7 /* Corporation Service Company RSA OV SSL CA.der in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1243,6 +1257,7 @@
 				8CBA05D31E28AA7B0045D8B3 /* www.cloudflare.com.der in Resources */,
 				8CBA05CC1E28AA6C0045D8B3 /* GlobalSignRootCA.der in Resources */,
 				8CBA05E01E28AAA40045D8B3 /* www.good.com.der in Resources */,
+				91B276462B9A54E6004B41A7 /* Corporation Service Company RSA OV SSL CA.der in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1269,6 +1284,7 @@
 				8CBA05D21E28AA7B0045D8B3 /* www.cloudflare.com.der in Resources */,
 				8CBA05CB1E28AA6C0045D8B3 /* GlobalSignRootCA.der in Resources */,
 				8CBA05DF1E28AAA40045D8B3 /* www.good.com.der in Resources */,
+				91B276452B9A54E4004B41A7 /* Corporation Service Company RSA OV SSL CA.der in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
