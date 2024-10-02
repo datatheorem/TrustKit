@@ -103,6 +103,12 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
 // Pin to any of CA, Intermediate CA and Leaf certificates public keys (all valid) and ensure it succeeds
 - (void)testVerifyAgainstAnyPublicKey
 {
+    id mockApplication = OCMClassMock([UIApplication class]);
+    OCMStub([mockApplication sharedApplication]).andReturn(mockApplication);
+    
+    // Mock isProtectedDataAvailable to return YES
+    OCMStub([mockApplication isProtectedDataAvailable]).andReturn(YES);
+
     // Create a valid server trust
     SecCertificateRef certChainArray[1] = {_leafCertificate};
     SecCertificateRef trustStoreArray[1] = {_rootCertificate};
@@ -165,6 +171,9 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     XCTAssertEqual([fsCache count], 1UL, @"SPKI cache for RSA 4096 must be persisted to the file system");
     
     CFRelease(trust);
+    
+    OCMVerify([mockApplication isProtectedDataAvailable]);
+    [mockApplication stopMocking];
 }
 
 

@@ -9,6 +9,7 @@
  
  */
 
+#import <UIKit/UIKit.h>
 #import "TSKSPKIHashCache.h"
 #import "../TSKLog.h"
 #import <CommonCrypto/CommonDigest.h>
@@ -244,7 +245,7 @@ static unsigned int getAsn1HeaderSize(NSString *publicKeyType, NSNumber *publicK
     });
     
     // Update the cache on the filesystem
-    if (self.spkiCacheFilename.length > 0)
+    if (self.spkiCacheFilename.length > 0 && [[UIApplication sharedApplication] isProtectedDataAvailable])
     {
         NSData *serializedSpkiCache = [NSKeyedArchiver archivedDataWithRootObject:_spkiCache requiringSecureCoding:YES error:nil];
         if ([serializedSpkiCache writeToURL:[self SPKICachePath] atomically:YES] == NO)
