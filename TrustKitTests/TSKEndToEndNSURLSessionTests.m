@@ -197,7 +197,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
           @{
               @"www.datatheorem.com" : @{
                       kTSKEnforcePinning : @YES,
-                      kTSKPublicKeyHashes : @[@"cXjPgKdVe6iojP8s0YQJ3rtmDFHTnYZxcYvmYGFiYME=", // CA key for Google Trust Services (cert valid until 27 Jan 2028)
+                      kTSKPublicKeyHashes : @[@"hxqRlPTu1bMS/0DITB1SSu0vd4u/8l8TjPgfaAp63Gc=", // CA key for Google Trust Services (cert valid until 27 Jan 2028)
                                               @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                               ]}}};
     

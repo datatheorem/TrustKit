@@ -245,13 +245,27 @@ static unsigned int getAsn1HeaderSize(NSString *publicKeyType, NSNumber *publicK
     });
     
     // Update the cache on the filesystem
-    if (self.spkiCacheFilename.length > 0 && [[UIApplication sharedApplication] isProtectedDataAvailable])
-    {
-        NSData *serializedSpkiCache = [NSKeyedArchiver archivedDataWithRootObject:_spkiCache requiringSecureCoding:YES error:nil];
-        if ([serializedSpkiCache writeToURL:[self SPKICachePath] atomically:YES] == NO)
-        {
-            NSAssert(false, @"Failed to write cache");
-            TSKLog(@"Could not persist SPKI cache to the filesystem");
+    if (self.spkiCacheFilename.length > 0) {
+        
+        __weak typeof(self) weakSelf = self;
+        void (^updateCacheBlock)(void) = ^{
+            if ([[UIApplication sharedApplication] isProtectedDataAvailable]) {
+                NSData *serializedSpkiCache = [NSKeyedArchiver archivedDataWithRootObject:weakSelf.spkiCache requiringSecureCoding:YES error:nil];
+                if ([serializedSpkiCache writeToURL:[weakSelf SPKICachePath] atomically:YES] == NO) {
+                    NSAssert(false, @"Failed to write cache");
+                    TSKLog(@"Could not persist SPKI cache to the filesystem");
+                }
+            }
+            else {
+                TSKLog(@"Protected data not available, skipping SPKI cache persistence");
+            }
+        };
+        
+        if ([NSThread isMainThread]) {
+            updateCacheBlock();
+        }
+        else {
+            dispatch_async(dispatch_get_main_queue(), updateCacheBlock);
         }
     }
     
