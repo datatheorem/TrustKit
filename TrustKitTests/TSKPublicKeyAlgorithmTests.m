@@ -18,6 +18,7 @@
 #import "../TrustKit/Reporting/reporting_utils.h"
 
 #import "TSKCertificateUtils.h"
+#import <OCMock/OCMock.h>
 
 
 @interface TSKSPKIHashCache (TestSupport)
@@ -111,5 +112,48 @@
     CFRelease(certificate);
 }
 
+
+- (void)testSPKICacheThreadSafetyAndProtectedData
+{
+    XCTestExpectation *expectation = [self expectationWithDescription:@"Cache operations completed"];
+    
+    id mockApplication = OCMClassMock([UIApplication class]);
+    OCMStub([mockApplication sharedApplication]).andReturn(mockApplication);
+    // Simulate protected data being unavailable
+    OCMStub([mockApplication isProtectedDataAvailable]).andReturn(NO);
+    
+    
+    // Perform multiple cache operations in parallel on a background queue
+    SecCertificateRef certificate = [TSKCertificateUtils createCertificateFromDer:@"www.globalsign.com"];
+    dispatch_group_t group = dispatch_group_create();
+    for (int i = 0; i < 10; i++) {
+        dispatch_group_async(group, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [self->spkiCache hashSubjectPublicKeyInfoFromCertificate:certificate];
+        });
+    }
+    
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+
+        NSDictionary *cache = [self->spkiCache getSubjectPublicKeyInfoHashesCache];
+        XCTAssertEqual(cache.count, 1, @"Cache should contain one entry");
+        
+        // Simulate protected data becoming available
+        OCMStub([mockApplication isProtectedDataAvailable]).andReturn(YES);
+        
+        // Perform one more cache operation to trigger filesystem write
+        [self->spkiCache hashSubjectPublicKeyInfoFromCertificate:certificate];
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            NSDictionary *finalCache = [self->spkiCache getSubjectPublicKeyInfoHashesCache];
+            XCTAssertEqual(finalCache.count, 1, @"Cache should still contain one entry");
+            
+            CFRelease(certificate);
+            [mockApplication stopMocking];
+            [expectation fulfill];
+        });
+    });
+    
+    [self waitForExpectationsWithTimeout:5.0 handler:nil];
+}
 
 @end
