@@ -8,8 +8,12 @@
  See AUTHORS file for the list of project authors.
  
  */
+ #import <TargetConditionals.h>
 
+#if TARGET_OS_MAC
+#else
 #import <UIKit/UIKit.h>
+#endif
 #import "TSKSPKIHashCache.h"
 #import "../TSKLog.h"
 #import <CommonCrypto/CommonDigest.h>
@@ -129,6 +133,16 @@ static unsigned int getAsn1HeaderSize(NSString *publicKeyType, NSNumber *publicK
     @throw([NSException exceptionWithName:@"Unsupported public key algorithm" reason:@"Tried to generate the SPKI hash for an unsupported key algorithm" userInfo:nil]);
 }
 
+static BOOL isProtectedDataAvailable(void)
+{
+  #if TARGET_OS_MAC
+    // No, there is no equivalent to [[UIApplication sharedApplication] isProtectedDataAvailable] on macOS.
+    // On macOS, protected data availability is not managed in the same way as on iOS.
+    return true;
+  #else
+    return [[UIApplication sharedApplication] isProtectedDataAvailable];
+  #endif
+}
 
 @interface TSKSPKIHashCache ()
 
@@ -249,7 +263,7 @@ static unsigned int getAsn1HeaderSize(NSString *publicKeyType, NSNumber *publicK
         
         __weak typeof(self) weakSelf = self;
         void (^updateCacheBlock)(void) = ^{
-            if ([[UIApplication sharedApplication] isProtectedDataAvailable]) {
+            if (isProtectedDataAvailable()) {
                 NSData *serializedSpkiCache = [NSKeyedArchiver archivedDataWithRootObject:weakSelf.spkiCache requiringSecureCoding:YES error:nil];
                 if ([serializedSpkiCache writeToURL:[weakSelf SPKICachePath] atomically:YES] == NO) {
                     NSAssert(false, @"Failed to write cache");
