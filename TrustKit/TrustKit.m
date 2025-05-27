@@ -274,7 +274,7 @@ void TSKLog(NSString *format, ...)
 
 #pragma mark TrustKit Implicit Initialization via Library Constructor
 
-
+#if !DISABLE_INIT_WITH_INFO_PLIST
 __attribute__((constructor)) static void initializeWithInfoPlist(int argc, const char **argv)
 {
     // TrustKit just got started in the App
@@ -288,3 +288,4 @@ __attribute__((constructor)) static void initializeWithInfoPlist(int argc, const
         [TrustKit initSharedInstanceWithConfiguration:trustKitConfigFromInfoPlist];
     }
 }
+#endif
