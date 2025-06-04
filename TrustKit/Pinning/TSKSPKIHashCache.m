@@ -8,8 +8,8 @@
  See AUTHORS file for the list of project authors.
  
  */
-
-#import <UIKit/UIKit.h>
+#import <objc/runtime.h>
+#import <objc/message.h>
 #import "TSKSPKIHashCache.h"
 #import "../TSKLog.h"
 #import <CommonCrypto/CommonDigest.h>
@@ -148,6 +148,21 @@ static unsigned int getAsn1HeaderSize(NSString *publicKeyType, NSNumber *publicK
 
 @implementation TSKSPKIHashCache
 
+static BOOL isProtectedDataAvailable(void)
+{
+    Class uiApplicationClass = objc_getClass("UIApplication");
+    if (uiApplicationClass) {
+        SEL sharedApplicationSelector = sel_registerName("sharedApplication");
+        SEL isProtectedDataAvailableSelector = sel_registerName("isProtectedDataAvailable");
+        id sharedApp = ((id (*)(id, SEL))objc_msgSend)(uiApplicationClass, sharedApplicationSelector);
+        if (sharedApp && [sharedApp respondsToSelector:isProtectedDataAvailableSelector]) {
+            return (((BOOL (*)(id, SEL))objc_msgSend)(sharedApp, isProtectedDataAvailableSelector));
+        }
+    }
+    
+    return YES;
+}
+
 - (instancetype)initWithIdentifier:(NSString *)uniqueIdentifier
 {
     self = [super init];
@@ -249,7 +264,8 @@ static unsigned int getAsn1HeaderSize(NSString *publicKeyType, NSNumber *publicK
         
         __weak typeof(self) weakSelf = self;
         void (^updateCacheBlock)(void) = ^{
-            if ([[UIApplication sharedApplication] isProtectedDataAvailable]) {
+            
+            if (isProtectedDataAvailable()) {
                 NSData *serializedSpkiCache = [NSKeyedArchiver archivedDataWithRootObject:weakSelf.spkiCache requiringSecureCoding:YES error:nil];
                 if ([serializedSpkiCache writeToURL:[weakSelf SPKICachePath] atomically:YES] == NO) {
                     NSAssert(false, @"Failed to write cache");
