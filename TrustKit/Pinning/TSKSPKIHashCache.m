@@ -219,16 +219,21 @@ static BOOL _isProtectedDataAvailable(void) {
     return self;
 }
 
-- (NSData *)hashSubjectPublicKeyInfoFromCertificate:(SecCertificateRef)certificate
-{
-    __block NSData *cachedSubjectPublicKeyInfo;
+- (NSData *)hashSubjectPublicKeyInfoFromCertificate:(SecCertificateRef)certificate {
+    __block NSData *hash = nil;
     
+    dispatch_sync(self.lockQueue, ^{
+        hash = [self _hashSubjectPublicKeyInfoFromCertificate:certificate];
+    });
+    
+    return hash;
+}
+
+- (NSData *)_hashSubjectPublicKeyInfoFromCertificate:(SecCertificateRef)certificate
+{
     // Have we seen this certificate before? Look for the SPKI in the cache
     NSData *certificateData = (__bridge_transfer NSData *)(SecCertificateCopyData(certificate));
-    
-    dispatch_sync(_lockQueue, ^{
-        cachedSubjectPublicKeyInfo = self->_spkiCache[certificateData];
-    });
+    NSData *cachedSubjectPublicKeyInfo = self->_spkiCache[certificateData];
     
     if (cachedSubjectPublicKeyInfo)
     {
@@ -289,34 +294,21 @@ static BOOL _isProtectedDataAvailable(void) {
     
     
     // Store the hash in our memory cache
-    dispatch_barrier_sync(_lockQueue, ^{
-        self->_spkiCache[certificateData] = subjectPublicKeyInfoHash;
-    });
+    self->_spkiCache[certificateData] = subjectPublicKeyInfoHash;
     
     // Update the cache on the filesystem
-    if (self.spkiCacheFilename.length > 0) {
-        
-        __weak typeof(self) weakSelf = self;
-        void (^updateCacheBlock)(void) = ^{
-            
-            if (isProtectedDataAvailable()) {
-                NSData *serializedSpkiCache = [NSKeyedArchiver archivedDataWithRootObject:weakSelf.spkiCache requiringSecureCoding:YES error:nil];
-                if ([serializedSpkiCache writeToURL:[weakSelf SPKICachePath] atomically:YES] == NO) {
-                    NSAssert(false, @"Failed to write cache");
-                    TSKLog(@"Could not persist SPKI cache to the filesystem");
-                }
-            }
-            else {
-                TSKLog(@"Protected data not available, skipping SPKI cache persistence");
-            }
-        };
-        
-        if ([NSThread isMainThread]) {
-            updateCacheBlock();
+    if (self.spkiCacheFilename.length && isProtectedDataAvailable()) {
+        NSData *serializedSpkiCache = [NSKeyedArchiver archivedDataWithRootObject:self.spkiCache
+                                                            requiringSecureCoding:YES
+                                                                            error:nil];
+        NSURL *cachePath = [self SPKICachePath];
+        if (!cachePath || ![serializedSpkiCache writeToURL:cachePath atomically:YES]) {
+            NSAssert(false, @"Failed to write cache");
+            TSKLog(@"Could not persist SPKI cache to the filesystem");
         }
-        else {
-            dispatch_async(dispatch_get_main_queue(), updateCacheBlock);
-        }
+    }
+    else if (self.spkiCacheFilename.length) {
+        TSKLog(@"Protected data not available, skipping SPKI cache persistence");
     }
     
     return subjectPublicKeyInfoHash;
