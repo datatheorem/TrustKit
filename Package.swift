@@ -14,25 +14,14 @@ let package = Package(
             name: "TrustKit",
             targets: ["TrustKit"]
         ),
-        .library(
-            name: "TrustKitDynamic",
-            type: .dynamic,
-            targets: ["TrustKit"]
-        ),
-        .library(
-            name: "TrustKitStatic",
-            type: .static,
-            targets: ["TrustKit"]
-        ),
     ],
     dependencies: [
     ],
     targets: [
         .target(
             name: "TrustKit",
-            dependencies: [],
             path: "TrustKit",   
-            resources: [.copy("PrivacyInfo.xcprivacy")],
+            resources: [.process("PrivacyInfo.xcprivacy")],
             publicHeadersPath: "public",
             cSettings: [.define("NS_BLOCK_ASSERTIONS", to: "1", .when(configuration: .release))]
         ),
