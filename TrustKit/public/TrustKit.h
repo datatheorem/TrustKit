@@ -9,19 +9,15 @@
  
  */
 
-#if __has_feature(modules)
-@import Foundation;
-#else
 #import <Foundation/Foundation.h>
-#endif
 
 #ifndef _TRUSTKIT_
 #define _TRUSTKIT_
-    #import "TSKTrustKitConfig.h"
-    #import "TSKPinningValidatorResult.h"
-    #import "TSKPinningValidatorCallback.h"
-    #import "TSKPinningValidator.h"
-    #import "TSKTrustDecision.h"
+    #import <TrustKit/TSKTrustKitConfig.h>
+    #import <TrustKit/TSKPinningValidatorResult.h>
+    #import <TrustKit/TSKPinningValidatorCallback.h>
+    #import <TrustKit/TSKPinningValidator.h>
+    #import <TrustKit/TSKTrustDecision.h>
 #endif /* _TRUSTKIT_ */
 
 NS_ASSUME_NONNULL_BEGIN

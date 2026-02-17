@@ -9,13 +9,8 @@
  
  */
 
-#import "TSKTrustDecision.h"
-
-#if __has_feature(modules)
-@import Foundation;
-#else
+#import <TrustKit/TSKTrustDecision.h>
 #import <Foundation/Foundation.h>
-#endif
 
 @class TSKPinningValidatorResult;
 @class TSKSPKIHashCache;
