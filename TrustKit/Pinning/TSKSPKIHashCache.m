@@ -148,8 +148,42 @@ static unsigned int getAsn1HeaderSize(NSString *publicKeyType, NSNumber *publicK
 
 @implementation TSKSPKIHashCache
 
+/// Blocks to call out to the main thread if necessary
 static BOOL isProtectedDataAvailable(void)
 {
+    if (NSThread.isMainThread) {
+        return _isProtectedDataAvailable();
+    } else {
+        __block BOOL ret = NO;
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            ret = _isProtectedDataAvailable();
+        });
+        
+        return ret;
+    }
+}
+
+static void isProtectedDataAvailableAsync(dispatch_queue_t callbackQueue, void (^callback)(BOOL available))
+{
+    NSCParameterAssert(callbackQueue);
+    NSCParameterAssert(callback);
+    
+    void (^callbackOnQueue)(BOOL) = ^(BOOL available) {
+        dispatch_async(callbackQueue, ^{
+            callback(available);
+        });
+    };
+    
+    if (NSThread.isMainThread) {
+        callbackOnQueue(_isProtectedDataAvailable());
+    } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            callbackOnQueue(_isProtectedDataAvailable());
+        });
+    }
+}
+
+static BOOL _isProtectedDataAvailable(void) {
     Class uiApplicationClass = objc_getClass("UIApplication");
     if (uiApplicationClass) {
         SEL sharedApplicationSelector = sel_registerName("sharedApplication");
