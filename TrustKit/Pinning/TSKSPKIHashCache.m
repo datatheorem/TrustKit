@@ -168,7 +168,7 @@ static BOOL isProtectedDataAvailable(void)
     self = [super init];
     if (self) {
         // Initialize our locks
-        _lockQueue = dispatch_queue_create("TSKSPKIHashLock", DISPATCH_QUEUE_CONCURRENT);
+        _lockQueue = dispatch_queue_create("TSKSPKIHashLock", DISPATCH_QUEUE_SERIAL);
 
         // Ensure a non-nil identifier was provided
         NSAssert(uniqueIdentifier, @"TSKSPKIHashCache initializer must be passed a unique identifier");
