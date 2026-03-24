@@ -148,8 +148,42 @@ static unsigned int getAsn1HeaderSize(NSString *publicKeyType, NSNumber *publicK
 
 @implementation TSKSPKIHashCache
 
+/// Blocks to call out to the main thread if necessary
 static BOOL isProtectedDataAvailable(void)
 {
+    if (NSThread.isMainThread) {
+        return _isProtectedDataAvailable();
+    } else {
+        __block BOOL ret = NO;
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            ret = _isProtectedDataAvailable();
+        });
+        
+        return ret;
+    }
+}
+
+static void isProtectedDataAvailableAsync(dispatch_queue_t callbackQueue, void (^callback)(BOOL available))
+{
+    NSCParameterAssert(callbackQueue);
+    NSCParameterAssert(callback);
+    
+    void (^callbackOnQueue)(BOOL) = ^(BOOL available) {
+        dispatch_async(callbackQueue, ^{
+            callback(available);
+        });
+    };
+    
+    if (NSThread.isMainThread) {
+        callbackOnQueue(_isProtectedDataAvailable());
+    } else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            callbackOnQueue(_isProtectedDataAvailable());
+        });
+    }
+}
+
+static BOOL _isProtectedDataAvailable(void) {
     Class uiApplicationClass = objc_getClass("UIApplication");
     if (uiApplicationClass) {
         SEL sharedApplicationSelector = sel_registerName("sharedApplication");
@@ -168,7 +202,7 @@ static BOOL isProtectedDataAvailable(void)
     self = [super init];
     if (self) {
         // Initialize our locks
-        _lockQueue = dispatch_queue_create("TSKSPKIHashLock", DISPATCH_QUEUE_CONCURRENT);
+        _lockQueue = dispatch_queue_create("TSKSPKIHashLock", DISPATCH_QUEUE_SERIAL);
 
         // Ensure a non-nil identifier was provided
         NSAssert(uniqueIdentifier, @"TSKSPKIHashCache initializer must be passed a unique identifier");
@@ -185,16 +219,21 @@ static BOOL isProtectedDataAvailable(void)
     return self;
 }
 
-- (NSData *)hashSubjectPublicKeyInfoFromCertificate:(SecCertificateRef)certificate
-{
-    __block NSData *cachedSubjectPublicKeyInfo;
+- (NSData *)hashSubjectPublicKeyInfoFromCertificate:(SecCertificateRef)certificate {
+    __block NSData *hash = nil;
     
+    dispatch_sync(self.lockQueue, ^{
+        hash = [self _hashSubjectPublicKeyInfoFromCertificate:certificate];
+    });
+    
+    return hash;
+}
+
+- (NSData *)_hashSubjectPublicKeyInfoFromCertificate:(SecCertificateRef)certificate
+{
     // Have we seen this certificate before? Look for the SPKI in the cache
     NSData *certificateData = (__bridge_transfer NSData *)(SecCertificateCopyData(certificate));
-    
-    dispatch_sync(_lockQueue, ^{
-        cachedSubjectPublicKeyInfo = self->_spkiCache[certificateData];
-    });
+    NSData *cachedSubjectPublicKeyInfo = self->_spkiCache[certificateData];
     
     if (cachedSubjectPublicKeyInfo)
     {
@@ -255,34 +294,21 @@ static BOOL isProtectedDataAvailable(void)
     
     
     // Store the hash in our memory cache
-    dispatch_barrier_sync(_lockQueue, ^{
-        self->_spkiCache[certificateData] = subjectPublicKeyInfoHash;
-    });
+    self->_spkiCache[certificateData] = subjectPublicKeyInfoHash;
     
     // Update the cache on the filesystem
-    if (self.spkiCacheFilename.length > 0) {
-        
-        __weak typeof(self) weakSelf = self;
-        void (^updateCacheBlock)(void) = ^{
-            
-            if (isProtectedDataAvailable()) {
-                NSData *serializedSpkiCache = [NSKeyedArchiver archivedDataWithRootObject:weakSelf.spkiCache requiringSecureCoding:YES error:nil];
-                if ([serializedSpkiCache writeToURL:[weakSelf SPKICachePath] atomically:YES] == NO) {
-                    NSAssert(false, @"Failed to write cache");
-                    TSKLog(@"Could not persist SPKI cache to the filesystem");
-                }
-            }
-            else {
-                TSKLog(@"Protected data not available, skipping SPKI cache persistence");
-            }
-        };
-        
-        if ([NSThread isMainThread]) {
-            updateCacheBlock();
+    if (self.spkiCacheFilename.length && isProtectedDataAvailable()) {
+        NSData *serializedSpkiCache = [NSKeyedArchiver archivedDataWithRootObject:self.spkiCache
+                                                            requiringSecureCoding:YES
+                                                                            error:nil];
+        NSURL *cachePath = [self SPKICachePath];
+        if (!cachePath || ![serializedSpkiCache writeToURL:cachePath atomically:YES]) {
+            NSAssert(false, @"Failed to write cache");
+            TSKLog(@"Could not persist SPKI cache to the filesystem");
         }
-        else {
-            dispatch_async(dispatch_get_main_queue(), updateCacheBlock);
-        }
+    }
+    else if (self.spkiCacheFilename.length) {
+        TSKLog(@"Protected data not available, skipping SPKI cache persistence");
     }
     
     return subjectPublicKeyInfoHash;
