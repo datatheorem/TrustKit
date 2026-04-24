@@ -167,7 +167,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
               // Valid pinning configuration
               @"www.datatheorem.com" : @{
                       kTSKEnforcePinning : @YES,
-                      kTSKPublicKeyHashes : @[@"F6jTih9VkkYZS8yuYqeU/4DUGehJ+niBGkkQ1yg8H3U=", // CA key
+                      kTSKPublicKeyHashes : @[@"OdSlmQD9NWJh4EbcOHBxkhygPwNSwA9Q91eounfbcoE=", // CA key
                                               @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
                                               ]},
               // Invalid pinning configuration

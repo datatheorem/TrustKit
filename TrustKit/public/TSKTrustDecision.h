@@ -9,11 +9,7 @@
  
  */
 
-#if __has_feature(modules)
-@import Foundation;
-#else
 #import <Foundation/Foundation.h>
-#endif
 
 /**
  Possible return values when verifying a server's identity against a set of pins.
