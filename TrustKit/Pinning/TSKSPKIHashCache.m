@@ -163,17 +163,19 @@ static BOOL isProtectedDataAvailable(void)
     }
 }
 
+// Currently unused, but kept for an upcoming rewrite that will need an async variant.
+static void isProtectedDataAvailableAsync(dispatch_queue_t callbackQueue, void (^callback)(BOOL available)) __attribute__((unused));
 static void isProtectedDataAvailableAsync(dispatch_queue_t callbackQueue, void (^callback)(BOOL available))
 {
     NSCParameterAssert(callbackQueue);
     NSCParameterAssert(callback);
-    
+
     void (^callbackOnQueue)(BOOL) = ^(BOOL available) {
         dispatch_async(callbackQueue, ^{
             callback(available);
         });
     };
-    
+
     if (NSThread.isMainThread) {
         callbackOnQueue(_isProtectedDataAvailable());
     } else {
