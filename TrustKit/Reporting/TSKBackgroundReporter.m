@@ -203,6 +203,12 @@ static NSString * const kTSKBackgroundSessionIdentifierFormat = @"%@.TSKBackgrou
         [NSException raise:@"TSKBackgroundReporter runtime error"
                     format:@"Report cannot be saved to file: %@", [error description]];
 #endif
+        // In production, if the report could not be written, bail out here. Otherwise we would go on to
+        // hand a non-existent file to -uploadTaskWithRequest:fromFile:, which throws an uncaught
+        // NSInvalidArgumentException ("Cannot read file at ...") and crashes the app.
+        // https://github.com/datatheorem/TrustKit/issues/351
+        TSKLog(@"Report for %@ could not be saved to file; skipping upload: %@", serverHostname, [error description]);
+        return;
     }
     TSKLog(@"Report for %@ created at: %@", serverHostname, [tmpFileURL path]);
     
