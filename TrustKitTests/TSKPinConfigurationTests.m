@@ -191,6 +191,8 @@
     id localeMock = OCMClassMock([NSLocale class]);
     OCMStub(ClassMethod([localeMock currentLocale])).andReturn(thaiLocale);
     OCMStub(ClassMethod([localeMock autoupdatingCurrentLocale])).andReturn(thaiLocale);
+    XCTAssertEqualObjects([[NSDateFormatter alloc] init].calendar.calendarIdentifier, NSCalendarIdentifierBuddhist,
+                          @"Stubbing NSLocale no longer sets NSDateFormatter's default calendar, so this test cannot detect the bug");
     
     NSDictionary *trustKitConfig = parseTrustKitConfiguration(@{kTSKPinnedDomains : @{
                                                                         @"www.good.com" : @{
