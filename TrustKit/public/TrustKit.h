@@ -13,11 +13,19 @@
 
 #ifndef _TRUSTKIT_
 #define _TRUSTKIT_
+#if __has_include(<TrustKit/TSKTrustKitConfig.h>)
     #import <TrustKit/TSKTrustKitConfig.h>
     #import <TrustKit/TSKPinningValidatorResult.h>
     #import <TrustKit/TSKPinningValidatorCallback.h>
     #import <TrustKit/TSKPinningValidator.h>
     #import <TrustKit/TSKTrustDecision.h>
+#else
+    #import "TSKTrustKitConfig.h"
+    #import "TSKPinningValidatorResult.h"
+    #import "TSKPinningValidatorCallback.h"
+    #import "TSKPinningValidator.h"
+    #import "TSKTrustDecision.h"
+#endif
 #endif /* _TRUSTKIT_ */
 
 NS_ASSUME_NONNULL_BEGIN

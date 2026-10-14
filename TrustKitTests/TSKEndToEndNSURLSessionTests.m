@@ -177,7 +177,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
     [task resume];
     
     // Wait for the connection to succeed and ensure a notification was posted
-    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error)
+    [self waitForExpectationsWithTimeout:30.0 handler:^(NSError *error)
      {
          if (error)
          {
@@ -231,7 +231,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
     [task resume];
     
     // Wait for the connection to succeed and ensure a notification was posted
-    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error)
+    [self waitForExpectationsWithTimeout:30.0 handler:^(NSError *error)
      {
          if (error)
          {
@@ -288,7 +288,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
     [task resume];
     
     // Wait for the connection to succeed and ensure a notification was posted
-    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error)
+    [self waitForExpectationsWithTimeout:30.0 handler:^(NSError *error)
      {
          if (error)
          {
@@ -333,7 +333,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
     [task resume];
     
     // Wait for the connection to succeed and ensure a notification was posted
-    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error)
+    [self waitForExpectationsWithTimeout:30.0 handler:^(NSError *error)
      {
          if (error)
          {

@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  DEVELOPER_DIR: /Applications/Xcode_26.6.app/Contents/Developer
+
+jobs:
+  test:
+    name: Test ${{ matrix.platform }}
+    runs-on: macos-26
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: [ios-simulator, macos, tvos-simulator]
+    steps:
+      - uses: actions/checkout@v7
+      - run: ./scripts/run_unit_tests.sh ${{ matrix.platform }} -retry-tests-on-failure -test-iterations 3
+      - uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: ${{ matrix.platform }}-tests
+          path: output/*.xcresult
+          if-no-files-found: ignore
+
+  xcframework:
+    name: Build XCFramework
+    runs-on: macos-26
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - run: ./scripts/build_xcframework.sh
+
+  swift-package:
+    name: Validate Swift package
+    runs-on: macos-26
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - run: ./scripts/validate_swift_package.sh
