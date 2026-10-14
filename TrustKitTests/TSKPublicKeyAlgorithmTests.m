@@ -113,6 +113,27 @@
 }
 
 
+- (void)testSPKICacheMissOffMainThreadDoesNotWaitForMainThread
+{
+    SecCertificateRef certificate = [TSKCertificateUtils createCertificateFromDer:@"www.globalsign.com"];
+    dispatch_semaphore_t hashed = dispatch_semaphore_create(0);
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_DEFAULT, 0), ^{
+        [self->spkiCache hashSubjectPublicKeyInfoFromCertificate:certificate];
+        CFRelease(certificate);
+        dispatch_semaphore_signal(hashed);
+    });
+    
+    long timedOut = dispatch_semaphore_wait(hashed, dispatch_time(DISPATCH_TIME_NOW, (int64_t)(5 * NSEC_PER_SEC)));
+    XCTAssertEqual(timedOut, 0L, @"Hashing an uncached certificate must not wait on the main thread");
+    
+    XCTestExpectation *mainQueueDrained = [self expectationWithDescription:@"Main queue drained"];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [mainQueueDrained fulfill];
+    });
+    [self waitForExpectations:@[mainQueueDrained] timeout:5.0];
+}
+
+
 #if TARGET_OS_IPHONE
 - (void)testSPKICacheThreadSafetyAndProtectedData
 {
