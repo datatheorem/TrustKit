@@ -38,6 +38,7 @@
 - (void)resetSubjectPublicKeyInfoDiskCache;
 - (NSMutableDictionary<NSNumber *, SPKICacheDictionnary *> *)getSubjectPublicKeyInfoHashesCache;
 - (NSMutableDictionary<NSNumber *, SPKICacheDictionnary *> *)loadSPKICacheFromFileSystem;
+- (void)waitForPendingSubjectPublicKeyInfoDiskWrites;
 @end
 
 static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
@@ -169,6 +170,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     [self waitForExpectationsWithTimeout:2.0 handler:nil];
     
     // Ensure the SPKI cache was persisted to the filesystem
+    [spkiCache waitForPendingSubjectPublicKeyInfoDiskWrites];
     fsCache = [spkiCache loadSPKICacheFromFileSystem];
     XCTAssertEqual([fsCache count], 1UL, @"SPKI cache for RSA 4096 must be persisted to the file system");
     

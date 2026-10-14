@@ -135,6 +135,8 @@ static unsigned int getAsn1HeaderSize(NSString *publicKeyType, NSNumber *publicK
 // Dictionnary to cache SPKI hashes instead of having to compute them on every connection
 @property (nonatomic) SPKICacheDictionnary *spkiCache;
 @property (nonatomic) dispatch_queue_t lockQueue;
+@property (nonatomic) dispatch_queue_t persistenceQueue;
+@property (nonatomic) BOOL persistenceScheduled;
 @property (nonatomic) NSString *spkiCacheFilename;
 
 
@@ -148,23 +150,7 @@ static unsigned int getAsn1HeaderSize(NSString *publicKeyType, NSNumber *publicK
 
 @implementation TSKSPKIHashCache
 
-/// Blocks to call out to the main thread if necessary
-static BOOL isProtectedDataAvailable(void)
-{
-    if (NSThread.isMainThread) {
-        return _isProtectedDataAvailable();
-    } else {
-        __block BOOL ret = NO;
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            ret = _isProtectedDataAvailable();
-        });
-        
-        return ret;
-    }
-}
-
-// Currently unused, but kept for an upcoming rewrite that will need an async variant.
-static void isProtectedDataAvailableAsync(dispatch_queue_t callbackQueue, void (^callback)(BOOL available)) __attribute__((unused));
+// Must not block: it runs while holding lockQueue, and waiting on the main queue there can deadlock
 static void isProtectedDataAvailableAsync(dispatch_queue_t callbackQueue, void (^callback)(BOOL available))
 {
     NSCParameterAssert(callbackQueue);
@@ -176,7 +162,7 @@ static void isProtectedDataAvailableAsync(dispatch_queue_t callbackQueue, void (
         });
     };
 
-    if (NSThread.isMainThread) {
+    if (NSThread.isMainThread || !objc_getClass("UIApplication")) {
         callbackOnQueue(_isProtectedDataAvailable());
     } else {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -205,6 +191,8 @@ static BOOL _isProtectedDataAvailable(void) {
     if (self) {
         // Initialize our locks
         _lockQueue = dispatch_queue_create("TSKSPKIHashLock", DISPATCH_QUEUE_SERIAL);
+        _persistenceQueue = dispatch_queue_create("TSKSPKIHashPersistence",
+                                                  dispatch_queue_attr_make_with_qos_class(DISPATCH_QUEUE_SERIAL, QOS_CLASS_UTILITY, 0));
 
         // Ensure a non-nil identifier was provided
         NSAssert(uniqueIdentifier, @"TSKSPKIHashCache initializer must be passed a unique identifier");
@@ -299,8 +287,33 @@ static BOOL _isProtectedDataAvailable(void) {
     self->_spkiCache[certificateData] = subjectPublicKeyInfoHash;
     
     // Update the cache on the filesystem
-    if (self.spkiCacheFilename.length && isProtectedDataAvailable()) {
-        NSData *serializedSpkiCache = [NSKeyedArchiver archivedDataWithRootObject:self.spkiCache
+    [self schedulePersistence];
+    
+    return subjectPublicKeyInfoHash;
+}
+
+- (void)schedulePersistence
+{
+    if (!self.spkiCacheFilename.length || self.persistenceScheduled) {
+        return;
+    }
+    self.persistenceScheduled = YES;
+    
+    isProtectedDataAvailableAsync(self.persistenceQueue, ^(BOOL available) {
+        __block SPKICacheDictionnary *snapshot = nil;
+        dispatch_sync(self.lockQueue, ^{
+            self.persistenceScheduled = NO;
+            if (available) {
+                snapshot = [self.spkiCache mutableCopy];
+            }
+        });
+    
+        if (snapshot == nil) {
+            TSKLog(@"Protected data not available, skipping SPKI cache persistence");
+            return;
+        }
+    
+        NSData *serializedSpkiCache = [NSKeyedArchiver archivedDataWithRootObject:snapshot
                                                             requiringSecureCoding:YES
                                                                             error:nil];
         NSURL *cachePath = [self SPKICachePath];
@@ -308,12 +321,7 @@ static BOOL _isProtectedDataAvailable(void) {
             NSAssert(false, @"Failed to write cache");
             TSKLog(@"Could not persist SPKI cache to the filesystem");
         }
-    }
-    else if (self.spkiCacheFilename.length) {
-        TSKLog(@"Protected data not available, skipping SPKI cache persistence");
-    }
-    
-    return subjectPublicKeyInfoHash;
+    });
 }
 
 - (SPKICacheDictionnary *)loadSPKICacheFromFileSystem
@@ -384,7 +392,13 @@ static BOOL _isProtectedDataAvailable(void) {
 - (void)resetSubjectPublicKeyInfoDiskCache
 {
     // Discard SPKI cache
+    [self waitForPendingSubjectPublicKeyInfoDiskWrites];
     [NSFileManager.defaultManager removeItemAtURL:[self SPKICachePath] error:nil];
+}
+
+- (void)waitForPendingSubjectPublicKeyInfoDiskWrites
+{
+    dispatch_sync(self.persistenceQueue, ^{});
 }
 
 
