@@ -9,9 +9,14 @@ configure_platform "$PLATFORM"
 RESULT_BUNDLE="output/${PLATFORM}-tests.xcresult"
 rm -rf "$RESULT_BUNDLE"
 
+DESTINATION="platform=${PLATFORM_NAME}"
+if [[ -n "$SIMULATOR" ]]; then
+    DESTINATION+=",name=${SIMULATOR},OS=$(xcrun --sdk "$SIMULATOR_SDK" --show-sdk-version)"
+fi
+
 xcodebuild_pretty test \
     -project TrustKit.xcodeproj \
     -scheme "$SCHEME" \
-    -destination "platform=${PLATFORM_NAME}${SIMULATOR:+,name=${SIMULATOR}}" \
+    -destination "$DESTINATION" \
     -resultBundlePath "$RESULT_BUNDLE" \
     "$@"
