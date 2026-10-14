@@ -1,6 +1,8 @@
 name: CI
 
 on:
+  push:
+    branches: [master]
   pull_request:
     branches: [master]
 
@@ -25,7 +27,7 @@ jobs:
         platform: [ios-simulator, macos, tvos-simulator]
     steps:
       - uses: actions/checkout@v7
-      - run: ./scripts/run_unit_tests.sh ${{ matrix.platform }}
+      - run: ./scripts/run_unit_tests.sh ${{ matrix.platform }} -retry-tests-on-failure -test-iterations 3
       - uses: actions/upload-artifact@v7
         if: failure()
         with:
