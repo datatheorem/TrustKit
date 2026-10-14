@@ -17,6 +17,7 @@
 #import "../TrustKit/parse_configuration.h"
 #import "../TrustKit/configuration_utils.h"
 #import "TSKCertificateUtils.h"
+#import <OCMock/OCMock.h>
 
 @interface TSKPinConfigurationTests : XCTestCase
 @end
@@ -173,6 +174,7 @@
     
     // Validate the content of the config
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    dateFormat.locale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
     dateFormat.dateFormat = @"yyyy-MM-dd";
     dateFormat.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
     NSDate *expirationDate = [dateFormat dateFromString:expirationDateStr];
@@ -180,6 +182,35 @@
     NSDictionary *serverConfig = trustKitConfig[kTSKPinnedDomains][serverConfigKey];
     XCTAssertEqualObjects(expirationDate, serverConfig[kTSKExpirationDate]);
     XCTAssertEqual([serverConfig[kTSKPublicKeyHashes] count], (unsigned long)2);
+}
+
+
+- (void)testExpirationDateIgnoresUserCalendar
+{
+    NSLocale *thaiLocale = [NSLocale localeWithLocaleIdentifier:@"th_TH"];
+    id localeMock = OCMClassMock([NSLocale class]);
+    OCMStub(ClassMethod([localeMock currentLocale])).andReturn(thaiLocale);
+    OCMStub(ClassMethod([localeMock autoupdatingCurrentLocale])).andReturn(thaiLocale);
+    XCTAssertEqualObjects([[NSDateFormatter alloc] init].calendar.calendarIdentifier, NSCalendarIdentifierBuddhist,
+                          @"Stubbing NSLocale no longer sets NSDateFormatter's default calendar, so this test cannot detect the bug");
+    
+    NSDictionary *trustKitConfig = parseTrustKitConfiguration(@{kTSKPinnedDomains : @{
+                                                                        @"www.good.com" : @{
+                                                                                kTSKExpirationDate: @"2027-06-01",
+                                                                                kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                                                                                                        @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" // Fake key
+                                                                                                        ]}}});
+    [localeMock stopMocking];
+    
+    NSCalendar *gregorian = [NSCalendar calendarWithIdentifier:NSCalendarIdentifierGregorian];
+    gregorian.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    components.year = 2027;
+    components.month = 6;
+    components.day = 1;
+    
+    XCTAssertEqualObjects(trustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKExpirationDate],
+                          [gregorian dateFromComponents:components]);
 }
 
 
