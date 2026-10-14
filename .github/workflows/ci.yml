@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [master]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  DEVELOPER_DIR: /Applications/Xcode_26.6.app/Contents/Developer
+
+jobs:
+  xcode:
+    name: ${{ matrix.name }}
+    runs-on: macos-26
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Test iOS
+            command: run_unit_tests.sh ios
+          - name: Test macOS
+            command: run_unit_tests.sh macos
+          - name: Test tvOS
+            command: run_unit_tests.sh tvos
+          - name: Build watchOS
+            command: build.sh watchos
+          - name: Build iOS static library
+            command: build.sh ios-static
+    steps:
+      - uses: actions/checkout@v7
+      - run: ./scripts/${{ matrix.command }}
+      - uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: ${{ matrix.name }} results
+          path: output/*.xcresult
+          if-no-files-found: ignore
+
+  swift-package:
+    name: Validate Swift package
+    runs-on: macos-26
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - run: ./scripts/validate_swift_package.sh

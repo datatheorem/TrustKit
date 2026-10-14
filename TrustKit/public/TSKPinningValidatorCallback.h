@@ -12,8 +12,13 @@
 #ifndef TSKPinningValidatorCallback_h
 #define TSKPinningValidatorCallback_h
 
+#if __has_include(<TrustKit/TSKPinningValidatorResult.h>)
 #import <TrustKit/TSKPinningValidatorResult.h>
 #import <TrustKit/TSKTrustKitConfig.h>
+#else
+#import "TSKPinningValidatorResult.h"
+#import "TSKTrustKitConfig.h"
+#endif
 
 /**
  The pinning policy set for a specific hostname.

@@ -9,7 +9,11 @@
  
  */
 
+#if __has_include(<TrustKit/TSKTrustDecision.h>)
 #import <TrustKit/TSKTrustDecision.h>
+#else
+#import "TSKTrustDecision.h"
+#endif
 #import <Foundation/Foundation.h>
 
 @class TSKPinningValidatorResult;

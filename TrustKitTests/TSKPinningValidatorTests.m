@@ -103,11 +103,13 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
 // Pin to any of CA, Intermediate CA and Leaf certificates public keys (all valid) and ensure it succeeds
 - (void)testVerifyAgainstAnyPublicKey
 {
+#if TARGET_OS_IPHONE
     id mockApplication = OCMClassMock([UIApplication class]);
     OCMStub([mockApplication sharedApplication]).andReturn(mockApplication);
     
     // Mock isProtectedDataAvailable to return YES
     OCMStub([mockApplication isProtectedDataAvailable]).andReturn(YES);
+#endif
 
     // Create a valid server trust
     SecCertificateRef certChainArray[1] = {_leafCertificate};
@@ -172,8 +174,10 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     
     CFRelease(trust);
     
+#if TARGET_OS_IPHONE
     OCMVerify([mockApplication isProtectedDataAvailable]);
     [mockApplication stopMocking];
+#endif
 }
 
 
