@@ -15,33 +15,31 @@ env:
   DEVELOPER_DIR: /Applications/Xcode_26.6.app/Contents/Developer
 
 jobs:
-  xcode:
-    name: ${{ matrix.name }}
+  test:
+    name: Test ${{ matrix.platform }}
     runs-on: macos-26
     timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
-        include:
-          - name: Test iOS
-            command: run_unit_tests.sh ios
-          - name: Test macOS
-            command: run_unit_tests.sh macos
-          - name: Test tvOS
-            command: run_unit_tests.sh tvos
-          - name: Build watchOS
-            command: build.sh watchos
-          - name: Build iOS static library
-            command: build.sh ios-static
+        platform: [ios-simulator, macos, tvos-simulator]
     steps:
       - uses: actions/checkout@v7
-      - run: ./scripts/${{ matrix.command }}
+      - run: ./scripts/run_unit_tests.sh ${{ matrix.platform }}
       - uses: actions/upload-artifact@v7
         if: failure()
         with:
-          name: ${{ matrix.name }} results
+          name: ${{ matrix.platform }}-tests
           path: output/*.xcresult
           if-no-files-found: ignore
+
+  xcframework:
+    name: Build XCFramework
+    runs-on: macos-26
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - run: ./scripts/build_xcframework.sh
 
   swift-package:
     name: Validate Swift package

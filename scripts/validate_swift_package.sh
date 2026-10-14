@@ -2,7 +2,6 @@
 
 . "$(dirname "$0")/lib.sh"
 
-cd "$ROOT_DIR"
 swift build
 
 CONSUMER_DIR="$(mktemp -d)"
@@ -16,7 +15,7 @@ import PackageDescription
 let package = Package(
     name: "TrustKitConsumer",
     products: [.library(name: "TrustKitConsumer", targets: ["TrustKitConsumer"])],
-    dependencies: [.package(name: "TrustKit", path: "${ROOT_DIR}")],
+    dependencies: [.package(name: "TrustKit", path: "${PWD}")],
     targets: [.target(name: "TrustKitConsumer", dependencies: ["TrustKit"])]
 )
 EOF

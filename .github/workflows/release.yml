@@ -1,0 +1,23 @@
+name: Release
+
+on:
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+env:
+  DEVELOPER_DIR: /Applications/Xcode_26.6.app/Contents/Developer
+
+jobs:
+  xcframework:
+    name: Attach XCFramework
+    runs-on: macos-26
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v7
+      - run: ./scripts/build_xcframework.sh
+      - run: gh release upload "$GITHUB_REF_NAME" output/TrustKit-static.zip --clobber
+        env:
+          GH_TOKEN: ${{ github.token }}
