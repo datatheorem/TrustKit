@@ -20,6 +20,8 @@ static NSString *const baseURLDT = @"https://www.datatheorem.com/";
 
 @property (nonatomic) NSURLSession *session;
 
+- (void)displayAlertWithTitle:(NSString *)title messageFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(2, 3);
+
 @end
 
 @implementation ViewController

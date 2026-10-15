@@ -15,7 +15,7 @@
 #define TSKLog_h
 
 // The logging function we use within TrustKit
-void TSKLog(NSString *format, ...);
+void TSKLog(NSString *format, ...) NS_FORMAT_FUNCTION(1, 2);
 
 
 #endif /* TSKLog_h */
