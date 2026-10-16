@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		10C1567CE710F572E4D2C481 /* TrustKitDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4033DAB959A685CC201D0F /* TrustKitDemoUITests.swift */; };
 		194230A21EF7C91A00029B04 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 194230A11EF7C91A00029B04 /* main.m */; };
 		194230A51EF7C91A00029B04 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 194230A41EF7C91A00029B04 /* AppDelegate.m */; };
 		194230A81EF7C91A00029B04 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 194230A71EF7C91A00029B04 /* ViewController.m */; };
@@ -21,7 +22,6 @@
 		649A18043082000000C9DDE0 /* TrustKit in Frameworks */ = {isa = PBXBuildFile; productRef = 649A18033082000000C9DDE0 /* TrustKit */; };
 		649A18083082000000C9DDE0 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 649A18073082000000C9DDE0 /* SceneDelegate.m */; };
 		649A180A3082000000C9DDE0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649A18093082000000C9DDE0 /* SceneDelegate.swift */; };
-		10C1567CE710F572E4D2C481 /* TrustKitDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4033DAB959A685CC201D0F /* TrustKitDemoUITests.swift */; };
 		7EFC88B88CFA398516477DBD /* TrustKitDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4033DAB959A685CC201D0F /* TrustKitDemoUITests.swift */; };
 /* End PBXBuildFile section */
 
@@ -56,9 +56,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		649A18063082000000C9DDE0 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
-		649A18073082000000C9DDE0 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
-		649A18093082000000C9DDE0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		1942309D1EF7C91A00029B04 /* TrustKitDemo-ObjC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TrustKitDemo-ObjC.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		194230A11EF7C91A00029B04 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		194230A31EF7C91A00029B04 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -74,11 +71,14 @@
 		194231171EF9658800029B04 /* DTViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTViewController.swift; sourceTree = "<group>"; };
 		1942311C1EF9658800029B04 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		194231261EF9663F00029B04 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		649A18063082000000C9DDE0 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		649A18073082000000C9DDE0 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		649A18093082000000C9DDE0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		9CEB919C2DEB8B95A35FDF7E /* TrustKitDemo-ObjCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TrustKitDemo-ObjCUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B3241D9D13469F5FC4FEA8B3 /* TrustKitDemo-SwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TrustKitDemo-SwiftUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC4033DAB959A685CC201D0F /* TrustKitDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustKitDemoUITests.swift; sourceTree = "<group>"; };
 		FCB0DD861F117CBE00741410 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCB0DD881F117D4C00741410 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		FC4033DAB959A685CC201D0F /* TrustKitDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustKitDemoUITests.swift; sourceTree = "<group>"; };
-		9CEB919C2DEB8B95A35FDF7E /* TrustKitDemo-ObjCUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrustKitDemo-ObjCUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B3241D9D13469F5FC4FEA8B3 /* TrustKitDemo-SwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrustKitDemo-SwiftUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,6 +173,14 @@
 			path = "TrustKitDemo-Swift";
 			sourceTree = "<group>";
 		};
+		A29D718AD0B668C00DE86231 /* TrustKitDemoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				FC4033DAB959A685CC201D0F /* TrustKitDemoUITests.swift */,
+			);
+			path = TrustKitDemoUITests;
+			sourceTree = "<group>";
+		};
 		FCB0DD871F117CCD00741410 /* Supporting FIles */ = {
 			isa = PBXGroup;
 			children = (
@@ -182,14 +190,6 @@
 				1942311C1EF9658800029B04 /* Assets.xcassets */,
 			);
 			name = "Supporting FIles";
-			sourceTree = "<group>";
-		};
-		A29D718AD0B668C00DE86231 /* TrustKitDemoUITests */ = {
-			isa = PBXGroup;
-			children = (
-				FC4033DAB959A685CC201D0F /* TrustKitDemoUITests.swift */,
-			);
-			path = TrustKitDemoUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -249,8 +249,8 @@
 			dependencies = (
 				B8CE155E07165B74F29DA80F /* PBXTargetDependency */,
 			);
-			name = TrustKitDemo-ObjCUITests;
-			productName = TrustKitDemo-ObjCUITests;
+			name = "TrustKitDemo-ObjCUITests";
+			productName = "TrustKitDemo-ObjCUITests";
 			productReference = 9CEB919C2DEB8B95A35FDF7E /* TrustKitDemo-ObjCUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
@@ -267,8 +267,8 @@
 			dependencies = (
 				C43ACEFB0F0726F93BE1F9C1 /* PBXTargetDependency */,
 			);
-			name = TrustKitDemo-SwiftUITests;
-			productName = TrustKitDemo-SwiftUITests;
+			name = "TrustKitDemo-SwiftUITests";
+			productName = "TrustKitDemo-SwiftUITests";
 			productReference = B3241D9D13469F5FC4FEA8B3 /* TrustKitDemo-SwiftUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
@@ -282,24 +282,22 @@
 				LastUpgradeCheck = 1250;
 				ORGANIZATIONNAME = DataTheorem;
 				TargetAttributes = {
-					DB566220AF0C00A67BA75AD6 = {
-						CreatedOnToolsVersion = 27.0;
-						TestTargetID = 194231121EF9658800029B04;
+					1942309C1EF7C91A00029B04 = {
+						CreatedOnToolsVersion = 8.3.2;
+						ProvisioningStyle = Automatic;
+					};
+					194231121EF9658800029B04 = {
+						CreatedOnToolsVersion = 8.3.2;
+						LastSwiftMigration = 1120;
+						ProvisioningStyle = Automatic;
 					};
 					6D807BAC01D8C628E16ACD7B = {
 						CreatedOnToolsVersion = 27.0;
 						TestTargetID = 1942309C1EF7C91A00029B04;
 					};
-					1942309C1EF7C91A00029B04 = {
-						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = D94Z5227S5;
-						ProvisioningStyle = Automatic;
-					};
-					194231121EF9658800029B04 = {
-						CreatedOnToolsVersion = 8.3.2;
-						DevelopmentTeam = D94Z5227S5;
-						LastSwiftMigration = 1120;
-						ProvisioningStyle = Automatic;
+					DB566220AF0C00A67BA75AD6 = {
+						CreatedOnToolsVersion = 27.0;
+						TestTargetID = 194231121EF9658800029B04;
 					};
 				};
 			};
@@ -328,6 +326,13 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		17769030C76184CABF7C2614 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		1942309B1EF7C91A00029B04 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -344,13 +349,6 @@
 			files = (
 				1942311D1EF9658800029B04 /* Assets.xcassets in Resources */,
 				194231271EF9663F00029B04 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		17769030C76184CABF7C2614 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,9 +549,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = D94Z5227S5;
+				DEVELOPMENT_TEAM = B2EWK89Q2H;
 				INFOPLIST_FILE = "TrustKitDemo-ObjC/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.TrustKitDemo-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -564,9 +565,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = D94Z5227S5;
+				DEVELOPMENT_TEAM = B2EWK89Q2H;
 				INFOPLIST_FILE = "TrustKitDemo-ObjC/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.TrustKitDemo-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -577,9 +581,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = D94Z5227S5;
+				DEVELOPMENT_TEAM = B2EWK89Q2H;
 				INFOPLIST_FILE = "TrustKitDemo-Swift/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.TrustKitDemo-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -594,9 +601,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = D94Z5227S5;
+				DEVELOPMENT_TEAM = B2EWK89Q2H;
 				INFOPLIST_FILE = "TrustKitDemo-Swift/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.TrustKitDemo-Swift";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -609,7 +619,7 @@
 		4E3A78E2910D343B70845448 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DEVELOPMENT_TEAM = D94Z5227S5;
+				DEVELOPMENT_TEAM = B2EWK89Q2H;
 				GENERATE_INFOPLIST_FILE = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.TrustKitDemo-ObjCUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -623,7 +633,7 @@
 		5374B5D0C60CB0A6EFFA7B1D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DEVELOPMENT_TEAM = D94Z5227S5;
+				DEVELOPMENT_TEAM = B2EWK89Q2H;
 				GENERATE_INFOPLIST_FILE = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.TrustKitDemo-ObjCUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -633,10 +643,23 @@
 			};
 			name = Release;
 		};
+		568D08D29CD652F2A9FAE183 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = B2EWK89Q2H;
+				GENERATE_INFOPLIST_FILE = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.TrustKitDemo-SwiftUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "TrustKitDemo-Swift";
+			};
+			name = Release;
+		};
 		D7B57975E3D4EE8CC4941400 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DEVELOPMENT_TEAM = D94Z5227S5;
+				DEVELOPMENT_TEAM = B2EWK89Q2H;
 				GENERATE_INFOPLIST_FILE = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.TrustKitDemo-SwiftUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -646,19 +669,6 @@
 				TEST_TARGET_NAME = "TrustKitDemo-Swift";
 			};
 			name = Debug;
-		};
-		568D08D29CD652F2A9FAE183 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				DEVELOPMENT_TEAM = D94Z5227S5;
-				GENERATE_INFOPLIST_FILE = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.datatheorem.TrustKitDemo-SwiftUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = "TrustKitDemo-Swift";
-			};
-			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -690,20 +700,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		DA9C5B1D98E192AFA5BDE566 /* Build configuration list for PBXNativeTarget "TrustKitDemo-ObjCUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				4E3A78E2910D343B70845448 /* Debug */,
-				5374B5D0C60CB0A6EFFA7B1D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		528D354756A83D183B56DDAA /* Build configuration list for PBXNativeTarget "TrustKitDemo-SwiftUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D7B57975E3D4EE8CC4941400 /* Debug */,
 				568D08D29CD652F2A9FAE183 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DA9C5B1D98E192AFA5BDE566 /* Build configuration list for PBXNativeTarget "TrustKitDemo-ObjCUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4E3A78E2910D343B70845448 /* Debug */,
+				5374B5D0C60CB0A6EFFA7B1D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
