@@ -10,9 +10,7 @@
  */
 
 #import "AppDelegate.h"
-#import <TrustKit/TrustKit.h>
-#import <TrustKit/TSKPinningValidator.h>
-#import <TrustKit/TSKPinningValidatorCallback.h>
+@import TrustKit;
 
 @interface AppDelegate ()
 
