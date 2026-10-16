@@ -34,3 +34,15 @@ configure_platform() {
             ;;
     esac
 }
+
+require_simulator_runtime() {
+    local runtime="${PLATFORM_NAME% Simulator}"
+    local runtimes
+    SIMULATOR_OS="$(xcrun --sdk "$SIMULATOR_SDK" --show-sdk-version)"
+    runtimes="$(xcrun simctl list runtimes available)"
+    if ! grep -q "^${runtime} ${SIMULATOR_OS} (" <<< "$runtimes"; then
+        echo "${runtime} ${SIMULATOR_OS} simulator runtime is not available; downloading it" >&2
+        xcrun simctl runtime list >&2
+        xcodebuild -downloadPlatform "$runtime" -buildVersion "$SIMULATOR_OS" -architectureVariant arm64
+    fi
+}
