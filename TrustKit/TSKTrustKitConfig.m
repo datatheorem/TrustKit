@@ -9,7 +9,7 @@
  
  */
 
-#import "TSKTrustKitConfig.h"
+#import "public/TrustKit/TSKTrustKitConfig.h"
 
 NSString * const TrustKitVersion = @"3.0.8";
 

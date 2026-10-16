@@ -9,7 +9,7 @@
  
  */
 
-#import "TSKPinningValidatorResult.h"
+#import "public/TrustKit/TSKPinningValidatorResult.h"
 #import "Reporting/reporting_utils.h"
 
 @implementation TSKPinningValidatorResult

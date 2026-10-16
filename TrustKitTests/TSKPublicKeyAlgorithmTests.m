@@ -10,7 +10,7 @@
  */
 
 #import <XCTest/XCTest.h>
-#import "../TrustKit/public/TSKTrustKitConfig.h"
+#import "../TrustKit/public/TrustKit/TSKTrustKitConfig.h"
 #import "../TrustKit/parse_configuration.h"
 
 #import "../TrustKit/Pinning/ssl_pin_verifier.h"
@@ -134,7 +134,7 @@
 }
 
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH
 - (void)testSPKICacheThreadSafetyAndProtectedData
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Cache operations completed"];

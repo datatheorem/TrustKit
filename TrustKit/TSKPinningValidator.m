@@ -9,14 +9,14 @@
  
  */
 
-#import "TSKPinningValidator.h"
-#import "TSKTrustKitConfig.h"
-#import "TSKTrustDecision.h"
-#import "TSKPinningValidatorResult.h"
+#import "public/TrustKit/TSKPinningValidator.h"
+#import "public/TrustKit/TSKTrustKitConfig.h"
+#import "public/TrustKit/TSKTrustDecision.h"
+#import "public/TrustKit/TSKPinningValidatorResult.h"
 #import "Pinning/TSKSPKIHashCache.h"
 #import "Pinning/ssl_pin_verifier.h"
 #import "configuration_utils.h"
-#import "TrustKit.h"
+#import "public/TrustKit/TrustKit.h"
 #import "TSKLog.h"
 #import "TSKPinningValidator_Private.h"
 

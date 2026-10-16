@@ -354,7 +354,7 @@ static BOOL _isProtectedDataAvailable(void) {
     
     if (status != errSecSuccess)
     {
-        TSKLog(@"Could not create trust from certificate, got status %d", status);
+        TSKLog(@"Could not create trust from certificate, got status %d", (int)status);
         return nil;
     }
     

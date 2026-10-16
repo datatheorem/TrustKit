@@ -37,6 +37,16 @@
          </BuildableReference>
       </MacroExpansion>
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "DB566220AF0C00A67BA75AD6"
+               BuildableName = "TrustKitDemo-SwiftUITests.xctest"
+               BlueprintName = "TrustKitDemo-SwiftUITests"
+               ReferencedContainer = "container:TrustKitDemo.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

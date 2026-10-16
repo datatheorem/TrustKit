@@ -7,10 +7,10 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "../TrustKit/public/TrustKit.h"
-#import "../TrustKit/public/TSKPinningValidator.h"
+#import "../TrustKit/public/TrustKit/TrustKit.h"
+#import "../TrustKit/public/TrustKit/TSKPinningValidator.h"
 #import "../TrustKit/configuration_utils.h"
-#import "../TrustKit/public/TSKPinningValidatorResult.h"
+#import "../TrustKit/public/TrustKit/TSKPinningValidatorResult.h"
 
 
 #pragma mark Test NSURLSession delegate

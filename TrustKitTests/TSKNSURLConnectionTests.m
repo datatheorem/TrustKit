@@ -7,9 +7,9 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "../TrustKit/public/TrustKit.h"
-#import "../TrustKit/public/TSKPinningValidator.h"
-#import "../TrustKit/public/TSKPinningValidatorResult.h"
+#import "../TrustKit/public/TrustKit/TrustKit.h"
+#import "../TrustKit/public/TrustKit/TSKPinningValidator.h"
+#import "../TrustKit/public/TrustKit/TSKPinningValidatorResult.h"
 #import "../TrustKit/Swizzling/TSKNSURLConnectionDelegateProxy.h"
 #import <OCMock/OCMock.h>
 

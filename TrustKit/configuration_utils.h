@@ -9,7 +9,7 @@
  
  */
 
-#import "TSKPinningValidatorCallback.h"
+#import "public/TrustKit/TSKPinningValidatorCallback.h"
 
 #if __has_feature(modules)
 @import Foundation;

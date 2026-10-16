@@ -11,14 +11,16 @@
 
 #import "ViewController.h"
 #import <TrustKit/TrustKit.h>
-#import <TrustKit/TSKPinningValidator.h>
 
-static NSString *const baseURLYahoo = @"https://www.yahoo.com/";
+static NSString *const baseURLGoogle = @"https://www.google.com/";
 static NSString *const baseURLDT = @"https://www.datatheorem.com/";
+static NSString *const baseURLYahoo = @"https://www.yahoo.com/";
 
 @interface ViewController ()
 
 @property (nonatomic) NSURLSession *session;
+
+- (void)displayAlertWithTitle:(NSString *)title messageFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(2, 3);
 
 @end
 
@@ -30,10 +32,11 @@ static NSString *const baseURLDT = @"https://www.datatheorem.com/";
     
     self.invalidPinBtn.layer.cornerRadius = 4;
     self.validPinBtn.layer.cornerRadius = 4;
+    self.notPinnedBtn.layer.cornerRadius = 4;
     
     self.session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]
                                                  delegate:self
-                                            delegateQueue:NSOperationQueue.mainQueue];
+                                            delegateQueue:nil];
 }
 
 #pragma mark TrustKit Pinning Reference
@@ -58,27 +61,34 @@ static NSString *const baseURLDT = @"https://www.datatheorem.com/";
     
     // Load a URL with a good pinning configuration
     NSURLSessionDataTask *task = [self.session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        
-        if (error) {
-            // Display Error Alert
-            [self displayAlertWithTitle:@"Test Result" messageFormat:@"Pinning validation failed for %@\n\n%@", url.absoluteString, error.description];
-        }
-        else {
-            // Display Success Alert
-            [self displayAlertWithTitle:@"Test Result" messageFormat:@"Pinning validation succeeded for %@", url.absoluteString];
-        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (!error) {
+                [self displayAlertWithTitle:@"Connected" messageFormat:@"Connected to %@", url.absoluteString];
+            }
+            else if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorCancelled) {
+                [self displayAlertWithTitle:@"Blocked" messageFormat:@"TrustKit blocked the connection to %@", url.absoluteString];
+            }
+            else {
+                [self displayAlertWithTitle:@"Failed" messageFormat:@"Connection to %@ failed\n\n%@", url.absoluteString, error.description];
+            }
+        });
     }];
     [task resume];
 }
 
 - (IBAction)testInvalidPinning:(UIButton *)sender
 {
-    [self loadUrl:[NSURL URLWithString:baseURLYahoo]];
+    [self loadUrl:[NSURL URLWithString:baseURLGoogle]];
 }
 
 - (IBAction)testValidPinning:(UIButton *)sender
 {
     [self loadUrl:[NSURL URLWithString:baseURLDT]];
+}
+
+- (IBAction)testNotPinned:(UIButton *)sender
+{
+    [self loadUrl:[NSURL URLWithString:baseURLYahoo]];
 }
 
 - (void)displayAlertWithTitle:(NSString *)title messageFormat:(NSString *)format, ...

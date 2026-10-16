@@ -10,11 +10,11 @@
  */
 
 #import <XCTest/XCTest.h>
-#import "../TrustKit/public/TrustKit.h"
-#import "../TrustKit/public/TSKPinningValidator.h"
-#import "../TrustKit/public/TSKTrustKitConfig.h"
+#import "../TrustKit/public/TrustKit/TrustKit.h"
+#import "../TrustKit/public/TrustKit/TSKPinningValidator.h"
+#import "../TrustKit/public/TrustKit/TSKTrustKitConfig.h"
 #import "../TrustKit/parse_configuration.h"
-#import "../TrustKit/public/TSKPinningValidatorResult.h"
+#import "../TrustKit/public/TrustKit/TSKPinningValidatorResult.h"
 #import "../TrustKit/TSKPinningValidator_Private.h"
 #import "../TrustKit/Pinning/TSKSPKIHashCache.h"
 
@@ -104,7 +104,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
 // Pin to any of CA, Intermediate CA and Leaf certificates public keys (all valid) and ensure it succeeds
 - (void)testVerifyAgainstAnyPublicKey
 {
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH
     id mockApplication = OCMClassMock([UIApplication class]);
     OCMStub([mockApplication sharedApplication]).andReturn(mockApplication);
     
@@ -176,7 +176,7 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
     
     CFRelease(trust);
     
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH
     OCMVerify([mockApplication isProtectedDataAvailable]);
     [mockApplication stopMocking];
 #endif
