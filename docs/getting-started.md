@@ -50,15 +50,16 @@ certificate:
 
 ### Adding TrustKit as a Dependency
 
-#### CocoaPods
+#### Swift Package Manager
 
-Add the following line to your Podfile:
+Follow the instructions from the 
+[Apple documentation](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app)
+using TrustKit's Git URL:
 
-    pod 'TrustKit'
+    https://github.com/datatheorem/TrustKit.git
 
-Then run:
-
-    $ pod install
+Then import TrustKit with `import TrustKit` in Swift, or with
+`#import <TrustKit/TrustKit.h>` or `@import TrustKit;` in Objective-C.
 
 #### Carthage
 
@@ -69,13 +70,10 @@ Add the following line to your Cartfile:
 Then, follow the instructions from the 
 [Carthage README](https://github.com/Carthage/Carthage#adding-frameworks-to-an-application).
 
-#### Swift Package Manager
+#### CocoaPods
 
-Follow the instructions from the 
-[Apple documentation](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app)
-using TrustKit's Git URL:
-
-    git@github.com:datatheorem/TrustKit.git
+TrustKit 4.0 and later are not published to CocoaPods. Use the Swift Package
+Manager instead; TrustKit 3.x remains available on CocoaPods.
 
 ### Configuring a Pinning Policy
 

@@ -10,7 +10,7 @@
  */
 
 #import "ViewController.h"
-@import TrustKit;
+#import <TrustKit/TrustKit.h>
 
 static NSString *const baseURLYahoo = @"https://www.yahoo.com/";
 static NSString *const baseURLDT = @"https://www.datatheorem.com/";

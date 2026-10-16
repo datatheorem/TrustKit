@@ -1,7 +1,7 @@
 TrustKit
 ========
 
-[![Build Status](https://github.com/datatheorem/TrustKit/actions/workflows/ci.yml/badge.svg)](https://github.com/datatheorem/TrustKit/actions/workflows/ci.yml) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Version Status](https://img.shields.io/cocoapods/v/TrustKit.svg?style=flat)](https://cocoapods.org/pods/TrustKit) [![Platform](https://img.shields.io/cocoapods/p/TrustKit.svg?style=flat)](https://cocoapods.org/pods/TrustKit) [![License MIT](https://img.shields.io/cocoapods/l/TrustKit.svg?style=flat)](https://en.wikipedia.org/wiki/MIT_License)
+[![Build Status](https://github.com/datatheorem/TrustKit/actions/workflows/ci.yml/badge.svg)](https://github.com/datatheorem/TrustKit/actions/workflows/ci.yml) [![SwiftPM compatible](https://img.shields.io/badge/SwiftPM-compatible-4BC51D.svg?style=flat)](https://www.swift.org/documentation/package-manager/) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Version Status](https://img.shields.io/github/v/release/datatheorem/TrustKit.svg?style=flat)](https://github.com/datatheorem/TrustKit/releases) [![License MIT](https://img.shields.io/github/license/datatheorem/TrustKit.svg?style=flat)](https://en.wikipedia.org/wiki/MIT_License)
 [![Gitter chat](https://badges.gitter.im/datatheorem/gitter.png)](https://gitter.im/TrustKit/Lobby)
 
 **TrustKit** is an open source framework that makes it easy to deploy SSL public key pinning and reporting in any iOS 12+, macOS 10.13+, tvOS 12+ or watchOS 4+ App; it supports both Swift and Objective-C Apps.

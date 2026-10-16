@@ -10,7 +10,7 @@
  */
 
 #import "configuration_utils.h"
-#import "TSKTrustKitConfig.h"
+#import "public/TrustKit/TSKTrustKitConfig.h"
 #import "Dependencies/domain_registry/domain_registry.h"
 #import "TSKLog.h"
 

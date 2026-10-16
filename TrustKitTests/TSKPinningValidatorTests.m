@@ -10,11 +10,11 @@
  */
 
 #import <XCTest/XCTest.h>
-#import "../TrustKit/public/TrustKit.h"
-#import "../TrustKit/public/TSKPinningValidator.h"
-#import "../TrustKit/public/TSKTrustKitConfig.h"
+#import "../TrustKit/public/TrustKit/TrustKit.h"
+#import "../TrustKit/public/TrustKit/TSKPinningValidator.h"
+#import "../TrustKit/public/TrustKit/TSKTrustKitConfig.h"
 #import "../TrustKit/parse_configuration.h"
-#import "../TrustKit/public/TSKPinningValidatorResult.h"
+#import "../TrustKit/public/TrustKit/TSKPinningValidatorResult.h"
 #import "../TrustKit/TSKPinningValidator_Private.h"
 #import "../TrustKit/Pinning/TSKSPKIHashCache.h"
 

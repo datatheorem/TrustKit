@@ -379,7 +379,6 @@
 		FC1A09081E57AC450055B12C /* TSKSPKIHashCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSKSPKIHashCache.h; path = Pinning/TSKSPKIHashCache.h; sourceTree = "<group>"; };
 		FC1A09091E57AC450055B12C /* TSKSPKIHashCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSKSPKIHashCache.m; path = Pinning/TSKSPKIHashCache.m; sourceTree = "<group>"; };
 		FC1A09121E57C6820055B12C /* TSKPublicKeyAlgorithm.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TSKPublicKeyAlgorithm.h; path = Pinning/TSKPublicKeyAlgorithm.h; sourceTree = "<group>"; };
-		FC23F68C1EE73BE600397646 /* TrustKit.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TrustKit.podspec; sourceTree = SOURCE_ROOT; };
 		FC23F68E1EE73BE600397646 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		FC23F68F1EE73BE600397646 /* ATTRIBUTIONS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ATTRIBUTIONS; sourceTree = SOURCE_ROOT; };
 		FC23F6901EE73BE600397646 /* AUTHORS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AUTHORS; sourceTree = SOURCE_ROOT; };
@@ -467,7 +466,7 @@
 			name = Certificates;
 			sourceTree = "<group>";
 		};
-		7033D357248FE84100BDFF50 /* public */ = {
+		649A18053082000000C9DDE0 /* TrustKit */ = {
 			isa = PBXGroup;
 			children = (
 				7033D358248FE84100BDFF50 /* TSKTrustKitConfig.h */,
@@ -476,6 +475,14 @@
 				7033D35B248FE84100BDFF50 /* TrustKit.h */,
 				7033D35C248FE84100BDFF50 /* TSKPinningValidator.h */,
 				7033D35D248FE84100BDFF50 /* TSKPinningValidatorCallback.h */,
+			);
+			path = TrustKit;
+			sourceTree = "<group>";
+		};
+		7033D357248FE84100BDFF50 /* public */ = {
+			isa = PBXGroup;
+			children = (
+				649A18053082000000C9DDE0 /* TrustKit */,
 			);
 			path = public;
 			sourceTree = "<group>";
@@ -695,7 +702,6 @@
 		FC23F6721EE72F2A00397646 /* Project Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				FC23F68C1EE73BE600397646 /* TrustKit.podspec */,
 				DC6F28762BAB30A8001B604A /* PrivacyInfo.xcprivacy */,
 				FC23F68E1EE73BE600397646 /* README.md */,
 				FC23F68F1EE73BE600397646 /* ATTRIBUTIONS */,
