@@ -134,7 +134,7 @@
 }
 
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH
 - (void)testSPKICacheThreadSafetyAndProtectedData
 {
     XCTestExpectation *expectation = [self expectationWithDescription:@"Cache operations completed"];

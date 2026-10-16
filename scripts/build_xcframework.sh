@@ -8,7 +8,7 @@ ZIP="output/TrustKit-static.zip"
 rm -rf "$ARCHIVES_DIR" "$XCFRAMEWORK" "$ZIP"
 
 FRAMEWORKS=()
-for PLATFORM in ios ios-simulator macos tvos tvos-simulator watchos watchos-simulator; do
+for PLATFORM in ios ios-simulator macos tvos tvos-simulator watchos watchos-simulator visionos visionos-simulator; do
     configure_platform "$PLATFORM"
     xcodebuild_pretty archive \
         -project TrustKit.xcodeproj \

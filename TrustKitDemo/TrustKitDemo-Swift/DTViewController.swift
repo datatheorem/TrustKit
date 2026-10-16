@@ -15,11 +15,15 @@ import TrustKit
 class DTViewController: UIViewController, URLSessionDelegate {
 
     @IBOutlet weak var testInvalidPinBtn: UIButton? {
-        didSet { testValidPinBtn?.layer.cornerRadius = 4; } // add rounded corners
+        didSet { testInvalidPinBtn?.layer.cornerRadius = 4; } // add rounded corners
     }
     
     @IBOutlet weak var testValidPinBtn: UIButton? {
         didSet { testValidPinBtn?.layer.cornerRadius = 4; }  // add rounded corners
+    }
+    
+    @IBOutlet weak var testNotPinnedBtn: UIButton? {
+        didSet { testNotPinnedBtn?.layer.cornerRadius = 4; }
     }
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -27,16 +31,18 @@ class DTViewController: UIViewController, URLSessionDelegate {
     lazy var session: URLSession = {
         URLSession(configuration: URLSessionConfiguration.ephemeral,
                                          delegate: self,
-                                         delegateQueue: OperationQueue.main)
+                                         delegateQueue: nil)
     }()
     
-    let baseURLYahoo = "https://www.yahoo.com/"
+    let baseURLGoogle = "https://www.google.com/"
     
     let baseURLDT = "https://www.datatheorem.com/"
     
+    let baseURLYahoo = "https://www.yahoo.com/"
+    
     // MARK: TrustKit Pinning Reference
     
-    func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+    nonisolated func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
         
         // Call into TrustKit here to do pinning validation
         if TrustKit.sharedInstance().pinningValidator.handle(challenge, completionHandler: completionHandler) == false {
@@ -54,27 +60,31 @@ class DTViewController: UIViewController, URLSessionDelegate {
         
         // Load a URL with a good pinning configuration
         let task = session.dataTask(with: url) { [weak self] (data, response, error) in
-            guard error == nil else {
-                // Display Error Alert
-                self?.displayAlert(withTitle: "Test Result",
-                                   message: "Pinning validation failed for \(url.absoluteString)\n\n\(error.debugDescription)")
-                return
+            DispatchQueue.main.async {
+                switch error {
+                case nil:
+                    self?.displayAlert(withTitle: "Connected", message: "Connected to \(url.absoluteString)")
+                case let error as URLError where error.code == .cancelled:
+                    self?.displayAlert(withTitle: "Blocked", message: "TrustKit blocked the connection to \(url.absoluteString)")
+                case let error?:
+                    self?.displayAlert(withTitle: "Failed", message: "Connection to \(url.absoluteString) failed\n\n\(error)")
+                }
             }
-            
-            // Display Success Alert
-            self?.displayAlert(withTitle: "Test Result",
-                               message: "Pinning validation succeeded for \(url.absoluteString)")
         }
         
         task.resume()
     }
     
     @IBAction func testInvalidPinning(_ sender: UIButton) {
-        self.loadURL(url: URL(string: baseURLYahoo)!)
+        self.loadURL(url: URL(string: baseURLGoogle)!)
     }
     
     @IBAction func testValidPinning(_ sender: UIButton) {
         self.loadURL(url: URL(string: baseURLDT)!)
+    }
+    
+    @IBAction func testNotPinned(_ sender: UIButton) {
+        self.loadURL(url: URL(string: baseURLYahoo)!)
     }
     
     func displayAlert(withTitle title: String, message: String) {

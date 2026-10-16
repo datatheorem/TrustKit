@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let trustKitConfig: [String: Any] = [
             kTSKSwizzleNetworkDelegates: false,
             kTSKPinnedDomains: [
-                "yahoo.com": [
+                "google.com": [
                     kTSKEnforcePinning: true,
                     kTSKIncludeSubdomains: true,
                     

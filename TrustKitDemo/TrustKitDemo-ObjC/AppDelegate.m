@@ -37,8 +37,8 @@
       
       kTSKPinnedDomains: @{
               
-              // Pin invalid SPKI hashes to *.yahoo.com to demonstrate pinning failures
-              @"yahoo.com": @{
+              // Pin invalid SPKI hashes to *.google.com to demonstrate pinning failures
+              @"google.com": @{
                       kTSKEnforcePinning: @YES,
                       kTSKIncludeSubdomains: @YES,
                       

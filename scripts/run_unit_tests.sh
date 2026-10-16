@@ -2,7 +2,7 @@
 
 . "$(dirname "$0")/lib.sh"
 
-PLATFORM="${1:?usage: $0 <ios-simulator|macos|tvos-simulator> [xcodebuild arguments...]}"
+PLATFORM="${1:?usage: $0 <ios-simulator|macos|tvos-simulator|watchos-simulator|visionos-simulator> [xcodebuild arguments...]}"
 shift
 configure_platform "$PLATFORM"
 

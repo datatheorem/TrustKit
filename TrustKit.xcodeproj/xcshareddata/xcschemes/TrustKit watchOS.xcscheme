@@ -37,6 +37,16 @@
          </BuildableReference>
       </MacroExpansion>
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "130A60F430F4BE91F67DBDEE"
+               BuildableName = "TrustKit watchOS Tests.xctest"
+               BlueprintName = "TrustKit watchOS Tests"
+               ReferencedContainer = "container:TrustKit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

@@ -54,6 +54,8 @@ static NSString * const kTSKBackgroundSessionIdentifierFormat = @"%@.TSKBackgrou
         _appPlatform = @"TVOS";
 #elif TARGET_OS_WATCH
         _appPlatform = @"WATCHOS";
+#elif TARGET_OS_VISION
+        _appPlatform = @"VISIONOS";
 #else
         _appPlatform = @"IOS";
 #endif
