@@ -28,9 +28,8 @@ final class TrustKitDemoUITests: XCTestCase {
         app.buttons[button].tap()
 
         let alert = app.alerts.firstMatch
-        XCTAssertTrue(alert.waitForExistence(timeout: 30), "No result after tapping \(button)")
-        let details = alert.staticTexts.allElementsBoundByIndex.map(\.label).joined(separator: "\n")
-        XCTAssertEqual(alert.label, outcome, details)
+        XCTAssertTrue(alert.waitForExistence(timeout: 30), "No result after tapping \(button)\n\(app.debugDescription)")
+        XCTAssertEqual(alert.label, outcome, alert.debugDescription)
         alert.buttons["OK"].tap()
     }
 }

@@ -15,4 +15,5 @@ xcodebuild_pretty test \
     -scheme "$DEMO_SCHEME" \
     -destination "platform=${PLATFORM_NAME},name=${SIMULATOR},OS=${SIMULATOR_OS}" \
     -resultBundlePath "$RESULT_BUNDLE" \
+    -collect-test-diagnostics never \
     "$@"
