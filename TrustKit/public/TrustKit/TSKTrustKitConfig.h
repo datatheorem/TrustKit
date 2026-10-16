@@ -85,7 +85,7 @@ FOUNDATION_EXPORT const TSKGlobalConfigurationKey kTSKPinnedDomains;
  "How does key pinning interact with local proxies and filters?" within the Chromium security
  FAQ at https://www.chromium.org/Home/chromium-security/security-faq for more information.
  
- Only available on macOS.
+ Only available on macOS; not available to Mac Catalyst apps.
  */
 FOUNDATION_EXPORT const TSKGlobalConfigurationKey kTSKIgnorePinningForUserDefinedTrustAnchors NS_AVAILABLE_MAC(10_9);
 

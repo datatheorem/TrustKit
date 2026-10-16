@@ -56,8 +56,10 @@ static NSString * const kTSKBackgroundSessionIdentifierFormat = @"%@.TSKBackgrou
         _appPlatform = @"WATCHOS";
 #elif TARGET_OS_VISION
         _appPlatform = @"VISIONOS";
+#elif TARGET_OS_MACCATALYST
+        _appPlatform = @"MAC_CATALYST";
 #else
-        _appPlatform = @"IOS";
+        _appPlatform = NSProcessInfo.processInfo.isiOSAppOnMac ? @"IOS_ON_MAC" : @"IOS";
 #endif
 #else
         _appPlatform = @"MACOS";

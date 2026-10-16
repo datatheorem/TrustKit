@@ -4,7 +4,7 @@ TrustKit
 [![Build Status](https://github.com/datatheorem/TrustKit/actions/workflows/ci.yml/badge.svg)](https://github.com/datatheorem/TrustKit/actions/workflows/ci.yml) [![SwiftPM compatible](https://img.shields.io/badge/SwiftPM-compatible-4BC51D.svg?style=flat)](https://www.swift.org/documentation/package-manager/) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Version Status](https://img.shields.io/github/v/release/datatheorem/TrustKit.svg?style=flat)](https://github.com/datatheorem/TrustKit/releases) [![License MIT](https://img.shields.io/github/license/datatheorem/TrustKit.svg?style=flat)](https://en.wikipedia.org/wiki/MIT_License)
 [![Gitter chat](https://badges.gitter.im/datatheorem/gitter.png)](https://gitter.im/TrustKit/Lobby)
 
-**TrustKit** is an open source framework that makes it easy to deploy SSL public key pinning and reporting in any iOS 15+, macOS 12+, tvOS 15+, watchOS 9+ or visionOS 1+ App; it supports both Swift and Objective-C Apps.
+**TrustKit** is an open source framework that makes it easy to deploy SSL public key pinning and reporting in any iOS 15+, macOS 12+, Mac Catalyst 15+, tvOS 15+, watchOS 9+ or visionOS 1+ App; it supports both Swift and Objective-C Apps.
 
 If you need SSL pinning/reporting in your Android App. we have also released **TrustKit for Android** at [https://github.com/datatheorem/TrustKit-Android](https://github.com/datatheorem/TrustKit-Android).
 

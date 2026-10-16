@@ -14,7 +14,7 @@ import PackageDescription
 
 let package = Package(
     name: "TrustKitConsumer",
-    platforms: [.iOS(.v15), .macOS(.v12), .tvOS(.v15), .watchOS(.v9), .visionOS(.v1)],
+    platforms: [.iOS(.v15), .macOS(.v12), .macCatalyst(.v15), .tvOS(.v15), .watchOS(.v9), .visionOS(.v1)],
     products: [.library(name: "TrustKitConsumer", targets: ["TrustKitConsumer", "TrustKitObjCConsumer"])],
     dependencies: [.package(name: "TrustKit", path: "${PWD}")],
     targets: [
@@ -39,7 +39,7 @@ TSKPinningValidator *TSKMakePinningValidator(NSDictionary<TSKGlobalConfiguration
 EOF
 
 cd "$CONSUMER_DIR"
-for PLATFORM in iOS macOS tvOS watchOS visionOS; do
+for PLATFORM in iOS macOS "macOS,variant=Mac Catalyst" tvOS watchOS visionOS; do
     xcodebuild_pretty build \
         -scheme TrustKitConsumer \
         -destination "generic/platform=${PLATFORM}" \
