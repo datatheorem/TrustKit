@@ -11,8 +11,7 @@ rm -rf "$RESULT_BUNDLE"
 
 DESTINATION="platform=${PLATFORM_NAME}${DESTINATION_SUFFIX}"
 if [[ -n "$SIMULATOR" ]]; then
-    require_simulator_runtime
-    DESTINATION+=",name=${SIMULATOR},OS=${SIMULATOR_OS}"
+    DESTINATION+=",name=${SIMULATOR},OS=$(xcrun --sdk "$SIMULATOR_SDK" --show-sdk-version)"
 fi
 
 xcodebuild_pretty test \

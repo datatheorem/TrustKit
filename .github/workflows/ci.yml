@@ -26,6 +26,8 @@ jobs:
         platform: [ios-simulator, macos, maccatalyst, tvos-simulator, watchos-simulator, visionos-simulator]
     steps:
       - uses: actions/checkout@v7
+      - if: matrix.platform == 'watchos-simulator'
+        run: ./scripts/install_simulator_runtime.sh ${{ matrix.platform }}
       - run: ./scripts/run_unit_tests.sh ${{ matrix.platform }} -retry-tests-on-failure -test-iterations 3
       - uses: actions/upload-artifact@v7
         if: failure()
