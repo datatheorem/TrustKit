@@ -14,32 +14,18 @@
 #include "TargetConditionals.h"
 
 void evaluateCertificateChainTrust(SecTrustRef serverTrust, SecTrustResultType *trustResult, NSError **error) {
-    if (@available(iOS 12.0, macOS 14.0, tvOS 12.0, watchOS 5.0, *)) {
-        CFErrorRef errorRef;
-        bool certificateEvaluationSucceeded = SecTrustEvaluateWithError(serverTrust, &errorRef);
-        OSStatus status = SecTrustGetTrustResult(serverTrust, trustResult);
-        if (error != NULL) {
-            if (status != errSecSuccess)
-            {
-                NSString *errDescription = [NSString stringWithFormat:@"got status %d", (int)status];
-                *error = [[NSError alloc] initWithDomain:@"com.datatheorem.trustkit" code:1 userInfo:@{NSLocalizedDescriptionKey:errDescription}];
-            }
-            else if (!certificateEvaluationSucceeded)
-            {
-                *error = (__bridge_transfer NSError *)errorRef;
-            }
-        }
-    }
-    else
-    {
-        // Use pragmas to supress deprecated warnings
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-        OSStatus status = SecTrustEvaluate(serverTrust, trustResult);
-#pragma clang diagnostic pop
-        if (status != errSecSuccess && (error != NULL)) {
+    CFErrorRef errorRef;
+    bool certificateEvaluationSucceeded = SecTrustEvaluateWithError(serverTrust, &errorRef);
+    OSStatus status = SecTrustGetTrustResult(serverTrust, trustResult);
+    if (error != NULL) {
+        if (status != errSecSuccess)
+        {
             NSString *errDescription = [NSString stringWithFormat:@"got status %d", (int)status];
-            *error = [[NSError alloc] initWithDomain:@"com.datatheorem.trustkit" code:2 userInfo:@{NSLocalizedDescriptionKey:errDescription}];
+            *error = [[NSError alloc] initWithDomain:@"com.datatheorem.trustkit" code:1 userInfo:@{NSLocalizedDescriptionKey:errDescription}];
+        }
+        else if (!certificateEvaluationSucceeded)
+        {
+            *error = (__bridge_transfer NSError *)errorRef;
         }
     }
 }
@@ -72,12 +58,5 @@ SecCertificateRef getCertificateAtIndex(SecTrustRef serverTrust, CFIndex index) 
 }
 
 SecKeyRef copyKey(SecTrustRef serverTrust) {
-    if (@available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *)) {
-        return SecTrustCopyKey(serverTrust);
-    } else {
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-        return SecTrustCopyPublicKey(serverTrust);
-#pragma clang diagnostic pop
-    }
+    return SecTrustCopyKey(serverTrust);
 }

@@ -19,6 +19,8 @@
 		194231271EF9663F00029B04 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 194231261EF9663F00029B04 /* Main.storyboard */; };
 		649A18023082000000C9DDE0 /* TrustKit in Frameworks */ = {isa = PBXBuildFile; productRef = 649A18013082000000C9DDE0 /* TrustKit */; };
 		649A18043082000000C9DDE0 /* TrustKit in Frameworks */ = {isa = PBXBuildFile; productRef = 649A18033082000000C9DDE0 /* TrustKit */; };
+		649A18083082000000C9DDE0 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 649A18073082000000C9DDE0 /* SceneDelegate.m */; };
+		649A180A3082000000C9DDE0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649A18093082000000C9DDE0 /* SceneDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,6 +37,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		649A18063082000000C9DDE0 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		649A18073082000000C9DDE0 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		649A18093082000000C9DDE0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		1942309D1EF7C91A00029B04 /* TrustKitDemo-ObjC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TrustKitDemo-ObjC.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		194230A11EF7C91A00029B04 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		194230A31EF7C91A00029B04 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -97,6 +102,8 @@
 			children = (
 				194230A31EF7C91A00029B04 /* AppDelegate.h */,
 				194230A41EF7C91A00029B04 /* AppDelegate.m */,
+				649A18063082000000C9DDE0 /* SceneDelegate.h */,
+				649A18073082000000C9DDE0 /* SceneDelegate.m */,
 				194230A61EF7C91A00029B04 /* ViewController.h */,
 				194230A71EF7C91A00029B04 /* ViewController.m */,
 				194230A01EF7C91A00029B04 /* Supporting Files */,
@@ -120,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				194231151EF9658800029B04 /* AppDelegate.swift */,
+				649A18093082000000C9DDE0 /* SceneDelegate.swift */,
 				194231171EF9658800029B04 /* DTViewController.swift */,
 				FCB0DD871F117CCD00741410 /* Supporting FIles */,
 			);
@@ -255,6 +263,7 @@
 			files = (
 				194230A81EF7C91A00029B04 /* ViewController.m in Sources */,
 				194230A51EF7C91A00029B04 /* AppDelegate.m in Sources */,
+				649A18083082000000C9DDE0 /* SceneDelegate.m in Sources */,
 				194230A21EF7C91A00029B04 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,6 +274,7 @@
 			files = (
 				194231181EF9658800029B04 /* DTViewController.swift in Sources */,
 				194231161EF9658800029B04 /* AppDelegate.swift in Sources */,
+				649A180A3082000000C9DDE0 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

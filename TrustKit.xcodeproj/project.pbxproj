@@ -382,7 +382,6 @@
 		FC23F68E1EE73BE600397646 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		FC23F68F1EE73BE600397646 /* ATTRIBUTIONS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = ATTRIBUTIONS; sourceTree = SOURCE_ROOT; };
 		FC23F6901EE73BE600397646 /* AUTHORS */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AUTHORS; sourceTree = SOURCE_ROOT; };
-		FC23F6911EE73BE600397646 /* circle.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = circle.yml; sourceTree = SOURCE_ROOT; };
 		FC23F6921EE73BE600397646 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = SOURCE_ROOT; };
 		FC4CAC7A1E958E0500DAC41E /* TSKReportsRateLimiterTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKReportsRateLimiterTests.m; sourceTree = "<group>"; };
 		FC4CAC7F1E96A2D600DAC41E /* TSKLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TSKLog.h; sourceTree = "<group>"; };
@@ -706,7 +705,6 @@
 				FC23F68E1EE73BE600397646 /* README.md */,
 				FC23F68F1EE73BE600397646 /* ATTRIBUTIONS */,
 				FC23F6901EE73BE600397646 /* AUTHORS */,
-				FC23F6911EE73BE600397646 /* circle.yml */,
 				FC23F6921EE73BE600397646 /* LICENSE */,
 			);
 			name = "Project Metadata";
@@ -1442,7 +1440,7 @@
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TVOS_DEPLOYMENT_TARGET = 17.0;
+				TVOS_DEPLOYMENT_TARGET = 15.0;
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1524,7 +1522,7 @@
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
 				SWIFT_COMPILATION_MODE = wholemodule;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TVOS_DEPLOYMENT_TARGET = 17.0;
+				TVOS_DEPLOYMENT_TARGET = 15.0;
 				VALIDATE_PRODUCT = YES;
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
 				VERSIONING_SYSTEM = "apple-generic";
