@@ -37,14 +37,33 @@ configure_platform() {
     esac
 }
 
+simulator_available() {
+    xcrun simctl list devices available | awk -v section="-- $1 --" -v device="    $2 (" '
+        $0 == section { in_section = 1; next }
+        /^-- / { in_section = 0 }
+        in_section && index($0, device) == 1 { found = 1 }
+        END { exit !found }'
+}
+
 require_simulator_runtime() {
     local runtime="${PLATFORM_NAME% Simulator}"
-    local runtimes
+    local image_dir
     SIMULATOR_OS="$(xcrun --sdk "$SIMULATOR_SDK" --show-sdk-version)"
-    runtimes="$(xcrun simctl list runtimes available)"
-    if ! grep -q "^${runtime} ${SIMULATOR_OS} (" <<< "$runtimes"; then
-        echo "${runtime} ${SIMULATOR_OS} simulator runtime is not available; downloading it" >&2
+    if simulator_available "${runtime} ${SIMULATOR_OS}" "$SIMULATOR"; then
+        return
+    fi
+
+    echo "${SIMULATOR} (${runtime} ${SIMULATOR_OS}) is not available; adding the ${runtime} ${SIMULATOR_OS} simulator runtime" >&2
+    xcrun simctl runtime list >&2
+    image_dir="$(mktemp -d)"
+    xcodebuild -downloadPlatform "$runtime" -buildVersion "$SIMULATOR_OS" -architectureVariant arm64 -exportPath "$image_dir"
+    find "$image_dir" -name '*.dmg' -exec xcrun simctl runtime add {} \;
+    rm -rf "$image_dir"
+
+    if ! simulator_available "${runtime} ${SIMULATOR_OS}" "$SIMULATOR"; then
         xcrun simctl runtime list >&2
-        xcodebuild -downloadPlatform "$runtime" -buildVersion "$SIMULATOR_OS" -architectureVariant arm64
+        xcrun simctl list devices >&2
+        echo "${SIMULATOR} (${runtime} ${SIMULATOR_OS}) is still not available" >&2
+        exit 1
     fi
 }
