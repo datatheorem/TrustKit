@@ -5,6 +5,7 @@
 @interface WebViewController () <WKNavigationDelegate>
 
 @property (nonatomic) NSURL *url;
+@property (nonatomic) NSString *blockedHost;
 
 @end
 
@@ -32,8 +33,12 @@
 didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
 completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler
 {
+    NSString *host = challenge.protectionSpace.host;
     void (^completeOnMainQueue)(NSURLSessionAuthChallengeDisposition, NSURLCredential *) = ^(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential) {
         dispatch_async(dispatch_get_main_queue(), ^{
+            if (disposition == NSURLSessionAuthChallengeCancelAuthenticationChallenge) {
+                self.blockedHost = host;
+            }
             completionHandler(disposition, credential);
         });
     };
@@ -48,15 +53,19 @@ completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NS
 
 - (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error
 {
+    NSURL *failingURL = error.userInfo[NSURLErrorFailingURLErrorKey] ?: webView.URL;
     UIAlertController *alertController;
-    if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorCancelled) {
+    if (self.blockedHost && [failingURL.host isEqualToString:self.blockedHost]) {
         alertController = [UIAlertController alertControllerWithTitle:@"Blocked"
-                                                              message:[NSString stringWithFormat:@"TrustKit blocked the connection to %@", self.url.absoluteString]
+                                                              message:[NSString stringWithFormat:@"TrustKit blocked the connection to %@", failingURL.absoluteString]
                                                        preferredStyle:UIAlertControllerStyleAlert];
+    }
+    else if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorCancelled) {
+        return;
     }
     else {
         alertController = [UIAlertController alertControllerWithTitle:@"Failed"
-                                                              message:[NSString stringWithFormat:@"Loading %@ failed\n\n%@", self.url.absoluteString, error.description]
+                                                              message:[NSString stringWithFormat:@"Loading %@ failed\n\n%@", failingURL.absoluteString, error.description]
                                                        preferredStyle:UIAlertControllerStyleAlert];
     }
     [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];

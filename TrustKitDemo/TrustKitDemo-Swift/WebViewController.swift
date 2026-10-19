@@ -5,6 +5,7 @@ import TrustKit
 class WebViewController: UIViewController, WKNavigationDelegate {
 
     let url: URL
+    private var blockedHost: String?
 
     init(url: URL) {
         self.url = url
@@ -25,9 +26,15 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     func webView(_ webView: WKWebView,
                  didReceive challenge: URLAuthenticationChallenge,
                  completionHandler: @escaping @MainActor @Sendable (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+        let host = challenge.protectionSpace.host
         DispatchQueue.global(qos: .userInitiated).async {
             let completeOnMainQueue = { (disposition: URLSession.AuthChallengeDisposition, credential: URLCredential?) in
-                DispatchQueue.main.async { completionHandler(disposition, credential) }
+                DispatchQueue.main.async {
+                    if disposition == .cancelAuthenticationChallenge {
+                        self.blockedHost = host
+                    }
+                    completionHandler(disposition, credential)
+                }
             }
             if !TrustKit.sharedInstance().pinningValidator.handle(challenge, completionHandler: completeOnMainQueue) {
                 completeOnMainQueue(.performDefaultHandling, nil)
@@ -36,11 +43,15 @@ class WebViewController: UIViewController, WKNavigationDelegate {
     }
 
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        let failingURL = (error as NSError).userInfo[NSURLErrorFailingURLErrorKey] as? URL ?? webView.url
+        let failingAddress = failingURL?.absoluteString ?? url.absoluteString
         let alertController: UIAlertController
-        if let error = error as? URLError, error.code == .cancelled {
-            alertController = UIAlertController(title: "Blocked", message: "TrustKit blocked the connection to \(url.absoluteString)", preferredStyle: .alert)
+        if let blockedHost, failingURL?.host == blockedHost {
+            alertController = UIAlertController(title: "Blocked", message: "TrustKit blocked the connection to \(failingAddress)", preferredStyle: .alert)
+        } else if let error = error as? URLError, error.code == .cancelled {
+            return
         } else {
-            alertController = UIAlertController(title: "Failed", message: "Loading \(url.absoluteString) failed\n\n\(error)", preferredStyle: .alert)
+            alertController = UIAlertController(title: "Failed", message: "Loading \(failingAddress) failed\n\n\(error)", preferredStyle: .alert)
         }
         alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alertController, animated: true, completion: nil)
