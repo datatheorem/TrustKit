@@ -25,6 +25,14 @@ class DTViewController: UIViewController, URLSessionDelegate {
     @IBOutlet weak var testNotPinnedBtn: UIButton? {
         didSet { testNotPinnedBtn?.layer.cornerRadius = 4; }
     }
+
+    @IBOutlet weak var testWebViewInvalidPinBtn: UIButton? {
+        didSet { testWebViewInvalidPinBtn?.layer.cornerRadius = 4; }
+    }
+
+    @IBOutlet weak var testWebViewValidPinBtn: UIButton? {
+        didSet { testWebViewValidPinBtn?.layer.cornerRadius = 4; }
+    }
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
@@ -85,6 +93,14 @@ class DTViewController: UIViewController, URLSessionDelegate {
     
     @IBAction func testNotPinned(_ sender: UIButton) {
         self.loadURL(url: URL(string: baseURLYahoo)!)
+    }
+
+    @IBAction func testWebViewInvalidPinning(_ sender: UIButton) {
+        present(WebViewController(url: URL(string: baseURLGoogle)!), animated: true)
+    }
+
+    @IBAction func testWebViewValidPinning(_ sender: UIButton) {
+        present(WebViewController(url: URL(string: baseURLDT)!), animated: true)
     }
     
     func displayAlert(withTitle title: String, message: String) {

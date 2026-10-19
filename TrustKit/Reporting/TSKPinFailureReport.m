@@ -57,7 +57,7 @@
 - (nonnull NSData *)json;
 {
     // NSDateFormatter (and NSNumberFormatter) is extremely expensive to initialize, doesn't
-    // change, and is listed as explicitely thread safe, so lets reuse the instance.
+    // change, and is listed as explicitly thread safe, so lets reuse the instance.
     static NSDateFormatter *DateTimeFormatter = nil;
     static NSDateFormatter *DateFormatter = nil;
     static dispatch_once_t onceToken;
@@ -66,8 +66,7 @@
         DateTimeFormatter = ({
             NSDateFormatter *df = [[NSDateFormatter alloc] init];
             
-            // Explicitely set the locale to avoid an iOS 8 bug
-            // http://stackoverflow.com/questions/29374181/nsdateformatter-hh-returning-am-pm-on-ios-8-device
+            // en_US_POSIX keeps the fixed format independent of the user's locale and 12/24-hour setting
             df.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
             
             df.dateFormat = @"yyyy-MM-dd'T'HH:mm:ss'Z'";
@@ -79,8 +78,7 @@
         DateFormatter = ({
             NSDateFormatter *df = [[NSDateFormatter alloc] init];
             
-            // Explicitely set the locale to avoid an iOS 8 bug
-            // http://stackoverflow.com/questions/29374181/nsdateformatter-hh-returning-am-pm-on-ios-8-device
+            // en_US_POSIX keeps the fixed format independent of the user's locale and 12/24-hour setting
             df.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US_POSIX"];
             
             df.dateFormat = @"yyyy-MM-dd";

@@ -180,22 +180,58 @@ intermediate CA in order to allow their users to use the app, or face weeks of
 the app being unusable.
 
 
-#### Properly implement pinning in WebViews
+#### Implement pinning in web views
 
-Adding SSL pinning to connections initiated within a `UIWebView` is difficult as the 
-class does not provide direct APIs to handle authentication challenges. As 
-mentionned in [Apple's technical note about HTTPS trust evaluation](https://developer.apple.com/library/ios/technotes/tn2232/_index.html), 
-customizing certificate validation in a `UIWebView` can still be achieved using 
-`NSURLProtocol` to intercept all outgoing connections. However, implemeting this 
-technique is a complex and significant engineering effort. 
+`WKWebView` sends server trust challenges to its
+[navigation delegate](https://developer.apple.com/documentation/webkit/wknavigationdelegate).
+To enforce the pinning policy for the content it loads, pass those challenges to
+TrustKit's pinning validator. `WKWebView` calls its navigation delegate on the
+main thread, so validate on a background queue to keep the certificate check off
+the main thread, then call WebKit's completion handler back on the main queue:
 
-Overall, the best approach to implementing SSL pinning in webviews is by 
-migrating to the `WKWebView` class introduced in iOS 8, which provides 
-[delegate methods](https://developer.apple.com/library/ios/documentation/WebKit/Reference/WKNavigationDelegate_Ref/) 
-to handle authentication challenges (such as server SSL certificate validation).
-However, this approach still requires some testing as it seems like the 
-`webView:didReceiveAuthenticationChallenge:completionHandler:` delegate method 
-[only works reliably on iOS 9](https://bugs.webkit.org/show_bug.cgi?id=135327).
+```objc
+- (void)webView:(WKWebView *)webView
+didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
+completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler
+{
+    void (^completeOnMainQueue)(NSURLSessionAuthChallengeDisposition, NSURLCredential *) = ^(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completionHandler(disposition, credential);
+        });
+    };
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
+        TSKPinningValidator *pinningValidator = [[TrustKit sharedInstance] pinningValidator];
+        if (![pinningValidator handleChallenge:challenge completionHandler:completeOnMainQueue])
+        {
+            completeOnMainQueue(NSURLSessionAuthChallengePerformDefaultHandling, nil);
+        }
+    });
+}
+```
+
+In Swift:
+
+```swift
+func webView(_ webView: WKWebView,
+             didReceive challenge: URLAuthenticationChallenge,
+             completionHandler: @escaping @MainActor @Sendable (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+    DispatchQueue.global(qos: .userInitiated).async {
+        let completeOnMainQueue = { (disposition: URLSession.AuthChallengeDisposition, credential: URLCredential?) in
+            DispatchQueue.main.async { completionHandler(disposition, credential) }
+        }
+        if !TrustKit.sharedInstance().pinningValidator.handle(challenge, completionHandler: completeOnMainQueue) {
+            completeOnMainQueue(.performDefaultHandling, nil)
+        }
+    }
+}
+```
+
+The `TrustKitDemo` project includes both examples.
+
+Auto-swizzling only covers `NSURLSession` and `NSURLConnection` delegates, so web
+views need this delegate method even when `kTSKSwizzleNetworkDelegates` is enabled.
+`UIWebView` is deprecated and no longer accepted by the App Store; use `WKWebView`
+instead.
 
 
 #### Consider leveraging auto-swizzling for simple Apps

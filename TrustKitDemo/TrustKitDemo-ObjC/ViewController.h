@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *invalidPinBtn;
 @property (weak, nonatomic) IBOutlet UIButton *validPinBtn;
 @property (weak, nonatomic) IBOutlet UIButton *notPinnedBtn;
+@property (weak, nonatomic) IBOutlet UIButton *webViewInvalidPinBtn;
+@property (weak, nonatomic) IBOutlet UIButton *webViewValidPinBtn;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end

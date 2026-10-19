@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 60;
+	objectVersion = 77;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -23,6 +23,8 @@
 		649A18083082000000C9DDE0 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 649A18073082000000C9DDE0 /* SceneDelegate.m */; };
 		649A180A3082000000C9DDE0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649A18093082000000C9DDE0 /* SceneDelegate.swift */; };
 		7EFC88B88CFA398516477DBD /* TrustKitDemoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4033DAB959A685CC201D0F /* TrustKitDemoUITests.swift */; };
+		FD20FA34626461DC0F4EC4C9 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF412427C60BA9C1205748A /* WebViewController.m */; };
+		550C5FD3B9BF87990F9EB1CC /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DF8A40C693788DE83D6110A /* WebViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +81,9 @@
 		FC4033DAB959A685CC201D0F /* TrustKitDemoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrustKitDemoUITests.swift; sourceTree = "<group>"; };
 		FCB0DD861F117CBE00741410 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCB0DD881F117D4C00741410 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		1C5F0A0D4FF51C864F8BF5FB /* WebViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		3BF412427C60BA9C1205748A /* WebViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
+		4DF8A40C693788DE83D6110A /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +150,8 @@
 				649A18073082000000C9DDE0 /* SceneDelegate.m */,
 				194230A61EF7C91A00029B04 /* ViewController.h */,
 				194230A71EF7C91A00029B04 /* ViewController.m */,
+				1C5F0A0D4FF51C864F8BF5FB /* WebViewController.h */,
+				3BF412427C60BA9C1205748A /* WebViewController.m */,
 				194230A01EF7C91A00029B04 /* Supporting Files */,
 			);
 			path = "TrustKitDemo-ObjC";
@@ -168,6 +175,7 @@
 				194231151EF9658800029B04 /* AppDelegate.swift */,
 				649A18093082000000C9DDE0 /* SceneDelegate.swift */,
 				194231171EF9658800029B04 /* DTViewController.swift */,
+				4DF8A40C693788DE83D6110A /* WebViewController.swift */,
 				FCB0DD871F117CCD00741410 /* Supporting FIles */,
 			);
 			path = "TrustKitDemo-Swift";
@@ -278,8 +286,9 @@
 		194230951EF7C91A00029B04 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 1250;
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2700;
+				LastUpgradeCheck = 2700;
 				ORGANIZATIONNAME = DataTheorem;
 				TargetAttributes = {
 					1942309C1EF7C91A00029B04 = {
@@ -302,7 +311,6 @@
 				};
 			};
 			buildConfigurationList = 194230981EF7C91A00029B04 /* Build configuration list for PBXProject "TrustKitDemo" */;
-			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -310,9 +318,11 @@
 				Base,
 			);
 			mainGroup = 194230941EF7C91A00029B04;
+			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				649A18003082000000C9DDE0 /* XCLocalSwiftPackageReference ".." */,
 			);
+			preferredProjectObjectVersion = 77;
 			productRefGroup = 1942309E1EF7C91A00029B04 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -367,6 +377,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				194230A81EF7C91A00029B04 /* ViewController.m in Sources */,
+				FD20FA34626461DC0F4EC4C9 /* WebViewController.m in Sources */,
 				194230A51EF7C91A00029B04 /* AppDelegate.m in Sources */,
 				649A18083082000000C9DDE0 /* SceneDelegate.m in Sources */,
 				194230A21EF7C91A00029B04 /* main.m in Sources */,
@@ -378,6 +389,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				194231181EF9658800029B04 /* DTViewController.swift in Sources */,
+				550C5FD3B9BF87990F9EB1CC /* WebViewController.swift in Sources */,
 				194231161EF9658800029B04 /* AppDelegate.swift in Sources */,
 				649A180A3082000000C9DDE0 /* SceneDelegate.swift in Sources */,
 			);
@@ -438,10 +450,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -468,10 +481,12 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -486,9 +501,11 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 			};
 			name = Debug;
 		};
@@ -496,10 +513,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -526,10 +544,12 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -538,8 +558,10 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
