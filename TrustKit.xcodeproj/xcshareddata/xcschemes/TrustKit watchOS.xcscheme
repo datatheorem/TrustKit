@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "2620"
+   LastUpgradeVersion = "2700"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -37,6 +37,16 @@
          </BuildableReference>
       </MacroExpansion>
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "130A60F430F4BE91F67DBDEE"
+               BuildableName = "TrustKit watchOS Tests.xctest"
+               BlueprintName = "TrustKit watchOS Tests"
+               ReferencedContainer = "container:TrustKit.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

@@ -18,16 +18,20 @@ xcodebuild_pretty() {
 
 configure_platform() {
     SIMULATOR=""
+    DESTINATION_SUFFIX=""
     case "$1" in
-        ios)               SCHEME="TrustKit";         PLATFORM_NAME="iOS" ;;
-        ios-simulator)     SCHEME="TrustKit";         PLATFORM_NAME="iOS Simulator";     SIMULATOR="iPhone 17";                    SIMULATOR_SDK="iphonesimulator" ;;
-        macos)             SCHEME="TrustKit OS X";    PLATFORM_NAME="macOS" ;;
-        tvos)              SCHEME="TrustKit tvOS";    PLATFORM_NAME="tvOS" ;;
-        tvos-simulator)    SCHEME="TrustKit tvOS";    PLATFORM_NAME="tvOS Simulator";    SIMULATOR="Apple TV 4K (3rd generation)"; SIMULATOR_SDK="appletvsimulator" ;;
-        watchos)           SCHEME="TrustKit watchOS"; PLATFORM_NAME="watchOS" ;;
-        watchos-simulator) SCHEME="TrustKit watchOS"; PLATFORM_NAME="watchOS Simulator" ;;
+        ios)                SCHEME="TrustKit";          PLATFORM_NAME="iOS" ;;
+        ios-simulator)      SCHEME="TrustKit";          PLATFORM_NAME="iOS Simulator";      SIMULATOR="iPhone 17";                    SIMULATOR_SDK="iphonesimulator" ;;
+        macos)              SCHEME="TrustKit OS X";     PLATFORM_NAME="macOS" ;;
+        maccatalyst)        SCHEME="TrustKit";          PLATFORM_NAME="macOS";              DESTINATION_SUFFIX=",variant=Mac Catalyst" ;;
+        tvos)               SCHEME="TrustKit tvOS";     PLATFORM_NAME="tvOS" ;;
+        tvos-simulator)     SCHEME="TrustKit tvOS";     PLATFORM_NAME="tvOS Simulator";     SIMULATOR="Apple TV 4K (3rd generation)"; SIMULATOR_SDK="appletvsimulator" ;;
+        watchos)            SCHEME="TrustKit watchOS";  PLATFORM_NAME="watchOS" ;;
+        watchos-simulator)  SCHEME="TrustKit watchOS";  PLATFORM_NAME="watchOS Simulator";  SIMULATOR="Apple Watch Series 12 (46mm)"; SIMULATOR_SDK="watchsimulator" ;;
+        visionos)           SCHEME="TrustKit visionOS"; PLATFORM_NAME="visionOS" ;;
+        visionos-simulator) SCHEME="TrustKit visionOS"; PLATFORM_NAME="visionOS Simulator"; SIMULATOR="Apple Vision Pro";             SIMULATOR_SDK="xrsimulator" ;;
         *)
-            echo "Unknown platform '$1'; expected ios, ios-simulator, macos, tvos, tvos-simulator, watchos or watchos-simulator" >&2
+            echo "Unknown platform '$1'; expected ios, ios-simulator, macos, maccatalyst, tvos, tvos-simulator, watchos, watchos-simulator, visionos or visionos-simulator" >&2
             exit 1
             ;;
     esac

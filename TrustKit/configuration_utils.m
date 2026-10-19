@@ -10,7 +10,7 @@
  */
 
 #import "configuration_utils.h"
-#import "TSKTrustKitConfig.h"
+#import "public/TrustKit/TSKTrustKitConfig.h"
 #import "Dependencies/domain_registry/domain_registry.h"
 #import "TSKLog.h"
 
@@ -75,13 +75,13 @@ NSString * _Nullable getPinningConfigurationKeyForDomain(NSString * _Nonnull hos
                 if (currentMatch > 0 && currentMatch > bestMatch)
                 {
                     // Yes; let's use the parent domain's pinning configuration
-                    TSKLog(@"Applying includeSubdomains configuration from %@ to %@ (new best match of %d chars)", pinnedServerName, hostname, currentMatch);
+                    TSKLog(@"Applying includeSubdomains configuration from %@ to %@ (new best match of %lu chars)", pinnedServerName, hostname, (unsigned long)currentMatch);
                     bestMatch = currentMatch;
                     notedHostname = pinnedServerName;
                 }
                 else if (currentMatch > 0)
                 {
-                    TSKLog(@"Not applying includeSubdomains configuration from %@ to %@ (current match of %d chars does not exceed best match)", pinnedServerName, hostname, currentMatch);
+                    TSKLog(@"Not applying includeSubdomains configuration from %@ to %@ (current match of %lu chars does not exceed best match)", pinnedServerName, hostname, (unsigned long)currentMatch);
                 }
             }
         }

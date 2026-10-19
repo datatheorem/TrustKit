@@ -4,7 +4,6 @@ on:
   push:
     branches: [master]
   pull_request:
-    branches: [master]
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -14,19 +13,21 @@ permissions:
   contents: read
 
 env:
-  DEVELOPER_DIR: /Applications/Xcode_26.6.app/Contents/Developer
+  DEVELOPER_DIR: /Applications/Xcode_27.0.app/Contents/Developer
 
 jobs:
   test:
     name: Test ${{ matrix.platform }}
-    runs-on: macos-26
+    runs-on: xcode-27
     timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
-        platform: [ios-simulator, macos, tvos-simulator]
+        platform: [ios-simulator, macos, maccatalyst, tvos-simulator, watchos-simulator, visionos-simulator]
     steps:
       - uses: actions/checkout@v7
+      - if: matrix.platform == 'watchos-simulator'
+        run: ./scripts/install_simulator_runtime.sh ${{ matrix.platform }}
       - run: ./scripts/run_unit_tests.sh ${{ matrix.platform }} -retry-tests-on-failure -test-iterations 3
       - uses: actions/upload-artifact@v7
         if: failure()
@@ -35,9 +36,27 @@ jobs:
           path: output/*.xcresult
           if-no-files-found: ignore
 
+  demo:
+    name: Demo UI tests ${{ matrix.scheme }}
+    runs-on: xcode-27
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        scheme: [TrustKitDemo-ObjC, TrustKitDemo-Swift]
+    steps:
+      - uses: actions/checkout@v7
+      - run: ./scripts/run_demo_ui_tests.sh ${{ matrix.scheme }} -retry-tests-on-failure -test-iterations 3
+      - uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: ${{ matrix.scheme }}-ui-tests
+          path: output/*.xcresult
+          if-no-files-found: ignore
+
   xcframework:
     name: Build XCFramework
-    runs-on: macos-26
+    runs-on: xcode-27
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v7
@@ -45,7 +64,7 @@ jobs:
 
   swift-package:
     name: Validate Swift package
-    runs-on: macos-26
+    runs-on: xcode-27
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v7

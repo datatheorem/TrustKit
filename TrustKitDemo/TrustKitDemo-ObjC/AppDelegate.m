@@ -11,8 +11,6 @@
 
 #import "AppDelegate.h"
 #import <TrustKit/TrustKit.h>
-#import <TrustKit/TSKPinningValidator.h>
-#import <TrustKit/TSKPinningValidatorCallback.h>
 
 @interface AppDelegate ()
 
@@ -39,8 +37,8 @@
       
       kTSKPinnedDomains: @{
               
-              // Pin invalid SPKI hashes to *.yahoo.com to demonstrate pinning failures
-              @"yahoo.com": @{
+              // Pin invalid SPKI hashes to *.google.com to demonstrate pinning failures
+              @"google.com": @{
                       kTSKEnforcePinning: @YES,
                       kTSKIncludeSubdomains: @YES,
                       
