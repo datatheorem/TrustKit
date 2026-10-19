@@ -8,17 +8,32 @@ final class TrustKitDemoUITests: XCTestCase {
 
     @MainActor
     func testValidPinsConnect() {
-        visit("Visit Data Theorem [good pins]", expecting: "Connected")
+        visit("urlSessionGoodPins", expecting: "Connected")
     }
 
     @MainActor
     func testInvalidPinsAreBlocked() {
-        visit("Visit Google [bad pins]", expecting: "Blocked")
+        visit("urlSessionBadPins", expecting: "Blocked")
     }
 
     @MainActor
     func testUnpinnedDomainConnects() {
-        visit("Visit Yahoo [no pins]", expecting: "Connected")
+        visit("urlSessionNoPins", expecting: "Connected")
+    }
+
+    @MainActor
+    func testWebViewWithValidPinsLoads() {
+        let app = XCUIApplication()
+        app.launch()
+        app.buttons["webViewGoodPins"].tap()
+
+        let link = app.webViews.firstMatch.links.firstMatch
+        XCTAssertTrue(link.waitForExistence(timeout: 30), "The page didn't load\n\(app.debugDescription)")
+    }
+
+    @MainActor
+    func testWebViewWithInvalidPinsIsBlocked() {
+        visit("webViewBadPins", expecting: "Blocked")
     }
 
     @MainActor

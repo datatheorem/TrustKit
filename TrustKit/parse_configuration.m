@@ -45,7 +45,7 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *trustKitArguments)
     
     
 #if !TARGET_OS_IPHONE
-    // OS X only: extract the optional ignorePinningForUserDefinedTrustAnchors setting
+    // macOS only: extract the optional ignorePinningForUserDefinedTrustAnchors setting
     NSNumber *shouldIgnorePinningForUserDefinedTrustAnchors = trustKitArguments[kTSKIgnorePinningForUserDefinedTrustAnchors];
     if (shouldIgnorePinningForUserDefinedTrustAnchors == nil)
     {

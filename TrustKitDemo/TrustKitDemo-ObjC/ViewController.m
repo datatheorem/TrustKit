@@ -10,6 +10,7 @@
  */
 
 #import "ViewController.h"
+#import "WebViewController.h"
 #import <TrustKit/TrustKit.h>
 
 static NSString *const baseURLGoogle = @"https://www.google.com/";
@@ -33,6 +34,8 @@ static NSString *const baseURLYahoo = @"https://www.yahoo.com/";
     self.invalidPinBtn.layer.cornerRadius = 4;
     self.validPinBtn.layer.cornerRadius = 4;
     self.notPinnedBtn.layer.cornerRadius = 4;
+    self.webViewInvalidPinBtn.layer.cornerRadius = 4;
+    self.webViewValidPinBtn.layer.cornerRadius = 4;
     
     self.session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]
                                                  delegate:self
@@ -89,6 +92,16 @@ static NSString *const baseURLYahoo = @"https://www.yahoo.com/";
 - (IBAction)testNotPinned:(UIButton *)sender
 {
     [self loadUrl:[NSURL URLWithString:baseURLYahoo]];
+}
+
+- (IBAction)testWebViewInvalidPinning:(UIButton *)sender
+{
+    [self presentViewController:[[WebViewController alloc] initWithURL:[NSURL URLWithString:baseURLGoogle]] animated:YES completion:nil];
+}
+
+- (IBAction)testWebViewValidPinning:(UIButton *)sender
+{
+    [self presentViewController:[[WebViewController alloc] initWithURL:[NSURL URLWithString:baseURLDT]] animated:YES completion:nil];
 }
 
 - (void)displayAlertWithTitle:(NSString *)title messageFormat:(NSString *)format, ...

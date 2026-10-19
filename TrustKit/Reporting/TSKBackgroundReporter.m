@@ -65,15 +65,11 @@ static NSString * const kTSKBackgroundSessionIdentifierFormat = @"%@.TSKBackgrou
         _appPlatform = @"MACOS";
 #endif
         
-        // If we don't have the OS version yet, we are on a device that provides the operatingSystemVersion method
-        if (_appPlatformVersion == nil)
-        {
-            NSOperatingSystemVersion version = [[NSProcessInfo processInfo] operatingSystemVersion];
-            _appPlatformVersion = [NSString stringWithFormat:@"%ld.%ld.%ld",
-                                   (long)version.majorVersion,
-                                   (long)version.minorVersion,
-                                   (long)version.patchVersion];
-        }
+        NSOperatingSystemVersion version = [[NSProcessInfo processInfo] operatingSystemVersion];
+        _appPlatformVersion = [NSString stringWithFormat:@"%ld.%ld.%ld",
+                               (long)version.majorVersion,
+                               (long)version.minorVersion,
+                               (long)version.patchVersion];
         
         
         CFBundleRef appBundle = CFBundleGetMainBundle();

@@ -78,7 +78,7 @@ FOUNDATION_EXPORT const TSKGlobalConfigurationKey kTSKPinnedDomains;
 
 /**
  A boolean. If set to `YES`, pinning validation will be skipped if the server's certificate
- chain terminates at a user-defined trust anchor (such as a root CA that isn't part of OS X's
+ chain terminates at a user-defined trust anchor (such as a root CA that isn't part of macOS's
  default trust store) and no pin failure reports will be sent; default value is `YES`.
  
  This is useful for allowing SSL connections through corporate proxies or firewalls. See
@@ -87,7 +87,7 @@ FOUNDATION_EXPORT const TSKGlobalConfigurationKey kTSKPinnedDomains;
  
  Only available on macOS; not available to Mac Catalyst apps.
  */
-FOUNDATION_EXPORT const TSKGlobalConfigurationKey kTSKIgnorePinningForUserDefinedTrustAnchors NS_AVAILABLE_MAC(10_9);
+FOUNDATION_EXPORT const TSKGlobalConfigurationKey kTSKIgnorePinningForUserDefinedTrustAnchors API_UNAVAILABLE(ios, tvos, watchos, visionos);
 
 
 #pragma mark Domain-Specific Configuration Keys - Required
