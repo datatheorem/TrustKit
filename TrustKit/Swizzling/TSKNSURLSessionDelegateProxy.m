@@ -41,6 +41,7 @@
 
                                              if (delegate == nil)
                                              {
+                                                 os_log_debug(TSKLogHandle(), "+sessionWithConfiguration:delegate:delegateQueue: was called with a nil delegate; TrustKit cannot enforce SSL pinning for any connection initiated by this session");
                                                  session = RSSWCallOriginal(configuration, delegate, queue);
                                              }
 
