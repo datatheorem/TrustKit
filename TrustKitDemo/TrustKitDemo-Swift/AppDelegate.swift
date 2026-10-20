@@ -17,10 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        TrustKit.setLoggerBlock { (message) in
-            print("TrustKit log: \(message)")
-        }
-        
         let trustKitConfig: [String: Any] = [
             kTSKSwizzleNetworkDelegates: false,
             kTSKPinnedDomains: [

@@ -7,8 +7,15 @@
 //
 
 #import <XCTest/XCTest.h>
+#import <OSLog/OSLog.h>
 #import "../TrustKit/public/TrustKit/TrustKit.h"
-#import "../TrustKit/TSKLog.h"
+#import "../TrustKit/public/TrustKit/TSKPinningValidator.h"
+#import "../TrustKit/public/TrustKit/TSKTrustKitConfig.h"
+#import "../TrustKit/parse_configuration.h"
+#import "../TrustKit/public/TrustKit/TSKPinningValidatorResult.h"
+#import "../TrustKit/TSKPinningValidator_Private.h"
+#import "../TrustKit/Pinning/TSKSPKIHashCache.h"
+#import "TSKCertificateUtils.h"
 
 
 @interface TSKLoggerTests : XCTestCase
@@ -17,34 +24,54 @@
 
 @implementation TSKLoggerTests
 
-- (void)setUp
+- (void)testPinValidationFailureIsLoggedAsError
 {
-    [super setUp];
-}
+    NSDate *startDate = [NSDate date];
 
-- (void)tearDown
-{
-    [super tearDown];
-}
+    SecCertificateRef rootCertificate = [TSKCertificateUtils createCertificateFromDer:@"GoodRootCA"];
+    SecCertificateRef leafCertificate = [TSKCertificateUtils createCertificateFromDer:@"www.good.com"];
+    SecCertificateRef certChainArray[1] = {leafCertificate};
+    SecCertificateRef trustStoreArray[1] = {rootCertificate};
+    SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
+                                                             arrayLength:1
+                                                      anchorCertificates:(const void **)trustStoreArray
+                                                             arrayLength:1];
 
-- (void)testDefaultLoggerBlock
-{
-    TSKLog(@"test %@", @"test");
-}
+    NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(@{kTSKSwizzleNetworkDelegates: @NO,
+                                                                      kTSKPinnedDomains: @{@"www.good.com": @{
+                                                                          kTSKPublicKeyHashes: @[@"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+                                                                                                 @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB="]}}});
+    TSKPinningValidator *validator = [[TSKPinningValidator alloc] initWithDomainPinningPolicies:parsedTrustKitConfig[kTSKPinnedDomains]
+                                                                                      hashCache:[[TSKSPKIHashCache alloc] initWithIdentifier:@"test"]
+                                                                  ignorePinsForUserTrustAnchors:NO
+                                                                        validationCallbackQueue:dispatch_get_main_queue()
+                                                                             validationCallback:^(TSKPinningValidatorResult *result, NSString *notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *notedHostnamePinningPolicy) {}];
 
+    XCTAssertEqual([validator evaluateTrust:trust forHostname:@"www.good.com"], TSKTrustDecisionShouldBlockConnection);
+    CFRelease(trust);
+    CFRelease(leafCertificate);
+    CFRelease(rootCertificate);
 
-- (void)testSetLoggerBlock
-{
-    __block bool wasBlockCalled = false;
-    void (^loggerBlock)(NSString *) = ^void(NSString *message)
-    {
-        XCTAssert(message, @"test test");
-        wasBlockCalled = true;
-    };
-    
-    [TrustKit setLoggerBlock:loggerBlock];
-    TSKLog(@"test %@", @"test");
-    XCTAssertTrue(wasBlockCalled);
+    NSError *error = nil;
+    OSLogStore *store = [OSLogStore storeWithScope:OSLogStoreCurrentProcessIdentifier error:&error];
+    XCTAssertNotNil(store, @"%@", error);
+
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"subsystem == %@ AND category == %@", @"com.datatheorem.trustkit", @"TrustKit"];
+    OSLogEnumerator *entries = [store entriesEnumeratorWithOptions:0
+                                                          position:[store positionWithDate:startDate]
+                                                         predicate:predicate
+                                                             error:&error];
+    XCTAssertNotNil(entries, @"%@", error);
+
+    OSLogEntryLog *failureEntry = nil;
+    for (OSLogEntry *entry in entries) {
+        if ([entry isKindOfClass:[OSLogEntryLog class]] && [entry.composedMessage isEqualToString:@"Pin validation failed for www.good.com"]) {
+            failureEntry = (OSLogEntryLog *)entry;
+            break;
+        }
+    }
+    XCTAssertNotNil(failureEntry);
+    XCTAssertEqual(failureEntry.level, OSLogEntryLogLevelError);
 }
 
 @end

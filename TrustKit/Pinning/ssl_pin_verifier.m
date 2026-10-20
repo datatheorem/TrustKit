@@ -25,7 +25,7 @@ TSKTrustEvaluationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *s
     NSCParameterAssert(knownPins);
     if ((serverTrust == NULL) || (knownPins == nil))
     {
-        TSKLog(@"Invalid pinning parameters for %@", serverHostname);
+        os_log_error(TSKLogHandle(), "Invalid pinning parameters for %{public}@", serverHostname);
         return TSKTrustEvaluationErrorInvalidParameters;
     }
 
@@ -46,7 +46,7 @@ TSKTrustEvaluationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *s
     evaluateCertificateChainTrust(serverTrust, &trustResult, &error);
     if ((error != NULL) && (trustResult == kSecTrustResultInvalid))
     {
-        TSKLog(@"SecTrustEvaluate error for %@: %@", serverHostname, [error localizedDescription]);
+        os_log_error(TSKLogHandle(), "SecTrustEvaluate error for %{public}@: %{public}@", serverHostname, [error localizedDescription]);
         CFRelease(serverTrust);
         return TSKTrustEvaluationErrorInvalidParameters;
     }
@@ -55,7 +55,7 @@ TSKTrustEvaluationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *s
     {
         // Default SSL validation failed
         CFDictionaryRef evaluationDetails = SecTrustCopyResult(serverTrust);
-        TSKLog(@"Error: default SSL validation failed for %@: %@", serverHostname, evaluationDetails);
+        os_log_error(TSKLogHandle(), "Default SSL validation failed for %{public}@: %{public}@", serverHostname, evaluationDetails);
         CFRelease(evaluationDetails);
         CFRelease(serverTrust);
         return TSKTrustEvaluationFailedInvalidCertificateChain;
@@ -68,31 +68,34 @@ TSKTrustEvaluationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *s
         // Extract the certificate
         SecCertificateRef certificate = getCertificateAtIndex(serverTrust, i);
         
-        CFStringRef certificateSubject = SecCertificateCopySubjectSummary(certificate);
-        if (certificateSubject != nil)
+        if (os_log_debug_enabled(TSKLogHandle()))
         {
-            TSKLog(@"Checking certificate with CN: %@", certificateSubject);
-            CFRelease(certificateSubject);
-        }
-        else
-        {
-            TSKLog(@"Could not parse certificate subject");
+            CFStringRef certificateSubject = SecCertificateCopySubjectSummary(certificate);
+            if (certificateSubject != nil)
+            {
+                os_log_debug(TSKLogHandle(), "Checking certificate with CN: %{public}@", certificateSubject);
+                CFRelease(certificateSubject);
+            }
+            else
+            {
+                os_log_debug(TSKLogHandle(), "Could not parse certificate subject");
+            }
         }
         
         // Generate the subject public key info hash
         NSData *subjectPublicKeyInfoHash = [hashCache hashSubjectPublicKeyInfoFromCertificate:certificate];
         if (subjectPublicKeyInfoHash == nil)
         {
-            TSKLog(@"Error - could not generate the SPKI hash for %@", serverHostname);
+            os_log_error(TSKLogHandle(), "Could not generate the SPKI hash for %{public}@", serverHostname);
             CFRelease(serverTrust);
             return TSKTrustEvaluationErrorCouldNotGenerateSpkiHash;
         }
         
         // Is the generated hash in our set of pinned hashes ?
-        TSKLog(@"Testing SSL Pin %@", subjectPublicKeyInfoHash);
+        os_log_debug(TSKLogHandle(), "Testing SSL Pin %{public}@", [subjectPublicKeyInfoHash base64EncodedStringWithOptions:0]);
         if ([knownPins containsObject:subjectPublicKeyInfoHash])
         {
-            TSKLog(@"SSL Pin found for %@", serverHostname);
+            os_log_debug(TSKLogHandle(), "SSL Pin found for %{public}@", serverHostname);
             CFRelease(serverTrust);
             return TSKTrustEvaluationSuccess;
         }
@@ -130,7 +133,7 @@ TSKTrustEvaluationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *s
             // Is the certificate chain's anchor a user-defined anchor ?
             if ([customRootCerts containsObject:(__bridge id)(certificate)])
             {
-                TSKLog(@"Detected user-defined trust anchor in the certificate chain");
+                os_log_debug(TSKLogHandle(), "Detected user-defined trust anchor in the certificate chain");
                 CFRelease(serverTrust);
                 return TSKTrustEvaluationFailedUserDefinedTrustAnchor;
             }
@@ -139,7 +142,7 @@ TSKTrustEvaluationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *s
 #endif
     
     // If we get here, we didn't find any matching SPKI hash in the chain
-    TSKLog(@"Error: SSL Pin not found for %@", serverHostname);
+    os_log_debug(TSKLogHandle(), "SSL Pin not found for %{public}@", serverHostname);
     CFRelease(serverTrust);
     return TSKTrustEvaluationFailedNoMatchingPin;
 }

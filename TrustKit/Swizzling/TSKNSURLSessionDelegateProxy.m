@@ -41,8 +41,6 @@
 
                                              if (delegate == nil)
                                              {
-                                                 // Just display a warning
-                                                 //TSKLog(@"WARNING: +sessionWithConfiguration:delegate:delegateQueue: was called with a nil delegate; TrustKit cannot enforce SSL pinning for any connection initiated by this session");
                                                  session = RSSWCallOriginal(configuration, delegate, queue);
                                              }
 
@@ -77,7 +75,7 @@
         _originalDelegate = delegate;
         _trustKit = trustKit;
     }
-    TSKLog(@"Proxy-ing NSURLSessionDelegate: %@", NSStringFromClass([delegate class]));
+    os_log_debug(TSKLogHandle(), "Proxy-ing NSURLSessionDelegate: %{public}@", NSStringFromClass([delegate class]));
     return self;
 }
 

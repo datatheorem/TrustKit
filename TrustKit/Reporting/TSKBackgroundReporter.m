@@ -84,7 +84,7 @@ static NSString * const kTSKBackgroundSessionIdentifierFormat = @"%@.TSKBackgrou
         {
             // The bundle ID we get is nil if we're running tests on Travis. If the bundle ID is nil, background sessions can't be used
             // backgroundSessionConfigurationWithIdentifier: will throw an exception
-            TSKLog(@"Null bundle ID: we are running the test suite; falling back to a normal session.");
+            os_log_debug(TSKLogHandle(), "Null bundle ID: we are running the test suite; falling back to a normal session.");
             _appBundleId = @"N/A";
             _appVendorId = @"unit-tests";
             
@@ -177,7 +177,7 @@ static NSString * const kTSKBackgroundSessionIdentifierFormat = @"%@.TSKBackgrou
     if (_shouldRateLimitReports && [self.rateLimiter shouldRateLimitReport:report])
     {
         // We recently sent the exact same report; do not send this report
-        TSKLog(@"Pin failure report for %@ was not sent due to rate-limiting", serverHostname);
+        os_log_info(TSKLogHandle(), "Pin failure report for %{public}@ was not sent due to rate-limiting", serverHostname);
         return;
     }
     
@@ -207,10 +207,10 @@ static NSString * const kTSKBackgroundSessionIdentifierFormat = @"%@.TSKBackgrou
         // hand a non-existent file to -uploadTaskWithRequest:fromFile:, which throws an uncaught
         // NSInvalidArgumentException ("Cannot read file at ...") and crashes the app.
         // https://github.com/datatheorem/TrustKit/issues/351
-        TSKLog(@"Report for %@ could not be saved to file; skipping upload: %@", serverHostname, [error description]);
+        os_log_error(TSKLogHandle(), "Report for %{public}@ could not be saved to file; skipping upload: %{public}@", serverHostname, error);
         return;
     }
-    TSKLog(@"Report for %@ created at: %@", serverHostname, [tmpFileURL path]);
+    os_log_debug(TSKLogHandle(), "Report for %{public}@ created at: %@", serverHostname, [tmpFileURL path]);
     
     
     // Create the HTTP request for all the configured report URIs and send it
@@ -234,11 +234,11 @@ static NSString * const kTSKBackgroundSessionIdentifierFormat = @"%@.TSKBackgrou
 {
     if (error == nil)
     {
-        TSKLog(@"Background upload - task completed successfully: pinning failure report sent");
+        os_log_info(TSKLogHandle(), "Background upload - task completed successfully: pinning failure report sent");
     }
     else
     {
-        TSKLog(@"Background upload - task completed with error: %@ (code %ld)", [error localizedDescription], (long)error.code);
+        os_log_error(TSKLogHandle(), "Background upload - task completed with error: %{public}@ (code %ld)", [error localizedDescription], (long)error.code);
     }
 }
 
