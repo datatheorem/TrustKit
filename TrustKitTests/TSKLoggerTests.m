@@ -53,24 +53,32 @@
     CFRelease(rootCertificate);
 
     NSPredicate *trustKitEntries = [NSPredicate predicateWithFormat:@"subsystem == %@ AND category == %@", @"com.datatheorem.trustkit", @"TrustKit"];
-    __block OSLogEntryLog *failureEntry = nil;
-    NSPredicate *failureEntryLogged = [NSPredicate predicateWithBlock:^BOOL(id _Nullable object, NSDictionary *bindings) {
-        OSLogStore *store = [OSLogStore storeWithScope:OSLogStoreCurrentProcessIdentifier error:nil];
-        OSLogEnumerator *entries = [store entriesEnumeratorWithOptions:0
-                                                              position:[store positionWithDate:startDate]
-                                                             predicate:trustKitEntries
-                                                                 error:nil];
-        for (OSLogEntry *entry in entries) {
-            if ([entry isKindOfClass:[OSLogEntryLog class]] && [entry.composedMessage isEqualToString:@"Pin validation failed for www.good.com"]) {
-                failureEntry = (OSLogEntryLog *)entry;
-                return YES;
+    dispatch_semaphore_t failureEntryFound = dispatch_semaphore_create(0);
+    __block OSLogEntryLogLevel failureEntryLevel = OSLogEntryLogLevelUndefined;
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
+        NSDate *deadline = [NSDate dateWithTimeIntervalSinceNow:30];
+        while ([deadline timeIntervalSinceNow] > 0) {
+            OSLogStore *store = [OSLogStore storeWithScope:OSLogStoreCurrentProcessIdentifier error:nil];
+            OSLogEnumerator *entries = [store entriesEnumeratorWithOptions:0
+                                                                  position:[store positionWithDate:startDate]
+                                                                 predicate:trustKitEntries
+                                                                     error:nil];
+            for (OSLogEntry *entry in entries) {
+                if ([entry isKindOfClass:[OSLogEntryLog class]] && [entry.composedMessage isEqualToString:@"Pin validation failed for www.good.com"]) {
+                    failureEntryLevel = ((OSLogEntryLog *)entry).level;
+                    dispatch_semaphore_signal(failureEntryFound);
+                    return;
+                }
             }
+            [NSThread sleepForTimeInterval:0.25];
         }
-        return NO;
-    }];
-    [self waitForExpectations:@[[[XCTNSPredicateExpectation alloc] initWithPredicate:failureEntryLogged object:nil]] timeout:30];
+    });
 
-    XCTAssertEqual(failureEntry.level, OSLogEntryLogLevelError);
+    if (dispatch_semaphore_wait(failureEntryFound, dispatch_time(DISPATCH_TIME_NOW, 30 * NSEC_PER_SEC)) != 0) {
+        XCTFail(@"The pin validation failure did not reach the log store within 30 seconds");
+        return;
+    }
+    XCTAssertEqual(failureEntryLevel, OSLogEntryLogLevelError);
 }
 
 @end
