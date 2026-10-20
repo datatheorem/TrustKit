@@ -52,25 +52,24 @@
     CFRelease(leafCertificate);
     CFRelease(rootCertificate);
 
-    NSError *error = nil;
-    OSLogStore *store = [OSLogStore storeWithScope:OSLogStoreCurrentProcessIdentifier error:&error];
-    XCTAssertNotNil(store, @"%@", error);
-
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"subsystem == %@ AND category == %@", @"com.datatheorem.trustkit", @"TrustKit"];
-    OSLogEnumerator *entries = [store entriesEnumeratorWithOptions:0
-                                                          position:[store positionWithDate:startDate]
-                                                         predicate:predicate
-                                                             error:&error];
-    XCTAssertNotNil(entries, @"%@", error);
-
-    OSLogEntryLog *failureEntry = nil;
-    for (OSLogEntry *entry in entries) {
-        if ([entry isKindOfClass:[OSLogEntryLog class]] && [entry.composedMessage isEqualToString:@"Pin validation failed for www.good.com"]) {
-            failureEntry = (OSLogEntryLog *)entry;
-            break;
+    NSPredicate *trustKitEntries = [NSPredicate predicateWithFormat:@"subsystem == %@ AND category == %@", @"com.datatheorem.trustkit", @"TrustKit"];
+    __block OSLogEntryLog *failureEntry = nil;
+    NSPredicate *failureEntryLogged = [NSPredicate predicateWithBlock:^BOOL(id _Nullable object, NSDictionary *bindings) {
+        OSLogStore *store = [OSLogStore storeWithScope:OSLogStoreCurrentProcessIdentifier error:nil];
+        OSLogEnumerator *entries = [store entriesEnumeratorWithOptions:0
+                                                              position:[store positionWithDate:startDate]
+                                                             predicate:trustKitEntries
+                                                                 error:nil];
+        for (OSLogEntry *entry in entries) {
+            if ([entry isKindOfClass:[OSLogEntryLog class]] && [entry.composedMessage isEqualToString:@"Pin validation failed for www.good.com"]) {
+                failureEntry = (OSLogEntryLog *)entry;
+                return YES;
+            }
         }
-    }
-    XCTAssertNotNil(failureEntry);
+        return NO;
+    }];
+    [self waitForExpectations:@[[[XCTNSPredicateExpectation alloc] initWithPredicate:failureEntryLogged object:nil]] timeout:30];
+
     XCTAssertEqual(failureEntry.level, OSLogEntryLogLevelError);
 }
 

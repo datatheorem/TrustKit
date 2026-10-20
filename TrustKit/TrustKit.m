@@ -198,7 +198,7 @@ os_log_t TSKLogHandle(void)
                                                                                            pinningPolicy:notedHostnamePinningPolicy];
                                                                     }];
         
-        os_log_debug(TSKLogHandle(), "Successfully initialized with configuration %{public}@", _configuration);
+        os_log_debug(TSKLogHandle(), "Successfully initialized with configuration %@", _configuration);
     }
     return self;
 }
