@@ -45,11 +45,11 @@ void evaluateCertificateChainTrust(SecTrustRef serverTrust, SecTrustResultType *
 SecCertificateRef getCertificateAtIndex(SecTrustRef serverTrust, CFIndex index);
 
 /**
- Returns the public key for a leaf certificate after it has been evaluated.
+ Returns the Subject Public Key Info of a certificate, exactly as it is encoded in the certificate.
 
- @param serverTrust The trust management object to evaluate
- @return The leaf certificate's public key, or nil if the public key could not be extracted
+ @param certificateData The DER-encoded certificate
+ @return The DER-encoded Subject Public Key Info, or nil if the certificate could not be read
  */
-SecKeyRef copyKey(SecTrustRef serverTrust);
+NSData *getSubjectPublicKeyInfo(NSData *certificateData);
 
 #endif

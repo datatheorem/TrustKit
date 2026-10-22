@@ -15,6 +15,7 @@
 
 #import "../TrustKit/Pinning/ssl_pin_verifier.h"
 #import "../TrustKit/Pinning/TSKSPKIHashCache.h"
+#import "../TrustKit/Pinning/pinning_utils.h"
 #import "../TrustKit/Reporting/reporting_utils.h"
 
 #import "TSKCertificateUtils.h"
@@ -110,6 +111,40 @@
     
     XCTAssertEqualObjects(spkiPin, @"vPtEqrmtAhAVcGtBIep2HIHJ6IlnWQ9vlK50TciLePs=");
     CFRelease(certificate);
+}
+
+
+- (void)testExtractEcDsaSecp521r1
+{
+    // Ensure a secp521r1 key is properly extracted from its certificate
+    SecCertificateRef certificate = [TSKCertificateUtils createCertificateFromDer:@"Secp521r1TestCA"];
+    
+    NSData *spkiHash = [spkiCache hashSubjectPublicKeyInfoFromCertificate:certificate];
+    NSString *spkiPin = [spkiHash base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    
+    XCTAssertEqualObjects(spkiPin, @"JDbjp5T1MJ6GUN/fY/voVivkg/5a+kiWCTF7yBFL4DM=");
+    CFRelease(certificate);
+}
+
+
+- (void)testSubjectPublicKeyInfoFromMalformedCertificate
+{
+    SecCertificateRef certificate = [TSKCertificateUtils createCertificateFromDer:@"www.good.com"];
+    NSData *certificateData = (__bridge_transfer NSData *)SecCertificateCopyData(certificate);
+    CFRelease(certificate);
+    
+    XCTAssertNotNil(getSubjectPublicKeyInfo(certificateData));
+    for (NSUInteger length = 0; length < [certificateData length]; length++)
+    {
+        XCTAssertNil(getSubjectPublicKeyInfo([certificateData subdataWithRange:NSMakeRange(0, length)]), @"Truncated to %lu bytes", (unsigned long)length);
+    }
+    
+    const uint8_t indefiniteLength[] = {0x30, 0x80, 0x30, 0x80, 0x00, 0x00, 0x00, 0x00};
+    const uint8_t fiveByteLength[] = {0x30, 0x85, 0x00, 0x00, 0x00, 0x00, 0x02, 0x30, 0x00};
+    const uint8_t notASequence[] = {0x31, 0x02, 0x30, 0x00};
+    XCTAssertNil(getSubjectPublicKeyInfo([NSData dataWithBytes:indefiniteLength length:sizeof(indefiniteLength)]));
+    XCTAssertNil(getSubjectPublicKeyInfo([NSData dataWithBytes:fiveByteLength length:sizeof(fiveByteLength)]));
+    XCTAssertNil(getSubjectPublicKeyInfo([NSData dataWithBytes:notASequence length:sizeof(notASequence)]));
 }
 
 
