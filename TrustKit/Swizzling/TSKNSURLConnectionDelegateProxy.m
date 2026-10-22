@@ -94,7 +94,7 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
                          RSSWReplacement(
                                          {
                                              // Just display a warning
-                                             TSKLog(@"WARNING: +sendAsynchronousRequest:queue:completionHandler: was called to connect to %@. This method does not expose a delegate argument for handling authentication challenges; TrustKit cannot enforce SSL pinning for these connections", [[request URL]host]);
+                                             os_log_error(TSKLogHandle(), "+sendAsynchronousRequest:queue:completionHandler: was called to connect to %@. This method does not expose a delegate argument for handling authentication challenges; TrustKit cannot enforce SSL pinning for these connections", [[request URL]host]);
                                              RSSWCallOriginal(request, queue, handler);
                                          }));
      
@@ -107,7 +107,7 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
                          RSSWReplacement(
                                          {
                                              // Just display a warning
-                                             TSKLog(@"WARNING: +sendSynchronousRequest:returningResponse:error: was called to connect to %@. This method does not expose a delegate argument for handling authentication challenges; TrustKit cannot enforce SSL pinning for these connections", [[request URL]host]);
+                                             os_log_error(TSKLogHandle(), "+sendSynchronousRequest:returningResponse:error: was called to connect to %@. This method does not expose a delegate argument for handling authentication challenges; TrustKit cannot enforce SSL pinning for these connections", [[request URL]host]);
                                              NSData *data = RSSWCallOriginal(request, response, error);
                                              return data;
                                          }));
@@ -125,7 +125,7 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
         _originalDelegate = delegate;
         _trustKit = trustKit;
     }
-    TSKLog(@"Proxy-ing NSURLConnectionDelegate: %@", NSStringFromClass([delegate class]));
+    os_log_debug(TSKLogHandle(), "Proxy-ing NSURLConnectionDelegate: %{public}@", NSStringFromClass([delegate class]));
     return self;
 }
 

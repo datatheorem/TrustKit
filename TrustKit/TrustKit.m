@@ -40,23 +40,14 @@ static TrustKit *sharedTrustKit;
 // A shared hash cache for use by all TrustKit instances
 static TSKSPKIHashCache *sharedHashCache;
 
-// Default logger block: only log in debug builds and add TrustKit at the beginning of the line
-#if DEBUG
-void (^_loggerBlock)(NSString *) = ^void(NSString *message) { NSLog(@"=== TrustKit: %@", message); };
-#else
-void (^_loggerBlock)(NSString *) = NULL;
-#endif
-
-// The logging function we use within TrustKit
-void TSKLog(NSString *format, ...)
+os_log_t TSKLogHandle(void)
 {
-    if (_loggerBlock) {
-        va_list args;
-        va_start(args, format);
-        NSString *message = [[NSString alloc] initWithFormat:format arguments:args];
-        va_end(args);
-        _loggerBlock(message);
-    }
+    static dispatch_once_t onceToken;
+    static os_log_t logHandle;
+    dispatch_once(&onceToken, ^{
+        logHandle = os_log_create("com.datatheorem.trustkit", "TrustKit");
+    });
+    return logHandle;
 }
 
 
@@ -94,7 +85,7 @@ void TSKLog(NSString *format, ...)
 + (void)initSharedInstanceWithConfiguration:(NSDictionary<TSKGlobalConfigurationKey, id> *)trustKitConfig
                   sharedContainerIdentifier:(NSString *)sharedContainerIdentifier
 {
-    TSKLog(@"Configuration passed via explicit call to initSharedInstanceWithConfiguration:");
+    os_log_debug(TSKLogHandle(), "Configuration passed via explicit call to initSharedInstanceWithConfiguration:");
     
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -207,7 +198,7 @@ void TSKLog(NSString *format, ...)
                                                                                            pinningPolicy:notedHostnamePinningPolicy];
                                                                     }];
         
-        TSKLog(@"Successfully initialized with configuration %@", _configuration);
+        os_log_debug(TSKLogHandle(), "Successfully initialized with configuration %@", _configuration);
     }
     return self;
 }
@@ -260,15 +251,6 @@ void TSKLog(NSString *format, ...)
     _pinningValidatorCallbackQueue = pinningValidatorCallbackQueue ?: dispatch_get_main_queue();
 }
 
-
-#pragma mark Configuring Logging
-
-
-+ (void)setLoggerBlock:(void (^)(NSString *))block
-{
-    _loggerBlock = block;
-}
-
 @end
 
 
@@ -284,7 +266,7 @@ __attribute__((constructor)) static void initializeWithInfoPlist(int argc, const
     NSDictionary *trustKitConfigFromInfoPlist = (__bridge NSDictionary *)CFBundleGetValueForInfoDictionaryKey(appBundle, (__bridge CFStringRef)kTSKConfiguration);
     if (trustKitConfigFromInfoPlist)
     {
-        TSKLog(@"Configuration supplied via the App's Info.plist");
+        os_log_debug(TSKLogHandle(), "Configuration supplied via the App's Info.plist");
         [TrustKit initSharedInstanceWithConfiguration:trustKitConfigFromInfoPlist];
     }
 }

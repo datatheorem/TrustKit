@@ -9,13 +9,12 @@
  
  */
 
-// Common header with internal constants and defines.
-
 #ifndef TSKLog_h
 #define TSKLog_h
 
-// The logging function we use within TrustKit
-void TSKLog(NSString *format, ...) NS_FORMAT_FUNCTION(1, 2);
+#import <os/log.h>
+
+os_log_t TSKLogHandle(void);
 
 
 #endif /* TSKLog_h */

@@ -281,6 +281,28 @@ was to be enforced.
 
 ## Appendices
 
+### Logging
+
+TrustKit logs through the unified logging system under the `com.datatheorem.trustkit`
+subsystem and the `TrustKit` category. Pin validation failures and other errors are
+logged at the error level, successful validations at the info level, and the
+details of each validation step at the debug level.
+
+The system's default policy applies: debug messages are not captured, info messages
+are kept in memory only, and errors are saved to disk, including in Release builds.
+To stream TrustKit's logs with debug messages included:
+
+```sh
+log stream --level debug --predicate 'subsystem == "com.datatheorem.trustkit"'
+```
+
+Prefix the command with `xcrun simctl spawn booted` to stream from the booted
+simulator. In Console.app, filter on the subsystem and turn on Include Info Messages
+and Include Debug Messages in the Action menu.
+
+To act on pin validation results in code, set `pinningValidatorCallback` on the
+`TrustKit` instance. `+setLoggerBlock:` was removed in TrustKit 4.0.
+
 ### Debugging network connections with TrustKit
 
 SSL pinning can make it difficult for developers to develop network clients or

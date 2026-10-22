@@ -87,7 +87,7 @@
     
     if ((serverTrust == NULL) || (serverHostname == nil))
     {
-        TSKLog(@"Pin validation error - invalid parameters for %@", serverHostname);
+        os_log_error(TSKLogHandle(), "Pin validation error - invalid parameters for %@", serverHostname);
         return finalTrustDecision;
     }
     CFRetain(serverTrust);
@@ -131,19 +131,19 @@
             if (validationResult == TSKTrustEvaluationSuccess)
             {
                 // Pin validation was successful
-                TSKLog(@"Pin validation succeeded for %@", serverHostname);
+                os_log_info(TSKLogHandle(), "Pin validation succeeded for %{public}@", serverHostname);
                 finalTrustDecision = TSKTrustDecisionShouldAllowConnection;
             }
             else
             {
                 // Pin validation failed
-                TSKLog(@"Pin validation failed for %@", serverHostname);
+                os_log_error(TSKLogHandle(), "Pin validation failed for %{public}@", serverHostname);
 #if !TARGET_OS_IPHONE
                 if ((validationResult == TSKTrustEvaluationFailedUserDefinedTrustAnchor)
                     && (self.ignorePinsForUserTrustAnchors))
                 {
                     // OS-X only: user-defined trust anchors can be whitelisted (for corporate proxies, etc.) so don't send reports
-                    TSKLog(@"Ignoring pinning failure due to user-defined trust anchor for %@", serverHostname);
+                    os_log(TSKLogHandle(), "Ignoring pinning failure due to user-defined trust anchor for %{public}@", serverHostname);
                     finalTrustDecision = TSKTrustDecisionShouldAllowConnection;
                 }
                 else

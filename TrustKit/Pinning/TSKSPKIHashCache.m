@@ -200,7 +200,7 @@ static BOOL _isProtectedDataAvailable(void) {
         
         // First try to load a cached version from the filesystem
         _spkiCache = [self loadSPKICacheFromFileSystem];
-        TSKLog(@"Loaded %lu SPKI cache entries from the filesystem", (unsigned long)_spkiCache.count);
+        os_log_debug(TSKLogHandle(), "Loaded %lu SPKI cache entries from the filesystem", (unsigned long)_spkiCache.count);
         if (_spkiCache == nil)
         {
             _spkiCache = [NSMutableDictionary new];
@@ -227,18 +227,18 @@ static BOOL _isProtectedDataAvailable(void) {
     
     if (cachedSubjectPublicKeyInfo)
     {
-        TSKLog(@"Subject Public Key Info hash was found in the cache");
+        os_log_debug(TSKLogHandle(), "Subject Public Key Info hash was found in the cache");
         return cachedSubjectPublicKeyInfo;
     }
     
     // We didn't this certificate in the cache so we need to generate its SPKI hash
-    TSKLog(@"Generating Subject Public Key Info hash...");
+    os_log_debug(TSKLogHandle(), "Generating Subject Public Key Info hash...");
     
     // First extract the public key
     SecKeyRef publicKey = [self copyPublicKeyFromCertificate:certificate];
     if (publicKey == nil)
     {
-        TSKLog(@"Error - could not copy the public key from the certificate");
+        os_log_error(TSKLogHandle(), "Could not copy the public key from the certificate");
         return nil;
     }
     
@@ -246,7 +246,7 @@ static BOOL _isProtectedDataAvailable(void) {
     NSData *publicKeyData = (__bridge_transfer NSData *)SecKeyCopyExternalRepresentation(publicKey, NULL);
     if (publicKeyData == nil)
     {
-        TSKLog(@"Error - could not extract the public key bytes");
+        os_log_error(TSKLogHandle(), "Could not extract the public key bytes");
         CFRelease(publicKey);
         return nil;
     }
@@ -259,7 +259,7 @@ static BOOL _isProtectedDataAvailable(void) {
     
     if (!isKeySupported(publicKeyType, publicKeysize))
     {
-        TSKLog(@"Error - public key algorithm or length is not supported");
+        os_log_error(TSKLogHandle(), "Public key algorithm or length is not supported");
         CFRelease(publicKey);
         return nil;
     }
@@ -309,7 +309,7 @@ static BOOL _isProtectedDataAvailable(void) {
         });
     
         if (snapshot == nil) {
-            TSKLog(@"Protected data not available, skipping SPKI cache persistence");
+            os_log_info(TSKLogHandle(), "Protected data not available, skipping SPKI cache persistence");
             return;
         }
     
@@ -319,7 +319,7 @@ static BOOL _isProtectedDataAvailable(void) {
         NSURL *cachePath = [self SPKICachePath];
         if (!cachePath || ![serializedSpkiCache writeToURL:cachePath atomically:YES]) {
             NSAssert(false, @"Failed to write cache");
-            TSKLog(@"Could not persist SPKI cache to the filesystem");
+            os_log_error(TSKLogHandle(), "Could not persist SPKI cache to the filesystem");
         }
     });
 }
@@ -333,7 +333,7 @@ static BOOL _isProtectedDataAvailable(void) {
         spkiCache = [NSKeyedUnarchiver unarchivedObjectOfClasses:[NSSet setWithArray:@[[SPKICacheDictionnary class], [NSData class]]] fromData:serializedSpkiCache error:&decodingError];
         if (decodingError)
         {
-            TSKLog(@"Could not retrieve SPKI cache from the filesystem: %@", decodingError);
+            os_log_error(TSKLogHandle(), "Could not retrieve SPKI cache from the filesystem: %{public}@", decodingError);
         }
     }
     return spkiCache;
@@ -351,7 +351,7 @@ static BOOL _isProtectedDataAvailable(void) {
     
     if (status != errSecSuccess)
     {
-        TSKLog(@"Could not create trust from certificate, got status %d", (int)status);
+        os_log_error(TSKLogHandle(), "Could not create trust from certificate, got status %d", (int)status);
         return nil;
     }
     
@@ -364,7 +364,7 @@ static BOOL _isProtectedDataAvailable(void) {
     evaluateCertificateChainTrust(trust, &trustResult, &error);
     if ((error != NULL) && (trustResult != kSecTrustResultRecoverableTrustFailure))
     {
-        TSKLog(@"Could not evaluate trust for the certificate: %@", [error localizedDescription]);
+        os_log_error(TSKLogHandle(), "Could not evaluate trust for the certificate: %{public}@", [error localizedDescription]);
         CFRelease(trust);
         return nil;
     }

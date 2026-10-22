@@ -8,11 +8,12 @@ configure_platform "$PLATFORM"
 RUNTIME="${PLATFORM_NAME% Simulator}"
 OS_VERSION="$(xcrun --sdk "$SIMULATOR_SDK" --show-sdk-version)"
 
+# simctl can list the device as available while xcodebuild sees its runtime as (null), so ask xcodebuild
 simulator_available() {
-    xcrun simctl list devices available | awk -v section="-- ${RUNTIME} ${OS_VERSION} --" -v device="    ${SIMULATOR} (" '
-        $0 == section { in_section = 1; next }
-        /^-- / { in_section = 0 }
-        in_section && index($0, device) == 1 { found = 1 }
+    xcodebuild -showdestinations -project TrustKit.xcodeproj -scheme "$SCHEME" 2>/dev/null | awk -v destination="OS:${OS_VERSION}, name:${SIMULATOR} }" '
+        /Destinations compatible with/ { compatible = 1; next }
+        /Destinations incompatible with/ { compatible = 0 }
+        compatible && index($0, destination) { found = 1 }
         END { exit !found }'
 }
 
