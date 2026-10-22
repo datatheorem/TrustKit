@@ -439,4 +439,30 @@
     XCTAssertNil(serverConfigKey, @"IncludeSubdomains did not work");
 }
 
+
+- (void)testRecentTldsAreAccepted
+{
+    // For https://github.com/datatheorem/TrustKit/issues/333
+    for (NSString *domain in @[@"good.xyz", @"good.music", @"good.kids", @"good.web", @"good.spa", @"good.ss", @"good.xn--qxa6a"])
+    {
+        XCTAssertNoThrow(parseTrustKitConfiguration(@{kTSKPinnedDomains : @{
+                                                              domain : @{
+                                                                      kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                                                                                              @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+                                                                                              ]}}}),
+                         @"Configuration for %@ must be accepted", domain);
+    }
+}
+
+
+- (void)testUnknownTldIsRejected
+{
+    XCTAssertThrows(parseTrustKitConfiguration(@{kTSKPinnedDomains : @{
+                                                         @"good.invalid" : @{
+                                                                 kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                                                                                         @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+                                                                                         ]}}}),
+                    @"Configuration for a domain outside the public suffix list must be rejected");
+}
+
 @end
