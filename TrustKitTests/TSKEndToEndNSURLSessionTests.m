@@ -150,6 +150,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
     
     // Configure a validation callback
     XCTestExpectation *notifReceivedExpectation = [self expectationWithDescription:@"TestNotificationReceivedExpectation"];
+    notifReceivedExpectation.assertForOverFulfill = NO;
     trustKit.pinningValidatorCallback = ^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, TKSDomainPinningPolicy *_Nonnull notedHostnamePinningPolicy) {
         // Check the received values
         XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldBlockConnection);
@@ -205,6 +206,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
     
     // Configure a validation callback
     XCTestExpectation *notifReceivedExpectation = [self expectationWithDescription:@"TestNotificationReceivedExpectation"];
+    notifReceivedExpectation.assertForOverFulfill = NO;
     trustKit.pinningValidatorCallback = ^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, TKSDomainPinningPolicy *_Nonnull notedHostnamePinningPolicy) {
         // Check the received values
         XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldAllowConnection);
@@ -262,6 +264,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
     
     // Configure a validation callback
     XCTestExpectation *notifReceivedExpectation = [self expectationWithDescription:@"TestNotificationReceivedExpectation"];
+    notifReceivedExpectation.assertForOverFulfill = NO;
     trustKit.pinningValidatorCallback = ^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, TKSDomainPinningPolicy *_Nonnull notedHostnamePinningPolicy) {
         // Check the received values
         XCTAssertEqual(result.finalTrustDecision, TSKTrustDecisionShouldBlockConnection);

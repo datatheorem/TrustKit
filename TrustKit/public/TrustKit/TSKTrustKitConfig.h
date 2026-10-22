@@ -65,6 +65,9 @@ FOUNDATION_EXPORT const TSKGlobalConfigurationKey kTSKSwizzleNetworkDelegates;
 /**
  A dictionary with domains (such as _www.domain.com_) as keys and dictionaries as values.
  
+ Keys can also be IPv4 or IPv6 addresses. Internationalized domain names must be written in
+ punycode. Matching ignores case.
+ 
  Each entry should contain domain-specific settings for performing pinning validation when
  connecting to the domain, including for example the domain's public key hashes. A list of
  all domain-specific keys is available in the "Domain-specific Keys" sections.
@@ -130,7 +133,7 @@ FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKEnforcePinning;
 
 /**
  A boolean. If set to `YES`, also pin all the subdomains of the specified domain; default
- value is `NO`.
+ value is `NO`. It cannot be set for an IP address or a single-label domain such as _com_.
  */
 FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKIncludeSubdomains;
 

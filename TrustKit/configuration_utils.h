@@ -17,6 +17,14 @@
 #import <Foundation/Foundation.h>
 #endif
 
+// Lowercase the hostname, drop a trailing dot and IPv6 brackets, and write IP addresses in their standard form
+NSString * _Nonnull canonicalHostname(NSString * _Nonnull hostname);
+
+BOOL isIPAddress(NSString * _Nonnull hostname);
+
+// Whether a canonical hostname is an IP address or a well-formed domain name
+BOOL isValidPinnedDomain(NSString * _Nonnull domain);
+
 // Figure out if a specific domain is pinned and retrieve this domain's configuration key; returns nil if no configuration was found
 NSString * _Nullable getPinningConfigurationKeyForDomain(NSString * _Nonnull hostname , NSDictionary<NSString *, TKSDomainPinningPolicy *> * _Nonnull domainPinningPolicies);
 
