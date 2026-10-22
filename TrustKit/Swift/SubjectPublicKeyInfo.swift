@@ -1,13 +1,9 @@
-/*
-
- SubjectPublicKeyInfo.swift
- TrustKit
-
- Copyright 2026 The TrustKit Project Authors
- Licensed under the MIT license, see associated LICENSE file for terms.
- See AUTHORS file for the list of project authors.
-
- */
+// SubjectPublicKeyInfo.swift
+// TrustKit
+//
+// Copyright 2026 The TrustKit Project Authors
+// Licensed under the MIT license, see associated LICENSE file for terms.
+// See AUTHORS file for the list of project authors.
 
 import Foundation
 
@@ -33,7 +29,8 @@ private struct DERElement {
 
 private func subjectPublicKeyInfoRange(in der: [UInt8]) -> Range<Int>? {
     guard let certificate = readElement(der, in: der.indices), certificate.tag == 0x30,
-          let tbsCertificate = readElement(der, in: certificate.content), tbsCertificate.tag == 0x30 else {
+        let tbsCertificate = readElement(der, in: certificate.content), tbsCertificate.tag == 0x30
+    else {
         return nil
     }
 
@@ -74,7 +71,9 @@ private func readElement(_ der: [UInt8], in range: Range<Int>) -> DERElement? {
     guard range.upperBound - contentStart >= length else {
         return nil
     }
-    return DERElement(tag: tag,
-                      content: contentStart..<contentStart + length,
-                      element: range.lowerBound..<contentStart + length)
+    return DERElement(
+        tag: tag,
+        content: contentStart..<contentStart + length,
+        element: range.lowerBound..<contentStart + length
+    )
 }

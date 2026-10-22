@@ -15,15 +15,14 @@ let package = Package(
         .library(
             name: "TrustKit",
             targets: ["TrustKit"]
-        ),
+        )
     ],
-    dependencies: [
-    ],
+    dependencies: [],
     targets: [
         .target(
             name: "TrustKit",
             dependencies: ["TrustKitSwift"],
-            path: "TrustKit",   
+            path: "TrustKit",
             exclude: ["Swift"],
             resources: [.process("PrivacyInfo.xcprivacy")],
             publicHeadersPath: "public",
@@ -32,6 +31,6 @@ let package = Package(
         .target(
             name: "TrustKitSwift",
             path: "TrustKit/Swift"
-        ),
+        )
     ]
 )

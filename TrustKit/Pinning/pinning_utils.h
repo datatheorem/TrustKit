@@ -21,7 +21,6 @@
 #import <Security/Security.h>
 #endif
 
-
 #ifndef TrustKit_pinning_utils_h
 #define TrustKit_pinning_utils_h
 
