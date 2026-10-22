@@ -181,6 +181,7 @@ didReceiveChallenge:(NSURLAuthenticationChallenge * _Nonnull)challenge
 
     // Configure a validation callback
     XCTestExpectation *notifReceivedExpectation = [self expectationWithDescription:@"TestNotificationReceivedExpectation"];
+    notifReceivedExpectation.assertForOverFulfill = NO;
     __block BOOL receivedCallForCloudflare = NO;
     __block BOOL receivedCallForFacebook = NO;
     TrustKit.sharedInstance.pinningValidatorCallback = ^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, TKSDomainPinningPolicy *_Nonnull notedHostnamePinningPolicy) {
