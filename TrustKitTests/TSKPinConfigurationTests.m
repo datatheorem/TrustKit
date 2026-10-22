@@ -439,4 +439,123 @@
     XCTAssertNil(serverConfigKey, @"IncludeSubdomains did not work");
 }
 
+
+- (void)testIPv4Address
+{
+    // For https://github.com/datatheorem/TrustKit/issues/341
+    NSDictionary *trustKitConfig;
+    trustKitConfig = parseTrustKitConfiguration(@{kTSKPinnedDomains : @{
+                                                          @"192.0.2.10" : @{
+                                                                  kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                                                                                          @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+                                                                                          ]}}});
+    
+    XCTAssertEqualObjects(getPinningConfigurationKeyForDomain(@"192.0.2.10", trustKitConfig[kTSKPinnedDomains]), @"192.0.2.10");
+    XCTAssertNil(getPinningConfigurationKeyForDomain(@"192.0.2.11", trustKitConfig[kTSKPinnedDomains]));
+}
+
+
+- (void)testIPv6AddressIsCanonicalized
+{
+    NSDictionary *trustKitConfig;
+    trustKitConfig = parseTrustKitConfiguration(@{kTSKPinnedDomains : @{
+                                                          @"2001:DB8:0:0:0:0:0:1" : @{
+                                                                  kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                                                                                          @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+                                                                                          ]}}});
+    
+    XCTAssertEqualObjects([trustKitConfig[kTSKPinnedDomains] allKeys], @[@"2001:db8::1"]);
+    XCTAssertEqualObjects(getPinningConfigurationKeyForDomain(@"2001:db8::1", trustKitConfig[kTSKPinnedDomains]), @"2001:db8::1");
+    XCTAssertEqualObjects(getPinningConfigurationKeyForDomain(@"[2001:db8::1]", trustKitConfig[kTSKPinnedDomains]), @"2001:db8::1");
+}
+
+
+- (void)testIncludeSubdomainsForIPAddressOrSingleLabelDomain
+{
+    for (NSString *domain in @[@"192.0.2.10", @"2001:db8::1", @"localhost"])
+    {
+        XCTAssertThrows(parseTrustKitConfiguration(@{kTSKPinnedDomains : @{
+                                                             domain : @{
+                                                                     kTSKIncludeSubdomains : @YES,
+                                                                     kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                                                                                             @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+                                                                                             ]}}}),
+                        @"Configuration with includeSubdomains for %@ must be rejected", domain);
+    }
+}
+
+
+- (void)testDomainsOutsideThePublicSuffixList
+{
+    // For https://github.com/datatheorem/TrustKit/issues/333
+    for (NSString *domain in @[@"api.internal", @"api.corp", @"printer.local", @"router.home.arpa", @"localhost",
+                               @"good.xyz", @"good.music", @"www.fastly.net", @"amazonaws.com", @"_service.good.com"])
+    {
+        XCTAssertNoThrow(parseTrustKitConfiguration(@{kTSKPinnedDomains : @{
+                                                              domain : @{
+                                                                      kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                                                                                              @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+                                                                                              ]}}}),
+                         @"Configuration for %@ must be accepted", domain);
+    }
+}
+
+
+- (void)testIncludeSubdomainsForMultiLabelSuffix
+{
+    NSDictionary *trustKitConfig;
+    trustKitConfig = parseTrustKitConfiguration(@{kTSKPinnedDomains : @{
+                                                          @"execute-api.us-east-1.amazonaws.com" : @{
+                                                                  kTSKIncludeSubdomains : @YES,
+                                                                  kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                                                                                          @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+                                                                                          ]}}});
+    
+    NSString *serverConfigKey = getPinningConfigurationKeyForDomain(@"abc123.execute-api.us-east-1.amazonaws.com", trustKitConfig[kTSKPinnedDomains]);
+    XCTAssertEqualObjects(serverConfigKey, @"execute-api.us-east-1.amazonaws.com");
+}
+
+
+- (void)testMalformedDomainsAreRejected
+{
+    for (NSString *domain in @[@"", @"*.good.com", @"https://good.com", @"good.com:443", @"good.com/path", @"user@good.com",
+                               @"good com", @"good..com", @"..good.com", @"bücher.de", @"10.0.0.256", @"1.2.3", @"fe80::1%en0"])
+    {
+        XCTAssertThrows(parseTrustKitConfiguration(@{kTSKPinnedDomains : @{
+                                                             domain : @{
+                                                                     kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                                                                                             @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+                                                                                             ]}}}),
+                        @"Configuration for %@ must be rejected", domain);
+    }
+}
+
+
+- (void)testDomainMatchingIgnoresCaseAndTrailingDot
+{
+    NSDictionary *trustKitConfig;
+    trustKitConfig = parseTrustKitConfiguration(@{kTSKPinnedDomains : @{
+                                                          @"Good.COM" : @{
+                                                                  kTSKIncludeSubdomains : @YES,
+                                                                  kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                                                                                          @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+                                                                                          ]}}});
+    
+    for (NSString *hostname in @[@"good.com", @"GOOD.com", @"WWW.good.com", @"www.good.com."])
+    {
+        XCTAssertEqualObjects(getPinningConfigurationKeyForDomain(hostname, trustKitConfig[kTSKPinnedDomains]), @"good.com", @"%@", hostname);
+    }
+}
+
+
+- (void)testDuplicateDomainsAreRejected
+{
+    NSDictionary *domainPolicy = @{kTSKPublicKeyHashes : @[@"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                                                           @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+                                                           ]};
+    XCTAssertThrows(parseTrustKitConfiguration(@{kTSKPinnedDomains : @{@"good.com" : domainPolicy,
+                                                                       @"GOOD.com." : domainPolicy}}),
+                    @"Configuration with the same domain twice must be rejected");
+}
+
 @end

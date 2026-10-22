@@ -722,6 +722,49 @@ static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
 }
 
 
+- (void)testVerifyIPAddress
+{
+    // For https://github.com/datatheorem/TrustKit/issues/341
+    // The leaf certificate is valid for 192.0.2.10 and 2001:db8::10
+    SecCertificateRef rootCertificate = [TSKCertificateUtils createCertificateFromDer:@"IPAddressRootCA"];
+    SecCertificateRef leafCertificate = [TSKCertificateUtils createCertificateFromDer:@"192.0.2.10"];
+    SecCertificateRef certChainArray[1] = {leafCertificate};
+    SecCertificateRef trustStoreArray[1] = {rootCertificate};
+    
+    NSArray *pins = @[@"kORWsi+P7EkQBmUG9EEmEWDxQ+pbyqy6xSH+sVtGoJQ=", // Leaf key
+                      @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
+                      ];
+    NSDictionary *trustKitConfig = @{kTSKSwizzleNetworkDelegates: @NO,
+                                     kTSKPinnedDomains : @{@"192.0.2.10" : @{kTSKPublicKeyHashes : pins},
+                                                           @"2001:DB8:0:0:0:0:0:10" : @{kTSKPublicKeyHashes : pins},
+                                                           @"192.0.2.11" : @{kTSKPublicKeyHashes : pins}}};
+    NSDictionary *parsedTrustKitConfig = parseTrustKitConfiguration(trustKitConfig);
+    
+    TSKPinningValidator *validator;
+    validator = [[TSKPinningValidator alloc] initWithDomainPinningPolicies:parsedTrustKitConfig[kTSKPinnedDomains]
+                                                              hashCache:spkiCache
+                                          ignorePinsForUserTrustAnchors:NO
+                                                validationCallbackQueue:dispatch_get_main_queue()
+                                                     validationCallback:^(TSKPinningValidatorResult * _Nonnull result, NSString * _Nonnull notedHostname, NSDictionary<TSKDomainConfigurationKey, id> *_Nonnull notedHostnamePinningPolicy) {}];
+    
+    NSDictionary<NSString *, NSNumber *> *expectedDecisions = @{@"192.0.2.10" : @(TSKTrustDecisionShouldAllowConnection),
+                                                                @"[2001:db8::10]" : @(TSKTrustDecisionShouldAllowConnection),
+                                                                @"192.0.2.11" : @(TSKTrustDecisionShouldBlockConnection)};
+    for (NSString *hostname in expectedDecisions)
+    {
+        SecTrustRef trust = [TSKCertificateUtils createTrustWithCertificates:(const void **)certChainArray
+                                                                 arrayLength:sizeof(certChainArray)/sizeof(certChainArray[0])
+                                                          anchorCertificates:(const void **)trustStoreArray
+                                                                 arrayLength:sizeof(trustStoreArray)/sizeof(trustStoreArray[0])];
+        XCTAssertEqual([validator evaluateTrust:trust forHostname:hostname], [expectedDecisions[hostname] integerValue], @"%@", hostname);
+        CFRelease(trust);
+    }
+    
+    CFRelease(rootCertificate);
+    CFRelease(leafCertificate);
+}
+
+
 - (void)testDomainNotPinned
 {
     // The certificate chain is valid for www.good.com but we are connecting to www.nonpinned.com

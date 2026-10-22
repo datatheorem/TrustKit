@@ -124,6 +124,12 @@ NSDictionary *trustKitConfig =
 The list of all the configuration keys is available in the
 [documentation](https://datatheorem.github.io/TrustKit/documentation/Classes/TrustKit.html).
 
+Pinned domains can be any domain name, including internal ones such as `api.internal` or
+`localhost`, or an IPv4 or IPv6 address. `kTSKIncludeSubdomains` cannot be used with an IP address
+or a single-label domain. TrustKit pins on top of the system's certificate validation, so a server
+with a self-signed certificate is still rejected; install your own CA on the device and pin its key
+instead.
+
 ### Implementing Pinning Validation
 
 After TrustKit has been initialized, a 
