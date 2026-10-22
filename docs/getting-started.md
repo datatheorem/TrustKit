@@ -44,12 +44,9 @@ repository on a PEM or DER certificate:
     $ ./get_pin_from_certificate.sh ca.pem
     $ ./get_pin_from_certificate.sh ca.der
 
-It runs the following `openssl` commands:
-
-    $ openssl x509 -in ca.pem -pubkey -noout \
-        | openssl pkey -pubin -outform der \
-        | openssl dgst -sha256 -binary \
-        | openssl enc -base64
+The script hashes the Subject Public Key Info exactly as it is encoded in the certificate, as
+TrustKit does. Avoid re-encoding the key first, for example with `openssl pkey`: for some
+certificates that changes the bytes, and the resulting pin won't match.
 
 
 ## Deploying TrustKit
