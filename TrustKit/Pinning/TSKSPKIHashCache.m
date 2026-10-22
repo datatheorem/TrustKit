@@ -13,7 +13,11 @@
 #import "TSKSPKIHashCache.h"
 #import "../TSKLog.h"
 #import <CommonCrypto/CommonDigest.h>
-#import "pinning_utils.h"
+#if SWIFT_PACKAGE
+@import TrustKitSwift;
+#else
+#import <TrustKit/TrustKit-Swift.h>
+#endif
 
 @interface TSKSPKIHashCache ()
 
@@ -119,7 +123,7 @@ static BOOL _isProtectedDataAvailable(void) {
     // We didn't this certificate in the cache so we need to generate its SPKI hash
     os_log_debug(TSKLogHandle(), "Generating Subject Public Key Info hash...");
     
-    NSData *subjectPublicKeyInfo = getSubjectPublicKeyInfo(certificateData);
+    NSData *subjectPublicKeyInfo = [TSKSubjectPublicKeyInfo dataFromCertificate:certificateData];
     if (subjectPublicKeyInfo == nil)
     {
         os_log_error(TSKLogHandle(), "Could not read the Subject Public Key Info from the certificate");

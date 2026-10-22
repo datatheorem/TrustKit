@@ -95,6 +95,7 @@
 		7C9060CC7B837D9C4A227DF7 /* TSKPinFailureReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C15F99F1B16094D00F06C0E /* TSKPinFailureReport.m */; };
 		7D9DD27EB4A45E73F274D7F4 /* GlobalSignDomainValidationCA-SHA256-G2.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05C41E28AA6C0045D8B3 /* GlobalSignDomainValidationCA-SHA256-G2.der */; };
 		7E0DCB5F043EC6726C2936B5 /* pinning_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = B005E3E729B85EBA007C3D84 /* pinning_utils.m */; };
+		45B5FB2AF8D093EDE71C825D /* SubjectPublicKeyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E84F4FFC49B4AC9B23F1EF4 /* SubjectPublicKeyInfo.swift */; };
 		805B476B7164A3EDD62F3F24 /* TSKPinningValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = 7033D35C248FE84100BDFF50 /* TSKPinningValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		82B218B6BA21627354BF9F46 /* ssl_pin_verifier.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CE919211AEA077F002B29AE /* ssl_pin_verifier.m */; };
 		8418436F3F12D407F7D14221 /* TSKSPKIHashCache.h in Headers */ = {isa = PBXBuildFile; fileRef = FC1A09081E57AC450055B12C /* TSKSPKIHashCache.h */; };
@@ -270,9 +271,13 @@
 		AE59E8A5C3487566AADBDFB2 /* www.good.com.der in Resources */ = {isa = PBXBuildFile; fileRef = 8CBA05D61E28AAA40045D8B3 /* www.good.com.der */; };
 		AED4268613023DF853EB22EC /* Corporation Service Company RSA OV SSL CA.der in Resources */ = {isa = PBXBuildFile; fileRef = 91B276432B9A463E004B41A7 /* Corporation Service Company RSA OV SSL CA.der */; };
 		B005E3E829B85EBA007C3D84 /* pinning_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = B005E3E729B85EBA007C3D84 /* pinning_utils.m */; };
+		BDA43C6C288EEF13E3A3D6B3 /* SubjectPublicKeyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E84F4FFC49B4AC9B23F1EF4 /* SubjectPublicKeyInfo.swift */; };
 		B005E3EB29B85EBA007C3D84 /* pinning_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = B005E3E729B85EBA007C3D84 /* pinning_utils.m */; };
+		83D3CE8E6A8308E00B957A40 /* SubjectPublicKeyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E84F4FFC49B4AC9B23F1EF4 /* SubjectPublicKeyInfo.swift */; };
 		B005E3ED29B85EBA007C3D84 /* pinning_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = B005E3E729B85EBA007C3D84 /* pinning_utils.m */; };
+		F2BFBF8001DFD807C061A666 /* SubjectPublicKeyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E84F4FFC49B4AC9B23F1EF4 /* SubjectPublicKeyInfo.swift */; };
 		B005E3EF29B85EBA007C3D84 /* pinning_utils.m in Sources */ = {isa = PBXBuildFile; fileRef = B005E3E729B85EBA007C3D84 /* pinning_utils.m */; };
+		B3A8FCA3E62F7CD5FDEA0B92 /* SubjectPublicKeyInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E84F4FFC49B4AC9B23F1EF4 /* SubjectPublicKeyInfo.swift */; };
 		B005E3F129B8C2F8007C3D84 /* pinning_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = B005E3F029B85ED0007C3D84 /* pinning_utils.h */; };
 		B005E3F229B8C2F8007C3D84 /* pinning_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = B005E3F029B85ED0007C3D84 /* pinning_utils.h */; };
 		B005E3F329B8C2F9007C3D84 /* pinning_utils.h in Headers */ = {isa = PBXBuildFile; fileRef = B005E3F029B85ED0007C3D84 /* pinning_utils.h */; };
@@ -440,6 +445,7 @@
 		8CF27AA11F01BB7B009369B0 /* TSKLoggerTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TSKLoggerTests.m; sourceTree = "<group>"; };
 		91B276432B9A463E004B41A7 /* Corporation Service Company RSA OV SSL CA.der */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Corporation Service Company RSA OV SSL CA.der"; sourceTree = "<group>"; };
 		B005E3E729B85EBA007C3D84 /* pinning_utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = pinning_utils.m; path = Pinning/pinning_utils.m; sourceTree = "<group>"; };
+		5E84F4FFC49B4AC9B23F1EF4 /* SubjectPublicKeyInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SubjectPublicKeyInfo.swift; path = Swift/SubjectPublicKeyInfo.swift; sourceTree = "<group>"; };
 		B005E3F029B85ED0007C3D84 /* pinning_utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = pinning_utils.h; path = Pinning/pinning_utils.h; sourceTree = "<group>"; };
 		B0C703E4281D53491D783E5F /* TrustKit visionOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "TrustKit visionOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC6F28762BAB30A8001B604A /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
@@ -724,6 +730,7 @@
 				FC1A09091E57AC450055B12C /* TSKSPKIHashCache.m */,
 				FC1A09121E57C6820055B12C /* TSKPublicKeyAlgorithm.h */,
 				B005E3E729B85EBA007C3D84 /* pinning_utils.m */,
+				5E84F4FFC49B4AC9B23F1EF4 /* SubjectPublicKeyInfo.swift */,
 				B005E3F029B85ED0007C3D84 /* pinning_utils.h */,
 			);
 			name = Pinning;
@@ -1389,6 +1396,7 @@
 				6BEE9B751CA48C25F2D78954 /* TSKReportsRateLimiter.m in Sources */,
 				BA4033A9744CF186E7E38480 /* parse_configuration.m in Sources */,
 				7E0DCB5F043EC6726C2936B5 /* pinning_utils.m in Sources */,
+				45B5FB2AF8D093EDE71C825D /* SubjectPublicKeyInfo.swift in Sources */,
 				2C3C580D8BBA830D9CE101FD /* TSKBackgroundReporter.m in Sources */,
 				6C7FCCD6E6E97546DF3EEFCE /* TSKNSURLSessionDelegateProxy.m in Sources */,
 				26024026147AF4313E2B54BB /* configuration_utils.m in Sources */,
@@ -1413,6 +1421,7 @@
 				8C9EBE031B619BBE00CA7EE0 /* TSKReportsRateLimiter.m in Sources */,
 				8C5D98B31CEFF079008E654B /* parse_configuration.m in Sources */,
 				B005E3E829B85EBA007C3D84 /* pinning_utils.m in Sources */,
+				BDA43C6C288EEF13E3A3D6B3 /* SubjectPublicKeyInfo.swift in Sources */,
 				6B2B06AF1B05157400FC749E /* TSKBackgroundReporter.m in Sources */,
 				8CD5F74B1BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.m in Sources */,
 				8C4346DA1E5B894A008023F9 /* configuration_utils.m in Sources */,
@@ -1456,6 +1465,7 @@
 				8C84CB921D6E0981009B3E7D /* TSKReportsRateLimiter.m in Sources */,
 				8C84CB931D6E0981009B3E7D /* parse_configuration.m in Sources */,
 				B005E3ED29B85EBA007C3D84 /* pinning_utils.m in Sources */,
+				F2BFBF8001DFD807C061A666 /* SubjectPublicKeyInfo.swift in Sources */,
 				8C84CB941D6E0981009B3E7D /* TSKBackgroundReporter.m in Sources */,
 				8C84CB951D6E0981009B3E7D /* TSKNSURLSessionDelegateProxy.m in Sources */,
 				8C4346DD1E5B894A008023F9 /* configuration_utils.m in Sources */,
@@ -1498,6 +1508,7 @@
 				8CA6CC1A1BAE2B6600BDA419 /* TSKBackgroundReporter.m in Sources */,
 				8CA6CC1C1BAE2B6600BDA419 /* TSKPinFailureReport.m in Sources */,
 				B005E3EB29B85EBA007C3D84 /* pinning_utils.m in Sources */,
+				83D3CE8E6A8308E00B957A40 /* SubjectPublicKeyInfo.swift in Sources */,
 				8CD5F74D1BCB535E005801D8 /* TSKNSURLSessionDelegateProxy.m in Sources */,
 				8C5D98B51CEFF079008E654B /* parse_configuration.m in Sources */,
 				8C4346DC1E5B894A008023F9 /* configuration_utils.m in Sources */,
@@ -1542,6 +1553,7 @@
 				8CC5D2271D6E64D10074F515 /* TSKReportsRateLimiter.m in Sources */,
 				8CC5D2281D6E64D10074F515 /* parse_configuration.m in Sources */,
 				B005E3EF29B85EBA007C3D84 /* pinning_utils.m in Sources */,
+				B3A8FCA3E62F7CD5FDEA0B92 /* SubjectPublicKeyInfo.swift in Sources */,
 				8CC5D22A1D6E64D10074F515 /* TSKBackgroundReporter.m in Sources */,
 				8CC5D22B1D6E64D10074F515 /* TSKNSURLSessionDelegateProxy.m in Sources */,
 				8C4346DE1E5B894A008023F9 /* configuration_utils.m in Sources */,
@@ -1782,7 +1794,6 @@
 				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/**";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 3.0.8;
@@ -1793,6 +1804,7 @@
 				SDKROOT = macosx;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TVOS_DEPLOYMENT_TARGET = 15.0;
 				VALID_ARCHS = "$(ARCHS_STANDARD)";
@@ -1866,7 +1878,6 @@
 				GCC_WARN_UNKNOWN_PRAGMAS = YES;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				HEADER_SEARCH_PATHS = "$(SRCROOT)/**";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MACOSX_DEPLOYMENT_TARGET = 12.0;
 				MARKETING_VERSION = 3.0.8;
@@ -1877,6 +1888,7 @@
 				SKIP_INSTALL = YES;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx";
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 6.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TVOS_DEPLOYMENT_TARGET = 15.0;
 				VALIDATE_PRODUCT = YES;

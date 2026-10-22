@@ -44,12 +44,4 @@ void evaluateCertificateChainTrust(SecTrustRef serverTrust, SecTrustResultType *
  */
 SecCertificateRef getCertificateAtIndex(SecTrustRef serverTrust, CFIndex index);
 
-/**
- Returns the Subject Public Key Info of a certificate, exactly as it is encoded in the certificate.
-
- @param certificateData The DER-encoded certificate
- @return The DER-encoded Subject Public Key Info, or nil if the certificate could not be read
- */
-NSData *getSubjectPublicKeyInfo(NSData *certificateData);
-
 #endif

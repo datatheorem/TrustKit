@@ -70,6 +70,16 @@ Add the following line to your Cartfile:
 Then, follow the instructions from the 
 [Carthage README](https://github.com/Carthage/Carthage#adding-frameworks-to-an-application).
 
+#### Prebuilt static XCFramework
+
+Each [GitHub release](https://github.com/datatheorem/TrustKit/releases) includes `TrustKit-static.zip`,
+which contains a static `TrustKit.xcframework`.
+
+Part of TrustKit is written in Swift. If your app has no Swift code of its own and its deployment
+target is earlier than iOS 16, tvOS 16, Mac Catalyst 16 or macOS 13, linking fails with
+`Undefined symbols … __swift_FORCE_LOAD_$_swiftCompatibility56`. To fix this, add an empty Swift
+file to your app target; Xcode then links the Swift libraries that TrustKit needs on those OS versions.
+
 #### CocoaPods
 
 TrustKit 4.0 and later are not published to CocoaPods. Use the Swift Package
