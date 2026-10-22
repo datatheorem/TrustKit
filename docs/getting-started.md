@@ -38,12 +38,18 @@ certificate's Subject Public Key Info; this is the same as what is described in
 the [HTTP Public Key Pinning
 specification](https://developer.mozilla.org/en-US/docs/Web/Security/Public_Key_Pinning).
 
-To generate such values, a Python helper script is available within the project's 
-repository; it can be used to generate the pin configuration from a PEM or DER 
-certificate:
+To generate such values, run the `get_pin_from_certificate.sh` script from the project's
+repository on a PEM or DER certificate:
 
-    $ python get_pin_from_certificate.py ca.pem
-    $ python get_pin_from_certificate.py --type DER ca.der
+    $ ./get_pin_from_certificate.sh ca.pem
+    $ ./get_pin_from_certificate.sh ca.der
+
+It runs the following `openssl` commands:
+
+    $ openssl x509 -in ca.pem -pubkey -noout \
+        | openssl pkey -pubin -outform der \
+        | openssl dgst -sha256 -binary \
+        | openssl enc -base64
 
 
 ## Deploying TrustKit
