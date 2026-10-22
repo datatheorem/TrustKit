@@ -94,20 +94,6 @@ FOUNDATION_EXPORT const TSKGlobalConfigurationKey kTSKIgnorePinningForUserDefine
  */
 FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKPublicKeyHashes;
 
-/**
- DEPRECATED since 1.6.0: this configuration key is no longer needed.
-
- An array of `TSKSupportedAlgorithm` constants to specify the public key algorithms for the
- keys to be pinned.
-
- TrustKit requires this information in order to compute SSL pins when validating a server's
- certificate chain, because the `Security` framework does not provide APIs to extract the
- key's algorithm from an SSL certificate. To minimize the performance impact of Trustkit,
- only one algorithm should be enabled.
- */
-FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKPublicKeyAlgorithms
-    __deprecated_msg("Starting with TrustKit 1.6.0, key algorithms no longer need to be specified; remove TSKPublicKeyAlgorithms from your configuration.");
-
 #pragma mark Domain-Specific Configuration Keys - Optional
 
 /**
@@ -189,37 +175,3 @@ FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKDisableDefaultReportUri;
  pin set, such as when the user disables App updates.
  */
 FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKExpirationDate;
-
-#pragma mark DEPRECATED - Supported Public Key Algorithm Keys
-
-/**
- DEPRECATED since 1.6.0: this configuration key is no longer needed.
-
- A public key algorithm supported by TrustKit for generating the SSL pin for a certificate.
- */
-typedef NSString *
-    TSKSupportedAlgorithm __deprecated_msg("Starting with TrustKit 1.6.0, key algorithms no longer need to be specified; remove TSKSupportedAlgorithm from your configuration.");
-
-/**
- RSA 2048.
- */
-FOUNDATION_EXPORT const TSKSupportedAlgorithm kTSKAlgorithmRsa2048
-    __deprecated_msg("Starting with TrustKit 1.6.0, key algorithms no longer need to be specified; remove TSKPublicKeyAlgorithms from your configuration.");
-
-/**
- RSA 4096.
- */
-FOUNDATION_EXPORT const TSKSupportedAlgorithm kTSKAlgorithmRsa4096
-    __deprecated_msg("Starting with TrustKit 1.6.0, key algorithms no longer need to be specified; remove TSKPublicKeyAlgorithms from your configuration.");
-
-/**
- ECDSA with secp256r1 curve.
- */
-FOUNDATION_EXPORT const TSKSupportedAlgorithm kTSKAlgorithmEcDsaSecp256r1
-    __deprecated_msg("Starting with TrustKit 1.6.0, key algorithms no longer need to be specified; remove TSKPublicKeyAlgorithms from your configuration.");
-
-/**
- ECDSA with secp384r1 curve.
- */
-FOUNDATION_EXPORT const TSKSupportedAlgorithm kTSKAlgorithmEcDsaSecp384r1
-    __deprecated_msg("Starting with TrustKit 1.6.0, key algorithms no longer need to be specified; remove TSKPublicKeyAlgorithms from your configuration.");

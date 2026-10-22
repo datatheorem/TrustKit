@@ -1,6 +1,6 @@
 /*
 
- TSKPublicKeyAlgorithmTests.m
+ TSKSPKIHashCacheTests.m
  TrustKit
 
  Copyright 2015 The TrustKit Project Authors
@@ -26,10 +26,10 @@
 - (NSMutableDictionary<NSNumber *, SPKICacheDictionnary *> *)getSubjectPublicKeyInfoHashesCache;
 @end
 
-@interface TSKPublicKeyAlgorithmTests : XCTestCase
+@interface TSKSPKIHashCacheTests : XCTestCase
 @end
 
-@implementation TSKPublicKeyAlgorithmTests {
+@implementation TSKSPKIHashCacheTests {
     TSKSPKIHashCache *spkiCache;
 }
 
@@ -57,7 +57,7 @@
 }
 
 - (void)testExtractRsa3072 {
-    // Ensure a RSA 2048 key is properly extracted from its certificate
+    // Ensure a RSA 3072 key is properly extracted from its certificate
     SecCertificateRef certificate = [TSKCertificateUtils createCertificateFromDer:@"Corporation Service Company RSA OV SSL CA"];
 
     NSData *spkiHash = [spkiCache hashSubjectPublicKeyInfoFromCertificate:certificate];
