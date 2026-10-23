@@ -1,12 +1,12 @@
 /*
- 
+
  TSKPinningValidator.h
  TrustKit
- 
+
  Copyright 2015 The TrustKit Project Authors
  Licensed under the MIT license, see associated LICENSE file for terms.
  See AUTHORS file for the list of project authors.
- 
+
  */
 
 #if __has_include(<TrustKit/TSKTrustDecision.h>)
@@ -28,18 +28,18 @@
 @property (nonatomic, readonly, nonnull) NSString *serverHostname;
 
 /**
- The result of validating the server's certificate chain against the set of SSL pins configured for 
+ The result of validating the server's certificate chain against the set of SSL pins configured for
  the `notedHostname`.
  */
 @property (nonatomic, readonly) TSKTrustEvaluationResult evaluationResult;
 
 /**
- The trust decision returned for this connection, which describes whether the connection should be blocked 
- or allowed, based on the `evaluationResult` returned when evaluating the `serverTrust` and the SSL pining 
+ The trust decision returned for this connection, which describes whether the connection should be blocked
+ or allowed, based on the `evaluationResult` returned when evaluating the `serverTrust` and the SSL pining
  policy configured for this server.
 
- For example, the pinning validation could have failed (ie. evaluationResult being 
- `TSKTrustEvaluationFailedNoMatchingPin`) but the policy might be set to ignore pinning validation failures 
+ For example, the pinning validation could have failed (ie. evaluationResult being
+ `TSKTrustEvaluationFailedNoMatchingPin`) but the policy might be set to ignore pinning validation failures
  for this server, thereby returning `TSKTrustDecisionShouldAllowConnection`.
  */
 @property (nonatomic, readonly) TSKTrustDecision finalTrustDecision;
@@ -50,7 +50,7 @@
 @property (nonatomic, readonly) NSTimeInterval validationDuration;
 
 /**
- The certificate chain sent by the server when establishing the connection as PEM-formatted certificates. 
+ The certificate chain sent by the server when establishing the connection as PEM-formatted certificates.
  */
 @property (nonatomic, readonly, nonnull) NSArray *certificateChain;
 

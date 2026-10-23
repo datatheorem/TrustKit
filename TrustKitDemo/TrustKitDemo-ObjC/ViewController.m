@@ -1,12 +1,12 @@
 /*
- 
+
  ViewController.m
  TrustKitDemo
- 
+
  Copyright 2017 The TrustKit Project Authors
  Licensed under the MIT license, see associated LICENSE file for terms.
  See AUTHORS file for the list of project authors.
- 
+
  */
 
 #import "ViewController.h"
@@ -27,28 +27,25 @@ static NSString *const baseURLYahoo = @"https://www.yahoo.com/";
 
 @implementation ViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     self.invalidPinBtn.layer.cornerRadius = 4;
     self.validPinBtn.layer.cornerRadius = 4;
     self.notPinnedBtn.layer.cornerRadius = 4;
     self.webViewInvalidPinBtn.layer.cornerRadius = 4;
     self.webViewValidPinBtn.layer.cornerRadius = 4;
-    
-    self.session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]
-                                                 delegate:self
-                                            delegateQueue:nil];
+
+    self.session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration] delegate:self delegateQueue:nil];
 }
 
 #pragma mark TrustKit Pinning Reference
 
-- (void)URLSession:(NSURLSession *)session didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential * _Nullable))completionHandler
-{
+- (void)URLSession:(NSURLSession *)session
+    didReceiveChallenge:(NSURLAuthenticationChallenge *)challenge
+      completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition, NSURLCredential *_Nullable))completionHandler {
     // Call into TrustKit here to do pinning validation
-    if (![TrustKit.sharedInstance.pinningValidator handleChallenge:challenge completionHandler:completionHandler])
-    {
+    if (![TrustKit.sharedInstance.pinningValidator handleChallenge:challenge completionHandler:completionHandler]) {
         // TrustKit did not handle this challenge: perhaps it was not for server trust
         // or the domain was not pinned. Fall back to the default behavior
         completionHandler(NSURLSessionAuthChallengePerformDefaultHandling, nil);
@@ -57,78 +54,67 @@ static NSString *const baseURLYahoo = @"https://www.yahoo.com/";
 
 #pragma mark Test Control
 
-- (void)loadUrl:(NSURL *)url
-{
+- (void)loadUrl:(NSURL *)url {
     // Show loading view
     [self showActivityIndicatorInCurrentViewController];
-    
+
     // Load a URL with a good pinning configuration
-    NSURLSessionDataTask *task = [self.session dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            if (!error) {
-                [self displayAlertWithTitle:@"Connected" messageFormat:@"Connected to %@", url.absoluteString];
-            }
-            else if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorCancelled) {
-                [self displayAlertWithTitle:@"Blocked" messageFormat:@"TrustKit blocked the connection to %@", url.absoluteString];
-            }
-            else {
-                [self displayAlertWithTitle:@"Failed" messageFormat:@"Connection to %@ failed\n\n%@", url.absoluteString, error.description];
-            }
-        });
-    }];
+    NSURLSessionDataTask *task = [self.session dataTaskWithURL:url
+                                             completionHandler:^(NSData *_Nullable data, NSURLResponse *_Nullable response, NSError *_Nullable error) {
+                                                 dispatch_async(dispatch_get_main_queue(), ^{
+                                                     if (!error) {
+                                                         [self displayAlertWithTitle:@"Connected" messageFormat:@"Connected to %@", url.absoluteString];
+                                                     } else if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorCancelled) {
+                                                         [self displayAlertWithTitle:@"Blocked" messageFormat:@"TrustKit blocked the connection to %@", url.absoluteString];
+                                                     } else {
+                                                         [self displayAlertWithTitle:@"Failed"
+                                                                       messageFormat:@"Connection to %@ failed\n\n%@", url.absoluteString, error.description];
+                                                     }
+                                                 });
+                                             }];
     [task resume];
 }
 
-- (IBAction)testInvalidPinning:(UIButton *)sender
-{
+- (IBAction)testInvalidPinning:(UIButton *)sender {
     [self loadUrl:[NSURL URLWithString:baseURLGoogle]];
 }
 
-- (IBAction)testValidPinning:(UIButton *)sender
-{
+- (IBAction)testValidPinning:(UIButton *)sender {
     [self loadUrl:[NSURL URLWithString:baseURLDT]];
 }
 
-- (IBAction)testNotPinned:(UIButton *)sender
-{
+- (IBAction)testNotPinned:(UIButton *)sender {
     [self loadUrl:[NSURL URLWithString:baseURLYahoo]];
 }
 
-- (IBAction)testWebViewInvalidPinning:(UIButton *)sender
-{
+- (IBAction)testWebViewInvalidPinning:(UIButton *)sender {
     [self presentViewController:[[WebViewController alloc] initWithURL:[NSURL URLWithString:baseURLGoogle]] animated:YES completion:nil];
 }
 
-- (IBAction)testWebViewValidPinning:(UIButton *)sender
-{
+- (IBAction)testWebViewValidPinning:(UIButton *)sender {
     [self presentViewController:[[WebViewController alloc] initWithURL:[NSURL URLWithString:baseURLDT]] animated:YES completion:nil];
 }
 
-- (void)displayAlertWithTitle:(NSString *)title messageFormat:(NSString *)format, ...
-{
+- (void)displayAlertWithTitle:(NSString *)title messageFormat:(NSString *)format, ... {
     // Hide Activity Indicator
     [self hideActivityIndicator];
-    
+
     va_list args;
     va_start(args, format);
     NSString *message = [[NSString alloc] initWithFormat:format arguments:args];
     va_end(args);
-    
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title
-                                                                             message:message
-                                                                      preferredStyle:UIAlertControllerStyleAlert];
+
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil]];
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
-- (void)showActivityIndicatorInCurrentViewController
-{
+- (void)showActivityIndicatorInCurrentViewController {
     self.view.userInteractionEnabled = NO;
     [self.activityIndicator startAnimating];
 }
 
-- (void)hideActivityIndicator
-{
+- (void)hideActivityIndicator {
     self.view.userInteractionEnabled = YES;
     [self.activityIndicator stopAnimating];
 }

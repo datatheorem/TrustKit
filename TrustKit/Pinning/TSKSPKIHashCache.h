@@ -1,12 +1,12 @@
 /*
- 
+
  TSKSPKIHashCache.h
  TrustKit
- 
+
  Copyright 2015 The TrustKit Project Authors
  Licensed under the MIT license, see associated LICENSE file for terms.
  See AUTHORS file for the list of project authors.
- 
+
  */
 
 #if __has_feature(modules)
@@ -25,7 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 // The identifier used for the default shared hash cache. Use this identifier
 // in the TSKSPKIHashCache constructor to use the shared cache.
-static NSString * const kTSKSPKISharedHashCacheIdentifier = @"spki-hash.cache";
+// Versioned so that hashes cached by TrustKit 3.x, which rebuilt the SPKI from the key, are not reused.
+static NSString *const kTSKSPKISharedHashCacheIdentifier = @"spki-hash-v2.cache";
 
 // Each key is a raw certificate data (for easy lookup) and each value is the certificate's raw SPKI data
 typedef NSMutableDictionary<NSData *, NSData *> SPKICacheDictionary;
@@ -42,7 +43,7 @@ typedef NSMutableDictionary<NSData *, NSData *> SPKICacheDictionary;
  @param uniqueIdentifier A unique identifier that is stable across app launches/instance creation
  @return An initialized hash cache.
  */
-- (instancetype _Nullable)initWithIdentifier:(NSString*)uniqueIdentifier NS_DESIGNATED_INITIALIZER;
+- (instancetype _Nullable)initWithIdentifier:(NSString *)uniqueIdentifier NS_DESIGNATED_INITIALIZER;
 
 /**
  Get a pin cache for the provided certificate. The pins
@@ -51,7 +52,7 @@ typedef NSMutableDictionary<NSData *, NSData *> SPKICacheDictionary;
  @param certificate The certificate containing the public key that will be hashed
  @return The hash of the public key or nil if the hash could not be generated
  */
-- (NSData * _Nullable)hashSubjectPublicKeyInfoFromCertificate:(SecCertificateRef)certificate;
+- (NSData *_Nullable)hashSubjectPublicKeyInfoFromCertificate:(SecCertificateRef)certificate;
 
 @end
 

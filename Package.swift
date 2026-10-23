@@ -1,4 +1,4 @@
-// swift-tools-version:5.9
+// swift-tools-version:6.0
 import PackageDescription
 
 let package = Package(
@@ -15,17 +15,22 @@ let package = Package(
         .library(
             name: "TrustKit",
             targets: ["TrustKit"]
-        ),
+        )
     ],
-    dependencies: [
-    ],
+    dependencies: [],
     targets: [
         .target(
             name: "TrustKit",
-            path: "TrustKit",   
+            dependencies: ["TrustKitSwift"],
+            path: "TrustKit",
+            exclude: ["Swift"],
             resources: [.process("PrivacyInfo.xcprivacy")],
             publicHeadersPath: "public",
             cSettings: [.define("NS_BLOCK_ASSERTIONS", to: "1", .when(configuration: .release))]
         ),
+        .target(
+            name: "TrustKitSwift",
+            path: "TrustKit/Swift"
+        )
     ]
 )

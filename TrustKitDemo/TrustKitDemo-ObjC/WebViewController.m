@@ -11,18 +11,15 @@
 
 @implementation WebViewController
 
-- (instancetype)initWithURL:(NSURL *)url
-{
+- (instancetype)initWithURL:(NSURL *)url {
     self = [super initWithNibName:nil bundle:nil];
-    if (self)
-    {
+    if (self) {
         _url = url;
     }
     return self;
 }
 
-- (void)loadView
-{
+- (void)loadView {
     WKWebView *webView = [[WKWebView alloc] init];
     webView.navigationDelegate = self;
     self.view = webView;
@@ -30,9 +27,8 @@
 }
 
 - (void)webView:(WKWebView *)webView
-didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
-completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler
-{
+    didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
+                    completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler {
     NSString *host = challenge.protectionSpace.host;
     void (^completeOnMainQueue)(NSURLSessionAuthChallengeDisposition, NSURLCredential *) = ^(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -44,26 +40,22 @@ completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NS
     };
     dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
         TSKPinningValidator *pinningValidator = [[TrustKit sharedInstance] pinningValidator];
-        if (![pinningValidator handleChallenge:challenge completionHandler:completeOnMainQueue])
-        {
+        if (![pinningValidator handleChallenge:challenge completionHandler:completeOnMainQueue]) {
             completeOnMainQueue(NSURLSessionAuthChallengePerformDefaultHandling, nil);
         }
     });
 }
 
-- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error
-{
+- (void)webView:(WKWebView *)webView didFailProvisionalNavigation:(WKNavigation *)navigation withError:(NSError *)error {
     NSURL *failingURL = error.userInfo[NSURLErrorFailingURLErrorKey] ?: webView.URL;
     UIAlertController *alertController;
     if (self.blockedHost && [failingURL.host isEqualToString:self.blockedHost]) {
         alertController = [UIAlertController alertControllerWithTitle:@"Blocked"
                                                               message:[NSString stringWithFormat:@"TrustKit blocked the connection to %@", failingURL.absoluteString]
                                                        preferredStyle:UIAlertControllerStyleAlert];
-    }
-    else if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorCancelled) {
+    } else if ([error.domain isEqualToString:NSURLErrorDomain] && error.code == NSURLErrorCancelled) {
         return;
-    }
-    else {
+    } else {
         alertController = [UIAlertController alertControllerWithTitle:@"Failed"
                                                               message:[NSString stringWithFormat:@"Loading %@ failed\n\n%@", failingURL.absoluteString, error.description]
                                                        preferredStyle:UIAlertControllerStyleAlert];

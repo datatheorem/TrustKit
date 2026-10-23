@@ -1,13 +1,17 @@
 /*
- 
+
  TSKPinningValidator_Private.h
  TrustKit
- 
+
  Copyright 2017 The TrustKit Project Authors
  Licensed under the MIT license, see associated LICENSE file for terms.
  See AUTHORS file for the list of project authors.
- 
+
  */
+
+#import "Pinning/TSKSPKIHashCache.h"
+#import "public/TrustKit/TSKPinningValidator.h"
+#import "public/TrustKit/TSKPinningValidatorCallback.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /**
  Initialize an instance of TSKPinningValidator.
- 
+
  @param domainPinningPolicies A dictionary of domains and the corresponding pinning policy.
  @param hashCache The hash cache to use. If nil, no caching is performed, performance may suffer.
  @param ignorePinsForUserTrustAnchors Set to true to ignore the trust anchors in the user trust store
@@ -31,7 +35,6 @@ NS_ASSUME_NONNULL_BEGIN
                                      validationCallback:(TSKPinningValidatorCallback)validationCallback;
 
 @end
-
 
 @interface TSKPinningValidatorResult (Internal)
 
