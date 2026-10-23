@@ -14,8 +14,10 @@ esac
 # depot_tools ships clang-format and swift-format wrappers that shadow Homebrew's.
 PATH="/opt/homebrew/bin:$PATH"
 
-swift_files() { git ls-files -z --cached --others --exclude-standard -- '*.swift'; }
-objc_files() { git ls-files -z --cached --others --exclude-standard -- '*.h' '*.m' ':!TrustKit/Dependencies'; }
+# --cached still lists files deleted from the working tree but not yet staged.
+existing() { while IFS= read -r -d '' f; do if [[ -e "$f" ]]; then printf '%s\0' "$f"; fi; done; }
+swift_files() { git ls-files -z --cached --others --exclude-standard -- '*.swift' | existing; }
+objc_files() { git ls-files -z --cached --others --exclude-standard -- '*.h' '*.m' ':!TrustKit/Dependencies' | existing; }
 
 if ! $CHECK; then
     swift_files | xargs -0 xcrun swift format --in-place --parallel
