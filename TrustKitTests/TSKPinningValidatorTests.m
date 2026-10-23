@@ -36,8 +36,8 @@
 
 @interface TSKSPKIHashCache (TestSupport)
 - (void)resetSubjectPublicKeyInfoDiskCache;
-- (NSMutableDictionary<NSNumber *, SPKICacheDictionnary *> *)getSubjectPublicKeyInfoHashesCache;
-- (NSMutableDictionary<NSNumber *, SPKICacheDictionnary *> *)loadSPKICacheFromFileSystem;
+- (NSMutableDictionary<NSNumber *, SPKICacheDictionary *> *)getSubjectPublicKeyInfoHashesCache;
+- (NSMutableDictionary<NSNumber *, SPKICacheDictionary *> *)loadSPKICacheFromFileSystem;
 - (void)waitForPendingSubjectPublicKeyInfoDiskWrites;
 @end
 

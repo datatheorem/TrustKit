@@ -132,8 +132,8 @@ static unsigned int getAsn1HeaderSize(NSString *publicKeyType, NSNumber *publicK
 
 @interface TSKSPKIHashCache ()
 
-// Dictionnary to cache SPKI hashes instead of having to compute them on every connection
-@property (nonatomic) SPKICacheDictionnary *spkiCache;
+// Dictionary to cache SPKI hashes instead of having to compute them on every connection
+@property (nonatomic) SPKICacheDictionary *spkiCache;
 @property (nonatomic) dispatch_queue_t lockQueue;
 @property (nonatomic) dispatch_queue_t persistenceQueue;
 @property (nonatomic) BOOL persistenceScheduled;
@@ -143,7 +143,7 @@ static unsigned int getAsn1HeaderSize(NSString *publicKeyType, NSNumber *publicK
 /**
  Load the SPKI cache from the filesystem. This triggers blocking file I/O.
  */
-- (SPKICacheDictionnary *)loadSPKICacheFromFileSystem;
+- (SPKICacheDictionary *)loadSPKICacheFromFileSystem;
 
 @end
 
@@ -300,7 +300,7 @@ static BOOL _isProtectedDataAvailable(void) {
     self.persistenceScheduled = YES;
     
     isProtectedDataAvailableAsync(self.persistenceQueue, ^(BOOL available) {
-        __block SPKICacheDictionnary *snapshot = nil;
+        __block SPKICacheDictionary *snapshot = nil;
         dispatch_sync(self.lockQueue, ^{
             self.persistenceScheduled = NO;
             if (available) {
@@ -324,13 +324,13 @@ static BOOL _isProtectedDataAvailable(void) {
     });
 }
 
-- (SPKICacheDictionnary *)loadSPKICacheFromFileSystem
+- (SPKICacheDictionary *)loadSPKICacheFromFileSystem
 {
     NSMutableDictionary *spkiCache = nil;
     NSData *serializedSpkiCache = [NSData dataWithContentsOfURL:[self SPKICachePath]];
     if (serializedSpkiCache) {
         NSError *decodingError = nil;
-        spkiCache = [NSKeyedUnarchiver unarchivedObjectOfClasses:[NSSet setWithArray:@[[SPKICacheDictionnary class], [NSData class]]] fromData:serializedSpkiCache error:&decodingError];
+        spkiCache = [NSKeyedUnarchiver unarchivedObjectOfClasses:[NSSet setWithArray:@[[SPKICacheDictionary class], [NSData class]]] fromData:serializedSpkiCache error:&decodingError];
         if (decodingError)
         {
             os_log_error(TSKLogHandle(), "Could not retrieve SPKI cache from the filesystem: %{public}@", decodingError);
@@ -399,7 +399,7 @@ static BOOL _isProtectedDataAvailable(void) {
 }
 
 
-- (SPKICacheDictionnary *)getSubjectPublicKeyInfoHashesCache
+- (SPKICacheDictionary *)getSubjectPublicKeyInfoHashesCache
 {
     return _spkiCache;
 }
