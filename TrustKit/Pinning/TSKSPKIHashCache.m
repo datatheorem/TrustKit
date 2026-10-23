@@ -13,122 +13,11 @@
 #import "TSKSPKIHashCache.h"
 #import "../TSKLog.h"
 #import <CommonCrypto/CommonDigest.h>
-#import "pinning_utils.h"
-
-#pragma mark Missing ASN1 SPKI Headers
-
-// These are the ASN1 headers for the Subject Public Key Info section of a certificate
-// TODO(AD): Are they returned by the new iOS API https://developer.apple.com/documentation/security/2963103-seccertificatecopykey ?
-static const unsigned char rsa2048Asn1Header[] =
-{
-    0x30, 0x82, 0x01, 0x22, 0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86,
-    0xf7, 0x0d, 0x01, 0x01, 0x01, 0x05, 0x00, 0x03, 0x82, 0x01, 0x0f, 0x00
-};
-
-static const unsigned char rsa3072Asn1Header[] =
-{
-    0x30, 0x82, 0x01, 0xA2, 0x30, 0x0D, 0x06, 0x09, 0x2A, 0x86, 0x48, 0x86,
-    0xF7, 0x0D, 0x01, 0x01, 0x01, 0x05, 0x00, 0x03, 0x82, 0x01, 0x8F, 0x00
-};
-
-static const unsigned char rsa4096Asn1Header[] =
-{
-    0x30, 0x82, 0x02, 0x22, 0x30, 0x0d, 0x06, 0x09, 0x2a, 0x86, 0x48, 0x86,
-    0xf7, 0x0d, 0x01, 0x01, 0x01, 0x05, 0x00, 0x03, 0x82, 0x02, 0x0f, 0x00
-};
-
-static const unsigned char ecDsaSecp256r1Asn1Header[] =
-{
-    0x30, 0x59, 0x30, 0x13, 0x06, 0x07, 0x2a, 0x86, 0x48, 0xce, 0x3d, 0x02,
-    0x01, 0x06, 0x08, 0x2a, 0x86, 0x48, 0xce, 0x3d, 0x03, 0x01, 0x07, 0x03,
-    0x42, 0x00
-};
-
-static const unsigned char ecDsaSecp384r1Asn1Header[] =
-{
-    0x30, 0x76, 0x30, 0x10, 0x06, 0x07, 0x2a, 0x86, 0x48, 0xce, 0x3d, 0x02,
-    0x01, 0x06, 0x05, 0x2b, 0x81, 0x04, 0x00, 0x22, 0x03, 0x62, 0x00
-};
-
-
-static BOOL isKeySupported(NSString *publicKeyType, NSNumber *publicKeySize)
-{
-    if (([publicKeyType isEqualToString:(NSString *)kSecAttrKeyTypeRSA]) && ([publicKeySize integerValue] == 2048))
-    {
-        return YES;
-    }
-    else if (([publicKeyType isEqualToString:(NSString *)kSecAttrKeyTypeRSA]) && ([publicKeySize integerValue] == 3072))
-    {
-        return YES;
-    }
-    else if (([publicKeyType isEqualToString:(NSString *)kSecAttrKeyTypeRSA]) && ([publicKeySize integerValue] == 4096))
-    {
-        return YES;
-    }
-    else if (([publicKeyType isEqualToString:(NSString *)kSecAttrKeyTypeECSECPrimeRandom]) && ([publicKeySize integerValue] == 256))
-    {
-        return YES;
-    }
-    else if (([publicKeyType isEqualToString:(NSString *)kSecAttrKeyTypeECSECPrimeRandom]) && ([publicKeySize integerValue] == 384))
-    {
-        return YES;
-    }
-    return NO;
-}
-
-
-static char *getAsn1HeaderBytes(NSString *publicKeyType, NSNumber *publicKeySize)
-{
-    if (([publicKeyType isEqualToString:(NSString *)kSecAttrKeyTypeRSA]) && ([publicKeySize integerValue] == 2048))
-    {
-        return (char *)rsa2048Asn1Header;
-    }
-    else if (([publicKeyType isEqualToString:(NSString *)kSecAttrKeyTypeRSA]) && ([publicKeySize integerValue] == 3072))
-    {
-        return (char *)rsa3072Asn1Header;
-    }
-    else if (([publicKeyType isEqualToString:(NSString *)kSecAttrKeyTypeRSA]) && ([publicKeySize integerValue] == 4096))
-    {
-        return (char *)rsa4096Asn1Header;
-    }
-    else if (([publicKeyType isEqualToString:(NSString *)kSecAttrKeyTypeECSECPrimeRandom]) && ([publicKeySize integerValue] == 256))
-    {
-        return (char *)ecDsaSecp256r1Asn1Header;
-    }
-    else if (([publicKeyType isEqualToString:(NSString *)kSecAttrKeyTypeECSECPrimeRandom]) && ([publicKeySize integerValue] == 384))
-    {
-        return (char *)ecDsaSecp384r1Asn1Header;
-    }
-    
-    @throw([NSException exceptionWithName:@"Unsupported public key algorithm" reason:@"Tried to generate the SPKI hash for an unsupported key algorithm" userInfo:nil]);
-}
-
-static unsigned int getAsn1HeaderSize(NSString *publicKeyType, NSNumber *publicKeySize)
-{
-    if (([publicKeyType isEqualToString:(NSString *)kSecAttrKeyTypeRSA]) && ([publicKeySize integerValue] == 2048))
-    {
-        return sizeof(rsa2048Asn1Header);
-    }
-    else if (([publicKeyType isEqualToString:(NSString *)kSecAttrKeyTypeRSA]) && ([publicKeySize integerValue] == 3072))
-    {
-        return sizeof(rsa3072Asn1Header);
-    }
-    else if (([publicKeyType isEqualToString:(NSString *)kSecAttrKeyTypeRSA]) && ([publicKeySize integerValue] == 4096))
-    {
-        return sizeof(rsa4096Asn1Header);
-    }
-    else if (([publicKeyType isEqualToString:(NSString *)kSecAttrKeyTypeECSECPrimeRandom]) && ([publicKeySize integerValue] == 256))
-    {
-        return sizeof(ecDsaSecp256r1Asn1Header);
-    }
-    else if (([publicKeyType isEqualToString:(NSString *)kSecAttrKeyTypeECSECPrimeRandom]) && ([publicKeySize integerValue] == 384))
-    {
-        return sizeof(ecDsaSecp384r1Asn1Header);
-    }
-    
-    @throw([NSException exceptionWithName:@"Unsupported public key algorithm" reason:@"Tried to generate the SPKI hash for an unsupported key algorithm" userInfo:nil]);
-}
-
+#if SWIFT_PACKAGE
+@import TrustKitSwift;
+#else
+#import <TrustKit/TrustKit-Swift.h>
+#endif
 
 @interface TSKSPKIHashCache ()
 
@@ -234,54 +123,15 @@ static BOOL _isProtectedDataAvailable(void) {
     // We didn't this certificate in the cache so we need to generate its SPKI hash
     os_log_debug(TSKLogHandle(), "Generating Subject Public Key Info hash...");
     
-    // First extract the public key
-    SecKeyRef publicKey = [self copyPublicKeyFromCertificate:certificate];
-    if (publicKey == nil)
+    NSData *subjectPublicKeyInfo = [TSKSubjectPublicKeyInfo dataFromCertificate:certificateData];
+    if (subjectPublicKeyInfo == nil)
     {
-        os_log_error(TSKLogHandle(), "Could not copy the public key from the certificate");
+        os_log_error(TSKLogHandle(), "Could not read the Subject Public Key Info from the certificate");
         return nil;
     }
     
-    // Obtain the public key bytes from the key reference
-    NSData *publicKeyData = (__bridge_transfer NSData *)SecKeyCopyExternalRepresentation(publicKey, NULL);
-    if (publicKeyData == nil)
-    {
-        os_log_error(TSKLogHandle(), "Could not extract the public key bytes");
-        CFRelease(publicKey);
-        return nil;
-    }
-    
-    // Obtain the SPKI header based on the key's algorithm
-    CFDictionaryRef publicKeyAttributes = SecKeyCopyAttributes(publicKey);
-    NSString *publicKeyType = CFDictionaryGetValue(publicKeyAttributes, kSecAttrKeyType);
-    NSNumber *publicKeysize = CFDictionaryGetValue(publicKeyAttributes, kSecAttrKeySizeInBits);
-    CFRelease(publicKeyAttributes);
-    
-    if (!isKeySupported(publicKeyType, publicKeysize))
-    {
-        os_log_error(TSKLogHandle(), "Public key algorithm or length is not supported");
-        CFRelease(publicKey);
-        return nil;
-    }
-    
-    char *asn1HeaderBytes = getAsn1HeaderBytes(publicKeyType, publicKeysize);
-    unsigned int asn1HeaderSize = getAsn1HeaderSize(publicKeyType, publicKeysize);
-    
-    CFRelease(publicKey);
-    
-    // Generate a hash of the subject public key info
     NSMutableData *subjectPublicKeyInfoHash = [NSMutableData dataWithLength:CC_SHA256_DIGEST_LENGTH];
-    CC_SHA256_CTX shaCtx;
-    CC_SHA256_Init(&shaCtx);
-    
-    // Add the missing ASN1 header for public keys to re-create the subject public key info
-    CC_SHA256_Update(&shaCtx, asn1HeaderBytes, asn1HeaderSize);
-    
-    
-    // Add the public key
-    CC_SHA256_Update(&shaCtx, [publicKeyData bytes], (unsigned int)[publicKeyData length]);
-    CC_SHA256_Final((unsigned char *)[subjectPublicKeyInfoHash bytes], &shaCtx);
-    
+    CC_SHA256([subjectPublicKeyInfo bytes], (CC_LONG)[subjectPublicKeyInfo length], [subjectPublicKeyInfoHash mutableBytes]);
     
     // Store the hash in our memory cache
     self->_spkiCache[certificateData] = subjectPublicKeyInfoHash;
@@ -337,41 +187,6 @@ static BOOL _isProtectedDataAvailable(void) {
         }
     }
     return spkiCache;
-}
-
-- (SecKeyRef)copyPublicKeyFromCertificate:(SecCertificateRef)certificate
-{
-    OSStatus status;
-    
-    // Create an X509 trust using the using the certificate
-    SecTrustRef trust;
-    SecPolicyRef policy = SecPolicyCreateBasicX509();
-    status = SecTrustCreateWithCertificates(certificate, policy, &trust);
-    CFRelease(policy);
-    
-    if (status != errSecSuccess)
-    {
-        os_log_error(TSKLogHandle(), "Could not create trust from certificate, got status %d", (int)status);
-        return nil;
-    }
-    
-    // Get a public key reference for the certificate from the trust
-    // The certificate chain must be evaluated first in order to be able
-    // to determine which is the leaf certificate of the chain, and only
-    // then SecTrustCopyKey can be called
-    NSError *error = NULL;
-    SecTrustResultType trustResult = 0;
-    evaluateCertificateChainTrust(trust, &trustResult, &error);
-    if ((error != NULL) && (trustResult != kSecTrustResultRecoverableTrustFailure))
-    {
-        os_log_error(TSKLogHandle(), "Could not evaluate trust for the certificate: %{public}@", [error localizedDescription]);
-        CFRelease(trust);
-        return nil;
-    }
-    
-    SecKeyRef publicKey = copyKey(trust);
-    CFRelease(trust);
-    return publicKey;
 }
 
 - (NSURL *)SPKICachePath

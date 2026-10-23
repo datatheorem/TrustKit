@@ -44,12 +44,4 @@ void evaluateCertificateChainTrust(SecTrustRef serverTrust, SecTrustResultType *
  */
 SecCertificateRef getCertificateAtIndex(SecTrustRef serverTrust, CFIndex index);
 
-/**
- Returns the public key for a leaf certificate after it has been evaluated.
-
- @param serverTrust The trust management object to evaluate
- @return The leaf certificate's public key, or nil if the public key could not be extracted
- */
-SecKeyRef copyKey(SecTrustRef serverTrust);
-
 #endif

@@ -38,12 +38,15 @@ certificate's Subject Public Key Info; this is the same as what is described in
 the [HTTP Public Key Pinning
 specification](https://developer.mozilla.org/en-US/docs/Web/Security/Public_Key_Pinning).
 
-To generate such values, a Python helper script is available within the project's 
-repository; it can be used to generate the pin configuration from a PEM or DER 
-certificate:
+To generate such values, run the `get_pin_from_certificate.sh` script from the project's
+repository on a PEM or DER certificate:
 
-    $ python get_pin_from_certificate.py ca.pem
-    $ python get_pin_from_certificate.py --type DER ca.der
+    $ ./get_pin_from_certificate.sh ca.pem
+    $ ./get_pin_from_certificate.sh ca.der
+
+The script hashes the Subject Public Key Info exactly as it is encoded in the certificate, as
+TrustKit does. Avoid re-encoding the key first, for example with `openssl pkey`: for some
+certificates that changes the bytes, and the resulting pin won't match.
 
 
 ## Deploying TrustKit
@@ -69,6 +72,16 @@ Add the following line to your Cartfile:
     
 Then, follow the instructions from the 
 [Carthage README](https://github.com/Carthage/Carthage#adding-frameworks-to-an-application).
+
+#### Prebuilt static XCFramework
+
+Each [GitHub release](https://github.com/datatheorem/TrustKit/releases) includes `TrustKit-static.zip`,
+which contains a static `TrustKit.xcframework`.
+
+Part of TrustKit is written in Swift. If your app has no Swift code of its own and its deployment
+target is earlier than iOS 16, tvOS 16, Mac Catalyst 16 or macOS 13, linking fails with
+`Undefined symbols … __swift_FORCE_LOAD_$_swiftCompatibility56`. To fix this, add an empty Swift
+file to your app target; Xcode then links the Swift libraries that TrustKit needs on those OS versions.
 
 #### CocoaPods
 

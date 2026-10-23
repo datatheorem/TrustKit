@@ -34,7 +34,3 @@ SecCertificateRef getCertificateAtIndex(SecTrustRef serverTrust, CFIndex index) 
     CFRelease(certs);
     return certificate;
 }
-
-SecKeyRef copyKey(SecTrustRef serverTrust) {
-    return SecTrustCopyKey(serverTrust);
-}
