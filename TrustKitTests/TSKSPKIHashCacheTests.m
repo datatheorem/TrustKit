@@ -23,7 +23,7 @@
 
 @interface TSKSPKIHashCache (TestSupport)
 - (void)resetSubjectPublicKeyInfoDiskCache;
-- (NSMutableDictionary<NSNumber *, SPKICacheDictionnary *> *)getSubjectPublicKeyInfoHashesCache;
+- (NSMutableDictionary<NSNumber *, SPKICacheDictionary *> *)getSubjectPublicKeyInfoHashesCache;
 @end
 
 @interface TSKSPKIHashCacheTests : XCTestCase
