@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  Initialize an instance of TSKPinningValidator.
 
- @param domainPinningPolicies A dictionnary of domains and the corresponding pinning policy.
+ @param domainPinningPolicies A dictionary of domains and the corresponding pinning policy.
  @param hashCache The hash cache to use. If nil, no caching is performed, performance may suffer.
  @param ignorePinsForUserTrustAnchors Set to true to ignore the trust anchors in the user trust store
  @param validationCallbackQueue The queue used when invoking the validationResultHandler

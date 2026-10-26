@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 static NSString *const kTSKSPKISharedHashCacheIdentifier = @"spki-hash-v2.cache";
 
 // Each key is a raw certificate data (for easy lookup) and each value is the certificate's raw SPKI data
-typedef NSMutableDictionary<NSData *, NSData *> SPKICacheDictionnary;
+typedef NSMutableDictionary<NSData *, NSData *> SPKICacheDictionary;
 
 @interface TSKSPKIHashCache : NSObject
 
