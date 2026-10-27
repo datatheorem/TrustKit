@@ -161,8 +161,9 @@ FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKReportUris;
  By default, pin failure reports are sent to a report server hosted by Data Theorem, for
  detecting potential CA compromises and man-in-the-middle attacks, as well as providing a
  free dashboard for developers; email info@datatheorem.com if you'd like a dashboard for
- your App. Only pin failure reports are sent, which contain the App's bundle ID, the IDFV,
- and the server's hostname and certificate chain that failed validation.
+ your App. Only pin failure reports are sent, which contain the App's bundle ID, a random UUID
+ that TrustKit generates once per install, and the server's hostname and certificate chain that
+ failed validation.
  */
 FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKDisableDefaultReportUri;
 

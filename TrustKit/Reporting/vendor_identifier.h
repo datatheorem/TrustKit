@@ -15,5 +15,5 @@
 #import <Foundation/Foundation.h>
 #endif
 
-// Will return the IDFV on platforms that support it (iOS, tvOS) and a randomly generated UUID on other platforms (macOS, watchOS)
+// Not the IDFV: a random UUID generated once per install and stored in the App's user defaults, on every platform
 NSString *identifier_for_vendor(void);
