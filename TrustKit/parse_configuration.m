@@ -110,7 +110,11 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *trustKitArguments) {
             dateFormat.locale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
             dateFormat.dateFormat = @"yyyy-MM-dd";
             dateFormat.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
-            NSDate *expirationDate = [dateFormat dateFromString:expirationDateStr];
+            NSDate *expirationDate = [expirationDateStr isKindOfClass:[NSString class]] ? [dateFormat dateFromString:expirationDateStr] : nil;
+            if (expirationDate == nil) {
+                [NSException raise:@"TrustKit configuration invalid"
+                            format:@"TrustKit was initialized with an invalid value for %@ for domain %@; expected a date in yyyy-MM-dd format", kTSKExpirationDate, domainName];
+            }
             domainFinalConfiguration[kTSKExpirationDate] = expirationDate;
         }
 

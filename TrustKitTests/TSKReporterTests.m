@@ -161,7 +161,7 @@ static NSString *const kTSKDefaultReportUri = @"https://overmind.datatheorem.com
 #if !TARGET_OS_IPHONE
     // TEST USER-DEFINED SUCCESS
     // Send a notification for a successful validation and ensure no report gets sent
-    pinReporterMock = OCMClassMock([TSKBackgroundReporter class]);
+    pinReporterMock = OCMStrictClassMock([TSKBackgroundReporter class]);
     _trustKit.pinFailureReporter = pinReporterMock;
 
     res = [[TSKPinningValidatorResult alloc] initWithServerHostname:@"www.test.com"
@@ -177,6 +177,45 @@ static NSString *const kTSKDefaultReportUri = @"https://overmind.datatheorem.com
     pinReporterMock = nil;
 #endif
 }
+
+#if !TARGET_OS_IPHONE
+- (void)testReportUserDefinedTrustAnchorWhenNotIgnored {
+    _trustKit = [[TrustKit alloc] initWithConfiguration:@{
+        kTSKIgnorePinningForUserDefinedTrustAnchors: @NO,
+        kTSKPinnedDomains: @ {
+            @"www.test.com": @ {
+                kTSKPublicKeyHashes: @[
+                    @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=", // Fake key
+                    @"BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB=" // Fake key 2
+                ]
+            }
+        }
+    }];
+
+    id pinReporterMock = OCMClassMock([TSKBackgroundReporter class]);
+    _trustKit.pinFailureReporter = pinReporterMock;
+    OCMExpect([pinReporterMock pinValidationFailedForHostname:@"www.test.com"
+                                                         port:nil
+                                             certificateChain:OCMOCK_ANY
+                                                notedHostname:@"www.test.com"
+                                                   reportURIs:OCMOCK_ANY
+                                            includeSubdomains:NO
+                                               enforcePinning:YES
+                                                    knownPins:OCMOCK_ANY
+                                             validationResult:TSKTrustEvaluationFailedUserDefinedTrustAnchor
+                                               expirationDate:nil]);
+
+    TSKPinningValidatorResult *res = [[TSKPinningValidatorResult alloc] initWithServerHostname:@"www.test.com"
+                                                                                   serverTrust:_testTrust
+                                                                              validationResult:TSKTrustEvaluationFailedUserDefinedTrustAnchor
+                                                                            finalTrustDecision:TSKTrustDecisionShouldBlockConnection
+                                                                            validationDuration:1.0];
+    [_trustKit sendValidationReport:res notedHostname:@"www.test.com" pinningPolicy:_trustKit.configuration[kTSKPinnedDomains][@"www.test.com"]];
+
+    [pinReporterMock verify];
+    [pinReporterMock stopMocking];
+}
+#endif
 
 - (void)testReporter {
     // Just try a simple valid case to see if we can post this to the default report URL

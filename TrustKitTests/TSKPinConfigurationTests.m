@@ -69,6 +69,7 @@
 
     NSString *serverConfigKey = getPinningConfigurationKeyForDomain(@"unsecured.good.com", trustKitConfig[kTSKPinnedDomains]);
     XCTAssertEqualObjects(serverConfigKey, @"unsecured.good.com", @"Did not receive a configuration for pinned subdomain");
+    XCTAssertEqualObjects(kTSKExcludeSubdomainFromParentPolicy, @"TSKExcludeSubdomainFromParentPolicy", @"Info.plist configurations use the documented key");
 }
 
 - (void)testExplicitNotDisablePinningForSubdomainAdditionalDomainKeys {
@@ -241,6 +242,26 @@
     components.day = 1;
 
     XCTAssertEqualObjects(trustKitConfig[kTSKPinnedDomains][@"www.good.com"][kTSKExpirationDate], [gregorian dateFromComponents:components]);
+}
+
+- (void)testMalformedExpirationDateIsRejected {
+    for (id expirationDate in @[@"12/31/2026", @"2026-31-12", @"", @20261231, [NSDate date]]) {
+        XCTAssertThrows(
+            parseTrustKitConfiguration(@{
+                kTSKPinnedDomains: @ {
+                    @"www.good.com": @ {
+                        kTSKExpirationDate: expirationDate,
+                        kTSKPublicKeyHashes: @[
+                            @"TQEtdMbmwFgYUifM4LDF+xgEtd0z69mPGmkp014d6ZY=",
+                            @"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=",
+                        ]
+                    }
+                }
+            }),
+            @"Expiration date %@ must be rejected",
+            expirationDate
+        );
+    }
 }
 
 - (void)testGetConfigurationPinningDisabled {

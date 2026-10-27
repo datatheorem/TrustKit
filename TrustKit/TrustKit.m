@@ -185,7 +185,7 @@ os_log_t TSKLogHandle(void) {
     // Send a report only if the there was a pinning failure
     if (validationResult != TSKTrustEvaluationSuccess) {
 #if !TARGET_OS_IPHONE
-        if (validationResult != TSKTrustEvaluationFailedUserDefinedTrustAnchor)
+        if ((validationResult != TSKTrustEvaluationFailedUserDefinedTrustAnchor) || ![self.configuration[kTSKIgnorePinningForUserDefinedTrustAnchors] boolValue])
 #endif
         {
             // Pin validation failed: retrieve the list of configured report URLs

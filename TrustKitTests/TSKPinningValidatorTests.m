@@ -43,15 +43,6 @@
 - (void)waitForPendingSubjectPublicKeyInfoDiskWrites;
 @end
 
-static BOOL AllowsAdditionalTrustAnchors = YES; // toggle in tests if needed
-@interface TestPinningValidator : TSKPinningValidator
-@end
-@implementation TestPinningValidator
-+ (BOOL)allowsAdditionalTrustAnchors {
-    return AllowsAdditionalTrustAnchors;
-}
-@end
-
 @interface TSKPinningValidatorTests : XCTestCase
 @end
 

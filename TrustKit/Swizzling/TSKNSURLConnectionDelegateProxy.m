@@ -39,7 +39,7 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
         RSSWReplacement({
             NSURLConnection *connection;
 
-            if ([NSStringFromClass([delegate class]) hasPrefix:@"TSK"]) {
+            if ([delegate isKindOfClass:[TSKNSURLConnectionDelegateProxy class]]) {
                 // Don't proxy ourselves
                 connection = RSSWCallOriginal(request, delegate);
             } else {
@@ -62,7 +62,7 @@ typedef void (^AsyncCompletionHandler)(NSURLResponse *response, NSData *data, NS
         RSSWReplacement({
             NSURLConnection *connection;
 
-            if ([NSStringFromClass([delegate class]) hasPrefix:@"TSK"]) {
+            if ([delegate isKindOfClass:[TSKNSURLConnectionDelegateProxy class]]) {
                 // Don't proxy ourselves
                 connection = RSSWCallOriginal(request, delegate, startImmediately);
             } else {

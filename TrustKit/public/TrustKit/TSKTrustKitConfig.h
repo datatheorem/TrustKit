@@ -169,7 +169,7 @@ FOUNDATION_EXPORT const TSKDomainConfigurationKey kTSKDisableDefaultReportUri;
 /**
  A string containing the date, in yyyy-MM-dd format, on which the domain's configured SSL
  pins expire, thus disabling pinning validation. If the key is not set, then the pins do
- not expire.
+ not expire. Any other value is a configuration error.
 
  Expiration helps prevent connectivity issues in Apps which do not get updates to their
  pin set, such as when the user disables App updates.
