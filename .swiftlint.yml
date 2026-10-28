@@ -1,0 +1,18 @@
+disabled_rules:
+  - line_length
+  - file_length
+  - inclusive_language
+  - large_tuple
+  - function_body_length
+  - type_body_length
+  - trailing_whitespace # Let swift-format handle whitespace
+  - vertical_whitespace # Let swift-format handle line breaks
+  - opening_brace       # Let swift-format handle brace placement
+  - closure_parameter_position # Let swift-format handle closure parameter position
+
+opt_in_rules:
+  - private_over_fileprivate
+
+excluded:
+  - output
+  - .build

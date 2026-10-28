@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1340"
+   LastUpgradeVersion = "2700"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -41,9 +41,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6B6B476C1B1EECB4007757EE"
-               BuildableName = "TrustKitDemoTests.xctest"
-               BlueprintName = "TrustKitDemoTests"
+               BlueprintIdentifier = "6D807BAC01D8C628E16ACD7B"
+               BuildableName = "TrustKitDemo-ObjCUITests.xctest"
+               BlueprintName = "TrustKitDemo-ObjCUITests"
                ReferencedContainer = "container:TrustKitDemo.xcodeproj">
             </BuildableReference>
          </TestableReference>

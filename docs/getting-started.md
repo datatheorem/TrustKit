@@ -38,27 +38,31 @@ certificate's Subject Public Key Info; this is the same as what is described in
 the [HTTP Public Key Pinning
 specification](https://developer.mozilla.org/en-US/docs/Web/Security/Public_Key_Pinning).
 
-To generate such values, a Python helper script is available within the project's 
-repository; it can be used to generate the pin configuration from a PEM or DER 
-certificate:
+To generate such values, run the `get_pin_from_certificate.sh` script from the project's
+repository on a PEM or DER certificate:
 
-    $ python get_pin_from_certificate.py ca.pem
-    $ python get_pin_from_certificate.py --type DER ca.der
+    $ ./get_pin_from_certificate.sh ca.pem
+    $ ./get_pin_from_certificate.sh ca.der
+
+The script hashes the Subject Public Key Info exactly as it is encoded in the certificate, as
+TrustKit does. Avoid re-encoding the key first, for example with `openssl pkey`: for some
+certificates that changes the bytes, and the resulting pin won't match.
 
 
 ## Deploying TrustKit
 
 ### Adding TrustKit as a Dependency
 
-#### CocoaPods
+#### Swift Package Manager
 
-Add the following line to your Podfile:
+Follow the instructions from the 
+[Apple documentation](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app)
+using TrustKit's Git URL:
 
-    pod 'TrustKit'
+    https://github.com/datatheorem/TrustKit.git
 
-Then run:
-
-    $ pod install
+Then import TrustKit with `import TrustKit` in Swift, or with
+`#import <TrustKit/TrustKit.h>` or `@import TrustKit;` in Objective-C.
 
 #### Carthage
 
@@ -69,13 +73,20 @@ Add the following line to your Cartfile:
 Then, follow the instructions from the 
 [Carthage README](https://github.com/Carthage/Carthage#adding-frameworks-to-an-application).
 
-#### Swift Package Manager
+#### Prebuilt static XCFramework
 
-Follow the instructions from the 
-[Apple documentation](https://developer.apple.com/documentation/xcode/adding_package_dependencies_to_your_app)
-using TrustKit's Git URL:
+Each [GitHub release](https://github.com/datatheorem/TrustKit/releases) includes `TrustKit-static.zip`,
+which contains a static `TrustKit.xcframework`.
 
-    git@github.com:datatheorem/TrustKit.git
+Part of TrustKit is written in Swift. If your app has no Swift code of its own and its deployment
+target is earlier than iOS 16, tvOS 16, Mac Catalyst 16 or macOS 13, linking fails with
+`Undefined symbols … __swift_FORCE_LOAD_$_swiftCompatibility56`. To fix this, add an empty Swift
+file to your app target; Xcode then links the Swift libraries that TrustKit needs on those OS versions.
+
+#### CocoaPods
+
+TrustKit 4.0 and later are not published to CocoaPods. Use the Swift Package
+Manager instead; TrustKit 3.x remains available on CocoaPods.
 
 ### Configuring a Pinning Policy
 
@@ -125,6 +136,12 @@ NSDictionary *trustKitConfig =
 
 The list of all the configuration keys is available in the
 [documentation](https://datatheorem.github.io/TrustKit/documentation/Classes/TrustKit.html).
+
+Pinned domains can be any domain name, including internal ones such as `api.internal` or
+`localhost`, or an IPv4 or IPv6 address. `kTSKIncludeSubdomains` cannot be used with an IP address
+or a single-label domain. TrustKit pins on top of the system's certificate validation, so a server
+with a self-signed certificate is still rejected; install your own CA on the device and pin its key
+instead.
 
 ### Implementing Pinning Validation
 
@@ -182,22 +199,58 @@ intermediate CA in order to allow their users to use the app, or face weeks of
 the app being unusable.
 
 
-#### Properly implement pinning in WebViews
+#### Implement pinning in web views
 
-Adding SSL pinning to connections initiated within a `UIWebView` is difficult as the 
-class does not provide direct APIs to handle authentication challenges. As 
-mentionned in [Apple's technical note about HTTPS trust evaluation](https://developer.apple.com/library/ios/technotes/tn2232/_index.html), 
-customizing certificate validation in a `UIWebView` can still be achieved using 
-`NSURLProtocol` to intercept all outgoing connections. However, implemeting this 
-technique is a complex and significant engineering effort. 
+`WKWebView` sends server trust challenges to its
+[navigation delegate](https://developer.apple.com/documentation/webkit/wknavigationdelegate).
+To enforce the pinning policy for the content it loads, pass those challenges to
+TrustKit's pinning validator. `WKWebView` calls its navigation delegate on the
+main thread, so validate on a background queue to keep the certificate check off
+the main thread, then call WebKit's completion handler back on the main queue:
 
-Overall, the best approach to implementing SSL pinning in webviews is by 
-migrating to the `WKWebView` class introduced in iOS 8, which provides 
-[delegate methods](https://developer.apple.com/library/ios/documentation/WebKit/Reference/WKNavigationDelegate_Ref/) 
-to handle authentication challenges (such as server SSL certificate validation).
-However, this approach still requires some testing as it seems like the 
-`webView:didReceiveAuthenticationChallenge:completionHandler:` delegate method 
-[only works reliably on iOS 9](https://bugs.webkit.org/show_bug.cgi?id=135327).
+```objc
+- (void)webView:(WKWebView *)webView
+didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
+completionHandler:(void (^)(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential))completionHandler
+{
+    void (^completeOnMainQueue)(NSURLSessionAuthChallengeDisposition, NSURLCredential *) = ^(NSURLSessionAuthChallengeDisposition disposition, NSURLCredential *credential) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            completionHandler(disposition, credential);
+        });
+    };
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
+        TSKPinningValidator *pinningValidator = [[TrustKit sharedInstance] pinningValidator];
+        if (![pinningValidator handleChallenge:challenge completionHandler:completeOnMainQueue])
+        {
+            completeOnMainQueue(NSURLSessionAuthChallengePerformDefaultHandling, nil);
+        }
+    });
+}
+```
+
+In Swift:
+
+```swift
+func webView(_ webView: WKWebView,
+             didReceive challenge: URLAuthenticationChallenge,
+             completionHandler: @escaping @MainActor @Sendable (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+    DispatchQueue.global(qos: .userInitiated).async {
+        let completeOnMainQueue = { (disposition: URLSession.AuthChallengeDisposition, credential: URLCredential?) in
+            DispatchQueue.main.async { completionHandler(disposition, credential) }
+        }
+        if !TrustKit.sharedInstance().pinningValidator.handle(challenge, completionHandler: completeOnMainQueue) {
+            completeOnMainQueue(.performDefaultHandling, nil)
+        }
+    }
+}
+```
+
+The `TrustKitDemo` project includes both examples.
+
+Auto-swizzling only covers `NSURLSession` and `NSURLConnection` delegates, so web
+views need this delegate method even when `kTSKSwizzleNetworkDelegates` is enabled.
+`UIWebView` is deprecated and no longer accepted by the App Store; use `WKWebView`
+instead.
 
 
 #### Consider leveraging auto-swizzling for simple Apps
@@ -246,6 +299,28 @@ This will give you an idea of how many users would be blocked, if pin validation
 was to be enforced.
 
 ## Appendices
+
+### Logging
+
+TrustKit logs through the unified logging system under the `com.datatheorem.trustkit`
+subsystem and the `TrustKit` category. Pin validation failures and other errors are
+logged at the error level, successful validations at the info level, and the
+details of each validation step at the debug level.
+
+The system's default policy applies: debug messages are not captured, info messages
+are kept in memory only, and errors are saved to disk, including in Release builds.
+To stream TrustKit's logs with debug messages included:
+
+```sh
+log stream --level debug --predicate 'subsystem == "com.datatheorem.trustkit"'
+```
+
+Prefix the command with `xcrun simctl spawn booted` to stream from the booted
+simulator. In Console.app, filter on the subsystem and turn on Include Info Messages
+and Include Debug Messages in the Action menu.
+
+To act on pin validation results in code, set `pinningValidatorCallback` on the
+`TrustKit` instance. `+setLoggerBlock:` was removed in TrustKit 4.0.
 
 ### Debugging network connections with TrustKit
 

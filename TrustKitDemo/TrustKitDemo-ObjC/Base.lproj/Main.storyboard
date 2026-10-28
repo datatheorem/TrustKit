@@ -22,33 +22,89 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="7DP-6J-iyZ">
-                                <rect key="frame" x="51" y="190" width="218" height="100"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="7DP-6J-iyZ">
+                                <rect key="frame" x="51" y="190" width="218" height="320"/>
                                 <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NSURLSession" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lb1-us-h1d">
+                                        <rect key="frame" x="0.0" y="0.0" width="303" height="20.5"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fUD-nR-oCW">
                                         <rect key="frame" x="0.0" y="0.0" width="218" height="35"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="urlSessionBadPins"/>
                                         <color key="backgroundColor" red="0.10980392160000001" green="0.2784313725" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="kQR-v2-MNc"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <state key="normal" title="Test Invalid Pinning"/>
+                                        <state key="normal" title="Visit Google [bad pins]"/>
                                         <connections>
                                             <action selector="testInvalidPinning:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BpP-OW-o3x"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" adjustsImageWhenHighlighted="NO" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v4z-tv-wOm">
                                         <rect key="frame" x="0.0" y="65" width="218" height="35"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="urlSessionGoodPins"/>
                                         <color key="backgroundColor" red="0.10980392160000001" green="0.2784313725" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="hZ3-Kp-Tbr"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <state key="normal" title="Test Valid Pinning"/>
+                                        <state key="normal" title="Visit Data Theorem [good pins]"/>
                                         <connections>
                                             <action selector="testValidPinning:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ARn-Nr-6H3"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yh1-nP-b7n">
+                                        <rect key="frame" x="0.0" y="130" width="218" height="35"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="urlSessionNoPins"/>
+                                        <color key="backgroundColor" red="0.10980392160000001" green="0.2784313725" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="Yh2-nP-c8n"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="Visit Yahoo [no pins]"/>
+                                        <connections>
+                                            <action selector="testNotPinned:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Yh3-nP-a9n"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WKWebView" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lb2-wk-h2d">
+                                        <rect key="frame" x="0.0" y="0.0" width="303" height="20.5"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wv1-gB-b7n">
+                                        <rect key="frame" x="0.0" y="130" width="218" height="35"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="webViewBadPins"/>
+                                        <color key="backgroundColor" red="0.10980392160000001" green="0.2784313725" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="Wv1-gB-c8n"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="Visit Google [bad pins]"/>
+                                        <connections>
+                                            <action selector="testWebViewInvalidPinning:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Wv1-gB-a9n"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Wv2-dT-b7n">
+                                        <rect key="frame" x="0.0" y="130" width="218" height="35"/>
+                                        <accessibility key="accessibilityConfiguration" identifier="webViewGoodPins"/>
+                                        <color key="backgroundColor" red="0.10980392160000001" green="0.2784313725" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="35" id="Wv2-dT-c8n"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <state key="normal" title="Visit Data Theorem [good pins]"/>
+                                        <connections>
+                                            <action selector="testWebViewValidPinning:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Wv2-dT-a9n"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -68,6 +124,9 @@
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="iox-tH-Uq9" id="Ebh-Ps-5io"/>
+                        <outlet property="webViewInvalidPinBtn" destination="Wv1-gB-b7n" id="Wv1-gB-o0n"/>
+                        <outlet property="webViewValidPinBtn" destination="Wv2-dT-b7n" id="Wv2-dT-o0n"/>
+                        <outlet property="notPinnedBtn" destination="Yh1-nP-b7n" id="Yh4-nP-o0n"/>
                         <outlet property="invalidPinBtn" destination="fUD-nR-oCW" id="Epm-VC-3ty"/>
                         <outlet property="validPinBtn" destination="v4z-tv-wOm" id="bCG-Fk-VLt"/>
                     </connections>

@@ -1,31 +1,27 @@
 /*
- 
+
  ssl_pin_verifier.m
  TrustKit
- 
+
  Copyright 2015 The TrustKit Project Authors
  Licensed under the MIT license, see associated LICENSE file for terms.
  See AUTHORS file for the list of project authors.
- 
+
  */
 
 #import "ssl_pin_verifier.h"
-#import "TSKSPKIHashCache.h"
-#import "../Dependencies/domain_registry/domain_registry.h"
-#import "../configuration_utils.h"
 #import "../TSKLog.h"
+#import "../configuration_utils.h"
+#import "TSKSPKIHashCache.h"
 #import "pinning_utils.h"
-
 
 #pragma mark SSL Pin Verifier
 
-TSKTrustEvaluationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverHostname, NSSet<NSData *> *knownPins, TSKSPKIHashCache *hashCache)
-{
+TSKTrustEvaluationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *serverHostname, NSSet<NSData *> *knownPins, TSKSPKIHashCache *hashCache) {
     NSCParameterAssert(serverTrust);
     NSCParameterAssert(knownPins);
-    if ((serverTrust == NULL) || (knownPins == nil))
-    {
-        TSKLog(@"Invalid pinning parameters for %@", serverHostname);
+    if ((serverTrust == NULL) || (knownPins == nil)) {
+        os_log_error(TSKLogHandle(), "Invalid pinning parameters for %{public}@", serverHostname);
         return TSKTrustEvaluationErrorInvalidParameters;
     }
 
@@ -33,113 +29,102 @@ TSKTrustEvaluationResult verifyPublicKeyPin(SecTrustRef serverTrust, NSString *s
     // This gives us revocation (only for EV certs I think?) and also ensures the certificate chain is sane
     // And also gives us the exact path that successfully validated the chain
     CFRetain(serverTrust);
-    
+
     // Create and use a sane SSL policy to force hostname validation, even if the supplied trust has a bad
     // policy configured (such as one from SecPolicyCreateBasicX509())
     SecPolicyRef SslPolicy = SecPolicyCreateSSL(YES, (__bridge CFStringRef)(serverHostname));
     SecTrustSetPolicies(serverTrust, SslPolicy);
     CFRelease(SslPolicy);
-    
+
     NSError *error = NULL;
     SecTrustResultType trustResult = 0;
-    
+
     evaluateCertificateChainTrust(serverTrust, &trustResult, &error);
-    if ((error != NULL) && (trustResult == kSecTrustResultInvalid))
-    {
-        TSKLog(@"SecTrustEvaluate error for %@: %@", serverHostname, [error localizedDescription]);
+    if ((error != NULL) && (trustResult == kSecTrustResultInvalid)) {
+        os_log_error(TSKLogHandle(), "SecTrustEvaluate error for %{public}@: %{public}@", serverHostname, [error localizedDescription]);
         CFRelease(serverTrust);
         return TSKTrustEvaluationErrorInvalidParameters;
     }
 
-    if ((trustResult != kSecTrustResultUnspecified) && (trustResult != kSecTrustResultProceed))
-    {
+    if ((trustResult != kSecTrustResultUnspecified) && (trustResult != kSecTrustResultProceed)) {
         // Default SSL validation failed
         CFDictionaryRef evaluationDetails = SecTrustCopyResult(serverTrust);
-        TSKLog(@"Error: default SSL validation failed for %@: %@", serverHostname, evaluationDetails);
+        os_log_error(TSKLogHandle(), "Default SSL validation failed for %{public}@: %{public}@", serverHostname, evaluationDetails);
         CFRelease(evaluationDetails);
         CFRelease(serverTrust);
         return TSKTrustEvaluationFailedInvalidCertificateChain;
     }
-    
+
     // Check each certificate in the server's certificate chain (the trust object); start with the CA all the way down to the leaf
     CFIndex certificateChainLen = SecTrustGetCertificateCount(serverTrust);
-    for(int i=(int)certificateChainLen-1;i>=0;i--)
-    {
+    for (int i = (int)certificateChainLen - 1; i >= 0; i--) {
         // Extract the certificate
         SecCertificateRef certificate = getCertificateAtIndex(serverTrust, i);
-        
-        CFStringRef certificateSubject = SecCertificateCopySubjectSummary(certificate);
-        if (certificateSubject != nil)
-        {
-            TSKLog(@"Checking certificate with CN: %@", certificateSubject);
-            CFRelease(certificateSubject);
+
+        if (os_log_debug_enabled(TSKLogHandle())) {
+            CFStringRef certificateSubject = SecCertificateCopySubjectSummary(certificate);
+            if (certificateSubject != nil) {
+                os_log_debug(TSKLogHandle(), "Checking certificate with CN: %{public}@", certificateSubject);
+                CFRelease(certificateSubject);
+            } else {
+                os_log_debug(TSKLogHandle(), "Could not parse certificate subject");
+            }
         }
-        else
-        {
-            TSKLog(@"Could not parse certificate subject");
-        }
-        
+
         // Generate the subject public key info hash
         NSData *subjectPublicKeyInfoHash = [hashCache hashSubjectPublicKeyInfoFromCertificate:certificate];
-        if (subjectPublicKeyInfoHash == nil)
-        {
-            TSKLog(@"Error - could not generate the SPKI hash for %@", serverHostname);
+        if (subjectPublicKeyInfoHash == nil) {
+            os_log_error(TSKLogHandle(), "Could not generate the SPKI hash for %{public}@", serverHostname);
             CFRelease(serverTrust);
             return TSKTrustEvaluationErrorCouldNotGenerateSpkiHash;
         }
-        
+
         // Is the generated hash in our set of pinned hashes ?
-        TSKLog(@"Testing SSL Pin %@", subjectPublicKeyInfoHash);
-        if ([knownPins containsObject:subjectPublicKeyInfoHash])
-        {
-            TSKLog(@"SSL Pin found for %@", serverHostname);
+        os_log_debug(TSKLogHandle(), "Testing SSL Pin %{public}@", [subjectPublicKeyInfoHash base64EncodedStringWithOptions:0]);
+        if ([knownPins containsObject:subjectPublicKeyInfoHash]) {
+            os_log_debug(TSKLogHandle(), "SSL Pin found for %{public}@", serverHostname);
             CFRelease(serverTrust);
             return TSKTrustEvaluationSuccess;
         }
     }
-    
+
 #if !TARGET_OS_IPHONE
-    // OS X only: if user-defined anchors are whitelisted, allow the App to not enforce pin validation
+    // macOS only: if user-defined anchors are whitelisted, allow the App to not enforce pin validation
     NSMutableArray *customRootCerts = [NSMutableArray array];
-    
-    // Retrieve the OS X host's list of user-defined CA certificates
+
+    // Retrieve the macOS host's list of user-defined CA certificates
     CFArrayRef userRootCerts;
     OSStatus status = SecTrustSettingsCopyCertificates(kSecTrustSettingsDomainUser, &userRootCerts);
-    if (status == errSecSuccess)
-    {
+    if (status == errSecSuccess) {
         [customRootCerts addObjectsFromArray:(__bridge NSArray *)(userRootCerts)];
         CFRelease(userRootCerts);
     }
     CFArrayRef adminRootCerts;
     status = SecTrustSettingsCopyCertificates(kSecTrustSettingsDomainAdmin, &adminRootCerts);
-    if (status == errSecSuccess)
-    {
+    if (status == errSecSuccess) {
         [customRootCerts addObjectsFromArray:(__bridge NSArray *)(adminRootCerts)];
         CFRelease(adminRootCerts);
     }
-    
+
     // Is any certificate in the chain a custom anchor that was manually added to the OS' trust store ?
     // If we get there, we shouldn't have to check the custom certificates' trust setting (trusted / not trusted)
     // as the chain validation was successful right before
-    if ([customRootCerts count] > 0)
-    {
-        for(int i=0;i<certificateChainLen;i++)
-        {
+    if ([customRootCerts count] > 0) {
+        for (int i = 0; i < certificateChainLen; i++) {
             SecCertificateRef certificate = getCertificateAtIndex(serverTrust, i);
-            
+
             // Is the certificate chain's anchor a user-defined anchor ?
-            if ([customRootCerts containsObject:(__bridge id)(certificate)])
-            {
-                TSKLog(@"Detected user-defined trust anchor in the certificate chain");
+            if ([customRootCerts containsObject:(__bridge id)(certificate)]) {
+                os_log_debug(TSKLogHandle(), "Detected user-defined trust anchor in the certificate chain");
                 CFRelease(serverTrust);
                 return TSKTrustEvaluationFailedUserDefinedTrustAnchor;
             }
         }
     }
 #endif
-    
+
     // If we get here, we didn't find any matching SPKI hash in the chain
-    TSKLog(@"Error: SSL Pin not found for %@", serverHostname);
+    os_log_debug(TSKLogHandle(), "SSL Pin not found for %{public}@", serverHostname);
     CFRelease(serverTrust);
     return TSKTrustEvaluationFailedNoMatchingPin;
 }
