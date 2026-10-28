@@ -49,17 +49,6 @@
 
 @implementation TSKPinningValidator
 
-+ (BOOL)allowsAdditionalTrustAnchors {
-    static const BOOL allowAdditionalTrustAnchors = {
-#if DEBUG == 1
-        YES
-#else
-        NO
-#endif
-    };
-    return allowAdditionalTrustAnchors;
-}
-
 #pragma mark Instance Methods
 
 - (instancetype _Nullable)initWithDomainPinningPolicies:(NSDictionary<NSString *, TKSDomainPinningPolicy *> *_Nonnull)domainPinningPolicies
@@ -127,7 +116,11 @@
                 } else
 #endif
                 {
-                    if (validationResult == TSKTrustEvaluationFailedNoMatchingPin) {
+                    BOOL noMatchingPin = (validationResult == TSKTrustEvaluationFailedNoMatchingPin);
+#if !TARGET_OS_IPHONE
+                    noMatchingPin = noMatchingPin || (validationResult == TSKTrustEvaluationFailedUserDefinedTrustAnchor);
+#endif
+                    if (noMatchingPin) {
                         // Is pinning enforced?
                         if ([domainConfig[kTSKEnforcePinning] boolValue] == YES) {
                             // Yes - Block the connection

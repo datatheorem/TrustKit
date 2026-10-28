@@ -14,6 +14,12 @@
 
 @end
 
+@interface TSKAppSessionDelegate : NSObject <NSURLSessionDelegate>
+@end
+
+@implementation TSKAppSessionDelegate
+@end
+
 /* Basic tests to ensure RSSwizzle does not trigger a crash because a method we are hooking has changed
  */
 @implementation TSKSwizzlingTests
@@ -42,6 +48,12 @@
     TrustKit *trustKit = [[TrustKit alloc] initWithConfiguration:trustKitConfig];
 
     [TSKNSURLSessionDelegateProxy swizzleNSURLSessionConstructors:trustKit];
+
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration ephemeralSessionConfiguration]
+                                                          delegate:[[TSKAppSessionDelegate alloc] init]
+                                                     delegateQueue:nil];
+    XCTAssertTrue([session.delegate isKindOfClass:[TSKNSURLSessionDelegateProxy class]], @"An app delegate whose class name starts with TSK must still be proxied");
+    [session invalidateAndCancel];
 }
 
 - (void)testNSURLConnection {

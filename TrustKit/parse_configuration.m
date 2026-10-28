@@ -52,6 +52,11 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *trustKitArguments) {
                         @"TSKPinnedDomains key within TSKConfiguration."];
     }
 
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    dateFormat.locale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
+    dateFormat.dateFormat = @"yyyy-MM-dd";
+    dateFormat.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
+
     for (NSString *configuredDomainName in trustKitArguments[kTSKPinnedDomains]) {
         // Sanity checks on the domain name
         NSString *domainName = canonicalHostname(configuredDomainName);
@@ -106,11 +111,11 @@ NSDictionary *parseTrustKitConfiguration(NSDictionary *trustKitArguments) {
         NSString *expirationDateStr = domainPinningPolicy[kTSKExpirationDate];
         if (expirationDateStr != nil) {
             // Convert the string in the yyyy-MM-dd format into an actual date in UTC
-            NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-            dateFormat.locale = [NSLocale localeWithLocaleIdentifier:@"en_US_POSIX"];
-            dateFormat.dateFormat = @"yyyy-MM-dd";
-            dateFormat.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
-            NSDate *expirationDate = [dateFormat dateFromString:expirationDateStr];
+            NSDate *expirationDate = [expirationDateStr isKindOfClass:[NSString class]] ? [dateFormat dateFromString:expirationDateStr] : nil;
+            if (expirationDate == nil) {
+                [NSException raise:@"TrustKit configuration invalid"
+                            format:@"TrustKit was initialized with an invalid value for %@ for domain %@; expected a date in yyyy-MM-dd format", kTSKExpirationDate, domainName];
+            }
             domainFinalConfiguration[kTSKExpirationDate] = expirationDate;
         }
 

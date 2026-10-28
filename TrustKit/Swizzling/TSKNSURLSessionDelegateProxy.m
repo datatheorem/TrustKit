@@ -11,6 +11,7 @@
 
 #import "TSKNSURLSessionDelegateProxy.h"
 #import "../Dependencies/RSSwizzle/RSSwizzle.h"
+#import "../Reporting/TSKBackgroundReporter.h"
 #import "../TSKLog.h"
 #import "../public/TrustKit/TSKPinningValidator.h"
 #import "../public/TrustKit/TSKTrustDecision.h"
@@ -48,7 +49,7 @@
             }
 
             // Do not swizzle TrustKit objects (such as the reporter)
-            else if ([NSStringFromClass([delegate class]) hasPrefix:@"TSK"]) {
+            else if ([delegate isKindOfClass:[TSKBackgroundReporter class]] || [delegate isKindOfClass:[TSKNSURLSessionDelegateProxy class]]) {
                 session = RSSWCallOriginal(configuration, delegate, queue);
             } else {
                 // Replace the delegate with our own so we can intercept and handle authentication challenges

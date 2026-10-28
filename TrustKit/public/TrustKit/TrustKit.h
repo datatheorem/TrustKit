@@ -65,6 +65,7 @@ NS_ASSUME_NONNULL_BEGIN
  | ____ TSKEnforcePinning                       | Boolean    |
  | ____ TSKReportUris                           | Array      |
  | ____ TSKDisableDefaultReportUri              | Boolean    |
+ | ____ TSKExpirationDate                       | String     |
  ```
 
  When setting the pinning policy programmatically, it has to be supplied to the

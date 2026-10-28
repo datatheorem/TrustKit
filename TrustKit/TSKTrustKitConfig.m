@@ -22,7 +22,7 @@ const TSKGlobalConfigurationKey kTSKIgnorePinningForUserDefinedTrustAnchors = @"
 // Keys for each domain within the TSKPinnedDomains entry
 const TSKDomainConfigurationKey kTSKPublicKeyHashes = @"TSKPublicKeyHashes";
 const TSKDomainConfigurationKey kTSKEnforcePinning = @"TSKEnforcePinning";
-const TSKDomainConfigurationKey kTSKExcludeSubdomainFromParentPolicy = @"kSKExcludeSubdomainFromParentPolicy";
+const TSKDomainConfigurationKey kTSKExcludeSubdomainFromParentPolicy = @"TSKExcludeSubdomainFromParentPolicy";
 
 const TSKDomainConfigurationKey kTSKIncludeSubdomains = @"TSKIncludeSubdomains";
 const TSKDomainConfigurationKey kTSKReportUris = @"TSKReportUris";
