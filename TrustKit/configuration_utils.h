@@ -1,15 +1,15 @@
 /*
- 
+
  configuration_utils.h
  TrustKit
- 
+
  Copyright 2017 The TrustKit Project Authors
  Licensed under the MIT license, see associated LICENSE file for terms.
  See AUTHORS file for the list of project authors.
- 
+
  */
 
-#import "TSKPinningValidatorCallback.h"
+#import "public/TrustKit/TSKPinningValidatorCallback.h"
 
 #if __has_feature(modules)
 @import Foundation;
@@ -17,9 +17,17 @@
 #import <Foundation/Foundation.h>
 #endif
 
+// Lowercase the hostname, drop a trailing dot and IPv6 brackets, and write IP addresses in their standard form
+NSString *_Nonnull canonicalHostname(NSString *_Nonnull hostname);
+
+BOOL isIPAddress(NSString *_Nonnull hostname);
+
+// Whether a canonical hostname is an IP address or a well-formed domain name
+BOOL isValidPinnedDomain(NSString *_Nonnull domain);
+
 // Figure out if a specific domain is pinned and retrieve this domain's configuration key; returns nil if no configuration was found
-NSString * _Nullable getPinningConfigurationKeyForDomain(NSString * _Nonnull hostname , NSDictionary<NSString *, TKSDomainPinningPolicy *> * _Nonnull domainPinningPolicies);
+NSString *_Nullable getPinningConfigurationKeyForDomain(NSString *_Nonnull hostname, NSDictionary<NSString *, TKSDomainPinningPolicy *> *_Nonnull domainPinningPolicies);
 
 // Create an ephemeral NSURLSessionConfiguration, with best practices defaults
 // for the current platform
-NSURLSessionConfiguration * _Nonnull ephemeralNSURLSessionConfiguration(void);
+NSURLSessionConfiguration *_Nonnull ephemeralNSURLSessionConfiguration(void);

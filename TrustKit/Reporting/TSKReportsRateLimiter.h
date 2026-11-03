@@ -1,12 +1,12 @@
 /*
- 
+
  TSKReportsRateLimiter.h
  TrustKit
- 
+
  Copyright 2015 The TrustKit Project Authors
  Licensed under the MIT license, see associated LICENSE file for terms.
  See AUTHORS file for the list of project authors.
- 
+
  */
 
 #import "TSKPinFailureReport.h"
@@ -16,7 +16,6 @@
 #else
 #import <Foundation/Foundation.h>
 #endif
-
 
 /*
  * Simple helper class which caches reports for 24 hours to prevent identical reports from being sent twice
@@ -33,6 +32,6 @@
  @return True if the report should be ignored under the rate-limiting policy that
     is in effect.
  */
-- (BOOL)shouldRateLimitReport:(TSKPinFailureReport * _Nonnull)report;
+- (BOOL)shouldRateLimitReport:(TSKPinFailureReport *_Nonnull)report;
 
 @end

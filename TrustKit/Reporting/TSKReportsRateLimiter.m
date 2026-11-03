@@ -1,12 +1,12 @@
 /*
- 
+
  TSKReportsRateLimiter.m
  TrustKit
- 
+
  Copyright 2015 The TrustKit Project Authors
  Licensed under the MIT license, see associated LICENSE file for terms.
  See AUTHORS file for the list of project authors.
- 
+
  */
 
 #import "TSKReportsRateLimiter.h"
@@ -29,8 +29,7 @@ static const NSTimeInterval kIntervalBetweenReportsCacheReset = 3600 * 24;
 
 @implementation TSKReportsRateLimiter
 
-- (instancetype)init
-{
+- (instancetype)init {
     self = [super init];
     if (self) {
         // Initialize all the internal state for rate-limiting report uploads
@@ -41,51 +40,41 @@ static const NSTimeInterval kIntervalBetweenReportsCacheReset = 3600 * 24;
     return self;
 }
 
-- (BOOL)shouldRateLimitReport:(TSKPinFailureReport *)report
-{
+- (BOOL)shouldRateLimitReport:(TSKPinFailureReport *)report {
     NSParameterAssert(report);
-    
+
     // Check if we need to clear the reports cache for rate-limiting
     NSTimeInterval secondsSinceCacheReset = -[self.lastReportsCacheResetDate timeIntervalSinceNow];
-    
+
     // Create an array containg the gist of the pin failure report; do not include the dates
-    NSArray *pinFailureInfo = @[ report.notedHostname,
-                                 report.hostname,
-                                 report.port,
-                                 report.validatedCertificateChain,
-                                 report.knownPins,
-                                 @(report.validationResult) ];
-    
+    NSArray *pinFailureInfo = @[report.notedHostname, report.hostname, report.port, report.validatedCertificateChain, report.knownPins, @(report.validationResult)];
+
     __block BOOL shouldRateLimitReport = NO;
     __weak typeof(self) weakSelf = self;
     dispatch_sync(self.reportsCacheQueue, ^{
         typeof(self) strongSelf = weakSelf;
-        
-        if (secondsSinceCacheReset > kIntervalBetweenReportsCacheReset)
-        {
+
+        if (secondsSinceCacheReset > kIntervalBetweenReportsCacheReset) {
             // Reset the cache
             [strongSelf.reportsCache removeAllObjects];
             strongSelf.lastReportsCacheResetDate = [NSDate date];
         }
-        
+
         // Check if the exact same report has already been sent recently
         shouldRateLimitReport = [strongSelf.reportsCache containsObject:pinFailureInfo];
-        if (shouldRateLimitReport == NO)
-        {
+        if (shouldRateLimitReport == NO) {
             // An identical report has NOT been sent recently
             // Add this report to the cache for rate-limiting
             [strongSelf.reportsCache addObject:pinFailureInfo];
         }
     });
-    
+
     return shouldRateLimitReport;
 }
 
-- (void)setLastReportsCacheResetDate:(NSDate *)lastReportsCacheResetDate
-{
+- (void)setLastReportsCacheResetDate:(NSDate *)lastReportsCacheResetDate {
     NSParameterAssert(lastReportsCacheResetDate);
     _lastReportsCacheResetDate = lastReportsCacheResetDate;
 }
 
 @end
-

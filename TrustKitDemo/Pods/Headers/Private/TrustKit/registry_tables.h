@@ -1,1 +1,0 @@
-../../../../../TrustKit/Dependencies/domain_registry/registry_tables_genfiles/registry_tables.h

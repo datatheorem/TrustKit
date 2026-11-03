@@ -8,7 +8,7 @@ hide_documentation_coverage: true
 theme: fullwidth
 
 objc: true
-umbrella_header: "TrustKit/TrustKit.h"
+umbrella_header: "TrustKit/public/TrustKit/TrustKit.h"
 framework_root: "./TrustKit"
 
 readme: "docs/documentation-readme.md"
